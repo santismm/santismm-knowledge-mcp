@@ -1,0 +1,292 @@
+{
+  "id": "ARCH-001",
+  "slug": "customer-service-agent",
+  "category": "customer-experience",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": true,
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "medium",
+    "sourceType": ["industry_observation", "paper"]
+  },
+  "technologies": [
+    "LangGraph / orchestration",
+    "RAG over a help-center knowledge base",
+    "CRM & ticketing tools (function calling)",
+    "Vector store",
+    "Guardrails / PII redaction",
+    "Observability (LangSmith / Langfuse)"
+  ],
+  "patterns": ["routing", "human-approval-gate", "semantic-caching", "reflection"],
+  "knowledge": ["ai-agent", "tool-use", "enterprise-rag", "guardrails", "human-in-the-loop", "ai-observability"],
+  "references": [
+    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
+    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
+    { "title": "Santiago Santa María — The Stopwatch and the Exam", "url": "https://articles.santismm.com/the-stopwatch-and-the-exam/" }
+  ],
+  "related": ["enterprise-knowledge-assistant"],
+  "locales": {
+    "en": {
+      "name": "Customer Service Agent",
+      "summary": "A reference architecture for an enterprise customer-service agent that resolves common requests end to end — answering from a grounded knowledge base, acting in the CRM and ticketing systems through tools, and escalating to a human when confidence is low or the action is high-impact. It pairs retrieval for grounding with risk-based human approval for safety, and is observable so every conversation can be evaluated and improved.",
+      "keyConcepts": [
+        "Grounding: answers come from retrieved, citable knowledge, not the model's memory.",
+        "Tool use: the agent reads and writes to CRM/ticketing systems through well-described tools.",
+        "Risk-based escalation: low-confidence or high-impact actions go to a human gate.",
+        "Observability: every turn is traced so the system can be evaluated and improved."
+      ],
+      "definition": "The customer service agent architecture is a grounded, tool-using conversational agent that resolves customer requests autonomously within guardrails, escalating to humans by risk and confidence, with full tracing for evaluation.",
+      "architecture": [
+        "At the core is an orchestration loop that classifies the incoming request, retrieves relevant knowledge, decides whether it can answer or must act, and either responds, calls a tool, or escalates. Routing sends simple FAQs down a cheap retrieval-and-answer path and complex or sensitive cases down a richer, more careful path.",
+        "Grounding is non-negotiable: the agent answers from a retrieval layer over the help center and policy docs, and cites its sources. When the request requires an action — issuing a refund, changing an order, closing a ticket — the agent prepares the action and routes high-impact ones through a human approval gate before execution.",
+        "Cross-cutting layers make it safe and improvable: guardrails redact PII and block out-of-policy responses, a semantic cache absorbs repeated questions to cut cost and latency, and an observability layer traces every turn so conversations can be scored against an evaluation set."
+      ],
+      "flow": [
+        "1. Intake: the user message arrives; PII is detected and redacted for logging.",
+        "2. Route: classify intent and risk — FAQ, account action, or escalation candidate.",
+        "3. Retrieve: pull grounding passages from the knowledge base (cache-checked first).",
+        "4. Decide: answer from grounding, call a CRM/ticketing tool, or escalate.",
+        "5. Gate: high-impact actions pause for human approval; low-impact ones execute.",
+        "6. Respond: reply with citations; log the trace and outcome for evaluation."
+      ],
+      "components": [
+        "Intent & risk router",
+        "Retrieval layer (RAG) with citations",
+        "CRM / ticketing tools",
+        "Human approval gate",
+        "Guardrails & PII redaction",
+        "Semantic cache",
+        "Observability & evaluation"
+      ],
+      "referenceScenario": {
+        "context": "An illustrative B2C support desk handling order, billing and account questions across chat and email.",
+        "scenario": "Tier-1 requests (order status, password reset, policy questions) are resolved by the agent; refunds and account changes are drafted by the agent and approved by a human; anything ambiguous is escalated with full context.",
+        "technology": "Orchestration loop, RAG over the help center, function-calling tools into the CRM, a risk-based approval gate, and conversation tracing.",
+        "load": "Bursty, business-hours-heavy traffic with a long tail of rare intents; a small set of FAQs dominates volume, which the semantic cache absorbs.",
+        "results": "Reference target: most Tier-1 volume deflected with grounded, cited answers; high-impact actions kept behind a human gate; cost concentrated on the rare, complex cases rather than the repetitive ones. Numbers depend on your traffic mix and should be measured, not assumed."
+      },
+      "benefits": [
+        "Resolves common requests end to end while keeping risky actions human-gated.",
+        "Grounded, cited answers reduce hallucination and build customer trust.",
+        "Semantic caching and routing concentrate spend on the cases that need it.",
+        "Full tracing makes quality measurable and regressions catchable."
+      ],
+      "risks": [
+        "Ungrounded answers if retrieval quality is poor.",
+        "Over-automation of actions that should stay human-gated.",
+        "PII leakage if guardrails are incomplete.",
+        "Approval bottlenecks if too many actions are gated."
+      ],
+      "failureModes": [
+        "Retrieval misses or returns stale policy, so the agent answers confidently but wrongly.",
+        "Tool errors (CRM timeouts, schema drift) leave actions half-applied without recovery.",
+        "Escalation overload when the router sends too much to humans, defeating the automation.",
+        "Cache false hits return a previous customer's context or an out-of-date answer."
+      ],
+      "lessons": [
+        "Ground first: invest in retrieval quality before expanding autonomy — most wrong answers are retrieval failures.",
+        "Gate by risk, not by default; reserve human approval for irreversible or regulated actions.",
+        "Scope the cache per customer/context and validate hits, or it leaks the wrong answer.",
+        "Instrument from day one; you cannot improve what you cannot trace."
+      ],
+      "kpis": [
+        { "metric": "Containment / deflection rate", "note": "Share of conversations resolved without a human; the headline value metric — but only meaningful alongside CSAT." },
+        { "metric": "Grounded-answer accuracy", "note": "How often answers are correct and supported by a citation, measured against an eval set." },
+        { "metric": "Escalation rate & quality", "note": "Share escalated to humans and whether those escalations were warranted; too high wastes the automation, too low risks bad outcomes." },
+        { "metric": "Cost per resolved conversation", "note": "Total tokens, tools and cache effect per resolution; routing and caching should keep this low on the common path." },
+        { "metric": "CSAT / resolution time", "note": "Customer satisfaction and time-to-resolution; guards against optimizing deflection at the expense of experience." }
+      ],
+      "scaling": [
+        "Volume scales with the stateless orchestration loop; the vector store and tool backends are the real capacity limits.",
+        "The semantic cache flattens cost as repeat questions grow, so unit cost falls with scale on the common path.",
+        "Human approval is the bottleneck that does not scale linearly — keep the gated set small and triaged.",
+        "Cost is dominated by the rare, complex conversations, not the cached FAQ majority."
+      ],
+      "examples": [
+        "An order-status question answered instantly from the cache with a citation.",
+        "A refund the agent drafts and a human approves before it is issued.",
+        "An ambiguous billing dispute escalated to an agent with the full conversation context attached."
+      ],
+      "faqs": [
+        { "q": "How is this different from a chatbot?", "a": "A chatbot answers; this architecture also acts — it uses tools to read and write enterprise systems — and it grounds answers in retrieved knowledge, escalating by risk rather than following fixed scripts." },
+        { "q": "Why keep a human in the loop at all?", "a": "Because some actions are irreversible or regulated. A risk-based approval gate keeps accountability with a person for high-impact steps while automating the safe majority." },
+        { "q": "What makes it reliable?", "a": "Grounding in retrieval, guardrails on inputs and outputs, and observability that lets you evaluate every conversation and catch regressions before they ship." }
+      ]
+    },
+    "es": {
+      "name": "Agente de Atención al Cliente",
+      "summary": "Una arquitectura de referencia para un agente empresarial de atención al cliente que resuelve solicitudes comunes de extremo a extremo: responde desde una base de conocimiento fundamentada, actúa en el CRM y los sistemas de tickets mediante herramientas, y escala a un humano cuando la confianza es baja o la acción es de alto impacto. Combina recuperación para fundamentar las respuestas con aprobación humana basada en riesgo para la seguridad, y es observable para evaluar y mejorar cada conversación.",
+      "keyConcepts": [
+        "Fundamentación: las respuestas vienen de conocimiento recuperado y citable, no de la memoria del modelo.",
+        "Uso de herramientas: el agente lee y escribe en CRM/tickets mediante herramientas bien descritas.",
+        "Escalado basado en riesgo: las acciones de baja confianza o alto impacto pasan por una puerta humana.",
+        "Observabilidad: cada turno se traza para poder evaluar y mejorar el sistema."
+      ],
+      "definition": "La arquitectura de agente de atención al cliente es un agente conversacional fundamentado y con herramientas que resuelve solicitudes de forma autónoma dentro de guardarraíles, escalando a humanos por riesgo y confianza, con trazado completo para evaluación.",
+      "architecture": [
+        "En el núcleo hay un bucle de orquestación que clasifica la solicitud entrante, recupera conocimiento relevante, decide si puede responder o debe actuar, y o bien responde, llama a una herramienta o escala. El enrutado envía las FAQ simples a un camino barato de recuperar-y-responder y los casos complejos o sensibles a un camino más rico y cuidadoso.",
+        "La fundamentación es innegociable: el agente responde desde una capa de recuperación sobre el centro de ayuda y las políticas, y cita sus fuentes. Cuando la solicitud requiere una acción —emitir un reembolso, cambiar un pedido, cerrar un ticket— el agente prepara la acción y enruta las de alto impacto por una puerta de aprobación humana antes de ejecutarlas.",
+        "Las capas transversales lo hacen seguro y mejorable: los guardarraíles redactan PII y bloquean respuestas fuera de política, una caché semántica absorbe preguntas repetidas para reducir coste y latencia, y una capa de observabilidad traza cada turno para puntuar conversaciones contra un conjunto de evaluación."
+      ],
+      "flow": [
+        "1. Entrada: llega el mensaje del usuario; se detecta y redacta la PII para el registro.",
+        "2. Enrutar: clasificar intención y riesgo — FAQ, acción de cuenta o candidato a escalado.",
+        "3. Recuperar: traer pasajes de fundamentación de la base de conocimiento (con caché comprobada primero).",
+        "4. Decidir: responder con fundamentación, llamar a una herramienta de CRM/tickets o escalar.",
+        "5. Puerta: las acciones de alto impacto se pausan para aprobación humana; las de bajo impacto se ejecutan.",
+        "6. Responder: contestar con citas; registrar la traza y el resultado para evaluación."
+      ],
+      "components": [
+        "Router de intención y riesgo",
+        "Capa de recuperación (RAG) con citas",
+        "Herramientas de CRM / tickets",
+        "Puerta de aprobación humana",
+        "Guardarraíles y redacción de PII",
+        "Caché semántica",
+        "Observabilidad y evaluación"
+      ],
+      "referenceScenario": {
+        "context": "Una mesa de soporte B2C ilustrativa que atiende preguntas de pedidos, facturación y cuenta por chat y correo.",
+        "scenario": "Las solicitudes de Nivel 1 (estado de pedido, restablecer contraseña, preguntas de política) las resuelve el agente; los reembolsos y cambios de cuenta los redacta el agente y los aprueba un humano; lo ambiguo se escala con contexto completo.",
+        "technology": "Bucle de orquestación, RAG sobre el centro de ayuda, herramientas de function-calling hacia el CRM, una puerta de aprobación basada en riesgo y trazado de conversaciones.",
+        "load": "Tráfico irregular y concentrado en horario laboral, con una larga cola de intenciones raras; un pequeño conjunto de FAQ domina el volumen, que la caché semántica absorbe.",
+        "results": "Objetivo de referencia: desviar la mayor parte del volumen de Nivel 1 con respuestas fundamentadas y citadas; mantener las acciones de alto impacto tras una puerta humana; concentrar el coste en los casos raros y complejos en vez de los repetitivos. Los números dependen de tu mezcla de tráfico y deben medirse, no asumirse."
+      },
+      "benefits": [
+        "Resuelve solicitudes comunes de extremo a extremo manteniendo las acciones de riesgo con puerta humana.",
+        "Las respuestas fundamentadas y citadas reducen la alucinación y generan confianza.",
+        "La caché semántica y el enrutado concentran el gasto en los casos que lo necesitan.",
+        "El trazado completo hace medible la calidad y detectables las regresiones."
+      ],
+      "risks": [
+        "Respuestas sin fundamentación si la calidad de la recuperación es pobre.",
+        "Sobreautomatización de acciones que deberían seguir con puerta humana.",
+        "Fuga de PII si los guardarraíles son incompletos.",
+        "Cuellos de botella de aprobación si se ponen puertas a demasiadas acciones."
+      ],
+      "failureModes": [
+        "La recuperación falla o devuelve política obsoleta, así que el agente responde con confianza pero mal.",
+        "Errores de herramienta (timeouts del CRM, deriva de esquema) dejan acciones a medio aplicar sin recuperación.",
+        "Sobrecarga de escalado cuando el router envía demasiado a humanos, anulando la automatización.",
+        "Falsos aciertos de caché devuelven el contexto de un cliente anterior o una respuesta desactualizada."
+      ],
+      "lessons": [
+        "Fundamenta primero: invierte en la calidad de la recuperación antes de ampliar la autonomía; la mayoría de respuestas erróneas son fallos de recuperación.",
+        "Pon puertas por riesgo, no por defecto; reserva la aprobación humana para acciones irreversibles o reguladas.",
+        "Acota la caché por cliente/contexto y valida los aciertos, o filtrará la respuesta equivocada.",
+        "Instrumenta desde el día uno; no puedes mejorar lo que no puedes trazar."
+      ],
+      "kpis": [
+        { "metric": "Tasa de contención / desviación", "note": "Proporción de conversaciones resueltas sin un humano; la métrica de valor principal, pero solo significativa junto al CSAT." },
+        { "metric": "Precisión de respuesta fundamentada", "note": "Con qué frecuencia las respuestas son correctas y respaldadas por una cita, medido contra un conjunto de evaluación." },
+        { "metric": "Tasa y calidad de escalado", "note": "Proporción escalada a humanos y si esos escalados estaban justificados; demasiado alto desperdicia la automatización, demasiado bajo arriesga malos resultados." },
+        { "metric": "Coste por conversación resuelta", "note": "Tokens, herramientas y efecto de caché totales por resolución; el enrutado y la caché deben mantenerlo bajo en el camino común." },
+        { "metric": "CSAT / tiempo de resolución", "note": "Satisfacción del cliente y tiempo hasta la resolución; evita optimizar la desviación a costa de la experiencia." }
+      ],
+      "scaling": [
+        "El volumen escala con el bucle de orquestación sin estado; el almacén vectorial y los backends de herramientas son los límites reales de capacidad.",
+        "La caché semántica aplana el coste a medida que crecen las preguntas repetidas, así que el coste unitario baja con la escala en el camino común.",
+        "La aprobación humana es el cuello de botella que no escala linealmente; mantén el conjunto con puerta pequeño y triado.",
+        "El coste lo dominan las conversaciones raras y complejas, no la mayoría de FAQ en caché."
+      ],
+      "examples": [
+        "Una pregunta de estado de pedido respondida al instante desde la caché con una cita.",
+        "Un reembolso que el agente redacta y un humano aprueba antes de emitirse.",
+        "Una disputa de facturación ambigua escalada a un agente con todo el contexto de la conversación adjunto."
+      ],
+      "faqs": [
+        { "q": "¿En qué se diferencia de un chatbot?", "a": "Un chatbot responde; esta arquitectura además actúa —usa herramientas para leer y escribir en sistemas empresariales— y fundamenta las respuestas en conocimiento recuperado, escalando por riesgo en vez de seguir guiones fijos." },
+        { "q": "¿Por qué mantener un humano en el bucle?", "a": "Porque algunas acciones son irreversibles o reguladas. Una puerta de aprobación basada en riesgo mantiene la responsabilidad en una persona para los pasos de alto impacto mientras automatiza la mayoría segura." },
+        { "q": "¿Qué la hace fiable?", "a": "La fundamentación en la recuperación, los guardarraíles en entradas y salidas, y la observabilidad que permite evaluar cada conversación y detectar regresiones antes de desplegar." }
+      ]
+    },
+    "pt": {
+      "name": "Agente de Atendimento ao Cliente",
+      "summary": "Uma arquitetura de referência para um agente empresarial de atendimento que resolve solicitações comuns de ponta a ponta: responde a partir de uma base de conhecimento fundamentada, age no CRM e nos sistemas de tickets via ferramentas, e escala para um humano quando a confiança é baixa ou a ação é de alto impacto. Combina recuperação para fundamentar as respostas com aprovação humana baseada em risco para segurança, e é observável para avaliar e melhorar cada conversa.",
+      "keyConcepts": [
+        "Fundamentação: as respostas vêm de conhecimento recuperado e citável, não da memória do modelo.",
+        "Uso de ferramentas: o agente lê e escreve no CRM/tickets via ferramentas bem descritas.",
+        "Escalonamento baseado em risco: ações de baixa confiança ou alto impacto passam por um portão humano.",
+        "Observabilidade: cada turno é rastreado para avaliar e melhorar o sistema."
+      ],
+      "definition": "A arquitetura de agente de atendimento é um agente conversacional fundamentado e com ferramentas que resolve solicitações de forma autônoma dentro de guard-rails, escalando para humanos por risco e confiança, com rastreamento completo para avaliação.",
+      "architecture": [
+        "No núcleo há um loop de orquestração que classifica a solicitação recebida, recupera conhecimento relevante, decide se pode responder ou deve agir, e então responde, chama uma ferramenta ou escala. O roteamento envia FAQs simples a um caminho barato de recuperar-e-responder e os casos complexos ou sensíveis a um caminho mais rico e cuidadoso.",
+        "A fundamentação é inegociável: o agente responde a partir de uma camada de recuperação sobre a central de ajuda e as políticas, e cita suas fontes. Quando a solicitação exige uma ação —emitir um reembolso, mudar um pedido, fechar um ticket— o agente prepara a ação e roteia as de alto impacto por um portão de aprovação humana antes de executar.",
+        "As camadas transversais o tornam seguro e melhorável: os guard-rails redigem PII e bloqueiam respostas fora da política, um cache semântico absorve perguntas repetidas para reduzir custo e latência, e uma camada de observabilidade rastreia cada turno para pontuar conversas contra um conjunto de avaliação."
+      ],
+      "flow": [
+        "1. Entrada: chega a mensagem do usuário; a PII é detectada e redigida para o log.",
+        "2. Rotear: classificar intenção e risco — FAQ, ação de conta ou candidato a escalonamento.",
+        "3. Recuperar: trazer trechos de fundamentação da base de conhecimento (com cache verificado primeiro).",
+        "4. Decidir: responder com fundamentação, chamar uma ferramenta de CRM/tickets ou escalar.",
+        "5. Portão: ações de alto impacto pausam para aprovação humana; as de baixo impacto executam.",
+        "6. Responder: responder com citações; registrar o rastro e o resultado para avaliação."
+      ],
+      "components": [
+        "Roteador de intenção e risco",
+        "Camada de recuperação (RAG) com citações",
+        "Ferramentas de CRM / tickets",
+        "Portão de aprovação humana",
+        "Guard-rails e redação de PII",
+        "Cache semântico",
+        "Observabilidade e avaliação"
+      ],
+      "referenceScenario": {
+        "context": "Uma mesa de suporte B2C ilustrativa que atende perguntas de pedidos, faturamento e conta por chat e e-mail.",
+        "scenario": "As solicitações de Nível 1 (status do pedido, redefinir senha, perguntas de política) são resolvidas pelo agente; reembolsos e mudanças de conta são redigidos pelo agente e aprovados por um humano; o ambíguo é escalado com contexto completo.",
+        "technology": "Loop de orquestração, RAG sobre a central de ajuda, ferramentas de function-calling para o CRM, um portão de aprovação baseado em risco e rastreamento de conversas.",
+        "load": "Tráfego irregular e concentrado no horário comercial, com uma longa cauda de intenções raras; um pequeno conjunto de FAQs domina o volume, que o cache semântico absorve.",
+        "results": "Meta de referência: desviar a maior parte do volume de Nível 1 com respostas fundamentadas e citadas; manter as ações de alto impacto atrás de um portão humano; concentrar o custo nos casos raros e complexos em vez dos repetitivos. Os números dependem da sua mistura de tráfego e devem ser medidos, não assumidos."
+      },
+      "benefits": [
+        "Resolve solicitações comuns de ponta a ponta mantendo as ações de risco com portão humano.",
+        "Respostas fundamentadas e citadas reduzem a alucinação e geram confiança.",
+        "O cache semântico e o roteamento concentram o gasto nos casos que precisam.",
+        "O rastreamento completo torna a qualidade mensurável e as regressões detectáveis."
+      ],
+      "risks": [
+        "Respostas sem fundamentação se a qualidade da recuperação for ruim.",
+        "Superautomação de ações que deveriam continuar com portão humano.",
+        "Vazamento de PII se os guard-rails forem incompletos.",
+        "Gargalos de aprovação se houver portões em ações demais."
+      ],
+      "failureModes": [
+        "A recuperação falha ou devolve política obsoleta, então o agente responde com confiança mas errado.",
+        "Erros de ferramenta (timeouts do CRM, deriva de esquema) deixam ações pela metade sem recuperação.",
+        "Sobrecarga de escalonamento quando o roteador envia demais a humanos, anulando a automação.",
+        "Falsos acertos de cache devolvem o contexto de um cliente anterior ou uma resposta desatualizada."
+      ],
+      "lessons": [
+        "Fundamente primeiro: invista na qualidade da recuperação antes de ampliar a autonomia; a maioria das respostas erradas são falhas de recuperação.",
+        "Coloque portões por risco, não por padrão; reserve a aprovação humana para ações irreversíveis ou reguladas.",
+        "Restrinja o cache por cliente/contexto e valide os acertos, ou ele vazará a resposta errada.",
+        "Instrumente desde o dia um; você não pode melhorar o que não consegue rastrear."
+      ],
+      "kpis": [
+        { "metric": "Taxa de contenção / desvio", "note": "Proporção de conversas resolvidas sem um humano; a métrica de valor principal, mas só significativa junto ao CSAT." },
+        { "metric": "Precisão de resposta fundamentada", "note": "Com que frequência as respostas são corretas e apoiadas por uma citação, medido contra um conjunto de avaliação." },
+        { "metric": "Taxa e qualidade de escalonamento", "note": "Proporção escalada a humanos e se esses escalonamentos eram justificados; alto demais desperdiça a automação, baixo demais arrisca maus resultados." },
+        { "metric": "Custo por conversa resolvida", "note": "Tokens, ferramentas e efeito do cache totais por resolução; o roteamento e o cache devem mantê-lo baixo no caminho comum." },
+        { "metric": "CSAT / tempo de resolução", "note": "Satisfação do cliente e tempo até a resolução; evita otimizar o desvio às custas da experiência." }
+      ],
+      "scaling": [
+        "O volume escala com o loop de orquestração sem estado; o armazenamento vetorial e os backends de ferramentas são os limites reais de capacidade.",
+        "O cache semântico achata o custo à medida que as perguntas repetidas crescem, então o custo unitário cai com a escala no caminho comum.",
+        "A aprovação humana é o gargalo que não escala linearmente; mantenha o conjunto com portão pequeno e triado.",
+        "O custo é dominado pelas conversas raras e complexas, não pela maioria de FAQ em cache."
+      ],
+      "examples": [
+        "Uma pergunta de status de pedido respondida na hora a partir do cache com uma citação.",
+        "Um reembolso que o agente redige e um humano aprova antes de ser emitido.",
+        "Uma disputa de faturamento ambígua escalada a um agente com todo o contexto da conversa anexado."
+      ],
+      "faqs": [
+        { "q": "Como difere de um chatbot?", "a": "Um chatbot responde; esta arquitetura também age —usa ferramentas para ler e escrever em sistemas empresariais— e fundamenta as respostas em conhecimento recuperado, escalando por risco em vez de seguir roteiros fixos." },
+        { "q": "Por que manter um humano no laço?", "a": "Porque algumas ações são irreversíveis ou reguladas. Um portão de aprovação baseado em risco mantém a responsabilidade com uma pessoa nos passos de alto impacto enquanto automatiza a maioria segura." },
+        { "q": "O que a torna confiável?", "a": "A fundamentação na recuperação, os guard-rails em entradas e saídas, e a observabilidade que permite avaliar cada conversa e detectar regressões antes de implantar." }
+      ]
+    }
+  }
+}

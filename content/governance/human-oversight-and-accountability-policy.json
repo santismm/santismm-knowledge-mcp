@@ -1,0 +1,275 @@
+{
+  "id": "GOV-007",
+  "slug": "human-oversight-and-accountability-policy",
+  "category": "playbook",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": false,
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "frameworks": [
+    "EU AI Act"
+  ],
+  "patterns": [
+    "human-approval-gate",
+    "human-escalation"
+  ],
+  "knowledge": [
+    "human-in-the-loop",
+    "ai-governance"
+  ],
+  "references": [
+    {
+      "title": "EU AI Act — Article 14 (Human oversight)",
+      "url": "https://artificialintelligenceact.eu/article/14/"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "OECD — AI Principles",
+      "url": "https://oecd.ai/en/ai-principles"
+    }
+  ],
+  "related": [
+    "eu-ai-act",
+    "agentic-ai-governance-checklist"
+  ],
+  "locales": {
+    "en": {
+      "name": "Human Oversight and Accountability Policy",
+      "summary": "An operational policy that turns EU AI Act Article 14 human oversight into practice for agentic AI. It assigns a named accountable owner per agent, sets the oversight level (in-the-loop, on-the-loop, out-of-the-loop) by risk, and defines intervention, override and stop authority plus escalation paths. It requires overseers to be competent and have time to act, and it guards against rubber-stamping and automation bias. It exists to prevent two failures: the absent human and the token human who cannot actually understand, override, or answer for what the agent does.",
+      "definition": "A human oversight and accountability policy is a binding rule set that assigns a named human to be answerable for each agent and guarantees a competent person can understand, intervene in, and stop its actions.",
+      "scope": "Every production or pilot agent that uses tools, acts on systems, or makes consequential decisions, and the system owners, approvers and operators who oversee them. It operationalizes Article 14; it is not a substitute for legal advice.",
+      "keyPoints": [
+        "Each agent has one named, accountable owner — accountability is never transferred to the model.",
+        "Oversight level is matched to risk: in-the-loop for high-impact or irreversible actions, on-the-loop for reversible high-volume actions, out-of-the-loop only for low-risk reversible tasks.",
+        "Every agent exposes tested reject, modify and stop (kill-switch) controls with the context needed for an informed decision.",
+        "Escalation thresholds route consequential decisions to humans by impact, irreversibility, rights or safety, confidence and novelty.",
+        "Overseers must be competent, intelligibly informed, and have genuine authority and time to act.",
+        "Automation bias and rubber-stamping are actively countered, not assumed away."
+      ],
+      "controls": [
+        {
+          "control": "Named accountable owner",
+          "note": "Assign one human answerable for each agent's outcomes. 'The model decided' is not an acceptable account."
+        },
+        {
+          "control": "Risk-matched oversight level",
+          "note": "Define in-the-loop, on-the-loop or out-of-the-loop per agent based on action impact and reversibility. Implements the human-approval-gate pattern for high-impact actions."
+        },
+        {
+          "control": "Override and stop authority",
+          "note": "Expose tested reject, modify and stop controls; surface enough context for an informed override. The stop must be fast and reachable."
+        },
+        {
+          "control": "Escalation thresholds",
+          "note": "Route decisions to humans when impact, irreversibility, rights/safety, low confidence or novelty thresholds are crossed. Implements the human-escalation pattern."
+        },
+        {
+          "control": "Overseer competence",
+          "note": "Train and certify overseers on the agent's domain and limits so oversight is meaningful, not nominal."
+        },
+        {
+          "control": "Anti-rubber-stamping safeguards",
+          "note": "Throttle and require justification for approvals; monitor approval time and override rates to detect automation bias."
+        }
+      ],
+      "checklist": [
+        "Name one accountable owner for each production agent and record it.",
+        "Classify each agent's actions by impact and reversibility and assign an oversight level.",
+        "Implement and test reject, modify and stop (kill-switch) controls for every agent.",
+        "Ensure the agent surfaces intelligible context for any decision that needs oversight.",
+        "Define and configure escalation thresholds for impact, rights/safety, confidence and novelty.",
+        "Train overseers on the agent's domain and limits and keep their certification current.",
+        "Add anti-rubber-stamping safeguards and monitor approval time and override rates.",
+        "Log every approval and override with actor, reason and timestamp, and review thresholds on a schedule."
+      ],
+      "pitfalls": [
+        "Token oversight: a human clicks approve without the context, authority or time to actually evaluate the action.",
+        "Automation bias: approvers trust the agent so much they stop scrutinizing its output.",
+        "Diffuse accountability: no single named owner, so a failure has no answerable human.",
+        "Unreachable override: a stop control that is slow, hidden or never tested.",
+        "Threshold drift: escalation limits set once and never updated as the agent's scope grows."
+      ],
+      "examples": [
+        "A finance agent whose payments above a spend cap require in-the-loop human approval, while reconciliations run on-the-loop.",
+        "A support agent that escalates to a human when its confidence is low or a request affects a customer's rights.",
+        "An incident where the named owner is held accountable and the override log shows who approved the action and why."
+      ],
+      "faqs": [
+        {
+          "q": "Does human oversight mean a human approves everything?",
+          "a": "No. Oversight is tiered: in-the-loop for high-impact or irreversible actions, on-the-loop monitoring for reversible high-volume actions, and a human-in-command posture overall. The model scales to risk so oversight stays meaningful instead of becoming approval fatigue."
+        },
+        {
+          "q": "Can accountability sit with the AI vendor?",
+          "a": "No. Vendor relationships are governed separately, but your named system owner remains accountable for how the agent is deployed and used. Automation is a tool, not a defense."
+        },
+        {
+          "q": "How do we prevent rubber-stamping and automation bias?",
+          "a": "Surface intelligible context for each decision, throttle and require justification for approvals, monitor approval time and override rates, and keep overseers competent through training and rotation."
+        }
+      ]
+    },
+    "es": {
+      "name": "Política de Supervisión Humana y Rendición de Cuentas",
+      "summary": "Una política operativa que lleva la supervisión humana del Artículo 14 del EU AI Act a la práctica para la IA agéntica. Asigna un responsable nombrado por agente, fija el nivel de supervisión (en el bucle, sobre el bucle, fuera del bucle) según el riesgo y define la autoridad de intervención, anulación y parada más las vías de escalado. Exige que los supervisores sean competentes y tengan tiempo para actuar, y protege frente al sello automático y el sesgo de automatización. Existe para evitar dos fallos: el humano ausente y el humano simbólico que no puede entender, anular ni responder por lo que hace el agente.",
+      "definition": "Una política de supervisión humana y rendición de cuentas es un conjunto de reglas vinculantes que asigna un humano nombrado como responsable de cada agente y garantiza que una persona competente pueda entender, intervenir y detener sus acciones.",
+      "scope": "Todo agente en producción o piloto que use herramientas, actúe sobre sistemas o tome decisiones de consecuencia, y los propietarios de sistema, aprobadores y operadores que los supervisan. Operacionaliza el Artículo 14; no sustituye al asesoramiento legal.",
+      "keyPoints": [
+        "Cada agente tiene un único responsable nombrado: la rendición de cuentas nunca se transfiere al modelo.",
+        "El nivel de supervisión se ajusta al riesgo: en el bucle para acciones de alto impacto o irreversibles, sobre el bucle para acciones reversibles de alto volumen, fuera del bucle solo para tareas reversibles de bajo riesgo.",
+        "Cada agente expone controles probados de rechazar, modificar y detener (interruptor de parada) con el contexto necesario para una decisión informada.",
+        "Los umbrales de escalado enrutan las decisiones de consecuencia a humanos por impacto, irreversibilidad, derechos o seguridad, confianza y novedad.",
+        "Los supervisores deben ser competentes, estar informados de forma inteligible y tener autoridad y tiempo reales para actuar.",
+        "El sesgo de automatización y el sello automático se contrarrestan activamente, no se dan por descartados."
+      ],
+      "controls": [
+        {
+          "control": "Responsable nombrado",
+          "note": "Asigna un humano que responda por los resultados de cada agente. 'El modelo decidió' no es una explicación aceptable."
+        },
+        {
+          "control": "Nivel de supervisión según riesgo",
+          "note": "Define en el bucle, sobre el bucle o fuera del bucle por agente según el impacto y la reversibilidad de la acción. Implementa el patrón de puerta de aprobación humana para acciones de alto impacto."
+        },
+        {
+          "control": "Autoridad de anulación y parada",
+          "note": "Expón controles probados de rechazar, modificar y detener; muestra suficiente contexto para una anulación informada. La parada debe ser rápida y accesible."
+        },
+        {
+          "control": "Umbrales de escalado",
+          "note": "Enruta las decisiones a humanos cuando se cruzan umbrales de impacto, irreversibilidad, derechos/seguridad, baja confianza o novedad. Implementa el patrón de escalado humano."
+        },
+        {
+          "control": "Competencia del supervisor",
+          "note": "Forma y certifica a los supervisores en el dominio y los límites del agente para que la supervisión sea significativa, no nominal."
+        },
+        {
+          "control": "Salvaguardas contra el sello automático",
+          "note": "Limita y exige justificación para las aprobaciones; monitoriza el tiempo de aprobación y la tasa de anulaciones para detectar el sesgo de automatización."
+        }
+      ],
+      "checklist": [
+        "Nombra un único responsable para cada agente en producción y regístralo.",
+        "Clasifica las acciones de cada agente por impacto y reversibilidad y asigna un nivel de supervisión.",
+        "Implementa y prueba los controles de rechazar, modificar y detener (interruptor de parada) para cada agente.",
+        "Asegura que el agente muestre contexto inteligible para cualquier decisión que necesite supervisión.",
+        "Define y configura umbrales de escalado para impacto, derechos/seguridad, confianza y novedad.",
+        "Forma a los supervisores en el dominio y los límites del agente y mantén su certificación al día.",
+        "Añade salvaguardas contra el sello automático y monitoriza el tiempo de aprobación y la tasa de anulaciones.",
+        "Registra cada aprobación y anulación con actor, motivo y marca de tiempo, y revisa los umbrales de forma periódica."
+      ],
+      "pitfalls": [
+        "Supervisión simbólica: un humano pulsa aprobar sin el contexto, la autoridad o el tiempo para evaluar realmente la acción.",
+        "Sesgo de automatización: los aprobadores confían tanto en el agente que dejan de escrutar su salida.",
+        "Rendición de cuentas difusa: ningún responsable nombrado, así que un fallo no tiene humano que responda.",
+        "Anulación inalcanzable: un control de parada lento, oculto o nunca probado.",
+        "Deriva de umbrales: límites de escalado fijados una vez y nunca actualizados a medida que crece el alcance del agente."
+      ],
+      "examples": [
+        "Un agente financiero cuyos pagos por encima de un tope de gasto requieren aprobación humana en el bucle, mientras las conciliaciones corren sobre el bucle.",
+        "Un agente de soporte que escala a un humano cuando su confianza es baja o una solicitud afecta los derechos de un cliente.",
+        "Un incidente en el que el responsable nombrado rinde cuentas y el registro de anulaciones muestra quién aprobó la acción y por qué."
+      ],
+      "faqs": [
+        {
+          "q": "¿Supervisión humana significa que un humano aprueba todo?",
+          "a": "No. La supervisión es por niveles: en el bucle para acciones de alto impacto o irreversibles, monitorización sobre el bucle para acciones reversibles de alto volumen y una postura de humano al mando en general. El modelo se ajusta al riesgo para que la supervisión siga siendo significativa en vez de convertirse en fatiga de aprobación."
+        },
+        {
+          "q": "¿Puede la rendición de cuentas recaer en el proveedor de IA?",
+          "a": "No. Las relaciones con proveedores se gobiernan aparte, pero tu propietario de sistema nombrado sigue siendo responsable de cómo se despliega y usa el agente. La automatización es una herramienta, no una defensa."
+        },
+        {
+          "q": "¿Cómo evitamos el sello automático y el sesgo de automatización?",
+          "a": "Muestra contexto inteligible para cada decisión, limita y exige justificación para las aprobaciones, monitoriza el tiempo de aprobación y la tasa de anulaciones, y mantén a los supervisores competentes mediante formación y rotación."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Política de Supervisão Humana e Responsabilização",
+      "summary": "Uma política operacional que leva a supervisão humana do Artigo 14 do EU AI Act à prática para a IA agêntica. Atribui um responsável nomeado por agente, define o nível de supervisão (no laço, sobre o laço, fora do laço) conforme o risco e estabelece a autoridade de intervenção, anulação e parada, além das vias de escalonamento. Exige que os supervisores sejam competentes e tenham tempo para agir, e protege contra o carimbo automático e o viés de automação. Existe para evitar duas falhas: o humano ausente e o humano simbólico que não consegue entender, anular nem responder pelo que o agente faz.",
+      "definition": "Uma política de supervisão humana e responsabilização é um conjunto de regras vinculantes que atribui um humano nomeado como responsável por cada agente e garante que uma pessoa competente possa entender, intervir e parar suas ações.",
+      "scope": "Todo agente em produção ou piloto que use ferramentas, aja sobre sistemas ou tome decisões consequentes, e os proprietários de sistema, aprovadores e operadores que os supervisionam. Operacionaliza o Artigo 14; não substitui aconselhamento jurídico.",
+      "keyPoints": [
+        "Cada agente tem um único responsável nomeado: a responsabilização nunca é transferida para o modelo.",
+        "O nível de supervisão é ajustado ao risco: no laço para ações de alto impacto ou irreversíveis, sobre o laço para ações reversíveis de alto volume, fora do laço apenas para tarefas reversíveis de baixo risco.",
+        "Cada agente expõe controles testados de rejeitar, modificar e parar (interruptor de parada) com o contexto necessário para uma decisão informada.",
+        "Os limiares de escalonamento roteiam as decisões consequentes para humanos por impacto, irreversibilidade, direitos ou segurança, confiança e novidade.",
+        "Os supervisores devem ser competentes, informados de forma inteligível e ter autoridade e tempo reais para agir.",
+        "O viés de automação e o carimbo automático são contrariados ativamente, não presumidos como ausentes."
+      ],
+      "controls": [
+        {
+          "control": "Responsável nomeado",
+          "note": "Atribua um humano que responda pelos resultados de cada agente. 'O modelo decidiu' não é uma explicação aceitável."
+        },
+        {
+          "control": "Nível de supervisão conforme o risco",
+          "note": "Defina no laço, sobre o laço ou fora do laço por agente conforme o impacto e a reversibilidade da ação. Implementa o padrão de portão de aprovação humana para ações de alto impacto."
+        },
+        {
+          "control": "Autoridade de anulação e parada",
+          "note": "Exponha controles testados de rejeitar, modificar e parar; mostre contexto suficiente para uma anulação informada. A parada deve ser rápida e acessível."
+        },
+        {
+          "control": "Limiares de escalonamento",
+          "note": "Roteie as decisões para humanos quando limiares de impacto, irreversibilidade, direitos/segurança, baixa confiança ou novidade forem cruzados. Implementa o padrão de escalonamento humano."
+        },
+        {
+          "control": "Competência do supervisor",
+          "note": "Treine e certifique os supervisores no domínio e nos limites do agente para que a supervisão seja significativa, não nominal."
+        },
+        {
+          "control": "Salvaguardas contra o carimbo automático",
+          "note": "Limite e exija justificativa para as aprovações; monitore o tempo de aprovação e a taxa de anulações para detectar o viés de automação."
+        }
+      ],
+      "checklist": [
+        "Nomeie um único responsável para cada agente em produção e registre-o.",
+        "Classifique as ações de cada agente por impacto e reversibilidade e atribua um nível de supervisão.",
+        "Implemente e teste os controles de rejeitar, modificar e parar (interruptor de parada) para cada agente.",
+        "Garanta que o agente mostre contexto inteligível para qualquer decisão que precise de supervisão.",
+        "Defina e configure limiares de escalonamento para impacto, direitos/segurança, confiança e novidade.",
+        "Treine os supervisores no domínio e nos limites do agente e mantenha a certificação deles em dia.",
+        "Adicione salvaguardas contra o carimbo automático e monitore o tempo de aprovação e a taxa de anulações.",
+        "Registre cada aprovação e anulação com ator, motivo e marca de tempo, e revise os limiares periodicamente."
+      ],
+      "pitfalls": [
+        "Supervisão simbólica: um humano clica em aprovar sem o contexto, a autoridade ou o tempo para avaliar de fato a ação.",
+        "Viés de automação: os aprovadores confiam tanto no agente que param de escrutinar sua saída.",
+        "Responsabilização difusa: nenhum responsável nomeado, então uma falha não tem humano que responda.",
+        "Anulação inalcançável: um controle de parada lento, oculto ou nunca testado.",
+        "Deriva de limiares: limites de escalonamento definidos uma vez e nunca atualizados à medida que o escopo do agente cresce."
+      ],
+      "examples": [
+        "Um agente financeiro cujos pagamentos acima de um teto de gasto exigem aprovação humana no laço, enquanto as conciliações correm sobre o laço.",
+        "Um agente de suporte que escala para um humano quando sua confiança é baixa ou uma solicitação afeta os direitos de um cliente.",
+        "Um incidente em que o responsável nomeado presta contas e o registro de anulações mostra quem aprovou a ação e por quê."
+      ],
+      "faqs": [
+        {
+          "q": "Supervisão humana significa que um humano aprova tudo?",
+          "a": "Não. A supervisão é em níveis: no laço para ações de alto impacto ou irreversíveis, monitoramento sobre o laço para ações reversíveis de alto volume e uma postura de humano no comando em geral. O modelo se ajusta ao risco para que a supervisão continue significativa em vez de virar fadiga de aprovação."
+        },
+        {
+          "q": "A responsabilização pode ficar com o fornecedor de IA?",
+          "a": "Não. As relações com fornecedores são governadas à parte, mas o seu proprietário de sistema nomeado continua responsável por como o agente é implantado e usado. A automação é uma ferramenta, não uma defesa."
+        },
+        {
+          "q": "Como evitamos o carimbo automático e o viés de automação?",
+          "a": "Mostre contexto inteligível para cada decisão, limite e exija justificativa para as aprovações, monitore o tempo de aprovação e a taxa de anulações, e mantenha os supervisores competentes por meio de treinamento e rotação."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "slug": "semantic-caching",
+  "category": "cost",
+  "updated": "2026-06-24",
+  "version": "1.1",
+  "technologies": ["Embedding models", "Vector databases", "GPTCache", "Redis / KV stores"],
+  "related": ["routing", "prompt-chaining"],
+  "references": [
+    { "title": "OpenAI — Vector embeddings guide", "url": "https://platform.openai.com/docs/guides/embeddings" }
+  ],
+  "evidence": {
+    "evidenceLevel": "production",
+    "confidenceLevel": "low",
+    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+  },
+  "locales": {
+    "en": {
+      "name": "Semantic Caching",
+      "summary": "Semantic caching stores past model responses and reuses them when a new request is semantically similar to a previous one — matching by meaning via embeddings, not exact text. It cuts cost and latency for repetitive or near-duplicate queries common in production.",
+      "problem": "Many production queries are paraphrases of ones already answered, so re-running the full model on each wastes cost and latency.",
+      "context": "Use semantic caching when traffic contains many similar or repeated questions and answers are stable enough to reuse — FAQs, support, documentation assistants.",
+      "solution": [
+        "Embed each incoming request and search a cache of prior request embeddings. If a sufficiently similar entry exists (above a similarity threshold), return its stored response; otherwise call the model and store the new pair.",
+        "Tune the similarity threshold carefully: too loose returns wrong answers for subtly different questions; too strict misses valid hits. Add TTLs and invalidation so cached answers do not go stale."
+      ],
+      "components": ["Embedding of the request", "Vector cache", "Similarity threshold", "TTL / invalidation", "Fallback to model"],
+      "benefits": [
+        "Lower cost by avoiding repeat model calls.",
+        "Lower latency on cache hits.",
+        "More consistent answers to similar questions."
+      ],
+      "risks": [
+        "A loose threshold serves wrong cached answers.",
+        "Stale cache without TTL or invalidation.",
+        "Personalized or time-sensitive answers cache poorly."
+      ],
+      "whenNot": [
+        "When most queries are unique.",
+        "When answers depend on fresh, user- or time-specific data.",
+        "When even small mismatches are unacceptable."
+      ],
+      "examples": [
+        "Reusing the answer to 'how do I reset my password' across its many phrasings.",
+        "Caching common documentation questions in a support assistant.",
+        "Short-circuiting repeated identical analytics questions."
+      ],
+      "productionEvidence": {
+        "context": "Single-operator, local-first OpenClaw deployment observed over 57 days (161 sessions / 2,776 turns), aggregated from the agent's own trajectory traces.",
+        "scenario": "Prompt and context caching is engineered with cache_control markers plus a workspace file cache and a route cache, so repeated structure is served from cache.",
+        "technology": "Anthropic cache_control injection on system and messages, OpenRouter passthrough, workspace file cache, route cache, and cache_read/write cost accounting.",
+        "load": "28.1M total tokens over 57 days, of which ~19.6M were served as cache-read.",
+        "results": "About 70% of tokens were served from cache, holding blended cost to $15.21 per 1M tokens ($41 of cache-read versus $374 of fresh input). Single-operator local-first deployment — the ratio reflects this workload's repetition; measure your own."
+      },
+      "kpis": [
+        { "metric": "Cache hit rate", "note": "Share of requests served from cache; the lever for both cost and latency savings." },
+        { "metric": "False-hit rate", "note": "How often a semantically 'similar' hit returns a wrong or stale answer — the central risk of caching by meaning." },
+        { "metric": "Cost & latency saved per hit", "note": "Tokens and time avoided on cache hits, the upside you're trading the false-hit risk for." },
+        { "metric": "Similarity threshold calibration", "note": "Whether the match threshold balances hit rate against false hits; too loose hurts quality, too strict kills savings." }
+      ],
+      "failureModes": [
+        "False hits: two queries are similar in embedding space but need different answers, so the cache returns a wrong one.",
+        "Staleness: cached answers go out of date while the underlying facts change.",
+        "Threshold mis-tuning: too loose returns wrong answers, too strict yields almost no hits.",
+        "Cache poisoning: a bad answer gets cached and then served repeatedly."
+      ],
+      "lessons": [
+        "Tune the similarity threshold against real traffic; it is the make-or-break parameter.",
+        "Never cache where freshness or correctness is critical without an invalidation strategy.",
+        "Validate or sample cache hits to catch false matches before users do.",
+        "Scope caches narrowly (per tenant, per context) to avoid leaking the wrong answer across users."
+      ],
+      "faqs": [
+        { "q": "How is this different from a normal cache?", "a": "A normal cache matches exact keys; a semantic cache matches by meaning using embeddings, so paraphrased questions still hit." },
+        { "q": "What is the main risk?", "a": "A too-loose similarity threshold returns a cached answer for a question that is actually different. Tune the threshold and validate on real traffic." },
+        { "q": "How do I avoid stale answers?", "a": "Set TTLs and invalidate entries when the underlying data changes; avoid caching personalized or time-sensitive responses." }
+      ]
+    },
+    "es": {
+      "name": "Caché Semántica (Semantic Caching)",
+      "summary": "La caché semántica almacena respuestas pasadas del modelo y las reutiliza cuando una nueva petición es semánticamente similar a una previa, casando por significado mediante embeddings, no por texto exacto. Reduce coste y latencia en consultas repetitivas o casi duplicadas, comunes en producción.",
+      "problem": "Muchas consultas en producción son paráfrasis de otras ya respondidas, así que reejecutar el modelo completo en cada una desperdicia coste y latencia.",
+      "context": "Usa la caché semántica cuando el tráfico contiene muchas preguntas similares o repetidas y las respuestas son lo bastante estables para reutilizarse: FAQs, soporte, asistentes de documentación.",
+      "solution": [
+        "Embebe cada petición entrante y busca en una caché de embeddings de peticiones previas. Si existe una entrada suficientemente similar (por encima de un umbral de similitud), devuelve su respuesta almacenada; si no, llama al modelo y guarda el nuevo par.",
+        "Ajusta el umbral de similitud con cuidado: demasiado laxo devuelve respuestas erróneas a preguntas sutilmente distintas; demasiado estricto pierde aciertos válidos. Añade TTLs e invalidación para que las respuestas no queden obsoletas."
+      ],
+      "components": ["Embedding de la petición", "Caché vectorial", "Umbral de similitud", "TTL / invalidación", "Fallback al modelo"],
+      "benefits": [
+        "Menor coste al evitar llamadas repetidas al modelo.",
+        "Menor latencia en los aciertos de caché.",
+        "Respuestas más consistentes a preguntas similares."
+      ],
+      "risks": [
+        "Un umbral laxo sirve respuestas cacheadas erróneas.",
+        "Caché obsoleta sin TTL ni invalidación.",
+        "Las respuestas personalizadas o sensibles al tiempo se cachean mal."
+      ],
+      "whenNot": [
+        "Cuando la mayoría de consultas son únicas.",
+        "Cuando las respuestas dependen de datos frescos, de usuario o de tiempo.",
+        "Cuando incluso pequeños desajustes son inaceptables."
+      ],
+      "examples": [
+        "Reutilizar la respuesta a 'cómo reseteo mi contraseña' en sus muchas formulaciones.",
+        "Cachear preguntas comunes de documentación en un asistente de soporte.",
+        "Cortocircuitar preguntas analíticas idénticas repetidas."
+      ],
+      "productionEvidence": {
+        "context": "Despliegue OpenClaw local-first y mono-operador observado durante 57 días (161 sesiones / 2.776 turnos), agregado desde las propias trazas del agente.",
+        "scenario": "El caching de prompt y contexto está diseñado con marcadores cache_control más una caché de archivos de workspace y una caché de rutas, de modo que la estructura repetida se sirve desde caché.",
+        "technology": "Inyección de cache_control de Anthropic en sistema y mensajes, passthrough de OpenRouter, caché de archivos de workspace, caché de rutas y contabilidad de coste cache_read/write.",
+        "load": "28,1M de tokens totales en 57 días, de los cuales ~19,6M se sirvieron como cache-read.",
+        "results": "Cerca del 70% de los tokens se sirvieron desde caché, manteniendo el coste mezclado en $15,21 por 1M de tokens ($41 de cache-read frente a $374 de input nuevo). Despliegue local-first mono-operador — el ratio refleja la repetición de esta carga; mide el tuyo."
+      },
+      "kpis": [
+        { "metric": "Tasa de aciertos de caché", "note": "Proporción de peticiones servidas desde caché; la palanca de ahorro en coste y latencia." },
+        { "metric": "Tasa de falsos aciertos", "note": "Con qué frecuencia un acierto 'similar' devuelve una respuesta errónea u obsoleta; el riesgo central de cachear por significado." },
+        { "metric": "Coste y latencia ahorrados por acierto", "note": "Tokens y tiempo evitados en los aciertos, la ventaja por la que cambias el riesgo de falso acierto." },
+        { "metric": "Calibración del umbral de similitud", "note": "Si el umbral equilibra tasa de aciertos y falsos aciertos; demasiado laxo daña la calidad, demasiado estricto elimina el ahorro." }
+      ],
+      "failureModes": [
+        "Falsos aciertos: dos consultas similares en el espacio de embeddings necesitan respuestas distintas, y la caché devuelve la equivocada.",
+        "Obsolescencia: las respuestas cacheadas quedan desactualizadas mientras los hechos subyacentes cambian.",
+        "Mal ajuste del umbral: demasiado laxo devuelve respuestas erróneas, demasiado estricto da casi ningún acierto.",
+        "Envenenamiento de caché: una respuesta mala se cachea y luego se sirve repetidamente."
+      ],
+      "lessons": [
+        "Ajusta el umbral de similitud con tráfico real; es el parámetro decisivo.",
+        "Nunca caches donde la frescura o la corrección sean críticas sin una estrategia de invalidación.",
+        "Valida o muestrea los aciertos de caché para detectar falsos antes que los usuarios.",
+        "Acota las cachés de forma estrecha (por tenant, por contexto) para no filtrar la respuesta equivocada entre usuarios."
+      ],
+      "faqs": [
+        { "q": "¿En qué se diferencia de una caché normal?", "a": "Una caché normal casa claves exactas; una caché semántica casa por significado usando embeddings, así las preguntas parafraseadas también aciertan." },
+        { "q": "¿Cuál es el riesgo principal?", "a": "Un umbral de similitud demasiado laxo devuelve una respuesta cacheada para una pregunta que en realidad es distinta. Ajusta el umbral y valida con tráfico real." },
+        { "q": "¿Cómo evito respuestas obsoletas?", "a": "Fija TTLs e invalida entradas cuando cambian los datos subyacentes; evita cachear respuestas personalizadas o sensibles al tiempo." }
+      ]
+    },
+    "pt": {
+      "name": "Cache Semântico (Semantic Caching)",
+      "summary": "O cache semântico armazena respostas passadas do modelo e as reutiliza quando uma nova requisição é semanticamente similar a uma anterior, casando por significado via embeddings, não por texto exato. Reduz custo e latência em consultas repetitivas ou quase duplicadas, comuns em produção.",
+      "problem": "Muitas consultas em produção são paráfrases de outras já respondidas, então reexecutar o modelo completo em cada uma desperdiça custo e latência.",
+      "context": "Use o cache semântico quando o tráfego contém muitas perguntas similares ou repetidas e as respostas são estáveis o bastante para reutilizar: FAQs, suporte, assistentes de documentação.",
+      "solution": [
+        "Embede cada requisição recebida e busca num cache de embeddings de requisições anteriores. Se existe uma entrada suficientemente similar (acima de um limiar de similaridade), devolve sua resposta armazenada; senão, chama o modelo e guarda o novo par.",
+        "Ajuste o limiar de similaridade com cuidado: frouxo demais devolve respostas erradas a perguntas sutilmente distintas; estrito demais perde acertos válidos. Adicione TTLs e invalidação para que as respostas não fiquem obsoletas."
+      ],
+      "components": ["Embedding da requisição", "Cache vetorial", "Limiar de similaridade", "TTL / invalidação", "Fallback ao modelo"],
+      "benefits": [
+        "Menor custo ao evitar chamadas repetidas ao modelo.",
+        "Menor latência nos acertos de cache.",
+        "Respostas mais consistentes a perguntas similares."
+      ],
+      "risks": [
+        "Um limiar frouxo serve respostas em cache erradas.",
+        "Cache obsoleto sem TTL nem invalidação.",
+        "Respostas personalizadas ou sensíveis ao tempo se armazenam mal."
+      ],
+      "whenNot": [
+        "Quando a maioria das consultas é única.",
+        "Quando as respostas dependem de dados frescos, de usuário ou de tempo.",
+        "Quando até pequenos descompassos são inaceitáveis."
+      ],
+      "examples": [
+        "Reutilizar a resposta a 'como redefino minha senha' em suas muitas formulações.",
+        "Armazenar perguntas comuns de documentação num assistente de suporte.",
+        "Curto-circuitar perguntas analíticas idênticas repetidas."
+      ],
+      "productionEvidence": {
+        "context": "Implantação OpenClaw local-first e de operador único observada por 57 dias (161 sessões / 2.776 turnos), agregada a partir dos próprios rastros do agente.",
+        "scenario": "O caching de prompt e contexto é projetado com marcadores cache_control mais um cache de arquivos de workspace e um cache de rotas, de modo que a estrutura repetida é servida do cache.",
+        "technology": "Injeção de cache_control da Anthropic em sistema e mensagens, passthrough do OpenRouter, cache de arquivos de workspace, cache de rotas e contabilidade de custo cache_read/write.",
+        "load": "28,1M de tokens totais em 57 dias, dos quais ~19,6M foram servidos como cache-read.",
+        "results": "Cerca de 70% dos tokens foram servidos do cache, mantendo o custo combinado em $15,21 por 1M de tokens ($41 de cache-read ante $374 de input novo). Implantação local-first de operador único — a proporção reflete a repetição desta carga; meça a sua."
+      },
+      "kpis": [
+        { "metric": "Taxa de acertos de cache", "note": "Proporção de requisições servidas do cache; a alavanca de economia em custo e latência." },
+        { "metric": "Taxa de falsos acertos", "note": "Com que frequência um acerto 'similar' devolve uma resposta errada ou obsoleta; o risco central de cachear por significado." },
+        { "metric": "Custo e latência economizados por acerto", "note": "Tokens e tempo evitados nos acertos, a vantagem pela qual você troca o risco de falso acerto." },
+        { "metric": "Calibração do limiar de similaridade", "note": "Se o limiar equilibra taxa de acertos e falsos acertos; frouxo demais prejudica a qualidade, estrito demais elimina a economia." }
+      ],
+      "failureModes": [
+        "Falsos acertos: duas consultas similares no espaço de embeddings precisam de respostas distintas, e o cache devolve a errada.",
+        "Obsolescência: as respostas cacheadas ficam desatualizadas enquanto os fatos subjacentes mudam.",
+        "Mau ajuste do limiar: frouxo demais devolve respostas erradas, estrito demais dá quase nenhum acerto.",
+        "Envenenamento de cache: uma resposta ruim é cacheada e depois servida repetidamente."
+      ],
+      "lessons": [
+        "Ajuste o limiar de similaridade com tráfego real; é o parâmetro decisivo.",
+        "Nunca cacheie onde a atualidade ou a correção sejam críticas sem uma estratégia de invalidação.",
+        "Valide ou amostre os acertos de cache para detectar falsos antes dos usuários.",
+        "Restrinja os caches de forma estreita (por tenant, por contexto) para não vazar a resposta errada entre usuários."
+      ],
+      "faqs": [
+        { "q": "Como difere de um cache normal?", "a": "Um cache normal casa chaves exatas; um cache semântico casa por significado usando embeddings, então perguntas parafraseadas também acertam." },
+        { "q": "Qual é o risco principal?", "a": "Um limiar de similaridade frouxo demais devolve uma resposta em cache para uma pergunta que na verdade é distinta. Ajuste o limiar e valide com tráfego real." },
+        { "q": "Como evito respostas obsoletas?", "a": "Defina TTLs e invalide entradas quando os dados subjacentes mudam; evite armazenar respostas personalizadas ou sensíveis ao tempo." }
+      ]
+    }
+  }
+}

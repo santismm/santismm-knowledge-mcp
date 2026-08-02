@@ -1,0 +1,158 @@
+{
+  "slug": "harness-engineering",
+  "category": "harness",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": true,
+  "related": ["agentic-ai", "ai-agent", "context-engineering", "agent-memory", "ai-observability", "multi-agent-architecture", "agentic-evaluation"],
+  "references": [
+    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
+    { "title": "Yao et al. — ReAct (2022)", "url": "https://arxiv.org/abs/2210.03629" },
+    { "title": "Santiago Santa María — The Stopwatch and the Exam", "url": "https://articles.santismm.com/the-stopwatch-and-the-exam/" }
+  ],
+  "evidence": {
+    "evidenceLevel": "theoretical",
+    "confidenceLevel": "medium",
+    "sourceType": ["personal_experience", "industry_observation"]
+  },
+  "locales": {
+    "en": {
+      "title": "What is Harness Engineering?",
+      "summary": "Harness engineering is the discipline of designing and optimizing the scaffolding around an AI model — the prompts, tools, memory, environment, control loop and guardrails — so the model performs reliably on real tasks. Its core premise: as base models converge in raw capability, competitive advantage shifts from the model itself to the harness built around it. The same model can pass or fail a task depending almost entirely on its harness.",
+      "definition": "Harness engineering is the practice of designing, building and optimizing the scaffolding (tools, memory, prompts, environment and control loop) that turns a model's raw capability into reliable, goal-directed action.",
+      "takeaways": [
+        "The harness is everything around the model that converts capability into action.",
+        "As frontier models converge, the harness becomes the main lever of differentiation.",
+        "Tool design, context management and memory often matter more than model choice.",
+        "Harnesses must be observable and evaluated — you cannot improve what you cannot measure.",
+        "Harness engineering is to agents what platform engineering is to cloud applications."
+      ],
+      "context": [
+        "Benchmarks long measured a model's capability in isolation. But in production, a model never acts alone: it acts through a harness. Give a strong model a poor harness and it fails; give a modest model an excellent harness and it succeeds. That gap is where harness engineering lives.",
+        "The term names a shift in where engineering effort and competitive advantage sit. When everyone can call a comparable frontier model, the durable advantage is the system around it: the quality of the tools, the memory, the context strategy, the evaluation loop and the guardrails."
+      ],
+      "architecture": [
+        "A harness has recurring layers: the prompt/instruction layer; the tool layer (what the model can do and how cleanly those tools are described); the memory layer (short-term context plus long-term stores); the environment (the systems the agent acts on); the control loop (how outputs become actions and observations return); and the cross-cutting layers of guardrails, observability and evaluation.",
+        "Good harness engineering treats each layer as a design surface. Tools are written for a model to use, not just for a developer to read. Context is curated rather than dumped. Memory is structured. Every run is traced so failures can be diagnosed and fed back into evals."
+      ],
+      "components": ["Instruction / prompt layer", "Tooling", "Memory systems", "Environment", "Control loop / orchestration", "Guardrails", "Observability", "Evaluation"],
+      "pros": [
+        "Turns the same model into a far more reliable system.",
+        "A durable advantage that survives model upgrades and swaps.",
+        "Makes failures diagnosable through observability and evals.",
+        "Lets teams improve agents systematically, not by prompt luck."
+      ],
+      "risks": [
+        "Complexity: more moving parts to build, secure and maintain.",
+        "Over-engineering harnesses that simpler patterns would solve.",
+        "Tight coupling to a model's quirks can create migration cost.",
+        "Without evaluation, harness changes are guesswork."
+      ],
+      "tools": ["LangGraph", "Claude Agent SDK", "OpenAI Agents SDK", "Model Context Protocol (MCP)", "LangSmith / Langfuse (observability)"],
+      "examples": [
+        "Rewriting a vague tool description so the model calls it correctly, lifting task success without touching the model.",
+        "Adding a memory store so an agent stops repeating work across a long task.",
+        "Introducing an evaluation harness that catches a regression before it ships."
+      ],
+      "faqs": [
+        { "q": "Why does harness engineering matter now?", "a": "Because frontier models are converging. When raw capability is broadly available, the differentiator becomes the harness — the engineered system that turns that capability into dependable work." },
+        { "q": "Is harness engineering the same as prompt engineering?", "a": "No. Prompt engineering is one layer of the harness. Harness engineering also covers tools, memory, environment, the control loop, guardrails, observability and evaluation." },
+        { "q": "How is it different from agentic harness engineering?", "a": "Agentic harness engineering applies the same discipline specifically to autonomous, multi-step agents and their long-horizon needs (memory, tools, feedback loops)." },
+        { "q": "What skills does it require?", "a": "Software and platform engineering, evaluation/measurement, systems design, security, and a working understanding of how models behave." },
+        { "q": "How do you know a harness is good?", "a": "By measuring it. A good harness is observable and evaluated against task-based benchmarks, so improvements are demonstrated rather than assumed." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué es la Ingeniería de Harness (Harness Engineering)?",
+      "summary": "La ingeniería de harness es la disciplina de diseñar y optimizar el andamiaje alrededor de un modelo de IA —prompts, herramientas, memoria, entorno, bucle de control y guardarraíles— para que el modelo rinda de forma fiable en tareas reales. Su premisa central: a medida que los modelos base convergen en capacidad bruta, la ventaja competitiva se desplaza del modelo al harness que lo rodea. El mismo modelo puede aprobar o fallar una tarea casi por completo según su harness.",
+      "definition": "La ingeniería de harness es la práctica de diseñar, construir y optimizar el andamiaje (herramientas, memoria, prompts, entorno y bucle de control) que convierte la capacidad bruta de un modelo en acción fiable y dirigida a objetivos.",
+      "takeaways": [
+        "El harness es todo lo que rodea al modelo y convierte capacidad en acción.",
+        "A medida que los modelos frontera convergen, el harness se vuelve la principal palanca de diferenciación.",
+        "El diseño de herramientas, la gestión de contexto y la memoria suelen importar más que el modelo elegido.",
+        "Los harness deben ser observables y evaluados: no se mejora lo que no se mide.",
+        "La ingeniería de harness es a los agentes lo que la ingeniería de plataforma a las aplicaciones cloud."
+      ],
+      "context": [
+        "Los benchmarks midieron durante mucho tiempo la capacidad de un modelo de forma aislada. Pero en producción un modelo nunca actúa solo: actúa a través de un harness. Dale a un modelo fuerte un harness pobre y falla; dale a un modelo modesto un harness excelente y triunfa. En esa brecha vive la ingeniería de harness.",
+        "El término nombra un desplazamiento en dónde están el esfuerzo de ingeniería y la ventaja competitiva. Cuando todos pueden llamar a un modelo frontera comparable, la ventaja duradera es el sistema que lo rodea: la calidad de las herramientas, la memoria, la estrategia de contexto, el bucle de evaluación y los guardarraíles."
+      ],
+      "architecture": [
+        "Un harness tiene capas recurrentes: la capa de instrucción/prompt; la capa de herramientas (qué puede hacer el modelo y con qué limpieza se describen esas herramientas); la capa de memoria (contexto a corto plazo más almacenes a largo plazo); el entorno (los sistemas sobre los que actúa el agente); el bucle de control (cómo las salidas se vuelven acciones y vuelven las observaciones); y las capas transversales de guardarraíles, observabilidad y evaluación.",
+        "La buena ingeniería de harness trata cada capa como una superficie de diseño. Las herramientas se escriben para que las use un modelo, no solo para que las lea un desarrollador. El contexto se cura en lugar de volcarse. La memoria se estructura. Cada ejecución se traza para diagnosticar fallos y realimentar las evaluaciones."
+      ],
+      "components": ["Capa de instrucción / prompt", "Herramientas (tooling)", "Sistemas de memoria", "Entorno", "Bucle de control / orquestación", "Guardarraíles", "Observabilidad", "Evaluación"],
+      "pros": [
+        "Convierte el mismo modelo en un sistema mucho más fiable.",
+        "Una ventaja duradera que sobrevive a actualizaciones y cambios de modelo.",
+        "Hace los fallos diagnosticables mediante observabilidad y evaluaciones.",
+        "Permite mejorar agentes de forma sistemática, no por suerte en el prompt."
+      ],
+      "risks": [
+        "Complejidad: más piezas que construir, asegurar y mantener.",
+        "Sobreingeniería de harness que patrones más simples resolverían.",
+        "El acoplamiento a las peculiaridades de un modelo puede crear coste de migración.",
+        "Sin evaluación, los cambios de harness son conjeturas."
+      ],
+      "tools": ["LangGraph", "Claude Agent SDK", "OpenAI Agents SDK", "Model Context Protocol (MCP)", "LangSmith / Langfuse (observabilidad)"],
+      "examples": [
+        "Reescribir una descripción de herramienta ambigua para que el modelo la llame bien, subiendo el éxito sin tocar el modelo.",
+        "Añadir un almacén de memoria para que un agente deje de repetir trabajo en una tarea larga.",
+        "Introducir un harness de evaluación que detecta una regresión antes de publicarla."
+      ],
+      "faqs": [
+        { "q": "¿Por qué importa ahora la ingeniería de harness?", "a": "Porque los modelos frontera están convergiendo. Cuando la capacidad bruta es ampliamente accesible, el diferenciador pasa a ser el harness: el sistema de ingeniería que convierte esa capacidad en trabajo fiable." },
+        { "q": "¿Es lo mismo que la ingeniería de prompts?", "a": "No. La ingeniería de prompts es una capa del harness. La ingeniería de harness abarca además herramientas, memoria, entorno, bucle de control, guardarraíles, observabilidad y evaluación." },
+        { "q": "¿En qué se diferencia de la ingeniería de harness agéntico?", "a": "La ingeniería de harness agéntico aplica la misma disciplina específicamente a agentes autónomos de varios pasos y sus necesidades de horizonte largo (memoria, herramientas, bucles de feedback)." },
+        { "q": "¿Qué habilidades requiere?", "a": "Ingeniería de software y de plataforma, evaluación/medición, diseño de sistemas, seguridad y una comprensión práctica de cómo se comportan los modelos." },
+        { "q": "¿Cómo sé si un harness es bueno?", "a": "Midiéndolo. Un buen harness es observable y se evalúa contra benchmarks basados en tareas, de modo que las mejoras se demuestran en vez de suponerse." }
+      ]
+    },
+    "pt": {
+      "title": "O que é Engenharia de Harness (Harness Engineering)?",
+      "summary": "A engenharia de harness é a disciplina de projetar e otimizar o andaime ao redor de um modelo de IA — prompts, ferramentas, memória, ambiente, laço de controle e guard-rails — para que o modelo tenha desempenho confiável em tarefas reais. Sua premissa central: à medida que os modelos base convergem em capacidade bruta, a vantagem competitiva se desloca do modelo para o harness à sua volta. O mesmo modelo pode passar ou falhar numa tarefa quase inteiramente conforme seu harness.",
+      "definition": "A engenharia de harness é a prática de projetar, construir e otimizar o andaime (ferramentas, memória, prompts, ambiente e laço de controle) que converte a capacidade bruta de um modelo em ação confiável e orientada a objetivos.",
+      "takeaways": [
+        "O harness é tudo o que rodeia o modelo e converte capacidade em ação.",
+        "À medida que os modelos de fronteira convergem, o harness se torna a principal alavanca de diferenciação.",
+        "O design de ferramentas, a gestão de contexto e a memória costumam importar mais que o modelo escolhido.",
+        "Os harnesses devem ser observáveis e avaliados: não se melhora o que não se mede.",
+        "A engenharia de harness está para os agentes assim como a engenharia de plataforma está para as aplicações cloud."
+      ],
+      "context": [
+        "Os benchmarks mediram por muito tempo a capacidade de um modelo de forma isolada. Mas em produção um modelo nunca age sozinho: age através de um harness. Dê a um modelo forte um harness ruim e ele falha; dê a um modelo modesto um harness excelente e ele tem sucesso. Nessa lacuna vive a engenharia de harness.",
+        "O termo nomeia um deslocamento de onde estão o esforço de engenharia e a vantagem competitiva. Quando todos podem chamar um modelo de fronteira comparável, a vantagem durável é o sistema ao seu redor: a qualidade das ferramentas, a memória, a estratégia de contexto, o laço de avaliação e os guard-rails."
+      ],
+      "architecture": [
+        "Um harness tem camadas recorrentes: a camada de instrução/prompt; a camada de ferramentas (o que o modelo pode fazer e com que clareza essas ferramentas são descritas); a camada de memória (contexto de curto prazo mais armazenamentos de longo prazo); o ambiente (os sistemas sobre os quais o agente age); o laço de controle (como as saídas viram ações e as observações retornam); e as camadas transversais de guard-rails, observabilidade e avaliação.",
+        "A boa engenharia de harness trata cada camada como uma superfície de design. As ferramentas são escritas para um modelo usar, não só para um desenvolvedor ler. O contexto é curado em vez de despejado. A memória é estruturada. Cada execução é rastreada para diagnosticar falhas e realimentar as avaliações."
+      ],
+      "components": ["Camada de instrução / prompt", "Ferramentas (tooling)", "Sistemas de memória", "Ambiente", "Laço de controle / orquestração", "Guard-rails", "Observabilidade", "Avaliação"],
+      "pros": [
+        "Transforma o mesmo modelo em um sistema muito mais confiável.",
+        "Uma vantagem durável que sobrevive a atualizações e trocas de modelo.",
+        "Torna as falhas diagnosticáveis por meio de observabilidade e avaliações.",
+        "Permite melhorar agentes de forma sistemática, não por sorte no prompt."
+      ],
+      "risks": [
+        "Complexidade: mais peças para construir, proteger e manter.",
+        "Superengenharia de harness que padrões mais simples resolveriam.",
+        "O acoplamento às peculiaridades de um modelo pode criar custo de migração.",
+        "Sem avaliação, as mudanças de harness são suposições."
+      ],
+      "tools": ["LangGraph", "Claude Agent SDK", "OpenAI Agents SDK", "Model Context Protocol (MCP)", "LangSmith / Langfuse (observabilidade)"],
+      "examples": [
+        "Reescrever uma descrição de ferramenta ambígua para o modelo chamá-la corretamente, elevando o sucesso sem tocar no modelo.",
+        "Adicionar um armazenamento de memória para um agente parar de repetir trabalho numa tarefa longa.",
+        "Introduzir um harness de avaliação que detecta uma regressão antes de publicá-la."
+      ],
+      "faqs": [
+        { "q": "Por que a engenharia de harness importa agora?", "a": "Porque os modelos de fronteira estão convergindo. Quando a capacidade bruta é amplamente acessível, o diferencial passa a ser o harness: o sistema de engenharia que converte essa capacidade em trabalho confiável." },
+        { "q": "É o mesmo que engenharia de prompts?", "a": "Não. A engenharia de prompts é uma camada do harness. A engenharia de harness abrange ainda ferramentas, memória, ambiente, laço de controle, guard-rails, observabilidade e avaliação." },
+        { "q": "Como se diferencia da engenharia de harness agêntico?", "a": "A engenharia de harness agêntico aplica a mesma disciplina especificamente a agentes autônomos de vários passos e suas necessidades de horizonte longo (memória, ferramentas, laços de feedback)." },
+        { "q": "Que habilidades exige?", "a": "Engenharia de software e de plataforma, avaliação/medição, design de sistemas, segurança e uma compreensão prática de como os modelos se comportam." },
+        { "q": "Como sei se um harness é bom?", "a": "Medindo-o. Um bom harness é observável e avaliado contra benchmarks baseados em tarefas, de modo que as melhorias são demonstradas em vez de presumidas." }
+      ]
+    }
+  }
+}

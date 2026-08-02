@@ -1,0 +1,153 @@
+{
+  "slug": "multi-agent-architecture",
+  "category": "architecture",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "related": ["agentic-ai", "ai-agent", "harness-engineering", "model-context-protocol"],
+  "references": [
+    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
+    { "title": "Yao et al. — ReAct (2022)", "url": "https://arxiv.org/abs/2210.03629" }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": ["industry_observation", "paper"]
+  },
+  "locales": {
+    "en": {
+      "title": "What is a Multi-Agent Architecture?",
+      "summary": "A multi-agent architecture divides a task among several specialized agents that collaborate, delegate or compete to reach a goal, instead of relying on one general agent. Common shapes include an orchestrator that delegates to workers, pipelines where each agent owns a stage, and debate or critic patterns. It can improve modularity and reliability for complex tasks, but adds coordination overhead and should be adopted only when a single agent demonstrably falls short.",
+      "definition": "A multi-agent architecture is a system design in which multiple specialized AI agents coordinate — through an orchestrator, a pipeline or peer interaction — to accomplish a task that is decomposed across them.",
+      "takeaways": [
+        "Several specialized agents beat one generalist for some complex tasks.",
+        "Common patterns: orchestrator-workers, pipelines, debate/critic.",
+        "Specialization improves modularity and focus per role.",
+        "Coordination, latency and cost overhead are the main costs.",
+        "Default to a single agent; go multi-agent only when measurement justifies it."
+      ],
+      "context": [
+        "As tasks grow, a single agent's context and reasoning get stretched. Splitting the work into focused roles — researcher, writer, reviewer; or planner and executors — can make each part more reliable and easier to evaluate.",
+        "But multi-agent is not automatically better. Every added agent adds communication, failure modes and cost. The discipline is to decompose only where roles are genuinely separable and a single agent measurably underperforms."
+      ],
+      "architecture": [
+        "Orchestrator-workers: a lead agent plans and delegates subtasks to worker agents, then synthesizes results. Pipeline: agents are arranged in stages, each transforming the output of the previous. Peer patterns: agents debate, critique or vote to improve quality.",
+        "Cross-cutting concerns — shared memory, message passing, error handling, budgets and observability — are where most multi-agent systems succeed or fail. Clear contracts between agents matter more than clever role names."
+      ],
+      "components": ["Orchestrator / lead agent", "Worker / specialist agents", "Shared memory & state", "Message passing", "Tools (often via MCP)", "Guardrails & budgets", "Observability"],
+      "pros": [
+        "Modular, specialized roles that are easier to evaluate.",
+        "Parallelism for independent subtasks.",
+        "Separation of concerns across complex workflows.",
+        "Critic/debate patterns can raise output quality."
+      ],
+      "risks": [
+        "Coordination overhead and added latency.",
+        "More failure modes and harder debugging.",
+        "Higher token cost from inter-agent communication.",
+        "Premature complexity when one agent would suffice."
+      ],
+      "tools": ["LangGraph", "CrewAI", "AutoGen", "OpenAI Agents SDK", "Model Context Protocol (MCP)"],
+      "examples": [
+        "An orchestrator delegating research, drafting and review to specialist agents.",
+        "A pipeline that extracts, transforms and validates data across stages.",
+        "A critic agent reviewing another agent's output before it is finalized."
+      ],
+      "faqs": [
+        { "q": "Is multi-agent always better than a single agent?", "a": "No. It adds coordination, cost and failure modes. Prefer a single agent and adopt multi-agent only when a task is clearly separable and a single agent underperforms." },
+        { "q": "What is the orchestrator-workers pattern?", "a": "A lead agent plans a task, delegates subtasks to specialized worker agents, and synthesizes their results into a final answer." },
+        { "q": "How do multi-agent systems fail?", "a": "Through unclear contracts between agents, lost context, runaway loops, and compounding errors — which is why budgets and observability are essential." },
+        { "q": "How does MCP relate to multi-agent systems?", "a": "MCP standardizes how each agent connects to tools and data, making integrations reusable across the agents in the system." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué es una Arquitectura Multiagente?",
+      "summary": "Una arquitectura multiagente divide una tarea entre varios agentes especializados que colaboran, delegan o compiten para alcanzar un objetivo, en lugar de depender de un único agente general. Formas habituales: un orquestador que delega en trabajadores, pipelines donde cada agente posee una etapa, y patrones de debate o crítico. Puede mejorar la modularidad y la fiabilidad en tareas complejas, pero añade coste de coordinación y solo debe adoptarse cuando un solo agente se queda corto de forma demostrable.",
+      "definition": "Una arquitectura multiagente es un diseño de sistema en el que varios agentes de IA especializados se coordinan —mediante un orquestador, un pipeline o interacción entre pares— para realizar una tarea descompuesta entre ellos.",
+      "takeaways": [
+        "Varios agentes especializados superan a uno generalista en ciertas tareas complejas.",
+        "Patrones habituales: orquestador-trabajadores, pipelines, debate/crítico.",
+        "La especialización mejora la modularidad y el foco por rol.",
+        "El coste principal es la coordinación, la latencia y el gasto.",
+        "Por defecto, un solo agente; ir a multiagente solo cuando la medición lo justifique."
+      ],
+      "context": [
+        "A medida que crecen las tareas, el contexto y el razonamiento de un solo agente se tensan. Dividir el trabajo en roles enfocados —investigador, redactor, revisor; o planificador y ejecutores— puede hacer cada parte más fiable y fácil de evaluar.",
+        "Pero multiagente no es automáticamente mejor. Cada agente añadido suma comunicación, modos de fallo y coste. La disciplina es descomponer solo donde los roles sean realmente separables y un solo agente rinda peor de forma medible."
+      ],
+      "architecture": [
+        "Orquestador-trabajadores: un agente líder planifica y delega subtareas a agentes trabajadores, y luego sintetiza los resultados. Pipeline: los agentes se disponen en etapas, cada una transformando la salida de la anterior. Patrones entre pares: los agentes debaten, critican o votan para mejorar la calidad.",
+        "Las preocupaciones transversales —memoria compartida, paso de mensajes, gestión de errores, presupuestos y observabilidad— son donde la mayoría de sistemas multiagente triunfan o fracasan. Los contratos claros entre agentes importan más que los nombres ingeniosos de roles."
+      ],
+      "components": ["Orquestador / agente líder", "Agentes trabajadores / especialistas", "Memoria y estado compartidos", "Paso de mensajes", "Herramientas (a menudo vía MCP)", "Guardarraíles y presupuestos", "Observabilidad"],
+      "pros": [
+        "Roles modulares y especializados, más fáciles de evaluar.",
+        "Paralelismo para subtareas independientes.",
+        "Separación de responsabilidades en flujos complejos.",
+        "Los patrones de crítico/debate pueden elevar la calidad."
+      ],
+      "risks": [
+        "Coste de coordinación y latencia añadida.",
+        "Más modos de fallo y depuración más difícil.",
+        "Mayor coste de tokens por la comunicación entre agentes.",
+        "Complejidad prematura cuando bastaría un agente."
+      ],
+      "tools": ["LangGraph", "CrewAI", "AutoGen", "OpenAI Agents SDK", "Model Context Protocol (MCP)"],
+      "examples": [
+        "Un orquestador que delega investigación, redacción y revisión a agentes especialistas.",
+        "Un pipeline que extrae, transforma y valida datos por etapas.",
+        "Un agente crítico que revisa la salida de otro agente antes de finalizarla."
+      ],
+      "faqs": [
+        { "q": "¿Multiagente es siempre mejor que un solo agente?", "a": "No. Añade coordinación, coste y modos de fallo. Prefiere un solo agente y adopta multiagente solo cuando la tarea sea claramente separable y un agente rinda peor." },
+        { "q": "¿Qué es el patrón orquestador-trabajadores?", "a": "Un agente líder planifica una tarea, delega subtareas a agentes trabajadores especializados y sintetiza sus resultados en una respuesta final." },
+        { "q": "¿Cómo fallan los sistemas multiagente?", "a": "Por contratos poco claros entre agentes, pérdida de contexto, bucles descontrolados y acumulación de errores; por eso presupuestos y observabilidad son esenciales." },
+        { "q": "¿Cómo se relaciona MCP con los sistemas multiagente?", "a": "MCP estandariza cómo cada agente se conecta a herramientas y datos, haciendo las integraciones reutilizables entre los agentes del sistema." }
+      ]
+    },
+    "pt": {
+      "title": "O que é uma Arquitetura Multiagente?",
+      "summary": "Uma arquitetura multiagente divide uma tarefa entre vários agentes especializados que colaboram, delegam ou competem para alcançar um objetivo, em vez de depender de um único agente geral. Formas comuns: um orquestrador que delega a trabalhadores, pipelines em que cada agente possui uma etapa, e padrões de debate ou crítico. Pode melhorar a modularidade e a confiabilidade em tarefas complexas, mas adiciona custo de coordenação e só deve ser adotada quando um único agente fica aquém de forma demonstrável.",
+      "definition": "Uma arquitetura multiagente é um design de sistema em que vários agentes de IA especializados se coordenam — por um orquestrador, um pipeline ou interação entre pares — para realizar uma tarefa decomposta entre eles.",
+      "takeaways": [
+        "Vários agentes especializados superam um generalista em certas tarefas complexas.",
+        "Padrões comuns: orquestrador-trabalhadores, pipelines, debate/crítico.",
+        "A especialização melhora a modularidade e o foco por papel.",
+        "O custo principal é a coordenação, a latência e o gasto.",
+        "Por padrão, um único agente; ir para multiagente só quando a medição justificar."
+      ],
+      "context": [
+        "À medida que as tarefas crescem, o contexto e o raciocínio de um único agente se esticam. Dividir o trabalho em papéis focados — pesquisador, redator, revisor; ou planejador e executores — pode tornar cada parte mais confiável e fácil de avaliar.",
+        "Mas multiagente não é automaticamente melhor. Cada agente adicionado soma comunicação, modos de falha e custo. A disciplina é decompor só onde os papéis sejam realmente separáveis e um único agente tenha desempenho mensuravelmente pior."
+      ],
+      "architecture": [
+        "Orquestrador-trabalhadores: um agente líder planeja e delega subtarefas a agentes trabalhadores, e depois sintetiza os resultados. Pipeline: os agentes são dispostos em etapas, cada uma transformando a saída da anterior. Padrões entre pares: os agentes debatem, criticam ou votam para melhorar a qualidade.",
+        "As preocupações transversais — memória compartilhada, passagem de mensagens, tratamento de erros, orçamentos e observabilidade — são onde a maioria dos sistemas multiagente tem sucesso ou falha. Contratos claros entre agentes importam mais que nomes engenhosos de papéis."
+      ],
+      "components": ["Orquestrador / agente líder", "Agentes trabalhadores / especialistas", "Memória e estado compartilhados", "Passagem de mensagens", "Ferramentas (muitas vezes via MCP)", "Guard-rails e orçamentos", "Observabilidade"],
+      "pros": [
+        "Papéis modulares e especializados, mais fáceis de avaliar.",
+        "Paralelismo para subtarefas independentes.",
+        "Separação de responsabilidades em fluxos complexos.",
+        "Padrões de crítico/debate podem elevar a qualidade."
+      ],
+      "risks": [
+        "Custo de coordenação e latência adicional.",
+        "Mais modos de falha e depuração mais difícil.",
+        "Maior custo de tokens pela comunicação entre agentes.",
+        "Complexidade prematura quando bastaria um agente."
+      ],
+      "tools": ["LangGraph", "CrewAI", "AutoGen", "OpenAI Agents SDK", "Model Context Protocol (MCP)"],
+      "examples": [
+        "Um orquestrador que delega pesquisa, redação e revisão a agentes especialistas.",
+        "Um pipeline que extrai, transforma e valida dados por etapas.",
+        "Um agente crítico que revisa a saída de outro agente antes de finalizá-la."
+      ],
+      "faqs": [
+        { "q": "Multiagente é sempre melhor que um único agente?", "a": "Não. Adiciona coordenação, custo e modos de falha. Prefira um único agente e adote multiagente só quando a tarefa for claramente separável e um agente tiver desempenho pior." },
+        { "q": "O que é o padrão orquestrador-trabalhadores?", "a": "Um agente líder planeja uma tarefa, delega subtarefas a agentes trabalhadores especializados e sintetiza seus resultados numa resposta final." },
+        { "q": "Como os sistemas multiagente falham?", "a": "Por contratos pouco claros entre agentes, perda de contexto, laços descontrolados e acúmulo de erros; por isso orçamentos e observabilidade são essenciais." },
+        { "q": "Como o MCP se relaciona com sistemas multiagente?", "a": "O MCP padroniza como cada agente se conecta a ferramentas e dados, tornando as integrações reutilizáveis entre os agentes do sistema." }
+      ]
+    }
+  }
+}

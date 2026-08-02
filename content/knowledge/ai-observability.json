@@ -1,0 +1,156 @@
+{
+  "slug": "ai-observability",
+  "category": "harness",
+  "updated": "2026-06-24",
+  "version": "1.1",
+  "related": ["harness-engineering", "agentic-evaluation", "ai-agent", "ai-governance"],
+  "references": [
+    { "title": "OpenTelemetry — Semantic conventions for generative AI", "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/" },
+    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" }
+  ],
+  "evidence": {
+    "evidenceLevel": "production",
+    "confidenceLevel": "medium",
+    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+  },
+  "locales": {
+    "en": {
+      "title": "What is AI Agent Observability?",
+      "summary": "AI observability is the practice of instrumenting AI systems — especially agents — so you can see what they did and why. It captures traces of each step: prompts, tool calls, retrieved context, model outputs, tokens, latency and cost. Because agents are non-deterministic and multi-step, observability is what makes failures diagnosable and improvement systematic. It is the layer that feeds evaluation and closes the harness-engineering loop.",
+      "definition": "AI observability is the practice of capturing traces, metrics and logs of an AI system's behavior — every prompt, tool call, retrieval, output, token, latency and cost — so its decisions can be understood, debugged and improved.",
+      "takeaways": [
+        "Observability makes non-deterministic agents debuggable.",
+        "Traces record each step: prompts, tools, context, outputs, cost.",
+        "It feeds evaluation — you improve what you can see and measure.",
+        "Track quality, latency, cost and safety together.",
+        "Emerging standards (OpenTelemetry GenAI) make traces portable."
+      ],
+      "context": [
+        "Traditional software is deterministic and easy to log. Agents are not: the same input can take different paths, call different tools and produce different outputs. Without tracing, a failure is a black box.",
+        "Observability opens that box. By recording the full trajectory of a run, teams can see where an agent went wrong, why a tool failed, where cost ballooned — and feed those findings into evals and harness changes."
+      ],
+      "architecture": [
+        "Instrumentation captures spans for each step — model call, tool call, retrieval — with inputs, outputs, tokens, latency and errors, linked into a trace for the whole run. Metrics aggregate quality, cost, latency and failure rates over time.",
+        "OpenTelemetry's GenAI semantic conventions standardize how these traces are structured, so they can flow into general observability backends rather than proprietary silos. Traces also become the raw material for evaluation datasets."
+      ],
+      "components": ["Tracing (spans per step)", "Metrics (quality, cost, latency)", "Logs", "Token & cost accounting", "Error tracking", "Trace-to-eval pipeline"],
+      "pros": [
+        "Turns opaque agent runs into diagnosable traces.",
+        "Surfaces cost, latency and failure hotspots.",
+        "Feeds evaluation and continuous improvement.",
+        "Supports incident response and governance audits."
+      ],
+      "risks": [
+        "Traces may capture sensitive data needing redaction.",
+        "Instrumentation overhead and storage cost at scale.",
+        "Volume without good queries hides the signal.",
+        "Privacy and retention obligations on logged prompts."
+      ],
+      "tools": ["OpenTelemetry (GenAI conventions)", "LangSmith", "Langfuse", "Arize / Phoenix", "Standard APM backends"],
+      "examples": [
+        "Tracing a failed agent run to the exact tool call that errored.",
+        "Tracking per-task token cost to find an expensive prompt.",
+        "Turning production traces into an evaluation dataset.",
+        "In practice: a 57-day single-operator autonomous deployment (OpenClaw) traced 161 sessions / 2,776 turns from local trajectory traces — 98.8% session success, p50 8.1s and p95 87.6s per turn, ~70% of tokens served from cache, and a blended $15.21 per 1M tokens (cost partially priced, so a floor). Every figure is derived from the agent's own traces."
+      ],
+      "faqs": [
+        { "q": "Why do agents need observability more than chatbots?", "a": "Agents are multi-step and non-deterministic, so a single answer hides many internal decisions. Without traces of those steps, failures cannot be diagnosed." },
+        { "q": "How does observability relate to evaluation?", "a": "Observability captures what happened; evaluation judges whether it was good. Traces become the data evals run on, closing the improvement loop." },
+        { "q": "Is there a standard for AI traces?", "a": "OpenTelemetry's generative-AI semantic conventions are emerging as a portable standard, letting AI traces flow into mainstream observability tooling." },
+        { "q": "What should you measure?", "a": "Quality (task success), cost (tokens), latency, and safety together — a fast, cheap agent that fails the task is not a good agent." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué es la Observabilidad de Agentes de IA?",
+      "summary": "La observabilidad de IA es la práctica de instrumentar sistemas de IA —sobre todo agentes— para poder ver qué hicieron y por qué. Captura trazas de cada paso: prompts, llamadas a herramientas, contexto recuperado, salidas del modelo, tokens, latencia y coste. Como los agentes son no deterministas y de varios pasos, la observabilidad es lo que hace diagnosticables los fallos y sistemática la mejora. Es la capa que alimenta la evaluación y cierra el bucle de la ingeniería de harness.",
+      "definition": "La observabilidad de IA es la práctica de capturar trazas, métricas y registros del comportamiento de un sistema de IA —cada prompt, llamada a herramienta, recuperación, salida, token, latencia y coste— para poder entender, depurar y mejorar sus decisiones.",
+      "takeaways": [
+        "La observabilidad hace depurables a los agentes no deterministas.",
+        "Las trazas registran cada paso: prompts, herramientas, contexto, salidas, coste.",
+        "Alimenta la evaluación: mejoras lo que puedes ver y medir.",
+        "Sigue juntos calidad, latencia, coste y seguridad.",
+        "Estándares emergentes (OpenTelemetry GenAI) hacen portables las trazas."
+      ],
+      "context": [
+        "El software tradicional es determinista y fácil de loguear. Los agentes no: la misma entrada puede tomar caminos distintos, llamar a herramientas distintas y producir salidas distintas. Sin trazado, un fallo es una caja negra.",
+        "La observabilidad abre esa caja. Al registrar la trayectoria completa de una ejecución, los equipos pueden ver dónde se equivocó un agente, por qué falló una herramienta, dónde se disparó el coste, y llevar esos hallazgos a las evaluaciones y a los cambios de harness."
+      ],
+      "architecture": [
+        "La instrumentación captura spans por cada paso —llamada al modelo, a herramienta, recuperación— con entradas, salidas, tokens, latencia y errores, enlazados en una traza de toda la ejecución. Las métricas agregan calidad, coste, latencia y tasas de fallo en el tiempo.",
+        "Las convenciones semánticas GenAI de OpenTelemetry estandarizan cómo se estructuran estas trazas, para que fluyan a backends de observabilidad generales en vez de silos propietarios. Las trazas también son la materia prima de los datasets de evaluación."
+      ],
+      "components": ["Trazado (spans por paso)", "Métricas (calidad, coste, latencia)", "Registros (logs)", "Contabilidad de tokens y coste", "Seguimiento de errores", "Pipeline traza-a-evaluación"],
+      "pros": [
+        "Convierte ejecuciones opacas en trazas diagnosticables.",
+        "Saca a la luz puntos calientes de coste, latencia y fallo.",
+        "Alimenta la evaluación y la mejora continua.",
+        "Apoya la respuesta a incidentes y las auditorías de gobernanza."
+      ],
+      "risks": [
+        "Las trazas pueden capturar datos sensibles que requieren redacción.",
+        "Sobrecarga de instrumentación y coste de almacenamiento a escala.",
+        "Volumen sin buenas consultas oculta la señal.",
+        "Obligaciones de privacidad y retención sobre los prompts registrados."
+      ],
+      "tools": ["OpenTelemetry (convenciones GenAI)", "LangSmith", "Langfuse", "Arize / Phoenix", "Backends APM estándar"],
+      "examples": [
+        "Trazar una ejecución fallida hasta la llamada a herramienta exacta que dio error.",
+        "Seguir el coste de tokens por tarea para encontrar un prompt caro.",
+        "Convertir trazas de producción en un dataset de evaluación.",
+        "En la práctica: un despliegue autónomo mono-operador de 57 días (OpenClaw) trazó 161 sesiones / 2.776 turnos desde trazas locales — 98,8% de éxito por sesión, p50 8,1s y p95 87,6s por turno, ~70% de tokens servidos desde caché y $15,21 mezclado por 1M de tokens (coste parcialmente tarifado, por tanto un suelo). Todas las cifras derivan de las propias trazas del agente."
+      ],
+      "faqs": [
+        { "q": "¿Por qué los agentes necesitan más observabilidad que los chatbots?", "a": "Los agentes son de varios pasos y no deterministas, así que una sola respuesta esconde muchas decisiones internas. Sin trazas de esos pasos, los fallos no se pueden diagnosticar." },
+        { "q": "¿Cómo se relaciona la observabilidad con la evaluación?", "a": "La observabilidad captura lo que pasó; la evaluación juzga si fue bueno. Las trazas se convierten en los datos sobre los que corren las evaluaciones, cerrando el bucle de mejora." },
+        { "q": "¿Hay un estándar para las trazas de IA?", "a": "Las convenciones semánticas de IA generativa de OpenTelemetry están emergiendo como estándar portable, permitiendo que las trazas de IA fluyan al tooling de observabilidad general." },
+        { "q": "¿Qué hay que medir?", "a": "Calidad (éxito de la tarea), coste (tokens), latencia y seguridad juntos: un agente rápido y barato que falla la tarea no es un buen agente." }
+      ]
+    },
+    "pt": {
+      "title": "O que é Observabilidade de Agentes de IA?",
+      "summary": "A observabilidade de IA é a prática de instrumentar sistemas de IA — sobretudo agentes — para poder ver o que fizeram e por quê. Captura rastros de cada passo: prompts, chamadas de ferramentas, contexto recuperado, saídas do modelo, tokens, latência e custo. Como os agentes são não determinísticos e de vários passos, a observabilidade é o que torna as falhas diagnosticáveis e a melhoria sistemática. É a camada que alimenta a avaliação e fecha o laço da engenharia de harness.",
+      "definition": "A observabilidade de IA é a prática de capturar rastros, métricas e logs do comportamento de um sistema de IA — cada prompt, chamada de ferramenta, recuperação, saída, token, latência e custo — para poder entender, depurar e melhorar suas decisões.",
+      "takeaways": [
+        "A observabilidade torna depuráveis os agentes não determinísticos.",
+        "Os rastros registram cada passo: prompts, ferramentas, contexto, saídas, custo.",
+        "Alimenta a avaliação: você melhora o que pode ver e medir.",
+        "Acompanhe juntos qualidade, latência, custo e segurança.",
+        "Padrões emergentes (OpenTelemetry GenAI) tornam os rastros portáveis."
+      ],
+      "context": [
+        "O software tradicional é determinístico e fácil de logar. Os agentes não: a mesma entrada pode tomar caminhos distintos, chamar ferramentas distintas e produzir saídas distintas. Sem rastreamento, uma falha é uma caixa-preta.",
+        "A observabilidade abre essa caixa. Ao registrar a trajetória completa de uma execução, as equipes podem ver onde um agente errou, por que uma ferramenta falhou, onde o custo disparou, e levar esses achados às avaliações e às mudanças de harness."
+      ],
+      "architecture": [
+        "A instrumentação captura spans para cada passo — chamada ao modelo, à ferramenta, recuperação — com entradas, saídas, tokens, latência e erros, ligados num rastro de toda a execução. As métricas agregam qualidade, custo, latência e taxas de falha ao longo do tempo.",
+        "As convenções semânticas GenAI do OpenTelemetry padronizam como esses rastros são estruturados, para que fluam a backends de observabilidade gerais em vez de silos proprietários. Os rastros também são a matéria-prima dos datasets de avaliação."
+      ],
+      "components": ["Rastreamento (spans por passo)", "Métricas (qualidade, custo, latência)", "Logs", "Contabilidade de tokens e custo", "Acompanhamento de erros", "Pipeline rastro-para-avaliação"],
+      "pros": [
+        "Transforma execuções opacas em rastros diagnosticáveis.",
+        "Revela pontos críticos de custo, latência e falha.",
+        "Alimenta a avaliação e a melhoria contínua.",
+        "Apoia a resposta a incidentes e as auditorias de governança."
+      ],
+      "risks": [
+        "Os rastros podem capturar dados sensíveis que exigem redação.",
+        "Sobrecarga de instrumentação e custo de armazenamento em escala.",
+        "Volume sem boas consultas esconde o sinal.",
+        "Obrigações de privacidade e retenção sobre os prompts registrados."
+      ],
+      "tools": ["OpenTelemetry (convenções GenAI)", "LangSmith", "Langfuse", "Arize / Phoenix", "Backends APM padrão"],
+      "examples": [
+        "Rastrear uma execução falha até a chamada de ferramenta exata que deu erro.",
+        "Acompanhar o custo de tokens por tarefa para encontrar um prompt caro.",
+        "Transformar rastros de produção num dataset de avaliação.",
+        "Na prática: uma implantação autônoma de operador único de 57 dias (OpenClaw) rastreou 161 sessões / 2.776 turnos a partir de rastros locais — 98,8% de sucesso por sessão, p50 8,1s e p95 87,6s por turno, ~70% dos tokens servidos do cache e $15,21 combinado por 1M de tokens (custo parcialmente precificado, portanto um piso). Todos os números derivam dos próprios rastros do agente."
+      ],
+      "faqs": [
+        { "q": "Por que os agentes precisam de mais observabilidade que os chatbots?", "a": "Os agentes são de vários passos e não determinísticos, então uma única resposta esconde muitas decisões internas. Sem rastros desses passos, as falhas não podem ser diagnosticadas." },
+        { "q": "Como a observabilidade se relaciona com a avaliação?", "a": "A observabilidade captura o que aconteceu; a avaliação julga se foi bom. Os rastros se tornam os dados sobre os quais as avaliações rodam, fechando o laço de melhoria." },
+        { "q": "Há um padrão para os rastros de IA?", "a": "As convenções semânticas de IA generativa do OpenTelemetry estão emergindo como padrão portável, permitindo que os rastros de IA fluam para o tooling de observabilidade geral." },
+        { "q": "O que medir?", "a": "Qualidade (sucesso da tarefa), custo (tokens), latência e segurança juntos: um agente rápido e barato que falha a tarefa não é um bom agente." }
+      ]
+    }
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "slug": "task-prioritization",
+  "category": "orchestration",
+  "updated": "2026-06-24",
+  "version": "1.1",
+  "featured": false,
+  "technologies": [
+    "Task queues",
+    "Planner agents",
+    "Scheduling / priority queues",
+    "Cost-aware routing"
+  ],
+  "related": [
+    "goal-decomposition",
+    "supervisor-agent"
+  ],
+  "references": [
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    },
+    {
+      "title": "Yao et al. — ReAct (2022)",
+      "url": "https://arxiv.org/abs/2210.03629"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "production",
+    "confidenceLevel": "low",
+    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+  },
+  "locales": {
+    "en": {
+      "name": "Task Prioritization",
+      "summary": "Order an agent's candidate tasks by value, urgency, dependencies, and cost instead of processing them first-in-first-out. A scoring function and a priority queue decide what runs next, so limited compute, budget, and time go to the work that matters most. Re-score as state changes, and bound the queue so it cannot grow without limit.",
+      "problem": "An agent that decomposes a goal often ends up with many candidate tasks at once: searches to run, files to read, tools to call, sub-goals to pursue. Processing them in arrival order treats a trivial cleanup step as equal to a blocking, deadline-bound task. Important work waits behind cheap noise, dependencies are violated, and budget is spent on tasks that no longer matter once the situation has changed.",
+      "context": "Use this when an agent or orchestrator holds a backlog of independent or loosely coupled tasks and cannot run them all immediately because of compute, rate-limit, cost, or wall-clock constraints. It fits planner and supervisor architectures where one component chooses what executes next. It assumes you can attach signals — impact, deadline, dependency, cost — to each task, and that priorities may shift as new observations arrive.",
+      "solution": [
+        "Attach explicit signals to every task: expected impact toward the goal, urgency or deadline, dependency relationships (what must finish first), and estimated cost in tokens, money, or latency. Combine these into a single score with a transparent, auditable function rather than an opaque model judgment. Feed scored tasks into a priority queue so the highest-value ready task runs next. Always respect dependencies first: a task whose prerequisites are unmet is not 'ready' regardless of its score, which keeps the ordering correct and prevents wasted retries.",
+        "Make prioritization dynamic. After each step, re-score affected tasks because new results change impact, deadlines approach, and some tasks become obsolete and can be dropped. Protect against starvation by aging — gradually raising the priority of long-waiting tasks — or by reserving capacity for lower tiers. Bound the backlog with an explicit cap and an admission policy: when the queue is full, reject, merge, or evict the weakest tasks instead of letting it grow without limit. Keep the scoring weights configurable and log why each task was chosen so behavior stays explainable."
+      ],
+      "components": [
+        "Signal extractor",
+        "Scoring function",
+        "Priority queue",
+        "Dependency resolver",
+        "Re-prioritization loop",
+        "Admission and aging controller"
+      ],
+      "benefits": [
+        "Limited compute, budget, and time are spent on high-value, time-critical work instead of whatever arrived first.",
+        "Respecting prerequisites avoids wasted retries and rework caused by running tasks before their inputs exist.",
+        "Re-scoring lets the agent abandon now-irrelevant tasks and promote newly urgent ones as the situation evolves.",
+        "Cost-aware scoring and a bounded queue keep token and latency budgets under control rather than open-ended."
+      ],
+      "risks": [
+        "A wrong weighting or bad cost estimate can systematically starve important work or chase low-value tasks; the formula needs review and calibration.",
+        "Without aging or reserved capacity, low-priority tasks may never run, leaving necessary cleanup or background work permanently undone.",
+        "Over-eager re-scoring can cause the agent to switch focus constantly, paying context-switch cost and never finishing anything.",
+        "If decomposition adds tasks faster than they are completed, an uncapped backlog inflates memory, cost, and planning latency."
+      ],
+      "whenNot": [
+        "When there are only a handful of similar tasks, FIFO or simple parallelism is simpler and the scoring overhead is not worth it.",
+        "If tasks must run in a fixed sequence dictated by the domain, a static workflow or DAG is clearer than a dynamic priority queue.",
+        "When you can run everything immediately within budget and limits, there is nothing to prioritize and ordering adds needless complexity."
+      ],
+      "examples": [
+        "An agent gathering evidence prioritizes the searches most likely to resolve open questions and skips redundant queries once a claim is confirmed.",
+        "An operations agent orders remediation steps by blast radius and deadline, handling the customer-facing outage before low-impact warnings.",
+        "A pipeline agent schedules high-value or near-deadline documents first and defers cheap bulk items, while aging prevents the bulk queue from stalling forever."
+      ],
+      "productionEvidence": {
+        "context": "Single-operator, local-first OpenClaw deployment observed over 57 days (161 sessions / 2,776 turns), aggregated from the agent's own trajectory traces.",
+        "scenario": "An autonomous agent is woken on a schedule (heartbeat + cron), with a top-of-hour stagger and a heartbeat cooldown providing back-pressure so jobs don't dogpile.",
+        "technology": "CronService scheduler, heartbeat-runner, a 5-minute top-of-hour stagger, heartbeat-cooldown defer logic, and a low/normal/high priority field on heartbeat outcomes.",
+        "load": "2,801 heartbeat turns + 57 cron turns + 106 user turns over 57 days (heartbeat ~94% of triggers).",
+        "results": "The scheduler sustained roughly fifty autonomous wake-ups per day with stagger and cooldown preventing dogpiling; no schedule-driven failure mode surfaced. Single-operator local-first deployment."
+      },
+      "kpis": [
+        {
+          "metric": "Weighted task value completed per unit cost",
+          "note": "Captures whether effort lands on high-impact work; good looks like more goal-relevant value delivered per token or dollar than a FIFO baseline."
+        },
+        {
+          "metric": "Deadline / SLA adherence on time-critical tasks",
+          "note": "Shows urgency signals are working; good looks like urgent tasks finishing before their deadline most of the time."
+        },
+        {
+          "metric": "Starvation indicator (max and tail wait time for low-priority tasks)",
+          "note": "Reveals whether aging is effective; good looks like bounded worst-case waits with no task stuck indefinitely."
+        },
+        {
+          "metric": "Queue depth vs. cap and admission/eviction rate",
+          "note": "Confirms the backlog stays bounded; good looks like depth held under the cap with eviction reserved for genuinely low-value tasks."
+        }
+      ],
+      "failureModes": [
+        "A high-priority task waits on a low-priority prerequisite that never gets scheduled; the resolver must propagate urgency to blockers.",
+        "Priorities computed once and never refreshed drive decisions on outdated impact or deadline information, so re-scoring must be triggered on relevant state changes.",
+        "Underestimating a task's cost lets it monopolize the budget; estimates need feedback from actual measured consumption.",
+        "An aggressive admission policy drops a task that later turns out to be required, forcing expensive rediscovery; eviction should prefer truly redundant items."
+      ],
+      "lessons": [
+        "An auditable, configurable formula is easier to debug and tune than an opaque model judgment about what to do next.",
+        "Treat prerequisite completion as a separate readiness check so a high score never lets a task jump ahead of its inputs.",
+        "Add aging or reserved capacity from the start; low-priority background work that never runs becomes a silent correctness gap.",
+        "A hard cap with a clear admission policy is the simplest defense against runaway decomposition inflating cost and latency."
+      ],
+      "faqs": [
+        {
+          "q": "How is this different from goal decomposition?",
+          "a": "Decomposition produces the tasks; prioritization decides the order in which the resulting tasks are executed. They are complementary: decomposition fills the backlog, prioritization drains it sensibly."
+        },
+        {
+          "q": "Should the LLM itself score priorities?",
+          "a": "It can propose signals like estimated impact, but combine them with a transparent, auditable function. A deterministic formula over named signals is easier to calibrate, log, and trust than a single opaque ranking call."
+        },
+        {
+          "q": "How do I stop low-priority tasks from never running?",
+          "a": "Use aging to gradually raise the priority of long-waiting tasks, or reserve a fraction of capacity for lower tiers, and monitor tail wait time to confirm nothing is starved."
+        }
+      ]
+    },
+    "es": {
+      "name": "Priorización de tareas",
+      "summary": "Ordena las tareas candidatas de un agente por valor, urgencia, dependencias y coste en lugar de procesarlas por orden de llegada. Una función de puntuación y una cola de prioridad deciden qué se ejecuta a continuación, de modo que el cómputo, el presupuesto y el tiempo limitados se dedican al trabajo que más importa. Vuelve a puntuar a medida que cambia el estado y acota la cola para que no crezca sin límite.",
+      "problem": "Un agente que descompone un objetivo suele acabar con muchas tareas candidatas a la vez: búsquedas que ejecutar, archivos que leer, herramientas que invocar, subobjetivos que perseguir. Procesarlas por orden de llegada trata un paso de limpieza trivial igual que una tarea bloqueante y con fecha límite. El trabajo importante espera detrás de ruido barato, se violan dependencias y se gasta presupuesto en tareas que ya no importan una vez que la situación ha cambiado.",
+      "context": "Úsalo cuando un agente u orquestador mantiene una lista pendiente de tareas independientes o débilmente acopladas y no puede ejecutarlas todas de inmediato por restricciones de cómputo, límites de tasa, coste o tiempo de reloj. Encaja en arquitecturas de planificador y supervisor donde un componente elige qué se ejecuta a continuación. Supone que puedes asociar señales —impacto, fecha límite, dependencia, coste— a cada tarea y que las prioridades pueden cambiar a medida que llegan nuevas observaciones.",
+      "solution": [
+        "Asocia señales explícitas a cada tarea: impacto esperado hacia el objetivo, urgencia o fecha límite, relaciones de dependencia (qué debe terminar primero) y coste estimado en tokens, dinero o latencia. Combínalas en una única puntuación con una función transparente y auditable en lugar de un juicio opaco del modelo. Introduce las tareas puntuadas en una cola de prioridad para que la tarea lista de mayor valor se ejecute a continuación. Respeta siempre primero las dependencias: una tarea cuyos prerrequisitos no se cumplen no está 'lista' sin importar su puntuación, lo que mantiene el orden correcto y evita reintentos desperdiciados.",
+        "Haz que la priorización sea dinámica. Tras cada paso, vuelve a puntuar las tareas afectadas porque los nuevos resultados cambian el impacto, las fechas límite se acercan y algunas tareas quedan obsoletas y pueden descartarse. Protégete contra la inanición mediante envejecimiento —elevando gradualmente la prioridad de las tareas que llevan mucho esperando— o reservando capacidad para los niveles inferiores. Acota la lista pendiente con un límite explícito y una política de admisión: cuando la cola está llena, rechaza, fusiona o expulsa las tareas más débiles en lugar de dejar que crezca sin límite. Mantén configurables los pesos de la puntuación y registra por qué se eligió cada tarea para que el comportamiento siga siendo explicable."
+      ],
+      "components": [
+        "Extractor de señales",
+        "Función de puntuación",
+        "Cola de prioridad",
+        "Resolutor de dependencias",
+        "Bucle de repriorización",
+        "Controlador de admisión y envejecimiento"
+      ],
+      "benefits": [
+        "El cómputo, el presupuesto y el tiempo limitados se dedican al trabajo de alto valor y crítico en el tiempo en lugar de a lo que llegó primero.",
+        "Respetar los prerrequisitos evita reintentos y retrabajo causados por ejecutar tareas antes de que existan sus entradas.",
+        "Volver a puntuar permite al agente abandonar tareas ahora irrelevantes y promover las recién urgentes a medida que evoluciona la situación.",
+        "La puntuación consciente del coste y una cola acotada mantienen bajo control los presupuestos de tokens y latencia en lugar de dejarlos abiertos."
+      ],
+      "risks": [
+        "Una ponderación errónea o una mala estimación de coste puede dejar sin recursos sistemáticamente al trabajo importante o perseguir tareas de bajo valor; la fórmula necesita revisión y calibración.",
+        "Sin envejecimiento ni capacidad reservada, las tareas de baja prioridad pueden no ejecutarse nunca, dejando sin hacer de forma permanente labores de limpieza o de fondo necesarias.",
+        "Volver a puntuar con demasiado afán puede hacer que el agente cambie de foco constantemente, pagando el coste de cambio de contexto sin terminar nada.",
+        "Si la descomposición añade tareas más rápido de lo que se completan, una lista pendiente sin límite infla la memoria, el coste y la latencia de planificación."
+      ],
+      "whenNot": [
+        "Cuando solo hay un puñado de tareas similares, FIFO o un paralelismo simple es más sencillo y la sobrecarga de puntuación no compensa.",
+        "Si las tareas deben ejecutarse en una secuencia fija dictada por el dominio, un flujo estático o un DAG es más claro que una cola de prioridad dinámica.",
+        "Cuando puedes ejecutar todo de inmediato dentro del presupuesto y los límites, no hay nada que priorizar y el orden añade complejidad innecesaria."
+      ],
+      "examples": [
+        "Un agente que reúne evidencia prioriza las búsquedas con más probabilidad de resolver preguntas abiertas y omite consultas redundantes una vez confirmada una afirmación.",
+        "Un agente de operaciones ordena los pasos de remediación por radio de impacto y fecha límite, atendiendo la caída visible para el cliente antes que las advertencias de bajo impacto.",
+        "Un agente de canalización programa primero los documentos de alto valor o cercanos a su fecha límite y aplaza los elementos masivos baratos, mientras el envejecimiento evita que la cola masiva se quede atascada para siempre."
+      ],
+      "productionEvidence": {
+        "context": "Despliegue OpenClaw local-first y mono-operador observado durante 57 días (161 sesiones / 2.776 turnos), agregado desde las propias trazas del agente.",
+        "scenario": "Un agente autónomo se despierta de forma programada (heartbeat + cron), con un escalonado al inicio de hora y un cooldown de heartbeat que dan contrapresión para que las tareas no se amontonen.",
+        "technology": "Scheduler CronService, heartbeat-runner, escalonado de 5 min al inicio de hora, lógica de aplazamiento por cooldown y un campo de prioridad bajo/normal/alto en los resultados de heartbeat.",
+        "load": "2.801 turnos de heartbeat + 57 de cron + 106 de usuario en 57 días (heartbeat ~94% de los triggers).",
+        "results": "El scheduler sostuvo unos cincuenta despertares autónomos al día, con escalonado y cooldown evitando el amontonamiento; no apareció ningún fallo derivado de la programación. Despliegue local-first mono-operador."
+      },
+      "kpis": [
+        {
+          "metric": "Valor de tarea ponderado completado por unidad de coste",
+          "note": "Capta si el esfuerzo recae en trabajo de alto impacto; lo bueno se parece a entregar más valor relevante para el objetivo por token o dólar que una base FIFO."
+        },
+        {
+          "metric": "Cumplimiento de fecha límite / SLA en tareas críticas en el tiempo",
+          "note": "Muestra que las señales de urgencia funcionan; lo bueno se parece a que las tareas urgentes terminen antes de su fecha límite la mayor parte de las veces."
+        },
+        {
+          "metric": "Indicador de inanición (tiempo de espera máximo y de cola larga para tareas de baja prioridad)",
+          "note": "Revela si el envejecimiento es eficaz; lo bueno se parece a esperas en el peor caso acotadas, sin ninguna tarea atascada indefinidamente."
+        },
+        {
+          "metric": "Profundidad de cola frente al límite y tasa de admisión/expulsión",
+          "note": "Confirma que la lista pendiente se mantiene acotada; lo bueno se parece a una profundidad por debajo del límite con expulsiones reservadas a tareas de valor genuinamente bajo."
+        }
+      ],
+      "failureModes": [
+        "Una tarea de alta prioridad espera por un prerrequisito de baja prioridad que nunca se programa; el resolutor debe propagar la urgencia a los bloqueadores.",
+        "Prioridades calculadas una vez y nunca refrescadas guían las decisiones con información de impacto o fecha límite caducada, así que la repriorización debe dispararse ante cambios de estado relevantes.",
+        "Subestimar el coste de una tarea le permite monopolizar el presupuesto; las estimaciones necesitan realimentación del consumo realmente medido.",
+        "Una política de admisión agresiva descarta una tarea que luego resulta necesaria, forzando un redescubrimiento costoso; la expulsión debería preferir elementos verdaderamente redundantes."
+      ],
+      "lessons": [
+        "Una fórmula auditable y configurable es más fácil de depurar y ajustar que un juicio opaco del modelo sobre qué hacer a continuación.",
+        "Trata la finalización de prerrequisitos como una comprobación de disponibilidad separada para que una puntuación alta nunca permita que una tarea se adelante a sus entradas.",
+        "Añade envejecimiento o capacidad reservada desde el principio; el trabajo de fondo de baja prioridad que nunca se ejecuta se convierte en una brecha de corrección silenciosa.",
+        "Un límite duro con una política de admisión clara es la defensa más simple contra una descomposición desbocada que infla el coste y la latencia."
+      ],
+      "faqs": [
+        {
+          "q": "¿En qué se diferencia esto de la descomposición de objetivos?",
+          "a": "La descomposición produce las tareas; la priorización decide el orden en que se ejecutan las tareas resultantes. Son complementarias: la descomposición llena la lista pendiente y la priorización la vacía con sensatez."
+        },
+        {
+          "q": "¿Debería el propio LLM puntuar las prioridades?",
+          "a": "Puede proponer señales como el impacto estimado, pero combínalas con una función transparente y auditable. Una fórmula determinista sobre señales con nombre es más fácil de calibrar, registrar y confiar que una única llamada de ranking opaca."
+        },
+        {
+          "q": "¿Cómo evito que las tareas de baja prioridad no se ejecuten nunca?",
+          "a": "Usa envejecimiento para elevar gradualmente la prioridad de las tareas que llevan mucho esperando, o reserva una fracción de capacidad para los niveles inferiores, y vigila el tiempo de espera de cola larga para confirmar que nada queda sin recursos."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Priorização de tarefas",
+      "summary": "Ordene as tarefas candidatas de um agente por valor, urgência, dependências e custo em vez de processá-las por ordem de chegada. Uma função de pontuação e uma fila de prioridade decidem o que roda em seguida, de modo que computação, orçamento e tempo limitados vão para o trabalho que mais importa. Repontue conforme o estado muda e limite a fila para que ela não cresça sem controle.",
+      "problem": "Um agente que decompõe um objetivo costuma terminar com muitas tarefas candidatas ao mesmo tempo: buscas a executar, arquivos a ler, ferramentas a chamar, subobjetivos a perseguir. Processá-las por ordem de chegada trata uma etapa de limpeza trivial como igual a uma tarefa bloqueante e com prazo. O trabalho importante espera atrás de ruído barato, dependências são violadas e o orçamento é gasto em tarefas que já não importam quando a situação muda.",
+      "context": "Use isto quando um agente ou orquestrador mantém uma lista de tarefas independentes ou fracamente acopladas e não pode executar todas de imediato por restrições de computação, limites de taxa, custo ou tempo de relógio. Encaixa em arquiteturas de planejador e supervisor onde um componente escolhe o que roda em seguida. Pressupõe que você consegue anexar sinais — impacto, prazo, dependência, custo — a cada tarefa e que as prioridades podem mudar conforme novas observações chegam.",
+      "solution": [
+        "Anexe sinais explícitos a cada tarefa: impacto esperado rumo ao objetivo, urgência ou prazo, relações de dependência (o que precisa terminar primeiro) e custo estimado em tokens, dinheiro ou latência. Combine-os em uma única pontuação com uma função transparente e auditável em vez de um julgamento opaco do modelo. Alimente as tarefas pontuadas em uma fila de prioridade para que a tarefa pronta de maior valor rode em seguida. Respeite sempre as dependências primeiro: uma tarefa cujos pré-requisitos não foram cumpridos não está 'pronta' independentemente de sua pontuação, o que mantém a ordenação correta e evita repetições desperdiçadas.",
+        "Torne a priorização dinâmica. Após cada etapa, repontue as tarefas afetadas porque novos resultados mudam o impacto, os prazos se aproximam e algumas tarefas ficam obsoletas e podem ser descartadas. Proteja-se contra a inanição por envelhecimento — elevando gradualmente a prioridade de tarefas que esperam há muito tempo — ou reservando capacidade para os níveis inferiores. Limite a lista pendente com um teto explícito e uma política de admissão: quando a fila está cheia, rejeite, mescle ou remova as tarefas mais fracas em vez de deixá-la crescer sem controle. Mantenha os pesos da pontuação configuráveis e registre por que cada tarefa foi escolhida para que o comportamento permaneça explicável."
+      ],
+      "components": [
+        "Extrator de sinais",
+        "Função de pontuação",
+        "Fila de prioridade",
+        "Resolvedor de dependências",
+        "Laço de repriorização",
+        "Controlador de admissão e envelhecimento"
+      ],
+      "benefits": [
+        "Computação, orçamento e tempo limitados são gastos em trabalho de alto valor e crítico no tempo em vez do que chegou primeiro.",
+        "Respeitar os pré-requisitos evita repetições e retrabalho causados por executar tarefas antes de suas entradas existirem.",
+        "Repontuar permite que o agente abandone tarefas agora irrelevantes e promova as recém-urgentes conforme a situação evolui.",
+        "A pontuação consciente de custo e uma fila limitada mantêm os orçamentos de tokens e latência sob controle em vez de abertos."
+      ],
+      "risks": [
+        "Uma ponderação errada ou uma má estimativa de custo pode privar sistematicamente o trabalho importante ou perseguir tarefas de baixo valor; a fórmula precisa de revisão e calibração.",
+        "Sem envelhecimento ou capacidade reservada, tarefas de baixa prioridade podem nunca rodar, deixando permanentemente por fazer limpezas ou trabalho de fundo necessários.",
+        "Repontuar com afinco demais pode fazer o agente trocar de foco constantemente, pagando o custo de troca de contexto sem terminar nada.",
+        "Se a decomposição adiciona tarefas mais rápido do que elas concluem, uma lista pendente sem teto infla a memória, o custo e a latência de planejamento."
+      ],
+      "whenNot": [
+        "Quando há apenas um punhado de tarefas semelhantes, FIFO ou paralelismo simples é mais simples e a sobrecarga de pontuação não compensa.",
+        "Se as tarefas precisam rodar em uma sequência fixa ditada pelo domínio, um fluxo estático ou um DAG é mais claro do que uma fila de prioridade dinâmica.",
+        "Quando você pode executar tudo de imediato dentro do orçamento e dos limites, não há nada a priorizar e a ordenação adiciona complexidade desnecessária."
+      ],
+      "examples": [
+        "Um agente que reúne evidências prioriza as buscas com mais chance de resolver perguntas em aberto e pula consultas redundantes uma vez confirmada uma afirmação.",
+        "Um agente de operações ordena as etapas de remediação por raio de impacto e prazo, tratando a indisponibilidade visível ao cliente antes dos alertas de baixo impacto.",
+        "Um agente de pipeline agenda primeiro os documentos de alto valor ou perto do prazo e adia os itens em massa baratos, enquanto o envelhecimento evita que a fila em massa fique travada para sempre."
+      ],
+      "productionEvidence": {
+        "context": "Implantação OpenClaw local-first e de operador único observada por 57 dias (161 sessões / 2.776 turnos), agregada a partir dos próprios rastros do agente.",
+        "scenario": "Um agente autônomo é despertado de forma programada (heartbeat + cron), com escalonamento no início da hora e um cooldown de heartbeat fornecendo contrapressão para que as tarefas não se amontoem.",
+        "technology": "Scheduler CronService, heartbeat-runner, escalonamento de 5 min no início da hora, lógica de adiamento por cooldown e um campo de prioridade baixo/normal/alto nos resultados de heartbeat.",
+        "load": "2.801 turnos de heartbeat + 57 de cron + 106 de usuário em 57 dias (heartbeat ~94% dos gatilhos).",
+        "results": "O scheduler sustentou cerca de cinquenta despertares autônomos por dia, com escalonamento e cooldown evitando o amontoamento; nenhuma falha derivada do agendamento apareceu. Implantação local-first de operador único."
+      },
+      "kpis": [
+        {
+          "metric": "Valor de tarefa ponderado concluído por unidade de custo",
+          "note": "Capta se o esforço recai em trabalho de alto impacto; o bom se parece com entregar mais valor relevante ao objetivo por token ou dólar do que uma base FIFO."
+        },
+        {
+          "metric": "Cumprimento de prazo / SLA em tarefas críticas no tempo",
+          "note": "Mostra que os sinais de urgência funcionam; o bom se parece com tarefas urgentes terminando antes do prazo na maioria das vezes."
+        },
+        {
+          "metric": "Indicador de inanição (tempo de espera máximo e de cauda para tarefas de baixa prioridade)",
+          "note": "Revela se o envelhecimento é eficaz; o bom se parece com esperas de pior caso limitadas, sem nenhuma tarefa travada indefinidamente."
+        },
+        {
+          "metric": "Profundidade da fila ante o teto e taxa de admissão/remoção",
+          "note": "Confirma que a lista pendente permanece limitada; o bom se parece com profundidade abaixo do teto e remoções reservadas a tarefas de valor genuinamente baixo."
+        }
+      ],
+      "failureModes": [
+        "Uma tarefa de alta prioridade espera por um pré-requisito de baixa prioridade que nunca é agendado; o resolvedor deve propagar a urgência aos bloqueadores.",
+        "Prioridades calculadas uma vez e nunca atualizadas guiam decisões com informação de impacto ou prazo vencida, então a repriorização deve ser disparada em mudanças de estado relevantes.",
+        "Subestimar o custo de uma tarefa permite que ela monopolize o orçamento; as estimativas precisam de retorno do consumo realmente medido.",
+        "Uma política de admissão agressiva descarta uma tarefa que depois se revela necessária, forçando uma redescoberta cara; a remoção deveria preferir itens verdadeiramente redundantes."
+      ],
+      "lessons": [
+        "Uma fórmula auditável e configurável é mais fácil de depurar e ajustar do que um julgamento opaco do modelo sobre o que fazer em seguida.",
+        "Trate a conclusão de pré-requisitos como uma verificação de prontidão separada para que uma pontuação alta nunca deixe uma tarefa passar à frente de suas entradas.",
+        "Adicione envelhecimento ou capacidade reservada desde o início; trabalho de fundo de baixa prioridade que nunca roda vira uma lacuna de correção silenciosa.",
+        "Um teto rígido com uma política de admissão clara é a defesa mais simples contra uma decomposição descontrolada que infla o custo e a latência."
+      ],
+      "faqs": [
+        {
+          "q": "Como isto difere da decomposição de objetivos?",
+          "a": "A decomposição produz as tarefas; a priorização decide a ordem em que as tarefas resultantes são executadas. Elas são complementares: a decomposição enche a lista pendente e a priorização a esvazia com bom senso."
+        },
+        {
+          "q": "O próprio LLM deveria pontuar as prioridades?",
+          "a": "Ele pode propor sinais como o impacto estimado, mas combine-os com uma função transparente e auditável. Uma fórmula determinística sobre sinais nomeados é mais fácil de calibrar, registrar e confiar do que uma única chamada de ranking opaca."
+        },
+        {
+          "q": "Como impeço que tarefas de baixa prioridade nunca rodem?",
+          "a": "Use envelhecimento para elevar gradualmente a prioridade das tarefas que esperam há muito tempo, ou reserve uma fração de capacidade para os níveis inferiores, e monitore o tempo de espera de cauda para confirmar que nada fica sem recursos."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "slug": "agentic-ai",
+  "category": "concept",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": true,
+  "related": ["ai-agent", "harness-engineering", "multi-agent-architecture", "agentic-evaluation"],
+  "references": [
+    { "title": "Yao et al. — ReAct: Synergizing Reasoning and Acting in Language Models (2022)", "url": "https://arxiv.org/abs/2210.03629" },
+    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
+    { "title": "Model Context Protocol — Introduction", "url": "https://modelcontextprotocol.io" }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": ["industry_observation", "paper"]
+  },
+  "locales": {
+    "en": {
+      "title": "What is Agentic AI?",
+      "summary": "Agentic AI refers to systems that pursue goals over multiple steps — planning, calling tools, acting on an environment and reacting to feedback — instead of producing a single response. It turns a language model from a text generator into an actor that can complete tasks. The shift it represents is from do-it-yourself software, where the human drives every step, to do-it-for-me software, where the system carries out the work and reports back.",
+      "definition": "Agentic AI is the class of AI systems that autonomously plan and execute multi-step tasks by combining a model with memory, tools and a control loop.",
+      "takeaways": [
+        "An agent = model + tools + memory + a control loop that decides what to do next.",
+        "Autonomy is a spectrum, from a single tool call to long-horizon task execution.",
+        "Reliability comes mostly from the harness around the model, not raw model IQ.",
+        "Tool use (function calling) is what connects the model to real systems and data.",
+        "Evaluation must measure task completion (agency), not just answer quality (capability)."
+      ],
+      "context": [
+        "For most of the LLM era, models were used as one-shot responders: a prompt in, an answer out. Agentic AI breaks that pattern by giving the model a loop — it can decide to call a tool, read the result, revise its plan and continue until the goal is met or a budget is exhausted.",
+        "This is the dominant frontier of applied AI in the enterprise because it moves the value from answering questions to completing work: resolving a support ticket end to end, refactoring a codebase, running a research task, operating a workflow."
+      ],
+      "architecture": [
+        "A minimal agent has four parts: a reasoning model, a set of tools it can invoke, some form of memory or state, and an orchestration loop that turns model outputs into actions and feeds observations back in.",
+        "Patterns range from simple (a model with tools and a stop condition) to complex (planner-executor splits, reflection, and multi-agent teams). Anthropic's guidance is to prefer the simplest pattern that works and add structure only when measurably needed."
+      ],
+      "components": ["Reasoning model", "Tools / function calling", "Memory & state", "Orchestration loop", "Guardrails", "Observability"],
+      "pros": [
+        "Completes multi-step work, not just single answers.",
+        "Adapts to feedback and recovers from intermediate errors.",
+        "Integrates with real systems through tools and APIs.",
+        "Scales repetitive knowledge work that was previously human-only."
+      ],
+      "risks": [
+        "Compounding errors over long task horizons.",
+        "Unbounded cost and latency without budgets and stop conditions.",
+        "Security exposure from tool access and prompt injection.",
+        "Hard to evaluate and debug compared with single-shot prompts."
+      ],
+      "tools": ["LangGraph", "OpenAI Agents SDK", "Claude Agent SDK", "Model Context Protocol (MCP)", "Vertex AI Agent Engine"],
+      "examples": [
+        "A customer-service agent that reads a ticket, looks up the order, applies a refund and replies — all through tools.",
+        "A coding agent that edits files, runs tests and iterates until the suite passes.",
+        "A research agent that searches, reads sources, verifies claims and writes a cited summary."
+      ],
+      "faqs": [
+        { "q": "What is the difference between an AI agent and agentic AI?", "a": "An AI agent is a concrete system; agentic AI is the broader paradigm of building software around such goal-directed, multi-step systems." },
+        { "q": "Do you need a more powerful model to be agentic?", "a": "Not necessarily. The same model can succeed or fail at a task depending almost entirely on the harness — the tools, memory, prompts and control loop around it." },
+        { "q": "Is RAG agentic?", "a": "Plain retrieval-augmented generation is a single step. It becomes agentic when the system decides when and what to retrieve as part of a multi-step loop." },
+        { "q": "What makes agents unreliable?", "a": "Long horizons compound small errors, tools fail, and context gets lost. Reliability comes from harness engineering: good tools, memory, guardrails and evaluation." },
+        { "q": "How do you measure an agent?", "a": "With agentic benchmarks and task-based evals that score end-to-end task completion in an environment, not just the quality of a single answer." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué es la IA Agéntica (Agentic AI)?",
+      "summary": "La IA agéntica designa sistemas que persiguen objetivos en varios pasos —planifican, llaman a herramientas, actúan sobre un entorno y reaccionan al feedback— en lugar de producir una única respuesta. Convierte a un modelo de lenguaje de generador de texto en un actor capaz de completar tareas. El cambio que representa es pasar del software 'hazlo tú', donde la persona conduce cada paso, al software 'hazlo por mí', donde el sistema ejecuta el trabajo y reporta el resultado.",
+      "definition": "La IA agéntica es la clase de sistemas de IA que planifican y ejecutan de forma autónoma tareas de varios pasos combinando un modelo con memoria, herramientas y un bucle de control.",
+      "takeaways": [
+        "Un agente = modelo + herramientas + memoria + un bucle de control que decide el siguiente paso.",
+        "La autonomía es un espectro, desde una sola llamada a herramienta hasta tareas de horizonte largo.",
+        "La fiabilidad viene sobre todo del 'harness' alrededor del modelo, no del coeficiente del modelo.",
+        "El uso de herramientas (function calling) es lo que conecta el modelo con sistemas y datos reales.",
+        "La evaluación debe medir la finalización de la tarea (agencia), no solo la calidad de la respuesta (capacidad)."
+      ],
+      "context": [
+        "Durante buena parte de la era LLM los modelos se usaron como respondedores de un solo turno: entra un prompt, sale una respuesta. La IA agéntica rompe ese patrón dándole al modelo un bucle: puede decidir llamar a una herramienta, leer el resultado, revisar su plan y continuar hasta cumplir el objetivo o agotar un presupuesto.",
+        "Es la frontera dominante de la IA aplicada en la empresa porque mueve el valor de responder preguntas a completar trabajo: resolver un ticket de soporte de principio a fin, refactorizar un código, ejecutar una investigación, operar un flujo de trabajo."
+      ],
+      "architecture": [
+        "Un agente mínimo tiene cuatro partes: un modelo de razonamiento, un conjunto de herramientas que puede invocar, alguna forma de memoria o estado, y un bucle de orquestación que convierte las salidas del modelo en acciones y reintroduce las observaciones.",
+        "Los patrones van de lo simple (un modelo con herramientas y una condición de parada) a lo complejo (separación planificador-ejecutor, reflexión y equipos multiagente). La recomendación de Anthropic es preferir el patrón más simple que funcione y añadir estructura solo cuando aporte de forma medible."
+      ],
+      "components": ["Modelo de razonamiento", "Herramientas / function calling", "Memoria y estado", "Bucle de orquestación", "Guardarraíles", "Observabilidad"],
+      "pros": [
+        "Completa trabajo de varios pasos, no solo respuestas sueltas.",
+        "Se adapta al feedback y se recupera de errores intermedios.",
+        "Se integra con sistemas reales mediante herramientas y APIs.",
+        "Escala trabajo de conocimiento repetitivo antes exclusivamente humano."
+      ],
+      "risks": [
+        "Acumulación de errores en horizontes de tarea largos.",
+        "Coste y latencia sin límite si faltan presupuestos y condiciones de parada.",
+        "Exposición de seguridad por el acceso a herramientas y la inyección de prompts.",
+        "Difícil de evaluar y depurar frente a los prompts de un solo turno."
+      ],
+      "tools": ["LangGraph", "OpenAI Agents SDK", "Claude Agent SDK", "Model Context Protocol (MCP)", "Vertex AI Agent Engine"],
+      "examples": [
+        "Un agente de atención al cliente que lee un ticket, consulta el pedido, aplica un reembolso y responde, todo a través de herramientas.",
+        "Un agente de programación que edita ficheros, ejecuta tests e itera hasta que la suite pasa.",
+        "Un agente de investigación que busca, lee fuentes, verifica afirmaciones y escribe un resumen con citas."
+      ],
+      "faqs": [
+        { "q": "¿Cuál es la diferencia entre un agente de IA y la IA agéntica?", "a": "Un agente de IA es un sistema concreto; la IA agéntica es el paradigma más amplio de construir software en torno a esos sistemas dirigidos a objetivos y de varios pasos." },
+        { "q": "¿Hace falta un modelo más potente para ser agéntico?", "a": "No necesariamente. El mismo modelo puede triunfar o fracasar en una tarea casi por completo según su harness: las herramientas, la memoria, los prompts y el bucle de control que lo rodean." },
+        { "q": "¿RAG es agéntico?", "a": "El RAG simple es un único paso. Se vuelve agéntico cuando el sistema decide cuándo y qué recuperar como parte de un bucle de varios pasos." },
+        { "q": "¿Qué hace poco fiables a los agentes?", "a": "Los horizontes largos acumulan errores pequeños, las herramientas fallan y se pierde contexto. La fiabilidad viene de la ingeniería de harness: buenas herramientas, memoria, guardarraíles y evaluación." },
+        { "q": "¿Cómo se mide un agente?", "a": "Con benchmarks agénticos y evaluaciones basadas en tareas que puntúan la finalización de extremo a extremo en un entorno, no solo la calidad de una respuesta." }
+      ]
+    },
+    "pt": {
+      "title": "O que é IA Agêntica (Agentic AI)?",
+      "summary": "A IA agêntica designa sistemas que perseguem objetivos em vários passos — planejam, chamam ferramentas, agem sobre um ambiente e reagem ao feedback — em vez de produzir uma única resposta. Transforma um modelo de linguagem de gerador de texto em um ator capaz de concluir tarefas. A mudança que representa é passar do software 'faça você mesmo', em que a pessoa conduz cada passo, ao software 'faça por mim', em que o sistema executa o trabalho e reporta o resultado.",
+      "definition": "A IA agêntica é a classe de sistemas de IA que planejam e executam de forma autônoma tarefas de vários passos combinando um modelo com memória, ferramentas e um laço de controle.",
+      "takeaways": [
+        "Um agente = modelo + ferramentas + memória + um laço de controle que decide o próximo passo.",
+        "A autonomia é um espectro, de uma única chamada de ferramenta a tarefas de horizonte longo.",
+        "A confiabilidade vem sobretudo do 'harness' em torno do modelo, não do QI do modelo.",
+        "O uso de ferramentas (function calling) é o que conecta o modelo a sistemas e dados reais.",
+        "A avaliação deve medir a conclusão da tarefa (agência), não só a qualidade da resposta (capacidade)."
+      ],
+      "context": [
+        "Durante boa parte da era LLM os modelos foram usados como respondedores de um único turno: entra um prompt, sai uma resposta. A IA agêntica quebra esse padrão dando ao modelo um laço: ele pode decidir chamar uma ferramenta, ler o resultado, revisar seu plano e continuar até cumprir o objetivo ou esgotar um orçamento.",
+        "É a fronteira dominante da IA aplicada na empresa porque move o valor de responder perguntas para concluir trabalho: resolver um chamado de suporte de ponta a ponta, refatorar um código, executar uma pesquisa, operar um fluxo de trabalho."
+      ],
+      "architecture": [
+        "Um agente mínimo tem quatro partes: um modelo de raciocínio, um conjunto de ferramentas que pode invocar, alguma forma de memória ou estado, e um laço de orquestração que converte as saídas do modelo em ações e realimenta as observações.",
+        "Os padrões vão do simples (um modelo com ferramentas e uma condição de parada) ao complexo (separação planejador-executor, reflexão e equipes multiagente). A recomendação da Anthropic é preferir o padrão mais simples que funcione e adicionar estrutura só quando agregar de forma mensurável."
+      ],
+      "components": ["Modelo de raciocínio", "Ferramentas / function calling", "Memória e estado", "Laço de orquestração", "Guard-rails", "Observabilidade"],
+      "pros": [
+        "Conclui trabalho de vários passos, não só respostas isoladas.",
+        "Adapta-se ao feedback e se recupera de erros intermediários.",
+        "Integra-se a sistemas reais por meio de ferramentas e APIs.",
+        "Escala trabalho de conhecimento repetitivo antes exclusivamente humano."
+      ],
+      "risks": [
+        "Acúmulo de erros em horizontes de tarefa longos.",
+        "Custo e latência sem limite sem orçamentos e condições de parada.",
+        "Exposição de segurança pelo acesso a ferramentas e pela injeção de prompts.",
+        "Difícil de avaliar e depurar frente aos prompts de um único turno."
+      ],
+      "tools": ["LangGraph", "OpenAI Agents SDK", "Claude Agent SDK", "Model Context Protocol (MCP)", "Vertex AI Agent Engine"],
+      "examples": [
+        "Um agente de atendimento que lê um chamado, consulta o pedido, aplica um reembolso e responde, tudo via ferramentas.",
+        "Um agente de programação que edita arquivos, executa testes e itera até a suíte passar.",
+        "Um agente de pesquisa que busca, lê fontes, verifica afirmações e escreve um resumo com citações."
+      ],
+      "faqs": [
+        { "q": "Qual é a diferença entre um agente de IA e IA agêntica?", "a": "Um agente de IA é um sistema concreto; a IA agêntica é o paradigma mais amplo de construir software em torno desses sistemas orientados a objetivos e de vários passos." },
+        { "q": "É preciso um modelo mais potente para ser agêntico?", "a": "Não necessariamente. O mesmo modelo pode ter sucesso ou falhar numa tarefa quase inteiramente conforme seu harness: as ferramentas, a memória, os prompts e o laço de controle ao seu redor." },
+        { "q": "RAG é agêntico?", "a": "O RAG simples é um único passo. Torna-se agêntico quando o sistema decide quando e o que recuperar como parte de um laço de vários passos." },
+        { "q": "O que torna os agentes pouco confiáveis?", "a": "Horizontes longos acumulam pequenos erros, ferramentas falham e contexto se perde. A confiabilidade vem da engenharia de harness: boas ferramentas, memória, guard-rails e avaliação." },
+        { "q": "Como se mede um agente?", "a": "Com benchmarks agênticos e avaliações baseadas em tarefas que pontuam a conclusão de ponta a ponta num ambiente, não só a qualidade de uma resposta." }
+      ]
+    }
+  }
+}

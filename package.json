@@ -1,0 +1,27 @@
+{
+  "name": "santismm-knowledge-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "MCP server exposing the Santismm Knowledge Platform (knowledge units, Enterprise AI patterns, reference architectures and AI governance) for native consumption by AI agents.",
+  "type": "module",
+  "bin": {
+    "santismm-knowledge-mcp": "dist/index.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4.19.0",
+    "typescript": "^5"
+  }
+}

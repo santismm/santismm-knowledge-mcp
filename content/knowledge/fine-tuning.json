@@ -1,0 +1,153 @@
+{
+  "slug": "fine-tuning",
+  "category": "concept",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "related": ["foundation-models", "enterprise-rag", "prompt-engineering", "embeddings"],
+  "references": [
+    { "title": "Hu et al. — LoRA: Low-Rank Adaptation of Large Language Models (2021)", "url": "https://arxiv.org/abs/2106.09685" },
+    { "title": "Ouyang et al. — Training language models to follow instructions with human feedback (InstructGPT, 2022)", "url": "https://arxiv.org/abs/2203.02155" }
+  ],
+  "evidence": {
+    "evidenceLevel": "benchmark",
+    "confidenceLevel": "high",
+    "sourceType": ["benchmark", "paper"]
+  },
+  "locales": {
+    "en": {
+      "title": "What is Fine-tuning?",
+      "summary": "Fine-tuning continues training a pretrained model on a smaller, targeted dataset to specialize its behavior, style or domain knowledge. It is far cheaper than pretraining and changes the model's weights — unlike prompting or retrieval, which leave the model unchanged. Use it to lock in a consistent format, tone or skill; use retrieval instead when you need fresh or private facts.",
+      "definition": "Fine-tuning is the process of further training a pretrained model on a focused dataset to adapt its weights toward a specific behavior, style, format or domain.",
+      "takeaways": [
+        "Fine-tuning updates model weights; prompting and RAG do not.",
+        "Best for consistent behavior, style or format — not for fresh facts.",
+        "Parameter-efficient methods (LoRA) make it cheap and practical.",
+        "RLHF is a form of fine-tuning using human preferences.",
+        "Default to prompting and retrieval first; fine-tune when they plateau."
+      ],
+      "context": [
+        "A pretrained foundation model is a generalist. Fine-tuning narrows it: shown enough examples of the target behavior, the model internalizes it, so you no longer need to specify it in every prompt.",
+        "It is one of three adaptation levers, alongside prompting and retrieval. The art is choosing the right one: fine-tune for how the model should behave, retrieve for what it should know."
+      ],
+      "architecture": [
+        "Full fine-tuning updates all weights — powerful but expensive. Parameter-efficient fine-tuning (PEFT), notably LoRA, trains small adapter weights while freezing the base, capturing most of the benefit at a fraction of the cost.",
+        "Instruction tuning and RLHF are specialized fine-tuning stages that turn a raw base model into a helpful, aligned assistant. Quality of the dataset matters far more than its size."
+      ],
+      "components": ["Pretrained base model", "Curated training dataset", "Training objective", "PEFT / LoRA adapters", "Evaluation set"],
+      "pros": [
+        "Bakes in consistent behavior, style or format.",
+        "Reduces prompt length and per-call cost.",
+        "Can teach narrow skills a base model lacks.",
+        "PEFT makes it affordable and fast."
+      ],
+      "risks": [
+        "Does not add fresh or private facts — use retrieval for that.",
+        "Risk of catastrophic forgetting or overfitting.",
+        "Needs a quality, well-labeled dataset and an eval set.",
+        "Couples you to a model version; migration costs on upgrades."
+      ],
+      "tools": ["LoRA / PEFT libraries", "Provider fine-tuning APIs", "RLHF / preference-tuning pipelines", "Evaluation suites"],
+      "examples": [
+        "Fine-tuning a model to always output a strict company JSON format.",
+        "Teaching a consistent brand voice for generated copy.",
+        "Adapting a model to a specialized domain's terminology."
+      ],
+      "faqs": [
+        { "q": "Fine-tuning or RAG?", "a": "Fine-tune to change how the model behaves (style, format, skill); use retrieval (RAG) to give it fresh or private knowledge. They are complementary, not competing." },
+        { "q": "Is fine-tuning expensive?", "a": "Full fine-tuning can be, but parameter-efficient methods like LoRA train tiny adapters and make it cheap and fast for most use cases." },
+        { "q": "What is RLHF?", "a": "Reinforcement learning from human feedback is a fine-tuning stage that uses human preference judgments to make a model more helpful, harmless and honest." },
+        { "q": "When should I fine-tune?", "a": "After prompting and retrieval plateau. If you can solve it with a better prompt or relevant context, do that first — it is cheaper and more flexible." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué es el Fine-tuning (Ajuste fino)?",
+      "summary": "El fine-tuning continúa el entrenamiento de un modelo preentrenado con un conjunto de datos más pequeño y dirigido para especializar su comportamiento, estilo o conocimiento de dominio. Es mucho más barato que el preentrenamiento y cambia los pesos del modelo, a diferencia del prompting o la recuperación, que lo dejan intacto. Úsalo para fijar un formato, tono o habilidad consistentes; usa recuperación cuando necesites hechos frescos o privados.",
+      "definition": "El fine-tuning es el proceso de seguir entrenando un modelo preentrenado con un conjunto de datos enfocado para adaptar sus pesos hacia un comportamiento, estilo, formato o dominio específico.",
+      "takeaways": [
+        "El fine-tuning actualiza los pesos del modelo; el prompting y el RAG no.",
+        "Mejor para comportamiento, estilo o formato consistentes, no para hechos frescos.",
+        "Los métodos eficientes en parámetros (LoRA) lo hacen barato y práctico.",
+        "El RLHF es una forma de fine-tuning que usa preferencias humanas.",
+        "Empieza por prompting y recuperación; haz fine-tuning cuando se estanquen."
+      ],
+      "context": [
+        "Un modelo fundacional preentrenado es un generalista. El fine-tuning lo estrecha: tras ver suficientes ejemplos del comportamiento objetivo, el modelo lo interioriza, así que ya no hace falta especificarlo en cada prompt.",
+        "Es una de las tres palancas de adaptación, junto al prompting y la recuperación. El arte está en elegir la adecuada: fine-tuning para cómo debe comportarse el modelo, recuperación para qué debe saber."
+      ],
+      "architecture": [
+        "El fine-tuning completo actualiza todos los pesos: potente pero caro. El fine-tuning eficiente en parámetros (PEFT), notablemente LoRA, entrena pequeños pesos adaptadores congelando la base, capturando casi todo el beneficio a una fracción del coste.",
+        "El instruction tuning y el RLHF son etapas especializadas de fine-tuning que convierten un modelo base bruto en un asistente útil y alineado. La calidad del dataset importa mucho más que su tamaño."
+      ],
+      "components": ["Modelo base preentrenado", "Dataset de entrenamiento curado", "Objetivo de entrenamiento", "Adaptadores PEFT / LoRA", "Conjunto de evaluación"],
+      "pros": [
+        "Fija un comportamiento, estilo o formato consistentes.",
+        "Reduce la longitud del prompt y el coste por llamada.",
+        "Puede enseñar habilidades estrechas que la base no tiene.",
+        "PEFT lo hace asequible y rápido."
+      ],
+      "risks": [
+        "No añade hechos frescos o privados: usa recuperación para eso.",
+        "Riesgo de olvido catastrófico o sobreajuste.",
+        "Necesita un dataset de calidad bien etiquetado y un set de evaluación.",
+        "Te acopla a una versión de modelo; coste de migración al actualizar."
+      ],
+      "tools": ["Librerías LoRA / PEFT", "APIs de fine-tuning de proveedores", "Pipelines de RLHF / ajuste por preferencias", "Suites de evaluación"],
+      "examples": [
+        "Hacer fine-tuning para que un modelo emita siempre un formato JSON estricto de la empresa.",
+        "Enseñar una voz de marca consistente para textos generados.",
+        "Adaptar un modelo a la terminología de un dominio especializado."
+      ],
+      "faqs": [
+        { "q": "¿Fine-tuning o RAG?", "a": "Haz fine-tuning para cambiar cómo se comporta el modelo (estilo, formato, habilidad); usa recuperación (RAG) para darle conocimiento fresco o privado. Son complementarios, no rivales." },
+        { "q": "¿El fine-tuning es caro?", "a": "El completo puede serlo, pero métodos eficientes como LoRA entrenan adaptadores diminutos y lo hacen barato y rápido para la mayoría de casos." },
+        { "q": "¿Qué es el RLHF?", "a": "El aprendizaje por refuerzo con feedback humano es una etapa de fine-tuning que usa juicios de preferencia humana para hacer un modelo más útil, inofensivo y honesto." },
+        { "q": "¿Cuándo debería hacer fine-tuning?", "a": "Cuando el prompting y la recuperación se estancan. Si puedes resolverlo con un mejor prompt o contexto relevante, hazlo primero: es más barato y flexible." }
+      ]
+    },
+    "pt": {
+      "title": "O que é Fine-tuning (Ajuste fino)?",
+      "summary": "O fine-tuning continua o treinamento de um modelo pré-treinado com um conjunto de dados menor e direcionado para especializar seu comportamento, estilo ou conhecimento de domínio. É muito mais barato que o pré-treinamento e muda os pesos do modelo, ao contrário do prompting ou da recuperação, que o deixam intacto. Use-o para fixar um formato, tom ou habilidade consistentes; use recuperação quando precisar de fatos frescos ou privados.",
+      "definition": "O fine-tuning é o processo de seguir treinando um modelo pré-treinado com um conjunto de dados focado para adaptar seus pesos rumo a um comportamento, estilo, formato ou domínio específico.",
+      "takeaways": [
+        "O fine-tuning atualiza os pesos do modelo; o prompting e o RAG não.",
+        "Melhor para comportamento, estilo ou formato consistentes, não para fatos frescos.",
+        "Métodos eficientes em parâmetros (LoRA) o tornam barato e prático.",
+        "O RLHF é uma forma de fine-tuning que usa preferências humanas.",
+        "Comece por prompting e recuperação; faça fine-tuning quando estagnarem."
+      ],
+      "context": [
+        "Um modelo de fundação pré-treinado é um generalista. O fine-tuning o estreita: após ver exemplos suficientes do comportamento alvo, o modelo o internaliza, então não é mais preciso especificá-lo em cada prompt.",
+        "É uma das três alavancas de adaptação, junto ao prompting e à recuperação. A arte está em escolher a adequada: fine-tuning para como o modelo deve se comportar, recuperação para o que deve saber."
+      ],
+      "architecture": [
+        "O fine-tuning completo atualiza todos os pesos: potente mas caro. O fine-tuning eficiente em parâmetros (PEFT), notavelmente o LoRA, treina pequenos pesos adaptadores congelando a base, capturando quase todo o benefício a uma fração do custo.",
+        "O instruction tuning e o RLHF são etapas especializadas de fine-tuning que transformam um modelo base bruto num assistente útil e alinhado. A qualidade do dataset importa muito mais que seu tamanho."
+      ],
+      "components": ["Modelo base pré-treinado", "Dataset de treinamento curado", "Objetivo de treinamento", "Adaptadores PEFT / LoRA", "Conjunto de avaliação"],
+      "pros": [
+        "Fixa um comportamento, estilo ou formato consistentes.",
+        "Reduz o comprimento do prompt e o custo por chamada.",
+        "Pode ensinar habilidades estreitas que a base não tem.",
+        "PEFT o torna acessível e rápido."
+      ],
+      "risks": [
+        "Não adiciona fatos frescos ou privados: use recuperação para isso.",
+        "Risco de esquecimento catastrófico ou sobreajuste.",
+        "Precisa de um dataset de qualidade bem rotulado e um conjunto de avaliação.",
+        "Acopla você a uma versão de modelo; custo de migração ao atualizar."
+      ],
+      "tools": ["Bibliotecas LoRA / PEFT", "APIs de fine-tuning de provedores", "Pipelines de RLHF / ajuste por preferências", "Suítes de avaliação"],
+      "examples": [
+        "Fazer fine-tuning para um modelo emitir sempre um formato JSON estrito da empresa.",
+        "Ensinar uma voz de marca consistente para textos gerados.",
+        "Adaptar um modelo à terminologia de um domínio especializado."
+      ],
+      "faqs": [
+        { "q": "Fine-tuning ou RAG?", "a": "Faça fine-tuning para mudar como o modelo se comporta (estilo, formato, habilidade); use recuperação (RAG) para dar-lhe conhecimento fresco ou privado. São complementares, não rivais." },
+        { "q": "O fine-tuning é caro?", "a": "O completo pode ser, mas métodos eficientes como o LoRA treinam adaptadores minúsculos e o tornam barato e rápido para a maioria dos casos." },
+        { "q": "O que é RLHF?", "a": "O aprendizado por reforço com feedback humano é uma etapa de fine-tuning que usa julgamentos de preferência humana para tornar um modelo mais útil, inofensivo e honesto." },
+        { "q": "Quando devo fazer fine-tuning?", "a": "Quando o prompting e a recuperação estagnam. Se você pode resolver com um prompt melhor ou contexto relevante, faça isso primeiro: é mais barato e flexível." }
+      ]
+    }
+  }
+}

@@ -1,0 +1,294 @@
+{
+  "slug": "routing",
+  "category": "orchestration",
+  "updated": "2026-06-24",
+  "version": "1.1",
+  "technologies": [
+    "Classifier models",
+    "LangGraph",
+    "Model routers",
+    "Rules engines"
+  ],
+  "related": [
+    "prompt-chaining",
+    "orchestrator-workers",
+    "parallelization"
+  ],
+  "references": [
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "production",
+    "confidenceLevel": "low",
+    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+  },
+  "locales": {
+    "en": {
+      "name": "Routing",
+      "summary": "Routing classifies an input and directs it to the most appropriate specialized handler, prompt or model. It improves quality by letting each path be optimized for its case, and controls cost by sending easy requests to cheap models and hard ones to capable models.",
+      "definition": "Routing is a pattern that classifies each incoming request and dispatches it to the most appropriate handler or model, so easy inputs use cheap paths and hard inputs use capable ones.",
+      "problem": "A single prompt or model handling every kind of input does each one worse, and using one expensive model for everything wastes money on easy requests.",
+      "context": "Use routing when inputs fall into distinct categories that benefit from different handling — different prompts, tools, models or workflows — and the categories can be classified reliably.",
+      "solution": [
+        "A lightweight classifier (an LLM call or a model) labels the input, then a router sends it to the matching downstream handler. Each handler is specialized and optimized for its category.",
+        "Routing also enables cost-performance tiering: route simple queries to a fast, cheap model and complex ones to a stronger reasoning model, paying for capability only when it is needed."
+      ],
+      "components": [
+        "Classifier",
+        "Routing logic",
+        "Specialized handlers",
+        "Fallback / default route"
+      ],
+      "benefits": [
+        "Each path is optimized for its case, raising quality.",
+        "Cost control by tiering models to difficulty.",
+        "Separation of concerns keeps each handler simple."
+      ],
+      "risks": [
+        "Misclassification sends inputs down the wrong path.",
+        "The classifier adds a step and some latency.",
+        "Category drift over time degrades routing accuracy."
+      ],
+      "whenNot": [
+        "When inputs are homogeneous — one handler suffices.",
+        "When categories cannot be classified reliably.",
+        "When the added classification step is not worth the gain."
+      ],
+      "examples": [
+        "Routing support tickets to billing, technical or sales handlers.",
+        "Sending simple questions to a small model and hard ones to a reasoning model.",
+        "Directing different document types to type-specific extractors."
+      ],
+      "productionEvidence": {
+        "context": "Single-operator, local-first OpenClaw deployment observed over 57 days (161 sessions / 2,776 turns), aggregated from the agent's own trajectory traces.",
+        "scenario": "Inbound channel messages and autonomous wake-ups are routed to one agent through distinct entrypoints, with channel/peer/role bindings selecting the session.",
+        "technology": "Binding + route registry (resolveAgentRoute), per-channel session keys, and a resolved-route cache.",
+        "load": "3 channels (Telegram, web chat, WhatsApp) and 4 trigger kinds (user, heartbeat, cron, memory).",
+        "results": "Routing held across all three channels and four trigger types with no misroute surfacing as a failure (98.8% session success overall). Single-operator local-first deployment — a working reference, not a scale benchmark."
+      },
+      "kpis": [
+        {
+          "metric": "Routing accuracy",
+          "note": "Share of inputs sent to the correct handler/model; the single metric that defines the pattern's value."
+        },
+        {
+          "metric": "Cost savings vs. always-best-model",
+          "note": "Money saved by routing easy inputs to cheaper models instead of the top one for everything."
+        },
+        {
+          "metric": "Misroute cost",
+          "note": "The downstream damage of wrong routes — a misroute can cost far more than the savings it chased."
+        },
+        {
+          "metric": "Router latency overhead",
+          "note": "Time the routing decision itself adds before any real work begins."
+        }
+      ],
+      "failureModes": [
+        "Misclassification: the router sends an input to the wrong model or path, degrading the answer.",
+        "Ambiguous inputs that don't fit any route cleanly and get forced into a poor one.",
+        "Router becomes a bottleneck or single point of failure for every request.",
+        "Drift: input distribution shifts over time and the router's categories go stale."
+      ],
+      "lessons": [
+        "Optimize for the cost of a misroute, not just routing accuracy — some wrong routes are far costlier than others.",
+        "Add a default / fallback route for inputs that match nothing well.",
+        "Keep the router cheap and fast; if it costs as much as the work, it defeats the purpose.",
+        "Monitor input drift and re-tune routes as the distribution changes."
+      ],
+      "faqs": [
+        {
+          "q": "What classifies the input?",
+          "a": "Usually a lightweight LLM call or a dedicated classifier model; for clear-cut cases, deterministic rules can route without a model."
+        },
+        {
+          "q": "How does routing save cost?",
+          "a": "By tiering: easy requests go to cheap, fast models and only hard ones reach expensive reasoning models, so you pay for capability only when needed."
+        },
+        {
+          "q": "What if the classifier is wrong?",
+          "a": "Provide a sensible default route and monitor misroutes; a fallback handler and good observability limit the impact of misclassification."
+        }
+      ]
+    },
+    "es": {
+      "name": "Enrutamiento (Routing)",
+      "summary": "El enrutamiento clasifica una entrada y la dirige al manejador, prompt o modelo especializado más adecuado. Mejora la calidad al optimizar cada camino para su caso y controla el coste enviando peticiones fáciles a modelos baratos y las difíciles a modelos capaces.",
+      "definition": "El enrutado es un patrón que clasifica cada petición entrante y la despacha al manejador o modelo más apropiado, de modo que las entradas fáciles usan caminos baratos y las difíciles, modelos capaces.",
+      "problem": "Un solo prompt o modelo manejando cada tipo de entrada hace cada una peor, y usar un modelo caro para todo malgasta dinero en peticiones fáciles.",
+      "context": "Usa el enrutamiento cuando las entradas caen en categorías distintas que se benefician de un manejo diferente —distintos prompts, herramientas, modelos o flujos— y las categorías se pueden clasificar de forma fiable.",
+      "solution": [
+        "Un clasificador ligero (una llamada al LLM o un modelo) etiqueta la entrada, y luego un enrutador la envía al manejador adecuado. Cada manejador está especializado y optimizado para su categoría.",
+        "El enrutamiento también permite escalonar coste-rendimiento: enruta consultas simples a un modelo rápido y barato y las complejas a un modelo de razonamiento más fuerte, pagando por capacidad solo cuando hace falta."
+      ],
+      "components": [
+        "Clasificador",
+        "Lógica de enrutamiento",
+        "Manejadores especializados",
+        "Ruta por defecto / fallback"
+      ],
+      "benefits": [
+        "Cada camino se optimiza para su caso, elevando la calidad.",
+        "Control de coste escalonando modelos según la dificultad.",
+        "La separación de responsabilidades mantiene simple cada manejador."
+      ],
+      "risks": [
+        "La mala clasificación envía entradas por el camino equivocado.",
+        "El clasificador añade un paso y algo de latencia.",
+        "La deriva de categorías en el tiempo degrada la precisión."
+      ],
+      "whenNot": [
+        "Cuando las entradas son homogéneas: basta un manejador.",
+        "Cuando las categorías no se pueden clasificar de forma fiable.",
+        "Cuando el paso de clasificación añadido no compensa la ganancia."
+      ],
+      "examples": [
+        "Enrutar tickets de soporte a manejadores de facturación, técnico o ventas.",
+        "Enviar preguntas simples a un modelo pequeño y las difíciles a uno de razonamiento.",
+        "Dirigir distintos tipos de documento a extractores específicos por tipo."
+      ],
+      "productionEvidence": {
+        "context": "Despliegue OpenClaw local-first y mono-operador observado durante 57 días (161 sesiones / 2.776 turnos), agregado desde las propias trazas del agente.",
+        "scenario": "Los mensajes entrantes de canal y los despertares autónomos se enrutan a un agente por entrypoints distintos, con bindings de canal/peer/rol que seleccionan la sesión.",
+        "technology": "Registro de bindings y rutas (resolveAgentRoute), claves de sesión por canal y caché de ruta resuelta.",
+        "load": "3 canales (Telegram, chat web, WhatsApp) y 4 tipos de trigger (usuario, heartbeat, cron, memoria).",
+        "results": "El enrutado se mantuvo en los tres canales y los cuatro tipos de trigger sin que ningún error de ruta apareciera como fallo (98,8% de éxito por sesión). Despliegue local-first mono-operador — una referencia que funciona, no un benchmark de escala."
+      },
+      "kpis": [
+        {
+          "metric": "Precisión de enrutado",
+          "note": "Proporción de entradas enviadas al manejador/modelo correcto; la métrica que define el valor del patrón."
+        },
+        {
+          "metric": "Ahorro vs. usar siempre el mejor modelo",
+          "note": "Dinero ahorrado al enrutar entradas fáciles a modelos más baratos en vez del mejor para todo."
+        },
+        {
+          "metric": "Coste de mal enrutado",
+          "note": "El daño posterior de rutas erróneas; un mal enrutado puede costar mucho más que el ahorro buscado."
+        },
+        {
+          "metric": "Sobrecoste de latencia del router",
+          "note": "Tiempo que la propia decisión de enrutado añade antes de empezar el trabajo real."
+        }
+      ],
+      "failureModes": [
+        "Mala clasificación: el router envía una entrada al modelo o ruta equivocados, degradando la respuesta.",
+        "Entradas ambiguas que no encajan bien en ninguna ruta y se fuerzan a una deficiente.",
+        "El router se convierte en cuello de botella o punto único de fallo de cada petición.",
+        "Deriva: la distribución de entradas cambia con el tiempo y las categorías del router quedan obsoletas."
+      ],
+      "lessons": [
+        "Optimiza por el coste de un mal enrutado, no solo por la precisión: algunas rutas erróneas son mucho más caras que otras.",
+        "Añade una ruta por defecto / de respaldo para entradas que no encajen bien en nada.",
+        "Mantén el router barato y rápido; si cuesta tanto como el trabajo, pierde su sentido.",
+        "Monitoriza la deriva de entradas y reajusta las rutas cuando cambie la distribución."
+      ],
+      "faqs": [
+        {
+          "q": "¿Qué clasifica la entrada?",
+          "a": "Normalmente una llamada ligera al LLM o un modelo clasificador dedicado; para casos claros, reglas deterministas pueden enrutar sin modelo."
+        },
+        {
+          "q": "¿Cómo ahorra coste el enrutamiento?",
+          "a": "Escalonando: las peticiones fáciles van a modelos baratos y rápidos y solo las difíciles llegan a modelos de razonamiento caros, así pagas por capacidad solo cuando hace falta."
+        },
+        {
+          "q": "¿Y si el clasificador se equivoca?",
+          "a": "Provee una ruta por defecto sensata y monitoriza los errores de ruta; un manejador de respaldo y buena observabilidad limitan el impacto de la mala clasificación."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Roteamento (Routing)",
+      "summary": "O roteamento classifica uma entrada e a direciona ao manipulador, prompt ou modelo especializado mais adequado. Melhora a qualidade ao otimizar cada caminho para seu caso e controla o custo enviando requisições fáceis a modelos baratos e as difíceis a modelos capazes.",
+      "definition": "O roteamento é um padrão que classifica cada requisição recebida e a despacha ao manipulador ou modelo mais apropriado, de modo que entradas fáceis usam caminhos baratos e as difíceis, modelos capazes.",
+      "problem": "Um único prompt ou modelo lidando com cada tipo de entrada faz cada uma pior, e usar um modelo caro para tudo desperdiça dinheiro em requisições fáceis.",
+      "context": "Use o roteamento quando as entradas caem em categorias distintas que se beneficiam de tratamento diferente — diferentes prompts, ferramentas, modelos ou fluxos — e as categorias podem ser classificadas de forma confiável.",
+      "solution": [
+        "Um classificador leve (uma chamada ao LLM ou um modelo) rotula a entrada, e então um roteador a envia ao manipulador adequado. Cada manipulador é especializado e otimizado para sua categoria.",
+        "O roteamento também permite escalonar custo-desempenho: roteie consultas simples a um modelo rápido e barato e as complexas a um modelo de raciocínio mais forte, pagando por capacidade só quando necessário."
+      ],
+      "components": [
+        "Classificador",
+        "Lógica de roteamento",
+        "Manipuladores especializados",
+        "Rota padrão / fallback"
+      ],
+      "benefits": [
+        "Cada caminho é otimizado para seu caso, elevando a qualidade.",
+        "Controle de custo escalonando modelos conforme a dificuldade.",
+        "A separação de responsabilidades mantém cada manipulador simples."
+      ],
+      "risks": [
+        "A má classificação envia entradas pelo caminho errado.",
+        "O classificador adiciona um passo e alguma latência.",
+        "A deriva de categorias ao longo do tempo degrada a precisão."
+      ],
+      "whenNot": [
+        "Quando as entradas são homogêneas: basta um manipulador.",
+        "Quando as categorias não podem ser classificadas de forma confiável.",
+        "Quando o passo de classificação adicionado não compensa o ganho."
+      ],
+      "examples": [
+        "Rotear chamados de suporte a manipuladores de faturamento, técnico ou vendas.",
+        "Enviar perguntas simples a um modelo pequeno e as difíceis a um de raciocínio.",
+        "Direcionar diferentes tipos de documento a extratores específicos por tipo."
+      ],
+      "productionEvidence": {
+        "context": "Implantação OpenClaw local-first e de operador único observada por 57 dias (161 sessões / 2.776 turnos), agregada a partir dos próprios rastros do agente.",
+        "scenario": "Mensagens de canal recebidas e despertares autônomos são roteados para um agente por entrypoints distintos, com bindings de canal/peer/papel selecionando a sessão.",
+        "technology": "Registro de bindings e rotas (resolveAgentRoute), chaves de sessão por canal e cache de rota resolvida.",
+        "load": "3 canais (Telegram, chat web, WhatsApp) e 4 tipos de gatilho (usuário, heartbeat, cron, memória).",
+        "results": "O roteamento se manteve nos três canais e nos quatro tipos de gatilho sem que nenhum erro de rota aparecesse como falha (98,8% de sucesso por sessão). Implantação local-first de operador único — uma referência que funciona, não um benchmark de escala."
+      },
+      "kpis": [
+        {
+          "metric": "Precisão de roteamento",
+          "note": "Proporção de entradas enviadas ao manipulador/modelo correto; a métrica que define o valor do padrão."
+        },
+        {
+          "metric": "Economia vs. usar sempre o melhor modelo",
+          "note": "Dinheiro economizado ao rotear entradas fáceis para modelos mais baratos em vez do melhor para tudo."
+        },
+        {
+          "metric": "Custo de roteamento errado",
+          "note": "O dano posterior de rotas erradas; um roteamento errado pode custar muito mais que a economia buscada."
+        },
+        {
+          "metric": "Sobrecusto de latência do roteador",
+          "note": "Tempo que a própria decisão de roteamento adiciona antes de começar o trabalho real."
+        }
+      ],
+      "failureModes": [
+        "Má classificação: o roteador envia uma entrada ao modelo ou rota errados, degradando a resposta.",
+        "Entradas ambíguas que não encaixam bem em nenhuma rota e são forçadas a uma deficiente.",
+        "O roteador vira gargalo ou ponto único de falha de cada requisição.",
+        "Deriva: a distribuição de entradas muda com o tempo e as categorias do roteador ficam obsoletas."
+      ],
+      "lessons": [
+        "Otimize pelo custo de um roteamento errado, não só pela precisão: algumas rotas erradas são muito mais caras que outras.",
+        "Adicione uma rota padrão / de fallback para entradas que não encaixem bem em nada.",
+        "Mantenha o roteador barato e rápido; se custa tanto quanto o trabalho, perde o sentido.",
+        "Monitore a deriva de entradas e reajuste as rotas quando a distribuição mudar."
+      ],
+      "faqs": [
+        {
+          "q": "O que classifica a entrada?",
+          "a": "Normalmente uma chamada leve ao LLM ou um modelo classificador dedicado; para casos claros, regras determinísticas podem rotear sem modelo."
+        },
+        {
+          "q": "Como o roteamento economiza custo?",
+          "a": "Escalonando: as requisições fáceis vão a modelos baratos e rápidos e só as difíceis chegam a modelos de raciocínio caros, então você paga por capacidade só quando necessário."
+        },
+        {
+          "q": "E se o classificador errar?",
+          "a": "Forneça uma rota padrão sensata e monitore os erros de rota; um manipulador de fallback e boa observabilidade limitam o impacto da má classificação."
+        }
+      ]
+    }
+  }
+}

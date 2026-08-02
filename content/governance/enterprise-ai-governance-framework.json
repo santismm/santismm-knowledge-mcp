@@ -1,0 +1,277 @@
+{
+  "id": "GOV-005",
+  "slug": "enterprise-ai-governance-framework",
+  "category": "framework",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": false,
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "frameworks": [
+    "EU AI Act",
+    "ISO/IEC 42001",
+    "NIST AI RMF"
+  ],
+  "patterns": [
+    "human-approval-gate"
+  ],
+  "knowledge": [
+    "ai-governance"
+  ],
+  "references": [
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "ISO/IEC 42001:2023 — Artificial intelligence management system",
+      "url": "https://www.iso.org/standard/81230.html"
+    },
+    {
+      "title": "OECD AI Principles",
+      "url": "https://oecd.ai/en/ai-principles"
+    }
+  ],
+  "related": [
+    "agentic-ai-governance-checklist",
+    "eu-ai-act",
+    "iso-42001",
+    "nist-ai-rmf"
+  ],
+  "locales": {
+    "en": {
+      "name": "Enterprise AI Governance Framework",
+      "summary": "An umbrella operating model for governing AI across an organization. It defines the principles, accountability (RACI), AI risk taxonomy, lifecycle gates and policy hierarchy that keep AI use lawful, safe and aligned with risk appetite. It harmonizes the EU AI Act, ISO/IEC 42001 and NIST AI RMF into one internal program — comply once, reuse everywhere — and composes the agentic governance checklist as its concrete control set. Use it to give every production AI system a named owner, a risk tier and a gate that can actually block a non-compliant deployment.",
+      "definition": "An enterprise AI governance framework is the system of principles, roles, processes and controls by which an organization directs and controls how it builds, procures and operates AI so that AI use stays lawful, safe, effective and aligned with its risk appetite.",
+      "scope": "Boards, AI governance committees, risk and compliance officers, and the product and engineering leaders who build and operate AI across the enterprise. It is an internal operating model that maps to named regulations and standards, not legal advice or a substitute for qualified counsel.",
+      "keyPoints": [
+        "Principles first: lawfulness, accountability, human oversight, transparency, fairness, safety and privacy by design anchor every policy.",
+        "RACI accountability: every governance activity has a clear Responsible, Accountable, Consulted and Informed map, and every production system has one named owner.",
+        "A risk taxonomy tiers use cases (unacceptable, high, limited, minimal) so control intensity is proportional to risk.",
+        "Lifecycle gates attach entry and exit checks to each stage, from propose through retire.",
+        "A policy hierarchy traces principles to policies, standards and concrete controls with named owners.",
+        "Comply once, reuse everywhere: external obligations map to internal controls a single time and are shared across regimes."
+      ],
+      "controls": [
+        {
+          "control": "AI governance committee with a charter",
+          "note": "A standing body with published decision rights sets risk appetite and policy, so accountability is structural rather than ad hoc."
+        },
+        {
+          "control": "Named accountable system owner",
+          "note": "Every production AI system has one human owner; this is the control most associated with incidents being caught and answered."
+        },
+        {
+          "control": "Risk-tiering procedure and central register",
+          "note": "A documented taxonomy classifies each use case before build and records it in an inventory, surfacing shadow AI and calibrating controls."
+        },
+        {
+          "control": "Lifecycle entry and exit gates",
+          "note": "Each stage from propose to retire has gates scaled to risk tier; an enforceable gate can block a non-compliant deployment."
+        },
+        {
+          "control": "Policy hierarchy mapped to controls",
+          "note": "Principles trace to policies, standards and concrete controls so obligations are operational, not aspirational."
+        },
+        {
+          "control": "Independent audit and assurance",
+          "note": "Periodic independent review tests that gates and controls actually hold, closing the loop back to the committee."
+        }
+      ],
+      "checklist": [
+        "Stand up an AI governance committee with a published charter and decision rights.",
+        "Define the seven governing principles and trace every policy back to them.",
+        "Publish a risk taxonomy with tiers and enumerate prohibited use cases blocked at intake.",
+        "Build a central register of all AI systems with their tier and named owner.",
+        "Attach entry and exit gates to each lifecycle stage, scaled to risk tier.",
+        "Map the EU AI Act, ISO/IEC 42001 and NIST AI RMF to internal controls once and reuse them.",
+        "Adopt the agentic governance checklist as the concrete control set for high-risk systems.",
+        "Schedule re-tiering and independent audit on a recurring cadence."
+      ],
+      "pitfalls": [
+        "Governance as paperwork: policies exist but no gate can actually block a non-compliant deployment.",
+        "No accountable owner: systems ship with diffuse ownership and no one is answerable when they fail.",
+        "Uniform controls: every system gets the same heavyweight process, so teams route around governance.",
+        "Shadow AI: systems are built outside the register and stay invisible to risk.",
+        "Static tiering: a use case's risk is set once and never re-evaluated as autonomy or scope grows."
+      ],
+      "examples": [
+        "A regulated enterprise routes every new agent through a tier-based intake gate before any build begins.",
+        "A high-risk customer-facing system gets the full control set and independent audit while a minimal-risk internal tool follows baseline hygiene only.",
+        "EU AI Act, ISO/IEC 42001 and NIST AI RMF obligations are mapped to one internal control library and reused across the portfolio."
+      ],
+      "faqs": [
+        {
+          "q": "Is this framework legal advice?",
+          "a": "No. It is a professional operating model that maps to named regulations and standards. Consult qualified counsel for binding compliance decisions."
+        },
+        {
+          "q": "How does it relate to the agentic governance checklist and the specific regimes?",
+          "a": "This framework owns the structure — principles, roles, taxonomy and gates — and composes the EU AI Act, ISO/IEC 42001 and NIST AI RMF and the agentic checklist as its concrete controls."
+        },
+        {
+          "q": "What is the single highest-leverage element?",
+          "a": "An enforceable gate plus a named accountable owner per system. Un-enforced policy is routed around within a quarter, and diffuse ownership means no one answers when a system fails."
+        }
+      ]
+    },
+    "es": {
+      "name": "Marco de Gobernanza de IA Empresarial",
+      "summary": "Un modelo operativo paraguas para gobernar la IA en toda la organización. Define los principios, la rendición de cuentas (RACI), la taxonomía de riesgo de IA, las puertas de ciclo de vida y la jerarquía de políticas que mantienen el uso de IA legal, seguro y alineado con el apetito de riesgo. Armoniza el EU AI Act, ISO/IEC 42001 y NIST AI RMF en un único programa interno —cumple una vez, reutiliza en todas partes— y compone el checklist de gobernanza agéntica como su conjunto concreto de controles. Úsalo para dar a cada sistema de IA en producción un responsable nombrado, un nivel de riesgo y una puerta que pueda realmente bloquear un despliegue no conforme.",
+      "definition": "Un marco de gobernanza de IA empresarial es el sistema de principios, roles, procesos y controles con el que una organización dirige y controla cómo construye, adquiere y opera la IA para que su uso siga siendo legal, seguro, eficaz y alineado con su apetito de riesgo.",
+      "scope": "Consejos de administración, comités de gobernanza de IA, responsables de riesgo y cumplimiento, y los líderes de producto e ingeniería que construyen y operan la IA en la empresa. Es un modelo operativo interno que mapea a regulaciones y estándares nombrados, no asesoramiento legal ni un sustituto del asesoramiento de un profesional cualificado.",
+      "keyPoints": [
+        "Los principios primero: legalidad, rendición de cuentas, supervisión humana, transparencia, equidad, seguridad y privacidad por diseño anclan cada política.",
+        "Rendición de cuentas RACI: cada actividad de gobernanza tiene un mapa claro de Responsable, Aprobador, Consultado e Informado, y cada sistema en producción tiene un responsable nombrado.",
+        "Una taxonomía de riesgo clasifica los casos de uso (inaceptable, alto, limitado, mínimo) para que la intensidad del control sea proporcional al riesgo.",
+        "Las puertas de ciclo de vida añaden controles de entrada y salida a cada etapa, desde proponer hasta retirar.",
+        "Una jerarquía de políticas traza los principios a políticas, estándares y controles concretos con responsables nombrados.",
+        "Cumple una vez, reutiliza en todas partes: las obligaciones externas se mapean a controles internos una sola vez y se comparten entre regímenes."
+      ],
+      "controls": [
+        {
+          "control": "Comité de gobernanza de IA con un estatuto",
+          "note": "Un órgano permanente con derechos de decisión publicados fija el apetito de riesgo y la política, de modo que la rendición de cuentas sea estructural y no ad hoc."
+        },
+        {
+          "control": "Responsable nombrado del sistema",
+          "note": "Cada sistema de IA en producción tiene un responsable humano; este es el control más asociado con que los incidentes se detecten y respondan."
+        },
+        {
+          "control": "Procedimiento de tiering de riesgo y registro central",
+          "note": "Una taxonomía documentada clasifica cada caso de uso antes de construir y lo registra en un inventario, sacando a la luz la IA en la sombra y calibrando los controles."
+        },
+        {
+          "control": "Puertas de entrada y salida del ciclo de vida",
+          "note": "Cada etapa, de proponer a retirar, tiene puertas escaladas al nivel de riesgo; una puerta exigible puede bloquear un despliegue no conforme."
+        },
+        {
+          "control": "Jerarquía de políticas mapeada a controles",
+          "note": "Los principios se trazan a políticas, estándares y controles concretos para que las obligaciones sean operativas, no aspiracionales."
+        },
+        {
+          "control": "Auditoría y aseguramiento independientes",
+          "note": "Una revisión independiente periódica comprueba que las puertas y los controles realmente se sostienen, cerrando el ciclo de vuelta al comité."
+        }
+      ],
+      "checklist": [
+        "Pon en marcha un comité de gobernanza de IA con un estatuto publicado y derechos de decisión.",
+        "Define los siete principios rectores y traza cada política de vuelta a ellos.",
+        "Publica una taxonomía de riesgo con niveles y enumera los casos de uso prohibidos bloqueados en la entrada.",
+        "Construye un registro central de todos los sistemas de IA con su nivel y responsable nombrado.",
+        "Añade puertas de entrada y salida a cada etapa del ciclo de vida, escaladas al nivel de riesgo.",
+        "Mapea el EU AI Act, ISO/IEC 42001 y NIST AI RMF a controles internos una vez y reutilízalos.",
+        "Adopta el checklist de gobernanza agéntica como conjunto concreto de controles para los sistemas de alto riesgo.",
+        "Programa el re-tiering y la auditoría independiente con una cadencia recurrente."
+      ],
+      "pitfalls": [
+        "Gobernanza como papeleo: las políticas existen pero ninguna puerta puede realmente bloquear un despliegue no conforme.",
+        "Sin responsable nombrado: los sistemas se lanzan con propiedad difusa y nadie responde cuando fallan.",
+        "Controles uniformes: cada sistema recibe el mismo proceso pesado, así que los equipos esquivan la gobernanza.",
+        "IA en la sombra: los sistemas se construyen fuera del registro y permanecen invisibles para el riesgo.",
+        "Tiering estático: el riesgo de un caso de uso se fija una vez y nunca se reevalúa a medida que crecen su autonomía o alcance."
+      ],
+      "examples": [
+        "Una empresa regulada enruta cada nuevo agente por una puerta de entrada basada en niveles antes de que comience cualquier construcción.",
+        "Un sistema de alto riesgo orientado al cliente recibe el conjunto completo de controles y auditoría independiente, mientras una herramienta interna de riesgo mínimo sigue solo la higiene básica.",
+        "Las obligaciones del EU AI Act, ISO/IEC 42001 y NIST AI RMF se mapean a una única biblioteca de controles interna y se reutilizan en todo el portafolio."
+      ],
+      "faqs": [
+        {
+          "q": "¿Este marco es asesoramiento legal?",
+          "a": "No. Es un modelo operativo profesional que mapea a regulaciones y estándares nombrados. Consulta a un profesional cualificado para decisiones de cumplimiento vinculantes."
+        },
+        {
+          "q": "¿Cómo se relaciona con el checklist de gobernanza agéntica y los regímenes específicos?",
+          "a": "Este marco posee la estructura —principios, roles, taxonomía y puertas— y compone el EU AI Act, ISO/IEC 42001 y NIST AI RMF y el checklist agéntico como sus controles concretos."
+        },
+        {
+          "q": "¿Cuál es el elemento de mayor palanca?",
+          "a": "Una puerta exigible más un responsable nombrado por sistema. La política no exigida se esquiva en un trimestre, y la propiedad difusa significa que nadie responde cuando un sistema falla."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Framework de Governança de IA Empresarial",
+      "summary": "Um modelo operacional guarda-chuva para governar a IA em toda a organização. Define os princípios, a prestação de contas (RACI), a taxonomia de risco de IA, os portões de ciclo de vida e a hierarquia de políticas que mantêm o uso de IA legal, seguro e alinhado ao apetite de risco. Harmoniza o EU AI Act, ISO/IEC 42001 e NIST AI RMF num único programa interno —cumpra uma vez, reutilize em todo lugar— e compõe o checklist de governança agêntica como seu conjunto concreto de controles. Use-o para dar a cada sistema de IA em produção um responsável nomeado, um nível de risco e um portão que possa de fato bloquear uma implantação não conforme.",
+      "definition": "Um framework de governança de IA empresarial é o sistema de princípios, papéis, processos e controles pelo qual uma organização dirige e controla como constrói, adquire e opera a IA para que seu uso permaneça legal, seguro, eficaz e alinhado ao seu apetite de risco.",
+      "scope": "Conselhos de administração, comitês de governança de IA, responsáveis por risco e conformidade, e os líderes de produto e engenharia que constroem e operam a IA na empresa. É um modelo operacional interno que mapeia para regulamentos e padrões nomeados, não aconselhamento jurídico nem um substituto de aconselhamento de um profissional qualificado.",
+      "keyPoints": [
+        "Princípios primeiro: legalidade, prestação de contas, supervisão humana, transparência, equidade, segurança e privacidade desde a concepção ancoram cada política.",
+        "Prestação de contas RACI: cada atividade de governança tem um mapa claro de Responsável, Aprovador, Consultado e Informado, e cada sistema em produção tem um responsável nomeado.",
+        "Uma taxonomia de risco classifica os casos de uso (inaceitável, alto, limitado, mínimo) para que a intensidade do controle seja proporcional ao risco.",
+        "Os portões de ciclo de vida adicionam verificações de entrada e saída a cada etapa, de propor a aposentar.",
+        "Uma hierarquia de políticas rastreia os princípios para políticas, padrões e controles concretos com responsáveis nomeados.",
+        "Cumpra uma vez, reutilize em todo lugar: as obrigações externas mapeiam para controles internos uma única vez e são compartilhadas entre regimes."
+      ],
+      "controls": [
+        {
+          "control": "Comitê de governança de IA com um estatuto",
+          "note": "Um órgão permanente com direitos de decisão publicados define o apetite de risco e a política, para que a prestação de contas seja estrutural e não ad hoc."
+        },
+        {
+          "control": "Responsável nomeado pelo sistema",
+          "note": "Cada sistema de IA em produção tem um responsável humano; este é o controle mais associado a incidentes serem detectados e respondidos."
+        },
+        {
+          "control": "Procedimento de tiering de risco e registro central",
+          "note": "Uma taxonomia documentada classifica cada caso de uso antes de construir e o registra num inventário, revelando a IA na sombra e calibrando os controles."
+        },
+        {
+          "control": "Portões de entrada e saída do ciclo de vida",
+          "note": "Cada etapa, de propor a aposentar, tem portões escalados ao nível de risco; um portão exigível pode bloquear uma implantação não conforme."
+        },
+        {
+          "control": "Hierarquia de políticas mapeada para controles",
+          "note": "Os princípios são rastreados para políticas, padrões e controles concretos para que as obrigações sejam operacionais, não aspiracionais."
+        },
+        {
+          "control": "Auditoria e garantia independentes",
+          "note": "Uma revisão independente periódica verifica que os portões e controles realmente se sustentam, fechando o ciclo de volta ao comitê."
+        }
+      ],
+      "checklist": [
+        "Estabeleça um comitê de governança de IA com um estatuto publicado e direitos de decisão.",
+        "Defina os sete princípios norteadores e rastreie cada política de volta a eles.",
+        "Publique uma taxonomia de risco com níveis e enumere os casos de uso proibidos bloqueados na entrada.",
+        "Construa um registro central de todos os sistemas de IA com seu nível e responsável nomeado.",
+        "Adicione portões de entrada e saída a cada etapa do ciclo de vida, escalados ao nível de risco.",
+        "Mapeie o EU AI Act, ISO/IEC 42001 e NIST AI RMF para controles internos uma vez e reutilize-os.",
+        "Adote o checklist de governança agêntica como conjunto concreto de controles para os sistemas de alto risco.",
+        "Programe o re-tiering e a auditoria independente numa cadência recorrente."
+      ],
+      "pitfalls": [
+        "Governança como papelada: as políticas existem mas nenhum portão pode de fato bloquear uma implantação não conforme.",
+        "Sem responsável nomeado: os sistemas são lançados com propriedade difusa e ninguém responde quando falham.",
+        "Controles uniformes: cada sistema recebe o mesmo processo pesado, então as equipes contornam a governança.",
+        "IA na sombra: os sistemas são construídos fora do registro e permanecem invisíveis ao risco.",
+        "Tiering estático: o risco de um caso de uso é definido uma vez e nunca reavaliado à medida que sua autonomia ou escopo crescem."
+      ],
+      "examples": [
+        "Uma empresa regulada roteia cada novo agente por um portão de entrada baseado em níveis antes de qualquer construção começar.",
+        "Um sistema de alto risco voltado ao cliente recebe o conjunto completo de controles e auditoria independente, enquanto uma ferramenta interna de risco mínimo segue apenas a higiene básica.",
+        "As obrigações do EU AI Act, ISO/IEC 42001 e NIST AI RMF são mapeadas para uma única biblioteca de controles interna e reutilizadas em todo o portfólio."
+      ],
+      "faqs": [
+        {
+          "q": "Este framework é aconselhamento jurídico?",
+          "a": "Não. É um modelo operacional profissional que mapeia para regulamentos e padrões nomeados. Consulte um profissional qualificado para decisões de conformidade vinculantes."
+        },
+        {
+          "q": "Como se relaciona com o checklist de governança agêntica e os regimes específicos?",
+          "a": "Este framework detém a estrutura —princípios, papéis, taxonomia e portões— e compõe o EU AI Act, ISO/IEC 42001 e NIST AI RMF e o checklist agêntico como seus controles concretos."
+        },
+        {
+          "q": "Qual é o elemento de maior alavancagem?",
+          "a": "Um portão exigível mais um responsável nomeado por sistema. A política não exigida é contornada em um trimestre, e a propriedade difusa significa que ninguém responde quando um sistema falha."
+        }
+      ]
+    }
+  }
+}

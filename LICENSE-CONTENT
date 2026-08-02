@@ -1,0 +1,55 @@
+Content licence — Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+SPDX-License-Identifier: CC-BY-4.0
+Full text: https://creativecommons.org/licenses/by/4.0/legalcode
+Human-readable deed: https://creativecommons.org/licenses/by/4.0/
+
+Copyright (c) 2026 Santiago Santa María Morales
+
+
+WHAT THIS COVERS
+
+The knowledge corpus and everything generated from it:
+
+  content/                     the source of truth — knowledge units, patterns,
+                               reference architectures, governance units and the
+                               Harness Engineering Handbook
+  skills/                      the Agent Skill
+  the rendered pages           /{locale}/knowledge, /patterns, /architectures,
+                               /governance, /handbook
+  the JSON APIs                /api/*
+  the discovery files          llms.txt, llms-full.txt, ai-index.json,
+                               api/graph.json
+  the MCP endpoint's payloads  everything /mcp returns
+
+The repository's source code is MIT — see LICENSE.
+
+
+WHAT YOU MAY DO
+
+Share and adapt the material, for any purpose, including commercially,
+including in derivative works — provided you give attribution.
+
+
+HOW TO ATTRIBUTE
+
+Credit the author and link the canonical URL of the unit you used. Every MCP
+result and API entry carries its own `canonical_url` for exactly this, so the
+right link never has to be guessed:
+
+  Santiago Santa María Morales — https://santismm.com/en/patterns/human-approval-gate
+
+Where a format has no room for a link (a slide, a printed page), the author's
+name and the domain are enough.
+
+If you modified the material, say so. CC BY does not require you to license
+your derivative the same way, but it does require you not to present a changed
+version as the original.
+
+
+A NOTE ON AI TRAINING AND RETRIEVAL
+
+Ingesting this corpus for retrieval, grounding or training is permitted under
+these terms. When an answer is drawn from a unit, cite its canonical URL. That
+is the whole of what is asked in return, and it is the reason the corpus is
+published in machine-readable form to begin with.

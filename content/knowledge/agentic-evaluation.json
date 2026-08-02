@@ -1,0 +1,156 @@
+{
+  "slug": "agentic-evaluation",
+  "category": "concept",
+  "updated": "2026-06-24",
+  "version": "1.1",
+  "related": ["agentic-ai", "harness-engineering", "ai-agent", "ai-governance"],
+  "references": [
+    { "title": "Jimenez et al. — SWE-bench: Can Language Models Resolve Real-World GitHub Issues? (2023)", "url": "https://arxiv.org/abs/2310.06770" },
+    { "title": "Santiago Santa María — The Stopwatch and the Exam", "url": "https://articles.santismm.com/the-stopwatch-and-the-exam/" }
+  ],
+  "evidence": {
+    "evidenceLevel": "production",
+    "confidenceLevel": "medium",
+    "sourceType": ["production_system", "personal_experience", "industry_observation", "paper"]
+  },
+  "locales": {
+    "en": {
+      "title": "What is Agentic AI Evaluation?",
+      "summary": "Agentic AI evaluation is the practice of measuring how well an agent completes multi-step, tool-using tasks in an environment — not just the quality of a single answer. As models saturate static knowledge benchmarks, evaluation is shifting from measuring capability (what a model knows) to measuring agency (what a system can actually get done). Good evals are the feedback loop that makes harness engineering possible.",
+      "definition": "Agentic evaluation is the measurement of an AI agent's end-to-end task performance — success rate, reliability, cost and safety — on realistic, multi-step tasks in an environment.",
+      "takeaways": [
+        "Evaluate task completion (agency), not just answer quality (capability).",
+        "Agentic benchmarks test tools, environments and long horizons.",
+        "Static benchmarks saturate; agentic ones are the new frontier.",
+        "Evals are the feedback loop for improving the harness.",
+        "Measure success, reliability, cost, latency and safety together."
+      ],
+      "context": [
+        "Traditional benchmarks ask a model questions and score the answers. That measures capability, but it tells you little about whether a system can complete real work. Agentic evaluation instead places an agent in an environment with tools and a goal, and scores whether it actually achieves it.",
+        "This shift matters because production value comes from task completion. An agent that answers well but fails to finish tasks is not useful. Evaluation is also what lets teams improve harnesses systematically rather than by anecdote."
+      ],
+      "architecture": [
+        "An agentic eval defines tasks, an environment (real or simulated) with tools, a success criterion, and metrics. The agent runs; its trajectory and outcome are scored automatically where possible, with human review for nuanced cases.",
+        "Beyond a single success rate, mature evaluation tracks reliability across runs, cost and latency budgets, and safety (did the agent stay within authorization and avoid harmful actions). Traces from observability feed directly into eval design."
+      ],
+      "components": ["Task suite", "Environment & tools", "Success criteria", "Metrics (success, cost, latency, safety)", "Automated graders", "Human review", "Trajectory traces"],
+      "pros": [
+        "Measures what actually matters: task completion.",
+        "Catches regressions before they reach users.",
+        "Turns harness improvement into a measurable loop.",
+        "Surfaces reliability, cost and safety, not just accuracy."
+      ],
+      "risks": [
+        "Hard to build realistic environments and graders.",
+        "Overfitting to a benchmark instead of real performance.",
+        "Saturation: benchmarks lose discriminative power over time.",
+        "Automated grading can miss nuance; human review is costly."
+      ],
+      "tools": ["SWE-bench and other agentic benchmarks", "LangSmith / Langfuse", "OpenAI Evals", "Custom task harnesses", "LLM-as-judge graders"],
+      "examples": [
+        "Scoring a coding agent on whether its patch makes a real test suite pass.",
+        "Measuring a support agent's end-to-end ticket resolution rate.",
+        "Tracking reliability of a workflow agent across repeated runs.",
+        "In practice: evaluating an autonomous agent (OpenClaw) over 57 days straight from production traces — 161 sessions at 98.8% success (2 errors), with per-model reliability of 100% vs 95.7% across two model versions — a reliability baseline computed directly from operational traces rather than a curated benchmark set."
+      ],
+      "faqs": [
+        { "q": "What is the difference between capability and agency?", "a": "Capability is what a model knows or can do in isolation; agency is what a full system can actually accomplish in an environment. Agentic evaluation measures the latter." },
+        { "q": "Why are static benchmarks no longer enough?", "a": "Top models saturate them, so they stop discriminating. They also do not test tool use, environments or long-horizon tasks, which is where real agent performance lives." },
+        { "q": "What is an agentic benchmark?", "a": "A test that scores an agent's ability to complete multi-step, tool-using tasks in an environment — for example resolving real software issues." },
+        { "q": "How do evals relate to harness engineering?", "a": "Evals are the measurement loop that makes harness engineering possible: you change the harness, measure the effect, and keep what demonstrably improves task performance." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué es la Evaluación de IA Agéntica?",
+      "summary": "La evaluación de IA agéntica es la práctica de medir cómo de bien un agente completa tareas de varios pasos con uso de herramientas en un entorno, no solo la calidad de una única respuesta. A medida que los modelos saturan los benchmarks estáticos de conocimiento, la evaluación se desplaza de medir capacidad (lo que un modelo sabe) a medir agencia (lo que un sistema realmente logra hacer). Unas buenas evaluaciones son el bucle de feedback que hace posible la ingeniería de harness.",
+      "definition": "La evaluación agéntica es la medición del rendimiento de extremo a extremo de un agente de IA —tasa de éxito, fiabilidad, coste y seguridad— en tareas realistas de varios pasos dentro de un entorno.",
+      "takeaways": [
+        "Evaluar la finalización de la tarea (agencia), no solo la calidad de la respuesta (capacidad).",
+        "Los benchmarks agénticos prueban herramientas, entornos y horizontes largos.",
+        "Los benchmarks estáticos se saturan; los agénticos son la nueva frontera.",
+        "Las evaluaciones son el bucle de feedback para mejorar el harness.",
+        "Medir juntos éxito, fiabilidad, coste, latencia y seguridad."
+      ],
+      "context": [
+        "Los benchmarks tradicionales hacen preguntas a un modelo y puntúan las respuestas. Eso mide capacidad, pero dice poco sobre si un sistema puede completar trabajo real. La evaluación agéntica, en cambio, coloca a un agente en un entorno con herramientas y un objetivo, y puntúa si realmente lo alcanza.",
+        "Este cambio importa porque el valor en producción viene de completar tareas. Un agente que responde bien pero no termina las tareas no es útil. La evaluación es también lo que permite mejorar los harness de forma sistemática y no por anécdota."
+      ],
+      "architecture": [
+        "Una evaluación agéntica define tareas, un entorno (real o simulado) con herramientas, un criterio de éxito y métricas. El agente se ejecuta; su trayectoria y su resultado se puntúan automáticamente cuando es posible, con revisión humana para casos con matiz.",
+        "Más allá de una sola tasa de éxito, la evaluación madura sigue la fiabilidad entre ejecuciones, los presupuestos de coste y latencia, y la seguridad (¿se mantuvo el agente dentro de su autorización y evitó acciones dañinas?). Las trazas de observabilidad alimentan directamente el diseño de las evaluaciones."
+      ],
+      "components": ["Suite de tareas", "Entorno y herramientas", "Criterios de éxito", "Métricas (éxito, coste, latencia, seguridad)", "Evaluadores automáticos", "Revisión humana", "Trazas de trayectoria"],
+      "pros": [
+        "Mide lo que de verdad importa: la finalización de la tarea.",
+        "Detecta regresiones antes de que lleguen a los usuarios.",
+        "Convierte la mejora del harness en un bucle medible.",
+        "Saca a la luz fiabilidad, coste y seguridad, no solo precisión."
+      ],
+      "risks": [
+        "Difícil construir entornos y evaluadores realistas.",
+        "Sobreajuste a un benchmark en vez del rendimiento real.",
+        "Saturación: los benchmarks pierden poder discriminativo con el tiempo.",
+        "La evaluación automática puede perder matices; la revisión humana es cara."
+      ],
+      "tools": ["SWE-bench y otros benchmarks agénticos", "LangSmith / Langfuse", "OpenAI Evals", "Harness de tareas a medida", "Evaluadores LLM-as-judge"],
+      "examples": [
+        "Puntuar a un agente de programación según si su parche hace pasar una suite de tests real.",
+        "Medir la tasa de resolución de tickets de extremo a extremo de un agente de soporte.",
+        "Seguir la fiabilidad de un agente de flujo de trabajo en ejecuciones repetidas.",
+        "En la práctica: evaluar un agente autónomo (OpenClaw) durante 57 días directamente desde trazas de producción — 161 sesiones con 98,8% de éxito (2 errores), con fiabilidad por modelo de 100% frente a 95,7% en dos versiones — una línea base de fiabilidad calculada directamente desde trazas operativas, no desde un set de benchmark curado."
+      ],
+      "faqs": [
+        { "q": "¿Cuál es la diferencia entre capacidad y agencia?", "a": "La capacidad es lo que un modelo sabe o puede hacer de forma aislada; la agencia es lo que un sistema completo logra realmente en un entorno. La evaluación agéntica mide esto último." },
+        { "q": "¿Por qué ya no bastan los benchmarks estáticos?", "a": "Los mejores modelos los saturan y dejan de discriminar. Además no prueban uso de herramientas, entornos ni tareas de horizonte largo, que es donde está el rendimiento real de un agente." },
+        { "q": "¿Qué es un benchmark agéntico?", "a": "Una prueba que puntúa la capacidad de un agente para completar tareas de varios pasos con uso de herramientas en un entorno; por ejemplo, resolver incidencias reales de software." },
+        { "q": "¿Cómo se relacionan las evaluaciones con la ingeniería de harness?", "a": "Las evaluaciones son el bucle de medición que hace posible la ingeniería de harness: cambias el harness, mides el efecto y conservas lo que demuestra mejorar el rendimiento en la tarea." }
+      ]
+    },
+    "pt": {
+      "title": "O que é Avaliação de IA Agêntica?",
+      "summary": "A avaliação de IA agêntica é a prática de medir quão bem um agente conclui tarefas de vários passos com uso de ferramentas num ambiente, não só a qualidade de uma única resposta. À medida que os modelos saturam os benchmarks estáticos de conhecimento, a avaliação se desloca de medir capacidade (o que um modelo sabe) para medir agência (o que um sistema realmente consegue concluir). Boas avaliações são o laço de feedback que torna possível a engenharia de harness.",
+      "definition": "A avaliação agêntica é a medição do desempenho de ponta a ponta de um agente de IA — taxa de sucesso, confiabilidade, custo e segurança — em tarefas realistas de vários passos dentro de um ambiente.",
+      "takeaways": [
+        "Avaliar a conclusão da tarefa (agência), não só a qualidade da resposta (capacidade).",
+        "Os benchmarks agênticos testam ferramentas, ambientes e horizontes longos.",
+        "Os benchmarks estáticos saturam; os agênticos são a nova fronteira.",
+        "As avaliações são o laço de feedback para melhorar o harness.",
+        "Medir juntos sucesso, confiabilidade, custo, latência e segurança."
+      ],
+      "context": [
+        "Os benchmarks tradicionais fazem perguntas a um modelo e pontuam as respostas. Isso mede capacidade, mas diz pouco sobre se um sistema consegue concluir trabalho real. A avaliação agêntica, em vez disso, coloca um agente num ambiente com ferramentas e um objetivo, e pontua se ele realmente o alcança.",
+        "Essa mudança importa porque o valor em produção vem de concluir tarefas. Um agente que responde bem mas não termina as tarefas não é útil. A avaliação é também o que permite melhorar os harnesses de forma sistemática e não por anedota."
+      ],
+      "architecture": [
+        "Uma avaliação agêntica define tarefas, um ambiente (real ou simulado) com ferramentas, um critério de sucesso e métricas. O agente é executado; sua trajetória e seu resultado são pontuados automaticamente quando possível, com revisão humana para casos com nuance.",
+        "Além de uma única taxa de sucesso, a avaliação madura acompanha a confiabilidade entre execuções, os orçamentos de custo e latência, e a segurança (o agente se manteve dentro de sua autorização e evitou ações nocivas?). Os rastros de observabilidade alimentam diretamente o design das avaliações."
+      ],
+      "components": ["Suíte de tarefas", "Ambiente e ferramentas", "Critérios de sucesso", "Métricas (sucesso, custo, latência, segurança)", "Avaliadores automáticos", "Revisão humana", "Rastros de trajetória"],
+      "pros": [
+        "Mede o que de fato importa: a conclusão da tarefa.",
+        "Detecta regressões antes de chegarem aos usuários.",
+        "Transforma a melhoria do harness num laço mensurável.",
+        "Revela confiabilidade, custo e segurança, não só precisão."
+      ],
+      "risks": [
+        "Difícil construir ambientes e avaliadores realistas.",
+        "Sobreajuste a um benchmark em vez do desempenho real.",
+        "Saturação: os benchmarks perdem poder discriminativo com o tempo.",
+        "A avaliação automática pode perder nuances; a revisão humana é cara."
+      ],
+      "tools": ["SWE-bench e outros benchmarks agênticos", "LangSmith / Langfuse", "OpenAI Evals", "Harness de tarefas sob medida", "Avaliadores LLM-as-judge"],
+      "examples": [
+        "Pontuar um agente de programação conforme seu patch faça passar uma suíte de testes real.",
+        "Medir a taxa de resolução de chamados de ponta a ponta de um agente de suporte.",
+        "Acompanhar a confiabilidade de um agente de fluxo de trabalho em execuções repetidas.",
+        "Na prática: avaliar um agente autônomo (OpenClaw) por 57 dias diretamente a partir de rastros de produção — 161 sessões com 98,8% de sucesso (2 erros), com confiabilidade por modelo de 100% ante 95,7% em duas versões — uma linha de base de confiabilidade calculada diretamente de rastros operacionais, não de um conjunto de benchmark curado."
+      ],
+      "faqs": [
+        { "q": "Qual é a diferença entre capacidade e agência?", "a": "Capacidade é o que um modelo sabe ou pode fazer isoladamente; agência é o que um sistema completo realmente realiza num ambiente. A avaliação agêntica mede o segundo." },
+        { "q": "Por que os benchmarks estáticos já não bastam?", "a": "Os melhores modelos os saturam e deixam de discriminar. Além disso não testam uso de ferramentas, ambientes nem tarefas de horizonte longo, que é onde está o desempenho real de um agente." },
+        { "q": "O que é um benchmark agêntico?", "a": "Um teste que pontua a capacidade de um agente de concluir tarefas de vários passos com uso de ferramentas num ambiente; por exemplo, resolver issues reais de software." },
+        { "q": "Como as avaliações se relacionam com a engenharia de harness?", "a": "As avaliações são o laço de medição que torna possível a engenharia de harness: você muda o harness, mede o efeito e mantém o que comprovadamente melhora o desempenho na tarefa." }
+      ]
+    }
+  }
+}

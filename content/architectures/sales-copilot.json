@@ -1,0 +1,280 @@
+{
+  "id": "ARCH-003",
+  "slug": "sales-copilot",
+  "category": "sales",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": true,
+  "evidence": { "evidenceLevel": "industry_observation", "confidenceLevel": "medium", "sourceType": ["industry_observation", "paper"] },
+  "technologies": ["CRM integration (function calling)", "RAG over product & deal data", "Email & calendar tools", "Orchestration loop", "Guardrails", "Observability (LangSmith / Langfuse)"],
+  "patterns": ["routing", "human-approval-gate", "reflection", "semantic-caching"],
+  "knowledge": ["ai-agent", "tool-use", "enterprise-rag", "context-engineering", "guardrails", "ai-observability"],
+  "references": [
+    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
+    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  ],
+  "related": ["customer-service-agent", "enterprise-knowledge-assistant"],
+  "locales": {
+    "en": {
+      "name": "Sales Copilot",
+      "summary": "A sales copilot is an agent that assists reps end to end: it researches accounts from CRM and product data, drafts personalized outreach and follow-ups, logs activity, surfaces next-best-actions, and prepares meeting briefs. Everything is grounded in the company's CRM, deal, and product knowledge to avoid hallucinated claims about features or pricing. The rep stays in control: a human-approval gate sits in front of any outbound action, so the agent drafts but never sends to a customer on its own. Success is measured honestly through rep productivity and pipeline impact, not vanity activity counts.",
+      "keyConcepts": [
+        "Grounding in CRM, deal, and product data so the agent reasons over the rep's real pipeline instead of generic assumptions.",
+        "A strict separation between drafting and sending, with a human-approval gate on every customer-facing action.",
+        "Tool use via function calling to read and write CRM records, search product knowledge, and schedule meetings.",
+        "Honest measurement of rep productivity and pipeline outcomes rather than raw volume of emails or logged tasks."
+      ],
+      "definition": "The sales copilot architecture is an agentic assistant that grounds account research, outreach drafting, and activity logging in CRM and product data while keeping a rep approval gate before anything reaches a customer.",
+      "architecture": [
+        "At the core sits an orchestration loop that interprets the rep's intent, plans a short sequence of tool calls, and assembles context. A router classifies each request — research an account, draft an email, log a call, prepare a brief, or suggest a next-best-action — and selects the relevant tools and retrieval scope. Keeping the loop bounded and observable matters more than maximal autonomy: every step is logged so the team can inspect what data was read, what was drafted, and why.",
+        "Grounding is supplied by RAG over product and deal data plus direct CRM function calls. Product specs, pricing rules, security documentation, and battlecards live in a retrieval index; live account state — open opportunities, contacts, recent activity, stage — comes from CRM reads. The agent must cite or attach the source for any factual claim about a product or price, and guardrails reject outputs that assert unverifiable specifics. This is the main defense against fabricated features or numbers leaking into customer communication.",
+        "Outbound actions are gated. The agent drafts emails, follow-ups, and meeting invites into a review surface; nothing is sent, and no irreversible CRM write to a customer-visible field happens, until the rep approves. Internal, low-risk writes (logging an internal note, updating a private next-step) can run with lighter review. Observability via LangSmith or Langfuse traces each run end to end, and semantic caching reuses account-research and product-answer results to cut latency and cost on repeated questions."
+      ],
+      "flow": [
+        "1. The rep makes a request (\"prep me for the Acme renewal call\") and the router classifies intent and selects the tools and retrieval scope.",
+        "2. The agent reads live account state from CRM via function calls — open opportunities, contacts, stage, recent activity — to ground its reasoning in the real deal.",
+        "3. It retrieves supporting product and deal knowledge through RAG: specs, pricing rules, security docs, and battlecards relevant to the account.",
+        "4. The agent drafts the requested artifact (brief, email, follow-up, next-best-action) with citations or attached sources for every product or pricing claim.",
+        "5. Guardrails check the draft for unverifiable claims, sensitive data, and policy violations; outbound drafts route to the human-approval gate for rep review and edits.",
+        "6. On approval the action executes — email sent, meeting scheduled, activity logged to CRM — and the full run is traced in observability for later audit and evaluation."
+      ],
+      "components": [
+        "Orchestration loop with intent router",
+        "CRM integration via function calling (reads and writes)",
+        "RAG index over product and deal knowledge",
+        "Email and calendar tools",
+        "Guardrails and claim-verification layer",
+        "Human-approval gate for outbound actions",
+        "Observability and semantic caching"
+      ],
+      "referenceScenario": {
+        "context": "A mid-market B2B software vendor equips its sales team with a copilot to reduce administrative load and improve the quality of account research and outreach. This is an illustrative, vendor-neutral blueprint, not a description of a specific deployment.",
+        "scenario": "Reps ask the copilot to prepare meeting briefs, draft renewal and prospecting emails, summarize account history, log calls, and recommend next-best-actions. The copilot grounds every artifact in CRM state and the product knowledge base, and routes all customer-facing drafts to the rep for approval before sending.",
+        "technology": "An orchestration loop calls the CRM through function calling, retrieves product and deal data via RAG, and uses email and calendar tools. Guardrails verify product and pricing claims, a human-approval gate fronts outbound actions, and LangSmith or Langfuse provide tracing with semantic caching over repeated research.",
+        "load": "Assume a few hundred reps issuing tens of requests each per day, with bursts around quarter-end. Research and drafting requests dominate; outbound sends are comparatively rare because each passes through human review.",
+        "results": "All figures here are reference targets to size and instrument the system, not guarantees: teams should expect to measure their own outcomes on their own data. Plausible targets include reduced time spent on pre-call research and CRM logging, faster first-draft turnaround on outreach, and improved data hygiene — each to be validated against a baseline before and after rollout."
+      },
+      "benefits": [
+        "Reps spend less time on administrative work — research, logging, and drafting — and more time in live conversations.",
+        "Outreach and briefs are grounded in the company's real CRM and product data, improving relevance and consistency.",
+        "The human-approval gate keeps reps accountable for every customer-facing message while still accelerating their workflow.",
+        "Observability and tracing make the system auditable, so the team can inspect what was read, drafted, and sent."
+      ],
+      "risks": [
+        "Hallucinated product features or pricing can leak into customer communication if grounding and claim verification are weak.",
+        "CRM write access creates the risk of corrupting pipeline data if guardrails or approval gates are misconfigured.",
+        "Over-automation can erode rep judgment and relationships if the copilot is allowed to send without genuine review.",
+        "Sensitive customer and deal data flowing through retrieval and prompts raises privacy and access-control concerns."
+      ],
+      "failureModes": [
+        "The agent asserts a feature or price that is outdated or simply wrong because retrieval missed the authoritative source.",
+        "Reps rubber-stamp drafts without reading them, turning the approval gate into a formality that ships errors.",
+        "Stale or partial CRM reads cause the agent to brief on a deal stage or contact that no longer reflects reality.",
+        "The orchestration loop over-plans or loops on ambiguous requests, burning tokens and latency without converging."
+      ],
+      "lessons": [
+        "Separate drafting from sending early; the human-approval gate is the single most important safety control for outbound work.",
+        "Treat product and pricing claims as citation-required: if the source cannot be attached, the claim should not ship.",
+        "Instrument from day one — without tracing you cannot tell whether the copilot helped or just generated more activity.",
+        "Scope CRM writes tightly and reversibly, keeping high-risk, customer-visible changes behind explicit rep confirmation."
+      ],
+      "kpis": [
+        { "metric": "Time saved per rep on research and logging", "note": "Measure pre-call research and CRM-logging time before and after rollout; good looks like a clear, sustained reduction without data-quality loss." },
+        { "metric": "Approval-gate edit and rejection rate", "note": "Track how often reps edit or reject drafts; a healthy, non-trivial rate shows reps are genuinely reviewing rather than rubber-stamping." },
+        { "metric": "Grounding and claim-verification accuracy", "note": "Sample drafts and check product and pricing claims against authoritative sources; good means near-zero unverifiable claims reaching customers." },
+        { "metric": "Pipeline and conversion impact", "note": "Compare conversion or progression for copilot-assisted versus baseline activity; attribute cautiously and look for honest, durable lift." },
+        { "metric": "Cost and latency per assisted task", "note": "Track tokens, retrieval calls, and response time per request; semantic caching should hold cost and latency stable as usage grows." }
+      ],
+      "scaling": [
+        "Cost is driven by retrieval volume and model calls per request; semantic caching of repeated account research and product answers is the main lever to contain it.",
+        "Read-heavy traffic (research, briefs, summaries) scales horizontally and benefits from caching; outbound writes are rarer and bounded by human review.",
+        "Quarter-end and campaign bursts require headroom in retrieval and inference capacity, plus rate limiting so a few heavy users do not starve others.",
+        "As the product catalog and CRM grow, retrieval freshness and index maintenance dominate operational cost more than raw inference."
+      ],
+      "examples": [
+        "A rep asks for a renewal-call brief; the copilot reads the account from CRM, retrieves the relevant contract and product docs, and drafts talking points with sources.",
+        "After a discovery call, the rep dictates notes; the copilot logs a structured activity to CRM and proposes a follow-up email that the rep edits and approves before sending.",
+        "The copilot scans a rep's book of business and surfaces next-best-actions — accounts gone quiet, expiring contracts, upsell signals — each linked to the CRM record behind it."
+      ],
+      "faqs": [
+        { "q": "Can the copilot send emails to customers on its own?", "a": "No. By design it only drafts; every customer-facing email, follow-up, or invite passes through a human-approval gate where the rep reviews, edits, and approves before anything is sent." },
+        { "q": "How do you stop it from inventing product features or prices?", "a": "Factual claims about products or pricing must be grounded in retrieved authoritative sources and carry a citation. Guardrails reject outputs that assert unverifiable specifics, and drafts are sampled to verify accuracy." },
+        { "q": "How do you measure whether it actually helps?", "a": "Through honest metrics — time saved on research and logging, the approval-gate edit rate, grounding accuracy, and cautiously attributed pipeline impact — compared against a baseline rather than raw activity counts." }
+      ]
+    },
+    "es": {
+      "name": "Copiloto de Ventas",
+      "summary": "Un copiloto de ventas es un agente que asiste a los representantes de principio a fin: investiga cuentas a partir del CRM y de los datos de producto, redacta correos personalizados y seguimientos, registra actividad, propone próximas mejores acciones y prepara informes para reuniones. Todo se fundamenta en el conocimiento de CRM, oportunidades y producto de la empresa para evitar afirmaciones inventadas sobre funciones o precios. El representante mantiene el control: una compuerta de aprobación humana precede a cualquier acción de salida, de modo que el agente redacta pero nunca envía al cliente por su cuenta. El éxito se mide con honestidad mediante la productividad del representante y el impacto en el pipeline, no con métricas de vanidad.",
+      "keyConcepts": [
+        "Fundamentación en datos de CRM, oportunidades y producto para que el agente razone sobre el pipeline real del representante y no sobre supuestos genéricos.",
+        "Separación estricta entre redactar y enviar, con una compuerta de aprobación humana en cada acción dirigida al cliente.",
+        "Uso de herramientas mediante llamadas a funciones para leer y escribir registros del CRM, buscar conocimiento de producto y agendar reuniones.",
+        "Medición honesta de la productividad del representante y de los resultados del pipeline en lugar del volumen bruto de correos o tareas registradas."
+      ],
+      "definition": "La arquitectura de copiloto de ventas es un asistente agéntico que fundamenta la investigación de cuentas, la redacción de comunicaciones y el registro de actividad en datos de CRM y producto, manteniendo una compuerta de aprobación del representante antes de que algo llegue al cliente.",
+      "architecture": [
+        "En el núcleo hay un bucle de orquestación que interpreta la intención del representante, planifica una secuencia corta de llamadas a herramientas y ensambla el contexto. Un enrutador clasifica cada solicitud —investigar una cuenta, redactar un correo, registrar una llamada, preparar un informe o sugerir una próxima mejor acción— y selecciona las herramientas y el alcance de recuperación pertinentes. Mantener el bucle acotado y observable importa más que la máxima autonomía: cada paso se registra para que el equipo pueda inspeccionar qué datos se leyeron, qué se redactó y por qué.",
+        "La fundamentación proviene de RAG sobre datos de producto y oportunidades, además de llamadas directas a funciones del CRM. Las especificaciones de producto, las reglas de precios, la documentación de seguridad y los argumentarios viven en un índice de recuperación; el estado vivo de la cuenta —oportunidades abiertas, contactos, actividad reciente, etapa— proviene de lecturas del CRM. El agente debe citar o adjuntar la fuente de cualquier afirmación factual sobre un producto o precio, y los guardarraíles rechazan salidas que afirmen detalles no verificables. Esta es la principal defensa contra la filtración de funciones o cifras inventadas en la comunicación con el cliente.",
+        "Las acciones de salida están protegidas por una compuerta. El agente redacta correos, seguimientos e invitaciones a reuniones en una superficie de revisión; nada se envía, y no ocurre ninguna escritura irreversible en el CRM sobre un campo visible para el cliente, hasta que el representante apruebe. Las escrituras internas de bajo riesgo (registrar una nota interna, actualizar un próximo paso privado) pueden ejecutarse con revisión más ligera. La observabilidad mediante LangSmith o Langfuse traza cada ejecución de extremo a extremo, y el almacenamiento en caché semántico reutiliza resultados de investigación de cuentas y respuestas de producto para reducir latencia y costo en preguntas repetidas."
+      ],
+      "flow": [
+        "1. El representante hace una solicitud (\"prepárame para la llamada de renovación de Acme\") y el enrutador clasifica la intención y selecciona las herramientas y el alcance de recuperación.",
+        "2. El agente lee el estado vivo de la cuenta desde el CRM mediante llamadas a funciones —oportunidades abiertas, contactos, etapa, actividad reciente— para fundamentar su razonamiento en la oportunidad real.",
+        "3. Recupera conocimiento de apoyo de producto y oportunidades mediante RAG: especificaciones, reglas de precios, documentos de seguridad y argumentarios relevantes para la cuenta.",
+        "4. El agente redacta el artefacto solicitado (informe, correo, seguimiento, próxima mejor acción) con citas o fuentes adjuntas para cada afirmación sobre producto o precio.",
+        "5. Los guardarraíles revisan el borrador en busca de afirmaciones no verificables, datos sensibles y violaciones de política; los borradores de salida pasan a la compuerta de aprobación humana para revisión y edición del representante.",
+        "6. Tras la aprobación se ejecuta la acción —correo enviado, reunión agendada, actividad registrada en el CRM— y toda la ejecución queda trazada en observabilidad para auditoría y evaluación posteriores."
+      ],
+      "components": [
+        "Bucle de orquestación con enrutador de intención",
+        "Integración de CRM mediante llamadas a funciones (lecturas y escrituras)",
+        "Índice RAG sobre conocimiento de producto y oportunidades",
+        "Herramientas de correo y calendario",
+        "Capa de guardarraíles y verificación de afirmaciones",
+        "Compuerta de aprobación humana para acciones de salida",
+        "Observabilidad y caché semántico"
+      ],
+      "referenceScenario": {
+        "context": "Un proveedor de software B2B de mercado medio dota a su equipo de ventas con un copiloto para reducir la carga administrativa y mejorar la calidad de la investigación de cuentas y de las comunicaciones. Este es un plano ilustrativo y neutral respecto a proveedores, no la descripción de un despliegue específico.",
+        "scenario": "Los representantes piden al copiloto que prepare informes para reuniones, redacte correos de renovación y prospección, resuma el historial de cuentas, registre llamadas y recomiende próximas mejores acciones. El copiloto fundamenta cada artefacto en el estado del CRM y en la base de conocimiento de producto, y enruta todos los borradores dirigidos al cliente al representante para su aprobación antes de enviarlos.",
+        "technology": "Un bucle de orquestación llama al CRM mediante llamadas a funciones, recupera datos de producto y oportunidades vía RAG y usa herramientas de correo y calendario. Los guardarraíles verifican las afirmaciones de producto y precio, una compuerta de aprobación humana precede a las acciones de salida, y LangSmith o Langfuse aportan trazado con caché semántico sobre la investigación repetida.",
+        "load": "Supongamos unos pocos cientos de representantes que emiten decenas de solicitudes cada uno por día, con picos en el cierre de trimestre. Las solicitudes de investigación y redacción dominan; los envíos de salida son comparativamente raros porque cada uno pasa por revisión humana.",
+        "results": "Todas las cifras aquí son objetivos de referencia para dimensionar e instrumentar el sistema, no garantías: los equipos deben esperar medir sus propios resultados con sus propios datos. Objetivos plausibles incluyen menos tiempo dedicado a la investigación previa a la llamada y al registro en CRM, una entrega más rápida del primer borrador de las comunicaciones y mejor higiene de datos —cada uno a validar contra una línea base antes y después del despliegue."
+      },
+      "benefits": [
+        "Los representantes dedican menos tiempo a trabajo administrativo —investigación, registro y redacción— y más a conversaciones en vivo.",
+        "Las comunicaciones y los informes se fundamentan en los datos reales de CRM y producto de la empresa, mejorando la relevancia y la consistencia.",
+        "La compuerta de aprobación humana mantiene a los representantes responsables de cada mensaje dirigido al cliente sin dejar de acelerar su flujo de trabajo.",
+        "La observabilidad y el trazado hacen el sistema auditable, de modo que el equipo puede inspeccionar qué se leyó, redactó y envió."
+      ],
+      "risks": [
+        "Funciones de producto o precios inventados pueden filtrarse en la comunicación con el cliente si la fundamentación y la verificación de afirmaciones son débiles.",
+        "El acceso de escritura al CRM crea el riesgo de corromper datos del pipeline si los guardarraíles o las compuertas de aprobación están mal configurados.",
+        "El exceso de automatización puede erosionar el criterio y las relaciones del representante si se permite que el copiloto envíe sin una revisión genuina.",
+        "Datos sensibles de clientes y oportunidades que fluyen por la recuperación y los prompts plantean preocupaciones de privacidad y control de acceso."
+      ],
+      "failureModes": [
+        "El agente afirma una función o un precio desactualizado o sencillamente erróneo porque la recuperación no encontró la fuente autorizada.",
+        "Los representantes aprueban borradores sin leerlos, convirtiendo la compuerta de aprobación en un trámite que despacha errores.",
+        "Lecturas obsoletas o parciales del CRM hacen que el agente informe sobre una etapa de oportunidad o un contacto que ya no refleja la realidad.",
+        "El bucle de orquestación sobreplanifica o entra en bucle ante solicitudes ambiguas, consumiendo tokens y latencia sin converger."
+      ],
+      "lessons": [
+        "Separa la redacción del envío desde el principio; la compuerta de aprobación humana es el control de seguridad más importante para el trabajo de salida.",
+        "Trata las afirmaciones de producto y precio como de cita obligatoria: si no se puede adjuntar la fuente, la afirmación no debe despacharse.",
+        "Instrumenta desde el primer día; sin trazado no puedes saber si el copiloto ayudó o solo generó más actividad.",
+        "Acota las escrituras al CRM de forma estrecha y reversible, manteniendo los cambios de alto riesgo y visibles para el cliente tras confirmación explícita del representante."
+      ],
+      "kpis": [
+        { "metric": "Tiempo ahorrado por representante en investigación y registro", "note": "Mide el tiempo de investigación previa a la llamada y de registro en CRM antes y después del despliegue; lo bueno es una reducción clara y sostenida sin pérdida de calidad de datos." },
+        { "metric": "Tasa de edición y rechazo en la compuerta de aprobación", "note": "Rastrea con qué frecuencia los representantes editan o rechazan borradores; una tasa saludable y no trivial muestra que revisan de verdad en lugar de aprobar por inercia." },
+        { "metric": "Precisión de fundamentación y verificación de afirmaciones", "note": "Muestrea borradores y compara las afirmaciones de producto y precio con fuentes autorizadas; lo bueno es casi cero afirmaciones no verificables llegando a clientes." },
+        { "metric": "Impacto en pipeline y conversión", "note": "Compara la conversión o el avance entre la actividad asistida por el copiloto y la línea base; atribuye con cautela y busca un aumento honesto y duradero." },
+        { "metric": "Costo y latencia por tarea asistida", "note": "Rastrea tokens, llamadas de recuperación y tiempo de respuesta por solicitud; el caché semántico debería mantener estables el costo y la latencia a medida que crece el uso." }
+      ],
+      "scaling": [
+        "El costo lo impulsan el volumen de recuperación y las llamadas al modelo por solicitud; el caché semántico de la investigación de cuentas y las respuestas de producto repetidas es la principal palanca para contenerlo.",
+        "El tráfico intensivo en lecturas (investigación, informes, resúmenes) escala horizontalmente y se beneficia del caché; las escrituras de salida son más raras y están acotadas por la revisión humana.",
+        "Los picos de cierre de trimestre y de campañas requieren holgura en la capacidad de recuperación e inferencia, además de limitación de tasa para que unos pocos usuarios intensivos no priven a los demás.",
+        "A medida que crecen el catálogo de producto y el CRM, la frescura de la recuperación y el mantenimiento del índice dominan el costo operativo más que la inferencia bruta."
+      ],
+      "examples": [
+        "Un representante pide un informe para una llamada de renovación; el copiloto lee la cuenta desde el CRM, recupera el contrato y la documentación de producto pertinentes y redacta puntos de conversación con fuentes.",
+        "Tras una llamada de descubrimiento, el representante dicta notas; el copiloto registra una actividad estructurada en el CRM y propone un correo de seguimiento que el representante edita y aprueba antes de enviar.",
+        "El copiloto recorre la cartera de un representante y propone próximas mejores acciones —cuentas que enmudecieron, contratos por vencer, señales de upsell— cada una vinculada al registro del CRM que la respalda."
+      ],
+      "faqs": [
+        { "q": "¿Puede el copiloto enviar correos a los clientes por su cuenta?", "a": "No. Por diseño solo redacta; cada correo, seguimiento o invitación dirigido al cliente pasa por una compuerta de aprobación humana donde el representante revisa, edita y aprueba antes de que se envíe algo." },
+        { "q": "¿Cómo se evita que invente funciones o precios de producto?", "a": "Las afirmaciones factuales sobre productos o precios deben fundamentarse en fuentes autorizadas recuperadas y llevar una cita. Los guardarraíles rechazan salidas que afirman detalles no verificables, y los borradores se muestrean para verificar su precisión." },
+        { "q": "¿Cómo se mide si realmente ayuda?", "a": "Mediante métricas honestas —tiempo ahorrado en investigación y registro, la tasa de edición de la compuerta de aprobación, la precisión de fundamentación y un impacto en pipeline atribuido con cautela— comparadas contra una línea base en lugar de recuentos brutos de actividad." }
+      ]
+    },
+    "pt": {
+      "name": "Copiloto de Vendas",
+      "summary": "Um copiloto de vendas é um agente que assiste os representantes de ponta a ponta: pesquisa contas a partir do CRM e dos dados de produto, redige mensagens personalizadas e follow-ups, registra atividade, sugere próximas melhores ações e prepara briefings para reuniões. Tudo é fundamentado no conhecimento de CRM, oportunidades e produto da empresa para evitar afirmações inventadas sobre funcionalidades ou preços. O representante mantém o controle: um portão de aprovação humana antecede qualquer ação de saída, de modo que o agente redige mas nunca envia ao cliente por conta própria. O sucesso é medido com honestidade pela produtividade do representante e pelo impacto no pipeline, e não por métricas de vaidade.",
+      "keyConcepts": [
+        "Fundamentação em dados de CRM, oportunidades e produto para que o agente raciocine sobre o pipeline real do representante, e não sobre suposições genéricas.",
+        "Separação rigorosa entre redigir e enviar, com um portão de aprovação humana em cada ação voltada ao cliente.",
+        "Uso de ferramentas via chamadas de função para ler e gravar registros do CRM, buscar conhecimento de produto e agendar reuniões.",
+        "Medição honesta da produtividade do representante e dos resultados de pipeline em vez do volume bruto de e-mails ou tarefas registradas."
+      ],
+      "definition": "A arquitetura de copiloto de vendas é um assistente agêntico que fundamenta a pesquisa de contas, a redação de mensagens e o registro de atividade em dados de CRM e produto, mantendo um portão de aprovação do representante antes que algo chegue ao cliente.",
+      "architecture": [
+        "No núcleo está um laço de orquestração que interpreta a intenção do representante, planeja uma sequência curta de chamadas de ferramentas e monta o contexto. Um roteador classifica cada solicitação — pesquisar uma conta, redigir um e-mail, registrar uma ligação, preparar um briefing ou sugerir uma próxima melhor ação — e seleciona as ferramentas e o escopo de recuperação pertinentes. Manter o laço delimitado e observável importa mais do que a autonomia máxima: cada passo é registrado para que a equipe possa inspecionar quais dados foram lidos, o que foi redigido e por quê.",
+        "A fundamentação vem de RAG sobre dados de produto e oportunidades, além de chamadas diretas de função ao CRM. Especificações de produto, regras de preço, documentação de segurança e battlecards vivem em um índice de recuperação; o estado vivo da conta — oportunidades abertas, contatos, atividade recente, estágio — vem de leituras do CRM. O agente deve citar ou anexar a fonte de qualquer afirmação factual sobre um produto ou preço, e as guardrails rejeitam saídas que afirmem detalhes não verificáveis. Essa é a principal defesa contra o vazamento de funcionalidades ou números inventados para a comunicação com o cliente.",
+        "As ações de saída ficam atrás de um portão. O agente redige e-mails, follow-ups e convites de reunião em uma superfície de revisão; nada é enviado, e nenhuma gravação irreversível no CRM em um campo visível ao cliente acontece, até o representante aprovar. Gravações internas de baixo risco (registrar uma nota interna, atualizar um próximo passo privado) podem rodar com revisão mais leve. A observabilidade via LangSmith ou Langfuse rastreia cada execução de ponta a ponta, e o cache semântico reutiliza resultados de pesquisa de conta e respostas de produto para reduzir latência e custo em perguntas repetidas."
+      ],
+      "flow": [
+        "1. O representante faz uma solicitação (\"me prepare para a ligação de renovação da Acme\") e o roteador classifica a intenção e seleciona as ferramentas e o escopo de recuperação.",
+        "2. O agente lê o estado vivo da conta no CRM via chamadas de função — oportunidades abertas, contatos, estágio, atividade recente — para fundamentar seu raciocínio na oportunidade real.",
+        "3. Ele recupera conhecimento de apoio de produto e oportunidades via RAG: especificações, regras de preço, documentos de segurança e battlecards relevantes para a conta.",
+        "4. O agente redige o artefato solicitado (briefing, e-mail, follow-up, próxima melhor ação) com citações ou fontes anexadas para cada afirmação sobre produto ou preço.",
+        "5. As guardrails verificam o rascunho em busca de afirmações não verificáveis, dados sensíveis e violações de política; os rascunhos de saída seguem para o portão de aprovação humana para revisão e edição do representante.",
+        "6. Após a aprovação, a ação é executada — e-mail enviado, reunião agendada, atividade registrada no CRM — e toda a execução fica rastreada na observabilidade para auditoria e avaliação posteriores."
+      ],
+      "components": [
+        "Laço de orquestração com roteador de intenção",
+        "Integração de CRM via chamadas de função (leituras e gravações)",
+        "Índice RAG sobre conhecimento de produto e oportunidades",
+        "Ferramentas de e-mail e calendário",
+        "Camada de guardrails e verificação de afirmações",
+        "Portão de aprovação humana para ações de saída",
+        "Observabilidade e cache semântico"
+      ],
+      "referenceScenario": {
+        "context": "Um fornecedor de software B2B de mercado intermediário equipa sua equipe de vendas com um copiloto para reduzir a carga administrativa e melhorar a qualidade da pesquisa de contas e das mensagens. Este é um blueprint ilustrativo e neutro em relação a fornecedores, não a descrição de uma implantação específica.",
+        "scenario": "Os representantes pedem ao copiloto para preparar briefings de reunião, redigir e-mails de renovação e prospecção, resumir o histórico de contas, registrar ligações e recomendar próximas melhores ações. O copiloto fundamenta cada artefato no estado do CRM e na base de conhecimento de produto, e encaminha todos os rascunhos voltados ao cliente ao representante para aprovação antes do envio.",
+        "technology": "Um laço de orquestração chama o CRM via chamadas de função, recupera dados de produto e oportunidades via RAG e usa ferramentas de e-mail e calendário. As guardrails verificam afirmações de produto e preço, um portão de aprovação humana antecede as ações de saída, e LangSmith ou Langfuse fornecem rastreamento com cache semântico sobre a pesquisa repetida.",
+        "load": "Suponha algumas centenas de representantes emitindo dezenas de solicitações cada por dia, com picos no fechamento de trimestre. As solicitações de pesquisa e redação dominam; os envios de saída são comparativamente raros porque cada um passa por revisão humana.",
+        "results": "Todos os números aqui são metas de referência para dimensionar e instrumentar o sistema, não garantias: as equipes devem esperar medir seus próprios resultados com seus próprios dados. Metas plausíveis incluem menos tempo gasto em pesquisa pré-ligação e registro no CRM, entrega mais rápida do primeiro rascunho das mensagens e melhor higiene de dados — cada uma a validar contra uma linha de base antes e depois da implantação."
+      },
+      "benefits": [
+        "Os representantes gastam menos tempo em trabalho administrativo — pesquisa, registro e redação — e mais em conversas ao vivo.",
+        "As mensagens e os briefings são fundamentados nos dados reais de CRM e produto da empresa, melhorando a relevância e a consistência.",
+        "O portão de aprovação humana mantém os representantes responsáveis por cada mensagem voltada ao cliente sem deixar de acelerar seu fluxo de trabalho.",
+        "A observabilidade e o rastreamento tornam o sistema auditável, de modo que a equipe possa inspecionar o que foi lido, redigido e enviado."
+      ],
+      "risks": [
+        "Funcionalidades de produto ou preços inventados podem vazar para a comunicação com o cliente se a fundamentação e a verificação de afirmações forem fracas.",
+        "O acesso de gravação ao CRM cria o risco de corromper dados do pipeline se as guardrails ou os portões de aprovação estiverem mal configurados.",
+        "A automação excessiva pode erodir o julgamento e os relacionamentos do representante se for permitido ao copiloto enviar sem revisão genuína.",
+        "Dados sensíveis de clientes e oportunidades que circulam pela recuperação e pelos prompts levantam preocupações de privacidade e controle de acesso."
+      ],
+      "failureModes": [
+        "O agente afirma uma funcionalidade ou um preço desatualizado ou simplesmente errado porque a recuperação não encontrou a fonte autorizada.",
+        "Os representantes carimbam rascunhos sem lê-los, transformando o portão de aprovação em uma formalidade que despacha erros.",
+        "Leituras desatualizadas ou parciais do CRM fazem o agente informar sobre um estágio de oportunidade ou um contato que já não reflete a realidade.",
+        "O laço de orquestração planeja demais ou entra em loop diante de solicitações ambíguas, consumindo tokens e latência sem convergir."
+      ],
+      "lessons": [
+        "Separe a redação do envio desde cedo; o portão de aprovação humana é o controle de segurança mais importante para o trabalho de saída.",
+        "Trate afirmações de produto e preço como de citação obrigatória: se a fonte não puder ser anexada, a afirmação não deve ser despachada.",
+        "Instrumente desde o primeiro dia; sem rastreamento você não consegue saber se o copiloto ajudou ou apenas gerou mais atividade.",
+        "Delimite as gravações no CRM de forma estreita e reversível, mantendo mudanças de alto risco e visíveis ao cliente atrás de confirmação explícita do representante."
+      ],
+      "kpis": [
+        { "metric": "Tempo economizado por representante em pesquisa e registro", "note": "Meça o tempo de pesquisa pré-ligação e de registro no CRM antes e depois da implantação; o bom é uma redução clara e sustentada sem perda de qualidade de dados." },
+        { "metric": "Taxa de edição e rejeição no portão de aprovação", "note": "Acompanhe com que frequência os representantes editam ou rejeitam rascunhos; uma taxa saudável e não trivial mostra que eles revisam de fato em vez de carimbar." },
+        { "metric": "Precisão de fundamentação e verificação de afirmações", "note": "Amostre rascunhos e compare as afirmações de produto e preço com fontes autorizadas; o bom é quase zero afirmações não verificáveis chegando aos clientes." },
+        { "metric": "Impacto em pipeline e conversão", "note": "Compare a conversão ou o avanço entre a atividade assistida pelo copiloto e a linha de base; atribua com cautela e busque um ganho honesto e duradouro." },
+        { "metric": "Custo e latência por tarefa assistida", "note": "Acompanhe tokens, chamadas de recuperação e tempo de resposta por solicitação; o cache semântico deve manter custo e latência estáveis à medida que o uso cresce." }
+      ],
+      "scaling": [
+        "O custo é impulsionado pelo volume de recuperação e pelas chamadas ao modelo por solicitação; o cache semântico da pesquisa de contas e das respostas de produto repetidas é a principal alavanca para contê-lo.",
+        "O tráfego intensivo em leituras (pesquisa, briefings, resumos) escala horizontalmente e se beneficia do cache; as gravações de saída são mais raras e delimitadas pela revisão humana.",
+        "Os picos de fechamento de trimestre e de campanhas exigem folga na capacidade de recuperação e inferência, além de limitação de taxa para que poucos usuários intensivos não privem os demais.",
+        "À medida que o catálogo de produto e o CRM crescem, a atualidade da recuperação e a manutenção do índice dominam o custo operacional mais do que a inferência bruta."
+      ],
+      "examples": [
+        "Um representante pede um briefing para uma ligação de renovação; o copiloto lê a conta no CRM, recupera o contrato e a documentação de produto pertinentes e redige pontos de conversa com fontes.",
+        "Após uma ligação de descoberta, o representante dita notas; o copiloto registra uma atividade estruturada no CRM e propõe um e-mail de follow-up que o representante edita e aprova antes de enviar.",
+        "O copiloto varre a carteira de um representante e sugere próximas melhores ações — contas que silenciaram, contratos a vencer, sinais de upsell — cada uma vinculada ao registro do CRM que a embasa."
+      ],
+      "faqs": [
+        { "q": "O copiloto pode enviar e-mails aos clientes por conta própria?", "a": "Não. Por design ele apenas redige; cada e-mail, follow-up ou convite voltado ao cliente passa por um portão de aprovação humana onde o representante revisa, edita e aprova antes que algo seja enviado." },
+        { "q": "Como evitar que ele invente funcionalidades ou preços de produto?", "a": "Afirmações factuais sobre produtos ou preços devem ser fundamentadas em fontes autorizadas recuperadas e levar uma citação. As guardrails rejeitam saídas que afirmam detalhes não verificáveis, e os rascunhos são amostrados para verificar a precisão." },
+        { "q": "Como medir se ele realmente ajuda?", "a": "Por meio de métricas honestas — tempo economizado em pesquisa e registro, a taxa de edição do portão de aprovação, a precisão de fundamentação e um impacto em pipeline atribuído com cautela — comparadas contra uma linha de base em vez de contagens brutas de atividade." }
+      ]
+    }
+  }
+}

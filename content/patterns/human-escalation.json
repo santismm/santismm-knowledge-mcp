@@ -1,0 +1,287 @@
+{
+  "slug": "human-escalation",
+  "category": "safety",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": false,
+  "technologies": [
+    "Confidence scoring",
+    "Routing",
+    "Ticketing / handoff systems",
+    "Audit logging"
+  ],
+  "related": [
+    "human-approval-gate",
+    "recovery-strategy",
+    "routing"
+  ],
+  "references": [
+    {
+      "title": "EU AI Act — Article 14 (Human oversight)",
+      "url": "https://artificialintelligenceact.eu/article/14/"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "locales": {
+    "en": {
+      "name": "Human Escalation",
+      "summary": "Hand the whole task to a human when the agent detects it is out of its depth — low confidence, repeated failure, ambiguity, or sensitive situations — and pass full context so the person can take over without re-investigating. Unlike an approval gate, which pauses one action for sign-off, escalation transfers ownership so the agent stops driving. The hard part is calibrating triggers to avoid both over- and under-escalation.",
+      "problem": "An autonomous agent will inevitably encounter cases it cannot handle well: inputs outside its training distribution, requests it keeps failing to satisfy, genuinely ambiguous goals, or emotionally and legally sensitive moments. If it presses on anyway, it produces confidently wrong answers, loops, or harmful actions — and the user discovers the failure too late. Yet routing everything to humans defeats the point of automation and overwhelms staff. The system needs a disciplined way to recognize the edge of its competence and transfer the task before damage is done.",
+      "context": "Use this pattern wherever an agent acts with meaningful autonomy and the cost of a wrong outcome exceeds the cost of a human glancing at it: customer support, claims and case handling, financial or medical triage, content moderation, and operational copilots. It assumes a human queue or on-call function exists to receive escalations and that the agent can observe signals about its own performance. It is most valuable when failures are silent — when a confidently wrong answer is worse than no answer — and when a subset of cases is known to be hard, rare, or regulated.",
+      "solution": [
+        "Define explicit escalation triggers and wire them into the agent's main loop as first-class exit conditions, not afterthoughts. Common triggers are confidence below a threshold (from model scores, self-critique, or a verifier), loop or repeated-failure detection (the agent retries the same step without progress), structural ambiguity (multiple valid interpretations of the goal), and sensitivity signals (negative sentiment, safety keywords, high-value accounts, or regulated topics). Each trigger should map to a routing decision: which human or team, with what priority. Treat thresholds as tunable parameters owned by the team, reviewed against real outcomes, because they encode the trade-off between automation rate and error rate.\n\nWhen a trigger fires, the agent must perform a clean handoff: stop acting, package the full context — original request, what it attempted, intermediate results, its current best guess, and why it escalated — and route it to the right queue via a ticket or live handoff. The receiving human should be able to take over without re-investigating from scratch; context quality is what makes escalation feel like help rather than a dropped ball. Always provide a graceful fallback message to the end user (\"I'm bringing in a specialist\") so the experience degrades smoothly. Finally, log every escalation with its trigger and resolution so appropriateness can be measured and triggers retuned."
+      ],
+      "components": [
+        "Trigger evaluator",
+        "Context packager",
+        "Router",
+        "Handoff channel",
+        "Fallback responder",
+        "Audit log"
+      ],
+      "benefits": [
+        "Hard cases reach a human before the agent produces a confidently wrong outcome, capping the blast radius of mistakes.",
+        "Only genuinely difficult cases are handed off, so routine volume stays automated and staff focus on what needs judgment.",
+        "A clean handoff with context means users are helped rather than bounced, and humans resume without starting over.",
+        "Logged triggers and resolutions provide the evidence trail regulators and risk owners expect for meaningful human oversight."
+      ],
+      "risks": [
+        "Thresholds set too conservatively push easy cases to humans, erasing automation gains and burying staff in noise.",
+        "Thresholds set too loosely let the agent power through cases it should have handed off, causing silent bad outcomes.",
+        "If the payload is thin, the human re-investigates from scratch and escalation feels like a dropped task, not assistance.",
+        "Model self-confidence often does not track real accuracy, so naive score thresholds escalate the wrong cases in both directions."
+      ],
+      "whenNot": [
+        "If there is no staffed queue or on-call function to take over, escalation has nowhere to go; invest in a safe-stop or recovery path instead.",
+        "When you only need approval for one specific high-impact step while the agent keeps the task, use a human-approval gate, not full ownership transfer.",
+        "For cheap, easily reversible tasks where a wrong answer costs nothing, the overhead and latency of escalation outweigh the benefit."
+      ],
+      "examples": [
+        "A support agent resolves routine questions but escalates to a human queue on detected frustration, repeated unhelpful answers, or account-sensitive requests, passing the full conversation.",
+        "An insurance agent auto-processes clear claims and escalates ambiguous, high-value, or fraud-flagged ones to an adjuster with its findings and the reason attached.",
+        "An autonomous coding agent that fails the same test repeatedly stops, summarizes what it tried and where it is blocked, and hands the task to an engineer instead of churning."
+      ],
+      "kpis": [
+        {
+          "metric": "Escalation rate",
+          "note": "Share of tasks handed to humans. Watch the trend and the distribution, not a target number — a sudden spike or drop signals a miscalibrated trigger or a shift in input mix."
+        },
+        {
+          "metric": "Escalation appropriateness",
+          "note": "Of escalated cases, how many genuinely needed a human (true positives) versus could have been handled. Sampled human review of escalations is the most reliable read."
+        },
+        {
+          "metric": "Missed-escalation rate",
+          "note": "Of automated resolutions, how many later turned out to be wrong and should have been escalated. The hardest and most important signal; mine complaints, reopens, and audits to find them."
+        },
+        {
+          "metric": "Handoff context sufficiency",
+          "note": "How often the receiving human can take over without re-contacting the user or re-investigating. Track via agent feedback on whether the package was complete."
+        }
+      ],
+      "failureModes": [
+        "Triggers tuned once and never revisited fall out of step as inputs and models change, silently shifting the automation/error balance.",
+        "Cases route into a queue that no one owns or that is overwhelmed, so escalated users wait indefinitely — worse than a wrong answer.",
+        "An agent optimized to avoid escalation learns to express false confidence, suppressing the very signal the pattern depends on.",
+        "Handoff strips formatting, intermediate reasoning, or attachments, forcing the human to rebuild the situation and erasing the speed benefit."
+      ],
+      "lessons": [
+        "Validate that your confidence signal correlates with actual accuracy before thresholding on it; pair model scores with a verifier or self-critique.",
+        "The difference between a good and bad escalation is almost entirely the handoff payload; invest there before tuning thresholds.",
+        "Treat thresholds as living parameters reviewed against sampled escalations and missed escalations, owned by the team, not frozen at launch.",
+        "Even a perfect trigger fails sometimes; a graceful holding message and an owned queue prevent failures from becoming abandonments."
+      ],
+      "faqs": [
+        {
+          "q": "How is this different from a human-approval gate?",
+          "a": "An approval gate pauses one specific high-impact action and asks a human to sign off, then the agent continues. Escalation transfers ownership of the whole task — the agent stops driving because it shouldn't proceed at all. Use a gate for 'should I do this one thing?' and escalation for 'I'm out of my depth, please take over.'"
+        },
+        {
+          "q": "What's the right escalation rate?",
+          "a": "There is no universal number; it depends on task difficulty mix and the cost of errors. Optimize for appropriateness, not a target rate: escalate cases that genuinely need a human and minimize both unnecessary handoffs and missed escalations. Review the rate as a signal of miscalibration, not as a goal in itself."
+        },
+        {
+          "q": "Can I just escalate whenever model confidence is low?",
+          "a": "It's a useful trigger but rarely sufficient alone, because model self-confidence often does not track real accuracy. Combine it with loop detection, ambiguity checks, and sensitivity signals, and validate that your confidence measure actually correlates with correct outcomes before trusting a threshold."
+        }
+      ]
+    },
+    "es": {
+      "name": "Escalado a humano",
+      "summary": "Entrega toda la tarea a una persona cuando el agente detecta que supera su competencia — baja confianza, fallos repetidos, ambigüedad o situaciones delicadas — y traspasa el contexto completo para que el humano retome sin volver a investigar. A diferencia de una puerta de aprobación, que pausa una acción para su visto bueno, el escalado transfiere la propiedad y el agente deja de conducir. Lo difícil es calibrar los disparadores para evitar tanto el exceso como la falta de escalado.",
+      "problem": "Un agente autónomo encontrará inevitablemente casos que no puede resolver bien: entradas fuera de su distribución de entrenamiento, solicitudes que falla una y otra vez, objetivos genuinamente ambiguos o momentos emocional y legalmente delicados. Si insiste de todos modos, produce respuestas erróneas con seguridad, bucles o acciones dañinas — y el usuario descubre el fallo demasiado tarde. Pero derivar todo a humanos anula el sentido de la automatización y satura al personal. El sistema necesita una forma disciplinada de reconocer el límite de su competencia y transferir la tarea antes de causar daño.",
+      "context": "Usa este patrón donde un agente actúe con autonomía relevante y el coste de un mal resultado supere el de que un humano lo revise: atención al cliente, gestión de casos y reclamaciones, triaje financiero o médico, moderación de contenido y copilotos operativos. Supone que existe una cola humana o función de guardia que recibe los escalados y que el agente puede observar señales sobre su propio desempeño. Es más valioso cuando los fallos son silenciosos — cuando una respuesta erróneamente segura es peor que ninguna respuesta — y cuando se sabe que un subconjunto de casos es difícil, raro o regulado.",
+      "solution": [
+        "Define disparadores de escalado explícitos e intégralos en el bucle principal del agente como condiciones de salida de primer nivel, no como añadidos. Los disparadores habituales son la confianza por debajo de un umbral (de puntuaciones del modelo, autocrítica o un verificador), la detección de bucles o fallos repetidos (el agente reintenta el mismo paso sin avanzar), la ambigüedad estructural (varias interpretaciones válidas del objetivo) y las señales de sensibilidad (sentimiento negativo, palabras de seguridad, cuentas de alto valor o temas regulados). Cada disparador debe mapear a una decisión de enrutamiento: qué humano o equipo, con qué prioridad. Trata los umbrales como parámetros ajustables propiedad del equipo, revisados frente a resultados reales, porque codifican el equilibrio entre tasa de automatización y tasa de error.\n\nCuando se dispara un trigger, el agente debe hacer un traspaso limpio: dejar de actuar, empaquetar el contexto completo — solicitud original, lo que intentó, resultados intermedios, su mejor estimación actual y por qué escaló — y enrutarlo a la cola adecuada mediante un ticket o un traspaso en vivo. El humano receptor debería poder retomar sin investigar de cero; la calidad del contexto es lo que hace que el escalado se sienta como ayuda y no como un balón soltado. Ofrece siempre un mensaje de respaldo elegante al usuario final (\"Voy a involucrar a un especialista\") para que la experiencia se degrade con suavidad. Por último, registra cada escalado con su disparador y su resolución para poder medir la idoneidad y reajustar los disparadores."
+      ],
+      "components": [
+        "Evaluador de disparadores",
+        "Empaquetador de contexto",
+        "Enrutador",
+        "Canal de traspaso",
+        "Respondedor de respaldo",
+        "Registro de auditoría"
+      ],
+      "benefits": [
+        "Los casos difíciles llegan a un humano antes de que el agente produzca un resultado erróneamente seguro, limitando el radio de impacto de los errores.",
+        "Solo se derivan los casos genuinamente difíciles, así el volumen rutinario sigue automatizado y el personal se centra en lo que requiere criterio.",
+        "Un traspaso limpio con contexto significa que se ayuda a los usuarios en lugar de rebotarlos, y los humanos retoman sin empezar de cero.",
+        "Los disparadores y resoluciones registrados aportan el rastro de evidencia que reguladores y responsables de riesgo esperan de una supervisión humana real."
+      ],
+      "risks": [
+        "Umbrales demasiado conservadores empujan casos fáciles a humanos, eliminando las ganancias de automatización y sepultando al personal en ruido.",
+        "Umbrales demasiado laxos dejan que el agente fuerce casos que debió traspasar, provocando malos resultados silenciosos.",
+        "Si la carga es escasa, el humano investiga de cero y el escalado se siente como una tarea abandonada, no como ayuda.",
+        "La autoconfianza del modelo a menudo no refleja la precisión real, así que umbrales ingenuos escalan los casos equivocados en ambas direcciones."
+      ],
+      "whenNot": [
+        "Si no hay cola con personal ni función de guardia que retome, el escalado no tiene a dónde ir; invierte en una parada segura o ruta de recuperación.",
+        "Cuando solo necesitas aprobación de un paso concreto de alto impacto mientras el agente conserva la tarea, usa una puerta de aprobación humana, no la transferencia de propiedad.",
+        "Para tareas baratas y fácilmente reversibles donde una respuesta errónea no cuesta nada, la latencia y el coste del escalado superan el beneficio."
+      ],
+      "examples": [
+        "Un agente de soporte resuelve dudas rutinarias pero escala a una cola humana ante frustración detectada, respuestas inútiles repetidas o solicitudes sensibles de cuenta, pasando toda la conversación.",
+        "Un agente de seguros procesa automáticamente reclamaciones claras y escala las ambiguas, de alto valor o marcadas como fraude a un perito, con sus hallazgos y el motivo adjuntos.",
+        "Un agente de programación autónomo que falla la misma prueba repetidamente se detiene, resume lo que intentó y dónde está bloqueado, y entrega la tarea a un ingeniero en lugar de seguir girando."
+      ],
+      "kpis": [
+        {
+          "metric": "Tasa de escalado",
+          "note": "Proporción de tareas entregadas a humanos. Observa la tendencia y la distribución, no una cifra objetivo — un pico o caída repentina señala un disparador mal calibrado o un cambio en la mezcla de entradas."
+        },
+        {
+          "metric": "Idoneidad del escalado",
+          "note": "De los casos escalados, cuántos necesitaban realmente un humano (verdaderos positivos) frente a los que podrían haberse resuelto. La revisión humana muestreada de los escalados es la lectura más fiable."
+        },
+        {
+          "metric": "Tasa de escalados omitidos",
+          "note": "De las resoluciones automáticas, cuántas resultaron luego erróneas y debieron escalarse. La señal más difícil e importante; explora quejas, reaperturas y auditorías para encontrarlas."
+        },
+        {
+          "metric": "Suficiencia del contexto de traspaso",
+          "note": "Con qué frecuencia el humano receptor puede retomar sin recontactar al usuario ni investigar de nuevo. Mídelo con la valoración del agente sobre si el paquete estaba completo."
+        }
+      ],
+      "failureModes": [
+        "Disparadores ajustados una vez y nunca revisados se desfasan al cambiar las entradas y los modelos, alterando en silencio el equilibrio automatización/error.",
+        "Los casos se enrutan a una cola sin dueño o saturada, así que los usuarios escalados esperan indefinidamente — peor que una respuesta errónea.",
+        "Un agente optimizado para evitar el escalado aprende a expresar falsa confianza, suprimiendo la misma señal de la que depende el patrón.",
+        "El traspaso elimina formato, razonamiento intermedio o adjuntos, obligando al humano a reconstruir la situación y borrando el beneficio de velocidad."
+      ],
+      "lessons": [
+        "Valida que tu señal de confianza correlaciona con la precisión real antes de poner umbrales; combina las puntuaciones del modelo con un verificador o autocrítica.",
+        "La diferencia entre un buen y un mal escalado está casi por completo en la carga del traspaso; invierte ahí antes de ajustar umbrales.",
+        "Trata los umbrales como parámetros vivos revisados frente a escalados muestreados y escalados omitidos, propiedad del equipo, no congelados en el lanzamiento.",
+        "Incluso un disparador perfecto falla a veces; un mensaje de espera elegante y una cola con dueño evitan que los fallos se vuelvan abandonos."
+      ],
+      "faqs": [
+        {
+          "q": "¿En qué se diferencia de una puerta de aprobación humana?",
+          "a": "Una puerta de aprobación pausa una acción concreta de alto impacto y pide a un humano que dé el visto bueno, y luego el agente continúa. El escalado transfiere la propiedad de toda la tarea — el agente deja de conducir porque no debería proceder en absoluto. Usa una puerta para '¿debo hacer esta cosa concreta?' y el escalado para 'esto me supera, por favor toma el control.'"
+        },
+        {
+          "q": "¿Cuál es la tasa de escalado correcta?",
+          "a": "No hay un número universal; depende de la mezcla de dificultad de las tareas y del coste de los errores. Optimiza por idoneidad, no por una tasa objetivo: escala los casos que realmente necesitan un humano y minimiza tanto los traspasos innecesarios como los escalados omitidos. Revisa la tasa como señal de descalibración, no como meta en sí misma."
+        },
+        {
+          "q": "¿Puedo escalar simplemente cuando la confianza del modelo es baja?",
+          "a": "Es un disparador útil pero rara vez suficiente por sí solo, porque la autoconfianza del modelo a menudo no refleja la precisión real. Combínalo con detección de bucles, comprobaciones de ambigüedad y señales de sensibilidad, y valida que tu medida de confianza correlaciona de verdad con resultados correctos antes de confiar en un umbral."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Escalonamento para humano",
+      "summary": "Entrega a tarefa inteira a uma pessoa quando o agente detecta que está além de sua competência — baixa confiança, falhas repetidas, ambiguidade ou situações sensíveis — e repassa o contexto completo para que o humano assuma sem reinvestigar. Diferente de um portão de aprovação, que pausa uma ação para liberação, o escalonamento transfere a propriedade e o agente para de conduzir. O difícil é calibrar os gatilhos para evitar tanto o excesso quanto a falta de escalonamento.",
+      "problem": "Um agente autônomo inevitavelmente encontrará casos que não consegue resolver bem: entradas fora de sua distribuição de treinamento, solicitações que ele falha repetidamente, objetivos genuinamente ambíguos ou momentos emocional e juridicamente sensíveis. Se insistir mesmo assim, produz respostas confiantemente erradas, laços ou ações nocivas — e o usuário descobre a falha tarde demais. Mas encaminhar tudo para humanos anula o propósito da automação e sobrecarrega a equipe. O sistema precisa de uma forma disciplinada de reconhecer o limite de sua competência e transferir a tarefa antes que o dano ocorra.",
+      "context": "Use este padrão onde um agente age com autonomia relevante e o custo de um mau resultado supera o de um humano dar uma olhada: atendimento ao cliente, gestão de casos e sinistros, triagem financeira ou médica, moderação de conteúdo e copilotos operacionais. Pressupõe que existe uma fila humana ou função de plantão para receber os escalonamentos e que o agente consegue observar sinais sobre o próprio desempenho. É mais valioso quando as falhas são silenciosas — quando uma resposta confiantemente errada é pior que nenhuma resposta — e quando se sabe que um subconjunto de casos é difícil, raro ou regulado.",
+      "solution": [
+        "Defina gatilhos de escalonamento explícitos e integre-os ao laço principal do agente como condições de saída de primeira classe, não como remendos. Os gatilhos comuns são confiança abaixo de um limiar (de pontuações do modelo, autocrítica ou um verificador), detecção de laço ou falha repetida (o agente repete o mesmo passo sem avançar), ambiguidade estrutural (várias interpretações válidas do objetivo) e sinais de sensibilidade (sentimento negativo, palavras de segurança, contas de alto valor ou temas regulados). Cada gatilho deve mapear para uma decisão de roteamento: qual humano ou equipe, com qual prioridade. Trate os limiares como parâmetros ajustáveis de propriedade da equipe, revisados contra resultados reais, pois codificam o equilíbrio entre taxa de automação e taxa de erro.\n\nQuando um gatilho dispara, o agente deve fazer um repasse limpo: parar de agir, empacotar o contexto completo — solicitação original, o que tentou, resultados intermediários, sua melhor estimativa atual e por que escalou — e roteá-lo para a fila certa via ticket ou repasse ao vivo. O humano receptor deve conseguir assumir sem investigar do zero; a qualidade do contexto é o que faz o escalonamento parecer ajuda e não uma bola fora. Forneça sempre uma mensagem de fallback elegante ao usuário final (\"Vou trazer um especialista\") para que a experiência se degrade suavemente. Por fim, registre cada escalonamento com seu gatilho e resolução para que a adequação possa ser medida e os gatilhos reajustados."
+      ],
+      "components": [
+        "Avaliador de gatilhos",
+        "Empacotador de contexto",
+        "Roteador",
+        "Canal de repasse",
+        "Respondedor de fallback",
+        "Registro de auditoria"
+      ],
+      "benefits": [
+        "Casos difíceis chegam a um humano antes de o agente produzir um resultado confiantemente errado, limitando o raio de impacto dos erros.",
+        "Apenas os casos genuinamente difíceis são repassados, então o volume rotineiro segue automatizado e a equipe foca no que exige julgamento.",
+        "Um repasse limpo com contexto significa que os usuários são ajudados em vez de rejeitados, e os humanos retomam sem começar do zero.",
+        "Gatilhos e resoluções registrados fornecem a trilha de evidência que reguladores e responsáveis por risco esperam de uma supervisão humana real."
+      ],
+      "risks": [
+        "Limiares conservadores demais empurram casos fáceis para humanos, apagando os ganhos de automação e enterrando a equipe em ruído.",
+        "Limiares frouxos demais deixam o agente forçar casos que deveria ter repassado, causando maus resultados silenciosos.",
+        "Se a carga é rasa, o humano reinvestiga do zero e o escalonamento parece uma tarefa abandonada, não ajuda.",
+        "A autoconfiança do modelo muitas vezes não acompanha a precisão real, então limiares ingênuos escalam os casos errados em ambas as direções."
+      ],
+      "whenNot": [
+        "Se não há fila com equipe nem função de plantão para assumir, o escalonamento não tem para onde ir; invista em uma parada segura ou caminho de recuperação.",
+        "Quando você só precisa de aprovação de um passo específico de alto impacto enquanto o agente mantém a tarefa, use um portão de aprovação humana, não a transferência de propriedade.",
+        "Para tarefas baratas e facilmente reversíveis onde uma resposta errada não custa nada, a latência e o custo do escalonamento superam o benefício."
+      ],
+      "examples": [
+        "Um agente de suporte resolve dúvidas rotineiras mas escala para uma fila humana ao detectar frustração, respostas inúteis repetidas ou solicitações sensíveis de conta, passando toda a conversa.",
+        "Um agente de seguros processa automaticamente sinistros claros e escala os ambíguos, de alto valor ou marcados como fraude a um analista, com suas constatações e o motivo anexados.",
+        "Um agente de programação autônomo que falha o mesmo teste repetidamente para, resume o que tentou e onde está travado, e entrega a tarefa a um engenheiro em vez de continuar girando."
+      ],
+      "kpis": [
+        {
+          "metric": "Taxa de escalonamento",
+          "note": "Proporção de tarefas entregues a humanos. Observe a tendência e a distribuição, não um número-alvo — um pico ou queda repentina sinaliza um gatilho mal calibrado ou uma mudança na mistura de entradas."
+        },
+        {
+          "metric": "Adequação do escalonamento",
+          "note": "Dos casos escalados, quantos realmente precisavam de um humano (verdadeiros positivos) versus os que poderiam ter sido resolvidos. A revisão humana amostrada dos escalonamentos é a leitura mais confiável."
+        },
+        {
+          "metric": "Taxa de escalonamentos omitidos",
+          "note": "Das resoluções automáticas, quantas depois se mostraram erradas e deveriam ter sido escaladas. O sinal mais difícil e importante; explore reclamações, reaberturas e auditorias para encontrá-las."
+        },
+        {
+          "metric": "Suficiência do contexto de repasse",
+          "note": "Com que frequência o humano receptor consegue assumir sem recontatar o usuário nem reinvestigar. Acompanhe pela avaliação do agente sobre se o pacote estava completo."
+        }
+      ],
+      "failureModes": [
+        "Gatilhos ajustados uma vez e nunca revisados se descompassam à medida que entradas e modelos mudam, alterando em silêncio o equilíbrio automação/erro.",
+        "Casos são roteados para uma fila sem dono ou sobrecarregada, então os usuários escalados esperam indefinidamente — pior que uma resposta errada.",
+        "Um agente otimizado para evitar escalonamento aprende a expressar falsa confiança, suprimindo o próprio sinal do qual o padrão depende.",
+        "O repasse remove formatação, raciocínio intermediário ou anexos, forçando o humano a reconstruir a situação e apagando o benefício de velocidade."
+      ],
+      "lessons": [
+        "Valide que seu sinal de confiança correlaciona com a precisão real antes de aplicar limiares; combine pontuações do modelo com um verificador ou autocrítica.",
+        "A diferença entre um bom e um mau escalonamento está quase inteiramente na carga do repasse; invista aí antes de ajustar limiares.",
+        "Trate os limiares como parâmetros vivos revisados contra escalonamentos amostrados e escalonamentos omitidos, de propriedade da equipe, não congelados no lançamento.",
+        "Mesmo um gatilho perfeito falha às vezes; uma mensagem de espera elegante e uma fila com dono evitam que falhas virem abandonos."
+      ],
+      "faqs": [
+        {
+          "q": "Como isso difere de um portão de aprovação humana?",
+          "a": "Um portão de aprovação pausa uma ação específica de alto impacto e pede a um humano que libere, e então o agente continua. O escalonamento transfere a propriedade da tarefa inteira — o agente para de conduzir porque não deveria prosseguir de jeito nenhum. Use um portão para 'devo fazer esta coisa específica?' e o escalonamento para 'isto está além de mim, por favor assuma.'"
+        },
+        {
+          "q": "Qual é a taxa de escalonamento certa?",
+          "a": "Não há número universal; depende da mistura de dificuldade das tarefas e do custo dos erros. Otimize pela adequação, não por uma taxa-alvo: escale os casos que realmente precisam de um humano e minimize tanto os repasses desnecessários quanto os escalonamentos omitidos. Revise a taxa como sinal de descalibração, não como meta em si."
+        },
+        {
+          "q": "Posso simplesmente escalar sempre que a confiança do modelo for baixa?",
+          "a": "É um gatilho útil mas raramente suficiente sozinho, porque a autoconfiança do modelo muitas vezes não acompanha a precisão real. Combine-o com detecção de laço, verificações de ambiguidade e sinais de sensibilidade, e valide que sua medida de confiança realmente correlaciona com resultados corretos antes de confiar em um limiar."
+        }
+      ]
+    }
+  }
+}

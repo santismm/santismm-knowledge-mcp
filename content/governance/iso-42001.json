@@ -1,0 +1,161 @@
+{
+  "id": "GOV-002",
+  "slug": "iso-42001",
+  "category": "standard",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": true,
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": ["paper", "industry_observation"]
+  },
+  "frameworks": ["ISO/IEC 42001"],
+  "patterns": ["human-approval-gate"],
+  "knowledge": ["ai-governance", "agentic-evaluation", "ai-observability", "guardrails"],
+  "references": [
+    { "title": "ISO/IEC 42001:2023 — AI management system", "url": "https://www.iso.org/standard/81230.html" },
+    { "title": "ISO — What is an AI management system?", "url": "https://www.iso.org/artificial-intelligence/ai-management-systems" }
+  ],
+  "related": ["eu-ai-act", "nist-ai-rmf", "agentic-ai-governance-checklist"],
+  "locales": {
+    "en": {
+      "name": "ISO/IEC 42001",
+      "summary": "ISO/IEC 42001:2023 is the first international, certifiable standard for an AI management system (AIMS). Like ISO 27001 for information security, it defines how an organization should establish, implement, maintain and continually improve the way it governs AI — through a policy, defined roles, risk and impact assessments, a set of controls, and a Plan-Do-Check-Act improvement cycle. It is voluntary and certifiable, giving organizations a recognized way to demonstrate responsible AI management.",
+      "definition": "ISO/IEC 42001 is a management-system standard that specifies requirements for establishing and continually improving an Artificial Intelligence Management System (AIMS) across an organization's AI lifecycle.",
+      "scope": "Any organization that provides or uses AI, of any size or sector. It governs the management system around AI — not a specific product — so it complements product- or risk-specific frameworks rather than replacing them.",
+      "keyPoints": [
+        "A certifiable AI management system, structured like other ISO management standards.",
+        "Requires an AI policy, leadership commitment and clearly assigned roles and responsibilities.",
+        "Centres on AI risk assessment and AI system impact assessment.",
+        "Provides a reference set of controls (Annex A) and implementation guidance (Annex B).",
+        "Built on the Plan-Do-Check-Act cycle for continual improvement.",
+        "Complements regulation (EU AI Act) and risk frameworks (NIST AI RMF)."
+      ],
+      "controls": [
+        { "control": "AI policy & governance roles", "note": "Establish an organizational AI policy and assign accountable owners — governance starts with leadership, not tooling." },
+        { "control": "AI risk assessment", "note": "Systematically identify, analyse and treat risks across the AI lifecycle, and keep the assessment current." },
+        { "control": "AI system impact assessment", "note": "Assess impacts on individuals and society (fairness, safety, rights), not just technical risk." },
+        { "control": "Lifecycle controls (Annex A)", "note": "Apply controls for data, design, deployment and operation, selecting those relevant to your context." },
+        { "control": "Continual improvement (PDCA)", "note": "Audit, review and improve the management system on a cycle, so governance keeps pace with change." }
+      ],
+      "checklist": [
+        "Define the AIMS scope and an organizational AI policy.",
+        "Assign governance roles, responsibilities and leadership accountability.",
+        "Run AI risk assessments and AI system impact assessments.",
+        "Select and implement the relevant Annex A controls.",
+        "Document objectives, processes and evidence of operation.",
+        "Establish internal audit and management review.",
+        "Run the Plan-Do-Check-Act cycle and pursue certification if desired."
+      ],
+      "pitfalls": [
+        "Treating it as a one-off project rather than a continuing management system.",
+        "Documenting a policy nobody operates against day to day.",
+        "Confusing it with EU AI Act compliance — certification is not legal conformity.",
+        "Skipping impact assessment and reducing it to technical risk only."
+      ],
+      "examples": [
+        "A company standing up an AIMS to govern all its AI use under one policy and risk process.",
+        "An impact assessment surfacing a fairness risk before a model ships.",
+        "An annual internal audit and management review closing governance gaps."
+      ],
+      "faqs": [
+        { "q": "Is ISO/IEC 42001 the same as complying with the EU AI Act?", "a": "No. The standard is a voluntary, certifiable management system; the EU AI Act is binding law. A well-run AIMS supports legal compliance but does not by itself satisfy it." },
+        { "q": "Can you get certified?", "a": "Yes. Like ISO 27001, an accredited body can audit and certify an organization's AI management system against the standard." },
+        { "q": "How does it relate to NIST AI RMF?", "a": "They are complementary: NIST AI RMF gives a risk-management framework and trustworthiness characteristics; ISO/IEC 42001 gives the certifiable management-system structure to operate governance continuously." }
+      ]
+    },
+    "es": {
+      "name": "ISO/IEC 42001",
+      "summary": "ISO/IEC 42001:2023 es la primera norma internacional y certificable para un sistema de gestión de IA (AIMS). Igual que ISO 27001 para la seguridad de la información, define cómo una organización debe establecer, implementar, mantener y mejorar de forma continua la manera en que gobierna la IA: mediante una política, roles definidos, evaluaciones de riesgo e impacto, un conjunto de controles y un ciclo de mejora Planificar-Hacer-Verificar-Actuar. Es voluntaria y certificable, y ofrece una forma reconocida de demostrar una gestión responsable de la IA.",
+      "definition": "ISO/IEC 42001 es una norma de sistema de gestión que especifica los requisitos para establecer y mejorar de forma continua un Sistema de Gestión de Inteligencia Artificial (AIMS) a lo largo del ciclo de vida de la IA de una organización.",
+      "scope": "Cualquier organización que provea o use IA, de cualquier tamaño o sector. Gobierna el sistema de gestión en torno a la IA —no un producto concreto— por lo que complementa marcos específicos de producto o riesgo en vez de reemplazarlos.",
+      "keyPoints": [
+        "Un sistema de gestión de IA certificable, estructurado como otras normas de gestión ISO.",
+        "Exige una política de IA, compromiso de la dirección y roles y responsabilidades claramente asignados.",
+        "Se centra en la evaluación de riesgos de IA y la evaluación de impacto del sistema de IA.",
+        "Proporciona un conjunto de controles de referencia (Anexo A) y guía de implementación (Anexo B).",
+        "Se basa en el ciclo Planificar-Hacer-Verificar-Actuar para la mejora continua.",
+        "Complementa la regulación (EU AI Act) y los marcos de riesgo (NIST AI RMF)."
+      ],
+      "controls": [
+        { "control": "Política y roles de gobernanza de IA", "note": "Establece una política organizativa de IA y asigna responsables: la gobernanza empieza por la dirección, no por las herramientas." },
+        { "control": "Evaluación de riesgos de IA", "note": "Identifica, analiza y trata los riesgos de forma sistemática a lo largo del ciclo de vida, y mantén la evaluación actualizada." },
+        { "control": "Evaluación de impacto del sistema de IA", "note": "Evalúa los impactos en las personas y la sociedad (equidad, seguridad, derechos), no solo el riesgo técnico." },
+        { "control": "Controles del ciclo de vida (Anexo A)", "note": "Aplica controles de datos, diseño, despliegue y operación, seleccionando los relevantes para tu contexto." },
+        { "control": "Mejora continua (PDCA)", "note": "Audita, revisa y mejora el sistema de gestión de forma cíclica, para que la gobernanza siga el ritmo del cambio." }
+      ],
+      "checklist": [
+        "Define el alcance del AIMS y una política organizativa de IA.",
+        "Asigna roles de gobernanza, responsabilidades y rendición de cuentas de la dirección.",
+        "Ejecuta evaluaciones de riesgos de IA y de impacto del sistema de IA.",
+        "Selecciona e implementa los controles relevantes del Anexo A.",
+        "Documenta objetivos, procesos y evidencia de operación.",
+        "Establece auditoría interna y revisión por la dirección.",
+        "Ejecuta el ciclo Planificar-Hacer-Verificar-Actuar y busca la certificación si lo deseas."
+      ],
+      "pitfalls": [
+        "Tratarlo como un proyecto puntual en vez de un sistema de gestión continuo.",
+        "Documentar una política contra la que nadie opera en el día a día.",
+        "Confundirlo con el cumplimiento del EU AI Act: la certificación no es conformidad legal.",
+        "Saltarse la evaluación de impacto y reducirla solo a riesgo técnico."
+      ],
+      "examples": [
+        "Una empresa que monta un AIMS para gobernar todo su uso de IA bajo una política y un proceso de riesgo.",
+        "Una evaluación de impacto que revela un riesgo de equidad antes de desplegar un modelo.",
+        "Una auditoría interna y revisión por la dirección anuales que cierran brechas de gobernanza."
+      ],
+      "faqs": [
+        { "q": "¿ISO/IEC 42001 es lo mismo que cumplir el EU AI Act?", "a": "No. La norma es un sistema de gestión voluntario y certificable; el EU AI Act es ley vinculante. Un AIMS bien llevado apoya el cumplimiento legal, pero no lo satisface por sí solo." },
+        { "q": "¿Se puede certificar?", "a": "Sí. Igual que ISO 27001, un organismo acreditado puede auditar y certificar el sistema de gestión de IA de una organización frente a la norma." },
+        { "q": "¿Cómo se relaciona con NIST AI RMF?", "a": "Son complementarios: NIST AI RMF da un marco de gestión de riesgos y características de confiabilidad; ISO/IEC 42001 da la estructura certificable de sistema de gestión para operar la gobernanza de forma continua." }
+      ]
+    },
+    "pt": {
+      "name": "ISO/IEC 42001",
+      "summary": "A ISO/IEC 42001:2023 é a primeira norma internacional e certificável para um sistema de gestão de IA (AIMS). Assim como a ISO 27001 para a segurança da informação, ela define como uma organização deve estabelecer, implementar, manter e melhorar continuamente a forma como governa a IA: por meio de uma política, papéis definidos, avaliações de risco e impacto, um conjunto de controles e um ciclo de melhoria Planejar-Fazer-Verificar-Agir. É voluntária e certificável, oferecendo uma forma reconhecida de demonstrar uma gestão responsável da IA.",
+      "definition": "A ISO/IEC 42001 é uma norma de sistema de gestão que especifica os requisitos para estabelecer e melhorar continuamente um Sistema de Gestão de Inteligência Artificial (AIMS) ao longo do ciclo de vida da IA de uma organização.",
+      "scope": "Qualquer organização que forneça ou use IA, de qualquer tamanho ou setor. Governa o sistema de gestão em torno da IA —não um produto específico— por isso complementa frameworks específicos de produto ou risco em vez de substituí-los.",
+      "keyPoints": [
+        "Um sistema de gestão de IA certificável, estruturado como outras normas de gestão ISO.",
+        "Exige uma política de IA, comprometimento da liderança e papéis e responsabilidades claramente atribuídos.",
+        "Centra-se na avaliação de riscos de IA e na avaliação de impacto do sistema de IA.",
+        "Fornece um conjunto de controles de referência (Anexo A) e orientação de implementação (Anexo B).",
+        "Baseia-se no ciclo Planejar-Fazer-Verificar-Agir para a melhoria contínua.",
+        "Complementa a regulação (EU AI Act) e os frameworks de risco (NIST AI RMF)."
+      ],
+      "controls": [
+        { "control": "Política e papéis de governança de IA", "note": "Estabeleça uma política organizacional de IA e atribua responsáveis: a governança começa pela liderança, não pelas ferramentas." },
+        { "control": "Avaliação de riscos de IA", "note": "Identifique, analise e trate os riscos de forma sistemática ao longo do ciclo de vida, e mantenha a avaliação atualizada." },
+        { "control": "Avaliação de impacto do sistema de IA", "note": "Avalie os impactos nas pessoas e na sociedade (equidade, segurança, direitos), não só o risco técnico." },
+        { "control": "Controles do ciclo de vida (Anexo A)", "note": "Aplique controles de dados, design, implantação e operação, selecionando os relevantes para o seu contexto." },
+        { "control": "Melhoria contínua (PDCA)", "note": "Audite, revise e melhore o sistema de gestão de forma cíclica, para que a governança acompanhe a mudança." }
+      ],
+      "checklist": [
+        "Defina o escopo do AIMS e uma política organizacional de IA.",
+        "Atribua papéis de governança, responsabilidades e prestação de contas da liderança.",
+        "Execute avaliações de riscos de IA e de impacto do sistema de IA.",
+        "Selecione e implemente os controles relevantes do Anexo A.",
+        "Documente objetivos, processos e evidência de operação.",
+        "Estabeleça auditoria interna e análise crítica pela direção.",
+        "Execute o ciclo Planejar-Fazer-Verificar-Agir e busque a certificação se desejar."
+      ],
+      "pitfalls": [
+        "Tratá-la como um projeto pontual em vez de um sistema de gestão contínuo.",
+        "Documentar uma política contra a qual ninguém opera no dia a dia.",
+        "Confundi-la com a conformidade ao EU AI Act: a certificação não é conformidade legal.",
+        "Pular a avaliação de impacto e reduzi-la apenas a risco técnico."
+      ],
+      "examples": [
+        "Uma empresa que monta um AIMS para governar todo o seu uso de IA sob uma política e um processo de risco.",
+        "Uma avaliação de impacto que revela um risco de equidade antes de implantar um modelo.",
+        "Uma auditoria interna e análise crítica pela direção anuais que fecham lacunas de governança."
+      ],
+      "faqs": [
+        { "q": "ISO/IEC 42001 é o mesmo que cumprir o EU AI Act?", "a": "Não. A norma é um sistema de gestão voluntário e certificável; o EU AI Act é lei vinculante. Um AIMS bem conduzido apoia a conformidade legal, mas não a satisfaz por si só." },
+        { "q": "É possível se certificar?", "a": "Sim. Assim como a ISO 27001, um organismo acreditado pode auditar e certificar o sistema de gestão de IA de uma organização frente à norma." },
+        { "q": "Como se relaciona com o NIST AI RMF?", "a": "São complementares: o NIST AI RMF dá um framework de gestão de riscos e características de confiabilidade; a ISO/IEC 42001 dá a estrutura certificável de sistema de gestão para operar a governança de forma contínua." }
+      ]
+    }
+  }
+}

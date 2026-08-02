@@ -1,0 +1,305 @@
+{
+  "slug": "recovery-strategy",
+  "category": "reliability",
+  "updated": "2026-06-24",
+  "version": "1.1",
+  "featured": false,
+  "technologies": [
+    "Retries with backoff",
+    "Circuit breakers",
+    "Checkpointing",
+    "Compensating actions"
+  ],
+  "related": [
+    "reflection",
+    "human-escalation",
+    "evaluator-optimizer"
+  ],
+  "references": [
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    },
+    {
+      "title": "Google SRE Book — Handling Overload & Cascading Failures",
+      "url": "https://sre.google/sre-book/handling-overload/"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "production",
+    "confidenceLevel": "low",
+    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+  },
+  "locales": {
+    "en": {
+      "name": "Recovery Strategy",
+      "summary": "Give the agent an explicit plan for when things break. Detect failures by validating outputs and catching tool errors; then retry with adjustment, fall back to an alternative path, roll back partial actions, or escalate. Bound retries to avoid runaway loops and cost, make actions idempotent, and distinguish transient from permanent failures. The goal is graceful degradation instead of crashes or silently wrong results.",
+      "problem": "Agents fail constantly: tools time out, APIs return errors, models emit malformed output, plans hit dead-ends, and multi-step workflows leave partial side effects behind. Without an explicit recovery path, an agent either crashes on the first error or — worse — plows ahead on bad data and silently produces confidently wrong results. Naive retry loops make it worse, hammering a failing dependency, burning tokens, and spinning forever. The hard part is not catching one error; it is deciding what kind of failure it is and what response is safe.",
+      "context": "Use this pattern in any agent that calls external tools, runs multi-step plans, or takes consequential actions where partial completion is possible. It matters most for long-running or autonomous workflows that no human watches in real time, and for actions with side effects (payments, writes, emails) where a blind retry could duplicate work. It assumes you can validate outputs against some contract and that at least some operations can be made idempotent or compensated. It is less relevant for single-shot, read-only, low-stakes prompts.",
+      "solution": [
+        "Treat recovery as a first-class control loop layered around the agent's normal execution. Every tool call and model output passes through a validation gate: catch exceptions and timeouts, and check outputs against a schema or contract before trusting them. On failure, classify it. Transient failures (timeouts, rate limits, 5xx) get a bounded retry with exponential backoff and jitter, ideally against an idempotent operation so a duplicate request is harmless. Permanent failures (invalid arguments, auth errors, contract violations) skip retries and move straight to an alternative: a different tool, a simpler plan, or a fallback answer.\n\nWhen progress matters, checkpoint state so the agent can resume from the last good step rather than restarting. When a step has already produced side effects and cannot proceed, run compensating actions to roll back — cancel the order, delete the draft, reverse the charge. Wrap the whole loop in hard budgets: maximum attempts, maximum wall-clock time, and a cost ceiling, plus a circuit breaker that stops calling a dependency that keeps failing. When all recovery options are exhausted, escalate cleanly — surface the failure to a human or a supervising agent with enough context to act, rather than guessing."
+      ],
+      "components": [
+        "Validation gate",
+        "Failure classifier",
+        "Bounded retry with backoff",
+        "Fallback router",
+        "Checkpoint store",
+        "Compensation handler"
+      ],
+      "benefits": [
+        "The agent produces a partial or fallback result and a clear status instead of crashing or returning confident garbage.",
+        "Hard attempt, time, and cost limits stop runaway retry loops from burning budget on a failing dependency.",
+        "Compensating actions and checkpoints keep external systems and task state coherent when a workflow stops midway.",
+        "When recovery fails, the agent hands off with enough context for a human or supervisor to act, rather than guessing."
+      ],
+      "risks": [
+        "Aggressive retries against a struggling dependency add load and can turn a brief blip into a cascading outage.",
+        "Retrying a non-idempotent action can double-charge, double-send, or double-write if request keys are not used.",
+        "Over-eager fallbacks can hide systematic failures, so a broken tool looks healthy while quietly degrading every result.",
+        "Rollback logic is often incomplete or itself fails, leaving systems in an inconsistent state that is hard to detect."
+      ],
+      "whenNot": [
+        "For low-stakes prompts with no side effects and no multi-step plan, a simple retry-or-fail is enough; full recovery machinery is overhead.",
+        "When a failure means the task is genuinely impossible (missing permission, deprecated API), retry and fallback only waste time — fail fast and escalate.",
+        "If a side effect is irreversible and cannot be made idempotent, do not auto-retry across it; require confirmation or human approval instead."
+      ],
+      "examples": [
+        "A research agent's search tool returns a 503; the agent retries with backoff, succeeds on the third attempt, and continues without crashing the run.",
+        "A code agent generates JSON that fails schema validation; the validation gate rejects it and re-prompts with the error, instead of passing malformed data downstream.",
+        "A booking agent reserves a flight but the hotel step fails permanently; the compensation handler cancels the reservation and escalates rather than leaving a half-booked trip."
+      ],
+      "productionEvidence": {
+        "context": "Single-operator, local-first OpenClaw deployment observed over 57 days (161 sessions / 2,776 turns), aggregated from the agent's own trajectory traces.",
+        "scenario": "Errors, aborts and timeouts during autonomous turns are absorbed by retry/backoff and a model-fallback chain so the agent keeps running.",
+        "technology": "retryAsync with exponential backoff and jitter, runWithModelFallback, abort propagation, and cron self-protection against refire loops.",
+        "load": "2,942 terminal turns; 52 errors, 126 aborts, 120 timeouts and 31 prompt-errors observed.",
+        "results": "A 1.77% terminal-error rate across 2,942 turns; recovery primitives absorbed transient failures and the deployment held 98.8% session success. Single-operator local-first deployment."
+      },
+      "kpis": [
+        {
+          "metric": "Recovery success rate",
+          "note": "Share of failures resolved automatically by retry or fallback without human help; a healthy value is high and stable, with no quiet downward drift."
+        },
+        {
+          "metric": "Mean attempts per successful task",
+          "note": "How many tries it takes to succeed; watch for creep, which signals a degrading dependency rather than genuine recovery."
+        },
+        {
+          "metric": "Unbounded-loop / budget-breach rate",
+          "note": "How often runs hit retry, time, or cost ceilings; this should be rare, and spikes mean limits or classification need tuning."
+        },
+        {
+          "metric": "Compensation completeness",
+          "note": "Fraction of failed multi-step workflows that end in a consistent state; the target is full rollback with no orphaned side effects."
+        }
+      ],
+      "failureModes": [
+        "Missing or too-high attempt caps let the agent retry a permanent failure forever, burning cost and never making progress.",
+        "Treating a permanent error as transient wastes retries; treating a transient error as permanent gives up too early and triggers needless fallbacks.",
+        "A fallback path returns a plausible but wrong answer with no signal that recovery occurred, so downstream consumers trust bad output.",
+        "The agent fails after a write or external action but before compensation runs, leaving duplicate or dangling records."
+      ],
+      "lessons": [
+        "The retry/fallback/escalate decision hinges on transient versus permanent; invest in clear classification before tuning backoff curves.",
+        "Idempotency keys turn a risky retry into a safe one; design for it up front rather than bolting on dedup later.",
+        "Hard caps on attempts, time, and cost are non-negotiable; an agent without them will eventually find a way to run forever.",
+        "Log every retry, fallback, and compensation so silent degradation surfaces as a metric instead of a surprise incident."
+      ],
+      "faqs": [
+        {
+          "q": "How is this different from just adding try/except and a retry loop?",
+          "a": "Try/except handles one error; a recovery strategy decides what kind of failure it is and chooses among retry, fallback, rollback, and escalation under hard budgets. The control logic and idempotency, not the exception handling, are the substance."
+        },
+        {
+          "q": "How many retries should I allow?",
+          "a": "Few — typically a small fixed cap with exponential backoff and jitter, plus separate time and cost ceilings. The exact number depends on the dependency, but the loop must always terminate, and permanent failures should not be retried at all."
+        },
+        {
+          "q": "What if an action cannot be undone or made idempotent?",
+          "a": "Do not auto-retry across it. Checkpoint before the irreversible step, and on failure escalate to a human or supervising agent rather than guessing. Irreversibility is a signal to slow down, not to retry harder."
+        }
+      ]
+    },
+    "es": {
+      "name": "Estrategia de recuperación",
+      "summary": "Da al agente un plan explícito para cuando algo falla. Detecta fallos validando salidas y capturando errores de herramientas; luego reintenta con ajuste, recurre a una ruta alternativa, revierte acciones parciales o escala. Acota los reintentos para evitar bucles y costes descontrolados, haz las acciones idempotentes y distingue fallos transitorios de permanentes. El objetivo es una degradación elegante en lugar de caídas o resultados silenciosamente erróneos.",
+      "problem": "Los agentes fallan constantemente: las herramientas expiran, las API devuelven errores, los modelos emiten salidas mal formadas, los planes llegan a callejones sin salida y los flujos de varios pasos dejan efectos secundarios parciales. Sin una ruta de recuperación explícita, un agente o bien se cae al primer error o — peor — sigue adelante con datos malos y produce en silencio resultados erróneos con aparente seguridad. Los bucles de reintento ingenuos lo empeoran, golpeando una dependencia que falla, quemando tokens y girando sin fin. Lo difícil no es capturar un error; es decidir de qué tipo de fallo se trata y qué respuesta es segura.",
+      "context": "Usa este patrón en cualquier agente que llame a herramientas externas, ejecute planes de varios pasos o realice acciones con consecuencias donde sea posible una finalización parcial. Importa sobre todo en flujos largos o autónomos que ningún humano vigila en tiempo real, y en acciones con efectos secundarios (pagos, escrituras, correos) donde un reintento ciego podría duplicar el trabajo. Supone que puedes validar las salidas contra algún contrato y que al menos algunas operaciones pueden hacerse idempotentes o compensables. Es menos relevante para indicaciones de un solo paso, de solo lectura y de bajo riesgo.",
+      "solution": [
+        "Trata la recuperación como un bucle de control de primera clase que envuelve la ejecución normal del agente. Cada llamada a herramienta y cada salida del modelo pasa por una puerta de validación: captura excepciones y tiempos de espera, y comprueba las salidas contra un esquema o contrato antes de confiar en ellas. Ante un fallo, clasifícalo. Los fallos transitorios (tiempos de espera, límites de tasa, 5xx) reciben un reintento acotado con retroceso exponencial y jitter, idealmente contra una operación idempotente para que una petición duplicada sea inofensiva. Los fallos permanentes (argumentos inválidos, errores de autenticación, violaciones de contrato) omiten los reintentos y pasan directamente a una alternativa: otra herramienta, un plan más simple o una respuesta de reserva.\n\nCuando el progreso importa, guarda puntos de control del estado para que el agente pueda reanudar desde el último paso correcto en lugar de reiniciar. Cuando un paso ya produjo efectos secundarios y no puede continuar, ejecuta acciones de compensación para revertir: cancela el pedido, elimina el borrador, revierte el cargo. Envuelve todo el bucle en presupuestos estrictos: número máximo de intentos, tiempo máximo de reloj y un techo de coste, además de un cortacircuitos que deje de llamar a una dependencia que sigue fallando. Cuando se agotan todas las opciones de recuperación, escala con limpieza: expón el fallo a un humano o a un agente supervisor con contexto suficiente para actuar, en lugar de adivinar."
+      ],
+      "components": [
+        "Puerta de validación",
+        "Clasificador de fallos",
+        "Reintento acotado con retroceso",
+        "Enrutador de reserva",
+        "Almacén de puntos de control",
+        "Manejador de compensación"
+      ],
+      "benefits": [
+        "El agente produce un resultado parcial o de reserva y un estado claro en lugar de caerse o devolver basura con apariencia de seguridad.",
+        "Los límites estrictos de intentos, tiempo y coste detienen los bucles de reintento descontrolados que queman presupuesto en una dependencia que falla.",
+        "Las acciones de compensación y los puntos de control mantienen coherentes los sistemas externos y el estado de la tarea cuando un flujo se detiene a medias.",
+        "Cuando la recuperación falla, el agente delega con contexto suficiente para que un humano o supervisor actúe, en lugar de adivinar."
+      ],
+      "risks": [
+        "Los reintentos agresivos contra una dependencia que sufre añaden carga y pueden convertir un breve fallo en una caída en cascada.",
+        "Reintentar una acción no idempotente puede cobrar, enviar o escribir por duplicado si no se usan claves de petición.",
+        "Las reservas demasiado ansiosas pueden ocultar fallos sistemáticos, de modo que una herramienta rota parece sana mientras degrada cada resultado en silencio.",
+        "La lógica de reversión suele estar incompleta o fallar ella misma, dejando los sistemas en un estado incoherente difícil de detectar."
+      ],
+      "whenNot": [
+        "Para indicaciones de bajo riesgo sin efectos secundarios ni plan de varios pasos, basta con reintentar o fallar; toda la maquinaria de recuperación es sobrecarga.",
+        "Cuando un fallo significa que la tarea es realmente imposible (permiso ausente, API obsoleta), reintentar y recurrir a alternativas solo pierde tiempo: falla rápido y escala.",
+        "Si un efecto secundario es irreversible y no puede hacerse idempotente, no reintentes automáticamente sobre él; exige confirmación o aprobación humana en su lugar."
+      ],
+      "examples": [
+        "La herramienta de búsqueda de un agente de investigación devuelve un 503; el agente reintenta con retroceso, lo logra al tercer intento y continúa sin tumbar la ejecución.",
+        "Un agente de código genera JSON que falla la validación de esquema; la puerta de validación lo rechaza y vuelve a indicar con el error, en lugar de pasar datos mal formados aguas abajo.",
+        "Un agente de reservas reserva un vuelo pero el paso del hotel falla de forma permanente; el manejador de compensación cancela la reserva y escala en lugar de dejar un viaje a medio reservar."
+      ],
+      "productionEvidence": {
+        "context": "Despliegue OpenClaw local-first y mono-operador observado durante 57 días (161 sesiones / 2.776 turnos), agregado desde las propias trazas del agente.",
+        "scenario": "Los errores, abortos y timeouts en turnos autónomos se absorben con retry/backoff y una cadena de modelo de respaldo para que el agente siga funcionando.",
+        "technology": "retryAsync con backoff exponencial y jitter, runWithModelFallback, propagación de abort y autoprotección de cron contra bucles de re-disparo.",
+        "load": "2.942 turnos terminales; 52 errores, 126 abortos, 120 timeouts y 31 prompt-errors observados.",
+        "results": "Tasa de error terminal del 1,77% sobre 2.942 turnos; las primitivas de recuperación absorbieron los fallos transitorios y el despliegue mantuvo 98,8% de éxito por sesión. Despliegue local-first mono-operador."
+      },
+      "kpis": [
+        {
+          "metric": "Tasa de éxito de recuperación",
+          "note": "Proporción de fallos resueltos automáticamente por reintento o reserva sin ayuda humana; un valor sano es alto y estable, sin una caída silenciosa."
+        },
+        {
+          "metric": "Media de intentos por tarea exitosa",
+          "note": "Cuántos intentos cuesta tener éxito; vigila el aumento gradual, que señala una dependencia que se degrada más que una recuperación genuina."
+        },
+        {
+          "metric": "Tasa de bucle ilimitado / ruptura de presupuesto",
+          "note": "Con qué frecuencia las ejecuciones alcanzan los techos de reintento, tiempo o coste; debería ser raro, y los picos indican que los límites o la clasificación necesitan ajuste."
+        },
+        {
+          "metric": "Completitud de la compensación",
+          "note": "Fracción de flujos de varios pasos fallidos que terminan en un estado coherente; el objetivo es una reversión total sin efectos secundarios huérfanos."
+        }
+      ],
+      "failureModes": [
+        "La ausencia de límites de intentos o límites demasiado altos dejan que el agente reintente un fallo permanente para siempre, quemando coste sin avanzar.",
+        "Tratar un error permanente como transitorio desperdicia reintentos; tratar uno transitorio como permanente se rinde demasiado pronto y dispara reservas innecesarias.",
+        "Una ruta de reserva devuelve una respuesta plausible pero errónea sin señal de que hubo recuperación, así que los consumidores aguas abajo confían en una salida mala.",
+        "El agente falla después de una escritura o acción externa pero antes de que corra la compensación, dejando registros duplicados o colgantes."
+      ],
+      "lessons": [
+        "La decisión de reintentar/recurrir/escalar depende de transitorio frente a permanente; invierte en una clasificación clara antes de ajustar las curvas de retroceso.",
+        "Las claves de idempotencia convierten un reintento arriesgado en uno seguro; diséñalo desde el principio en lugar de añadir deduplicación después.",
+        "Los límites estrictos de intentos, tiempo y coste son innegociables; un agente sin ellos acabará por encontrar la forma de correr para siempre.",
+        "Registra cada reintento, reserva y compensación para que la degradación silenciosa aflore como una métrica en lugar de un incidente sorpresa."
+      ],
+      "faqs": [
+        {
+          "q": "¿En qué se diferencia esto de solo añadir try/except y un bucle de reintento?",
+          "a": "Try/except maneja un error; una estrategia de recuperación decide de qué tipo de fallo se trata y elige entre reintento, reserva, reversión y escalado bajo presupuestos estrictos. La lógica de control y la idempotencia, no el manejo de excepciones, son la sustancia."
+        },
+        {
+          "q": "¿Cuántos reintentos debería permitir?",
+          "a": "Pocos — normalmente un límite fijo pequeño con retroceso exponencial y jitter, más techos separados de tiempo y coste. El número exacto depende de la dependencia, pero el bucle siempre debe terminar, y los fallos permanentes no deberían reintentarse en absoluto."
+        },
+        {
+          "q": "¿Y si una acción no puede deshacerse ni hacerse idempotente?",
+          "a": "No reintentes automáticamente sobre ella. Guarda un punto de control antes del paso irreversible, y ante un fallo escala a un humano o agente supervisor en lugar de adivinar. La irreversibilidad es una señal para ir más despacio, no para reintentar con más fuerza."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Estratégia de recuperação",
+      "summary": "Dê ao agente um plano explícito para quando algo falha. Detecte falhas validando saídas e capturando erros de ferramentas; depois reenvie com ajuste, recorra a um caminho alternativo, reverta ações parciais ou escale. Limite as retentativas para evitar laços e custos descontrolados, torne as ações idempotentes e distinga falhas transitórias de permanentes. O objetivo é uma degradação elegante em vez de quedas ou resultados silenciosamente errados.",
+      "problem": "Agentes falham constantemente: ferramentas expiram, APIs retornam erros, modelos emitem saídas malformadas, planos chegam a becos sem saída e fluxos de várias etapas deixam efeitos colaterais parciais. Sem um caminho de recuperação explícito, um agente ou cai no primeiro erro ou — pior — segue em frente com dados ruins e produz, em silêncio, resultados errados com aparente confiança. Laços de retentativa ingênuos pioram tudo, martelando uma dependência que falha, queimando tokens e girando sem fim. O difícil não é capturar um erro; é decidir que tipo de falha é e qual resposta é segura.",
+      "context": "Use este padrão em qualquer agente que chame ferramentas externas, execute planos de várias etapas ou tome ações com consequências em que uma conclusão parcial seja possível. Importa sobretudo em fluxos longos ou autônomos que nenhum humano observa em tempo real, e em ações com efeitos colaterais (pagamentos, escritas, e-mails) em que uma retentativa cega poderia duplicar o trabalho. Pressupõe que você consiga validar as saídas contra algum contrato e que ao menos algumas operações possam ser tornadas idempotentes ou compensáveis. É menos relevante para prompts de uma só etapa, somente leitura e de baixo risco.",
+      "solution": [
+        "Trate a recuperação como um laço de controle de primeira classe que envolve a execução normal do agente. Cada chamada de ferramenta e cada saída do modelo passa por um portão de validação: capture exceções e tempos esgotados, e verifique as saídas contra um esquema ou contrato antes de confiar nelas. Diante de uma falha, classifique-a. Falhas transitórias (timeouts, limites de taxa, 5xx) recebem uma retentativa limitada com recuo exponencial e jitter, idealmente contra uma operação idempotente para que uma requisição duplicada seja inofensiva. Falhas permanentes (argumentos inválidos, erros de autenticação, violações de contrato) pulam as retentativas e vão direto para uma alternativa: outra ferramenta, um plano mais simples ou uma resposta de reserva.\n\nQuando o progresso importa, salve pontos de verificação do estado para que o agente possa retomar a partir da última etapa boa em vez de recomeçar. Quando uma etapa já produziu efeitos colaterais e não pode prosseguir, execute ações de compensação para reverter: cancele o pedido, exclua o rascunho, estorne a cobrança. Envolva todo o laço em orçamentos rígidos: número máximo de tentativas, tempo máximo de relógio e um teto de custo, além de um disjuntor que pare de chamar uma dependência que continua falhando. Quando todas as opções de recuperação se esgotam, escale de forma limpa: exponha a falha a um humano ou a um agente supervisor com contexto suficiente para agir, em vez de adivinhar."
+      ],
+      "components": [
+        "Portão de validação",
+        "Classificador de falhas",
+        "Retentativa limitada com recuo",
+        "Roteador de reserva",
+        "Repositório de pontos de verificação",
+        "Manipulador de compensação"
+      ],
+      "benefits": [
+        "O agente produz um resultado parcial ou de reserva e um status claro em vez de cair ou devolver lixo com aparência de confiança.",
+        "Limites rígidos de tentativas, tempo e custo barram os laços de retentativa descontrolados que queimam orçamento em uma dependência que falha.",
+        "Ações de compensação e pontos de verificação mantêm os sistemas externos e o estado da tarefa coerentes quando um fluxo para no meio.",
+        "Quando a recuperação falha, o agente repassa com contexto suficiente para que um humano ou supervisor aja, em vez de adivinhar."
+      ],
+      "risks": [
+        "Retentativas agressivas contra uma dependência em sofrimento acrescentam carga e podem transformar uma falha breve em uma queda em cascata.",
+        "Refazer uma ação não idempotente pode cobrar, enviar ou escrever em duplicidade se chaves de requisição não forem usadas.",
+        "Reservas ansiosas demais podem esconder falhas sistemáticas, fazendo uma ferramenta quebrada parecer saudável enquanto degrada cada resultado em silêncio.",
+        "A lógica de reversão costuma estar incompleta ou falhar ela mesma, deixando os sistemas em um estado inconsistente difícil de detectar."
+      ],
+      "whenNot": [
+        "Para prompts de baixo risco sem efeitos colaterais e sem plano de várias etapas, basta retentar ou falhar; toda a maquinaria de recuperação é sobrecarga.",
+        "Quando uma falha significa que a tarefa é genuinamente impossível (permissão ausente, API obsoleta), retentar e recorrer a alternativas só desperdiça tempo — falhe rápido e escale.",
+        "Se um efeito colateral é irreversível e não pode ser tornado idempotente, não retente automaticamente sobre ele; exija confirmação ou aprovação humana."
+      ],
+      "examples": [
+        "A ferramenta de busca de um agente de pesquisa retorna um 503; o agente retenta com recuo, consegue na terceira tentativa e continua sem derrubar a execução.",
+        "Um agente de código gera JSON que falha na validação de esquema; o portão de validação o rejeita e refaz o prompt com o erro, em vez de passar dados malformados a jusante.",
+        "Um agente de reservas reserva um voo, mas a etapa do hotel falha de forma permanente; o manipulador de compensação cancela a reserva e escala em vez de deixar uma viagem reservada pela metade."
+      ],
+      "productionEvidence": {
+        "context": "Implantação OpenClaw local-first e de operador único observada por 57 dias (161 sessões / 2.776 turnos), agregada a partir dos próprios rastros do agente.",
+        "scenario": "Erros, abortos e timeouts em turnos autônomos são absorvidos por retry/backoff e uma cadeia de modelo de fallback para que o agente continue rodando.",
+        "technology": "retryAsync com backoff exponencial e jitter, runWithModelFallback, propagação de abort e autoproteção de cron contra loops de redisparo.",
+        "load": "2.942 turnos terminais; 52 erros, 126 abortos, 120 timeouts e 31 prompt-errors observados.",
+        "results": "Taxa de erro terminal de 1,77% em 2.942 turnos; as primitivas de recuperação absorveram as falhas transitórias e a implantação manteve 98,8% de sucesso por sessão. Implantação local-first de operador único."
+      },
+      "kpis": [
+        {
+          "metric": "Taxa de sucesso de recuperação",
+          "note": "Proporção de falhas resolvidas automaticamente por retentativa ou reserva sem ajuda humana; um valor saudável é alto e estável, sem queda silenciosa."
+        },
+        {
+          "metric": "Média de tentativas por tarefa bem-sucedida",
+          "note": "Quantas tentativas custa ter sucesso; observe o aumento gradual, que sinaliza uma dependência em degradação mais do que recuperação genuína."
+        },
+        {
+          "metric": "Taxa de laço ilimitado / estouro de orçamento",
+          "note": "Com que frequência as execuções atingem os tetos de retentativa, tempo ou custo; deve ser raro, e picos indicam que limites ou classificação precisam de ajuste."
+        },
+        {
+          "metric": "Completude da compensação",
+          "note": "Fração de fluxos de várias etapas que falham e terminam em estado consistente; o alvo é reversão total sem efeitos colaterais órfãos."
+        }
+      ],
+      "failureModes": [
+        "Limites de tentativa ausentes ou altos demais deixam o agente retentar uma falha permanente para sempre, queimando custo sem avançar.",
+        "Tratar um erro permanente como transitório desperdiça retentativas; tratar um transitório como permanente desiste cedo demais e dispara reservas desnecessárias.",
+        "Um caminho de reserva devolve uma resposta plausível mas errada sem sinal de que houve recuperação, então consumidores a jusante confiam em saída ruim.",
+        "O agente falha depois de uma escrita ou ação externa, mas antes de a compensação rodar, deixando registros duplicados ou pendentes."
+      ],
+      "lessons": [
+        "A decisão de retentar/recorrer/escalar depende de transitório versus permanente; invista em classificação clara antes de ajustar curvas de recuo.",
+        "Chaves de idempotência transformam uma retentativa arriscada em uma segura; projete para isso desde o início em vez de acoplar deduplicação depois.",
+        "Tetos rígidos de tentativas, tempo e custo são inegociáveis; um agente sem eles acabará achando um jeito de rodar para sempre.",
+        "Registre cada retentativa, reserva e compensação para que a degradação silenciosa apareça como métrica em vez de incidente surpresa."
+      ],
+      "faqs": [
+        {
+          "q": "Como isso difere de apenas adicionar try/except e um laço de retentativa?",
+          "a": "Try/except trata um erro; uma estratégia de recuperação decide que tipo de falha é e escolhe entre retentativa, reserva, reversão e escalada sob orçamentos rígidos. A lógica de controle e a idempotência, não o tratamento de exceções, são a substância."
+        },
+        {
+          "q": "Quantas retentativas devo permitir?",
+          "a": "Poucas — em geral um limite fixo pequeno com recuo exponencial e jitter, mais tetos separados de tempo e custo. O número exato depende da dependência, mas o laço sempre deve terminar, e falhas permanentes não deveriam ser retentadas de forma alguma."
+        },
+        {
+          "q": "E se uma ação não puder ser desfeita nem tornada idempotente?",
+          "a": "Não retente automaticamente sobre ela. Salve um ponto de verificação antes da etapa irreversível e, diante de uma falha, escale para um humano ou agente supervisor em vez de adivinhar. A irreversibilidade é um sinal para ir mais devagar, não para retentar com mais força."
+        }
+      ]
+    }
+  }
+}

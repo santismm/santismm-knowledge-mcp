@@ -1,0 +1,304 @@
+{
+  "slug": "long-term-memory",
+  "category": "retrieval",
+  "updated": "2026-06-24",
+  "version": "1.1",
+  "featured": false,
+  "technologies": [
+    "Vector store",
+    "Memory frameworks (Mem0 / LangMem)",
+    "RAG",
+    "Summarization"
+  ],
+  "related": [
+    "semantic-caching",
+    "context-compression"
+  ],
+  "references": [
+    {
+      "title": "Packer et al. — MemGPT (2023)",
+      "url": "https://arxiv.org/abs/2310.08560"
+    },
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "production",
+    "confidenceLevel": "low",
+    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+  },
+  "locales": {
+    "en": {
+      "name": "Long-Term Memory",
+      "summary": "Give an agent persistent memory across sessions so it remembers facts, user preferences, and prior outcomes beyond a single context window. A write path decides what to store, summarizes it, and deduplicates it; a read path retrieves only the relevant memories into context when needed. Unlike semantic caching, which caches whole answers to skip recomputation, long-term memory stores durable facts and state and recomposes them into fresh reasoning each time.",
+      "problem": "The context window is finite and resets between sessions. An agent that only sees the current conversation forgets a user's stated preferences, decisions made last week, and the outcome of prior tasks. Stuffing all history into every prompt is impossible past a certain scale and degrades reasoning as the window fills with low-value tokens. Teams need a way to persist the small set of facts that matter and surface them precisely when they are relevant.",
+      "context": "Use this when an agent serves the same users or works on the same long-running tasks repeatedly: assistants that learn preferences, support agents that track a customer's history, coding agents that remember project conventions, or multi-step workflows spanning days. It assumes you can store data outside the model (a vector store, database, or memory framework) and that you control both when memories are written and how they are retrieved into the prompt.",
+      "solution": [
+        "Separate the write path from the read path. On the write path, after a turn or task completes, an extraction step decides what is worth remembering: stable facts, preferences, commitments, and outcomes — not transient chatter. Candidate memories are summarized into compact, self-contained statements, checked against existing memories to deduplicate and to detect contradictions, then written to a store with metadata: a memory type, a timestamp, a source, and the user or scope it belongs to. Writing less but writing well is the goal; noisy memories poison later retrieval.\n\nOn the read path, before the agent reasons, you retrieve candidate memories relevant to the current task — typically by semantic similarity plus filters on scope and recency — rank them, and inject only the top few into context. Treat retrieval as a precision problem: a handful of correct memories beats a large, loosely related set. Distinguish memory types so retrieval can be targeted: episodic (what happened), semantic (durable facts and preferences), and procedural (how to do a recurring task). Periodically consolidate and expire memories so the store stays small, current, and free of contradictions."
+      ],
+      "components": [
+        "Memory extractor (write path)",
+        "Deduplication and contradiction check",
+        "Memory store",
+        "Retriever (read path)",
+        "Context assembler",
+        "Consolidation and expiry job"
+      ],
+      "benefits": [
+        "The agent recalls preferences, decisions, and outcomes from prior sessions, so users do not have to repeat context and the agent behaves consistently over time.",
+        "Retrieving a few relevant memories keeps the window focused on high-value tokens instead of dumping full history, which preserves reasoning quality and reduces cost.",
+        "As stable facts and preferences accumulate, the agent tailors responses more accurately with each interaction without retraining the model.",
+        "Because memories live in an external store with metadata, you can inspect, correct, export, and delete what the agent knows — important for trust and compliance."
+      ],
+      "risks": [
+        "Without consolidation and expiry, the store accumulates outdated facts and conflicting statements, and the agent confidently acts on the wrong one.",
+        "Persisting user data raises retention, consent, and access-control obligations; memories can leak sensitive information across sessions or users if scope is not enforced.",
+        "Low precision injects irrelevant or wrong memories that mislead reasoning; low recall silently drops the memory that mattered, making failures hard to diagnose.",
+        "Over-eager writing inflates the store, slows retrieval, raises storage and embedding costs, and dilutes the signal that good retrieval depends on."
+      ],
+      "whenNot": [
+        "If sessions are independent and nothing needs to carry over, persistent memory adds complexity, cost, and privacy surface for no benefit.",
+        "When the goal is to reuse a previous answer for a repeated query, semantic caching is the right tool; long-term memory is for remembering facts and state, not caching outputs.",
+        "Where regulation or policy forbids retaining user data, do not persist memories; rely on in-session context or explicit, scoped storage the user controls."
+      ],
+      "examples": [
+        "Across sessions it remembers tone, formats, recurring contacts, and standing instructions, retrieving the few that apply to the current request instead of re-asking.",
+        "On each contact it retrieves the customer's prior issues, entitlements, and resolutions scoped to that account, so it continues rather than restarts the conversation.",
+        "It stores procedural memories — build commands, naming rules, review preferences — and recalls them when working in the same repository over many sessions."
+      ],
+      "productionEvidence": {
+        "context": "Single-operator, local-first OpenClaw deployment observed over 57 days (161 sessions / 2,776 turns), aggregated from the agent's own trajectory traces.",
+        "scenario": "The agent persists workspace memory files and per-session traces for cross-turn and cross-session continuity, with a semantic-recall plugin available on demand.",
+        "technology": "Workspace memory files (MEMORY.md, IDENTITY.md, SOUL.md, USER.md, HEARTBEAT.md), persistent session ids and lifecycle events, and an active-memory plugin (memory_search/get/recall).",
+        "load": "134 persisted session files across the 57-day window; semantic recall invoked once.",
+        "results": "Continuity held across 134 persisted sessions over 57 days through structural workspace memory; explicit semantic recall was rarely needed (one call) in this autonomous workload. Single-operator local-first deployment."
+      },
+      "kpis": [
+        {
+          "metric": "Retrieval precision of injected memories",
+          "note": "Of the memories placed in context, the share that were actually relevant. This is the metric that most directly governs answer quality; good looks like the injected set being almost entirely on-topic, with irrelevant memories rare."
+        },
+        {
+          "metric": "Retrieval recall on memory-dependent tasks",
+          "note": "On tasks that require a known stored fact, how often that fact is actually retrieved. Good looks like the right memory surfacing reliably; persistent misses point to extraction or indexing gaps."
+        },
+        {
+          "metric": "Memory store size and growth rate",
+          "note": "Total memories and how fast they accumulate per active user. Good looks like growth tracking genuinely new durable facts, not unbounded climb — a runaway curve signals over-eager writing."
+        },
+        {
+          "metric": "Staleness and contradiction rate",
+          "note": "Share of retrieved memories that are outdated or conflict with a newer truth. Good looks like a low and stable rate, evidence that consolidation and expiry are keeping pace with change."
+        }
+      ],
+      "failureModes": [
+        "Writing everything turns the store into noise; retrieval then surfaces low-value or wrong memories. Fix by raising the bar for what gets written and reviewing extraction quality.",
+        "An old fact is retrieved and acted on after the truth changed, with no signal that it is outdated. Mitigate with timestamps, recency-weighted ranking, and explicit supersession on write.",
+        "A memory from one user, tenant, or project is retrieved into another's context because scope filters were missing or wrong — a privacy and correctness failure at once.",
+        "To compensate for poor ranking, teams inject many memories, refilling the window with marginal tokens and degrading the very reasoning memory was meant to support."
+      ],
+      "lessons": [
+        "Quality is decided when you choose what to remember. A small, clean, deduplicated store retrieves far better than a large noisy one.",
+        "A few correct memories outperform many loosely related ones. Tune for relevance and rank tightly rather than maximizing how much you inject.",
+        "Store metadata and provide ways to view, edit, expire, and delete memories. This is essential for debugging, trust, and meeting privacy obligations.",
+        "Facts go stale and contradict each other. Build consolidation, supersession, and expiry early; retrofitting them onto a large polluted store is painful."
+      ],
+      "faqs": [
+        {
+          "q": "How is this different from semantic caching?",
+          "a": "Semantic caching stores and replays whole answers to avoid recomputing similar requests. Long-term memory stores durable facts, preferences, and outcomes, then recomposes them into fresh reasoning for each new task. One reuses outputs; the other remembers state."
+        },
+        {
+          "q": "What should the agent actually remember?",
+          "a": "Stable, reusable signal: user preferences, decisions and commitments, outcomes of prior tasks, and recurring procedures. Avoid transient chatter and anything you cannot justify retaining. Writing less but writing well is what makes later retrieval precise."
+        },
+        {
+          "q": "How do you handle PII and privacy?",
+          "a": "Treat the store as governed data: enforce scope so memories never cross users or tenants, minimize what you persist, support consent and deletion, and set retention and access controls. Inspectability and an expiry policy are part of meeting these obligations."
+        }
+      ]
+    },
+    "es": {
+      "name": "Memoria a largo plazo",
+      "summary": "Dota a un agente de memoria persistente entre sesiones para que recuerde hechos, preferencias del usuario y resultados previos más allá de una única ventana de contexto. Una vía de escritura decide qué almacenar, lo resume y lo deduplica; una vía de lectura recupera solo las memorias relevantes hacia el contexto cuando hacen falta. A diferencia del almacenamiento en caché semántico, que cachea respuestas completas para evitar recomputar, la memoria a largo plazo guarda hechos y estado duraderos y los recompone en razonamiento nuevo cada vez.",
+      "problem": "La ventana de contexto es finita y se reinicia entre sesiones. Un agente que solo ve la conversación actual olvida las preferencias declaradas por el usuario, las decisiones tomadas la semana pasada y el resultado de tareas previas. Meter todo el historial en cada prompt es imposible a cierta escala y degrada el razonamiento a medida que la ventana se llena de tokens de bajo valor. Los equipos necesitan una forma de persistir el pequeño conjunto de hechos que importan y de mostrarlos con precisión cuando son relevantes.",
+      "context": "Úsalo cuando un agente atiende a los mismos usuarios o trabaja repetidamente en las mismas tareas de larga duración: asistentes que aprenden preferencias, agentes de soporte que siguen el historial de un cliente, agentes de programación que recuerdan las convenciones de un proyecto o flujos de varios pasos que abarcan días. Supone que puedes almacenar datos fuera del modelo (un almacén vectorial, una base de datos o un framework de memoria) y que controlas tanto cuándo se escriben las memorias como cómo se recuperan hacia el prompt.",
+      "solution": [
+        "Separa la vía de escritura de la vía de lectura. En la vía de escritura, tras completar un turno o una tarea, un paso de extracción decide qué vale la pena recordar: hechos estables, preferencias, compromisos y resultados, no charla transitoria. Las memorias candidatas se resumen en enunciados compactos y autocontenidos, se contrastan con las memorias existentes para deduplicar y detectar contradicciones, y se escriben en un almacén con metadatos: un tipo de memoria, una marca de tiempo, una fuente y el usuario o ámbito al que pertenecen. El objetivo es escribir menos pero escribir bien; las memorias ruidosas envenenan la recuperación posterior.\n\nEn la vía de lectura, antes de que el agente razone, recuperas las memorias candidatas relevantes para la tarea actual — normalmente por similitud semántica más filtros de ámbito y recencia —, las clasificas e inyectas solo las pocas mejores en el contexto. Trata la recuperación como un problema de precisión: un puñado de memorias correctas vale más que un conjunto grande y poco relacionado. Distingue los tipos de memoria para que la recuperación sea dirigida: episódica (qué ocurrió), semántica (hechos y preferencias duraderos) y procedimental (cómo realizar una tarea recurrente). Consolida y expira las memorias periódicamente para que el almacén siga siendo pequeño, actual y libre de contradicciones."
+      ],
+      "components": [
+        "Extractor de memorias (vía de escritura)",
+        "Verificación de duplicados y contradicciones",
+        "Almacén de memorias",
+        "Recuperador (vía de lectura)",
+        "Ensamblador de contexto",
+        "Tarea de consolidación y expiración"
+      ],
+      "benefits": [
+        "El agente recuerda preferencias, decisiones y resultados de sesiones previas, así los usuarios no tienen que repetir el contexto y el agente se comporta de forma consistente en el tiempo.",
+        "Recuperar unas pocas memorias relevantes mantiene la ventana centrada en tokens de alto valor en lugar de volcar todo el historial, lo que preserva la calidad del razonamiento y reduce el coste.",
+        "A medida que se acumulan hechos y preferencias estables, el agente adapta sus respuestas con más precisión en cada interacción sin reentrenar el modelo.",
+        "Como las memorias viven en un almacén externo con metadatos, puedes inspeccionar, corregir, exportar y borrar lo que el agente sabe, algo importante para la confianza y el cumplimiento normativo."
+      ],
+      "risks": [
+        "Sin consolidación ni expiración, el almacén acumula hechos desactualizados y enunciados en conflicto, y el agente actúa con confianza sobre el equivocado.",
+        "Persistir datos de usuario genera obligaciones de retención, consentimiento y control de acceso; las memorias pueden filtrar información sensible entre sesiones o usuarios si no se aplica el ámbito.",
+        "Una precisión baja inyecta memorias irrelevantes o erróneas que desorientan el razonamiento; una cobertura baja descarta en silencio la memoria que importaba, lo que dificulta diagnosticar los fallos.",
+        "Escribir en exceso infla el almacén, ralentiza la recuperación, eleva los costes de almacenamiento y de embeddings y diluye la señal de la que depende una buena recuperación."
+      ],
+      "whenNot": [
+        "Si las sesiones son independientes y nada necesita trasladarse, la memoria persistente añade complejidad, coste y superficie de privacidad sin beneficio.",
+        "Cuando el objetivo es reutilizar una respuesta previa para una consulta repetida, el almacenamiento en caché semántico es la herramienta adecuada; la memoria a largo plazo es para recordar hechos y estado, no para cachear salidas.",
+        "Donde la normativa o la política prohíbe retener datos de usuario, no persistas memorias; apóyate en el contexto de la sesión o en un almacenamiento explícito y acotado que controle el usuario."
+      ],
+      "examples": [
+        "Entre sesiones recuerda el tono, los formatos, los contactos recurrentes y las instrucciones permanentes, recuperando las pocas que aplican a la solicitud actual en lugar de volver a preguntar.",
+        "En cada contacto recupera los problemas previos del cliente, sus derechos y las resoluciones acotadas a esa cuenta, de modo que continúa en vez de reiniciar la conversación.",
+        "Almacena memorias procedimentales — comandos de compilación, reglas de nombres, preferencias de revisión — y las recuerda al trabajar en el mismo repositorio durante muchas sesiones."
+      ],
+      "productionEvidence": {
+        "context": "Despliegue OpenClaw local-first y mono-operador observado durante 57 días (161 sesiones / 2.776 turnos), agregado desde las propias trazas del agente.",
+        "scenario": "El agente persiste archivos de memoria de workspace y trazas por sesión para continuidad entre turnos y entre sesiones, con un plugin de recuerdo semántico disponible bajo demanda.",
+        "technology": "Archivos de memoria de workspace (MEMORY.md, IDENTITY.md, SOUL.md, USER.md, HEARTBEAT.md), ids de sesión persistentes y eventos de ciclo de vida, y un plugin de memoria activa (memory_search/get/recall).",
+        "load": "134 archivos de sesión persistidos en la ventana de 57 días; recuerdo semántico invocado una vez.",
+        "results": "La continuidad se mantuvo en 134 sesiones persistidas durante 57 días mediante memoria estructural de workspace; el recuerdo semántico explícito apenas se necesitó (una llamada) en esta carga autónoma. Despliegue local-first mono-operador."
+      },
+      "kpis": [
+        {
+          "metric": "Precisión de recuperación de las memorias inyectadas",
+          "note": "De las memorias colocadas en el contexto, la proporción que era realmente relevante. Es la métrica que más directamente gobierna la calidad de la respuesta; lo bueno se ve cuando el conjunto inyectado está casi todo a propósito, con memorias irrelevantes poco frecuentes."
+        },
+        {
+          "metric": "Cobertura de recuperación en tareas dependientes de memoria",
+          "note": "En tareas que requieren un hecho almacenado conocido, con qué frecuencia ese hecho se recupera realmente. Lo bueno se ve cuando la memoria correcta aparece de forma fiable; los fallos persistentes apuntan a lagunas de extracción o de indexación."
+        },
+        {
+          "metric": "Tamaño del almacén de memorias y ritmo de crecimiento",
+          "note": "Total de memorias y a qué velocidad se acumulan por usuario activo. Lo bueno se ve cuando el crecimiento sigue hechos duraderos genuinamente nuevos, no una subida sin límite — una curva descontrolada señala escritura excesiva."
+        },
+        {
+          "metric": "Tasa de obsolescencia y contradicción",
+          "note": "Proporción de memorias recuperadas que están desactualizadas o entran en conflicto con una verdad más nueva. Lo bueno se ve como una tasa baja y estable, evidencia de que la consolidación y la expiración van al ritmo del cambio."
+        }
+      ],
+      "failureModes": [
+        "Escribir todo convierte el almacén en ruido; entonces la recuperación expone memorias de bajo valor o erróneas. Se corrige elevando el umbral de lo que se escribe y revisando la calidad de la extracción.",
+        "Un hecho antiguo se recupera y se actúa sobre él después de que la verdad cambió, sin señal de que esté desactualizado. Se mitiga con marcas de tiempo, clasificación ponderada por recencia y reemplazo explícito al escribir.",
+        "Una memoria de un usuario, inquilino o proyecto se recupera hacia el contexto de otro porque faltaban o eran incorrectos los filtros de ámbito — un fallo de privacidad y de corrección a la vez.",
+        "Para compensar una mala clasificación, los equipos inyectan muchas memorias, rellenando la ventana con tokens marginales y degradando el mismo razonamiento que la memoria debía sostener."
+      ],
+      "lessons": [
+        "La calidad se decide cuando eliges qué recordar. Un almacén pequeño, limpio y deduplicado recupera mucho mejor que uno grande y ruidoso.",
+        "Unas pocas memorias correctas superan a muchas poco relacionadas. Ajusta por relevancia y clasifica con rigor en lugar de maximizar cuánto inyectas.",
+        "Almacena metadatos y ofrece formas de ver, editar, expirar y borrar memorias. Es esencial para depurar, generar confianza y cumplir las obligaciones de privacidad.",
+        "Los hechos se vuelven obsoletos y se contradicen. Construye consolidación, reemplazo y expiración pronto; adaptarlos sobre un almacén grande y contaminado es doloroso."
+      ],
+      "faqs": [
+        {
+          "q": "¿En qué se diferencia del almacenamiento en caché semántico?",
+          "a": "El caché semántico almacena y reproduce respuestas completas para evitar recomputar solicitudes similares. La memoria a largo plazo almacena hechos, preferencias y resultados duraderos, y luego los recompone en razonamiento nuevo para cada tarea. Uno reutiliza salidas; la otra recuerda estado."
+        },
+        {
+          "q": "¿Qué debe recordar realmente el agente?",
+          "a": "Señal estable y reutilizable: preferencias del usuario, decisiones y compromisos, resultados de tareas previas y procedimientos recurrentes. Evita la charla transitoria y cualquier cosa que no puedas justificar retener. Escribir menos pero escribir bien es lo que hace precisa la recuperación posterior."
+        },
+        {
+          "q": "¿Cómo se manejan la PII y la privacidad?",
+          "a": "Trata el almacén como datos gobernados: aplica el ámbito para que las memorias nunca crucen entre usuarios o inquilinos, minimiza lo que persistes, admite consentimiento y borrado, y define controles de retención y de acceso. La inspeccionabilidad y una política de expiración son parte del cumplimiento de estas obligaciones."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Memória de longo prazo",
+      "summary": "Dá a um agente memória persistente entre sessões para que ele lembre fatos, preferências do usuário e resultados anteriores além de uma única janela de contexto. Um caminho de escrita decide o que armazenar, resume e remove duplicatas; um caminho de leitura recupera apenas as memórias relevantes para o contexto quando preciso. Diferente do cache semântico, que armazena respostas inteiras para evitar recomputar, a memória de longo prazo guarda fatos e estado duradouros e os recompõe em raciocínio novo a cada vez.",
+      "problem": "A janela de contexto é finita e reinicia entre sessões. Um agente que só enxerga a conversa atual esquece as preferências declaradas pelo usuário, as decisões tomadas na semana passada e o resultado de tarefas anteriores. Colocar todo o histórico em cada prompt é inviável a partir de certa escala e degrada o raciocínio à medida que a janela se enche de tokens de baixo valor. As equipes precisam de uma forma de persistir o pequeno conjunto de fatos que importam e de trazê-los com precisão quando são relevantes.",
+      "context": "Use isto quando um agente atende os mesmos usuários ou trabalha repetidamente nas mesmas tarefas de longa duração: assistentes que aprendem preferências, agentes de suporte que acompanham o histórico de um cliente, agentes de programação que lembram as convenções de um projeto ou fluxos de várias etapas que se estendem por dias. Pressupõe que você consegue armazenar dados fora do modelo (um armazenamento vetorial, um banco de dados ou um framework de memória) e que controla tanto quando as memórias são escritas quanto como são recuperadas para o prompt.",
+      "solution": [
+        "Separe o caminho de escrita do caminho de leitura. No caminho de escrita, após concluir um turno ou tarefa, uma etapa de extração decide o que vale a pena lembrar: fatos estáveis, preferências, compromissos e resultados — não conversa passageira. As memórias candidatas são resumidas em afirmações compactas e autocontidas, comparadas com as memórias existentes para remover duplicatas e detectar contradições, e gravadas em um armazenamento com metadados: um tipo de memória, um carimbo de tempo, uma fonte e o usuário ou escopo a que pertencem. O objetivo é escrever menos, mas escrever bem; memórias ruidosas envenenam a recuperação posterior.\n\nNo caminho de leitura, antes de o agente raciocinar, você recupera as memórias candidatas relevantes para a tarefa atual — geralmente por similaridade semântica mais filtros de escopo e recência —, as classifica e injeta apenas as poucas melhores no contexto. Trate a recuperação como um problema de precisão: um punhado de memórias corretas vale mais que um conjunto grande e pouco relacionado. Distinga os tipos de memória para que a recuperação seja direcionada: episódica (o que aconteceu), semântica (fatos e preferências duradouros) e procedimental (como executar uma tarefa recorrente). Consolide e expire as memórias periodicamente para que o armazenamento permaneça pequeno, atual e livre de contradições."
+      ],
+      "components": [
+        "Extrator de memórias (caminho de escrita)",
+        "Verificação de duplicatas e contradições",
+        "Armazenamento de memórias",
+        "Recuperador (caminho de leitura)",
+        "Montador de contexto",
+        "Tarefa de consolidação e expiração"
+      ],
+      "benefits": [
+        "O agente lembra preferências, decisões e resultados de sessões anteriores, então os usuários não precisam repetir o contexto e o agente se comporta de forma consistente ao longo do tempo.",
+        "Recuperar algumas memórias relevantes mantém a janela focada em tokens de alto valor em vez de despejar todo o histórico, o que preserva a qualidade do raciocínio e reduz o custo.",
+        "À medida que fatos e preferências estáveis se acumulam, o agente adapta as respostas com mais precisão a cada interação sem retreinar o modelo.",
+        "Como as memórias ficam em um armazenamento externo com metadados, você pode inspecionar, corrigir, exportar e excluir o que o agente sabe — importante para confiança e conformidade."
+      ],
+      "risks": [
+        "Sem consolidação e expiração, o armazenamento acumula fatos desatualizados e afirmações conflitantes, e o agente age com confiança sobre o errado.",
+        "Persistir dados do usuário gera obrigações de retenção, consentimento e controle de acesso; as memórias podem vazar informações sensíveis entre sessões ou usuários se o escopo não for aplicado.",
+        "Baixa precisão injeta memórias irrelevantes ou erradas que desorientam o raciocínio; baixa cobertura descarta em silêncio a memória que importava, dificultando o diagnóstico das falhas.",
+        "Escrever em excesso infla o armazenamento, torna a recuperação mais lenta, eleva custos de armazenamento e de embeddings e dilui o sinal do qual uma boa recuperação depende."
+      ],
+      "whenNot": [
+        "Se as sessões são independentes e nada precisa ser carregado adiante, a memória persistente adiciona complexidade, custo e superfície de privacidade sem benefício.",
+        "Quando o objetivo é reutilizar uma resposta anterior para uma consulta repetida, o cache semântico é a ferramenta certa; a memória de longo prazo serve para lembrar fatos e estado, não para armazenar saídas em cache.",
+        "Onde a regulação ou a política proíbe reter dados do usuário, não persista memórias; apoie-se no contexto da sessão ou em um armazenamento explícito e delimitado que o usuário controle."
+      ],
+      "examples": [
+        "Entre sessões ele lembra o tom, os formatos, os contatos recorrentes e as instruções permanentes, recuperando as poucas que se aplicam ao pedido atual em vez de perguntar de novo.",
+        "A cada contato ele recupera os problemas anteriores do cliente, seus direitos e as resoluções delimitadas àquela conta, de modo que continua em vez de reiniciar a conversa.",
+        "Armazena memórias procedimentais — comandos de build, regras de nomenclatura, preferências de revisão — e as recupera ao trabalhar no mesmo repositório ao longo de muitas sessões."
+      ],
+      "productionEvidence": {
+        "context": "Implantação OpenClaw local-first e de operador único observada por 57 dias (161 sessões / 2.776 turnos), agregada a partir dos próprios rastros do agente.",
+        "scenario": "O agente persiste arquivos de memória de workspace e rastros por sessão para continuidade entre turnos e entre sessões, com um plugin de recall semântico disponível sob demanda.",
+        "technology": "Arquivos de memória de workspace (MEMORY.md, IDENTITY.md, SOUL.md, USER.md, HEARTBEAT.md), ids de sessão persistentes e eventos de ciclo de vida, e um plugin de memória ativa (memory_search/get/recall).",
+        "load": "134 arquivos de sessão persistidos na janela de 57 dias; recall semântico invocado uma vez.",
+        "results": "A continuidade se manteve em 134 sessões persistidas por 57 dias por meio de memória estrutural de workspace; o recall semântico explícito quase não foi necessário (uma chamada) nesta carga autônoma. Implantação local-first de operador único."
+      },
+      "kpis": [
+        {
+          "metric": "Precisão de recuperação das memórias injetadas",
+          "note": "Das memórias colocadas no contexto, a parcela que era de fato relevante. É a métrica que mais diretamente governa a qualidade da resposta; o bom é quando o conjunto injetado está quase todo no tema, com memórias irrelevantes raras."
+        },
+        {
+          "metric": "Cobertura de recuperação em tarefas dependentes de memória",
+          "note": "Em tarefas que exigem um fato armazenado conhecido, com que frequência esse fato é de fato recuperado. O bom é quando a memória certa aparece de forma confiável; falhas persistentes apontam lacunas de extração ou de indexação."
+        },
+        {
+          "metric": "Tamanho do armazenamento de memórias e taxa de crescimento",
+          "note": "Total de memórias e a que velocidade se acumulam por usuário ativo. O bom é quando o crescimento acompanha fatos duradouros genuinamente novos, não uma subida sem limite — uma curva descontrolada sinaliza escrita excessiva."
+        },
+        {
+          "metric": "Taxa de obsolescência e contradição",
+          "note": "Parcela das memórias recuperadas que estão desatualizadas ou conflitam com uma verdade mais nova. O bom é uma taxa baixa e estável, evidência de que a consolidação e a expiração acompanham o ritmo da mudança."
+        }
+      ],
+      "failureModes": [
+        "Escrever tudo transforma o armazenamento em ruído; a recuperação então expõe memórias de baixo valor ou erradas. Corrija elevando o critério do que é escrito e revisando a qualidade da extração.",
+        "Um fato antigo é recuperado e usado depois que a verdade mudou, sem sinal de que está desatualizado. Mitigue com carimbos de tempo, classificação ponderada por recência e substituição explícita na escrita.",
+        "Uma memória de um usuário, inquilino ou projeto é recuperada para o contexto de outro porque os filtros de escopo faltavam ou estavam errados — uma falha de privacidade e de correção ao mesmo tempo.",
+        "Para compensar uma classificação ruim, as equipes injetam muitas memórias, reenchendo a janela com tokens marginais e degradando justamente o raciocínio que a memória deveria sustentar."
+      ],
+      "lessons": [
+        "A qualidade é decidida quando você escolhe o que lembrar. Um armazenamento pequeno, limpo e sem duplicatas recupera muito melhor que um grande e ruidoso.",
+        "Algumas memórias corretas superam muitas pouco relacionadas. Ajuste por relevância e classifique com rigor em vez de maximizar quanto você injeta.",
+        "Armazene metadados e ofereça formas de ver, editar, expirar e excluir memórias. Isso é essencial para depurar, gerar confiança e cumprir obrigações de privacidade.",
+        "Fatos ficam obsoletos e se contradizem. Construa consolidação, substituição e expiração cedo; adaptá-las a um armazenamento grande e poluído é doloroso."
+      ],
+      "faqs": [
+        {
+          "q": "Como isso difere do cache semântico?",
+          "a": "O cache semântico armazena e reproduz respostas inteiras para evitar recomputar solicitações semelhantes. A memória de longo prazo armazena fatos, preferências e resultados duradouros e depois os recompõe em raciocínio novo para cada tarefa. Um reutiliza saídas; a outra lembra estado."
+        },
+        {
+          "q": "O que o agente deve de fato lembrar?",
+          "a": "Sinal estável e reutilizável: preferências do usuário, decisões e compromissos, resultados de tarefas anteriores e procedimentos recorrentes. Evite conversa passageira e qualquer coisa que você não consiga justificar reter. Escrever menos, mas escrever bem, é o que torna a recuperação posterior precisa."
+        },
+        {
+          "q": "Como lidar com PII e privacidade?",
+          "a": "Trate o armazenamento como dados governados: aplique o escopo para que as memórias nunca cruzem entre usuários ou inquilinos, minimize o que você persiste, dê suporte a consentimento e exclusão, e defina controles de retenção e de acesso. A inspecionabilidade e uma política de expiração fazem parte do cumprimento dessas obrigações."
+        }
+      ]
+    }
+  }
+}

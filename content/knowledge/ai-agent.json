@@ -1,0 +1,153 @@
+{
+  "slug": "ai-agent",
+  "category": "concept",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "related": ["agentic-ai", "harness-engineering", "model-context-protocol", "multi-agent-architecture"],
+  "references": [
+    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
+    { "title": "Yao et al. — ReAct (2022)", "url": "https://arxiv.org/abs/2210.03629" }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": ["industry_observation", "paper"]
+  },
+  "locales": {
+    "en": {
+      "title": "What is an AI Agent?",
+      "summary": "An AI agent is a system that combines a model with tools, memory and a control loop to take actions toward a goal, rather than just answering a single prompt. It perceives a situation, decides what to do, acts through tools, observes the result and repeats until done. Autonomy ranges from a single tool call to long-horizon execution of complex tasks.",
+      "definition": "An AI agent is a system that pairs a reasoning model with tools, memory and an orchestration loop so it can plan and act over multiple steps to achieve a goal.",
+      "takeaways": [
+        "Agent = model + tools + memory + control loop.",
+        "Agents act; chatbots answer.",
+        "Tool use is the bridge to real systems and data.",
+        "More autonomy means more need for guardrails and evaluation.",
+        "Reliability is engineered through the harness, not assumed from the model."
+      ],
+      "context": [
+        "A plain LLM produces text. An agent uses that text to decide and act: it can search, call APIs, write files or trigger workflows, then react to what happens. This loop is what lets it complete tasks instead of merely describing them.",
+        "Agents sit on a spectrum of autonomy. Low-autonomy agents make one or two tool calls under tight control; high-autonomy agents run long, branching tasks with little supervision — and need correspondingly stronger guardrails."
+      ],
+      "architecture": [
+        "The core loop is sense → decide → act → observe. The model decides the next action, an orchestrator executes it via a tool, the result is fed back as an observation, and the loop continues until a goal or stop condition is reached.",
+        "Around this loop sit memory (to carry state), guardrails (to constrain behavior), and observability (to trace what happened). These are the parts of the harness that make an agent dependable."
+      ],
+      "components": ["Reasoning model", "Tools", "Memory", "Orchestration loop", "Guardrails", "Observability"],
+      "pros": [
+        "Executes tasks end to end.",
+        "Connects models to live systems.",
+        "Recovers from intermediate failures.",
+        "Automates multi-step knowledge work."
+      ],
+      "risks": [
+        "Error compounding over long tasks.",
+        "Cost and latency without budgets.",
+        "Prompt injection and tool-misuse risks.",
+        "Harder to test and debug than single prompts."
+      ],
+      "tools": ["LangGraph", "Claude Agent SDK", "OpenAI Agents SDK", "CrewAI", "Model Context Protocol (MCP)"],
+      "examples": [
+        "A triage agent that classifies and routes incoming requests.",
+        "A coding agent that fixes a bug and verifies it with tests.",
+        "A data agent that queries a warehouse and assembles a report."
+      ],
+      "faqs": [
+        { "q": "Is a chatbot an AI agent?", "a": "Not by default. A chatbot answers; an agent takes actions through tools across multiple steps to reach a goal." },
+        { "q": "What is the simplest useful agent?", "a": "A model with one or two well-described tools and a clear stop condition. Start simple and add structure only when measurement shows you need it." },
+        { "q": "What makes an agent reliable?", "a": "The harness: clean tool design, good memory, guardrails, observability and evaluation — not just a stronger model." },
+        { "q": "Single agent or multi-agent?", "a": "Prefer a single agent until a task clearly benefits from specialized, separable roles. Multi-agent adds coordination overhead." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué es un Agente de IA?",
+      "summary": "Un agente de IA es un sistema que combina un modelo con herramientas, memoria y un bucle de control para tomar acciones hacia un objetivo, en lugar de solo responder a un prompt. Percibe una situación, decide qué hacer, actúa mediante herramientas, observa el resultado y repite hasta terminar. La autonomía va desde una sola llamada a herramienta hasta la ejecución de tareas complejas de horizonte largo.",
+      "definition": "Un agente de IA es un sistema que une un modelo de razonamiento con herramientas, memoria y un bucle de orquestación para planificar y actuar en varios pasos hacia un objetivo.",
+      "takeaways": [
+        "Agente = modelo + herramientas + memoria + bucle de control.",
+        "Los agentes actúan; los chatbots responden.",
+        "El uso de herramientas es el puente hacia sistemas y datos reales.",
+        "Más autonomía exige más guardarraíles y evaluación.",
+        "La fiabilidad se diseña con el harness, no se da por sentada en el modelo."
+      ],
+      "context": [
+        "Un LLM simple produce texto. Un agente usa ese texto para decidir y actuar: puede buscar, llamar APIs, escribir ficheros o disparar flujos, y luego reaccionar a lo que ocurre. Ese bucle es lo que le permite completar tareas en vez de solo describirlas.",
+        "Los agentes están en un espectro de autonomía. Los de baja autonomía hacen una o dos llamadas bajo control estricto; los de alta autonomía ejecutan tareas largas y ramificadas con poca supervisión, y necesitan guardarraíles proporcionalmente más fuertes."
+      ],
+      "architecture": [
+        "El bucle central es percibir → decidir → actuar → observar. El modelo decide la siguiente acción, un orquestador la ejecuta vía una herramienta, el resultado vuelve como observación, y el bucle continúa hasta alcanzar un objetivo o una condición de parada.",
+        "Alrededor de ese bucle están la memoria (para arrastrar estado), los guardarraíles (para acotar el comportamiento) y la observabilidad (para trazar lo ocurrido). Son las partes del harness que hacen fiable a un agente."
+      ],
+      "components": ["Modelo de razonamiento", "Herramientas", "Memoria", "Bucle de orquestación", "Guardarraíles", "Observabilidad"],
+      "pros": [
+        "Ejecuta tareas de principio a fin.",
+        "Conecta modelos con sistemas en vivo.",
+        "Se recupera de fallos intermedios.",
+        "Automatiza trabajo de conocimiento de varios pasos."
+      ],
+      "risks": [
+        "Acumulación de errores en tareas largas.",
+        "Coste y latencia sin presupuestos.",
+        "Riesgos de inyección de prompts y mal uso de herramientas.",
+        "Más difícil de probar y depurar que un prompt simple."
+      ],
+      "tools": ["LangGraph", "Claude Agent SDK", "OpenAI Agents SDK", "CrewAI", "Model Context Protocol (MCP)"],
+      "examples": [
+        "Un agente de triaje que clasifica y enruta solicitudes entrantes.",
+        "Un agente de programación que corrige un bug y lo verifica con tests.",
+        "Un agente de datos que consulta un warehouse y arma un informe."
+      ],
+      "faqs": [
+        { "q": "¿Un chatbot es un agente de IA?", "a": "Por defecto no. Un chatbot responde; un agente toma acciones mediante herramientas en varios pasos para alcanzar un objetivo." },
+        { "q": "¿Cuál es el agente útil más simple?", "a": "Un modelo con una o dos herramientas bien descritas y una condición de parada clara. Empieza simple y añade estructura solo cuando la medición lo justifique." },
+        { "q": "¿Qué hace fiable a un agente?", "a": "El harness: diseño limpio de herramientas, buena memoria, guardarraíles, observabilidad y evaluación, no solo un modelo más potente." },
+        { "q": "¿Un agente o multiagente?", "a": "Prefiere un solo agente hasta que la tarea se beneficie claramente de roles especializados y separables. El multiagente añade coste de coordinación." }
+      ]
+    },
+    "pt": {
+      "title": "O que é um Agente de IA?",
+      "summary": "Um agente de IA é um sistema que combina um modelo com ferramentas, memória e um laço de controle para tomar ações rumo a um objetivo, em vez de só responder a um prompt. Ele percebe uma situação, decide o que fazer, age por meio de ferramentas, observa o resultado e repete até concluir. A autonomia vai de uma única chamada de ferramenta à execução de tarefas complexas de horizonte longo.",
+      "definition": "Um agente de IA é um sistema que une um modelo de raciocínio a ferramentas, memória e um laço de orquestração para planejar e agir em vários passos rumo a um objetivo.",
+      "takeaways": [
+        "Agente = modelo + ferramentas + memória + laço de controle.",
+        "Agentes agem; chatbots respondem.",
+        "O uso de ferramentas é a ponte para sistemas e dados reais.",
+        "Mais autonomia exige mais guard-rails e avaliação.",
+        "A confiabilidade é projetada com o harness, não presumida do modelo."
+      ],
+      "context": [
+        "Um LLM simples produz texto. Um agente usa esse texto para decidir e agir: pode buscar, chamar APIs, escrever arquivos ou disparar fluxos, e então reagir ao que acontece. Esse laço é o que lhe permite concluir tarefas em vez de só descrevê-las.",
+        "Os agentes estão num espectro de autonomia. Os de baixa autonomia fazem uma ou duas chamadas sob controle estrito; os de alta autonomia executam tarefas longas e ramificadas com pouca supervisão, e precisam de guard-rails proporcionalmente mais fortes."
+      ],
+      "architecture": [
+        "O laço central é perceber → decidir → agir → observar. O modelo decide a próxima ação, um orquestrador a executa via uma ferramenta, o resultado retorna como observação, e o laço continua até alcançar um objetivo ou uma condição de parada.",
+        "Em torno desse laço estão a memória (para carregar estado), os guard-rails (para limitar o comportamento) e a observabilidade (para rastrear o ocorrido). São as partes do harness que tornam um agente confiável."
+      ],
+      "components": ["Modelo de raciocínio", "Ferramentas", "Memória", "Laço de orquestração", "Guard-rails", "Observabilidade"],
+      "pros": [
+        "Executa tarefas de ponta a ponta.",
+        "Conecta modelos a sistemas ao vivo.",
+        "Recupera-se de falhas intermediárias.",
+        "Automatiza trabalho de conhecimento de vários passos."
+      ],
+      "risks": [
+        "Acúmulo de erros em tarefas longas.",
+        "Custo e latência sem orçamentos.",
+        "Riscos de injeção de prompts e mau uso de ferramentas.",
+        "Mais difícil de testar e depurar que um prompt simples."
+      ],
+      "tools": ["LangGraph", "Claude Agent SDK", "OpenAI Agents SDK", "CrewAI", "Model Context Protocol (MCP)"],
+      "examples": [
+        "Um agente de triagem que classifica e roteia solicitações recebidas.",
+        "Um agente de programação que corrige um bug e o verifica com testes.",
+        "Um agente de dados que consulta um warehouse e monta um relatório."
+      ],
+      "faqs": [
+        { "q": "Um chatbot é um agente de IA?", "a": "Por padrão não. Um chatbot responde; um agente toma ações por meio de ferramentas em vários passos para alcançar um objetivo." },
+        { "q": "Qual é o agente útil mais simples?", "a": "Um modelo com uma ou duas ferramentas bem descritas e uma condição de parada clara. Comece simples e adicione estrutura só quando a medição justificar." },
+        { "q": "O que torna um agente confiável?", "a": "O harness: design limpo de ferramentas, boa memória, guard-rails, observabilidade e avaliação, não só um modelo mais potente." },
+        { "q": "Um agente ou multiagente?", "a": "Prefira um único agente até a tarefa se beneficiar claramente de papéis especializados e separáveis. O multiagente adiciona custo de coordenação." }
+      ]
+    }
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "slug": "human-approval-gate",
+  "category": "safety",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": true,
+  "technologies": [
+    "LangGraph (interrupts)",
+    "Workflow / approval systems",
+    "Audit logging"
+  ],
+  "related": [
+    "reflection",
+    "evaluator-optimizer",
+    "prompt-chaining"
+  ],
+  "references": [
+    {
+      "title": "European Union — AI Act, Article 14 (Human oversight)",
+      "url": "https://artificialintelligenceact.eu/article/14/"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "locales": {
+    "en": {
+      "name": "Human Approval Gate",
+      "summary": "A human approval gate pauses an automated workflow at a defined checkpoint so a person can review, edit or reject a proposed action before it executes — especially for high-impact, irreversible or regulated operations. It is the operational form of human-in-the-loop oversight.",
+      "definition": "A human approval gate is a control checkpoint inserted before a high-impact automated action, where a person reviews and approves, edits or rejects the proposed action before it executes.",
+      "problem": "Letting an AI system execute high-impact actions autonomously risks costly, irreversible or non-compliant mistakes with no chance for human judgment.",
+      "context": "Use an approval gate for actions whose cost of error outweighs the latency of review: payments, deletions, external communications, production changes, or anything regulated.",
+      "solution": [
+        "Insert a checkpoint before the sensitive action: the system prepares the proposed action with enough context, then suspends and routes it to a human who approves, edits or rejects. On approval it proceeds; on timeout it falls back safely. Every decision is logged for audit.",
+        "Gate only the high-impact steps, not everything — over-gating destroys the value of automation and causes approval fatigue. Choose checkpoints by risk."
+      ],
+      "components": [
+        "Risk-based checkpoint",
+        "Proposed-action preview",
+        "Approve / edit / reject",
+        "Timeout & safe fallback",
+        "Audit log"
+      ],
+      "benefits": [
+        "Prevents costly or irreversible mistakes.",
+        "Keeps accountability with a human.",
+        "Satisfies compliance and oversight requirements.",
+        "Builds trust, enabling gradual autonomy."
+      ],
+      "risks": [
+        "Adds latency and limits throughput.",
+        "Rubber-stamping if reviewers lack context or time.",
+        "Approval fatigue from too many gates.",
+        "Bottlenecks if reviewers are unavailable."
+      ],
+      "whenNot": [
+        "For low-impact, easily reversible actions.",
+        "When throughput must be high and risk is low.",
+        "When a deterministic guardrail can safely auto-approve."
+      ],
+      "examples": [
+        "An agent drafting a refund a human approves before it is issued.",
+        "A production change that pauses for sign-off before deploying.",
+        "An outbound email queued for review before sending."
+      ],
+      "productionEvidence": {
+        "context": "Enterprise workflows where an agent can trigger irreversible or regulated actions — refunds, account changes, outbound communications, production deployments.",
+        "scenario": "The agent prepares the action with full context and pauses; a reviewer approves, edits or rejects it; on approval it executes, on timeout it falls back safely. Every decision is logged.",
+        "technology": "A workflow engine with interrupts (e.g. LangGraph), an approval queue/UI, and an audit log.",
+        "load": "Only a minority of high-impact steps are gated; the bulk of low-impact steps run automatically, so reviewer volume stays bounded.",
+        "results": "Observed pattern: irreversible errors are caught before execution and accountability stays with a human, at the cost of added latency on gated steps. Gate by risk and measure approval latency and rubber-stamp rate on your own workflow — these are reference observations, not guaranteed numbers."
+      },
+      "kpis": [
+        {
+          "metric": "Approval latency",
+          "note": "Time an action waits at the gate; the core cost of the pattern and the first thing to watch for bottlenecks."
+        },
+        {
+          "metric": "Rejection / edit rate",
+          "note": "Share of proposals a human rejects or edits — near-zero often means rubber-stamping, very high means the agent isn't trusted yet."
+        },
+        {
+          "metric": "Throughput vs. gated steps",
+          "note": "Tasks completed per hour against how many steps are gated; over-gating collapses throughput."
+        },
+        {
+          "metric": "Timeout / fallback rate",
+          "note": "How often actions hit the timeout and take the safe fallback; a rising rate signals reviewer overload."
+        }
+      ],
+      "failureModes": [
+        "Rubber-stamping: reviewers approve without real scrutiny when they lack context or time, defeating the gate.",
+        "Approval fatigue and bottlenecks from over-gating low-impact steps.",
+        "Silent auto-execution on timeout when no safe fallback is defined.",
+        "Insufficient context in the proposal, so the human can't make an informed decision."
+      ],
+      "lessons": [
+        "Gate by risk, not by default — automate low-impact steps and reserve gates for irreversible or regulated actions.",
+        "Give reviewers enough context and a clear approve/edit/reject choice to prevent rubber-stamping.",
+        "Always define a safe fallback on timeout; never silently execute a gated action.",
+        "Log every decision for audit — the gate is also your compliance evidence."
+      ],
+      "faqs": [
+        {
+          "q": "How is this different from human-in-the-loop?",
+          "a": "It is the concrete implementation of the human-in-the-loop principle: a specific approval checkpoint in a workflow before a sensitive action."
+        },
+        {
+          "q": "Won't approvals slow everything down?",
+          "a": "Only if you over-gate. Apply gates by risk — automate low-impact steps and reserve approval for high-impact, irreversible or regulated actions."
+        },
+        {
+          "q": "What happens on timeout?",
+          "a": "Define a safe fallback: hold the action, escalate, or cancel. Never silently auto-execute a gated action just because no one responded."
+        }
+      ]
+    },
+    "es": {
+      "name": "Puerta de Aprobación Humana (Human Approval Gate)",
+      "summary": "Una puerta de aprobación humana pausa un flujo automatizado en un punto de control definido para que una persona revise, edite o rechace una acción propuesta antes de ejecutarse, sobre todo en operaciones de alto impacto, irreversibles o reguladas. Es la forma operativa de la supervisión humana en el bucle.",
+      "definition": "Una puerta de aprobación humana es un punto de control que se inserta antes de una acción automatizada de alto impacto, donde una persona revisa y aprueba, edita o rechaza la acción propuesta antes de que se ejecute.",
+      "problem": "Dejar que un sistema de IA ejecute acciones de alto impacto de forma autónoma arriesga errores costosos, irreversibles o no conformes sin posibilidad de juicio humano.",
+      "context": "Usa una puerta de aprobación para acciones cuyo coste de error supera la latencia de la revisión: pagos, borrados, comunicaciones externas, cambios en producción o cualquier cosa regulada.",
+      "solution": [
+        "Inserta un punto de control antes de la acción sensible: el sistema prepara la acción propuesta con suficiente contexto, luego se suspende y la enruta a un humano que aprueba, edita o rechaza. Con la aprobación, procede; ante un timeout, recurre a un respaldo seguro. Cada decisión se registra para auditoría.",
+        "Pon puertas solo en los pasos de alto impacto, no en todo: el exceso de puertas destruye el valor de la automatización y causa fatiga de aprobación. Elige los puntos de control por riesgo."
+      ],
+      "components": [
+        "Punto de control basado en riesgo",
+        "Vista previa de la acción propuesta",
+        "Aprobar / editar / rechazar",
+        "Timeout y respaldo seguro",
+        "Registro de auditoría"
+      ],
+      "benefits": [
+        "Previene errores costosos o irreversibles.",
+        "Mantiene la responsabilidad en un humano.",
+        "Satisface requisitos de cumplimiento y supervisión.",
+        "Genera confianza, habilitando una autonomía gradual."
+      ],
+      "risks": [
+        "Añade latencia y limita el rendimiento.",
+        "Aprobación automática si los revisores carecen de contexto o tiempo.",
+        "Fatiga de aprobación por demasiadas puertas.",
+        "Cuellos de botella si los revisores no están disponibles."
+      ],
+      "whenNot": [
+        "Para acciones de bajo impacto y fácilmente reversibles.",
+        "Cuando el rendimiento debe ser alto y el riesgo es bajo.",
+        "Cuando un guardarraíl determinista puede autoaprobar con seguridad."
+      ],
+      "examples": [
+        "Un agente que redacta un reembolso que un humano aprueba antes de emitirse.",
+        "Un cambio en producción que se pausa para una firma antes de desplegar.",
+        "Un correo saliente en cola para revisión antes de enviarse."
+      ],
+      "productionEvidence": {
+        "context": "Flujos empresariales donde un agente puede desencadenar acciones irreversibles o reguladas: reembolsos, cambios de cuenta, comunicaciones externas, despliegues en producción.",
+        "scenario": "El agente prepara la acción con todo el contexto y se pausa; un revisor la aprueba, edita o rechaza; con la aprobación se ejecuta, ante un timeout recurre a un respaldo seguro. Cada decisión se registra.",
+        "technology": "Un motor de flujos con interrupciones (p. ej. LangGraph), una cola/UI de aprobación y un registro de auditoría.",
+        "load": "Solo se ponen puertas a una minoría de pasos de alto impacto; la mayoría de pasos de bajo impacto se ejecutan automáticamente, así que el volumen para los revisores se mantiene acotado.",
+        "results": "Patrón observado: los errores irreversibles se detectan antes de ejecutarse y la responsabilidad queda en un humano, a costa de más latencia en los pasos con puerta. Pon puertas por riesgo y mide la latencia de aprobación y la tasa de aprobación automática en tu propio flujo: son observaciones de referencia, no cifras garantizadas."
+      },
+      "kpis": [
+        {
+          "metric": "Latencia de aprobación",
+          "note": "Tiempo que una acción espera en la puerta; el coste central del patrón y lo primero a vigilar por cuellos de botella."
+        },
+        {
+          "metric": "Tasa de rechazo / edición",
+          "note": "Proporción de propuestas que un humano rechaza o edita; casi cero suele indicar aprobación automática, muy alta, falta de confianza en el agente."
+        },
+        {
+          "metric": "Rendimiento vs. pasos con puerta",
+          "note": "Tareas completadas por hora frente a cuántos pasos tienen puerta; el exceso de puertas hunde el rendimiento."
+        },
+        {
+          "metric": "Tasa de timeout / respaldo",
+          "note": "Con qué frecuencia las acciones llegan al timeout y toman el respaldo seguro; si sube, los revisores están saturados."
+        }
+      ],
+      "failureModes": [
+        "Aprobación automática: los revisores aprueban sin escrutinio real cuando faltan contexto o tiempo, anulando la puerta.",
+        "Fatiga de aprobación y cuellos de botella por poner puertas en pasos de bajo impacto.",
+        "Autoejecución silenciosa en el timeout cuando no se define un respaldo seguro.",
+        "Contexto insuficiente en la propuesta, de modo que el humano no puede decidir con criterio."
+      ],
+      "lessons": [
+        "Pon puertas por riesgo, no por defecto: automatiza lo de bajo impacto y reserva las puertas para acciones irreversibles o reguladas.",
+        "Da a los revisores contexto suficiente y una elección clara aprobar/editar/rechazar para evitar la aprobación automática.",
+        "Define siempre un respaldo seguro en el timeout; nunca ejecutes en silencio una acción con puerta.",
+        "Registra cada decisión para auditoría: la puerta es también tu evidencia de cumplimiento."
+      ],
+      "faqs": [
+        {
+          "q": "¿En qué se diferencia del human-in-the-loop?",
+          "a": "Es la implementación concreta del principio human-in-the-loop: un punto de aprobación específico en un flujo antes de una acción sensible."
+        },
+        {
+          "q": "¿Las aprobaciones no lo ralentizan todo?",
+          "a": "Solo si pones demasiadas puertas. Aplica puertas por riesgo: automatiza los pasos de bajo impacto y reserva la aprobación para acciones de alto impacto, irreversibles o reguladas."
+        },
+        {
+          "q": "¿Qué pasa en un timeout?",
+          "a": "Define un respaldo seguro: retener la acción, escalar o cancelar. Nunca autoejecutes en silencio una acción con puerta solo porque nadie respondió."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Portão de Aprovação Humana (Human Approval Gate)",
+      "summary": "Um portão de aprovação humana pausa um fluxo automatizado num ponto de controle definido para que uma pessoa revise, edite ou rejeite uma ação proposta antes de executar, sobretudo em operações de alto impacto, irreversíveis ou reguladas. É a forma operacional da supervisão humana no laço.",
+      "definition": "Um portão de aprovação humana é um ponto de controle inserido antes de uma ação automatizada de alto impacto, onde uma pessoa revisa e aprova, edita ou rejeita a ação proposta antes que ela seja executada.",
+      "problem": "Deixar um sistema de IA executar ações de alto impacto de forma autônoma arrisca erros custosos, irreversíveis ou não conformes sem possibilidade de julgamento humano.",
+      "context": "Use um portão de aprovação para ações cujo custo de erro supera a latência da revisão: pagamentos, exclusões, comunicações externas, mudanças em produção ou qualquer coisa regulada.",
+      "solution": [
+        "Insira um ponto de controle antes da ação sensível: o sistema prepara a ação proposta com contexto suficiente, depois se suspende e a roteia a um humano que aprova, edita ou rejeita. Com a aprovação, prossegue; em um timeout, recorre a um fallback seguro. Cada decisão é registrada para auditoria.",
+        "Coloque portões só nos passos de alto impacto, não em tudo: o excesso de portões destrói o valor da automação e causa fadiga de aprovação. Escolha os pontos de controle por risco."
+      ],
+      "components": [
+        "Ponto de controle baseado em risco",
+        "Pré-visualização da ação proposta",
+        "Aprovar / editar / rejeitar",
+        "Timeout e fallback seguro",
+        "Registro de auditoria"
+      ],
+      "benefits": [
+        "Previne erros custosos ou irreversíveis.",
+        "Mantém a responsabilidade com um humano.",
+        "Satisfaz requisitos de conformidade e supervisão.",
+        "Gera confiança, habilitando uma autonomia gradual."
+      ],
+      "risks": [
+        "Adiciona latência e limita a vazão.",
+        "Aprovação automática se os revisores carecem de contexto ou tempo.",
+        "Fadiga de aprovação por portões demais.",
+        "Gargalos se os revisores não estiverem disponíveis."
+      ],
+      "whenNot": [
+        "Para ações de baixo impacto e facilmente reversíveis.",
+        "Quando a vazão deve ser alta e o risco é baixo.",
+        "Quando um guard-rail determinístico pode autoaprovar com segurança."
+      ],
+      "examples": [
+        "Um agente que redige um reembolso que um humano aprova antes de ser emitido.",
+        "Uma mudança em produção que pausa para uma assinatura antes de implantar.",
+        "Um e-mail de saída em fila para revisão antes de enviar."
+      ],
+      "productionEvidence": {
+        "context": "Fluxos empresariais onde um agente pode desencadear ações irreversíveis ou reguladas: reembolsos, mudanças de conta, comunicações externas, implantações em produção.",
+        "scenario": "O agente prepara a ação com todo o contexto e pausa; um revisor a aprova, edita ou rejeita; com a aprovação ela executa, em um timeout recorre a um fallback seguro. Cada decisão é registrada.",
+        "technology": "Um motor de fluxos com interrupções (ex.: LangGraph), uma fila/UI de aprovação e um registro de auditoria.",
+        "load": "Apenas uma minoria de passos de alto impacto tem portão; a maioria dos passos de baixo impacto roda automaticamente, então o volume para os revisores fica limitado.",
+        "results": "Padrão observado: erros irreversíveis são detectados antes de executar e a responsabilidade fica com um humano, ao custo de mais latência nos passos com portão. Coloque portões por risco e meça a latência de aprovação e a taxa de aprovação automática no seu próprio fluxo — são observações de referência, não números garantidos."
+      },
+      "kpis": [
+        {
+          "metric": "Latência de aprovação",
+          "note": "Tempo que uma ação espera no portão; o custo central do padrão e o primeiro a vigiar por gargalos."
+        },
+        {
+          "metric": "Taxa de rejeição / edição",
+          "note": "Proporção de propostas que um humano rejeita ou edita; quase zero costuma indicar aprovação automática, muito alta, falta de confiança no agente."
+        },
+        {
+          "metric": "Vazão vs. passos com portão",
+          "note": "Tarefas concluídas por hora frente a quantos passos têm portão; o excesso de portões afunda a vazão."
+        },
+        {
+          "metric": "Taxa de timeout / fallback",
+          "note": "Com que frequência as ações atingem o timeout e tomam o fallback seguro; se sobe, os revisores estão sobrecarregados."
+        }
+      ],
+      "failureModes": [
+        "Aprovação automática: os revisores aprovam sem escrutínio real quando faltam contexto ou tempo, anulando o portão.",
+        "Fadiga de aprovação e gargalos por colocar portões em passos de baixo impacto.",
+        "Autoexecução silenciosa no timeout quando não se define um fallback seguro.",
+        "Contexto insuficiente na proposta, de modo que o humano não consegue decidir com critério."
+      ],
+      "lessons": [
+        "Coloque portões por risco, não por padrão: automatize o de baixo impacto e reserve os portões para ações irreversíveis ou reguladas.",
+        "Dê aos revisores contexto suficiente e uma escolha clara aprovar/editar/rejeitar para evitar a aprovação automática.",
+        "Defina sempre um fallback seguro no timeout; nunca execute em silêncio uma ação com portão.",
+        "Registre cada decisão para auditoria: o portão é também sua evidência de conformidade."
+      ],
+      "faqs": [
+        {
+          "q": "Como difere do human-in-the-loop?",
+          "a": "É a implementação concreta do princípio human-in-the-loop: um ponto de aprovação específico num fluxo antes de uma ação sensível."
+        },
+        {
+          "q": "As aprovações não atrasam tudo?",
+          "a": "Só se você colocar portões demais. Aplique portões por risco: automatize os passos de baixo impacto e reserve a aprovação para ações de alto impacto, irreversíveis ou reguladas."
+        },
+        {
+          "q": "O que acontece num timeout?",
+          "a": "Defina um fallback seguro: reter a ação, escalar ou cancelar. Nunca autoexecute em silêncio uma ação com portão só porque ninguém respondeu."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "slug": "parallelization",
+  "category": "orchestration",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "technologies": ["LangGraph", "Async runtimes", "OpenAI Agents SDK", "Map-reduce frameworks"],
+  "related": ["prompt-chaining", "orchestrator-workers", "evaluator-optimizer"],
+  "references": [
+    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": ["industry_observation"]
+  },
+  "locales": {
+    "en": {
+      "name": "Parallelization",
+      "summary": "Parallelization runs multiple LLM calls at the same time and aggregates the results. Two flavors: sectioning (split a task into independent subtasks run in parallel) and voting (run the same task several times to improve reliability or coverage). It cuts latency and can raise quality.",
+      "problem": "Running independent subtasks one after another wastes time, and a single sample of a hard task can be unreliable.",
+      "context": "Use parallelization when subtasks are independent (sectioning), or when multiple attempts at the same task improve confidence or coverage (voting).",
+      "solution": [
+        "Sectioning: split the work into independent pieces, run them concurrently, and combine the outputs. Voting: run the same prompt multiple times (or with variations) and aggregate by majority, union or a judge.",
+        "Both reduce wall-clock time versus sequential execution; voting additionally trades extra cost for higher reliability on tasks where a single sample is risky."
+      ],
+      "components": ["Task splitter", "Concurrent workers", "Aggregator (merge / vote / judge)"],
+      "benefits": [
+        "Lower latency by running calls concurrently.",
+        "Voting improves reliability and coverage.",
+        "Each parallel call stays simple and focused."
+      ],
+      "risks": [
+        "Voting multiplies token cost.",
+        "Aggregation logic can be tricky to get right.",
+        "Subtasks assumed independent may actually interact."
+      ],
+      "whenNot": [
+        "When subtasks depend on each other's output — chain them.",
+        "When cost is tight and a single call suffices.",
+        "When results cannot be aggregated meaningfully."
+      ],
+      "examples": [
+        "Summarizing many documents at once, then merging the summaries.",
+        "Running a safety check in parallel with the main response.",
+        "Sampling an answer several times and taking the majority."
+      ],
+      "kpis": [
+        { "metric": "Latency reduction vs. sequential", "note": "Wall-clock saved by running calls concurrently; the whole point of the pattern." },
+        { "metric": "Aggregation quality", "note": "Whether merging the parallel outputs preserves correctness — the hard part is the join, not the fan-out." },
+        { "metric": "Concurrency cost", "note": "Total tokens across all parallel branches; you trade money for speed, so watch the multiplier." },
+        { "metric": "Rate-limit / throttle rate", "note": "How often parallel calls hit provider rate limits, which silently serializes or fails them." }
+      ],
+      "failureModes": [
+        "Aggregation errors: parallel results are correct individually but combined wrongly (double-counting, contradictions).",
+        "Rate limiting turns intended parallelism back into slow, serialized calls.",
+        "Cost surprise: N parallel branches cost N× even when only one result is used.",
+        "Partial failure handling: one branch fails and the aggregator either blocks or silently drops it."
+      ],
+      "lessons": [
+        "Design the aggregation step first — combining results well is harder than splitting the work.",
+        "Respect provider rate limits with batching or backoff, or parallelism evaporates.",
+        "Only parallelize independent sub-tasks; dependencies force a sequence anyway.",
+        "Decide explicitly how partial failures are handled before they happen in production."
+      ],
+      "faqs": [
+        { "q": "What is the difference between sectioning and voting?", "a": "Sectioning splits one task into different independent subtasks; voting runs the same task multiple times to aggregate for reliability." },
+        { "q": "Does voting always improve quality?", "a": "Often, on tasks where samples vary, but it multiplies cost. Reserve it for high-stakes steps where a single sample is risky." },
+        { "q": "How do I combine parallel results?", "a": "Depending on the case: concatenate sections, take a majority vote, union the findings, or use a judge model to synthesize." }
+      ]
+    },
+    "es": {
+      "name": "Paralelización (Parallelization)",
+      "summary": "La paralelización ejecuta varias llamadas al LLM a la vez y agrega los resultados. Dos variantes: seccionado (dividir una tarea en subtareas independientes en paralelo) y votación (ejecutar la misma tarea varias veces para mejorar fiabilidad o cobertura). Reduce la latencia y puede subir la calidad.",
+      "problem": "Ejecutar subtareas independientes una tras otra desperdicia tiempo, y una sola muestra de una tarea difícil puede ser poco fiable.",
+      "context": "Usa la paralelización cuando las subtareas son independientes (seccionado), o cuando varios intentos de la misma tarea mejoran la confianza o cobertura (votación).",
+      "solution": [
+        "Seccionado: divide el trabajo en piezas independientes, ejecútalas en paralelo y combina las salidas. Votación: ejecuta el mismo prompt varias veces (o con variaciones) y agrega por mayoría, unión o un juez.",
+        "Ambas reducen el tiempo real frente a la ejecución secuencial; la votación además cambia coste extra por mayor fiabilidad en tareas donde una sola muestra es arriesgada."
+      ],
+      "components": ["Divisor de tareas", "Trabajadores concurrentes", "Agregador (fusión / voto / juez)"],
+      "benefits": [
+        "Menor latencia al ejecutar llamadas en concurrencia.",
+        "La votación mejora la fiabilidad y la cobertura.",
+        "Cada llamada paralela se mantiene simple y enfocada."
+      ],
+      "risks": [
+        "La votación multiplica el coste de tokens.",
+        "La lógica de agregación puede ser difícil de acertar.",
+        "Subtareas asumidas independientes pueden interactuar en realidad."
+      ],
+      "whenNot": [
+        "Cuando las subtareas dependen de la salida de otra: encadénalas.",
+        "Cuando el coste es ajustado y basta una sola llamada.",
+        "Cuando los resultados no se pueden agregar de forma significativa."
+      ],
+      "examples": [
+        "Resumir muchos documentos a la vez y luego fusionar los resúmenes.",
+        "Ejecutar una comprobación de seguridad en paralelo con la respuesta principal.",
+        "Muestrear una respuesta varias veces y tomar la mayoría."
+      ],
+      "kpis": [
+        { "metric": "Reducción de latencia vs. secuencial", "note": "Tiempo ahorrado al ejecutar llamadas en paralelo; la razón de ser del patrón." },
+        { "metric": "Calidad de la agregación", "note": "Si combinar las salidas paralelas preserva la corrección; lo difícil es la unión, no el fan-out." },
+        { "metric": "Coste de concurrencia", "note": "Tokens totales de todas las ramas paralelas; cambias dinero por velocidad, vigila el multiplicador." },
+        { "metric": "Tasa de límite de tasa / throttle", "note": "Con qué frecuencia las llamadas paralelas chocan con los límites del proveedor, que las serializa o falla en silencio." }
+      ],
+      "failureModes": [
+        "Errores de agregación: resultados paralelos correctos por separado pero mal combinados (doble conteo, contradicciones).",
+        "El límite de tasa convierte el paralelismo previsto en llamadas lentas y serializadas.",
+        "Sorpresa de coste: N ramas paralelas cuestan N× aunque solo se use un resultado.",
+        "Manejo de fallo parcial: una rama falla y el agregador o se bloquea o la descarta en silencio."
+      ],
+      "lessons": [
+        "Diseña primero el paso de agregación: combinar bien los resultados es más difícil que dividir el trabajo.",
+        "Respeta los límites de tasa del proveedor con batching o backoff, o el paralelismo se evapora.",
+        "Paraleliza solo subtareas independientes; las dependencias fuerzan una secuencia de todos modos.",
+        "Decide explícitamente cómo se manejan los fallos parciales antes de que ocurran en producción."
+      ],
+      "faqs": [
+        { "q": "¿Diferencia entre seccionado y votación?", "a": "El seccionado divide una tarea en subtareas independientes distintas; la votación ejecuta la misma tarea varias veces para agregar por fiabilidad." },
+        { "q": "¿La votación siempre mejora la calidad?", "a": "A menudo, en tareas donde las muestras varían, pero multiplica el coste. Resérvala para pasos críticos donde una sola muestra es arriesgada." },
+        { "q": "¿Cómo combino resultados paralelos?", "a": "Según el caso: concatenar secciones, tomar voto mayoritario, unir los hallazgos o usar un modelo juez para sintetizar." }
+      ]
+    },
+    "pt": {
+      "name": "Paralelização (Parallelization)",
+      "summary": "A paralelização executa várias chamadas ao LLM ao mesmo tempo e agrega os resultados. Duas variantes: seccionamento (dividir uma tarefa em subtarefas independentes em paralelo) e votação (executar a mesma tarefa várias vezes para melhorar confiabilidade ou cobertura). Reduz a latência e pode aumentar a qualidade.",
+      "problem": "Executar subtarefas independentes uma após a outra desperdiça tempo, e uma única amostra de uma tarefa difícil pode ser pouco confiável.",
+      "context": "Use a paralelização quando as subtarefas são independentes (seccionamento), ou quando várias tentativas da mesma tarefa melhoram a confiança ou cobertura (votação).",
+      "solution": [
+        "Seccionamento: divida o trabalho em peças independentes, execute-as em paralelo e combine as saídas. Votação: execute o mesmo prompt várias vezes (ou com variações) e agregue por maioria, união ou um juiz.",
+        "Ambas reduzem o tempo real frente à execução sequencial; a votação além disso troca custo extra por maior confiabilidade em tarefas em que uma única amostra é arriscada."
+      ],
+      "components": ["Divisor de tarefas", "Trabalhadores concorrentes", "Agregador (fusão / voto / juiz)"],
+      "benefits": [
+        "Menor latência ao executar chamadas em concorrência.",
+        "A votação melhora a confiabilidade e a cobertura.",
+        "Cada chamada paralela se mantém simples e focada."
+      ],
+      "risks": [
+        "A votação multiplica o custo de tokens.",
+        "A lógica de agregação pode ser difícil de acertar.",
+        "Subtarefas assumidas independentes podem interagir na realidade."
+      ],
+      "whenNot": [
+        "Quando as subtarefas dependem da saída de outra: encadeie-as.",
+        "Quando o custo é apertado e basta uma única chamada.",
+        "Quando os resultados não podem ser agregados de forma significativa."
+      ],
+      "examples": [
+        "Resumir muitos documentos ao mesmo tempo e depois fundir os resumos.",
+        "Executar uma verificação de segurança em paralelo com a resposta principal.",
+        "Amostrar uma resposta várias vezes e tomar a maioria."
+      ],
+      "kpis": [
+        { "metric": "Redução de latência vs. sequencial", "note": "Tempo economizado ao executar chamadas em paralelo; a razão de ser do padrão." },
+        { "metric": "Qualidade da agregação", "note": "Se combinar as saídas paralelas preserva a correção; o difícil é a junção, não o fan-out." },
+        { "metric": "Custo de concorrência", "note": "Tokens totais de todas as ramificações paralelas; você troca dinheiro por velocidade, vigie o multiplicador." },
+        { "metric": "Taxa de rate limit / throttle", "note": "Com que frequência as chamadas paralelas batem nos limites do provedor, que as serializa ou falha em silêncio." }
+      ],
+      "failureModes": [
+        "Erros de agregação: resultados paralelos corretos isoladamente mas mal combinados (dupla contagem, contradições).",
+        "O rate limit transforma o paralelismo pretendido em chamadas lentas e serializadas.",
+        "Surpresa de custo: N ramificações paralelas custam N× mesmo quando só um resultado é usado.",
+        "Tratamento de falha parcial: uma ramificação falha e o agregador ou bloqueia ou a descarta em silêncio."
+      ],
+      "lessons": [
+        "Projete primeiro o passo de agregação: combinar bem os resultados é mais difícil que dividir o trabalho.",
+        "Respeite os limites de taxa do provedor com batching ou backoff, ou o paralelismo evapora.",
+        "Paralelize só subtarefas independentes; dependências forçam uma sequência de qualquer forma.",
+        "Decida explicitamente como as falhas parciais são tratadas antes que ocorram em produção."
+      ],
+      "faqs": [
+        { "q": "Diferença entre seccionamento e votação?", "a": "O seccionamento divide uma tarefa em subtarefas independentes distintas; a votação executa a mesma tarefa várias vezes para agregar por confiabilidade." },
+        { "q": "A votação sempre melhora a qualidade?", "a": "Muitas vezes, em tarefas em que as amostras variam, mas multiplica o custo. Reserve-a para passos críticos em que uma única amostra é arriscada." },
+        { "q": "Como combino resultados paralelos?", "a": "Conforme o caso: concatenar seções, tomar voto majoritário, unir os achados ou usar um modelo juiz para sintetizar." }
+      ]
+    }
+  }
+}

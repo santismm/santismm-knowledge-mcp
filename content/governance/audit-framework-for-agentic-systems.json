@@ -1,0 +1,278 @@
+{
+  "id": "GOV-006",
+  "slug": "audit-framework-for-agentic-systems",
+  "category": "framework",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": false,
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "medium",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "frameworks": [
+    "ISO/IEC 42001",
+    "NIST AI RMF"
+  ],
+  "patterns": [
+    "human-approval-gate",
+    "evaluator-optimizer"
+  ],
+  "knowledge": [
+    "ai-observability",
+    "agentic-evaluation",
+    "ai-governance"
+  ],
+  "references": [
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "ISO/IEC 42001:2023 — AI management systems",
+      "url": "https://www.iso.org/standard/81230.html"
+    },
+    {
+      "title": "ISACA — Auditing Artificial Intelligence",
+      "url": "https://www.isaca.org/resources/white-papers/2024/auditing-artificial-intelligence"
+    }
+  ],
+  "related": [
+    "agentic-ai-governance-checklist",
+    "nist-ai-rmf",
+    "iso-42001"
+  ],
+  "locales": {
+    "en": {
+      "name": "Audit Framework for Agentic Systems",
+      "summary": "A practical, vendor-neutral framework for making an agent auditable and for auditing it. It defines the evidence an independent reviewer needs — immutable, correlated traces of every decision and tool call, model and version provenance, evaluation reports, approval and incident records — and how to test controls and sample high-volume runs. Each evidence type maps to ISO/IEC 42001 and NIST AI RMF so an auditor can verify the agent stayed within its governed bounds. Use it to design auditability in from the start, not as an afterthought.",
+      "definition": "An agent audit is an independent, evidence-based examination that determines whether an agentic system operated within its authorized scope, controls and policies over a defined period, and whether the governance claims made about it are supported by reliable evidence.",
+      "scope": "Auditors, assurance and risk teams, and the system owners who must make their agents auditable by design. It applies to autonomous or semi-autonomous agents that use tools and act over time, and supports both internal assurance and external or regulatory audit. It is a practical companion to the formal frameworks, not a substitute for legal advice.",
+      "keyPoints": [
+        "Auditability by design: the agent must emit enough structured evidence at runtime to reconstruct any run later.",
+        "Every run produces an immutable, correlated trace: goal, each step and tool call with parameters and results, approvals, overrides and outcome.",
+        "Evidence must be complete, attributable, time-stamped and tamper-evident to hold evidentiary value.",
+        "Model and version provenance (prompt, tools, model) is captured per run so behaviour is tied to a known configuration.",
+        "Sampling is layered: risk-stratified, statistical, and 100% review of all exceptions, overrides, denials and incidents.",
+        "Audit evidence maps to ISO/IEC 42001 internal audit (Clause 9) and NIST AI RMF Measure and Manage functions."
+      ],
+      "controls": [
+        {
+          "control": "Immutable audit logs and traceability",
+          "note": "Capture a correlated trace per run — agent identity and version, goal, each step, tool call, result, approvals and outcome — and protect it against alteration. Implements AI observability."
+        },
+        {
+          "control": "Model and version provenance",
+          "note": "Record the exact prompt, tool set and model version behind each run so behaviour is attributable to a known, reproducible-by-config baseline."
+        },
+        {
+          "control": "Evaluation evidence",
+          "note": "Retain pre-deployment and ongoing evaluation reports and gate results so the auditor can verify safety and quality were measured — NIST 'Measure'."
+        },
+        {
+          "control": "Control testing and sampling",
+          "note": "Test each control against evidence using a documented sampling methodology: risk-stratified, statistical, and full exception review."
+        },
+        {
+          "control": "Approval and incident records",
+          "note": "Capture human approvals, overrides and incidents with actor identity and timestamps. Implements the human-approval-gate pattern."
+        },
+        {
+          "control": "Attestations and findings management",
+          "note": "System and control owners sign attestations backed by evidence; findings are tracked to closure with severity and deadlines."
+        }
+      ],
+      "checklist": [
+        "Confirm every agent run produces a complete, correlated trace tied by a stable trace ID.",
+        "Verify logs are tamper-evident, time-stamped and retained for the full audit and regulatory window.",
+        "Check that each run records model and version provenance (prompt, tools, model version).",
+        "Retrieve a control mapping / Statement of Applicability linking each control to its evidence.",
+        "Retain and review pre-deployment and ongoing evaluation reports and gate outcomes.",
+        "Confirm approval, override and incident records exist with actor identity and timestamps.",
+        "Apply a documented sampling methodology — risk-stratified, statistical, and 100% exception coverage.",
+        "Track findings to closure with severity and deadlines, and collect signed owner attestations."
+      ],
+      "pitfalls": [
+        "Non-auditable agents: logging added as an afterthought, leaving gaps no audit can fill.",
+        "Mutable logs: records that could be altered, destroying their evidentiary value.",
+        "Sampling blind spots: random-only sampling that misses rare but catastrophic actions.",
+        "Attestation without evidence: owners signing off on controls they cannot demonstrate.",
+        "Findings graveyard: issues raised but never remediated or re-tested."
+      ],
+      "examples": [
+        "An auditor reconstructs a disputed refund by following its correlated trace from goal to tool call to human approval.",
+        "A continuous-audit check alerts on a tool call outside the allow-list against the live log stream.",
+        "Retained evaluation reports map to NIST AI RMF Measure, evidencing that safety gates passed before deployment."
+      ],
+      "faqs": [
+        {
+          "q": "Can you audit a non-deterministic agent at all?",
+          "a": "Yes — you audit the controls and the recorded behaviour, not the determinism. Complete, immutable traces make any specific run reconstructable even if it cannot be reproduced exactly."
+        },
+        {
+          "q": "How big should the audit sample be?",
+          "a": "Large enough for your target assurance level statistically, plus 100% of exceptions and high-impact actions. Sampling never replaces full exception review."
+        },
+        {
+          "q": "How does audit evidence map to the frameworks?",
+          "a": "Traces and logs support NIST AI RMF Measure and Manage and ISO/IEC 42001 Clause 9 internal audit; a control mapping or Statement of Applicability links each control to the evidence that proves it operated."
+        }
+      ]
+    },
+    "es": {
+      "name": "Marco de Auditoría para Sistemas Agénticos",
+      "summary": "Un marco práctico y neutral para hacer un agente auditable y para auditarlo. Define la evidencia que necesita un revisor independiente —trazas inmutables y correlacionadas de cada decisión y llamada a herramienta, procedencia de modelo y versión, informes de evaluación, registros de aprobación e incidentes— y cómo probar controles y muestrear ejecuciones de alto volumen. Cada tipo de evidencia se mapea a ISO/IEC 42001 y NIST AI RMF para que un auditor pueda verificar que el agente se mantuvo dentro de sus límites gobernados. Úsalo para diseñar la auditabilidad desde el inicio, no como algo añadido después.",
+      "definition": "Una auditoría de agente es un examen independiente y basado en evidencia que determina si un sistema agéntico operó dentro de su alcance, controles y políticas autorizados durante un periodo definido, y si las afirmaciones de gobernanza hechas sobre él se sustentan en evidencia fiable.",
+      "scope": "Auditores, equipos de aseguramiento y de riesgo, y los responsables del sistema que deben hacer sus agentes auditables por diseño. Aplica a agentes autónomos o semiautónomos que usan herramientas y actúan a lo largo del tiempo, y da soporte tanto al aseguramiento interno como a la auditoría externa o regulatoria. Es un compañero práctico de los marcos formales, no un sustituto del asesoramiento legal.",
+      "keyPoints": [
+        "Auditabilidad por diseño: el agente debe emitir suficiente evidencia estructurada en tiempo de ejecución para reconstruir cualquier ejecución después.",
+        "Cada ejecución produce una traza inmutable y correlacionada: objetivo, cada paso y llamada a herramienta con parámetros y resultados, aprobaciones, anulaciones y resultado.",
+        "La evidencia debe ser completa, atribuible, con marca de tiempo y a prueba de manipulación para tener valor probatorio.",
+        "La procedencia de modelo y versión (prompt, herramientas, modelo) se captura por ejecución para que el comportamiento quede ligado a una configuración conocida.",
+        "El muestreo es por capas: estratificado por riesgo, estadístico, y revisión al 100% de todas las excepciones, anulaciones, denegaciones e incidentes.",
+        "La evidencia de auditoría se mapea a la auditoría interna de ISO/IEC 42001 (Cláusula 9) y a las funciones Medir y Gestionar de NIST AI RMF."
+      ],
+      "controls": [
+        {
+          "control": "Registros de auditoría inmutables y trazabilidad",
+          "note": "Captura una traza correlacionada por ejecución —identidad y versión del agente, objetivo, cada paso, llamada a herramienta, resultado, aprobaciones y resultado— y protégela contra alteración. Implementa la observabilidad de IA."
+        },
+        {
+          "control": "Procedencia de modelo y versión",
+          "note": "Registra el prompt exacto, el conjunto de herramientas y la versión del modelo detrás de cada ejecución para que el comportamiento sea atribuible a una base conocida y reproducible por configuración."
+        },
+        {
+          "control": "Evidencia de evaluación",
+          "note": "Conserva los informes de evaluación previos al despliegue y continuos y los resultados de las puertas para que el auditor pueda verificar que se midieron la seguridad y la calidad: el 'Medir' del NIST."
+        },
+        {
+          "control": "Prueba de controles y muestreo",
+          "note": "Prueba cada control frente a la evidencia usando una metodología de muestreo documentada: estratificada por riesgo, estadística y revisión completa de excepciones."
+        },
+        {
+          "control": "Registros de aprobación e incidentes",
+          "note": "Captura aprobaciones humanas, anulaciones e incidentes con la identidad del actor y marcas de tiempo. Implementa el patrón de puerta de aprobación humana."
+        },
+        {
+          "control": "Atestaciones y gestión de hallazgos",
+          "note": "Los responsables del sistema y de los controles firman atestaciones respaldadas por evidencia; los hallazgos se siguen hasta su cierre con severidad y plazos."
+        }
+      ],
+      "checklist": [
+        "Confirma que cada ejecución del agente produce una traza completa y correlacionada ligada por un ID de traza estable.",
+        "Verifica que los registros son a prueba de manipulación, con marca de tiempo y conservados durante toda la ventana de auditoría y regulatoria.",
+        "Comprueba que cada ejecución registra la procedencia de modelo y versión (prompt, herramientas, versión del modelo).",
+        "Obtén un mapeo de controles / Declaración de Aplicabilidad que vincule cada control con su evidencia.",
+        "Conserva y revisa los informes de evaluación previos al despliegue y continuos y los resultados de las puertas.",
+        "Confirma que existen registros de aprobación, anulación e incidentes con identidad del actor y marcas de tiempo.",
+        "Aplica una metodología de muestreo documentada: estratificada por riesgo, estadística y cobertura del 100% de excepciones.",
+        "Sigue los hallazgos hasta su cierre con severidad y plazos, y recoge atestaciones firmadas de los responsables."
+      ],
+      "pitfalls": [
+        "Agentes no auditables: registro añadido como algo tardío, dejando huecos que ninguna auditoría puede llenar.",
+        "Registros mutables: registros que podrían alterarse, destruyendo su valor probatorio.",
+        "Puntos ciegos del muestreo: muestreo solo aleatorio que pasa por alto acciones raras pero catastróficas.",
+        "Atestación sin evidencia: responsables que firman controles que no pueden demostrar.",
+        "Cementerio de hallazgos: problemas planteados pero nunca remediados ni vueltos a probar."
+      ],
+      "examples": [
+        "Un auditor reconstruye un reembolso en disputa siguiendo su traza correlacionada desde el objetivo a la llamada a herramienta y a la aprobación humana.",
+        "Un control de auditoría continua alerta sobre una llamada a herramienta fuera de la lista permitida contra el flujo de registros en vivo.",
+        "Los informes de evaluación conservados se mapean al Medir de NIST AI RMF, evidenciando que las puertas de seguridad pasaron antes del despliegue."
+      ],
+      "faqs": [
+        {
+          "q": "¿Se puede auditar un agente no determinista?",
+          "a": "Sí: auditas los controles y el comportamiento registrado, no el determinismo. Las trazas completas e inmutables hacen reconstruible cualquier ejecución concreta aunque no se pueda reproducir exactamente."
+        },
+        {
+          "q": "¿Qué tamaño debe tener la muestra de auditoría?",
+          "a": "Suficiente para tu nivel de aseguramiento objetivo de forma estadística, más el 100% de las excepciones y las acciones de alto impacto. El muestreo nunca reemplaza la revisión completa de excepciones."
+        },
+        {
+          "q": "¿Cómo se mapea la evidencia de auditoría a los marcos?",
+          "a": "Las trazas y registros dan soporte a Medir y Gestionar de NIST AI RMF y a la auditoría interna de la Cláusula 9 de ISO/IEC 42001; un mapeo de controles o Declaración de Aplicabilidad vincula cada control con la evidencia que prueba que operó."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Framework de Auditoria para Sistemas Agênticos",
+      "summary": "Um framework prático e neutro para tornar um agente auditável e para auditá-lo. Define a evidência que um revisor independente precisa — traços imutáveis e correlacionados de cada decisão e chamada de ferramenta, proveniência de modelo e versão, relatórios de avaliação, registros de aprovação e incidentes — e como testar controles e amostrar execuções de alto volume. Cada tipo de evidência é mapeado para ISO/IEC 42001 e NIST AI RMF, para que um auditor possa verificar se o agente se manteve dentro de seus limites governados. Use-o para projetar a auditabilidade desde o início, não como algo adicionado depois.",
+      "definition": "Uma auditoria de agente é um exame independente e baseado em evidência que determina se um sistema agêntico operou dentro de seu escopo, controles e políticas autorizados durante um período definido, e se as alegações de governança feitas sobre ele são sustentadas por evidência confiável.",
+      "scope": "Auditores, equipes de garantia e de risco, e os responsáveis pelo sistema que devem tornar seus agentes auditáveis por design. Aplica-se a agentes autônomos ou semiautônomos que usam ferramentas e agem ao longo do tempo, e dá suporte tanto à garantia interna quanto à auditoria externa ou regulatória. É um companheiro prático dos frameworks formais, não um substituto de aconselhamento jurídico.",
+      "keyPoints": [
+        "Auditabilidade por design: o agente deve emitir evidência estruturada suficiente em tempo de execução para reconstruir qualquer execução depois.",
+        "Cada execução produz um traço imutável e correlacionado: objetivo, cada passo e chamada de ferramenta com parâmetros e resultados, aprovações, anulações e resultado.",
+        "A evidência deve ser completa, atribuível, com carimbo de tempo e à prova de adulteração para ter valor probatório.",
+        "A proveniência de modelo e versão (prompt, ferramentas, modelo) é capturada por execução para que o comportamento fique ligado a uma configuração conhecida.",
+        "A amostragem é em camadas: estratificada por risco, estatística, e revisão de 100% de todas as exceções, anulações, negações e incidentes.",
+        "A evidência de auditoria mapeia para a auditoria interna da ISO/IEC 42001 (Cláusula 9) e para as funções Medir e Gerenciar do NIST AI RMF."
+      ],
+      "controls": [
+        {
+          "control": "Registros de auditoria imutáveis e rastreabilidade",
+          "note": "Capture um traço correlacionado por execução — identidade e versão do agente, objetivo, cada passo, chamada de ferramenta, resultado, aprovações e resultado — e proteja-o contra alteração. Implementa a observabilidade de IA."
+        },
+        {
+          "control": "Proveniência de modelo e versão",
+          "note": "Registre o prompt exato, o conjunto de ferramentas e a versão do modelo por trás de cada execução para que o comportamento seja atribuível a uma base conhecida e reproduzível por configuração."
+        },
+        {
+          "control": "Evidência de avaliação",
+          "note": "Retenha os relatórios de avaliação prévios à implantação e contínuos e os resultados dos portões para que o auditor possa verificar que a segurança e a qualidade foram medidas: o 'Medir' do NIST."
+        },
+        {
+          "control": "Teste de controles e amostragem",
+          "note": "Teste cada controle contra a evidência usando uma metodologia de amostragem documentada: estratificada por risco, estatística e revisão completa de exceções."
+        },
+        {
+          "control": "Registros de aprovação e incidentes",
+          "note": "Capture aprovações humanas, anulações e incidentes com a identidade do ator e carimbos de tempo. Implementa o padrão de portão de aprovação humana."
+        },
+        {
+          "control": "Atestações e gestão de achados",
+          "note": "Os responsáveis pelo sistema e pelos controles assinam atestações respaldadas por evidência; os achados são acompanhados até o fechamento com severidade e prazos."
+        }
+      ],
+      "checklist": [
+        "Confirme que cada execução do agente produz um traço completo e correlacionado ligado por um ID de traço estável.",
+        "Verifique que os registros são à prova de adulteração, com carimbo de tempo e retidos durante toda a janela de auditoria e regulatória.",
+        "Verifique que cada execução registra a proveniência de modelo e versão (prompt, ferramentas, versão do modelo).",
+        "Obtenha um mapeamento de controles / Declaração de Aplicabilidade que vincule cada controle à sua evidência.",
+        "Retenha e revise os relatórios de avaliação prévios à implantação e contínuos e os resultados dos portões.",
+        "Confirme que existem registros de aprovação, anulação e incidentes com identidade do ator e carimbos de tempo.",
+        "Aplique uma metodologia de amostragem documentada: estratificada por risco, estatística e cobertura de 100% das exceções.",
+        "Acompanhe os achados até o fechamento com severidade e prazos, e colete atestações assinadas dos responsáveis."
+      ],
+      "pitfalls": [
+        "Agentes não auditáveis: registro adicionado tardiamente, deixando lacunas que nenhuma auditoria pode preencher.",
+        "Registros mutáveis: registros que poderiam ser alterados, destruindo seu valor probatório.",
+        "Pontos cegos da amostragem: amostragem apenas aleatória que ignora ações raras mas catastróficas.",
+        "Atestação sem evidência: responsáveis que assinam controles que não conseguem demonstrar.",
+        "Cemitério de achados: problemas levantados mas nunca remediados ou retestados."
+      ],
+      "examples": [
+        "Um auditor reconstrói um reembolso em disputa seguindo seu traço correlacionado do objetivo à chamada de ferramenta e à aprovação humana.",
+        "Um controle de auditoria contínua alerta sobre uma chamada de ferramenta fora da lista permitida contra o fluxo de registros ao vivo.",
+        "Os relatórios de avaliação retidos mapeiam para o Medir do NIST AI RMF, evidenciando que os portões de segurança passaram antes da implantação."
+      ],
+      "faqs": [
+        {
+          "q": "É possível auditar um agente não determinístico?",
+          "a": "Sim: você audita os controles e o comportamento registrado, não o determinismo. Traços completos e imutáveis tornam qualquer execução específica reconstruível, mesmo que não possa ser reproduzida exatamente."
+        },
+        {
+          "q": "Qual deve ser o tamanho da amostra de auditoria?",
+          "a": "Grande o suficiente para seu nível de garantia alvo de forma estatística, mais 100% das exceções e das ações de alto impacto. A amostragem nunca substitui a revisão completa de exceções."
+        },
+        {
+          "q": "Como a evidência de auditoria mapeia para os frameworks?",
+          "a": "Traços e registros dão suporte a Medir e Gerenciar do NIST AI RMF e à auditoria interna da Cláusula 9 da ISO/IEC 42001; um mapeamento de controles ou Declaração de Aplicabilidade vincula cada controle à evidência que prova que ele operou."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "slug": "goal-decomposition",
+  "category": "orchestration",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": false,
+  "technologies": [
+    "Planner/executor frameworks",
+    "LangGraph",
+    "ReAct / Plan-and-Solve",
+    "Task graphs"
+  ],
+  "related": [
+    "supervisor-agent",
+    "orchestrator-workers",
+    "task-prioritization"
+  ],
+  "references": [
+    {
+      "title": "Yao et al. — ReAct (2022)",
+      "url": "https://arxiv.org/abs/2210.03629"
+    },
+    {
+      "title": "Wang et al. — Plan-and-Solve Prompting (2023)",
+      "url": "https://arxiv.org/abs/2305.04091"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "locales": {
+    "en": {
+      "name": "Goal Decomposition",
+      "summary": "Goal decomposition has an agent break a high-level goal into an ordered set of smaller, tractable sub-tasks — a plan — before acting, then execute and monitor that plan, re-planning when steps fail. The explicit plan becomes an inspectable artifact you can review, gate, and debug. Use it when a goal needs several dependent steps and reactive, step-at-a-time agents drift or stall; skip it for simple, single-shot tasks.",
+      "problem": "A single LLM call handed a broad, multi-step goal tends to improvise. Reactive agents that choose one action at a time can lose the thread on long horizons: they repeat work, skip prerequisites, or chase a dead end without realizing the overall objective is now unreachable. Because no plan exists as an artifact, you cannot review intended steps before they run, cannot tell whether a failure came from a bad strategy or a bad execution, and cannot easily resume after an interruption. The agent's reasoning is implicit, transient, and hard to audit.",
+      "context": "This pattern fits goals that decompose into multiple interdependent steps with a meaningful ordering — research-then-synthesize, migrate-then-verify, gather-then-reconcile-then-report. It assumes the model can produce a reasonable plan from the goal and available tools, and that steps are observable enough to detect failure. It is most valuable where steps are costly, side-effecting, or hard to undo, so reviewing the plan before execution pays off. It is a poor fit when the next action is obvious from the current state, or when the environment changes so fast that any upfront plan is stale before the second step.",
+      "solution": [
+        "Split the agent into a planning phase and an execution phase. The planner reads the goal, the available tools, and the current state, and emits an explicit, ordered plan: a list (or graph) of sub-tasks with their dependencies and expected outputs. Treating the plan as a first-class artifact is the core idea — it can be logged, shown to a human for approval, scored against policy, and diffed across runs. Encode dependencies explicitly so independent sub-tasks can run in parallel and dependent ones wait for their inputs, rather than forcing a brittle linear sequence the model invented.",
+        "An executor then runs the plan step by step, feeding each step's result forward and checking it against the step's expected output. When a step fails, returns something unusable, or invalidates a downstream assumption, hand control back to the planner to re-plan from the current state instead of blindly continuing — this closed loop is what separates robust decomposition from one-shot planning. Keep plans as shallow as the goal allows: prefer a few well-chosen steps over a deep tree, gate re-planning with a budget so the agent cannot loop forever, and let trivial goals bypass planning entirely."
+      ],
+      "components": [
+        "Planner that emits an ordered, dependency-aware plan",
+        "Plan representation (task list or task graph) as an inspectable artifact",
+        "Executor that runs steps and forwards results",
+        "Per-step verification against expected outputs",
+        "Re-planning trigger and loop with a step/iteration budget",
+        "Optional human approval gate before execution"
+      ],
+      "benefits": [
+        "Long-horizon goals stay coherent because intended steps are decided up front, not improvised one at a time.",
+        "The explicit plan is inspectable: it can be reviewed, approved, audited, and diffed before any side effect runs.",
+        "Failures are easier to localize — a bad plan is distinguishable from a bad step execution.",
+        "Independent sub-tasks expose parallelism and let work resume from the last completed step after an interruption."
+      ],
+      "risks": [
+        "A flawed initial decomposition propagates: every downstream step inherits a wrong assumption or missing prerequisite.",
+        "Over-planning adds latency and cost on simple goals that a reactive agent would finish in one step.",
+        "Plans go stale in fast-changing environments, so executing a step still based on an outdated world state.",
+        "Unbounded re-planning loops where the agent repeatedly rewrites the plan without making real progress."
+      ],
+      "whenNot": [
+        "The next action is obvious from the current state and a single reactive step solves the goal.",
+        "The environment changes faster than a plan stays valid, making any upfront sequence stale.",
+        "Steps are cheap, reversible, and independent, so the overhead of planning outweighs its benefit."
+      ],
+      "examples": [
+        "A research assistant plans gather-sources, extract-claims, cross-check, then synthesize, running the source gathering in parallel before the dependent synthesis step.",
+        "A code-migration agent plans inventory-usages, transform-files, run-tests, then re-plans the transform step when the test step surfaces a missed edge case.",
+        "A data-reconciliation agent decomposes a 'close the books' goal into pull-ledgers, normalize, match-entries, and flag-exceptions, with matching gated behind successful normalization."
+      ],
+      "kpis": [
+        {
+          "metric": "Goal completion rate",
+          "note": "Share of goals fully achieved end-to-end; good looks like decomposition beating a reactive baseline on the same multi-step tasks."
+        },
+        {
+          "metric": "Re-plan frequency",
+          "note": "How often a run triggers re-planning; a healthy band means the loop catches real failures without thrashing on every step."
+        },
+        {
+          "metric": "Steps per goal vs. minimum",
+          "note": "Plan length relative to a sensible minimum; watch for over-planning that inflates steps on simple goals."
+        },
+        {
+          "metric": "Plan-approval pass rate",
+          "note": "Fraction of plans accepted by reviewers or policy checks before execution; low rates signal systematically weak decomposition."
+        }
+      ],
+      "failureModes": [
+        "Bad decomposition propagates: a wrong early assumption corrupts every dependent step downstream.",
+        "Re-planning loop: the agent rewrites the plan repeatedly without converging or making progress.",
+        "Stale plan execution: a step runs against a world state that changed since the plan was made.",
+        "Over-decomposition: a trivial goal is split into needless steps, adding latency, cost, and failure surface."
+      ],
+      "lessons": [
+        "Make the plan a real artifact — log it, show it, diff it — so failures are debuggable rather than mysterious.",
+        "Always close the loop: detect step failure and re-plan from current state instead of continuing blindly.",
+        "Bound both plan depth and re-planning with explicit budgets to prevent shallow goals from spiraling.",
+        "Let trivial goals skip the planner; reserve decomposition for genuinely multi-step, dependent work."
+      ],
+      "faqs": [
+        {
+          "q": "How is this different from a reactive ReAct-style agent?",
+          "a": "A reactive agent decides one action at a time from the current state, with no plan as an artifact. Goal decomposition commits to an ordered plan up front, making intended steps inspectable and dependency ordering explicit. In practice the two are often combined: plan first, then execute reactively within each step and re-plan when a step fails."
+        },
+        {
+          "q": "What happens when a step fails mid-plan?",
+          "a": "Hand control back to the planner to re-plan from the current state rather than continuing blindly. The closed re-planning loop is what makes decomposition robust. Bound it with a budget so a persistently failing step cannot trigger endless rewrites without progress."
+        },
+        {
+          "q": "When does planning hurt more than it helps?",
+          "a": "On simple, single-step goals where the next action is obvious, or in environments that change faster than a plan stays valid. There, upfront planning adds latency and a stale-plan risk. Detect trivial goals and let them bypass the planner, reserving decomposition for genuinely multi-step, dependent work."
+        }
+      ]
+    },
+    "es": {
+      "name": "Descomposición de objetivos",
+      "summary": "La descomposición de objetivos hace que un agente divida una meta de alto nivel en un conjunto ordenado de subtareas más pequeñas y abordables — un plan — antes de actuar, para luego ejecutar y supervisar ese plan, replanificando cuando algún paso falla. El plan explícito se vuelve un artefacto inspeccionable que puedes revisar, controlar y depurar. Úsalo cuando una meta requiera varios pasos dependientes y los agentes reactivos paso a paso se desvían o se estancan; omítelo en tareas simples de un solo paso.",
+      "problem": "Una sola llamada a un LLM con una meta amplia y de múltiples pasos tiende a improvisar. Los agentes reactivos que eligen una acción a la vez pueden perder el hilo en horizontes largos: repiten trabajo, omiten prerrequisitos o persiguen un callejón sin salida sin advertir que el objetivo general ya es inalcanzable. Como no existe un plan como artefacto, no puedes revisar los pasos previstos antes de ejecutarlos, no distingues si un fallo vino de una mala estrategia o de una mala ejecución, y no puedes reanudar fácilmente tras una interrupción. El razonamiento del agente es implícito, transitorio y difícil de auditar.",
+      "context": "Este patrón encaja con metas que se descomponen en múltiples pasos interdependientes con un orden significativo — investigar-luego-sintetizar, migrar-luego-verificar, recopilar-conciliar-luego-reportar. Supone que el modelo puede producir un plan razonable a partir de la meta y las herramientas disponibles, y que los pasos son lo bastante observables para detectar fallos. Es más valioso cuando los pasos son costosos, con efectos secundarios o difíciles de deshacer, de modo que revisar el plan antes de ejecutarlo compensa. Encaja mal cuando la siguiente acción es obvia desde el estado actual, o cuando el entorno cambia tan rápido que cualquier plan inicial queda obsoleto antes del segundo paso.",
+      "solution": [
+        "Divide el agente en una fase de planificación y una de ejecución. El planificador lee la meta, las herramientas disponibles y el estado actual, y emite un plan explícito y ordenado: una lista (o grafo) de subtareas con sus dependencias y salidas esperadas. Tratar el plan como un artefacto de primera clase es la idea central — puede registrarse, mostrarse a una persona para su aprobación, evaluarse frente a una política y compararse entre ejecuciones. Codifica las dependencias de forma explícita para que las subtareas independientes corran en paralelo y las dependientes esperen sus entradas, en lugar de forzar una secuencia lineal frágil inventada por el modelo.",
+        "Un ejecutor recorre el plan paso a paso, propagando el resultado de cada paso y contrastándolo con su salida esperada. Cuando un paso falla, devuelve algo inutilizable o invalida una suposición posterior, devuelve el control al planificador para replanificar desde el estado actual en lugar de continuar a ciegas — este bucle cerrado es lo que separa la descomposición robusta de la planificación de un solo intento. Mantén los planes tan superficiales como la meta lo permita: prefiere unos pocos pasos bien elegidos antes que un árbol profundo, limita la replanificación con un presupuesto para que el agente no entre en bucle infinito, y deja que las metas triviales eviten por completo la planificación."
+      ],
+      "components": [
+        "Planificador que emite un plan ordenado y consciente de dependencias",
+        "Representación del plan (lista o grafo de tareas) como artefacto inspeccionable",
+        "Ejecutor que corre los pasos y propaga resultados",
+        "Verificación por paso frente a las salidas esperadas",
+        "Disparador y bucle de replanificación con presupuesto de pasos/iteraciones",
+        "Compuerta opcional de aprobación humana antes de ejecutar"
+      ],
+      "benefits": [
+        "Las metas de horizonte largo se mantienen coherentes porque los pasos previstos se deciden por adelantado, no se improvisan uno a uno.",
+        "El plan explícito es inspeccionable: puede revisarse, aprobarse, auditarse y compararse antes de cualquier efecto secundario.",
+        "Los fallos son más fáciles de localizar — un mal plan se distingue de una mala ejecución de un paso.",
+        "Las subtareas independientes exponen paralelismo y permiten reanudar el trabajo desde el último paso completado tras una interrupción."
+      ],
+      "risks": [
+        "Una descomposición inicial defectuosa se propaga: cada paso posterior hereda una suposición errónea o un prerrequisito ausente.",
+        "Planificar de más añade latencia y coste en metas simples que un agente reactivo terminaría en un solo paso.",
+        "Los planes quedan obsoletos en entornos cambiantes, ejecutando un paso aún basado en un estado del mundo desactualizado.",
+        "Bucles de replanificación sin límite en los que el agente reescribe el plan una y otra vez sin avanzar de verdad."
+      ],
+      "whenNot": [
+        "La siguiente acción es obvia desde el estado actual y un solo paso reactivo resuelve la meta.",
+        "El entorno cambia más rápido de lo que un plan se mantiene válido, dejando obsoleta cualquier secuencia inicial.",
+        "Los pasos son baratos, reversibles e independientes, de modo que la sobrecarga de planificar supera su beneficio."
+      ],
+      "examples": [
+        "Un asistente de investigación planifica recopilar-fuentes, extraer-afirmaciones, contrastar y luego sintetizar, corriendo la recopilación de fuentes en paralelo antes del paso dependiente de síntesis.",
+        "Un agente de migración de código planifica inventariar-usos, transformar-archivos, ejecutar-pruebas, y luego replanifica el paso de transformación cuando las pruebas revelan un caso límite omitido.",
+        "Un agente de conciliación de datos descompone la meta de 'cerrar los libros' en extraer-libros-mayores, normalizar, emparejar-asientos y marcar-excepciones, con el emparejamiento condicionado a una normalización exitosa."
+      ],
+      "kpis": [
+        {
+          "metric": "Tasa de cumplimiento de objetivos",
+          "note": "Proporción de metas logradas de extremo a extremo; lo bueno se ve como una descomposición que supera a una línea base reactiva en las mismas tareas de múltiples pasos."
+        },
+        {
+          "metric": "Frecuencia de replanificación",
+          "note": "Con qué frecuencia una ejecución dispara replanificación; una banda sana significa que el bucle captura fallos reales sin oscilar en cada paso."
+        },
+        {
+          "metric": "Pasos por meta frente al mínimo",
+          "note": "Longitud del plan respecto a un mínimo sensato; vigila la planificación excesiva que infla los pasos en metas simples."
+        },
+        {
+          "metric": "Tasa de aprobación de planes",
+          "note": "Fracción de planes aceptados por revisores o controles de política antes de ejecutar; tasas bajas indican una descomposición sistemáticamente débil."
+        }
+      ],
+      "failureModes": [
+        "La mala descomposición se propaga: una suposición temprana errónea corrompe cada paso dependiente posterior.",
+        "Bucle de replanificación: el agente reescribe el plan repetidamente sin converger ni avanzar.",
+        "Ejecución de plan obsoleto: un paso corre contra un estado del mundo que cambió desde que se hizo el plan.",
+        "Sobredescomposición: una meta trivial se divide en pasos innecesarios, añadiendo latencia, coste y superficie de fallo."
+      ],
+      "lessons": [
+        "Haz del plan un artefacto real — regístralo, muéstralo, compáralo — para que los fallos sean depurables y no misteriosos.",
+        "Cierra siempre el bucle: detecta el fallo de un paso y replanifica desde el estado actual en vez de continuar a ciegas.",
+        "Limita tanto la profundidad del plan como la replanificación con presupuestos explícitos para evitar que las metas superficiales se descontrolen.",
+        "Deja que las metas triviales salten el planificador; reserva la descomposición para trabajo realmente de múltiples pasos y dependiente."
+      ],
+      "faqs": [
+        {
+          "q": "¿En qué se diferencia esto de un agente reactivo estilo ReAct?",
+          "a": "Un agente reactivo decide una acción a la vez desde el estado actual, sin un plan como artefacto. La descomposición de objetivos se compromete con un plan ordenado por adelantado, haciendo inspeccionables los pasos previstos y explícito el orden de dependencias. En la práctica suelen combinarse: planificar primero, luego ejecutar de forma reactiva dentro de cada paso y replanificar cuando un paso falla."
+        },
+        {
+          "q": "¿Qué ocurre cuando un paso falla a mitad del plan?",
+          "a": "Devuelve el control al planificador para replanificar desde el estado actual en lugar de continuar a ciegas. El bucle cerrado de replanificación es lo que hace robusta a la descomposición. Limítalo con un presupuesto para que un paso que falla de forma persistente no dispare reescrituras interminables sin avanzar."
+        },
+        {
+          "q": "¿Cuándo planificar perjudica más de lo que ayuda?",
+          "a": "En metas simples de un solo paso donde la siguiente acción es obvia, o en entornos que cambian más rápido de lo que un plan se mantiene válido. Ahí, planificar por adelantado añade latencia y riesgo de plan obsoleto. Detecta las metas triviales y deja que eviten el planificador, reservando la descomposición para trabajo realmente de múltiples pasos y dependiente."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Decomposição de objetivos",
+      "summary": "A decomposição de objetivos faz um agente dividir uma meta de alto nível em um conjunto ordenado de subtarefas menores e tratáveis — um plano — antes de agir, e então executar e monitorar esse plano, replanejando quando passos falham. O plano explícito vira um artefato inspecionável que você pode revisar, controlar e depurar. Use quando uma meta exigir vários passos dependentes e agentes reativos passo a passo se desviarem ou travarem; dispense em tarefas simples de um único passo.",
+      "problem": "Uma única chamada a um LLM com uma meta ampla e de múltiplos passos tende a improvisar. Agentes reativos que escolhem uma ação por vez podem perder o fio em horizontes longos: repetem trabalho, pulam pré-requisitos ou perseguem um beco sem saída sem perceber que o objetivo geral já é inalcançável. Como não existe um plano como artefato, você não consegue revisar os passos pretendidos antes de executá-los, não distingue se uma falha veio de uma estratégia ruim ou de uma execução ruim, e não consegue retomar facilmente após uma interrupção. O raciocínio do agente é implícito, transitório e difícil de auditar.",
+      "context": "Este padrão encaixa em metas que se decompõem em múltiplos passos interdependentes com uma ordenação significativa — pesquisar-depois-sintetizar, migrar-depois-verificar, coletar-conciliar-depois-reportar. Pressupõe que o modelo consegue produzir um plano razoável a partir da meta e das ferramentas disponíveis, e que os passos são observáveis o suficiente para detectar falhas. É mais valioso quando os passos são caros, com efeitos colaterais ou difíceis de desfazer, de modo que revisar o plano antes de executar compensa. Encaixa mal quando a próxima ação é óbvia a partir do estado atual, ou quando o ambiente muda tão rápido que qualquer plano inicial fica desatualizado antes do segundo passo.",
+      "solution": [
+        "Divida o agente em uma fase de planejamento e uma de execução. O planejador lê a meta, as ferramentas disponíveis e o estado atual, e emite um plano explícito e ordenado: uma lista (ou grafo) de subtarefas com suas dependências e saídas esperadas. Tratar o plano como um artefato de primeira classe é a ideia central — ele pode ser registrado, mostrado a uma pessoa para aprovação, avaliado contra uma política e comparado entre execuções. Codifique as dependências de forma explícita para que subtarefas independentes rodem em paralelo e as dependentes aguardem suas entradas, em vez de forçar uma sequência linear frágil inventada pelo modelo.",
+        "Um executor então percorre o plano passo a passo, propagando o resultado de cada passo e conferindo-o contra a saída esperada. Quando um passo falha, retorna algo inutilizável ou invalida uma suposição posterior, devolva o controle ao planejador para replanejar a partir do estado atual em vez de continuar às cegas — esse laço fechado é o que separa a decomposição robusta do planejamento de tentativa única. Mantenha os planos tão rasos quanto a meta permitir: prefira poucos passos bem escolhidos a uma árvore profunda, limite o replanejamento com um orçamento para que o agente não entre em laço infinito, e deixe que metas triviais ignorem completamente o planejamento."
+      ],
+      "components": [
+        "Planejador que emite um plano ordenado e ciente de dependências",
+        "Representação do plano (lista ou grafo de tarefas) como artefato inspecionável",
+        "Executor que roda os passos e propaga resultados",
+        "Verificação por passo contra as saídas esperadas",
+        "Gatilho e laço de replanejamento com orçamento de passos/iterações",
+        "Portão opcional de aprovação humana antes da execução"
+      ],
+      "benefits": [
+        "Metas de horizonte longo permanecem coerentes porque os passos pretendidos são decididos com antecedência, não improvisados um a um.",
+        "O plano explícito é inspecionável: pode ser revisado, aprovado, auditado e comparado antes de qualquer efeito colateral.",
+        "Falhas são mais fáceis de localizar — um plano ruim se distingue de uma execução de passo ruim.",
+        "Subtarefas independentes expõem paralelismo e permitem retomar o trabalho a partir do último passo concluído após uma interrupção."
+      ],
+      "risks": [
+        "Uma decomposição inicial falha se propaga: cada passo posterior herda uma suposição errada ou um pré-requisito ausente.",
+        "Planejar demais adiciona latência e custo em metas simples que um agente reativo terminaria em um único passo.",
+        "Os planos ficam desatualizados em ambientes que mudam rápido, executando um passo ainda baseado em um estado de mundo defasado.",
+        "Laços de replanejamento sem limite em que o agente reescreve o plano repetidamente sem progredir de fato."
+      ],
+      "whenNot": [
+        "A próxima ação é óbvia a partir do estado atual e um único passo reativo resolve a meta.",
+        "O ambiente muda mais rápido do que um plano se mantém válido, deixando qualquer sequência inicial desatualizada.",
+        "Os passos são baratos, reversíveis e independentes, de modo que o custo de planejar supera seu benefício."
+      ],
+      "examples": [
+        "Um assistente de pesquisa planeja coletar-fontes, extrair-afirmações, conferir e então sintetizar, rodando a coleta de fontes em paralelo antes do passo dependente de síntese.",
+        "Um agente de migração de código planeja inventariar-usos, transformar-arquivos, rodar-testes, e então replaneja o passo de transformação quando os testes revelam um caso de borda omitido.",
+        "Um agente de conciliação de dados decompõe a meta de 'fechar os livros' em puxar-razões, normalizar, casar-lançamentos e sinalizar-exceções, com o casamento condicionado a uma normalização bem-sucedida."
+      ],
+      "kpis": [
+        {
+          "metric": "Taxa de conclusão de objetivos",
+          "note": "Parcela de metas alcançadas de ponta a ponta; o bom se parece com uma decomposição superando uma linha de base reativa nas mesmas tarefas de múltiplos passos."
+        },
+        {
+          "metric": "Frequência de replanejamento",
+          "note": "Com que frequência uma execução dispara replanejamento; uma faixa saudável significa que o laço captura falhas reais sem oscilar a cada passo."
+        },
+        {
+          "metric": "Passos por meta frente ao mínimo",
+          "note": "Comprimento do plano em relação a um mínimo sensato; observe o planejamento excessivo que infla os passos em metas simples."
+        },
+        {
+          "metric": "Taxa de aprovação de planos",
+          "note": "Fração de planos aceitos por revisores ou verificações de política antes da execução; taxas baixas sinalizam decomposição sistematicamente fraca."
+        }
+      ],
+      "failureModes": [
+        "Decomposição ruim se propaga: uma suposição inicial errada corrompe cada passo dependente posterior.",
+        "Laço de replanejamento: o agente reescreve o plano repetidamente sem convergir nem progredir.",
+        "Execução de plano desatualizado: um passo roda contra um estado de mundo que mudou desde que o plano foi feito.",
+        "Sobredecomposição: uma meta trivial é dividida em passos desnecessários, adicionando latência, custo e superfície de falha."
+      ],
+      "lessons": [
+        "Faça do plano um artefato real — registre, mostre, compare — para que falhas sejam depuráveis e não misteriosas.",
+        "Feche sempre o laço: detecte a falha de um passo e replaneje a partir do estado atual em vez de continuar às cegas.",
+        "Limite tanto a profundidade do plano quanto o replanejamento com orçamentos explícitos para evitar que metas rasas saiam de controle.",
+        "Deixe metas triviais pularem o planejador; reserve a decomposição para trabalho realmente de múltiplos passos e dependente."
+      ],
+      "faqs": [
+        {
+          "q": "Como isso difere de um agente reativo no estilo ReAct?",
+          "a": "Um agente reativo decide uma ação por vez a partir do estado atual, sem um plano como artefato. A decomposição de objetivos se compromete com um plano ordenado de antemão, tornando os passos pretendidos inspecionáveis e explícita a ordenação de dependências. Na prática os dois costumam ser combinados: planejar primeiro, depois executar de forma reativa dentro de cada passo e replanejar quando um passo falha."
+        },
+        {
+          "q": "O que acontece quando um passo falha no meio do plano?",
+          "a": "Devolva o controle ao planejador para replanejar a partir do estado atual em vez de continuar às cegas. O laço fechado de replanejamento é o que torna a decomposição robusta. Limite-o com um orçamento para que um passo que falha persistentemente não dispare reescritas intermináveis sem progresso."
+        },
+        {
+          "q": "Quando planejar atrapalha mais do que ajuda?",
+          "a": "Em metas simples de um único passo onde a próxima ação é óbvia, ou em ambientes que mudam mais rápido do que um plano se mantém válido. Ali, planejar com antecedência adiciona latência e risco de plano desatualizado. Detecte as metas triviais e deixe que pulem o planejador, reservando a decomposição para trabalho realmente de múltiplos passos e dependente."
+        }
+      ]
+    }
+  }
+}

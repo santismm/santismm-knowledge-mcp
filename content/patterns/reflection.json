@@ -1,0 +1,298 @@
+{
+  "slug": "reflection",
+  "category": "reliability",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "technologies": [
+    "LangGraph",
+    "Agent frameworks",
+    "LLM-as-judge"
+  ],
+  "related": [
+    "evaluator-optimizer",
+    "prompt-chaining"
+  ],
+  "references": [
+    {
+      "title": "Shinn et al. — Reflexion: Language Agents with Verbal Reinforcement Learning (2023)",
+      "url": "https://arxiv.org/abs/2303.11366"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "locales": {
+    "en": {
+      "name": "Reflection",
+      "summary": "Reflection has a model critique its own output and then revise it, using the critique as feedback. It is a lightweight, single-model way to catch mistakes and improve quality on reasoning, coding and writing tasks — at the cost of extra calls.",
+      "definition": "Reflection is a pattern in which a model reviews and critiques its own output against explicit criteria and then revises it, trading extra inference for higher quality.",
+      "problem": "Models often produce a flawed first answer they could improve if prompted to review their own work, but a single pass gives them no chance to.",
+      "context": "Use reflection when a self-review step measurably improves output and you want a simpler alternative to a two-model evaluator loop — common in reasoning and coding tasks.",
+      "solution": [
+        "After generating an answer, prompt the same model to critique it against the goal (and any tool feedback such as test results or errors), then to produce a revised answer informed by that critique. Repeat for a bounded number of iterations.",
+        "Reflection works best when grounded in real signals — execution errors, test output, retrieved facts — rather than pure self-assessment, which can be overconfident."
+      ],
+      "components": [
+        "Initial generation",
+        "Self-critique step",
+        "Grounding signal (errors / tests / facts)",
+        "Revision",
+        "Iteration budget"
+      ],
+      "benefits": [
+        "Improves quality with a single model — no second system.",
+        "Effective when grounded in tool or test feedback.",
+        "Simple to add to an existing call."
+      ],
+      "risks": [
+        "Self-critique can be overconfident or miss its own errors.",
+        "Extra calls add latency and cost.",
+        "Without grounding, gains are limited."
+      ],
+      "whenNot": [
+        "When you have an objective external check — use evaluator-optimizer.",
+        "When a single pass already meets the bar.",
+        "When latency budgets are very tight."
+      ],
+      "examples": [
+        "A coding agent reading test failures and fixing its own patch.",
+        "A reasoning task where the model rechecks its steps before answering.",
+        "A draft the model reviews for gaps before finalizing."
+      ],
+      "productionEvidence": {
+        "context": "Tasks where output quality matters more than latency or cost — drafting, code generation, analysis — and where errors are detectable on review.",
+        "scenario": "After producing a first answer, the model (or a separate critic) evaluates it against concrete criteria and produces a revised version; the loop is capped at one or two passes.",
+        "technology": "A critique-then-revise prompt chain, ideally backed by external signals (tests, tools, a separate evaluator) for high-stakes work.",
+        "load": "Each reflection pass at least doubles calls, so it is applied selectively to the outputs that justify the overhead.",
+        "results": "Observed pattern: reflection lifts quality where the model can actually detect its own errors, but it can over-revise correct answers and at least doubles cost. Measure the quality lift against an eval set before trusting it, and prefer external signals when stakes are high."
+      },
+      "kpis": [
+        {
+          "metric": "Quality lift from reflection",
+          "note": "Measured improvement in output quality with the reflection step versus without; if it's not measurable, the step isn't earning its cost."
+        },
+        {
+          "metric": "Self-correction rate",
+          "note": "Share of genuine errors the model catches and fixes on review — distinct from cosmetic edits."
+        },
+        {
+          "metric": "Added latency & cost",
+          "note": "Reflection at least doubles calls; track the overhead against the quality it buys."
+        },
+        {
+          "metric": "Over-revision rate",
+          "note": "How often reflection degrades an already-good answer by second-guessing it."
+        }
+      ],
+      "failureModes": [
+        "Self-evaluation blind spots: a model often can't see its own errors, so reflection misses them.",
+        "Over-revision: the model 'fixes' a correct answer into a worse one.",
+        "Cost and latency double (or more) for marginal or no quality gain.",
+        "False confidence: the model asserts the output is now correct when it isn't."
+      ],
+      "lessons": [
+        "Measure the lift; reflection is worth it only where it demonstrably improves quality.",
+        "Prefer external signals (tests, tools, a separate evaluator) over pure self-critique when stakes are high.",
+        "Cap reflection to one or two passes — returns diminish fast and cost compounds.",
+        "Give the reflection step concrete criteria, not a vague 'improve this'."
+      ],
+      "faqs": [
+        {
+          "q": "Reflection or evaluator-optimizer?",
+          "a": "Reflection uses one model to self-critique (simpler); evaluator-optimizer uses a separate evaluator (sharper, less biased). Choose by how reliable self-assessment is for your task."
+        },
+        {
+          "q": "Does reflection always help?",
+          "a": "It helps most when grounded in real feedback like test results or errors. Pure self-assessment can be overconfident and add little."
+        },
+        {
+          "q": "How many reflection rounds?",
+          "a": "Keep it bounded — often one or two. Diminishing returns and rising cost make long loops rarely worth it."
+        }
+      ]
+    },
+    "es": {
+      "name": "Reflexión (Reflection)",
+      "summary": "La reflexión hace que un modelo critique su propia salida y luego la revise, usando la crítica como feedback. Es una forma ligera, de un solo modelo, de atrapar errores y mejorar la calidad en tareas de razonamiento, código y escritura, a costa de llamadas extra.",
+      "definition": "La reflexión es un patrón en el que un modelo revisa y critica su propia salida frente a criterios explícitos y luego la corrige, cambiando inferencia adicional por mayor calidad.",
+      "problem": "Los modelos a menudo producen una primera respuesta defectuosa que podrían mejorar si se les pide revisar su propio trabajo, pero una sola pasada no les da la oportunidad.",
+      "context": "Usa la reflexión cuando un paso de autorrevisión mejore la salida de forma medible y quieras una alternativa más simple al bucle evaluador de dos modelos —común en tareas de razonamiento y código.",
+      "solution": [
+        "Tras generar una respuesta, pide al mismo modelo que la critique frente al objetivo (y cualquier feedback de herramientas como resultados de tests o errores), y luego que produzca una respuesta revisada informada por esa crítica. Repite un número acotado de iteraciones.",
+        "La reflexión funciona mejor anclada en señales reales —errores de ejecución, salida de tests, hechos recuperados— que en la pura autoevaluación, que puede ser demasiado confiada."
+      ],
+      "components": [
+        "Generación inicial",
+        "Paso de autocrítica",
+        "Señal de anclaje (errores / tests / hechos)",
+        "Revisión",
+        "Presupuesto de iteración"
+      ],
+      "benefits": [
+        "Mejora la calidad con un solo modelo, sin segundo sistema.",
+        "Eficaz cuando se ancla en feedback de herramientas o tests.",
+        "Simple de añadir a una llamada existente."
+      ],
+      "risks": [
+        "La autocrítica puede ser demasiado confiada o no ver sus errores.",
+        "Las llamadas extra añaden latencia y coste.",
+        "Sin anclaje, las ganancias son limitadas."
+      ],
+      "whenNot": [
+        "Cuando tienes una comprobación externa objetiva: usa evaluador-optimizador.",
+        "Cuando una sola pasada ya alcanza el nivel.",
+        "Cuando los presupuestos de latencia son muy ajustados."
+      ],
+      "examples": [
+        "Un agente de código que lee fallos de tests y corrige su propio parche.",
+        "Una tarea de razonamiento donde el modelo revisa sus pasos antes de responder.",
+        "Un borrador que el modelo revisa en busca de lagunas antes de finalizar."
+      ],
+      "productionEvidence": {
+        "context": "Tareas donde la calidad importa más que la latencia o el coste —redacción, generación de código, análisis— y donde los errores son detectables al revisar.",
+        "scenario": "Tras producir una primera respuesta, el modelo (o un crítico aparte) la evalúa frente a criterios concretos y produce una versión revisada; el bucle se limita a una o dos pasadas.",
+        "technology": "Una cadena de prompts criticar-luego-revisar, idealmente respaldada por señales externas (tests, herramientas, un evaluador aparte) para el trabajo de alto riesgo.",
+        "load": "Cada pasada de reflexión al menos duplica las llamadas, así que se aplica de forma selectiva a las salidas que justifican el sobrecoste.",
+        "results": "Patrón observado: la reflexión mejora la calidad donde el modelo puede de verdad detectar sus propios errores, pero puede sobrerrevisar respuestas correctas y al menos duplica el coste. Mide la mejora frente a un conjunto de evaluación antes de confiar en ella, y prefiere señales externas cuando hay mucho en juego."
+      },
+      "kpis": [
+        {
+          "metric": "Mejora de calidad por reflexión",
+          "note": "Mejora medida en la calidad con el paso de reflexión frente a sin él; si no es medible, el paso no justifica su coste."
+        },
+        {
+          "metric": "Tasa de autocorrección",
+          "note": "Proporción de errores reales que el modelo detecta y corrige al revisar, distinta de ediciones cosméticas."
+        },
+        {
+          "metric": "Latencia y coste añadidos",
+          "note": "La reflexión al menos duplica las llamadas; vigila el sobrecoste frente a la calidad que aporta."
+        },
+        {
+          "metric": "Tasa de sobrerrevisión",
+          "note": "Con qué frecuencia la reflexión degrada una respuesta ya buena al cuestionarla en exceso."
+        }
+      ],
+      "failureModes": [
+        "Puntos ciegos de autoevaluación: un modelo suele no ver sus propios errores, así que la reflexión los pasa por alto.",
+        "Sobrerrevisión: el modelo 'corrige' una respuesta correcta y la empeora.",
+        "Coste y latencia se duplican (o más) para una ganancia de calidad marginal o nula.",
+        "Falsa confianza: el modelo afirma que la salida ya es correcta cuando no lo es."
+      ],
+      "lessons": [
+        "Mide la mejora; la reflexión vale la pena solo donde mejora la calidad de forma demostrable.",
+        "Prefiere señales externas (tests, herramientas, un evaluador aparte) sobre la pura autocrítica cuando hay mucho en juego.",
+        "Limita la reflexión a una o dos pasadas: los rendimientos caen rápido y el coste se acumula.",
+        "Da al paso de reflexión criterios concretos, no un vago 'mejora esto'."
+      ],
+      "faqs": [
+        {
+          "q": "¿Reflexión o evaluador-optimizador?",
+          "a": "La reflexión usa un modelo para autocriticarse (más simple); el evaluador-optimizador usa un evaluador separado (más afilado, menos sesgado). Elige según cuán fiable sea la autoevaluación en tu tarea."
+        },
+        {
+          "q": "¿La reflexión siempre ayuda?",
+          "a": "Ayuda más cuando se ancla en feedback real como resultados de tests o errores. La pura autoevaluación puede ser demasiado confiada y aportar poco."
+        },
+        {
+          "q": "¿Cuántas rondas de reflexión?",
+          "a": "Mantenlo acotado, a menudo una o dos. Los rendimientos decrecientes y el coste creciente hacen que los bucles largos rara vez compensen."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Reflexão (Reflection)",
+      "summary": "A reflexão faz um modelo criticar sua própria saída e depois revisá-la, usando a crítica como feedback. É uma forma leve, de um único modelo, de capturar erros e melhorar a qualidade em tarefas de raciocínio, código e escrita, ao custo de chamadas extras.",
+      "definition": "A reflexão é um padrão em que um modelo revisa e critica a própria saída frente a critérios explícitos e depois a corrige, trocando inferência adicional por mais qualidade.",
+      "problem": "Os modelos muitas vezes produzem uma primeira resposta defeituosa que poderiam melhorar se solicitados a revisar o próprio trabalho, mas uma única passagem não lhes dá a chance.",
+      "context": "Use a reflexão quando um passo de autorrevisão melhore a saída de forma mensurável e você queira uma alternativa mais simples ao laço avaliador de dois modelos — comum em tarefas de raciocínio e código.",
+      "solution": [
+        "Após gerar uma resposta, peça ao mesmo modelo que a critique frente ao objetivo (e qualquer feedback de ferramentas como resultados de testes ou erros), e depois que produza uma resposta revisada informada por essa crítica. Repita um número limitado de iterações.",
+        "A reflexão funciona melhor ancorada em sinais reais — erros de execução, saída de testes, fatos recuperados — que na pura autoavaliação, que pode ser confiante demais."
+      ],
+      "components": [
+        "Geração inicial",
+        "Passo de autocrítica",
+        "Sinal de ancoragem (erros / testes / fatos)",
+        "Revisão",
+        "Orçamento de iteração"
+      ],
+      "benefits": [
+        "Melhora a qualidade com um único modelo, sem segundo sistema.",
+        "Eficaz quando ancorada em feedback de ferramentas ou testes.",
+        "Simples de adicionar a uma chamada existente."
+      ],
+      "risks": [
+        "A autocrítica pode ser confiante demais ou não ver seus erros.",
+        "As chamadas extras adicionam latência e custo.",
+        "Sem ancoragem, os ganhos são limitados."
+      ],
+      "whenNot": [
+        "Quando você tem uma verificação externa objetiva: use avaliador-otimizador.",
+        "Quando uma única passagem já alcança o nível.",
+        "Quando os orçamentos de latência são muito apertados."
+      ],
+      "examples": [
+        "Um agente de código que lê falhas de testes e corrige seu próprio patch.",
+        "Uma tarefa de raciocínio em que o modelo revisa seus passos antes de responder.",
+        "Um rascunho que o modelo revisa em busca de lacunas antes de finalizar."
+      ],
+      "productionEvidence": {
+        "context": "Tarefas onde a qualidade importa mais que latência ou custo —redação, geração de código, análise— e onde os erros são detectáveis na revisão.",
+        "scenario": "Após produzir uma primeira resposta, o modelo (ou um crítico à parte) a avalia frente a critérios concretos e produz uma versão revisada; o laço é limitado a uma ou duas passagens.",
+        "technology": "Uma cadeia de prompts criticar-depois-revisar, idealmente apoiada por sinais externos (testes, ferramentas, um avaliador à parte) para o trabalho de alto risco.",
+        "load": "Cada passagem de reflexão ao menos duplica as chamadas, então é aplicada de forma seletiva às saídas que justificam o sobrecusto.",
+        "results": "Padrão observado: a reflexão melhora a qualidade onde o modelo consegue de fato detectar os próprios erros, mas pode sobrerrevisar respostas corretas e ao menos duplica o custo. Meça o ganho frente a um conjunto de avaliação antes de confiar nela, e prefira sinais externos quando há muito em jogo."
+      },
+      "kpis": [
+        {
+          "metric": "Ganho de qualidade pela reflexão",
+          "note": "Melhoria medida na qualidade com o passo de reflexão versus sem ele; se não for mensurável, o passo não justifica seu custo."
+        },
+        {
+          "metric": "Taxa de autocorreção",
+          "note": "Proporção de erros reais que o modelo detecta e corrige ao revisar, distinta de edições cosméticas."
+        },
+        {
+          "metric": "Latência e custo adicionados",
+          "note": "A reflexão ao menos duplica as chamadas; vigie o sobrecusto frente à qualidade que traz."
+        },
+        {
+          "metric": "Taxa de sobrerrevisão",
+          "note": "Com que frequência a reflexão degrada uma resposta já boa ao questioná-la em excesso."
+        }
+      ],
+      "failureModes": [
+        "Pontos cegos de autoavaliação: um modelo costuma não ver os próprios erros, então a reflexão os ignora.",
+        "Sobrerrevisão: o modelo 'corrige' uma resposta correta e a piora.",
+        "Custo e latência dobram (ou mais) para um ganho de qualidade marginal ou nulo.",
+        "Falsa confiança: o modelo afirma que a saída já está correta quando não está."
+      ],
+      "lessons": [
+        "Meça o ganho; a reflexão vale a pena só onde melhora a qualidade de forma demonstrável.",
+        "Prefira sinais externos (testes, ferramentas, um avaliador à parte) à pura autocrítica quando há muito em jogo.",
+        "Limite a reflexão a uma ou duas passagens: os retornos caem rápido e o custo se acumula.",
+        "Dê ao passo de reflexão critérios concretos, não um vago 'melhore isto'."
+      ],
+      "faqs": [
+        {
+          "q": "Reflexão ou avaliador-otimizador?",
+          "a": "A reflexão usa um modelo para se autocriticar (mais simples); o avaliador-otimizador usa um avaliador separado (mais afiado, menos enviesado). Escolha conforme quão confiável é a autoavaliação na sua tarefa."
+        },
+        {
+          "q": "A reflexão sempre ajuda?",
+          "a": "Ajuda mais quando ancorada em feedback real como resultados de testes ou erros. A pura autoavaliação pode ser confiante demais e agregar pouco."
+        },
+        {
+          "q": "Quantas rodadas de reflexão?",
+          "a": "Mantenha limitado, muitas vezes uma ou duas. Os retornos decrescentes e o custo crescente fazem laços longos raramente valerem a pena."
+        }
+      ]
+    }
+  }
+}

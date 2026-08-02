@@ -1,0 +1,292 @@
+{
+  "id": "ARCH-002",
+  "slug": "enterprise-knowledge-assistant",
+  "category": "knowledge",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": true,
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": ["industry_observation", "paper"]
+  },
+  "technologies": [
+    "RAG (retrieval-augmented generation)",
+    "Embeddings + vector store",
+    "Hybrid search & reranking",
+    "Document-level access control",
+    "Evaluation harness",
+    "Observability (LangSmith / Langfuse)"
+  ],
+  "patterns": ["routing", "semantic-caching", "evaluator-optimizer", "prompt-chaining"],
+  "knowledge": ["enterprise-rag", "embeddings", "context-engineering", "guardrails", "agentic-evaluation", "ai-governance"],
+  "references": [
+    { "title": "Lewis et al. — Retrieval-Augmented Generation (2020)", "url": "https://arxiv.org/abs/2005.11401" },
+    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
+    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  ],
+  "related": ["customer-service-agent"],
+  "locales": {
+    "en": {
+      "name": "Enterprise Knowledge Assistant",
+      "summary": "A reference architecture for an internal knowledge assistant that answers employee questions from the company's own documents — wikis, policies, tickets, code — with citations and respecting each user's access permissions. It combines hybrid retrieval and reranking for grounding, permission-aware filtering for security, and an evaluation harness so answer quality is measured rather than assumed. The hard parts are not the model; they are retrieval quality, access control and evaluation.",
+      "keyConcepts": [
+        "Permission-aware retrieval: a user only ever retrieves documents they are allowed to see.",
+        "Hybrid search + reranking: combine keyword and vector search, then rerank for precision.",
+        "Citations: every answer links back to its source passages for verification.",
+        "Evaluation: answer quality is scored against a curated set, continuously."
+      ],
+      "definition": "The enterprise knowledge assistant architecture is a permission-aware RAG system that answers employee questions from internal documents with citations, scoped to each user's access rights and continuously evaluated for quality.",
+      "architecture": [
+        "Content from many internal sources is ingested, chunked and embedded into a vector store, with each chunk tagged by its source document's access-control metadata. At query time the assistant routes the question, runs hybrid retrieval (keyword + vector) filtered to the user's permissions, reranks the candidates, and synthesizes a cited answer from the top passages.",
+        "Security is structural, not bolted on: the access-control filter is applied during retrieval so the model never even sees documents the user cannot access. A semantic cache serves repeated questions cheaply, and guardrails keep answers within policy and flag low-confidence cases.",
+        "Quality is governed by measurement: an evaluation harness scores answers for groundedness, correctness and citation accuracy against a curated set, and an optional evaluator-optimizer loop revises weak answers before they reach the user. Observability traces every query so failures can be diagnosed and fed back into the evals."
+      ],
+      "flow": [
+        "1. Ingest (offline): chunk and embed documents; tag each chunk with access-control metadata.",
+        "2. Route: classify the question and pick the retrieval strategy.",
+        "3. Retrieve: hybrid search filtered to the user's permissions (cache-checked first).",
+        "4. Rerank: reorder candidates for precision; keep the top passages.",
+        "5. Synthesize: generate a cited answer; optionally revise it via an evaluator loop.",
+        "6. Return & log: deliver answer with citations; trace and score for evaluation."
+      ],
+      "components": [
+        "Ingestion & chunking pipeline",
+        "Embeddings + vector store",
+        "Permission-aware retrieval filter",
+        "Hybrid search & reranker",
+        "Answer synthesis with citations",
+        "Semantic cache",
+        "Evaluation harness & observability"
+      ],
+      "referenceScenario": {
+        "context": "An illustrative internal assistant over a company's wiki, HR and IT policies, and engineering docs.",
+        "scenario": "Employees ask natural-language questions ('how do I expense travel?', 'what's our on-call policy?'); the assistant answers with citations, never surfacing documents the asker cannot access, and says 'I don't know' rather than guessing when retrieval is weak.",
+        "technology": "Ingestion pipeline, embeddings + vector store with ACL metadata, hybrid retrieval and reranking, an evaluation harness, and query tracing.",
+        "load": "Steady internal traffic with strong query overlap (a few policies drive most questions), so the cache hit rate is high and embeddings dominate the offline cost.",
+        "results": "Reference target: grounded, cited answers with no access-control leaks, and a measurable groundedness score that improves as retrieval is tuned. Treat all figures as things to measure on your corpus, not guarantees."
+      },
+      "benefits": [
+        "Turns scattered internal knowledge into instant, cited answers.",
+        "Permission-aware retrieval prevents access-control leaks by construction.",
+        "Citations make answers verifiable and build user trust.",
+        "An evaluation harness makes quality measurable and improvements demonstrable."
+      ],
+      "risks": [
+        "Access-control leaks if permissions are not enforced at retrieval time.",
+        "Stale answers when the document corpus changes faster than re-indexing.",
+        "Confident hallucination when retrieval is weak and the model fills the gap.",
+        "Poor chunking that fragments meaning and degrades retrieval."
+      ],
+      "failureModes": [
+        "Permission bypass: a chunk inherits the wrong ACL and surfaces in a user's results.",
+        "Retrieval gaps: the right document exists but chunking or embeddings miss it.",
+        "Staleness: an answer cites a superseded policy because re-indexing lagged.",
+        "Citation drift: the cited passage doesn't actually support the generated claim."
+      ],
+      "lessons": [
+        "Enforce access control inside retrieval, not after generation — filtering the prompt is too late.",
+        "Most quality gains come from retrieval (chunking, hybrid search, reranking), not from a bigger model.",
+        "Make 'I don't know' a first-class answer; a wrong confident answer is worse than an abstention.",
+        "Stand up evaluation before scaling; without it, every change is a guess."
+      ],
+      "kpis": [
+        { "metric": "Groundedness", "note": "Share of answers fully supported by the cited passages; the core quality metric for a RAG assistant." },
+        { "metric": "Retrieval recall@k", "note": "How often the right passage is in the top-k retrieved; most answer errors trace back to this." },
+        { "metric": "Access-control leak rate", "note": "Any answer surfacing a document the user couldn't access — the metric that must stay at zero." },
+        { "metric": "Cache hit rate & cost per query", "note": "Repeat-question coverage and unit cost; high overlap should make most queries cheap." },
+        { "metric": "Abstention quality", "note": "How often the assistant correctly says 'I don't know' instead of hallucinating on weak retrieval." }
+      ],
+      "scaling": [
+        "Offline embedding and indexing dominate ingestion cost and grow with corpus size and update frequency.",
+        "Query-time cost is mostly retrieval + generation; reranking adds latency you trade for precision.",
+        "The cache flattens cost as query overlap rises, so unit cost falls with adoption.",
+        "Re-indexing cadence is the real scaling tension: fresher answers cost more compute."
+      ],
+      "examples": [
+        "An employee asking the travel-expense policy and getting a cited, up-to-date answer.",
+        "A question about a restricted project correctly returning nothing for an unauthorized user.",
+        "A weak-retrieval query answered with 'I don't have a confident source for that' instead of a guess."
+      ],
+      "faqs": [
+        { "q": "Isn't this just RAG?", "a": "RAG is the core, but the architecture is defined by what makes it enterprise-safe: permission-aware retrieval, citations, an evaluation harness and observability. Those are the parts that decide whether it can be trusted." },
+        { "q": "Why enforce permissions during retrieval?", "a": "So the model never sees documents the user can't access. Filtering after generation is too late — the content could already have leaked into the answer." },
+        { "q": "How do you keep answers from hallucinating?", "a": "Ground every answer in retrieved passages with citations, measure groundedness against an eval set, and let the assistant abstain when retrieval is weak rather than fill the gap." }
+      ]
+    },
+    "es": {
+      "name": "Asistente de Conocimiento Empresarial",
+      "summary": "Una arquitectura de referencia para un asistente de conocimiento interno que responde preguntas de los empleados desde los propios documentos de la empresa —wikis, políticas, tickets, código— con citas y respetando los permisos de acceso de cada usuario. Combina recuperación híbrida y reranking para fundamentar, filtrado por permisos para la seguridad, y un arnés de evaluación para que la calidad se mida en vez de asumirse. Lo difícil no es el modelo; es la calidad de la recuperación, el control de acceso y la evaluación.",
+      "keyConcepts": [
+        "Recuperación con permisos: un usuario solo recupera documentos que tiene permitido ver.",
+        "Búsqueda híbrida + reranking: combinar búsqueda por palabras clave y vectorial, y luego reordenar por precisión.",
+        "Citas: cada respuesta enlaza a sus pasajes fuente para verificación.",
+        "Evaluación: la calidad de las respuestas se puntúa contra un conjunto curado, de forma continua."
+      ],
+      "definition": "La arquitectura de asistente de conocimiento empresarial es un sistema RAG con conciencia de permisos que responde preguntas de empleados desde documentos internos con citas, acotado a los derechos de acceso de cada usuario y evaluado de forma continua.",
+      "architecture": [
+        "El contenido de muchas fuentes internas se ingiere, trocea e incrusta en un almacén vectorial, con cada fragmento etiquetado por los metadatos de control de acceso de su documento de origen. En la consulta, el asistente enruta la pregunta, ejecuta recuperación híbrida (palabras clave + vectorial) filtrada a los permisos del usuario, reordena los candidatos y sintetiza una respuesta citada a partir de los mejores pasajes.",
+        "La seguridad es estructural, no añadida: el filtro de control de acceso se aplica durante la recuperación, así que el modelo nunca ve documentos a los que el usuario no puede acceder. Una caché semántica sirve preguntas repetidas de forma barata, y los guardarraíles mantienen las respuestas dentro de política y marcan los casos de baja confianza.",
+        "La calidad se gobierna con medición: un arnés de evaluación puntúa las respuestas por fundamentación, corrección y precisión de citas contra un conjunto curado, y un bucle opcional evaluador-optimizador revisa las respuestas débiles antes de que lleguen al usuario. La observabilidad traza cada consulta para diagnosticar fallos y retroalimentar las evaluaciones."
+      ],
+      "flow": [
+        "1. Ingesta (offline): trocear e incrustar documentos; etiquetar cada fragmento con metadatos de control de acceso.",
+        "2. Enrutar: clasificar la pregunta y elegir la estrategia de recuperación.",
+        "3. Recuperar: búsqueda híbrida filtrada a los permisos del usuario (con caché comprobada primero).",
+        "4. Reordenar: reordenar candidatos por precisión; quedarse con los mejores pasajes.",
+        "5. Sintetizar: generar una respuesta citada; opcionalmente revisarla con un bucle evaluador.",
+        "6. Devolver y registrar: entregar la respuesta con citas; trazar y puntuar para evaluación."
+      ],
+      "components": [
+        "Pipeline de ingesta y troceado",
+        "Embeddings + almacén vectorial",
+        "Filtro de recuperación con permisos",
+        "Búsqueda híbrida y reranker",
+        "Síntesis de respuesta con citas",
+        "Caché semántica",
+        "Arnés de evaluación y observabilidad"
+      ],
+      "referenceScenario": {
+        "context": "Un asistente interno ilustrativo sobre la wiki de una empresa, las políticas de RRHH e IT, y la documentación de ingeniería.",
+        "scenario": "Los empleados hacen preguntas en lenguaje natural ('¿cómo reporto gastos de viaje?', '¿cuál es la política de guardias?'); el asistente responde con citas, sin mostrar nunca documentos que quien pregunta no puede ver, y dice 'no lo sé' en vez de adivinar cuando la recuperación es débil.",
+        "technology": "Pipeline de ingesta, embeddings + almacén vectorial con metadatos de ACL, recuperación híbrida y reranking, un arnés de evaluación y trazado de consultas.",
+        "load": "Tráfico interno estable con fuerte solapamiento de consultas (unas pocas políticas generan la mayoría de preguntas), así que la tasa de aciertos de caché es alta y los embeddings dominan el coste offline.",
+        "results": "Objetivo de referencia: respuestas fundamentadas y citadas sin fugas de control de acceso, y una puntuación de fundamentación medible que mejora al afinar la recuperación. Trata todas las cifras como algo a medir en tu corpus, no como garantías."
+      },
+      "benefits": [
+        "Convierte el conocimiento interno disperso en respuestas instantáneas y citadas.",
+        "La recuperación con permisos previene fugas de control de acceso por construcción.",
+        "Las citas hacen las respuestas verificables y generan confianza.",
+        "Un arnés de evaluación hace la calidad medible y las mejoras demostrables."
+      ],
+      "risks": [
+        "Fugas de control de acceso si los permisos no se aplican en la recuperación.",
+        "Respuestas obsoletas cuando el corpus cambia más rápido que la reindexación.",
+        "Alucinación confiada cuando la recuperación es débil y el modelo rellena el hueco.",
+        "Troceado deficiente que fragmenta el significado y degrada la recuperación."
+      ],
+      "failureModes": [
+        "Salto de permisos: un fragmento hereda la ACL equivocada y aparece en los resultados de un usuario.",
+        "Huecos de recuperación: el documento correcto existe pero el troceado o los embeddings no lo encuentran.",
+        "Obsolescencia: una respuesta cita una política superada porque la reindexación se retrasó.",
+        "Deriva de citas: el pasaje citado no respalda realmente la afirmación generada."
+      ],
+      "lessons": [
+        "Aplica el control de acceso dentro de la recuperación, no tras la generación; filtrar el prompt es demasiado tarde.",
+        "La mayoría de las mejoras de calidad vienen de la recuperación (troceado, búsqueda híbrida, reranking), no de un modelo más grande.",
+        "Haz de 'no lo sé' una respuesta de primera clase; una respuesta confiada y errónea es peor que una abstención.",
+        "Monta la evaluación antes de escalar; sin ella, cada cambio es una conjetura."
+      ],
+      "kpis": [
+        { "metric": "Fundamentación", "note": "Proporción de respuestas totalmente respaldadas por los pasajes citados; la métrica de calidad central de un asistente RAG." },
+        { "metric": "Recall@k de recuperación", "note": "Con qué frecuencia el pasaje correcto está en los top-k recuperados; la mayoría de errores de respuesta se remontan a esto." },
+        { "metric": "Tasa de fuga de control de acceso", "note": "Cualquier respuesta que muestre un documento al que el usuario no podía acceder; la métrica que debe quedarse en cero." },
+        { "metric": "Tasa de aciertos de caché y coste por consulta", "note": "Cobertura de preguntas repetidas y coste unitario; un alto solapamiento debería abaratar la mayoría de consultas." },
+        { "metric": "Calidad de abstención", "note": "Con qué frecuencia el asistente dice correctamente 'no lo sé' en vez de alucinar ante una recuperación débil." }
+      ],
+      "scaling": [
+        "La incrustación e indexación offline dominan el coste de ingesta y crecen con el tamaño del corpus y la frecuencia de actualización.",
+        "El coste en consulta es sobre todo recuperación + generación; el reranking añade latencia que cambias por precisión.",
+        "La caché aplana el coste a medida que sube el solapamiento de consultas, así que el coste unitario baja con la adopción.",
+        "La cadencia de reindexación es la verdadera tensión de escala: respuestas más frescas cuestan más cómputo."
+      ],
+      "examples": [
+        "Un empleado preguntando la política de gastos de viaje y obteniendo una respuesta citada y actualizada.",
+        "Una pregunta sobre un proyecto restringido devolviendo correctamente nada para un usuario no autorizado.",
+        "Una consulta con recuperación débil respondida con 'no tengo una fuente fiable para eso' en vez de adivinar."
+      ],
+      "faqs": [
+        { "q": "¿Esto no es solo RAG?", "a": "RAG es el núcleo, pero la arquitectura la define lo que la hace segura para la empresa: recuperación con permisos, citas, un arnés de evaluación y observabilidad. Esas son las partes que deciden si se puede confiar en ella." },
+        { "q": "¿Por qué aplicar permisos durante la recuperación?", "a": "Para que el modelo nunca vea documentos a los que el usuario no puede acceder. Filtrar tras la generación es demasiado tarde: el contenido ya podría haberse filtrado en la respuesta." },
+        { "q": "¿Cómo se evita que las respuestas alucinen?", "a": "Fundamenta cada respuesta en pasajes recuperados con citas, mide la fundamentación contra un conjunto de evaluación, y deja que el asistente se abstenga cuando la recuperación es débil en vez de rellenar el hueco." }
+      ]
+    },
+    "pt": {
+      "name": "Assistente de Conhecimento Empresarial",
+      "summary": "Uma arquitetura de referência para um assistente de conhecimento interno que responde perguntas dos funcionários a partir dos próprios documentos da empresa —wikis, políticas, tickets, código— com citações e respeitando as permissões de acesso de cada usuário. Combina recuperação híbrida e reranking para fundamentar, filtragem por permissões para segurança, e um harness de avaliação para que a qualidade seja medida em vez de assumida. O difícil não é o modelo; é a qualidade da recuperação, o controle de acesso e a avaliação.",
+      "keyConcepts": [
+        "Recuperação com permissões: um usuário só recupera documentos que tem permissão de ver.",
+        "Busca híbrida + reranking: combinar busca por palavras-chave e vetorial, e então reordenar por precisão.",
+        "Citações: cada resposta liga aos seus trechos fonte para verificação.",
+        "Avaliação: a qualidade das respostas é pontuada contra um conjunto curado, continuamente."
+      ],
+      "definition": "A arquitetura de assistente de conhecimento empresarial é um sistema RAG com consciência de permissões que responde perguntas de funcionários a partir de documentos internos com citações, restrito aos direitos de acesso de cada usuário e avaliado continuamente.",
+      "architecture": [
+        "O conteúdo de muitas fontes internas é ingerido, fragmentado e incorporado em um armazenamento vetorial, com cada fragmento marcado pelos metadados de controle de acesso do seu documento de origem. Na consulta, o assistente roteia a pergunta, executa recuperação híbrida (palavras-chave + vetorial) filtrada às permissões do usuário, reordena os candidatos e sintetiza uma resposta citada a partir dos melhores trechos.",
+        "A segurança é estrutural, não acoplada: o filtro de controle de acesso é aplicado durante a recuperação, então o modelo nunca vê documentos aos quais o usuário não pode acessar. Um cache semântico serve perguntas repetidas de forma barata, e os guard-rails mantêm as respostas dentro da política e sinalizam os casos de baixa confiança.",
+        "A qualidade é governada por medição: um harness de avaliação pontua as respostas por fundamentação, correção e precisão de citações contra um conjunto curado, e um loop opcional avaliador-otimizador revisa as respostas fracas antes de chegarem ao usuário. A observabilidade rastreia cada consulta para diagnosticar falhas e realimentar as avaliações."
+      ],
+      "flow": [
+        "1. Ingestão (offline): fragmentar e incorporar documentos; marcar cada fragmento com metadados de controle de acesso.",
+        "2. Rotear: classificar a pergunta e escolher a estratégia de recuperação.",
+        "3. Recuperar: busca híbrida filtrada às permissões do usuário (com cache verificado primeiro).",
+        "4. Reordenar: reordenar candidatos por precisão; manter os melhores trechos.",
+        "5. Sintetizar: gerar uma resposta citada; opcionalmente revisá-la com um loop avaliador.",
+        "6. Devolver e registrar: entregar a resposta com citações; rastrear e pontuar para avaliação."
+      ],
+      "components": [
+        "Pipeline de ingestão e fragmentação",
+        "Embeddings + armazenamento vetorial",
+        "Filtro de recuperação com permissões",
+        "Busca híbrida e reranker",
+        "Síntese de resposta com citações",
+        "Cache semântico",
+        "Harness de avaliação e observabilidade"
+      ],
+      "referenceScenario": {
+        "context": "Um assistente interno ilustrativo sobre a wiki de uma empresa, as políticas de RH e TI, e a documentação de engenharia.",
+        "scenario": "Os funcionários fazem perguntas em linguagem natural ('como faço para reembolsar viagem?', 'qual é a política de plantão?'); o assistente responde com citações, sem nunca mostrar documentos que quem pergunta não pode ver, e diz 'não sei' em vez de adivinhar quando a recuperação é fraca.",
+        "technology": "Pipeline de ingestão, embeddings + armazenamento vetorial com metadados de ACL, recuperação híbrida e reranking, um harness de avaliação e rastreamento de consultas.",
+        "load": "Tráfego interno estável com forte sobreposição de consultas (poucas políticas geram a maioria das perguntas), então a taxa de acertos de cache é alta e os embeddings dominam o custo offline.",
+        "results": "Meta de referência: respostas fundamentadas e citadas sem vazamentos de controle de acesso, e uma pontuação de fundamentação mensurável que melhora ao ajustar a recuperação. Trate todos os números como algo a medir no seu corpus, não como garantias."
+      },
+      "benefits": [
+        "Transforma o conhecimento interno disperso em respostas instantâneas e citadas.",
+        "A recuperação com permissões previne vazamentos de controle de acesso por construção.",
+        "As citações tornam as respostas verificáveis e geram confiança.",
+        "Um harness de avaliação torna a qualidade mensurável e as melhorias demonstráveis."
+      ],
+      "risks": [
+        "Vazamentos de controle de acesso se as permissões não forem aplicadas na recuperação.",
+        "Respostas obsoletas quando o corpus muda mais rápido que a reindexação.",
+        "Alucinação confiante quando a recuperação é fraca e o modelo preenche a lacuna.",
+        "Fragmentação ruim que quebra o significado e degrada a recuperação."
+      ],
+      "failureModes": [
+        "Bypass de permissões: um fragmento herda a ACL errada e aparece nos resultados de um usuário.",
+        "Lacunas de recuperação: o documento certo existe mas a fragmentação ou os embeddings não o encontram.",
+        "Obsolescência: uma resposta cita uma política superada porque a reindexação atrasou.",
+        "Deriva de citação: o trecho citado não apoia de fato a afirmação gerada."
+      ],
+      "lessons": [
+        "Aplique o controle de acesso dentro da recuperação, não após a geração; filtrar o prompt é tarde demais.",
+        "A maioria dos ganhos de qualidade vem da recuperação (fragmentação, busca híbrida, reranking), não de um modelo maior.",
+        "Torne 'não sei' uma resposta de primeira classe; uma resposta confiante e errada é pior que uma abstenção.",
+        "Monte a avaliação antes de escalar; sem ela, cada mudança é um palpite."
+      ],
+      "kpis": [
+        { "metric": "Fundamentação", "note": "Proporção de respostas totalmente apoiadas pelos trechos citados; a métrica de qualidade central de um assistente RAG." },
+        { "metric": "Recall@k de recuperação", "note": "Com que frequência o trecho certo está nos top-k recuperados; a maioria dos erros de resposta remonta a isso." },
+        { "metric": "Taxa de vazamento de controle de acesso", "note": "Qualquer resposta que mostre um documento ao qual o usuário não podia acessar; a métrica que deve ficar em zero." },
+        { "metric": "Taxa de acertos de cache e custo por consulta", "note": "Cobertura de perguntas repetidas e custo unitário; uma alta sobreposição deve baratear a maioria das consultas." },
+        { "metric": "Qualidade de abstenção", "note": "Com que frequência o assistente diz corretamente 'não sei' em vez de alucinar diante de uma recuperação fraca." }
+      ],
+      "scaling": [
+        "A incorporação e indexação offline dominam o custo de ingestão e crescem com o tamanho do corpus e a frequência de atualização.",
+        "O custo na consulta é principalmente recuperação + geração; o reranking adiciona latência que você troca por precisão.",
+        "O cache achata o custo à medida que a sobreposição de consultas sobe, então o custo unitário cai com a adoção.",
+        "A cadência de reindexação é a real tensão de escala: respostas mais frescas custam mais computação."
+      ],
+      "examples": [
+        "Um funcionário perguntando a política de reembolso de viagem e obtendo uma resposta citada e atualizada.",
+        "Uma pergunta sobre um projeto restrito devolvendo corretamente nada para um usuário não autorizado.",
+        "Uma consulta com recuperação fraca respondida com 'não tenho uma fonte confiável para isso' em vez de adivinhar."
+      ],
+      "faqs": [
+        { "q": "Isso não é só RAG?", "a": "RAG é o núcleo, mas a arquitetura é definida pelo que a torna segura para a empresa: recuperação com permissões, citações, um harness de avaliação e observabilidade. Essas são as partes que decidem se ela pode ser confiável." },
+        { "q": "Por que aplicar permissões durante a recuperação?", "a": "Para que o modelo nunca veja documentos aos quais o usuário não pode acessar. Filtrar após a geração é tarde demais: o conteúdo já poderia ter vazado na resposta." },
+        { "q": "Como evitar que as respostas aluciem?", "a": "Fundamente cada resposta em trechos recuperados com citações, meça a fundamentação contra um conjunto de avaliação, e deixe o assistente se abster quando a recuperação for fraca em vez de preencher a lacuna." }
+      ]
+    }
+  }
+}

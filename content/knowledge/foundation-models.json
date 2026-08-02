@@ -1,0 +1,154 @@
+{
+  "slug": "foundation-models",
+  "category": "concept",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": true,
+  "related": ["fine-tuning", "embeddings", "agentic-ai", "harness-engineering"],
+  "references": [
+    { "title": "Bommasani et al. — On the Opportunities and Risks of Foundation Models (2021)", "url": "https://arxiv.org/abs/2108.07258" },
+    { "title": "Vaswani et al. — Attention Is All You Need (2017)", "url": "https://arxiv.org/abs/1706.03762" }
+  ],
+  "evidence": {
+    "evidenceLevel": "benchmark",
+    "confidenceLevel": "high",
+    "sourceType": ["benchmark", "paper"]
+  },
+  "locales": {
+    "en": {
+      "title": "What are Foundation Models?",
+      "summary": "A foundation model is a large model pretrained on broad data at scale that can be adapted to a wide range of downstream tasks. Large language models (LLMs) and large multimodal models are the canonical examples. The term, coined at Stanford in 2021, captures a shift: instead of training a bespoke model per task, organizations build on a shared, general-purpose base — then specialize it through prompting, retrieval or fine-tuning.",
+      "definition": "A foundation model is a large, general-purpose model pretrained on broad data that serves as a base which can be adapted — via prompting, retrieval or fine-tuning — to many downstream tasks.",
+      "takeaways": [
+        "Foundation models are general bases adapted to many tasks.",
+        "LLMs and multimodal models are the leading examples.",
+        "Most are built on the transformer architecture.",
+        "Capabilities emerge with scale of data, parameters and compute.",
+        "You adapt them by prompting, retrieval (RAG) or fine-tuning — rarely by training from scratch."
+      ],
+      "context": [
+        "Before foundation models, teams trained narrow models for each task. The foundation-model paradigm flips this: one large model is pretrained once on broad data, then reused everywhere. That reuse is why a handful of models now underpin most AI products.",
+        "It also concentrates capability — and risk. Because so much is built on a few bases, their biases, failures and security properties propagate downstream, which is part of why governance and evaluation matter."
+      ],
+      "architecture": [
+        "Pretraining: a model with millions to trillions of parameters learns general patterns from massive datasets, typically with self-supervised objectives like next-token prediction. The transformer's attention mechanism makes this scalable.",
+        "Adaptation: the same base is specialized for use — zero/few-shot prompting, retrieval-augmented generation for fresh or private knowledge, or fine-tuning for behavior and domain. Agents wrap the model in tools and a harness."
+      ],
+      "components": ["Transformer architecture", "Pretraining data & objective", "Parameters (weights)", "Tokenizer", "Adaptation layer (prompt / RAG / fine-tune)"],
+      "pros": [
+        "One base reused across many tasks.",
+        "Strong general capability out of the box.",
+        "Rapid adaptation without training from scratch.",
+        "Multimodal variants span text, image, audio and more."
+      ],
+      "risks": [
+        "Concentrated risk: flaws propagate to everything built on them.",
+        "Costly to pretrain; few organizations can.",
+        "Inherit biases and gaps from training data.",
+        "Knowledge is frozen at training time without retrieval."
+      ],
+      "tools": ["Frontier LLMs (Claude, GPT, Gemini)", "Open-weight models (Llama, Mistral)", "Multimodal models", "Model hosting / inference platforms"],
+      "examples": [
+        "Using one LLM for summarization, classification and drafting across an org.",
+        "Adapting a base model to a domain with retrieval instead of retraining.",
+        "Building an agent on a frontier model plus tools and memory."
+      ],
+      "faqs": [
+        { "q": "Is a foundation model the same as an LLM?", "a": "An LLM is the most common type of foundation model, specialized to language. Foundation models also include multimodal and other general-purpose models." },
+        { "q": "Why are they called 'foundation' models?", "a": "Because they serve as a shared base that many applications are built on, rather than a model trained for a single task." },
+        { "q": "Do I need to train one?", "a": "Almost never. Pretraining is extremely costly; nearly all value comes from adapting an existing base via prompting, retrieval or fine-tuning." },
+        { "q": "How do agents relate to foundation models?", "a": "An agent uses a foundation model as its reasoning core, wrapped in tools, memory and a control loop — the harness — to take actions." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué son los Modelos Fundacionales (Foundation Models)?",
+      "summary": "Un modelo fundacional es un modelo grande preentrenado a escala con datos amplios que puede adaptarse a una gran variedad de tareas posteriores. Los modelos de lenguaje (LLM) y los multimodales son los ejemplos canónicos. El término, acuñado en Stanford en 2021, captura un cambio: en lugar de entrenar un modelo a medida por tarea, las organizaciones construyen sobre una base general compartida y luego la especializan mediante prompting, recuperación o fine-tuning.",
+      "definition": "Un modelo fundacional es un modelo grande y de propósito general, preentrenado con datos amplios, que sirve de base adaptable —vía prompting, recuperación o fine-tuning— a muchas tareas posteriores.",
+      "takeaways": [
+        "Los modelos fundacionales son bases generales adaptadas a muchas tareas.",
+        "Los LLM y los modelos multimodales son los ejemplos principales.",
+        "La mayoría se construyen sobre la arquitectura transformer.",
+        "Las capacidades emergen con la escala de datos, parámetros y cómputo.",
+        "Se adaptan por prompting, recuperación (RAG) o fine-tuning; rara vez entrenando desde cero."
+      ],
+      "context": [
+        "Antes de los modelos fundacionales, los equipos entrenaban modelos estrechos para cada tarea. El paradigma fundacional lo invierte: un modelo grande se preentrena una vez con datos amplios y se reutiliza en todas partes. Esa reutilización es la razón por la que un puñado de modelos sustenta hoy la mayoría de productos de IA.",
+        "También concentra capacidad y riesgo. Como tanto se construye sobre unas pocas bases, sus sesgos, fallos y propiedades de seguridad se propagan aguas abajo, parte de por qué importan la gobernanza y la evaluación."
+      ],
+      "architecture": [
+        "Preentrenamiento: un modelo con millones a billones de parámetros aprende patrones generales de conjuntos de datos masivos, normalmente con objetivos autosupervisados como la predicción del siguiente token. La atención del transformer lo hace escalable.",
+        "Adaptación: la misma base se especializa para su uso —prompting zero/few-shot, RAG para conocimiento fresco o privado, o fine-tuning para comportamiento y dominio. Los agentes envuelven el modelo en herramientas y un harness."
+      ],
+      "components": ["Arquitectura transformer", "Datos y objetivo de preentrenamiento", "Parámetros (pesos)", "Tokenizador", "Capa de adaptación (prompt / RAG / fine-tune)"],
+      "pros": [
+        "Una base reutilizada en muchas tareas.",
+        "Fuerte capacidad general de fábrica.",
+        "Adaptación rápida sin entrenar desde cero.",
+        "Las variantes multimodales abarcan texto, imagen, audio y más."
+      ],
+      "risks": [
+        "Riesgo concentrado: los fallos se propagan a todo lo construido sobre ellos.",
+        "Costoso de preentrenar; pocas organizaciones pueden.",
+        "Heredan sesgos y lagunas de los datos de entrenamiento.",
+        "El conocimiento queda congelado en el momento del entrenamiento sin recuperación."
+      ],
+      "tools": ["LLM frontera (Claude, GPT, Gemini)", "Modelos de pesos abiertos (Llama, Mistral)", "Modelos multimodales", "Plataformas de hosting / inferencia"],
+      "examples": [
+        "Usar un LLM para resumir, clasificar y redactar en toda una organización.",
+        "Adaptar un modelo base a un dominio con recuperación en vez de reentrenar.",
+        "Construir un agente sobre un modelo frontera más herramientas y memoria."
+      ],
+      "faqs": [
+        { "q": "¿Un modelo fundacional es lo mismo que un LLM?", "a": "Un LLM es el tipo más común de modelo fundacional, especializado en lenguaje. Los modelos fundacionales también incluyen multimodales y otros de propósito general." },
+        { "q": "¿Por qué se llaman 'fundacionales'?", "a": "Porque sirven de base compartida sobre la que se construyen muchas aplicaciones, en lugar de un modelo entrenado para una sola tarea." },
+        { "q": "¿Necesito entrenar uno?", "a": "Casi nunca. El preentrenamiento es extremadamente costoso; casi todo el valor viene de adaptar una base existente vía prompting, recuperación o fine-tuning." },
+        { "q": "¿Cómo se relacionan los agentes con los modelos fundacionales?", "a": "Un agente usa un modelo fundacional como núcleo de razonamiento, envuelto en herramientas, memoria y un bucle de control —el harness— para tomar acciones." }
+      ]
+    },
+    "pt": {
+      "title": "O que são Modelos de Fundação (Foundation Models)?",
+      "summary": "Um modelo de fundação é um modelo grande pré-treinado em escala com dados amplos que pode ser adaptado a uma ampla variedade de tarefas posteriores. Os modelos de linguagem (LLMs) e os multimodais são os exemplos canônicos. O termo, cunhado em Stanford em 2021, captura uma mudança: em vez de treinar um modelo sob medida por tarefa, as organizações constroem sobre uma base geral compartilhada e depois a especializam via prompting, recuperação ou fine-tuning.",
+      "definition": "Um modelo de fundação é um modelo grande e de propósito geral, pré-treinado com dados amplos, que serve de base adaptável — via prompting, recuperação ou fine-tuning — a muitas tarefas posteriores.",
+      "takeaways": [
+        "Os modelos de fundação são bases gerais adaptadas a muitas tarefas.",
+        "Os LLMs e os modelos multimodais são os exemplos principais.",
+        "A maioria é construída sobre a arquitetura transformer.",
+        "As capacidades emergem com a escala de dados, parâmetros e computação.",
+        "São adaptados por prompting, recuperação (RAG) ou fine-tuning; raramente treinando do zero."
+      ],
+      "context": [
+        "Antes dos modelos de fundação, as equipes treinavam modelos estreitos para cada tarefa. O paradigma de fundação inverte isso: um modelo grande é pré-treinado uma vez com dados amplos e reutilizado em todo lugar. Essa reutilização é a razão pela qual um punhado de modelos sustenta hoje a maioria dos produtos de IA.",
+        "Também concentra capacidade e risco. Como tanto se constrói sobre poucas bases, seus vieses, falhas e propriedades de segurança se propagam para baixo, parte do porquê governança e avaliação importam."
+      ],
+      "architecture": [
+        "Pré-treinamento: um modelo com milhões a trilhões de parâmetros aprende padrões gerais de conjuntos de dados massivos, normalmente com objetivos autossupervisionados como a previsão do próximo token. A atenção do transformer torna isso escalável.",
+        "Adaptação: a mesma base é especializada para uso — prompting zero/few-shot, RAG para conhecimento fresco ou privado, ou fine-tuning para comportamento e domínio. Os agentes envolvem o modelo em ferramentas e um harness."
+      ],
+      "components": ["Arquitetura transformer", "Dados e objetivo de pré-treinamento", "Parâmetros (pesos)", "Tokenizador", "Camada de adaptação (prompt / RAG / fine-tune)"],
+      "pros": [
+        "Uma base reutilizada em muitas tarefas.",
+        "Forte capacidade geral de fábrica.",
+        "Adaptação rápida sem treinar do zero.",
+        "As variantes multimodais abrangem texto, imagem, áudio e mais."
+      ],
+      "risks": [
+        "Risco concentrado: as falhas se propagam a tudo o que é construído sobre eles.",
+        "Custoso de pré-treinar; poucas organizações conseguem.",
+        "Herdam vieses e lacunas dos dados de treinamento.",
+        "O conhecimento fica congelado no momento do treinamento sem recuperação."
+      ],
+      "tools": ["LLMs de fronteira (Claude, GPT, Gemini)", "Modelos de pesos abertos (Llama, Mistral)", "Modelos multimodais", "Plataformas de hosting / inferência"],
+      "examples": [
+        "Usar um LLM para resumir, classificar e redigir em toda uma organização.",
+        "Adaptar um modelo base a um domínio com recuperação em vez de retreinar.",
+        "Construir um agente sobre um modelo de fronteira mais ferramentas e memória."
+      ],
+      "faqs": [
+        { "q": "Um modelo de fundação é o mesmo que um LLM?", "a": "Um LLM é o tipo mais comum de modelo de fundação, especializado em linguagem. Os modelos de fundação também incluem multimodais e outros de propósito geral." },
+        { "q": "Por que são chamados de 'fundação'?", "a": "Porque servem de base compartilhada sobre a qual muitas aplicações são construídas, em vez de um modelo treinado para uma única tarefa." },
+        { "q": "Preciso treinar um?", "a": "Quase nunca. O pré-treinamento é extremamente custoso; quase todo o valor vem de adaptar uma base existente via prompting, recuperação ou fine-tuning." },
+        { "q": "Como os agentes se relacionam com os modelos de fundação?", "a": "Um agente usa um modelo de fundação como núcleo de raciocínio, envolvido em ferramentas, memória e um laço de controle — o harness — para tomar ações." }
+      ]
+    }
+  }
+}

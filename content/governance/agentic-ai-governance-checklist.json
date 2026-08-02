@@ -1,0 +1,323 @@
+{
+  "id": "GOV-004",
+  "slug": "agentic-ai-governance-checklist",
+  "category": "playbook",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": true,
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "medium",
+    "sourceType": [
+      "industry_observation",
+      "personal_experience"
+    ]
+  },
+  "frameworks": [
+    "EU AI Act",
+    "ISO/IEC 42001",
+    "NIST AI RMF"
+  ],
+  "patterns": [
+    "human-approval-gate",
+    "evaluator-optimizer",
+    "reflection",
+    "routing"
+  ],
+  "knowledge": [
+    "ai-governance",
+    "guardrails",
+    "human-in-the-loop",
+    "ai-observability",
+    "agentic-evaluation",
+    "prompt-injection"
+  ],
+  "references": [
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "EU AI Act — Article 14 (Human oversight)",
+      "url": "https://artificialintelligenceact.eu/article/14/"
+    },
+    {
+      "title": "OWASP — Top 10 for LLM Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
+    }
+  ],
+  "related": [
+    "eu-ai-act",
+    "iso-42001",
+    "nist-ai-rmf"
+  ],
+  "locales": {
+    "en": {
+      "name": "Agentic AI Governance Checklist",
+      "summary": "A practical, vendor-neutral checklist for governing agentic AI in the enterprise — translating the principles of the EU AI Act, ISO/IEC 42001 and NIST AI RMF into concrete controls you can implement in a harness. It covers human oversight, guardrails, audit logging, evaluation, access control, prompt-injection defence and incident response, and maps each control to the patterns and knowledge units that operationalize it. Use it as a readiness gate before letting an agent act in production.",
+      "definition": "The agentic AI governance checklist is an operational control set that turns AI governance frameworks into concrete, implementable requirements for autonomous agents acting in production.",
+      "scope": "Teams building or deploying autonomous or semi-autonomous agents that use tools, act on systems, or make consequential decisions. It is a practical companion to the formal frameworks, not a substitute for legal advice.",
+      "keyPoints": [
+        "Human oversight by risk: gate high-impact, irreversible or regulated actions for human approval.",
+        "Guardrails on inputs and outputs, including prompt-injection and PII defence.",
+        "Full audit logging and observability so every action is traceable.",
+        "Evaluation before and after deployment, against a maintained eval set.",
+        "Least-privilege access for tools and data the agent can reach.",
+        "A defined incident response and kill-switch for agents in production."
+      ],
+      "controls": [
+        {
+          "control": "Human approval gates",
+          "note": "Route high-impact actions through a human checkpoint (EU AI Act Art. 14). Implements the human-approval-gate pattern."
+        },
+        {
+          "control": "Guardrails",
+          "note": "Validate and constrain inputs and outputs; defend against prompt injection and block out-of-policy actions."
+        },
+        {
+          "control": "Audit logging & observability",
+          "note": "Trace every decision, tool call and action so the agent is reviewable and incidents are reconstructable."
+        },
+        {
+          "control": "Evaluation harness",
+          "note": "Score behaviour against an eval set before shipping and monitor for regressions after — NIST 'Measure'."
+        },
+        {
+          "control": "Least-privilege access",
+          "note": "Scope the tools, data and permissions an agent can reach to the minimum its task requires."
+        },
+        {
+          "control": "Incident response & kill-switch",
+          "note": "Define how to detect, stop and remediate a misbehaving agent, including a way to halt it immediately."
+        }
+      ],
+      "checklist": [
+        "Classify the agent's risk and identify which actions need human approval.",
+        "Implement guardrails for inputs/outputs and prompt-injection defence.",
+        "Enable end-to-end audit logging and observability.",
+        "Stand up an evaluation set and run it pre-deployment and continuously.",
+        "Apply least-privilege scoping to tools, data and credentials.",
+        "Define incident response, monitoring thresholds and a kill-switch.",
+        "Map each control to your obligations under the EU AI Act, ISO 42001 and NIST AI RMF.",
+        "Document ownership and review the agent on a schedule."
+      ],
+      "pitfalls": [
+        "Granting an agent broad tool/data access 'to be safe', creating a large blast radius.",
+        "Gating everything (approval fatigue) or nothing (no oversight) instead of gating by risk.",
+        "Shipping without an eval set, so quality and safety are unmeasured.",
+        "No kill-switch or incident plan when an agent misbehaves in production.",
+        "Ignoring prompt injection as an attack surface for tool-using agents."
+      ],
+      "productionEvidence": {
+        "context": "Teams putting an autonomous or semi-autonomous agent into production where it uses tools and takes consequential actions.",
+        "scenario": "Before go-live, the team runs the checklist as a readiness gate: classify the agent's risk, gate high-impact actions for human approval, add guardrails and prompt-injection defence, enable audit logging and observability, stand up an evaluation set, scope least-privilege access, and define incident response and a kill-switch.",
+        "technology": "A harness combining a human-approval gate, guardrails, audit logging/observability, an evaluation harness and scoped tool/credential access.",
+        "load": "Applied per agent before deployment and re-reviewed on a schedule; the heaviest control (human approval) is reserved for the small set of high-impact actions.",
+        "results": "Observed pattern: teams that gate by risk, enforce least privilege and instrument from day one contain the blast radius of agent errors; those that grant broad access 'to be safe' or ship without evals discover failures in production. Measure escalation appropriateness, false-action rate and mean time to detect."
+      },
+      "lessons": [
+        "Treat the checklist as a readiness gate, not a one-time audit — re-run it as the agent's tools and autonomy grow.",
+        "Least-privilege access and risk-based human approval bound the blast radius more than any single guardrail.",
+        "Without an evaluation set and audit logging in place before launch, you cannot tell a safe agent from a lucky one.",
+        "Map each control to a concrete owner; governance without accountability is just documentation."
+      ],
+      "examples": [
+        "An agent whose refund action is gated for human approval while read-only lookups run freely.",
+        "A guardrail blocking a prompt-injected instruction to exfiltrate data via a tool.",
+        "An evaluation run catching a safety regression before an agent update ships."
+      ],
+      "faqs": [
+        {
+          "q": "Is this a substitute for the EU AI Act or ISO 42001?",
+          "a": "No. It is a practical control set that operationalizes their principles for agents. Use it alongside the formal frameworks and legal advice, not instead of them."
+        },
+        {
+          "q": "Which control matters most for autonomous agents?",
+          "a": "Risk-based human oversight plus least-privilege access and audit logging — together they bound what an agent can do and make every action accountable."
+        },
+        {
+          "q": "How does it connect to the patterns library?",
+          "a": "Each control maps to patterns that implement it — human-approval-gate for oversight, reflection and evaluator-optimizer for quality — and to knowledge units like guardrails and AI observability."
+        }
+      ]
+    },
+    "es": {
+      "name": "Checklist de Gobernanza de IA Agéntica",
+      "summary": "Un checklist práctico y neutral para gobernar la IA agéntica en la empresa, que traduce los principios del EU AI Act, ISO/IEC 42001 y NIST AI RMF en controles concretos que puedes implementar en un harness. Cubre supervisión humana, guardarraíles, registro de auditoría, evaluación, control de acceso, defensa frente a inyección de prompts y respuesta a incidentes, y mapea cada control a los patrones y unidades de conocimiento que lo operacionalizan. Úsalo como puerta de preparación antes de dejar que un agente actúe en producción.",
+      "definition": "El checklist de gobernanza de IA agéntica es un conjunto de controles operativos que convierte los marcos de gobernanza de IA en requisitos concretos e implementables para agentes autónomos que actúan en producción.",
+      "scope": "Equipos que construyen o despliegan agentes autónomos o semiautónomos que usan herramientas, actúan sobre sistemas o toman decisiones de consecuencia. Es un compañero práctico de los marcos formales, no un sustituto del asesoramiento legal.",
+      "keyPoints": [
+        "Supervisión humana por riesgo: pon puertas de aprobación a las acciones de alto impacto, irreversibles o reguladas.",
+        "Guardarraíles en entradas y salidas, incluyendo defensa frente a inyección de prompts y PII.",
+        "Registro de auditoría y observabilidad completos para que cada acción sea trazable.",
+        "Evaluación antes y después del despliegue, contra un conjunto de evaluación mantenido.",
+        "Acceso de mínimo privilegio a las herramientas y datos que el agente puede alcanzar.",
+        "Una respuesta a incidentes y un interruptor de parada definidos para los agentes en producción."
+      ],
+      "controls": [
+        {
+          "control": "Puertas de aprobación humana",
+          "note": "Enruta las acciones de alto impacto por un punto de control humano (Art. 14 del EU AI Act). Implementa el patrón de puerta de aprobación humana."
+        },
+        {
+          "control": "Guardarraíles",
+          "note": "Valida y restringe entradas y salidas; defiende frente a la inyección de prompts y bloquea acciones fuera de política."
+        },
+        {
+          "control": "Registro de auditoría y observabilidad",
+          "note": "Traza cada decisión, llamada a herramienta y acción para que el agente sea revisable y los incidentes reconstruibles."
+        },
+        {
+          "control": "Arnés de evaluación",
+          "note": "Puntúa el comportamiento frente a un conjunto de evaluación antes de desplegar y monitoriza regresiones después: el 'Medir' del NIST."
+        },
+        {
+          "control": "Acceso de mínimo privilegio",
+          "note": "Acota las herramientas, los datos y los permisos que un agente puede alcanzar al mínimo que su tarea requiere."
+        },
+        {
+          "control": "Respuesta a incidentes e interruptor de parada",
+          "note": "Define cómo detectar, detener y remediar un agente que se comporta mal, incluyendo una forma de pararlo de inmediato."
+        }
+      ],
+      "checklist": [
+        "Clasifica el riesgo del agente e identifica qué acciones necesitan aprobación humana.",
+        "Implementa guardarraíles para entradas/salidas y defensa frente a inyección de prompts.",
+        "Habilita registro de auditoría y observabilidad de extremo a extremo.",
+        "Monta un conjunto de evaluación y ejecútalo antes del despliegue y de forma continua.",
+        "Aplica mínimo privilegio a herramientas, datos y credenciales.",
+        "Define respuesta a incidentes, umbrales de monitorización y un interruptor de parada.",
+        "Mapea cada control a tus obligaciones bajo el EU AI Act, ISO 42001 y NIST AI RMF.",
+        "Documenta la responsabilidad y revisa el agente de forma periódica."
+      ],
+      "pitfalls": [
+        "Dar a un agente amplio acceso a herramientas/datos 'por si acaso', creando un gran radio de impacto.",
+        "Poner puertas a todo (fatiga de aprobación) o a nada (sin supervisión) en vez de hacerlo por riesgo.",
+        "Desplegar sin un conjunto de evaluación, dejando calidad y seguridad sin medir.",
+        "No tener interruptor de parada ni plan de incidentes cuando un agente se comporta mal en producción.",
+        "Ignorar la inyección de prompts como superficie de ataque para agentes con herramientas."
+      ],
+      "productionEvidence": {
+        "context": "Equipos que ponen en producción un agente autónomo o semiautónomo que usa herramientas y toma acciones de consecuencia.",
+        "scenario": "Antes del lanzamiento, el equipo ejecuta el checklist como puerta de preparación: clasifica el riesgo del agente, pone puertas de aprobación humana a las acciones de alto impacto, añade guardarraíles y defensa frente a inyección de prompts, habilita registro de auditoría y observabilidad, monta un conjunto de evaluación, acota el acceso de mínimo privilegio y define respuesta a incidentes y un interruptor de parada.",
+        "technology": "Un harness que combina una puerta de aprobación humana, guardarraíles, registro de auditoría/observabilidad, un arnés de evaluación y acceso acotado a herramientas y credenciales.",
+        "load": "Se aplica por agente antes del despliegue y se revisa de forma periódica; el control más pesado (aprobación humana) se reserva para el pequeño conjunto de acciones de alto impacto.",
+        "results": "Patrón observado: los equipos que ponen puertas por riesgo, aplican mínimo privilegio e instrumentan desde el día uno contienen el radio de impacto de los errores del agente; los que dan acceso amplio 'por si acaso' o despliegan sin evaluaciones descubren los fallos en producción. Mide la idoneidad del escalado, la tasa de acciones erróneas y el tiempo medio de detección."
+      },
+      "lessons": [
+        "Trata el checklist como una puerta de preparación, no como una auditoría puntual: vuelve a ejecutarlo a medida que crecen las herramientas y la autonomía del agente.",
+        "El acceso de mínimo privilegio y la aprobación humana basada en riesgo acotan el radio de impacto más que cualquier guardarraíl aislado.",
+        "Sin un conjunto de evaluación y registro de auditoría antes del lanzamiento, no puedes distinguir un agente seguro de uno con suerte.",
+        "Asigna cada control a un responsable concreto; la gobernanza sin rendición de cuentas es solo documentación."
+      ],
+      "examples": [
+        "Un agente cuya acción de reembolso tiene puerta de aprobación humana mientras las consultas de solo lectura corren libres.",
+        "Un guardarraíl que bloquea una instrucción inyectada para exfiltrar datos mediante una herramienta.",
+        "Una ejecución de evaluación que detecta una regresión de seguridad antes de desplegar una actualización del agente."
+      ],
+      "faqs": [
+        {
+          "q": "¿Esto sustituye al EU AI Act o a ISO 42001?",
+          "a": "No. Es un conjunto de controles práctico que operacionaliza sus principios para agentes. Úsalo junto a los marcos formales y al asesoramiento legal, no en su lugar."
+        },
+        {
+          "q": "¿Qué control importa más para los agentes autónomos?",
+          "a": "La supervisión humana basada en riesgo más el acceso de mínimo privilegio y el registro de auditoría: juntos acotan lo que un agente puede hacer y hacen cada acción responsable."
+        },
+        {
+          "q": "¿Cómo conecta con la biblioteca de patrones?",
+          "a": "Cada control mapea a patrones que lo implementan —puerta de aprobación humana para la supervisión, reflexión y evaluador-optimizador para la calidad— y a unidades de conocimiento como guardarraíles y observabilidad de IA."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Checklist de Governança de IA Agêntica",
+      "summary": "Um checklist prático e neutro para governar a IA agêntica na empresa, que traduz os princípios do EU AI Act, ISO/IEC 42001 e NIST AI RMF em controles concretos que você pode implementar num harness. Cobre supervisão humana, guard-rails, registro de auditoria, avaliação, controle de acesso, defesa contra injeção de prompts e resposta a incidentes, e mapeia cada controle aos padrões e unidades de conhecimento que o operacionalizam. Use-o como portão de prontidão antes de deixar um agente agir em produção.",
+      "definition": "O checklist de governança de IA agêntica é um conjunto de controles operacionais que transforma os frameworks de governança de IA em requisitos concretos e implementáveis para agentes autônomos que agem em produção.",
+      "scope": "Equipes que constroem ou implantam agentes autônomos ou semiautônomos que usam ferramentas, agem sobre sistemas ou tomam decisões consequentes. É um companheiro prático dos frameworks formais, não um substituto de aconselhamento jurídico.",
+      "keyPoints": [
+        "Supervisão humana por risco: coloque portões de aprovação nas ações de alto impacto, irreversíveis ou reguladas.",
+        "Guard-rails em entradas e saídas, incluindo defesa contra injeção de prompts e PII.",
+        "Registro de auditoria e observabilidade completos para que cada ação seja rastreável.",
+        "Avaliação antes e depois da implantação, contra um conjunto de avaliação mantido.",
+        "Acesso de menor privilégio às ferramentas e dados que o agente pode alcançar.",
+        "Uma resposta a incidentes e um interruptor de parada definidos para os agentes em produção."
+      ],
+      "controls": [
+        {
+          "control": "Portões de aprovação humana",
+          "note": "Roteie as ações de alto impacto por um ponto de controle humano (Art. 14 do EU AI Act). Implementa o padrão de portão de aprovação humana."
+        },
+        {
+          "control": "Guard-rails",
+          "note": "Valide e restrinja entradas e saídas; defenda contra a injeção de prompts e bloqueie ações fora da política."
+        },
+        {
+          "control": "Registro de auditoria e observabilidade",
+          "note": "Rastreie cada decisão, chamada de ferramenta e ação para que o agente seja revisável e os incidentes reconstruíveis."
+        },
+        {
+          "control": "Harness de avaliação",
+          "note": "Pontue o comportamento contra um conjunto de avaliação antes de implantar e monitore regressões depois: o 'Medir' do NIST."
+        },
+        {
+          "control": "Acesso de menor privilégio",
+          "note": "Restrinja as ferramentas, os dados e as permissões que um agente pode alcançar ao mínimo que sua tarefa requer."
+        },
+        {
+          "control": "Resposta a incidentes e interruptor de parada",
+          "note": "Defina como detectar, parar e remediar um agente que se comporta mal, incluindo uma forma de pará-lo imediatamente."
+        }
+      ],
+      "checklist": [
+        "Classifique o risco do agente e identifique quais ações precisam de aprovação humana.",
+        "Implemente guard-rails para entradas/saídas e defesa contra injeção de prompts.",
+        "Habilite registro de auditoria e observabilidade ponta a ponta.",
+        "Monte um conjunto de avaliação e execute-o antes da implantação e continuamente.",
+        "Aplique menor privilégio a ferramentas, dados e credenciais.",
+        "Defina resposta a incidentes, limiares de monitoramento e um interruptor de parada.",
+        "Mapeie cada controle para suas obrigações sob o EU AI Act, ISO 42001 e NIST AI RMF.",
+        "Documente a responsabilidade e revise o agente periodicamente."
+      ],
+      "pitfalls": [
+        "Dar a um agente amplo acesso a ferramentas/dados 'por precaução', criando um grande raio de impacto.",
+        "Colocar portões em tudo (fadiga de aprovação) ou em nada (sem supervisão) em vez de fazê-lo por risco.",
+        "Implantar sem um conjunto de avaliação, deixando qualidade e segurança sem medição.",
+        "Não ter interruptor de parada nem plano de incidentes quando um agente se comporta mal em produção.",
+        "Ignorar a injeção de prompts como superfície de ataque para agentes com ferramentas."
+      ],
+      "productionEvidence": {
+        "context": "Equipes que colocam em produção um agente autônomo ou semiautônomo que usa ferramentas e toma ações consequentes.",
+        "scenario": "Antes do go-live, a equipe executa o checklist como portão de prontidão: classifica o risco do agente, coloca portões de aprovação humana nas ações de alto impacto, adiciona guard-rails e defesa contra injeção de prompts, habilita registro de auditoria e observabilidade, monta um conjunto de avaliação, restringe o acesso de menor privilégio e define resposta a incidentes e um interruptor de parada.",
+        "technology": "Um harness que combina um portão de aprovação humana, guard-rails, registro de auditoria/observabilidade, um harness de avaliação e acesso restrito a ferramentas e credenciais.",
+        "load": "Aplicado por agente antes da implantação e revisado periodicamente; o controle mais pesado (aprovação humana) é reservado para o pequeno conjunto de ações de alto impacto.",
+        "results": "Padrão observado: equipes que colocam portões por risco, aplicam menor privilégio e instrumentam desde o dia um contêm o raio de impacto dos erros do agente; as que dão acesso amplo 'por precaução' ou implantam sem avaliações descobrem as falhas em produção. Meça a adequação do escalonamento, a taxa de ações erradas e o tempo médio de detecção."
+      },
+      "lessons": [
+        "Trate o checklist como um portão de prontidão, não como uma auditoria pontual: execute-o novamente à medida que as ferramentas e a autonomia do agente crescem.",
+        "O acesso de menor privilégio e a aprovação humana baseada em risco limitam o raio de impacto mais do que qualquer guard-rail isolado.",
+        "Sem um conjunto de avaliação e registro de auditoria antes do lançamento, você não distingue um agente seguro de um com sorte.",
+        "Atribua cada controle a um responsável concreto; governança sem prestação de contas é só documentação."
+      ],
+      "examples": [
+        "Um agente cuja ação de reembolso tem portão de aprovação humana enquanto as consultas somente leitura correm livres.",
+        "Um guard-rail que bloqueia uma instrução injetada para exfiltrar dados via uma ferramenta.",
+        "Uma execução de avaliação que detecta uma regressão de segurança antes de implantar uma atualização do agente."
+      ],
+      "faqs": [
+        {
+          "q": "Isto substitui o EU AI Act ou a ISO 42001?",
+          "a": "Não. É um conjunto de controles prático que operacionaliza seus princípios para agentes. Use-o junto aos frameworks formais e ao aconselhamento jurídico, não no lugar deles."
+        },
+        {
+          "q": "Qual controle importa mais para os agentes autônomos?",
+          "a": "A supervisão humana baseada em risco mais o acesso de menor privilégio e o registro de auditoria: juntos limitam o que um agente pode fazer e tornam cada ação responsável."
+        },
+        {
+          "q": "Como conecta com a biblioteca de padrões?",
+          "a": "Cada controle mapeia para padrões que o implementam —portão de aprovação humana para a supervisão, reflexão e avaliador-otimizador para a qualidade— e para unidades de conhecimento como guard-rails e observabilidade de IA."
+        }
+      ]
+    }
+  }
+}

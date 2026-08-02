@@ -1,0 +1,153 @@
+{
+  "slug": "embeddings",
+  "category": "concept",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "related": ["enterprise-rag", "foundation-models", "fine-tuning", "agentic-ai"],
+  "references": [
+    { "title": "Reimers & Gurevych — Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks (2019)", "url": "https://arxiv.org/abs/1908.10084" },
+    { "title": "Mikolov et al. — Efficient Estimation of Word Representations (word2vec, 2013)", "url": "https://arxiv.org/abs/1301.3781" }
+  ],
+  "evidence": {
+    "evidenceLevel": "benchmark",
+    "confidenceLevel": "high",
+    "sourceType": ["benchmark", "paper"]
+  },
+  "locales": {
+    "en": {
+      "title": "What are Embeddings & Vector Search?",
+      "summary": "An embedding is a numeric vector that represents the meaning of text (or images, audio, code) so that semantically similar items sit close together in vector space. Vector search finds the nearest embeddings to a query, enabling search by meaning rather than keywords. Embeddings are the backbone of retrieval-augmented generation, semantic search, clustering and recommendation.",
+      "definition": "An embedding is a dense numeric vector that encodes the meaning of a piece of data, positioned so that similar items are close in vector space; vector search retrieves the nearest embeddings to a query.",
+      "takeaways": [
+        "Embeddings turn meaning into vectors; similar things sit close together.",
+        "Vector search retrieves by semantic similarity, not exact keywords.",
+        "They power RAG, semantic search, clustering and recommendation.",
+        "Hybrid search (vector + keyword) usually beats either alone.",
+        "Chunking and the embedding model choice drive retrieval quality."
+      ],
+      "context": [
+        "Computers compare numbers, not meaning. Embeddings bridge that gap: an embedding model maps text to a vector such that 'cancel my subscription' and 'how do I unsubscribe' land near each other, even with no shared words.",
+        "This is what makes semantic retrieval possible. Instead of matching keywords, a system embeds the query and finds the closest stored vectors — the foundation of how RAG and modern search retrieve relevant content."
+      ],
+      "architecture": [
+        "Indexing: content is split into chunks, each passed through an embedding model to produce a vector, then stored in a vector index. Querying: the query is embedded and the index returns the nearest vectors by a similarity metric (e.g. cosine).",
+        "Production systems add a re-ranker to refine the top results, combine vector search with keyword search (hybrid), and filter by metadata and permissions. Quality depends heavily on chunking and the embedding model."
+      ],
+      "components": ["Embedding model", "Chunking", "Vector index / database", "Similarity metric (cosine)", "Re-ranker", "Hybrid (keyword) search"],
+      "pros": [
+        "Search by meaning, robust to wording.",
+        "Cross-lingual and multimodal matching.",
+        "The backbone of RAG and semantic search.",
+        "Cheap to query at scale once indexed."
+      ],
+      "risks": [
+        "Poor chunking degrades every downstream result.",
+        "Embedding model mismatch hurts relevance.",
+        "Vectors can leak sensitive info; secure the store.",
+        "Pure vector search can miss exact-match needs (use hybrid)."
+      ],
+      "tools": ["Embedding models (OpenAI, Cohere, open-source)", "Vector databases (pgvector, Pinecone, Vertex AI Vector Search)", "Re-rankers", "Hybrid search engines"],
+      "examples": [
+        "Semantic search over a help center that matches intent, not keywords.",
+        "Retrieving relevant passages to ground a RAG answer.",
+        "Clustering support tickets by topic using their embeddings."
+      ],
+      "faqs": [
+        { "q": "How are embeddings different from keywords?", "a": "Keyword search matches exact words; embeddings match meaning, so paraphrases and synonyms still retrieve the right content." },
+        { "q": "What is vector search?", "a": "Finding the stored embeddings nearest to a query embedding by a similarity metric like cosine distance — search by semantic closeness." },
+        { "q": "Why combine vector and keyword search?", "a": "Vectors excel at meaning but can miss exact terms (codes, names). Hybrid search blends both for the best recall and precision." },
+        { "q": "Do embeddings power RAG?", "a": "Yes. RAG embeds documents and queries, retrieves the nearest chunks by vector search, and grounds the model's answer in them." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué son los Embeddings y la Búsqueda Vectorial?",
+      "summary": "Un embedding es un vector numérico que representa el significado de un texto (o imágenes, audio, código) de modo que los elementos semánticamente similares quedan cerca en el espacio vectorial. La búsqueda vectorial encuentra los embeddings más cercanos a una consulta, permitiendo buscar por significado en vez de por palabras clave. Los embeddings son la columna vertebral de la generación aumentada por recuperación, la búsqueda semántica, el clustering y la recomendación.",
+      "definition": "Un embedding es un vector numérico denso que codifica el significado de un dato, situado de forma que los elementos similares quedan cerca en el espacio vectorial; la búsqueda vectorial recupera los embeddings más cercanos a una consulta.",
+      "takeaways": [
+        "Los embeddings convierten el significado en vectores; lo similar queda cerca.",
+        "La búsqueda vectorial recupera por similitud semántica, no por palabras exactas.",
+        "Sustentan el RAG, la búsqueda semántica, el clustering y la recomendación.",
+        "La búsqueda híbrida (vector + palabras clave) suele superar a cada una sola.",
+        "El chunking y la elección del modelo de embeddings determinan la calidad."
+      ],
+      "context": [
+        "Los ordenadores comparan números, no significado. Los embeddings salvan esa brecha: un modelo de embeddings mapea texto a un vector de modo que 'cancela mi suscripción' y 'cómo me doy de baja' caen cerca, aun sin palabras compartidas.",
+        "Esto es lo que hace posible la recuperación semántica. En vez de casar palabras clave, el sistema embebe la consulta y encuentra los vectores almacenados más cercanos: la base de cómo el RAG y la búsqueda moderna recuperan contenido relevante."
+      ],
+      "architecture": [
+        "Indexación: el contenido se divide en chunks, cada uno pasa por un modelo de embeddings para producir un vector y se guarda en un índice vectorial. Consulta: la consulta se embebe y el índice devuelve los vectores más cercanos por una métrica de similitud (p. ej. coseno).",
+        "Los sistemas en producción añaden un re-ranker para refinar los mejores resultados, combinan búsqueda vectorial con búsqueda por palabras clave (híbrida) y filtran por metadatos y permisos. La calidad depende mucho del chunking y del modelo de embeddings."
+      ],
+      "components": ["Modelo de embeddings", "Chunking", "Índice / base de datos vectorial", "Métrica de similitud (coseno)", "Re-ranker", "Búsqueda híbrida (palabras clave)"],
+      "pros": [
+        "Búsqueda por significado, robusta a la redacción.",
+        "Coincidencia translingüe y multimodal.",
+        "La columna vertebral del RAG y la búsqueda semántica.",
+        "Barata de consultar a escala una vez indexada."
+      ],
+      "risks": [
+        "Un chunking pobre degrada todo resultado posterior.",
+        "Un modelo de embeddings inadecuado daña la relevancia.",
+        "Los vectores pueden filtrar info sensible; asegura el almacén.",
+        "La búsqueda vectorial pura puede fallar en coincidencias exactas (usa híbrida)."
+      ],
+      "tools": ["Modelos de embeddings (OpenAI, Cohere, open source)", "Bases de datos vectoriales (pgvector, Pinecone, Vertex AI Vector Search)", "Re-rankers", "Motores de búsqueda híbrida"],
+      "examples": [
+        "Búsqueda semántica en un centro de ayuda que casa la intención, no las palabras.",
+        "Recuperar pasajes relevantes para fundamentar una respuesta RAG.",
+        "Agrupar tickets de soporte por tema usando sus embeddings."
+      ],
+      "faqs": [
+        { "q": "¿En qué se diferencian los embeddings de las palabras clave?", "a": "La búsqueda por palabras clave casa palabras exactas; los embeddings casan significado, así que paráfrasis y sinónimos siguen recuperando el contenido correcto." },
+        { "q": "¿Qué es la búsqueda vectorial?", "a": "Encontrar los embeddings almacenados más cercanos al embedding de una consulta por una métrica como la distancia coseno: búsqueda por cercanía semántica." },
+        { "q": "¿Por qué combinar búsqueda vectorial y por palabras clave?", "a": "Los vectores destacan en significado pero pueden fallar en términos exactos (códigos, nombres). La búsqueda híbrida combina ambas para mejor recall y precisión." },
+        { "q": "¿Los embeddings sustentan el RAG?", "a": "Sí. El RAG embebe documentos y consultas, recupera los chunks más cercanos por búsqueda vectorial y fundamenta en ellos la respuesta del modelo." }
+      ]
+    },
+    "pt": {
+      "title": "O que são Embeddings e Busca Vetorial?",
+      "summary": "Um embedding é um vetor numérico que representa o significado de um texto (ou imagens, áudio, código) de modo que itens semanticamente similares ficam próximos no espaço vetorial. A busca vetorial encontra os embeddings mais próximos de uma consulta, permitindo buscar por significado em vez de palavras-chave. Os embeddings são a espinha dorsal da geração aumentada por recuperação, da busca semântica, do clustering e da recomendação.",
+      "definition": "Um embedding é um vetor numérico denso que codifica o significado de um dado, posicionado de forma que itens similares ficam próximos no espaço vetorial; a busca vetorial recupera os embeddings mais próximos de uma consulta.",
+      "takeaways": [
+        "Embeddings transformam significado em vetores; o similar fica próximo.",
+        "A busca vetorial recupera por similaridade semântica, não por palavras exatas.",
+        "Sustentam o RAG, a busca semântica, o clustering e a recomendação.",
+        "A busca híbrida (vetor + palavras-chave) costuma superar cada uma sozinha.",
+        "O chunking e a escolha do modelo de embeddings determinam a qualidade."
+      ],
+      "context": [
+        "Os computadores comparam números, não significado. Os embeddings preenchem essa lacuna: um modelo de embeddings mapeia texto a um vetor de modo que 'cancele minha assinatura' e 'como eu me descadastro' caem próximos, mesmo sem palavras em comum.",
+        "Isso é o que torna possível a recuperação semântica. Em vez de casar palavras-chave, o sistema embeda a consulta e encontra os vetores armazenados mais próximos: a base de como o RAG e a busca moderna recuperam conteúdo relevante."
+      ],
+      "architecture": [
+        "Indexação: o conteúdo é dividido em chunks, cada um passa por um modelo de embeddings para produzir um vetor e é guardado num índice vetorial. Consulta: a consulta é embedada e o índice devolve os vetores mais próximos por uma métrica de similaridade (ex.: cosseno).",
+        "Os sistemas em produção adicionam um re-ranker para refinar os melhores resultados, combinam busca vetorial com busca por palavras-chave (híbrida) e filtram por metadados e permissões. A qualidade depende muito do chunking e do modelo de embeddings."
+      ],
+      "components": ["Modelo de embeddings", "Chunking", "Índice / banco de dados vetorial", "Métrica de similaridade (cosseno)", "Re-ranker", "Busca híbrida (palavras-chave)"],
+      "pros": [
+        "Busca por significado, robusta à redação.",
+        "Correspondência translíngue e multimodal.",
+        "A espinha dorsal do RAG e da busca semântica.",
+        "Barata de consultar em escala uma vez indexada."
+      ],
+      "risks": [
+        "Um chunking ruim degrada todo resultado posterior.",
+        "Um modelo de embeddings inadequado prejudica a relevância.",
+        "Os vetores podem vazar info sensível; proteja o armazenamento.",
+        "A busca vetorial pura pode falhar em correspondências exatas (use híbrida)."
+      ],
+      "tools": ["Modelos de embeddings (OpenAI, Cohere, open source)", "Bancos de dados vetoriais (pgvector, Pinecone, Vertex AI Vector Search)", "Re-rankers", "Motores de busca híbrida"],
+      "examples": [
+        "Busca semântica numa central de ajuda que casa a intenção, não as palavras.",
+        "Recuperar trechos relevantes para fundamentar uma resposta RAG.",
+        "Agrupar chamados de suporte por tema usando seus embeddings."
+      ],
+      "faqs": [
+        { "q": "Como os embeddings diferem das palavras-chave?", "a": "A busca por palavras-chave casa palavras exatas; os embeddings casam significado, então paráfrases e sinônimos ainda recuperam o conteúdo correto." },
+        { "q": "O que é busca vetorial?", "a": "Encontrar os embeddings armazenados mais próximos do embedding de uma consulta por uma métrica como a distância cosseno: busca por proximidade semântica." },
+        { "q": "Por que combinar busca vetorial e por palavras-chave?", "a": "Os vetores se destacam em significado mas podem falhar em termos exatos (códigos, nomes). A busca híbrida combina ambas para melhor recall e precisão." },
+        { "q": "Os embeddings sustentam o RAG?", "a": "Sim. O RAG embeda documentos e consultas, recupera os chunks mais próximos por busca vetorial e fundamenta neles a resposta do modelo." }
+      ]
+    }
+  }
+}

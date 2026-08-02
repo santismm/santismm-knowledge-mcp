@@ -1,0 +1,153 @@
+{
+  "slug": "reasoning-models",
+  "category": "concept",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "related": ["foundation-models", "agentic-ai", "prompt-engineering", "agentic-evaluation"],
+  "references": [
+    { "title": "Wei et al. — Chain-of-Thought Prompting Elicits Reasoning in LLMs (2022)", "url": "https://arxiv.org/abs/2201.11903" },
+    { "title": "DeepSeek-AI — DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via RL (2025)", "url": "https://arxiv.org/abs/2501.12948" }
+  ],
+  "evidence": {
+    "evidenceLevel": "benchmark",
+    "confidenceLevel": "high",
+    "sourceType": ["benchmark", "paper"]
+  },
+  "locales": {
+    "en": {
+      "title": "What are Reasoning Models?",
+      "summary": "Reasoning models are language models trained to spend extra computation 'thinking' before they answer — generating internal reasoning steps to solve harder problems in math, code and logic. They trade latency and cost for accuracy on complex, multi-step tasks. The key idea is test-time compute: letting a model reason longer at inference, rather than only making the model bigger, can substantially improve results.",
+      "definition": "Reasoning models are language models optimized to perform extended step-by-step reasoning at inference time — using additional test-time compute — to improve accuracy on complex, multi-step problems.",
+      "takeaways": [
+        "They 'think' before answering, using extra inference compute.",
+        "Test-time compute is a new scaling axis beyond model size.",
+        "Best for math, code, logic and multi-step planning.",
+        "They trade latency and token cost for accuracy.",
+        "Overkill for simple tasks — match the model to the problem."
+      ],
+      "context": [
+        "Standard models answer in roughly constant time regardless of difficulty. Reasoning models break that: they generate a chain of internal reasoning, effectively spending more compute on harder questions, which lifts performance on tasks that need multi-step deduction.",
+        "This introduced a second scaling axis. Beyond making models larger (train-time compute), you can let them reason longer at inference (test-time compute) — a major driver of recent progress on hard benchmarks."
+      ],
+      "architecture": [
+        "Reasoning models are typically trained to produce long internal reasoning before a final answer, often reinforced with reinforcement learning that rewards correct outcomes. At inference, more 'thinking' tokens generally mean better answers on hard problems.",
+        "In agentic systems, reasoning models serve as strong planners and decision-makers, while cheaper, faster models can handle routine steps. Routing between them by task difficulty is a common cost-control pattern."
+      ],
+      "components": ["Extended reasoning (thinking tokens)", "Test-time compute budget", "RL-based training for reasoning", "Final-answer extraction"],
+      "pros": [
+        "Higher accuracy on complex, multi-step problems.",
+        "Strong at math, coding and planning.",
+        "Reasoning effort can be scaled per query.",
+        "Good planners at the core of capable agents."
+      ],
+      "risks": [
+        "Higher latency and token cost.",
+        "Overkill — and wasteful — for simple tasks.",
+        "Longer reasoning is not always more correct.",
+        "Internal reasoning can be hard to audit or trust verbatim."
+      ],
+      "tools": ["Reasoning model tiers from major providers", "Adjustable reasoning-effort settings", "Model routing by task difficulty", "Evaluation suites"],
+      "examples": [
+        "Solving a multi-step math or logic problem that trips up a standard model.",
+        "Planning a complex agent task before execution.",
+        "Routing only hard tickets to a reasoning model to control cost."
+      ],
+      "faqs": [
+        { "q": "How are reasoning models different from standard LLMs?", "a": "They are trained and configured to reason at length before answering, spending more inference compute on hard problems instead of replying in near-constant time." },
+        { "q": "What is test-time compute?", "a": "Computation spent at inference (the model 'thinking' longer), as opposed to train-time compute spent making the model. It is a distinct way to improve results." },
+        { "q": "Should I always use a reasoning model?", "a": "No. They cost more and add latency. Use them for hard, multi-step problems and route simpler tasks to faster, cheaper models." },
+        { "q": "Do they eliminate hallucination?", "a": "No. Reasoning improves accuracy on many tasks but does not guarantee correctness; grounding, tools and evaluation remain necessary." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué son los Modelos de Razonamiento (Reasoning Models)?",
+      "summary": "Los modelos de razonamiento son modelos de lenguaje entrenados para gastar cómputo extra 'pensando' antes de responder, generando pasos de razonamiento internos para resolver problemas más difíciles de matemáticas, código y lógica. Cambian latencia y coste por precisión en tareas complejas de varios pasos. La idea clave es el cómputo en inferencia (test-time compute): dejar que un modelo razone más en la inferencia, en vez de solo hacerlo más grande, puede mejorar mucho los resultados.",
+      "definition": "Los modelos de razonamiento son modelos de lenguaje optimizados para realizar razonamiento extendido paso a paso en el momento de la inferencia —usando cómputo adicional en inferencia— para mejorar la precisión en problemas complejos de varios pasos.",
+      "takeaways": [
+        "'Piensan' antes de responder, usando cómputo extra en inferencia.",
+        "El cómputo en inferencia es un nuevo eje de escalado más allá del tamaño.",
+        "Mejores para matemáticas, código, lógica y planificación de varios pasos.",
+        "Cambian latencia y coste de tokens por precisión.",
+        "Excesivos para tareas simples: ajusta el modelo al problema."
+      ],
+      "context": [
+        "Los modelos estándar responden en un tiempo casi constante sin importar la dificultad. Los modelos de razonamiento rompen eso: generan una cadena de razonamiento interno, gastando de hecho más cómputo en preguntas más difíciles, lo que mejora tareas que necesitan deducción de varios pasos.",
+        "Esto introdujo un segundo eje de escalado. Más allá de hacer modelos más grandes (cómputo en entrenamiento), puedes dejarlos razonar más en inferencia (cómputo en inferencia): un motor importante del progreso reciente en benchmarks difíciles."
+      ],
+      "architecture": [
+        "Los modelos de razonamiento suelen entrenarse para producir un razonamiento interno largo antes de la respuesta final, a menudo reforzado con aprendizaje por refuerzo que premia resultados correctos. En inferencia, más tokens de 'pensamiento' suelen significar mejores respuestas en problemas difíciles.",
+        "En sistemas agénticos, los modelos de razonamiento sirven como planificadores y decisores fuertes, mientras que modelos más baratos y rápidos manejan pasos rutinarios. Enrutar entre ellos según la dificultad es un patrón común de control de coste."
+      ],
+      "components": ["Razonamiento extendido (tokens de pensamiento)", "Presupuesto de cómputo en inferencia", "Entrenamiento por RL para razonar", "Extracción de la respuesta final"],
+      "pros": [
+        "Mayor precisión en problemas complejos de varios pasos.",
+        "Fuertes en matemáticas, programación y planificación.",
+        "El esfuerzo de razonamiento puede escalarse por consulta.",
+        "Buenos planificadores en el núcleo de agentes capaces."
+      ],
+      "risks": [
+        "Mayor latencia y coste de tokens.",
+        "Excesivos —y derrochadores— para tareas simples.",
+        "Razonar más no siempre es más correcto.",
+        "El razonamiento interno puede ser difícil de auditar o de creer al pie de la letra."
+      ],
+      "tools": ["Niveles de modelos de razonamiento de los grandes proveedores", "Ajustes de esfuerzo de razonamiento", "Enrutamiento de modelos por dificultad", "Suites de evaluación"],
+      "examples": [
+        "Resolver un problema de matemáticas o lógica de varios pasos que confunde a un modelo estándar.",
+        "Planificar una tarea de agente compleja antes de ejecutarla.",
+        "Enrutar solo los tickets difíciles a un modelo de razonamiento para controlar el coste."
+      ],
+      "faqs": [
+        { "q": "¿En qué se diferencian de los LLM estándar?", "a": "Están entrenados y configurados para razonar extensamente antes de responder, gastando más cómputo en inferencia en problemas difíciles en vez de responder en tiempo casi constante." },
+        { "q": "¿Qué es el cómputo en inferencia?", "a": "El cómputo gastado en la inferencia (el modelo 'pensando' más tiempo), frente al cómputo en entrenamiento gastado en construir el modelo. Es una forma distinta de mejorar resultados." },
+        { "q": "¿Debería usar siempre un modelo de razonamiento?", "a": "No. Cuestan más y añaden latencia. Úsalos para problemas difíciles de varios pasos y enruta las tareas simples a modelos más rápidos y baratos." },
+        { "q": "¿Eliminan la alucinación?", "a": "No. El razonamiento mejora la precisión en muchas tareas pero no garantiza la corrección; siguen siendo necesarios la fundamentación, las herramientas y la evaluación." }
+      ]
+    },
+    "pt": {
+      "title": "O que são Modelos de Raciocínio (Reasoning Models)?",
+      "summary": "Os modelos de raciocínio são modelos de linguagem treinados para gastar computação extra 'pensando' antes de responder, gerando passos de raciocínio internos para resolver problemas mais difíceis de matemática, código e lógica. Trocam latência e custo por precisão em tarefas complexas de vários passos. A ideia central é a computação em inferência (test-time compute): deixar um modelo raciocinar mais na inferência, em vez de só torná-lo maior, pode melhorar muito os resultados.",
+      "definition": "Os modelos de raciocínio são modelos de linguagem otimizados para realizar raciocínio estendido passo a passo no momento da inferência — usando computação adicional em inferência — para melhorar a precisão em problemas complexos de vários passos.",
+      "takeaways": [
+        "'Pensam' antes de responder, usando computação extra em inferência.",
+        "A computação em inferência é um novo eixo de escala além do tamanho.",
+        "Melhores para matemática, código, lógica e planejamento de vários passos.",
+        "Trocam latência e custo de tokens por precisão.",
+        "Exagero para tarefas simples: ajuste o modelo ao problema."
+      ],
+      "context": [
+        "Os modelos padrão respondem em tempo quase constante independentemente da dificuldade. Os modelos de raciocínio quebram isso: geram uma cadeia de raciocínio interno, gastando de fato mais computação em perguntas mais difíceis, o que melhora tarefas que precisam de dedução de vários passos.",
+        "Isso introduziu um segundo eixo de escala. Além de tornar os modelos maiores (computação em treinamento), você pode deixá-los raciocinar mais na inferência (computação em inferência): um motor importante do progresso recente em benchmarks difíceis."
+      ],
+      "architecture": [
+        "Os modelos de raciocínio costumam ser treinados para produzir um raciocínio interno longo antes da resposta final, muitas vezes reforçado com aprendizado por reforço que premia resultados corretos. Na inferência, mais tokens de 'pensamento' costumam significar melhores respostas em problemas difíceis.",
+        "Em sistemas agênticos, os modelos de raciocínio servem como planejadores e decisores fortes, enquanto modelos mais baratos e rápidos lidam com passos rotineiros. Rotear entre eles conforme a dificuldade é um padrão comum de controle de custo."
+      ],
+      "components": ["Raciocínio estendido (tokens de pensamento)", "Orçamento de computação em inferência", "Treinamento por RL para raciocinar", "Extração da resposta final"],
+      "pros": [
+        "Maior precisão em problemas complexos de vários passos.",
+        "Fortes em matemática, programação e planejamento.",
+        "O esforço de raciocínio pode ser escalado por consulta.",
+        "Bons planejadores no núcleo de agentes capazes."
+      ],
+      "risks": [
+        "Maior latência e custo de tokens.",
+        "Exagero — e desperdício — para tarefas simples.",
+        "Raciocinar mais nem sempre é mais correto.",
+        "O raciocínio interno pode ser difícil de auditar ou de crer ao pé da letra."
+      ],
+      "tools": ["Níveis de modelos de raciocínio dos grandes provedores", "Ajustes de esforço de raciocínio", "Roteamento de modelos por dificuldade", "Suítes de avaliação"],
+      "examples": [
+        "Resolver um problema de matemática ou lógica de vários passos que confunde um modelo padrão.",
+        "Planejar uma tarefa de agente complexa antes de executá-la.",
+        "Rotear só os chamados difíceis a um modelo de raciocínio para controlar o custo."
+      ],
+      "faqs": [
+        { "q": "Como diferem dos LLMs padrão?", "a": "São treinados e configurados para raciocinar longamente antes de responder, gastando mais computação em inferência em problemas difíceis em vez de responder em tempo quase constante." },
+        { "q": "O que é computação em inferência?", "a": "A computação gasta na inferência (o modelo 'pensando' mais tempo), frente à computação em treinamento gasta em construir o modelo. É uma forma distinta de melhorar resultados." },
+        { "q": "Devo usar sempre um modelo de raciocínio?", "a": "Não. Custam mais e adicionam latência. Use-os para problemas difíceis de vários passos e roteie as tarefas simples a modelos mais rápidos e baratos." },
+        { "q": "Eles eliminam a alucinação?", "a": "Não. O raciocínio melhora a precisão em muitas tarefas mas não garante a correção; fundamentação, ferramentas e avaliação seguem necessárias." }
+      ]
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "slug": "guardrails",
+  "category": "governance",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "related": ["prompt-injection", "ai-governance", "human-in-the-loop", "ai-observability"],
+  "references": [
+    { "title": "OWASP — Top 10 for LLM Applications", "url": "https://genai.owasp.org/llm-top-10/" },
+    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": ["industry_observation", "paper"]
+  },
+  "locales": {
+    "en": {
+      "title": "What are AI Guardrails?",
+      "summary": "Guardrails are runtime controls that constrain what goes into and comes out of an AI system, keeping its behavior safe, on-policy and compliant. They check and filter inputs and outputs, validate tool actions, block disallowed content and enforce limits — sitting around the model as a safety layer. Guardrails are a primary, operational control in AI governance and a key defense against misuse and prompt injection.",
+      "definition": "AI guardrails are runtime safeguards that validate, filter or constrain a model's inputs, outputs and actions to keep its behavior safe, compliant and within defined policy.",
+      "takeaways": [
+        "Guardrails act at runtime on inputs, outputs and actions.",
+        "They enforce safety, policy and compliance, not model quality.",
+        "Types: input filtering, output validation, action allow-lists, limits.",
+        "A core defense against misuse and prompt injection.",
+        "Guardrails complement — they do not replace — evaluation and oversight."
+      ],
+      "context": [
+        "A model alone has no enforceable boundaries; it will attempt whatever the prompt elicits. Guardrails add those boundaries operationally: deterministic or model-based checks that sit between the user, the model and the systems it can touch.",
+        "They are how governance policies become live controls. A policy that says 'never expose PII' or 'never execute payments without approval' is realized as a guardrail that actually checks and blocks at runtime."
+      ],
+      "architecture": [
+        "Input guardrails screen prompts (e.g. for injection, policy violations, PII). Output guardrails validate responses (format, safety, factual constraints, PII redaction). Action guardrails gate tool calls with permissions and allow-lists. Rate, scope and budget limits cap blast radius.",
+        "Guardrails can be deterministic (rules, schemas, regex, allow-lists) or model-based (a classifier or LLM judge). They pair with observability to log violations and with human-in-the-loop approval for high-impact actions."
+      ],
+      "components": ["Input filtering", "Output validation / redaction", "Action allow-lists & permissions", "Rate & scope limits", "Policy classifiers", "Violation logging"],
+      "pros": [
+        "Enforces safety and policy at runtime, not just in guidance.",
+        "Reduces misuse, unsafe output and injection impact.",
+        "Operationalizes governance and compliance requirements.",
+        "Bounds the blast radius of agent actions."
+      ],
+      "risks": [
+        "Over-blocking harms usefulness (false positives).",
+        "Under-blocking creates a false sense of safety.",
+        "Model-based guardrails add latency and cost.",
+        "They are not a complete defense; combine with oversight and evals."
+      ],
+      "tools": ["Guardrail frameworks (e.g. NeMo Guardrails, Guardrails AI)", "Content moderation / safety classifiers", "Schema & input validation", "Permission & policy engines", "Observability for violations"],
+      "examples": [
+        "Redacting personal data from a model's output before it is shown.",
+        "Blocking a tool call that falls outside an allow-list of safe actions.",
+        "Rejecting responses that do not match a required JSON schema."
+      ],
+      "faqs": [
+        { "q": "Are guardrails the same as alignment?", "a": "No. Alignment shapes the model's intrinsic behavior during training; guardrails are external runtime controls around the deployed system. They are complementary." },
+        { "q": "Do guardrails stop prompt injection?", "a": "They reduce its impact — input screening and action allow-lists help — but no guardrail fully prevents injection. Use layered defenses plus human approval for sensitive actions." },
+        { "q": "Deterministic or model-based guardrails?", "a": "Both. Deterministic checks (schemas, allow-lists) are cheap and reliable for clear rules; model-based checks handle nuanced content at the cost of latency." },
+        { "q": "How do guardrails fit AI governance?", "a": "They are the operational layer: the runtime controls that turn governance policies into enforced behavior, evidenced through logging and audit." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué son los Guardarraíles de IA (Guardrails)?",
+      "summary": "Los guardarraíles son controles en tiempo de ejecución que acotan lo que entra y sale de un sistema de IA, manteniendo su comportamiento seguro, conforme a la política y al cumplimiento. Comprueban y filtran entradas y salidas, validan acciones de herramientas, bloquean contenido no permitido e imponen límites, situándose alrededor del modelo como capa de seguridad. Son un control primario y operativo en la gobernanza de IA y una defensa clave contra el mal uso y la inyección de prompts.",
+      "definition": "Los guardarraíles de IA son salvaguardas en tiempo de ejecución que validan, filtran o acotan las entradas, salidas y acciones de un modelo para mantener su comportamiento seguro, conforme y dentro de la política definida.",
+      "takeaways": [
+        "Los guardarraíles actúan en tiempo de ejecución sobre entradas, salidas y acciones.",
+        "Imponen seguridad, política y cumplimiento, no la calidad del modelo.",
+        "Tipos: filtrado de entrada, validación de salida, listas de permitidos de acciones, límites.",
+        "Una defensa central contra el mal uso y la inyección de prompts.",
+        "Complementan —no reemplazan— la evaluación y la supervisión."
+      ],
+      "context": [
+        "Un modelo por sí solo no tiene límites exigibles; intentará lo que el prompt provoque. Los guardarraíles añaden esos límites de forma operativa: comprobaciones deterministas o basadas en modelo que se sitúan entre el usuario, el modelo y los sistemas que puede tocar.",
+        "Son la forma en que las políticas de gobernanza se vuelven controles vivos. Una política que dice 'nunca exponer datos personales' o 'nunca ejecutar pagos sin aprobación' se materializa como un guardarraíl que realmente comprueba y bloquea en tiempo de ejecución."
+      ],
+      "architecture": [
+        "Los guardarraíles de entrada filtran prompts (p. ej. inyección, violaciones de política, datos personales). Los de salida validan respuestas (formato, seguridad, restricciones factuales, redacción de datos personales). Los de acción acotan las llamadas a herramientas con permisos y listas de permitidos. Los límites de tasa, alcance y presupuesto contienen el radio de impacto.",
+        "Pueden ser deterministas (reglas, esquemas, regex, listas de permitidos) o basados en modelo (un clasificador o juez LLM). Se combinan con observabilidad para registrar violaciones y con aprobación con humano en el bucle para acciones de alto impacto."
+      ],
+      "components": ["Filtrado de entrada", "Validación / redacción de salida", "Listas de permitidos y permisos de acción", "Límites de tasa y alcance", "Clasificadores de política", "Registro de violaciones"],
+      "pros": [
+        "Impone seguridad y política en ejecución, no solo en la guía.",
+        "Reduce el mal uso, la salida insegura y el impacto de la inyección.",
+        "Operacionaliza requisitos de gobernanza y cumplimiento.",
+        "Acota el radio de impacto de las acciones del agente."
+      ],
+      "risks": [
+        "El sobrebloqueo daña la utilidad (falsos positivos).",
+        "El infrabloqueo crea una falsa sensación de seguridad.",
+        "Los guardarraíles basados en modelo añaden latencia y coste.",
+        "No son una defensa completa; combínalos con supervisión y evaluaciones."
+      ],
+      "tools": ["Frameworks de guardarraíles (p. ej. NeMo Guardrails, Guardrails AI)", "Clasificadores de moderación / seguridad", "Validación de esquemas y entradas", "Motores de permisos y políticas", "Observabilidad de violaciones"],
+      "examples": [
+        "Redactar datos personales de la salida de un modelo antes de mostrarla.",
+        "Bloquear una llamada a herramienta fuera de una lista de acciones seguras.",
+        "Rechazar respuestas que no cumplen un esquema JSON requerido."
+      ],
+      "faqs": [
+        { "q": "¿Los guardarraíles son lo mismo que la alineación?", "a": "No. La alineación moldea el comportamiento intrínseco del modelo durante el entrenamiento; los guardarraíles son controles externos en ejecución alrededor del sistema desplegado. Son complementarios." },
+        { "q": "¿Los guardarraíles detienen la inyección de prompts?", "a": "Reducen su impacto —el filtrado de entrada y las listas de permitidos ayudan— pero ningún guardarraíl la previene por completo. Usa defensas por capas más aprobación humana para acciones sensibles." },
+        { "q": "¿Guardarraíles deterministas o basados en modelo?", "a": "Ambos. Las comprobaciones deterministas (esquemas, listas) son baratas y fiables para reglas claras; las basadas en modelo manejan contenido con matices a costa de latencia." },
+        { "q": "¿Cómo encajan los guardarraíles en la gobernanza de IA?", "a": "Son la capa operativa: los controles en ejecución que convierten las políticas de gobernanza en comportamiento exigido, evidenciado mediante registro y auditoría." }
+      ]
+    },
+    "pt": {
+      "title": "O que são Guard-rails de IA (Guardrails)?",
+      "summary": "Os guard-rails são controles em tempo de execução que limitam o que entra e sai de um sistema de IA, mantendo seu comportamento seguro, em conformidade com a política e a regulação. Verificam e filtram entradas e saídas, validam ações de ferramentas, bloqueiam conteúdo não permitido e impõem limites, situando-se ao redor do modelo como camada de segurança. São um controle primário e operacional na governança de IA e uma defesa-chave contra o mau uso e a injeção de prompts.",
+      "definition": "Os guard-rails de IA são salvaguardas em tempo de execução que validam, filtram ou limitam as entradas, saídas e ações de um modelo para manter seu comportamento seguro, conforme e dentro da política definida.",
+      "takeaways": [
+        "Os guard-rails atuam em tempo de execução sobre entradas, saídas e ações.",
+        "Impõem segurança, política e conformidade, não a qualidade do modelo.",
+        "Tipos: filtragem de entrada, validação de saída, listas de permitidos de ações, limites.",
+        "Uma defesa central contra o mau uso e a injeção de prompts.",
+        "Complementam — não substituem — a avaliação e a supervisão."
+      ],
+      "context": [
+        "Um modelo sozinho não tem limites exigíveis; tentará o que o prompt provocar. Os guard-rails adicionam esses limites de forma operacional: verificações determinísticas ou baseadas em modelo que se situam entre o usuário, o modelo e os sistemas que ele pode tocar.",
+        "São a forma como as políticas de governança se tornam controles vivos. Uma política que diz 'nunca expor dados pessoais' ou 'nunca executar pagamentos sem aprovação' se materializa como um guard-rail que realmente verifica e bloqueia em tempo de execução."
+      ],
+      "architecture": [
+        "Os guard-rails de entrada filtram prompts (ex.: injeção, violações de política, dados pessoais). Os de saída validam respostas (formato, segurança, restrições factuais, redação de dados pessoais). Os de ação limitam as chamadas de ferramentas com permissões e listas de permitidos. Os limites de taxa, escopo e orçamento contêm o raio de impacto.",
+        "Podem ser determinísticos (regras, esquemas, regex, listas de permitidos) ou baseados em modelo (um classificador ou juiz LLM). Combinam-se com observabilidade para registrar violações e com aprovação com humano no laço para ações de alto impacto."
+      ],
+      "components": ["Filtragem de entrada", "Validação / redação de saída", "Listas de permitidos e permissões de ação", "Limites de taxa e escopo", "Classificadores de política", "Registro de violações"],
+      "pros": [
+        "Impõe segurança e política em execução, não só na orientação.",
+        "Reduz o mau uso, a saída insegura e o impacto da injeção.",
+        "Operacionaliza requisitos de governança e conformidade.",
+        "Limita o raio de impacto das ações do agente."
+      ],
+      "risks": [
+        "O bloqueio em excesso prejudica a utilidade (falsos positivos).",
+        "O bloqueio insuficiente cria uma falsa sensação de segurança.",
+        "Os guard-rails baseados em modelo adicionam latência e custo.",
+        "Não são uma defesa completa; combine-os com supervisão e avaliações."
+      ],
+      "tools": ["Frameworks de guard-rails (ex.: NeMo Guardrails, Guardrails AI)", "Classificadores de moderação / segurança", "Validação de esquemas e entradas", "Motores de permissões e políticas", "Observabilidade de violações"],
+      "examples": [
+        "Redigir dados pessoais da saída de um modelo antes de exibi-la.",
+        "Bloquear uma chamada de ferramenta fora de uma lista de ações seguras.",
+        "Rejeitar respostas que não cumprem um esquema JSON exigido."
+      ],
+      "faqs": [
+        { "q": "Os guard-rails são o mesmo que alinhamento?", "a": "Não. O alinhamento molda o comportamento intrínseco do modelo durante o treinamento; os guard-rails são controles externos em execução ao redor do sistema implantado. São complementares." },
+        { "q": "Os guard-rails detêm a injeção de prompts?", "a": "Reduzem seu impacto — a filtragem de entrada e as listas de permitidos ajudam — mas nenhum guard-rail a previne por completo. Use defesas em camadas mais aprovação humana para ações sensíveis." },
+        { "q": "Guard-rails determinísticos ou baseados em modelo?", "a": "Ambos. As verificações determinísticas (esquemas, listas) são baratas e confiáveis para regras claras; as baseadas em modelo lidam com conteúdo com nuances ao custo de latência." },
+        { "q": "Como os guard-rails se encaixam na governança de IA?", "a": "São a camada operacional: os controles em execução que convertem as políticas de governança em comportamento exigido, evidenciado por registro e auditoria." }
+      ]
+    }
+  }
+}

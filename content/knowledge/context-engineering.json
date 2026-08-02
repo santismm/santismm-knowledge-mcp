@@ -1,0 +1,153 @@
+{
+  "slug": "context-engineering",
+  "category": "harness",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "related": ["harness-engineering", "prompt-engineering", "agent-memory", "enterprise-rag"],
+  "references": [
+    { "title": "Anthropic — Effective context engineering for AI agents (2025)", "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" },
+    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": ["industry_observation", "paper"]
+  },
+  "locales": {
+    "en": {
+      "title": "What is Context Engineering?",
+      "summary": "Context engineering is the discipline of deciding what information enters a model's limited context window at each step — and what stays out. As agents run over many steps, naively stuffing everything into context degrades quality and cost. Context engineering curates the right instructions, retrieved knowledge, tool results and memory so the model has exactly what it needs, when it needs it. It is a core part of harness engineering.",
+      "definition": "Context engineering is the practice of curating, compressing and sequencing the information placed in a model's context window so it has the most relevant signal — and the least noise — at each step.",
+      "takeaways": [
+        "Context is a scarce resource; what you leave out matters as much as what you include.",
+        "More context is not better — irrelevant tokens degrade quality and raise cost.",
+        "Techniques: retrieval, summarization, compaction, and structured memory.",
+        "It generalizes prompt engineering from one prompt to a whole agent run.",
+        "It is a core layer of the harness around a model."
+      ],
+      "context": [
+        "Every model has a finite context window, and quality degrades when it is filled with low-signal content. In single-turn use this is manageable, but agents accumulate history, tool outputs and retrieved documents across many steps, quickly overwhelming the window.",
+        "Context engineering treats the window as a budget to be managed deliberately: keep the durable instructions, retrieve only what is relevant now, summarize or compact the rest, and store long-term state outside the window in memory."
+      ],
+      "architecture": [
+        "Core moves: select (retrieve only relevant passages), compress (summarize prior steps), compact (drop or fold stale turns), and externalize (push long-term state to a memory store, pulling it back on demand).",
+        "In an agent loop, context is reassembled each step from layered sources: stable system instructions, task state, relevant retrieved knowledge, recent tool results and selected long-term memories — ordered so the most important signal is most salient."
+      ],
+      "components": ["System instructions", "Task state", "Retrieved knowledge", "Tool results", "Long-term memory", "Summaries / compaction"],
+      "pros": [
+        "Keeps quality high as tasks grow long.",
+        "Controls token cost and latency.",
+        "Reduces distraction and hallucination from noise.",
+        "Enables long-horizon agents within finite context."
+      ],
+      "risks": [
+        "Over-aggressive compression can drop needed information.",
+        "Poor retrieval injects irrelevant or wrong context.",
+        "Complexity in deciding what to keep each step.",
+        "Bugs here surface as subtle quality regressions."
+      ],
+      "tools": ["Retrieval / RAG pipelines", "Summarization models", "Memory stores", "Context-management frameworks (e.g. LangGraph)"],
+      "examples": [
+        "Summarizing earlier agent steps so the window stays focused on the current subtask.",
+        "Retrieving only the policy section relevant to a question instead of the whole manual.",
+        "Storing a user's preferences in memory and recalling them only when relevant."
+      ],
+      "faqs": [
+        { "q": "How is context engineering different from prompt engineering?", "a": "Prompt engineering crafts a single instruction. Context engineering manages the full set of information in the window across an entire agent run — retrieval, memory, tool results and compression included." },
+        { "q": "Why not just use a bigger context window?", "a": "Larger windows help but do not eliminate the problem: quality and cost degrade as windows fill with low-signal tokens. Curation still wins." },
+        { "q": "How does it relate to RAG and memory?", "a": "RAG and memory are sources of context; context engineering decides what from them actually enters the window, when, and in what form." },
+        { "q": "Is it part of harness engineering?", "a": "Yes. Context management is one of the core layers of the harness that turns model capability into reliable agent behavior." }
+      ]
+    },
+    "es": {
+      "title": "¿Qué es la Ingeniería de Contexto (Context Engineering)?",
+      "summary": "La ingeniería de contexto es la disciplina de decidir qué información entra en la ventana de contexto limitada de un modelo en cada paso, y qué se queda fuera. Como los agentes se ejecutan en muchos pasos, meter todo ingenuamente en el contexto degrada calidad y coste. La ingeniería de contexto cura las instrucciones, el conocimiento recuperado, los resultados de herramientas y la memoria adecuados para que el modelo tenga justo lo que necesita cuando lo necesita. Es una parte central de la ingeniería de harness.",
+      "definition": "La ingeniería de contexto es la práctica de curar, comprimir y secuenciar la información que se coloca en la ventana de contexto de un modelo para que tenga la señal más relevante —y el menor ruido— en cada paso.",
+      "takeaways": [
+        "El contexto es un recurso escaso; lo que dejas fuera importa tanto como lo que incluyes.",
+        "Más contexto no es mejor: los tokens irrelevantes degradan calidad y suben el coste.",
+        "Técnicas: recuperación, resumen, compactación y memoria estructurada.",
+        "Generaliza la ingeniería de prompts de un prompt a toda una ejecución de agente.",
+        "Es una capa central del harness alrededor del modelo."
+      ],
+      "context": [
+        "Todo modelo tiene una ventana de contexto finita, y la calidad se degrada cuando se llena de contenido de baja señal. En uso de un solo turno es manejable, pero los agentes acumulan historial, salidas de herramientas y documentos recuperados a lo largo de muchos pasos, saturando rápido la ventana.",
+        "La ingeniería de contexto trata la ventana como un presupuesto a gestionar de forma deliberada: conservar las instrucciones duraderas, recuperar solo lo relevante ahora, resumir o compactar el resto y guardar el estado a largo plazo fuera de la ventana en memoria."
+      ],
+      "architecture": [
+        "Movimientos clave: seleccionar (recuperar solo pasajes relevantes), comprimir (resumir pasos previos), compactar (descartar o plegar turnos obsoletos) y externalizar (llevar el estado a largo plazo a un almacén de memoria y traerlo bajo demanda).",
+        "En un bucle de agente, el contexto se reensambla en cada paso desde fuentes en capas: instrucciones de sistema estables, estado de la tarea, conocimiento recuperado relevante, resultados recientes de herramientas y memorias a largo plazo seleccionadas, ordenadas para que la señal más importante sea la más saliente."
+      ],
+      "components": ["Instrucciones de sistema", "Estado de la tarea", "Conocimiento recuperado", "Resultados de herramientas", "Memoria a largo plazo", "Resúmenes / compactación"],
+      "pros": [
+        "Mantiene alta la calidad cuando las tareas se alargan.",
+        "Controla el coste de tokens y la latencia.",
+        "Reduce la distracción y la alucinación por ruido.",
+        "Habilita agentes de horizonte largo dentro de un contexto finito."
+      ],
+      "risks": [
+        "Una compresión demasiado agresiva puede descartar información necesaria.",
+        "Una recuperación pobre inyecta contexto irrelevante o erróneo.",
+        "Complejidad al decidir qué conservar en cada paso.",
+        "Los errores aquí aparecen como regresiones sutiles de calidad."
+      ],
+      "tools": ["Pipelines de recuperación / RAG", "Modelos de resumen", "Almacenes de memoria", "Frameworks de gestión de contexto (p. ej. LangGraph)"],
+      "examples": [
+        "Resumir pasos anteriores del agente para que la ventana siga enfocada en la subtarea actual.",
+        "Recuperar solo la sección de la política relevante a una pregunta en vez de todo el manual.",
+        "Guardar las preferencias de un usuario en memoria y recordarlas solo cuando son relevantes."
+      ],
+      "faqs": [
+        { "q": "¿En qué se diferencia de la ingeniería de prompts?", "a": "La ingeniería de prompts crea una sola instrucción. La ingeniería de contexto gestiona todo el conjunto de información en la ventana a lo largo de una ejecución de agente, incluyendo recuperación, memoria, resultados de herramientas y compresión." },
+        { "q": "¿Por qué no usar simplemente una ventana de contexto más grande?", "a": "Las ventanas más grandes ayudan pero no eliminan el problema: la calidad y el coste se degradan al llenarse de tokens de baja señal. La curación sigue ganando." },
+        { "q": "¿Cómo se relaciona con RAG y la memoria?", "a": "RAG y la memoria son fuentes de contexto; la ingeniería de contexto decide qué de ellas entra realmente en la ventana, cuándo y en qué forma." },
+        { "q": "¿Es parte de la ingeniería de harness?", "a": "Sí. La gestión de contexto es una de las capas centrales del harness que convierte la capacidad del modelo en comportamiento fiable del agente." }
+      ]
+    },
+    "pt": {
+      "title": "O que é Engenharia de Contexto (Context Engineering)?",
+      "summary": "A engenharia de contexto é a disciplina de decidir qual informação entra na janela de contexto limitada de um modelo a cada passo, e o que fica de fora. Como os agentes rodam em muitos passos, enfiar tudo ingenuamente no contexto degrada qualidade e custo. A engenharia de contexto cura as instruções, o conhecimento recuperado, os resultados de ferramentas e a memória adequados para que o modelo tenha exatamente o que precisa quando precisa. É uma parte central da engenharia de harness.",
+      "definition": "A engenharia de contexto é a prática de curar, comprimir e sequenciar a informação colocada na janela de contexto de um modelo para que ele tenha o sinal mais relevante — e o menor ruído — a cada passo.",
+      "takeaways": [
+        "O contexto é um recurso escasso; o que você deixa de fora importa tanto quanto o que inclui.",
+        "Mais contexto não é melhor: tokens irrelevantes degradam a qualidade e elevam o custo.",
+        "Técnicas: recuperação, resumo, compactação e memória estruturada.",
+        "Generaliza a engenharia de prompts de um prompt para toda uma execução de agente.",
+        "É uma camada central do harness em torno do modelo."
+      ],
+      "context": [
+        "Todo modelo tem uma janela de contexto finita, e a qualidade se degrada quando ela é preenchida com conteúdo de baixo sinal. No uso de um único turno é gerenciável, mas os agentes acumulam histórico, saídas de ferramentas e documentos recuperados ao longo de muitos passos, saturando rápido a janela.",
+        "A engenharia de contexto trata a janela como um orçamento a gerir de forma deliberada: manter as instruções duráveis, recuperar só o relevante agora, resumir ou compactar o resto e guardar o estado de longo prazo fora da janela na memória."
+      ],
+      "architecture": [
+        "Movimentos centrais: selecionar (recuperar só trechos relevantes), comprimir (resumir passos anteriores), compactar (descartar ou dobrar turnos obsoletos) e externalizar (levar o estado de longo prazo a um armazenamento de memória e trazê-lo sob demanda).",
+        "Num laço de agente, o contexto é remontado a cada passo a partir de fontes em camadas: instruções de sistema estáveis, estado da tarefa, conhecimento recuperado relevante, resultados recentes de ferramentas e memórias de longo prazo selecionadas, ordenados para que o sinal mais importante seja o mais saliente."
+      ],
+      "components": ["Instruções de sistema", "Estado da tarefa", "Conhecimento recuperado", "Resultados de ferramentas", "Memória de longo prazo", "Resumos / compactação"],
+      "pros": [
+        "Mantém a qualidade alta quando as tarefas se alongam.",
+        "Controla o custo de tokens e a latência.",
+        "Reduz a distração e a alucinação por ruído.",
+        "Habilita agentes de horizonte longo dentro de um contexto finito."
+      ],
+      "risks": [
+        "Uma compressão agressiva demais pode descartar informação necessária.",
+        "Uma recuperação ruim injeta contexto irrelevante ou errado.",
+        "Complexidade ao decidir o que manter a cada passo.",
+        "Bugs aqui aparecem como regressões sutis de qualidade."
+      ],
+      "tools": ["Pipelines de recuperação / RAG", "Modelos de resumo", "Armazenamentos de memória", "Frameworks de gestão de contexto (ex.: LangGraph)"],
+      "examples": [
+        "Resumir passos anteriores do agente para a janela seguir focada na subtarefa atual.",
+        "Recuperar só a seção da política relevante a uma pergunta em vez de todo o manual.",
+        "Guardar as preferências de um usuário na memória e lembrá-las só quando relevantes."
+      ],
+      "faqs": [
+        { "q": "Qual a diferença para a engenharia de prompts?", "a": "A engenharia de prompts cria uma única instrução. A engenharia de contexto gere todo o conjunto de informação na janela ao longo de uma execução de agente, incluindo recuperação, memória, resultados de ferramentas e compressão." },
+        { "q": "Por que não usar simplesmente uma janela de contexto maior?", "a": "Janelas maiores ajudam mas não eliminam o problema: qualidade e custo se degradam ao se encherem de tokens de baixo sinal. A curadoria ainda vence." },
+        { "q": "Como se relaciona com RAG e memória?", "a": "RAG e memória são fontes de contexto; a engenharia de contexto decide o que delas realmente entra na janela, quando e em que forma." },
+        { "q": "É parte da engenharia de harness?", "a": "Sim. A gestão de contexto é uma das camadas centrais do harness que converte a capacidade do modelo em comportamento confiável do agente." }
+      ]
+    }
+  }
+}

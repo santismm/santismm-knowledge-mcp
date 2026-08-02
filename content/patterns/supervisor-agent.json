@@ -1,0 +1,290 @@
+{
+  "slug": "supervisor-agent",
+  "category": "orchestration",
+  "updated": "2026-06-21",
+  "version": "1.0",
+  "featured": false,
+  "technologies": [
+    "LangGraph (supervisor)",
+    "OpenAI Agents SDK",
+    "Multi-agent frameworks",
+    "Message routing"
+  ],
+  "related": [
+    "orchestrator-workers",
+    "routing",
+    "goal-decomposition"
+  ],
+  "references": [
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    },
+    {
+      "title": "LangGraph — Multi-agent systems",
+      "url": "https://langchain-ai.github.io/langgraph/concepts/multi_agent/"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "locales": {
+    "en": {
+      "name": "Supervisor Agent",
+      "summary": "A supervisor agent is a persistent coordinator that manages a team of specialized sub-agents. It reads the conversation state, decides which specialist should act next, routes messages to it, and integrates returned results toward the goal. Unlike a one-shot decomposer, the supervisor stays in the loop across many turns, delegating by capability and re-planning until the task is done or handed back to the user.",
+      "problem": "A single agent given many tools, instructions, and domains becomes unfocused: its prompt bloats, tool selection degrades, and it confuses unrelated concerns. Real workflows need different expertise at different steps (research, coding, billing, compliance), but no single flat agent reliably picks the right capability at the right moment or keeps long multi-step interactions coherent.",
+      "context": "Use a supervisor when work spans several distinct, reusable specialist capabilities that must collaborate over a multi-turn conversation or loop, when routing decisions depend on evolving state rather than a fixed plan, and when you need a clear, central place to enforce policy, manage handoffs, and observe which agent did what. It fits heterogeneous teams of agents more than uniform parallel workers.",
+      "solution": [
+        "The supervisor owns the control loop and the shared conversation state. On each turn it inspects the latest messages and goal, then decides whether to answer directly, delegate to a named specialist, or finish. Delegation is by capability: each sub-agent has a declared scope (for example a code agent, a data agent, a knowledge agent), and the supervisor routes the relevant slice of context to the chosen one. The specialist runs its own focused tool loop and returns a result or a request for clarification, which the supervisor records before deciding the next step.",
+        "Control returns to the supervisor after every specialist turn, so it remains the single decision point rather than letting agents call each other freely. The supervisor integrates partial results, resolves conflicts between specialists, decides when a goal is satisfied, and decides when to hand back to the user. Guardrails such as step budgets, allowed-transition rules, and explicit termination conditions keep the loop from cycling. Structured handoff messages and a shared trace make every delegation auditable, so teams can see who was asked to do what and why."
+      ],
+      "components": [
+        "Supervisor (router/planner)",
+        "Specialist sub-agents with declared scopes",
+        "Shared conversation/state store",
+        "Handoff protocol and message schema",
+        "Step budget and termination guard",
+        "Trace and per-agent observability"
+      ],
+      "benefits": [
+        "Focused specialists with smaller, cleaner prompts",
+        "Centralized routing and policy enforcement",
+        "Modular agents that can evolve independently",
+        "Clear audit trail of who did what"
+      ],
+      "risks": [
+        "Infinite or ping-pong handoff loops",
+        "Coordination overhead inflates latency and cost",
+        "Supervisor becomes a routing bottleneck",
+        "Context loss across handoffs degrades quality"
+      ],
+      "whenNot": [
+        "Single capability handles the whole task",
+        "Fixed parallel fan-out fits better (orchestrator-workers)",
+        "Latency or cost budgets forbid extra hops"
+      ],
+      "examples": [
+        "Customer support routing across billing, technical, and account specialists",
+        "Software task split among coding, testing, and documentation agents",
+        "Research assistant delegating to search, analysis, and writing agents"
+      ],
+      "kpis": [
+        {
+          "metric": "Task success / goal-completion rate",
+          "note": "Share of sessions reaching the intended outcome without human rescue; the headline quality signal for the supervisor team."
+        },
+        {
+          "metric": "Handoffs per resolved task",
+          "note": "Average delegations to completion; watch for upward drift signaling indecision or routing thrash, not richer work."
+        },
+        {
+          "metric": "Coordination overhead",
+          "note": "Extra tokens, calls, and latency attributable to the supervisor versus a single agent; good means routing earns its cost."
+        },
+        {
+          "metric": "Routing accuracy",
+          "note": "Fraction of delegations sent to the correct specialist on first try, judged against labeled cases."
+        }
+      ],
+      "failureModes": [
+        "Two agents hand work back and forth without progress until a budget cuts the loop",
+        "Supervisor mis-routes to the wrong specialist and never recovers the thread",
+        "Critical context is dropped in the handoff, so the specialist solves the wrong problem",
+        "Specialists' partial results conflict and the supervisor merges them incoherently"
+      ],
+      "lessons": [
+        "Enforce hard step budgets and explicit termination so loops always end",
+        "Make handoffs structured, with intent and scope, not raw message dumps",
+        "Keep specialist scopes narrow and non-overlapping to reduce routing ambiguity",
+        "Instrument every delegation; you cannot debug a multi-agent loop you cannot see"
+      ],
+      "faqs": [
+        {
+          "q": "How is this different from orchestrator-workers?",
+          "a": "Orchestrator-workers decomposes one task into parallel, often homogeneous worker calls and merges them. A supervisor is a persistent coordinator over heterogeneous specialists across a multi-turn loop, re-deciding routing as state evolves rather than executing a fixed plan."
+        },
+        {
+          "q": "How do I prevent infinite handoff loops?",
+          "a": "Route control back to the supervisor after each specialist turn, forbid free peer-to-peer calls, set a step or token budget, define allowed transitions, and add explicit termination conditions so the loop cannot cycle indefinitely."
+        },
+        {
+          "q": "When should a specialist hand back to the supervisor?",
+          "a": "Whenever it finishes its scoped task, needs a capability it does not own, hits ambiguity needing a decision, or detects it is the wrong agent for the request. The supervisor then integrates and picks the next step."
+        }
+      ]
+    },
+    "es": {
+      "name": "Agente Supervisor",
+      "summary": "Un agente supervisor es un coordinador persistente que gestiona un equipo de subagentes especializados. Lee el estado de la conversación, decide qué especialista debe actuar a continuación, le enruta los mensajes e integra los resultados hacia el objetivo. A diferencia de un descompositor de un solo paso, el supervisor permanece en el bucle durante muchos turnos, delegando por capacidad y replanificando hasta que la tarea se completa o se devuelve al usuario.",
+      "problem": "Un único agente con muchas herramientas, instrucciones y dominios pierde el foco: su prompt se infla, la selección de herramientas se degrada y confunde asuntos no relacionados. Los flujos reales requieren distinta experiencia en cada paso (investigación, código, facturación, cumplimiento), pero ningún agente plano elige de forma fiable la capacidad correcta en el momento correcto ni mantiene coherentes las interacciones largas de varios pasos.",
+      "context": "Usa un supervisor cuando el trabajo abarca varias capacidades especializadas, distintas y reutilizables que deben colaborar en una conversación o bucle de varios turnos, cuando las decisiones de enrutamiento dependen de un estado que evoluciona en lugar de un plan fijo, y cuando necesitas un punto central claro para aplicar políticas, gestionar traspasos y observar qué hizo cada agente. Encaja con equipos heterogéneos de agentes más que con trabajadores paralelos uniformes.",
+      "solution": [
+        "El supervisor posee el bucle de control y el estado compartido de la conversación. En cada turno inspecciona los últimos mensajes y el objetivo, y decide si responde directamente, delega en un especialista nombrado o termina. La delegación es por capacidad: cada subagente tiene un alcance declarado (por ejemplo un agente de código, uno de datos, uno de conocimiento), y el supervisor enruta al elegido la porción de contexto relevante. El especialista ejecuta su propio bucle de herramientas enfocado y devuelve un resultado o una solicitud de aclaración, que el supervisor registra antes de decidir el siguiente paso.",
+        "El control regresa al supervisor después del turno de cada especialista, de modo que sigue siendo el único punto de decisión en lugar de permitir que los agentes se llamen libremente entre sí. El supervisor integra resultados parciales, resuelve conflictos entre especialistas, decide cuándo se satisface un objetivo y cuándo devolver el control al usuario. Salvaguardas como presupuestos de pasos, reglas de transiciones permitidas y condiciones de terminación explícitas evitan que el bucle se cicle. Mensajes de traspaso estructurados y una traza compartida hacen auditable cada delegación, para que los equipos vean a quién se le pidió qué y por qué."
+      ],
+      "components": [
+        "Supervisor (enrutador/planificador)",
+        "Subagentes especialistas con alcances declarados",
+        "Almacén compartido de conversación/estado",
+        "Protocolo de traspaso y esquema de mensajes",
+        "Presupuesto de pasos y guardia de terminación",
+        "Traza y observabilidad por agente"
+      ],
+      "benefits": [
+        "Especialistas enfocados con prompts más pequeños y limpios",
+        "Enrutamiento y aplicación de políticas centralizados",
+        "Agentes modulares que evolucionan de forma independiente",
+        "Rastro de auditoría claro de quién hizo qué"
+      ],
+      "risks": [
+        "Bucles de traspaso infinitos o de ida y vuelta",
+        "La sobrecarga de coordinación infla latencia y costo",
+        "El supervisor se convierte en cuello de botella de enrutamiento",
+        "La pérdida de contexto en los traspasos degrada la calidad"
+      ],
+      "whenNot": [
+        "Una sola capacidad resuelve toda la tarea",
+        "Encaja mejor un fan-out paralelo fijo (orchestrator-workers)",
+        "Los presupuestos de latencia o costo prohíben saltos extra"
+      ],
+      "examples": [
+        "Enrutamiento de soporte al cliente entre especialistas de facturación, técnicos y de cuenta",
+        "Tarea de software repartida entre agentes de código, pruebas y documentación",
+        "Asistente de investigación que delega en agentes de búsqueda, análisis y redacción"
+      ],
+      "kpis": [
+        {
+          "metric": "Tasa de éxito de tareas / cumplimiento del objetivo",
+          "note": "Proporción de sesiones que alcanzan el resultado previsto sin rescate humano; la señal principal de calidad del equipo supervisor."
+        },
+        {
+          "metric": "Traspasos por tarea resuelta",
+          "note": "Promedio de delegaciones hasta la finalización; vigila una deriva al alza que señale indecisión o rebote de enrutamiento, no más trabajo útil."
+        },
+        {
+          "metric": "Sobrecarga de coordinación",
+          "note": "Tokens, llamadas y latencia extra atribuibles al supervisor frente a un solo agente; lo bueno es que el enrutamiento justifique su costo."
+        },
+        {
+          "metric": "Precisión de enrutamiento",
+          "note": "Fracción de delegaciones enviadas al especialista correcto en el primer intento, evaluada contra casos etiquetados."
+        }
+      ],
+      "failureModes": [
+        "Dos agentes se devuelven el trabajo sin avanzar hasta que un presupuesto corta el bucle",
+        "El supervisor enruta mal al especialista equivocado y nunca recupera el hilo",
+        "Se pierde contexto crítico en el traspaso, así que el especialista resuelve el problema equivocado",
+        "Los resultados parciales de los especialistas entran en conflicto y el supervisor los integra de forma incoherente"
+      ],
+      "lessons": [
+        "Aplica presupuestos de pasos estrictos y terminación explícita para que los bucles siempre acaben",
+        "Haz los traspasos estructurados, con intención y alcance, no volcados de mensajes en bruto",
+        "Mantén alcances de especialista estrechos y sin solapamiento para reducir la ambigüedad de enrutamiento",
+        "Instrumenta cada delegación; no puedes depurar un bucle multiagente que no puedes ver"
+      ],
+      "faqs": [
+        {
+          "q": "¿En qué se diferencia de orchestrator-workers?",
+          "a": "Orchestrator-workers descompone una tarea en llamadas paralelas, a menudo homogéneas, y las fusiona. Un supervisor es un coordinador persistente sobre especialistas heterogéneos a lo largo de un bucle de varios turnos, que vuelve a decidir el enrutamiento a medida que evoluciona el estado en lugar de ejecutar un plan fijo."
+        },
+        {
+          "q": "¿Cómo evito bucles de traspaso infinitos?",
+          "a": "Devuelve el control al supervisor tras el turno de cada especialista, prohíbe llamadas libres entre pares, fija un presupuesto de pasos o tokens, define transiciones permitidas y añade condiciones de terminación explícitas para que el bucle no se cicle indefinidamente."
+        },
+        {
+          "q": "¿Cuándo debe un especialista devolver el control al supervisor?",
+          "a": "Siempre que termine su tarea acotada, necesite una capacidad que no posee, encuentre ambigüedad que requiera una decisión, o detecte que es el agente equivocado para la solicitud. El supervisor entonces integra y elige el siguiente paso."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Agente Supervisor",
+      "summary": "Um agente supervisor é um coordenador persistente que gerencia uma equipe de subagentes especializados. Ele lê o estado da conversa, decide qual especialista deve agir em seguida, roteia mensagens para ele e integra os resultados em direção ao objetivo. Diferente de um decompositor de uma única etapa, o supervisor permanece no laço por muitos turnos, delegando por capacidade e replanejando até a tarefa terminar ou voltar ao usuário.",
+      "problem": "Um único agente com muitas ferramentas, instruções e domínios perde o foco: seu prompt incha, a seleção de ferramentas piora e ele confunde assuntos sem relação. Fluxos reais exigem expertise diferente em cada etapa (pesquisa, código, faturamento, conformidade), mas nenhum agente plano escolhe de forma confiável a capacidade certa no momento certo nem mantém coerentes as interações longas de várias etapas.",
+      "context": "Use um supervisor quando o trabalho abrange várias capacidades especializadas, distintas e reutilizáveis que precisam colaborar em uma conversa ou laço de vários turnos, quando as decisões de roteamento dependem de um estado em evolução em vez de um plano fixo, e quando você precisa de um ponto central claro para aplicar políticas, gerenciar transferências e observar o que cada agente fez. Ele se encaixa em equipes heterogêneas de agentes mais do que em trabalhadores paralelos uniformes.",
+      "solution": [
+        "O supervisor detém o laço de controle e o estado compartilhado da conversa. A cada turno ele inspeciona as mensagens mais recentes e o objetivo, e então decide se responde diretamente, delega a um especialista nomeado ou encerra. A delegação é por capacidade: cada subagente tem um escopo declarado (por exemplo um agente de código, um de dados, um de conhecimento), e o supervisor roteia ao escolhido a fatia de contexto relevante. O especialista executa seu próprio laço de ferramentas focado e devolve um resultado ou um pedido de esclarecimento, que o supervisor registra antes de decidir o próximo passo.",
+        "O controle volta ao supervisor após o turno de cada especialista, de modo que ele permanece o único ponto de decisão em vez de deixar os agentes se chamarem livremente. O supervisor integra resultados parciais, resolve conflitos entre especialistas, decide quando um objetivo foi satisfeito e quando devolver o controle ao usuário. Salvaguardas como orçamentos de passos, regras de transições permitidas e condições de término explícitas impedem que o laço entre em ciclo. Mensagens de transferência estruturadas e um rastro compartilhado tornam cada delegação auditável, para que as equipes vejam a quem foi pedido o quê e por quê."
+      ],
+      "components": [
+        "Supervisor (roteador/planejador)",
+        "Subagentes especialistas com escopos declarados",
+        "Repositório compartilhado de conversa/estado",
+        "Protocolo de transferência e esquema de mensagens",
+        "Orçamento de passos e guarda de término",
+        "Rastro e observabilidade por agente"
+      ],
+      "benefits": [
+        "Especialistas focados com prompts menores e mais limpos",
+        "Roteamento e aplicação de políticas centralizados",
+        "Agentes modulares que evoluem de forma independente",
+        "Trilha de auditoria clara de quem fez o quê"
+      ],
+      "risks": [
+        "Laços de transferência infinitos ou de vai e volta",
+        "A sobrecarga de coordenação infla latência e custo",
+        "O supervisor vira gargalo de roteamento",
+        "A perda de contexto nas transferências degrada a qualidade"
+      ],
+      "whenNot": [
+        "Uma única capacidade resolve a tarefa inteira",
+        "Um fan-out paralelo fixo se encaixa melhor (orchestrator-workers)",
+        "Orçamentos de latência ou custo proíbem saltos extras"
+      ],
+      "examples": [
+        "Roteamento de suporte ao cliente entre especialistas de faturamento, técnicos e de conta",
+        "Tarefa de software dividida entre agentes de código, testes e documentação",
+        "Assistente de pesquisa que delega a agentes de busca, análise e redação"
+      ],
+      "kpis": [
+        {
+          "metric": "Taxa de sucesso de tarefas / cumprimento do objetivo",
+          "note": "Parcela de sessões que atingem o resultado pretendido sem resgate humano; o principal sinal de qualidade da equipe supervisora."
+        },
+        {
+          "metric": "Transferências por tarefa resolvida",
+          "note": "Média de delegações até a conclusão; observe uma deriva de alta que sinalize indecisão ou repique de roteamento, e não mais trabalho útil."
+        },
+        {
+          "metric": "Sobrecarga de coordenação",
+          "note": "Tokens, chamadas e latência extras atribuíveis ao supervisor frente a um único agente; o bom é o roteamento justificar seu custo."
+        },
+        {
+          "metric": "Acurácia de roteamento",
+          "note": "Fração de delegações enviadas ao especialista correto na primeira tentativa, avaliada contra casos rotulados."
+        }
+      ],
+      "failureModes": [
+        "Dois agentes devolvem o trabalho um ao outro sem progredir até um orçamento cortar o laço",
+        "O supervisor roteia mal para o especialista errado e nunca recupera o fio",
+        "Contexto crítico é descartado na transferência, então o especialista resolve o problema errado",
+        "Os resultados parciais dos especialistas conflitam e o supervisor os integra de forma incoerente"
+      ],
+      "lessons": [
+        "Imponha orçamentos de passos rígidos e término explícito para que os laços sempre acabem",
+        "Faça transferências estruturadas, com intenção e escopo, não despejos de mensagens em bruto",
+        "Mantenha escopos de especialista estreitos e sem sobreposição para reduzir a ambiguidade de roteamento",
+        "Instrumente cada delegação; você não consegue depurar um laço multiagente que não consegue ver"
+      ],
+      "faqs": [
+        {
+          "q": "Como isto difere de orchestrator-workers?",
+          "a": "Orchestrator-workers decompõe uma tarefa em chamadas paralelas, muitas vezes homogêneas, e as funde. Um supervisor é um coordenador persistente sobre especialistas heterogêneos ao longo de um laço de vários turnos, redecidindo o roteamento à medida que o estado evolui em vez de executar um plano fixo."
+        },
+        {
+          "q": "Como evito laços de transferência infinitos?",
+          "a": "Devolva o controle ao supervisor após o turno de cada especialista, proíba chamadas livres entre pares, defina um orçamento de passos ou tokens, defina transições permitidas e adicione condições de término explícitas para que o laço não entre em ciclo indefinidamente."
+        },
+        {
+          "q": "Quando um especialista deve devolver o controle ao supervisor?",
+          "a": "Sempre que concluir sua tarefa delimitada, precisar de uma capacidade que não possui, encontrar ambiguidade que exija uma decisão, ou detectar que é o agente errado para o pedido. O supervisor então integra e escolhe o próximo passo."
+        }
+      ]
+    }
+  }
+}

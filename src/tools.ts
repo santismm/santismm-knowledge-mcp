@@ -11,7 +11,7 @@ import type { CorpusOverview } from "./shape.js";
  * provider); both providers read the same `content/{domain}/*.json` files.
  */
 
-export const SERVER_INFO = { name: "santismm-knowledge", version: "0.2.0" } as const;
+export const SERVER_INFO = { name: "santismm-knowledge", version: "0.2.1" } as const;
 
 /**
  * The subset of the MCP SDK's `McpServer` that the registry uses (just

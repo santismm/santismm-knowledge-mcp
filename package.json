@@ -1,6 +1,6 @@
 {
   "name": "santismm-knowledge-mcp",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "private": true,
   "license": "MIT",
   "description": "MCP server exposing the Santismm Knowledge Platform (knowledge units, Enterprise AI patterns, reference architectures and AI governance) for native consumption by AI agents.",

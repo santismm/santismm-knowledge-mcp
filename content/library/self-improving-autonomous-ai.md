@@ -1,5 +1,6 @@
 ---
 title: "The next generation of AI: Self-Improvement and Autonomous Learning"
+titles: { es: "La próxima generación de IA: modelos que se perfeccionan solos" }
 date: "2025-05-30"
 kind: "article"
 summary: "Self-improvement and autonomous learning in AI — and the road to an intelligence explosion."

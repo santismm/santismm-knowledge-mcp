@@ -1,5 +1,6 @@
 ---
 title: "Cognitive Architecture and Emergent Phenomena in Advanced AI"
+titles: { es: "La arquitectura cognitiva y los fenómenos emergentes de la IA avanzada" }
 date: "2025-06-07"
 kind: "article"
 summary: "A synthesis of current mechanistic and behavioral research on how cognitive structures and emergent behavior arise in modern AI systems."

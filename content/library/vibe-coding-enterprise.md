@@ -1,5 +1,6 @@
 ---
 title: "Vibe Coding in Enterprise Software"
+titles: { es: "Vibe Coding en el software empresarial" }
 date: "2025-04-30"
 kind: "article"
 summary: "AI-assisted software development in 2025: state of the art, risks and best practices for shipping it in real organizations."

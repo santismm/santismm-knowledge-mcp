@@ -1,5 +1,6 @@
 ---
 title: "The Rise of Agentic AI"
+titles: { es: "El auge de la IA agéntica" }
 date: "2025-04-09"
 kind: "article"
 summary: "How agentic AI is revolutionizing business strategy — and the shift from do-it-yourself to do-it-for-me software."

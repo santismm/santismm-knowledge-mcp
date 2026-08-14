@@ -1,22 +1,3 @@
-This repository is covered by two licences, because it holds two different
-kinds of work.
-
-  SOURCE CODE      MIT — the full text below.
-                   Everything under app/, lib/, components/, mcp/, scripts/,
-                   messages/ and the build configuration.
-
-  CONTENT          CC BY 4.0 — see LICENSE-CONTENT.
-                   Everything under content/ and skills/, and every artifact
-                   generated from it: the rendered pages, the JSON APIs,
-                   llms.txt, llms-full.txt, the knowledge graph and the
-                   payloads returned by the MCP endpoint.
-
-Two licences rather than one because CC BY is not a software licence and MIT is
-not a content licence. Applying either to both would leave the terms ambiguous
-exactly where someone evaluating reuse looks first.
-
--------------------------------------------------------------------------------
-
 MIT License
 
 Copyright (c) 2026 Santiago Santa María Morales

@@ -1,5 +1,7 @@
 # santismm-knowledge-mcp
 
+[![santismm-knowledge-mcp MCP server](https://glama.ai/mcp/servers/santismm/santismm-knowledge-mcp/badges/card.svg)](https://glama.ai/mcp/servers/santismm/santismm-knowledge-mcp)
+
 > MCP server for the Santismm Knowledge Platform — harness engineering, agentic
 > AI patterns, reference architectures, AI governance and the agent taxonomy.
 
@@ -55,6 +57,12 @@ proxy to the hosted endpoint** — it ships no corpus, so it is always fresh.
 ```json
 { "mcpServers": { "santismm-knowledge": { "command": "uvx", "args": ["santismm-knowledge-mcp"] } } }
 ```
+
+## Licences
+
+Code is **MIT** ([LICENSE](LICENSE)); the knowledge corpus in `content/` is
+**CC BY 4.0** ([LICENSE-CONTENT](LICENSE-CONTENT)) — two licences because CC BY
+is not a software licence and MIT is not a content licence.
 
 ## What it exposes
 

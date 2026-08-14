@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "santismm-knowledge-mcp"
+version = "0.2.1"
+description = "MCP access to the Santismm Knowledge Platform (harness engineering, agentic AI patterns, reference architectures, AI governance) — a zero-dependency stdio proxy to the hosted, always-fresh endpoint."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [{ name = "Santiago Santa María Morales" }]
+keywords = [
+  "mcp",
+  "model-context-protocol",
+  "mcp-server",
+  "agentic-ai",
+  "harness-engineering",
+  "ai-governance",
+  "knowledge-base",
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Developers",
+]
+
+[project.urls]
+Homepage = "https://santismm.com/en/mcp"
+Repository = "https://github.com/santismm/santismm-knowledge-mcp"
+Issues = "https://github.com/santismm/santismm-knowledge-mcp/issues"
+
+[project.scripts]
+santismm-knowledge-mcp = "santismm_knowledge_mcp.proxy:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/santismm_knowledge_mcp"]

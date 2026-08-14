@@ -43,6 +43,19 @@ The npm package carries the corpus **frozen at publish time**; this repository
 and the hosted endpoint update continuously. When freshness matters, prefer
 the endpoint.
 
+## Install from PyPI (Python)
+
+```bash
+uvx santismm-knowledge-mcp
+```
+
+The Python package (in [`python/`](python/)) is a **zero-dependency stdio
+proxy to the hosted endpoint** — it ships no corpus, so it is always fresh.
+
+```json
+{ "mcpServers": { "santismm-knowledge": { "command": "uvx", "args": ["santismm-knowledge-mcp"] } } }
+```
+
 ## What it exposes
 
 13 read-only tools over knowledge, patterns, architectures, governance and the

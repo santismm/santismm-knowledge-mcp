@@ -9,8 +9,7 @@
   },
   "files": [
     "dist",
-    "content",
-    "LICENSE-CONTENT"
+    "content"
   ],
   "scripts": {
     "build": "tsc",

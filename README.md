@@ -61,7 +61,7 @@ proxy to the hosted endpoint** — it ships no corpus, so it is always fresh.
 ## Licences
 
 Code is **MIT** ([LICENSE](LICENSE)); the knowledge corpus in `content/` is
-**CC BY 4.0** ([LICENSE-CONTENT](LICENSE-CONTENT)) — two licences because CC BY
+**CC BY 4.0** ([content/LICENSE](content/LICENSE)) — two licences because CC BY
 is not a software licence and MIT is not a content licence.
 
 ## What it exposes

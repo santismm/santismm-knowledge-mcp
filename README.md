@@ -27,6 +27,22 @@ npm ci && npm run build && npm start
 The corpus ships in `content/` and is read from disk, so this works offline.
 Point it elsewhere with `SANTISMM_CONTENT_DIR`.
 
+## Install from npm
+
+```bash
+npx santismm-knowledge-mcp
+```
+
+Or in an MCP client config (stdio):
+
+```json
+{ "mcpServers": { "santismm-knowledge": { "command": "npx", "args": ["santismm-knowledge-mcp"] } } }
+```
+
+The npm package carries the corpus **frozen at publish time**; this repository
+and the hosted endpoint update continuously. When freshness matters, prefer
+the endpoint.
+
 ## What it exposes
 
 13 read-only tools over knowledge, patterns, architectures, governance and the

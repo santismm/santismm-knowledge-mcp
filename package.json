@@ -1,19 +1,23 @@
 {
   "name": "santismm-knowledge-mcp",
   "version": "0.2.1",
-  "private": true,
   "license": "MIT",
-  "description": "MCP server exposing the Santismm Knowledge Platform (knowledge units, Enterprise AI patterns, reference architectures and AI governance) for native consumption by AI agents.",
+  "description": "MCP server for the Santismm Knowledge Platform — harness engineering, agentic AI patterns, reference architectures and AI governance. Ships the corpus; the hosted endpoint at https://santismm.com/mcp is the always-fresh alternative.",
   "type": "module",
   "bin": {
     "santismm-knowledge-mcp": "dist/index.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist",
+    "content",
+    "LICENSE-CONTENT"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/server": "^2.0.0",
@@ -23,5 +27,22 @@
     "@types/node": "^20",
     "tsx": "^4.19.0",
     "typescript": "^5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santismm/santismm-knowledge-mcp.git"
+  },
+  "homepage": "https://santismm.com/en/mcp",
+  "bugs": {
+    "url": "https://github.com/santismm/santismm-knowledge-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "agentic-ai",
+    "harness-engineering",
+    "ai-governance",
+    "knowledge-base"
+  ]
 }

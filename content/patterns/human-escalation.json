@@ -13,7 +13,8 @@
   "related": [
     "human-approval-gate",
     "recovery-strategy",
-    "routing"
+    "routing",
+    "least-privilege-tooling"
   ],
   "references": [
     {

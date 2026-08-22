@@ -12,7 +12,8 @@
   "related": [
     "reflection",
     "evaluator-optimizer",
-    "prompt-chaining"
+    "prompt-chaining",
+    "least-privilege-tooling"
   ],
   "references": [
     {

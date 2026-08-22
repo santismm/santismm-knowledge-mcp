@@ -1,0 +1,333 @@
+{
+  "slug": "least-privilege-tooling",
+  "category": "safety",
+  "updated": "2026-08-22",
+  "version": "1.0",
+  "technologies": [
+    "Scoped API tokens",
+    "Policy engines (OPA / Cedar)",
+    "MCP tool scoping",
+    "Per-tool service accounts",
+    "Audit logging"
+  ],
+  "related": [
+    "egress-allowlist",
+    "sandboxed-execution",
+    "human-approval-gate",
+    "human-escalation",
+    "recovery-strategy"
+  ],
+  "references": [
+    {
+      "title": "OWASP — Top 10 for LLM Applications",
+      "url": "https://genai.owasp.org/llm-top-10/"
+    },
+    {
+      "title": "OWASP — LLM01: Prompt Injection",
+      "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "production",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "production_system",
+      "personal_experience",
+      "industry_observation"
+    ]
+  },
+  "locales": {
+    "en": {
+      "name": "Least-Privilege Tooling",
+      "summary": "Give an agent the narrowest set of tools, and each tool the narrowest scope, that the task actually needs. The pattern accepts that prompt injection will sometimes succeed and bounds what a hijacked agent can do — you cannot patch the model, but you can decide what it is able to reach.",
+      "definition": "Least-privilege tooling is the practice of scoping an agent's tool catalogue, and each tool's underlying credential, to the minimum the task requires — so the consequences of a successful attack or a model error are bounded by design rather than by the model's compliance.",
+      "problem": "An agent given broad tools and broad credentials turns any successful injection, jailbreak or hallucination into a real action carrying the full reach of the account behind it.",
+      "context": "Use it wherever an agent can act — call APIs, write files, send messages, move money. The more autonomy and the less human review, the more the blast radius has to be set at the permission layer rather than in the prompt.",
+      "solution": [
+        "Start from the task, not from the platform. List the operations the agent must perform and expose exactly those. A catalogue assembled from 'what the API offers' is a permission grant nobody reviewed.",
+        "Split read from write: separate tools, separate credentials, and no write path reachable by an argument to a read tool. 'Query' endpoints that can also mutate are the most common quiet escalation.",
+        "Scope the credential, not only the tool. A read-only tool backed by an admin token is one bug away from being a write tool; issue per-tool credentials at the narrowest scope the upstream system supports.",
+        "Bound the parameters. Allowlist the paths, repositories, tables, accounts or recipients a tool may address, so a hijacked agent cannot repoint a legitimate tool at an illegitimate target.",
+        "Make grants expire and be reviewed. Tools accumulate; remove what nothing has called, and treat adding a tool as the permission change that it is.",
+        "Log the grant and the call separately. What the agent could do and what it did are two different audits, and an incident needs both."
+      ],
+      "components": [
+        "A tool catalogue with an explicit, written scope per tool.",
+        "Per-tool credentials issued at the narrowest scope the upstream system offers.",
+        "Parameter allowlists for the targets a tool may address.",
+        "A policy layer that authorises each call independently of the model.",
+        "An audit log covering both grants and invocations.",
+        "A review cadence that removes tools nothing calls."
+      ],
+      "benefits": [
+        "Bounds the damage of a successful injection without depending on the model behaving well.",
+        "Turns 'is this agent safe?' into a reviewable artefact: a list of tools, scopes and owners.",
+        "Improves tool-selection accuracy as a side effect — fewer, sharper tools are easier for a model to choose between.",
+        "Makes incidents investigable, because the reachable set was known before the incident."
+      ],
+      "risks": [
+        "Scope creep by convenience: a broad token pasted in while debugging and never narrowed afterwards.",
+        "Fragmentation: dozens of hair-thin tools the model cannot distinguish, trading a security win for a reliability loss.",
+        "False comfort. Least privilege bounds consequences; it does not prevent the attack, and it says nothing about exfiltration through a legitimately granted read tool.",
+        "Process drag: if issuing a scoped credential is harder than reusing a broad one, the process itself becomes the vulnerability."
+      ],
+      "whenNot": [
+        "Prototypes on synthetic data with no production reach, where the ceremony costs more than the risk it removes.",
+        "When the upstream platform cannot express scopes at all — then the control moves to a proxy in front of it, rather than being declared satisfied.",
+        "When narrowing the agent would push the work onto a human path that is itself less bounded and less audited."
+      ],
+      "examples": [
+        "A coding agent given a repository token scoped to one repository and one branch prefix, with no organisation-wide read. An injection through a dependency README can still open a branch; it cannot reach the other forty repositories.",
+        "A support agent whose CRM tools are split: read_customer with a read-only key, and update_ticket restricted to tickets already in the conversation. A hijacked session can annoy one ticket, not export the customer base.",
+        "A public MCP server whose entire catalogue is getters over already-published content, backed by no credential at all — there is nothing to revoke because there is nothing to leak."
+      ],
+      "kpis": [
+        {
+          "metric": "Tools per agent",
+          "note": "The size of the catalogue. Growth without removals is the signal that grants are accumulating unreviewed."
+        },
+        {
+          "metric": "Write-capable tool share",
+          "note": "How much of the catalogue can change state. The number worth driving toward the minimum the task allows."
+        },
+        {
+          "metric": "Age of the oldest unused tool",
+          "note": "Days since a granted tool was last called. An old unused grant is reach nobody needs and an attacker inherits."
+        },
+        {
+          "metric": "Scope documentation coverage",
+          "note": "Share of tools with a written scope and a named owner. An undocumented tool is an unbounded one."
+        }
+      ],
+      "failureModes": [
+        "The admin token behind the read-only tool: scope declared at the tool layer, unbounded at the credential layer.",
+        "Parameter repointing: the tool is legitimate and the target is not, because nothing constrained the argument.",
+        "Confused deputy: narrowing the tools without narrowing whose authority they run under changes nothing, because the caller still inherits the agent's reach.",
+        "Catalogue drift: tools added for an experiment stay, and the permission set that was reviewed is no longer the one deployed."
+      ],
+      "lessons": [
+        "Write down the blast radius before granting the tool, not after the incident.",
+        "A tool's name is not its scope. Only the server-side credential is.",
+        "Removing a tool nothing calls is the cheapest security work available.",
+        "Least privilege pays twice: it bounds attacks, and it makes the agent choose tools better."
+      ],
+      "faqs": [
+        {
+          "q": "Does least privilege stop prompt injection?",
+          "a": "No, and it is not meant to. It assumes injection will sometimes succeed and decides in advance what a successful one can accomplish. Prevention and containment are different jobs; only containment is under your control."
+        },
+        {
+          "q": "How narrow is too narrow?",
+          "a": "When the model can no longer tell two tools apart, or when a routine task needs four calls that could safely have been one. Splitting improves security until it starts producing wrong tool choices, and a wrong call is its own failure."
+        },
+        {
+          "q": "We use one service account for everything. Is that so bad?",
+          "a": "It means every agent, and every attacker who reaches one, has the reach of the widest task any of them performs. One account is the version of this pattern where the blast radius is 'all of it'."
+        }
+      ],
+      "productionEvidence": {
+        "context": "The public MCP endpoint for this knowledge base, reachable by any agent on the internet.",
+        "scenario": "The corpus is public and read-only, so the catalogue is entirely getters. There is no tool that writes, no tool that reaches a database the site does not already publish, and no credential reachable from any tool.",
+        "technology": "Stateless JSON-RPC over HTTP on a Next.js route handler, origin allowlist checked before any handler runs, per-caller rate limiting in Redis, structured per-call audit logging.",
+        "load": "Continuous unattended agent traffic since launch, plus registry crawlers and directory health checks.",
+        "results": "A client of this server that is hijacked by prompt injection can obtain nothing it could not have fetched from the public site, because the reachable set is exactly the published corpus. There is no credential to revoke and no write path to abuse."
+      }
+    },
+    "es": {
+      "name": "Herramientas con Mínimo Privilegio",
+      "summary": "Dale al agente el conjunto de herramientas más estrecho, y a cada herramienta el alcance más estrecho, que la tarea realmente necesita. El patrón asume que la inyección de prompts a veces tendrá éxito y acota lo que un agente secuestrado puede hacer: no puedes parchear el modelo, pero sí decidir a qué es capaz de llegar.",
+      "definition": "Las herramientas con mínimo privilegio son la práctica de acotar el catálogo de herramientas de un agente, y la credencial que hay bajo cada una, al mínimo que la tarea requiere, de modo que las consecuencias de un ataque con éxito o de un error del modelo queden acotadas por diseño y no por la obediencia del modelo.",
+      "problem": "Un agente con herramientas amplias y credenciales amplias convierte cualquier inyección, jailbreak o alucinación con éxito en una acción real con todo el alcance de la cuenta que hay detrás.",
+      "context": "Úsalo allí donde un agente pueda actuar: llamar APIs, escribir ficheros, enviar mensajes, mover dinero. Cuanta más autonomía y menos revisión humana, más hay que fijar el radio de impacto en la capa de permisos y no en el prompt.",
+      "solution": [
+        "Parte de la tarea, no de la plataforma. Lista las operaciones que el agente debe realizar y expón exactamente esas. Un catálogo montado a partir de «lo que ofrece la API» es una concesión de permisos que nadie revisó.",
+        "Separa lectura de escritura: herramientas distintas, credenciales distintas y ninguna ruta de escritura alcanzable por un argumento de una herramienta de lectura. Los endpoints de «consulta» que además mutan son la escalada silenciosa más común.",
+        "Acota la credencial, no solo la herramienta. Una herramienta de solo lectura respaldada por un token de administrador está a un bug de ser una herramienta de escritura; emite credenciales por herramienta con el alcance más estrecho que soporte el sistema de arriba.",
+        "Acota los parámetros. Pon en lista de permitidos las rutas, repositorios, tablas, cuentas o destinatarios a los que una herramienta puede dirigirse, para que un agente secuestrado no pueda reapuntar una herramienta legítima a un objetivo ilegítimo.",
+        "Haz que las concesiones caduquen y se revisen. Las herramientas se acumulan; retira lo que nadie invoca y trata añadir una herramienta como el cambio de permisos que es.",
+        "Registra la concesión y la llamada por separado. Lo que el agente podía hacer y lo que hizo son dos auditorías distintas, y un incidente necesita las dos."
+      ],
+      "components": [
+        "Un catálogo de herramientas con un alcance explícito y escrito por herramienta.",
+        "Credenciales por herramienta emitidas con el alcance más estrecho que ofrezca el sistema de arriba.",
+        "Listas de permitidos de parámetros para los objetivos a los que una herramienta puede dirigirse.",
+        "Una capa de política que autoriza cada llamada con independencia del modelo.",
+        "Un log de auditoría que cubra tanto concesiones como invocaciones.",
+        "Una cadencia de revisión que retire las herramientas que nadie invoca."
+      ],
+      "benefits": [
+        "Acota el daño de una inyección con éxito sin depender de que el modelo se porte bien.",
+        "Convierte «¿es seguro este agente?» en un artefacto revisable: una lista de herramientas, alcances y responsables.",
+        "Mejora de rebote la precisión al elegir herramienta: menos herramientas y más nítidas son más fáciles de distinguir para un modelo.",
+        "Hace investigables los incidentes, porque el conjunto alcanzable se conocía antes del incidente."
+      ],
+      "risks": [
+        "Ampliación por comodidad: un token amplio pegado durante una depuración y nunca estrechado después.",
+        "Fragmentación: decenas de herramientas finísimas que el modelo no sabe distinguir, cambiando una victoria de seguridad por una pérdida de fiabilidad.",
+        "Falsa tranquilidad. El mínimo privilegio acota consecuencias; no evita el ataque, y no dice nada sobre la exfiltración a través de una herramienta de lectura legítimamente concedida.",
+        "Fricción de proceso: si emitir una credencial acotada cuesta más que reutilizar una amplia, el proceso se convierte en la vulnerabilidad."
+      ],
+      "whenNot": [
+        "Prototipos sobre datos sintéticos sin alcance a producción, donde la ceremonia cuesta más que el riesgo que elimina.",
+        "Cuando la plataforma de arriba no sabe expresar alcances: entonces el control se mueve a un proxy delante, en lugar de darse por satisfecho.",
+        "Cuando estrechar al agente empujaría el trabajo a una vía humana que está peor acotada y peor auditada."
+      ],
+      "examples": [
+        "Un agente de programación con un token de repositorio acotado a un repositorio y un prefijo de rama, sin lectura a nivel de organización. Una inyección por el README de una dependencia todavía puede abrir una rama; no puede llegar a los otros cuarenta repositorios.",
+        "Un agente de soporte con las herramientas de CRM separadas: read_customer con una clave de solo lectura y update_ticket restringida a los tickets ya presentes en la conversación. Una sesión secuestrada puede molestar a un ticket, no exportar la base de clientes.",
+        "Un servidor MCP público cuyo catálogo entero son getters sobre contenido ya publicado, respaldado por ninguna credencial: no hay nada que revocar porque no hay nada que filtrar."
+      ],
+      "kpis": [
+        {
+          "metric": "Herramientas por agente",
+          "note": "El tamaño del catálogo. Crecer sin retirar es la señal de que las concesiones se acumulan sin revisión."
+        },
+        {
+          "metric": "Porcentaje de herramientas con escritura",
+          "note": "Cuánto del catálogo puede cambiar estado. El número que conviene llevar al mínimo que la tarea permita."
+        },
+        {
+          "metric": "Antigüedad de la herramienta sin uso más vieja",
+          "note": "Días desde la última invocación de una herramienta concedida. Una concesión vieja sin uso es alcance que nadie necesita y que un atacante hereda."
+        },
+        {
+          "metric": "Cobertura de alcance documentado",
+          "note": "Porcentaje de herramientas con alcance escrito y responsable con nombre. Una herramienta sin documentar es una herramienta sin acotar."
+        }
+      ],
+      "failureModes": [
+        "El token de administrador detrás de la herramienta de solo lectura: alcance declarado en la capa de herramienta, sin acotar en la capa de credencial.",
+        "Reapuntado de parámetros: la herramienta es legítima y el objetivo no, porque nada restringió el argumento.",
+        "Diputado confundido: estrechar las herramientas sin estrechar bajo qué autoridad corren no cambia nada, porque quien llama sigue heredando el alcance del agente.",
+        "Deriva del catálogo: las herramientas añadidas para un experimento se quedan, y el conjunto de permisos que se revisó ya no es el desplegado."
+      ],
+      "lessons": [
+        "Escribe el radio de impacto antes de conceder la herramienta, no después del incidente.",
+        "El nombre de una herramienta no es su alcance. Solo lo es la credencial del lado servidor.",
+        "Retirar una herramienta que nadie invoca es el trabajo de seguridad más barato que existe.",
+        "El mínimo privilegio paga dos veces: acota ataques y hace que el agente elija mejor sus herramientas."
+      ],
+      "faqs": [
+        {
+          "q": "¿El mínimo privilegio detiene la inyección de prompts?",
+          "a": "No, ni pretende hacerlo. Asume que a veces tendrá éxito y decide de antemano qué puede conseguir un ataque exitoso. Prevenir y contener son trabajos distintos, y solo contener está bajo tu control."
+        },
+        {
+          "q": "¿Cuánto es demasiado estrecho?",
+          "a": "Cuando el modelo ya no distingue dos herramientas, o cuando una tarea rutinaria necesita cuatro llamadas que podrían haber sido una con seguridad. Dividir mejora hasta que empieza a producir elecciones erróneas, y una llamada equivocada es un fallo por derecho propio."
+        },
+        {
+          "q": "Usamos una sola cuenta de servicio para todo, ¿tan malo es?",
+          "a": "Significa que cada agente, y cada atacante que llegue a uno, tiene el alcance de la tarea más amplia que realice cualquiera de ellos. Una sola cuenta es la versión de este patrón en la que el radio de impacto es «todo»."
+        }
+      ],
+      "productionEvidence": {
+        "context": "El endpoint MCP público de esta base de conocimiento, accesible para cualquier agente de internet.",
+        "scenario": "El corpus es público y de solo lectura, así que el catálogo son íntegramente getters. No hay herramienta que escriba, ninguna que llegue a datos que el sitio no publique ya y ninguna credencial alcanzable desde una herramienta.",
+        "technology": "JSON-RPC sin estado sobre HTTP en un route handler de Next.js, lista de orígenes permitidos comprobada antes de ejecutar ningún handler, límite de tasa por llamante en Redis y log de auditoría estructurado por llamada.",
+        "load": "Tráfico continuo y desatendido de agentes desde el lanzamiento, más rastreadores de registros y comprobaciones de salud de directorios.",
+        "results": "Un cliente de este servidor secuestrado por inyección de prompts no puede obtener nada que no pudiera haber descargado del sitio público, porque el conjunto alcanzable es exactamente el corpus publicado. No hay credencial que revocar ni ruta de escritura que abusar."
+      }
+    },
+    "pt": {
+      "name": "Ferramentas com Privilégio Mínimo",
+      "summary": "Dê ao agente o conjunto de ferramentas mais estreito, e a cada ferramenta o escopo mais estreito, que a tarefa realmente exige. O padrão assume que a injeção de prompts às vezes terá êxito e limita o que um agente sequestrado pode fazer: você não consegue corrigir o modelo, mas consegue decidir o que ele é capaz de alcançar.",
+      "definition": "Ferramentas com privilégio mínimo são a prática de restringir o catálogo de ferramentas de um agente, e a credencial por trás de cada uma, ao mínimo que a tarefa exige — de modo que as consequências de um ataque bem-sucedido ou de um erro do modelo fiquem limitadas por design, e não pela obediência do modelo.",
+      "problem": "Um agente com ferramentas amplas e credenciais amplas transforma qualquer injeção, jailbreak ou alucinação bem-sucedida em uma ação real com todo o alcance da conta por trás dela.",
+      "context": "Use onde um agente puder agir: chamar APIs, escrever arquivos, enviar mensagens, movimentar dinheiro. Quanto mais autonomia e menos revisão humana, mais o raio de impacto precisa ser definido na camada de permissões e não no prompt.",
+      "solution": [
+        "Parta da tarefa, não da plataforma. Liste as operações que o agente precisa executar e exponha exatamente essas. Um catálogo montado a partir de «o que a API oferece» é uma concessão de permissões que ninguém revisou.",
+        "Separe leitura de escrita: ferramentas distintas, credenciais distintas e nenhum caminho de escrita alcançável por um argumento de uma ferramenta de leitura. Endpoints de «consulta» que também mutam são a escalada silenciosa mais comum.",
+        "Restrinja a credencial, não apenas a ferramenta. Uma ferramenta somente leitura apoiada por um token de administrador está a um bug de virar ferramenta de escrita; emita credenciais por ferramenta com o escopo mais estreito que o sistema a montante suporte.",
+        "Limite os parâmetros. Coloque em lista de permitidos os caminhos, repositórios, tabelas, contas ou destinatários que uma ferramenta pode endereçar, para que um agente sequestrado não consiga reapontar uma ferramenta legítima para um alvo ilegítimo.",
+        "Faça as concessões expirarem e serem revisadas. Ferramentas se acumulam; remova o que ninguém invoca e trate adicionar uma ferramenta como a mudança de permissão que ela é.",
+        "Registre a concessão e a chamada separadamente. O que o agente podia fazer e o que ele fez são duas auditorias diferentes, e um incidente precisa das duas."
+      ],
+      "components": [
+        "Um catálogo de ferramentas com escopo explícito e escrito por ferramenta.",
+        "Credenciais por ferramenta emitidas no escopo mais estreito que o sistema a montante oferecer.",
+        "Listas de permitidos de parâmetros para os alvos que uma ferramenta pode endereçar.",
+        "Uma camada de política que autoriza cada chamada independentemente do modelo.",
+        "Um log de auditoria cobrindo tanto concessões quanto invocações.",
+        "Uma cadência de revisão que remove as ferramentas que ninguém chama."
+      ],
+      "benefits": [
+        "Limita o dano de uma injeção bem-sucedida sem depender de o modelo se comportar.",
+        "Transforma «este agente é seguro?» em um artefato revisável: uma lista de ferramentas, escopos e responsáveis.",
+        "Melhora de tabela a precisão na escolha de ferramenta: menos ferramentas e mais nítidas são mais fáceis de distinguir para um modelo.",
+        "Torna incidentes investigáveis, porque o conjunto alcançável já era conhecido antes do incidente."
+      ],
+      "risks": [
+        "Ampliação por conveniência: um token amplo colado durante uma depuração e nunca estreitado depois.",
+        "Fragmentação: dezenas de ferramentas finíssimas que o modelo não distingue, trocando um ganho de segurança por uma perda de confiabilidade.",
+        "Falsa tranquilidade. O privilégio mínimo limita consequências; não evita o ataque, e nada diz sobre exfiltração por uma ferramenta de leitura legitimamente concedida.",
+        "Atrito de processo: se emitir uma credencial restrita custa mais do que reutilizar uma ampla, o processo vira a vulnerabilidade."
+      ],
+      "whenNot": [
+        "Protótipos sobre dados sintéticos sem alcance à produção, onde a cerimônia custa mais do que o risco que elimina.",
+        "Quando a plataforma a montante não sabe expressar escopos: aí o controle se muda para um proxy à frente, em vez de ser dado por satisfeito.",
+        "Quando estreitar o agente empurraria o trabalho para uma via humana pior limitada e pior auditada."
+      ],
+      "examples": [
+        "Um agente de programação com um token de repositório restrito a um repositório e a um prefixo de branch, sem leitura no nível da organização. Uma injeção pelo README de uma dependência ainda pode abrir um branch; não alcança os outros quarenta repositórios.",
+        "Um agente de suporte com as ferramentas de CRM separadas: read_customer com uma chave somente leitura e update_ticket restrita aos chamados já presentes na conversa. Uma sessão sequestrada pode incomodar um chamado, não exportar a base de clientes.",
+        "Um servidor MCP público cujo catálogo inteiro são getters sobre conteúdo já publicado, apoiado por nenhuma credencial: não há o que revogar porque não há o que vazar."
+      ],
+      "kpis": [
+        {
+          "metric": "Ferramentas por agente",
+          "note": "O tamanho do catálogo. Crescer sem remover é o sinal de que as concessões se acumulam sem revisão."
+        },
+        {
+          "metric": "Percentual de ferramentas com escrita",
+          "note": "Quanto do catálogo pode alterar estado. O número que vale a pena levar ao mínimo que a tarefa permitir."
+        },
+        {
+          "metric": "Idade da ferramenta sem uso mais antiga",
+          "note": "Dias desde a última invocação de uma ferramenta concedida. Uma concessão antiga sem uso é alcance que ninguém precisa e que um atacante herda."
+        },
+        {
+          "metric": "Cobertura de escopo documentado",
+          "note": "Percentual de ferramentas com escopo escrito e responsável nomeado. Uma ferramenta sem documentação é uma ferramenta sem limite."
+        }
+      ],
+      "failureModes": [
+        "O token de administrador atrás da ferramenta somente leitura: escopo declarado na camada de ferramenta, ilimitado na camada de credencial.",
+        "Reapontamento de parâmetros: a ferramenta é legítima e o alvo não é, porque nada restringiu o argumento.",
+        "Deputado confuso: estreitar as ferramentas sem estreitar sob qual autoridade elas rodam não muda nada, porque quem chama continua herdando o alcance do agente.",
+        "Deriva do catálogo: as ferramentas adicionadas para um experimento ficam, e o conjunto de permissões revisado já não é o implantado."
+      ],
+      "lessons": [
+        "Escreva o raio de impacto antes de conceder a ferramenta, não depois do incidente.",
+        "O nome de uma ferramenta não é o escopo dela. Só a credencial do lado servidor é.",
+        "Remover uma ferramenta que ninguém chama é o trabalho de segurança mais barato que existe.",
+        "O privilégio mínimo paga duas vezes: limita ataques e faz o agente escolher melhor as ferramentas."
+      ],
+      "faqs": [
+        {
+          "q": "O privilégio mínimo impede a injeção de prompts?",
+          "a": "Não, e não é essa a intenção. Ele assume que a injeção às vezes vai funcionar e decide de antemão o que um ataque bem-sucedido consegue realizar. Prevenir e conter são trabalhos diferentes, e só conter está sob o seu controle."
+        },
+        {
+          "q": "Quão estreito é estreito demais?",
+          "a": "Quando o modelo já não distingue duas ferramentas, ou quando uma tarefa rotineira precisa de quatro chamadas que poderiam com segurança ter sido uma. Dividir melhora até começar a produzir escolhas erradas, e uma chamada errada é uma falha por si só."
+        },
+        {
+          "q": "Usamos uma única conta de serviço para tudo. É tão ruim assim?",
+          "a": "Significa que cada agente, e cada atacante que alcançar um deles, tem o alcance da tarefa mais ampla que qualquer um deles executa. Uma única conta é a versão deste padrão em que o raio de impacto é «tudo»."
+        }
+      ],
+      "productionEvidence": {
+        "context": "O endpoint MCP público desta base de conhecimento, acessível a qualquer agente na internet.",
+        "scenario": "O corpus é público e somente leitura, então o catálogo é inteiramente de getters. Não há ferramenta que escreva, nenhuma que alcance dados que o site já não publique e nenhuma credencial alcançável a partir de uma ferramenta.",
+        "technology": "JSON-RPC sem estado sobre HTTP em um route handler do Next.js, lista de origens permitidas verificada antes de qualquer handler rodar, limite de taxa por chamador em Redis e log de auditoria estruturado por chamada.",
+        "load": "Tráfego contínuo e não assistido de agentes desde o lançamento, mais rastreadores de registries e verificações de saúde de diretórios.",
+        "results": "Um cliente deste servidor sequestrado por injeção de prompts não obtém nada que não pudesse ter baixado do site público, porque o conjunto alcançável é exatamente o corpus publicado. Não há credencial a revogar nem caminho de escrita a abusar."
+      }
+    }
+  }
+}

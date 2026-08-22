@@ -1,0 +1,310 @@
+{
+  "slug": "egress-allowlist",
+  "category": "safety",
+  "updated": "2026-08-22",
+  "version": "1.0",
+  "technologies": [
+    "Egress proxies",
+    "Container network policies",
+    "Service mesh policy",
+    "DNS filtering",
+    "Denial logging and alerting"
+  ],
+  "related": [
+    "least-privilege-tooling",
+    "human-approval-gate",
+    "recovery-strategy"
+  ],
+  "references": [
+    {
+      "title": "OWASP — Top 10 for LLM Applications",
+      "url": "https://genai.owasp.org/llm-top-10/"
+    },
+    {
+      "title": "OWASP — LLM01: Prompt Injection",
+      "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    },
+    {
+      "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
+      "url": "https://atlas.mitre.org/"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "industry_observation",
+      "personal_experience",
+      "paper"
+    ]
+  },
+  "locales": {
+    "en": {
+      "name": "Egress Allowlist",
+      "summary": "Restrict where an agent's traffic is allowed to go. Data theft and injection payload delivery both end in an outbound request, so a default-deny list of permitted destinations is the control that still works after every other one has failed.",
+      "definition": "An egress allowlist is a network- or sandbox-level policy that permits an agent's outbound requests only to an explicitly named set of destinations and denies everything else by default, so data cannot leave to an attacker-chosen endpoint even when the agent has been fully hijacked.",
+      "problem": "Every exfiltration path ends in an outbound request. An agent that can reach arbitrary hosts can be instructed to send anything it has read to any address, and no prompt-level instruction prevents that.",
+      "context": "Use it wherever an agent both processes untrusted content and can make network requests — fetching pages, calling tools, rendering images, running generated code. The pattern is most valuable exactly where injection is most likely.",
+      "solution": [
+        "Default deny. The allowlist is the only way out; anything not named is refused, and the refusal is logged as a signal rather than swallowed as an error.",
+        "Enumerate destinations from the task: the APIs the agent must call, the domains it must fetch, the registries it must install from — each with an owner and a written reason.",
+        "Enforce below the agent. Put the policy in the sandbox, the proxy or the network, never in tool code the model can be argued out of. A rule the agent can talk its way past is documentation, not a control.",
+        "Close the quiet channels. Rendered image URLs, link previews, DNS lookups, webhooks, error reporters and package installs are all egress, and all of them get used.",
+        "Allow hosts you can reason about. A wildcard over a host that serves user-supplied content — a raw-file CDN, a paste site, a public object store — is an open channel wearing an allowlist's clothes.",
+        "Derive the list from measurement and re-derive it when the task changes. Start from what the agent actually calls, not from what someone assumes it calls."
+      ],
+      "components": [
+        "An egress gateway or sandbox network policy that all traffic must traverse.",
+        "A deny-by-default rule with an explicit, owned destination inventory.",
+        "Per-role policies, so a research agent and a deployment agent do not share one list.",
+        "Denial logging wired to alerting, because a denial is a high-signal event.",
+        "Method and payload constraints where the destination alone is not enough (GET-only, body size caps).",
+        "A review cadence that removes destinations nothing has used."
+      ],
+      "benefits": [
+        "Bounds exfiltration even after a complete compromise of the agent's reasoning.",
+        "Makes attempts visible: a denied destination is one of the few unambiguous attack signals an agent stack produces.",
+        "Model-independent — it keeps working across model swaps, prompt changes and framework migrations.",
+        "Cheap to extend once the gateway exists; each new agent inherits the enforcement point."
+      ],
+      "risks": [
+        "The allowlisted relay: a permitted host that itself forwards data onward turns the allowlist into a formality.",
+        "Breakage when a legitimate dependency moves host, which creates pressure to widen the list under time pressure.",
+        "Wildcard erosion: each broad entry added 'temporarily' is permanent until someone audits it.",
+        "Enforcement at the wrong layer — an in-process check the generated code can simply bypass."
+      ],
+      "whenNot": [
+        "Fully offline agents, where there is no egress to constrain and the control would be theatre.",
+        "When the design already permits exactly one destination, so the allowlist is a property of the architecture rather than a policy to add.",
+        "When a corporate proxy already enforces the same policy and a second list would split ownership without adding a constraint."
+      ],
+      "examples": [
+        "A coding agent in a container whose egress policy names the package registry and the internal Git host and nothing else. An injected instruction to POST the repository to an external collector fails at the network layer and shows up as a denial.",
+        "A research agent allowed to fetch widely but forced through a proxy that permits GET only and caps outbound bodies — able to read the web without having a channel to write to it.",
+        "The stdio package published for this knowledge base: its only outbound destination is the public endpoint it proxies, so the allowlist is a property of the design rather than a policy layered on afterwards."
+      ],
+      "kpis": [
+        {
+          "metric": "Denied egress attempts",
+          "note": "The signal the pattern exists to produce. A sustained rise is either an attack or a task that outgrew its list — both worth knowing."
+        },
+        {
+          "metric": "Allowlist size",
+          "note": "Destinations permitted per agent role. Growth without removals is the list decaying toward 'allow all'."
+        },
+        {
+          "metric": "Wildcard entries",
+          "note": "Count of broad entries. Every one is a channel you cannot reason about; the target is zero."
+        },
+        {
+          "metric": "Time from denial to triage",
+          "note": "How long a denial waits before a human looks. An unread denial is an alert you do not actually have."
+        }
+      ],
+      "failureModes": [
+        "The allowlisted relay: an approved host that will forward whatever it is given, so the destination check passes and the data still leaves.",
+        "Wildcard erosion: temporary broad entries that outlive the reason they were added.",
+        "In-process enforcement: the check lives where the generated code runs, so the code can skip it.",
+        "Silent denials: refusals logged as ordinary network errors, so the one signal the pattern generates never reaches anyone."
+      ],
+      "lessons": [
+        "Egress is the last control that still works after the model has been convinced. Build it before you need it.",
+        "Derive the list from measured traffic rather than assumption. Doing exactly that for the inbound origin rule on our own MCP endpoint produced a rule that differed from the one we would have written from a default.",
+        "Treat a denial as an alert, not an error. It is the cheapest attack signal in the stack.",
+        "Every wildcard is a promise you cannot keep. Name hosts, or accept that you do not have an allowlist."
+      ],
+      "faqs": [
+        {
+          "q": "Is an egress allowlist realistic for an agent that browses the web?",
+          "a": "Yes, if you constrain the shape rather than the set. Permit wide GET traffic through a proxy that forbids request bodies and caps sizes: the agent can read broadly while having no channel wide enough to write out what it read."
+        },
+        {
+          "q": "Does DNS need to be on the list?",
+          "a": "It does. A resolver the agent can query freely is an exfiltration channel — data encoded into subdomain lookups leaves without a single HTTP request. Route DNS through the same policy."
+        },
+        {
+          "q": "We already have least-privilege tools. Is this redundant?",
+          "a": "No; they cover different halves. Least privilege bounds what the agent can do, egress control bounds where what it already read can go. A read-only agent with open egress can still leak everything it can read."
+        }
+      ]
+    },
+    "es": {
+      "name": "Lista de Salida Permitida",
+      "summary": "Restringe adónde puede ir el tráfico de un agente. El robo de datos y la entrega de un payload de inyección terminan ambos en una petición saliente, así que una lista de destinos permitidos con denegación por defecto es el control que sigue funcionando cuando todos los demás ya han fallado.",
+      "definition": "Una lista de salida permitida es una política de red o de sandbox que solo autoriza las peticiones salientes del agente hacia un conjunto de destinos nombrados explícitamente y deniega todo lo demás por defecto, de modo que los datos no puedan salir hacia un endpoint elegido por el atacante ni siquiera con el agente completamente secuestrado.",
+      "problem": "Toda ruta de exfiltración termina en una petición saliente. Un agente que puede llegar a hosts arbitrarios puede recibir la instrucción de enviar todo lo que ha leído a cualquier dirección, y ninguna instrucción a nivel de prompt lo impide.",
+      "context": "Úsala allí donde un agente procesa contenido no confiable y además puede hacer peticiones de red: descargar páginas, invocar herramientas, renderizar imágenes, ejecutar código generado. El patrón vale más justo donde la inyección es más probable.",
+      "solution": [
+        "Deniega por defecto. La lista es la única salida; lo que no esté nombrado se rechaza, y el rechazo se registra como señal en lugar de tragarse como error.",
+        "Enumera los destinos a partir de la tarea: las APIs que el agente debe llamar, los dominios que debe descargar, los registros de los que debe instalar, cada uno con responsable y motivo escrito.",
+        "Aplica la política por debajo del agente. Ponla en el sandbox, en el proxy o en la red, nunca en el código de la herramienta del que se puede convencer al modelo. Una regla que el agente puede sortear hablando es documentación, no un control.",
+        "Cierra los canales silenciosos. Las URLs de imágenes renderizadas, las previsualizaciones de enlaces, las resoluciones DNS, los webhooks, los reportes de error y las instalaciones de paquetes son todos salida, y todos se usan.",
+        "Permite hosts sobre los que puedas razonar. Un comodín sobre un host que sirve contenido de usuario —un CDN de ficheros crudos, un sitio de pastes, un almacén de objetos público— es un canal abierto disfrazado de lista de permitidos.",
+        "Deriva la lista de la medición y vuelve a derivarla cuando cambie la tarea. Parte de lo que el agente llama de verdad, no de lo que alguien supone que llama."
+      ],
+      "components": [
+        "Una pasarela de salida o política de red del sandbox que todo el tráfico deba atravesar.",
+        "Una regla de denegación por defecto con un inventario de destinos explícito y con responsables.",
+        "Políticas por rol, para que un agente de investigación y uno de despliegue no compartan una misma lista.",
+        "Registro de denegaciones conectado a alertas, porque una denegación es un evento de alta señal.",
+        "Restricciones de método y de payload donde el destino por sí solo no basta (solo GET, límites de tamaño de cuerpo).",
+        "Una cadencia de revisión que retire los destinos que nadie ha usado."
+      ],
+      "benefits": [
+        "Acota la exfiltración incluso tras un compromiso total del razonamiento del agente.",
+        "Hace visibles los intentos: un destino denegado es una de las pocas señales de ataque inequívocas que produce una pila agéntica.",
+        "Es independiente del modelo: sigue funcionando entre cambios de modelo, de prompt y de framework.",
+        "Es barata de extender una vez existe la pasarela; cada agente nuevo hereda el punto de aplicación."
+      ],
+      "risks": [
+        "El relé permitido: un host autorizado que a su vez reenvía los datos convierte la lista en un trámite.",
+        "Roturas cuando una dependencia legítima cambia de host, lo que genera presión para ampliar la lista con prisa.",
+        "Erosión por comodines: cada entrada amplia añadida «temporalmente» es permanente hasta que alguien la audita.",
+        "Aplicación en la capa equivocada: una comprobación en el propio proceso que el código generado simplemente esquiva."
+      ],
+      "whenNot": [
+        "Agentes completamente sin red, donde no hay salida que acotar y el control sería teatro.",
+        "Cuando el diseño ya permite exactamente un destino, así que la lista es una propiedad de la arquitectura y no una política que añadir.",
+        "Cuando un proxy corporativo ya aplica la misma política y una segunda lista repartiría la responsabilidad sin añadir restricción."
+      ],
+      "examples": [
+        "Un agente de programación en un contenedor cuya política de salida nombra el registro de paquetes y el host Git interno, y nada más. Una instrucción inyectada para hacer POST del repositorio a un recolector externo falla en la capa de red y aparece como denegación.",
+        "Un agente de investigación con permiso para descargar ampliamente pero forzado a pasar por un proxy que solo permite GET y limita el tamaño de los cuerpos salientes: puede leer la web sin tener un canal para escribir en ella.",
+        "El paquete stdio publicado para esta base de conocimiento: su único destino saliente es el endpoint público del que hace de proxy, así que la lista de permitidos es una propiedad del diseño y no una política añadida después."
+      ],
+      "kpis": [
+        {
+          "metric": "Intentos de salida denegados",
+          "note": "La señal que el patrón existe para producir. Una subida sostenida es un ataque o una tarea que se ha salido de su lista; conviene saber cuál."
+        },
+        {
+          "metric": "Tamaño de la lista",
+          "note": "Destinos permitidos por rol de agente. Crecer sin retirar es la lista degradándose hacia «permitir todo»."
+        },
+        {
+          "metric": "Entradas con comodín",
+          "note": "Número de entradas amplias. Cada una es un canal sobre el que no puedes razonar; el objetivo es cero."
+        },
+        {
+          "metric": "Tiempo de denegación a triaje",
+          "note": "Cuánto espera una denegación antes de que alguien la mire. Una denegación sin leer es una alerta que en realidad no tienes."
+        }
+      ],
+      "failureModes": [
+        "El relé permitido: un host aprobado que reenvía lo que le den, así que la comprobación de destino pasa y los datos salen igual.",
+        "Erosión por comodines: entradas amplias temporales que sobreviven al motivo por el que se añadieron.",
+        "Aplicación en el propio proceso: la comprobación vive donde corre el código generado, así que el código puede saltársela.",
+        "Denegaciones silenciosas: rechazos registrados como errores de red corrientes, así que la única señal que genera el patrón no llega a nadie."
+      ],
+      "lessons": [
+        "La salida es el último control que sigue funcionando cuando ya han convencido al modelo. Constrúyelo antes de necesitarlo.",
+        "Deriva la lista de tráfico medido y no de suposiciones. Hacer exactamente eso para la regla de origen entrante de nuestro propio endpoint MCP produjo una regla distinta de la que habríamos escrito partiendo de un valor por defecto.",
+        "Trata una denegación como alerta, no como error. Es la señal de ataque más barata de toda la pila.",
+        "Cada comodín es una promesa que no puedes cumplir. Nombra hosts, o admite que no tienes una lista de permitidos."
+      ],
+      "faqs": [
+        {
+          "q": "¿Es realista una lista de salida para un agente que navega por la web?",
+          "a": "Sí, si acotas la forma en lugar del conjunto. Permite tráfico GET amplio a través de un proxy que prohíba cuerpos de petición y limite tamaños: el agente puede leer mucho sin tener un canal lo bastante ancho para sacar lo que ha leído."
+        },
+        {
+          "q": "¿Hay que incluir el DNS?",
+          "a": "Sí. Un resolutor que el agente puede consultar libremente es un canal de exfiltración: los datos codificados en consultas de subdominio salen sin una sola petición HTTP. Enruta el DNS por la misma política."
+        },
+        {
+          "q": "Ya tenemos herramientas con mínimo privilegio, ¿esto es redundante?",
+          "a": "No; cubren mitades distintas. El mínimo privilegio acota lo que el agente puede hacer; el control de salida acota adónde puede ir lo que ya leyó. Un agente de solo lectura con salida abierta puede filtrar todo lo que es capaz de leer."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Lista de Saída Permitida",
+      "summary": "Restrinja para onde o tráfego de um agente pode ir. O roubo de dados e a entrega de um payload de injeção terminam ambos em uma requisição de saída, então uma lista de destinos permitidos com negação por padrão é o controle que continua funcionando depois que todos os outros já falharam.",
+      "definition": "Uma lista de saída permitida é uma política de rede ou de sandbox que autoriza as requisições de saída do agente apenas para um conjunto de destinos nomeados explicitamente e nega todo o resto por padrão, de modo que os dados não possam sair para um endpoint escolhido pelo atacante mesmo com o agente totalmente sequestrado.",
+      "problem": "Todo caminho de exfiltração termina em uma requisição de saída. Um agente que alcança hosts arbitrários pode ser instruído a enviar tudo o que leu para qualquer endereço, e nenhuma instrução no nível do prompt impede isso.",
+      "context": "Use onde um agente processa conteúdo não confiável e também faz requisições de rede: baixar páginas, invocar ferramentas, renderizar imagens, executar código gerado. O padrão vale mais exatamente onde a injeção é mais provável.",
+      "solution": [
+        "Negue por padrão. A lista é a única saída; o que não estiver nomeado é recusado, e a recusa é registrada como sinal em vez de engolida como erro.",
+        "Enumere os destinos a partir da tarefa: as APIs que o agente precisa chamar, os domínios que precisa baixar, os registries de onde precisa instalar — cada um com responsável e motivo escrito.",
+        "Aplique a política abaixo do agente. Coloque-a no sandbox, no proxy ou na rede, nunca no código da ferramenta do qual o modelo pode ser convencido. Uma regra que o agente contorna conversando é documentação, não controle.",
+        "Feche os canais silenciosos. URLs de imagens renderizadas, pré-visualizações de links, resoluções DNS, webhooks, relatores de erro e instalações de pacotes são todos saída, e todos são usados.",
+        "Permita hosts sobre os quais você consiga raciocinar. Um curinga sobre um host que serve conteúdo de usuário — um CDN de arquivos crus, um site de pastes, um object store público — é um canal aberto fantasiado de lista de permitidos.",
+        "Derive a lista da medição e volte a derivá-la quando a tarefa mudar. Parta do que o agente realmente chama, não do que alguém supõe que ele chama."
+      ],
+      "components": [
+        "Um gateway de saída ou política de rede do sandbox que todo o tráfego precise atravessar.",
+        "Uma regra de negação por padrão com um inventário de destinos explícito e com responsáveis.",
+        "Políticas por papel, para que um agente de pesquisa e um de implantação não compartilhem uma mesma lista.",
+        "Registro de negações ligado a alertas, porque uma negação é um evento de alto sinal.",
+        "Restrições de método e de payload onde o destino sozinho não basta (somente GET, limites de tamanho de corpo).",
+        "Uma cadência de revisão que remova os destinos que ninguém usou."
+      ],
+      "benefits": [
+        "Limita a exfiltração mesmo após um comprometimento completo do raciocínio do agente.",
+        "Torna as tentativas visíveis: um destino negado é um dos poucos sinais de ataque inequívocos que uma pilha agêntica produz.",
+        "É independente do modelo: continua funcionando entre trocas de modelo, mudanças de prompt e migrações de framework.",
+        "É barata de estender depois que o gateway existe; cada agente novo herda o ponto de aplicação."
+      ],
+      "risks": [
+        "O relé permitido: um host autorizado que por sua vez repassa os dados transforma a lista em formalidade.",
+        "Quebras quando uma dependência legítima muda de host, o que gera pressão para ampliar a lista com pressa.",
+        "Erosão por curingas: cada entrada ampla adicionada «temporariamente» é permanente até alguém auditá-la.",
+        "Aplicação na camada errada: uma verificação no próprio processo que o código gerado simplesmente contorna."
+      ],
+      "whenNot": [
+        "Agentes totalmente sem rede, onde não há saída a limitar e o controle seria encenação.",
+        "Quando o design já permite exatamente um destino, então a lista é propriedade da arquitetura e não política a acrescentar.",
+        "Quando um proxy corporativo já aplica a mesma política e uma segunda lista dividiria a responsabilidade sem acrescentar restrição."
+      ],
+      "examples": [
+        "Um agente de programação em um contêiner cuja política de saída nomeia o registry de pacotes e o host Git interno, e nada mais. Uma instrução injetada para dar POST do repositório a um coletor externo falha na camada de rede e aparece como negação.",
+        "Um agente de pesquisa autorizado a baixar amplamente, mas forçado por um proxy que permite apenas GET e limita o tamanho dos corpos de saída: consegue ler a web sem ter um canal para escrever nela.",
+        "O pacote stdio publicado para esta base de conhecimento: seu único destino de saída é o endpoint público do qual ele é proxy, então a lista de permitidos é propriedade do design e não política acrescentada depois."
+      ],
+      "kpis": [
+        {
+          "metric": "Tentativas de saída negadas",
+          "note": "O sinal que o padrão existe para produzir. Uma alta sustentada é um ataque ou uma tarefa que ultrapassou sua lista; vale saber qual."
+        },
+        {
+          "metric": "Tamanho da lista",
+          "note": "Destinos permitidos por papel de agente. Crescer sem remover é a lista degradando para «permitir tudo»."
+        },
+        {
+          "metric": "Entradas com curinga",
+          "note": "Número de entradas amplas. Cada uma é um canal sobre o qual você não consegue raciocinar; o alvo é zero."
+        },
+        {
+          "metric": "Tempo de negação até triagem",
+          "note": "Quanto uma negação espera até alguém olhar. Uma negação não lida é um alerta que você não tem de fato."
+        }
+      ],
+      "failureModes": [
+        "O relé permitido: um host aprovado que repassa o que receber, então a verificação de destino passa e os dados saem do mesmo jeito.",
+        "Erosão por curingas: entradas amplas temporárias que sobrevivem ao motivo pelo qual foram adicionadas.",
+        "Aplicação no próprio processo: a verificação mora onde o código gerado roda, então o código consegue pulá-la.",
+        "Negações silenciosas: recusas registradas como erros de rede comuns, então o único sinal que o padrão gera nunca chega a ninguém."
+      ],
+      "lessons": [
+        "A saída é o último controle que ainda funciona depois que o modelo foi convencido. Construa antes de precisar.",
+        "Derive a lista de tráfego medido e não de suposição. Fazer exatamente isso para a regra de origem de entrada do nosso próprio endpoint MCP produziu uma regra diferente da que teríamos escrito a partir de um padrão.",
+        "Trate uma negação como alerta, não como erro. É o sinal de ataque mais barato de toda a pilha.",
+        "Todo curinga é uma promessa que você não consegue cumprir. Nomeie hosts, ou admita que não tem uma lista de permitidos."
+      ],
+      "faqs": [
+        {
+          "q": "Uma lista de saída é realista para um agente que navega na web?",
+          "a": "Sim, se você limitar a forma em vez do conjunto. Permita tráfego GET amplo através de um proxy que proíba corpos de requisição e limite tamanhos: o agente lê muito sem ter um canal largo o bastante para tirar o que leu."
+        },
+        {
+          "q": "O DNS precisa entrar na lista?",
+          "a": "Precisa. Um resolvedor que o agente consulta livremente é um canal de exfiltração: dados codificados em consultas de subdomínio saem sem uma única requisição HTTP. Roteie o DNS pela mesma política."
+        },
+        {
+          "q": "Já temos ferramentas com privilégio mínimo. Isto é redundante?",
+          "a": "Não; cobrem metades diferentes. O privilégio mínimo limita o que o agente pode fazer; o controle de saída limita para onde pode ir o que ele já leu. Um agente somente leitura com saída aberta ainda vaza tudo o que consegue ler."
+        }
+      ]
+    }
+  }
+}

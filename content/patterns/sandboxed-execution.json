@@ -1,0 +1,311 @@
+{
+  "slug": "sandboxed-execution",
+  "category": "safety",
+  "updated": "2026-08-22",
+  "version": "1.0",
+  "technologies": [
+    "Containers",
+    "microVMs (Firecracker / gVisor)",
+    "Ephemeral workspaces",
+    "Resource quotas and timeouts",
+    "Scoped secret injection"
+  ],
+  "related": [
+    "least-privilege-tooling",
+    "egress-allowlist",
+    "recovery-strategy",
+    "human-approval-gate"
+  ],
+  "references": [
+    {
+      "title": "OWASP — Top 10 for LLM Applications",
+      "url": "https://genai.owasp.org/llm-top-10/"
+    },
+    {
+      "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
+      "url": "https://atlas.mitre.org/"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "industry_observation",
+      "personal_experience",
+      "paper"
+    ]
+  },
+  "locales": {
+    "en": {
+      "name": "Sandboxed Execution",
+      "summary": "Run everything an agent generates or invokes inside a disposable, isolated environment with no ambient credentials, a bounded filesystem, controlled egress and hard resource caps. The sandbox is not there because the agent is malicious; it is there because the agent's input can be.",
+      "definition": "Sandboxed execution is the practice of running agent-generated code and agent-invoked actions inside an isolated, ephemeral environment whose filesystem, network, credentials and resources are bounded by the host rather than by the agent, so that a hijacked or mistaken agent cannot affect anything outside it.",
+      "problem": "An agent that executes code on the host inherits the host: its credentials, its filesystem, its network position. One successful injection or one confidently wrong command is then indistinguishable from a compromise of the machine.",
+      "context": "Use it whenever an agent runs code, executes shell commands, installs packages or processes untrusted files. The threshold is low: if the agent can cause execution, the execution belongs in a sandbox.",
+      "solution": [
+        "Make it ephemeral. Create the environment per task, destroy it after, and never carry state forward that the next task did not ask for. Persistence is how a one-off compromise becomes a foothold.",
+        "Remove ambient credentials. Nothing in the environment should be usable simply because it is present; inject only the narrowly scoped secrets the task needs, for its duration.",
+        "Bound the filesystem to the working set. Mount the repository or the input, nothing else, and mount read-only whatever does not need writing.",
+        "Constrain egress inside the sandbox, not around it. The isolation and the network policy are the same control from the attacker's point of view, and a sandbox with open network is a jail with a phone.",
+        "Cap resources — CPU, memory, disk, wall-clock, process count. Runaway consumption is the failure mode that arrives first and most often, usually without any adversary at all.",
+        "Log what crossed the boundary: which files came in, which came out, which destinations were reached. The boundary is only useful if you can see what passed through it."
+      ],
+      "components": [
+        "An isolation primitive: container, microVM or equivalent, chosen for the strength the workload needs.",
+        "Ephemeral lifecycle management, with destruction as the default rather than a cleanup step.",
+        "A secret-injection path scoped to the task and its duration.",
+        "A network policy applied inside the sandbox boundary.",
+        "Resource quotas and timeouts, enforced by the host.",
+        "Boundary logging: inputs, outputs and destinations."
+      ],
+      "benefits": [
+        "Converts 'the agent ran something bad' from an incident into a discarded container.",
+        "Makes it safe to give an agent genuine execution ability, which is often what makes it useful at all.",
+        "Bounds honest mistakes as well as attacks — the same control catches an infinite loop and an injected payload.",
+        "Gives a clean place to observe: everything the task touched crossed one boundary."
+      ],
+      "risks": [
+        "Isolation weaker than assumed: a shared kernel is not a security boundary against determined escape, and treating a container as a microVM is a category error.",
+        "Credentials smuggled in for convenience — one mounted config file undoes the whole pattern.",
+        "Sandboxes that quietly become persistent because rebuilding is slow, so the ephemerality that carried the guarantee is gone.",
+        "Escape via the shared surface that remains: mounted volumes, the orchestrator API, or the network the sandbox still reaches."
+      ],
+      "whenNot": [
+        "Read-only agents with no execution capability, where there is nothing to isolate and the cost buys nothing.",
+        "Latency-critical inline paths where environment startup dominates the task and a narrower control — a restricted interpreter, a pure function — fits better.",
+        "When the sandbox would need the very credentials it exists to withhold, which is a sign the task should be split rather than isolated."
+      ],
+      "examples": [
+        "A coding agent that clones into a fresh container per task, with the repository mounted, no cloud credentials present and egress limited to the package registry. A malicious dependency install destroys a container and nothing else.",
+        "A data-analysis agent executing generated Python in a microVM with the input dataset mounted read-only, no network at all and a wall-clock cap. The generated code can be wrong; it cannot be expensive or exfiltrating.",
+        "A document-processing agent that opens untrusted PDFs inside a disposable environment, because a parser exploit in an uploaded file is a real path to the host and the file arrived from outside."
+      ],
+      "kpis": [
+        {
+          "metric": "Share of executions sandboxed",
+          "note": "The coverage number. Anything running outside the sandbox is the actual security posture, regardless of what the sandboxed share does."
+        },
+        {
+          "metric": "Sandbox lifetime",
+          "note": "How long environments live. Rising lifetimes mean ephemerality is eroding into persistence."
+        },
+        {
+          "metric": "Resource-cap hits",
+          "note": "Tasks stopped by a quota or timeout. A useful mix of runaway generations and genuine limits set too tight."
+        },
+        {
+          "metric": "Secrets present at runtime",
+          "note": "Count of credentials reachable inside the environment. The target is the minimum the task needs, and often zero."
+        }
+      ],
+      "failureModes": [
+        "The convenience mount: a home directory, a credentials file or a socket mounted in so a task would stop failing.",
+        "Persistent reuse: the environment stops being per-task because rebuilding costs too much, so state and compromise both survive.",
+        "Open egress inside the boundary: strong isolation with a free network is containment against the filesystem only.",
+        "Orchestrator reachability: the sandbox can call the API that manages sandboxes, which is escape by design rather than by exploit."
+      ],
+      "lessons": [
+        "Isolate execution before you trust generation. The sandbox is what makes it reasonable to let an agent run code at all.",
+        "Ephemeral is the security property; isolation alone only postpones the problem.",
+        "The credential that is not present cannot be stolen — and it is the only control that holds after an escape.",
+        "Most sandbox activations are honest mistakes, not attacks. That is the pattern working, not evidence it was unnecessary."
+      ],
+      "faqs": [
+        {
+          "q": "Is a container enough, or do I need a microVM?",
+          "a": "It depends on what runs inside. For your own code with an injection risk, a hardened container with no credentials and constrained egress is usually proportionate. For arbitrary code from untrusted sources, assume the shared kernel can be escaped and use a microVM."
+        },
+        {
+          "q": "How does this differ from least-privilege tooling?",
+          "a": "Least privilege bounds what the agent may ask for; the sandbox bounds what happens when something runs anyway. One governs the request, the other the environment it executes in, and agents that run code need both."
+        },
+        {
+          "q": "The sandbox slows everything down. Is it worth it?",
+          "a": "Compare against the alternative cost, not against zero. Most of the latency is environment startup, which pools and pre-warmed images largely remove; the failure it prevents is a compromise of the host that runs the agent."
+        }
+      ]
+    },
+    "es": {
+      "name": "Ejecución en Sandbox",
+      "summary": "Ejecuta todo lo que un agente genera o invoca dentro de un entorno aislado y desechable, sin credenciales ambientales, con sistema de ficheros acotado, salida controlada y límites duros de recursos. El sandbox no está porque el agente sea malicioso, sino porque su entrada puede serlo.",
+      "definition": "La ejecución en sandbox es la práctica de correr el código generado por el agente y las acciones que invoca dentro de un entorno aislado y efímero cuyo sistema de ficheros, red, credenciales y recursos los acota el anfitrión y no el agente, de forma que un agente secuestrado o equivocado no pueda afectar a nada fuera de él.",
+      "problem": "Un agente que ejecuta código en el anfitrión hereda el anfitrión: sus credenciales, su sistema de ficheros, su posición de red. Una inyección con éxito o un comando confiadamente equivocado pasan entonces a ser indistinguibles de un compromiso de la máquina.",
+      "context": "Úsala siempre que un agente ejecute código, corra comandos de shell, instale paquetes o procese ficheros no confiables. El umbral es bajo: si el agente puede provocar ejecución, la ejecución va en un sandbox.",
+      "solution": [
+        "Hazlo efímero. Crea el entorno por tarea, destrúyelo al terminar y no arrastres estado que la siguiente tarea no haya pedido. La persistencia es cómo un compromiso puntual se convierte en punto de apoyo.",
+        "Elimina las credenciales ambientales. Nada del entorno debería ser utilizable solo por estar presente; inyecta únicamente los secretos acotados que la tarea necesita, durante lo que dure.",
+        "Acota el sistema de ficheros al conjunto de trabajo. Monta el repositorio o la entrada y nada más, y monta en solo lectura todo lo que no necesite escritura.",
+        "Restringe la salida dentro del sandbox, no alrededor. Desde el punto de vista del atacante el aislamiento y la política de red son el mismo control, y un sandbox con red abierta es una celda con teléfono.",
+        "Limita recursos: CPU, memoria, disco, tiempo de reloj, número de procesos. El consumo desbocado es el modo de fallo que llega primero y más a menudo, normalmente sin ningún adversario.",
+        "Registra lo que cruzó la frontera: qué ficheros entraron, cuáles salieron, a qué destinos se llegó. La frontera solo sirve si puedes ver qué pasó por ella."
+      ],
+      "components": [
+        "Una primitiva de aislamiento: contenedor, microVM o equivalente, elegida por la fuerza que la carga necesita.",
+        "Gestión de ciclo de vida efímero, con la destrucción como comportamiento por defecto y no como paso de limpieza.",
+        "Una vía de inyección de secretos acotada a la tarea y a su duración.",
+        "Una política de red aplicada dentro de la frontera del sandbox.",
+        "Cuotas de recursos y timeouts aplicados por el anfitrión.",
+        "Registro de frontera: entradas, salidas y destinos."
+      ],
+      "benefits": [
+        "Convierte «el agente ejecutó algo malo» de incidente en contenedor descartado.",
+        "Hace seguro dar a un agente capacidad real de ejecución, que suele ser justo lo que lo hace útil.",
+        "Acota los errores honestos igual que los ataques: el mismo control atrapa un bucle infinito y un payload inyectado.",
+        "Da un buen sitio donde observar: todo lo que la tarea tocó cruzó una única frontera."
+      ],
+      "risks": [
+        "Aislamiento más débil de lo supuesto: un kernel compartido no es una frontera de seguridad frente a un escape decidido, y tratar un contenedor como una microVM es un error de categoría.",
+        "Credenciales coladas por comodidad: un solo fichero de configuración montado deshace el patrón entero.",
+        "Sandboxes que se vuelven persistentes en silencio porque reconstruir es lento, y con ello desaparece la efimeridad que sostenía la garantía.",
+        "Escape por la superficie compartida que queda: volúmenes montados, la API del orquestador o la red a la que el sandbox sigue llegando."
+      ],
+      "whenNot": [
+        "Agentes de solo lectura sin capacidad de ejecución, donde no hay nada que aislar y el coste no compra nada.",
+        "Rutas en línea críticas en latencia donde el arranque del entorno domina la tarea y encaja mejor un control más estrecho: un intérprete restringido, una función pura.",
+        "Cuando el sandbox necesitaría justo las credenciales que existe para retener, que es señal de que la tarea hay que partirla en lugar de aislarla."
+      ],
+      "examples": [
+        "Un agente de programación que clona en un contenedor nuevo por tarea, con el repositorio montado, sin credenciales de nube presentes y con salida limitada al registro de paquetes. Una instalación de dependencia maliciosa destruye un contenedor y nada más.",
+        "Un agente de análisis de datos que ejecuta Python generado en una microVM con el dataset montado en solo lectura, sin red alguna y con límite de tiempo de reloj. El código generado puede estar mal; no puede salir caro ni exfiltrar.",
+        "Un agente de procesamiento documental que abre PDFs no confiables dentro de un entorno desechable, porque un exploit del parser en un fichero subido es una vía real al anfitrión y el fichero vino de fuera."
+      ],
+      "kpis": [
+        {
+          "metric": "Porcentaje de ejecuciones en sandbox",
+          "note": "El número de cobertura. Lo que corre fuera del sandbox es la postura de seguridad real, diga lo que diga la parte que sí está dentro."
+        },
+        {
+          "metric": "Vida del sandbox",
+          "note": "Cuánto duran los entornos. Vidas crecientes significan que la efimeridad se está erosionando hacia la persistencia."
+        },
+        {
+          "metric": "Choques con límites de recursos",
+          "note": "Tareas detenidas por una cuota o un timeout. Una mezcla útil de generaciones desbocadas y límites legítimos puestos demasiado estrechos."
+        },
+        {
+          "metric": "Secretos presentes en ejecución",
+          "note": "Número de credenciales alcanzables dentro del entorno. El objetivo es el mínimo que la tarea necesite, y a menudo cero."
+        }
+      ],
+      "failureModes": [
+        "El montaje por comodidad: un directorio home, un fichero de credenciales o un socket montados para que una tarea dejara de fallar.",
+        "Reutilización persistente: el entorno deja de ser por tarea porque reconstruir cuesta demasiado, así que sobreviven el estado y el compromiso.",
+        "Salida abierta dentro de la frontera: aislamiento fuerte con red libre es contención solo frente al sistema de ficheros.",
+        "Alcance al orquestador: el sandbox puede llamar a la API que gestiona sandboxes, lo que es escapar por diseño y no por exploit."
+      ],
+      "lessons": [
+        "Aísla la ejecución antes de confiar en la generación. El sandbox es lo que hace razonable dejar que un agente ejecute código.",
+        "Lo efímero es la propiedad de seguridad; el aislamiento por sí solo únicamente aplaza el problema.",
+        "La credencial que no está presente no se puede robar, y es el único control que aguanta después de un escape.",
+        "La mayoría de activaciones del sandbox son errores honestos, no ataques. Eso es el patrón funcionando, no la prueba de que sobraba."
+      ],
+      "faqs": [
+        {
+          "q": "¿Basta un contenedor o necesito una microVM?",
+          "a": "Depende de qué corre dentro. Para código propio con riesgo de inyección, un contenedor endurecido sin credenciales y con salida acotada suele ser proporcionado. Para código arbitrario de origen no confiable, asume que el kernel compartido se puede escapar y usa una microVM."
+        },
+        {
+          "q": "¿En qué se diferencia del mínimo privilegio en herramientas?",
+          "a": "El mínimo privilegio acota lo que el agente puede pedir; el sandbox acota lo que ocurre cuando algo se ejecuta igualmente. Uno gobierna la petición y el otro el entorno donde se ejecuta, y un agente que corre código necesita ambos."
+        },
+        {
+          "q": "El sandbox lo ralentiza todo, ¿compensa?",
+          "a": "Compáralo con el coste de la alternativa, no con cero. Casi toda la latencia es el arranque del entorno, que los pools y las imágenes precalentadas eliminan en buena parte; el fallo que evita es un compromiso del anfitrión que ejecuta el agente."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Execução em Sandbox",
+      "summary": "Execute tudo o que um agente gera ou invoca dentro de um ambiente isolado e descartável, sem credenciais ambientais, com sistema de arquivos limitado, saída controlada e limites rígidos de recursos. O sandbox não existe porque o agente seja malicioso, mas porque a entrada dele pode ser.",
+      "definition": "Execução em sandbox é a prática de rodar o código gerado pelo agente e as ações que ele invoca dentro de um ambiente isolado e efêmero cujo sistema de arquivos, rede, credenciais e recursos são limitados pelo host e não pelo agente, de modo que um agente sequestrado ou equivocado não afete nada fora dele.",
+      "problem": "Um agente que executa código no host herda o host: suas credenciais, seu sistema de arquivos, sua posição de rede. Uma injeção bem-sucedida ou um comando confiantemente errado passam a ser indistinguíveis de um comprometimento da máquina.",
+      "context": "Use sempre que um agente executar código, rodar comandos de shell, instalar pacotes ou processar arquivos não confiáveis. O limiar é baixo: se o agente pode provocar execução, a execução vai para um sandbox.",
+      "solution": [
+        "Torne-o efêmero. Crie o ambiente por tarefa, destrua ao final e não carregue estado que a próxima tarefa não pediu. A persistência é como um comprometimento pontual vira ponto de apoio.",
+        "Remova as credenciais ambientais. Nada no ambiente deveria ser utilizável só por estar presente; injete apenas os segredos restritos de que a tarefa precisa, pelo tempo dela.",
+        "Limite o sistema de arquivos ao conjunto de trabalho. Monte o repositório ou a entrada e nada mais, e monte como somente leitura tudo o que não precisa de escrita.",
+        "Restrinja a saída dentro do sandbox, não em volta dele. Do ponto de vista do atacante, o isolamento e a política de rede são o mesmo controle, e um sandbox com rede aberta é uma cela com telefone.",
+        "Limite recursos: CPU, memória, disco, tempo de relógio, número de processos. O consumo descontrolado é o modo de falha que chega primeiro e com mais frequência, normalmente sem adversário algum.",
+        "Registre o que cruzou a fronteira: quais arquivos entraram, quais saíram, quais destinos foram alcançados. A fronteira só é útil se você puder ver o que passou por ela."
+      ],
+      "components": [
+        "Uma primitiva de isolamento: contêiner, microVM ou equivalente, escolhida pela força que a carga exige.",
+        "Gestão de ciclo de vida efêmero, com a destruição como comportamento padrão e não como etapa de limpeza.",
+        "Um caminho de injeção de segredos restrito à tarefa e à duração dela.",
+        "Uma política de rede aplicada dentro da fronteira do sandbox.",
+        "Cotas de recursos e timeouts aplicados pelo host.",
+        "Registro de fronteira: entradas, saídas e destinos."
+      ],
+      "benefits": [
+        "Converte «o agente executou algo ruim» de incidente em contêiner descartado.",
+        "Torna seguro dar a um agente capacidade real de execução, que costuma ser justamente o que o torna útil.",
+        "Limita erros honestos tanto quanto ataques: o mesmo controle pega um laço infinito e um payload injetado.",
+        "Dá um bom lugar para observar: tudo o que a tarefa tocou cruzou uma única fronteira."
+      ],
+      "risks": [
+        "Isolamento mais fraco do que o suposto: um kernel compartilhado não é fronteira de segurança contra um escape determinado, e tratar um contêiner como microVM é um erro de categoria.",
+        "Credenciais contrabandeadas por conveniência: um único arquivo de configuração montado desfaz o padrão inteiro.",
+        "Sandboxes que ficam persistentes em silêncio porque reconstruir é lento, e com isso some a efemeridade que sustentava a garantia.",
+        "Escape pela superfície compartilhada que resta: volumes montados, a API do orquestrador ou a rede que o sandbox ainda alcança."
+      ],
+      "whenNot": [
+        "Agentes somente leitura sem capacidade de execução, onde não há o que isolar e o custo não compra nada.",
+        "Caminhos em linha críticos em latência onde a inicialização do ambiente domina a tarefa e um controle mais estreito cabe melhor: um interpretador restrito, uma função pura.",
+        "Quando o sandbox precisaria justamente das credenciais que ele existe para reter, o que é sinal de que a tarefa deve ser dividida em vez de isolada."
+      ],
+      "examples": [
+        "Um agente de programação que clona em um contêiner novo por tarefa, com o repositório montado, sem credenciais de nuvem presentes e com saída limitada ao registry de pacotes. Uma instalação de dependência maliciosa destrói um contêiner e nada mais.",
+        "Um agente de análise de dados que executa Python gerado em uma microVM com o dataset montado somente leitura, sem rede alguma e com limite de tempo de relógio. O código gerado pode estar errado; não pode sair caro nem exfiltrar.",
+        "Um agente de processamento de documentos que abre PDFs não confiáveis dentro de um ambiente descartável, porque um exploit de parser em um arquivo enviado é um caminho real até o host e o arquivo veio de fora."
+      ],
+      "kpis": [
+        {
+          "metric": "Percentual de execuções em sandbox",
+          "note": "O número de cobertura. O que roda fora do sandbox é a postura de segurança real, independentemente do que a parte de dentro faça."
+        },
+        {
+          "metric": "Tempo de vida do sandbox",
+          "note": "Quanto duram os ambientes. Vidas crescentes significam que a efemeridade está erodindo para persistência."
+        },
+        {
+          "metric": "Batidas em limites de recursos",
+          "note": "Tarefas interrompidas por cota ou timeout. Uma mistura útil de gerações descontroladas e limites legítimos apertados demais."
+        },
+        {
+          "metric": "Segredos presentes em execução",
+          "note": "Número de credenciais alcançáveis dentro do ambiente. O alvo é o mínimo de que a tarefa precisa, e muitas vezes zero."
+        }
+      ],
+      "failureModes": [
+        "A montagem por conveniência: um diretório home, um arquivo de credenciais ou um socket montados para que uma tarefa parasse de falhar.",
+        "Reutilização persistente: o ambiente deixa de ser por tarefa porque reconstruir custa demais, então estado e comprometimento sobrevivem.",
+        "Saída aberta dentro da fronteira: isolamento forte com rede livre é contenção apenas contra o sistema de arquivos.",
+        "Alcance ao orquestrador: o sandbox consegue chamar a API que gerencia sandboxes, o que é escapar por design e não por exploit."
+      ],
+      "lessons": [
+        "Isole a execução antes de confiar na geração. O sandbox é o que torna razoável deixar um agente rodar código.",
+        "O efêmero é a propriedade de segurança; o isolamento sozinho apenas adia o problema.",
+        "A credencial que não está presente não pode ser roubada — e é o único controle que resiste depois de um escape.",
+        "A maioria das ativações do sandbox são erros honestos, não ataques. Isso é o padrão funcionando, não prova de que era desnecessário."
+      ],
+      "faqs": [
+        {
+          "q": "Um contêiner basta ou preciso de microVM?",
+          "a": "Depende do que roda dentro. Para código próprio com risco de injeção, um contêiner endurecido sem credenciais e com saída limitada costuma ser proporcional. Para código arbitrário de origem não confiável, assuma que o kernel compartilhado pode ser escapado e use uma microVM."
+        },
+        {
+          "q": "Em que difere de ferramentas com privilégio mínimo?",
+          "a": "O privilégio mínimo limita o que o agente pode pedir; o sandbox limita o que acontece quando algo executa mesmo assim. Um governa a requisição, o outro o ambiente em que ela roda, e agentes que executam código precisam dos dois."
+        },
+        {
+          "q": "O sandbox deixa tudo mais lento. Compensa?",
+          "a": "Compare com o custo da alternativa, não com zero. Quase toda a latência é a inicialização do ambiente, que pools e imagens pré-aquecidas removem em boa parte; a falha que ele evita é um comprometimento do host que roda o agente."
+        }
+      ]
+    }
+  }
+}

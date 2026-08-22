@@ -111,6 +111,18 @@ const evidenceSchema = z
  * Schema and needs `~standard.jsonSchema`, which zod 3 does not implement, so
  * the CLI moved to zod 4 with it. One zod, one SDK.)
  */
+/**
+ * Bounded free-text inputs.
+ *
+ * `slug` and `query` were unbounded strings, so a caller could send a megabyte
+ * where a word belongs and the server would hash it, search it and log it
+ * before deciding it matched nothing. The limits are set well above anything
+ * the corpus can legitimately need — the longest slug is a fraction of this —
+ * so they refuse abuse without ever refusing a real request.
+ */
+const slugSchema = z.string().min(1).max(128);
+const querySchema = z.string().min(1).max(512);
+
 const cardSchema = z.object({
   domain: z.string(),
   id: z.string().optional(),
@@ -193,6 +205,46 @@ const unitOutput = z.object({
   name: z.string().optional(),
   summary: z.string().optional(),
 }).passthrough();
+
+/**
+ * The four unit getters, tightened into an actual contract.
+ *
+ * `unitOutput` is a superset covering five domains, so every field is optional
+ * and it ends in `.passthrough()` — the schema validated the response and
+ * promised nothing. An audit put it plainly: structured, but not typed.
+ *
+ * The required set below is the INTERSECTION of what every unit in the corpus
+ * actually returns, measured across all 55 of them rather than chosen by eye.
+ * `featured`, `technologies`, `id` and the domain-specific cross-reference
+ * arrays stay optional because they are genuinely absent on some units;
+ * requiring them would be a contract the server breaks on its own data.
+ *
+ * `locales` is optional for the same reason, and it is worth recording why the
+ * first version of this got it wrong: measuring only `get_knowledge({slug})`
+ * showed `locales` on every unit, so it went into the required set — and
+ * `get_knowledge({slug, locale})` returns `body` INSTEAD of `locales` and
+ * started failing its own output validation. The intersection has to be taken
+ * across every call SHAPE, not only across every unit.
+ *
+ * `.strict()` closes the object: an undeclared field becomes a failure instead
+ * of a silent addition, which is what makes the schema worth reading. The
+ * handbook keeps the permissive base — its shape really is different (a body,
+ * a resolved locale, no `locales` map and no `version`).
+ */
+const UNIT_REQUIRED = {
+  domain: true,
+  slug: true,
+  category: true,
+  updated: true,
+  version: true,
+  evidence: true,
+  canonical_url: true,
+  api_url: true,
+  references: true,
+  related: true,
+} as const;
+
+const unitGetOutput = unitOutput.required(UNIT_REQUIRED).strict();
 
 /**
  * Emit a result on both channels: `structuredContent` (validated against the
@@ -282,8 +334,8 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
       annotations: READ_ONLY,
       description:
         "Get one knowledge unit by slug. Returns the full entry, or a single-locale body if locale is given. Use this once `search` or `list_knowledge` has given you a slug.",
-      inputSchema: z.object({ slug: z.string().describe("Knowledge unit slug, e.g. 'harness-engineering'."), locale: localeSchema }),
-      outputSchema: unitOutput,
+      inputSchema: z.object({ slug: slugSchema.describe("Knowledge unit slug, e.g. 'harness-engineering'."), locale: localeSchema }),
+      outputSchema: unitGetOutput,
     },
     async ({ slug, locale }) => {
       const entry = content.getEntry("knowledge", slug, locale as Locale | undefined);
@@ -311,8 +363,8 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
       annotations: READ_ONLY,
       description:
         "Get one Enterprise AI pattern by slug (includes problem, solution, KPIs, failure modes, lessons). Use this once `search` or `list_patterns` has given you a slug.",
-      inputSchema: z.object({ slug: z.string().describe("Pattern slug, e.g. 'human-approval-gate'."), locale: localeSchema }),
-      outputSchema: unitOutput,
+      inputSchema: z.object({ slug: slugSchema.describe("Pattern slug, e.g. 'human-approval-gate'."), locale: localeSchema }),
+      outputSchema: unitGetOutput,
     },
     async ({ slug, locale }) => {
       const entry = content.getEntry("patterns", slug, locale as Locale | undefined);
@@ -340,8 +392,8 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
       annotations: READ_ONLY,
       description:
         "Get one reference architecture by slug (includes the request flow, reference scenario, KPIs, cost & scaling, and the patterns/knowledge it composes). Use this once `search` or `list_architectures` has given you a slug.",
-      inputSchema: z.object({ slug: z.string().describe("Architecture slug, e.g. 'customer-service-agent'."), locale: localeSchema }),
-      outputSchema: unitOutput,
+      inputSchema: z.object({ slug: slugSchema.describe("Architecture slug, e.g. 'customer-service-agent'."), locale: localeSchema }),
+      outputSchema: unitGetOutput,
     },
     async ({ slug, locale }) => {
       const entry = content.getEntry("architectures", slug, locale as Locale | undefined);
@@ -369,8 +421,8 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
       annotations: READ_ONLY,
       description:
         "Get one AI governance unit by slug (includes scope, key requirements, implementable controls, a checklist and common pitfalls). Use this once `search` or `list_governance` has given you a slug.",
-      inputSchema: z.object({ slug: z.string().describe("Governance unit slug, e.g. 'eu-ai-act'."), locale: localeSchema }),
-      outputSchema: unitOutput,
+      inputSchema: z.object({ slug: slugSchema.describe("Governance unit slug, e.g. 'eu-ai-act'."), locale: localeSchema }),
+      outputSchema: unitGetOutput,
     },
     async ({ slug, locale }) => {
       const entry = content.getEntry("governance", slug, locale as Locale | undefined);
@@ -399,7 +451,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
       description:
         "Get one Harness Engineering Handbook chapter, by id (e.g. 'HRN-001') or slug. Returns the full Markdown body plus its provenance and related ids. Use this once `search` or `list_handbook` has given you an id.",
       inputSchema: z.object({
-        id: z.string().describe("Chapter id like 'HRN-001', or its slug."),
+        id: slugSchema.describe("Chapter id like 'HRN-001', or its slug."),
         locale: localeSchema,
       }),
       outputSchema: unitOutput.extend({
@@ -427,7 +479,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
       description:
         "Ranked keyword search across the whole corpus (knowledge, patterns, architectures, governance and the handbook). Matches every language and ignores accents, so query in the user's own words. Each hit carries a relevance score and the fields it matched; follow up with the matching get_* tool for full detail. Use this before any `get_*` tool whenever you have a question rather than an identifier.",
       inputSchema: z.object({
-        query: z.string().describe("Keyword or phrase to search for, in any of en/es/pt."),
+        query: querySchema.describe("Keyword or phrase to search for, in any of en/es/pt."),
         domains: z
           .array(z.enum(["knowledge", "patterns", "architectures", "governance", "handbook"]))
           .optional()

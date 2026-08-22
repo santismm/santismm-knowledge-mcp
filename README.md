@@ -29,34 +29,17 @@ npm ci && npm run build && npm start
 The corpus ships in `content/` and is read from disk, so this works offline.
 Point it elsewhere with `SANTISMM_CONTENT_DIR`.
 
-## Install from npm
+## Packaged installs (not published yet)
 
-```bash
-npx santismm-knowledge-mcp
-```
+`npx santismm-knowledge-mcp` and `uvx santismm-knowledge-mcp` are **not
+available yet** — the packages are built here but not published, so those
+commands would fail. Until they are, use the hosted endpoint above, or clone
+this repository and run it locally as described.
 
-Or in an MCP client config (stdio):
+The sources are in place: the npm package is this repository, and the Python
+package in [`python/`](python/) is a zero-dependency stdio proxy to the hosted
+endpoint.
 
-```json
-{ "mcpServers": { "santismm-knowledge": { "command": "npx", "args": ["santismm-knowledge-mcp"] } } }
-```
-
-The npm package carries the corpus **frozen at publish time**; this repository
-and the hosted endpoint update continuously. When freshness matters, prefer
-the endpoint.
-
-## Install from PyPI (Python)
-
-```bash
-uvx santismm-knowledge-mcp
-```
-
-The Python package (in [`python/`](python/)) is a **zero-dependency stdio
-proxy to the hosted endpoint** — it ships no corpus, so it is always fresh.
-
-```json
-{ "mcpServers": { "santismm-knowledge": { "command": "uvx", "args": ["santismm-knowledge-mcp"] } } }
-```
 
 ## Licences
 

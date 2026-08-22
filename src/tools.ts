@@ -408,7 +408,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
         resolved_locale: z
           .string()
           .optional()
-          .describe("The locale actually returned — the handbook is authored in English only."),
+          .describe("The locale actually returned. Chapters are authored in English and translated; where a translation exists this equals the requested locale, and `fallback` says when it does not."),
         fallback: z.boolean().optional().describe("True when the body is not in the requested locale."),
       }),
     },

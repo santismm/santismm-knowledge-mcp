@@ -19,7 +19,7 @@ export const SITE_URL = "https://santismm.com";
 
 export const ALL_LOCALES: Locale[] = ["en", "es", "pt"];
 
-/** The handbook is authored in English; localized routes fall back to it. */
+/** The handbook is authored in English; a chapter without a translation falls back to it. */
 export const HANDBOOK_BODY_LOCALE: Locale = "en";
 
 /**
@@ -417,11 +417,12 @@ export function resolveHandbookLocale(e: HandbookEntry, locale: Locale) {
 /**
  * Compact card for a handbook chapter, mirroring `summarize`.
  *
- * The handbook is authored in English only. Stamping `locale: "es"` on a card
- * whose title and summary are English claims a translation that does not
- * exist — `get_handbook` was fixed to say so, but the cards from
- * `list_handbook` and `get_related` kept making the claim. They now carry the
- * same admission, so no surface of the corpus overstates its coverage.
+ * The handbook is authored in English and translated chapter by chapter.
+ * Stamping `locale: "es"` on a card whose title and summary are English claims
+ * a translation that does not exist — `get_handbook` was fixed to say so, but
+ * the cards from `list_handbook` and `get_related` kept making the claim. They
+ * now report the resolution, so no surface of the corpus overstates its
+ * coverage — nor, now that every chapter is translated, understates it.
  */
 export function summarizeHandbook(e: HandbookEntry, locale: Locale = "en") {
   const r = resolveHandbookLocale(e, locale);

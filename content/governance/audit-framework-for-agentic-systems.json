@@ -43,7 +43,9 @@
   "related": [
     "agentic-ai-governance-checklist",
     "nist-ai-rmf",
-    "iso-42001"
+    "iso-42001",
+    "owasp-llm-top10",
+    "mitre-atlas"
   ],
   "locales": {
     "en": {

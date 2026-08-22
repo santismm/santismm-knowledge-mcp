@@ -1,0 +1,301 @@
+{
+  "id": "GOV-008",
+  "slug": "owasp-llm-top10",
+  "category": "framework",
+  "updated": "2026-08-22",
+  "version": "1.0",
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "paper",
+      "industry_observation",
+      "personal_experience"
+    ]
+  },
+  "frameworks": [
+    "OWASP GenAI Security Project",
+    "NIST AI RMF",
+    "MITRE ATLAS"
+  ],
+  "patterns": [
+    "least-privilege-tooling",
+    "egress-allowlist",
+    "sandboxed-execution",
+    "human-approval-gate"
+  ],
+  "knowledge": [
+    "prompt-injection",
+    "ai-cyberdefense",
+    "agentic-threat-model",
+    "mcp-security",
+    "guardrails"
+  ],
+  "references": [
+    {
+      "title": "OWASP — Top 10 for LLM Applications",
+      "url": "https://genai.owasp.org/llm-top-10/"
+    },
+    {
+      "title": "OWASP — LLM01: Prompt Injection",
+      "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    },
+    {
+      "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
+      "url": "https://atlas.mitre.org/"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
+  ],
+  "related": [
+    "mitre-atlas",
+    "nist-ai-rmf",
+    "iso-42001",
+    "agentic-ai-governance-checklist",
+    "audit-framework-for-agentic-systems"
+  ],
+  "locales": {
+    "en": {
+      "name": "OWASP Top 10 for LLM Applications",
+      "summary": "The OWASP Top 10 for LLM Applications is the shared vocabulary for what goes wrong in systems built on language models. It is not a control framework and does not tell you what to implement — it names the vulnerability classes, from prompt injection through excessive agency to unbounded consumption, so that teams, auditors and vendors can argue about the same things. Its practical value is as a checklist over your own architecture and as the common language in which findings get reported.",
+      "definition": "The OWASP Top 10 for LLM Applications is a community-maintained list of the most critical vulnerability classes in applications built on large language models, published by the OWASP GenAI Security Project and revised periodically as the ecosystem changes.",
+      "scope": "Any application built on a large language model — chat interfaces, retrieval systems, agents and the tools they call. It is voluntary, non-certifiable and deliberately descriptive: it classifies risks, it does not prescribe controls or grant compliance.",
+      "keyPoints": [
+        "Prompt injection has led the list since the first edition, and remains the class with no clean fix — only layered containment.",
+        "The 2025 edition covers prompt injection, sensitive information disclosure, supply chain, data and model poisoning, improper output handling, excessive agency, system prompt leakage, vector and embedding weaknesses, misinformation, and unbounded consumption. The list is revised periodically, so check the current edition rather than trusting a cached one.",
+        "Several entries are agent-specific in effect: excessive agency and improper output handling only become severe once the model can act.",
+        "It is a taxonomy, not a control set. Mapping a finding to LLM06 tells you what kind of problem it is, not what to build.",
+        "It is the lingua franca of the field: security reviews, vendor questionnaires and bug reports all reference it, which is most of why it is worth knowing by number.",
+        "Coverage of the list is not a security posture. Every entry needs a control in your architecture, and an entry with no control is an accepted risk whether or not anyone wrote that down."
+      ],
+      "controls": [
+        {
+          "control": "Map the list onto your own architecture",
+          "note": "Walk each entry against your actual inputs, tools, data stores and outputs. The exercise is worth more than the list, because it surfaces the entries that do not apply and the surfaces the list does not name."
+        },
+        {
+          "control": "Assign an owner and a control per entry",
+          "note": "Each applicable class needs a named component that bounds it and a person who maintains that component. An entry mapped to nothing is a gap with a reference number."
+        },
+        {
+          "control": "Treat prompt injection as containment, not prevention",
+          "note": "LLM01 has no reliable fix at the model layer. The controls that matter are least-privilege tooling, egress restriction, output handling and approval gates for high-impact actions."
+        },
+        {
+          "control": "Constrain agency explicitly",
+          "note": "For LLM06, write down what the agent may do, with which credentials, against which targets — and enforce it below the model rather than in the prompt."
+        },
+        {
+          "control": "Handle model output as untrusted input",
+          "note": "For LLM05, anything the model emits that reaches a renderer, a shell, a query or another system needs the same encoding and validation you would apply to input from a stranger."
+        },
+        {
+          "control": "Bound consumption",
+          "note": "For LLM10, rate limits, quotas and timeouts turn an availability and cost attack into a logged refusal. This is the entry teams most often skip because it does not look like security until the invoice arrives."
+        },
+        {
+          "control": "Re-run the mapping when the list or the system changes",
+          "note": "The list is revised and your tool catalogue grows. A mapping done once is a document about a system that no longer exists."
+        }
+      ],
+      "checklist": [
+        "Read the current edition rather than a summary — including this one.",
+        "Produce a mapping table: entry → applies? → control → owner.",
+        "For every applicable entry with no control, record it as an accepted risk with a reason and a compensating detection.",
+        "Write a test for each control, and see the test fail before trusting it.",
+        "Check the entries that only bite with tools: excessive agency, improper output handling, supply chain.",
+        "Confirm rate limits and quotas exist and return correct signals to well-behaved clients.",
+        "Re-run the mapping whenever a tool, a data source or an autonomy level changes.",
+        "Use the list's numbering in findings so reviewers and vendors are discussing the same class."
+      ],
+      "pitfalls": [
+        "Treating the list as a compliance target: covering ten headings while the actual architecture stays unexamined.",
+        "Assuming a model vendor's safety work covers LLM01. It reduces attempts; the consequences remain entirely yours.",
+        "Mapping to a cached edition. The list is revised, and an old mapping quietly stops covering current classes.",
+        "Skipping LLM10 because unbounded consumption looks like an operations problem rather than a security one.",
+        "Confusing naming a class with controlling it. A tidy mapping table with no enforcement is documentation of risk, not reduction of it."
+      ],
+      "examples": [
+        "An agent that summarises customer emails maps to LLM01 (the email body is untrusted instruction input), LLM02 (the summary can repeat data the requester should not see) and LLM06 (the CRM tool turns a hijack into an action) — three entries from one feature, each needing a different control.",
+        "A RAG system over an internal wiki maps to LLM01 via indirect injection from any page editor, LLM04 if the index can be poisoned, and LLM08 for retrieval that returns documents outside the requester's permissions.",
+        "A public MCP endpoint maps most sharply to LLM10: read-only, public data, so the consumption bound — rate limits with correct headers — is the entry doing the real work."
+      ],
+      "faqs": [
+        {
+          "q": "Is the OWASP LLM Top 10 something you can be compliant with?",
+          "a": "No. It is an awareness and classification document, not a certifiable standard. It pairs naturally with a management system such as ISO 42001 or a framework such as the NIST AI RMF, which is where governance obligations actually live."
+        },
+        {
+          "q": "Which entries change most when you add tools to a model?",
+          "a": "Excessive agency and improper output handling. Without tools they produce a wrong answer; with tools they produce an action, and severity moves from embarrassment to incident."
+        },
+        {
+          "q": "How does it relate to MITRE ATLAS?",
+          "a": "They answer different questions. OWASP names the vulnerability classes in your application; ATLAS catalogues the tactics and techniques an adversary uses against AI systems. One is a checklist over your design, the other is a map of the attacker's playbook."
+        }
+      ]
+    },
+    "es": {
+      "name": "OWASP Top 10 para Aplicaciones LLM",
+      "summary": "El OWASP Top 10 para aplicaciones LLM es el vocabulario común de lo que sale mal en sistemas construidos sobre modelos de lenguaje. No es un marco de controles y no dice qué implementar: nombra las clases de vulnerabilidad, de la inyección de prompts al exceso de agencia y al consumo sin límite, para que equipos, auditores y proveedores discutan sobre las mismas cosas. Su valor práctico es servir de lista de comprobación sobre tu propia arquitectura y de idioma común en el que se reportan los hallazgos.",
+      "definition": "El OWASP Top 10 para aplicaciones LLM es una lista mantenida por la comunidad con las clases de vulnerabilidad más críticas en aplicaciones construidas sobre grandes modelos de lenguaje, publicada por el OWASP GenAI Security Project y revisada periódicamente conforme cambia el ecosistema.",
+      "scope": "Cualquier aplicación construida sobre un gran modelo de lenguaje: interfaces de chat, sistemas de recuperación, agentes y las herramientas que invocan. Es voluntaria, no certificable y deliberadamente descriptiva: clasifica riesgos, no prescribe controles ni otorga conformidad.",
+      "keyPoints": [
+        "La inyección de prompts encabeza la lista desde la primera edición y sigue siendo la clase sin solución limpia: solo contención por capas.",
+        "La edición de 2025 cubre inyección de prompts, divulgación de información sensible, cadena de suministro, envenenamiento de datos y modelo, tratamiento indebido de la salida, exceso de agencia, filtración del system prompt, debilidades de vectores y embeddings, desinformación y consumo sin límite. La lista se revisa periódicamente, así que consulta la edición vigente y no una copia en caché.",
+        "Varias entradas son en la práctica específicas de agentes: el exceso de agencia y el tratamiento indebido de la salida solo se vuelven graves cuando el modelo puede actuar.",
+        "Es una taxonomía, no un conjunto de controles. Mapear un hallazgo a LLM06 te dice de qué tipo de problema se trata, no qué construir.",
+        "Es la lengua franca del campo: revisiones de seguridad, cuestionarios de proveedores y reportes de fallos la citan, y esa es buena parte del motivo para conocerla por número.",
+        "Cubrir la lista no es una postura de seguridad. Cada entrada necesita un control en tu arquitectura, y una entrada sin control es un riesgo aceptado lo haya escrito alguien o no."
+      ],
+      "controls": [
+        {
+          "control": "Mapea la lista sobre tu propia arquitectura",
+          "note": "Recorre cada entrada frente a tus entradas reales, herramientas, almacenes de datos y salidas. El ejercicio vale más que la lista, porque saca a la luz las entradas que no aplican y las superficies que la lista no nombra."
+        },
+        {
+          "control": "Asigna responsable y control por entrada",
+          "note": "Cada clase aplicable necesita un componente concreto que la acote y una persona que lo mantenga. Una entrada mapeada a nada es una brecha con número de referencia."
+        },
+        {
+          "control": "Trata la inyección de prompts como contención, no como prevención",
+          "note": "LLM01 no tiene solución fiable en la capa del modelo. Los controles que importan son herramientas con mínimo privilegio, restricción de salida, tratamiento de la salida y puertas de aprobación para acciones de alto impacto."
+        },
+        {
+          "control": "Acota la agencia de forma explícita",
+          "note": "Para LLM06, escribe qué puede hacer el agente, con qué credenciales y contra qué objetivos, y aplícalo por debajo del modelo en lugar de en el prompt."
+        },
+        {
+          "control": "Trata la salida del modelo como entrada no confiable",
+          "note": "Para LLM05, todo lo que el modelo emita y llegue a un renderizador, un shell, una consulta u otro sistema necesita la misma codificación y validación que aplicarías a la entrada de un desconocido."
+        },
+        {
+          "control": "Acota el consumo",
+          "note": "Para LLM10, los límites de tasa, las cuotas y los timeouts convierten un ataque de disponibilidad y coste en un rechazo registrado. Es la entrada que más se salta la gente porque no parece seguridad hasta que llega la factura."
+        },
+        {
+          "control": "Rehaz el mapeo cuando cambie la lista o el sistema",
+          "note": "La lista se revisa y tu catálogo de herramientas crece. Un mapeo hecho una vez es un documento sobre un sistema que ya no existe."
+        }
+      ],
+      "checklist": [
+        "Lee la edición vigente en lugar de un resumen, incluido este.",
+        "Produce una tabla de mapeo: entrada → ¿aplica? → control → responsable.",
+        "Para cada entrada aplicable sin control, regístrala como riesgo aceptado con motivo y detección compensatoria.",
+        "Escribe una prueba por control y ve fallar la prueba antes de confiar en ella.",
+        "Revisa las entradas que solo muerden con herramientas: exceso de agencia, tratamiento indebido de la salida, cadena de suministro.",
+        "Confirma que existen límites de tasa y cuotas y que devuelven señales correctas a los clientes bien educados.",
+        "Rehaz el mapeo siempre que cambie una herramienta, una fuente de datos o un nivel de autonomía.",
+        "Usa la numeración de la lista en los hallazgos para que revisores y proveedores hablen de la misma clase."
+      ],
+      "pitfalls": [
+        "Tratar la lista como objetivo de cumplimiento: cubrir diez titulares mientras la arquitectura real sigue sin examinarse.",
+        "Suponer que el trabajo de seguridad del proveedor del modelo cubre LLM01. Reduce los intentos; las consecuencias siguen siendo enteramente tuyas.",
+        "Mapear contra una edición en caché. La lista se revisa, y un mapeo antiguo deja de cubrir en silencio las clases actuales.",
+        "Saltarse LLM10 porque el consumo sin límite parece un problema de operaciones y no de seguridad.",
+        "Confundir nombrar una clase con controlarla. Una tabla de mapeo impecable sin aplicación es documentación del riesgo, no reducción."
+      ],
+      "examples": [
+        "Un agente que resume correos de clientes mapea a LLM01 (el cuerpo del correo es entrada de instrucciones no confiable), LLM02 (el resumen puede repetir datos que quien pregunta no debería ver) y LLM06 (la herramienta de CRM convierte el secuestro en acción): tres entradas de una sola funcionalidad, cada una con un control distinto.",
+        "Un sistema RAG sobre una wiki interna mapea a LLM01 por inyección indirecta desde cualquier editor de páginas, a LLM04 si el índice puede envenenarse y a LLM08 por recuperación que devuelve documentos fuera de los permisos de quien pregunta.",
+        "Un endpoint MCP público mapea sobre todo a LLM10: solo lectura y datos públicos, así que el límite de consumo —límites de tasa con cabeceras correctas— es la entrada que hace el trabajo de verdad."
+      ],
+      "faqs": [
+        {
+          "q": "¿Se puede ser conforme con el OWASP LLM Top 10?",
+          "a": "No. Es un documento de concienciación y clasificación, no una norma certificable. Encaja de forma natural con un sistema de gestión como ISO 42001 o un marco como el NIST AI RMF, que es donde viven de verdad las obligaciones de gobierno."
+        },
+        {
+          "q": "¿Qué entradas cambian más al dar herramientas al modelo?",
+          "a": "El exceso de agencia y el tratamiento indebido de la salida. Sin herramientas producen una respuesta equivocada; con herramientas producen una acción, y la gravedad pasa de bochorno a incidente."
+        },
+        {
+          "q": "¿Qué relación tiene con MITRE ATLAS?",
+          "a": "Responden preguntas distintas. OWASP nombra las clases de vulnerabilidad de tu aplicación; ATLAS cataloga las tácticas y técnicas que un adversario usa contra sistemas de IA. Una es una lista de comprobación sobre tu diseño, la otra un mapa del manual del atacante."
+        }
+      ]
+    },
+    "pt": {
+      "name": "OWASP Top 10 para Aplicações LLM",
+      "summary": "O OWASP Top 10 para aplicações LLM é o vocabulário comum do que dá errado em sistemas construídos sobre modelos de linguagem. Não é um framework de controles e não diz o que implementar: nomeia as classes de vulnerabilidade, da injeção de prompts ao excesso de agência e ao consumo sem limite, para que times, auditores e fornecedores discutam as mesmas coisas. Seu valor prático é servir de lista de verificação sobre a sua própria arquitetura e de idioma comum em que os achados são relatados.",
+      "definition": "O OWASP Top 10 para aplicações LLM é uma lista mantida pela comunidade com as classes de vulnerabilidade mais críticas em aplicações construídas sobre grandes modelos de linguagem, publicada pelo OWASP GenAI Security Project e revisada periodicamente conforme o ecossistema muda.",
+      "scope": "Qualquer aplicação construída sobre um grande modelo de linguagem: interfaces de chat, sistemas de recuperação, agentes e as ferramentas que eles invocam. É voluntária, não certificável e deliberadamente descritiva: classifica riscos, não prescreve controles nem concede conformidade.",
+      "keyPoints": [
+        "A injeção de prompts lidera a lista desde a primeira edição e continua sendo a classe sem solução limpa: apenas contenção em camadas.",
+        "A edição de 2025 cobre injeção de prompts, divulgação de informação sensível, cadeia de suprimentos, envenenamento de dados e modelo, tratamento indevido da saída, excesso de agência, vazamento do system prompt, fragilidades de vetores e embeddings, desinformação e consumo sem limite. A lista é revisada periodicamente, então consulte a edição vigente e não uma cópia em cache.",
+        "Várias entradas são na prática específicas de agentes: excesso de agência e tratamento indevido da saída só ficam graves quando o modelo pode agir.",
+        "É uma taxonomia, não um conjunto de controles. Mapear um achado para LLM06 diz que tipo de problema é, não o que construir.",
+        "É a língua franca da área: revisões de segurança, questionários de fornecedores e relatos de falha a citam, e essa é boa parte do motivo para conhecê-la por número.",
+        "Cobrir a lista não é uma postura de segurança. Cada entrada precisa de um controle na sua arquitetura, e uma entrada sem controle é um risco aceito, tenha alguém escrito isso ou não."
+      ],
+      "controls": [
+        {
+          "control": "Mapeie a lista sobre a sua própria arquitetura",
+          "note": "Percorra cada entrada diante das suas entradas reais, ferramentas, armazenamentos de dados e saídas. O exercício vale mais do que a lista, porque revela as entradas que não se aplicam e as superfícies que a lista não nomeia."
+        },
+        {
+          "control": "Atribua responsável e controle por entrada",
+          "note": "Cada classe aplicável precisa de um componente concreto que a limite e de uma pessoa que o mantenha. Uma entrada mapeada para nada é uma lacuna com número de referência."
+        },
+        {
+          "control": "Trate a injeção de prompts como contenção, não como prevenção",
+          "note": "LLM01 não tem solução confiável na camada do modelo. Os controles que importam são ferramentas com privilégio mínimo, restrição de saída, tratamento da saída e portões de aprovação para ações de alto impacto."
+        },
+        {
+          "control": "Limite a agência explicitamente",
+          "note": "Para LLM06, escreva o que o agente pode fazer, com quais credenciais e contra quais alvos — e aplique isso abaixo do modelo, não no prompt."
+        },
+        {
+          "control": "Trate a saída do modelo como entrada não confiável",
+          "note": "Para LLM05, tudo o que o modelo emite e chega a um renderizador, a um shell, a uma consulta ou a outro sistema precisa da mesma codificação e validação que você aplicaria à entrada de um desconhecido."
+        },
+        {
+          "control": "Limite o consumo",
+          "note": "Para LLM10, limites de taxa, cotas e timeouts transformam um ataque de disponibilidade e custo em uma recusa registrada. É a entrada que mais se pula porque não parece segurança até a fatura chegar."
+        },
+        {
+          "control": "Refaça o mapeamento quando a lista ou o sistema mudar",
+          "note": "A lista é revisada e o seu catálogo de ferramentas cresce. Um mapeamento feito uma vez é um documento sobre um sistema que já não existe."
+        }
+      ],
+      "checklist": [
+        "Leia a edição vigente em vez de um resumo, este incluído.",
+        "Produza uma tabela de mapeamento: entrada → aplica? → controle → responsável.",
+        "Para cada entrada aplicável sem controle, registre-a como risco aceito, com motivo e detecção compensatória.",
+        "Escreva um teste por controle e veja o teste falhar antes de confiar nele.",
+        "Revise as entradas que só mordem com ferramentas: excesso de agência, tratamento indevido da saída, cadeia de suprimentos.",
+        "Confirme que limites de taxa e cotas existem e devolvem sinais corretos a clientes bem-educados.",
+        "Refaça o mapeamento sempre que uma ferramenta, uma fonte de dados ou um nível de autonomia mudar.",
+        "Use a numeração da lista nos achados para que revisores e fornecedores falem da mesma classe."
+      ],
+      "pitfalls": [
+        "Tratar a lista como meta de conformidade: cobrir dez títulos enquanto a arquitetura real segue sem exame.",
+        "Supor que o trabalho de segurança do fornecedor do modelo cobre LLM01. Ele reduz as tentativas; as consequências continuam inteiramente suas.",
+        "Mapear contra uma edição em cache. A lista é revisada, e um mapeamento antigo deixa de cobrir em silêncio as classes atuais.",
+        "Pular LLM10 porque consumo sem limite parece problema de operações e não de segurança.",
+        "Confundir nomear uma classe com controlá-la. Uma tabela de mapeamento impecável sem aplicação é documentação do risco, não redução dele."
+      ],
+      "examples": [
+        "Um agente que resume e-mails de clientes mapeia para LLM01 (o corpo do e-mail é entrada de instruções não confiável), LLM02 (o resumo pode repetir dados que quem pergunta não deveria ver) e LLM06 (a ferramenta de CRM transforma o sequestro em ação): três entradas de uma única funcionalidade, cada uma com um controle diferente.",
+        "Um sistema RAG sobre uma wiki interna mapeia para LLM01 por injeção indireta a partir de qualquer editor de páginas, para LLM04 se o índice puder ser envenenado e para LLM08 por recuperação que devolve documentos fora das permissões de quem pergunta.",
+        "Um endpoint MCP público mapeia sobretudo para LLM10: somente leitura e dados públicos, então o limite de consumo — limites de taxa com cabeçalhos corretos — é a entrada que faz o trabalho de verdade."
+      ],
+      "faqs": [
+        {
+          "q": "É possível estar em conformidade com o OWASP LLM Top 10?",
+          "a": "Não. É um documento de conscientização e classificação, não uma norma certificável. Ele combina naturalmente com um sistema de gestão como a ISO 42001 ou um framework como o NIST AI RMF, que é onde as obrigações de governança de fato vivem."
+        },
+        {
+          "q": "Quais entradas mudam mais ao dar ferramentas ao modelo?",
+          "a": "Excesso de agência e tratamento indevido da saída. Sem ferramentas produzem uma resposta errada; com ferramentas produzem uma ação, e a gravidade passa de constrangimento a incidente."
+        },
+        {
+          "q": "Qual a relação com o MITRE ATLAS?",
+          "a": "Respondem perguntas diferentes. O OWASP nomeia as classes de vulnerabilidade da sua aplicação; o ATLAS cataloga as táticas e técnicas que um adversário usa contra sistemas de IA. Uma é uma lista de verificação sobre o seu design, a outra é um mapa do manual do atacante."
+        }
+      ]
+    }
+  }
+}

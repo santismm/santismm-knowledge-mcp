@@ -17,7 +17,7 @@
     { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
     { "title": "NIST AI 600-1 — Generative AI Profile", "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence" }
   ],
-  "related": ["eu-ai-act", "iso-42001", "agentic-ai-governance-checklist"],
+  "related": ["eu-ai-act", "iso-42001", "agentic-ai-governance-checklist", "owasp-llm-top10", "mitre-atlas"],
   "locales": {
     "en": {
       "name": "NIST AI Risk Management Framework",

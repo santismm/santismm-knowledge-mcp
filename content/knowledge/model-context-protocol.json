@@ -4,7 +4,7 @@
   "updated": "2026-06-21",
   "version": "1.0",
   "featured": true,
-  "related": ["ai-agent", "agentic-ai", "enterprise-rag", "harness-engineering"],
+  "related": ["ai-agent", "agentic-ai", "enterprise-rag", "harness-engineering", "mcp-security"],
   "references": [
     { "title": "Model Context Protocol — Official site & specification", "url": "https://modelcontextprotocol.io" },
     { "title": "Anthropic — Introducing the Model Context Protocol (2024)", "url": "https://www.anthropic.com/news/model-context-protocol" }

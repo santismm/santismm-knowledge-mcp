@@ -1,0 +1,274 @@
+{
+  "slug": "ai-cyberdefense",
+  "category": "governance",
+  "updated": "2026-08-22",
+  "version": "1.0",
+  "related": [
+    "prompt-injection",
+    "guardrails",
+    "ai-governance",
+    "tool-use",
+    "human-in-the-loop",
+    "harness-engineering"
+  ],
+  "references": [
+    {
+      "title": "OWASP — Top 10 for LLM Applications",
+      "url": "https://genai.owasp.org/llm-top-10/"
+    },
+    {
+      "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
+      "url": "https://atlas.mitre.org/"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "European Union — AI Act (Regulation 2024/1689)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "high",
+    "sourceType": [
+      "industry_observation",
+      "paper",
+      "personal_experience"
+    ]
+  },
+  "locales": {
+    "en": {
+      "title": "What is AI Cyberdefense?",
+      "summary": "AI cyberdefense is the practice of protecting AI systems — models, agents, the tools they call and the data they reach — from attacks that exploit how those systems reason and act. For agents it is not a layer added afterwards: the controls that stop an attack are the same harness components that make the agent work at all — tool permissions, context boundaries, approval gates, observability. Defending an agent is engineering its harness.",
+      "definition": "AI cyberdefense is the practice of protecting AI systems, and the organisations that operate them, against attacks that target the AI itself — its inputs, its context, its tools and its autonomy — through controls implemented in the harness around the model rather than in the model's weights.",
+      "takeaways": [
+        "The model is rarely the attack surface; the harness around it is.",
+        "Attacks target an agent's inputs, memory, tools and autonomy — not its parameters.",
+        "You cannot patch a language model against prompt injection. You constrain what a hijacked agent is able to do.",
+        "Every defensive control is also a reliability control: least privilege, validation, approval gates, audit logs.",
+        "Two directions share the name: defending AI systems, and using AI to defend. They share tooling, not threat models."
+      ],
+      "context": [
+        "Classical application security assumes code decides and data is inert. An agent breaks that assumption: it reads untrusted content and then decides from it, so any document, web page or tool response is a candidate instruction.",
+        "This is where enterprise adoption stalls. Security review is the most common blocker between an agent demo and production, because the risk is unfamiliar: the system behaves exactly as designed and is still abused."
+      ],
+      "architecture": [
+        "Input boundary — untrusted content is delimited and labelled as data, never concatenated into the instruction channel.",
+        "Tool layer — each tool carries the narrowest credential that still lets it work, and declares whether it is read-only.",
+        "Action gate — irreversible or high-value actions stop for human approval instead of being trusted to the model's judgement.",
+        "Egress control — outbound destinations are allowlisted, so exfiltration needs a hole someone opened deliberately.",
+        "Observability — every tool call, its arguments and its outcome are logged, because an incident you cannot reconstruct is an incident you cannot close.",
+        "Adversarial evaluation — injection and misuse cases run in CI next to the functional tests, so a regression fails a build rather than a customer."
+      ],
+      "components": [
+        "Threat model for the specific agent",
+        "Least-privilege tool credentials",
+        "Trust boundary between instructions and content",
+        "Human approval gate for irreversible actions",
+        "Egress allowlist",
+        "Tamper-evident audit log of tool calls",
+        "Adversarial evaluation suite",
+        "Incident response procedure that covers agent behaviour"
+      ],
+      "pros": [
+        "Controls are auditable and testable, unlike model-level assurances that cannot be verified from outside.",
+        "The same work buys reliability: an agent that cannot delete the wrong record by malice cannot delete it by mistake either.",
+        "It maps directly onto obligations organisations already face — EU AI Act robustness and cybersecurity duties, ISO/IEC 42001, NIST AI RMF.",
+        "It gives security review something concrete to approve, which is what unblocks production."
+      ],
+      "risks": [
+        "Security theatre: a guardrail model filtering text while the agent still holds a write-capable API key.",
+        "Over-restriction that makes the agent useless and pushes people to unofficial copies without any controls.",
+        "Assuming vendor defaults are safe, particularly for third-party tool servers nobody on the team has read.",
+        "Treating it as a one-off review instead of a lifecycle: new tool, new attack surface."
+      ],
+      "tools": [
+        "OWASP Top 10 for LLM Applications — shared risk vocabulary",
+        "MITRE ATLAS — adversary tactics and techniques observed against AI systems",
+        "NIST AI RMF and its Generative AI Profile",
+        "Input/output guardrail and validation libraries",
+        "Sandboxed execution environments and egress proxies",
+        "Adversarial evaluation harnesses wired into CI"
+      ],
+      "examples": [
+        "An agent that reads a shared inbox and can send mail: an injected email instructs it to forward the last twenty messages to an external address.",
+        "A coding agent holding a repository token, pointed at a dependency whose README carries hidden instructions.",
+        "An MCP client that connects to a third-party tool server whose tool descriptions contain instructions aimed at the model rather than the developer."
+      ],
+      "faqs": [
+        {
+          "q": "Will a better model fix prompt injection?",
+          "a": "No. The vulnerability is structural: instructions and content arrive through the same channel, as text. Better models raise the cost of an attack; only the harness limits its blast radius."
+        },
+        {
+          "q": "How is this different from AI governance?",
+          "a": "Governance decides what is allowed and who answers for it. Cyberdefense makes the allowed thing hard to abuse. They share evidence — logs, evaluations, approvals — which is why they are usually built together."
+        },
+        {
+          "q": "Where should a team start?",
+          "a": "Write the threat model for one agent, list the worst thing it could be made to do, and remove its ability to do that without a human. Everything else is refinement."
+        },
+        {
+          "q": "Does this apply to agents that only read?",
+          "a": "Yes, with a smaller surface. A read-only agent can still exfiltrate what it reads, so context boundaries and egress control still matter even when no tool can write."
+        }
+      ]
+    },
+    "es": {
+      "title": "¿Qué es la ciberdefensa de la IA?",
+      "summary": "La ciberdefensa de la IA es la práctica de proteger sistemas de IA —modelos, agentes, las herramientas que invocan y los datos que alcanzan— frente a ataques que explotan cómo esos sistemas razonan y actúan. En agentes no es una capa que se añade después: los controles que detienen un ataque son los mismos componentes del arnés que hacen que el agente funcione — permisos de herramientas, fronteras de contexto, puertas de aprobación, observabilidad. Defender un agente es diseñar su arnés.",
+      "definition": "La ciberdefensa de la IA es la práctica de proteger los sistemas de IA, y a las organizaciones que los operan, frente a ataques dirigidos a la propia IA —sus entradas, su contexto, sus herramientas y su autonomía— mediante controles implementados en el arnés que rodea al modelo y no en los pesos del modelo.",
+      "takeaways": [
+        "El modelo rara vez es la superficie de ataque; lo es el arnés que lo rodea.",
+        "Los ataques apuntan a las entradas, la memoria, las herramientas y la autonomía del agente, no a sus parámetros.",
+        "No puedes parchear un modelo de lenguaje contra la inyección de prompts. Lo que limitas es qué puede hacer un agente secuestrado.",
+        "Todo control defensivo es también un control de fiabilidad: mínimo privilegio, validación, puertas de aprobación, registros de auditoría.",
+        "Dos direcciones comparten el nombre: defender sistemas de IA y usar IA para defender. Comparten herramientas, no modelos de amenaza."
+      ],
+      "context": [
+        "La seguridad de aplicaciones clásica asume que el código decide y los datos son inertes. Un agente rompe esa premisa: lee contenido no confiable y decide a partir de él, así que cualquier documento, página web o respuesta de herramienta es una instrucción en potencia.",
+        "Aquí es donde se atasca la adopción empresarial. La revisión de seguridad es el bloqueo más frecuente entre la demo de un agente y su paso a producción, porque el riesgo es poco familiar: el sistema se comporta exactamente como se diseñó y aun así es abusado."
+      ],
+      "architecture": [
+        "Frontera de entrada — el contenido no confiable se delimita y se etiqueta como dato, nunca se concatena en el canal de instrucciones.",
+        "Capa de herramientas — cada herramienta lleva la credencial más estrecha con la que sigue funcionando y declara si es de solo lectura.",
+        "Puerta de acción — las acciones irreversibles o de alto valor se detienen para aprobación humana en lugar de confiarse al criterio del modelo.",
+        "Control de salida — los destinos externos están en una allowlist, así que exfiltrar exige un hueco que alguien abrió a propósito.",
+        "Observabilidad — cada llamada a herramienta, sus argumentos y su resultado quedan registrados, porque un incidente que no puedes reconstruir es un incidente que no puedes cerrar.",
+        "Evaluación adversarial — los casos de inyección y abuso se ejecutan en CI junto a las pruebas funcionales, para que una regresión rompa una build y no a un cliente."
+      ],
+      "components": [
+        "Modelo de amenazas del agente concreto",
+        "Credenciales de herramienta con mínimo privilegio",
+        "Frontera de confianza entre instrucciones y contenido",
+        "Puerta de aprobación humana para acciones irreversibles",
+        "Allowlist de salida",
+        "Registro de auditoría a prueba de manipulación de las llamadas a herramientas",
+        "Suite de evaluación adversarial",
+        "Procedimiento de respuesta a incidentes que cubra el comportamiento del agente"
+      ],
+      "pros": [
+        "Los controles son auditables y comprobables, a diferencia de las garantías a nivel de modelo, que no se pueden verificar desde fuera.",
+        "El mismo trabajo compra fiabilidad: un agente que no puede borrar el registro equivocado por malicia tampoco puede borrarlo por error.",
+        "Encaja directamente con obligaciones que las organizaciones ya tienen — deberes de robustez y ciberseguridad del Reglamento de IA de la UE, ISO/IEC 42001, NIST AI RMF.",
+        "Le da a la revisión de seguridad algo concreto que aprobar, que es lo que desbloquea el paso a producción."
+      ],
+      "risks": [
+        "Teatro de seguridad: un modelo guardián filtrando texto mientras el agente sigue teniendo una clave de API con permisos de escritura.",
+        "Restricción excesiva que vuelve inútil al agente y empuja a la gente a copias no oficiales sin ningún control.",
+        "Dar por seguros los valores por defecto del proveedor, en especial en servidores de herramientas de terceros que nadie del equipo ha leído.",
+        "Tratarlo como una revisión puntual en vez de como un ciclo de vida: herramienta nueva, superficie de ataque nueva."
+      ],
+      "tools": [
+        "OWASP Top 10 para aplicaciones LLM — vocabulario común de riesgos",
+        "MITRE ATLAS — tácticas y técnicas adversarias observadas contra sistemas de IA",
+        "NIST AI RMF y su perfil de IA generativa",
+        "Librerías de guardrails y validación de entrada/salida",
+        "Entornos de ejecución en sandbox y proxies de salida",
+        "Arneses de evaluación adversarial integrados en CI"
+      ],
+      "examples": [
+        "Un agente que lee un buzón compartido y puede enviar correo: un email inyectado le ordena reenviar los últimos veinte mensajes a una dirección externa.",
+        "Un agente de programación con un token del repositorio, apuntado a una dependencia cuyo README lleva instrucciones ocultas.",
+        "Un cliente MCP que se conecta a un servidor de herramientas de terceros cuyas descripciones contienen instrucciones dirigidas al modelo y no al desarrollador."
+      ],
+      "faqs": [
+        {
+          "q": "¿Un modelo mejor resuelve la inyección de prompts?",
+          "a": "No. La vulnerabilidad es estructural: instrucciones y contenido llegan por el mismo canal, como texto. Un modelo mejor encarece el ataque; solo el arnés limita su radio de daño."
+        },
+        {
+          "q": "¿En qué se diferencia de la gobernanza de IA?",
+          "a": "La gobernanza decide qué está permitido y quién responde. La ciberdefensa hace que lo permitido sea difícil de abusar. Comparten evidencia —registros, evaluaciones, aprobaciones—, por eso suelen construirse juntas."
+        },
+        {
+          "q": "¿Por dónde empieza un equipo?",
+          "a": "Escribe el modelo de amenazas de un agente, enumera lo peor que se le podría hacer hacer y quítale la capacidad de hacerlo sin un humano. Todo lo demás es refinamiento."
+        },
+        {
+          "q": "¿Aplica a agentes que solo leen?",
+          "a": "Sí, con menos superficie. Un agente de solo lectura puede exfiltrar lo que lee, así que las fronteras de contexto y el control de salida siguen importando aunque ninguna herramienta escriba."
+        }
+      ]
+    },
+    "pt": {
+      "title": "O que é a ciberdefesa de IA?",
+      "summary": "A ciberdefesa de IA é a prática de proteger sistemas de IA — modelos, agentes, as ferramentas que eles chamam e os dados que alcançam — contra ataques que exploram como esses sistemas raciocinam e agem. Em agentes não é uma camada adicionada depois: os controles que detêm um ataque são os mesmos componentes do harness que fazem o agente funcionar — permissões de ferramentas, fronteiras de contexto, portões de aprovação, observabilidade. Defender um agente é projetar o seu harness.",
+      "definition": "A ciberdefesa de IA é a prática de proteger os sistemas de IA, e as organizações que os operam, contra ataques dirigidos à própria IA — suas entradas, seu contexto, suas ferramentas e sua autonomia — por meio de controles implementados no harness ao redor do modelo, e não nos pesos do modelo.",
+      "takeaways": [
+        "O modelo raramente é a superfície de ataque; o harness ao redor dele é.",
+        "Os ataques miram as entradas, a memória, as ferramentas e a autonomia do agente — não seus parâmetros.",
+        "Não dá para corrigir um modelo de linguagem contra injeção de prompt. O que se limita é o que um agente sequestrado consegue fazer.",
+        "Todo controle defensivo também é de confiabilidade: privilégio mínimo, validação, portões de aprovação, trilhas de auditoria.",
+        "Duas direções compartilham o nome: defender sistemas de IA e usar IA para defender. Compartilham ferramentas, não modelos de ameaça."
+      ],
+      "context": [
+        "A segurança de aplicações clássica assume que o código decide e os dados são inertes. Um agente quebra essa premissa: ele lê conteúdo não confiável e decide a partir dele, então qualquer documento, página web ou resposta de ferramenta é uma instrução em potencial.",
+        "É aqui que a adoção empresarial trava. A revisão de segurança é o bloqueio mais comum entre a demo de um agente e a produção, porque o risco é pouco familiar: o sistema se comporta exatamente como projetado e ainda assim é abusado."
+      ],
+      "architecture": [
+        "Fronteira de entrada — o conteúdo não confiável é delimitado e rotulado como dado, nunca concatenado no canal de instruções.",
+        "Camada de ferramentas — cada ferramenta carrega a credencial mais estreita com que ainda funciona e declara se é somente leitura.",
+        "Portão de ação — ações irreversíveis ou de alto valor param para aprovação humana em vez de serem confiadas ao julgamento do modelo.",
+        "Controle de saída — os destinos externos ficam em uma allowlist, então exfiltrar exige uma brecha que alguém abriu de propósito.",
+        "Observabilidade — cada chamada de ferramenta, seus argumentos e seu resultado ficam registrados, porque um incidente que você não consegue reconstruir é um incidente que você não consegue encerrar.",
+        "Avaliação adversarial — casos de injeção e abuso rodam no CI ao lado dos testes funcionais, para que uma regressão quebre um build e não um cliente."
+      ],
+      "components": [
+        "Modelo de ameaças do agente específico",
+        "Credenciais de ferramenta com privilégio mínimo",
+        "Fronteira de confiança entre instruções e conteúdo",
+        "Portão de aprovação humana para ações irreversíveis",
+        "Allowlist de saída",
+        "Trilha de auditoria à prova de adulteração das chamadas de ferramentas",
+        "Suíte de avaliação adversarial",
+        "Procedimento de resposta a incidentes que cubra o comportamento do agente"
+      ],
+      "pros": [
+        "Os controles são auditáveis e testáveis, ao contrário de garantias no nível do modelo, que não podem ser verificadas de fora.",
+        "O mesmo trabalho compra confiabilidade: um agente que não pode apagar o registro errado por malícia também não o apaga por engano.",
+        "Encaixa diretamente em obrigações que as organizações já têm — deveres de robustez e cibersegurança do Regulamento de IA da UE, ISO/IEC 42001, NIST AI RMF.",
+        "Dá à revisão de segurança algo concreto para aprovar, que é o que desbloqueia a produção."
+      ],
+      "risks": [
+        "Teatro de segurança: um modelo guardião filtrando texto enquanto o agente continua com uma chave de API com permissão de escrita.",
+        "Restrição excessiva que torna o agente inútil e empurra as pessoas para cópias não oficiais sem controle algum.",
+        "Assumir que os padrões do fornecedor são seguros, sobretudo em servidores de ferramentas de terceiros que ninguém da equipe leu.",
+        "Tratar como revisão pontual em vez de ciclo de vida: ferramenta nova, superfície de ataque nova."
+      ],
+      "tools": [
+        "OWASP Top 10 para aplicações LLM — vocabulário comum de riscos",
+        "MITRE ATLAS — táticas e técnicas adversariais observadas contra sistemas de IA",
+        "NIST AI RMF e seu perfil de IA generativa",
+        "Bibliotecas de guardrails e validação de entrada/saída",
+        "Ambientes de execução em sandbox e proxies de saída",
+        "Harnesses de avaliação adversarial integrados ao CI"
+      ],
+      "examples": [
+        "Um agente que lê uma caixa de entrada compartilhada e pode enviar e-mail: um e-mail injetado manda encaminhar as últimas vinte mensagens para um endereço externo.",
+        "Um agente de programação com um token do repositório, apontado para uma dependência cujo README carrega instruções ocultas.",
+        "Um cliente MCP que se conecta a um servidor de ferramentas de terceiros cujas descrições contêm instruções dirigidas ao modelo, e não ao desenvolvedor."
+      ],
+      "faqs": [
+        {
+          "q": "Um modelo melhor resolve a injeção de prompt?",
+          "a": "Não. A vulnerabilidade é estrutural: instruções e conteúdo chegam pelo mesmo canal, como texto. Um modelo melhor encarece o ataque; só o harness limita o raio do dano."
+        },
+        {
+          "q": "Qual a diferença para a governança de IA?",
+          "a": "A governança decide o que é permitido e quem responde. A ciberdefesa torna o permitido difícil de abusar. Compartilham evidência — registros, avaliações, aprovações —, por isso costumam ser construídas juntas."
+        },
+        {
+          "q": "Por onde uma equipe começa?",
+          "a": "Escreva o modelo de ameaças de um agente, liste a pior coisa que ele poderia ser levado a fazer e retire a capacidade de fazê-la sem um humano. O resto é refinamento."
+        },
+        {
+          "q": "Vale para agentes que só leem?",
+          "a": "Sim, com superfície menor. Um agente somente leitura ainda pode exfiltrar o que lê, então fronteiras de contexto e controle de saída continuam importando mesmo sem nenhuma ferramenta de escrita."
+        }
+      ]
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "category": "governance",
   "updated": "2026-06-21",
   "version": "1.0",
-  "related": ["prompt-injection", "ai-governance", "human-in-the-loop", "ai-observability"],
+  "related": ["prompt-injection", "ai-governance", "human-in-the-loop", "ai-observability", "ai-cyberdefense", "agentic-threat-model"],
   "references": [
     { "title": "OWASP — Top 10 for LLM Applications", "url": "https://genai.owasp.org/llm-top-10/" },
     { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }

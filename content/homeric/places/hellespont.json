@@ -1,0 +1,125 @@
+{
+  "slug": "hellespont",
+  "id": "HOM-P-012",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "troad",
+  "homericNames": [
+    "Ἑλλήσποντος"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "845"
+    },
+    {
+      "work": "iliad",
+      "book": 7,
+      "lines": "84-91"
+    },
+    {
+      "work": "iliad",
+      "book": 23,
+      "lines": "1-2"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "dardanelles",
+      "kind": "scholarship",
+      "citation": "The Hellespont of the Iliad is the Dardanelles strait; the identification is universal in the geographical literature, ancient and modern",
+      "year": 2004
+    },
+    {
+      "id": "herodotus-7",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 7.33-37 — Xerxes bridges the Hellespont",
+      "author": "Herodotus",
+      "year": -430
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "dardanelles",
+      "identification": "accepted",
+      "modernName": "Çanakkale Boğazı",
+      "country": "TR",
+      "lat": 40.2,
+      "lon": 26.4,
+      "precision": "area",
+      "proponent": "Universal ancient and modern identification",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 1,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 10,
+        "band": "high"
+      },
+      "sources": [
+        "dardanelles",
+        "herodotus-7",
+        "iliad"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Dardanelles",
+          "note": "The strait between the Aegean and the Sea of Marmara, sixty kilometres long and at its narrowest about a kilometre and a half across. The Iliad puts the Achaean camp on its shore and calls the sea 'broad' and 'strong-flowing' — a current that is a real navigational fact and a plausible reason for a Bronze Age settlement to matter at Hisarlık."
+        },
+        "es": {
+          "label": "Los Dardanelos",
+          "note": "El estrecho entre el Egeo y el mar de Mármara, de sesenta kilómetros de largo y kilómetro y medio en su punto más angosto. La Ilíada sitúa el campamento aqueo en su orilla y llama al mar «ancho» y «de fuerte corriente»: una corriente que es un hecho náutico real y una razón plausible de que un asentamiento del Bronce importara en Hisarlık."
+        },
+        "pt": {
+          "label": "Os Dardanelos",
+          "note": "O estreito entre o Egeu e o mar de Mármara, com sessenta quilômetros de comprimento e cerca de um quilômetro e meio no ponto mais estreito. A Ilíada situa o acampamento aqueu em sua margem e chama o mar de “largo” e “de forte corrente” — uma corrente que é um fato náutico real e uma razão plausível para um assentamento do Bronze importar em Hisarlık."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "the-achaean-camp"
+  ],
+  "locales": {
+    "en": {
+      "name": "The Hellespont",
+      "summary": "The strait beside the war. The Achaean ships are beached on it, Achilles' funeral games are held by it, and its current is the most plausible economic reason for Troy to have existed at all.",
+      "description": [
+        "Homer's Hellespont is where the fleet lies and where the dead are burnt. It marks the edge of the Achaean position and the boundary of the poem's world to the north-east: beyond it are Thrace and allies, not adventure.",
+        "The strait's current runs strongly from the Marmara to the Aegean, which makes the passage difficult under sail from the south and gives any settlement controlling the waiting-place upstream of it a permanent advantage. That is the strongest non-literary argument for why a city stood at Hisarlık for three thousand years."
+      ],
+      "identificationNote": "Accepted: an unmistakable, universally agreed feature, and one whose physical behaviour the poem describes accurately.",
+      "debate": "Not the identification but the inference: how much of Troy's importance was actually built on controlling the strait is argued, and it was one of the sharpest points of contention around Korfmann's reading of the site."
+    },
+    "es": {
+      "name": "El Helesponto",
+      "summary": "El estrecho junto a la guerra. Las naves aqueas están varadas en él, los juegos fúnebres de Aquiles se celebran a su lado y su corriente es la razón económica más plausible de que Troya existiera.",
+      "description": [
+        "El Helesponto de Homero es donde está la flota y donde se queman los muertos. Marca el borde de la posición aquea y el límite del mundo del poema hacia el nordeste: más allá hay Tracia y aliados, no aventura.",
+        "La corriente del estrecho baja con fuerza del Mármara al Egeo, lo que dificulta el paso a vela desde el sur y da una ventaja permanente a cualquier asentamiento que controle el fondeadero de espera. Ese es el argumento no literario más fuerte de por qué hubo una ciudad en Hisarlık durante tres mil años."
+      ],
+      "identificationNote": "Aceptada: un accidente inconfundible y universalmente acordado, y uno cuyo comportamiento físico el poema describe con exactitud.",
+      "debate": "No la identificación, sino la inferencia: cuánto de la importancia de Troya se sostenía realmente en controlar el estrecho está en discusión, y fue uno de los puntos más ásperos del debate en torno a la lectura del yacimiento que hizo Korfmann."
+    },
+    "pt": {
+      "name": "O Helesponto",
+      "summary": "O estreito ao lado da guerra. As naus aqueias estão encalhadas nele, os jogos fúnebres de Aquiles acontecem à sua margem e sua corrente é a razão econômica mais plausível para Troia ter existido.",
+      "description": [
+        "O Helesponto de Homero é onde está a frota e onde os mortos são queimados. Marca a borda da posição aqueia e o limite do mundo do poema a nordeste: além dele há Trácia e aliados, não aventura.",
+        "A corrente do estreito desce com força do Mármara para o Egeu, o que dificulta a passagem à vela vinda do sul e dá vantagem permanente a qualquer assentamento que controle o fundeadouro de espera. Esse é o argumento não literário mais forte para uma cidade ter existido em Hisarlık por três mil anos."
+      ],
+      "identificationNote": "Aceita: um acidente inconfundível e universalmente consensual, e um cujo comportamento físico o poema descreve com exatidão.",
+      "debate": "Não a identificação, mas a inferência: quanto da importância de Troia se apoiava de fato no controle do estreito está em discussão, e foi um dos pontos mais ásperos do debate em torno da leitura do sítio feita por Korfmann."
+    }
+  }
+}

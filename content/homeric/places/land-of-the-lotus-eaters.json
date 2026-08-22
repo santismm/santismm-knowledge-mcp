@@ -1,0 +1,122 @@
+{
+  "slug": "land-of-the-lotus-eaters",
+  "id": "HOM-P-024",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "speculative",
+  "unlocated": false,
+  "region": "northAfrica",
+  "homericNames": [
+    "Λωτοφάγοι"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 9,
+      "lines": "82-104"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "herodotus-4-177",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 4.177 — the Lotophagi on the Libyan coast",
+      "author": "Herodotus",
+      "year": -430
+    },
+    {
+      "id": "polybius-djerba",
+      "kind": "primary_text",
+      "citation": "Polybius, Histories 1.39 and 34.3 (ap. Strabo) — the island of the Lotus-eaters identified with Meninx (Djerba)",
+      "author": "Polybius",
+      "year": -150
+    },
+    {
+      "id": "ziziphus",
+      "kind": "scholarship",
+      "citation": "Ziziphus lotus, the jujube-like shrub of the North African coast, proposed as Homer's lotus in botanical and classical commentary",
+      "year": 1990
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "djerba",
+      "identification": "speculative",
+      "modernName": "Djerba",
+      "country": "TN",
+      "lat": 33.8,
+      "lon": 10.86,
+      "precision": "island",
+      "proponent": "Herodotus 4.177; Polybius, reported by Strabo",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 2,
+        "geographic": 2,
+        "score": 6,
+        "band": "medium"
+      },
+      "sources": [
+        "herodotus-4-177",
+        "polybius-djerba",
+        "ziziphus"
+      ],
+      "locales": {
+        "en": {
+          "label": "Djerba (ancient Meninx)",
+          "note": "The one wandering identification with an ancient geographer's argument behind it rather than a coincidence of names: Herodotus places a people called the Lotophagi on the Libyan coast, and Polybius identified their island with Meninx, modern Djerba. A local fruit that matches the description grows there."
+        },
+        "es": {
+          "label": "Yerba (la antigua Meninx)",
+          "note": "La única identificación de las andanzas con el razonamiento de un geógrafo antiguo detrás y no una coincidencia de nombres: Heródoto sitúa un pueblo llamado lotófagos en la costa libia, y Polibio identificó su isla con Meninx, la actual Yerba. Allí crece un fruto local que encaja con la descripción."
+        },
+        "pt": {
+          "label": "Djerba (a antiga Meninx)",
+          "note": "A única identificação das andanças com o raciocínio de um geógrafo antigo por trás, e não uma coincidência de nomes: Heródoto situa um povo chamado lotófagos na costa líbia, e Políbio identificou sua ilha com Meninx, a atual Djerba. Ali cresce um fruto local que encaixa na descrição."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "lotus-eaters"
+  ],
+  "locales": {
+    "en": {
+      "name": "The land of the Lotus-eaters",
+      "summary": "The first stop after the storm, and the first temptation: a people whose fruit makes visitors forget the way home. Ancient geography put them on the Libyan coast, at Djerba.",
+      "description": [
+        "The episode is short and structurally important. Three men eat the lotus, lose all desire to return, and have to be dragged back to the ships and tied under the benches. Nobody is killed; the danger is amnesia.",
+        "Herodotus knew a real people called Lotophagi on the coast west of the Syrtis, and Polybius identified the island of Meninx as theirs. That makes this the best-documented of the wandering identifications, which is a comment on how thin the others are."
+      ],
+      "identificationNote": "Speculative, at 6/12: two ancient sources argue it rather than assert it, and the botany is at least consistent. There is still nothing excavated and no modern consensus that the episode records a voyage.",
+      "debate": "Whether Homer's Lotus-eaters are the historical Lotophagi under a poetic name, or whether Greek geographers read the poem back onto a people they met."
+    },
+    "es": {
+      "name": "La tierra de los lotófagos",
+      "summary": "La primera escala tras la tormenta y la primera tentación: un pueblo cuyo fruto hace que el visitante olvide el camino de vuelta. La geografía antigua los situó en la costa libia, en Yerba.",
+      "description": [
+        "El episodio es breve y estructuralmente importante. Tres hombres comen el loto, pierden todo deseo de regresar y hay que arrastrarlos hasta las naves y atarlos bajo los bancos. Nadie muere; el peligro es la amnesia.",
+        "Heródoto conocía un pueblo real llamado lotófagos en la costa al oeste de la Sirte, y Polibio identificó como suya la isla de Meninx. Eso convierte a esta en la mejor documentada de las identificaciones de las andanzas, lo cual dice bastante sobre lo delgadas que son las demás."
+      ],
+      "identificationNote": "Especulativa, con 6/12: dos fuentes antiguas la argumentan en vez de afirmarla, y la botánica es al menos coherente. Sigue sin haber nada excavado ni consenso moderno de que el episodio registre un viaje.",
+      "debate": "Si los lotófagos de Homero son los lotófagos históricos bajo un nombre poético, o si los geógrafos griegos proyectaron el poema sobre un pueblo con el que se encontraron."
+    },
+    "pt": {
+      "name": "A terra dos lotófagos",
+      "summary": "A primeira escala após a tempestade e a primeira tentação: um povo cujo fruto faz o visitante esquecer o caminho de volta. A geografia antiga os situou na costa líbia, em Djerba.",
+      "description": [
+        "O episódio é breve e estruturalmente importante. Três homens comem o loto, perdem todo desejo de voltar e precisam ser arrastados até as naus e amarrados sob os bancos. Ninguém morre; o perigo é a amnésia.",
+        "Heródoto conhecia um povo real chamado lotófagos na costa a oeste da Sirte, e Políbio identificou como sua a ilha de Meninx. Isso faz desta a mais bem documentada das identificações das andanças, o que diz bastante sobre como as outras são finas."
+      ],
+      "identificationNote": "Especulativa, com 6/12: duas fontes antigas a argumentam em vez de afirmá-la, e a botânica é ao menos coerente. Continua sem nada escavado e sem consenso moderno de que o episódio registre uma viagem.",
+      "debate": "Se os lotófagos de Homero são os lotófagos históricos sob um nome poético, ou se os geógrafos gregos projetaram o poema sobre um povo que encontraram."
+    }
+  }
+}

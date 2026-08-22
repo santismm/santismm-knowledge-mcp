@@ -1,4 +1,4 @@
-import type { McpContent } from "./tools.js";
+import type { HomericKind, McpContent } from "./tools.js";
 import type { Domain, Entry, Locale } from "./content.js";
 
 /**
@@ -490,9 +490,85 @@ function handbookFields(e: HandbookEntry): Record<string, string> {
  * `loadHandbook` is injected the same way for the Markdown handbook
  * (`content/harness/*.md`), so both transports expose the same chapters.
  */
+
+/**
+ * A Homeric Atlas artifact, kept loose on purpose.
+ *
+ * The atlas has its own schema (identification classes, a 0–12 rubric,
+ * hypotheses carrying their own coordinates) which is validated in the site's
+ * own CI. Re-declaring it here would mean two definitions of one contract, so
+ * this module only names the fields it actually reads to build a card.
+ */
+export interface HomericArtifact {
+  slug: string;
+  id?: string;
+  identification?: string;
+  region?: string;
+  unlocated?: boolean;
+  work?: string;
+  book?: number;
+  lines?: string;
+  hypotheses?: Array<{ identification?: string; confidence?: Record<string, unknown> }>;
+  variants?: unknown[];
+  confidence?: Record<string, unknown>;
+  locales?: Record<string, Record<string, unknown>>;
+  [key: string]: unknown;
+}
+
+const HOMERIC_CLASS_ORDER = ["accepted", "plausible", "speculative", "mythical"];
+
+function homericBody(e: HomericArtifact, locale: Locale): Record<string, unknown> | undefined {
+  return e.locales?.[locale] ?? e.locales?.en;
+}
+
+/**
+ * The confidence a place leads with: the strongest identification class it
+ * carries, then the highest score inside that class — the same rule the site
+ * uses to choose which pin a place is represented by.
+ */
+function primaryHomericConfidence(e: HomericArtifact): Record<string, unknown> | null {
+  if (e.confidence) return e.confidence;
+  const ranked = [...(e.hypotheses ?? [])].sort(
+    (a, b) =>
+      HOMERIC_CLASS_ORDER.indexOf(String(a.identification)) -
+        HOMERIC_CLASS_ORDER.indexOf(String(b.identification)) ||
+      Number(b.confidence?.score ?? 0) - Number(a.confidence?.score ?? 0),
+  );
+  return (ranked[0]?.confidence as Record<string, unknown>) ?? null;
+}
+
+/** A list card for one atlas artifact. */
+function summarizeHomeric(kind: HomericKind, e: HomericArtifact, locale: Locale) {
+  const body = homericBody(e, locale) ?? {};
+  const name = String(body.name ?? body.title ?? e.slug);
+  const citation =
+    e.work && e.book !== undefined && e.lines
+      ? `${e.work === "iliad" ? "Iliad" : "Odyssey"} ${e.book}.${String(e.lines).replace("-", "–")}`
+      : undefined;
+  return {
+    kind,
+    id: e.id,
+    slug: e.slug,
+    name,
+    summary: typeof body.summary === "string" ? body.summary : undefined,
+    identification: e.identification,
+    region: e.region,
+    unlocated: e.unlocated,
+    work: e.work,
+    citation,
+    hypotheses: e.hypotheses?.length,
+    variants: e.variants?.length,
+    confidence: primaryHomericConfidence(e),
+    locale,
+    canonical_url: `${SITE_URL}/en/labs/homeric-atlas/${kind}/${e.slug}`,
+    api_url: `${SITE_URL}/api/homeric/${kind}/${e.slug}`,
+  };
+}
+
 export function makeContent(
   loadAll: (domain: Domain) => Entry[],
   loadHandbook?: () => HandbookEntry[],
+  loadHomeric?: (kind: HomericKind) => HomericArtifact[],
 ): McpContent {
   const getOne = (domain: Domain, slug: string) =>
     loadAll(domain).find((e) => e.slug === slug);
@@ -536,6 +612,7 @@ export function makeContent(
         bulk: {
           llms_full_txt: `${SITE_URL}/llms-full.txt`,
           graph: `${SITE_URL}/api/graph.json`,
+          homeric_atlas: `${SITE_URL}/api/homeric-atlas.json`,
         },
       };
     },
@@ -618,6 +695,25 @@ export function makeContent(
 
       scored.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
       return scored.slice(0, limit);
+    },
+
+    listHomeric(kind, locale = "en") {
+      if (!loadHomeric) return [];
+      return loadHomeric(kind).map((e) => summarizeHomeric(kind, e, locale));
+    },
+
+    getHomeric(kind, slug, locale = "en") {
+      if (!loadHomeric) return undefined;
+      const entry = loadHomeric(kind).find((e) => e.slug === slug);
+      if (!entry) return undefined;
+      // The full artifact, plus the requested locale hoisted to `body`. Both:
+      // an agent asking in Spanish should not have to know the shape of
+      // `locales`, and one auditing the atlas should still see all three.
+      return {
+        ...summarizeHomeric(kind, entry, locale),
+        ...entry,
+        body: homericBody(entry, locale),
+      };
     },
 
     listHandbook(locale = "en") {

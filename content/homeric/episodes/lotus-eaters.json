@@ -1,0 +1,138 @@
+{
+  "slug": "lotus-eaters",
+  "id": "HOM-E-011",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 9,
+  "lines": "82-104",
+  "places": [
+    "land-of-the-lotus-eaters"
+  ],
+  "confidence": {
+    "textual": 2,
+    "archaeological": 0,
+    "scholarly": 2,
+    "geographic": 2,
+    "score": 6,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "herodotus-4-177",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 4.177",
+      "author": "Herodotus",
+      "year": -430
+    },
+    {
+      "id": "polybius-djerba",
+      "kind": "primary_text",
+      "citation": "Polybius, Histories 34.3, reported by Strabo — Meninx as the island of the Lotus-eaters",
+      "author": "Polybius",
+      "year": -150
+    },
+    {
+      "id": "ziziphus",
+      "kind": "scholarship",
+      "citation": "Ziziphus lotus, the North African shrub proposed as Homer's lotus in botanical and classical commentary",
+      "year": 1990
+    }
+  ],
+  "theories": [
+    {
+      "id": "djerba",
+      "identification": "speculative",
+      "place": "land-of-the-lotus-eaters",
+      "proponent": "Herodotus 4.177; Polybius",
+      "era": "antiquity",
+      "sources": [
+        "herodotus-4-177",
+        "polybius-djerba",
+        "ziziphus"
+      ],
+      "locales": {
+        "en": {
+          "label": "Djerba and the Libyan coast",
+          "note": "Herodotus knew a people called Lotophagi on this coast and Polybius identified their island as Meninx. It is the best-argued of the wandering identifications and still rests on geographers reading a poem."
+        },
+        "es": {
+          "label": "Yerba y la costa libia",
+          "note": "Heródoto conocía en esta costa un pueblo llamado lotófagos y Polibio identificó su isla con Meninx. Es la mejor argumentada de las identificaciones de las andanzas y sigue apoyándose en geógrafos que leen un poema."
+        },
+        "pt": {
+          "label": "Djerba e a costa líbia",
+          "note": "Heródoto conhecia nessa costa um povo chamado lotófagos e Políbio identificou sua ilha com Meninx. É a mais bem argumentada das identificações das andanças e ainda se apoia em geógrafos lendo um poema."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The Lotus-eaters",
+      "summary": "Twenty-three lines, no violence, and the most quietly frightening danger in the poem: a fruit that makes men stop wanting to go home.",
+      "narrative": [
+        "Blown past Cythera for nine days, Odysseus lands among a people who offer his scouts lotus instead of harm. The men who eat it forget the return; Odysseus drags them back weeping and ties them under the benches.",
+        "The threat is not death but the end of the story. Everything the Odyssey is about — return, memory, identity — can be dissolved by a plant."
+      ],
+      "whyItMatters": "It is the first of the wanderings and the one with the most respectable ancient geography behind it, which is why it scores at the top of the speculative band.",
+      "debate": "Whether Homer's Lotus-eaters are the historical Lotophagi under a poetic name, or whether ancient geographers projected the poem onto a real people.",
+      "faqs": [
+        {
+          "q": "What was the lotus?",
+          "a": "Ancient and modern commentators most often propose Ziziphus lotus, a jujube-like shrub of the North African coast whose fruit is sweet and mildly intoxicating in quantity. The identification is plausible and unproven."
+        },
+        {
+          "q": "Is Djerba the island of the Lotus-eaters?",
+          "a": "It is the ancient identification, argued by Polybius. The atlas records it as speculative: no excavation connects the island to the episode."
+        }
+      ]
+    },
+    "es": {
+      "title": "Los lotófagos",
+      "summary": "Veintitrés versos, ninguna violencia y el peligro más silenciosamente aterrador del poema: un fruto que hace que los hombres dejen de querer volver a casa.",
+      "narrative": [
+        "Empujado más allá de Citera durante nueve días, Odiseo desembarca entre un pueblo que ofrece loto a sus exploradores en vez de daño. Quienes lo comen olvidan el regreso; Odiseo los arrastra llorando de vuelta y los ata bajo los bancos.",
+        "La amenaza no es la muerte, sino el fin del relato. Todo aquello de lo que trata la Odisea —regreso, memoria, identidad— puede disolverlo una planta."
+      ],
+      "whyItMatters": "Es la primera de las andanzas y la que tiene detrás la geografía antigua más respetable, y por eso puntúa en el techo de la banda especulativa.",
+      "debate": "Si los lotófagos de Homero son los lotófagos históricos bajo un nombre poético, o si los geógrafos antiguos proyectaron el poema sobre un pueblo real.",
+      "faqs": [
+        {
+          "q": "¿Qué era el loto?",
+          "a": "Comentaristas antiguos y modernos proponen sobre todo Ziziphus lotus, un arbusto parecido al azufaifo de la costa norteafricana, cuyo fruto es dulce y levemente embriagador en cantidad. La identificación es plausible y no probada."
+        },
+        {
+          "q": "¿Es Yerba la isla de los lotófagos?",
+          "a": "Es la identificación antigua, argumentada por Polibio. El atlas la registra como especulativa: ninguna excavación conecta la isla con el episodio."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Os lotófagos",
+      "summary": "Vinte e três versos, nenhuma violência e o perigo mais silenciosamente aterrorizante do poema: um fruto que faz os homens deixarem de querer voltar para casa.",
+      "narrative": [
+        "Empurrado para além de Citera por nove dias, Odisseu desembarca entre um povo que oferece loto a seus batedores em vez de dano. Quem o come esquece o retorno; Odisseu os arrasta chorando de volta e os amarra sob os bancos.",
+        "A ameaça não é a morte, é o fim do relato. Tudo aquilo de que a Odisseia trata — retorno, memória, identidade — pode ser dissolvido por uma planta."
+      ],
+      "whyItMatters": "É a primeira das andanças e a que tem por trás a geografia antiga mais respeitável, e por isso pontua no teto da faixa especulativa.",
+      "debate": "Se os lotófagos de Homero são os lotófagos históricos sob um nome poético, ou se os geógrafos antigos projetaram o poema sobre um povo real.",
+      "faqs": [
+        {
+          "q": "O que era o loto?",
+          "a": "Comentadores antigos e modernos propõem sobretudo Ziziphus lotus, arbusto parecido com a jujuba da costa norte-africana, cujo fruto é doce e levemente inebriante em quantidade. A identificação é plausível e não comprovada."
+        },
+        {
+          "q": "Djerba é a ilha dos lotófagos?",
+          "a": "É a identificação antiga, argumentada por Políbio. O atlas a registra como especulativa: nenhuma escavação conecta a ilha ao episódio."
+        }
+      ]
+    }
+  }
+}

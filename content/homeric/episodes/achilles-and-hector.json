@@ -1,0 +1,139 @@
+{
+  "slug": "achilles-and-hector",
+  "id": "HOM-E-023",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "iliad",
+  "book": 22,
+  "lines": "131-166",
+  "places": [
+    "troy",
+    "mount-ida"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 2,
+    "scholarly": 2,
+    "geographic": 3,
+    "score": 10,
+    "band": "high"
+  },
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "blegen-1958",
+      "kind": "archaeology",
+      "citation": "Carl W. Blegen et al., Troy: Excavations Conducted by the University of Cincinnati 1932–1938 (1950–1958)",
+      "author": "Carl W. Blegen",
+      "year": 1958
+    },
+    {
+      "id": "korfmann",
+      "kind": "archaeology",
+      "citation": "Manfred Korfmann, Troia/Wilusa excavation reports, Studia Troica (1988–2005)",
+      "author": "Manfred Korfmann",
+      "year": 2005
+    },
+    {
+      "id": "troad-springs",
+      "kind": "scholarship",
+      "citation": "The springs of the Scamander and the topography of Iliad 22, debated since Lechevalier and Maclaren",
+      "year": 1822
+    }
+  ],
+  "theories": [
+    {
+      "id": "walls-of-troy",
+      "identification": "plausible",
+      "place": "troy",
+      "proponent": "The topographical debate from Lechevalier and Maclaren onward",
+      "era": "modern",
+      "sources": [
+        "blegen-1958",
+        "korfmann",
+        "troad-springs"
+      ],
+      "locales": {
+        "en": {
+          "label": "A circuit around the walls of Troy VI",
+          "note": "The chase needs a walled city with room to run around it and springs nearby. Troy VI's circuit is large enough; the springs are the detail that once anchored the rival Pınarbaşı identification."
+        },
+        "es": {
+          "label": "Una vuelta a las murallas de Troya VI",
+          "note": "La persecución exige una ciudad amurallada con espacio para rodearla y manantiales cerca. El recinto de Troya VI es lo bastante grande; los manantiales son el detalle que en su día ancló la identificación rival de Pınarbaşı."
+        },
+        "pt": {
+          "label": "Uma volta às muralhas de Troia VI",
+          "note": "A perseguição exige uma cidade murada com espaço para contorná-la e nascentes por perto. O circuito de Troia VI é grande o bastante; as nascentes são o detalhe que um dia ancorou a identificação rival de Pınarbaşı."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Achilles and Hector",
+      "summary": "Three circuits of the city at a run, past the springs where the women of Troy used to wash — the most topographically specific action scene in Greek epic.",
+      "narrative": [
+        "Hector waits outside the gate, loses his nerve when Achilles comes, and runs. They pass the lookout point, the wind-blown fig tree, the wagon track and the two springs of the Scamander, one hot and one cold. Three times around the city, and then Athena tricks Hector into standing.",
+        "The springs drove a century of Troy topography: Lechevalier read them into Pınarbaşı, Maclaren answered with Hisarlık, and Schliemann's excavation settled the site without ever settling the springs."
+      ],
+      "whyItMatters": "It is the passage where the Iliad reads most like a map, and where the map has failed most instructively: the springs have never been matched at Hisarlık.",
+      "debate": "Whether the springs are a real Bronze Age feature now dry or buried, a poetic doublet, or evidence that the poem's topography is composite.",
+      "faqs": [
+        {
+          "q": "Do the hot and cold springs exist at Troy?",
+          "a": "No pair matching the description has been identified at Hisarlık. The springs were the strongest argument for the rival Pınarbaşı site, which excavation otherwise ruled out."
+        },
+        {
+          "q": "Does that weaken the identification of Troy?",
+          "a": "Not materially. It shows that a poem can be right about a city and unverifiable about a detail — which is why this atlas scores criteria separately."
+        }
+      ]
+    },
+    "es": {
+      "title": "Aquiles y Héctor",
+      "summary": "Tres vueltas a la ciudad a la carrera, junto a las fuentes donde lavaban las troyanas: la escena de acción más específica topográficamente de la épica griega.",
+      "narrative": [
+        "Héctor espera fuera de la puerta, pierde el valor cuando llega Aquiles y echa a correr. Pasan junto al puesto de vigía, la higuera batida por el viento, el camino de carros y las dos fuentes del Escamandro, una caliente y otra fría. Tres vueltas a la ciudad, y entonces Atenea engaña a Héctor para que se detenga.",
+        "Las fuentes empujaron un siglo de topografía troyana: Lechevalier las leyó en Pınarbaşı, Maclaren respondió con Hisarlık y la excavación de Schliemann zanjó el yacimiento sin zanjar nunca las fuentes."
+      ],
+      "whyItMatters": "Es el pasaje en el que la Ilíada más se parece a un mapa y en el que el mapa ha fallado de forma más instructiva: las fuentes nunca se han identificado en Hisarlık.",
+      "debate": "Si las fuentes son un rasgo real del Bronce hoy seco o enterrado, un doblete poético o la prueba de que la topografía del poema es compuesta.",
+      "faqs": [
+        {
+          "q": "¿Existen en Troya las fuentes caliente y fría?",
+          "a": "No se ha identificado en Hisarlık ninguna pareja que corresponda a la descripción. Las fuentes eran el argumento más fuerte del yacimiento rival de Pınarbaşı, que la excavación descartó por lo demás."
+        },
+        {
+          "q": "¿Debilita eso la identificación de Troya?",
+          "a": "No materialmente. Muestra que un poema puede acertar con una ciudad y ser inverificable en un detalle, y por eso este atlas puntúa los criterios por separado."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Aquiles e Heitor",
+      "summary": "Três voltas à cidade em corrida, junto às nascentes onde as troianas lavavam — a cena de ação mais específica topograficamente da épica grega.",
+      "narrative": [
+        "Heitor espera fora da porta, perde a coragem quando Aquiles chega e sai correndo. Passam pelo posto de vigia, a figueira batida pelo vento, o caminho de carros e as duas nascentes do Escamandro, uma quente e outra fria. Três voltas à cidade, e então Atena engana Heitor para que pare.",
+        "As nascentes moveram um século de topografia troiana: Lechevalier as leu em Pınarbaşı, Maclaren respondeu com Hisarlık, e a escavação de Schliemann resolveu o sítio sem nunca resolver as nascentes."
+      ],
+      "whyItMatters": "É a passagem em que a Ilíada mais se parece com um mapa e em que o mapa falhou de modo mais instrutivo: as nascentes nunca foram identificadas em Hisarlık.",
+      "debate": "Se as nascentes são um traço real do Bronze hoje seco ou soterrado, um dublê poético ou prova de que a topografia do poema é composta.",
+      "faqs": [
+        {
+          "q": "As nascentes quente e fria existem em Troia?",
+          "a": "Nenhum par correspondente à descrição foi identificado em Hisarlık. As nascentes eram o argumento mais forte do sítio rival de Pınarbaşı, que a escavação de resto descartou."
+        },
+        {
+          "q": "Isso enfraquece a identificação de Troia?",
+          "a": "Não materialmente. Mostra que um poema pode acertar sobre uma cidade e ser inverificável sobre um detalhe — e por isso este atlas pontua os critérios separadamente."
+        }
+      ]
+    }
+  }
+}

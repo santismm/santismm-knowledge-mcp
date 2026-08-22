@@ -1,0 +1,120 @@
+{
+  "slug": "chryse",
+  "id": "HOM-P-032",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "plausible",
+  "unlocated": false,
+  "region": "troad",
+  "homericNames": [
+    "Χρύση"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 1,
+      "lines": "8-52"
+    },
+    {
+      "work": "iliad",
+      "book": 1,
+      "lines": "430-487"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-13",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 13.1",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "troad-survey",
+      "kind": "archaeology",
+      "citation": "Archaeological survey of the southern Troad and the Adramyttian gulf, where the coastal sites of the Iliad's raids are sought",
+      "year": 2000
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "southern-troad",
+      "identification": "plausible",
+      "modernName": "Southern Troad, Adramyttian gulf",
+      "country": "TR",
+      "lat": 39.55,
+      "lon": 26.6,
+      "precision": "area",
+      "proponent": "Strabo, Geography 13.1",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 1,
+        "scholarly": 2,
+        "geographic": 3,
+        "score": 9,
+        "band": "medium"
+      },
+      "sources": [
+        "strabo-13",
+        "troad-survey",
+        "iliad"
+      ],
+      "locales": {
+        "en": {
+          "label": "The southern Troad coast",
+          "note": "Strabo already discussed where Chryse stood and reported more than one candidate, all on this coast within a day's sail of the Achaean camp — which is what the poem requires. No excavated site has been tied to the name."
+        },
+        "es": {
+          "label": "La costa sur de la Tróade",
+          "note": "Estrabón ya discutía dónde estuvo Crisa y recogía más de un candidato, todos en esta costa y a un día de navegación del campamento aqueo, que es lo que exige el poema. Ningún yacimiento excavado se ha atado al nombre."
+        },
+        "pt": {
+          "label": "A costa sul da Trôade",
+          "note": "Estrabão já discutia onde ficava Crise e registrava mais de um candidato, todos nesta costa e a um dia de navegação do acampamento aqueu — que é o que o poema exige. Nenhum sítio escavado foi ligado ao nome."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "chryse-and-the-plague"
+  ],
+  "locales": {
+    "en": {
+      "name": "Chryse",
+      "summary": "Where the Iliad starts. A priest of Apollo comes from Chryse to ransom his daughter, Agamemnon refuses, and the god's plague sets the whole poem in motion.",
+      "description": [
+        "Chryse is a coastal town with a temple of Apollo, close enough to the Achaean camp for a ship to return the girl and be back quickly. The poem's opening quarrel is a dispute over her, and the first hundred lines are effectively a piece of local geography.",
+        "Ancient geographers argued about the exact site and modern survey has not settled it. What is not in doubt is the region: the southern Troad, the same coast Achilles raids for plunder throughout the war."
+      ],
+      "identificationNote": "Plausible: the region is secure and the specific site is not, which is the normal state of the Iliad's minor Troad towns.",
+      "debate": "Which of the candidate coastal sites is Chryse, and whether the raids the poem attributes to Achilles reflect a real pattern of coastal warfare in the Late Bronze Age."
+    },
+    "es": {
+      "name": "Crisa",
+      "summary": "Donde empieza la Ilíada. Un sacerdote de Apolo llega desde Crisa a rescatar a su hija, Agamenón se niega y la peste del dios pone en marcha todo el poema.",
+      "description": [
+        "Crisa es una ciudad costera con templo de Apolo, lo bastante cerca del campamento aqueo como para que una nave devuelva a la muchacha y regrese pronto. La disputa inicial del poema es por ella, y los primeros cien versos son en la práctica geografía local.",
+        "Los geógrafos antiguos discutieron el emplazamiento exacto y la prospección moderna no lo ha zanjado. Lo que no está en duda es la región: la Tróade meridional, la misma costa que Aquiles saquea durante toda la guerra."
+      ],
+      "identificationNote": "Plausible: la región es segura y el sitio concreto no, que es el estado normal de las ciudades menores de la Tróade en la Ilíada.",
+      "debate": "Cuál de los yacimientos costeros candidatos es Crisa, y si las razias que el poema atribuye a Aquiles reflejan un patrón real de guerra costera en el Bronce Final."
+    },
+    "pt": {
+      "name": "Crise",
+      "summary": "Onde a Ilíada começa. Um sacerdote de Apolo vem de Crise resgatar a filha, Agamêmnon recusa, e a peste do deus põe todo o poema em movimento.",
+      "description": [
+        "Crise é uma cidade costeira com templo de Apolo, perto o bastante do acampamento aqueu para uma nau devolver a moça e voltar depressa. A disputa inicial do poema é por ela, e os primeiros cem versos são, na prática, geografia local.",
+        "Os geógrafos antigos discutiram o sítio exato e a prospecção moderna não o resolveu. O que não está em dúvida é a região: a Trôade meridional, a mesma costa que Aquiles saqueia durante toda a guerra."
+      ],
+      "identificationNote": "Plausível: a região é segura e o sítio concreto não, que é o estado normal das cidades menores da Trôade na Ilíada.",
+      "debate": "Qual dos sítios costeiros candidatos é Crise, e se as razias que o poema atribui a Aquiles refletem um padrão real de guerra costeira no Bronze Final."
+    }
+  }
+}

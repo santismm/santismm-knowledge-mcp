@@ -1,0 +1,131 @@
+{
+  "slug": "suitors-ambush-at-asteris",
+  "id": "HOM-E-020",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 4,
+  "lines": "842-847",
+  "places": [
+    "asteris",
+    "ithaca"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 0,
+    "scholarly": 1,
+    "geographic": 1,
+    "score": 5,
+    "band": "low"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-10",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 10.2",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "daskalio",
+      "kind": "scholarship",
+      "citation": "Daskalio, the islet in the Ithaki–Kefalonia channel, as the traditional candidate for Asteris",
+      "year": 2005
+    }
+  ],
+  "theories": [
+    {
+      "id": "daskalio",
+      "identification": "speculative",
+      "place": "asteris",
+      "proponent": "Ancient tradition, reported by Strabo 10.2",
+      "era": "antiquity",
+      "sources": [
+        "daskalio",
+        "strabo-10"
+      ],
+      "locales": {
+        "en": {
+          "label": "Daskalio islet",
+          "note": "The only candidate in the right strait, and it has none of the two harbours the poem gives Asteris. Strabo already recorded the objection."
+        },
+        "es": {
+          "label": "El islote de Daskalio",
+          "note": "El único candidato en el estrecho correcto, y no tiene ninguno de los dos puertos que el poema da a Asteris. Estrabón ya recogía la objeción."
+        },
+        "pt": {
+          "label": "O ilhéu de Daskalio",
+          "note": "O único candidato no estreito certo, e não tem nenhum dos dois portos que o poema dá a Astéris. Estrabão já registrava a objeção."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The ambush at Asteris",
+      "summary": "Twenty suitors take a ship and wait in a strait for Telemachus to sail home. Six lines of text, one named islet, and an identification that has failed for two thousand years.",
+      "narrative": [
+        "Antinous proposes the ambush and the suitors set it between Ithaca and Same, on a small island with two harbours. Telemachus, warned by Athena, takes another route and lands elsewhere; the ambush never happens.",
+        "It is the most operational piece of geography in the Odyssey — a position chosen to intercept traffic — and the only islet in the right place has no harbours at all."
+      ],
+      "whyItMatters": "It is a test the map fails. When the poem is at its most precise, the atlas's confidence is at its lowest, and that inversion is worth showing.",
+      "debate": "Whether the coastline has changed, whether the detail is invented, and whether the whole Ionian geography is internally consistent.",
+      "faqs": [
+        {
+          "q": "Does Asteris exist?",
+          "a": "No islet matching the description has been identified. Daskalio, the traditional candidate, lacks the two harbours Homer gives it."
+        },
+        {
+          "q": "Could the coastline have changed?",
+          "a": "The Ionian is seismically active and coastlines there have changed. That is a possibility, not evidence, and the atlas records it as such."
+        }
+      ]
+    },
+    "es": {
+      "title": "La emboscada de Asteris",
+      "summary": "Veinte pretendientes toman una nave y esperan en un estrecho a que Telémaco vuelva a casa. Seis versos de texto, un islote con nombre y una identificación fallida desde hace dos mil años.",
+      "narrative": [
+        "Antínoo propone la emboscada y los pretendientes la sitúan entre Ítaca y Same, en una isla pequeña con dos puertos. Telémaco, avisado por Atenea, toma otra ruta y desembarca en otro sitio; la emboscada nunca ocurre.",
+        "Es la pieza de geografía más operativa de la Odisea —una posición elegida para interceptar tráfico— y el único islote en el lugar correcto no tiene puerto alguno."
+      ],
+      "whyItMatters": "Es una prueba que el mapa suspende. Cuando el poema es más preciso, la confianza del atlas es mínima, y esa inversión merece mostrarse.",
+      "debate": "Si la costa ha cambiado, si el detalle es inventado y si toda la geografía jónica es internamente coherente.",
+      "faqs": [
+        {
+          "q": "¿Existe Asteris?",
+          "a": "No se ha identificado ningún islote que corresponda a la descripción. Daskalio, el candidato tradicional, carece de los dos puertos que Homero le da."
+        },
+        {
+          "q": "¿Pudo cambiar la costa?",
+          "a": "El Jónico es sísmicamente activo y allí las costas han cambiado. Eso es una posibilidad, no una prueba, y el atlas lo registra como tal."
+        }
+      ]
+    },
+    "pt": {
+      "title": "A emboscada em Astéris",
+      "summary": "Vinte pretendentes tomam uma nau e esperam num estreito que Telêmaco volte para casa. Seis versos de texto, um ilhéu com nome e uma identificação que falha há dois mil anos.",
+      "narrative": [
+        "Antínoo propõe a emboscada e os pretendentes a situam entre Ítaca e Same, numa ilha pequena com dois portos. Telêmaco, avisado por Atena, toma outra rota e desembarca em outro lugar; a emboscada nunca acontece.",
+        "É a peça de geografia mais operacional da Odisseia — uma posição escolhida para interceptar tráfego — e o único ilhéu no lugar certo não tem porto algum."
+      ],
+      "whyItMatters": "É um teste que o mapa não passa. Quando o poema é mais preciso, a confiança do atlas é mínima, e essa inversão merece ser mostrada.",
+      "debate": "Se a costa mudou, se o detalhe é inventado e se toda a geografia jônica é internamente coerente.",
+      "faqs": [
+        {
+          "q": "Astéris existe?",
+          "a": "Nenhum ilhéu correspondente à descrição foi identificado. Daskalio, o candidato tradicional, não tem os dois portos que Homero lhe dá."
+        },
+        {
+          "q": "A costa pode ter mudado?",
+          "a": "O Jônico é sismicamente ativo e ali as costas mudaram. Isso é possibilidade, não prova, e o atlas o registra como tal."
+        }
+      ]
+    }
+  }
+}

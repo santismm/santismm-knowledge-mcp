@@ -1,0 +1,177 @@
+{
+  "slug": "same",
+  "id": "HOM-P-014",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "plausible",
+  "unlocated": false,
+  "region": "ionian",
+  "homericNames": [
+    "Σάμη",
+    "Σάμος"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 1,
+      "lines": "245-248"
+    },
+    {
+      "work": "odyssey",
+      "book": 4,
+      "lines": "669-672"
+    },
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "631-637"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-10",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 10.2",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "bittlestone-2005",
+      "kind": "scholarship",
+      "citation": "Robert Bittlestone, James Diggle and John Underhill, Odysseus Unbound: The Search for Homer's Ithaca (Cambridge University Press, 2005)",
+      "author": "Robert Bittlestone",
+      "year": 2005
+    },
+    {
+      "id": "kefalonia-tombs",
+      "kind": "archaeology",
+      "citation": "Mycenaean chamber-tomb cemeteries on Kefalonia, notably around Poros and Lakkithra",
+      "year": 1995
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "kefalonia",
+      "identification": "plausible",
+      "modernName": "Kefalonia",
+      "country": "GR",
+      "lat": 38.25,
+      "lon": 20.6,
+      "precision": "island",
+      "proponent": "Strabo, Geography 10.2",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 2,
+        "scholarly": 3,
+        "geographic": 2,
+        "score": 9,
+        "band": "medium"
+      },
+      "sources": [
+        "strabo-10",
+        "kefalonia-tombs",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Kefalonia (the ancient Same)",
+          "note": "Strabo identifies Same with the island later called Kefalonia, where a town of Sami still carries the name. Kefalonia has the richest Mycenaean cemeteries in the Ionian, which fits a populous island supplying suitors; what it lacks is a palace."
+        },
+        "es": {
+          "label": "Cefalonia (la antigua Same)",
+          "note": "Estrabón identifica Same con la isla luego llamada Cefalonia, donde una ciudad de Sami conserva aún el nombre. Cefalonia tiene los cementerios micénicos más ricos del Jónico, lo que encaja con una isla populosa que aporta pretendientes; lo que falta es un palacio."
+        },
+        "pt": {
+          "label": "Cefalônia (a antiga Same)",
+          "note": "Estrabão identifica Same com a ilha depois chamada Cefalônia, onde uma cidade de Sami ainda carrega o nome. A Cefalônia tem os cemitérios micênicos mais ricos do Jônico, o que encaixa numa ilha populosa que fornece pretendentes; o que falta é um palácio."
+        }
+      }
+    },
+    {
+      "id": "paliki-as-same",
+      "identification": "speculative",
+      "modernName": "Eastern Kefalonia",
+      "country": "GR",
+      "lat": 38.25,
+      "lon": 20.65,
+      "precision": "area",
+      "proponent": "Robert Bittlestone, James Diggle & John Underhill (2005)",
+      "era": "contemporary",
+      "since": 2005,
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 2,
+        "score": 5,
+        "band": "low"
+      },
+      "sources": [
+        "bittlestone-2005",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Eastern Kefalonia, if Paliki is Ithaca",
+          "note": "Bittlestone's reconstruction requires Same to be the rest of Kefalonia east of a former sea channel. The hypothesis is internally consistent and depends entirely on that channel having existed."
+        },
+        "es": {
+          "label": "La Cefalonia oriental, si Paliki es Ítaca",
+          "note": "La reconstrucción de Bittlestone exige que Same sea el resto de Cefalonia al este de un antiguo canal marino. La hipótesis es internamente coherente y depende por completo de que ese canal existiera."
+        },
+        "pt": {
+          "label": "A Cefalônia oriental, se Paliki for Ítaca",
+          "note": "A reconstrução de Bittlestone exige que Same seja o resto da Cefalônia a leste de um antigo canal marinho. A hipótese é internamente coerente e depende inteiramente de esse canal ter existido."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "catalogue-of-ships"
+  ],
+  "locales": {
+    "en": {
+      "name": "Same",
+      "summary": "The second island of Odysseus' kingdom, generally taken to be Kefalonia — the largest island in the group and the one with the most Mycenaean graves and the fewest Mycenaean buildings.",
+      "description": [
+        "Same supplies twenty-four suitors, the largest contingent, which implies a substantial population. Ancient tradition and the surviving town name point at Kefalonia, and the island's chamber-tomb cemeteries confirm it was populous in the Late Bronze Age.",
+        "Every rival reconstruction of Ithaca has to say something about Same, because the two are defined against each other in the text. That is why the entry carries a second hypothesis: it is not an independent claim, it is the shadow of the Ithaca question."
+      ],
+      "identificationNote": "Plausible rather than accepted: the ancient identification is strong and the archaeology is real, but no excavated centre ties the island to the poem, and the Ionian names may not have been stable between the Bronze Age and Homer.",
+      "debate": "Whether Homer's four-island geography is coherent at all, and whether Same, Dulichium and Ithaca named the same places in the Bronze Age that they named in the eighth century."
+    },
+    "es": {
+      "name": "Same",
+      "summary": "La segunda isla del reino de Odiseo, tenida en general por Cefalonia: la mayor del grupo y la que más tumbas micénicas y menos edificios micénicos ha dado.",
+      "description": [
+        "Same aporta veinticuatro pretendientes, el contingente más numeroso, lo que implica una población considerable. La tradición antigua y el topónimo superviviente apuntan a Cefalonia, y los cementerios de tumbas de cámara de la isla confirman que estuvo poblada en el Bronce Final.",
+        "Toda reconstrucción rival de Ítaca tiene que decir algo sobre Same, porque ambas se definen la una contra la otra en el texto. Por eso la ficha lleva una segunda hipótesis: no es una afirmación independiente, es la sombra de la cuestión de Ítaca."
+      ],
+      "identificationNote": "Plausible y no aceptada: la identificación antigua es fuerte y la arqueología es real, pero ningún centro excavado ata la isla al poema, y los nombres jónicos pueden no haber sido estables entre la Edad del Bronce y Homero.",
+      "debate": "Si la geografía homérica de cuatro islas es coherente siquiera, y si Same, Duliquio e Ítaca nombraban en el Bronce los mismos lugares que nombraban en el siglo VIII."
+    },
+    "pt": {
+      "name": "Same",
+      "summary": "A segunda ilha do reino de Odisseu, geralmente tida como a Cefalônia: a maior do grupo e a que deu mais túmulos micênicos e menos edifícios micênicos.",
+      "description": [
+        "Same fornece vinte e quatro pretendentes, o maior contingente, o que implica população considerável. A tradição antiga e o topônimo sobrevivente apontam para a Cefalônia, e os cemitérios de câmaras da ilha confirmam que era populosa no Bronze Final.",
+        "Toda reconstrução rival de Ítaca precisa dizer algo sobre Same, porque as duas se definem uma contra a outra no texto. Por isso a ficha carrega uma segunda hipótese: não é uma afirmação independente, é a sombra da questão de Ítaca."
+      ],
+      "identificationNote": "Plausível e não aceita: a identificação antiga é forte e a arqueologia é real, mas nenhum centro escavado liga a ilha ao poema, e os nomes jônicos podem não ter sido estáveis entre a Idade do Bronze e Homero.",
+      "debate": "Se a geografia homérica de quatro ilhas é sequer coerente, e se Same, Dulíquio e Ítaca nomeavam no Bronze os mesmos lugares que nomeavam no século VIII."
+    }
+  }
+}

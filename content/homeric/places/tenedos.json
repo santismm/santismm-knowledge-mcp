@@ -1,0 +1,129 @@
+{
+  "slug": "tenedos",
+  "id": "HOM-P-033",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "aegean",
+  "homericNames": [
+    "Τένεδος"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 1,
+      "lines": "38-39"
+    },
+    {
+      "work": "iliad",
+      "book": 11,
+      "lines": "624-627"
+    },
+    {
+      "work": "odyssey",
+      "book": 3,
+      "lines": "157-164"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-13",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 13.1",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "bozcaada",
+      "kind": "archaeology",
+      "citation": "Bozcaada (Tenedos) — continuously inhabited island off the Troad, with occupation attested from prehistory onward",
+      "year": 2000
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "bozcaada",
+      "identification": "accepted",
+      "modernName": "Bozcaada",
+      "country": "TR",
+      "lat": 39.83,
+      "lon": 26.05,
+      "precision": "island",
+      "proponent": "Universal identification since antiquity",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 2,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 10,
+        "band": "high"
+      },
+      "sources": [
+        "bozcaada",
+        "strabo-13",
+        "iliad"
+      ],
+      "locales": {
+        "en": {
+          "label": "Bozcaada (Tenedos)",
+          "note": "The island twenty kilometres off the Troad coast, named identically in every period and inhabited throughout. It is where the later tradition has the fleet hide while the horse stands in Troy — a detail from the Epic Cycle rather than from Homer."
+        },
+        "es": {
+          "label": "Bozcaada (Ténedos)",
+          "note": "La isla a veinte kilómetros de la costa de la Tróade, nombrada igual en toda época y habitada de forma continua. Es donde la tradición posterior hace que se esconda la flota mientras el caballo está en Troya: un dato del Ciclo Épico, no de Homero."
+        },
+        "pt": {
+          "label": "Bozcaada (Tênedos)",
+          "note": "A ilha a vinte quilômetros da costa da Trôade, nomeada igual em toda época e habitada continuamente. É onde a tradição posterior faz a frota se esconder enquanto o cavalo está em Troia — um dado do Ciclo Épico, não de Homero."
+        }
+      }
+    }
+  ],
+  "episodes": [],
+  "locales": {
+    "en": {
+      "name": "Tenedos",
+      "summary": "The island offshore from Troy: a staging point in the Iliad, a hiding place in the later tradition, and a reminder that the Troad's seascape is as checkable as its land.",
+      "description": [
+        "Tenedos appears early — Apollo is invoked as its lord in Book 1 — and again as the fleet's first stop on the way home in the Odyssey's account of the nostoi. The Epic Cycle puts the Achaean fleet behind it during the trick of the horse.",
+        "It is a small entry, and it earns its place by corroboration: the Troad's islands, straits and mountain are all where the poems imply they are."
+      ],
+      "identificationNote": "Accepted: an unmistakable, continuously named island with continuous occupation.",
+      "debate": "Nothing about the island itself. The interesting question is how much of the Tenedos material belongs to Homer and how much to the Cycle that grew around him."
+    },
+    "es": {
+      "name": "Ténedos",
+      "summary": "La isla frente a Troya: punto de apoyo en la Ilíada, escondite en la tradición posterior y recordatorio de que el paisaje marino de la Tróade es tan comprobable como su tierra.",
+      "description": [
+        "Ténedos aparece pronto —a Apolo se lo invoca como su señor en el canto 1— y de nuevo como primera escala de la flota de vuelta en el relato de los nostoi de la Odisea. El Ciclo Épico sitúa tras ella a la flota aquea durante la treta del caballo.",
+        "Es una entrada pequeña y se gana su sitio por corroboración: las islas, los estrechos y la montaña de la Tróade están donde los poemas dan a entender."
+      ],
+      "identificationNote": "Aceptada: una isla inconfundible, nombrada de forma continua y habitada sin interrupción.",
+      "debate": "Nada sobre la isla en sí. La pregunta interesante es cuánto del material sobre Ténedos pertenece a Homero y cuánto al Ciclo que creció a su alrededor."
+    },
+    "pt": {
+      "name": "Tênedos",
+      "summary": "A ilha diante de Troia: ponto de apoio na Ilíada, esconderijo na tradição posterior e lembrete de que a paisagem marinha da Trôade é tão verificável quanto sua terra.",
+      "description": [
+        "Tênedos aparece cedo — Apolo é invocado como seu senhor no canto 1 — e de novo como primeira escala da frota de volta no relato dos nostoi da Odisseia. O Ciclo Épico situa atrás dela a frota aqueia durante a artimanha do cavalo.",
+        "É uma entrada pequena e ganha seu lugar por corroboração: as ilhas, os estreitos e a montanha da Trôade estão onde os poemas dão a entender."
+      ],
+      "identificationNote": "Aceita: uma ilha inconfundível, nomeada continuamente e habitada sem interrupção.",
+      "debate": "Nada sobre a ilha em si. A pergunta interessante é quanto do material sobre Tênedos pertence a Homero e quanto ao Ciclo que cresceu ao seu redor."
+    }
+  }
+}

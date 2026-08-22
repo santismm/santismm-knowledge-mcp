@@ -1,0 +1,131 @@
+{
+  "slug": "scylla-and-charybdis",
+  "id": "HOM-E-017",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 12,
+  "lines": "201-259",
+  "places": [
+    "scylla-and-charybdis",
+    "planctae"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 0,
+    "scholarly": 2,
+    "geographic": 3,
+    "score": 8,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-6-2",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 6.2",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "messina-tides",
+      "kind": "scholarship",
+      "citation": "Tidal streams and the standing whirlpool of the Strait of Messina in modern navigational literature",
+      "year": 1990
+    }
+  ],
+  "theories": [
+    {
+      "id": "messina",
+      "identification": "plausible",
+      "place": "scylla-and-charybdis",
+      "proponent": "Universal ancient identification; Strabo 6.2",
+      "era": "antiquity",
+      "sources": [
+        "strabo-6-2",
+        "messina-tides"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Strait of Messina",
+          "note": "The strongest identification in the wanderings: a real tidal race, a real whirlpool, a cliff-bound shore, and unanimous ancient testimony. A town called Scilla still stands on the rock."
+        },
+        "es": {
+          "label": "El estrecho de Mesina",
+          "note": "La identificación más fuerte de las andanzas: una corriente de marea real, un remolino real, una orilla acantilada y testimonio antiguo unánime. Una ciudad llamada Scilla sigue en pie sobre la roca."
+        },
+        "pt": {
+          "label": "O estreito de Messina",
+          "note": "A identificação mais forte das andanças: uma corrente de maré real, um redemoinho real, uma margem de falésias e testemunho antigo unânime. Uma cidade chamada Scilla ainda está de pé sobre a rocha."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Scylla and Charybdis",
+      "summary": "A choice between losing six men and losing everyone. It is the only hazard in the wanderings whose physical behaviour matches a real place.",
+      "narrative": [
+        "Circe describes both: the whirlpool that swallows the sea three times a day, and the six-headed monster in the cave above the cliff. She tells Odysseus to keep to Scylla's side and accept the loss. He does, and watches six men taken 'like fish on a long rod'.",
+        "The Planctae — the Wandering Rocks — are offered as the alternative route and never taken, which is why they appear in this atlas as an unlocated place with no coordinates."
+      ],
+      "whyItMatters": "It is the atlas's highest-scoring wandering episode at 8/12, and the clearest case of real geography inside a fictional voyage.",
+      "debate": "Whether the identification preserves an old memory or reflects the knowledge of eighth-century Greek sailors who used the strait, in which case the poem is describing a real place it never claims to visit.",
+      "faqs": [
+        {
+          "q": "Is Charybdis a real whirlpool?",
+          "a": "The Strait of Messina genuinely produces strong tidal streams and a whirlpool at certain states of the tide. It is dangerous to small craft and was more so under oar and sail."
+        },
+        {
+          "q": "Why do the Wandering Rocks have no location here?",
+          "a": "Because the poem presents them as the road not taken, and every later identification comes from the Argonaut tradition rather than from the Odyssey."
+        }
+      ]
+    },
+    "es": {
+      "title": "Escila y Caribdis",
+      "summary": "Una elección entre perder seis hombres y perderlos a todos. Es el único peligro de las andanzas cuyo comportamiento físico corresponde a un lugar real.",
+      "narrative": [
+        "Circe describe ambos: el remolino que traga el mar tres veces al día y el monstruo de seis cabezas en la cueva sobre el acantilado. Le dice a Odiseo que se ciña al lado de Escila y acepte la pérdida. Lo hace, y ve cómo se llevan a seis hombres «como peces en una caña larga».",
+        "Las Plancas —las rocas errantes— se ofrecen como ruta alternativa y nunca se toman, y por eso figuran en este atlas como lugar sin localizar y sin coordenadas."
+      ],
+      "whyItMatters": "Es el episodio de las andanzas mejor puntuado del atlas, con 8/12, y el caso más claro de geografía real dentro de un viaje ficticio.",
+      "debate": "Si la identificación conserva un recuerdo antiguo o refleja el conocimiento de los marinos griegos del siglo VIII que usaban el estrecho, en cuyo caso el poema describe un lugar real que nunca dice visitar.",
+      "faqs": [
+        {
+          "q": "¿Es Caribdis un remolino real?",
+          "a": "El estrecho de Mesina produce de verdad fuertes corrientes de marea y un remolino en ciertos estados de marea. Es peligroso para embarcaciones pequeñas y lo era más a remo y vela."
+        },
+        {
+          "q": "¿Por qué las rocas errantes no tienen aquí localización?",
+          "a": "Porque el poema las presenta como el camino no tomado, y toda identificación posterior procede de la tradición argonáutica, no de la Odisea."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Cila e Caribdes",
+      "summary": "Uma escolha entre perder seis homens e perder todos. É o único perigo das andanças cujo comportamento físico corresponde a um lugar real.",
+      "narrative": [
+        "Circe descreve os dois: o redemoinho que engole o mar três vezes ao dia e o monstro de seis cabeças na gruta acima da falésia. Diz a Odisseu que se mantenha do lado de Cila e aceite a perda. Ele o faz, e vê seis homens serem levados “como peixes numa vara longa”.",
+        "As Plânctas — as rochas errantes — são oferecidas como rota alternativa e nunca tomadas, e por isso figuram neste atlas como lugar sem localização e sem coordenadas."
+      ],
+      "whyItMatters": "É o episódio das andanças mais bem pontuado do atlas, com 8/12, e o caso mais claro de geografia real dentro de uma viagem fictícia.",
+      "debate": "Se a identificação preserva uma lembrança antiga ou reflete o conhecimento dos marinheiros gregos do século VIII que usavam o estreito, caso em que o poema descreve um lugar real que nunca diz visitar.",
+      "faqs": [
+        {
+          "q": "Caribdes é um redemoinho real?",
+          "a": "O estreito de Messina produz de fato fortes correntes de maré e um redemoinho em certos estados de maré. É perigoso para embarcações pequenas e era mais ainda a remo e vela."
+        },
+        {
+          "q": "Por que as rochas errantes não têm localização aqui?",
+          "a": "Porque o poema as apresenta como o caminho não tomado, e toda identificação posterior vem da tradição argonáutica, não da Odisseia."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "slug": "cattle-of-the-sun",
+  "id": "HOM-E-018",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 12,
+  "lines": "260-402",
+  "places": [
+    "thrinacia"
+  ],
+  "confidence": {
+    "textual": 2,
+    "archaeological": 0,
+    "scholarly": 2,
+    "geographic": 2,
+    "score": 6,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "thucydides-6-2",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 6.2",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "strabo-6-2",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 6.2",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "theories": [
+    {
+      "id": "sicily",
+      "identification": "speculative",
+      "place": "thrinacia",
+      "proponent": "Ancient identification via the name Trinacria",
+      "era": "antiquity",
+      "sources": [
+        "thucydides-6-2",
+        "strabo-6-2"
+      ],
+      "locales": {
+        "en": {
+          "label": "Sicily, via the name Trinacria",
+          "note": "Plausible philology, no evidence about the episode. The island of the Sun's cattle is defined by what happens on it, not by where it is."
+        },
+        "es": {
+          "label": "Sicilia, por el nombre Trinacria",
+          "note": "Filología plausible y ninguna prueba sobre el episodio. La isla de las vacas del Sol se define por lo que ocurre en ella, no por dónde está."
+        },
+        "pt": {
+          "label": "Sicília, pelo nome Trinácria",
+          "note": "Filologia plausível e prova nenhuma sobre o episódio. A ilha do gado do Sol define-se pelo que acontece nela, não por onde fica."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The cattle of the Sun",
+      "summary": "The crew's last mistake. Warned twice by name, trapped a month by contrary winds and starving, they kill the Sun's immortal cattle while their captain sleeps.",
+      "narrative": [
+        "Tiresias and Circe both name Thrinacia and both say the same thing: leave the cattle alone and you may still get home, harm them and you lose the ship. The wind pins them for a month; the food runs out; Eurylochus argues that starving is the worse death.",
+        "The hides crawl and the meat lows on the spits. Six days later they sail, and Zeus breaks the ship with a thunderbolt. Odysseus alone survives, and reaches Ogygia on the keel."
+      ],
+      "whyItMatters": "It is the end of the crew and the last stop before the poem's two most unlocatable places. Its identification rests on a single name.",
+      "debate": "Whether Thrinacia and Trinacria are the same word, and whether an island defined by a taboo can be located at all.",
+      "faqs": [
+        {
+          "q": "Where is Thrinacia?",
+          "a": "Ancient tradition equates it with Sicily on the strength of the name Trinacria. The atlas records this as speculative at 6/12."
+        },
+        {
+          "q": "Is this the crew's fault?",
+          "a": "The poem is explicit that they were warned by name and did it anyway, and it opens by saying they died 'through their own blind folly'. It is also explicit that they were starving."
+        }
+      ]
+    },
+    "es": {
+      "title": "Las vacas del Sol",
+      "summary": "El último error de la tripulación. Advertidos dos veces y por su nombre, retenidos un mes por vientos contrarios y hambrientos, matan las reses inmortales del Sol mientras su capitán duerme.",
+      "narrative": [
+        "Tiresias y Circe nombran ambos Trinacia y dicen lo mismo: no toquéis el ganado y quizá lleguéis a casa; tocadlo y perderéis la nave. El viento los clava un mes; se acaba la comida; Euríloco argumenta que morir de hambre es peor muerte.",
+        "Las pieles se arrastran y la carne muge en los asadores. Seis días después zarpan, y Zeus rompe la nave con un rayo. Solo Odiseo sobrevive y llega a Ogigia sobre la quilla."
+      ],
+      "whyItMatters": "Es el fin de la tripulación y la última escala antes de los dos lugares más ilocalizables del poema. Su identificación se apoya en un solo nombre.",
+      "debate": "Si Trinacia y Trinacria son la misma palabra, y si una isla definida por un tabú puede localizarse siquiera.",
+      "faqs": [
+        {
+          "q": "¿Dónde está Trinacia?",
+          "a": "La tradición antigua la equipara con Sicilia por el nombre Trinacria. El atlas lo registra como especulativo, con 6/12."
+        },
+        {
+          "q": "¿Es culpa de la tripulación?",
+          "a": "El poema dice explícitamente que fueron advertidos por su nombre y lo hicieron igual, y arranca diciendo que murieron «por su propia ceguera». También dice explícitamente que se morían de hambre."
+        }
+      ]
+    },
+    "pt": {
+      "title": "O gado do Sol",
+      "summary": "O último erro da tripulação. Avisados duas vezes e pelo nome, retidos um mês por ventos contrários e famintos, matam o gado imortal do Sol enquanto o capitão dorme.",
+      "narrative": [
+        "Tirésias e Circe ambos nomeiam Trinácia e dizem a mesma coisa: não toquem no gado e talvez cheguem em casa; toquem e perderão a nau. O vento os prende por um mês; a comida acaba; Euríloco argumenta que morrer de fome é morte pior.",
+        "As peles se arrastam e a carne muge nos espetos. Seis dias depois zarpam, e Zeus quebra a nau com um raio. Só Odisseu sobrevive e chega a Ogígia sobre a quilha."
+      ],
+      "whyItMatters": "É o fim da tripulação e a última escala antes dos dois lugares mais impossíveis de localizar do poema. Sua identificação apoia-se num único nome.",
+      "debate": "Se Trinácia e Trinácria são a mesma palavra, e se uma ilha definida por um tabu pode sequer ser localizada.",
+      "faqs": [
+        {
+          "q": "Onde fica Trinácia?",
+          "a": "A tradição antiga a equipara à Sicília pela força do nome Trinácria. O atlas registra isso como especulativo, com 6/12."
+        },
+        {
+          "q": "A culpa é da tripulação?",
+          "a": "O poema diz explicitamente que foram avisados pelo nome e o fizeram assim mesmo, e começa dizendo que morreram “por sua própria cegueira”. Também diz explicitamente que estavam morrendo de fome."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "slug": "odysseus-nostos",
+  "id": "HOM-R-001",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 9–12 (Odysseus’ retrospective narrative to the Phaeacians)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-1",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 1.2",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "eratosthenes",
+      "kind": "primary_text",
+      "citation": "Eratosthenes, fr. ap. Strabo, Geography 1.2.15",
+      "author": "Eratosthenes",
+      "year": -230
+    },
+    {
+      "id": "berard-1927",
+      "kind": "scholarship",
+      "citation": "Victor Bérard, Les navigations d'Ulysse (4 vols., 1927–1929)",
+      "author": "Victor Bérard",
+      "year": 1927,
+      "url": "https://archive.org/details/lesnavigationsdu04bera"
+    },
+    {
+      "id": "plutarch-defacie",
+      "kind": "primary_text",
+      "citation": "Plutarch, De facie quae in orbe lunae apparet 941a",
+      "author": "Plutarch",
+      "year": 100
+    },
+    {
+      "id": "thucydides-6-2",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 6.2",
+      "author": "Thucydides",
+      "year": -410
+    }
+  ],
+  "variants": [
+    {
+      "id": "mediterranean",
+      "identification": "speculative",
+      "proponent": "Strabo, Geography 1.2; Victor Bérard (1927–1929)",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 2,
+        "geographic": 2,
+        "score": 6,
+        "band": "medium"
+      },
+      "stops": [
+        {
+          "order": 1,
+          "place": "troy",
+          "hypothesis": "hisarlik",
+          "episode": "wooden-horse"
+        },
+        {
+          "order": 2,
+          "place": "ismarus",
+          "hypothesis": "maroneia",
+          "episode": "cicones-at-ismarus"
+        },
+        {
+          "order": 3,
+          "place": "cape-malea",
+          "hypothesis": "malea"
+        },
+        {
+          "order": 4,
+          "place": "land-of-the-lotus-eaters",
+          "hypothesis": "djerba",
+          "episode": "lotus-eaters"
+        },
+        {
+          "order": 5,
+          "place": "land-of-the-cyclopes",
+          "hypothesis": "etna-sicily",
+          "episode": "cyclops-polyphemus"
+        },
+        {
+          "order": 6,
+          "place": "aeolia",
+          "hypothesis": "lipari",
+          "episode": "aeolus-and-the-winds"
+        },
+        {
+          "order": 7,
+          "place": "laestrygonia",
+          "hypothesis": "bonifacio",
+          "episode": "laestrygonians"
+        },
+        {
+          "order": 8,
+          "place": "aeaea",
+          "hypothesis": "circeo",
+          "episode": "circe-on-aeaea"
+        },
+        {
+          "order": 9,
+          "place": "house-of-hades",
+          "episode": "nekyia"
+        },
+        {
+          "order": 10,
+          "place": "sirens",
+          "hypothesis": "li-galli",
+          "episode": "the-sirens"
+        },
+        {
+          "order": 11,
+          "place": "scylla-and-charybdis",
+          "hypothesis": "messina",
+          "episode": "scylla-and-charybdis"
+        },
+        {
+          "order": 12,
+          "place": "thrinacia",
+          "hypothesis": "sicily",
+          "episode": "cattle-of-the-sun"
+        },
+        {
+          "order": 13,
+          "place": "ogygia",
+          "hypothesis": "gozo",
+          "episode": "calypso-ogygia"
+        },
+        {
+          "order": 14,
+          "place": "scheria",
+          "hypothesis": "corfu",
+          "episode": "phaeacians-on-scheria"
+        },
+        {
+          "order": 15,
+          "place": "ithaca",
+          "hypothesis": "ithaki",
+          "episode": "return-to-ithaca"
+        }
+      ],
+      "sources": [
+        "strabo-1",
+        "berard-1927",
+        "thucydides-6-2",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Mediterranean reading",
+          "note": "The route as antiquity drew it: out of the Troad, past Malea into the Libyan sea, west into Sicilian and Tyrrhenian waters, and home to the Ionian islands. Every stop is a place someone has argued for, and only one of them — the Strait of Messina — reaches the plausible class. The line is drawn through the candidates each stop actually names, so its gaps are the atlas's gaps."
+        },
+        "es": {
+          "label": "La lectura mediterránea",
+          "note": "La ruta tal como la trazó la Antigüedad: fuera de la Tróade, más allá de Maleas hacia el mar de Libia, al oeste hacia aguas sicilianas y tirrenas, y de vuelta a las islas Jónicas. Cada escala es un lugar que alguien ha defendido, y solo una —el estrecho de Mesina— alcanza la clase plausible. La línea pasa por los candidatos que cada escala nombra realmente, de modo que sus huecos son los huecos del atlas."
+        },
+        "pt": {
+          "label": "A leitura mediterrânea",
+          "note": "A rota como a Antiguidade a traçou: para fora da Trôade, além do Maleia rumo ao mar da Líbia, a oeste para águas sicilianas e tirrenas, e de volta às ilhas Jônicas. Cada escala é um lugar que alguém defendeu, e só uma — o estreito de Messina — alcança a classe plausível. A linha passa pelos candidatos que cada escala de fato nomeia, de modo que suas lacunas são as lacunas do atlas."
+        }
+      }
+    },
+    {
+      "id": "atlantic",
+      "identification": "speculative",
+      "proponent": "Plutarch, De facie 941a",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 1,
+        "archaeological": 0,
+        "scholarly": 0,
+        "geographic": 1,
+        "score": 2,
+        "band": "minimal"
+      },
+      "stops": [
+        {
+          "order": 1,
+          "place": "troy",
+          "hypothesis": "hisarlik",
+          "episode": "wooden-horse"
+        },
+        {
+          "order": 2,
+          "place": "ismarus",
+          "hypothesis": "maroneia",
+          "episode": "cicones-at-ismarus"
+        },
+        {
+          "order": 3,
+          "place": "cape-malea",
+          "hypothesis": "malea"
+        },
+        {
+          "order": 4,
+          "place": "land-of-the-lotus-eaters",
+          "hypothesis": "djerba",
+          "episode": "lotus-eaters"
+        },
+        {
+          "order": 5,
+          "place": "land-of-the-cyclopes",
+          "episode": "cyclops-polyphemus"
+        },
+        {
+          "order": 6,
+          "place": "aeolia",
+          "episode": "aeolus-and-the-winds"
+        },
+        {
+          "order": 7,
+          "place": "laestrygonia",
+          "episode": "laestrygonians"
+        },
+        {
+          "order": 8,
+          "place": "aeaea",
+          "episode": "circe-on-aeaea"
+        },
+        {
+          "order": 9,
+          "place": "house-of-hades",
+          "episode": "nekyia"
+        },
+        {
+          "order": 10,
+          "place": "ogygia",
+          "episode": "calypso-ogygia"
+        },
+        {
+          "order": 11,
+          "place": "scheria",
+          "episode": "phaeacians-on-scheria"
+        },
+        {
+          "order": 12,
+          "place": "ithaca",
+          "hypothesis": "paliki",
+          "episode": "return-to-ithaca"
+        }
+      ],
+      "sources": [
+        "plutarch-defacie",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Atlantic reading",
+          "note": "Takes the ten-day drifts and the seventeen-day raft literally and pushes the wanderings out through Gibraltar. Most of its stops name no candidate inside this frame, so the line simply stops at the places the reading shares with the Mediterranean one. That is not a rendering failure: it is what the reading claims."
+        },
+        "es": {
+          "label": "La lectura atlántica",
+          "note": "Toma al pie de la letra las derivas de diez días y la balsa de diecisiete y empuja las andanzas fuera del Estrecho. La mayoría de sus escalas no nombra candidato dentro de este marco, así que la línea se detiene en los lugares que la lectura comparte con la mediterránea. No es un fallo de dibujo: es lo que la lectura afirma."
+        },
+        "pt": {
+          "label": "A leitura atlântica",
+          "note": "Toma ao pé da letra as derivas de dez dias e a jangada de dezessete e empurra as andanças para fora do Estreito. A maioria de suas escalas não nomeia candidato dentro deste quadro, então a linha simplesmente para nos lugares que a leitura compartilha com a mediterrânea. Não é falha de desenho: é o que a leitura afirma."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "name": "The nostos of Odysseus",
+      "summary": "The ten-year voyage home from Troy — the most mapped and least mappable itinerary in European literature. The atlas plots it as competing reconstructions, not as a line.",
+      "description": [
+        "The Odyssey does not describe a voyage in order. Books 9 to 12 are Odysseus telling his own story at a Phaeacian banquet, to an audience he is trying to impress, after which the poem returns to the present. Any route drawn from it is a reconstruction of a retrospective narrative, and the poem never claims otherwise.",
+        "Antiquity mapped it anyway, and Strabo defended the practice: he held that Homer knew the western Mediterranean and set the wanderings in it. Eratosthenes had already given the counter-position, in one of the great one-line dismissals of ancient scholarship — you will find where Odysseus wandered when you find the cobbler who sewed the bag of the winds.",
+        "This atlas takes neither side. It plots the reconstructions that have actually been argued, scores each one, and leaves the episodes with no defensible location off the line entirely."
+      ],
+      "debate": "The dispute is older than archaeology and unlikely to be settled by it: whether the wanderings encode a real seaway, a folk-tale sequence, or a deliberate voyage out of the known world. The two variants here are the two families of answer, plotted with their own scores."
+    },
+    "es": {
+      "name": "El nostos de Odiseo",
+      "summary": "El viaje de diez años de regreso desde Troya: el itinerario más cartografiado y menos cartografiable de la literatura europea. El atlas lo dibuja como reconstrucciones en competencia, no como una línea.",
+      "description": [
+        "La Odisea no describe un viaje en orden. Los cantos 9 a 12 son Odiseo contando su propia historia en un banquete feacio, ante un auditorio al que trata de impresionar, tras lo cual el poema vuelve al presente. Toda ruta trazada a partir de ahí es la reconstrucción de un relato retrospectivo, y el poema nunca pretende otra cosa.",
+        "La Antigüedad la cartografió igualmente, y Estrabón defendió la práctica: sostenía que Homero conocía el Mediterráneo occidental y situó allí las andanzas. Eratóstenes ya había dado la posición contraria en uno de los grandes zascas de la erudición antigua: hallarás por dónde anduvo Odiseo cuando halles al zapatero que cosió el odre de los vientos.",
+        "Este atlas no toma partido. Dibuja las reconstrucciones que realmente se han defendido, puntúa cada una y deja fuera de la línea los episodios sin localización defendible."
+      ],
+      "debate": "La disputa es más antigua que la arqueología y es improbable que esta la resuelva: si las andanzas codifican una ruta marítima real, una secuencia de cuento popular o un viaje deliberado fuera del mundo conocido. Las dos variantes recogidas aquí son las dos familias de respuesta, dibujadas con sus propias puntuaciones."
+    },
+    "pt": {
+      "name": "O nostos de Odisseu",
+      "summary": "A viagem de dez anos de volta de Troia: o itinerário mais mapeado e menos mapeável da literatura europeia. O atlas o desenha como reconstruções concorrentes, não como uma linha.",
+      "description": [
+        "A Odisseia não descreve uma viagem em ordem. Os cantos 9 a 12 são Odisseu contando a própria história num banquete feácio, diante de um auditório que tenta impressionar, após o que o poema volta ao presente. Toda rota traçada a partir disso é a reconstrução de um relato retrospectivo, e o poema nunca pretende outra coisa.",
+        "A Antiguidade a mapeou mesmo assim, e Estrabão defendeu a prática: sustentava que Homero conhecia o Mediterrâneo ocidental e ali situou as andanças. Eratóstenes já dera a posição contrária numa das grandes tiradas da erudição antiga: descobrirás por onde Odisseu andou quando descobrires o sapateiro que costurou o odre dos ventos.",
+        "Este atlas não toma partido. Desenha as reconstruções que de fato foram defendidas, pontua cada uma e deixa fora da linha os episódios sem localização defensável."
+      ],
+      "debate": "A disputa é mais antiga que a arqueologia e é improvável que esta a resolva: se as andanças codificam uma rota marítima real, uma sequência de conto popular ou uma viagem deliberada para fora do mundo conhecido. As duas variantes aqui são as duas famílias de resposta, desenhadas com suas próprias pontuações."
+    }
+  }
+}

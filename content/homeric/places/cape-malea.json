@@ -1,0 +1,126 @@
+{
+  "slug": "cape-malea",
+  "id": "HOM-P-027",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "mainlandGreece",
+  "homericNames": [
+    "Μάλεια"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 9,
+      "lines": "78-84"
+    },
+    {
+      "work": "odyssey",
+      "book": 3,
+      "lines": "286-290"
+    },
+    {
+      "work": "odyssey",
+      "book": 19,
+      "lines": "185-190"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "malea-pilot",
+      "kind": "scholarship",
+      "citation": "Sailing directions for Cape Malea and the southern Peloponnese, a byword for hazardous rounding in Mediterranean pilot literature",
+      "year": 1990
+    },
+    {
+      "id": "strabo-8-6",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 8.6",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "malea",
+      "identification": "accepted",
+      "modernName": "Cape Maleas",
+      "country": "GR",
+      "lat": 36.4333,
+      "lon": 23.2,
+      "precision": "site",
+      "proponent": "Universal identification since antiquity",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 1,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 10,
+        "band": "high"
+      },
+      "sources": [
+        "strabo-8-6",
+        "malea-pilot",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Cape Malea, Laconia",
+          "note": "The south-eastern tip of the Peloponnese, where the poem's real geography ends and the wanderings begin. Its reputation for foul weather is not literary: the cape has been a byword among sailors for three thousand years, and pilot books still describe the acceleration of wind around it."
+        },
+        "es": {
+          "label": "Cabo Maleas, Laconia",
+          "note": "La punta sudoriental del Peloponeso, donde acaba la geografía real del poema y empiezan las andanzas. Su fama de mal tiempo no es literaria: el cabo lleva tres mil años siendo proverbial entre marinos, y los derroteros aún describen la aceleración del viento a su alrededor."
+        },
+        "pt": {
+          "label": "Cabo Maleia, Lacônia",
+          "note": "A ponta sudeste do Peloponeso, onde acaba a geografia real do poema e começam as andanças. Sua fama de mau tempo não é literária: o cabo é proverbial entre marinheiros há três mil anos, e os roteiros ainda descrevem a aceleração do vento ao seu redor."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "cicones-at-ismarus",
+    "agamemnons-murder"
+  ],
+  "locales": {
+    "en": {
+      "name": "Cape Malea",
+      "summary": "The hinge of the whole Odyssey. Rounding it, Odysseus is blown off course for ten years — and the poem's geography changes from a map to a story at exactly this point.",
+      "description": [
+        "Odysseus leaves Troy, raids the Cicones, and is driven past Cythera by a north wind at Malea. Everything before the cape can be plotted; almost nothing after it can. The same cape wrecks Menelaus' return and appears again in Odysseus' Cretan lies.",
+        "This is why the atlas treats Malea as a structural entry rather than a minor toponym: it is the boundary between the two halves of the dataset, the located and the argued."
+      ],
+      "identificationNote": "Accepted: an unmistakable headland, named identically in every period, whose sailing conditions the poem describes accurately.",
+      "debate": "Nothing about the cape. What is worth arguing is whether the poem's turn to the fantastic at Malea is a deliberate frontier — the edge of the known sea — or an accident of how the story grew."
+    },
+    "es": {
+      "name": "Cabo Maleas",
+      "summary": "La bisagra de toda la Odisea. Al doblarlo, Odiseo es desviado durante diez años, y la geografía del poema pasa de mapa a relato exactamente en ese punto.",
+      "description": [
+        "Odiseo sale de Troya, saquea a los cícones y un viento del norte lo empuja más allá de Citera al llegar a Maleas. Todo lo anterior al cabo se puede cartografiar; casi nada de lo posterior. El mismo cabo arruina el regreso de Menelao y reaparece en las mentiras cretenses de Odiseo.",
+        "Por eso el atlas trata Maleas como una entrada estructural y no como un topónimo menor: es la frontera entre las dos mitades del conjunto de datos, la localizada y la discutida."
+      ],
+      "identificationNote": "Aceptada: un promontorio inconfundible, nombrado igual en toda época, cuyas condiciones de navegación el poema describe con exactitud.",
+      "debate": "Nada sobre el cabo. Lo que merece discusión es si el giro del poema hacia lo fantástico en Maleas es una frontera deliberada —el borde del mar conocido— o un accidente del modo en que creció la historia."
+    },
+    "pt": {
+      "name": "Cabo Maleia",
+      "summary": "A dobradiça de toda a Odisseia. Ao dobrá-lo, Odisseu é desviado por dez anos — e a geografia do poema passa de mapa a relato exatamente nesse ponto.",
+      "description": [
+        "Odisseu sai de Troia, saqueia os cícones e um vento norte o empurra para além de Citera ao chegar ao Maleia. Tudo o que é anterior ao cabo pode ser mapeado; quase nada do posterior. O mesmo cabo arruína o retorno de Menelau e reaparece nas mentiras cretenses de Odisseu.",
+        "Por isso o atlas trata o Maleia como entrada estrutural e não como topônimo menor: é a fronteira entre as duas metades do conjunto de dados, a localizada e a discutida."
+      ],
+      "identificationNote": "Aceita: um promontório inconfundível, nomeado igual em toda época, cujas condições de navegação o poema descreve com exatidão.",
+      "debate": "Nada sobre o cabo. O que merece discussão é se a virada do poema para o fantástico no Maleia é uma fronteira deliberada — a borda do mar conhecido — ou um acidente do modo como a história cresceu."
+    }
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "slug": "aeolia",
+  "id": "HOM-P-018",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "speculative",
+  "unlocated": false,
+  "region": "italySicily",
+  "homericNames": [
+    "Αἰολίη νῆσος"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 10,
+      "lines": "1-79"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "berard-1927",
+      "kind": "scholarship",
+      "citation": "Victor Bérard, Les navigations d'Ulysse (4 vols., 1927–1929)",
+      "author": "Victor Bérard",
+      "year": 1927,
+      "url": "https://archive.org/details/lesnavigationsdu04bera"
+    },
+    {
+      "id": "thucydides-3-88",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 3.88",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "strabo-6-2",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 6.2",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "lipari",
+      "identification": "speculative",
+      "modernName": "Lipari, Aeolian Islands",
+      "country": "IT",
+      "lat": 38.4667,
+      "lon": 14.95,
+      "precision": "island",
+      "proponent": "Ancient identification reported by Thucydides 3.88 and Strabo 6.2",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 2,
+        "score": 5,
+        "band": "low"
+      },
+      "sources": [
+        "thucydides-3-88",
+        "strabo-6-2",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Lipari and the Aeolian islands",
+          "note": "The islands carry the name, and antiquity made the connection early: Thucydides discusses them as the islands of Aeolus. The poem's floating island with a bronze wall is not a description of Lipari, but the archipelago's volcanism and the winds around it have kept the identification alive for 2,500 years."
+        },
+        "es": {
+          "label": "Lípari y las islas Eolias",
+          "note": "Las islas llevan el nombre, y la Antigüedad hizo pronto la conexión: Tucídides las trata como las islas de Eolo. La isla flotante con muralla de bronce del poema no es una descripción de Lípari, pero el vulcanismo del archipiélago y los vientos que lo rodean han mantenido viva la identificación durante 2.500 años."
+        },
+        "pt": {
+          "label": "Lipari e as ilhas Eólias",
+          "note": "As ilhas carregam o nome, e a Antiguidade fez a conexão cedo: Tucídides as trata como as ilhas de Éolo. A ilha flutuante com muralha de bronze do poema não é uma descrição de Lipari, mas o vulcanismo do arquipélago e os ventos ao redor mantiveram a identificação viva por 2.500 anos."
+        }
+      }
+    },
+    {
+      "id": "stromboli",
+      "identification": "speculative",
+      "modernName": "Stromboli",
+      "country": "IT",
+      "lat": 38.79,
+      "lon": 15.21,
+      "precision": "island",
+      "proponent": "A recurring modern refinement of the Aeolian identification",
+      "era": "modern",
+      "confidence": {
+        "textual": 1,
+        "archaeological": 0,
+        "scholarly": 0,
+        "geographic": 1,
+        "score": 2,
+        "band": "minimal"
+      },
+      "sources": [
+        "berard-1927",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Stromboli",
+          "note": "A narrower version of the same idea, attracted by the permanently active volcano. It explains the 'floating' island as a smoking one; it explains nothing else."
+        },
+        "es": {
+          "label": "Estrómboli",
+          "note": "Una versión más estrecha de la misma idea, atraída por el volcán permanentemente activo. Explica la isla «flotante» como una isla humeante; no explica nada más."
+        },
+        "pt": {
+          "label": "Strômboli",
+          "note": "Uma versão mais estreita da mesma ideia, atraída pelo vulcão permanentemente ativo. Explica a ilha “flutuante” como uma ilha fumegante; não explica mais nada."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "aeolus-and-the-winds"
+  ],
+  "locales": {
+    "en": {
+      "name": "Aeolia",
+      "summary": "The floating island of Aeolus, keeper of the winds, whose gift Odysseus' crew open within sight of Ithaca. The Aeolian islands carry the name — which is evidence about Greek naming, not about the poem.",
+      "description": [
+        "Aeolia is described as an island that floats, ringed by an unbroken bronze wall, where Aeolus lives with six sons married to six daughters. The detail is fairy-tale and the hospitality is real: Aeolus gives Odysseus a bag containing all the winds but the one that will carry him home.",
+        "The episode's geography is famously self-defeating. Nine days of favourable sailing bring Ithaca in sight; the crew open the bag; the winds blow them straight back to Aeolia. Whatever the island is, the poem places it exactly nine days from Ithaca and then refuses to say in which direction."
+      ],
+      "identificationNote": "Speculative: an ancient name-based identification and a modern volcanic refinement, neither with any material support. The best hypothesis scores 5/12.",
+      "debate": "Whether the Aeolian islands were named after the Homeric Aeolus or the Homeric Aeolus after them — the direction of that borrowing is the whole question, and the atlas records it as unresolved."
+    },
+    "es": {
+      "name": "Eolia",
+      "summary": "La isla flotante de Eolo, guardián de los vientos, cuyo regalo abre la tripulación de Odiseo a la vista de Ítaca. Las islas Eolias llevan el nombre, lo que es una prueba sobre la toponimia griega, no sobre el poema.",
+      "description": [
+        "Eolia se describe como una isla que flota, ceñida por una muralla de bronce sin brecha, donde Eolo vive con seis hijos casados con seis hijas. El detalle es de cuento y la hospitalidad es real: Eolo da a Odiseo un odre con todos los vientos salvo el que ha de llevarlo a casa.",
+        "La geografía del episodio se derrota a sí misma, y es célebre por ello. Nueve días de navegación favorable ponen Ítaca a la vista; la tripulación abre el odre; los vientos los devuelven de un soplo a Eolia. Sea lo que sea la isla, el poema la sitúa a exactamente nueve días de Ítaca y luego se niega a decir en qué dirección."
+      ],
+      "identificationNote": "Especulativa: una identificación antigua basada en el nombre y una precisión volcánica moderna, ninguna con apoyo material. La mejor hipótesis puntúa 5/12.",
+      "debate": "Si las islas Eolias se llamaron así por el Eolo homérico o el Eolo homérico por ellas: la dirección de ese préstamo es toda la cuestión, y el atlas la registra como no resuelta."
+    },
+    "pt": {
+      "name": "Eólia",
+      "summary": "A ilha flutuante de Éolo, guardião dos ventos, cujo presente a tripulação de Odisseu abre à vista de Ítaca. As ilhas Eólias carregam o nome, o que é prova sobre a toponímia grega, não sobre o poema.",
+      "description": [
+        "Eólia é descrita como uma ilha que flutua, cercada por uma muralha de bronze sem brecha, onde Éolo vive com seis filhos casados com seis filhas. O detalhe é de conto e a hospitalidade é real: Éolo dá a Odisseu um odre com todos os ventos, menos o que há de levá-lo para casa.",
+        "A geografia do episódio derrota a si mesma, e é célebre por isso. Nove dias de navegação favorável põem Ítaca à vista; a tripulação abre o odre; os ventos os devolvem num sopro a Eólia. Seja o que for a ilha, o poema a situa a exatamente nove dias de Ítaca e depois se recusa a dizer em que direção."
+      ],
+      "identificationNote": "Especulativa: uma identificação antiga baseada no nome e um refinamento vulcânico moderno, nenhum com apoio material. A melhor hipótese pontua 5/12.",
+      "debate": "Se as ilhas Eólias receberam o nome do Éolo homérico ou o Éolo homérico delas: a direção desse empréstimo é toda a questão, e o atlas a registra como não resolvida."
+    }
+  }
+}

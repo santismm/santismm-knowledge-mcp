@@ -1,0 +1,129 @@
+{
+  "slug": "phaeacians-on-scheria",
+  "id": "HOM-E-019",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 6,
+  "lines": "1-331",
+  "places": [
+    "scheria"
+  ],
+  "confidence": {
+    "textual": 2,
+    "archaeological": 0,
+    "scholarly": 1,
+    "geographic": 2,
+    "score": 5,
+    "band": "low"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "thucydides-1-25",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 1.25",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "corfu-tradition",
+      "kind": "tradition",
+      "citation": "The identification of Scheria with Corcyra (Corfu), continuous since antiquity"
+    }
+  ],
+  "theories": [
+    {
+      "id": "corfu",
+      "identification": "speculative",
+      "place": "scheria",
+      "proponent": "Ancient identification; Thucydides 1.25",
+      "era": "antiquity",
+      "sources": [
+        "thucydides-1-25",
+        "corfu-tradition"
+      ],
+      "locales": {
+        "en": {
+          "label": "Corcyra (Corfu)",
+          "note": "The identification antiquity settled on, still marked by a rock shown as the petrified Phaeacian ship. A long tradition with no material support."
+        },
+        "es": {
+          "label": "Corcira (Corfú)",
+          "note": "La identificación en la que se asentó la Antigüedad, todavía señalada por una roca que se enseña como la nave feacia petrificada. Una tradición larga sin apoyo material."
+        },
+        "pt": {
+          "label": "Córcira (Corfu)",
+          "note": "A identificação em que a Antiguidade se assentou, ainda marcada por uma rocha mostrada como a nau feácia petrificada. Uma tradição longa sem apoio material."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The Phaeacians on Scheria",
+      "summary": "Odysseus washes ashore naked and is found by a princess doing laundry. What follows is the most civilised sequence in the poem — and the last place he visits before home.",
+      "narrative": [
+        "Nausicaa gives him clothes and advice on how to approach her parents; the palace is described in gold and bronze; the games are held, Demodocus sings, and Odysseus finally gives his name and tells the story of the wanderings.",
+        "The Phaeacians ferry him home in a night, in a ship that needs no steersman, and are punished for it. Their island is where the poem's fantastic geography ends and Ithaca's real one resumes."
+      ],
+      "whyItMatters": "Scheria is the frontier between the two halves of the Odyssey, which is why its identification matters more than its 5/12 score suggests.",
+      "debate": "Whether Scheria is a real island idealised, an idealisation given an island's furniture, or Corcyra's own tradition drawn into the poem.",
+      "faqs": [
+        {
+          "q": "Is Scheria Corfu?",
+          "a": "That is the ancient identification and it has no material support. The atlas records it as speculative."
+        },
+        {
+          "q": "Why are the Phaeacians punished?",
+          "a": "For ferrying strangers home too easily. Poseidon turns their ship to stone in sight of the harbour, and the poem leaves the threat of a mountain closing over their city unresolved."
+        }
+      ]
+    },
+    "es": {
+      "title": "Los feacios en Esqueria",
+      "summary": "Odiseo llega desnudo a la orilla y lo encuentra una princesa lavando ropa. Lo que sigue es la secuencia más civilizada del poema, y el último lugar que visita antes de casa.",
+      "narrative": [
+        "Nausícaa le da ropa y le explica cómo presentarse ante sus padres; el palacio se describe en oro y bronce; se celebran los juegos, canta Demódoco y Odiseo da por fin su nombre y cuenta las andanzas.",
+        "Los feacios lo llevan a casa en una noche, en una nave que no necesita timonel, y son castigados por ello. Su isla es donde termina la geografía fantástica del poema y se reanuda la real de Ítaca."
+      ],
+      "whyItMatters": "Esqueria es la frontera entre las dos mitades de la Odisea, y por eso su identificación importa más de lo que sugiere su 5/12.",
+      "debate": "Si Esqueria es una isla real idealizada, una idealización amueblada como isla, o la propia tradición de Corcira arrastrada al poema.",
+      "faqs": [
+        {
+          "q": "¿Es Esqueria Corfú?",
+          "a": "Es la identificación antigua y no tiene apoyo material. El atlas la registra como especulativa."
+        },
+        {
+          "q": "¿Por qué se castiga a los feacios?",
+          "a": "Por llevar a casa a los extranjeros con demasiada facilidad. Poseidón petrifica su nave a la vista del puerto, y el poema deja sin resolver la amenaza de una montaña que cierre su ciudad."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Os feácios em Esquéria",
+      "summary": "Odisseu chega nu à praia e é encontrado por uma princesa lavando roupa. O que se segue é a sequência mais civilizada do poema — e o último lugar que ele visita antes de casa.",
+      "narrative": [
+        "Nausícaa lhe dá roupas e explica como se apresentar aos pais; o palácio é descrito em ouro e bronze; realizam-se os jogos, Demódoco canta, e Odisseu enfim dá seu nome e conta as andanças.",
+        "Os feácios o levam para casa numa noite, numa nau que não precisa de timoneiro, e são punidos por isso. Sua ilha é onde termina a geografia fantástica do poema e recomeça a real de Ítaca."
+      ],
+      "whyItMatters": "Esquéria é a fronteira entre as duas metades da Odisseia, e por isso sua identificação importa mais do que seu 5/12 sugere.",
+      "debate": "Se Esquéria é uma ilha real idealizada, uma idealização mobiliada como ilha, ou a própria tradição de Córcira arrastada para o poema.",
+      "faqs": [
+        {
+          "q": "Esquéria é Corfu?",
+          "a": "É a identificação antiga e não tem apoio material. O atlas a registra como especulativa."
+        },
+        {
+          "q": "Por que os feácios são punidos?",
+          "a": "Por levar estrangeiros para casa com facilidade demais. Posêidon petrifica sua nau à vista do porto, e o poema deixa sem resolver a ameaça de uma montanha fechando sua cidade."
+        }
+      ]
+    }
+  }
+}

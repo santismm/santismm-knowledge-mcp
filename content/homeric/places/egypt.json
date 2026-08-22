@@ -1,0 +1,125 @@
+{
+  "slug": "egypt",
+  "id": "HOM-P-030",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "levantEgypt",
+  "homericNames": [
+    "Αἴγυπτος"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 4,
+      "lines": "351-386"
+    },
+    {
+      "work": "odyssey",
+      "book": 14,
+      "lines": "245-286"
+    },
+    {
+      "work": "odyssey",
+      "book": 17,
+      "lines": "424-444"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "egypt-contacts",
+      "kind": "archaeology",
+      "citation": "Late Bronze Age and early Iron Age contact between the Aegean and Egypt, attested by imported material in both directions",
+      "year": 2000
+    },
+    {
+      "id": "herodotus-2",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 2 — Egypt and the Greek presence there",
+      "author": "Herodotus",
+      "year": -430
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "nile-delta",
+      "identification": "accepted",
+      "modernName": "Nile delta",
+      "country": "EG",
+      "lat": 31.05,
+      "lon": 31.5,
+      "precision": "region",
+      "proponent": "Universal identification",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 2,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 11,
+        "band": "high"
+      },
+      "sources": [
+        "egypt-contacts",
+        "herodotus-2",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Egypt and the Nile",
+          "note": "Homer calls both the country and the river Aigyptos, and describes raiding, captivity and forced labour there in terms that match how the eastern Mediterranean actually worked. Egypt is the furthest real place the poems name with confidence."
+        },
+        "es": {
+          "label": "Egipto y el Nilo",
+          "note": "Homero llama Aigyptos tanto al país como al río, y describe allí razias, cautiverio y trabajo forzado en términos que encajan con el funcionamiento real del Mediterráneo oriental. Egipto es el lugar real más lejano que los poemas nombran con seguridad."
+        },
+        "pt": {
+          "label": "Egito e o Nilo",
+          "note": "Homero chama de Aigyptos tanto o país quanto o rio, e descreve ali razias, cativeiro e trabalho forçado em termos que encaixam no funcionamento real do Mediterrâneo oriental. O Egito é o lugar real mais distante que os poemas nomeiam com segurança."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "menelaus-and-proteus"
+  ],
+  "locales": {
+    "en": {
+      "name": "Egypt",
+      "summary": "The far edge of the poems' real world. Menelaus is blown there and comes home rich; Odysseus' invented life stories go there too, because it is where a plausible lie about hard travel would go.",
+      "description": [
+        "Egypt appears in the Odyssey as a destination for raiding and for captivity, and Odysseus uses it repeatedly in his false tales — a sign that the audience found the destination credible rather than marvellous.",
+        "The detail is unromantic and consistent: a raid that goes wrong, prisoners taken, years of service, wealth acquired. It is the kind of knowledge a trading world has of a large neighbour."
+      ],
+      "identificationNote": "Accepted: the country is the country. Archaeological scores 2 rather than 3 because the material connecting Aegean visitors to specific Homeric events is contextual, not direct.",
+      "debate": "How much Egyptian detail in the poems reflects Late Bronze Age contact and how much reflects eighth- and seventh-century Greek presence in the delta."
+    },
+    "es": {
+      "name": "Egipto",
+      "summary": "El borde lejano del mundo real de los poemas. A Menelao lo empuja allí el viento y vuelve rico; las vidas inventadas de Odiseo pasan también por allí, porque es adonde iría una mentira verosímil sobre viajes duros.",
+      "description": [
+        "Egipto aparece en la Odisea como destino de razias y de cautiverio, y Odiseo lo usa repetidamente en sus relatos falsos: señal de que el público encontraba el destino creíble y no maravilloso.",
+        "El detalle es poco romántico y coherente: una razia que sale mal, prisioneros, años de servicio, riqueza obtenida. Es el tipo de conocimiento que un mundo comercial tiene de un vecino grande."
+      ],
+      "identificationNote": "Aceptada: el país es el país. El criterio arqueológico puntúa 2 y no 3 porque el material que conecta a visitantes egeos con hechos homéricos concretos es contextual, no directo.",
+      "debate": "Cuánto del detalle egipcio de los poemas refleja contactos del Bronce Final y cuánto la presencia griega en el delta durante los siglos VIII y VII."
+    },
+    "pt": {
+      "name": "Egito",
+      "summary": "A borda distante do mundo real dos poemas. Menelau é levado para lá pelo vento e volta rico; as vidas inventadas de Odisseu também passam por ali, porque é para onde iria uma mentira verossímil sobre viagens duras.",
+      "description": [
+        "O Egito aparece na Odisseia como destino de razias e de cativeiro, e Odisseu o usa repetidamente em suas histórias falsas — sinal de que o público achava o destino crível, não maravilhoso.",
+        "O detalhe é pouco romântico e coerente: uma razia que dá errado, prisioneiros, anos de serviço, riqueza obtida. É o tipo de conhecimento que um mundo comercial tem de um vizinho grande."
+      ],
+      "identificationNote": "Aceita: o país é o país. O critério arqueológico pontua 2 e não 3 porque o material que conecta visitantes egeus a fatos homéricos concretos é contextual, não direto.",
+      "debate": "Quanto do detalhe egípcio nos poemas reflete contatos do Bronze Final e quanto reflete a presença grega no delta nos séculos VIII e VII."
+    }
+  }
+}

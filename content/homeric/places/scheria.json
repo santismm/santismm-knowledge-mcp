@@ -1,0 +1,129 @@
+{
+  "slug": "scheria",
+  "id": "HOM-P-026",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "speculative",
+  "unlocated": false,
+  "region": "ionian",
+  "homericNames": [
+    "Σχερίη"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 6,
+      "lines": "1-47"
+    },
+    {
+      "work": "odyssey",
+      "book": 7,
+      "lines": "81-132"
+    },
+    {
+      "work": "odyssey",
+      "book": 13,
+      "lines": "125-187"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "thucydides-1-25",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 1.25 — Corcyra and its Phaeacian reputation",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "corfu-tradition",
+      "kind": "tradition",
+      "citation": "The identification of Scheria with Corcyra (Corfu), current in antiquity and continuous in local tradition"
+    },
+    {
+      "id": "kanoni",
+      "kind": "tradition",
+      "citation": "The islet of Pontikonisi off Corfu, shown as the petrified Phaeacian ship"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "corfu",
+      "identification": "speculative",
+      "modernName": "Corfu",
+      "country": "GR",
+      "lat": 39.62,
+      "lon": 19.92,
+      "precision": "island",
+      "proponent": "Ancient identification; Thucydides 1.25",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 2,
+        "score": 5,
+        "band": "low"
+      },
+      "sources": [
+        "thucydides-1-25",
+        "corfu-tradition",
+        "kanoni"
+      ],
+      "locales": {
+        "en": {
+          "label": "Corfu (Corcyra)",
+          "note": "The identification antiquity settled on and tourism has never let go: Thucydides already records the Corcyraeans' Phaeacian reputation, and a rock off the coast is still shown as the ship Poseidon turned to stone. It is a tradition of long standing and no material basis."
+        },
+        "es": {
+          "label": "Corfú (Corcira)",
+          "note": "La identificación en la que se asentó la Antigüedad y que el turismo no ha soltado: Tucídides ya recoge la fama feacia de los corcireos, y todavía se enseña frente a la costa una roca como la nave que Poseidón petrificó. Es una tradición de largo recorrido y sin base material."
+        },
+        "pt": {
+          "label": "Corfu (Córcira)",
+          "note": "A identificação em que a Antiguidade se assentou e que o turismo nunca largou: Tucídides já registra a fama feácia dos corcireus, e ainda se mostra diante da costa uma rocha como a nau que Posêidon petrificou. É uma tradição de longo curso e sem base material."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "phaeacians-on-scheria"
+  ],
+  "locales": {
+    "en": {
+      "name": "Scheria",
+      "summary": "The island of the Phaeacians, the last stop before home and the most civilised place in the poem — a harbour city with walls, ships and a court, described in more social detail than anywhere Odysseus actually rules.",
+      "description": [
+        "Odysseus washes up naked on Scheria, is found by Nausicaa, and is entertained by a people whose ships need no steering and who deliver him to Ithaca asleep. Their punishment for the favour — Poseidon turning the ship to stone and threatening to wall the city in with a mountain — is the poem's last supernatural act.",
+        "Antiquity identified Scheria with Corcyra, and the identification stuck. The poem places the Phaeacians 'far from men who eat bread', which is a statement about isolation rather than a bearing."
+      ],
+      "identificationNote": "Speculative: an ancient, continuous tradition with a real island behind it and nothing excavated to connect them. It scores 5/12.",
+      "debate": "Whether Scheria is a real island seen through utopian distortion, a utopia given an island's furniture, or Corcyra's own claim absorbed into the poem. The petrified-ship rock is a good example of how a tradition acquires a landmark."
+    },
+    "es": {
+      "name": "Esqueria",
+      "summary": "La isla de los feacios, la última escala antes de casa y el lugar más civilizado del poema: una ciudad portuaria con murallas, naves y corte, descrita con más detalle social que ningún sitio que Odiseo gobierne.",
+      "description": [
+        "Odiseo llega desnudo a Esqueria, lo encuentra Nausícaa y lo acoge un pueblo cuyas naves no necesitan timón y que lo deposita dormido en Ítaca. El castigo por el favor —Poseidón petrificando la nave y amenazando con cerrar la ciudad tras una montaña— es el último acto sobrenatural del poema.",
+        "La Antigüedad identificó Esqueria con Corcira, y la identificación cuajó. El poema sitúa a los feacios «lejos de los hombres que comen pan», que es una afirmación sobre aislamiento, no un rumbo."
+      ],
+      "identificationNote": "Especulativa: una tradición antigua y continua, con una isla real detrás y nada excavado que las conecte. Puntúa 5/12.",
+      "debate": "Si Esqueria es una isla real vista con distorsión utópica, una utopía amueblada como isla, o la propia reivindicación de Corcira absorbida por el poema. La roca de la nave petrificada es un buen ejemplo de cómo una tradición adquiere un hito."
+    },
+    "pt": {
+      "name": "Esquéria",
+      "summary": "A ilha dos feácios, a última escala antes de casa e o lugar mais civilizado do poema: uma cidade portuária com muralhas, naus e corte, descrita com mais detalhe social que qualquer lugar que Odisseu governe.",
+      "description": [
+        "Odisseu chega nu a Esquéria, é encontrado por Nausícaa e é acolhido por um povo cujas naus não precisam de leme e que o deposita adormecido em Ítaca. O castigo pelo favor — Posêidon petrificando a nau e ameaçando fechar a cidade atrás de uma montanha — é o último ato sobrenatural do poema.",
+        "A Antiguidade identificou Esquéria com Córcira, e a identificação pegou. O poema situa os feácios “longe dos homens que comem pão”, o que é uma afirmação sobre isolamento, não um rumo."
+      ],
+      "identificationNote": "Especulativa: uma tradição antiga e contínua, com uma ilha real por trás e nada escavado que as conecte. Pontua 5/12.",
+      "debate": "Se Esquéria é uma ilha real vista com distorção utópica, uma utopia mobiliada como ilha, ou a própria reivindicação de Córcira absorvida pelo poema. A rocha da nau petrificada é um bom exemplo de como uma tradição adquire um marco."
+    }
+  }
+}

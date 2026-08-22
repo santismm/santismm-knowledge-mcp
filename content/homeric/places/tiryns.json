@@ -1,0 +1,123 @@
+{
+  "slug": "tiryns",
+  "id": "HOM-P-008",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "mainlandGreece",
+  "homericNames": [
+    "Τίρυνς"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "559-568"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "schliemann-tiryns",
+      "kind": "archaeology",
+      "citation": "Heinrich Schliemann and Wilhelm Dörpfeld, Tiryns: The Prehistoric Palace of the Kings of Tiryns (1885)",
+      "author": "Heinrich Schliemann",
+      "year": 1885
+    },
+    {
+      "id": "unesco-mycenae",
+      "kind": "scholarship",
+      "citation": "UNESCO World Heritage List, Archaeological Sites of Mycenae and Tiryns (inscribed 1999)",
+      "year": 1999,
+      "url": "https://whc.unesco.org/en/list/941"
+    },
+    {
+      "id": "pausanias-2-25",
+      "kind": "primary_text",
+      "citation": "Pausanias, Description of Greece 2.25",
+      "author": "Pausanias",
+      "year": 170
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "tiryns-citadel",
+      "identification": "accepted",
+      "modernName": "Tiryns",
+      "country": "GR",
+      "lat": 37.5997,
+      "lon": 22.7997,
+      "precision": "site",
+      "proponent": "Continuous identification; excavated by Schliemann and Dörpfeld (1884–1885)",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 3,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 11,
+        "band": "high"
+      },
+      "sources": [
+        "schliemann-tiryns",
+        "unesco-mycenae",
+        "pausanias-2-25"
+      ],
+      "locales": {
+        "en": {
+          "label": "The citadel of Tiryns",
+          "note": "Cyclopean walls up to eight metres thick, corbelled galleries and a palace with a megaron, on a low ridge commanding the Argive plain and its coast. Homer's single epithet for it — 'Tiryns of the great walls' — is the most economical accurate description of an archaeological site in either poem."
+        },
+        "es": {
+          "label": "La ciudadela de Tirinto",
+          "note": "Murallas ciclópeas de hasta ocho metros de espesor, galerías abovedadas por aproximación y un palacio con mégaron, sobre una loma baja que domina la llanura argiva y su costa. El único epíteto que Homero le dedica —«Tirinto la amurallada»— es la descripción exacta más económica de un yacimiento arqueológico en ambos poemas."
+        },
+        "pt": {
+          "label": "A cidadela de Tirinto",
+          "note": "Muralhas ciclópicas de até oito metros de espessura, galerias em falsa abóbada e um palácio com mégaron, sobre uma crista baixa que domina a planície argiva e sua costa. O único epíteto que Homero lhe dá — “Tirinto das grandes muralhas” — é a descrição exata mais econômica de um sítio arqueológico nos dois poemas."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "catalogue-of-ships"
+  ],
+  "locales": {
+    "en": {
+      "name": "Tiryns",
+      "summary": "A Catalogue-of-Ships city whose Homeric epithet is a literal description of what survives: walls so massive that later Greeks assumed giants had built them.",
+      "description": [
+        "Tiryns appears once in the Iliad, in Diomedes' Argive contingent, as 'Tiryns of the great walls'. The citadel stands eight kilometres from Mycenae, controlling the plain's access to the sea, and its Bronze Age fortifications are the most intact in the Argolid.",
+        "It is a small entry in the poems and a large one in the archaeology, which makes it a useful control case: the atlas is not measuring how important a place is in Homer, but how securely it can be located."
+      ],
+      "identificationNote": "Accepted: an excavated citadel of unmistakable date, identified continuously since antiquity. Textual scores 2 only because the poem says almost nothing about it beyond the epithet.",
+      "debate": "Nothing about the location. The live questions are about function — how Tiryns related politically to Mycenae, and what the post-palatial reoccupation means for the end of the Bronze Age."
+    },
+    "es": {
+      "name": "Tirinto",
+      "summary": "Una ciudad del Catálogo de las Naves cuyo epíteto homérico es una descripción literal de lo que se conserva: murallas tan macizas que los griegos posteriores dieron por hecho que las habían levantado gigantes.",
+      "description": [
+        "Tirinto aparece una vez en la Ilíada, en el contingente argivo de Diomedes, como «Tirinto la amurallada». La ciudadela está a ocho kilómetros de Micenas y controla el acceso de la llanura al mar; sus fortificaciones del Bronce son las más íntegras de la Argólide.",
+        "Es una entrada pequeña en los poemas y grande en la arqueología, lo que la convierte en un buen caso de control: el atlas no mide la importancia de un lugar en Homero, sino con qué seguridad se lo puede localizar."
+      ],
+      "identificationNote": "Aceptada: una ciudadela excavada de fecha inequívoca, identificada de forma continua desde la Antigüedad. El criterio textual puntúa 2 solo porque el poema apenas dice nada más allá del epíteto.",
+      "debate": "Nada sobre la ubicación. Las preguntas vivas son de función: cómo se relacionaba políticamente Tirinto con Micenas y qué significa su reocupación pospalacial para el final de la Edad del Bronce."
+    },
+    "pt": {
+      "name": "Tirinto",
+      "summary": "Uma cidade do Catálogo das Naus cujo epíteto homérico é uma descrição literal do que sobreviveu: muralhas tão maciças que os gregos posteriores supuseram terem sido erguidas por gigantes.",
+      "description": [
+        "Tirinto aparece uma vez na Ilíada, no contingente argivo de Diomedes, como “Tirinto das grandes muralhas”. A cidadela fica a oito quilômetros de Micenas e controla o acesso da planície ao mar; suas fortificações do Bronze são as mais íntegras da Argólida.",
+        "É uma entrada pequena nos poemas e grande na arqueologia, o que a torna um bom caso de controle: o atlas não mede a importância de um lugar em Homero, mas com que segurança ele pode ser localizado."
+      ],
+      "identificationNote": "Aceita: uma cidadela escavada de data inequívoca, identificada continuamente desde a Antiguidade. O critério textual pontua 2 apenas porque o poema quase nada diz além do epíteto.",
+      "debate": "Nada sobre a localização. As questões vivas são de função: como Tirinto se relacionava politicamente com Micenas e o que sua reocupação pós-palaciana significa para o fim da Idade do Bronze."
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "slug": "menelaus-and-proteus",
+  "id": "HOM-E-009",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 4,
+  "lines": "351-586",
+  "places": [
+    "pharos",
+    "egypt"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 1,
+    "scholarly": 2,
+    "geographic": 2,
+    "score": 8,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-17",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 17.1 — Pharos and Homer's description of its distance",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "egypt-contacts",
+      "kind": "archaeology",
+      "citation": "Aegean–Egyptian contact in the Late Bronze Age and early Iron Age, attested by imported material",
+      "year": 2000
+    }
+  ],
+  "theories": [
+    {
+      "id": "pharos-island",
+      "identification": "plausible",
+      "place": "pharos",
+      "proponent": "Strabo, Geography 17.1",
+      "era": "antiquity",
+      "sources": [
+        "strabo-17"
+      ],
+      "locales": {
+        "en": {
+          "label": "The island of Pharos",
+          "note": "The island is certain and the distance the poem gives it is not: Homer places it a day's sail offshore, and it lies about a kilometre out. Strabo already tried to explain the discrepancy by silting."
+        },
+        "es": {
+          "label": "La isla de Faros",
+          "note": "La isla es segura y la distancia que le da el poema no lo es: Homero la sitúa a un día de navegación de la costa, y está a un kilómetro. Estrabón ya intentó explicar la discrepancia por la colmatación."
+        },
+        "pt": {
+          "label": "A ilha de Faros",
+          "note": "A ilha é certa e a distância que o poema lhe dá não é: Homero a situa a um dia de navegação da costa, e ela fica a cerca de um quilômetro. Estrabão já tentou explicar a discrepância pelo assoreamento."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Menelaus and Proteus at Pharos",
+      "summary": "Becalmed off Egypt, Menelaus ambushes a shape-shifting god to ask the way home — and gets, instead, the news that his brother has been murdered.",
+      "narrative": [
+        "Eidothea tells Menelaus to hide among the seals at midday and seize her father Proteus as he counts his flock. Proteus turns into a lion, a serpent, a leopard, a boar, water and a tree, and when he tires he answers: how to appease the gods, how the others returned, and that Odysseus is alive on an island with Calypso.",
+        "The scene is set on a real island, described with a real detail — the stink of the seals, which Eidothea masks with ambrosia — and a wrong distance."
+      ],
+      "whyItMatters": "It is the atlas's clearest example of a correct identification with an incorrect detail: Pharos is Pharos, and Homer still puts it a day's sail from Egypt.",
+      "debate": "Whether the distance is error, exaggeration or a memory of a different coastline. Strabo's silting argument does not work at that scale.",
+      "faqs": [
+        {
+          "q": "Is Pharos the island with the lighthouse?",
+          "a": "Yes — the same island, centuries before the Ptolemaic lighthouse was built on it."
+        },
+        {
+          "q": "Does the wrong distance undermine the identification?",
+          "a": "No, and that is the point of scoring criteria separately: the place scores high on identification and lower on geographic coherence, and both facts stay visible."
+        }
+      ]
+    },
+    "es": {
+      "title": "Menelao y Proteo en Faros",
+      "summary": "En calma chicha frente a Egipto, Menelao embosca a un dios que cambia de forma para preguntarle el camino a casa, y lo que obtiene es la noticia de que su hermano ha sido asesinado.",
+      "narrative": [
+        "Idótea le dice a Menelao que se esconda entre las focas al mediodía y agarre a su padre Proteo mientras cuenta el rebaño. Proteo se convierte en león, serpiente, leopardo, jabalí, agua y árbol, y cuando se cansa responde: cómo aplacar a los dioses, cómo regresaron los demás y que Odiseo está vivo en una isla con Calipso.",
+        "La escena transcurre en una isla real, descrita con un detalle real —el hedor de las focas, que Idótea disimula con ambrosía— y con una distancia equivocada."
+      ],
+      "whyItMatters": "Es el ejemplo más claro del atlas de una identificación correcta con un dato incorrecto: Faros es Faros, y aun así Homero la sitúa a un día de navegación de Egipto.",
+      "debate": "Si la distancia es un error, una exageración o el recuerdo de otra línea de costa. El argumento de la colmatación de Estrabón no funciona a esa escala.",
+      "faqs": [
+        {
+          "q": "¿Es Faros la isla del faro?",
+          "a": "Sí: la misma isla, siglos antes de que se levantara sobre ella el faro ptolemaico."
+        },
+        {
+          "q": "¿Invalida la identificación la distancia errónea?",
+          "a": "No, y en eso consiste puntuar los criterios por separado: el lugar puntúa alto en identificación y más bajo en coherencia geográfica, y ambos hechos quedan a la vista."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Menelau e Proteu em Faros",
+      "summary": "Em calmaria diante do Egito, Menelau embosca um deus que muda de forma para lhe perguntar o caminho de casa — e o que obtém é a notícia de que seu irmão foi assassinado.",
+      "narrative": [
+        "Idoteia diz a Menelau que se esconda entre as focas ao meio-dia e agarre seu pai Proteu enquanto ele conta o rebanho. Proteu vira leão, serpente, leopardo, javali, água e árvore, e quando se cansa responde: como aplacar os deuses, como os outros voltaram e que Odisseu está vivo numa ilha com Calipso.",
+        "A cena se passa numa ilha real, descrita com um detalhe real — o fedor das focas, que Idoteia disfarça com ambrosia — e com uma distância errada."
+      ],
+      "whyItMatters": "É o exemplo mais claro do atlas de uma identificação correta com um dado incorreto: Faros é Faros, e ainda assim Homero a situa a um dia de navegação do Egito.",
+      "debate": "Se a distância é erro, exagero ou lembrança de outra linha de costa. O argumento do assoreamento de Estrabão não funciona nessa escala.",
+      "faqs": [
+        {
+          "q": "Faros é a ilha do farol?",
+          "a": "Sim: a mesma ilha, séculos antes de o farol ptolomaico ser erguido sobre ela."
+        },
+        {
+          "q": "A distância errada invalida a identificação?",
+          "a": "Não, e é nisso que consiste pontuar os critérios separadamente: o lugar pontua alto em identificação e mais baixo em coerência geográfica, e ambos os fatos ficam à vista."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "slug": "sirens",
+  "id": "HOM-P-022",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "speculative",
+  "unlocated": false,
+  "region": "italySicily",
+  "homericNames": [
+    "Σειρῆνες"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 12,
+      "lines": "39-54"
+    },
+    {
+      "work": "odyssey",
+      "book": 12,
+      "lines": "165-200"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "berard-1927",
+      "kind": "scholarship",
+      "citation": "Victor Bérard, Les navigations d'Ulysse (4 vols., 1927–1929)",
+      "author": "Victor Bérard",
+      "year": 1927,
+      "url": "https://archive.org/details/lesnavigationsdu04bera"
+    },
+    {
+      "id": "strabo-1-2-13",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 1.2 — the Sirens placed off the Campanian coast in the geographical tradition",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "li-galli",
+      "kind": "tradition",
+      "citation": "Li Galli (the Sirenuse), the islets off the Amalfi coast, named for the Sirens in Italian tradition"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "li-galli",
+      "identification": "speculative",
+      "modernName": "Li Galli, Campania",
+      "country": "IT",
+      "lat": 40.58,
+      "lon": 14.43,
+      "precision": "island",
+      "proponent": "Ancient geographical tradition; Strabo 1.2",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 1,
+        "score": 4,
+        "band": "low"
+      },
+      "sources": [
+        "strabo-1-2-13",
+        "li-galli",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Li Galli / the Sirenuse",
+          "note": "Three islets off the Sorrentine peninsula, called the Sirenuse since antiquity. The name is the argument, and the name may well have followed the poem rather than preceded it."
+        },
+        "es": {
+          "label": "Li Galli / las Sirenusas",
+          "note": "Tres islotes frente a la península sorrentina, llamados Sirenusas desde la Antigüedad. El nombre es el argumento, y bien pudo seguir al poema en vez de precederlo."
+        },
+        "pt": {
+          "label": "Li Galli / as Sirenusas",
+          "note": "Três ilhotas diante da península sorrentina, chamadas Sirenusas desde a Antiguidade. O nome é o argumento, e bem pode ter seguido o poema em vez de precedê-lo."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "the-sirens"
+  ],
+  "locales": {
+    "en": {
+      "name": "The Sirens' island",
+      "summary": "Two singers on a flowery meadow surrounded by the bones of the men who stopped to listen. The poem gives no coordinates and one navigational instruction: wax in the ears, and tie the captain to the mast.",
+      "description": [
+        "The Sirens are the only hazard Odysseus survives by preparation alone. Circe tells him what they are and what to do; he does it; the ship passes. The episode is twenty lines long and has generated more art than any other in the poem.",
+        "Italian tradition attached them to the Sirenuse islets off Amalfi, which is a naming, not a discovery. The atlas records the identification and scores it accordingly."
+      ],
+      "identificationNote": "Speculative: a name-based tradition with no supporting evidence and no scholarly consensus, scoring 4/12.",
+      "debate": "Whether the Sirenuse are named after the episode or the episode located at the Sirenuse — the same circularity that runs through most of the western identifications."
+    },
+    "es": {
+      "name": "La isla de las sirenas",
+      "summary": "Dos cantoras en un prado florido rodeado por los huesos de quienes se detuvieron a escuchar. El poema no da coordenadas y sí una instrucción náutica: cera en los oídos y el capitán atado al mástil.",
+      "description": [
+        "Las sirenas son el único peligro que Odiseo supera solo con preparación. Circe le dice qué son y qué hacer; él lo hace; la nave pasa. El episodio dura veinte versos y ha generado más arte que ningún otro del poema.",
+        "La tradición italiana las adhirió a los islotes Sirenusas frente a Amalfi, lo cual es una denominación, no un hallazgo. El atlas registra la identificación y la puntúa en consecuencia."
+      ],
+      "identificationNote": "Especulativa: una tradición basada en el nombre, sin pruebas de apoyo ni consenso académico; puntúa 4/12.",
+      "debate": "Si las Sirenusas se llaman así por el episodio o el episodio se sitúa en las Sirenusas: la misma circularidad que recorre casi todas las identificaciones occidentales."
+    },
+    "pt": {
+      "name": "A ilha das sereias",
+      "summary": "Duas cantoras num prado florido cercado pelos ossos de quem parou para ouvir. O poema não dá coordenadas e dá uma instrução náutica: cera nos ouvidos e o capitão amarrado ao mastro.",
+      "description": [
+        "As sereias são o único perigo que Odisseu supera só com preparação. Circe lhe diz o que são e o que fazer; ele faz; a nau passa. O episódio dura vinte versos e gerou mais arte que qualquer outro do poema.",
+        "A tradição italiana as ligou às ilhotas Sirenusas diante de Amalfi, o que é uma denominação, não uma descoberta. O atlas registra a identificação e a pontua de acordo."
+      ],
+      "identificationNote": "Especulativa: uma tradição baseada no nome, sem provas de apoio nem consenso acadêmico; pontua 4/12.",
+      "debate": "Se as Sirenusas se chamam assim por causa do episódio ou o episódio é situado nas Sirenusas — a mesma circularidade que percorre quase todas as identificações ocidentais."
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "slug": "chryse-and-the-plague",
+  "id": "HOM-E-006",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "iliad",
+  "book": 1,
+  "lines": "8-100",
+  "places": [
+    "chryse",
+    "troy"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 1,
+    "scholarly": 2,
+    "geographic": 3,
+    "score": 9,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-13",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 13.1",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "troad-survey",
+      "kind": "archaeology",
+      "citation": "Archaeological survey of the southern Troad and the Adramyttian gulf",
+      "year": 2000
+    }
+  ],
+  "theories": [
+    {
+      "id": "southern-troad-site",
+      "identification": "plausible",
+      "place": "chryse",
+      "proponent": "Strabo, Geography 13.1",
+      "era": "antiquity",
+      "sources": [
+        "strabo-13",
+        "troad-survey"
+      ],
+      "locales": {
+        "en": {
+          "label": "A site on the southern Troad coast",
+          "note": "Strabo names candidates and the region is not in doubt; no excavated town has been tied to the name Chryse."
+        },
+        "es": {
+          "label": "Un yacimiento en la costa sur de la Tróade",
+          "note": "Estrabón nombra candidatos y la región no está en duda; ninguna ciudad excavada se ha atado al nombre de Crisa."
+        },
+        "pt": {
+          "label": "Um sítio na costa sul da Trôade",
+          "note": "Estrabão nomeia candidatos e a região não está em dúvida; nenhuma cidade escavada foi ligada ao nome Crise."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Chryse and the plague",
+      "summary": "The Iliad opens with a local dispute over a captive woman from a nearby coastal town — and with nine days of arrows from Apollo.",
+      "narrative": [
+        "Chryses, priest of Apollo, comes to the ships to ransom his daughter. Agamemnon refuses him roughly; the priest prays; the god comes down 'like the night' and shoots the army for nine days. The quarrel with Achilles follows from the remedy.",
+        "The geography is small and domestic: a town within easy sailing of the camp, a temple, a ship sent to return the girl and sacrifice. It is the poem's clearest picture of the Troad as a lived-in coast rather than a battlefield."
+      ],
+      "whyItMatters": "It anchors the war's opening to the local coast rather than to the citadel, and it is a reminder that most of the Iliad's geography is ordinary: towns, temples, harbours and a day's sailing.",
+      "debate": "Where exactly Chryse stood, and how the poem's picture of raiding and ransom on this coast relates to Late Bronze Age reality.",
+      "faqs": [
+        {
+          "q": "Is Chryse a real place?",
+          "a": "Almost certainly a real coastal town of the southern Troad, though which site it was is unresolved. The atlas classes it plausible."
+        },
+        {
+          "q": "Why does the plague matter for the atlas?",
+          "a": "It does not, in itself. What matters is that the episode is set in a local landscape that can be tested, and that the poem treats that landscape as familiar."
+        }
+      ]
+    },
+    "es": {
+      "title": "Crisa y la peste",
+      "summary": "La Ilíada empieza con una disputa local por una cautiva de una ciudad costera cercana, y con nueve días de flechas de Apolo.",
+      "narrative": [
+        "Crises, sacerdote de Apolo, llega a las naves a rescatar a su hija. Agamenón lo despide con dureza; el sacerdote reza; el dios baja «semejante a la noche» y dispara contra el ejército durante nueve días. La disputa con Aquiles nace del remedio.",
+        "La geografía es pequeña y doméstica: una ciudad a poca navegación del campamento, un templo, una nave enviada a devolver a la muchacha y a sacrificar. Es la imagen más clara del poema de la Tróade como costa habitada y no como campo de batalla."
+      ],
+      "whyItMatters": "Ancla la apertura de la guerra a la costa local y no a la ciudadela, y recuerda que la mayor parte de la geografía de la Ilíada es ordinaria: ciudades, templos, puertos y un día de navegación.",
+      "debate": "Dónde estuvo exactamente Crisa y cómo se relaciona la imagen de razias y rescates de esta costa con la realidad del Bronce Final.",
+      "faqs": [
+        {
+          "q": "¿Es Crisa un lugar real?",
+          "a": "Casi con seguridad una ciudad costera real de la Tróade meridional, aunque no está resuelto qué yacimiento era. El atlas la clasifica como plausible."
+        },
+        {
+          "q": "¿Por qué importa la peste para el atlas?",
+          "a": "En sí, no importa. Lo que importa es que el episodio transcurre en un paisaje local contrastable y que el poema trata ese paisaje como familiar."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Crise e a peste",
+      "summary": "A Ilíada começa com uma disputa local por uma cativa de uma cidade costeira próxima — e com nove dias de flechas de Apolo.",
+      "narrative": [
+        "Crises, sacerdote de Apolo, chega às naus para resgatar a filha. Agamêmnon o despacha com dureza; o sacerdote reza; o deus desce “semelhante à noite” e atira contra o exército por nove dias. A disputa com Aquiles nasce do remédio.",
+        "A geografia é pequena e doméstica: uma cidade a pouca navegação do acampamento, um templo, uma nau enviada a devolver a moça e a sacrificar. É a imagem mais clara do poema da Trôade como costa habitada e não como campo de batalha."
+      ],
+      "whyItMatters": "Ancora a abertura da guerra à costa local e não à cidadela, e lembra que a maior parte da geografia da Ilíada é ordinária: cidades, templos, portos e um dia de navegação.",
+      "debate": "Onde exatamente ficava Crise e como a imagem de razias e resgates desta costa se relaciona com a realidade do Bronze Final.",
+      "faqs": [
+        {
+          "q": "Crise é um lugar real?",
+          "a": "Quase com certeza uma cidade costeira real da Trôade meridional, embora não esteja resolvido qual sítio era. O atlas a classifica como plausível."
+        },
+        {
+          "q": "Por que a peste importa para o atlas?",
+          "a": "Em si, não importa. O que importa é que o episódio se passa numa paisagem local verificável e que o poema trata essa paisagem como familiar."
+        }
+      ]
+    }
+  }
+}

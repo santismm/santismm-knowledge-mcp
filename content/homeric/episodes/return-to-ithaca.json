@@ -1,0 +1,167 @@
+{
+  "slug": "return-to-ithaca",
+  "id": "HOM-E-002",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 13,
+  "lines": "70-187",
+  "places": [
+    "ithaca"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 1,
+    "scholarly": 2,
+    "geographic": 2,
+    "score": 8,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 13.70–187",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey-9",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 9.21–27",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-10",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 10.2",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "bittlestone-2005",
+      "kind": "scholarship",
+      "citation": "Robert Bittlestone, Odysseus Unbound: The Search for Homer's Ithaca (Cambridge University Press, 2005)",
+      "author": "Robert Bittlestone",
+      "year": 2005
+    },
+    {
+      "id": "school-of-homer",
+      "kind": "archaeology",
+      "citation": "Excavations at Agios Athanasios ('School of Homer'), northern Ithaki",
+      "year": 2010
+    }
+  ],
+  "theories": [
+    {
+      "id": "phorcys-dexia",
+      "identification": "plausible",
+      "place": "ithaca",
+      "era": "modern",
+      "sources": [
+        "odyssey",
+        "strabo-10"
+      ],
+      "locales": {
+        "en": {
+          "label": "Dexa bay as the harbour of Phorcys",
+          "note": "The bay near Vathy usually shown to visitors as the landing place. It matches the poem's two headlands and sheltered water; so do several other bays in the Ionian."
+        },
+        "es": {
+          "label": "La bahía de Dexa como puerto de Forcis",
+          "note": "La ensenada cercana a Vathý que suele mostrarse a los visitantes como lugar del desembarco. Coincide con los dos promontorios y el agua abrigada del poema; también coinciden otras varias bahías del Jónico."
+        },
+        "pt": {
+          "label": "A baía de Dexa como porto de Fórcis",
+          "note": "A enseada perto de Vathy normalmente mostrada aos visitantes como local do desembarque. Corresponde aos dois promontórios e às águas abrigadas do poema; várias outras baías do Jônico também correspondem."
+        }
+      }
+    },
+    {
+      "id": "paliki-landing",
+      "identification": "speculative",
+      "place": "ithaca",
+      "proponent": "Robert Bittlestone (2005)",
+      "era": "contemporary",
+      "sources": [
+        "bittlestone-2005",
+        "odyssey-9"
+      ],
+      "locales": {
+        "en": {
+          "label": "A landing on Paliki",
+          "note": "If Ithaca is Paliki, the harbour of Phorcys is one of its western bays and the whole homecoming shifts about 25 km west. The reading depends on a Bronze Age sea channel that geology has not confirmed."
+        },
+        "es": {
+          "label": "Un desembarco en Paliki",
+          "note": "Si Ítaca es Paliki, el puerto de Forcis es una de sus bahías occidentales y todo el regreso se desplaza unos 25 km al oeste. La lectura depende de un canal marino de la Edad del Bronce que la geología no ha confirmado."
+        },
+        "pt": {
+          "label": "Um desembarque em Paliki",
+          "note": "Se Ítaca é Paliki, o porto de Fórcis é uma de suas baías ocidentais e todo o retorno se desloca cerca de 25 km a oeste. A leitura depende de um canal marinho da Idade do Bronze que a geologia não confirmou."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The homecoming: landing in the harbour of Phorcys",
+      "summary": "The Phaeacians sail Odysseus home asleep and leave him on his own shore with his treasure. The poem describes the landing place in unusual topographical detail — two headlands, an olive tree, a cave of the nymphs.",
+      "narrative": [
+        "Odysseus reaches Ithaca unconscious, carried by a crew who never speak to him and are turned to stone on the way home. He wakes not knowing where he is; Athena has poured a mist over the island, and the recognition of his own country is the first of the poem's recognitions.",
+        "The description of the harbour of Phorcys is one of the most specific pieces of landscape in either poem, which is why it has been matched to real bays for two centuries — and why none of the matches is decisive."
+      ],
+      "whyItMatters": "This is the episode that would settle the Ithaca question if any of its landmarks could be tied to a site. It scores textual 3 — the poem is unusually explicit — but archaeological 1, because no excavated harbour or sanctuary corresponds.",
+      "debate": "Which bay, on which island. The candidates track the island candidacies: Dexa on Ithaki, a western bay on Paliki, Nydri on Lefkada. The atlas records all three and commits to none.",
+      "faqs": [
+        {
+          "q": "Does the harbour of Phorcys exist?",
+          "a": "Several real bays fit the description. None has produced archaeological evidence connecting it to the poem, so the atlas records the identifications as competing theories rather than as a location."
+        },
+        {
+          "q": "Why is Odysseus asleep when he arrives?",
+          "a": "Narratively it removes the last stretch of navigation from the poem. It also means the Odyssey never describes the route from Scheria to Ithaca — a gap that every reconstruction of the voyage has to fill by inference."
+        }
+      ]
+    },
+    "es": {
+      "title": "El regreso: desembarco en el puerto de Forcis",
+      "summary": "Los feacios llevan dormido a Odiseo hasta su casa y lo dejan en su propia orilla con su tesoro. El poema describe el lugar del desembarco con un detalle topográfico insólito: dos promontorios, un olivo, una cueva de las ninfas.",
+      "narrative": [
+        "Odiseo llega a Ítaca inconsciente, transportado por una tripulación que nunca le habla y que es petrificada durante el viaje de vuelta. Despierta sin saber dónde está: Atenea ha derramado una niebla sobre la isla, y el reconocimiento de su propia tierra es el primero de los reconocimientos del poema.",
+        "La descripción del puerto de Forcis es uno de los pasajes de paisaje más específicos de ambos poemas, y por eso se ha hecho corresponder con bahías reales durante dos siglos, y por eso ninguna correspondencia es decisiva."
+      ],
+      "whyItMatters": "Es el episodio que zanjaría la cuestión de Ítaca si alguno de sus hitos pudiera vincularse a un yacimiento. Puntúa textual 3 —el poema es insólitamente explícito— pero arqueológica 1, porque ningún puerto o santuario excavado le corresponde.",
+      "debate": "Qué bahía, en qué isla. Los candidatos siguen a las candidaturas de la isla: Dexa en Ítaca, una bahía occidental en Paliki, Nydri en Léucade. El atlas registra las tres y no se compromete con ninguna.",
+      "faqs": [
+        {
+          "q": "¿Existe el puerto de Forcis?",
+          "a": "Varias bahías reales encajan con la descripción. Ninguna ha aportado pruebas arqueológicas que la conecten con el poema, así que el atlas registra las identificaciones como teorías en competencia, no como una localización."
+        },
+        {
+          "q": "¿Por qué llega Odiseo dormido?",
+          "a": "Narrativamente, elimina del poema el último tramo de navegación. También significa que la Odisea nunca describe la ruta de Esqueria a Ítaca: un hueco que toda reconstrucción del viaje debe rellenar por inferencia."
+        }
+      ]
+    },
+    "pt": {
+      "title": "O retorno: desembarque no porto de Fórcis",
+      "summary": "Os feácios levam Odisseu adormecido até sua casa e o deixam na própria praia com seu tesouro. O poema descreve o local do desembarque com detalhe topográfico incomum: dois promontórios, uma oliveira, uma gruta das ninfas.",
+      "narrative": [
+        "Odisseu chega a Ítaca inconsciente, transportado por uma tripulação que nunca lhe fala e que é petrificada na viagem de volta. Acorda sem saber onde está: Atena derramou uma névoa sobre a ilha, e o reconhecimento da própria terra é o primeiro dos reconhecimentos do poema.",
+        "A descrição do porto de Fórcis é uma das passagens de paisagem mais específicas dos dois poemas, e por isso vem sendo associada a baías reais há dois séculos — e por isso nenhuma associação é decisiva."
+      ],
+      "whyItMatters": "É o episódio que resolveria a questão de Ítaca se algum de seus marcos pudesse ser ligado a um sítio. Pontua textual 3 — o poema é incomumente explícito — mas arqueológica 1, porque nenhum porto ou santuário escavado lhe corresponde.",
+      "debate": "Qual baía, em qual ilha. Os candidatos acompanham as candidaturas da ilha: Dexa em Ítaca, uma baía ocidental em Paliki, Nydri em Lêucade. O atlas registra as três e não se compromete com nenhuma.",
+      "faqs": [
+        {
+          "q": "O porto de Fórcis existe?",
+          "a": "Várias baías reais encaixam na descrição. Nenhuma produziu provas arqueológicas que a conectem ao poema, então o atlas registra as identificações como teorias concorrentes, não como uma localização."
+        },
+        {
+          "q": "Por que Odisseu chega dormindo?",
+          "a": "Narrativamente, retira do poema o último trecho de navegação. Também significa que a Odisseia nunca descreve a rota de Esquéria a Ítaca — uma lacuna que toda reconstrução da viagem precisa preencher por inferência."
+        }
+      ]
+    }
+  }
+}

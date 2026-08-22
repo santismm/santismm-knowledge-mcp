@@ -1,0 +1,240 @@
+{
+  "slug": "ithaca",
+  "id": "HOM-P-002",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "plausible",
+  "unlocated": false,
+  "region": "ionian",
+  "homericNames": [
+    "Ἰθάκη"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 9,
+      "lines": "21-27"
+    },
+    {
+      "work": "odyssey",
+      "book": 13,
+      "lines": "96-112"
+    },
+    {
+      "work": "odyssey",
+      "book": 4,
+      "lines": "844-847"
+    },
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "631-637"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 9.21–27; 13.96–112",
+      "author": "Homer"
+    },
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad 2.631–637",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-10",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 10.2",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "dorpfeld-1927",
+      "kind": "scholarship",
+      "citation": "Wilhelm Dörpfeld, Alt-Ithaka (1927)",
+      "author": "Wilhelm Dörpfeld",
+      "year": 1927,
+      "url": "https://archive.org/details/bub_gb_YmcrMtWumK8C"
+    },
+    {
+      "id": "bittlestone-2005",
+      "kind": "scholarship",
+      "citation": "Robert Bittlestone, with James Diggle and John Underhill, Odysseus Unbound: The Search for Homer's Ithaca (Cambridge University Press, 2005)",
+      "author": "Robert Bittlestone",
+      "year": 2005
+    },
+    {
+      "id": "school-of-homer",
+      "kind": "archaeology",
+      "citation": "Excavations at Agios Athanasios ('School of Homer'), northern Ithaki",
+      "year": 2010
+    },
+    {
+      "id": "underhill-geology",
+      "kind": "scholarship",
+      "citation": "John R. Underhill, geological studies of the Thinia isthmus, Kefalonia",
+      "author": "John R. Underhill",
+      "year": 2009
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "ithaki",
+      "identification": "plausible",
+      "modernName": "Ithaki",
+      "country": "GR",
+      "lat": 38.4,
+      "lon": 20.71,
+      "precision": "island",
+      "proponent": "Strabo, Geography 10.2",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 2,
+        "scholarly": 3,
+        "geographic": 2,
+        "score": 9,
+        "band": "medium"
+      },
+      "sources": [
+        "strabo-10",
+        "school-of-homer",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Modern Ithaki",
+          "note": "The island has carried the name since antiquity, and the Mycenaean-period complex at Agios Athanasios in the north is the best archaeological candidate for an Odyssean-scale settlement. What it does not fit cleanly is Odysseus' own description: Ithaki is neither low-lying nor the farthest west of its group."
+        },
+        "es": {
+          "label": "Ítaca moderna",
+          "note": "La isla lleva ese nombre desde la Antigüedad, y el complejo de época micénica de Agios Athanasios, en el norte, es el mejor candidato arqueológico a un asentamiento de escala odiseica. Lo que no encaja limpiamente es la descripción del propio Odiseo: Ítaca no es ni baja ni la más occidental de su grupo."
+        },
+        "pt": {
+          "label": "Ítaca moderna",
+          "note": "A ilha carrega esse nome desde a Antiguidade, e o complexo de época micênica de Agios Athanasios, ao norte, é o melhor candidato arqueológico a um assentamento de escala odisseica. O que não encaixa com clareza é a descrição do próprio Odisseu: Ítaca não é baixa nem a mais ocidental do grupo."
+        }
+      }
+    },
+    {
+      "id": "paliki",
+      "identification": "speculative",
+      "modernName": "Paliki, Kefalonia",
+      "country": "GR",
+      "lat": 38.25,
+      "lon": 20.42,
+      "precision": "area",
+      "proponent": "Robert Bittlestone, James Diggle & John Underhill (2005)",
+      "era": "contemporary",
+      "since": 2005,
+      "confidence": {
+        "textual": 3,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 2,
+        "score": 6,
+        "band": "medium"
+      },
+      "sources": [
+        "bittlestone-2005",
+        "underhill-geology",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Paliki peninsula (Kefalonia)",
+          "note": "Bittlestone's proposal takes Odysseus' description literally — low-lying, farthest toward the dark — and requires that the Thinia isthmus was a sea channel in the Bronze Age, making Paliki an island. Underhill's geology found the isthmus to be rockfall over a possible former channel but could not confirm a Bronze Age strait. No excavation has produced a settlement to match."
+        },
+        "es": {
+          "label": "Península de Paliki (Cefalonia)",
+          "note": "La propuesta de Bittlestone toma al pie de la letra la descripción de Odiseo —baja, la más orientada hacia el poniente— y exige que el istmo de Thinia fuera un canal marino en la Edad del Bronce, lo que haría de Paliki una isla. La geología de Underhill halló en el istmo un desprendimiento de roca sobre un posible canal antiguo, pero no pudo confirmar un estrecho en el Bronce. Ninguna excavación ha aportado un asentamiento que corresponda."
+        },
+        "pt": {
+          "label": "Península de Paliki (Cefalônia)",
+          "note": "A proposta de Bittlestone toma ao pé da letra a descrição de Odisseu — baixa, a mais voltada ao poente — e exige que o istmo de Thinia fosse um canal marinho na Idade do Bronze, o que faria de Paliki uma ilha. A geologia de Underhill encontrou no istmo um desabamento de rocha sobre um possível canal antigo, mas não pôde confirmar um estreito no Bronze. Nenhuma escavação produziu um assentamento correspondente."
+        }
+      }
+    },
+    {
+      "id": "lefkada",
+      "identification": "speculative",
+      "modernName": "Lefkada",
+      "country": "GR",
+      "lat": 38.7,
+      "lon": 20.71,
+      "precision": "island",
+      "proponent": "Wilhelm Dörpfeld, Alt-Ithaka (1927)",
+      "era": "modern",
+      "since": 1927,
+      "confidence": {
+        "textual": 2,
+        "archaeological": 1,
+        "scholarly": 0,
+        "geographic": 1,
+        "score": 4,
+        "band": "low"
+      },
+      "sources": [
+        "dorpfeld-1927",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Lefkada (Dörpfeld's Alt-Ithaka)",
+          "note": "Dörpfeld, Schliemann's successor at Troy, spent decades arguing that Lefkada was the Odyssey's Ithaca, reading the sailing distances and the bay of Nydri into the poem. The Bronze Age tumuli he excavated at Nydri are real; the identification convinced almost nobody, and the island's ancient name was Leukas."
+        },
+        "es": {
+          "label": "Léucade (la Alt-Ithaka de Dörpfeld)",
+          "note": "Dörpfeld, sucesor de Schliemann en Troya, dedicó décadas a defender que Léucade era la Ítaca de la Odisea, leyendo en el poema las distancias de navegación y la bahía de Nydri. Los túmulos de la Edad del Bronce que excavó en Nydri son reales; la identificación no convenció casi a nadie, y el nombre antiguo de la isla era Léucade."
+        },
+        "pt": {
+          "label": "Lêucade (a Alt-Ithaka de Dörpfeld)",
+          "note": "Dörpfeld, sucessor de Schliemann em Troia, passou décadas defendendo que Lêucade era a Ítaca da Odisseia, lendo no poema as distâncias de navegação e a baía de Nydri. Os túmulos da Idade do Bronze que escavou em Nydri são reais; a identificação não convenceu quase ninguém, e o nome antigo da ilha era Lêucade."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "return-to-ithaca",
+    "catalogue-of-ships",
+    "suitors-ambush-at-asteris"
+  ],
+  "locales": {
+    "en": {
+      "name": "Ithaca",
+      "summary": "Odysseus' home and the destination of the whole poem — and, awkwardly, one of its least secure locations. Modern Ithaki carries the name; the Odyssey's own description of the island fits it poorly.",
+      "description": [
+        "Ithaca is the case that makes this atlas necessary. It is not a mythical place: the Iliad's Catalogue of Ships lists Odysseus' contingent among real Greek communities, and an island called Ithaca has existed continuously under that name. But when Odysseus describes his home (Odyssey 9.21–27) he calls it low-lying and farthest toward the dark — the westernmost of its group — and modern Ithaki is mountainous and lies east of Kefalonia.",
+        "That single mismatch has generated two centuries of alternative proposals, of which the most substantial are Dörpfeld's Lefkada and Bittlestone's Paliki. Both are real places argued with real evidence; neither has produced the settlement that would settle the question.",
+        "Meanwhile the archaeology of Ithaki itself has improved: the Mycenaean-period complex at Agios Athanasios in the north of the island is the best structural candidate found so far, though nothing ties it to a named person."
+      ],
+      "identificationNote": "Plausible rather than accepted: the identification is mainstream and ancient, but no excavation has confirmed a Bronze Age centre of the right scale, and the poem's own geography argues against it. The rubric gives textual 2 (the description does not fit), archaeological 2, scholarly 3 and geographic 2 — 9/12.",
+      "debate": "Three questions are genuinely open: whether Homer's geography of the Ionian islands is coherent at all, whether 'Ithaca' named a different island in the Bronze Age, and whether Paliki was separated from Kefalonia by a channel that has since filled. The atlas plots all three candidacies and scores them separately rather than choosing."
+    },
+    "es": {
+      "name": "Ítaca",
+      "summary": "La casa de Odiseo y el destino de todo el poema y, de forma incómoda, una de sus localizaciones menos seguras. La Ítaca moderna lleva el nombre; la descripción que la Odisea hace de la isla le encaja mal.",
+      "description": [
+        "Ítaca es el caso que hace necesario este atlas. No es un lugar mítico: el Catálogo de las Naves de la Ilíada incluye el contingente de Odiseo entre comunidades griegas reales, y una isla llamada Ítaca ha existido continuamente con ese nombre. Pero cuando Odiseo describe su hogar (Odisea 9.21–27) lo llama bajo y el más orientado hacia el poniente —el más occidental de su grupo— y la Ítaca moderna es montañosa y está al este de Cefalonia.",
+        "Ese único desajuste ha generado dos siglos de propuestas alternativas, de las cuales las más sustanciales son la Léucade de Dörpfeld y el Paliki de Bittlestone. Ambos son lugares reales defendidos con pruebas reales; ninguno ha producido el asentamiento que zanjaría la cuestión.",
+        "Entretanto la arqueología de la propia Ítaca ha mejorado: el complejo de época micénica de Agios Athanasios, en el norte de la isla, es el mejor candidato estructural hallado hasta ahora, aunque nada lo vincule a una persona con nombre."
+      ],
+      "identificationNote": "Plausible y no aceptada: la identificación es mayoritaria y antigua, pero ninguna excavación ha confirmado un centro del Bronce de la escala necesaria, y la geografía del propio poema juega en contra. La rúbrica da textual 2 (la descripción no encaja), arqueológica 2, académica 3 y geográfica 2: 9/12.",
+      "debate": "Hay tres cuestiones realmente abiertas: si la geografía homérica de las islas Jónicas es coherente siquiera, si «Ítaca» nombraba a otra isla en la Edad del Bronce, y si Paliki estuvo separada de Cefalonia por un canal hoy colmatado. El atlas dibuja las tres candidaturas y las puntúa por separado en vez de elegir."
+    },
+    "pt": {
+      "name": "Ítaca",
+      "summary": "A casa de Odisseu e o destino de todo o poema — e, de modo incômodo, uma de suas localizações menos seguras. A Ítaca moderna carrega o nome; a descrição que a Odisseia faz da ilha encaixa mal nela.",
+      "description": [
+        "Ítaca é o caso que torna este atlas necessário. Não é um lugar mítico: o Catálogo das Naus da Ilíada inclui o contingente de Odisseu entre comunidades gregas reais, e uma ilha chamada Ítaca existiu continuamente com esse nome. Mas quando Odisseu descreve sua casa (Odisseia 9.21–27), chama-a de baixa e a mais voltada para o poente — a mais ocidental do grupo — e a Ítaca moderna é montanhosa e fica a leste da Cefalônia.",
+        "Esse único desencaixe gerou dois séculos de propostas alternativas, das quais as mais substanciais são a Lêucade de Dörpfeld e o Paliki de Bittlestone. Ambos são lugares reais defendidos com provas reais; nenhum produziu o assentamento que resolveria a questão.",
+        "Enquanto isso, a arqueologia da própria Ítaca melhorou: o complexo de época micênica de Agios Athanasios, no norte da ilha, é o melhor candidato estrutural encontrado até agora, embora nada o ligue a uma pessoa com nome."
+      ],
+      "identificationNote": "Plausível e não aceita: a identificação é majoritária e antiga, mas nenhuma escavação confirmou um centro do Bronze na escala necessária, e a geografia do próprio poema joga contra. A rubrica dá textual 2 (a descrição não encaixa), arqueológica 2, acadêmica 3 e geográfica 2: 9/12.",
+      "debate": "Três questões estão realmente em aberto: se a geografia homérica das ilhas Jônicas é sequer coerente, se “Ítaca” nomeava outra ilha na Idade do Bronze, e se Paliki esteve separada da Cefalônia por um canal hoje assoreado. O atlas desenha as três candidaturas e as pontua separadamente em vez de escolher."
+    }
+  }
+}

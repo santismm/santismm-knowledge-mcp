@@ -1,0 +1,130 @@
+{
+  "slug": "telemachus-in-sparta",
+  "id": "HOM-E-008",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 4,
+  "lines": "1-305",
+  "places": [
+    "sparta"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 2,
+    "scholarly": 3,
+    "geographic": 3,
+    "score": 11,
+    "band": "high"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "menelaion",
+      "kind": "archaeology",
+      "citation": "Excavations at the Menelaion, Therapne — Mycenaean mansions and an archaic sanctuary of Menelaus and Helen",
+      "year": 1973
+    },
+    {
+      "id": "herodotus-6-61",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 6.61 — the shrine of Helen at Therapne",
+      "author": "Herodotus",
+      "year": -430
+    }
+  ],
+  "theories": [
+    {
+      "id": "menelaion-cult",
+      "identification": "plausible",
+      "place": "sparta",
+      "proponent": "British School at Athens excavations",
+      "era": "modern",
+      "sources": [
+        "menelaion",
+        "herodotus-6-61"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Menelaion at Therapne",
+          "note": "The place Greeks themselves associated with Menelaus and Helen, with Mycenaean buildings underneath an archaic cult. Evidence of belief, and of Bronze Age occupation; not evidence of the palace the poem describes."
+        },
+        "es": {
+          "label": "El Menelaion de Terapne",
+          "note": "El lugar que los propios griegos asociaban con Menelao y Helena, con edificios micénicos bajo un culto arcaico. Prueba de creencia y de ocupación en el Bronce; no prueba del palacio que describe el poema."
+        },
+        "pt": {
+          "label": "O Menelaion de Terapne",
+          "note": "O lugar que os próprios gregos associavam a Menelau e Helena, com edifícios micênicos sob um culto arcaico. Prova de crença e de ocupação no Bronze; não prova do palácio que o poema descreve."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Telemachus in Sparta",
+      "summary": "The strangest domestic scene in Homer: Helen, back in her husband's house, drugs the wine so the company can talk about Troy without weeping.",
+      "narrative": [
+        "Telemachus arrives during a double wedding feast and is struck by the brightness of the hall. Menelaus tells him about the returns; Helen drops a drug from Egypt into the wine and both of them tell stories about Odysseus at Troy, hers flattering and his less so.",
+        "The setting is a palace with a courtyard, guest quarters and enough wealth to compare to Olympus. Laconia has produced no such building, which makes this the most vivid Homeric interior with the least material behind it."
+      ],
+      "whyItMatters": "It is the test case for Sparta: a scene rich enough to be checked against archaeology, in a region whose Bronze Age centre has never been found.",
+      "debate": "Whether a palace of this class exists undiscovered in the Eurotas valley, or whether the Odyssey furnished Menelaus with a hall from elsewhere.",
+      "faqs": [
+        {
+          "q": "Has the palace of Menelaus been found?",
+          "a": "No. Laconia has Mycenaean mansions at the Menelaion and an early cult of Menelaus and Helen, but no palace comparable to Pylos or Mycenae has been excavated."
+        },
+        {
+          "q": "Is Helen's Egyptian drug a real detail?",
+          "a": "It is consistent with the poem's wider picture of Egypt as a source of exotic goods and knowledge, which is itself consistent with real Aegean contact with Egypt. That is context, not confirmation."
+        }
+      ]
+    },
+    "es": {
+      "title": "Telémaco en Esparta",
+      "summary": "La escena doméstica más extraña de Homero: Helena, de vuelta en casa de su marido, droga el vino para que la compañía pueda hablar de Troya sin llorar.",
+      "narrative": [
+        "Telémaco llega durante un doble banquete de bodas y le impresiona el brillo de la sala. Menelao le cuenta los regresos; Helena echa en el vino una droga de Egipto y ambos cuentan historias sobre Odiseo en Troya, la de ella halagadora y la de él menos.",
+        "El escenario es un palacio con patio, aposentos de huéspedes y riqueza suficiente para compararlo con el Olimpo. Laconia no ha dado un edificio así, lo que convierte a este en el interior homérico más vívido con menos material detrás."
+      ],
+      "whyItMatters": "Es el caso de prueba de Esparta: una escena lo bastante rica como para contrastarla con la arqueología, en una región cuyo centro del Bronce nunca ha aparecido.",
+      "debate": "Si existe sin descubrir un palacio de esta clase en el valle del Eurotas, o si la Odisea amuebló a Menelao con una sala tomada de otro sitio.",
+      "faqs": [
+        {
+          "q": "¿Se ha encontrado el palacio de Menelao?",
+          "a": "No. Laconia tiene mansiones micénicas en el Menelaion y un culto temprano a Menelao y Helena, pero no se ha excavado un palacio comparable a Pilos o Micenas."
+        },
+        {
+          "q": "¿Es real el detalle de la droga egipcia de Helena?",
+          "a": "Es coherente con la imagen general del poema sobre Egipto como fuente de bienes y saberes exóticos, que a su vez es coherente con el contacto real entre el Egeo y Egipto. Eso es contexto, no confirmación."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Telêmaco em Esparta",
+      "summary": "A cena doméstica mais estranha de Homero: Helena, de volta à casa do marido, droga o vinho para que a companhia possa falar de Troia sem chorar.",
+      "narrative": [
+        "Telêmaco chega durante um duplo banquete de casamento e se impressiona com o brilho do salão. Menelau lhe conta os retornos; Helena joga no vinho uma droga do Egito e ambos contam histórias sobre Odisseu em Troia, a dela lisonjeira e a dele menos.",
+        "O cenário é um palácio com pátio, aposentos de hóspedes e riqueza suficiente para se comparar ao Olimpo. A Lacônia não produziu tal edifício, o que faz deste o interior homérico mais vívido com menos material por trás."
+      ],
+      "whyItMatters": "É o caso de teste de Esparta: uma cena rica o bastante para ser confrontada com a arqueologia, numa região cujo centro do Bronze nunca apareceu.",
+      "debate": "Se existe por descobrir um palácio dessa classe no vale do Eurotas, ou se a Odisseia mobiliou Menelau com um salão vindo de outro lugar.",
+      "faqs": [
+        {
+          "q": "O palácio de Menelau foi encontrado?",
+          "a": "Não. A Lacônia tem mansões micênicas no Menelaion e um culto antigo a Menelau e Helena, mas nenhum palácio comparável a Pilos ou Micenas foi escavado."
+        },
+        {
+          "q": "O detalhe da droga egípcia de Helena é real?",
+          "a": "É coerente com a imagem geral do poema sobre o Egito como fonte de bens e saberes exóticos, que por sua vez é coerente com o contato real entre o Egeu e o Egito. Isso é contexto, não confirmação."
+        }
+      ]
+    }
+  }
+}

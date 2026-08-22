@@ -1,0 +1,131 @@
+{
+  "slug": "cicones-at-ismarus",
+  "id": "HOM-E-010",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 9,
+  "lines": "39-61",
+  "places": [
+    "ismarus",
+    "cape-malea"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 1,
+    "scholarly": 2,
+    "geographic": 3,
+    "score": 9,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "maroneia",
+      "kind": "archaeology",
+      "citation": "Maroneia and the Ismaros ridge, Thrace — the standard location of the Ciconian territory",
+      "year": 2000
+    },
+    {
+      "id": "herodotus-7-108",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 7.108-110 — the Thracian coast",
+      "author": "Herodotus",
+      "year": -430
+    }
+  ],
+  "theories": [
+    {
+      "id": "thracian-coast",
+      "identification": "plausible",
+      "place": "ismarus",
+      "proponent": "Ancient identification of the Ciconian territory",
+      "era": "antiquity",
+      "sources": [
+        "maroneia",
+        "herodotus-7-108"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Thracian coast at Maroneia",
+          "note": "A real people in a real territory, with the name surviving on a ridge. The episode reads as ordinary raiding, which is what makes the identification comparatively strong."
+        },
+        "es": {
+          "label": "La costa tracia de Maronea",
+          "note": "Un pueblo real en un territorio real, con el nombre conservado en una sierra. El episodio se lee como una razia corriente, y eso hace comparativamente fuerte la identificación."
+        },
+        "pt": {
+          "label": "A costa trácia de Maroneia",
+          "note": "Um povo real num território real, com o nome preservado numa serra. O episódio se lê como razia comum, e é isso que torna a identificação comparativamente forte."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The Cicones at Ismarus",
+      "summary": "The last piece of ordinary history in the Odyssey. Odysseus leaves Troy, sacks a Thracian town, loses seventy-two men to a counter-attack, and then the wind takes over.",
+      "narrative": [
+        "The raid goes exactly as raids do: the town falls, the plunder is shared 'so that no one should go without an equal share', and Odysseus tells the crew to leave. They stay to drink on the beach. The inland Cicones arrive at dawn with chariots, and six men from each ship die.",
+        "Only one thing is carried away that matters later: the wine given by Maron, priest of Apollo, spared during the sack. It is the drug that will put the Cyclops to sleep."
+      ],
+      "whyItMatters": "It is the boundary of the mappable Odyssey. Everything before Ismarus can be plotted with confidence; after Cape Malea, almost nothing can.",
+      "debate": "Whether the raid preserves a memory of real Aegean coastal warfare, and how far the wine's description reflects knowledge of Thracian production.",
+      "faqs": [
+        {
+          "q": "Where is Ismarus?",
+          "a": "On the Thracian coast near modern Maroneia, where a ridge still carries the name. The atlas classes the place plausible: the region is agreed, the specific town is not excavated."
+        },
+        {
+          "q": "Why is this episode important?",
+          "a": "Because it is the last one with a defensible location before the wanderings begin. It marks where the atlas's confidence drops."
+        }
+      ]
+    },
+    "es": {
+      "title": "Los cícones en Ísmaro",
+      "summary": "El último trozo de historia ordinaria de la Odisea. Odiseo sale de Troya, saquea una ciudad tracia, pierde setenta y dos hombres en el contraataque, y a partir de ahí manda el viento.",
+      "narrative": [
+        "La razia va exactamente como van las razias: la ciudad cae, el botín se reparte «para que nadie se quede sin parte igual» y Odiseo ordena zarpar. Ellos se quedan a beber en la playa. Los cícones del interior llegan al alba con carros y mueren seis hombres de cada nave.",
+        "Solo se llevan una cosa que importará después: el vino que les dio Marón, sacerdote de Apolo, respetado durante el saqueo. Es la droga que dormirá al cíclope."
+      ],
+      "whyItMatters": "Es la frontera de la Odisea cartografiable. Todo lo anterior a Ísmaro puede dibujarse con confianza; tras el cabo Maleas, casi nada.",
+      "debate": "Si la razia conserva el recuerdo de una guerra costera egea real, y hasta qué punto la descripción del vino refleja conocimiento de la producción tracia.",
+      "faqs": [
+        {
+          "q": "¿Dónde está Ísmaro?",
+          "a": "En la costa tracia, cerca de la actual Maronea, donde una sierra conserva el nombre. El atlas clasifica el lugar como plausible: la región está acordada, la ciudad concreta no está excavada."
+        },
+        {
+          "q": "¿Por qué importa este episodio?",
+          "a": "Porque es el último con una localización defendible antes de que empiecen las andanzas. Marca el punto en el que cae la confianza del atlas."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Os cícones em Ísmaro",
+      "summary": "O último pedaço de história ordinária da Odisseia. Odisseu sai de Troia, saqueia uma cidade trácia, perde setenta e dois homens no contra-ataque, e daí em diante quem manda é o vento.",
+      "narrative": [
+        "A razia corre exatamente como razias correm: a cidade cai, o espólio é dividido “para que ninguém fique sem parte igual” e Odisseu manda zarpar. Eles ficam bebendo na praia. Os cícones do interior chegam ao amanhecer com carros, e morrem seis homens de cada nau.",
+        "Só uma coisa é levada e importará depois: o vinho dado por Máron, sacerdote de Apolo, poupado durante o saque. É a droga que fará o ciclope dormir."
+      ],
+      "whyItMatters": "É a fronteira da Odisseia mapeável. Tudo antes de Ísmaro pode ser desenhado com confiança; depois do cabo Maleia, quase nada.",
+      "debate": "Se a razia preserva a lembrança de uma guerra costeira egeia real, e o quanto a descrição do vinho reflete conhecimento da produção trácia.",
+      "faqs": [
+        {
+          "q": "Onde fica Ísmaro?",
+          "a": "Na costa trácia, perto da atual Maroneia, onde uma serra ainda carrega o nome. O atlas classifica o lugar como plausível: a região é consensual, a cidade específica não está escavada."
+        },
+        {
+          "q": "Por que este episódio importa?",
+          "a": "Porque é o último com localização defensável antes de as andanças começarem. Marca o ponto em que a confiança do atlas cai."
+        }
+      ]
+    }
+  }
+}

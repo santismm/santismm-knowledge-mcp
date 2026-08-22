@@ -1,0 +1,130 @@
+{
+  "slug": "telemachus-at-pylos",
+  "id": "HOM-E-007",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 3,
+  "lines": "1-485",
+  "places": [
+    "pylos"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 3,
+    "scholarly": 3,
+    "geographic": 3,
+    "score": 12,
+    "band": "high"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "blegen-pylos",
+      "kind": "archaeology",
+      "citation": "Carl W. Blegen and Marion Rawson, The Palace of Nestor at Pylos in Western Messenia, vol. I (Princeton, 1966)",
+      "author": "Carl W. Blegen",
+      "year": 1966
+    },
+    {
+      "id": "linear-b-py",
+      "kind": "archaeology",
+      "citation": "The Pylos Linear B archive: administrative tablets baked in the destruction of the palace",
+      "year": 1956
+    }
+  ],
+  "theories": [
+    {
+      "id": "ano-englianos",
+      "identification": "plausible",
+      "place": "pylos",
+      "proponent": "Carl W. Blegen (1939)",
+      "era": "modern",
+      "sources": [
+        "blegen-pylos",
+        "linear-b-py"
+      ],
+      "locales": {
+        "en": {
+          "label": "The palace at Ano Englianos",
+          "note": "The episode's setting matches an excavated palace: a great hall, a bath, a beach within reach. Nothing in the archive names Nestor, so the match is of type and place, not of person."
+        },
+        "es": {
+          "label": "El palacio de Ano Englianós",
+          "note": "El escenario del episodio coincide con un palacio excavado: un gran salón, un baño, una playa cercana. Nada en el archivo nombra a Néstor, así que la correspondencia es de tipo y de lugar, no de persona."
+        },
+        "pt": {
+          "label": "O palácio de Ano Englianós",
+          "note": "O cenário do episódio coincide com um palácio escavado: um grande salão, um banho, uma praia próxima. Nada no arquivo nomeia Nestor, então a correspondência é de tipo e lugar, não de pessoa."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Telemachus at Pylos",
+      "summary": "A young man arrives by ship at a sacrificing shore, is fed before he is questioned, and hears an old king talk. It is the most ordinary episode in the Odyssey and the easiest to place.",
+      "narrative": [
+        "Telemachus and Athena reach Pylos at dawn during a sacrifice of black bulls to Poseidon on the beach. Nestor receives them, tells what he knows of the returns from Troy, and sends Telemachus on to Sparta by chariot with his son.",
+        "The domestic detail is unusual and specific: the guest bath drawn by Nestor's daughter, the gilding of a heifer's horns, the sleeping arrangements. It is a picture of palace hospitality that an excavated palace can be compared against."
+      ],
+      "whyItMatters": "This is the atlas's cleanest 12/12 episode: the place is accepted, the setting matches a real excavated building type, and nothing in the passage requires the supernatural.",
+      "debate": "Not where it happened, but what the match means: whether the poem preserves the memory of palatial hospitality or reconstructs it from ruins and habit.",
+      "faqs": [
+        {
+          "q": "Can you visit the palace of Nestor?",
+          "a": "Yes. The site at Ano Englianos in Messenia is open, and its throne room, storerooms and bath are visible. What is not visible is any evidence naming Nestor."
+        },
+        {
+          "q": "Why does this episode score higher than most?",
+          "a": "Because all four criteria hold: the text is specific, the archaeology is rich, the scholarly identification is agreed and the geography works. Most episodes in the atlas fail at least one."
+        }
+      ]
+    },
+    "es": {
+      "title": "Telémaco en Pilos",
+      "summary": "Un joven llega por mar a una playa donde se sacrifica, lo alimentan antes de preguntarle y escucha hablar a un rey viejo. Es el episodio más ordinario de la Odisea y el más fácil de situar.",
+      "narrative": [
+        "Telémaco y Atenea llegan a Pilos al amanecer, durante un sacrificio de toros negros a Poseidón en la playa. Néstor los acoge, cuenta lo que sabe de los regresos desde Troya y envía a Telémaco a Esparta en carro con su hijo.",
+        "El detalle doméstico es insólito y concreto: el baño de huésped que prepara la hija de Néstor, el dorado de los cuernos de una novilla, la disposición para dormir. Es una imagen de la hospitalidad palacial que puede contrastarse con un palacio excavado."
+      ],
+      "whyItMatters": "Es el episodio 12/12 más limpio del atlas: el lugar está aceptado, el escenario coincide con un tipo de edificio real excavado y nada del pasaje exige lo sobrenatural.",
+      "debate": "No dónde ocurrió, sino qué significa la coincidencia: si el poema conserva el recuerdo de la hospitalidad palacial o la reconstruye a partir de ruinas y costumbre.",
+      "faqs": [
+        {
+          "q": "¿Se puede visitar el palacio de Néstor?",
+          "a": "Sí. El yacimiento de Ano Englianós, en Mesenia, está abierto, y se ven su sala del trono, sus almacenes y su baño. Lo que no se ve es prueba alguna que nombre a Néstor."
+        },
+        {
+          "q": "¿Por qué puntúa más que la mayoría?",
+          "a": "Porque se cumplen los cuatro criterios: el texto es específico, la arqueología es rica, la identificación académica está acordada y la geografía funciona. La mayoría de los episodios del atlas falla al menos uno."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Telêmaco em Pilos",
+      "summary": "Um jovem chega de navio a uma praia onde se sacrifica, é alimentado antes de ser interrogado e ouve um velho rei falar. É o episódio mais ordinário da Odisseia e o mais fácil de situar.",
+      "narrative": [
+        "Telêmaco e Atena chegam a Pilos ao amanhecer, durante um sacrifício de touros negros a Posêidon na praia. Nestor os acolhe, conta o que sabe dos retornos de Troia e envia Telêmaco a Esparta de carro com seu filho.",
+        "O detalhe doméstico é incomum e concreto: o banho de hóspede preparado pela filha de Nestor, o douramento dos chifres de uma novilha, os arranjos para dormir. É uma imagem da hospitalidade palaciana que pode ser confrontada com um palácio escavado."
+      ],
+      "whyItMatters": "É o episódio 12/12 mais limpo do atlas: o lugar é aceito, o cenário coincide com um tipo de edifício real escavado e nada na passagem exige o sobrenatural.",
+      "debate": "Não onde aconteceu, mas o que a coincidência significa: se o poema preserva a lembrança da hospitalidade palaciana ou a reconstrói a partir de ruínas e costume.",
+      "faqs": [
+        {
+          "q": "Dá para visitar o palácio de Nestor?",
+          "a": "Sim. O sítio de Ano Englianós, na Messênia, está aberto, e veem-se a sala do trono, os armazéns e o banho. O que não se vê é prova alguma que nomeie Nestor."
+        },
+        {
+          "q": "Por que este episódio pontua mais que a maioria?",
+          "a": "Porque os quatro critérios se sustentam: o texto é específico, a arqueologia é rica, a identificação acadêmica é consensual e a geografia funciona. A maioria dos episódios do atlas falha em ao menos um."
+        }
+      ]
+    }
+  }
+}

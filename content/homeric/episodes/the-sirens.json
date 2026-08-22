@@ -1,0 +1,129 @@
+{
+  "slug": "the-sirens",
+  "id": "HOM-E-016",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 12,
+  "lines": "165-200",
+  "places": [
+    "sirens"
+  ],
+  "confidence": {
+    "textual": 2,
+    "archaeological": 0,
+    "scholarly": 1,
+    "geographic": 1,
+    "score": 4,
+    "band": "low"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "li-galli",
+      "kind": "tradition",
+      "citation": "Li Galli (the Sirenuse), the islets off the Amalfi coast, named for the Sirens in Italian tradition"
+    },
+    {
+      "id": "strabo-1-2-13",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 1.2",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "theories": [
+    {
+      "id": "sirenuse",
+      "identification": "speculative",
+      "place": "sirens",
+      "proponent": "Ancient geographical tradition",
+      "era": "antiquity",
+      "sources": [
+        "li-galli",
+        "strabo-1-2-13"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Sirenuse islets",
+          "note": "A tradition carried by a name. The islets off the Sorrentine peninsula have been called the Sirenuse since antiquity, which tells us what Greeks and Romans believed, not where the episode belongs."
+        },
+        "es": {
+          "label": "Los islotes Sirenusas",
+          "note": "Una tradición sostenida por un nombre. Los islotes frente a la península sorrentina se llaman Sirenusas desde la Antigüedad, lo que nos dice qué creían griegos y romanos, no dónde encaja el episodio."
+        },
+        "pt": {
+          "label": "Os ilhéus Sirenusas",
+          "note": "Uma tradição sustentada por um nome. Os ilhéus diante da península sorrentina chamam-se Sirenusas desde a Antiguidade, o que nos diz o que gregos e romanos acreditavam, não onde o episódio se encaixa."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The Sirens",
+      "summary": "The one danger Odysseus survives by planning: wax in the crew's ears, his own body lashed to the mast, and the song heard by a man who cannot act on it.",
+      "narrative": [
+        "Circe warns him and gives the method. The Sirens sing that they know everything that happened at Troy and everything that happens on earth — knowledge, not beauty, is the bait — and Odysseus signals to be untied while his deaf crew row past.",
+        "The whole episode is thirty-five lines long. It has generated a disproportionate share of the poem's afterlife, and it contributes almost nothing to the map."
+      ],
+      "whyItMatters": "It is the clearest example in the atlas of a name-based identification: the Sirenuse islets carry the name and nothing else supports the location.",
+      "debate": "Whether the islets were named after the episode or the episode located at the islets — a circularity that runs through most western identifications.",
+      "faqs": [
+        {
+          "q": "Where is the island of the Sirens?",
+          "a": "Not established. Italian tradition attaches it to Li Galli off Amalfi; the atlas scores that 4/12."
+        },
+        {
+          "q": "What do the Sirens actually offer?",
+          "a": "Knowledge. They sing that they know what happened at Troy and everything that comes to pass on earth, which is why the temptation works on this particular listener."
+        }
+      ]
+    },
+    "es": {
+      "title": "Las sirenas",
+      "summary": "El único peligro que Odiseo supera planificando: cera en los oídos de la tripulación, su propio cuerpo atado al mástil y el canto escuchado por un hombre que no puede obedecerlo.",
+      "narrative": [
+        "Circe le avisa y le da el método. Las sirenas cantan que saben cuanto ocurrió en Troya y cuanto sucede en la tierra —el cebo es el conocimiento, no la belleza— y Odiseo hace señas para que lo desaten mientras su tripulación sorda rema de largo.",
+        "Todo el episodio dura treinta y cinco versos. Ha generado una parte desproporcionada de la posteridad del poema y no aporta casi nada al mapa."
+      ],
+      "whyItMatters": "Es el ejemplo más claro del atlas de identificación por el nombre: los islotes Sirenusas llevan el nombre y nada más sostiene la localización.",
+      "debate": "Si los islotes se llamaron así por el episodio o el episodio se situó en los islotes: una circularidad que recorre la mayoría de las identificaciones occidentales.",
+      "faqs": [
+        {
+          "q": "¿Dónde está la isla de las sirenas?",
+          "a": "No establecida. La tradición italiana la adhiere a Li Galli, frente a Amalfi; el atlas puntúa eso con 4/12."
+        },
+        {
+          "q": "¿Qué ofrecen en realidad las sirenas?",
+          "a": "Conocimiento. Cantan que saben lo ocurrido en Troya y cuanto sucede en la tierra, y por eso la tentación funciona con este oyente en concreto."
+        }
+      ]
+    },
+    "pt": {
+      "title": "As sereias",
+      "summary": "O único perigo que Odisseu supera planejando: cera nos ouvidos da tripulação, o próprio corpo amarrado ao mastro e o canto ouvido por um homem que não pode obedecê-lo.",
+      "narrative": [
+        "Circe o avisa e lhe dá o método. As sereias cantam que sabem tudo o que ocorreu em Troia e tudo o que acontece na terra — a isca é o conhecimento, não a beleza — e Odisseu faz sinais para ser desamarrado enquanto sua tripulação surda rema adiante.",
+        "Todo o episódio dura trinta e cinco versos. Gerou uma parcela desproporcional da posteridade do poema e quase nada acrescenta ao mapa."
+      ],
+      "whyItMatters": "É o exemplo mais claro do atlas de identificação pelo nome: os ilhéus Sirenusas levam o nome e nada mais sustenta a localização.",
+      "debate": "Se os ilhéus receberam o nome do episódio ou o episódio foi situado nos ilhéus — circularidade que percorre a maioria das identificações ocidentais.",
+      "faqs": [
+        {
+          "q": "Onde fica a ilha das sereias?",
+          "a": "Não estabelecida. A tradição italiana a liga a Li Galli, diante de Amalfi; o atlas pontua isso com 4/12."
+        },
+        {
+          "q": "O que as sereias realmente oferecem?",
+          "a": "Conhecimento. Cantam que sabem o que ocorreu em Troia e tudo o que se passa na terra, e por isso a tentação funciona com este ouvinte em particular."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "slug": "priams-ransom",
+  "id": "HOM-E-024",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "iliad",
+  "book": 24,
+  "lines": "322-467",
+  "places": [
+    "troy",
+    "mount-ida"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 1,
+    "scholarly": 2,
+    "geographic": 3,
+    "score": 9,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "korfmann",
+      "kind": "archaeology",
+      "citation": "Manfred Korfmann, Troia/Wilusa excavation reports, Studia Troica (1988–2005)",
+      "author": "Manfred Korfmann",
+      "year": 2005
+    },
+    {
+      "id": "hittite-treaties",
+      "kind": "scholarship",
+      "citation": "Hittite treaty and letter corpus referring to Wilusa and its rulers",
+      "year": 2004
+    }
+  ],
+  "theories": [
+    {
+      "id": "plain-crossing",
+      "identification": "plausible",
+      "place": "troy",
+      "proponent": "Topography of the Troad plain",
+      "era": "contemporary",
+      "sources": [
+        "korfmann",
+        "hittite-treaties"
+      ],
+      "locales": {
+        "en": {
+          "label": "The night crossing of the plain",
+          "note": "Priam drives from the city to the Achaean camp and back in a night, which the Troad's real distances allow — especially with a Bronze Age shoreline further inland."
+        },
+        "es": {
+          "label": "La travesía nocturna de la llanura",
+          "note": "Príamo va en carro de la ciudad al campamento aqueo y vuelve en una noche, cosa que permiten las distancias reales de la Tróade, sobre todo con una línea de costa del Bronce más interior."
+        },
+        "pt": {
+          "label": "A travessia noturna da planície",
+          "note": "Príamo vai de carro da cidade ao acampamento aqueu e volta numa noite, o que as distâncias reais da Trôade permitem — sobretudo com uma linha de costa do Bronze mais para o interior."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Priam's ransom",
+      "summary": "An old king crosses the plain at night with a wagon of treasure to ask the man who killed his son for the body. The Iliad ends here, and so does its geography.",
+      "narrative": [
+        "Hermes guides Priam past the sentries to Achilles' hut. The scene is domestic and unbearable: the ransom weighed out, the request made, the two men weeping for different dead, and then a meal. Achilles gives back the body and grants eleven days' truce for the funeral.",
+        "Geographically it is a short journey — city, ford, plain, camp — and it is the last time the poem uses the landscape it has spent twenty-four books crossing."
+      ],
+      "whyItMatters": "It confirms the scale of the Trojan battlefield: a night's round trip by wagon, which the real Troad allows and a larger landscape would not.",
+      "debate": "Nothing about the location. What is argued is the historical frame — whether the Hittite references to Wilusa give the poem a political context, or only a name.",
+      "faqs": [
+        {
+          "q": "Is Priam a historical figure?",
+          "a": "There is no evidence for Priam. Hittite documents name rulers of a Wilusa most scholars equate with Ilios, but no name in them matches Priam's."
+        },
+        {
+          "q": "Why does the Iliad end here?",
+          "a": "With Hector's funeral, not with the fall of the city. The sack belongs to the Epic Cycle and is only ever glimpsed in Homer."
+        }
+      ]
+    },
+    "es": {
+      "title": "El rescate de Príamo",
+      "summary": "Un rey anciano cruza la llanura de noche con un carro de tesoros para pedirle al hombre que mató a su hijo el cuerpo del muchacho. La Ilíada termina aquí, y con ella su geografía.",
+      "narrative": [
+        "Hermes guía a Príamo entre los centinelas hasta la cabaña de Aquiles. La escena es doméstica e insoportable: el rescate pesado, la petición hecha, los dos hombres llorando por muertos distintos, y después una comida. Aquiles devuelve el cuerpo y concede once días de tregua para el funeral.",
+        "Geográficamente es un trayecto corto —ciudad, vado, llanura, campamento— y es la última vez que el poema usa el paisaje que ha recorrido durante veinticuatro cantos."
+      ],
+      "whyItMatters": "Confirma la escala del campo de batalla troyano: una ida y vuelta nocturna en carro, que la Tróade real permite y un paisaje mayor no permitiría.",
+      "debate": "Nada sobre la ubicación. Lo que se discute es el marco histórico: si las referencias hititas a Wilusa dan al poema un contexto político o solo un nombre.",
+      "faqs": [
+        {
+          "q": "¿Es Príamo un personaje histórico?",
+          "a": "No hay pruebas de Príamo. Los documentos hititas nombran gobernantes de una Wilusa que la mayoría equipara con Ilión, pero ningún nombre en ellos corresponde al suyo."
+        },
+        {
+          "q": "¿Por qué termina aquí la Ilíada?",
+          "a": "Con el funeral de Héctor, no con la caída de la ciudad. El saqueo pertenece al Ciclo Épico y en Homero solo se vislumbra."
+        }
+      ]
+    },
+    "pt": {
+      "title": "O resgate de Príamo",
+      "summary": "Um rei idoso cruza a planície à noite com um carro de tesouros para pedir ao homem que matou seu filho o corpo do rapaz. A Ilíada termina aqui, e com ela sua geografia.",
+      "narrative": [
+        "Hermes guia Príamo entre as sentinelas até a cabana de Aquiles. A cena é doméstica e insuportável: o resgate pesado, o pedido feito, os dois homens chorando por mortos diferentes, e depois uma refeição. Aquiles devolve o corpo e concede onze dias de trégua para o funeral.",
+        "Geograficamente é um trajeto curto — cidade, vau, planície, acampamento — e é a última vez que o poema usa a paisagem que atravessou por vinte e quatro cantos."
+      ],
+      "whyItMatters": "Confirma a escala do campo de batalha troiano: uma ida e volta noturna de carro, que a Trôade real permite e uma paisagem maior não permitiria.",
+      "debate": "Nada sobre a localização. O que se discute é o quadro histórico: se as referências hititas a Wilusa dão ao poema um contexto político ou apenas um nome.",
+      "faqs": [
+        {
+          "q": "Príamo é uma figura histórica?",
+          "a": "Não há provas de Príamo. Documentos hititas nomeiam governantes de uma Wilusa que a maioria equipara a Ílion, mas nenhum nome neles corresponde ao dele."
+        },
+        {
+          "q": "Por que a Ilíada termina aqui?",
+          "a": "Com o funeral de Heitor, não com a queda da cidade. O saque pertence ao Ciclo Épico e em Homero apenas se entrevê."
+        }
+      ]
+    }
+  }
+}

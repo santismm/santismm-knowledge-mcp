@@ -1,0 +1,120 @@
+{
+  "slug": "asteris",
+  "id": "HOM-P-016",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "speculative",
+  "unlocated": false,
+  "region": "ionian",
+  "homericNames": [
+    "Ἀστερίς"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 4,
+      "lines": "842-847"
+    },
+    {
+      "work": "odyssey",
+      "book": 16,
+      "lines": "351-370"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-10",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 10.2",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "daskalio",
+      "kind": "scholarship",
+      "citation": "Daskalio, the islet in the Ithaki–Kefalonia channel, as the traditional candidate for Asteris; its lack of harbours is the standing objection",
+      "year": 2005
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "daskalio",
+      "identification": "speculative",
+      "modernName": "Daskalio",
+      "country": "GR",
+      "lat": 38.35,
+      "lon": 20.67,
+      "precision": "site",
+      "proponent": "Ancient tradition, reported by Strabo, Geography 10.2",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 1,
+        "score": 4,
+        "band": "low"
+      },
+      "sources": [
+        "daskalio",
+        "strabo-10",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Daskalio islet",
+          "note": "The one islet in the strait where the ambush would work geographically. Homer gives Asteris 'two harbours'; Daskalio is a bare rock with none, which is exactly the objection Strabo already records."
+        },
+        "es": {
+          "label": "El islote de Daskalio",
+          "note": "El único islote del estrecho en el que la emboscada funcionaría geográficamente. Homero da a Asteris «dos puertos»; Daskalio es una roca pelada sin ninguno, que es justo la objeción que ya recoge Estrabón."
+        },
+        "pt": {
+          "label": "O ilhéu de Daskalio",
+          "note": "O único ilhéu do estreito em que a emboscada funcionaria geograficamente. Homero dá a Astéris “dois portos”; Daskalio é uma rocha nua sem nenhum, que é exatamente a objeção que Estrabão já registra."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "suitors-ambush-at-asteris"
+  ],
+  "locales": {
+    "en": {
+      "name": "Asteris",
+      "summary": "The islet where the suitors lie in wait for Telemachus — a place the poem describes precisely and the map has never produced.",
+      "description": [
+        "Asteris sits between Ithaca and Same, has two harbours, and is where twenty suitors ambush Telemachus on his way home. The detail is operational: it names a place, a position and a facility.",
+        "The only candidate in the right strait is Daskalio, a rock with no harbours at all. Strabo already noticed the mismatch. Either the poem exaggerates, or the coastline has changed, or the geography is imagined."
+      ],
+      "identificationNote": "Speculative: one traditional candidate, contradicted by the poem's own description, with nothing excavated and no consensus. It scores 4/12 and is one of the clearest cases in the atlas of a precise description that fails to land.",
+      "debate": "Whether Asteris is a real islet mis-remembered, a place lost to seismic change — the Ionian is tectonically active — or a narrative convenience. Bittlestone's Paliki reconstruction relocates the whole ambush, which is one of its selling points and one of its costs."
+    },
+    "es": {
+      "name": "Asteris",
+      "summary": "El islote donde los pretendientes acechan a Telémaco: un lugar que el poema describe con precisión y que el mapa nunca ha producido.",
+      "description": [
+        "Asteris está entre Ítaca y Same, tiene dos puertos y es donde veinte pretendientes emboscan a Telémaco en su regreso. El detalle es operativo: nombra un lugar, una posición y una instalación.",
+        "El único candidato en el estrecho correcto es Daskalio, una roca sin puerto alguno. Estrabón ya advirtió el desajuste. O el poema exagera, o la costa ha cambiado, o la geografía es imaginada."
+      ],
+      "identificationNote": "Especulativa: un candidato tradicional, contradicho por la descripción del propio poema, sin nada excavado y sin consenso. Puntúa 4/12 y es uno de los casos más claros del atlas de una descripción precisa que no aterriza.",
+      "debate": "Si Asteris es un islote real mal recordado, un lugar perdido por cambios sísmicos —el Jónico es tectónicamente activo— o una conveniencia narrativa. La reconstrucción de Paliki de Bittlestone reubica toda la emboscada, lo que es uno de sus atractivos y uno de sus costes."
+    },
+    "pt": {
+      "name": "Astéris",
+      "summary": "O ilhéu onde os pretendentes espreitam Telêmaco: um lugar que o poema descreve com precisão e que o mapa nunca produziu.",
+      "description": [
+        "Astéris fica entre Ítaca e Same, tem dois portos e é onde vinte pretendentes emboscam Telêmaco no retorno. O detalhe é operacional: nomeia um lugar, uma posição e uma instalação.",
+        "O único candidato no estreito certo é Daskalio, uma rocha sem porto algum. Estrabão já notou o desencaixe. Ou o poema exagera, ou a costa mudou, ou a geografia é imaginada."
+      ],
+      "identificationNote": "Especulativa: um candidato tradicional, contrariado pela descrição do próprio poema, sem nada escavado e sem consenso. Pontua 4/12 e é um dos casos mais claros do atlas de uma descrição precisa que não aterrissa.",
+      "debate": "Se Astéris é um ilhéu real mal lembrado, um lugar perdido por mudanças sísmicas — o Jônico é tectonicamente ativo — ou uma conveniência narrativa. A reconstrução de Paliki de Bittlestone realoca toda a emboscada, o que é um de seus atrativos e um de seus custos."
+    }
+  }
+}

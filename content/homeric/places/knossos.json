@@ -1,0 +1,132 @@
+{
+  "slug": "knossos",
+  "id": "HOM-P-009",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "crete",
+  "homericNames": [
+    "Κνωσός"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "645-652"
+    },
+    {
+      "work": "odyssey",
+      "book": 19,
+      "lines": "172-184"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "evans-1921",
+      "kind": "archaeology",
+      "citation": "Arthur Evans, The Palace of Minos at Knossos, 4 vols. (London, 1921–1935)",
+      "author": "Arthur Evans",
+      "year": 1921
+    },
+    {
+      "id": "unesco-knossos",
+      "kind": "scholarship",
+      "citation": "Knossos and the Minoan palaces in the standard archaeological literature of Bronze Age Crete",
+      "year": 2000
+    },
+    {
+      "id": "linear-b-knossos",
+      "kind": "archaeology",
+      "citation": "Linear B tablets from Knossos, deciphered as Greek by Ventris and Chadwick (1952–1956)",
+      "year": 1956
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "knossos-palace",
+      "identification": "accepted",
+      "modernName": "Knossos, Heraklion",
+      "country": "GR",
+      "lat": 35.298,
+      "lon": 25.163,
+      "precision": "site",
+      "proponent": "Continuous identification; excavated by Arthur Evans (from 1900)",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 3,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 12,
+        "band": "high"
+      },
+      "sources": [
+        "evans-1921",
+        "linear-b-knossos",
+        "unesco-knossos"
+      ],
+      "locales": {
+        "en": {
+          "label": "The palace at Knossos",
+          "note": "The largest Bronze Age complex on Crete, excavated by Evans from 1900 and occupied through the Mycenaean period, when its administration wrote Greek in Linear B. The Odyssey's Crete of 'ninety cities' and its 'great city Knossos where Minos ruled' fit an island whose palatial archaeology is the densest in the Aegean."
+        },
+        "es": {
+          "label": "El palacio de Cnosos",
+          "note": "El mayor complejo del Bronce en Creta, excavado por Evans desde 1900 y ocupado durante el periodo micénico, cuando su administración escribía griego en Lineal B. La Creta odiseica de las «noventa ciudades» y su «gran ciudad de Cnosos, donde reinó Minos» encajan con una isla cuya arqueología palacial es la más densa del Egeo."
+        },
+        "pt": {
+          "label": "O palácio de Cnossos",
+          "note": "O maior complexo do Bronze em Creta, escavado por Evans desde 1900 e ocupado durante o período micênico, quando sua administração escrevia grego em Linear B. A Creta odisseica das “noventa cidades” e sua “grande cidade de Cnossos, onde Minos reinou” encaixam numa ilha cuja arqueologia palaciana é a mais densa do Egeu."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "catalogue-of-ships"
+  ],
+  "locales": {
+    "en": {
+      "name": "Knossos",
+      "summary": "Minos' city in the Odyssey and the largest palace on Crete — an identification nobody disputes, attached to a civilisation the poems only half remember.",
+      "description": [
+        "Odysseus, lying to Penelope in Book 19, invents a Cretan identity and gives the island a description that is not invented: ninety cities, many peoples, and Knossos where Minos ruled. The Iliad's catalogue lists Cretan contingents under Idomeneus from Knossos, Gortyn and Lyctus.",
+        "The palace Evans excavated from 1900 is Minoan, older than the world the poems describe, but it was still occupied in the Mycenaean period and its Linear B archive is in Greek. What the poems preserve is a memory of Cretan importance rather than of Minoan civilisation as archaeology now understands it."
+      ],
+      "identificationNote": "Accepted: the site, the name and the scale all agree, and the identification has never been contested. The interest of the entry is not the location but the gap between the memory and the material.",
+      "debate": "How much of Homer's Crete is Minoan memory, how much Mycenaean, and how much contemporary eighth-century knowledge of a large, populous island. Evans' reconstruction of the palace itself — concrete, repainted, partly conjectural — remains a live methodological argument."
+    },
+    "es": {
+      "name": "Cnosos",
+      "summary": "La ciudad de Minos en la Odisea y el mayor palacio de Creta: una identificación que nadie discute, adherida a una civilización que los poemas solo recuerdan a medias.",
+      "description": [
+        "Odiseo, mintiendo a Penélope en el canto 19, se inventa una identidad cretense y da de la isla una descripción que no es inventada: noventa ciudades, muchos pueblos y Cnosos, donde reinó Minos. El catálogo de la Ilíada enumera contingentes cretenses al mando de Idomeneo desde Cnosos, Gortina y Licto.",
+        "El palacio que Evans excavó desde 1900 es minoico, más antiguo que el mundo que describen los poemas, pero siguió ocupado en época micénica y su archivo en Lineal B está en griego. Lo que los poemas conservan es el recuerdo de la importancia cretense, no de la civilización minoica tal como hoy la entiende la arqueología."
+      ],
+      "identificationNote": "Aceptada: el yacimiento, el nombre y la escala coinciden, y la identificación nunca se ha discutido. El interés de la ficha no es la ubicación, sino la distancia entre el recuerdo y el material.",
+      "debate": "Cuánto de la Creta homérica es memoria minoica, cuánto micénica y cuánto conocimiento contemporáneo del siglo VIII sobre una isla grande y populosa. La reconstrucción del palacio hecha por Evans —hormigón, repintes, partes conjeturales— sigue siendo un argumento metodológico vivo."
+    },
+    "pt": {
+      "name": "Cnossos",
+      "summary": "A cidade de Minos na Odisseia e o maior palácio de Creta: uma identificação que ninguém contesta, ligada a uma civilização que os poemas só lembram pela metade.",
+      "description": [
+        "Odisseu, mentindo a Penélope no canto 19, inventa uma identidade cretense e dá da ilha uma descrição que não é inventada: noventa cidades, muitos povos e Cnossos, onde Minos reinou. O catálogo da Ilíada lista contingentes cretenses sob Idomeneu vindos de Cnossos, Górtina e Licto.",
+        "O palácio que Evans escavou a partir de 1900 é minoico, mais antigo que o mundo descrito nos poemas, mas seguiu ocupado na época micênica e seu arquivo em Linear B está em grego. O que os poemas preservam é a lembrança da importância cretense, não da civilização minoica como a arqueologia hoje a entende."
+      ],
+      "identificationNote": "Aceita: o sítio, o nome e a escala concordam, e a identificação nunca foi contestada. O interesse da ficha não é a localização, mas a distância entre a lembrança e o material.",
+      "debate": "Quanto da Creta homérica é memória minoica, quanto micênica e quanto conhecimento contemporâneo do século VIII sobre uma ilha grande e populosa. A reconstrução do palácio feita por Evans — concreto, repinturas, partes conjeturais — segue sendo um argumento metodológico vivo."
+    }
+  }
+}

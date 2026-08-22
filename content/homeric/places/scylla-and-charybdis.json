@@ -1,0 +1,135 @@
+{
+  "slug": "scylla-and-charybdis",
+  "id": "HOM-P-021",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "plausible",
+  "unlocated": false,
+  "region": "italySicily",
+  "homericNames": [
+    "Σκύλλα",
+    "Χάρυβδις"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 12,
+      "lines": "73-126"
+    },
+    {
+      "work": "odyssey",
+      "book": 12,
+      "lines": "201-259"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "thucydides-6-2",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 6.2",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "strabo-5-3",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 5.3",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "strabo-6-2b",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 6.2 — the strait between Italy and Sicily and its whirlpool",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "messina-tides",
+      "kind": "scholarship",
+      "citation": "Tidal streams and the standing whirlpool of the Strait of Messina, described in modern navigational literature",
+      "year": 1990
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "messina",
+      "identification": "plausible",
+      "modernName": "Strait of Messina",
+      "country": "IT",
+      "lat": 38.24,
+      "lon": 15.63,
+      "precision": "area",
+      "proponent": "Universal ancient identification; Strabo, Geography 6.2",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 0,
+        "scholarly": 2,
+        "geographic": 3,
+        "score": 8,
+        "band": "medium"
+      },
+      "sources": [
+        "strabo-6-2b",
+        "messina-tides",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Strait of Messina",
+          "note": "The oldest and strongest of the wandering identifications. The strait genuinely produces a violent tidal race and a standing whirlpool, opposite a cliff-bound Calabrian shore, and antiquity named the two hazards Scylla and Charybdis and put them here without dissent. A town called Scilla still stands on the rock."
+        },
+        "es": {
+          "label": "El estrecho de Mesina",
+          "note": "La más antigua y firme de las identificaciones de las andanzas. El estrecho produce de verdad una corriente de marea violenta y un remolino estable, frente a una orilla calabresa de acantilados; la Antigüedad nombró los dos peligros Escila y Caribdis y los situó aquí sin discrepancias. Una ciudad llamada Scilla sigue en pie sobre la roca."
+        },
+        "pt": {
+          "label": "O estreito de Messina",
+          "note": "A mais antiga e firme das identificações das andanças. O estreito produz de fato uma corrente de maré violenta e um redemoinho estável, diante de uma margem calabresa de falésias; a Antiguidade nomeou os dois perigos Cila e Caribdes e os situou ali sem discordância. Uma cidade chamada Scilla ainda está de pé sobre a rocha."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "scylla-and-charybdis"
+  ],
+  "locales": {
+    "en": {
+      "name": "Scylla and Charybdis",
+      "summary": "The one hazard in the wanderings that behaves like a real place: a narrow strait with a lethal tidal race on one side and cliffs on the other. Antiquity put it at Messina and never argued.",
+      "description": [
+        "Circe describes the passage before Odysseus sails it: a monster in a cave high on a cliff that takes six men, and a whirlpool that swallows the sea three times a day and would take the whole ship. She tells him to hug the cliff and lose six men rather than lose everything, which he does.",
+        "The Strait of Messina has a genuine tidal race, a real whirlpool at certain states of the tide, and a cliff-bound Calabrian shore. It is the only stop on the voyage where the poem's hazard and the physical world line up without special pleading."
+      ],
+      "identificationNote": "Plausible — the highest class any of the wandering places reaches. It scores 8/12: strong on text and geography, unanimous enough in scholarship to count, and necessarily zero on archaeology, because a strait leaves no excavation.",
+      "debate": "Whether the identification is a memory or a later attachment: Greek sailors knew the strait from the eighth century, so a poem composed then could describe it from report. That would make Scylla and Charybdis real geography inside a fictional voyage — which is arguably what the whole atlas is about."
+    },
+    "es": {
+      "name": "Escila y Caribdis",
+      "summary": "El único peligro de las andanzas que se comporta como un lugar real: un estrecho angosto con una corriente de marea letal a un lado y acantilados al otro. La Antigüedad lo situó en Mesina y nunca lo discutió.",
+      "description": [
+        "Circe describe el paso antes de que Odiseo lo navegue: un monstruo en una cueva alta del acantilado que se lleva a seis hombres, y un remolino que traga el mar tres veces al día y se llevaría la nave entera. Le dice que se pegue al acantilado y pierda seis hombres antes que perderlo todo, y eso hace.",
+        "El estrecho de Mesina tiene una corriente de marea auténtica, un remolino real en ciertos estados de marea y una orilla calabresa de acantilados. Es la única escala del viaje en la que el peligro del poema y el mundo físico coinciden sin forzar nada."
+      ],
+      "identificationNote": "Plausible: la clase más alta que alcanza cualquiera de los lugares de las andanzas. Puntúa 8/12: fuerte en texto y geografía, con acuerdo académico suficiente, y necesariamente cero en arqueología, porque un estrecho no deja excavación.",
+      "debate": "Si la identificación es un recuerdo o una adhesión posterior: los marinos griegos conocían el estrecho desde el siglo VIII, de modo que un poema compuesto entonces pudo describirlo de oídas. Eso convertiría a Escila y Caribdis en geografía real dentro de un viaje ficticio, que es, discutiblemente, de lo que trata todo este atlas."
+    },
+    "pt": {
+      "name": "Cila e Caribdes",
+      "summary": "O único perigo das andanças que se comporta como um lugar real: um estreito apertado com uma corrente de maré letal de um lado e falésias do outro. A Antiguidade o situou em Messina e nunca discutiu.",
+      "description": [
+        "Circe descreve a passagem antes de Odisseu navegá-la: um monstro numa gruta alta na falésia que leva seis homens, e um redemoinho que engole o mar três vezes ao dia e levaria a nau inteira. Diz-lhe que se cole à falésia e perca seis homens em vez de perder tudo, e é o que ele faz.",
+        "O estreito de Messina tem uma corrente de maré autêntica, um redemoinho real em certos estados de maré e uma margem calabresa de falésias. É a única escala da viagem em que o perigo do poema e o mundo físico coincidem sem forçar nada."
+      ],
+      "identificationNote": "Plausível: a classe mais alta que qualquer um dos lugares das andanças alcança. Pontua 8/12: forte em texto e geografia, com acordo acadêmico suficiente, e necessariamente zero em arqueologia, porque um estreito não deixa escavação.",
+      "debate": "Se a identificação é lembrança ou anexação posterior: os marinheiros gregos conheciam o estreito desde o século VIII, de modo que um poema composto então poderia descrevê-lo de ouvido. Isso faria de Cila e Caribdes geografia real dentro de uma viagem fictícia — que é, discutivelmente, do que trata todo este atlas."
+    }
+  }
+}

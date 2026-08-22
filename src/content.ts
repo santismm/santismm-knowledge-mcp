@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { makeContent, type HandbookEntry } from "./shape.js";
+import { makeContent, type HandbookEntry, type HomericArtifact } from "./shape.js";
 
 /**
  * Filesystem content provider for the standalone stdio CLI.
@@ -172,5 +172,22 @@ export function loadHandbook(): HandbookEntry[] {
     .sort((a, b) => a.id.localeCompare(b.id));
 }
 
+/**
+ * Homeric Atlas artifacts, read from content/homeric/{places,episodes,routes}.
+ *
+ * Missing directories return an empty list rather than throwing: the standalone
+ * package ships the corpus it has, and a server that refuses to start because
+ * one Lab is absent is worse than one that reports zero places.
+ */
+function loadHomeric(kind: "places" | "episodes" | "routes"): HomericArtifact[] {
+  const dir = path.join(CONTENT_ROOT, "homeric", kind);
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as HomericArtifact)
+    .sort((a, b) => String(a.id ?? a.slug).localeCompare(String(b.id ?? b.slug)));
+}
+
 /** Content provider backed by the local filesystem (used by the stdio CLI). */
-export const fsContent = makeContent(loadAll, loadHandbook);
+export const fsContent = makeContent(loadAll, loadHandbook, loadHomeric);

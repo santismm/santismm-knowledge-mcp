@@ -1,0 +1,160 @@
+{
+  "slug": "nekyia",
+  "id": "HOM-E-004",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 11,
+  "lines": "1-50",
+  "places": [
+    "house-of-hades"
+  ],
+  "confidence": {
+    "textual": 2,
+    "archaeological": 0,
+    "scholarly": 1,
+    "geographic": 0,
+    "score": 3,
+    "band": "low"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 10.504–540 and 11.1–50",
+      "author": "Homer"
+    },
+    {
+      "id": "herodotus-5-92",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 5.92",
+      "author": "Herodotus",
+      "year": -430
+    },
+    {
+      "id": "dakaris",
+      "kind": "archaeology",
+      "citation": "Sotirios Dakaris, excavations at Ephyra, Thesprotia (from 1958)",
+      "author": "Sotirios Dakaris",
+      "year": 1958
+    },
+    {
+      "id": "wiseman-1998",
+      "kind": "scholarship",
+      "citation": "Reassessments of the Ephyra building as a fortified farmhouse (Greek and Anglophone scholarship since the 1990s)",
+      "year": 1998
+    }
+  ],
+  "theories": [
+    {
+      "id": "beyond-ocean",
+      "identification": "mythical",
+      "place": "house-of-hades",
+      "era": "antiquity",
+      "sources": [
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Beyond Ocean, at the world's edge",
+          "note": "Circe sends the ship across Ocean to a shore of perpetual mist. Read literally, the destination is outside the world the rest of the poem sails in — which is how most scholars read it."
+        },
+        "es": {
+          "label": "Más allá del Océano, en el borde del mundo",
+          "note": "Circe envía la nave a cruzar el Océano hacia una costa de niebla perpetua. Leído al pie de la letra, el destino queda fuera del mundo por el que navega el resto del poema, que es como lo lee la mayoría de los estudiosos."
+        },
+        "pt": {
+          "label": "Além do Oceano, na borda do mundo",
+          "note": "Circe manda o navio cruzar o Oceano rumo a uma costa de névoa perpétua. Lido ao pé da letra, o destino fica fora do mundo em que o resto do poema navega — que é como a maioria dos estudiosos o lê."
+        }
+      }
+    },
+    {
+      "id": "acheron-thesprotia",
+      "identification": "speculative",
+      "proponent": "Herodotus, Histories 5.92; Sotirios Dakaris (from 1958)",
+      "era": "antiquity",
+      "sources": [
+        "herodotus-5-92",
+        "dakaris",
+        "wiseman-1998"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Acheron in Thesprotia",
+          "note": "A real river, a real oracle of the dead reported by Herodotus, and an excavated building long shown to visitors as the Nekyomanteion — an identification many archaeologists now reject. The cult is historical; the equation with Homer's Erebus is not."
+        },
+        "es": {
+          "label": "El Aqueronte de Tesprocia",
+          "note": "Un río real, un oráculo de los muertos real citado por Heródoto y un edificio excavado que se ha mostrado durante décadas como el Necromanteion, identificación que hoy rechazan muchos arqueólogos. El culto es histórico; la ecuación con el Érebo homérico, no."
+        },
+        "pt": {
+          "label": "O Aqueronte da Tesprócia",
+          "note": "Um rio real, um oráculo dos mortos real citado por Heródoto e um edifício escavado exibido por décadas como o Necromanteion — identificação hoje rejeitada por muitos arqueólogos. O culto é histórico; a equação com o Érebo homérico, não."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The Nekyia: Odysseus questions the dead",
+      "summary": "Book 11 sends Odysseus to the edge of the world to consult the prophet Tiresias. It is the one journey in the poem with detailed directions and no possible destination.",
+      "narrative": [
+        "Circe gives the route: a day's sail with the north wind across Ocean, to the shore of the Cimmerians where the sun never shines; beach the ship by the grove of Persephone, where Pyriphlegethon and Cocytus flow into Acheron. There Odysseus digs a pit, pours honey, milk, wine and water, and the dead gather to the blood.",
+        "What follows is a catalogue of the dead — Elpenor, his mother Anticleia, Agamemnon, Achilles, Ajax — and the prophecy that structures the rest of the poem."
+      ],
+      "whyItMatters": "The Nekyia is the clean test of the atlas's own honesty. It has precise instructions, real river names and an ancient cult site attached to it, and it still scores 3/12, because precision about a ritual is not evidence about a place.",
+      "debate": "Whether the river names were borrowed from Thesprotia into the poem or the other way round; whether the Cimmerians locate anything; and whether Book 11 is an early or late part of the Odyssey. None of these questions can put a pin on a map.",
+      "faqs": [
+        {
+          "q": "Is the Nekyomanteion of Ephyra the entrance to Homer's underworld?",
+          "a": "No. It is a real archaeological site with a real cult history, and its identification as an oracle of the dead is itself disputed. The atlas records it as a theory attached to the episode, not as a location for the house of Hades."
+        },
+        {
+          "q": "Why does the episode score so low?",
+          "a": "Because three of the four criteria fail: nothing has been excavated that corresponds, there is no scholarly consensus that the passage locates anything, and the geography is explicitly beyond the known world. Only the textual criterion scores, and only partly."
+        }
+      ]
+    },
+    "es": {
+      "title": "La Nekyia: Odiseo interroga a los muertos",
+      "summary": "El canto 11 envía a Odiseo al borde del mundo a consultar al adivino Tiresias. Es el único viaje del poema con indicaciones detalladas y ningún destino posible.",
+      "narrative": [
+        "Circe da la ruta: un día de navegación con el Bóreas a través del Océano, hasta la costa de los cimerios donde nunca luce el sol; varar junto al bosque de Perséfone, donde el Piriflegetonte y el Cocito desembocan en el Aqueronte. Allí Odiseo cava una fosa, vierte miel, leche, vino y agua, y los muertos acuden a la sangre.",
+        "Lo que sigue es un catálogo de difuntos —Elpénor, su madre Anticlea, Agamenón, Aquiles, Áyax— y la profecía que estructura el resto del poema."
+      ],
+      "whyItMatters": "La Nekyia es la prueba limpia de la honestidad del propio atlas. Tiene instrucciones precisas, nombres de ríos reales y un sitio de culto antiguo asociado, y aun así puntúa 3/12: la precisión sobre un rito no es prueba sobre un lugar.",
+      "debate": "Si los nombres de los ríos pasaron de Tesprocia al poema o al revés; si los cimerios localizan algo; y si el canto 11 es una parte temprana o tardía de la Odisea. Ninguna de estas preguntas permite clavar una chincheta en un mapa.",
+      "faqs": [
+        {
+          "q": "¿Es el Necromanteion de Éfira la entrada al inframundo homérico?",
+          "a": "No. Es un yacimiento real con una historia de culto real, y su identificación como oráculo de los muertos está discutida. El atlas lo registra como teoría asociada al episodio, no como localización de la morada de Hades."
+        },
+        {
+          "q": "¿Por qué puntúa tan bajo el episodio?",
+          "a": "Porque fallan tres de los cuatro criterios: no se ha excavado nada que corresponda, no hay consenso académico de que el pasaje localice algo y la geografía está explícitamente más allá del mundo conocido. Solo puntúa el criterio textual, y solo en parte."
+        }
+      ]
+    },
+    "pt": {
+      "title": "A Nekyia: Odisseu interroga os mortos",
+      "summary": "O canto 11 envia Odisseu à borda do mundo para consultar o adivinho Tirésias. É a única viagem do poema com indicações detalhadas e nenhum destino possível.",
+      "narrative": [
+        "Circe dá a rota: um dia de navegação com o Bóreas através do Oceano, até a costa dos cimérios onde o sol nunca brilha; encalhar junto ao bosque de Perséfone, onde o Piriflegetonte e o Cocito desembocam no Aqueronte. Ali Odisseu cava uma cova, verte mel, leite, vinho e água, e os mortos acorrem ao sangue.",
+        "O que se segue é um catálogo de mortos — Elpenor, sua mãe Anticleia, Agamêmnon, Aquiles, Ájax — e a profecia que estrutura o resto do poema."
+      ],
+      "whyItMatters": "A Nekyia é o teste limpo da honestidade do próprio atlas. Tem instruções precisas, nomes de rios reais e um sítio de culto antigo associado, e ainda assim pontua 3/12: precisão sobre um rito não é prova sobre um lugar.",
+      "debate": "Se os nomes dos rios passaram da Tesprócia para o poema ou o contrário; se os cimérios localizam algo; e se o canto 11 é uma parte antiga ou tardia da Odisseia. Nenhuma dessas perguntas permite fincar um alfinete num mapa.",
+      "faqs": [
+        {
+          "q": "O Necromanteion de Éfira é a entrada do submundo homérico?",
+          "a": "Não. É um sítio arqueológico real com história de culto real, e sua identificação como oráculo dos mortos é contestada. O atlas o registra como teoria associada ao episódio, não como localização da morada de Hades."
+        },
+        {
+          "q": "Por que o episódio pontua tão baixo?",
+          "a": "Porque três dos quatro critérios falham: nada foi escavado que corresponda, não há consenso acadêmico de que a passagem localize algo e a geografia está explicitamente além do mundo conhecido. Só o critério textual pontua, e apenas em parte."
+        }
+      ]
+    }
+  }
+}

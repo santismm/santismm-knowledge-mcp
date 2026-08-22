@@ -1,0 +1,152 @@
+{
+  "slug": "mycenae",
+  "id": "HOM-P-005",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "mainlandGreece",
+  "homericNames": [
+    "Μυκῆναι",
+    "Μυκήνη"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "569-580"
+    },
+    {
+      "work": "iliad",
+      "book": 4,
+      "lines": "51-53"
+    },
+    {
+      "work": "odyssey",
+      "book": 3,
+      "lines": "304-312"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "schliemann-1878",
+      "kind": "archaeology",
+      "citation": "Heinrich Schliemann, Mycenae: A Narrative of Researches and Discoveries at Mycenae and Tiryns (1878)",
+      "author": "Heinrich Schliemann",
+      "year": 1878
+    },
+    {
+      "id": "wace-1949",
+      "kind": "archaeology",
+      "citation": "Alan J. B. Wace, Mycenae: An Archaeological History and Guide (Princeton, 1949)",
+      "author": "Alan J. B. Wace",
+      "year": 1949
+    },
+    {
+      "id": "pausanias-2-16",
+      "kind": "primary_text",
+      "citation": "Pausanias, Description of Greece 2.16",
+      "author": "Pausanias",
+      "year": 170
+    },
+    {
+      "id": "unesco-mycenae",
+      "kind": "scholarship",
+      "citation": "UNESCO World Heritage List, Archaeological Sites of Mycenae and Tiryns (inscribed 1999)",
+      "year": 1999,
+      "url": "https://whc.unesco.org/en/list/941"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "mycenae-citadel",
+      "identification": "accepted",
+      "modernName": "Mykines",
+      "country": "GR",
+      "lat": 37.7306,
+      "lon": 22.7561,
+      "precision": "site",
+      "proponent": "Pausanias 2.16; excavated by Schliemann (1876), then Wace",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 3,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 12,
+        "band": "high"
+      },
+      "sources": [
+        "schliemann-1878",
+        "wace-1949",
+        "pausanias-2-16",
+        "unesco-mycenae"
+      ],
+      "locales": {
+        "en": {
+          "label": "The citadel at Mycenae",
+          "note": "A fortified Late Bronze Age citadel with cyclopean walls, the Lion Gate, shaft graves and a palace complex, occupied continuously since antiquity in memory as well as in fact — Pausanias visited the ruins in the second century CE and identified them as Agamemnon's city."
+        },
+        "es": {
+          "label": "La ciudadela de Micenas",
+          "note": "Una ciudadela fortificada del Bronce Final con murallas ciclópeas, la Puerta de los Leones, tumbas de fosa y un complejo palacial; su identificación nunca se perdió: Pausanias visitó las ruinas en el siglo II d.C. y las señaló como la ciudad de Agamenón."
+        },
+        "pt": {
+          "label": "A cidadela de Micenas",
+          "note": "Uma cidadela fortificada do Bronze Final com muralhas ciclópicas, a Porta dos Leões, túmulos de fossa e um complexo palaciano; sua identificação nunca se perdeu: Pausânias visitou as ruínas no século II d.C. e as apontou como a cidade de Agamêmnon."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "catalogue-of-ships",
+    "agamemnons-murder"
+  ],
+  "locales": {
+    "en": {
+      "name": "Mycenae",
+      "summary": "Agamemnon's city, and the one Homeric capital that never had to be found: the citadel was visible above ground throughout antiquity and gives its name to the entire Bronze Age civilisation.",
+      "description": [
+        "The Iliad calls Mycenae 'rich in gold' and makes it the seat of the coalition's high king. The site on the Argolid ridge answers that description with an emphasis the poem could hardly have invented: cyclopean fortifications, a monumental gate, shaft graves whose gold masks reached the Athens museum in 1876, and a palace burnt at the end of the Late Bronze Age.",
+        "The identification was never lost. Pausanias walked the ruins in the second century CE and named them; Schliemann dug them in 1876 believing he had found Agamemnon's grave, which he had not. What he had found was the centre of a civilisation that now takes its name from this hill.",
+        "What Mycenae gives the atlas is a baseline. It is what a Homeric place looks like when text, tradition and excavation agree completely — and it is the standard the contested identifications are scored against."
+      ],
+      "identificationNote": "Accepted: the site was never in doubt, its Bronze Age material is overwhelming, and the surrounding geography — the Argive plain, the road to Corinth, the citadels at Tiryns and Argos — matches the political landscape the Catalogue of Ships describes.",
+      "debate": "Not whether the place is Mycenae, but what the place was. Whether a Mycenaean high king ever exercised the authority the Iliad gives Agamemnon, and how far the Linear B palace economy resembles the world of the poems, are open questions in Aegean archaeology."
+    },
+    "es": {
+      "name": "Micenas",
+      "summary": "La ciudad de Agamenón y la única capital homérica que nunca hubo que encontrar: la ciudadela estuvo siempre visible sobre el terreno y da nombre a toda la civilización de la Edad del Bronce.",
+      "description": [
+        "La Ilíada llama a Micenas «rica en oro» y la convierte en sede del rey supremo de la coalición. El yacimiento del cerro de la Argólide responde a esa descripción con un énfasis que el poema difícilmente pudo inventar: fortificaciones ciclópeas, una puerta monumental, tumbas de fosa cuyas máscaras de oro llegaron al museo de Atenas en 1876 y un palacio incendiado al final del Bronce Final.",
+        "La identificación nunca se perdió. Pausanias recorrió las ruinas en el siglo II d.C. y las nombró; Schliemann las excavó en 1876 creyendo haber hallado la tumba de Agamenón, cosa que no ocurrió. Lo que sí había hallado era el centro de una civilización que hoy toma su nombre de esta colina.",
+        "Lo que Micenas aporta al atlas es una línea de base: es el aspecto que tiene un lugar homérico cuando texto, tradición y excavación coinciden por completo, y es el patrón contra el que se puntúan las identificaciones discutidas."
+      ],
+      "identificationNote": "Aceptada: el yacimiento nunca estuvo en duda, su material del Bronce es abrumador y la geografía circundante —la llanura argiva, el camino a Corinto, las ciudadelas de Tirinto y Argos— encaja con el paisaje político que describe el Catálogo de las Naves.",
+      "debate": "No se discute que el lugar sea Micenas, sino qué fue ese lugar. Si un rey micénico ejerció alguna vez la autoridad que la Ilíada da a Agamenón, y hasta qué punto la economía palacial del Lineal B se parece al mundo de los poemas, siguen siendo preguntas abiertas en la arqueología egea."
+    },
+    "pt": {
+      "name": "Micenas",
+      "summary": "A cidade de Agamêmnon e a única capital homérica que nunca precisou ser encontrada: a cidadela esteve sempre visível acima do solo e dá nome a toda a civilização da Idade do Bronze.",
+      "description": [
+        "A Ilíada chama Micenas de “rica em ouro” e faz dela a sede do rei supremo da coalizão. O sítio na crista da Argólida responde a essa descrição com uma ênfase que o poema dificilmente inventaria: fortificações ciclópicas, uma porta monumental, túmulos de fossa cujas máscaras de ouro chegaram ao museu de Atenas em 1876 e um palácio incendiado no fim do Bronze Final.",
+        "A identificação nunca se perdeu. Pausânias percorreu as ruínas no século II d.C. e as nomeou; Schliemann as escavou em 1876 acreditando ter achado o túmulo de Agamêmnon, o que não ocorreu. O que de fato encontrara era o centro de uma civilização que hoje leva o nome desta colina.",
+        "O que Micenas dá ao atlas é uma linha de base: é a aparência de um lugar homérico quando texto, tradição e escavação concordam por completo — e é o padrão contra o qual as identificações contestadas são pontuadas."
+      ],
+      "identificationNote": "Aceita: o sítio nunca esteve em dúvida, seu material do Bronze é esmagador e a geografia ao redor — a planície argiva, a estrada para Corinto, as cidadelas de Tirinto e Argos — encaixa na paisagem política que o Catálogo das Naus descreve.",
+      "debate": "Não se discute que o lugar seja Micenas, mas o que esse lugar foi. Se um rei micênico algum dia exerceu a autoridade que a Ilíada dá a Agamêmnon, e o quanto a economia palaciana do Linear B se parece com o mundo dos poemas, seguem questões abertas na arqueologia egeia."
+    }
+  }
+}

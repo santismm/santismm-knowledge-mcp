@@ -1,0 +1,138 @@
+{
+  "slug": "the-achaean-camp",
+  "id": "HOM-E-022",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "iliad",
+  "book": 7,
+  "lines": "436-441",
+  "places": [
+    "troy",
+    "hellespont"
+  ],
+  "confidence": {
+    "textual": 2,
+    "archaeological": 1,
+    "scholarly": 2,
+    "geographic": 3,
+    "score": 8,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "korfmann",
+      "kind": "archaeology",
+      "citation": "Manfred Korfmann, Troia/Wilusa excavation reports, Studia Troica (1988–2005)",
+      "author": "Manfred Korfmann",
+      "year": 2005
+    },
+    {
+      "id": "thucydides-1-11",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 1.11 — on the Achaean camp and the length of the siege",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "troad-coastline",
+      "kind": "scholarship",
+      "citation": "Reconstructions of the Bronze Age coastline of the Troad: the bay silted by the Scamander has advanced several kilometres since antiquity",
+      "year": 2003
+    }
+  ],
+  "theories": [
+    {
+      "id": "silted-bay",
+      "identification": "plausible",
+      "place": "troy",
+      "proponent": "Coastal geology of the Troad",
+      "era": "contemporary",
+      "sources": [
+        "troad-coastline",
+        "korfmann"
+      ],
+      "locales": {
+        "en": {
+          "label": "The silted bay north of Hisarlık",
+          "note": "Geological work on the Troad shows the Bronze Age shoreline lay well inland of the modern one, which would put the beached ships closer to the citadel than the present landscape suggests. This is the strongest physical argument that the Iliad's battlefield is a real space."
+        },
+        "es": {
+          "label": "La bahía colmatada al norte de Hisarlık",
+          "note": "Los trabajos geológicos en la Tróade muestran que la línea de costa del Bronce quedaba bastante más al interior que la actual, lo que situaría las naves varadas más cerca de la ciudadela de lo que sugiere el paisaje presente. Es el argumento físico más fuerte de que el campo de batalla de la Ilíada es un espacio real."
+        },
+        "pt": {
+          "label": "A baía assoreada ao norte de Hisarlık",
+          "note": "Os trabalhos geológicos na Trôade mostram que a linha de costa do Bronze ficava bem mais para o interior que a atual, o que situaria as naus encalhadas mais perto da cidadela do que a paisagem presente sugere. É o argumento físico mais forte de que o campo de batalha da Ilíada é um espaço real."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The Achaean camp and the wall",
+      "summary": "The Iliad's second setting: a beach of drawn-up ships, a ditch, a wall with gates, and the ground between it and the city where almost all the fighting happens.",
+      "narrative": [
+        "The camp is built like a place — ships in rows, huts, an assembly ground, a wall thrown up in Book 7 and breached in Book 12. Thucydides already read the Iliad's camp as evidence about how the siege must have worked.",
+        "The distance between camp and city governs the poem's action, and it depends on where the shoreline was. Coastal geology says the bay reached much further inland in the Bronze Age, which shortens the battlefield to something a day's fighting can cross."
+      ],
+      "whyItMatters": "It is the part of the Trojan landscape that can be tested by geology rather than by excavation, and it comes out well.",
+      "debate": "How far inland the Bronze Age shore actually lay, and whether the wall of Book 7 belongs to the oldest layer of the poem — an ancient critical question, since the poem also says the gods destroyed it without trace.",
+      "faqs": [
+        {
+          "q": "Can the Achaean camp be excavated?",
+          "a": "Nothing identifiable as the camp has been found. What supports the setting is the reconstruction of the Bronze Age coastline, which places a suitable beach much closer to the citadel than today's plain does."
+        },
+        {
+          "q": "Why does the poem destroy the wall?",
+          "a": "Poseidon and Apollo sweep it away after the war, which conveniently explains why nothing of it remains. Ancient critics noticed the convenience."
+        }
+      ]
+    },
+    "es": {
+      "title": "El campamento aqueo y la muralla",
+      "summary": "El segundo escenario de la Ilíada: una playa de naves varadas, un foso, una muralla con puertas y el terreno entre ella y la ciudad donde ocurre casi todo el combate.",
+      "narrative": [
+        "El campamento está construido como un lugar: naves en filas, cabañas, un espacio de asamblea, una muralla levantada en el canto 7 y rota en el 12. Tucídides ya leía el campamento de la Ilíada como prueba de cómo debió de funcionar el asedio.",
+        "La distancia entre campamento y ciudad gobierna la acción del poema y depende de dónde estuviera la costa. La geología costera dice que la bahía llegaba mucho más al interior en el Bronce, lo que reduce el campo de batalla a algo que una jornada de combate puede recorrer."
+      ],
+      "whyItMatters": "Es la parte del paisaje troyano que puede contrastarse con la geología más que con la excavación, y sale bien parada.",
+      "debate": "Cuánto más al interior llegaba realmente la costa del Bronce, y si la muralla del canto 7 pertenece a la capa más antigua del poema: una vieja cuestión crítica, ya que el propio poema dice que los dioses la destruyeron sin dejar rastro.",
+      "faqs": [
+        {
+          "q": "¿Se puede excavar el campamento aqueo?",
+          "a": "No se ha hallado nada identificable como el campamento. Lo que sostiene el escenario es la reconstrucción de la costa del Bronce, que sitúa una playa adecuada mucho más cerca de la ciudadela que la llanura actual."
+        },
+        {
+          "q": "¿Por qué destruye el poema la muralla?",
+          "a": "Poseidón y Apolo la barren después de la guerra, lo que explica cómodamente que no quede nada de ella. Los críticos antiguos advirtieron la comodidad."
+        }
+      ]
+    },
+    "pt": {
+      "title": "O acampamento aqueu e a muralha",
+      "summary": "O segundo cenário da Ilíada: uma praia de naus encalhadas, um fosso, uma muralha com portas e o terreno entre ela e a cidade onde ocorre quase todo o combate.",
+      "narrative": [
+        "O acampamento é construído como um lugar: naus em fileiras, cabanas, um espaço de assembleia, uma muralha erguida no canto 7 e rompida no 12. Tucídides já lia o acampamento da Ilíada como prova de como o cerco deve ter funcionado.",
+        "A distância entre acampamento e cidade governa a ação do poema e depende de onde ficava a costa. A geologia costeira diz que a baía chegava muito mais para o interior no Bronze, o que reduz o campo de batalha a algo que uma jornada de combate atravessa."
+      ],
+      "whyItMatters": "É a parte da paisagem troiana que pode ser conferida pela geologia mais que pela escavação, e sai bem.",
+      "debate": "Quanto mais para o interior a costa do Bronze realmente chegava, e se a muralha do canto 7 pertence à camada mais antiga do poema — velha questão crítica, já que o próprio poema diz que os deuses a destruíram sem deixar rastro.",
+      "faqs": [
+        {
+          "q": "Dá para escavar o acampamento aqueu?",
+          "a": "Nada identificável como o acampamento foi encontrado. O que sustenta o cenário é a reconstrução da costa do Bronze, que situa uma praia adequada muito mais perto da cidadela que a planície atual."
+        },
+        {
+          "q": "Por que o poema destrói a muralha?",
+          "a": "Posêidon e Apolo a varrem depois da guerra, o que explica convenientemente que nada dela reste. Os críticos antigos notaram a conveniência."
+        }
+      ]
+    }
+  }
+}

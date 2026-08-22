@@ -1,0 +1,77 @@
+{
+  "slug": "planctae",
+  "id": "HOM-P-025",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "mythical",
+  "unlocated": true,
+  "region": "unlocated",
+  "homericNames": [
+    "Πλαγκταί"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 12,
+      "lines": "55-72"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "apollonius-4",
+      "kind": "primary_text",
+      "citation": "Apollonius of Rhodes, Argonautica 4.922-963 — the Planctae in the Argonaut tradition",
+      "author": "Apollonius of Rhodes",
+      "year": -250
+    },
+    {
+      "id": "strabo-3-2",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 3.2 — on Homer's western geography and its limits",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "hypotheses": [],
+  "episodes": [
+    "scylla-and-charybdis"
+  ],
+  "locales": {
+    "en": {
+      "name": "The Wandering Rocks",
+      "summary": "The route Circe tells Odysseus not to take. They are described, named and then avoided — the only place in the poem that exists purely as an alternative.",
+      "description": [
+        "Circe offers a choice: the Wandering Rocks, past which no ship has ever come except the Argo, or the strait of Scylla and Charybdis. She recommends the strait. The Rocks are therefore described in detail and never visited.",
+        "Because the Argo passed them, they belong to a different story — the Argonaut tradition, which later writers such as Apollonius located in the Adriatic or the far west. The Odyssey borrows them as a boundary marker of its own world."
+      ],
+      "identificationNote": "Mythical and unlocated: no hypothesis is recorded, because the poem itself presents them as the road not taken, and every later identification comes from the Argonaut cycle rather than from this text.",
+      "debate": "Whether the Planctae are a doublet of Scylla and Charybdis, a borrowing from an older Argonautic poem, or a memory of a real hazard now unrecognisable. The atlas takes no position and plots nothing."
+    },
+    "es": {
+      "name": "Las rocas errantes",
+      "summary": "La ruta que Circe le dice a Odiseo que no tome. Se las describe, se las nombra y se las evita: es el único lugar del poema que existe solo como alternativa.",
+      "description": [
+        "Circe ofrece una elección: las rocas errantes, junto a las que ninguna nave ha pasado salvo Argo, o el estrecho de Escila y Caribdis. Recomienda el estrecho. Las rocas quedan así descritas en detalle y nunca visitadas.",
+        "Como Argo pasó por ellas, pertenecen a otra historia —la tradición argonáutica, que autores posteriores como Apolonio situaron en el Adriático o en el extremo occidente—. La Odisea las toma prestadas como mojón de los límites de su propio mundo."
+      ],
+      "identificationNote": "Mítica y sin localizar: no se registra ninguna hipótesis, porque el propio poema las presenta como el camino no tomado y toda identificación posterior procede del ciclo argonáutico, no de este texto.",
+      "debate": "Si las Plancas son un doblete de Escila y Caribdis, un préstamo de un poema argonáutico más antiguo o el recuerdo de un peligro real hoy irreconocible. El atlas no toma posición y no dibuja nada."
+    },
+    "pt": {
+      "name": "As rochas errantes",
+      "summary": "A rota que Circe diz a Odisseu para não tomar. São descritas, nomeadas e evitadas: é o único lugar do poema que existe apenas como alternativa.",
+      "description": [
+        "Circe oferece uma escolha: as rochas errantes, por onde nau alguma passou exceto a Argo, ou o estreito de Cila e Caribdes. Ela recomenda o estreito. As rochas ficam assim descritas em detalhe e nunca visitadas.",
+        "Como a Argo passou por elas, pertencem a outra história — a tradição argonáutica, que autores posteriores como Apolônio situaram no Adriático ou no extremo ocidente. A Odisseia as toma emprestadas como marco dos limites do próprio mundo."
+      ],
+      "identificationNote": "Mítica e sem localização: nenhuma hipótese é registrada, porque o próprio poema as apresenta como o caminho não tomado e toda identificação posterior vem do ciclo argonáutico, não deste texto.",
+      "debate": "Se as Plânctas são um dublê de Cila e Caribdes, um empréstimo de um poema argonáutico mais antigo ou a lembrança de um perigo real hoje irreconhecível. O atlas não toma posição e não desenha nada."
+    }
+  }
+}

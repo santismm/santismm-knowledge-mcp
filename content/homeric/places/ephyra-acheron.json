@@ -1,0 +1,127 @@
+{
+  "slug": "ephyra-acheron",
+  "id": "HOM-P-028",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "plausible",
+  "unlocated": false,
+  "region": "mainlandGreece",
+  "homericNames": [
+    "Ἐφύρη",
+    "Ἀχέρων"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 1,
+      "lines": "257-264"
+    },
+    {
+      "work": "odyssey",
+      "book": 10,
+      "lines": "504-515"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "herodotus-5-92",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 5.92 — Periander and the oracle of the dead on the Acheron",
+      "author": "Herodotus",
+      "year": -430
+    },
+    {
+      "id": "dakaris",
+      "kind": "archaeology",
+      "citation": "Sotirios Dakaris, excavations at Ephyra, Thesprotia (from 1958)",
+      "author": "Sotirios Dakaris",
+      "year": 1958
+    },
+    {
+      "id": "wiseman-1998",
+      "kind": "scholarship",
+      "citation": "Reassessments of the Ephyra building as a fortified farmhouse rather than an oracle of the dead, in scholarship since the 1990s",
+      "year": 1998
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "mesopotamos",
+      "identification": "plausible",
+      "modernName": "Mesopotamos, Preveza",
+      "country": "GR",
+      "lat": 39.2361,
+      "lon": 20.53,
+      "precision": "site",
+      "proponent": "Sotirios Dakaris (from 1958)",
+      "era": "modern",
+      "since": 1958,
+      "confidence": {
+        "textual": 2,
+        "archaeological": 2,
+        "scholarly": 2,
+        "geographic": 3,
+        "score": 9,
+        "band": "medium"
+      },
+      "sources": [
+        "dakaris",
+        "herodotus-5-92",
+        "wiseman-1998"
+      ],
+      "locales": {
+        "en": {
+          "label": "The site at Mesopotamos, Thesprotia",
+          "note": "A real Hellenistic building at the confluence of the Acheron and its tributaries, excavated by Dakaris and long presented as the Nekyomanteion of Homer's underworld. Later scholarship reads the same building as a fortified farmhouse; the river, the cult and the ancient reputation are not in doubt, only the identification of the structure."
+        },
+        "es": {
+          "label": "El yacimiento de Mesopótamos, Tesprocia",
+          "note": "Un edificio helenístico real en la confluencia del Aqueronte con sus afluentes, excavado por Dakaris y presentado durante décadas como el Necromanteion del inframundo homérico. La erudición posterior lee ese mismo edificio como una granja fortificada; el río, el culto y la fama antigua no están en duda, solo la identificación de la estructura."
+        },
+        "pt": {
+          "label": "O sítio de Mesopótamos, Tesprócia",
+          "note": "Um edifício helenístico real na confluência do Aqueronte com seus afluentes, escavado por Dakaris e apresentado por décadas como o Necromanteion do submundo homérico. A erudição posterior lê o mesmo edifício como fazenda fortificada; o rio, o culto e a fama antiga não estão em dúvida, apenas a identificação da estrutura."
+        }
+      }
+    }
+  ],
+  "episodes": [],
+  "locales": {
+    "en": {
+      "name": "Ephyra and the Acheron",
+      "summary": "A real river with an underworld reputation, and the site most often confused with the entrance to Homer's Hades. The atlas keeps them apart: this place is here, that one is not.",
+      "description": [
+        "The Acheron of Thesprotia is a real river running through a gorge to the sea, and Herodotus reports an oracle of the dead beside it, consulted by Periander of Corinth. Ephyra appears in the Odyssey too, as the place Odysseus went for arrow poison.",
+        "Circe's directions to the underworld name Acheron along with Pyriphlegethon and Cocytus. Whether the poem borrowed the name from Thesprotia or Thesprotia acquired its cult from the poem is genuinely open — and either way, the house of Hades stays unlocated in this atlas."
+      ],
+      "identificationNote": "Plausible: a real, excavated site with a real cult history, whose function is disputed. It scores 9/12 as a place; the Nekyia's own entry scores 3/12, and the gap between those two numbers is the point.",
+      "debate": "Whether the excavated building is an oracle of the dead at all, and whether the Homeric river names come from this landscape or were attached to it later."
+    },
+    "es": {
+      "name": "Éfira y el Aqueronte",
+      "summary": "Un río real con fama de inframundo y el yacimiento que más se confunde con la entrada al Hades homérico. El atlas los mantiene separados: este lugar está aquí; aquel, no.",
+      "description": [
+        "El Aqueronte de Tesprocia es un río real que baja por una garganta hasta el mar, y Heródoto menciona junto a él un oráculo de los muertos que consultó Periandro de Corinto. Éfira aparece también en la Odisea, como el lugar al que fue Odiseo a buscar veneno para sus flechas.",
+        "Las indicaciones de Circe al inframundo nombran el Aqueronte junto al Piriflegetonte y el Cocito. Si el poema tomó el nombre de Tesprocia o si Tesprocia adquirió su culto a partir del poema es una cuestión realmente abierta, y en cualquier caso la morada de Hades sigue sin localizar en este atlas."
+      ],
+      "identificationNote": "Plausible: un yacimiento real y excavado, con una historia de culto real, cuya función se discute. Puntúa 9/12 como lugar; la ficha de la propia Nekyia puntúa 3/12, y la distancia entre esos dos números es justamente el asunto.",
+      "debate": "Si el edificio excavado es siquiera un oráculo de los muertos, y si los nombres homéricos de los ríos proceden de este paisaje o se le adhirieron después."
+    },
+    "pt": {
+      "name": "Éfira e o Aqueronte",
+      "summary": "Um rio real com fama de submundo e o sítio mais confundido com a entrada do Hades homérico. O atlas os mantém separados: este lugar está aqui; aquele, não.",
+      "description": [
+        "O Aqueronte da Tesprócia é um rio real que desce por uma garganta até o mar, e Heródoto menciona ao lado dele um oráculo dos mortos consultado por Periandro de Corinto. Éfira também aparece na Odisseia, como o lugar aonde Odisseu foi buscar veneno para as flechas.",
+        "As indicações de Circe ao submundo nomeiam o Aqueronte junto ao Piriflegetonte e ao Cocito. Se o poema tomou o nome da Tesprócia ou se a Tesprócia adquiriu seu culto a partir do poema é questão realmente aberta — e, de todo modo, a morada de Hades segue sem localização neste atlas."
+      ],
+      "identificationNote": "Plausível: um sítio real e escavado, com história de culto real, cuja função é discutida. Pontua 9/12 como lugar; a ficha da própria Nekyia pontua 3/12, e a distância entre esses dois números é justamente o ponto.",
+      "debate": "Se o edifício escavado é sequer um oráculo dos mortos, e se os nomes homéricos dos rios vêm desta paisagem ou lhe foram atribuídos depois."
+    }
+  }
+}

@@ -49,7 +49,21 @@ export interface McpContent {
   /** Harness Engineering Handbook chapters (empty when no handbook loader is injected). */
   listHandbook(locale?: Locale): unknown[];
   getHandbookChapter(idOrSlug: string, locale?: Locale): unknown;
+  /**
+   * Homeric Atlas artifacts (empty when no atlas loader is injected).
+   *
+   * Kept outside `Domain` on purpose: the atlas does not carry Evidence-First
+   * provenance, it carries an identification class and a 0–12 rubric. Flattening
+   * one vocabulary into the other would tell an agent that a guidebook tradition
+   * about Ogygia and an industry observation about agent memory are the same
+   * kind of claim.
+   */
+  listHomeric(kind: HomericKind, locale?: Locale): unknown[];
+  getHomeric(kind: HomericKind, slug: string, locale?: Locale): unknown;
 }
+
+/** The three artifact kinds of the Homeric Atlas. */
+export type HomericKind = "places" | "episodes" | "routes";
 
 /**
  * Every tool here reads a static corpus and nothing else, so all four hints are
@@ -276,6 +290,51 @@ function notFound(domain: string, slug: string) {
     isError: true as const,
   };
 }
+
+/**
+ * Atlas cards and units.
+ *
+ * They keep the two things an agent has to weigh before quoting the atlas — the
+ * identification class and the rubric — at the top level, rather than buried
+ * inside a locale body.
+ */
+const homericConfidence = z
+  .object({
+    textual: z.number(),
+    archaeological: z.number(),
+    scholarly: z.number(),
+    geographic: z.number(),
+    score: z.number(),
+    band: z.string(),
+  })
+  .partial()
+  .passthrough();
+
+const homericCard = z
+  .object({
+    kind: z.string(),
+    id: z.string().optional(),
+    slug: z.string(),
+    name: z.string(),
+    summary: z.string().optional(),
+    identification: z.string().optional(),
+    region: z.string().optional(),
+    work: z.string().optional(),
+    citation: z.string().optional(),
+    unlocated: z.boolean().optional(),
+    hypotheses: z.number().optional(),
+    confidence: homericConfidence.nullable().optional(),
+    canonical_url: z.string().optional().describe("Cite this URL."),
+    api_url: z.string().optional(),
+  })
+  .passthrough();
+
+const homericListOutput = {
+  count: z.number(),
+  results: z.array(homericCard),
+};
+
+const homericUnitOutput = z.object({}).passthrough();
 
 export function registerTools(server: McpToolServer, content: McpContent): void {
   // ── Orientation ────────────────────────────────────────────────────────────
@@ -524,6 +583,102 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     async ({ domain, slug, locale }) => {
       const result = content.related(domain as Domain, slug, (locale ?? "en") as Locale);
       return result ? out(result as Record<string, unknown>) : notFound(domain, slug);
+    },
+  );
+
+  // ── Homeric Atlas (Labs) ───────────────────────────────────────────────────
+  const atlasNote =
+    "Identification classes: accepted (an excavated site with consensus), plausible (a real place, contested), speculative (a minority reading or a later tradition), mythical (the poem places it outside the mappable world). Confidence is a published 0-12 rubric - textual, archaeological, scholarly and geographic, 0-3 each - and is an editorial judgement, not a probability.";
+
+  server.registerTool(
+    "list_homeric_places",
+    {
+      title: "List Homeric Atlas places",
+      annotations: READ_ONLY,
+      description:
+        "List every place in the Homeric Atlas with its identification class, its confidence score and how many competing identifications it carries. Use this to browse the atlas; use `get_homeric_place` once you have a slug. " +
+        atlasNote,
+      inputSchema: z.object({ locale: localeSchema }),
+      outputSchema: homericListOutput,
+    },
+    async ({ locale }) => outList(content.listHomeric("places", (locale ?? "en") as Locale)),
+  );
+  server.registerTool(
+    "get_homeric_place",
+    {
+      title: "Get a Homeric Atlas place",
+      annotations: READ_ONLY,
+      description:
+        "Get one place by slug: every identification proposed for it, each with its own coordinates, class, 0-12 rubric and sources, plus the attested passages. Use this when you need to weigh the evidence for a location, or to cite it; a place the poem does not locate carries no coordinates at all.",
+      inputSchema: z.object({
+        slug: z.string().describe("Place slug, e.g. 'ithaca'."),
+        locale: localeSchema,
+      }),
+      outputSchema: homericUnitOutput,
+    },
+    async ({ slug, locale }) => {
+      const entry = content.getHomeric("places", slug, locale as Locale | undefined);
+      return entry ? out(entry as Record<string, unknown>) : notFound("homeric/places", slug);
+    },
+  );
+  server.registerTool(
+    "list_homeric_episodes",
+    {
+      title: "List Homeric Atlas episodes",
+      annotations: READ_ONLY,
+      description:
+        "List every episode of the Iliad and the Odyssey held in the atlas, in reading order, with its passage, the places it involves and how firmly it can be located. Use this to find the episode you want; use `get_homeric_episode` for its theories and sources.",
+      inputSchema: z.object({ locale: localeSchema }),
+      outputSchema: homericListOutput,
+    },
+    async ({ locale }) => outList(content.listHomeric("episodes", (locale ?? "en") as Locale)),
+  );
+  server.registerTool(
+    "get_homeric_episode",
+    {
+      title: "Get a Homeric Atlas episode",
+      annotations: READ_ONLY,
+      description:
+        "Get one episode by slug: the passage, the narrative, the competing theories about where it happened (each with its proponent and sources), the confidence rubric and the FAQs. Use this when the question is where an episode took place and who argued for it.",
+      inputSchema: z.object({
+        slug: z.string().describe("Episode slug, e.g. 'nekyia'."),
+        locale: localeSchema,
+      }),
+      outputSchema: homericUnitOutput,
+    },
+    async ({ slug, locale }) => {
+      const entry = content.getHomeric("episodes", slug, locale as Locale | undefined);
+      return entry ? out(entry as Record<string, unknown>) : notFound("homeric/episodes", slug);
+    },
+  );
+  server.registerTool(
+    "list_homeric_routes",
+    {
+      title: "List Homeric Atlas routes",
+      annotations: READ_ONLY,
+      description:
+        "List the reconstructed itineraries (the nostos of Odysseus and the others), each with its rival reconstructions scored separately. Use this to see which voyages the atlas reconstructs before fetching one.",
+      inputSchema: z.object({ locale: localeSchema }),
+      outputSchema: homericListOutput,
+    },
+    async ({ locale }) => outList(content.listHomeric("routes", (locale ?? "en") as Locale)),
+  );
+  server.registerTool(
+    "get_homeric_route",
+    {
+      title: "Get a Homeric Atlas route",
+      annotations: READ_ONLY,
+      description:
+        "Get one route by slug: each reconstruction variant with its ordered stops, the hypothesis chosen at each stop, its confidence rubric and its sources. Use this to compare rival reconstructions of a voyage: they are returned side by side rather than merged.",
+      inputSchema: z.object({
+        slug: z.string().describe("Route slug, e.g. 'odysseus-nostos'."),
+        locale: localeSchema,
+      }),
+      outputSchema: homericUnitOutput,
+    },
+    async ({ slug, locale }) => {
+      const entry = content.getHomeric("routes", slug, locale as Locale | undefined);
+      return entry ? out(entry as Record<string, unknown>) : notFound("homeric/routes", slug);
     },
   );
 }

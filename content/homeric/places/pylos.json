@@ -1,0 +1,188 @@
+{
+  "slug": "pylos",
+  "id": "HOM-P-006",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "mainlandGreece",
+  "homericNames": [
+    "Πύλος"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "591-602"
+    },
+    {
+      "work": "odyssey",
+      "book": 3,
+      "lines": "1-64"
+    },
+    {
+      "work": "odyssey",
+      "book": 4,
+      "lines": "633-637"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "blegen-pylos",
+      "kind": "archaeology",
+      "citation": "Carl W. Blegen and Marion Rawson, The Palace of Nestor at Pylos in Western Messenia, vol. I (Princeton, 1966)",
+      "author": "Carl W. Blegen",
+      "year": 1966
+    },
+    {
+      "id": "ventris-chadwick",
+      "kind": "scholarship",
+      "citation": "Michael Ventris and John Chadwick, Documents in Mycenaean Greek (Cambridge, 1956)",
+      "author": "Michael Ventris",
+      "year": 1956
+    },
+    {
+      "id": "griffin-warrior",
+      "kind": "archaeology",
+      "citation": "Jack L. Davis and Sharon R. Stocker, the Griffin Warrior tomb at Pylos, University of Cincinnati excavations (from 2015)",
+      "author": "Jack L. Davis",
+      "year": 2015
+    },
+    {
+      "id": "strabo-8",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 8.3",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "ano-englianos",
+      "identification": "accepted",
+      "modernName": "Ano Englianos, Messenia",
+      "country": "GR",
+      "lat": 37.0278,
+      "lon": 21.6953,
+      "precision": "site",
+      "proponent": "Carl W. Blegen (1939)",
+      "era": "modern",
+      "since": 1939,
+      "confidence": {
+        "textual": 3,
+        "archaeological": 3,
+        "scholarly": 3,
+        "geographic": 2,
+        "score": 11,
+        "band": "high"
+      },
+      "sources": [
+        "blegen-pylos",
+        "ventris-chadwick",
+        "griffin-warrior"
+      ],
+      "locales": {
+        "en": {
+          "label": "Ano Englianos (the Palace of Nestor)",
+          "note": "Blegen found Linear B tablets on the first day of excavation in 1939 and eventually a well-preserved Late Bronze Age palace, burnt around 1200 BCE. The archive names a place and an administration; it does not name Nestor. The palace is the strongest candidate for Homeric Pylos, and the identification rests on scale, date and location rather than on an inscription."
+        },
+        "es": {
+          "label": "Ano Englianós (el Palacio de Néstor)",
+          "note": "Blegen halló tablillas en Lineal B el primer día de excavación en 1939 y, con el tiempo, un palacio del Bronce Final bien conservado, incendiado hacia 1200 a.C. El archivo nombra un lugar y una administración; no nombra a Néstor. El palacio es el candidato más fuerte a la Pilos homérica, y la identificación se apoya en la escala, la fecha y la ubicación, no en una inscripción."
+        },
+        "pt": {
+          "label": "Ano Englianós (o Palácio de Nestor)",
+          "note": "Blegen achou tabuinhas em Linear B no primeiro dia de escavação, em 1939, e com o tempo um palácio do Bronze Final bem preservado, incendiado por volta de 1200 a.C. O arquivo nomeia um lugar e uma administração; não nomeia Nestor. O palácio é o candidato mais forte à Pilos homérica, e a identificação se apoia na escala, na data e na localização, não numa inscrição."
+        }
+      }
+    },
+    {
+      "id": "triphylian-pylos",
+      "identification": "speculative",
+      "modernName": "Triphylia / Elis",
+      "country": "GR",
+      "lat": 37.55,
+      "lon": 21.65,
+      "precision": "region",
+      "proponent": "Strabo, Geography 8.3",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 1,
+        "archaeological": 1,
+        "scholarly": 1,
+        "geographic": 1,
+        "score": 4,
+        "band": "low"
+      },
+      "sources": [
+        "strabo-8",
+        "iliad"
+      ],
+      "locales": {
+        "en": {
+          "label": "A Triphylian or Elean Pylos",
+          "note": "Antiquity already argued about which Pylos Nestor ruled: Strabo reports rival claims from Triphylia and Elis further north. The dispute is old, real, and now largely settled by excavation rather than by argument."
+        },
+        "es": {
+          "label": "Una Pilos trifilia o élide",
+          "note": "La Antigüedad ya discutía sobre qué Pilos gobernaba Néstor: Estrabón recoge reclamaciones rivales de Trifilia y de la Élide, más al norte. La disputa es antigua y real, y hoy la ha zanjado en gran medida la excavación, no la argumentación."
+        },
+        "pt": {
+          "label": "Uma Pilos trifília ou eleia",
+          "note": "A Antiguidade já discutia qual Pilos Nestor governava: Estrabão registra reivindicações rivais da Trifília e da Élide, mais ao norte. A disputa é antiga e real, e hoje foi em grande parte resolvida pela escavação, não pela argumentação."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "catalogue-of-ships",
+    "telemachus-at-pylos"
+  ],
+  "locales": {
+    "en": {
+      "name": "Pylos",
+      "summary": "Nestor's kingdom, and the Homeric palace we can actually walk through: the Late Bronze Age complex at Ano Englianos, whose Linear B archive survived because the building burned.",
+      "description": [
+        "Telemachus sails to Pylos in Book 3 of the Odyssey and finds Nestor sacrificing on the shore. The Iliad's catalogue gives Nestor ninety ships, the second-largest contingent. Both point at a major Messenian power, and one was found: a palace on the ridge at Ano Englianos with a throne room, a bathtub, storerooms and an archive of more than a thousand clay tablets.",
+        "The tablets are administrative — rations, offerings, personnel — and they are in Greek, which is the single most consequential thing the site has told us. They do not mention Nestor or the war, and their world is a bureaucracy the poems never describe.",
+        "Nearby, the Griffin Warrior tomb excavated from 2015 has added a rich early Mycenaean burial to the picture, further tying the area to the period the poems remember."
+      ],
+      "identificationNote": "Accepted: an excavated Bronze Age palace of the right scale, date and region, with a scholarly consensus behind the identification. Geographic scores 2 rather than 3 because the Odyssey's sailing details and the exact harbour arrangements do not resolve cleanly.",
+      "debate": "Which bay Telemachus landed in, whether the ancient dispute over the location of Nestor's Pylos preserves a real memory of more than one Pylos, and how a palace bureaucracy in Linear B relates to the heroic society of the poems."
+    },
+    "es": {
+      "name": "Pilos",
+      "summary": "El reino de Néstor y el único palacio homérico por el que realmente se puede caminar: el complejo del Bronce Final de Ano Englianós, cuyo archivo en Lineal B se conservó porque el edificio ardió.",
+      "description": [
+        "Telémaco navega a Pilos en el canto 3 de la Odisea y encuentra a Néstor sacrificando en la playa. El catálogo de la Ilíada da a Néstor noventa naves, el segundo contingente más grande. Ambos apuntan a una potencia mesenia importante, y una fue hallada: un palacio en la loma de Ano Englianós con sala del trono, bañera, almacenes y un archivo de más de mil tablillas de arcilla.",
+        "Las tablillas son administrativas —raciones, ofrendas, personal— y están en griego, que es lo más trascendente que el yacimiento nos ha dicho. No mencionan a Néstor ni la guerra, y su mundo es una burocracia que los poemas nunca describen.",
+        "Cerca, la tumba del Guerrero del Grifo, excavada desde 2015, ha añadido un enterramiento micénico temprano y rico al conjunto, vinculando aún más la zona al periodo que los poemas recuerdan."
+      ],
+      "identificationNote": "Aceptada: un palacio del Bronce excavado, de la escala, fecha y región correctas, con consenso académico tras la identificación. El criterio geográfico puntúa 2 y no 3 porque los detalles náuticos de la Odisea y la disposición exacta del puerto no se resuelven limpiamente.",
+      "debate": "En qué ensenada desembarcó Telémaco, si la antigua disputa sobre la ubicación de la Pilos de Néstor conserva el recuerdo real de más de una Pilos, y cómo se relaciona una burocracia palacial en Lineal B con la sociedad heroica de los poemas."
+    },
+    "pt": {
+      "name": "Pilos",
+      "summary": "O reino de Nestor e o único palácio homérico por onde realmente se pode caminhar: o complexo do Bronze Final de Ano Englianós, cujo arquivo em Linear B se preservou porque o edifício ardeu.",
+      "description": [
+        "Telêmaco navega até Pilos no canto 3 da Odisseia e encontra Nestor sacrificando na praia. O catálogo da Ilíada dá a Nestor noventa naus, o segundo maior contingente. Ambos apontam para uma potência messênia importante, e uma foi encontrada: um palácio na crista de Ano Englianós com sala do trono, banheira, armazéns e um arquivo de mais de mil tabuinhas de argila.",
+        "As tabuinhas são administrativas — rações, oferendas, pessoal — e estão em grego, o que é a coisa mais consequente que o sítio nos disse. Não mencionam Nestor nem a guerra, e seu mundo é uma burocracia que os poemas nunca descrevem.",
+        "Perto dali, o túmulo do Guerreiro do Grifo, escavado desde 2015, acrescentou um rico sepultamento micênico antigo ao quadro, ligando ainda mais a área ao período que os poemas lembram."
+      ],
+      "identificationNote": "Aceita: um palácio do Bronze escavado, na escala, data e região corretas, com consenso acadêmico por trás da identificação. O critério geográfico pontua 2 e não 3 porque os detalhes náuticos da Odisseia e a disposição exata do porto não se resolvem com clareza.",
+      "debate": "Em que enseada Telêmaco desembarcou, se a antiga disputa sobre a localização da Pilos de Nestor preserva a memória real de mais de uma Pilos, e como uma burocracia palaciana em Linear B se relaciona com a sociedade heroica dos poemas."
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "slug": "nostoi-of-the-others",
+  "id": "HOM-R-004",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 3.130-312 and 4.351-586 (the returns told by Nestor and Proteus)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-17",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 17.1",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "schliemann-1878",
+      "kind": "archaeology",
+      "citation": "Heinrich Schliemann, Mycenae (1878)",
+      "author": "Heinrich Schliemann",
+      "year": 1878
+    },
+    {
+      "id": "egypt-contacts",
+      "kind": "archaeology",
+      "citation": "Late Bronze Age and early Iron Age contact between the Aegean and Egypt, attested by imported material in both directions",
+      "year": 2000
+    }
+  ],
+  "variants": [
+    {
+      "id": "menelaus",
+      "identification": "speculative",
+      "proponent": "Proteus' account in Odyssey 4",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 1,
+        "scholarly": 2,
+        "geographic": 2,
+        "score": 7,
+        "band": "medium"
+      },
+      "stops": [
+        {
+          "order": 1,
+          "place": "troy",
+          "hypothesis": "hisarlik",
+          "episode": "wooden-horse"
+        },
+        {
+          "order": 2,
+          "place": "tenedos",
+          "hypothesis": "bozcaada"
+        },
+        {
+          "order": 3,
+          "place": "cape-malea",
+          "hypothesis": "malea"
+        },
+        {
+          "order": 4,
+          "place": "knossos",
+          "hypothesis": "knossos-palace"
+        },
+        {
+          "order": 5,
+          "place": "egypt",
+          "hypothesis": "nile-delta",
+          "episode": "menelaus-and-proteus"
+        },
+        {
+          "order": 6,
+          "place": "pharos",
+          "hypothesis": "pharos-island",
+          "episode": "menelaus-and-proteus"
+        },
+        {
+          "order": 7,
+          "place": "sparta",
+          "hypothesis": "eurotas-valley",
+          "episode": "telemachus-in-sparta"
+        }
+      ],
+      "sources": [
+        "strabo-17",
+        "egypt-contacts",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Menelaus: eight years by way of Egypt",
+          "note": "Blown off course at Malea, wrecked on Crete, and held in Egypt long enough to come home rich. Every stop is a real place; what is speculative is the itinerary, which the poem gives in a single retrospective speech."
+        },
+        "es": {
+          "label": "Menelao: ocho años pasando por Egipto",
+          "note": "Desviado en Maleas, naufragado en Creta y retenido en Egipto el tiempo suficiente para volver rico. Todas las escalas son lugares reales; lo especulativo es el itinerario, que el poema da en un solo discurso retrospectivo."
+        },
+        "pt": {
+          "label": "Menelau: oito anos passando pelo Egito",
+          "note": "Desviado no Maleia, naufragado em Creta e retido no Egito o bastante para voltar rico. Todas as escalas são lugares reais; o especulativo é o itinerário, que o poema dá num único discurso retrospectivo."
+        }
+      }
+    },
+    {
+      "id": "nestor-agamemnon",
+      "identification": "plausible",
+      "proponent": "Nestor's account in Odyssey 3",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 2,
+        "scholarly": 2,
+        "geographic": 3,
+        "score": 9,
+        "band": "medium"
+      },
+      "stops": [
+        {
+          "order": 1,
+          "place": "troy",
+          "hypothesis": "hisarlik",
+          "episode": "wooden-horse"
+        },
+        {
+          "order": 2,
+          "place": "tenedos",
+          "hypothesis": "bozcaada"
+        },
+        {
+          "order": 3,
+          "place": "cape-malea",
+          "hypothesis": "malea"
+        },
+        {
+          "order": 4,
+          "place": "pylos",
+          "hypothesis": "ano-englianos",
+          "episode": "telemachus-at-pylos"
+        },
+        {
+          "order": 5,
+          "place": "mycenae",
+          "hypothesis": "mycenae-citadel",
+          "episode": "agamemnons-murder"
+        }
+      ],
+      "sources": [
+        "schliemann-1878",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Nestor home, Agamemnon murdered",
+          "note": "The short version and the fatal one. Nestor sails straight and reaches Pylos without incident; Agamemnon is driven past Malea, lands on the wrong coast and is killed at his own table. Both endpoints are accepted sites."
+        },
+        "es": {
+          "label": "Néstor en casa, Agamenón asesinado",
+          "note": "La versión corta y la fatal. Néstor navega derecho y llega a Pilos sin incidentes; a Agamenón lo desvía el viento más allá de Maleas, desembarca en la costa equivocada y lo matan en su propia mesa. Ambos extremos son yacimientos aceptados."
+        },
+        "pt": {
+          "label": "Nestor em casa, Agamêmnon assassinado",
+          "note": "A versão curta e a fatal. Nestor navega direto e chega a Pilos sem incidentes; Agamêmnon é desviado além do Maleia, desembarca na costa errada e é morto à própria mesa. Ambos os extremos são sítios aceitos."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "name": "The other returns",
+      "summary": "Odysseus is not the only one coming home. The Odyssey spends its early books on the other nostoi — Nestor's easy one, Menelaus' eight-year detour, Agamemnon's murder — and they are the control group for the whole poem.",
+      "description": [
+        "Nestor tells Telemachus how the fleet split at Tenedos over whether to sail or sacrifice first, and how each contingent fared. Proteus tells Menelaus the rest. Between the two accounts the poem gives a survey of returns that runs from uneventful to catastrophic.",
+        "Their geography is the mirror of the wanderings': it stays inside the known world. Malea, Crete, Egypt, Pharos, Mycenae, Pylos — every stop is a place the atlas can class as accepted or plausible, and the only speculative element is the order of the legs.",
+        "Read against the nostos of Odysseus, this route is the argument that the Odyssey knows perfectly well what a real voyage looks like, and chooses something else for its hero."
+      ],
+      "debate": "How much of the returns tradition is older than the Odyssey — a lost Nostoi poem is attested in the Epic Cycle — and whether Menelaus' Egyptian years reflect a real pattern of Aegean contact or a storyteller's idea of the far south."
+    },
+    "es": {
+      "name": "Los otros regresos",
+      "summary": "Odiseo no es el único que vuelve a casa. La Odisea dedica sus primeros cantos a los otros nostoi —el fácil de Néstor, el rodeo de ocho años de Menelao, el asesinato de Agamenón— y son el grupo de control de todo el poema.",
+      "description": [
+        "Néstor cuenta a Telémaco cómo la flota se dividió en Ténedos sobre si zarpar o sacrificar primero, y cómo le fue a cada contingente. Proteo cuenta a Menelao el resto. Entre ambos relatos el poema ofrece un repaso de regresos que va de lo apacible a lo catastrófico.",
+        "Su geografía es el espejo de la de las andanzas: se queda dentro del mundo conocido. Maleas, Creta, Egipto, Faros, Micenas, Pilos: cada escala es un lugar que el atlas puede clasificar como aceptado o plausible, y lo único especulativo es el orden de los tramos.",
+        "Leída frente al nostos de Odiseo, esta ruta es el argumento de que la Odisea sabe perfectamente qué aspecto tiene un viaje real y elige otra cosa para su héroe."
+      ],
+      "debate": "Cuánto de la tradición de los regresos es anterior a la Odisea —el Ciclo Épico atestigua un poema Nostoi perdido— y si los años egipcios de Menelao reflejan un patrón real de contacto egeo o la idea que un narrador tenía del sur lejano."
+    },
+    "pt": {
+      "name": "Os outros retornos",
+      "summary": "Odisseu não é o único a voltar para casa. A Odisseia dedica seus primeiros cantos aos outros nostoi — o fácil de Nestor, o desvio de oito anos de Menelau, o assassinato de Agamêmnon — e eles são o grupo de controle de todo o poema.",
+      "description": [
+        "Nestor conta a Telêmaco como a frota se dividiu em Tênedos sobre zarpar ou sacrificar primeiro, e como foi para cada contingente. Proteu conta a Menelau o resto. Entre os dois relatos, o poema oferece um panorama de retornos que vai do tranquilo ao catastrófico.",
+        "Sua geografia é o espelho da das andanças: fica dentro do mundo conhecido. Maleia, Creta, Egito, Faros, Micenas, Pilos — cada escala é um lugar que o atlas pode classificar como aceito ou plausível, e o único elemento especulativo é a ordem dos trechos.",
+        "Lida diante do nostos de Odisseu, esta rota é o argumento de que a Odisseia sabe perfeitamente como é uma viagem real e escolhe outra coisa para seu herói."
+      ],
+      "debate": "Quanto da tradição dos retornos é anterior à Odisseia — o Ciclo Épico atesta um poema Nostoi perdido — e se os anos egípcios de Menelau refletem um padrão real de contato egeu ou a ideia que um narrador tinha do sul distante."
+    }
+  }
+}

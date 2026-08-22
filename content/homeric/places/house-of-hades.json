@@ -1,0 +1,91 @@
+{
+  "slug": "house-of-hades",
+  "id": "HOM-P-004",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "mythical",
+  "unlocated": true,
+  "region": "unlocated",
+  "homericNames": [
+    "Ἀΐδαο δόμος",
+    "Ἔρεβος"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 10,
+      "lines": "504-540"
+    },
+    {
+      "work": "odyssey",
+      "book": 11,
+      "lines": "1-50"
+    },
+    {
+      "work": "odyssey",
+      "book": 24,
+      "lines": "1-14"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 10.504–540; 11.1–50",
+      "author": "Homer"
+    },
+    {
+      "id": "herodotus-5-92",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 5.92",
+      "author": "Herodotus",
+      "year": -430
+    },
+    {
+      "id": "dakaris",
+      "kind": "archaeology",
+      "citation": "Sotirios Dakaris, excavations at the Nekyomanteion of Ephyra, Thesprotia (from 1958)",
+      "author": "Sotirios Dakaris",
+      "year": 1958
+    }
+  ],
+  "hypotheses": [],
+  "episodes": [
+    "nekyia"
+  ],
+  "locales": {
+    "en": {
+      "name": "The house of Hades",
+      "summary": "Where Odysseus goes to question the dead. The poem gives sailing directions to it — and they lead past the edge of the world, which is why this entry carries no coordinates at all.",
+      "description": [
+        "Circe's instructions are unusually precise for a destination that cannot exist: cross Ocean, beach the ship by the grove of Persephone where three named rivers meet, dig a pit, pour the offerings, and the dead will come. The precision is the point — it is ritual instruction, not navigation.",
+        "Real places have collected the association since antiquity. Herodotus reports an oracle of the dead on the Acheron in Thesprotia, and the site excavated at Ephyra was long presented as that oracle, though the identification is now disputed by archaeologists who read the building as a fortified farmhouse.",
+        "Those are real places with a real cult history. They are not the house of Hades, and the atlas does not pin one as the other."
+      ],
+      "identificationNote": "Mythical and unlocated: no hypothesis is recorded, because none can be. This is the only class in the atlas that carries no coordinates by rule — the schema forbids an unlocated place from having any, so nothing can quietly acquire a pin later.",
+      "debate": "What is debated is not the location of Hades but the geography of the passage: whether Circe's directions preserve a real sailing tradition toward the north-west, whether the rivers are borrowed from the Thesprotian Acheron, and whether the Nekyia belongs to the oldest layer of the poem at all."
+    },
+    "es": {
+      "name": "La morada de Hades",
+      "summary": "Adonde va Odiseo a interrogar a los muertos. El poema da instrucciones de navegación para llegar y conducen más allá del borde del mundo: por eso esta ficha no lleva coordenada alguna.",
+      "description": [
+        "Las instrucciones de Circe son insólitamente precisas para un destino que no puede existir: cruzar el Océano, varar junto al bosque de Perséfone donde se juntan tres ríos con nombre, cavar una fosa, verter las libaciones y los muertos acudirán. La precisión es justamente el punto: son instrucciones rituales, no náuticas.",
+        "Lugares reales han acumulado esa asociación desde la Antigüedad. Heródoto menciona un oráculo de los muertos junto al Aqueronte, en Tesprocia, y el yacimiento excavado en Éfira se presentó largo tiempo como ese oráculo, aunque hoy la identificación la discuten arqueólogos que leen el edificio como una granja fortificada.",
+        "Son lugares reales con una historia de culto real. No son la morada de Hades, y el atlas no clava el uno como si fuera la otra."
+      ],
+      "identificationNote": "Mítica y no localizada: no se registra ninguna hipótesis, porque no puede haberla. Es la única clase del atlas que por regla no lleva coordenadas: el esquema prohíbe que un lugar no localizado tenga ninguna, de modo que nada puede adquirir una chincheta en silencio más adelante.",
+      "debate": "Lo que se discute no es la ubicación del Hades, sino la geografía del pasaje: si las indicaciones de Circe conservan una tradición náutica real hacia el noroeste, si los ríos están tomados del Aqueronte tesprocio y si la Nekyia pertenece siquiera a la capa más antigua del poema."
+    },
+    "pt": {
+      "name": "A morada de Hades",
+      "summary": "Para onde Odisseu vai interrogar os mortos. O poema dá instruções de navegação até lá — e elas levam para além da borda do mundo, razão pela qual esta ficha não traz coordenada alguma.",
+      "description": [
+        "As instruções de Circe são estranhamente precisas para um destino que não pode existir: cruzar o Oceano, encalhar junto ao bosque de Perséfone onde se juntam três rios com nome, cavar uma cova, verter as libações e os mortos virão. A precisão é justamente o ponto: são instruções rituais, não náuticas.",
+        "Lugares reais acumularam essa associação desde a Antiguidade. Heródoto menciona um oráculo dos mortos junto ao Aqueronte, na Tesprócia, e o sítio escavado em Éfira foi por muito tempo apresentado como esse oráculo, embora hoje a identificação seja contestada por arqueólogos que leem o edifício como uma fazenda fortificada.",
+        "São lugares reais com uma história de culto real. Não são a morada de Hades, e o atlas não finca um como se fosse a outra."
+      ],
+      "identificationNote": "Mítica e não localizada: nenhuma hipótese é registrada, porque não pode haver. É a única classe do atlas que por regra não carrega coordenadas: o esquema proíbe que um lugar não localizado tenha alguma, de modo que nada pode ganhar um alfinete em silêncio mais tarde.",
+      "debate": "O que se discute não é a localização do Hades, mas a geografia da passagem: se as indicações de Circe preservam uma tradição náutica real rumo ao noroeste, se os rios vêm do Aqueronte tesprócio e se a Nekyia pertence sequer à camada mais antiga do poema."
+    }
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "slug": "catalogue-of-ships",
+  "id": "HOM-E-005",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "iliad",
+  "book": 2,
+  "lines": "484-760",
+  "places": [
+    "aulis",
+    "mycenae",
+    "pylos",
+    "sparta",
+    "tiryns",
+    "ithaca",
+    "zacynthus",
+    "same",
+    "dulichium",
+    "knossos"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 2,
+    "scholarly": 3,
+    "geographic": 2,
+    "score": 10,
+    "band": "high"
+  },
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "hope-simpson",
+      "kind": "scholarship",
+      "citation": "Richard Hope Simpson and John F. Lazenby, The Catalogue of the Ships in Homer's Iliad (Oxford, 1970)",
+      "author": "Richard Hope Simpson",
+      "year": 1970
+    },
+    {
+      "id": "latacz-2004",
+      "kind": "scholarship",
+      "citation": "Joachim Latacz, Troy and Homer: Towards a Solution of an Old Mystery (2004)",
+      "author": "Joachim Latacz",
+      "year": 2004
+    },
+    {
+      "id": "mycenaean-survey",
+      "kind": "archaeology",
+      "citation": "Correlation of Catalogue place names with excavated Late Bronze Age settlement, tested repeatedly by survey archaeology since the 1960s",
+      "year": 1970
+    },
+    {
+      "id": "strabo-8b",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 8-10 — the ancient commentary tradition on the Catalogue",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "theories": [
+    {
+      "id": "bronze-age-memory",
+      "identification": "plausible",
+      "proponent": "Richard Hope Simpson & John F. Lazenby (1970); Joachim Latacz (2004)",
+      "era": "modern",
+      "sources": [
+        "hope-simpson",
+        "mycenaean-survey",
+        "latacz-2004"
+      ],
+      "locales": {
+        "en": {
+          "label": "A Late Bronze Age memory",
+          "note": "The strongest version of the case: a significant proportion of the Catalogue's places were occupied in the Late Bronze Age and some were abandoned before the archaic period, which is hard to explain if the list was composed from an eighth-century map."
+        },
+        "es": {
+          "label": "Un recuerdo del Bronce Final",
+          "note": "La versión más fuerte del argumento: una proporción significativa de los lugares del Catálogo estaba ocupada en el Bronce Final y algunos fueron abandonados antes de la época arcaica, lo que es difícil de explicar si la lista se compuso a partir de un mapa del siglo VIII."
+        },
+        "pt": {
+          "label": "Uma lembrança do Bronze Final",
+          "note": "A versão mais forte do argumento: uma proporção significativa dos lugares do Catálogo estava ocupada no Bronze Final e alguns foram abandonados antes da época arcaica, o que é difícil de explicar se a lista foi composta a partir de um mapa do século VIII."
+        }
+      }
+    },
+    {
+      "id": "archaic-composition",
+      "identification": "plausible",
+      "proponent": "The ancient commentary tradition, reported by Strabo",
+      "era": "antiquity",
+      "sources": [
+        "strabo-8b",
+        "iliad"
+      ],
+      "locales": {
+        "en": {
+          "label": "An archaic list, projected backwards",
+          "note": "The sceptical reading: the Catalogue reflects the political geography of the poet's own time, with archaising touches, and its Bronze Age hits are the places that were simply always important. Ancient commentators were already arguing about entries that did not match the Greece they knew."
+        },
+        "es": {
+          "label": "Una lista arcaica proyectada hacia atrás",
+          "note": "La lectura escéptica: el Catálogo refleja la geografía política de la época del poeta, con toques arcaizantes, y sus aciertos del Bronce son los lugares que siempre fueron importantes. Los comentaristas antiguos ya discutían entradas que no encajaban con la Grecia que conocían."
+        },
+        "pt": {
+          "label": "Uma lista arcaica projetada para trás",
+          "note": "A leitura cética: o Catálogo reflete a geografia política da época do poeta, com toques arcaizantes, e seus acertos do Bronze são os lugares que sempre foram importantes. Os comentadores antigos já discutiam entradas que não encaixavam na Grécia que conheciam."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The Catalogue of Ships",
+      "summary": "Two hundred and seventy lines listing twenty-nine contingents, their commanders, their ship counts and their towns. It is the single densest piece of geography in Greek literature and the backbone of this atlas.",
+      "narrative": [
+        "The Catalogue interrupts the second book of the Iliad to enumerate the Achaean force gathered at Aulis: Boeotians first, then contingent after contingent, each with named towns. A shorter Trojan catalogue follows. Nothing else in either poem tries to be a survey.",
+        "Its value here is that it can be tested. Places in the list can be looked for on the ground, and many have been found — some of them occupied in the Late Bronze Age and deserted long before the poem was written down."
+      ],
+      "whyItMatters": "Every accepted identification in this atlas is a Catalogue entry, and the Catalogue is why the atlas can distinguish the located from the argued at all. It scores 8/12: superb on text, strong on consensus, held back by the fact that a list of names is not itself an excavation.",
+      "debate": "Whether the Catalogue preserves a Bronze Age document, an archaic reconstruction, or a tradition that accreted for centuries. The archaeology supports partial antiquity; it does not settle authorship or date.",
+      "faqs": [
+        {
+          "q": "Is the Catalogue of Ships historically reliable?",
+          "a": "In parts. Some of its towns were occupied in the Late Bronze Age and abandoned before the archaic period, which suggests genuinely old material; other entries fit the poet's own era better. It is best read as a stratified list rather than as a single document from one date."
+        },
+        {
+          "q": "Why does it matter for locating Homeric places?",
+          "a": "Because it names places in relation to one another and to their commanders, so a proposed identification can be tested against a whole regional pattern rather than against a single line."
+        }
+      ]
+    },
+    "es": {
+      "title": "El Catálogo de las Naves",
+      "summary": "Doscientos setenta versos que enumeran veintinueve contingentes, sus jefes, sus naves y sus ciudades. Es la pieza de geografía más densa de la literatura griega y la columna vertebral de este atlas.",
+      "narrative": [
+        "El Catálogo interrumpe el canto 2 de la Ilíada para enumerar la fuerza aquea reunida en Áulide: primero los beocios, luego contingente tras contingente, cada uno con sus ciudades nombradas. Le sigue un catálogo troyano más breve. Ninguna otra parte de los dos poemas intenta ser un inventario.",
+        "Su valor aquí es que se puede contrastar. Los lugares de la lista pueden buscarse sobre el terreno, y muchos han aparecido, algunos ocupados en el Bronce Final y desiertos mucho antes de que el poema se pusiera por escrito."
+      ],
+      "whyItMatters": "Toda identificación aceptada de este atlas es una entrada del Catálogo, y el Catálogo es la razón de que el atlas pueda distinguir lo localizado de lo discutido. Puntúa 8/12: soberbio en texto, fuerte en consenso, frenado porque una lista de nombres no es en sí una excavación.",
+      "debate": "Si el Catálogo conserva un documento del Bronce, una reconstrucción arcaica o una tradición sedimentada durante siglos. La arqueología respalda una antigüedad parcial; no zanja autoría ni fecha.",
+      "faqs": [
+        {
+          "q": "¿Es históricamente fiable el Catálogo de las Naves?",
+          "a": "En parte. Algunas de sus ciudades estuvieron ocupadas en el Bronce Final y se abandonaron antes de la época arcaica, lo que sugiere material genuinamente antiguo; otras entradas encajan mejor con la época del propio poeta. Conviene leerlo como una lista estratificada, no como un documento único de una sola fecha."
+        },
+        {
+          "q": "¿Por qué importa para localizar lugares homéricos?",
+          "a": "Porque nombra lugares en relación unos con otros y con sus jefes, de modo que una identificación propuesta puede contrastarse con un patrón regional completo y no con un solo verso."
+        }
+      ]
+    },
+    "pt": {
+      "title": "O Catálogo das Naus",
+      "summary": "Duzentos e setenta versos que enumeram vinte e nove contingentes, seus chefes, suas naus e suas cidades. É a peça de geografia mais densa da literatura grega e a espinha dorsal deste atlas.",
+      "narrative": [
+        "O Catálogo interrompe o canto 2 da Ilíada para enumerar a força aqueia reunida em Áulis: primeiro os beócios, depois contingente após contingente, cada um com suas cidades nomeadas. Segue-se um catálogo troiano mais breve. Nenhuma outra parte dos dois poemas tenta ser um inventário.",
+        "Seu valor aqui é que pode ser conferido. Os lugares da lista podem ser procurados em campo, e muitos apareceram — alguns ocupados no Bronze Final e desertos muito antes de o poema ser posto por escrito."
+      ],
+      "whyItMatters": "Toda identificação aceita deste atlas é uma entrada do Catálogo, e o Catálogo é a razão de o atlas conseguir distinguir o localizado do discutido. Pontua 8/12: soberbo no texto, forte no consenso, freado porque uma lista de nomes não é, em si, uma escavação.",
+      "debate": "Se o Catálogo preserva um documento do Bronze, uma reconstrução arcaica ou uma tradição sedimentada por séculos. A arqueologia sustenta antiguidade parcial; não resolve autoria nem data.",
+      "faqs": [
+        {
+          "q": "O Catálogo das Naus é historicamente confiável?",
+          "a": "Em parte. Algumas de suas cidades estiveram ocupadas no Bronze Final e foram abandonadas antes da época arcaica, o que sugere material genuinamente antigo; outras entradas encaixam melhor na época do próprio poeta. Convém lê-lo como lista estratificada, não como documento único de uma só data."
+        },
+        {
+          "q": "Por que importa para localizar lugares homéricos?",
+          "a": "Porque nomeia lugares em relação uns aos outros e a seus chefes, de modo que uma identificação proposta pode ser confrontada com um padrão regional inteiro, não com um único verso."
+        }
+      ]
+    }
+  }
+}

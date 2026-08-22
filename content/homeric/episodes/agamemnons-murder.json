@@ -1,0 +1,162 @@
+{
+  "slug": "agamemnons-murder",
+  "id": "HOM-E-021",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 4,
+  "lines": "512-537",
+  "places": [
+    "mycenae",
+    "cape-malea"
+  ],
+  "confidence": {
+    "textual": 2,
+    "archaeological": 2,
+    "scholarly": 2,
+    "geographic": 3,
+    "score": 9,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "schliemann-1878",
+      "kind": "archaeology",
+      "citation": "Heinrich Schliemann, Mycenae (1878)",
+      "author": "Heinrich Schliemann",
+      "year": 1878
+    },
+    {
+      "id": "aeschylus-agamemnon",
+      "kind": "primary_text",
+      "citation": "Aeschylus, Agamemnon (458 BCE)",
+      "author": "Aeschylus",
+      "year": -458
+    },
+    {
+      "id": "pausanias-2-16",
+      "kind": "primary_text",
+      "citation": "Pausanias, Description of Greece 2.16",
+      "author": "Pausanias",
+      "year": 170
+    }
+  ],
+  "theories": [
+    {
+      "id": "mycenae-return",
+      "identification": "plausible",
+      "place": "mycenae",
+      "proponent": "The poem itself; the site excavated by Schliemann",
+      "era": "antiquity",
+      "sources": [
+        "schliemann-1878",
+        "pausanias-2-16"
+      ],
+      "locales": {
+        "en": {
+          "label": "Mycenae",
+          "note": "The Odyssey has Agamemnon driven past Malea and murdered on his return. The place is accepted, the event is not evidenced, and Schliemann's 'mask of Agamemnon' is some three centuries too early for it."
+        },
+        "es": {
+          "label": "Micenas",
+          "note": "La Odisea hace que a Agamenón lo desvíe el viento más allá de Maleas y lo asesinen al regresar. El lugar está aceptado, el suceso no está probado, y la «máscara de Agamenón» de Schliemann es unos tres siglos anterior."
+        },
+        "pt": {
+          "label": "Micenas",
+          "note": "A Odisseia faz Agamêmnon ser desviado além do Maleia e assassinado no retorno. O lugar é aceito, o acontecimento não é comprovado, e a “máscara de Agamêmnon” de Schliemann é cerca de três séculos anterior."
+        }
+      }
+    },
+    {
+      "id": "argos-tragedy",
+      "identification": "speculative",
+      "proponent": "Aeschylus, Agamemnon (458 BCE)",
+      "era": "antiquity",
+      "sources": [
+        "aeschylus-agamemnon"
+      ],
+      "locales": {
+        "en": {
+          "label": "Argos, in the tragic tradition",
+          "note": "Aeschylus sets the murder at Argos rather than Mycenae — a reminder that the 'where' of a famous story can move between genres without anyone noticing."
+        },
+        "es": {
+          "label": "Argos, en la tradición trágica",
+          "note": "Esquilo sitúa el asesinato en Argos y no en Micenas: un recordatorio de que el «dónde» de una historia célebre puede desplazarse entre géneros sin que nadie lo advierta."
+        },
+        "pt": {
+          "label": "Argos, na tradição trágica",
+          "note": "Ésquilo situa o assassinato em Argos, não em Micenas — um lembrete de que o “onde” de uma história célebre pode se deslocar entre gêneros sem que ninguém note."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The murder of Agamemnon",
+      "summary": "The Odyssey's counter-example: the homecoming that goes wrong. Agamemnon reaches his own country and is killed at dinner, and the story shadows Odysseus' return from Book 1 onward.",
+      "narrative": [
+        "Proteus tells Menelaus what happened: a storm at Malea, a landing on the wrong coast, a watchman posted by Aegisthus, and a banquet at which Agamemnon and his men are cut down 'like oxen at the manger'.",
+        "The poem keeps returning to it. Agamemnon tells the story again himself in the underworld, and Athena uses it to warn Telemachus. It is the alternative ending the Odyssey spends twenty-four books avoiding."
+      ],
+      "whyItMatters": "It ties the atlas's most secure site to one of its least verifiable events — exactly the distinction the rubric exists to keep visible.",
+      "debate": "Where the murder was set — Mycenae in Homer, Argos in Aeschylus — and whether the story reflects any historical dynastic violence at the end of the Bronze Age.",
+      "faqs": [
+        {
+          "q": "Is the 'mask of Agamemnon' really his?",
+          "a": "No. The gold masks Schliemann found in the shaft graves at Mycenae date to roughly the sixteenth century BCE, some three hundred years before any plausible date for the Trojan War."
+        },
+        {
+          "q": "Does the Odyssey say where Agamemnon was killed?",
+          "a": "In his own house, after a landing on his own coast. Later tragedy moved the setting to Argos; the atlas records both."
+        }
+      ]
+    },
+    "es": {
+      "title": "El asesinato de Agamenón",
+      "summary": "El contraejemplo de la Odisea: el regreso que sale mal. Agamenón llega a su tierra y lo matan durante la cena, y la historia proyecta su sombra sobre el regreso de Odiseo desde el canto 1.",
+      "narrative": [
+        "Proteo cuenta a Menelao lo ocurrido: una tormenta en Maleas, un desembarco en la costa equivocada, un vigía apostado por Egisto y un banquete en el que Agamenón y sus hombres son degollados «como bueyes en el pesebre».",
+        "El poema vuelve una y otra vez a ello. El propio Agamenón lo cuenta de nuevo en el inframundo, y Atenea lo usa para advertir a Telémaco. Es el final alternativo que la Odisea dedica veinticuatro cantos a evitar."
+      ],
+      "whyItMatters": "Ata el yacimiento más seguro del atlas a uno de sus sucesos menos verificables, que es justamente la distinción que la rúbrica existe para mantener a la vista.",
+      "debate": "Dónde se situaba el asesinato —Micenas en Homero, Argos en Esquilo— y si la historia refleja alguna violencia dinástica histórica al final de la Edad del Bronce.",
+      "faqs": [
+        {
+          "q": "¿Es de Agamenón la «máscara de Agamenón»?",
+          "a": "No. Las máscaras de oro que Schliemann halló en las tumbas de fosa de Micenas datan aproximadamente del siglo XVI a.C., unos trescientos años antes de cualquier fecha plausible para la guerra de Troya."
+        },
+        {
+          "q": "¿Dice la Odisea dónde mataron a Agamenón?",
+          "a": "En su propia casa, tras desembarcar en su propia costa. La tragedia posterior trasladó el escenario a Argos; el atlas registra ambos."
+        }
+      ]
+    },
+    "pt": {
+      "title": "O assassinato de Agamêmnon",
+      "summary": "O contraexemplo da Odisseia: o retorno que dá errado. Agamêmnon chega à própria terra e é morto no jantar, e a história projeta sua sombra sobre o retorno de Odisseu desde o canto 1.",
+      "narrative": [
+        "Proteu conta a Menelau o que houve: uma tempestade no Maleia, um desembarque na costa errada, um vigia posto por Egisto e um banquete em que Agamêmnon e seus homens são abatidos “como bois na manjedoura”.",
+        "O poema volta a isso repetidas vezes. O próprio Agamêmnon reconta a história no submundo, e Atena a usa para advertir Telêmaco. É o final alternativo que a Odisseia passa vinte e quatro cantos evitando."
+      ],
+      "whyItMatters": "Liga o sítio mais seguro do atlas a um de seus acontecimentos menos verificáveis — exatamente a distinção que a rubrica existe para manter à vista.",
+      "debate": "Onde o assassinato se situava — Micenas em Homero, Argos em Ésquilo — e se a história reflete alguma violência dinástica histórica no fim da Idade do Bronze.",
+      "faqs": [
+        {
+          "q": "A “máscara de Agamêmnon” é dele?",
+          "a": "Não. As máscaras de ouro que Schliemann encontrou nos túmulos de fossa de Micenas datam de cerca do século XVI a.C., uns trezentos anos antes de qualquer data plausível para a Guerra de Troia."
+        },
+        {
+          "q": "A Odisseia diz onde Agamêmnon foi morto?",
+          "a": "Em sua própria casa, após desembarcar na própria costa. A tragédia posterior mudou o cenário para Argos; o atlas registra ambos."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "slug": "ismarus",
+  "id": "HOM-P-029",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "plausible",
+  "unlocated": false,
+  "region": "aegean",
+  "homericNames": [
+    "Ἴσμαρος"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 9,
+      "lines": "39-61"
+    },
+    {
+      "work": "odyssey",
+      "book": 9,
+      "lines": "196-215"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "herodotus-7-108",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 7.108-110 — the Thracian coast and the Ciconian territory",
+      "author": "Herodotus",
+      "year": -430
+    },
+    {
+      "id": "maroneia",
+      "kind": "archaeology",
+      "citation": "Maroneia and the Ismaros ridge, Thrace — a settled coast in the Late Bronze Age and later, and the standard location of the Ciconian territory",
+      "year": 2000
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "maroneia",
+      "identification": "plausible",
+      "modernName": "Maroneia",
+      "country": "GR",
+      "lat": 40.88,
+      "lon": 25.52,
+      "precision": "area",
+      "proponent": "Ancient identification of the Ciconian territory",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 1,
+        "scholarly": 2,
+        "geographic": 3,
+        "score": 9,
+        "band": "medium"
+      },
+      "sources": [
+        "herodotus-7-108",
+        "maroneia",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "The coast at Maroneia, Thrace",
+          "note": "The Cicones were a real Thracian people whose territory ancient sources place on this coast, and a ridge here still carries the name Ismaros. The wine Odysseus takes from Maron is described in enough detail — strong, sweet, cut with twenty parts of water — to read as knowledge of a specific regional product."
+        },
+        "es": {
+          "label": "La costa de Maronea, Tracia",
+          "note": "Los cícones fueron un pueblo tracio real cuyo territorio las fuentes antiguas sitúan en esta costa, y una sierra de aquí conserva el nombre de Ismaro. El vino que Odiseo recibe de Marón se describe con detalle suficiente —fuerte, dulce, rebajado con veinte partes de agua— como para leerse como conocimiento de un producto regional concreto."
+        },
+        "pt": {
+          "label": "A costa de Maroneia, Trácia",
+          "note": "Os cícones foram um povo trácio real cujo território as fontes antigas situam nesta costa, e uma serra aqui ainda carrega o nome de Ismaro. O vinho que Odisseu recebe de Máron é descrito com detalhe suficiente — forte, doce, cortado com vinte partes de água — para se ler como conhecimento de um produto regional concreto."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "cicones-at-ismarus"
+  ],
+  "locales": {
+    "en": {
+      "name": "Ismarus",
+      "summary": "The first stop out of Troy, and the only one Odysseus reaches by ordinary sailing: a Thracian town he sacks, and where his crew's refusal to leave costs six men per ship.",
+      "description": [
+        "The raid on the Cicones is the hinge between the war and the wanderings. It is a normal piece of Bronze Age or archaic raiding — take the town, take the women and goods, and get out before the neighbours arrive. The crew stay to drink, the inland Cicones counter-attack, and the fleet leaves at a loss.",
+        "The wine of Maron reappears later as the drug that makes the Cyclops sleep, which is one of the few threads tying the fantastic episodes back to a real place."
+      ],
+      "identificationNote": "Plausible: a real people, a real coast and a surviving name, without an excavation that ties the site to the episode. It scores 9/12.",
+      "debate": "Whether Ismarus was a specific town or a district, and how much the wine's description reflects genuine knowledge of Thracian production rather than epic hyperbole."
+    },
+    "es": {
+      "name": "Ísmaro",
+      "summary": "La primera escala al salir de Troya y la única a la que Odiseo llega por navegación ordinaria: una ciudad tracia que saquea y donde la negativa de su tripulación a marcharse cuesta seis hombres por nave.",
+      "description": [
+        "El ataque a los cícones es la bisagra entre la guerra y las andanzas. Es un episodio normal de razia de la Edad del Bronce o arcaica: tomar la ciudad, llevarse mujeres y bienes y salir antes de que lleguen los vecinos. La tripulación se queda a beber, los cícones del interior contraatacan y la flota se marcha con pérdidas.",
+        "El vino de Marón reaparece después como la droga que duerme al cíclope, uno de los pocos hilos que atan los episodios fantásticos a un lugar real."
+      ],
+      "identificationNote": "Plausible: un pueblo real, una costa real y un nombre superviviente, sin una excavación que ate el yacimiento al episodio. Puntúa 9/12.",
+      "debate": "Si Ísmaro era una ciudad concreta o un distrito, y cuánto refleja la descripción del vino un conocimiento genuino de la producción tracia y no una hipérbole épica."
+    },
+    "pt": {
+      "name": "Ísmaro",
+      "summary": "A primeira escala ao sair de Troia e a única aonde Odisseu chega por navegação comum: uma cidade trácia que ele saqueia e onde a recusa da tripulação em partir custa seis homens por nau.",
+      "description": [
+        "O ataque aos cícones é a dobradiça entre a guerra e as andanças. É um episódio normal de razia da Idade do Bronze ou arcaica: tomar a cidade, levar mulheres e bens e sair antes que os vizinhos cheguem. A tripulação fica bebendo, os cícones do interior contra-atacam e a frota parte com perdas.",
+        "O vinho de Máron reaparece depois como a droga que faz o ciclope dormir, um dos poucos fios que atam os episódios fantásticos a um lugar real."
+      ],
+      "identificationNote": "Plausível: um povo real, uma costa real e um nome sobrevivente, sem uma escavação que ligue o sítio ao episódio. Pontua 9/12.",
+      "debate": "Se Ísmaro era uma cidade concreta ou um distrito, e o quanto a descrição do vinho reflete conhecimento genuíno da produção trácia e não hipérbole épica."
+    }
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "slug": "dulichium",
+  "id": "HOM-P-015",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "speculative",
+  "unlocated": false,
+  "region": "ionian",
+  "homericNames": [
+    "Δουλίχιον"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 1,
+      "lines": "245-248"
+    },
+    {
+      "work": "odyssey",
+      "book": 16,
+      "lines": "245-253"
+    },
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "625-630"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-10",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 10.2",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "dorpfeld-1927",
+      "kind": "scholarship",
+      "citation": "Wilhelm Dörpfeld, Alt-Ithaka (1927)",
+      "author": "Wilhelm Dörpfeld",
+      "year": 1927,
+      "url": "https://archive.org/details/bub_gb_YmcrMtWumK8C"
+    },
+    {
+      "id": "echinades",
+      "kind": "scholarship",
+      "citation": "The Echinades and Lefkada as candidates for Dulichium, discussed in the topographical literature on the Homeric Ionian",
+      "year": 2005
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "lefkada-dulichium",
+      "identification": "speculative",
+      "modernName": "Lefkada",
+      "country": "GR",
+      "lat": 38.7,
+      "lon": 20.71,
+      "precision": "island",
+      "proponent": "Wilhelm Dörpfeld, Alt-Ithaka (1927)",
+      "era": "modern",
+      "since": 1927,
+      "confidence": {
+        "textual": 2,
+        "archaeological": 1,
+        "scholarly": 1,
+        "geographic": 2,
+        "score": 6,
+        "band": "medium"
+      },
+      "sources": [
+        "dorpfeld-1927",
+        "echinades",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Lefkada",
+          "note": "One of the two standing candidates. Lefkada is large enough to supply the fifty-two suitors Dulichium sends, and Dörpfeld's work put Bronze Age material on the island — though he was arguing it was Ithaca, not Dulichium."
+        },
+        "es": {
+          "label": "Léucade",
+          "note": "Uno de los dos candidatos vigentes. Léucade es lo bastante grande para aportar los cincuenta y dos pretendientes que envía Duliquio, y los trabajos de Dörpfeld situaron material del Bronce en la isla, aunque él sostenía que era Ítaca, no Duliquio."
+        },
+        "pt": {
+          "label": "Lêucade",
+          "note": "Um dos dois candidatos vigentes. Lêucade é grande o bastante para fornecer os cinquenta e dois pretendentes que Dulíquio envia, e os trabalhos de Dörpfeld situaram material do Bronze na ilha — embora ele defendesse que era Ítaca, não Dulíquio."
+        }
+      }
+    },
+    {
+      "id": "echinades",
+      "identification": "speculative",
+      "modernName": "Echinades islands",
+      "country": "GR",
+      "lat": 38.45,
+      "lon": 21.1,
+      "precision": "area",
+      "proponent": "Strabo, Geography 10.2",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 1,
+        "score": 4,
+        "band": "low"
+      },
+      "sources": [
+        "echinades",
+        "strabo-10"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Echinades or a coastal district",
+          "note": "Ancient and modern readers have also put Dulichium among the small islands off the Acheloos mouth, or on the Acarnanian coast. None of the candidates is large enough to be obvious, which is precisely the problem."
+        },
+        "es": {
+          "label": "Las Equínades o un distrito costero",
+          "note": "Lectores antiguos y modernos han situado también Duliquio entre las islillas frente a la desembocadura del Aqueloo, o en la costa de Acarnania. Ninguno de los candidatos es lo bastante grande como para resultar evidente, y ese es justamente el problema."
+        },
+        "pt": {
+          "label": "As Equínades ou um distrito costeiro",
+          "note": "Leitores antigos e modernos também situaram Dulíquio entre as ilhotas diante da foz do Aqueloo, ou na costa da Acarnânia. Nenhum dos candidatos é grande o bastante para ser evidente, e esse é exatamente o problema."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "catalogue-of-ships"
+  ],
+  "locales": {
+    "en": {
+      "name": "Dulichium",
+      "summary": "The island of Odysseus' kingdom that has simply gone missing. It sends more suitors than anywhere else and matches nothing on the modern map.",
+      "description": [
+        "Dulichium supplies fifty-two of the hundred and eight suitors, so the poem imagines it as the most populous part of the kingdom. Antiquity could not agree on where it was, and neither can modern scholarship: Lefkada, the Echinades and stretches of the Acarnanian coast have all been proposed.",
+        "The failure is informative. It suggests either that the Ionian names shifted between the Bronze Age and the eighth century, or that Homer's western geography is assembled rather than surveyed."
+      ],
+      "identificationNote": "Speculative: two real candidates, neither with archaeological support tying it to the name, and no consensus in either antiquity or modern scholarship. The best score any hypothesis reaches here is 6/12.",
+      "debate": "Whether Dulichium was ever a real place under that name, whether it is a doublet of another island, and how much weight the Catalogue of Ships' western entries can bear."
+    },
+    "es": {
+      "name": "Duliquio",
+      "summary": "La isla del reino de Odiseo que sencillamente ha desaparecido. Envía más pretendientes que ningún otro lugar y no corresponde a nada en el mapa moderno.",
+      "description": [
+        "Duliquio aporta cincuenta y dos de los ciento ocho pretendientes, de modo que el poema la imagina como la parte más poblada del reino. La Antigüedad no logró ponerse de acuerdo sobre dónde estaba, y la erudición moderna tampoco: se han propuesto Léucade, las Equínades y tramos de la costa de Acarnania.",
+        "El fracaso es informativo. Sugiere o bien que los nombres jónicos cambiaron entre la Edad del Bronce y el siglo VIII, o bien que la geografía occidental de Homero está ensamblada y no levantada sobre el terreno."
+      ],
+      "identificationNote": "Especulativa: dos candidatos reales, ninguno con apoyo arqueológico que lo ate al nombre, y sin consenso ni en la Antigüedad ni en la erudición moderna. La mejor puntuación que alcanza aquí una hipótesis es 6/12.",
+      "debate": "Si Duliquio fue alguna vez un lugar real con ese nombre, si es un doblete de otra isla y cuánto peso pueden soportar las entradas occidentales del Catálogo de las Naves."
+    },
+    "pt": {
+      "name": "Dulíquio",
+      "summary": "A ilha do reino de Odisseu que simplesmente sumiu. Envia mais pretendentes que qualquer outro lugar e não corresponde a nada no mapa moderno.",
+      "description": [
+        "Dulíquio fornece cinquenta e dois dos cento e oito pretendentes, de modo que o poema o imagina como a parte mais populosa do reino. A Antiguidade não conseguiu concordar sobre onde ficava, e a erudição moderna também não: propuseram-se Lêucade, as Equínades e trechos da costa da Acarnânia.",
+        "O fracasso é informativo. Sugere ou que os nomes jônicos mudaram entre a Idade do Bronze e o século VIII, ou que a geografia ocidental de Homero é montada, não levantada em campo."
+      ],
+      "identificationNote": "Especulativa: dois candidatos reais, nenhum com apoio arqueológico que o ligue ao nome, e sem consenso nem na Antiguidade nem na erudição moderna. A melhor pontuação que uma hipótese alcança aqui é 6/12.",
+      "debate": "Se Dulíquio algum dia foi um lugar real com esse nome, se é um dublê de outra ilha e quanto peso as entradas ocidentais do Catálogo das Naus podem suportar."
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "slug": "laestrygonians",
+  "id": "HOM-E-014",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 10,
+  "lines": "80-132",
+  "places": [
+    "laestrygonia"
+  ],
+  "confidence": {
+    "textual": 3,
+    "archaeological": 0,
+    "scholarly": 1,
+    "geographic": 2,
+    "score": 6,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "bonifacio",
+      "kind": "scholarship",
+      "citation": "Bonifacio, Corsica, proposed for the Laestrygonian harbour on the strength of the poem's description",
+      "year": 1963
+    },
+    {
+      "id": "cicero-formiae",
+      "kind": "primary_text",
+      "citation": "Cicero, Ad Atticum 2.13 — Formiae and the Laestrygonian association",
+      "author": "Cicero",
+      "year": -59
+    }
+  ],
+  "theories": [
+    {
+      "id": "bonifacio",
+      "identification": "speculative",
+      "place": "laestrygonia",
+      "proponent": "A modern reading argued from the harbour description",
+      "era": "modern",
+      "sources": [
+        "bonifacio"
+      ],
+      "locales": {
+        "en": {
+          "label": "Bonifacio, Corsica",
+          "note": "The inlet matches the poem's harbour as well as anywhere in the Mediterranean, and that is the whole of the argument."
+        },
+        "es": {
+          "label": "Bonifacio, Córcega",
+          "note": "La ensenada corresponde al puerto del poema tan bien como cualquier lugar del Mediterráneo, y ese es todo el argumento."
+        },
+        "pt": {
+          "label": "Bonifácio, Córsega",
+          "note": "A enseada corresponde ao porto do poema tão bem quanto qualquer lugar do Mediterrâneo, e esse é todo o argumento."
+        }
+      }
+    },
+    {
+      "id": "formiae",
+      "identification": "speculative",
+      "place": "laestrygonia",
+      "proponent": "Roman literary tradition",
+      "era": "antiquity",
+      "sources": [
+        "cicero-formiae"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Latian coast at Formiae",
+          "note": "A Roman literary tradition rather than a geographical argument."
+        },
+        "es": {
+          "label": "La costa lacial de Formias",
+          "note": "Una tradición literaria romana, no un argumento geográfico."
+        },
+        "pt": {
+          "label": "A costa lacial de Fórmias",
+          "note": "Uma tradição literária romana, não um argumento geográfico."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The Laestrygonians",
+      "summary": "Eleven ships lost in a single harbour. The most precisely described anchorage in the Odyssey is also its deadliest, and nobody can prove where it is.",
+      "narrative": [
+        "The fleet enters a harbour with a narrow mouth between cliffs, where no swell ever rises. Every captain moors inside except Odysseus, who ties up outside on the rock. The Laestrygonians turn out to be giants; they spear the men like fish and smash the ships with boulders from the heights.",
+        "Odysseus cuts his cable and rows out. He leaves with one ship out of twelve, and the poem's arithmetic of loss is complete: from here on, it is a single crew that dwindles."
+      ],
+      "whyItMatters": "It is the atlas's textbook case of a vivid description that cannot be converted into a location: textual 3, archaeological 0, and no consensus.",
+      "debate": "Whether the detail of very short nights preserves a report from high latitudes, or is a fantastic touch. Both readings are old and neither is testable.",
+      "faqs": [
+        {
+          "q": "Is the Laestrygonian harbour Bonifacio?",
+          "a": "Bonifacio matches the description well and has no other support. The atlas records it as speculative, at 6/12."
+        },
+        {
+          "q": "Why does the episode matter?",
+          "a": "Because it is the moment the expedition becomes a single ship — and because it shows how a precise description can still fail to identify a place."
+        }
+      ]
+    },
+    "es": {
+      "title": "Los lestrigones",
+      "summary": "Once naves perdidas en un solo puerto. El fondeadero descrito con más precisión de la Odisea es también el más letal, y nadie puede demostrar dónde está.",
+      "narrative": [
+        "La flota entra en un puerto de bocana angosta entre acantilados, donde nunca se levanta oleaje. Todos los capitanes amarran dentro menos Odiseo, que se ata fuera a la roca. Los lestrigones resultan ser gigantes: arponean a los hombres como peces y destrozan las naves con peñascos desde lo alto.",
+        "Odiseo corta la amarra y saca la nave a remo. Se marcha con una de doce, y la aritmética de la pérdida queda completa: de aquí en adelante es una sola tripulación que mengua."
+      ],
+      "whyItMatters": "Es el caso de manual del atlas de una descripción vívida que no se convierte en localización: textual 3, arqueológica 0 y sin consenso.",
+      "debate": "Si el detalle de las noches muy cortas conserva un informe de latitudes altas o es un toque fantástico. Ambas lecturas son antiguas y ninguna es comprobable.",
+      "faqs": [
+        {
+          "q": "¿Es Bonifacio el puerto de los lestrigones?",
+          "a": "Bonifacio encaja bien con la descripción y no tiene ningún otro apoyo. El atlas lo registra como especulativo, con 6/12."
+        },
+        {
+          "q": "¿Por qué importa el episodio?",
+          "a": "Porque es el momento en que la expedición se reduce a una sola nave, y porque muestra cómo una descripción precisa puede seguir sin identificar un lugar."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Os lestrigões",
+      "summary": "Onze naus perdidas num único porto. O ancoradouro descrito com mais precisão na Odisseia é também o mais letal, e ninguém pode provar onde fica.",
+      "narrative": [
+        "A frota entra num porto de boca estreita entre falésias, onde nunca se levanta ondulação. Todos os capitães amarram dentro, menos Odisseu, que se prende fora, à rocha. Os lestrigões revelam-se gigantes: arpoam os homens como peixes e despedaçam as naus com penedos do alto.",
+        "Odisseu corta a amarra e sai a remo. Parte com uma de doze, e a aritmética da perda se completa: daqui em diante é uma só tripulação que mingua."
+      ],
+      "whyItMatters": "É o caso de manual do atlas de uma descrição vívida que não se converte em localização: textual 3, arqueológica 0 e sem consenso.",
+      "debate": "Se o detalhe das noites muito curtas preserva um relato de latitudes altas ou é um toque fantástico. Ambas as leituras são antigas e nenhuma é testável.",
+      "faqs": [
+        {
+          "q": "Bonifácio é o porto dos lestrigões?",
+          "a": "Bonifácio encaixa bem na descrição e não tem nenhum outro apoio. O atlas o registra como especulativo, com 6/12."
+        },
+        {
+          "q": "Por que o episódio importa?",
+          "a": "Porque é o momento em que a expedição se reduz a uma só nau — e porque mostra como uma descrição precisa pode ainda assim não identificar um lugar."
+        }
+      ]
+    }
+  }
+}

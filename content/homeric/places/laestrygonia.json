@@ -1,0 +1,168 @@
+{
+  "slug": "laestrygonia",
+  "id": "HOM-P-019",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "speculative",
+  "unlocated": false,
+  "region": "westernMed",
+  "homericNames": [
+    "Λαιστρυγονίη",
+    "Τηλέπυλος"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 10,
+      "lines": "80-132"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "thucydides-6-2",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 6.2",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "berard-1927",
+      "kind": "scholarship",
+      "citation": "Victor Bérard, Les navigations d'Ulysse (4 vols., 1927–1929)",
+      "author": "Victor Bérard",
+      "year": 1927,
+      "url": "https://archive.org/details/lesnavigationsdu04bera"
+    },
+    {
+      "id": "bonifacio",
+      "kind": "scholarship",
+      "citation": "Bonifacio, Corsica, as a candidate for the Laestrygonian harbour — argued from the poem's description of a narrow inlet between sheer cliffs",
+      "year": 1963
+    },
+    {
+      "id": "cicero-formiae",
+      "kind": "primary_text",
+      "citation": "Cicero, Ad Atticum 2.13 — the Formiae coast associated with the Laestrygonians in Roman literary tradition",
+      "author": "Cicero",
+      "year": -59
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "bonifacio",
+      "identification": "speculative",
+      "modernName": "Bonifacio",
+      "country": "FR",
+      "lat": 41.387,
+      "lon": 9.159,
+      "precision": "area",
+      "proponent": "A modern reading argued from the harbour description",
+      "era": "modern",
+      "since": 1963,
+      "confidence": {
+        "textual": 3,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 2,
+        "score": 6,
+        "band": "medium"
+      },
+      "sources": [
+        "bonifacio",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Bonifacio, Corsica",
+          "note": "The poem describes a harbour entered between two headlands so close that the swell never enters, with cliffs on both sides — an unusually specific piece of coastal description, and Bonifacio's inlet matches it as well as any place in the Mediterranean. Nothing else supports the identification, and 'it matches the description' is exactly the argument that has failed elsewhere in this atlas."
+        },
+        "es": {
+          "label": "Bonifacio, Córcega",
+          "note": "El poema describe un puerto al que se entra entre dos promontorios tan próximos que el oleaje no penetra, con acantilados a ambos lados: una descripción costera insólitamente específica, y la ensenada de Bonifacio le corresponde tan bien como cualquier lugar del Mediterráneo. Nada más sostiene la identificación, y «coincide con la descripción» es justo el argumento que ha fallado en otras fichas de este atlas."
+        },
+        "pt": {
+          "label": "Bonifácio, Córsega",
+          "note": "O poema descreve um porto onde se entra entre dois promontórios tão próximos que a ondulação não penetra, com falésias dos dois lados: uma descrição costeira incomumente específica, e a enseada de Bonifácio lhe corresponde tão bem quanto qualquer lugar do Mediterrâneo. Nada mais sustenta a identificação, e “corresponde à descrição” é exatamente o argumento que falhou em outras fichas deste atlas."
+        }
+      }
+    },
+    {
+      "id": "formiae",
+      "identification": "speculative",
+      "modernName": "Formia, Lazio",
+      "country": "IT",
+      "lat": 41.25,
+      "lon": 13.6,
+      "precision": "area",
+      "proponent": "Roman literary tradition; Thucydides 6.2 for Sicily",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 1,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 1,
+        "score": 3,
+        "band": "low"
+      },
+      "sources": [
+        "cicero-formiae",
+        "thucydides-6-2"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Latian or Sicilian coast",
+          "note": "Roman literary tradition attached the Laestrygonians to the coast around Formiae, and Thucydides reports the Sicilian claim. Both are traditions about where a people was said to have lived, not evidence about where an episode happened."
+        },
+        "es": {
+          "label": "La costa lacial o siciliana",
+          "note": "La tradición literaria romana adhirió a los lestrigones a la costa de Formias, y Tucídides recoge la reclamación siciliana. Ambas son tradiciones sobre dónde se decía que vivía un pueblo, no pruebas sobre dónde ocurrió un episodio."
+        },
+        "pt": {
+          "label": "A costa lacial ou siciliana",
+          "note": "A tradição literária romana ligou os lestrigões à costa de Fórmias, e Tucídides registra a reivindicação siciliana. Ambas são tradições sobre onde se dizia que um povo vivia, não provas sobre onde um episódio aconteceu."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "laestrygonians"
+  ],
+  "locales": {
+    "en": {
+      "name": "Laestrygonia (Telepylus)",
+      "summary": "Where Odysseus loses eleven of his twelve ships in a single afternoon. The harbour is the most precisely described anchorage in the poem, and nobody can prove which one it is.",
+      "description": [
+        "The fleet enters a landlocked harbour between cliffs; only Odysseus keeps his ship outside. The Laestrygonians turn out to be giants, and they destroy the ships inside with rocks thrown from above. It is the worst single loss of the voyage and the only one that is purely a trap of geography.",
+        "The description — the narrow entrance, the sheer sides, the calm inside — reads like sailing directions, which is why Bonifacio has attracted the identification. The poem also says the place has nights so short that a sleepless man could earn double wages, a detail read by some as a memory of high latitudes and by others as pure fantasy."
+      ],
+      "identificationNote": "Speculative: a textual score of 3, an archaeological score of 0, and no consensus. That combination is what the atlas's rubric exists to make visible — a vivid description is not evidence of a location.",
+      "debate": "Whether the short-nights detail preserves a real northern report, and whether a harbour description can ever identify a place in a sea full of similar harbours."
+    },
+    "es": {
+      "name": "Lestrigonia (Telépilo)",
+      "summary": "Donde Odiseo pierde once de sus doce naves en una sola tarde. El puerto es el fondeadero descrito con más precisión del poema, y nadie puede demostrar cuál es.",
+      "description": [
+        "La flota entra en un puerto cerrado entre acantilados; solo Odiseo deja su nave fuera. Los lestrigones resultan ser gigantes y destruyen desde arriba, a pedradas, las naves de dentro. Es la peor pérdida del viaje y la única que es puramente una trampa de la geografía.",
+        "La descripción —la bocana estrecha, las paredes verticales, la calma interior— se lee como una instrucción náutica, y por eso Bonifacio ha atraído la identificación. El poema dice además que allí las noches son tan cortas que un hombre sin sueño podría cobrar doble jornal, un detalle que unos leen como recuerdo de latitudes altas y otros como pura fantasía."
+      ],
+      "identificationNote": "Especulativa: puntuación textual 3, arqueológica 0 y sin consenso. Esa combinación es justo lo que la rúbrica del atlas existe para hacer visible: una descripción vívida no es prueba de una localización.",
+      "debate": "Si el detalle de las noches cortas conserva un informe nórdico real, y si una descripción portuaria puede identificar alguna vez un lugar en un mar lleno de puertos parecidos."
+    },
+    "pt": {
+      "name": "Lestrigônia (Telépilo)",
+      "summary": "Onde Odisseu perde onze de suas doze naus numa só tarde. O porto é o ancoradouro descrito com mais precisão no poema, e ninguém pode provar qual é.",
+      "description": [
+        "A frota entra num porto fechado entre falésias; só Odisseu deixa sua nau do lado de fora. Os lestrigões revelam-se gigantes e destroem do alto, a pedradas, as naus de dentro. É a pior perda da viagem e a única que é puramente uma armadilha da geografia.",
+        "A descrição — a entrada estreita, as paredes verticais, a calmaria interior — lê-se como instrução náutica, e por isso Bonifácio atraiu a identificação. O poema diz ainda que ali as noites são tão curtas que um homem sem sono poderia receber salário dobrado, detalhe que uns leem como lembrança de latitudes altas e outros como pura fantasia."
+      ],
+      "identificationNote": "Especulativa: pontuação textual 3, arqueológica 0 e sem consenso. Essa combinação é exatamente o que a rubrica do atlas existe para tornar visível: uma descrição vívida não é prova de uma localização.",
+      "debate": "Se o detalhe das noites curtas preserva um relato nórdico real, e se uma descrição portuária pode alguma vez identificar um lugar num mar cheio de portos parecidos."
+    }
+  }
+}

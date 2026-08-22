@@ -1,0 +1,162 @@
+{
+  "slug": "cyclops-polyphemus",
+  "id": "HOM-E-012",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 9,
+  "lines": "105-566",
+  "places": [
+    "land-of-the-cyclopes"
+  ],
+  "confidence": {
+    "textual": 2,
+    "archaeological": 0,
+    "scholarly": 1,
+    "geographic": 2,
+    "score": 5,
+    "band": "low"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "thucydides-6-2",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 6.2",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "berard-1927",
+      "kind": "scholarship",
+      "citation": "Victor Bérard, Les navigations d'Ulysse (4 vols., 1927–1929)",
+      "author": "Victor Bérard",
+      "year": 1927,
+      "url": "https://archive.org/details/lesnavigationsdu04bera"
+    },
+    {
+      "id": "goat-island",
+      "kind": "scholarship",
+      "citation": "The 'goat island' description in Odyssey 9.116-141, read as sailing observation in the commentary tradition",
+      "year": 1990
+    }
+  ],
+  "theories": [
+    {
+      "id": "sicily",
+      "identification": "speculative",
+      "place": "land-of-the-cyclopes",
+      "proponent": "Thucydides 6.2",
+      "era": "antiquity",
+      "sources": [
+        "thucydides-6-2",
+        "goat-island"
+      ],
+      "locales": {
+        "en": {
+          "label": "Eastern Sicily",
+          "note": "Thucydides reports the tradition that Cyclopes lived in Sicily, and the volcanic coast under Etna has carried it since. The goat island offshore has been matched to islets there."
+        },
+        "es": {
+          "label": "Sicilia oriental",
+          "note": "Tucídides recoge la tradición de que los cíclopes vivieron en Sicilia, y la costa volcánica bajo el Etna la arrastra desde entonces. La isla de las cabras se ha hecho corresponder con islotes de allí."
+        },
+        "pt": {
+          "label": "Sicília oriental",
+          "note": "Tucídides registra a tradição de que os ciclopes viveram na Sicília, e a costa vulcânica sob o Etna a carrega desde então. A ilha das cabras foi associada a ilhotas de lá."
+        }
+      }
+    },
+    {
+      "id": "campania",
+      "identification": "speculative",
+      "place": "land-of-the-cyclopes",
+      "proponent": "Victor Bérard (1927–1929)",
+      "era": "modern",
+      "sources": [
+        "berard-1927"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Campanian coast",
+          "note": "Bérard's Phoenician-route reading places the episode near Naples. Systematic, consistent and unverifiable."
+        },
+        "es": {
+          "label": "La costa campana",
+          "note": "La lectura de Bérard según la ruta fenicia sitúa el episodio cerca de Nápoles. Sistemática, coherente e inverificable."
+        },
+        "pt": {
+          "label": "A costa campana",
+          "note": "A leitura de Bérard segundo a rota fenícia situa o episódio perto de Nápoles. Sistemática, coerente e inverificável."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The Cyclops Polyphemus",
+      "summary": "The most famous episode in Homer and one of the least locatable. Odysseus loses six men, blinds a giant, escapes under a ram, and then shouts his own name — which is what costs him ten years.",
+      "narrative": [
+        "Odysseus takes twelve men into a cave to see 'what kind of men' live there. The owner is a one-eyed giant who eats two of them at once, blocks the entrance with a stone no mortal can move, and asks a name. Odysseus answers 'Nobody', gets him drunk on Maron's wine, and puts a sharpened olive stake through his eye.",
+        "The escape works. The mistake comes afterwards: rowing away, Odysseus shouts his real name, and Polyphemus calls on his father Poseidon to make the return long, lonely and full of grief. He gets what he asks for."
+      ],
+      "whyItMatters": "It is the episode that makes the rest of the poem happen, and the atlas can locate it only by tradition — two rival volcanic coasts, no evidence, and a text that describes a moral condition rather than a shoreline.",
+      "debate": "Whether the goat island's precise description reflects real sailing knowledge, and whether any of the wanderings can be located at all.",
+      "faqs": [
+        {
+          "q": "Is there a real island of the Cyclops?",
+          "a": "No location is established. Ancient tradition points to eastern Sicily, Bérard's modern reading to the Campanian coast; both score low in this atlas because they rest on tradition and inference rather than evidence."
+        },
+        {
+          "q": "Why does the naming matter?",
+          "a": "Because it converts an escape into a curse. Poseidon can only act against a named man — which is also why the poem's geography collapses into wandering immediately afterwards."
+        }
+      ]
+    },
+    "es": {
+      "title": "El cíclope Polifemo",
+      "summary": "El episodio más famoso de Homero y uno de los menos localizables. Odiseo pierde seis hombres, ciega a un gigante, escapa bajo un carnero y luego grita su propio nombre, que es lo que le cuesta diez años.",
+      "narrative": [
+        "Odiseo entra en una cueva con doce hombres para ver «qué clase de hombres» viven allí. El dueño es un gigante de un solo ojo que se come a dos de golpe, bloquea la entrada con una roca que ningún mortal puede mover y pregunta un nombre. Odiseo responde «Nadie», lo emborracha con el vino de Marón y le clava en el ojo una estaca de olivo afilada.",
+        "La huida funciona. El error viene después: al alejarse a remo, Odiseo grita su nombre verdadero, y Polifemo pide a su padre Poseidón un regreso largo, solitario y lleno de dolor. Lo obtiene."
+      ],
+      "whyItMatters": "Es el episodio que hace posible el resto del poema, y el atlas solo puede localizarlo por tradición: dos costas volcánicas rivales, ninguna prueba y un texto que describe una condición moral más que un litoral.",
+      "debate": "Si la descripción precisa de la isla de las cabras refleja conocimiento náutico real, y si alguna de las andanzas puede localizarse siquiera.",
+      "faqs": [
+        {
+          "q": "¿Existe una isla real del cíclope?",
+          "a": "No hay localización establecida. La tradición antigua apunta a Sicilia oriental y la lectura moderna de Bérard a la costa campana; ambas puntúan bajo en este atlas porque se apoyan en tradición e inferencia, no en pruebas."
+        },
+        {
+          "q": "¿Por qué importa decir el nombre?",
+          "a": "Porque convierte una huida en una maldición. Poseidón solo puede actuar contra un hombre con nombre, que es también la razón de que la geografía del poema se desplome en andanza justo después."
+        }
+      ]
+    },
+    "pt": {
+      "title": "O ciclope Polifemo",
+      "summary": "O episódio mais famoso de Homero e um dos menos localizáveis. Odisseu perde seis homens, cega um gigante, escapa sob um carneiro e depois grita o próprio nome — que é o que lhe custa dez anos.",
+      "narrative": [
+        "Odisseu entra numa gruta com doze homens para ver “que espécie de homens” vive ali. O dono é um gigante de um só olho que come dois de uma vez, bloqueia a entrada com uma rocha que nenhum mortal move e pergunta um nome. Odisseu responde “Ninguém”, embebeda-o com o vinho de Máron e lhe crava no olho uma estaca de oliveira afiada.",
+        "A fuga funciona. O erro vem depois: afastando-se a remo, Odisseu grita seu nome verdadeiro, e Polifemo pede ao pai Posêidon um retorno longo, solitário e cheio de dor. E o obtém."
+      ],
+      "whyItMatters": "É o episódio que torna possível o resto do poema, e o atlas só pode localizá-lo por tradição: duas costas vulcânicas rivais, prova nenhuma e um texto que descreve uma condição moral mais que um litoral.",
+      "debate": "Se a descrição precisa da ilha das cabras reflete conhecimento náutico real, e se alguma das andanças pode sequer ser localizada.",
+      "faqs": [
+        {
+          "q": "Existe uma ilha real do ciclope?",
+          "a": "Não há localização estabelecida. A tradição antiga aponta para a Sicília oriental e a leitura moderna de Bérard para a costa campana; ambas pontuam baixo neste atlas porque se apoiam em tradição e inferência, não em provas."
+        },
+        {
+          "q": "Por que dizer o nome importa?",
+          "a": "Porque converte uma fuga em maldição. Posêidon só pode agir contra um homem com nome — que é também a razão de a geografia do poema desabar em andança logo depois."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "slug": "land-of-the-cyclopes",
+  "id": "HOM-P-017",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "speculative",
+  "unlocated": false,
+  "region": "italySicily",
+  "homericNames": [
+    "Κυκλώπων γαῖα"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 9,
+      "lines": "105-566"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "thucydides-6-2",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 6.2",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "berard-1927",
+      "kind": "scholarship",
+      "citation": "Victor Bérard, Les navigations d'Ulysse (4 vols., 1927–1929)",
+      "author": "Victor Bérard",
+      "year": 1927,
+      "url": "https://archive.org/details/lesnavigationsdu04bera"
+    },
+    {
+      "id": "eratosthenes",
+      "kind": "primary_text",
+      "citation": "Eratosthenes, fr. ap. Strabo, Geography 1.2.15",
+      "author": "Eratosthenes",
+      "year": -230
+    },
+    {
+      "id": "strabo-1-2",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 1.2",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "etna-sicily",
+      "identification": "speculative",
+      "modernName": "Riviera dei Ciclopi, Sicily",
+      "country": "IT",
+      "lat": 37.56,
+      "lon": 15.16,
+      "precision": "area",
+      "proponent": "Thucydides 6.2; ancient Sicilian tradition",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 2,
+        "score": 5,
+        "band": "low"
+      },
+      "sources": [
+        "thucydides-6-2",
+        "strabo-1-2",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Eastern Sicily, under Etna",
+          "note": "The oldest identification: Thucydides reports that Cyclopes and Laestrygonians were said to have been Sicily's earliest inhabitants, and the volcanic coast below Etna has carried the association ever since. Nothing excavated bears on it, and the poem's own description — a lawless pastoral people without ships or assemblies — is a portrait of un-civilisation rather than a location."
+        },
+        "es": {
+          "label": "Sicilia oriental, bajo el Etna",
+          "note": "La identificación más antigua: Tucídides recoge que se decía que cíclopes y lestrigones habían sido los primeros habitantes de Sicilia, y la costa volcánica al pie del Etna arrastra la asociación desde entonces. Nada excavado la sostiene, y la descripción del propio poema —un pueblo pastoril sin leyes, sin naves ni asambleas— es un retrato de la no civilización más que una localización."
+        },
+        "pt": {
+          "label": "Sicília oriental, sob o Etna",
+          "note": "A identificação mais antiga: Tucídides registra que se dizia que ciclopes e lestrigões teriam sido os primeiros habitantes da Sicília, e a costa vulcânica ao pé do Etna carrega a associação desde então. Nada escavado a sustenta, e a descrição do próprio poema — um povo pastoril sem leis, sem naus nem assembleias — é um retrato da não civilização mais que uma localização."
+        }
+      }
+    },
+    {
+      "id": "campi-flegrei",
+      "identification": "speculative",
+      "modernName": "Campi Flegrei",
+      "country": "IT",
+      "lat": 40.83,
+      "lon": 14.1,
+      "precision": "area",
+      "proponent": "Victor Bérard (1927–1929)",
+      "era": "modern",
+      "since": 1927,
+      "confidence": {
+        "textual": 1,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 1,
+        "score": 3,
+        "band": "low"
+      },
+      "sources": [
+        "berard-1927",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Campanian coast",
+          "note": "Bérard's systematic reading of the wanderings as a Phoenician sailing route put the Cyclopes on the volcanic coast near Naples. The method is consistent and the conclusion is unverifiable: it explains the poem by assuming the poem records a real itinerary."
+        },
+        "es": {
+          "label": "La costa campana",
+          "note": "La lectura sistemática de Bérard, que entiende las andanzas como una ruta fenicia de navegación, situó a los cíclopes en la costa volcánica cercana a Nápoles. El método es coherente y la conclusión es inverificable: explica el poema dando por supuesto que el poema registra un itinerario real."
+        },
+        "pt": {
+          "label": "A costa campana",
+          "note": "A leitura sistemática de Bérard, que entende as andanças como uma rota fenícia de navegação, situou os ciclopes na costa vulcânica perto de Nápoles. O método é coerente e a conclusão é inverificável: explica o poema supondo que o poema registra um itinerário real."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "cyclops-polyphemus"
+  ],
+  "locales": {
+    "en": {
+      "name": "The land of the Cyclopes",
+      "summary": "Where Odysseus loses six men and blinds Polyphemus. Two traditions place it on volcanic coasts — Sicily and Campania — and the poem places it nowhere in particular, on purpose.",
+      "description": [
+        "Book 9 is the most quoted episode in either poem and the least locatable. The land is described by what it lacks: no ships, no assemblies, no ploughing, no laws. Odysseus reaches it after the Lotus-eaters and leaves it blinded of one enemy and cursed by Poseidon.",
+        "There is a small goat island offshore, described with a sailor's eye — good harbour, no inhabitants, wild goats — which is the one detail that reads like observation. It has been matched to islets off Sicily and off Campania with equal confidence and equal absence of evidence."
+      ],
+      "identificationNote": "Speculative: two identifications with real ancient and modern pedigrees, no archaeology, and a text that describes a moral condition rather than a coastline. The strongest hypothesis reaches 5/12.",
+      "debate": "Whether the wanderings encode any real sailing route at all. Eratosthenes' answer — that you will find where Odysseus wandered when you find the cobbler who sewed the bag of the winds — remains the sharpest statement of the sceptical case."
+    },
+    "es": {
+      "name": "La tierra de los cíclopes",
+      "summary": "Donde Odiseo pierde a seis hombres y ciega a Polifemo. Dos tradiciones la sitúan en costas volcánicas —Sicilia y Campania— y el poema no la sitúa en ninguna parte concreta, a propósito.",
+      "description": [
+        "El canto 9 es el episodio más citado de ambos poemas y el menos localizable. La tierra se describe por lo que le falta: sin naves, sin asambleas, sin arado, sin leyes. Odiseo llega tras los lotófagos y se marcha habiendo cegado a un enemigo y maldito por Poseidón.",
+        "Hay frente a ella una pequeña isla de cabras, descrita con ojo de marino —buen puerto, sin habitantes, cabras salvajes—, que es el único detalle que suena a observación. Se la ha hecho corresponder con islotes de Sicilia y de Campania con igual seguridad e igual falta de pruebas."
+      ],
+      "identificationNote": "Especulativa: dos identificaciones con pedigrí antiguo y moderno reales, ninguna arqueología y un texto que describe una condición moral más que una costa. La hipótesis más fuerte llega a 5/12.",
+      "debate": "Si las andanzas codifican siquiera una ruta náutica real. La respuesta de Eratóstenes —hallarás por dónde anduvo Odiseo cuando halles al zapatero que cosió el odre de los vientos— sigue siendo la formulación más afilada del caso escéptico."
+    },
+    "pt": {
+      "name": "A terra dos ciclopes",
+      "summary": "Onde Odisseu perde seis homens e cega Polifemo. Duas tradições a situam em costas vulcânicas — Sicília e Campânia — e o poema não a situa em parte alguma concreta, de propósito.",
+      "description": [
+        "O canto 9 é o episódio mais citado dos dois poemas e o menos localizável. A terra é descrita pelo que lhe falta: sem naus, sem assembleias, sem arado, sem leis. Odisseu chega depois dos lotófagos e parte tendo cegado um inimigo e amaldiçoado por Posêidon.",
+        "Diante dela há uma pequena ilha de cabras, descrita com olho de marinheiro — bom porto, sem habitantes, cabras selvagens —, que é o único detalhe que soa a observação. Foi associada a ilhotas da Sicília e da Campânia com igual segurança e igual falta de provas."
+      ],
+      "identificationNote": "Especulativa: duas identificações com pedigree antigo e moderno reais, nenhuma arqueologia e um texto que descreve uma condição moral mais que uma costa. A hipótese mais forte chega a 5/12.",
+      "debate": "Se as andanças codificam sequer uma rota náutica real. A resposta de Eratóstenes — descobrirás por onde Odisseu andou quando descobrires o sapateiro que costurou o odre dos ventos — segue sendo a formulação mais afiada do caso cético."
+    }
+  }
+}

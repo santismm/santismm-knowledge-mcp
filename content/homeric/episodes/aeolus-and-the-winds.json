@@ -1,0 +1,131 @@
+{
+  "slug": "aeolus-and-the-winds",
+  "id": "HOM-E-013",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 10,
+  "lines": "1-79",
+  "places": [
+    "aeolia"
+  ],
+  "confidence": {
+    "textual": 1,
+    "archaeological": 0,
+    "scholarly": 1,
+    "geographic": 1,
+    "score": 3,
+    "band": "low"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "thucydides-3-88",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 3.88",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "strabo-6-2",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 6.2",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "theories": [
+    {
+      "id": "aeolian-islands",
+      "identification": "speculative",
+      "place": "aeolia",
+      "proponent": "Thucydides 3.88; Strabo 6.2",
+      "era": "antiquity",
+      "sources": [
+        "thucydides-3-88",
+        "strabo-6-2"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Aeolian islands",
+          "note": "The islands bear the name and antiquity made the link early. Which way the naming ran — poem to islands or islands to poem — is the unresolved question."
+        },
+        "es": {
+          "label": "Las islas Eolias",
+          "note": "Las islas llevan el nombre y la Antigüedad hizo pronto la conexión. En qué dirección corrió la denominación —del poema a las islas o de las islas al poema— es la pregunta sin resolver."
+        },
+        "pt": {
+          "label": "As ilhas Eólias",
+          "note": "As ilhas levam o nome e a Antiguidade fez a ligação cedo. Em que direção correu a denominação — do poema às ilhas ou das ilhas ao poema — é a questão sem resposta."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Aeolus and the bag of winds",
+      "summary": "The cruellest episode in the poem: Ithaca is in sight, the crew open the bag their captain has guarded for nine days, and the winds blow them all the way back.",
+      "narrative": [
+        "Aeolus, keeper of the winds, entertains Odysseus for a month and sends him off with a leather bag containing every wind but the west. Odysseus steers for nine days and nights without sleeping. On the tenth, with the fires of Ithaca visible, he sleeps and the crew — certain the bag holds gold — open it.",
+        "They are blown back to Aeolia. This time Aeolus refuses them: a man so hated by the gods is not to be helped. It is the poem's clearest statement that the return is not a navigational problem."
+      ],
+      "whyItMatters": "It is the geometric centre of the wanderings and the point where the atlas's confidence is lowest: a nine-day sail from an unlocated island brings Ithaca into view, and the poem never says in which direction.",
+      "debate": "Whether the Aeolian islands were named for the Homeric Aeolus or vice versa, and whether the nine-day interval can be used as evidence of distance at all.",
+      "faqs": [
+        {
+          "q": "Where is Aeolia?",
+          "a": "Nowhere established. Ancient tradition associates it with the Aeolian islands north of Sicily, and the poem describes a floating island ringed with bronze, which is not a description of anywhere."
+        },
+        {
+          "q": "Can the nine days be used to measure distance?",
+          "a": "Only if the wanderings are a real itinerary, which is the question. Nine days at typical Bronze Age sailing speeds would cover most of the central Mediterranean."
+        }
+      ]
+    },
+    "es": {
+      "title": "Eolo y el odre de los vientos",
+      "summary": "El episodio más cruel del poema: Ítaca está a la vista, la tripulación abre el odre que su capitán ha custodiado durante nueve días y los vientos los devuelven al principio.",
+      "narrative": [
+        "Eolo, guardián de los vientos, agasaja a Odiseo durante un mes y lo despide con un odre de cuero que contiene todos los vientos salvo el poniente. Odiseo gobierna nueve días con sus noches sin dormir. Al décimo, ya visibles las hogueras de Ítaca, se duerme y la tripulación —convencida de que el odre guarda oro— lo abre.",
+        "Los devuelve el viento a Eolia. Esta vez Eolo los rechaza: a un hombre tan odiado por los dioses no se le ayuda. Es la afirmación más clara del poema de que el regreso no es un problema náutico."
+      ],
+      "whyItMatters": "Es el centro geométrico de las andanzas y el punto donde la confianza del atlas es mínima: nueve días de navegación desde una isla sin localizar ponen Ítaca a la vista, y el poema nunca dice en qué dirección.",
+      "debate": "Si las islas Eolias se llamaron así por el Eolo homérico o al revés, y si el intervalo de nueve días puede usarse siquiera como prueba de distancia.",
+      "faqs": [
+        {
+          "q": "¿Dónde está Eolia?",
+          "a": "En ningún lugar establecido. La tradición antigua la asocia con las islas Eolias al norte de Sicilia, y el poema describe una isla flotante ceñida de bronce, que no es la descripción de ningún sitio."
+        },
+        {
+          "q": "¿Sirven los nueve días para medir distancia?",
+          "a": "Solo si las andanzas son un itinerario real, que es justamente la cuestión. Nueve días a velocidades típicas de la Edad del Bronce cubrirían casi todo el Mediterráneo central."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Éolo e o odre dos ventos",
+      "summary": "O episódio mais cruel do poema: Ítaca está à vista, a tripulação abre o odre que seu capitão guardou por nove dias e os ventos os levam de volta ao começo.",
+      "narrative": [
+        "Éolo, guardião dos ventos, hospeda Odisseu por um mês e o despede com um odre de couro contendo todos os ventos menos o oeste. Odisseu governa nove dias e noites sem dormir. No décimo, já visíveis as fogueiras de Ítaca, adormece e a tripulação — convencida de que o odre guarda ouro — o abre.",
+        "O vento os devolve a Eólia. Desta vez Éolo os rejeita: a um homem tão odiado pelos deuses não se ajuda. É a afirmação mais clara do poema de que o retorno não é um problema náutico."
+      ],
+      "whyItMatters": "É o centro geométrico das andanças e o ponto em que a confiança do atlas é mínima: nove dias de navegação a partir de uma ilha sem localização põem Ítaca à vista, e o poema nunca diz em que direção.",
+      "debate": "Se as ilhas Eólias receberam o nome do Éolo homérico ou o contrário, e se o intervalo de nove dias pode sequer servir de prova de distância.",
+      "faqs": [
+        {
+          "q": "Onde fica Eólia?",
+          "a": "Em nenhum lugar estabelecido. A tradição antiga a associa às ilhas Eólias ao norte da Sicília, e o poema descreve uma ilha flutuante cercada de bronze, o que não é descrição de lugar algum."
+        },
+        {
+          "q": "Os nove dias servem para medir distância?",
+          "a": "Só se as andanças forem um itinerário real, que é exatamente a questão. Nove dias a velocidades típicas da Idade do Bronze cobririam quase todo o Mediterrâneo central."
+        }
+      ]
+    }
+  }
+}

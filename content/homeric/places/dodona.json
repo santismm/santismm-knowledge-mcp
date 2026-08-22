@@ -1,0 +1,129 @@
+{
+  "slug": "dodona",
+  "id": "HOM-P-034",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "mainlandGreece",
+  "homericNames": [
+    "Δωδώνη"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 16,
+      "lines": "233-235"
+    },
+    {
+      "work": "odyssey",
+      "book": 14,
+      "lines": "327-330"
+    },
+    {
+      "work": "odyssey",
+      "book": 19,
+      "lines": "296-299"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "dodona-excavations",
+      "kind": "archaeology",
+      "citation": "Excavations at Dodona, Epirus — sanctuary of Zeus with Bronze Age and early Iron Age material and later oracular installations",
+      "year": 1990
+    },
+    {
+      "id": "herodotus-2-52",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 2.52-57 — the oracle of Dodona and its origins",
+      "author": "Herodotus",
+      "year": -430
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "dodona-site",
+      "identification": "accepted",
+      "modernName": "Dodoni, Epirus",
+      "country": "GR",
+      "lat": 39.5464,
+      "lon": 20.7875,
+      "precision": "site",
+      "proponent": "Continuous identification; excavated from the nineteenth century",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 3,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 12,
+        "band": "high"
+      },
+      "sources": [
+        "dodona-excavations",
+        "herodotus-2-52",
+        "iliad"
+      ],
+      "locales": {
+        "en": {
+          "label": "The sanctuary at Dodona, Epirus",
+          "note": "An excavated sanctuary of Zeus in a mountain valley south of Ioannina, with material reaching back before the archaic oracle and a documented oracular practice. Achilles prays to 'Zeus of Dodona' and Odysseus twice claims to have gone there to consult the oak — the same institution, in the same place."
+        },
+        "es": {
+          "label": "El santuario de Dodona, Epiro",
+          "note": "Un santuario de Zeus excavado en un valle de montaña al sur de Ioánina, con material anterior al oráculo arcaico y una práctica oracular documentada. Aquiles reza al «Zeus de Dodona» y Odiseo afirma dos veces haber ido allí a consultar la encina: la misma institución, en el mismo lugar."
+        },
+        "pt": {
+          "label": "O santuário de Dodona, Epiro",
+          "note": "Um santuário de Zeus escavado num vale de montanha ao sul de Ioânina, com material anterior ao oráculo arcaico e uma prática oracular documentada. Aquiles reza ao “Zeus de Dodona” e Odisseu afirma duas vezes ter ido ali consultar o carvalho — a mesma instituição, no mesmo lugar."
+        }
+      }
+    }
+  ],
+  "episodes": [],
+  "locales": {
+    "en": {
+      "name": "Dodona",
+      "summary": "The oracle of Zeus in the Epirote mountains, and one of the few Homeric institutions we can excavate: the same god, the same oak, the same valley.",
+      "description": [
+        "Achilles prays to Zeus of Dodona in the Iliad, calling on the Selloi who sleep on the ground and do not wash their feet. In the Odyssey, Odysseus twice tells a story in which he goes to Dodona to hear Zeus' will from the oak. The oracle is a normal part of the poems' world, not a marvel.",
+        "The sanctuary was excavated, and the practice of inscribing questions on lead tablets is attested there in later centuries. It is a rare case where a Homeric religious institution has a findable address."
+      ],
+      "identificationNote": "Accepted: a named, excavated sanctuary whose Homeric description matches its documented practice.",
+      "debate": "How far back the oracle goes, and whether the Selloi of the Iliad reflect a real archaic priesthood or an already-antique memory when the poem was composed."
+    },
+    "es": {
+      "name": "Dodona",
+      "summary": "El oráculo de Zeus en las montañas del Epiro y una de las pocas instituciones homéricas que se pueden excavar: el mismo dios, la misma encina, el mismo valle.",
+      "description": [
+        "Aquiles reza al Zeus de Dodona en la Ilíada, invocando a los selos que duermen en el suelo y no se lavan los pies. En la Odisea, Odiseo cuenta dos veces una historia en la que va a Dodona a escuchar de la encina la voluntad de Zeus. El oráculo es una parte normal del mundo de los poemas, no un prodigio.",
+        "El santuario fue excavado, y en siglos posteriores está atestiguada allí la práctica de inscribir preguntas en tablillas de plomo. Es un caso raro en que una institución religiosa homérica tiene una dirección localizable."
+      ],
+      "identificationNote": "Aceptada: un santuario nombrado y excavado cuya descripción homérica coincide con su práctica documentada.",
+      "debate": "Hasta cuándo se remonta el oráculo y si los selos de la Ilíada reflejan un sacerdocio arcaico real o un recuerdo ya antiguo cuando se compuso el poema."
+    },
+    "pt": {
+      "name": "Dodona",
+      "summary": "O oráculo de Zeus nas montanhas do Epiro e uma das poucas instituições homéricas que se podem escavar: o mesmo deus, o mesmo carvalho, o mesmo vale.",
+      "description": [
+        "Aquiles reza ao Zeus de Dodona na Ilíada, invocando os selos que dormem no chão e não lavam os pés. Na Odisseia, Odisseu conta duas vezes uma história em que vai a Dodona ouvir do carvalho a vontade de Zeus. O oráculo é parte normal do mundo dos poemas, não um prodígio.",
+        "O santuário foi escavado, e em séculos posteriores está atestada ali a prática de inscrever perguntas em tabuinhas de chumbo. É um caso raro em que uma instituição religiosa homérica tem endereço localizável."
+      ],
+      "identificationNote": "Aceita: um santuário nomeado e escavado cuja descrição homérica coincide com sua prática documentada.",
+      "debate": "Até quando o oráculo recua, e se os selos da Ilíada refletem um sacerdócio arcaico real ou uma lembrança já antiga quando o poema foi composto."
+    }
+  }
+}

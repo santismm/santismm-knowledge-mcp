@@ -1,0 +1,168 @@
+{
+  "slug": "wooden-horse",
+  "id": "HOM-E-001",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 8,
+  "lines": "499-520",
+  "places": [
+    "troy"
+  ],
+  "confidence": {
+    "textual": 2,
+    "archaeological": 1,
+    "scholarly": 1,
+    "geographic": 3,
+    "score": 7,
+    "band": "medium"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 8.499–520",
+      "author": "Homer"
+    },
+    {
+      "id": "iliupersis",
+      "kind": "primary_text",
+      "citation": "Iliou Persis and Little Iliad (Epic Cycle)",
+      "year": -600
+    },
+    {
+      "id": "blegen-1958",
+      "kind": "archaeology",
+      "citation": "Carl W. Blegen et al., Troy: Excavations Conducted by the University of Cincinnati 1932–1938",
+      "author": "Carl W. Blegen",
+      "year": 1958
+    },
+    {
+      "id": "korfmann",
+      "kind": "archaeology",
+      "citation": "Manfred Korfmann, Troia/Wilusa excavation reports, Studia Troica (1988–2005)",
+      "author": "Manfred Korfmann",
+      "year": 2005
+    },
+    {
+      "id": "latacz-2004",
+      "kind": "scholarship",
+      "citation": "Joachim Latacz, Troy and Homer: Towards a Solution of an Old Mystery (2004)",
+      "author": "Joachim Latacz",
+      "year": 2004
+    }
+  ],
+  "theories": [
+    {
+      "id": "siege-engine",
+      "identification": "speculative",
+      "place": "troy",
+      "era": "modern",
+      "sources": [
+        "iliupersis",
+        "latacz-2004"
+      ],
+      "locales": {
+        "en": {
+          "label": "The horse as a siege engine or a ship",
+          "note": "The suggestion that the horse rationalises a battering ram under a hide roof, or a ship with a horse figurehead. It is old, popular and unfalsifiable: nothing in the archaeology of Troy speaks to it either way."
+        },
+        "es": {
+          "label": "El caballo como máquina de asedio o como nave",
+          "note": "La sugerencia de que el caballo racionaliza un ariete cubierto de pieles, o una nave con mascarón de caballo. Es antigua, popular e infalsable: nada en la arqueología de Troya se pronuncia al respecto."
+        },
+        "pt": {
+          "label": "O cavalo como máquina de cerco ou navio",
+          "note": "A sugestão de que o cavalo racionaliza um aríete coberto de peles, ou um navio com carranca de cavalo. É antiga, popular e infalsificável: nada na arqueologia de Troia se pronuncia a respeito."
+        }
+      }
+    },
+    {
+      "id": "troy-viia-destruction",
+      "identification": "plausible",
+      "place": "troy",
+      "proponent": "Carl W. Blegen (1958); Manfred Korfmann (1988–2005)",
+      "era": "modern",
+      "sources": [
+        "blegen-1958",
+        "korfmann"
+      ],
+      "locales": {
+        "en": {
+          "label": "The destruction layer of Troy VIIa",
+          "note": "Troy VIIa ends in fire and violence in the 12th century BCE, with signs of crowding and hasty storage inside the walls. That a city was destroyed is evidence; that a coalition led by a Mycenaean high king destroyed it is inference."
+        },
+        "es": {
+          "label": "El estrato de destrucción de Troya VIIa",
+          "note": "Troya VIIa acaba en fuego y violencia en el siglo XII a.C., con indicios de hacinamiento y almacenamiento apresurado intramuros. Que una ciudad fue destruida es una prueba; que la destruyera una coalición dirigida por un rey micénico es una inferencia."
+        },
+        "pt": {
+          "label": "A camada de destruição de Troia VIIa",
+          "note": "Troia VIIa termina em fogo e violência no século XII a.C., com sinais de aglomeração e armazenamento apressado intramuros. Que uma cidade foi destruída é prova; que uma coalizão liderada por um rei micênico a destruiu é inferência."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "The wooden horse and the fall of Troy",
+      "summary": "The best-known episode of the war is not narrated in either poem: the Odyssey has a bard sing it in twenty lines. Its location is the most secure in the atlas, and its historicity the least.",
+      "narrative": [
+        "In Book 8 of the Odyssey, at the Phaeacian court, Demodocus sings of the horse standing on the Trojan acropolis, of the debate among the Trojans about what to do with it, and of the Greeks pouring out to sack the city. Odysseus, still unnamed among his hosts, weeps and gives himself away.",
+        "The full narrative belonged to other poems of the Epic Cycle — the Little Iliad and the Iliou Persis — which survive only in summary. The Iliad ends with Hector's funeral; the sack is always told at a slant."
+      ],
+      "whyItMatters": "It anchors the war to a specific acropolis, so the geography is not in doubt. What it cannot do is date the event or confirm it: the episode's confidence score is limited by the text (a song within a poem) and by the archaeology (a destruction layer that fits a sack, and many other things).",
+      "debate": "Whether the horse is a memory, a metaphor, a rationalised siege engine, or a folktale motif attached to a real siege. The atlas scores the episode 7/12 — high geographic confidence, low scholarly agreement about what actually happened.",
+      "faqs": [
+        {
+          "q": "Is the Trojan horse in the Iliad?",
+          "a": "No. The Iliad ends before the sack. The horse appears in the Odyssey as a song performed by the bard Demodocus (8.499–520) and in Menelaus' and Odysseus' recollections (4.271–289; 11.523–532), and it was narrated at length in the lost poems of the Epic Cycle."
+        },
+        {
+          "q": "Does archaeology confirm the sack of Troy?",
+          "a": "Archaeology confirms that Troy VIIa was destroyed by fire and violence in the 12th century BCE. It cannot confirm who destroyed it or why, and no artefact links that destruction to the events the poems describe."
+        }
+      ]
+    },
+    "es": {
+      "title": "El caballo de madera y la caída de Troya",
+      "summary": "El episodio más conocido de la guerra no se narra en ninguno de los dos poemas: la Odisea hace que un aedo lo cante en veinte versos. Su localización es la más segura del atlas; su historicidad, la menos.",
+      "narrative": [
+        "En el canto 8 de la Odisea, en la corte feacia, Demódoco canta el caballo erguido en la acrópolis troyana, la discusión de los troyanos sobre qué hacer con él y a los griegos saliendo en tromba a saquear la ciudad. Odiseo, aún anónimo entre sus anfitriones, llora y se delata.",
+        "La narración completa pertenecía a otros poemas del Ciclo Épico —la Pequeña Ilíada y la Iliupersis—, que solo se conservan en resumen. La Ilíada termina con el funeral de Héctor; el saqueo siempre se cuenta de refilón."
+      ],
+      "whyItMatters": "Ancla la guerra a una acrópolis concreta, de modo que la geografía no está en duda. Lo que no puede hacer es datar el suceso ni confirmarlo: la puntuación del episodio la limitan el texto (un canto dentro de un poema) y la arqueología (un estrato de destrucción compatible con un saqueo y con muchas otras cosas).",
+      "debate": "Si el caballo es un recuerdo, una metáfora, una máquina de asedio racionalizada o un motivo folclórico adherido a un asedio real. El atlas puntúa el episodio 7/12: confianza geográfica alta, acuerdo académico bajo sobre qué ocurrió realmente.",
+      "faqs": [
+        {
+          "q": "¿Aparece el caballo de Troya en la Ilíada?",
+          "a": "No. La Ilíada termina antes del saqueo. El caballo aparece en la Odisea como canto del aedo Demódoco (8.499–520) y en los recuerdos de Menelao y Odiseo (4.271–289; 11.523–532), y se narraba con detalle en los poemas perdidos del Ciclo Épico."
+        },
+        {
+          "q": "¿Confirma la arqueología el saqueo de Troya?",
+          "a": "La arqueología confirma que Troya VIIa fue destruida por el fuego y la violencia en el siglo XII a.C. No puede confirmar quién la destruyó ni por qué, y ningún objeto vincula esa destrucción con los hechos que narran los poemas."
+        }
+      ]
+    },
+    "pt": {
+      "title": "O cavalo de madeira e a queda de Troia",
+      "summary": "O episódio mais conhecido da guerra não é narrado em nenhum dos dois poemas: a Odisseia faz um aedo cantá-lo em vinte versos. Sua localização é a mais segura do atlas; sua historicidade, a menos.",
+      "narrative": [
+        "No canto 8 da Odisseia, na corte feácia, Demódoco canta o cavalo erguido na acrópole troiana, a discussão dos troianos sobre o que fazer com ele e os gregos saindo em massa para saquear a cidade. Odisseu, ainda anônimo entre seus anfitriões, chora e se entrega.",
+        "A narrativa completa pertencia a outros poemas do Ciclo Épico — a Pequena Ilíada e a Iliupersis —, que só sobrevivem em resumo. A Ilíada termina com o funeral de Heitor; o saque é sempre contado de viés."
+      ],
+      "whyItMatters": "Ancora a guerra a uma acrópole concreta, de modo que a geografia não está em dúvida. O que não pode fazer é datar o acontecimento nem confirmá-lo: a pontuação do episódio é limitada pelo texto (um canto dentro de um poema) e pela arqueologia (uma camada de destruição compatível com um saque e com muitas outras coisas).",
+      "debate": "Se o cavalo é uma lembrança, uma metáfora, uma máquina de cerco racionalizada ou um motivo folclórico grudado a um cerco real. O atlas pontua o episódio em 7/12: confiança geográfica alta, acordo acadêmico baixo sobre o que de fato ocorreu.",
+      "faqs": [
+        {
+          "q": "O cavalo de Troia aparece na Ilíada?",
+          "a": "Não. A Ilíada termina antes do saque. O cavalo aparece na Odisseia como canto do aedo Demódoco (8.499–520) e nas lembranças de Menelau e Odisseu (4.271–289; 11.523–532), e era narrado em detalhe nos poemas perdidos do Ciclo Épico."
+        },
+        {
+          "q": "A arqueologia confirma o saque de Troia?",
+          "a": "A arqueologia confirma que Troia VIIa foi destruída por fogo e violência no século XII a.C. Não pode confirmar quem a destruiu nem por quê, e nenhum objeto liga essa destruição aos fatos que os poemas narram."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "slug": "ogygia",
+  "id": "HOM-P-003",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "mythical",
+  "unlocated": false,
+  "region": "unlocated",
+  "homericNames": [
+    "Ὠγυγίη"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 1,
+      "lines": "48-59"
+    },
+    {
+      "work": "odyssey",
+      "book": 5,
+      "lines": "55-75"
+    },
+    {
+      "work": "odyssey",
+      "book": 7,
+      "lines": "244-266"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 1.48–59; 5.55–75; 7.244–266",
+      "author": "Homer"
+    },
+    {
+      "id": "plutarch-defacie",
+      "kind": "primary_text",
+      "citation": "Plutarch, De facie quae in orbe lunae apparet 941a",
+      "author": "Plutarch",
+      "year": 100
+    },
+    {
+      "id": "gozo-tradition",
+      "kind": "tradition",
+      "citation": "Maltese tradition identifying Gozo (Għawdex) with Calypso’s island"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "gozo",
+      "identification": "speculative",
+      "modernName": "Gozo (Għawdex)",
+      "country": "MT",
+      "lat": 36.04,
+      "lon": 14.25,
+      "precision": "island",
+      "era": "modern",
+      "confidence": {
+        "textual": 1,
+        "archaeological": 0,
+        "scholarly": 0,
+        "geographic": 1,
+        "score": 2,
+        "band": "minimal"
+      },
+      "sources": [
+        "gozo-tradition",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Gozo (local tradition)",
+          "note": "The best-known identification and the weakest kind of evidence in this atlas: a tradition, transmitted locally and repeated by guidebooks, with no ancient text behind it and nothing excavated to support it. It is plotted because the atlas records what is claimed, at the confidence the claim earns — 2 out of 12."
+        },
+        "es": {
+          "label": "Gozo (tradición local)",
+          "note": "La identificación más conocida y el tipo de prueba más débil de este atlas: una tradición transmitida localmente y repetida por las guías, sin texto antiguo detrás ni nada excavado que la sostenga. Se dibuja porque el atlas registra lo que se afirma, con la confianza que la afirmación merece: 2 sobre 12."
+        },
+        "pt": {
+          "label": "Gozo (tradição local)",
+          "note": "A identificação mais conhecida e o tipo de prova mais fraco deste atlas: uma tradição transmitida localmente e repetida pelos guias, sem texto antigo por trás nem nada escavado que a sustente. É desenhada porque o atlas registra o que se afirma, com a confiança que a afirmação merece: 2 de 12."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "calypso-ogygia"
+  ],
+  "locales": {
+    "en": {
+      "name": "Ogygia",
+      "summary": "Calypso's island, where Odysseus spends seven of his ten years away. The Odyssey places it deliberately nowhere — 'the navel of the sea' — which is exactly why identifications of it are so revealing.",
+      "description": [
+        "Ogygia is the clearest case in the poems of a place that resists mapping by design. Athena calls it the navel of the sea; it is described as wooded, spring-fed and remote, and no route to it is given — Odysseus arrives clinging to wreckage and leaves on a raft he builds himself, sailing seventeen days to Scheria with the Bear on his left.",
+        "Only that last detail is navigational, and it points broadly west or north-west from wherever Scheria is. Everything else is atmosphere.",
+        "Antiquity already speculated: Plutarch, writing an essay on the face of the moon, places an 'Ogygia' five days' sail west of Britain — a literary borrowing rather than a location. The modern identification with Gozo comes from Maltese tradition and has no ancient authority."
+      ],
+      "identificationNote": "Mythical: the poem places it outside the mappable world, and no external tradition overrides that. The class describes the poem's own geography; the Gozo hypothesis is recorded and plotted separately, at its own confidence of 2/12.",
+      "debate": "The real question about Ogygia is not where it is but what kind of place it is. Readings that map it — Atlantic, Maltese, Adriatic — all require treating a deliberately unlocated island as an under-specified one. This atlas keeps the two apart: the place stays mythical, the claims about it are listed with their sources."
+    },
+    "es": {
+      "name": "Ogigia",
+      "summary": "La isla de Calipso, donde Odiseo pasa siete de sus diez años de ausencia. La Odisea la sitúa deliberadamente en ninguna parte —«el ombligo del mar»— y por eso mismo sus identificaciones resultan tan reveladoras.",
+      "description": [
+        "Ogigia es el caso más claro en los poemas de un lugar que resiste al mapa por diseño. Atenea la llama el ombligo del mar; se la describe boscosa, con manantiales y remota, y no se da ninguna ruta hacia ella: Odiseo llega agarrado a unos restos y se marcha en una balsa que construye él mismo, navegando diecisiete días hasta Esqueria con la Osa a su izquierda.",
+        "Solo ese último detalle es náutico, y apunta en términos amplios al oeste o al noroeste de donde quiera que esté Esqueria. Todo lo demás es atmósfera.",
+        "La Antigüedad ya especulaba: Plutarco, en un ensayo sobre la cara de la luna, sitúa una «Ogigia» a cinco días de navegación al oeste de Britania, un préstamo literario más que una localización. La identificación moderna con Gozo procede de la tradición maltesa y carece de autoridad antigua."
+      ],
+      "identificationNote": "Mítica: el poema la sitúa fuera del mundo cartografiable y ninguna tradición externa anula eso. La clase describe la geografía del propio poema; la hipótesis de Gozo se registra y se dibuja aparte, con su propia confianza de 2/12.",
+      "debate": "La pregunta real sobre Ogigia no es dónde está, sino qué clase de lugar es. Las lecturas que la cartografían —atlántica, maltesa, adriática— exigen tratar una isla deliberadamente no localizada como si fuera una isla mal especificada. Este atlas mantiene ambas cosas separadas: el lugar sigue siendo mítico, y las afirmaciones sobre él se listan con sus fuentes."
+    },
+    "pt": {
+      "name": "Ogígia",
+      "summary": "A ilha de Calipso, onde Odisseu passa sete de seus dez anos de ausência. A Odisseia a situa deliberadamente em lugar nenhum — “o umbigo do mar” — e é justamente por isso que suas identificações são tão reveladoras.",
+      "description": [
+        "Ogígia é o caso mais claro nos poemas de um lugar que resiste ao mapa por projeto. Atena a chama de umbigo do mar; é descrita como arborizada, com nascentes e remota, e nenhuma rota até ela é dada: Odisseu chega agarrado a destroços e parte numa jangada que constrói sozinho, navegando dezessete dias até Esquéria com a Ursa à sua esquerda.",
+        "Só esse último detalhe é náutico, e aponta em termos amplos para oeste ou noroeste de onde quer que esteja Esquéria. Todo o resto é atmosfera.",
+        "A Antiguidade já especulava: Plutarco, num ensaio sobre a face da lua, situa uma “Ogígia” a cinco dias de navegação a oeste da Britânia — um empréstimo literário, não uma localização. A identificação moderna com Gozo vem da tradição maltesa e não tem autoridade antiga."
+      ],
+      "identificationNote": "Mítica: o poema a situa fora do mundo mapeável, e nenhuma tradição externa anula isso. A classe descreve a geografia do próprio poema; a hipótese de Gozo é registrada e desenhada à parte, com sua própria confiança de 2/12.",
+      "debate": "A pergunta real sobre Ogígia não é onde ela está, mas que tipo de lugar é. As leituras que a mapeiam — atlântica, maltesa, adriática — exigem tratar uma ilha deliberadamente não localizada como se fosse mal especificada. Este atlas mantém as duas coisas separadas: o lugar permanece mítico, e as afirmações sobre ele são listadas com suas fontes."
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "slug": "telemachy",
+  "id": "HOM-R-002",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 1–4 and 15",
+      "author": "Homer"
+    },
+    {
+      "id": "blegen-pylos",
+      "kind": "archaeology",
+      "citation": "Carl W. Blegen and Marion Rawson, The Palace of Nestor at Pylos in Western Messenia (Princeton, 1966)",
+      "author": "Carl W. Blegen",
+      "year": 1966
+    },
+    {
+      "id": "menelaion",
+      "kind": "archaeology",
+      "citation": "Excavations at the Menelaion, Therapne — Mycenaean mansions and an archaic sanctuary",
+      "year": 1973
+    },
+    {
+      "id": "strabo-10",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 10.2",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "variants": [
+    {
+      "id": "mainland-journey",
+      "identification": "plausible",
+      "proponent": "The poem's own itinerary",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 2,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 11,
+        "band": "high"
+      },
+      "stops": [
+        {
+          "order": 1,
+          "place": "ithaca",
+          "hypothesis": "ithaki"
+        },
+        {
+          "order": 2,
+          "place": "pylos",
+          "hypothesis": "ano-englianos",
+          "episode": "telemachus-at-pylos"
+        },
+        {
+          "order": 3,
+          "place": "sparta",
+          "hypothesis": "eurotas-valley",
+          "episode": "telemachus-in-sparta"
+        },
+        {
+          "order": 4,
+          "place": "asteris",
+          "hypothesis": "daskalio",
+          "episode": "suitors-ambush-at-asteris"
+        },
+        {
+          "order": 5,
+          "place": "ithaca",
+          "hypothesis": "ithaki",
+          "episode": "return-to-ithaca"
+        }
+      ],
+      "sources": [
+        "blegen-pylos",
+        "menelaion",
+        "strabo-10",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Ithaca — Pylos — Sparta — Ithaca",
+          "note": "The one Homeric itinerary that can be walked and sailed today. Every stop but the ambush islet is a real, agreed place, and two of them are excavated palatial sites. It is the highest-scoring route in the atlas by a wide margin."
+        },
+        "es": {
+          "label": "Ítaca — Pilos — Esparta — Ítaca",
+          "note": "El único itinerario homérico que hoy puede recorrerse a pie y en barco. Todas las escalas salvo el islote de la emboscada son lugares reales y acordados, y dos de ellas son yacimientos palaciales excavados. Es, con diferencia, la ruta mejor puntuada del atlas."
+        },
+        "pt": {
+          "label": "Ítaca — Pilos — Esparta — Ítaca",
+          "note": "O único itinerário homérico que hoje pode ser percorrido a pé e de barco. Todas as escalas, exceto o ilhéu da emboscada, são lugares reais e consensuais, e duas delas são sítios palacianos escavados. É, de longe, a rota mais bem pontuada do atlas."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "name": "The Telemachy",
+      "summary": "A young man's journey from Ithaca to Pylos and Sparta and back, in search of news of his father. It is the Odyssey's other voyage — and the only one the atlas can plot with confidence throughout.",
+      "description": [
+        "Athena sends Telemachus to ask Nestor and Menelaus what became of Odysseus. He sails to Pylos, is received and sent on by chariot to Sparta, hears Menelaus' account of Proteus and Egypt, and returns by sea while the suitors wait in ambush.",
+        "Everything about the journey is ordinary: a ship borrowed, a crew of volunteers, hospitality, gifts, two nights of talk. There is no monster and no god that a Greek audience would have found remarkable.",
+        "That ordinariness is why it matters here. Placed beside the nostos, it shows what the atlas's confidence looks like when the poem stays inside the world its audience knew."
+      ],
+      "debate": "Almost nothing about the route. What is argued is the ambush islet of Asteris, which no map has produced, and whether Menelaus' palace lies undiscovered in the Eurotas valley."
+    },
+    "es": {
+      "name": "La Telemaquia",
+      "summary": "El viaje de un joven desde Ítaca a Pilos y Esparta y de vuelta, en busca de noticias de su padre. Es el otro viaje de la Odisea y el único que el atlas puede dibujar con confianza de principio a fin.",
+      "description": [
+        "Atenea envía a Telémaco a preguntar a Néstor y a Menelao qué fue de Odiseo. Navega a Pilos, lo reciben y lo envían en carro a Esparta, escucha el relato de Menelao sobre Proteo y Egipto y regresa por mar mientras los pretendientes acechan.",
+        "Todo en el viaje es ordinario: una nave prestada, una tripulación de voluntarios, hospitalidad, regalos, dos noches de conversación. No hay monstruo ni dios que a un auditorio griego le resultara notable.",
+        "Esa normalidad es lo que aquí importa. Junto al nostos, muestra qué aspecto tiene la confianza del atlas cuando el poema se queda dentro del mundo que su público conocía."
+      ],
+      "debate": "Casi nada sobre la ruta. Lo que se discute es el islote de la emboscada, Asteris, que ningún mapa ha producido, y si el palacio de Menelao yace sin descubrir en el valle del Eurotas."
+    },
+    "pt": {
+      "name": "A Telemaquia",
+      "summary": "A viagem de um jovem de Ítaca a Pilos e Esparta e de volta, em busca de notícias do pai. É a outra viagem da Odisseia — e a única que o atlas pode desenhar com confiança do início ao fim.",
+      "description": [
+        "Atena envia Telêmaco a perguntar a Nestor e a Menelau o que foi feito de Odisseu. Ele navega até Pilos, é recebido e enviado de carro a Esparta, ouve o relato de Menelau sobre Proteu e o Egito e volta por mar enquanto os pretendentes espreitam.",
+        "Tudo na viagem é ordinário: uma nau emprestada, uma tripulação de voluntários, hospitalidade, presentes, duas noites de conversa. Não há monstro nem deus que um auditório grego achasse notável.",
+        "Essa normalidade é o que importa aqui. Ao lado do nostos, mostra a aparência da confiança do atlas quando o poema fica dentro do mundo que seu público conhecia."
+      ],
+      "debate": "Quase nada sobre a rota. O que se discute é o ilhéu da emboscada, Astéris, que nenhum mapa produziu, e se o palácio de Menelau jaz por descobrir no vale do Eurotas."
+    }
+  }
+}

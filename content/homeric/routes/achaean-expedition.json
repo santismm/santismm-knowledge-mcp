@@ -1,0 +1,132 @@
+{
+  "slug": "achaean-expedition",
+  "id": "HOM-R-003",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "iliad",
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad 2.484-760 (the Catalogue of Ships)",
+      "author": "Homer"
+    },
+    {
+      "id": "thucydides-1-9",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 1.9-11",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "hope-simpson",
+      "kind": "scholarship",
+      "citation": "Richard Hope Simpson and John F. Lazenby, The Catalogue of the Ships in Homer's Iliad (Oxford, 1970)",
+      "author": "Richard Hope Simpson",
+      "year": 1970
+    },
+    {
+      "id": "korfmann",
+      "kind": "archaeology",
+      "citation": "Manfred Korfmann, Troia/Wilusa excavation reports, Studia Troica (1988–2005)",
+      "author": "Manfred Korfmann",
+      "year": 2005
+    }
+  ],
+  "variants": [
+    {
+      "id": "aulis-to-troy",
+      "identification": "plausible",
+      "proponent": "The Catalogue of Ships and the Iliad's own assumptions",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 2,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 11,
+        "band": "high"
+      },
+      "stops": [
+        {
+          "order": 1,
+          "place": "mycenae",
+          "hypothesis": "mycenae-citadel",
+          "episode": "catalogue-of-ships"
+        },
+        {
+          "order": 2,
+          "place": "aulis",
+          "hypothesis": "aulis-bay",
+          "episode": "catalogue-of-ships"
+        },
+        {
+          "order": 3,
+          "place": "tenedos",
+          "hypothesis": "bozcaada"
+        },
+        {
+          "order": 4,
+          "place": "troy",
+          "hypothesis": "hisarlik",
+          "episode": "the-achaean-camp"
+        },
+        {
+          "order": 5,
+          "place": "chryse",
+          "hypothesis": "southern-troad",
+          "episode": "chryse-and-the-plague"
+        }
+      ],
+      "sources": [
+        "hope-simpson",
+        "thucydides-1-9",
+        "korfmann",
+        "iliad"
+      ],
+      "locales": {
+        "en": {
+          "label": "Muster at Aulis, crossing to the Troad",
+          "note": "The outward journey the Iliad assumes rather than narrates: contingents gather at Aulis, cross the Aegean, and camp on the Troad shore. Every stop is an accepted or plausible place, which makes this the best-anchored route in the atlas after the Telemachy."
+        },
+        "es": {
+          "label": "Concentración en Áulide y travesía a la Tróade",
+          "note": "El viaje de ida que la Ilíada da por supuesto en vez de narrar: los contingentes se reúnen en Áulide, cruzan el Egeo y acampan en la costa de la Tróade. Todas las escalas son lugares aceptados o plausibles, lo que convierte a esta en la ruta mejor anclada del atlas después de la Telemaquia."
+        },
+        "pt": {
+          "label": "Concentração em Áulis e travessia à Trôade",
+          "note": "A viagem de ida que a Ilíada pressupõe em vez de narrar: os contingentes se reúnem em Áulis, cruzam o Egeu e acampam na costa da Trôade. Todas as escalas são lugares aceitos ou plausíveis, o que faz desta a rota mais bem ancorada do atlas depois da Telemaquia."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "name": "The Achaean expedition",
+      "summary": "How the army got there. The Iliad begins in the tenth year and takes the journey for granted, so this route is assembled from the Catalogue, from Aulis and from the camp on the shore.",
+      "description": [
+        "The Catalogue of Ships names where the contingents came from; Odysseus' speech in Book 2 remembers the omen at Aulis; the camp on the Troad shore is the poem's second setting. Between them they describe an expedition without ever narrating its voyage.",
+        "Thucydides read the same material as evidence of scale and logistics — how a force that size could feed itself, and why the siege took as long as it did. He was doing, in the fifth century BCE, what this atlas does: treating the poem as testimony to be weighed rather than believed."
+      ],
+      "debate": "Whether a coalition expedition of this scale happened at all. The route's stops are secure; the campaign they describe is exactly what the archaeology cannot confirm."
+    },
+    "es": {
+      "name": "La expedición aquea",
+      "summary": "Cómo llegó allí el ejército. La Ilíada empieza en el décimo año y da el viaje por supuesto, así que esta ruta se arma con el Catálogo, con Áulide y con el campamento de la playa.",
+      "description": [
+        "El Catálogo de las Naves nombra de dónde vinieron los contingentes; el discurso de Odiseo en el canto 2 recuerda el prodigio de Áulide; el campamento en la costa de la Tróade es el segundo escenario del poema. Entre los tres describen una expedición sin narrar nunca su travesía.",
+        "Tucídides leyó ese mismo material como prueba de escala y logística: cómo podía alimentarse una fuerza así y por qué el asedio duró lo que duró. Hacía, en el siglo V a.C., lo que hace este atlas: tratar el poema como testimonio que se pondera, no que se cree."
+      ],
+      "debate": "Si llegó a existir una expedición de coalición de esa escala. Las escalas de la ruta son seguras; la campaña que describen es justo lo que la arqueología no puede confirmar."
+    },
+    "pt": {
+      "name": "A expedição aqueia",
+      "summary": "Como o exército chegou lá. A Ilíada começa no décimo ano e dá a viagem como certa, então esta rota é montada a partir do Catálogo, de Áulis e do acampamento na praia.",
+      "description": [
+        "O Catálogo das Naus nomeia de onde vieram os contingentes; o discurso de Odisseu no canto 2 lembra o prodígio de Áulis; o acampamento na costa da Trôade é o segundo cenário do poema. Entre os três descrevem uma expedição sem nunca narrar sua travessia.",
+        "Tucídides leu esse mesmo material como prova de escala e logística: como uma força desse tamanho podia se alimentar e por que o cerco durou o que durou. Fazia, no século V a.C., o que este atlas faz: tratar o poema como testemunho a ser ponderado, não crido."
+      ],
+      "debate": "Se chegou a existir uma expedição de coalizão dessa escala. As escalas da rota são seguras; a campanha que descrevem é exatamente o que a arqueologia não pode confirmar."
+    }
+  }
+}

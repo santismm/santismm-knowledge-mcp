@@ -1,0 +1,131 @@
+{
+  "slug": "circe-on-aeaea",
+  "id": "HOM-E-015",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 10,
+  "lines": "133-574",
+  "places": [
+    "aeaea"
+  ],
+  "confidence": {
+    "textual": 2,
+    "archaeological": 0,
+    "scholarly": 1,
+    "geographic": 2,
+    "score": 5,
+    "band": "low"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-5-3",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 5.3",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "virgil-aeneid-7",
+      "kind": "primary_text",
+      "citation": "Virgil, Aeneid 7.10-24 — the Circean headland",
+      "author": "Virgil",
+      "year": -19
+    }
+  ],
+  "theories": [
+    {
+      "id": "circeo",
+      "identification": "speculative",
+      "place": "aeaea",
+      "proponent": "Strabo, Geography 5.3; Virgil, Aeneid 7",
+      "era": "antiquity",
+      "sources": [
+        "strabo-5-3",
+        "virgil-aeneid-7"
+      ],
+      "locales": {
+        "en": {
+          "label": "Monte Circeo",
+          "note": "An ancient identification with a distinctive landform behind it — a promontory that looks like an island from the sea — and nothing excavated."
+        },
+        "es": {
+          "label": "Monte Circeo",
+          "note": "Una identificación antigua con un accidente característico detrás —un promontorio que desde el mar parece una isla— y nada excavado."
+        },
+        "pt": {
+          "label": "Monte Circeo",
+          "note": "Uma identificação antiga com um acidente característico por trás — um promontório que do mar parece uma ilha — e nada escavado."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Circe on Aeaea",
+      "summary": "A year on an island with a goddess who turns men into pigs, and the only host in the wanderings who sends Odysseus on with instructions instead of injuries.",
+      "narrative": [
+        "Half the crew are turned into swine; Odysseus, protected by the herb moly, forces Circe to undo it. They stay a year. When the men finally ask to leave, Circe tells Odysseus he must first go to the house of Hades and consult Tiresias.",
+        "On the return from the dead she briefs him again: the Sirens, the choice between the Wandering Rocks and Scylla, the cattle of the Sun. Almost everything the rest of the voyage knows about itself comes from this island."
+      ],
+      "whyItMatters": "It is the hinge of the wanderings' narrative and the source of every subsequent 'route'. Locating it would anchor the second half of the voyage; the identification is a Roman tradition attached to a promontory.",
+      "debate": "The poem calls Aeaea the place 'where Dawn has her dwelling', an eastward marker that sits badly with the western identification. Whether that is a survival from an older version of the story is genuinely argued.",
+      "faqs": [
+        {
+          "q": "Where is Aeaea?",
+          "a": "Roman tradition placed it at Monte Circeo in Latium, which still carries Circe's name. The atlas classes it speculative at 5/12."
+        },
+        {
+          "q": "Why does Circe matter for the geography?",
+          "a": "Because she supplies the sailing directions. Every later stop is described before it is reached, which is why the wanderings read like an itinerary even though the poem never gives a bearing."
+        }
+      ]
+    },
+    "es": {
+      "title": "Circe en Eea",
+      "summary": "Un año en una isla con una diosa que convierte a los hombres en cerdos, y la única anfitriona de las andanzas que despide a Odiseo con instrucciones en vez de heridas.",
+      "narrative": [
+        "La mitad de la tripulación es convertida en cerdos; Odiseo, protegido por la hierba moly, obliga a Circe a deshacerlo. Se quedan un año. Cuando por fin los hombres piden marcharse, Circe le dice que antes debe ir a la morada de Hades a consultar a Tiresias.",
+        "Al volver de entre los muertos, ella lo instruye de nuevo: las sirenas, la elección entre las rocas errantes y Escila, las vacas del Sol. Casi todo lo que el resto del viaje sabe de sí mismo sale de esta isla."
+      ],
+      "whyItMatters": "Es la bisagra narrativa de las andanzas y la fuente de toda «ruta» posterior. Localizarla anclaría la segunda mitad del viaje; la identificación es una tradición romana adherida a un promontorio.",
+      "debate": "El poema llama a Eea el lugar «donde la Aurora tiene su morada», una marca oriental que casa mal con la identificación occidental. Si eso es una supervivencia de una versión más antigua del relato se discute de verdad.",
+      "faqs": [
+        {
+          "q": "¿Dónde está Eea?",
+          "a": "La tradición romana la situó en el monte Circeo, en el Lacio, que aún lleva el nombre de Circe. El atlas la clasifica como especulativa, con 5/12."
+        },
+        {
+          "q": "¿Por qué importa Circe para la geografía?",
+          "a": "Porque es ella quien da las indicaciones náuticas. Cada escala posterior se describe antes de alcanzarse, y por eso las andanzas se leen como un itinerario aunque el poema nunca dé un rumbo."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Circe em Eeia",
+      "summary": "Um ano numa ilha com uma deusa que transforma homens em porcos, e a única anfitriã das andanças que despede Odisseu com instruções em vez de ferimentos.",
+      "narrative": [
+        "Metade da tripulação é transformada em porcos; Odisseu, protegido pela erva moly, obriga Circe a desfazer o feitiço. Ficam um ano. Quando os homens enfim pedem para partir, Circe lhe diz que antes precisa ir à morada de Hades consultar Tirésias.",
+        "Ao voltar dos mortos, ela o instrui de novo: as sereias, a escolha entre as rochas errantes e Cila, o gado do Sol. Quase tudo o que o resto da viagem sabe sobre si mesma sai desta ilha."
+      ],
+      "whyItMatters": "É a dobradiça narrativa das andanças e a fonte de toda “rota” posterior. Localizá-la ancoraria a segunda metade da viagem; a identificação é uma tradição romana ligada a um promontório.",
+      "debate": "O poema chama Eeia de lugar “onde a Aurora tem sua morada”, uma marca oriental que casa mal com a identificação ocidental. Se isso é sobrevivência de uma versão mais antiga do relato é discutido de verdade.",
+      "faqs": [
+        {
+          "q": "Onde fica Eeia?",
+          "a": "A tradição romana a situou no monte Circeo, no Lácio, que ainda leva o nome de Circe. O atlas a classifica como especulativa, com 5/12."
+        },
+        {
+          "q": "Por que Circe importa para a geografia?",
+          "a": "Porque é ela quem dá as indicações náuticas. Cada escala posterior é descrita antes de ser alcançada, e por isso as andanças se leem como itinerário embora o poema nunca dê um rumo."
+        }
+      ]
+    }
+  }
+}

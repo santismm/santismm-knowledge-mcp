@@ -1,0 +1,157 @@
+{
+  "slug": "calypso-ogygia",
+  "id": "HOM-E-003",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "work": "odyssey",
+  "book": 5,
+  "lines": "55-281",
+  "places": [
+    "ogygia"
+  ],
+  "confidence": {
+    "textual": 1,
+    "archaeological": 0,
+    "scholarly": 0,
+    "geographic": 1,
+    "score": 2,
+    "band": "minimal"
+  },
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 5.55–281",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey-1",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 1.48–59",
+      "author": "Homer"
+    },
+    {
+      "id": "plutarch-defacie",
+      "kind": "primary_text",
+      "citation": "Plutarch, De facie quae in orbe lunae apparet 941a",
+      "author": "Plutarch",
+      "year": 100
+    },
+    {
+      "id": "gozo-tradition",
+      "kind": "tradition",
+      "citation": "Maltese tradition identifying Gozo with Calypso's island"
+    }
+  ],
+  "theories": [
+    {
+      "id": "gozo",
+      "identification": "speculative",
+      "place": "ogygia",
+      "era": "modern",
+      "sources": [
+        "gozo-tradition"
+      ],
+      "locales": {
+        "en": {
+          "label": "Gozo",
+          "note": "The identification a visitor is most likely to meet, and the one with the least behind it: no ancient source, no excavation, and a landscape that matches the poem no better than a dozen others."
+        },
+        "es": {
+          "label": "Gozo",
+          "note": "La identificación con la que más probablemente se topa un visitante y la que menos sostiene: ninguna fuente antigua, ninguna excavación y un paisaje que no encaja con el poema mejor que otra docena."
+        },
+        "pt": {
+          "label": "Gozo",
+          "note": "A identificação com que um visitante mais provavelmente se depara e a que menos se sustenta: nenhuma fonte antiga, nenhuma escavação e uma paisagem que não encaixa no poema melhor que uma dúzia de outras."
+        }
+      }
+    },
+    {
+      "id": "atlantic",
+      "identification": "speculative",
+      "proponent": "Plutarch, De facie 941a",
+      "era": "antiquity",
+      "sources": [
+        "plutarch-defacie",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "An Atlantic Ogygia, beyond the map",
+          "note": "Plutarch places an Ogygia far west of Britain, and modern Atlantic readings follow the seventeen-day raft voyage outward through Gibraltar. This theory points off the atlas frame on purpose: it is listed, not pinned."
+        },
+        "es": {
+          "label": "Una Ogigia atlántica, fuera del mapa",
+          "note": "Plutarco sitúa una Ogigia muy al oeste de Britania, y las lecturas atlánticas modernas siguen los diecisiete días de balsa hacia fuera del Estrecho. Esta teoría apunta fuera del marco del atlas a propósito: se lista, no se clava."
+        },
+        "pt": {
+          "label": "Uma Ogígia atlântica, fora do mapa",
+          "note": "Plutarco situa uma Ogígia bem a oeste da Britânia, e as leituras atlânticas modernas seguem os dezessete dias de jangada para fora do Estreito. Esta teoria aponta para fora do quadro do atlas de propósito: é listada, não fincada."
+        }
+      }
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Calypso and the island of Ogygia",
+      "summary": "Seven years of the ten are spent here, and the poem spends them almost entirely off-stage. When the Odyssey finally opens on Ogygia in Book 5, it gives a lush description and no coordinates.",
+      "narrative": [
+        "Hermes crosses the sea to order Calypso to release Odysseus; the island is described through his arrival — a cave, four springs, meadows of violet and parsley, alder and cypress full of birds. Odysseus is on the shore, weeping toward the sea.",
+        "He builds a raft, and Calypso tells him how to steer: keep the Bear on his left, which means sailing east. Seventeen days later he sights Scheria. Those two facts are the only navigational content the episode contains, and they are relative, not absolute."
+      ],
+      "whyItMatters": "It is the atlas's floor case: the episode that shows what a score of 2/12 looks like. A reader can see immediately that its identifications rest on tradition rather than text, archaeology or consensus.",
+      "debate": "Whether the seventeen-day sail is a real measure of distance at all, and whether Ogygia belongs to the same geography as the rest of the poem. Readings that place it in the Atlantic, at Malta, or in the Adriatic all begin by assuming it is placeable.",
+      "faqs": [
+        {
+          "q": "Where is Ogygia?",
+          "a": "Nowhere the poem locates. The Odyssey calls it the navel of the sea and gives no route to it; the identifications with Gozo, the Atlantic and elsewhere are later claims, recorded here with their sources and their weakness."
+        },
+        {
+          "q": "How long is Odysseus on Ogygia?",
+          "a": "Seven years of his ten-year absence, the longest stay anywhere in the poem — and the least narrated."
+        }
+      ]
+    },
+    "es": {
+      "title": "Calipso y la isla de Ogigia",
+      "summary": "Siete de los diez años transcurren aquí, y el poema los pasa casi enteros fuera de escena. Cuando la Odisea abre por fin en Ogigia, en el canto 5, ofrece una descripción exuberante y ninguna coordenada.",
+      "narrative": [
+        "Hermes cruza el mar para ordenar a Calipso que libere a Odiseo; la isla se describe a través de su llegada: una cueva, cuatro manantiales, prados de violetas y apio, alisos y cipreses llenos de pájaros. Odiseo está en la orilla, llorando hacia el mar.",
+        "Construye una balsa y Calipso le dice cómo gobernarla: mantener la Osa a su izquierda, lo que significa navegar hacia el este. Diecisiete días después avista Esqueria. Esos dos datos son todo el contenido náutico del episodio, y son relativos, no absolutos."
+      ],
+      "whyItMatters": "Es el caso suelo del atlas: el episodio que muestra qué aspecto tiene un 2/12. El lector ve de inmediato que sus identificaciones se apoyan en la tradición y no en el texto, la arqueología o el consenso.",
+      "debate": "Si los diecisiete días de navegación son siquiera una medida real de distancia, y si Ogigia pertenece a la misma geografía que el resto del poema. Las lecturas que la sitúan en el Atlántico, en Malta o en el Adriático empiezan todas dando por hecho que es situable.",
+      "faqs": [
+        {
+          "q": "¿Dónde está Ogigia?",
+          "a": "En ningún lugar que el poema localice. La Odisea la llama el ombligo del mar y no da ruta alguna hacia ella; las identificaciones con Gozo, el Atlántico y otros sitios son afirmaciones posteriores, recogidas aquí con sus fuentes y su debilidad."
+        },
+        {
+          "q": "¿Cuánto tiempo pasa Odiseo en Ogigia?",
+          "a": "Siete de los diez años de ausencia: la estancia más larga de todo el poema y la menos narrada."
+        }
+      ]
+    },
+    "pt": {
+      "title": "Calipso e a ilha de Ogígia",
+      "summary": "Sete dos dez anos transcorrem aqui, e o poema os passa quase inteiros fora de cena. Quando a Odisseia enfim abre em Ogígia, no canto 5, oferece uma descrição exuberante e nenhuma coordenada.",
+      "narrative": [
+        "Hermes cruza o mar para ordenar que Calipso liberte Odisseu; a ilha é descrita através de sua chegada: uma gruta, quatro nascentes, prados de violetas e aipo, amieiros e ciprestes cheios de pássaros. Odisseu está na praia, chorando voltado para o mar.",
+        "Ele constrói uma jangada, e Calipso lhe diz como governá-la: manter a Ursa à esquerda, o que significa navegar para leste. Dezessete dias depois avista Esquéria. Esses dois dados são todo o conteúdo náutico do episódio, e são relativos, não absolutos."
+      ],
+      "whyItMatters": "É o caso-piso do atlas: o episódio que mostra a aparência de um 2/12. O leitor vê de imediato que suas identificações se apoiam na tradição, e não no texto, na arqueologia ou no consenso.",
+      "debate": "Se os dezessete dias de navegação são sequer uma medida real de distância, e se Ogígia pertence à mesma geografia do resto do poema. As leituras que a situam no Atlântico, em Malta ou no Adriático começam todas supondo que ela é situável.",
+      "faqs": [
+        {
+          "q": "Onde fica Ogígia?",
+          "a": "Em lugar nenhum que o poema localize. A Odisseia a chama de umbigo do mar e não dá rota alguma até ela; as identificações com Gozo, o Atlântico e outros lugares são afirmações posteriores, registradas aqui com suas fontes e sua fragilidade."
+        },
+        {
+          "q": "Quanto tempo Odisseu passa em Ogígia?",
+          "a": "Sete dos dez anos de ausência: a estadia mais longa de todo o poema e a menos narrada."
+        }
+      ]
+    }
+  }
+}

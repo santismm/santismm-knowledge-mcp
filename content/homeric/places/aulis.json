@@ -1,0 +1,122 @@
+{
+  "slug": "aulis",
+  "id": "HOM-P-010",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "mainlandGreece",
+  "homericNames": [
+    "Αὐλίς"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "303-330"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "aulis-temple",
+      "kind": "archaeology",
+      "citation": "Sanctuary of Artemis at Aulis, Boeotia — excavated from 1956; the visible remains are archaic and later",
+      "year": 1956
+    },
+    {
+      "id": "strabo-9",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 9.2",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "euripides-ia",
+      "kind": "primary_text",
+      "citation": "Euripides, Iphigenia at Aulis",
+      "author": "Euripides",
+      "year": -405
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "aulis-bay",
+      "identification": "accepted",
+      "modernName": "Avlida, Boeotia",
+      "country": "GR",
+      "lat": 38.3833,
+      "lon": 23.5936,
+      "precision": "area",
+      "proponent": "Strabo, Geography 9.2; continuous ancient tradition",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 1,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 9,
+        "band": "medium"
+      },
+      "sources": [
+        "strabo-9",
+        "aulis-temple",
+        "iliad"
+      ],
+      "locales": {
+        "en": {
+          "label": "The bay of Aulis, Boeotia",
+          "note": "A sheltered anchorage on the Euripus strait, opposite Euboea, identified without interruption in antiquity and marked by a sanctuary of Artemis. The site is real and the location is agreed; the archaeology visible there is archaic and later, not the muster of a Bronze Age fleet."
+        },
+        "es": {
+          "label": "La bahía de Áulide, Beocia",
+          "note": "Un fondeadero abrigado en el estrecho del Euripo, frente a Eubea, identificado sin interrupción en la Antigüedad y señalado por un santuario de Ártemis. El lugar es real y la ubicación está acordada; la arqueología visible allí es arcaica y posterior, no la concentración de una flota de la Edad del Bronce."
+        },
+        "pt": {
+          "label": "A baía de Áulis, Beócia",
+          "note": "Um ancoradouro abrigado no estreito do Euripo, diante da Eubeia, identificado sem interrupção na Antiguidade e marcado por um santuário de Ártemis. O lugar é real e a localização é consensual; a arqueologia visível ali é arcaica e posterior, não a concentração de uma frota da Idade do Bronze."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "catalogue-of-ships"
+  ],
+  "locales": {
+    "en": {
+      "name": "Aulis",
+      "summary": "Where the fleet gathered before Troy — a real, agreed anchorage whose Homeric event is a portent, not a battle: the serpent and the sparrows that told the Greeks the war would last ten years.",
+      "description": [
+        "The Iliad's Aulis is a memory inside a speech. Odysseus reminds the army of the omen they saw there while the ships lay waiting, and the place is never revisited. The later tradition of Iphigenia's sacrifice belongs to tragedy, not to Homer.",
+        "The bay itself is straightforward: a sheltered strait crossing at the narrowest point between Boeotia and Euboea, which is exactly where a fleet drawn from central Greece would assemble."
+      ],
+      "identificationNote": "Accepted: the location was never lost and the geography is unarguable. The archaeological score is 1 because the sanctuary excavated there is centuries later than the events the poem places at the site.",
+      "debate": "Whether the muster at Aulis preserves any historical memory of a coalition fleet, or whether it is the narrative device it reads as — a starting line drawn where the geography made one obvious."
+    },
+    "es": {
+      "name": "Áulide",
+      "summary": "Donde se reunió la flota antes de Troya: un fondeadero real y consensuado cuyo episodio homérico es un presagio, no una batalla —la serpiente y los gorriones que anunciaron a los griegos diez años de guerra.",
+      "description": [
+        "La Áulide de la Ilíada es un recuerdo dentro de un discurso. Odiseo recuerda al ejército el prodigio que vieron allí mientras las naves esperaban, y el lugar no vuelve a aparecer. La tradición posterior del sacrificio de Ifigenia pertenece a la tragedia, no a Homero.",
+        "La bahía en sí no tiene misterio: un paso de estrecho abrigado en el punto más angosto entre Beocia y Eubea, que es justo donde se concentraría una flota reclutada en la Grecia central."
+      ],
+      "identificationNote": "Aceptada: la ubicación nunca se perdió y la geografía es indiscutible. El criterio arqueológico puntúa 1 porque el santuario excavado allí es siglos posterior a los hechos que el poema sitúa en el lugar.",
+      "debate": "Si la concentración en Áulide conserva algún recuerdo histórico de una flota de coalición, o si es el recurso narrativo que parece: una línea de salida trazada donde la geografía la hacía obvia."
+    },
+    "pt": {
+      "name": "Áulis",
+      "summary": "Onde a frota se reuniu antes de Troia: um ancoradouro real e consensual cujo episódio homérico é um presságio, não uma batalha — a serpente e os pardais que anunciaram aos gregos dez anos de guerra.",
+      "description": [
+        "A Áulis da Ilíada é uma lembrança dentro de um discurso. Odisseu recorda ao exército o prodígio que viram ali enquanto as naus esperavam, e o lugar não volta a aparecer. A tradição posterior do sacrifício de Ifigênia pertence à tragédia, não a Homero.",
+        "A baía em si não tem mistério: uma passagem de estreito abrigada no ponto mais estreito entre a Beócia e a Eubeia, que é exatamente onde uma frota recrutada na Grécia central se concentraria."
+      ],
+      "identificationNote": "Aceita: a localização nunca se perdeu e a geografia é indiscutível. O critério arqueológico pontua 1 porque o santuário escavado ali é séculos posterior aos fatos que o poema situa no local.",
+      "debate": "Se a concentração em Áulis preserva alguma lembrança histórica de uma frota de coalizão, ou se é o recurso narrativo que parece ser: uma linha de partida traçada onde a geografia a tornava óbvia."
+    }
+  }
+}

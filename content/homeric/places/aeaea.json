@@ -1,0 +1,129 @@
+{
+  "slug": "aeaea",
+  "id": "HOM-P-020",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "speculative",
+  "unlocated": false,
+  "region": "italySicily",
+  "homericNames": [
+    "Αἰαίη"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 10,
+      "lines": "133-574"
+    },
+    {
+      "work": "odyssey",
+      "book": 12,
+      "lines": "1-15"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-5-3",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 5.3",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "berard-1927",
+      "kind": "scholarship",
+      "citation": "Victor Bérard, Les navigations d'Ulysse (4 vols., 1927–1929)",
+      "author": "Victor Bérard",
+      "year": 1927,
+      "url": "https://archive.org/details/lesnavigationsdu04bera"
+    },
+    {
+      "id": "virgil-aeneid-7",
+      "kind": "primary_text",
+      "citation": "Virgil, Aeneid 7.10-24 — the Circean headland",
+      "author": "Virgil",
+      "year": -19
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "circeo",
+      "identification": "speculative",
+      "modernName": "Monte Circeo",
+      "country": "IT",
+      "lat": 41.24,
+      "lon": 13.09,
+      "precision": "area",
+      "proponent": "Strabo, Geography 5.3; Virgil, Aeneid 7",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 1,
+        "geographic": 2,
+        "score": 5,
+        "band": "low"
+      },
+      "sources": [
+        "strabo-5-3",
+        "virgil-aeneid-7",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Monte Circeo, Latium",
+          "note": "A limestone promontory rising from flat coast, which looks like an island from the sea and carries Circe's name in Latin sources from Strabo and Virgil onward. The identification is ancient, geographically suggestive and archaeologically unsupported."
+        },
+        "es": {
+          "label": "Monte Circeo, Lacio",
+          "note": "Un promontorio calcáreo que se alza sobre una costa llana, con aspecto de isla desde el mar y con el nombre de Circe en las fuentes latinas desde Estrabón y Virgilio en adelante. La identificación es antigua, geográficamente sugerente y sin apoyo arqueológico."
+        },
+        "pt": {
+          "label": "Monte Circeo, Lácio",
+          "note": "Um promontório calcário que se ergue sobre costa plana, com aparência de ilha vista do mar e com o nome de Circe nas fontes latinas desde Estrabão e Virgílio. A identificação é antiga, geograficamente sugestiva e sem apoio arqueológico."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "circe-on-aeaea"
+  ],
+  "locales": {
+    "en": {
+      "name": "Aeaea",
+      "summary": "Circe's island, where the crew are turned into pigs and where Odysseus is told how to reach the dead. Roman tradition put it on a headland that only looks like an island.",
+      "description": [
+        "Odysseus' men spend a year on Aeaea. It is the hinge of the voyage: Circe is the one host who gives instructions rather than obstacles, and the route to the underworld, the Sirens, Scylla and Thrinacia all come from her mouth.",
+        "The poem calls it an island where 'Dawn has her dwelling and her dancing-floors', an eastward detail that sits awkwardly with a western identification — one of several places where the Odyssey's internal directions and the traditional map disagree."
+      ],
+      "identificationNote": "Speculative: an ancient identification with a real, distinctive landform behind it and nothing else. The textual criterion is held at 2 because the poem's own orientation for Aeaea points the other way.",
+      "debate": "Whether Circe's island belongs to the same geography as the Sicilian and Tyrrhenian stops, or whether the eastward 'house of Dawn' preserves an older, different layer of the story."
+    },
+    "es": {
+      "name": "Eea",
+      "summary": "La isla de Circe, donde la tripulación es convertida en cerdos y donde a Odiseo se le explica cómo llegar hasta los muertos. La tradición romana la situó en un promontorio que solo parece una isla.",
+      "description": [
+        "Los hombres de Odiseo pasan un año en Eea. Es la bisagra del viaje: Circe es la única anfitriona que da instrucciones en vez de obstáculos, y de su boca salen la ruta al inframundo, las sirenas, Escila y Trinacia.",
+        "El poema la llama isla donde «la Aurora tiene su morada y sus coros», un dato oriental que casa mal con una identificación occidental: uno de los varios puntos en los que las direcciones internas de la Odisea y el mapa tradicional discrepan."
+      ],
+      "identificationNote": "Especulativa: una identificación antigua con un accidente geográfico real y característico detrás, y nada más. El criterio textual se mantiene en 2 porque la propia orientación que el poema da a Eea apunta al lado contrario.",
+      "debate": "Si la isla de Circe pertenece a la misma geografía que las escalas sicilianas y tirrenas, o si la «morada de la Aurora» hacia oriente conserva una capa más antigua y distinta del relato."
+    },
+    "pt": {
+      "name": "Eeia",
+      "summary": "A ilha de Circe, onde a tripulação é transformada em porcos e onde a Odisseu se explica como chegar aos mortos. A tradição romana a situou num promontório que só parece uma ilha.",
+      "description": [
+        "Os homens de Odisseu passam um ano em Eeia. É a dobradiça da viagem: Circe é a única anfitriã que dá instruções em vez de obstáculos, e de sua boca saem a rota ao submundo, as sereias, Cila e Trinácia.",
+        "O poema a chama de ilha onde “a Aurora tem sua morada e seus coros”, um dado oriental que casa mal com uma identificação ocidental — um dos vários pontos em que as direções internas da Odisseia e o mapa tradicional discordam."
+      ],
+      "identificationNote": "Especulativa: uma identificação antiga com um acidente geográfico real e característico por trás, e nada mais. O critério textual fica em 2 porque a própria orientação que o poema dá a Eeia aponta para o lado contrário.",
+      "debate": "Se a ilha de Circe pertence à mesma geografia das escalas sicilianas e tirrenas, ou se a “morada da Aurora” a leste preserva uma camada mais antiga e distinta do relato."
+    }
+  }
+}

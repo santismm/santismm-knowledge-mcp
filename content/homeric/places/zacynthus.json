@@ -1,0 +1,126 @@
+{
+  "slug": "zacynthus",
+  "id": "HOM-P-013",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "ionian",
+  "homericNames": [
+    "Ζάκυνθος"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 1,
+      "lines": "245-248"
+    },
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "631-637"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-10",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 10.2",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "zakynthos-arch",
+      "kind": "archaeology",
+      "citation": "Mycenaean-period cemeteries and settlement traces on Zakynthos, reported in Ionian island archaeology",
+      "year": 2000
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "zakynthos",
+      "identification": "accepted",
+      "modernName": "Zakynthos",
+      "country": "GR",
+      "lat": 37.79,
+      "lon": 20.9,
+      "precision": "island",
+      "proponent": "Continuous identification; Strabo, Geography 10.2",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 2,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 10,
+        "band": "high"
+      },
+      "sources": [
+        "strabo-10",
+        "zakynthos-arch",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Modern Zakynthos",
+          "note": "The one island in Odysseus' kingdom whose name and position were never contested: 'wooded Zacynthus' is the southernmost of the group, it has carried the name continuously, and Mycenaean burials confirm Bronze Age occupation."
+        },
+        "es": {
+          "label": "Zacinto moderna",
+          "note": "La única isla del reino de Odiseo cuyo nombre y posición nunca se discutieron: la «boscosa Zacinto» es la más meridional del grupo, ha llevado el nombre de forma continua y sus enterramientos micénicos confirman ocupación en la Edad del Bronce."
+        },
+        "pt": {
+          "label": "Zacinto moderna",
+          "note": "A única ilha do reino de Odisseu cujo nome e posição nunca foram contestados: a “arborizada Zacinto” é a mais meridional do grupo, carregou o nome continuamente e seus sepultamentos micênicos confirmam ocupação na Idade do Bronze."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "catalogue-of-ships"
+  ],
+  "locales": {
+    "en": {
+      "name": "Zacynthus",
+      "summary": "The fixed point in the Ionian puzzle. Every reconstruction of Odysseus' kingdom, however radical, agrees on where Zacynthus is.",
+      "description": [
+        "Homer names four islands in Odysseus' domain — Ithaca, Dulichium, Same and wooded Zacynthus — and the suitors come from all of them. Three of the four have been argued over for two centuries. Zacynthus has not.",
+        "That matters methodologically: it is a control. Any theory that moves Ithaca has to keep Zacynthus where it is and still make the poem's relative directions work."
+      ],
+      "identificationNote": "Accepted: continuous naming, agreed position, Bronze Age occupation. Textual scores 2 because 'wooded' is nearly all the poem says about it.",
+      "debate": "Nothing about the island. Its role in the debate is as the fixed leg of every rival reconstruction of the Ionian geography."
+    },
+    "es": {
+      "name": "Zacinto",
+      "summary": "El punto fijo del rompecabezas jónico. Toda reconstrucción del reino de Odiseo, por radical que sea, coincide en dónde está Zacinto.",
+      "description": [
+        "Homero nombra cuatro islas en el dominio de Odiseo —Ítaca, Duliquio, Same y la boscosa Zacinto— y los pretendientes vienen de todas ellas. Tres de las cuatro llevan dos siglos en discusión. Zacinto, no.",
+        "Eso importa metodológicamente: es un control. Cualquier teoría que mueva Ítaca tiene que dejar Zacinto donde está y aun así hacer funcionar las direcciones relativas del poema."
+      ],
+      "identificationNote": "Aceptada: nombre continuo, posición acordada, ocupación en el Bronce. El criterio textual puntúa 2 porque «boscosa» es casi todo lo que el poema dice de ella.",
+      "debate": "Nada sobre la isla. Su papel en el debate es el de pata fija de toda reconstrucción rival de la geografía jónica."
+    },
+    "pt": {
+      "name": "Zacinto",
+      "summary": "O ponto fixo do quebra-cabeça jônico. Toda reconstrução do reino de Odisseu, por mais radical que seja, concorda sobre onde fica Zacinto.",
+      "description": [
+        "Homero nomeia quatro ilhas no domínio de Odisseu — Ítaca, Dulíquio, Same e a arborizada Zacinto — e os pretendentes vêm de todas elas. Três das quatro estão em discussão há dois séculos. Zacinto, não.",
+        "Isso importa metodologicamente: é um controle. Qualquer teoria que mova Ítaca precisa deixar Zacinto onde está e ainda assim fazer as direções relativas do poema funcionarem."
+      ],
+      "identificationNote": "Aceita: nome contínuo, posição consensual, ocupação no Bronze. O critério textual pontua 2 porque “arborizada” é quase tudo o que o poema diz dela.",
+      "debate": "Nada sobre a ilha. Seu papel no debate é o de perna fixa de toda reconstrução rival da geografia jônica."
+    }
+  }
+}

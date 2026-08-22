@@ -1,0 +1,116 @@
+{
+  "slug": "thrinacia",
+  "id": "HOM-P-023",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "speculative",
+  "unlocated": false,
+  "region": "italySicily",
+  "homericNames": [
+    "Θρινακίη"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 12,
+      "lines": "260-402"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "thucydides-6-2",
+      "kind": "primary_text",
+      "citation": "Thucydides, History of the Peloponnesian War 6.2",
+      "author": "Thucydides",
+      "year": -410
+    },
+    {
+      "id": "strabo-6-2c",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 6.2 — Sicily and the name Thrinacia/Trinacria",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "sicily",
+      "identification": "speculative",
+      "modernName": "Sicily",
+      "country": "IT",
+      "lat": 37.5,
+      "lon": 14.0,
+      "precision": "island",
+      "proponent": "Ancient identification via the name Trinacria; Strabo 6.2",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 2,
+        "geographic": 2,
+        "score": 6,
+        "band": "medium"
+      },
+      "sources": [
+        "strabo-6-2c",
+        "thucydides-6-2",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "Sicily",
+          "note": "The identification rests on a name: ancient writers connected Thrinacia with Trinacria, the three-cornered island. It is plausible philology and no evidence at all about the episode, which requires an island where the sun god pastures immortal cattle."
+        },
+        "es": {
+          "label": "Sicilia",
+          "note": "La identificación se apoya en un nombre: los autores antiguos conectaron Trinacia con Trinacria, la isla de tres puntas. Es una filología plausible y ninguna prueba sobre el episodio, que exige una isla donde el dios sol apacienta reses inmortales."
+        },
+        "pt": {
+          "label": "Sicília",
+          "note": "A identificação se apoia num nome: autores antigos conectaram Trinácia a Trinácria, a ilha de três pontas. É filologia plausível e prova nenhuma sobre o episódio, que exige uma ilha onde o deus sol apascenta gado imortal."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "cattle-of-the-sun"
+  ],
+  "locales": {
+    "en": {
+      "name": "Thrinacia",
+      "summary": "The island of the Sun's cattle, where the crew commit the sacrilege that kills them all. Antiquity read the name as Sicily; the poem describes a place that cannot be visited safely.",
+      "description": [
+        "Odysseus is warned twice — by Tiresias and by Circe — to leave the cattle alone. Trapped by a month of contrary winds and out of food, the crew kill them anyway while he sleeps. Zeus destroys the ship; Odysseus alone survives.",
+        "The name-based equation with Sicily is old and philologically reasonable. It is also the last stop before Ogygia, which means the whole western reading of the voyage stands or falls with places like this one."
+      ],
+      "identificationNote": "Speculative: a plausible etymology, an ancient consensus of sorts, and no material connection to the episode. It scores 6/12, the top of the speculative band.",
+      "debate": "Whether Thrinacia and Trinacria are the same word, and whether an island of immortal cattle can be located at all without deciding first that the wanderings are a real itinerary."
+    },
+    "es": {
+      "name": "Trinacia",
+      "summary": "La isla de las vacas del Sol, donde la tripulación comete el sacrilegio que la mata entera. La Antigüedad leyó el nombre como Sicilia; el poema describe un lugar al que no se puede llegar sin peligro.",
+      "description": [
+        "A Odiseo se le advierte dos veces —por Tiresias y por Circe— que no toque el ganado. Atrapados por un mes de vientos contrarios y sin comida, los hombres lo matan igualmente mientras él duerme. Zeus destruye la nave; solo Odiseo sobrevive.",
+        "La ecuación con Sicilia por el nombre es antigua y filológicamente razonable. Es también la última escala antes de Ogigia, lo que significa que toda la lectura occidental del viaje se sostiene o cae con lugares como este."
+      ],
+      "identificationNote": "Especulativa: una etimología plausible, una especie de consenso antiguo y ninguna conexión material con el episodio. Puntúa 6/12, el techo de la banda especulativa.",
+      "debate": "Si Trinacia y Trinacria son la misma palabra, y si una isla de reses inmortales puede localizarse siquiera sin decidir antes que las andanzas son un itinerario real."
+    },
+    "pt": {
+      "name": "Trinácia",
+      "summary": "A ilha do gado do Sol, onde a tripulação comete o sacrilégio que a mata inteira. A Antiguidade leu o nome como Sicília; o poema descreve um lugar aonde não se pode chegar sem perigo.",
+      "description": [
+        "Odisseu é avisado duas vezes — por Tirésias e por Circe — de que não toque no gado. Presos por um mês de ventos contrários e sem comida, os homens o matam mesmo assim enquanto ele dorme. Zeus destrói a nau; só Odisseu sobrevive.",
+        "A equação com a Sicília pelo nome é antiga e filologicamente razoável. É também a última escala antes de Ogígia, o que significa que toda a leitura ocidental da viagem se sustenta ou cai com lugares como este."
+      ],
+      "identificationNote": "Especulativa: uma etimologia plausível, uma espécie de consenso antigo e nenhuma conexão material com o episódio. Pontua 6/12, o teto da faixa especulativa.",
+      "debate": "Se Trinácia e Trinácria são a mesma palavra, e se uma ilha de gado imortal pode ser localizada sem antes decidir que as andanças são um itinerário real."
+    }
+  }
+}

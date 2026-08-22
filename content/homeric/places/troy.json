@@ -1,0 +1,224 @@
+{
+  "slug": "troy",
+  "id": "HOM-P-001",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "troad",
+  "homericNames": [
+    "Ἴλιος",
+    "Τροίη",
+    "Ἴλιον"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "816-877"
+    },
+    {
+      "work": "iliad",
+      "book": 6,
+      "lines": "237-311"
+    },
+    {
+      "work": "iliad",
+      "book": 22,
+      "lines": "145-166"
+    },
+    {
+      "work": "odyssey",
+      "book": 8,
+      "lines": "499-520"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey 8.499–520",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-13",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 13.1",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "lechevalier-1791",
+      "kind": "scholarship",
+      "citation": "Jean-Baptiste Lechevalier, Description of the Plain of Troy (Edinburgh, 1791)",
+      "author": "Jean-Baptiste Lechevalier",
+      "year": 1791
+    },
+    {
+      "id": "maclaren-1822",
+      "kind": "scholarship",
+      "citation": "Charles Maclaren, A Dissertation on the Topography of the Plain of Troy (1822)",
+      "author": "Charles Maclaren",
+      "year": 1822
+    },
+    {
+      "id": "schliemann-1881",
+      "kind": "archaeology",
+      "citation": "Heinrich Schliemann, Ilios: The City and Country of the Trojans (1881)",
+      "author": "Heinrich Schliemann",
+      "year": 1881
+    },
+    {
+      "id": "blegen-1958",
+      "kind": "archaeology",
+      "citation": "Carl W. Blegen et al., Troy: Excavations Conducted by the University of Cincinnati 1932–1938 (Princeton, 1950–1958)",
+      "author": "Carl W. Blegen",
+      "year": 1958
+    },
+    {
+      "id": "korfmann",
+      "kind": "archaeology",
+      "citation": "Manfred Korfmann, Troia/Wilusa excavation reports, Studia Troica (1988–2005)",
+      "author": "Manfred Korfmann",
+      "year": 2005
+    },
+    {
+      "id": "latacz-2004",
+      "kind": "scholarship",
+      "citation": "Joachim Latacz, Troy and Homer: Towards a Solution of an Old Mystery (Oxford University Press, 2004)",
+      "author": "Joachim Latacz",
+      "year": 2004
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "hisarlik",
+      "identification": "accepted",
+      "modernName": "Hisarlık",
+      "country": "TR",
+      "lat": 39.9576,
+      "lon": 26.2389,
+      "precision": "site",
+      "proponent": "Charles Maclaren (1822); Schliemann, Dörpfeld, Blegen, Korfmann",
+      "era": "modern",
+      "since": 1822,
+      "confidence": {
+        "textual": 3,
+        "archaeological": 3,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 12,
+        "band": "high"
+      },
+      "sources": [
+        "maclaren-1822",
+        "schliemann-1881",
+        "blegen-1958",
+        "korfmann",
+        "latacz-2004",
+        "strabo-13"
+      ],
+      "locales": {
+        "en": {
+          "label": "Hisarlık (Troy VI / VIIa)",
+          "note": "A mound occupied for some 3,000 years, with a fortified Late Bronze Age citadel and — since Korfmann — a substantial lower city around it. It sits where the Iliad needs a city to sit: on the Scamander plain, in sight of the Hellespont, under Mount Ida, with Tenedos and Imbros offshore. Hittite archives independently name a Wilusa in this region, which most scholars equate with Ἴλιος."
+        },
+        "es": {
+          "label": "Hisarlık (Troya VI / VIIa)",
+          "note": "Un tell ocupado durante unos 3.000 años, con una ciudadela fortificada del Bronce Final y —desde Korfmann— una ciudad baja considerable a su alrededor. Está donde la Ilíada necesita que esté una ciudad: en la llanura del Escamandro, a la vista del Helesponto, bajo el monte Ida, con Ténedos e Imbros enfrente. Los archivos hititas nombran de forma independiente una Wilusa en esta región, que la mayoría de los estudiosos equipara con Ἴλιος."
+        },
+        "pt": {
+          "label": "Hisarlık (Troia VI / VIIa)",
+          "note": "Um tell ocupado por cerca de 3.000 anos, com uma cidadela fortificada do Bronze Final e — desde Korfmann — uma cidade baixa considerável ao redor. Fica onde a Ilíada precisa que uma cidade fique: na planície do Escamandro, à vista do Helesponto, sob o monte Ida, com Tênedos e Imbros ao largo. Os arquivos hititas nomeiam de forma independente uma Wilusa nessa região, que a maioria dos estudiosos equipara a Ἴλιος."
+        }
+      }
+    },
+    {
+      "id": "pinarbasi",
+      "identification": "speculative",
+      "modernName": "Pınarbaşı (Bunarbashi)",
+      "country": "TR",
+      "lat": 39.85,
+      "lon": 26.23,
+      "precision": "area",
+      "proponent": "Jean-Baptiste Lechevalier (1791)",
+      "era": "modern",
+      "since": 1791,
+      "confidence": {
+        "textual": 2,
+        "archaeological": 0,
+        "scholarly": 0,
+        "geographic": 1,
+        "score": 3,
+        "band": "low"
+      },
+      "sources": [
+        "lechevalier-1791",
+        "iliad",
+        "maclaren-1822"
+      ],
+      "locales": {
+        "en": {
+          "label": "Pınarbaşı (abandoned identification)",
+          "note": "The identification that dominated European scholarship for a century, argued from the springs where Hector and Achilles run (Iliad 22.147–156). Excavation found no Bronze Age city of the required scale here, and the site is too far from the sea for the Iliad's beached ships. It is kept in the atlas because being wrong in public is how the Troy question was settled. Coordinates are approximate to the village."
+        },
+        "es": {
+          "label": "Pınarbaşı (identificación abandonada)",
+          "note": "La identificación que dominó la erudición europea durante un siglo, argumentada a partir de las fuentes junto a las que corren Héctor y Aquiles (Ilíada 22.147–156). Las excavaciones no hallaron aquí una ciudad de la Edad del Bronce de la escala necesaria, y el sitio queda demasiado lejos del mar para las naves varadas de la Ilíada. Se mantiene en el atlas porque equivocarse en público fue precisamente lo que zanjó la cuestión troyana. Las coordenadas son aproximadas al pueblo."
+        },
+        "pt": {
+          "label": "Pınarbaşı (identificação abandonada)",
+          "note": "A identificação que dominou a erudição europeia por um século, argumentada a partir das fontes junto às quais correm Heitor e Aquiles (Ilíada 22.147–156). As escavações não encontraram aqui uma cidade da Idade do Bronze na escala necessária, e o sítio fica longe demais do mar para os navios encalhados da Ilíada. Permanece no atlas porque errar em público foi justamente o que resolveu a questão troiana. As coordenadas são aproximadas à aldeia."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "wooden-horse",
+    "chryse-and-the-plague",
+    "the-achaean-camp",
+    "achilles-and-hector",
+    "priams-ransom"
+  ],
+  "locales": {
+    "en": {
+      "name": "Troy (Ilios)",
+      "summary": "The city the Iliad besieges, identified since 1822 with the mound of Hisarlık in north-western Türkiye and excavated continuously since 1870. The identification of the place is settled; what happened there is not.",
+      "description": [
+        "Troy is the one location in this atlas where text, excavation and independent archives converge. The Iliad describes a walled city on a plain crossed by rivers, within sight of the Hellespont and reachable from a beach where ships can be drawn up. Hisarlık is such a place, and it was a real Late Bronze Age fortress: Troy VI and VIIa show massive walls, a lower town, and destruction layers in roughly the right centuries.",
+        "The site's history of identification is itself instructive. For a hundred years the favoured location was Pınarbaşı, argued from a detail of the text; Maclaren proposed Hisarlık in 1822 on topographical grounds and was ignored until Schliemann dug there. Later excavators — Dörpfeld, Blegen, Korfmann — replaced Schliemann's conclusions almost entirely while confirming his site.",
+        "Hittite documents refer to a place called Wilusa in this region, and to a king Alaksandu of Wilusa. Most scholars accept the equation Wilusa = Ἴλιος (Ilios); it makes Troy the only Homeric city attested in a contemporary foreign archive."
+      ],
+      "identificationNote": "Accepted: a real site with both archaeological and scholarly consensus. The rubric scores 12/12 because all four criteria are satisfied independently — the text is specific, the excavation is deep, the consensus is mainstream, and the surrounding geography matches without special pleading.",
+      "debate": "What is settled is the place, not the war. Whether Troy VIIa's destruction was caused by an Achaean coalition, whether any siege resembling the Iliad's occurred, and how much of the poem's world is 8th-century rather than 13th-century, all remain open. Korfmann's claims about the size and importance of the lower city drew sharp criticism from colleagues in 2001–2002. This atlas locates the city with high confidence and takes no position on the historicity of the war."
+    },
+    "es": {
+      "name": "Troya (Ilión)",
+      "summary": "La ciudad que asedia la Ilíada, identificada desde 1822 con el montículo de Hisarlık, en el noroeste de Turquía, y excavada sin interrupción desde 1870. La identificación del lugar está zanjada; lo que allí ocurrió, no.",
+      "description": [
+        "Troya es el único lugar de este atlas donde convergen texto, excavación y archivos independientes. La Ilíada describe una ciudad amurallada en una llanura cruzada por ríos, a la vista del Helesponto y accesible desde una playa donde varar las naves. Hisarlık es un lugar así, y fue una fortaleza real del Bronce Final: Troya VI y VIIa muestran murallas macizas, una ciudad baja y estratos de destrucción en los siglos aproximadamente correctos.",
+        "La propia historia de su identificación es instructiva. Durante cien años la ubicación preferida fue Pınarbaşı, argumentada a partir de un detalle del texto; Maclaren propuso Hisarlık en 1822 por razones topográficas y fue ignorado hasta que Schliemann excavó allí. Los excavadores posteriores —Dörpfeld, Blegen, Korfmann— sustituyeron casi por completo las conclusiones de Schliemann mientras confirmaban su yacimiento.",
+        "Los documentos hititas mencionan un lugar llamado Wilusa en esta región y a un rey Alaksandu de Wilusa. La mayoría de los estudiosos acepta la ecuación Wilusa = Ἴλιος (Ilión); eso convierte a Troya en la única ciudad homérica atestiguada en un archivo extranjero contemporáneo."
+      ],
+      "identificationNote": "Aceptada: un yacimiento real con consenso arqueológico y académico. La rúbrica puntúa 12/12 porque los cuatro criterios se satisfacen de forma independiente: el texto es específico, la excavación es profunda, el consenso es mayoritario y la geografía circundante encaja sin forzar nada.",
+      "debate": "Lo zanjado es el lugar, no la guerra. Si la destrucción de Troya VIIa la causó una coalición aquea, si hubo algún asedio parecido al de la Ilíada y cuánto del mundo del poema es del siglo VIII y no del XIII siguen siendo cuestiones abiertas. Las afirmaciones de Korfmann sobre el tamaño y la importancia de la ciudad baja recibieron duras críticas de sus colegas en 2001–2002. Este atlas localiza la ciudad con confianza alta y no toma posición sobre la historicidad de la guerra."
+    },
+    "pt": {
+      "name": "Troia (Ílion)",
+      "summary": "A cidade que a Ilíada sitia, identificada desde 1822 com o morro de Hisarlık, no noroeste da Turquia, e escavada continuamente desde 1870. A identificação do lugar está resolvida; o que aconteceu ali, não.",
+      "description": [
+        "Troia é o único lugar deste atlas em que texto, escavação e arquivos independentes convergem. A Ilíada descreve uma cidade murada numa planície cortada por rios, à vista do Helesponto e acessível a partir de uma praia onde se encalham navios. Hisarlık é um lugar assim, e foi uma fortaleza real do Bronze Final: Troia VI e VIIa mostram muralhas maciças, uma cidade baixa e camadas de destruição nos séculos aproximadamente certos.",
+        "A própria história da identificação é instrutiva. Por cem anos a localização preferida foi Pınarbaşı, defendida a partir de um detalhe do texto; Maclaren propôs Hisarlık em 1822 por razões topográficas e foi ignorado até Schliemann escavar ali. Os escavadores seguintes — Dörpfeld, Blegen, Korfmann — substituíram quase por completo as conclusões de Schliemann enquanto confirmavam o sítio dele.",
+        "Documentos hititas mencionam um lugar chamado Wilusa nessa região e um rei Alaksandu de Wilusa. A maioria dos estudiosos aceita a equação Wilusa = Ἴλιος (Ílion); isso faz de Troia a única cidade homérica atestada num arquivo estrangeiro contemporâneo."
+      ],
+      "identificationNote": "Aceita: um sítio real com consenso arqueológico e acadêmico. A rubrica pontua 12/12 porque os quatro critérios se satisfazem de forma independente: o texto é específico, a escavação é profunda, o consenso é majoritário e a geografia ao redor encaixa sem forçar nada.",
+      "debate": "O que está resolvido é o lugar, não a guerra. Se a destruição de Troia VIIa foi causada por uma coalizão aqueia, se houve algum cerco parecido com o da Ilíada e quanto do mundo do poema é do século VIII e não do XIII continuam questões abertas. As afirmações de Korfmann sobre o tamanho e a importância da cidade baixa receberam críticas duras de colegas em 2001–2002. Este atlas localiza a cidade com confiança alta e não toma posição sobre a historicidade da guerra."
+    }
+  }
+}

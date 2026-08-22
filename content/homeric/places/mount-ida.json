@@ -1,0 +1,126 @@
+{
+  "slug": "mount-ida",
+  "id": "HOM-P-011",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "troad",
+  "homericNames": [
+    "Ἴδη"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 8,
+      "lines": "41-52"
+    },
+    {
+      "work": "iliad",
+      "book": 14,
+      "lines": "283-293"
+    },
+    {
+      "work": "iliad",
+      "book": 20,
+      "lines": "56-60"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "kazdagi",
+      "kind": "scholarship",
+      "citation": "Mount Ida of the Troad — modern Kaz Dağı, Turkey; the identification is standard in the topographical literature on the Troad",
+      "year": 2004
+    },
+    {
+      "id": "strabo-13",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 13.1",
+      "author": "Strabo",
+      "year": -20
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "kaz-dagi",
+      "identification": "accepted",
+      "modernName": "Kaz Dağı",
+      "country": "TR",
+      "lat": 39.7,
+      "lon": 26.85,
+      "precision": "area",
+      "proponent": "Strabo, Geography 13.1; standard in Troad topography",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 1,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 10,
+        "band": "high"
+      },
+      "sources": [
+        "kazdagi",
+        "strabo-13",
+        "iliad"
+      ],
+      "locales": {
+        "en": {
+          "label": "Kaz Dağı (Mount Ida of the Troad)",
+          "note": "The massif south-east of the Troad, the highest ground in sight of the plain, from which the Iliad has Zeus watch the fighting. Rivers named in the poem — Scamander among them — rise on its slopes. Nothing about the identification is disputed."
+        },
+        "es": {
+          "label": "Kaz Dağı (el monte Ida de la Tróade)",
+          "note": "El macizo al sureste de la Tróade, la mayor altura a la vista de la llanura, desde el que la Ilíada hace que Zeus contemple el combate. Los ríos que nombra el poema —el Escamandro entre ellos— nacen en sus laderas. Nada de la identificación se discute."
+        },
+        "pt": {
+          "label": "Kaz Dağı (o monte Ida da Trôade)",
+          "note": "O maciço a sudeste da Trôade, a maior altura à vista da planície, do qual a Ilíada faz Zeus observar o combate. Os rios que o poema nomeia — o Escamandro entre eles — nascem em suas encostas. Nada da identificação é contestado."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "achilles-and-hector",
+    "priams-ransom"
+  ],
+  "locales": {
+    "en": {
+      "name": "Mount Ida",
+      "summary": "The mountain the gods watch the war from, and a piece of real topography that anchors the Iliad's landscape: it is visible from Hisarlık, and the plain's rivers come off it.",
+      "description": [
+        "Ida is the Iliad's vantage point. Zeus sits on Gargarus, one of its peaks, and the poem's weather, its rivers and its similes come down from the massif to the plain. It is also where Paris judged the goddesses, in a story the Iliad alludes to rather than tells.",
+        "The identification is unremarkable, which is the point: the Troad's physical geography — mountain, rivers, plain, strait, offshore islands — is coherent and checkable, and it is the strongest single argument that the poem's setting was known to whoever composed it."
+      ],
+      "identificationNote": "Accepted: a named, unmistakable landform, agreed since antiquity. Archaeological scores 1 because a mountain is not an excavation, not because anything is in doubt.",
+      "debate": "Nothing about the mountain. What the entry contributes is corroboration for the Troad landscape as a whole — the point at which several Homeric place names stop being names and start being a map."
+    },
+    "es": {
+      "name": "Monte Ida",
+      "summary": "La montaña desde la que los dioses contemplan la guerra y una pieza de topografía real que ancla el paisaje de la Ilíada: se ve desde Hisarlık y de ella bajan los ríos de la llanura.",
+      "description": [
+        "El Ida es el mirador de la Ilíada. Zeus se sienta en el Gárgaro, una de sus cumbres, y el tiempo atmosférico del poema, sus ríos y sus símiles descienden del macizo a la llanura. Allí juzgó también Paris a las diosas, en una historia que la Ilíada alude sin contar.",
+        "La identificación no tiene nada de notable, y eso es lo relevante: la geografía física de la Tróade —montaña, ríos, llanura, estrecho, islas enfrente— es coherente y comprobable, y es el argumento más fuerte de que el escenario del poema le era conocido a quien lo compuso."
+      ],
+      "identificationNote": "Aceptada: un accidente geográfico nombrado e inconfundible, acordado desde la Antigüedad. El criterio arqueológico puntúa 1 porque una montaña no es una excavación, no porque haya duda alguna.",
+      "debate": "Nada sobre la montaña. Lo que aporta la ficha es corroboración del paisaje de la Tróade en conjunto: el punto en el que varios topónimos homéricos dejan de ser nombres y empiezan a ser un mapa."
+    },
+    "pt": {
+      "name": "Monte Ida",
+      "summary": "A montanha de onde os deuses observam a guerra e uma peça de topografia real que ancora a paisagem da Ilíada: é visível de Hisarlık, e dela descem os rios da planície.",
+      "description": [
+        "O Ida é o mirante da Ilíada. Zeus senta-se no Gárgaro, um de seus cumes, e o tempo atmosférico do poema, seus rios e seus símiles descem do maciço para a planície. Ali também Páris julgou as deusas, numa história que a Ilíada alude sem contar.",
+        "A identificação nada tem de notável, e é isso que importa: a geografia física da Trôade — montanha, rios, planície, estreito, ilhas ao largo — é coerente e verificável, e é o argumento mais forte de que o cenário do poema era conhecido de quem o compôs."
+      ],
+      "identificationNote": "Aceita: um acidente geográfico nomeado e inconfundível, consensual desde a Antiguidade. O critério arqueológico pontua 1 porque uma montanha não é uma escavação, não porque haja dúvida.",
+      "debate": "Nada sobre a montanha. O que a ficha aporta é a corroboração da paisagem da Trôade como um todo: o ponto em que vários topônimos homéricos deixam de ser nomes e passam a ser um mapa."
+    }
+  }
+}

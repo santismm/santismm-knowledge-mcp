@@ -1,0 +1,120 @@
+{
+  "slug": "pharos",
+  "id": "HOM-P-031",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "levantEgypt",
+  "homericNames": [
+    "Φάρος"
+  ],
+  "attestations": [
+    {
+      "work": "odyssey",
+      "book": 4,
+      "lines": "351-359"
+    },
+    {
+      "work": "odyssey",
+      "book": 4,
+      "lines": "382-424"
+    }
+  ],
+  "sources": [
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "strabo-17",
+      "kind": "primary_text",
+      "citation": "Strabo, Geography 17.1 — Pharos, its distance from the mainland, and Homer's description",
+      "author": "Strabo",
+      "year": -20
+    },
+    {
+      "id": "alexandria-geology",
+      "kind": "scholarship",
+      "citation": "The silting and later causeway (Heptastadion) that joined Pharos to the Alexandrian shore, described in the archaeology of the city",
+      "year": 2000
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "pharos-island",
+      "identification": "accepted",
+      "modernName": "Pharos, Alexandria",
+      "country": "EG",
+      "lat": 31.214,
+      "lon": 29.885,
+      "precision": "site",
+      "proponent": "Universal identification since antiquity",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 1,
+        "scholarly": 3,
+        "geographic": 2,
+        "score": 9,
+        "band": "medium"
+      },
+      "sources": [
+        "strabo-17",
+        "alexandria-geology",
+        "odyssey"
+      ],
+      "locales": {
+        "en": {
+          "label": "The island of Pharos, Alexandria",
+          "note": "A real island off the Egyptian coast, later joined to the mainland and crowned by the lighthouse. Homer places it 'a day's sail' from the Nile, which is wrong by an order of magnitude — Strabo already noticed and tried to explain it away."
+        },
+        "es": {
+          "label": "La isla de Faros, Alejandría",
+          "note": "Una isla real frente a la costa egipcia, unida después a tierra firme y coronada por el faro. Homero la sitúa «a un día de navegación» del Nilo, un error de un orden de magnitud que Estrabón ya advirtió y trató de justificar."
+        },
+        "pt": {
+          "label": "A ilha de Faros, Alexandria",
+          "note": "Uma ilha real diante da costa egípcia, depois unida ao continente e coroada pelo farol. Homero a situa “a um dia de navegação” do Nilo, um erro de uma ordem de magnitude que Estrabão já notou e tentou justificar."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "menelaus-and-proteus"
+  ],
+  "locales": {
+    "en": {
+      "name": "Pharos",
+      "summary": "Where Menelaus is becalmed and wrestles the shape-shifting sea god Proteus. The island is certain; the distance Homer gives it is one of the clearest errors in the poems.",
+      "description": [
+        "Trapped by windless weather, Menelaus is told by Proteus' daughter how to ambush her father, hold him through his transformations and make him answer. The scene is the Odyssey's other prophecy, and it delivers the news of Agamemnon's murder and Odysseus' captivity on Ogygia.",
+        "The island is real and unmistakable. But the poem puts it a full day's sail offshore, and Pharos lies barely a kilometre out. Ancient critics noticed; Strabo argued the coast had silted. It is a useful reminder that a correct identification does not make every detail correct."
+      ],
+      "identificationNote": "Accepted as a place, with the geographic criterion held at 2 precisely because the poem's own distance is wrong. This is the entry where the rubric's separation of criteria does the most work.",
+      "debate": "Whether the distance is a genuine error, a poetic exaggeration, or a memory of a coastline before silting — a claim Strabo made and modern geology does not support at that scale."
+    },
+    "es": {
+      "name": "Faros",
+      "summary": "Donde Menelao queda en calma chicha y lucha con Proteo, el dios marino que cambia de forma. La isla es segura; la distancia que le da Homero es uno de los errores más claros de los poemas.",
+      "description": [
+        "Atrapado por la falta de viento, Menelao recibe de la hija de Proteo la instrucción de emboscar a su padre, sujetarlo durante sus transformaciones y obligarlo a responder. La escena es la otra profecía de la Odisea y trae la noticia del asesinato de Agamenón y del cautiverio de Odiseo en Ogigia.",
+        "La isla es real e inconfundible. Pero el poema la sitúa a un día entero de navegación de la costa, y Faros está a apenas un kilómetro. Los críticos antiguos lo advirtieron; Estrabón alegó que la costa se había colmatado. Es un recordatorio útil de que una identificación correcta no vuelve correcto cada detalle."
+      ],
+      "identificationNote": "Aceptada como lugar, con el criterio geográfico retenido en 2 justamente porque la distancia del propio poema es errónea. Es la ficha en la que la separación de criterios de la rúbrica trabaja más.",
+      "debate": "Si la distancia es un error genuino, una exageración poética o el recuerdo de una costa anterior a la colmatación, afirmación que hizo Estrabón y que la geología moderna no respalda a esa escala."
+    },
+    "pt": {
+      "name": "Faros",
+      "summary": "Onde Menelau fica em calmaria e luta com Proteu, o deus marinho que muda de forma. A ilha é certa; a distância que Homero lhe dá é um dos erros mais claros dos poemas.",
+      "description": [
+        "Preso pela falta de vento, Menelau recebe da filha de Proteu a instrução de emboscar o pai, segurá-lo durante suas transformações e obrigá-lo a responder. A cena é a outra profecia da Odisseia e traz a notícia do assassinato de Agamêmnon e do cativeiro de Odisseu em Ogígia.",
+        "A ilha é real e inconfundível. Mas o poema a situa a um dia inteiro de navegação da costa, e Faros fica a pouco mais de um quilômetro. Os críticos antigos notaram; Estrabão alegou que a costa havia assoreado. É um lembrete útil de que uma identificação correta não torna correto cada detalhe."
+      ],
+      "identificationNote": "Aceita como lugar, com o critério geográfico mantido em 2 justamente porque a distância do próprio poema está errada. É a ficha em que a separação de critérios da rubrica mais trabalha.",
+      "debate": "Se a distância é erro genuíno, exagero poético ou lembrança de uma costa anterior ao assoreamento — alegação que Estrabão fez e que a geologia moderna não sustenta nessa escala."
+    }
+  }
+}

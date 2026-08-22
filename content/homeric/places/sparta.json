@@ -1,0 +1,179 @@
+{
+  "slug": "sparta",
+  "id": "HOM-P-007",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "identification": "accepted",
+  "unlocated": false,
+  "region": "mainlandGreece",
+  "homericNames": [
+    "Λακεδαίμων",
+    "Σπάρτη"
+  ],
+  "attestations": [
+    {
+      "work": "iliad",
+      "book": 2,
+      "lines": "581-590"
+    },
+    {
+      "work": "odyssey",
+      "book": 4,
+      "lines": "1-19"
+    },
+    {
+      "work": "odyssey",
+      "book": 13,
+      "lines": "412-415"
+    }
+  ],
+  "sources": [
+    {
+      "id": "iliad",
+      "kind": "primary_text",
+      "citation": "Homer, Iliad (trans. A. T. Murray, Loeb, 1924)",
+      "author": "Homer"
+    },
+    {
+      "id": "odyssey",
+      "kind": "primary_text",
+      "citation": "Homer, Odyssey (trans. A. T. Murray, Loeb, 1919)",
+      "author": "Homer"
+    },
+    {
+      "id": "menelaion",
+      "kind": "archaeology",
+      "citation": "Excavations at the Menelaion, Therapne — Mycenaean mansions and a Late Bronze Age settlement; British School at Athens, from 1909 and again from 1973",
+      "year": 1973
+    },
+    {
+      "id": "catling-1976",
+      "kind": "archaeology",
+      "citation": "Hector W. Catling, excavation reports on the Menelaion site, Archaeological Reports (1976–1977)",
+      "author": "Hector W. Catling",
+      "year": 1976
+    },
+    {
+      "id": "herodotus-6-61",
+      "kind": "primary_text",
+      "citation": "Herodotus, Histories 6.61 — the shrine of Helen at Therapne",
+      "author": "Herodotus",
+      "year": -430
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "eurotas-valley",
+      "identification": "accepted",
+      "modernName": "Sparta, Laconia",
+      "country": "GR",
+      "lat": 37.0736,
+      "lon": 22.4297,
+      "precision": "area",
+      "proponent": "Continuous ancient identification",
+      "era": "antiquity",
+      "confidence": {
+        "textual": 3,
+        "archaeological": 2,
+        "scholarly": 3,
+        "geographic": 3,
+        "score": 11,
+        "band": "high"
+      },
+      "sources": [
+        "menelaion",
+        "catling-1976",
+        "iliad"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Eurotas valley (Lacedaemon)",
+          "note": "The region Homer calls Lacedaemon is not in doubt: a broad river valley enclosed by Taygetus and Parnon, exactly the 'hollow' the poems describe. The Bronze Age centre within it is the open question, not the valley."
+        },
+        "es": {
+          "label": "El valle del Eurotas (Lacedemonia)",
+          "note": "La región que Homero llama Lacedemonia no está en duda: un valle fluvial ancho encerrado entre el Taigeto y el Parnón, exactamente el «hueco» que describen los poemas. Lo que queda abierto es el centro del Bronce dentro de él, no el valle."
+        },
+        "pt": {
+          "label": "O vale do Eurotas (Lacedemônia)",
+          "note": "A região que Homero chama de Lacedemônia não está em dúvida: um vale fluvial largo entre o Taígeto e o Parnon, exatamente o “oco” que os poemas descrevem. O que fica em aberto é o centro do Bronze dentro dele, não o vale."
+        }
+      }
+    },
+    {
+      "id": "menelaion",
+      "identification": "plausible",
+      "modernName": "Therapne",
+      "country": "GR",
+      "lat": 37.0714,
+      "lon": 22.4569,
+      "precision": "site",
+      "proponent": "Excavated by the British School at Athens (1909; 1973–)",
+      "era": "modern",
+      "since": 1909,
+      "confidence": {
+        "textual": 2,
+        "archaeological": 3,
+        "scholarly": 2,
+        "geographic": 3,
+        "score": 10,
+        "band": "high"
+      },
+      "sources": [
+        "menelaion",
+        "catling-1976",
+        "herodotus-6-61"
+      ],
+      "locales": {
+        "en": {
+          "label": "The Menelaion at Therapne",
+          "note": "A hill above the Eurotas with substantial Mycenaean mansions and, from the archaic period, a shrine to Menelaus and Helen. The cult is evidence that Greeks located Menelaus here; it is not evidence that he lived here, and no palace of the Pylos or Mycenae class has been found in Laconia."
+        },
+        "es": {
+          "label": "El Menelaion de Terapne",
+          "note": "Una colina sobre el Eurotas con mansiones micénicas de entidad y, desde época arcaica, un santuario a Menelao y Helena. El culto prueba que los griegos situaban aquí a Menelao; no prueba que viviera aquí, y en Laconia no ha aparecido ningún palacio de la clase de Pilos o Micenas."
+        },
+        "pt": {
+          "label": "O Menelaion de Terapne",
+          "note": "Uma colina sobre o Eurotas com mansões micênicas de porte e, desde a época arcaica, um santuário a Menelau e Helena. O culto prova que os gregos situavam Menelau ali; não prova que ele viveu ali, e na Lacônia não apareceu nenhum palácio da classe de Pilos ou Micenas."
+        }
+      }
+    }
+  ],
+  "episodes": [
+    "catalogue-of-ships",
+    "telemachus-in-sparta"
+  ],
+  "locales": {
+    "en": {
+      "name": "Sparta (Lacedaemon)",
+      "summary": "Menelaus and Helen's kingdom. The valley is certain, the palace is not: Laconia has produced Mycenaean mansions and an early cult of Menelaus, but no palace to match Pylos or Mycenae.",
+      "description": [
+        "Telemachus reaches Lacedaemon by chariot in Book 4 and finds Menelaus in a hall so bright he compares it to the court of Zeus. Homer's Lacedaemon is 'hollow' and 'full of ravines' — a good description of the Eurotas valley between Taygetus and Parnon.",
+        "The Menelaion at Therapne is where the ancient Greeks put him. The hill carries Mycenaean buildings and, from the archaic period onward, a sanctuary of Menelaus and Helen where Herodotus already reports a story of Helen. That is a strong cult tradition attached to a real Bronze Age site, and it is the best Laconia offers."
+      ],
+      "identificationNote": "Accepted at the level of the region and plausible at the level of the palace, which is why the place carries two hypotheses at different scores. The archaeological criterion is what separates them: the valley scores on landscape and continuity, the Menelaion on excavated buildings and cult.",
+      "debate": "Whether a Mycenaean palatial centre of the Pylos class lies undiscovered under the Eurotas plain, or whether Laconia was governed differently — and therefore whether the Odyssey's Spartan palace is a memory, an anachronism, or an invention."
+    },
+    "es": {
+      "name": "Esparta (Lacedemonia)",
+      "summary": "El reino de Menelao y Helena. El valle es seguro; el palacio, no: Laconia ha dado mansiones micénicas y un culto temprano a Menelao, pero ningún palacio comparable a Pilos o Micenas.",
+      "description": [
+        "Telémaco llega a Lacedemonia en carro en el canto 4 y encuentra a Menelao en una sala tan brillante que la compara con la corte de Zeus. La Lacedemonia de Homero es «hueca» y «llena de barrancos»: una buena descripción del valle del Eurotas entre el Taigeto y el Parnón.",
+        "El Menelaion de Terapne es donde lo situaban los griegos antiguos. La colina conserva edificios micénicos y, desde época arcaica, un santuario de Menelao y Helena en el que Heródoto ya recoge una historia sobre Helena. Es una tradición cultual fuerte adherida a un yacimiento real del Bronce, y es lo mejor que ofrece Laconia."
+      ],
+      "identificationNote": "Aceptada a escala de región y plausible a escala de palacio, y por eso el lugar lleva dos hipótesis con puntuaciones distintas. El criterio arqueológico es el que las separa: el valle puntúa por paisaje y continuidad; el Menelaion, por edificios excavados y culto.",
+      "debate": "Si bajo la llanura del Eurotas yace sin descubrir un centro palacial micénico de la clase de Pilos, o si Laconia se gobernaba de otro modo; y por tanto si el palacio espartano de la Odisea es un recuerdo, un anacronismo o una invención."
+    },
+    "pt": {
+      "name": "Esparta (Lacedemônia)",
+      "summary": "O reino de Menelau e Helena. O vale é certo; o palácio, não: a Lacônia produziu mansões micênicas e um culto antigo a Menelau, mas nenhum palácio comparável a Pilos ou Micenas.",
+      "description": [
+        "Telêmaco chega à Lacedemônia de carro no canto 4 e encontra Menelau num salão tão brilhante que o compara à corte de Zeus. A Lacedemônia de Homero é “oca” e “cheia de ravinas” — uma boa descrição do vale do Eurotas entre o Taígeto e o Parnon.",
+        "O Menelaion de Terapne é onde os gregos antigos o situavam. A colina guarda edifícios micênicos e, desde a época arcaica, um santuário de Menelau e Helena em que Heródoto já registra uma história sobre Helena. É uma tradição de culto forte ligada a um sítio real do Bronze, e é o melhor que a Lacônia oferece."
+      ],
+      "identificationNote": "Aceita na escala da região e plausível na escala do palácio, e por isso o lugar carrega duas hipóteses com pontuações diferentes. O critério arqueológico é o que as separa: o vale pontua por paisagem e continuidade; o Menelaion, por edifícios escavados e culto.",
+      "debate": "Se sob a planície do Eurotas jaz por descobrir um centro palaciano micênico da classe de Pilos, ou se a Lacônia era governada de outro modo — e, portanto, se o palácio espartano da Odisseia é lembrança, anacronismo ou invenção."
+    }
+  }
+}

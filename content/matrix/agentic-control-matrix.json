@@ -1,0 +1,965 @@
+{
+  "id": "ACM",
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "groups": [
+    "permissions",
+    "egress",
+    "execution",
+    "oversight",
+    "observability",
+    "lifecycle"
+  ],
+  "frameworks": [
+    {
+      "key": "eu-ai-act",
+      "kind": "regulation",
+      "granularity": "article",
+      "name": "EU AI Act (Regulation 2024/1689)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "governance": "eu-ai-act"
+    },
+    {
+      "key": "iso-42001",
+      "kind": "standard",
+      "granularity": "annex-a-group",
+      "name": "ISO/IEC 42001 — AI management system",
+      "url": "https://www.iso.org/standard/81230.html",
+      "governance": "iso-42001"
+    },
+    {
+      "key": "nist-ai-rmf",
+      "kind": "framework",
+      "granularity": "function",
+      "name": "NIST AI Risk Management Framework 1.0",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "governance": "nist-ai-rmf"
+    },
+    {
+      "key": "owasp-llm-top10",
+      "kind": "framework",
+      "granularity": "entry",
+      "name": "OWASP Top 10 for LLM Applications",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "governance": "owasp-llm-top10"
+    },
+    {
+      "key": "mitre-atlas",
+      "kind": "framework",
+      "granularity": "tactic",
+      "name": "MITRE ATLAS",
+      "url": "https://atlas.mitre.org/",
+      "governance": "mitre-atlas"
+    }
+  ],
+  "controls": [
+    {
+      "id": "ACM-01",
+      "group": "permissions",
+      "patterns": [
+        "least-privilege-tooling"
+      ],
+      "knowledge": [
+        "tool-use",
+        "ai-cyberdefense"
+      ],
+      "governance": [
+        "owasp-llm-top10"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 9",
+          "Art. 14",
+          "Art. 26"
+        ],
+        "iso-42001": [
+          "A.6 AI system life cycle",
+          "A.9 Use of AI systems"
+        ],
+        "nist-ai-rmf": [
+          "GOVERN",
+          "MAP"
+        ],
+        "owasp-llm-top10": [
+          "LLM06 Excessive Agency"
+        ],
+        "mitre-atlas": [
+          "Initial Access",
+          "Privilege Escalation"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Scoped tool catalogue",
+          "statement": "Every tool the agent can call is listed, with its scope, whether it writes, and what an attacker gains by calling it. A tool nobody documented is a permission nobody reviewed.",
+          "test": "Produce the catalogue. Every entry has a written scope and a named owner, and nothing the agent can call is missing from it."
+        },
+        "es": {
+          "name": "Catálogo de herramientas acotado",
+          "statement": "Toda herramienta que el agente puede invocar está listada, con su alcance, si escribe y qué gana un atacante al invocarla. Una herramienta que nadie documentó es un permiso que nadie revisó.",
+          "test": "Produce el catálogo. Cada entrada tiene alcance escrito y responsable con nombre, y nada de lo que el agente puede invocar falta en él."
+        },
+        "pt": {
+          "name": "Catálogo de ferramentas delimitado",
+          "statement": "Toda ferramenta que o agente pode invocar está listada, com seu escopo, se escreve e o que um atacante ganha ao invocá-la. Uma ferramenta que ninguém documentou é uma permissão que ninguém revisou.",
+          "test": "Produza o catálogo. Cada entrada tem escopo escrito e responsável nomeado, e nada do que o agente pode invocar está fora dele."
+        }
+      }
+    },
+    {
+      "id": "ACM-02",
+      "group": "permissions",
+      "patterns": [
+        "least-privilege-tooling"
+      ],
+      "knowledge": [
+        "tool-use"
+      ],
+      "governance": [
+        "owasp-llm-top10"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 15",
+          "Art. 26"
+        ],
+        "iso-42001": [
+          "A.4 Resources for AI systems",
+          "A.6 AI system life cycle"
+        ],
+        "nist-ai-rmf": [
+          "GOVERN",
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM06 Excessive Agency",
+          "LLM02 Sensitive Information Disclosure"
+        ],
+        "mitre-atlas": [
+          "Credential Access",
+          "Privilege Escalation"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Per-tool credentials at minimum scope",
+          "statement": "Each tool holds its own credential, issued at the narrowest scope the upstream system supports. A read-only tool backed by an admin token is one bug away from being a write tool.",
+          "test": "For each tool, show the credential and its server-side scope. No two tools share a credential whose reach exceeds either one."
+        },
+        "es": {
+          "name": "Credenciales por herramienta con alcance mínimo",
+          "statement": "Cada herramienta tiene su credencial, emitida con el alcance más estrecho que soporte el sistema de arriba. Una herramienta de solo lectura respaldada por un token de administrador está a un bug de ser de escritura.",
+          "test": "Para cada herramienta, muestra la credencial y su alcance en el servidor. Ninguna pareja de herramientas comparte una credencial cuyo alcance exceda al de cualquiera de las dos."
+        },
+        "pt": {
+          "name": "Credenciais por ferramenta no escopo mínimo",
+          "statement": "Cada ferramenta tem sua credencial, emitida no escopo mais estreito que o sistema a montante suporta. Uma ferramenta somente leitura apoiada por um token de administrador está a um bug de virar de escrita.",
+          "test": "Para cada ferramenta, mostre a credencial e seu escopo no servidor. Nenhum par de ferramentas compartilha credencial cujo alcance exceda o de qualquer uma delas."
+        }
+      }
+    },
+    {
+      "id": "ACM-03",
+      "group": "permissions",
+      "patterns": [
+        "least-privilege-tooling"
+      ],
+      "knowledge": [
+        "prompt-injection"
+      ],
+      "governance": [
+        "owasp-llm-top10",
+        "mitre-atlas"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 15"
+        ],
+        "iso-42001": [
+          "A.6 AI system life cycle"
+        ],
+        "nist-ai-rmf": [
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM01 Prompt Injection",
+          "LLM06 Excessive Agency"
+        ],
+        "mitre-atlas": [
+          "Execution",
+          "Impact"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Parameter allowlists",
+          "statement": "The targets a tool may address — paths, repositories, tables, accounts, recipients — are constrained server-side, so a hijacked agent cannot repoint a legitimate tool at an illegitimate target.",
+          "test": "Call each write-capable tool with an out-of-scope target. The call is refused by the tool's own boundary, not by the model declining."
+        },
+        "es": {
+          "name": "Listas de permitidos de parámetros",
+          "statement": "Los objetivos a los que una herramienta puede dirigirse —rutas, repositorios, tablas, cuentas, destinatarios— están acotados en el servidor, de modo que un agente secuestrado no pueda reapuntar una herramienta legítima a un objetivo ilegítimo.",
+          "test": "Invoca cada herramienta con escritura contra un objetivo fuera de alcance. La llamada se rechaza en la frontera de la propia herramienta, no porque el modelo se niegue."
+        },
+        "pt": {
+          "name": "Listas de permitidos de parâmetros",
+          "statement": "Os alvos que uma ferramenta pode endereçar — caminhos, repositórios, tabelas, contas, destinatários — são limitados no servidor, de modo que um agente sequestrado não consiga reapontar uma ferramenta legítima para um alvo ilegítimo.",
+          "test": "Invoque cada ferramenta com escrita contra um alvo fora do escopo. A chamada é recusada na fronteira da própria ferramenta, não porque o modelo se recusou."
+        }
+      }
+    },
+    {
+      "id": "ACM-04",
+      "group": "egress",
+      "patterns": [
+        "egress-allowlist"
+      ],
+      "knowledge": [
+        "ai-cyberdefense",
+        "agentic-threat-model"
+      ],
+      "governance": [
+        "owasp-llm-top10",
+        "mitre-atlas"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 15"
+        ],
+        "iso-42001": [
+          "A.6 AI system life cycle",
+          "A.7 Data for AI systems"
+        ],
+        "nist-ai-rmf": [
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM02 Sensitive Information Disclosure",
+          "LLM01 Prompt Injection"
+        ],
+        "mitre-atlas": [
+          "Exfiltration",
+          "Collection"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Default-deny egress",
+          "statement": "Outbound traffic reaches only named destinations; everything else is refused. Every exfiltration path ends in an outbound request, so this is the control that still works after the model has been convinced.",
+          "test": "From inside the agent's environment, request a host that is not on the list. It fails at the network or proxy layer and the refusal is logged."
+        },
+        "es": {
+          "name": "Salida denegada por defecto",
+          "statement": "El tráfico saliente solo llega a destinos nombrados; todo lo demás se rechaza. Toda ruta de exfiltración termina en una petición saliente, así que este es el control que sigue funcionando cuando ya han convencido al modelo.",
+          "test": "Desde dentro del entorno del agente, pide un host que no esté en la lista. Falla en la capa de red o de proxy y el rechazo queda registrado."
+        },
+        "pt": {
+          "name": "Saída negada por padrão",
+          "statement": "O tráfego de saída alcança apenas destinos nomeados; todo o resto é recusado. Todo caminho de exfiltração termina em uma requisição de saída, então este é o controle que continua funcionando depois que o modelo foi convencido.",
+          "test": "De dentro do ambiente do agente, requisite um host fora da lista. Falha na camada de rede ou de proxy e a recusa fica registrada."
+        }
+      }
+    },
+    {
+      "id": "ACM-05",
+      "group": "egress",
+      "patterns": [
+        "egress-allowlist"
+      ],
+      "knowledge": [
+        "ai-observability"
+      ],
+      "governance": [
+        "mitre-atlas"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 12",
+          "Art. 72"
+        ],
+        "iso-42001": [
+          "A.6 AI system life cycle",
+          "Clause 9 Performance evaluation"
+        ],
+        "nist-ai-rmf": [
+          "MEASURE",
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM02 Sensitive Information Disclosure"
+        ],
+        "mitre-atlas": [
+          "Exfiltration"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Denied egress is an alert, not an error",
+          "statement": "Refused outbound requests are logged as security signal and reach a human. A denial is one of the few unambiguous attack signals an agent stack produces, and it is worthless if it lands in the same bucket as a timeout.",
+          "test": "Trigger a denial. It appears as a distinct, alertable event with the destination and the calling agent, not as a generic network error."
+        },
+        "es": {
+          "name": "Una salida denegada es una alerta, no un error",
+          "statement": "Las peticiones salientes rechazadas se registran como señal de seguridad y llegan a una persona. Una denegación es una de las pocas señales de ataque inequívocas que produce una pila agéntica, y no vale nada si cae en el mismo cajón que un timeout.",
+          "test": "Provoca una denegación. Aparece como evento distinguible y alertable, con el destino y el agente que llamó, no como un error de red genérico."
+        },
+        "pt": {
+          "name": "Uma saída negada é um alerta, não um erro",
+          "statement": "As requisições de saída recusadas são registradas como sinal de segurança e chegam a uma pessoa. Uma negação é um dos poucos sinais de ataque inequívocos que uma pilha agêntica produz, e não vale nada se cair no mesmo balde de um timeout.",
+          "test": "Provoque uma negação. Ela aparece como evento distinguível e alertável, com o destino e o agente que chamou, não como erro de rede genérico."
+        }
+      }
+    },
+    {
+      "id": "ACM-06",
+      "group": "execution",
+      "patterns": [
+        "sandboxed-execution"
+      ],
+      "knowledge": [
+        "ai-cyberdefense"
+      ],
+      "governance": [
+        "owasp-llm-top10",
+        "mitre-atlas"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 15"
+        ],
+        "iso-42001": [
+          "A.6 AI system life cycle"
+        ],
+        "nist-ai-rmf": [
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM05 Improper Output Handling",
+          "LLM03 Supply Chain"
+        ],
+        "mitre-atlas": [
+          "Execution",
+          "Persistence"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Ephemeral, credential-free execution",
+          "statement": "Anything the agent generates or invokes runs in an environment created per task and destroyed after, holding no ambient credentials. Persistence is how a one-off compromise becomes a foothold.",
+          "test": "Inside a live task, enumerate the environment. No credential is present that the task did not need, and the environment does not survive the task."
+        },
+        "es": {
+          "name": "Ejecución efímera y sin credenciales",
+          "statement": "Todo lo que el agente genera o invoca corre en un entorno creado por tarea y destruido al terminar, sin credenciales ambientales. La persistencia es cómo un compromiso puntual se convierte en punto de apoyo.",
+          "test": "Dentro de una tarea en vivo, enumera el entorno. No hay ninguna credencial que la tarea no necesitara, y el entorno no sobrevive a la tarea."
+        },
+        "pt": {
+          "name": "Execução efêmera e sem credenciais",
+          "statement": "Tudo o que o agente gera ou invoca roda em um ambiente criado por tarefa e destruído ao final, sem credenciais ambientais. A persistência é como um comprometimento pontual vira ponto de apoio.",
+          "test": "Dentro de uma tarefa ao vivo, enumere o ambiente. Não há credencial que a tarefa não precisasse, e o ambiente não sobrevive à tarefa."
+        }
+      }
+    },
+    {
+      "id": "ACM-07",
+      "group": "execution",
+      "patterns": [
+        "sandboxed-execution",
+        "recovery-strategy"
+      ],
+      "knowledge": [
+        "ai-observability"
+      ],
+      "governance": [
+        "owasp-llm-top10"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 15"
+        ],
+        "iso-42001": [
+          "A.4 Resources for AI systems",
+          "Clause 8 Operation"
+        ],
+        "nist-ai-rmf": [
+          "MEASURE",
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM10 Unbounded Consumption"
+        ],
+        "mitre-atlas": [
+          "Impact"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Resource caps and timeouts",
+          "statement": "CPU, memory, disk, wall-clock and call count are bounded by the host. Runaway consumption is the failure mode that arrives first and most often, usually with no adversary involved at all.",
+          "test": "Run a task designed not to terminate. It is stopped by a quota, the stop is recorded, and the cost of the attempt is bounded and known."
+        },
+        "es": {
+          "name": "Límites de recursos y timeouts",
+          "statement": "CPU, memoria, disco, tiempo de reloj y número de llamadas los acota el anfitrión. El consumo desbocado es el modo de fallo que llega primero y más a menudo, normalmente sin ningún adversario.",
+          "test": "Ejecuta una tarea diseñada para no terminar. La detiene una cuota, la parada queda registrada y el coste del intento es acotado y conocido."
+        },
+        "pt": {
+          "name": "Limites de recursos e timeouts",
+          "statement": "CPU, memória, disco, tempo de relógio e número de chamadas são limitados pelo host. O consumo descontrolado é o modo de falha que chega primeiro e com mais frequência, normalmente sem adversário algum.",
+          "test": "Execute uma tarefa projetada para não terminar. Ela é interrompida por uma cota, a parada fica registrada e o custo da tentativa é limitado e conhecido."
+        }
+      }
+    },
+    {
+      "id": "ACM-08",
+      "group": "oversight",
+      "patterns": [
+        "human-approval-gate"
+      ],
+      "knowledge": [
+        "human-in-the-loop"
+      ],
+      "governance": [
+        "eu-ai-act",
+        "human-oversight-and-accountability-policy"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 14",
+          "Art. 26"
+        ],
+        "iso-42001": [
+          "A.9 Use of AI systems",
+          "A.5 Assessing impacts of AI systems"
+        ],
+        "nist-ai-rmf": [
+          "GOVERN",
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM06 Excessive Agency"
+        ],
+        "mitre-atlas": [
+          "Impact"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Approval gate on high-impact actions",
+          "statement": "Actions that are irreversible, regulated or expensive stop for a person who can approve, edit or reject, with enough context to decide. Gate by risk, not by default — over-gating produces rubber-stamping, which is worse than no gate because it looks like one.",
+          "test": "List the gated actions and the risk criterion that put them there. Attempt one; it suspends, routes, and records the decision with the identity of who made it."
+        },
+        "es": {
+          "name": "Puerta de aprobación en acciones de alto impacto",
+          "statement": "Las acciones irreversibles, reguladas o caras se detienen ante una persona que puede aprobar, editar o rechazar, con contexto suficiente para decidir. Acota por riesgo, no por defecto: poner puertas de más produce aprobación automática, que es peor que no tener puerta porque lo parece.",
+          "test": "Lista las acciones con puerta y el criterio de riesgo que las puso ahí. Intenta una; se suspende, se enruta y se registra la decisión con la identidad de quien la tomó."
+        },
+        "pt": {
+          "name": "Portão de aprovação em ações de alto impacto",
+          "statement": "Ações irreversíveis, reguladas ou caras param diante de uma pessoa que pode aprovar, editar ou rejeitar, com contexto suficiente para decidir. Delimite por risco, não por padrão: portões demais produzem aprovação automática, que é pior do que não ter portão porque parece um.",
+          "test": "Liste as ações com portão e o critério de risco que as colocou ali. Tente uma; ela suspende, roteia e registra a decisão com a identidade de quem a tomou."
+        }
+      }
+    },
+    {
+      "id": "ACM-09",
+      "group": "oversight",
+      "patterns": [
+        "human-escalation"
+      ],
+      "knowledge": [
+        "human-in-the-loop"
+      ],
+      "governance": [
+        "human-oversight-and-accountability-policy"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 14"
+        ],
+        "iso-42001": [
+          "A.9 Use of AI systems"
+        ],
+        "nist-ai-rmf": [
+          "GOVERN",
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM09 Misinformation"
+        ],
+        "mitre-atlas": []
+      },
+      "locales": {
+        "en": {
+          "name": "Escalation path with a named owner",
+          "statement": "When the agent is uncertain, blocked or out of policy, there is a defined path to a person, and that person is named. An escalation route with no owner is a queue.",
+          "test": "Force an escalation. It reaches a named human within the stated time, and the handoff carries the context needed to act without re-deriving it."
+        },
+        "es": {
+          "name": "Vía de escalado con responsable con nombre",
+          "statement": "Cuando el agente duda, se bloquea o se sale de política, hay una vía definida hacia una persona, y esa persona tiene nombre. Una vía de escalado sin responsable es una cola.",
+          "test": "Fuerza un escalado. Llega a un humano con nombre dentro del tiempo declarado, y el traspaso lleva el contexto necesario para actuar sin volver a deducirlo."
+        },
+        "pt": {
+          "name": "Via de escalonamento com responsável nomeado",
+          "statement": "Quando o agente hesita, trava ou sai da política, há uma via definida até uma pessoa, e essa pessoa tem nome. Uma via de escalonamento sem responsável é uma fila.",
+          "test": "Force um escalonamento. Ele chega a um humano nomeado dentro do tempo declarado, e a passagem carrega o contexto necessário para agir sem rededuzi-lo."
+        }
+      }
+    },
+    {
+      "id": "ACM-10",
+      "group": "observability",
+      "patterns": [],
+      "knowledge": [
+        "ai-observability"
+      ],
+      "governance": [
+        "audit-framework-for-agentic-systems"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 12",
+          "Art. 19",
+          "Art. 72"
+        ],
+        "iso-42001": [
+          "Clause 9 Performance evaluation",
+          "A.6 AI system life cycle"
+        ],
+        "nist-ai-rmf": [
+          "MEASURE",
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM02 Sensitive Information Disclosure"
+        ],
+        "mitre-atlas": [
+          "Discovery",
+          "Collection"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Correlated trace of every decision and tool call",
+          "statement": "Each run produces an immutable, correlated record: inputs, model and version, tool calls with arguments and outcomes, and the final action. Enough to reconstruct what happened, and nothing that turns the log itself into the breach.",
+          "test": "Pick a past run at random and reconstruct it end to end from the log alone. Then confirm the log holds no secret or raw personal data it did not need."
+        },
+        "es": {
+          "name": "Traza correlada de cada decisión y llamada a herramienta",
+          "statement": "Cada ejecución produce un registro inmutable y correlado: entradas, modelo y versión, llamadas a herramientas con argumentos y resultados, y la acción final. Lo suficiente para reconstruir qué pasó, y nada que convierta el propio log en la brecha.",
+          "test": "Coge una ejecución pasada al azar y reconstrúyela de punta a punta solo desde el log. Después confirma que el log no guarda ningún secreto ni dato personal en crudo que no necesitara."
+        },
+        "pt": {
+          "name": "Trace correlacionado de cada decisão e chamada de ferramenta",
+          "statement": "Cada execução produz um registro imutável e correlacionado: entradas, modelo e versão, chamadas de ferramentas com argumentos e resultados, e a ação final. O suficiente para reconstruir o que aconteceu, e nada que transforme o próprio log na brecha.",
+          "test": "Pegue uma execução passada ao acaso e reconstrua-a de ponta a ponta só pelo log. Depois confirme que o log não guarda nenhum segredo ou dado pessoal cru de que não precisava."
+        }
+      }
+    },
+    {
+      "id": "ACM-11",
+      "group": "observability",
+      "patterns": [
+        "evaluator-optimizer"
+      ],
+      "knowledge": [
+        "agentic-evaluation"
+      ],
+      "governance": [
+        "audit-framework-for-agentic-systems",
+        "nist-ai-rmf"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 9",
+          "Art. 15",
+          "Art. 17"
+        ],
+        "iso-42001": [
+          "A.6 AI system life cycle",
+          "Clause 9 Performance evaluation"
+        ],
+        "nist-ai-rmf": [
+          "MEASURE"
+        ],
+        "owasp-llm-top10": [
+          "LLM09 Misinformation"
+        ],
+        "mitre-atlas": []
+      },
+      "locales": {
+        "en": {
+          "name": "Evaluation suite gating change",
+          "statement": "A curated set of cases runs on every change, and a regression blocks release. Without it, 'it seems to work' is the entire quality argument, and nothing distinguishes a fix from a change.",
+          "test": "Introduce a known regression. The suite catches it and the change does not ship. A suite never seen failing is a suite never verified."
+        },
+        "es": {
+          "name": "Suite de evaluación que condiciona los cambios",
+          "statement": "Un conjunto curado de casos se ejecuta en cada cambio, y una regresión bloquea el despliegue. Sin eso, «parece que funciona» es todo el argumento de calidad, y nada distingue un arreglo de un cambio.",
+          "test": "Introduce una regresión conocida. La suite la caza y el cambio no sale. Una suite que nunca se ha visto fallar es una suite que nunca se ha verificado."
+        },
+        "pt": {
+          "name": "Suíte de avaliação que condiciona mudanças",
+          "statement": "Um conjunto curado de casos roda a cada mudança, e uma regressão bloqueia o lançamento. Sem isso, «parece que funciona» é todo o argumento de qualidade, e nada distingue uma correção de uma mudança.",
+          "test": "Introduza uma regressão conhecida. A suíte a pega e a mudança não sai. Uma suíte que nunca foi vista falhando é uma suíte que nunca foi verificada."
+        }
+      }
+    },
+    {
+      "id": "ACM-12",
+      "group": "lifecycle",
+      "patterns": [
+        "least-privilege-tooling",
+        "egress-allowlist"
+      ],
+      "knowledge": [
+        "prompt-injection",
+        "guardrails"
+      ],
+      "governance": [
+        "owasp-llm-top10",
+        "mitre-atlas"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 15"
+        ],
+        "iso-42001": [
+          "A.6 AI system life cycle",
+          "A.7 Data for AI systems"
+        ],
+        "nist-ai-rmf": [
+          "MAP",
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM01 Prompt Injection"
+        ],
+        "mitre-atlas": [
+          "Initial Access",
+          "AI Attack Staging"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Untrusted content is isolated and marked",
+          "statement": "Retrieved documents, tool results and third-party output are delimited as data, never merged into the instruction channel. The model cannot reliably tell them apart, so the harness must.",
+          "test": "Plant an instruction inside a document the agent retrieves. The agent may read it; it must not act on it, and the attempt must be visible afterwards."
+        },
+        "es": {
+          "name": "El contenido no confiable se aísla y se marca",
+          "statement": "Documentos recuperados, resultados de herramientas y salida de terceros se delimitan como datos, nunca se funden con el canal de instrucciones. El modelo no sabe distinguirlos de forma fiable, así que tiene que hacerlo el arnés.",
+          "test": "Planta una instrucción dentro de un documento que el agente recupere. El agente puede leerla; no debe actuar sobre ella, y el intento debe quedar visible después."
+        },
+        "pt": {
+          "name": "O conteúdo não confiável é isolado e marcado",
+          "statement": "Documentos recuperados, resultados de ferramentas e saída de terceiros são delimitados como dados, nunca fundidos ao canal de instruções. O modelo não sabe distingui-los de forma confiável, então o harness precisa fazê-lo.",
+          "test": "Plante uma instrução dentro de um documento que o agente recupere. O agente pode lê-la; não deve agir sobre ela, e a tentativa deve ficar visível depois."
+        }
+      }
+    },
+    {
+      "id": "ACM-13",
+      "group": "lifecycle",
+      "patterns": [],
+      "knowledge": [
+        "guardrails"
+      ],
+      "governance": [
+        "owasp-llm-top10"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 15",
+          "Art. 50"
+        ],
+        "iso-42001": [
+          "A.8 Information for interested parties"
+        ],
+        "nist-ai-rmf": [
+          "MEASURE",
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM05 Improper Output Handling",
+          "LLM07 System Prompt Leakage"
+        ],
+        "mitre-atlas": [
+          "Defense Evasion"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Model output treated as untrusted input",
+          "statement": "Anything the model emits that reaches a renderer, a shell, a query or another system is encoded and validated exactly as input from a stranger would be.",
+          "test": "Make the model emit a payload for each downstream sink you have. Each is neutralised at the boundary before it arrives."
+        },
+        "es": {
+          "name": "La salida del modelo se trata como entrada no confiable",
+          "statement": "Todo lo que el modelo emita y llegue a un renderizador, un shell, una consulta u otro sistema se codifica y valida exactamente igual que la entrada de un desconocido.",
+          "test": "Haz que el modelo emita un payload para cada destino que tengas aguas abajo. Cada uno se neutraliza en la frontera antes de llegar."
+        },
+        "pt": {
+          "name": "A saída do modelo é tratada como entrada não confiável",
+          "statement": "Tudo o que o modelo emite e chega a um renderizador, a um shell, a uma consulta ou a outro sistema é codificado e validado exatamente como a entrada de um desconhecido.",
+          "test": "Faça o modelo emitir um payload para cada destino a jusante que você tenha. Cada um é neutralizado na fronteira antes de chegar."
+        }
+      }
+    },
+    {
+      "id": "ACM-14",
+      "group": "lifecycle",
+      "patterns": [],
+      "knowledge": [
+        "agent-memory",
+        "agentic-threat-model"
+      ],
+      "governance": [
+        "mitre-atlas"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 10",
+          "Art. 15"
+        ],
+        "iso-42001": [
+          "A.7 Data for AI systems"
+        ],
+        "nist-ai-rmf": [
+          "MAP",
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM04 Data and Model Poisoning",
+          "LLM08 Vector and Embedding Weaknesses"
+        ],
+        "mitre-atlas": [
+          "Persistence",
+          "AI Attack Staging"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Memory integrity and expiry",
+          "statement": "What the agent writes to persistent memory is attributed, reviewable and expirable. Memory is what turns a one-shot attack into one that re-triggers on future, unrelated tasks.",
+          "test": "Write a false fact through a normal interaction. Show where it came from, who can remove it, and when it would expire on its own."
+        },
+        "es": {
+          "name": "Integridad y caducidad de la memoria",
+          "statement": "Lo que el agente escribe en memoria persistente está atribuido, es revisable y caduca. La memoria es lo que convierte un ataque puntual en uno que se vuelve a disparar en tareas futuras sin relación.",
+          "test": "Escribe un hecho falso a través de una interacción normal. Muestra de dónde vino, quién puede retirarlo y cuándo caducaría por sí solo."
+        },
+        "pt": {
+          "name": "Integridade e expiração da memória",
+          "statement": "O que o agente grava em memória persistente é atribuído, revisável e expira. A memória é o que transforma um ataque pontual em um que volta a disparar em tarefas futuras e não relacionadas.",
+          "test": "Grave um fato falso por meio de uma interação normal. Mostre de onde veio, quem pode removê-lo e quando expiraria sozinho."
+        }
+      }
+    },
+    {
+      "id": "ACM-15",
+      "group": "lifecycle",
+      "patterns": [],
+      "knowledge": [
+        "mcp-security",
+        "agentic-threat-model"
+      ],
+      "governance": [
+        "owasp-llm-top10",
+        "mitre-atlas"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 10",
+          "Art. 11",
+          "Art. 25"
+        ],
+        "iso-42001": [
+          "A.10 Third-party and customer relationships",
+          "A.6 AI system life cycle"
+        ],
+        "nist-ai-rmf": [
+          "GOVERN",
+          "MAP"
+        ],
+        "owasp-llm-top10": [
+          "LLM03 Supply Chain",
+          "LLM04 Data and Model Poisoning"
+        ],
+        "mitre-atlas": [
+          "Resource Development",
+          "Initial Access"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Provenance for models, prompts and servers",
+          "statement": "Models, system prompts, MCP servers, packages and datasets are pinned, reviewed on change, and traceable to a source. A dependency that can rewrite a tool description can rewrite the agent's behaviour.",
+          "test": "For each external dependency, name the pinned version and who reviewed the last change. Change a tool description upstream; the change is detected before it reaches production."
+        },
+        "es": {
+          "name": "Procedencia de modelos, prompts y servidores",
+          "statement": "Modelos, system prompts, servidores MCP, paquetes y datasets están fijados, se revisan al cambiar y son trazables a un origen. Una dependencia que puede reescribir la descripción de una herramienta puede reescribir el comportamiento del agente.",
+          "test": "Para cada dependencia externa, nombra la versión fijada y quién revisó el último cambio. Cambia una descripción de herramienta aguas arriba; el cambio se detecta antes de llegar a producción."
+        },
+        "pt": {
+          "name": "Procedência de modelos, prompts e servidores",
+          "statement": "Modelos, system prompts, servidores MCP, pacotes e datasets são fixados, revisados a cada mudança e rastreáveis até uma origem. Uma dependência que pode reescrever a descrição de uma ferramenta pode reescrever o comportamento do agente.",
+          "test": "Para cada dependência externa, nomeie a versão fixada e quem revisou a última mudança. Altere uma descrição de ferramenta a montante; a mudança é detectada antes de chegar à produção."
+        }
+      }
+    },
+    {
+      "id": "ACM-16",
+      "group": "egress",
+      "patterns": [],
+      "knowledge": [
+        "mcp-security"
+      ],
+      "governance": [
+        "owasp-llm-top10",
+        "mitre-atlas"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 15"
+        ],
+        "iso-42001": [
+          "A.6 AI system life cycle"
+        ],
+        "nist-ai-rmf": [
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM10 Unbounded Consumption",
+          "LLM06 Excessive Agency"
+        ],
+        "mitre-atlas": [
+          "Initial Access",
+          "AI Model Access"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Transport and origin validation on exposed endpoints",
+          "statement": "An agent endpoint reachable from outside validates its transport before doing work: origin checked against an allowlist, browser-initiated cross-site calls rejected, and every caller rate limited with a real 429.",
+          "test": "Call the endpoint with a foreign Origin and with no Origin. The first is rejected before any handler runs; the second is served and counted against its caller's limit."
+        },
+        "es": {
+          "name": "Validación de transporte y origen en endpoints expuestos",
+          "statement": "Un endpoint de agente accesible desde fuera valida el transporte antes de trabajar: origen comprobado contra una lista, llamadas cross-site iniciadas por navegador rechazadas y todo llamante con límite de tasa y un 429 real.",
+          "test": "Llama al endpoint con un Origin ajeno y sin Origin. El primero se rechaza antes de ejecutar ningún handler; el segundo se sirve y cuenta contra el límite de su llamante."
+        },
+        "pt": {
+          "name": "Validação de transporte e origem em endpoints expostos",
+          "statement": "Um endpoint de agente acessível de fora valida o transporte antes de trabalhar: origem verificada contra uma lista, chamadas cross-site iniciadas por navegador recusadas e todo chamador com limite de taxa e um 429 real.",
+          "test": "Chame o endpoint com um Origin alheio e sem Origin. O primeiro é recusado antes de qualquer handler rodar; o segundo é servido e conta contra o limite do seu chamador."
+        }
+      }
+    },
+    {
+      "id": "ACM-17",
+      "group": "execution",
+      "patterns": [
+        "recovery-strategy"
+      ],
+      "knowledge": [
+        "human-in-the-loop"
+      ],
+      "governance": [
+        "audit-framework-for-agentic-systems"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 14",
+          "Art. 15",
+          "Art. 26"
+        ],
+        "iso-42001": [
+          "Clause 8 Operation",
+          "Clause 10 Improvement"
+        ],
+        "nist-ai-rmf": [
+          "MANAGE"
+        ],
+        "owasp-llm-top10": [
+          "LLM06 Excessive Agency"
+        ],
+        "mitre-atlas": [
+          "Impact"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "Reversibility and a stop control",
+          "statement": "Every action the agent can take is either reversible or gated, and a person can stop the agent mid-run without stopping the whole system. Autonomy without an off switch is not autonomy, it is exposure.",
+          "test": "Stop a running agent. It halts within the stated time, leaves no half-applied change, and the stop is recorded with who issued it."
+        },
+        "es": {
+          "name": "Reversibilidad y control de parada",
+          "statement": "Toda acción que el agente puede tomar es reversible o tiene puerta, y una persona puede pararlo a mitad de ejecución sin parar el sistema entero. Autonomía sin interruptor no es autonomía, es exposición.",
+          "test": "Para un agente en marcha. Se detiene dentro del tiempo declarado, no deja ningún cambio a medio aplicar y la parada queda registrada con quién la ordenó."
+        },
+        "pt": {
+          "name": "Reversibilidade e controle de parada",
+          "statement": "Toda ação que o agente pode tomar é reversível ou tem portão, e uma pessoa pode pará-lo no meio da execução sem parar o sistema inteiro. Autonomia sem interruptor não é autonomia, é exposição.",
+          "test": "Pare um agente em execução. Ele para dentro do tempo declarado, não deixa nenhuma mudança pela metade e a parada fica registrada com quem a ordenou."
+        }
+      }
+    },
+    {
+      "id": "ACM-18",
+      "group": "lifecycle",
+      "patterns": [],
+      "knowledge": [
+        "agentic-threat-model",
+        "ai-cyberdefense"
+      ],
+      "governance": [
+        "mitre-atlas",
+        "owasp-llm-top10",
+        "agentic-ai-governance-checklist"
+      ],
+      "mappings": {
+        "eu-ai-act": [
+          "Art. 9",
+          "Art. 72"
+        ],
+        "iso-42001": [
+          "A.5 Assessing impacts of AI systems",
+          "Clause 10 Improvement"
+        ],
+        "nist-ai-rmf": [
+          "MAP",
+          "GOVERN"
+        ],
+        "owasp-llm-top10": [
+          "LLM01 Prompt Injection",
+          "LLM06 Excessive Agency"
+        ],
+        "mitre-atlas": [
+          "Reconnaissance",
+          "AI Attack Staging"
+        ]
+      },
+      "locales": {
+        "en": {
+          "name": "A threat model that is maintained and tested",
+          "statement": "The attack surfaces are written down with a control and an owner each, accepted risks are named as accepted, and the document is revisited whenever a tool, a data source or an autonomy level changes.",
+          "test": "Show the current threat model and the date of the last change to the tool catalogue. If the catalogue is newer than the model, the model is out of date and this control fails."
+        },
+        "es": {
+          "name": "Un modelo de amenazas mantenido y probado",
+          "statement": "Las superficies de ataque están escritas, cada una con control y responsable, los riesgos aceptados se nombran como aceptados, y el documento se revisa siempre que cambia una herramienta, una fuente de datos o un nivel de autonomía.",
+          "test": "Muestra el modelo de amenazas vigente y la fecha del último cambio en el catálogo de herramientas. Si el catálogo es más nuevo que el modelo, el modelo está caducado y este control falla."
+        },
+        "pt": {
+          "name": "Um modelo de ameaças mantido e testado",
+          "statement": "As superfícies de ataque estão escritas, cada uma com controle e responsável, os riscos aceitos são nomeados como aceitos, e o documento é revisitado sempre que uma ferramenta, uma fonte de dados ou um nível de autonomia muda.",
+          "test": "Mostre o modelo de ameaças vigente e a data da última mudança no catálogo de ferramentas. Se o catálogo for mais novo que o modelo, o modelo está desatualizado e este controle falha."
+        }
+      }
+    }
+  ]
+}

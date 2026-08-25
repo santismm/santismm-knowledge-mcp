@@ -710,7 +710,9 @@
     {
       "id": "ACM-14",
       "group": "lifecycle",
-      "patterns": [],
+      "patterns": [
+        "attributed-memory"
+      ],
       "knowledge": [
         "agent-memory",
         "agentic-threat-model"

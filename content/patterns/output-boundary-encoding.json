@@ -1,0 +1,320 @@
+{
+  "slug": "output-boundary-encoding",
+  "category": "safety",
+  "updated": "2026-08-25",
+  "version": "1.0",
+  "technologies": [
+    "Context-aware output encoders",
+    "Markdown renderers with raw HTML disabled",
+    "Parameterised queries and ORM bindings",
+    "argv-array process execution",
+    "URL and egress allowlists",
+    "JSON Schema validation of tool-call arguments"
+  ],
+  "related": [
+    "egress-allowlist",
+    "least-privilege-tooling",
+    "sandboxed-execution",
+    "human-approval-gate",
+    "attributed-memory"
+  ],
+  "references": [
+    {
+      "title": "OWASP — Top 10 for LLM Applications",
+      "url": "https://genai.owasp.org/llm-top-10/"
+    },
+    {
+      "title": "OWASP LLM01 — Prompt Injection (the paired risk)",
+      "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    },
+    {
+      "title": "MITRE ATLAS — adversarial techniques against AI systems",
+      "url": "https://atlas.mitre.org/"
+    },
+    {
+      "title": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "EU AI Act — Article 15 (accuracy, robustness and cybersecurity)",
+      "url": "https://artificialintelligenceact.eu/article/15/"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "medium",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "locales": {
+    "en": {
+      "name": "Output Boundary Encoding",
+      "summary": "Treat everything the model emits as hostile input to whatever consumes it. Encode and validate at each destination — renderer, shell, query, downstream agent — using that destination's own rules. One global sanitiser cannot do this: escaping that is correct for HTML is meaningless for a shell.",
+      "definition": "Output boundary encoding is the practice of applying destination-specific encoding and validation to model output at every point where it crosses into a system that will interpret it, rather than filtering it once, generically, on the way out of the model. Its absence is the weakness OWASP names as improper output handling.",
+      "problem": "Teams harden the input side against prompt injection and leave the output side open. The model's text then reaches a renderer, a shell, a database or another agent's context, where it is interpreted as instruction rather than displayed as data. The attacker never has to reach the model directly.",
+      "context": "Any agent whose output reaches something that parses it: a chat interface rendering markdown, a coding agent running a suggested command, a tool call built from generated arguments, a summary fed into a second agent's prompt, or a webhook that forwards the text onward.",
+      "solution": [
+        "Enumerate the destinations before writing any filter. Every place model output lands and is interpreted — HTML renderer, shell, query, file path, URL fetcher, another agent's context, a downstream webhook — is a distinct boundary with distinct rules.",
+        "Encode at the destination, not at the source. HTML-escape for the renderer, parameterise for the query, pass an argv array to the process. The encoding belongs where the interpretation happens, because only there do you know what will be interpreted.",
+        "Prefer structured output over prose you have to parse back. A tool call with typed arguments has a schema to validate against; a sentence you regex for a filename does not.",
+        "Validate the value, not only the syntax. An encoded path is still a path: check it resolves inside the directory you meant before opening it.",
+        "Treat outbound URLs as a destination of their own. Rendered images and links cause a fetch with no click, so they carry data out; allowlist the hosts a rendered link may reach.",
+        "Make the boundary the only route. If any code path can consume raw model output without passing a destination encoder, the control is advisory rather than real."
+      ],
+      "components": [
+        "A destination inventory: every consumer of model output, with the encoder each one requires.",
+        "Per-destination encoders — HTML, process argv, query parameters, path resolution, URL allowlist — rather than one shared sanitiser.",
+        "Schema-validated structured output for tool calls, so arguments are typed rather than parsed out of prose.",
+        "An egress allowlist covering the hosts reachable from rendered links and images.",
+        "Contract tests that emit a payload per destination and assert it is neutralised at the boundary.",
+        "Logging when an encoder neutralises something, so the boundary can tell you it is on the path."
+      ],
+      "benefits": [
+        "Breaks the injection chain where it matters: even a fully persuaded model cannot make a downstream system act, because that system never interprets its text.",
+        "Independent of model behaviour. It keeps working across model upgrades, new jailbreaks and prompt changes, because it does not depend on the model refusing anything.",
+        "Testable. Each destination has a payload and a pass or fail, so the control produces evidence rather than assurance.",
+        "Cheap when applied early. Adding an encoder is a boundary change; retrofitting one after the destination is everywhere is a refactor."
+      ],
+      "risks": [
+        "One sanitiser for every destination. It feels like a control, satisfies the checklist, and is wrong at every boundary except the one it was written for.",
+        "Encoding that breaks the product: over-escaping turns legitimate markdown, code blocks and non-Latin text into noise, and the pressure to loosen it lands on the encoder rather than on the destination list.",
+        "A destination inventory that ages. New integrations add consumers, and nothing fails when one is missed.",
+        "Confusing detection with encoding. Scanning output for suspicious strings catches last year's payloads; encoding does not need to recognise the attack at all."
+      ],
+      "whenNot": [
+        "Output that is never interpreted — a score, an enum, a boolean the caller compares. Constrain the type instead; an encoder on a closed value set is ceremony.",
+        "Fully local single-user tools with no rendering and no process execution, where the only consumer is a person reading text.",
+        "Where the destination already parameterises by construction, such as an ORM binding or a template engine that escapes by default. A second encoder gains nothing and can double-encode."
+      ],
+      "examples": [
+        "A support agent summarises a ticket whose body contains a markdown image pointing at an attacker's host. The console renders it, the browser fetches the URL, and the conversation leaks with nobody clicking anything. Disabling raw HTML and allowlisting image hosts closes it.",
+        "A coding agent proposes a shell command. The runner passes the string to a shell, so a filename containing a command separator executes. Passing an argv array instead removes the shell's parsing step entirely.",
+        "One agent's summary is placed into a second agent's prompt. The summary contained instructions, and the second agent followed them. Fencing the untrusted span and labelling it as data is the boundary in that case."
+      ],
+      "kpis": [
+        {
+          "metric": "Destination coverage",
+          "note": "Share of known model-output consumers with an encoder at the boundary. Below 100% the control has a specific hole, and naming the destination is more useful than a percentage that averages it away."
+        },
+        {
+          "metric": "Payload neutralisation rate",
+          "note": "Share of per-destination test payloads neutralised at the boundary. The target is 100%: anything else names a destination to fix rather than a number to improve."
+        },
+        {
+          "metric": "Time to cover a new destination",
+          "note": "How long from a new integration going live to its encoder existing. Measures whether the inventory keeps up with the product rather than whether it was right once."
+        },
+        {
+          "metric": "Boundary trigger volume",
+          "note": "How often encoders neutralise something in production. A flat zero usually means the encoder is not on the path, not that nothing hostile is arriving."
+        }
+      ],
+      "failureModes": [
+        "Silent exfiltration through rendered markup: an image or link causes a fetch without a click, so data leaves with no user action and no error anyone would notice.",
+        "Second-order injection: output encoded correctly for the console is stored and later rendered somewhere else — a log viewer, a ticket, a digest email — where that encoding does not apply.",
+        "The encoder that only sits on the happy path. Error branches, retries and fallbacks emit the same text through a different code path with nothing on it.",
+        "Double encoding. Two layers each escape correctly, users see escaped entities in the product, and the fix removes the wrong layer."
+      ],
+      "lessons": [
+        "Enumerate destinations before writing filters. Almost every real failure here is a consumer nobody listed, not an encoder that was written wrong.",
+        "The destination you forget is rarely a screen. It is a webhook, a log viewer, an export or a digest email — somewhere the output goes without anyone thinking of it as a render.",
+        "Encoding beats detection because encoding does not need to recognise the attack. A payload blocklist is a description of the attacks that were already public.",
+        "Do not let a single sanitise() become the answer. The name suggests completeness and the behaviour is correct for exactly one destination."
+      ],
+      "faqs": [
+        {
+          "q": "Isn't this the same as filtering inputs for prompt injection?",
+          "a": "No — they defend opposite ends. Input filtering tries to stop the model from being persuaded, which depends on the model. This assumes persuasion already succeeded and stops the output from being acted on, which does not depend on the model at all. A system with only the first fails the moment a new jailbreak appears."
+        },
+        {
+          "q": "Isn't this just output sanitization? Why not one sanitiser for everything?",
+          "a": "Because encoding is contextual. Escaping a quote protects an HTML renderer and does nothing for a shell; shell-quoting protects a shell and corrupts displayed text. A shared function has to choose one context, is wrong in the others, and looks like coverage while being a single point of failure."
+        },
+        {
+          "q": "The model is ours and the prompt is fixed. Do we still need this?",
+          "a": "Yes, if any content the model reads comes from outside: a fetched page, a user file, a tool result, a memory record. The instruction does not have to arrive through your prompt — it arrives through whatever the model reads, and your prompt being fixed does not constrain that."
+        }
+      ]
+    },
+    "es": {
+      "name": "Codificación en la frontera de salida",
+      "summary": "Trata todo lo que el modelo emite como entrada hostil para quien lo consuma. Codifica y valida en cada destino —renderizador, shell, consulta, agente aguas abajo— con las reglas de ese destino. Un saneador global no puede hacerlo: el escapado correcto para HTML no significa nada para un shell.",
+      "definition": "La codificación en la frontera de salida es la práctica de aplicar codificación y validación específicas de cada destino a la salida del modelo en todo punto donde cruza hacia un sistema que va a interpretarla, en lugar de filtrarla una sola vez, de forma genérica, al salir del modelo. Su ausencia es la debilidad que OWASP llama improper output handling: manejo indebido de la salida.",
+      "problem": "Los equipos endurecen el lado de la entrada contra la inyección de prompts y dejan abierto el de la salida. El texto del modelo llega entonces a un renderizador, un shell, una base de datos o el contexto de otro agente, donde se interpreta como instrucción en vez de mostrarse como dato. El atacante no necesita llegar al modelo directamente. Dicho de otro modo: la salida del modelo hay que tratarla como entrada no confiable.",
+      "context": "Cualquier agente cuya salida llegue a algo que la parsea: una interfaz de chat que renderiza markdown, un agente de código que ejecuta un comando sugerido, una llamada a herramienta construida con argumentos generados, un resumen que se inyecta en el prompt de un segundo agente, o un webhook que reenvía el texto.",
+      "solution": [
+        "Enumera los destinos antes de escribir ningún filtro. Cada sitio donde aterriza la salida del modelo y se interpreta —renderizador HTML, shell, consulta, ruta de fichero, descargador de URLs, contexto de otro agente, webhook aguas abajo— es una frontera distinta con reglas distintas.",
+        "Codifica en el destino, no en el origen. Escapa HTML para el renderizador, parametriza la consulta, pasa un array argv al proceso. La codificación pertenece a donde ocurre la interpretación, porque solo ahí sabes qué se va a interpretar.",
+        "Prefiere salida estructurada antes que prosa que luego hay que volver a parsear. Una llamada a herramienta con argumentos tipados tiene un esquema contra el que validar; una frase a la que le aplicas una expresión regular para sacar un nombre de fichero, no.",
+        "Valida el valor, no solo la sintaxis. Una ruta codificada sigue siendo una ruta: comprueba que resuelve dentro del directorio que querías antes de abrirla.",
+        "Trata las URLs salientes como un destino propio. Las imágenes y los enlaces renderizados provocan una petición sin que nadie pulse, así que sacan datos; pon en lista de permitidos los hosts que puede alcanzar un enlace renderizado.",
+        "Haz que la frontera sea el único camino. Si alguna ruta de código puede consumir salida cruda del modelo sin pasar por un codificador de destino, el control es orientativo, no real."
+      ],
+      "components": [
+        "Un inventario de destinos: cada consumidor de la salida del modelo, con el codificador que necesita cada uno.",
+        "Codificadores por destino —HTML, argv de proceso, parámetros de consulta, resolución de rutas, lista de URLs permitidas— en lugar de un saneador compartido.",
+        "Salida estructurada validada contra esquema para las llamadas a herramientas, de modo que los argumentos estén tipados y no extraídos de la prosa.",
+        "Una lista de egreso permitido que cubra los hosts alcanzables desde enlaces e imágenes renderizados.",
+        "Pruebas de contrato que emiten un payload por destino y comprueban que se neutraliza en la frontera.",
+        "Registro de cuándo un codificador neutraliza algo, para que la frontera pueda decirte que está en el camino."
+      ],
+      "benefits": [
+        "Rompe la cadena de inyección donde importa: ni un modelo completamente persuadido puede hacer que un sistema aguas abajo actúe, porque ese sistema nunca interpreta su texto.",
+        "Independiente del comportamiento del modelo. Sigue funcionando entre versiones, jailbreaks nuevos y cambios de prompt, porque no depende de que el modelo se niegue a nada.",
+        "Comprobable. Cada destino tiene un payload y un resultado de pasa o falla, así que el control produce evidencia en vez de garantías.",
+        "Barato si se aplica pronto. Añadir un codificador es un cambio de frontera; ponerlo cuando el destino ya está por todas partes es una refactorización."
+      ],
+      "risks": [
+        "Un solo saneador para todos los destinos. Parece un control, satisface la lista de verificación y está mal en todas las fronteras menos en aquella para la que se escribió.",
+        "Codificación que rompe el producto: escapar de más convierte markdown legítimo, bloques de código y texto no latino en ruido, y la presión por aflojar recae sobre el codificador en vez de sobre la lista de destinos.",
+        "Un inventario de destinos que envejece. Cada integración nueva añade consumidores, y no falla nada cuando se olvida uno.",
+        "Confundir detección con codificación. Escanear la salida buscando cadenas sospechosas caza los payloads del año pasado; la codificación no necesita reconocer el ataque."
+      ],
+      "whenNot": [
+        "Salida que nunca se interpreta: una puntuación, un enum, un booleano que el llamante compara. Restringe el tipo en su lugar; un codificador sobre un conjunto cerrado de valores es ceremonia.",
+        "Herramientas locales de un solo usuario, sin renderizado ni ejecución de procesos, donde el único consumidor es una persona leyendo texto.",
+        "Donde el destino ya parametriza por construcción, como el binding de un ORM o un motor de plantillas que escapa por defecto. Un segundo codificador no aporta nada y puede provocar doble codificación."
+      ],
+      "examples": [
+        "Un agente de soporte resume un ticket cuyo cuerpo contiene una imagen markdown apuntando al host de un atacante. La consola la renderiza, el navegador pide la URL, y la conversación se filtra sin que nadie pulse nada. Deshabilitar HTML crudo y permitir solo ciertos hosts de imagen lo cierra.",
+        "Un agente de código propone un comando de shell. El ejecutor pasa la cadena a un shell, así que un nombre de fichero con un separador de comandos se ejecuta. Pasar un array argv elimina por completo el paso de parseo del shell.",
+        "El resumen de un agente se coloca en el prompt de un segundo agente. El resumen contenía instrucciones y el segundo las siguió. Delimitar el fragmento no confiable y etiquetarlo como dato es la frontera en ese caso."
+      ],
+      "kpis": [
+        {
+          "metric": "Cobertura de destinos",
+          "note": "Proporción de consumidores conocidos de la salida del modelo con codificador en la frontera. Por debajo del 100% el control tiene un agujero concreto, y nombrar el destino sirve más que un porcentaje que lo promedia."
+        },
+        {
+          "metric": "Tasa de neutralización de payloads",
+          "note": "Proporción de payloads de prueba por destino neutralizados en la frontera. El objetivo es 100%: cualquier otra cifra nombra un destino que arreglar, no un número que mejorar."
+        },
+        {
+          "metric": "Tiempo hasta cubrir un destino nuevo",
+          "note": "Cuánto pasa desde que una integración entra en producción hasta que existe su codificador. Mide si el inventario sigue el ritmo del producto, no si acertó una vez."
+        },
+        {
+          "metric": "Volumen de disparos en la frontera",
+          "note": "Con qué frecuencia los codificadores neutralizan algo en producción. Un cero plano suele significar que el codificador no está en el camino, no que no llegue nada hostil."
+        }
+      ],
+      "failureModes": [
+        "Exfiltración silenciosa por marcado renderizado: una imagen o un enlace provocan una petición sin pulsar, así que los datos salen sin acción del usuario y sin ningún error que alguien fuera a notar.",
+        "Inyección de segundo orden: la salida se codifica bien para la consola, se almacena y luego se renderiza en otro sitio —un visor de logs, un ticket, un correo resumen— donde esa codificación no aplica.",
+        "El codificador que solo está en el camino feliz. Las ramas de error, los reintentos y los repliegues emiten el mismo texto por otra ruta de código que no lleva nada.",
+        "Doble codificación. Dos capas escapan correctamente, los usuarios ven entidades escapadas en el producto, y el arreglo quita la capa equivocada."
+      ],
+      "lessons": [
+        "Enumera destinos antes de escribir filtros. Casi todo fallo real aquí es un consumidor que nadie listó, no un codificador mal escrito.",
+        "El destino que se olvida rara vez es una pantalla. Es un webhook, un visor de logs, una exportación o un correo resumen: algún sitio al que va la salida sin que nadie lo piense como un renderizado.",
+        "La codificación gana a la detección porque no necesita reconocer el ataque. Una lista negra de payloads es una descripción de los ataques que ya eran públicos.",
+        "No dejes que un único sanitize() se convierta en la respuesta. El nombre sugiere completitud y el comportamiento es correcto para exactamente un destino."
+      ],
+      "faqs": [
+        {
+          "q": "¿No es lo mismo que filtrar entradas contra la inyección de prompts?",
+          "a": "No: defienden extremos opuestos. El filtrado de entrada intenta que no persuadan al modelo, y eso depende del modelo. Esto asume que ya lo persuadieron e impide que se actúe sobre la salida, y eso no depende del modelo en absoluto. Un sistema que solo tenga lo primero falla en cuanto aparece un jailbreak nuevo."
+        },
+        {
+          "q": "¿Esto no es simplemente sanitization de la salida, con un saneador único para todo?",
+          "a": "Porque la codificación es contextual. Escapar una comilla protege un renderizador HTML y no hace nada por un shell; entrecomillar para shell protege el shell y corrompe el texto mostrado. Una función compartida tiene que elegir un contexto, está mal en los demás, y parece cobertura mientras es un punto único de fallo."
+        },
+        {
+          "q": "El modelo es nuestro y el prompt está fijado. ¿Aun así hace falta?",
+          "a": "Sí, si algo de lo que el modelo lee viene de fuera: una página descargada, un fichero del usuario, el resultado de una herramienta, un registro de memoria. La instrucción no tiene que llegar por tu prompt: llega por lo que el modelo lea, y que tu prompt esté fijado no restringe eso."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Codificação na fronteira de saída",
+      "summary": "Trate tudo o que o modelo emite como entrada hostil para quem o consome. Codifique e valide em cada destino — renderizador, shell, consulta, agente a jusante — com as regras desse destino. Um sanitizador global não dá conta: o escape correto para HTML não significa nada para um shell.",
+      "definition": "A codificação na fronteira de saída é a prática de aplicar codificação e validação específicas de cada destino à saída do modelo em todo ponto onde ela cruza para um sistema que vai interpretá-la, em vez de filtrá-la uma única vez, de forma genérica, ao sair do modelo. Sua ausência é a fraqueza que a OWASP chama de improper output handling: tratamento indevido da saída.",
+      "problem": "As equipes endurecem o lado da entrada contra injeção de prompt e deixam o lado da saída aberto. O texto do modelo então chega a um renderizador, a um shell, a um banco de dados ou ao contexto de outro agente, onde é interpretado como instrução em vez de exibido como dado. O atacante nunca precisa alcançar o modelo diretamente. Dito de outro modo: a saída do modelo tem de ser tratada como entrada não confiável.",
+      "context": "Qualquer agente cuja saída chegue a algo que a analisa: uma interface de chat que renderiza markdown, um agente de código que executa um comando sugerido, uma chamada de ferramenta construída com argumentos gerados, um resumo injetado no prompt de um segundo agente, ou um webhook que encaminha o texto adiante.",
+      "solution": [
+        "Enumere os destinos antes de escrever qualquer filtro. Cada lugar onde a saída do modelo aterrissa e é interpretada — renderizador HTML, shell, consulta, caminho de arquivo, buscador de URLs, contexto de outro agente, webhook a jusante — é uma fronteira distinta com regras distintas.",
+        "Codifique no destino, não na origem. Escape HTML para o renderizador, parametrize a consulta, passe um array argv ao processo. A codificação pertence ao lugar onde ocorre a interpretação, porque só ali se sabe o que será interpretado.",
+        "Prefira saída estruturada a prosa que depois é preciso analisar de volta. Uma chamada de ferramenta com argumentos tipados tem um esquema contra o qual validar; uma frase da qual você extrai um nome de arquivo com expressão regular, não.",
+        "Valide o valor, não só a sintaxe. Um caminho codificado continua sendo um caminho: verifique que ele resolve dentro do diretório pretendido antes de abri-lo.",
+        "Trate as URLs de saída como um destino próprio. Imagens e links renderizados provocam uma requisição sem clique, portanto levam dados para fora; permita apenas os hosts que um link renderizado pode alcançar.",
+        "Faça da fronteira o único caminho. Se alguma rota de código puder consumir saída crua do modelo sem passar por um codificador de destino, o controle é orientativo, não real."
+      ],
+      "components": [
+        "Um inventário de destinos: cada consumidor da saída do modelo, com o codificador exigido por cada um.",
+        "Codificadores por destino — HTML, argv de processo, parâmetros de consulta, resolução de caminhos, lista de URLs permitidas — em vez de um sanitizador compartilhado.",
+        "Saída estruturada validada por esquema para as chamadas de ferramentas, de modo que os argumentos sejam tipados e não extraídos da prosa.",
+        "Uma lista de egresso permitido cobrindo os hosts alcançáveis a partir de links e imagens renderizados.",
+        "Testes de contrato que emitem um payload por destino e verificam que ele é neutralizado na fronteira.",
+        "Registro de quando um codificador neutraliza algo, para que a fronteira consiga dizer que está no caminho."
+      ],
+      "benefits": [
+        "Rompe a cadeia de injeção onde importa: nem um modelo completamente persuadido consegue fazer um sistema a jusante agir, porque esse sistema nunca interpreta o texto dele.",
+        "Independente do comportamento do modelo. Continua funcionando entre versões, novos jailbreaks e mudanças de prompt, porque não depende de o modelo recusar nada.",
+        "Verificável. Cada destino tem um payload e um resultado de passa ou falha, então o controle produz evidência em vez de garantia.",
+        "Barato quando aplicado cedo. Adicionar um codificador é uma mudança de fronteira; colocá-lo depois que o destino já está em toda parte é uma refatoração."
+      ],
+      "risks": [
+        "Um único sanitizador para todos os destinos. Parece um controle, satisfaz a lista de verificação e está errado em todas as fronteiras menos naquela para a qual foi escrito.",
+        "Codificação que quebra o produto: escapar demais transforma markdown legítimo, blocos de código e texto não latino em ruído, e a pressão por afrouxar recai sobre o codificador em vez de sobre a lista de destinos.",
+        "Um inventário de destinos que envelhece. Cada nova integração acrescenta consumidores, e nada falha quando um é esquecido.",
+        "Confundir detecção com codificação. Varrer a saída em busca de cadeias suspeitas pega os payloads do ano passado; a codificação não precisa reconhecer o ataque."
+      ],
+      "whenNot": [
+        "Saída que nunca é interpretada: uma pontuação, um enum, um booleano que o chamador compara. Restrinja o tipo em vez disso; um codificador sobre um conjunto fechado de valores é cerimônia.",
+        "Ferramentas locais de um só usuário, sem renderização e sem execução de processos, onde o único consumidor é uma pessoa lendo texto.",
+        "Onde o destino já parametriza por construção, como o binding de um ORM ou um motor de templates que escapa por padrão. Um segundo codificador não acrescenta nada e pode causar dupla codificação."
+      ],
+      "examples": [
+        "Um agente de suporte resume um chamado cujo corpo contém uma imagem markdown apontando para o host de um atacante. O console a renderiza, o navegador busca a URL, e a conversa vaza sem que ninguém clique em nada. Desabilitar HTML cru e permitir apenas certos hosts de imagem fecha isso.",
+        "Um agente de código propõe um comando de shell. O executor passa a string a um shell, então um nome de arquivo com um separador de comandos é executado. Passar um array argv elimina por completo a etapa de análise do shell.",
+        "O resumo de um agente é colocado no prompt de um segundo agente. O resumo continha instruções e o segundo as seguiu. Delimitar o trecho não confiável e rotulá-lo como dado é a fronteira nesse caso."
+      ],
+      "kpis": [
+        {
+          "metric": "Cobertura de destinos",
+          "note": "Proporção de consumidores conhecidos da saída do modelo com codificador na fronteira. Abaixo de 100% o controle tem um buraco concreto, e nomear o destino serve mais do que uma porcentagem que o dilui na média."
+        },
+        {
+          "metric": "Taxa de neutralização de payloads",
+          "note": "Proporção de payloads de teste por destino neutralizados na fronteira. O alvo é 100%: qualquer outro número nomeia um destino a corrigir, não um número a melhorar."
+        },
+        {
+          "metric": "Tempo até cobrir um novo destino",
+          "note": "Quanto tempo passa desde que uma integração entra em produção até que o codificador dela exista. Mede se o inventário acompanha o produto, não se ele acertou uma vez."
+        },
+        {
+          "metric": "Volume de disparos na fronteira",
+          "note": "Com que frequência os codificadores neutralizam algo em produção. Um zero constante costuma significar que o codificador não está no caminho, não que nada hostil esteja chegando."
+        }
+      ],
+      "failureModes": [
+        "Exfiltração silenciosa por marcação renderizada: uma imagem ou um link provocam uma requisição sem clique, então os dados saem sem ação do usuário e sem nenhum erro que alguém fosse notar.",
+        "Injeção de segunda ordem: a saída é codificada corretamente para o console, é armazenada e depois renderizada em outro lugar — um visualizador de logs, um chamado, um e-mail de resumo — onde essa codificação não se aplica.",
+        "O codificador que só está no caminho feliz. Ramos de erro, novas tentativas e fallbacks emitem o mesmo texto por outra rota de código, sem nada nela.",
+        "Dupla codificação. Duas camadas escapam corretamente, os usuários veem entidades escapadas no produto, e a correção remove a camada errada."
+      ],
+      "lessons": [
+        "Enumere destinos antes de escrever filtros. Quase toda falha real aqui é um consumidor que ninguém listou, não um codificador escrito errado.",
+        "O destino que se esquece raramente é uma tela. É um webhook, um visualizador de logs, uma exportação ou um e-mail de resumo: algum lugar para onde a saída vai sem que ninguém o pense como renderização.",
+        "A codificação vence a detecção porque não precisa reconhecer o ataque. Uma lista de bloqueio de payloads é uma descrição dos ataques que já eram públicos.",
+        "Não deixe um único sanitize() virar a resposta. O nome sugere completude e o comportamento está correto para exatamente um destino."
+      ],
+      "faqs": [
+        {
+          "q": "Isso não é o mesmo que filtrar entradas contra injeção de prompt?",
+          "a": "Não: defendem extremos opostos. O filtro de entrada tenta impedir que o modelo seja persuadido, e isso depende do modelo. Isto aqui assume que a persuasão já ocorreu e impede que se aja sobre a saída, e isso não depende do modelo em nada. Um sistema que só tenha o primeiro falha assim que surge um novo jailbreak."
+        },
+        {
+          "q": "Isto não é simplesmente sanitization da saída, com um sanitizador único para tudo?",
+          "a": "Porque a codificação é contextual. Escapar uma aspa protege um renderizador HTML e não faz nada por um shell; aspas de shell protegem o shell e corrompem o texto exibido. Uma função compartilhada precisa escolher um contexto, está errada nos demais, e parece cobertura enquanto é um ponto único de falha."
+        },
+        {
+          "q": "O modelo é nosso e o prompt é fixo. Ainda assim é preciso?",
+          "a": "Sim, se algo que o modelo lê vem de fora: uma página buscada, um arquivo do usuário, o resultado de uma ferramenta, um registro de memória. A instrução não precisa chegar pelo seu prompt: chega por aquilo que o modelo lê, e o seu prompt ser fixo não restringe isso."
+        }
+      ]
+    }
+  }
+}

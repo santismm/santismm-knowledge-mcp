@@ -662,7 +662,9 @@
     {
       "id": "ACM-13",
       "group": "lifecycle",
-      "patterns": [],
+      "patterns": [
+        "output-boundary-encoding"
+      ],
       "knowledge": [
         "guardrails"
       ],

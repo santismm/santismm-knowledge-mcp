@@ -278,15 +278,165 @@ function outList(results: unknown[], extra: Record<string, unknown> = {}) {
 }
 
 /**
- * Tool-level failure. `isError` is required here: the SDK skips output
- * validation for error results, which is what lets a not-found response omit
- * `structuredContent` while the tool still declares an outputSchema.
+ * Where each retrievable space lives and which tools reach it.
+ *
+ * Written out rather than derived by string surgery on the domain name: the
+ * getters are not a regular transformation of it (`patterns` → `get_pattern`,
+ * `knowledge` → `get_knowledge`), and a rule with exceptions would break
+ * silently the next time a space is added. `npm run validate` checks every name
+ * here against the `server.registerTool(` calls below, so the table cannot
+ * drift from the server it describes.
  */
-function notFound(domain: string, slug: string) {
+const ESPACIOS = [
+  { domain: "knowledge", listTool: "list_knowledge", getTool: "get_knowledge" },
+  { domain: "patterns", listTool: "list_patterns", getTool: "get_pattern" },
+  { domain: "architectures", listTool: "list_architectures", getTool: "get_architecture" },
+  { domain: "governance", listTool: "list_governance", getTool: "get_governance" },
+  { domain: "handbook", listTool: "list_handbook", getTool: "get_handbook" },
+  { domain: "homeric/places", listTool: "list_homeric_places", getTool: "get_homeric_place" },
+  { domain: "homeric/episodes", listTool: "list_homeric_episodes", getTool: "get_homeric_episode" },
+  { domain: "homeric/routes", listTool: "list_homeric_routes", getTool: "get_homeric_route" },
+] as const;
+
+type EspacioNombre = (typeof ESPACIOS)[number]["domain"];
+
+/** Every identifier a card answers to: its id (handbook chapters) and its slug. */
+function identificadores(cards: unknown[]): string[] {
+  const vistos = new Set<string>();
+  for (const card of cards) {
+    const o = card as Record<string, unknown> | null;
+    if (!o) continue;
+    for (const campo of [o.id, o.slug]) {
+      if (typeof campo === "string" && campo.length > 0) vistos.add(campo);
+    }
+  }
+  return [...vistos];
+}
+
+/** The cards of one space, whichever loader serves it. */
+function cardsDe(content: McpContent, domain: EspacioNombre, locale: Locale): unknown[] {
+  if (domain === "handbook") return content.listHandbook(locale);
+  if (domain.startsWith("homeric/")) {
+    return content.listHomeric(domain.slice("homeric/".length) as HomericKind, locale);
+  }
+  return content.listDomain(domain as Domain, locale);
+}
+
+/**
+ * Levenshtein distance, bounded by `tope`: it stops as soon as the whole row
+ * exceeds the budget, so a long identifier costs nothing when it is obviously
+ * unrelated. Only ever run over the few dozen short slugs of one space.
+ */
+function distancia(a: string, b: string, tope: number): number {
+  if (Math.abs(a.length - b.length) > tope) return tope + 1;
+  let anterior = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const fila = [i];
+    let minima = i;
+    for (let j = 1; j <= b.length; j++) {
+      const coste = a[i - 1] === b[j - 1] ? 0 : 1;
+      const v = Math.min(fila[j - 1] + 1, anterior[j] + 1, anterior[j - 1] + coste);
+      fila.push(v);
+      if (v < minima) minima = v;
+    }
+    if (minima > tope) return tope + 1;
+    anterior = fila;
+  }
+  return anterior[b.length];
+}
+
+/** Identifiers are compared case- and separator-insensitively: agents guess both. */
+function normalizar(s: string): string {
+  return s.toLowerCase().replace(/[\s_]+/g, "-");
+}
+
+/** Most identifiers a not-found payload will spell out before summarising. */
+const MUESTRA_MAXIMA = 30;
+
+/**
+ * Tool-level failure that an agent can recover from.
+ *
+ * The bare `{error, domain, slug}` this used to return was a dead end: 90 days
+ * of traffic show `get_handbook` answering 2 of 29 calls, the other 27 asking
+ * for ids invented by analogy (`arch-001`, `hom-r-001`) against a handbook that
+ * only has the `HRN-###` series — and eight more calls asking for
+ * `customer-service-agent` in three domains that do not hold it while
+ * `architectures` does. Nothing in the response said so, so the caller retried
+ * the same invention. Now the error carries the valid identifiers, the tool
+ * that lists them, the nearest match, and the space that does hold the slug.
+ *
+ * `isError` is required here: the SDK skips output validation for error
+ * results, which is what lets a not-found response omit `structuredContent`
+ * while the tool still declares an outputSchema.
+ */
+function noEncontrado(
+  content: McpContent,
+  domain: EspacioNombre,
+  pedido: string,
+  locale: Locale,
+) {
+  const espacio = ESPACIOS.find((e) => e.domain === domain);
+  const cuerpo: Record<string, unknown> = { error: "not_found", domain, slug: pedido };
+  const pistas: string[] = [];
+
+  let validos: string[] = [];
+  try {
+    validos = identificadores(cardsDe(content, domain, locale));
+  } catch {
+    validos = [];
+  }
+
+  // Lo mismo, en otro sitio: el fallo más común no es que falte el contenido.
+  const buscado = normalizar(pedido);
+  for (const otro of ESPACIOS) {
+    if (otro.domain === domain) continue;
+    let suyos: string[] = [];
+    try {
+      suyos = identificadores(cardsDe(content, otro.domain, locale));
+    } catch {
+      continue;
+    }
+    const acierto = suyos.find((id) => normalizar(id) === buscado);
+    if (acierto) {
+      cuerpo.found_in = { domain: otro.domain, id: acierto, tool: otro.getTool };
+      pistas.push(`"${acierto}" exists in ${otro.domain}: call ${otro.getTool}.`);
+      break;
+    }
+  }
+
+  if (validos.length > 0) {
+    const tope = Math.max(2, Math.floor(buscado.length / 3));
+    const cerca = validos
+      .map((id) => ({ id, d: distancia(buscado, normalizar(id), tope) }))
+      .filter((c) => c.d <= tope)
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 3)
+      .map((c) => c.id);
+    if (cerca.length > 0) {
+      cuerpo.did_you_mean = cerca;
+      pistas.push(`Did you mean ${cerca.map((c) => `"${c}"`).join(", ")}?`);
+    }
+
+    const orden = [...validos].sort();
+    cuerpo.available_count = orden.length;
+    cuerpo.available = orden.slice(0, MUESTRA_MAXIMA);
+    if (orden.length > MUESTRA_MAXIMA) {
+      cuerpo.available_truncated = true;
+      pistas.push(
+        `${domain} has ${orden.length} identifiers; ${MUESTRA_MAXIMA} are listed here.`,
+      );
+    }
+  }
+
+  if (espacio) {
+    cuerpo.list_tool = espacio.listTool;
+    pistas.push(`${espacio.listTool} returns every identifier this tool accepts.`);
+  }
+  pistas.push("Identifiers are not interchangeable between spaces; do not invent one by analogy.");
+  cuerpo.hint = pistas.join(" ");
+
   return {
-    content: [
-      { type: "text" as const, text: JSON.stringify({ error: "not_found", domain, slug }, null, 2) },
-    ],
+    content: [{ type: "text" as const, text: JSON.stringify(cuerpo, null, 2) }],
     isError: true as const,
   };
 }
@@ -398,7 +548,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ slug, locale }) => {
       const entry = content.getEntry("knowledge", slug, locale as Locale | undefined);
-      return entry ? out(entry as Record<string, unknown>) : notFound("knowledge", slug);
+      return entry ? out(entry as Record<string, unknown>) : noEncontrado(content, "knowledge", slug, (locale ?? "en") as Locale);
     },
   );
 
@@ -427,7 +577,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ slug, locale }) => {
       const entry = content.getEntry("patterns", slug, locale as Locale | undefined);
-      return entry ? out(entry as Record<string, unknown>) : notFound("patterns", slug);
+      return entry ? out(entry as Record<string, unknown>) : noEncontrado(content, "patterns", slug, (locale ?? "en") as Locale);
     },
   );
 
@@ -456,7 +606,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ slug, locale }) => {
       const entry = content.getEntry("architectures", slug, locale as Locale | undefined);
-      return entry ? out(entry as Record<string, unknown>) : notFound("architectures", slug);
+      return entry ? out(entry as Record<string, unknown>) : noEncontrado(content, "architectures", slug, (locale ?? "en") as Locale);
     },
   );
 
@@ -485,7 +635,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ slug, locale }) => {
       const entry = content.getEntry("governance", slug, locale as Locale | undefined);
-      return entry ? out(entry as Record<string, unknown>) : notFound("governance", slug);
+      return entry ? out(entry as Record<string, unknown>) : noEncontrado(content, "governance", slug, (locale ?? "en") as Locale);
     },
   );
 
@@ -525,7 +675,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ id, locale }) => {
       const entry = content.getHandbookChapter(id, (locale ?? "en") as Locale);
-      return entry ? out(entry as Record<string, unknown>) : notFound("handbook", id);
+      return entry ? out(entry as Record<string, unknown>) : noEncontrado(content, "handbook", id, (locale ?? "en") as Locale);
     },
   );
 
@@ -582,7 +732,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ domain, slug, locale }) => {
       const result = content.related(domain as Domain, slug, (locale ?? "en") as Locale);
-      return result ? out(result as Record<string, unknown>) : notFound(domain, slug);
+      return result ? out(result as Record<string, unknown>) : noEncontrado(content, domain as EspacioNombre, slug, (locale ?? "en") as Locale);
     },
   );
 
@@ -618,7 +768,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ slug, locale }) => {
       const entry = content.getHomeric("places", slug, locale as Locale | undefined);
-      return entry ? out(entry as Record<string, unknown>) : notFound("homeric/places", slug);
+      return entry ? out(entry as Record<string, unknown>) : noEncontrado(content, "homeric/places", slug, (locale ?? "en") as Locale);
     },
   );
   server.registerTool(
@@ -648,7 +798,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ slug, locale }) => {
       const entry = content.getHomeric("episodes", slug, locale as Locale | undefined);
-      return entry ? out(entry as Record<string, unknown>) : notFound("homeric/episodes", slug);
+      return entry ? out(entry as Record<string, unknown>) : noEncontrado(content, "homeric/episodes", slug, (locale ?? "en") as Locale);
     },
   );
   server.registerTool(
@@ -678,7 +828,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ slug, locale }) => {
       const entry = content.getHomeric("routes", slug, locale as Locale | undefined);
-      return entry ? out(entry as Record<string, unknown>) : notFound("homeric/routes", slug);
+      return entry ? out(entry as Record<string, unknown>) : noEncontrado(content, "homeric/routes", slug, (locale ?? "en") as Locale);
     },
   );
 }

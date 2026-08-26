@@ -1,0 +1,329 @@
+{
+  "slug": "correlated-run-trace",
+  "category": "reliability",
+  "updated": "2026-08-25",
+  "version": "1.0",
+  "technologies": [
+    "OpenTelemetry GenAI semantic conventions",
+    "Distributed tracing backends",
+    "Tail-based sampling",
+    "Field-level redaction at capture",
+    "Append-only / WORM storage",
+    "Structured logging with a propagated run id"
+  ],
+  "related": [
+    "recovery-strategy",
+    "evaluator-optimizer",
+    "human-escalation",
+    "attributed-memory",
+    "output-boundary-encoding"
+  ],
+  "references": [
+    {
+      "title": "OpenTelemetry — semantic conventions for GenAI",
+      "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/"
+    },
+    {
+      "title": "EU AI Act — Article 12 (record-keeping)",
+      "url": "https://artificialintelligenceact.eu/article/12/"
+    },
+    {
+      "title": "EU AI Act — consolidated text",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+    },
+    {
+      "title": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "OWASP — Top 10 for LLM Applications",
+      "url": "https://genai.owasp.org/llm-top-10/"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "medium",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "locales": {
+    "en": {
+      "name": "Correlated Run Trace",
+      "summary": "One identifier threads a whole agent run — inputs, model and version, every tool call with its arguments and outcome, the final action — into a record you can replay months later. The hard part is not capture. It is being complete enough to reconstruct the run and restrained enough that the trace store is not a second copy of the data it describes.",
+      "definition": "A correlated run trace is an immutable, single-identifier record of everything an agent run decided and did, captured at a fidelity that lets someone reconstruct the run end to end afterwards without access to the systems that produced it, and redacted so that the trace does not become an easier target than the source. It is a record of the agent's decisions, not a request log.",
+      "problem": "Agents are non-deterministic and multi-step, so 'what happened' cannot be inferred from the output. Most teams do log, and still cannot answer why a specific run did what it did: the steps are in different systems with no shared identifier, the prompt was recorded as a template reference that has since changed, or the model version was never captured, so nobody can tell whether the behaviour drifted or the model did.",
+      "context": "Any agent whose actions have consequences someone will later ask about: a regulated process where the trace is the audit trail and traceability is an obligation rather than a preference, an incident that needs a root cause, a customer disputing an outcome, or an evaluation loop that needs real failures to learn from.",
+      "solution": [
+        "Mint one run identifier at the entry point and propagate it through every step, service and retry. Correlation is the whole value: unlinked records of the same run are three logs, not a trace.",
+        "Record the rendered prompt, not a reference to it. A template id resolves to whatever the template says today, which is not what the model saw.",
+        "Capture the model and its version alongside every call. Without it, a behaviour change and a model change are indistinguishable after the fact.",
+        "Log tool calls as arguments plus outcome, including the failures and the retries. A trace that shows only successful calls describes a run that did not happen.",
+        "Redact at capture, not at read. Field-level rules that drop or hash secrets and personal data before the record is written, because a redaction applied at query time still leaves the raw value in storage.",
+        "Sample on the tail, not the head. Decide what to keep after the run finishes, so errors, escalations and anomalies are kept and the routine successes are the ones thinned.",
+        "Make the store append-only and give it the access controls of the most sensitive system it describes, not the ones a logging backend ships with."
+      ],
+      "components": [
+        "A run identifier minted at entry and propagated through every step, service, retry and asynchronous continuation.",
+        "A span per step with a stable schema: inputs, model and version, tool name, arguments, outcome, latency, token usage.",
+        "Field-level redaction applied at capture, with an explicit list of what is dropped, what is hashed and what is kept whole.",
+        "Tail-based sampling that decides after the fact, so anomalous runs survive and routine ones are thinned.",
+        "Append-only storage with retention aligned to the obligation that justifies the record, and access control matching the source systems.",
+        "A replay path that reconstructs a run from the trace alone, used often enough that its gaps are known."
+      ],
+      "benefits": [
+        "Makes non-deterministic failures diagnosable: you can answer why this run did this, instead of reproducing until it happens again.",
+        "Turns record-keeping obligations into an artefact rather than a promise. The reconstruction either works on a random past run or it does not.",
+        "Feeds evaluation with real failures instead of invented ones, which is the difference between a benchmark and a regression suite.",
+        "Separates drift from deployment. With the model version in the record, 'it got worse' becomes a question with an answer."
+      ],
+      "risks": [
+        "The trace store as the softest target: it holds the same data as the systems it describes, usually with weaker access control and longer retention.",
+        "Capture cost that grows with traffic until someone samples on the head to save money, quietly removing exactly the runs worth keeping.",
+        "Redaction that removes what the reconstruction needed. Over-redaction is invisible until the day someone tries to replay a run and cannot.",
+        "Volume mistaken for coverage. Terabytes of spans with no shared identifier still cannot answer a single question about one run."
+      ],
+      "whenNot": [
+        "Single-step, deterministic calls where the input and the output are the whole story. A request log already reconstructs those.",
+        "Prototypes with no users and no obligations, where the cost of the trace pipeline exceeds anything you would learn from it.",
+        "Where the applicable rule forbids retaining the content at all. Then the trace records that a decision happened and its metadata, and the content stays out — that is a different artefact, and pretending otherwise creates the liability the rule was written to avoid."
+      ],
+      "examples": [
+        "An incident where an agent emailed the wrong customer. The run identifier links the retrieval that returned the wrong record, the tool call that used it and the message sent, so the root cause is one query rather than a week of reproduction attempts.",
+        "A regulator asks how a decision was reached six months ago. The replay path rebuilds the run from the trace alone, including the model version in force that day.",
+        "A quality drop after a model upgrade. Because every span carries the model version, the comparison is between two populations of real runs rather than between impressions."
+      ],
+      "kpis": [
+        {
+          "metric": "Reconstruction success rate",
+          "note": "Share of randomly chosen past runs that can be rebuilt end to end from the trace alone. This is the control's own test, and it is the only number here that cannot be satisfied by capturing more."
+        },
+        {
+          "metric": "Correlation completeness",
+          "note": "Share of spans in a run that carry the run identifier. Anything below 100% means some step is invisible, and the missing one is rarely the boring one."
+        },
+        {
+          "metric": "Sensitive-field escape rate",
+          "note": "Share of sampled records containing a value the redaction rules should have removed. The target is zero; any other number means the trace store is accumulating a liability."
+        },
+        {
+          "metric": "Anomalous-run retention",
+          "note": "Share of errored or escalated runs retained after sampling. Head-based sampling drives this toward the sample rate, which is the failure this metric exists to catch."
+        }
+      ],
+      "failureModes": [
+        "The trace that proves nothing: every step is logged, no step shares an identifier, and reconstructing one run means correlating timestamps by hand.",
+        "The prompt recorded by reference. The template changed, so the log now describes a prompt the model never saw, and nobody notices until a reconstruction contradicts the output.",
+        "Head-based sampling that keeps the ordinary. The run you need was dropped at the entry point, before anything knew it was going to be interesting.",
+        "The log as the breach: raw tool arguments carry personal data into a store with broader access and longer retention than the database they came from.",
+        "Missing model version. A behaviour change and a silent model update look identical in the record, and the investigation stalls on a question the trace should have answered."
+      ],
+      "lessons": [
+        "Correlation is the product; capture is the raw material. Teams that buy a tracing backend and skip the identifier end up with storage rather than answers.",
+        "Test the reconstruction, not the pipeline. Pick a random past run and rebuild it — the gaps are always somewhere nobody instrumented, and only the attempt finds them.",
+        "Redact at write time. Every redaction deferred to read time is a decision to keep the raw value, and storage outlives the intention.",
+        "Sample on the tail. Head-based sampling is a decision to discard the interesting runs made before anything knows which ones those are.",
+        "Record the model version everywhere. It costs a field and it is the difference between diagnosing drift and arguing about it."
+      ],
+      "faqs": [
+        {
+          "q": "We already use a tracing backend. Isn't this solved?",
+          "a": "A backend gives you capture and storage. This pattern is about the three things a backend does not decide for you: whether one identifier threads the whole run, whether the fidelity is enough to reconstruct it without the source systems, and whether what you wrote down is safe to keep. Teams with excellent tooling routinely fail the reconstruction test."
+        },
+        {
+          "q": "Doesn't full capture conflict with data minimisation?",
+          "a": "It would, if capture meant keeping everything raw. The control states both halves on purpose — enough to reconstruct, nothing that turns the log into the breach — and the way to hold both is field-level redaction at capture plus retention tied to the obligation that justifies the record. What you cannot do is decide the tension away by keeping everything and calling it compliance."
+        },
+        {
+          "q": "How much fidelity is enough?",
+          "a": "Exactly enough to pass the reconstruction test on a run picked at random, and no more. That threshold is discoverable by trying it, which is why the test belongs in the routine rather than in an audit. Anything captured beyond it is cost and liability without a question it answers."
+        }
+      ]
+    },
+    "es": {
+      "name": "Traza de ejecución correlada",
+      "summary": "Un identificador hilvana la ejecución entera de un agente —entradas, modelo y versión, cada llamada a herramienta con sus argumentos y su resultado, la acción final— en un registro que puedes reproducir meses después. Lo difícil no es capturar. Es ser lo bastante completo para reconstruir la ejecución y lo bastante contenido para que el almacén de trazas no sea una segunda copia de los datos que describe.",
+      "definition": "Una traza de ejecución correlada es un registro inmutable, con un único identificador, de todo lo que una ejecución de agente decidió e hizo, capturado con la fidelidad suficiente para que alguien pueda reconstruirla de punta a punta después sin acceso a los sistemas que la produjeron, y redactado de forma que la traza no sea un objetivo más fácil que el origen. Es el registro de decisiones del agente, no un log de peticiones.",
+      "problem": "Los agentes son no deterministas y de varios pasos, así que «qué pasó» no se deduce de la salida. Casi todos los equipos registran algo y aun así no pueden explicar por qué una ejecución concreta hizo lo que hizo: los pasos están en sistemas distintos sin identificador común, el prompt se guardó como referencia a una plantilla que ya ha cambiado, o nunca se capturó la versión del modelo, así que nadie puede decir si derivó el comportamiento o cambió el modelo.",
+      "context": "Cualquier agente cuyas acciones tengan consecuencias por las que alguien vaya a preguntar después: un proceso regulado donde la traza es el rastro de auditoría y la trazabilidad es una obligación y no una preferencia, un incidente que necesita causa raíz, un cliente que discute un resultado, o un bucle de evaluación que necesita fallos reales de los que aprender.",
+      "solution": [
+        "Emite un identificador de ejecución en el punto de entrada y propágalo por cada paso, servicio y reintento. La correlación es todo el valor: registros sin enlazar de la misma ejecución son tres logs, no una traza.",
+        "Guarda el prompt renderizado, no una referencia a él. Un identificador de plantilla resuelve a lo que la plantilla diga hoy, que no es lo que vio el modelo.",
+        "Captura el modelo y su versión junto a cada llamada. Sin eso, un cambio de comportamiento y un cambio de modelo son indistinguibles a posteriori.",
+        "Registra las llamadas a herramientas como argumentos más resultado, incluidos los fallos y los reintentos. Una traza que solo enseña las llamadas que salieron bien describe una ejecución que no ocurrió.",
+        "Redacta en la captura, no en la lectura. Reglas por campo que descartan o hashean secretos y datos personales antes de escribir el registro, porque una redacción aplicada al consultar deja el valor crudo en el almacenamiento.",
+        "Muestrea por la cola, no por la cabeza. Decide qué conservar cuando la ejecución ha terminado, de modo que se guarden los errores, los escalados y las anomalías y se adelgacen los éxitos rutinarios.",
+        "Haz el almacén de solo anexado y dale los controles de acceso del sistema más sensible que describe, no los que trae por defecto un backend de logs."
+      ],
+      "components": [
+        "Un identificador de ejecución emitido en la entrada y propagado por cada paso, servicio, reintento y continuación asíncrona.",
+        "Un span por paso con esquema estable: entradas, modelo y versión, nombre de herramienta, argumentos, resultado, latencia, consumo de tokens.",
+        "Redacción por campo aplicada en la captura, con una lista explícita de qué se descarta, qué se hashea y qué se guarda entero.",
+        "Muestreo por la cola que decide a posteriori, para que las ejecuciones anómalas sobrevivan y se adelgacen las rutinarias.",
+        "Almacenamiento de solo anexado, con retención alineada a la obligación que justifica el registro y control de acceso equivalente al de los sistemas de origen.",
+        "Un camino de reproducción que reconstruya una ejecución solo desde la traza, usado con la frecuencia suficiente para que sus huecos se conozcan."
+      ],
+      "benefits": [
+        "Hace diagnosticables los fallos no deterministas: puedes responder por qué esta ejecución hizo esto, en vez de reproducir hasta que vuelva a pasar.",
+        "Convierte las obligaciones de registro en un artefacto en vez de una promesa. La reconstrucción funciona sobre una ejecución pasada al azar o no funciona.",
+        "Alimenta la evaluación con fallos reales en vez de inventados, que es la diferencia entre un benchmark y una suite de regresión.",
+        "Separa la deriva del despliegue. Con la versión del modelo en el registro, «ha empeorado» pasa a ser una pregunta con respuesta."
+      ],
+      "risks": [
+        "El almacén de trazas como el blanco más blando: guarda los mismos datos que los sistemas que describe, normalmente con menos control de acceso y más retención.",
+        "Coste de captura que crece con el tráfico hasta que alguien muestrea por la cabeza para ahorrar, eliminando en silencio justo las ejecuciones que merecía la pena guardar.",
+        "Redacción que se lleva por delante lo que la reconstrucción necesitaba. Redactar de más es invisible hasta el día en que alguien intenta reproducir una ejecución y no puede.",
+        "Confundir volumen con cobertura. Terabytes de spans sin identificador común siguen sin poder responder ni una pregunta sobre una ejecución."
+      ],
+      "whenNot": [
+        "Llamadas deterministas de un solo paso donde la entrada y la salida son toda la historia. Un log de peticiones ya las reconstruye.",
+        "Prototipos sin usuarios ni obligaciones, donde el coste del pipeline de trazas supera cualquier cosa que fueras a aprender de él.",
+        "Donde la norma aplicable prohíba retener el contenido. Entonces la traza registra que hubo una decisión y sus metadatos, y el contenido se queda fuera: es otro artefacto, y fingir lo contrario crea justo la responsabilidad que la norma quería evitar."
+      ],
+      "examples": [
+        "Un incidente en el que un agente escribió al cliente equivocado. El identificador de ejecución enlaza la recuperación que devolvió el registro erróneo, la llamada a herramienta que lo usó y el mensaje enviado, así que la causa raíz es una consulta y no una semana de intentos de reproducción.",
+        "Un regulador pregunta cómo se tomó una decisión hace seis meses. El camino de reproducción reconstruye la ejecución solo desde la traza, incluida la versión del modelo vigente aquel día.",
+        "Una caída de calidad tras actualizar el modelo. Como cada span lleva la versión, la comparación es entre dos poblaciones de ejecuciones reales y no entre impresiones."
+      ],
+      "kpis": [
+        {
+          "metric": "Tasa de reconstrucción con éxito",
+          "note": "Proporción de ejecuciones pasadas elegidas al azar que se pueden rehacer de punta a punta solo desde la traza. Es la prueba que el propio control define, y el único número de esta lista que no se satisface capturando más."
+        },
+        {
+          "metric": "Completitud de la correlación",
+          "note": "Proporción de spans de una ejecución que llevan el identificador. Cualquier cifra por debajo del 100% significa que hay un paso invisible, y el que falta rara vez es el aburrido."
+        },
+        {
+          "metric": "Tasa de fuga de campos sensibles",
+          "note": "Proporción de registros muestreados que contienen un valor que las reglas de redacción debían haber quitado. El objetivo es cero; cualquier otra cifra significa que el almacén de trazas está acumulando una responsabilidad."
+        },
+        {
+          "metric": "Retención de ejecuciones anómalas",
+          "note": "Proporción de ejecuciones con error o escalado que sobreviven al muestreo. El muestreo por cabeza lleva esta cifra hacia la tasa de muestreo, que es justo el fallo que esta métrica existe para cazar."
+        }
+      ],
+      "failureModes": [
+        "La traza que no prueba nada: cada paso está registrado, ninguno comparte identificador, y reconstruir una ejecución significa correlacionar marcas de tiempo a mano.",
+        "El prompt guardado por referencia. La plantilla cambió, así que el log describe ahora un prompt que el modelo nunca vio, y nadie se entera hasta que una reconstrucción contradice la salida.",
+        "Muestreo por cabeza que se queda lo corriente. La ejecución que necesitas se descartó en el punto de entrada, antes de que nada supiera que iba a ser interesante.",
+        "El log como brecha: argumentos de herramienta en crudo llevan datos personales a un almacén con más acceso y más retención que la base de datos de la que salieron.",
+        "Falta la versión del modelo. Un cambio de comportamiento y una actualización silenciosa del modelo se ven idénticos en el registro, y la investigación se atasca en una pregunta que la traza debería haber respondido."
+      ],
+      "lessons": [
+        "La correlación es el producto; la captura es la materia prima. Los equipos que compran un backend de trazas y se saltan el identificador acaban con almacenamiento, no con respuestas.",
+        "Prueba la reconstrucción, no el pipeline. Coge una ejecución pasada al azar y rehazla: los huecos están siempre donde nadie instrumentó, y solo el intento los encuentra.",
+        "Redacta al escribir. Cada redacción aplazada a la lectura es una decisión de conservar el valor crudo, y el almacenamiento sobrevive a la intención.",
+        "Muestrea por la cola. El muestreo por cabeza es una decisión de tirar las ejecuciones interesantes tomada antes de que nada sepa cuáles son.",
+        "Registra la versión del modelo en todas partes. Cuesta un campo y es la diferencia entre diagnosticar la deriva y discutir sobre ella."
+      ],
+      "faqs": [
+        {
+          "q": "Ya usamos un backend de trazas. ¿No está resuelto?",
+          "a": "Un backend te da captura y almacenamiento. Este patrón trata las tres cosas que un backend no decide por ti: si un único identificador hilvana la ejecución entera, si la fidelidad basta para reconstruirla sin los sistemas de origen, y si lo que anotaste es seguro de conservar. Equipos con herramientas excelentes fallan la prueba de reconstrucción con toda normalidad."
+        },
+        {
+          "q": "¿La captura completa no choca con la minimización de datos?",
+          "a": "Chocaría si capturar significara guardarlo todo en crudo. El control enuncia las dos mitades a propósito —lo suficiente para reconstruir, nada que convierta el log en la brecha— y la manera de sostener ambas es redacción por campo en la captura más retención atada a la obligación que justifica el registro. Lo que no vale es zanjar la tensión guardándolo todo y llamarlo cumplimiento."
+        },
+        {
+          "q": "¿Cuánta fidelidad es suficiente?",
+          "a": "Exactamente la que hace falta para pasar la prueba de reconstrucción sobre una ejecución elegida al azar, y ni una más. Ese umbral se descubre intentándolo, que es la razón de que la prueba pertenezca a la rutina y no a una auditoría. Todo lo capturado por encima es coste y responsabilidad sin una pregunta a la que responda."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Trace de execução correlacionado",
+      "summary": "Um identificador costura a execução inteira de um agente — entradas, modelo e versão, cada chamada de ferramenta com seus argumentos e resultado, a ação final — em um registro que se pode reproduzir meses depois. O difícil não é capturar. É ser completo o bastante para reconstruir a execução e contido o bastante para que o repositório de traces não seja uma segunda cópia dos dados que descreve.",
+      "definition": "Um trace de execução correlacionado é um registro imutável, com um único identificador, de tudo o que uma execução de agente decidiu e fez, capturado com fidelidade suficiente para que alguém possa reconstruí-la de ponta a ponta depois, sem acesso aos sistemas que a produziram, e redigido de modo que o trace não seja um alvo mais fácil do que a origem. É o registro de decisões do agente, não um log de requisições.",
+      "problem": "Agentes são não determinísticos e de vários passos, então «o que aconteceu» não se deduz da saída. Quase todas as equipes registram algo e ainda assim não conseguem explicar por que uma execução específica fez o que fez: os passos estão em sistemas diferentes sem identificador comum, o prompt foi salvo como referência a um template que já mudou, ou a versão do modelo nunca foi capturada, então ninguém consegue dizer se o comportamento derivou ou se o modelo mudou.",
+      "context": "Qualquer agente cujas ações tenham consequências sobre as quais alguém vai perguntar depois: um processo regulado onde o trace é a trilha de auditoria e a rastreabilidade é uma obrigação e não uma preferência, um incidente que precisa de causa raiz, um cliente que contesta um resultado, ou um ciclo de avaliação que precisa de falhas reais para aprender.",
+      "solution": [
+        "Emita um identificador de execução no ponto de entrada e propague-o por cada passo, serviço e nova tentativa. A correlação é todo o valor: registros desconectados da mesma execução são três logs, não um trace.",
+        "Grave o prompt renderizado, não uma referência a ele. Um identificador de template resolve para o que o template diz hoje, que não é o que o modelo viu.",
+        "Capture o modelo e sua versão junto de cada chamada. Sem isso, uma mudança de comportamento e uma mudança de modelo são indistinguíveis depois do fato.",
+        "Registre as chamadas de ferramenta como argumentos mais resultado, incluindo as falhas e as novas tentativas. Um trace que mostra só as chamadas bem-sucedidas descreve uma execução que não aconteceu.",
+        "Redija na captura, não na leitura. Regras por campo que descartam ou aplicam hash a segredos e dados pessoais antes de o registro ser escrito, porque uma redação aplicada na consulta deixa o valor cru no armazenamento.",
+        "Amostre pela cauda, não pela cabeça. Decida o que guardar depois que a execução termina, de modo que erros, escalonamentos e anomalias sejam mantidos e os sucessos rotineiros sejam os afinados.",
+        "Faça o repositório apenas de acréscimo e dê a ele os controles de acesso do sistema mais sensível que descreve, não os que um backend de logs traz por padrão."
+      ],
+      "components": [
+        "Um identificador de execução emitido na entrada e propagado por cada passo, serviço, nova tentativa e continuação assíncrona.",
+        "Um span por passo com esquema estável: entradas, modelo e versão, nome da ferramenta, argumentos, resultado, latência, consumo de tokens.",
+        "Redação por campo aplicada na captura, com uma lista explícita do que é descartado, do que recebe hash e do que é guardado inteiro.",
+        "Amostragem pela cauda que decide depois do fato, para que execuções anômalas sobrevivam e as rotineiras sejam afinadas.",
+        "Armazenamento apenas de acréscimo, com retenção alinhada à obrigação que justifica o registro e controle de acesso equivalente ao dos sistemas de origem.",
+        "Um caminho de reprodução que reconstrua uma execução só a partir do trace, usado com frequência suficiente para que suas lacunas sejam conhecidas."
+      ],
+      "benefits": [
+        "Torna diagnosticáveis as falhas não determinísticas: dá para responder por que esta execução fez isto, em vez de reproduzir até acontecer de novo.",
+        "Transforma obrigações de registro em artefato e não em promessa. A reconstrução funciona sobre uma execução passada ao acaso, ou não funciona.",
+        "Alimenta a avaliação com falhas reais em vez de inventadas, que é a diferença entre um benchmark e uma suíte de regressão.",
+        "Separa a deriva do deploy. Com a versão do modelo no registro, «piorou» vira uma pergunta com resposta."
+      ],
+      "risks": [
+        "O repositório de traces como o alvo mais fraco: guarda os mesmos dados dos sistemas que descreve, em geral com menos controle de acesso e mais retenção.",
+        "Custo de captura que cresce com o tráfego até alguém amostrar pela cabeça para economizar, removendo em silêncio justamente as execuções que valia a pena guardar.",
+        "Redação que leva embora o que a reconstrução precisava. Redigir demais é invisível até o dia em que alguém tenta reproduzir uma execução e não consegue.",
+        "Confundir volume com cobertura. Terabytes de spans sem identificador comum continuam sem responder uma única pergunta sobre uma execução."
+      ],
+      "whenNot": [
+        "Chamadas determinísticas de um só passo, onde a entrada e a saída são a história inteira. Um log de requisições já as reconstrói.",
+        "Protótipos sem usuários e sem obrigações, onde o custo do pipeline de traces supera qualquer coisa que você fosse aprender com ele.",
+        "Onde a norma aplicável proíba reter o conteúdo. Então o trace registra que houve uma decisão e seus metadados, e o conteúdo fica de fora: é outro artefato, e fingir o contrário cria exatamente a responsabilidade que a norma queria evitar."
+      ],
+      "examples": [
+        "Um incidente em que um agente escreveu ao cliente errado. O identificador de execução liga a recuperação que devolveu o registro errado, a chamada de ferramenta que o usou e a mensagem enviada, então a causa raiz é uma consulta e não uma semana de tentativas de reprodução.",
+        "Um regulador pergunta como uma decisão foi tomada seis meses atrás. O caminho de reprodução reconstrói a execução só a partir do trace, incluindo a versão do modelo vigente naquele dia.",
+        "Uma queda de qualidade depois de atualizar o modelo. Como cada span carrega a versão, a comparação é entre duas populações de execuções reais e não entre impressões."
+      ],
+      "kpis": [
+        {
+          "metric": "Taxa de reconstrução bem-sucedida",
+          "note": "Proporção de execuções passadas escolhidas ao acaso que podem ser refeitas de ponta a ponta só a partir do trace. É o teste que o próprio controle define, e o único número desta lista que não se satisfaz capturando mais."
+        },
+        {
+          "metric": "Completude da correlação",
+          "note": "Proporção de spans de uma execução que carregam o identificador. Qualquer número abaixo de 100% significa que há um passo invisível, e o que falta raramente é o entediante."
+        },
+        {
+          "metric": "Taxa de vazamento de campos sensíveis",
+          "note": "Proporção de registros amostrados que contêm um valor que as regras de redação deveriam ter removido. O alvo é zero; qualquer outro número significa que o repositório de traces está acumulando uma responsabilidade."
+        },
+        {
+          "metric": "Retenção de execuções anômalas",
+          "note": "Proporção de execuções com erro ou escalonamento que sobrevivem à amostragem. A amostragem pela cabeça leva esse número para perto da taxa de amostragem, que é justamente a falha que esta métrica existe para pegar."
+        }
+      ],
+      "failureModes": [
+        "O trace que não prova nada: cada passo está registrado, nenhum compartilha identificador, e reconstruir uma execução significa correlacionar marcas de tempo à mão.",
+        "O prompt salvo por referência. O template mudou, então o log agora descreve um prompt que o modelo nunca viu, e ninguém percebe até uma reconstrução contradizer a saída.",
+        "Amostragem pela cabeça que fica com o comum. A execução de que você precisa foi descartada no ponto de entrada, antes de qualquer coisa saber que seria interessante.",
+        "O log como brecha: argumentos de ferramenta crus levam dados pessoais para um repositório com mais acesso e mais retenção do que o banco de dados de onde saíram.",
+        "Falta a versão do modelo. Uma mudança de comportamento e uma atualização silenciosa do modelo parecem idênticas no registro, e a investigação empaca numa pergunta que o trace deveria ter respondido."
+      ],
+      "lessons": [
+        "A correlação é o produto; a captura é a matéria-prima. Equipes que compram um backend de traces e pulam o identificador acabam com armazenamento, não com respostas.",
+        "Teste a reconstrução, não o pipeline. Pegue uma execução passada ao acaso e refaça-a: as lacunas estão sempre onde ninguém instrumentou, e só a tentativa as encontra.",
+        "Redija na escrita. Toda redação adiada para a leitura é uma decisão de conservar o valor cru, e o armazenamento sobrevive à intenção.",
+        "Amostre pela cauda. A amostragem pela cabeça é uma decisão de jogar fora as execuções interessantes tomada antes de qualquer coisa saber quais são.",
+        "Registre a versão do modelo em todo lugar. Custa um campo e é a diferença entre diagnosticar a deriva e discutir sobre ela."
+      ],
+      "faqs": [
+        {
+          "q": "Já usamos um backend de traces. Isso não está resolvido?",
+          "a": "Um backend dá captura e armazenamento. Este padrão trata das três coisas que um backend não decide por você: se um único identificador costura a execução inteira, se a fidelidade basta para reconstruí-la sem os sistemas de origem, e se o que você anotou é seguro de guardar. Equipes com ferramentas excelentes falham o teste de reconstrução com toda a naturalidade."
+        },
+        {
+          "q": "A captura completa não conflita com a minimização de dados?",
+          "a": "Conflitaria, se capturar significasse guardar tudo cru. O controle enuncia as duas metades de propósito — o suficiente para reconstruir, nada que transforme o log na brecha — e a maneira de sustentar ambas é redação por campo na captura mais retenção atada à obrigação que justifica o registro. O que não vale é resolver a tensão guardando tudo e chamando isso de conformidade."
+        },
+        {
+          "q": "Quanta fidelidade é suficiente?",
+          "a": "Exatamente a necessária para passar no teste de reconstrução sobre uma execução escolhida ao acaso, e nada além. Esse limiar se descobre tentando, e é por isso que o teste pertence à rotina e não a uma auditoria. Tudo o que for capturado além disso é custo e responsabilidade sem uma pergunta a que responda."
+        }
+      ]
+    }
+  }
+}

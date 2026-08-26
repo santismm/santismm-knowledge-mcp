@@ -1,7 +1,7 @@
 {
   "slug": "recovery-strategy",
   "category": "reliability",
-  "updated": "2026-06-24",
+  "updated": "2026-08-25",
   "version": "1.1",
   "featured": false,
   "technologies": [
@@ -13,7 +13,8 @@
   "related": [
     "reflection",
     "human-escalation",
-    "evaluator-optimizer"
+    "evaluator-optimizer",
+    "correlated-run-trace"
   ],
   "references": [
     {
@@ -28,7 +29,11 @@
   "evidence": {
     "evidenceLevel": "production",
     "confidenceLevel": "low",
-    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+    "sourceType": [
+      "production_system",
+      "personal_experience",
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {

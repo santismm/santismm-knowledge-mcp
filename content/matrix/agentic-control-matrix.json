@@ -510,7 +510,9 @@
     {
       "id": "ACM-10",
       "group": "observability",
-      "patterns": [],
+      "patterns": [
+        "correlated-run-trace"
+      ],
       "knowledge": [
         "ai-observability"
       ],

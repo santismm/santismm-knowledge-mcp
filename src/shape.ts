@@ -116,8 +116,41 @@ export interface CorpusOverview {
   license_url: string;
   total: number;
   domains: DomainOverview[];
+  /**
+   * How fresh the copy answering this call is.
+   *
+   * The same server code runs from the site, which is redeployed on every
+   * content change, and from a published package, which carries the corpus
+   * frozen at publish time. An agent holding the package could not tell the
+   * difference: a `not_found` looked identical whether the slug was wrong or
+   * the snapshot was old. These two numbers make that answerable — compare
+   * them against the hosted endpoint and a difference means you have a
+   * snapshot.
+   */
+  corpus: {
+    /** Newest `updated` date across every unit this copy holds (YYYY-MM-DD). */
+    newest_unit: string | null;
+    /** How to find out whether this copy is behind. */
+    freshness: string;
+  };
   next: string;
   bulk: Record<string, string>;
+}
+
+/**
+ * Newest `updated` across a set of units, or null if none carries one.
+ *
+ * Dates are ISO `YYYY-MM-DD`, so a string comparison is the date comparison.
+ * Derived from the loaded content rather than stamped at build time, so it is
+ * correct in every deployment without anyone remembering to update it.
+ */
+function newestUpdated(items: Array<{ updated?: string }>): string | null {
+  let newest: string | null = null;
+  for (const it of items) {
+    const u = it.updated;
+    if (typeof u === "string" && (newest === null || u > newest)) newest = u;
+  }
+  return newest;
 }
 
 /** Distinct, sorted category values — read off the content, never hand-listed. */
@@ -603,6 +636,16 @@ export function makeContent(
         license_url: LICENSE_INFO.url,
         total: domains.reduce((n, d) => n + d.count, 0),
         domains,
+        corpus: {
+          newest_unit: newestUpdated([
+            ...DOMAINS.flatMap((d) => loadAll(d)),
+            ...(loadHandbook ? loadHandbook() : []),
+          ]),
+          freshness:
+            `This describes the copy answering the call. ${SITE_URL}/mcp is redeployed on ` +
+            "every content change; a published package carries the corpus frozen at publish " +
+            "time. If total or newest_unit differ from that endpoint's, you are holding a snapshot.",
+        },
         next:
           "search(query, locale) to answer a question across the whole corpus; " +
           "list_<domain> to browse one; get_<domain>(slug) for a full unit with its " +

@@ -433,6 +433,29 @@ function noEncontrado(
     pistas.push(`${espacio.listTool} returns every identifier this tool accepts.`);
   }
   pistas.push("Identifiers are not interchangeable between spaces; do not invent one by analogy.");
+
+  /**
+   * The third reason a lookup fails, and the one this answer could not express.
+   *
+   * A published package carries the corpus frozen at publish time, so an agent
+   * holding one gets `not_found` for a unit that exists — and everything above
+   * tells it, truthfully but misleadingly, that the identifier is not in the
+   * corpus. Stating the date of this copy turns that into something the caller
+   * can check instead of a dead end wearing a helpful face.
+   */
+  try {
+    const fecha = content.overview().corpus.newest_unit;
+    if (fecha) {
+      cuerpo.corpus_newest_unit = fecha;
+      pistas.push(
+        `This copy holds nothing newer than ${fecha}. If the unit was added after that, ` +
+          "a package snapshot is the reason and the hosted endpoint has it.",
+      );
+    }
+  } catch {
+    // La recuperación nunca puede ser la que rompa la respuesta.
+  }
+
   cuerpo.hint = pistas.join(" ");
 
   return {
@@ -516,6 +539,14 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
             api_url: z.string(),
           }),
         ),
+        corpus: z
+          .object({
+            newest_unit: z.string().nullable().describe("Newest unit date in THIS copy (YYYY-MM-DD)."),
+            freshness: z.string(),
+          })
+          .describe(
+            "Whether this copy is current. Compare against the hosted endpoint: a lower total or an older newest_unit means you are holding a snapshot, not that the corpus lacks what you asked for.",
+          ),
         next: z.string(),
         bulk: z.record(z.string(), z.string()),
       }),

@@ -248,6 +248,17 @@ function stem(token: string): string {
 }
 
 /** Relative importance of each field when scoring a search hit. */
+/**
+ * Cuánto puede sumar como mucho la centralidad. Por debajo del peso de un
+ * acierto en título (6) a propósito: desempata y matiza dentro de un empate,
+ * nunca adelanta a una unidad que acertó más términos de la consulta.
+ */
+const CENTRALITY_NUDGE = 1.5;
+
+/** Satura: pasar de 0 a 4 enlaces importa; de 40 a 44, ya no. */
+const centralityBonus = (inbound: number) =>
+  CENTRALITY_NUDGE * (inbound / (inbound + 4));
+
 const FIELD_WEIGHTS: Record<string, number> = {
   name: 6,
   slug: 5,
@@ -606,6 +617,58 @@ export function makeContent(
   const getOne = (domain: Domain, slug: string) =>
     loadAll(domain).find((e) => e.slug === slug);
 
+  /**
+   * Enlaces entrantes por unidad — la única señal de centralidad que este
+   * corpus ya tiene, y la que decide un empate de puntuación.
+   *
+   * Para una consulta de una palabra, toda unidad que la lleve en el título
+   * saca exactamente la misma nota: "memory" empataba 4 unidades y "harness" 7,
+   * y el orden lo resolvía `localeCompare`. Cuál es la canónica no está en el
+   * texto — está en quién apunta a quién.
+   *
+   * Cuenta TODAS las aristas declaradas, incluidas las del manual, que
+   * referencia por identificador (`HRN-003`, `GOV-001`, `ARCH-001`) y no por
+   * slug: medirlo solo sobre los cuatro dominios JSON dejaba a los 14 capítulos
+   * a cero por artefacto y habría hundido el manual entero fingiendo que era
+   * una señal.
+   */
+  let inboundCache: Map<string, number> | null = null;
+  const inboundLinks = (): Map<string, number> => {
+    if (inboundCache) return inboundCache;
+    const bySlug = new Map<string, string>(); // ARCH-001 / HRN-003 -> slug
+    const entries: Record<string, unknown>[] = [];
+    for (const domain of DOMAINS) {
+      for (const e of loadAll(domain)) {
+        entries.push(e as unknown as Record<string, unknown>);
+        const id = (e as Record<string, unknown>).id;
+        if (typeof id === "string") bySlug.set(id.toUpperCase(), e.slug);
+      }
+    }
+    if (loadHandbook) {
+      for (const c of loadHandbook()) {
+        entries.push(c as unknown as Record<string, unknown>);
+        if (c.id) bySlug.set(String(c.id).toUpperCase(), c.slug);
+      }
+    }
+    const inb = new Map<string, number>();
+    for (const e of entries) {
+      for (const field of ["related", "patterns", "knowledge", "architectures", "governance"]) {
+        const refs = e[field];
+        if (!Array.isArray(refs)) continue;
+        for (const r of refs) {
+          if (typeof r !== "string") continue;
+          // Una referencia que no resuelve acaba bajo una clave que ninguna
+          // unidad tiene, así que no confiere centralidad a nadie. Quien avisa
+          // de que existen es `npm run validate`, no esto.
+          const slug = bySlug.get(r.toUpperCase()) ?? r;
+          inb.set(slug, (inb.get(slug) ?? 0) + 1);
+        }
+      }
+    }
+    inboundCache = inb;
+    return inb;
+  };
+
   const card = (d: Domain, e: Entry, locale: Locale, type: string) => ({
     type,
     ...summarize(d, e, locale),
@@ -699,11 +762,13 @@ export function makeContent(
       const wantHandbook = domains.includes("handbook" as Domain);
       const structured = domains.filter((d) => d !== ("handbook" as Domain));
 
-      const docs: { fields: Record<string, string>; card: () => Record<string, unknown> }[] = [];
+      const inb = inboundLinks();
+      const docs: { fields: Record<string, string>; slug: string; card: () => Record<string, unknown> }[] = [];
       for (const domain of structured) {
         for (const entry of loadAll(domain)) {
           docs.push({
             fields: searchFields(entry),
+            slug: entry.slug,
             card: () => summarize(domain, entry, locale) as unknown as Record<string, unknown>,
           });
         }
@@ -714,6 +779,7 @@ export function makeContent(
         for (const e of loadHandbook()) {
           docs.push({
             fields: handbookFields(e),
+            slug: e.slug,
             card: () => summarizeHandbook(e, locale) as unknown as Record<string, unknown>,
           });
         }
@@ -733,7 +799,11 @@ export function makeContent(
       const scored: (Record<string, unknown> & ScoredHit & { name: string })[] = [];
       for (const d of docs) {
         const hit = scoreEntry(d.fields, tokens, idf);
-        if (hit) scored.push({ ...d.card(), ...hit } as typeof scored[number]);
+        if (!hit) continue;
+        // La centralidad se suma DESPUÉS de puntuar el texto: decide entre
+        // unidades que ya empataron por relevancia, no compite con ella.
+        const score = Math.round((hit.score + centralityBonus(inb.get(d.slug) ?? 0)) * 100) / 100;
+        scored.push({ ...d.card(), ...hit, score } as typeof scored[number]);
       }
 
       scored.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));

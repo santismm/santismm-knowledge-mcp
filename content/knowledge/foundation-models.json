@@ -4,7 +4,8 @@
   "updated": "2026-06-21",
   "version": "1.0",
   "featured": true,
-  "related": ["fine-tuning", "embeddings", "agentic-ai", "harness-engineering"],
+  "related": ["fine-tuning", "embeddings", "agentic-ai", "harness-engineering",
+    "reasoning-models"],
   "references": [
     { "title": "Bommasani et al. — On the Opportunities and Risks of Foundation Models (2021)", "url": "https://arxiv.org/abs/2108.07258" },
     { "title": "Vaswani et al. — Attention Is All You Need (2017)", "url": "https://arxiv.org/abs/1706.03762" }

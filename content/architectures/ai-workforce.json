@@ -13,7 +13,9 @@
     { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
     { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
   ],
-  "related": ["customer-service-agent", "enterprise-knowledge-assistant"],
+  "related": ["customer-service-agent", "enterprise-knowledge-assistant",
+    "operations-center",
+    "sales-copilot"],
   "locales": {
     "en": {
       "name": "AI Workforce",

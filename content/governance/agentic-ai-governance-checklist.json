@@ -49,7 +49,9 @@
   "related": [
     "eu-ai-act",
     "iso-42001",
-    "nist-ai-rmf"
+    "nist-ai-rmf",
+    "enterprise-ai-governance-framework",
+    "human-oversight-and-accountability-policy"
   ],
   "locales": {
     "en": {

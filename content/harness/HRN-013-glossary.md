@@ -35,7 +35,7 @@ The following are the canonical definitions of terms used throughout this corpus
 - **Agent:** a system that uses a language model in a loop to pursue a goal, deciding which actions (tool calls) to take based on observations until a stopping condition is met.
 - **Agentic system:** a software system whose behavior is driven by one or more agents, including all the surrounding scaffolding required to make them reliable.
 - **Harness:** the engineered scaffolding around a model — memory, tools, planning, orchestration, observability, evaluation, governance, and security — that turns a raw model into a reliable agentic system.
-- **Harness Engineering:** the discipline responsible for building reliable agentic systems for enterprise environments by designing and operating the harness.
+- **Harness Engineering:** the emerging discipline responsible for building reliable agentic systems for enterprise environments by designing and operating the harness.
 - **Model / LLM:** the underlying large language model that performs reasoning and generation; in the harness it is treated as a powerful but non-deterministic, manipulable component.
 - **Autonomy gradient:** the spectrum of control modes from fully autonomous to human-in-the-loop, assigned per action class by policy.
 - **Blast radius:** the maximum harm an action (or a compromised agent) can cause; a core quantity to bound.

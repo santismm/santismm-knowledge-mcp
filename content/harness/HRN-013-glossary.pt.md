@@ -20,7 +20,7 @@ Os nomes ingleses de uso estabelecido na indústria (*harness*, *tool*, *span*, 
 - **Agente:** um sistema que usa um modelo de linguagem dentro de um ciclo para perseguir um objetivo, decidindo que ações (chamadas a ferramentas) tomar a partir das observações até se cumprir uma condição de paragem.
 - **Sistema agêntico:** um sistema de software cujo comportamento é conduzido por um ou vários agentes, incluindo todo o andaime circundante necessário para os tornar confiáveis.
 - **Harness:** o andaime de engenharia em torno de um modelo — memória, ferramentas, planejamento, orquestração, observabilidade, avaliação, governança e segurança — que converte um modelo em bruto num sistema agêntico confiável.
-- **Engenharia de Harness:** a disciplina responsável por construir sistemas agênticos confiáveis para ambientes empresariais, desenhando e operando o harness.
+- **Engenharia de Harness:** a disciplina emergente responsável por construir sistemas agênticos confiáveis para ambientes empresariais, desenhando e operando o harness.
 - **Modelo / LLM:** o grande modelo de linguagem subjacente que raciocina e gera; dentro do harness é tratado como um componente poderoso mas não determinista e manipulável.
 - **Gradiente de autonomia:** o espectro de modos de controle, de totalmente autônomo a humano no ciclo, atribuído por política a cada classe de ação.
 - **Raio de impacto (*blast radius*):** o dano máximo que uma ação, ou um agente comprometido, pode causar; uma grandeza central a limitar.

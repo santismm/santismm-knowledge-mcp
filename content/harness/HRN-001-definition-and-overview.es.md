@@ -1,12 +1,12 @@
 ---
 title: "Ingeniería de Harness: definición y panorama"
-summary: "La Ingeniería de Harness es la disciplina que construye sistemas agénticos fiables para entornos empresariales: el andamiaje de ingeniería —memoria, herramientas, orquestación, observabilidad, evaluación, gobernanza y seguridad— que rodea al modelo."
+summary: "La Ingeniería de Harness es la disciplina emergente que construye sistemas agénticos fiables para entornos empresariales: el andamiaje de ingeniería —memoria, herramientas, orquestación, observabilidad, evaluación, gobernanza y seguridad— que rodea al modelo."
 ---
 
 # Ingeniería de Harness: definición y panorama
 
 ## Resumen ejecutivo
-La Ingeniería de Harness es la disciplina responsable de construir sistemas agénticos fiables para entornos empresariales. Un modelo de lenguaje es un predictor probabilístico del siguiente token; una empresa necesita un sistema de confianza que haga el trabajo, respete la política y falle de forma segura. El harness es todo lo que se construye *alrededor* del modelo —memoria, herramientas, planificación, orquestación, observabilidad, evaluación, gobernanza y seguridad— para cerrar esa distancia. Este capítulo define la disciplina, enuncia su tesis y enmarca el resto del manual.
+La Ingeniería de Harness es la disciplina emergente responsable de construir sistemas agénticos fiables para entornos empresariales. Un modelo de lenguaje es un predictor probabilístico del siguiente token; una empresa necesita un sistema de confianza que haga el trabajo, respete la política y falle de forma segura. El harness es todo lo que se construye *alrededor* del modelo —memoria, herramientas, planificación, orquestación, observabilidad, evaluación, gobernanza y seguridad— para cerrar esa distancia. Este capítulo define la disciplina, enuncia su tesis y enmarca el resto del manual.
 
 ## Conceptos clave
 - **Modelo:** el núcleo probabilístico (un LLM o un modelo multimodal) que transforma un contexto en una distribución sobre los siguientes tokens. Potente, pero sin estado, sin gobernanza y no determinista por defecto.
@@ -17,7 +17,7 @@ La Ingeniería de Harness es la disciplina responsable de construir sistemas ag�
 - **Entorno empresarial:** un contexto con riesgo real: datos regulados, requisitos de auditoría, acuerdos de nivel de servicio y adversarios.
 
 ## Definición
-La **Ingeniería de Harness** es la disciplina de ingeniería que se ocupa del diseño, la construcción y la operación de los sistemas que rodean a los modelos probabilísticos, de modo que el sistema agéntico resultante sea suficientemente fiable, observable, gobernable y seguro para uso empresarial. Donde el aprendizaje automático produce el *modelo*, la Ingeniería de Harness produce el *sistema*. Su unidad de trabajo no es un prompt ni una matriz de pesos, sino el bucle completo que convierte un objetivo en un resultado verificado y auditable.
+La **Ingeniería de Harness** es la disciplina de ingeniería emergente que se ocupa del diseño, la construcción y la operación de los sistemas que rodean a los modelos probabilísticos, de modo que el sistema agéntico resultante sea suficientemente fiable, observable, gobernable y seguro para uso empresarial. Donde el aprendizaje automático produce el *modelo*, la Ingeniería de Harness produce el *sistema*. Su unidad de trabajo no es un prompt ni una matriz de pesos, sino el bucle completo que convierte un objetivo en un resultado verificado y auditable.
 
 ## Explicación detallada
 La industria pasó de 2020 a 2023 aprendiendo que un modelo mejor es necesario pero no suficiente. Las demos que deslumbran con un prompt cuidado se derrumban en producción frente a entradas ambiguas, usuarios hostiles, datos obsoletos, fallos parciales de herramientas y el simple hecho de que la misma entrada puede dar dos salidas distintas. La respuesta no fue «un modelo más listo» sino *un sistema de ingeniería alrededor del modelo*. Ese sistema es el harness, y construirlo bien es una disciplina propia.
@@ -38,6 +38,9 @@ La tesis central de este manual es una **separación de responsabilidades**: el 
 No son extras opcionales: son la estructura portante. La taxonomía de HRN-003 precisa la descomposición, y HRN-004 enuncia los principios de ingeniería que valen para todas ellas.
 
 **¿Por qué una disciplina nueva?** Porque los modos de fallo son nuevos. El software clásico es determinista: dada una entrada, calcula la misma salida, y lo pruebas con aserciones. Los sistemas agénticos son *estocásticos y autodirigidos*: la misma entrada puede tomar caminos distintos, invocar herramientas distintas y llegar a conclusiones distintas (a veces erróneas). No puedes llegar a la confianza a base de aserciones; tienes que *medir distribuciones*, acotar la autoridad del modelo e instrumentarlo todo. Las capacidades que exige —fiabilidad probabilística, diseño de evaluación, ingeniería de contexto, diseño de contratos de herramientas y seguridad adversaria— no encajan limpiamente ni en el aprendizaje automático tradicional ni en la ingeniería de backend. Ese hueco es la disciplina.
+
+
+**¿Por qué *emergente* y no simplemente una disciplina?** Porque la respuesta honesta tiene cuatro partes y no son igual de firmes. Que el mismo modelo con distintos harnesses dé resultados distintos es un **hecho observado**. Que la práctica esté convergiendo en las mismas preocupaciones —contexto, herramientas, evaluación, observabilidad, control— es una **lectura del sector**. Que esas preocupaciones constituyan una disciplina propia es **nuestra posición**, sostenida con confianza media: no hay acreditación, ni currículo estándar, ni cuerpo de conocimiento acordado, ni organismo profesional, y darla por establecida afirmaría más de lo que nadie puede demostrar. Que el harness, y no el modelo, acabe siendo el activo competitivo duradero es una **apuesta**, sostenida con confianza baja. Cada una se publica por separado, con sus límites y la observación que la retiraría, como `HE-CLAIM-001` a `HE-CLAIM-004`: se consultan con `get_claim`.
 
 **Para quién es.** La Ingeniería de Harness es para los equipos responsables de poner agentes en producción donde importa: ingeniería de plataforma que construye runtimes de agentes, ingeniería de IA aplicada que entrega funcionalidades agénticas, las funciones de seguridad y gobernanza que deben dar el visto bueno, y los arquitectos que responden del conjunto. Es explícitamente *enterprise-first*: las restricciones que definen la disciplina —auditoría, regulación, SLA, adversarios, escala— son precisamente las que el utillaje de aficionado ignora.
 

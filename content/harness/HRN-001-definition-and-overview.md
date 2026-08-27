@@ -7,7 +7,7 @@ status: Draft
 author: Santiago Santa María
 created: 2026-06-21
 updated: 2026-06-21
-summary: Harness Engineering is the discipline of building reliable agentic systems for enterprise environments — the engineered scaffolding of memory, tools, orchestration, observability, evaluation, governance, and security that surrounds the model.
+summary: Harness Engineering is the emerging discipline of building reliable agentic systems for enterprise environments — the engineered scaffolding of memory, tools, orchestration, observability, evaluation, governance, and security that surrounds the model.
 evidence_level: theoretical
 confidence_level: medium
 source_type:
@@ -28,7 +28,7 @@ tags:
 # Harness Engineering: Definition and Overview
 
 ## Executive Summary
-Harness Engineering is the discipline responsible for building reliable agentic systems for enterprise environments. A large language model is a probabilistic next-token predictor; an enterprise needs a dependable system that performs work, respects policy, and fails safely. The harness is everything engineered *around* the model — memory, tools, planning, orchestration, observability, evaluation, governance, and security — that closes the gap between the two. This chapter defines the discipline, states its thesis, and frames the rest of the handbook.
+Harness Engineering is the emerging discipline responsible for building reliable agentic systems for enterprise environments. A large language model is a probabilistic next-token predictor; an enterprise needs a dependable system that performs work, respects policy, and fails safely. The harness is everything engineered *around* the model — memory, tools, planning, orchestration, observability, evaluation, governance, and security — that closes the gap between the two. This chapter defines the discipline, states its thesis, and frames the rest of the handbook.
 
 ## Key Concepts
 - **Model:** The probabilistic core (an LLM or multimodal model) that maps a context to a distribution over next tokens. Powerful, but stateless, ungoverned, and non-deterministic by default.
@@ -39,7 +39,7 @@ Harness Engineering is the discipline responsible for building reliable agentic 
 - **Enterprise environment:** A setting with real stakes — regulated data, audit requirements, SLAs, and adversaries.
 
 ## Definition
-**Harness Engineering** is the engineering discipline concerned with the design, construction, and operation of the systems that surround probabilistic models so that the resulting agentic system is reliable, observable, governable, and secure enough for enterprise use. Where machine learning produces the *model*, Harness Engineering produces the *system*. Its unit of work is not a prompt or a weight matrix but the end-to-end loop that turns a goal into a verified, auditable outcome.
+**Harness Engineering** is the emerging engineering discipline concerned with the design, construction, and operation of the systems that surround probabilistic models so that the resulting agentic system is reliable, observable, governable, and secure enough for enterprise use. Where machine learning produces the *model*, Harness Engineering produces the *system*. Its unit of work is not a prompt or a weight matrix but the end-to-end loop that turns a goal into a verified, auditable outcome.
 
 ## Architecture Diagram
 ```mermaid
@@ -87,6 +87,9 @@ The central claim of this handbook is a **separation of concerns**: the model su
 These are not optional add-ons; they are the load-bearing structure. The taxonomy in HRN-003 makes the decomposition precise, and HRN-004 states the engineering principles that hold across all of them.
 
 **Why a new discipline?** Because the failure modes are new. Classical software is deterministic: given an input, it computes the same output, and you test it with assertions. Agentic systems are *stochastic and self-directed*: the same input may take different paths, invoke different tools, and reach different (sometimes wrong) conclusions. You cannot assert your way to confidence; you must *measure distributions*, bound the model's authority, and instrument everything. The skills required — probabilistic reliability, evaluation design, prompt-and-context engineering, tool contract design, and adversarial security — do not map cleanly onto either traditional ML or traditional backend engineering. That gap is the discipline.
+
+
+**Why *emerging*, and not simply a discipline?** Because the honest answer has four parts, and they are not equally strong. That the same model under different harnesses produces different results is an **observed fact**. That practice is converging on the same concerns — context, tools, evaluation, observability, control — is a **reading of the industry**. That those concerns constitute a discipline of its own is **our position**, held at medium confidence: there is no accreditation, no standard curriculum, no agreed body of knowledge and no professional body, and calling it settled would claim more than anyone can show. That the harness, rather than the model, becomes the durable competitive asset is a **bet**, held at low confidence. Each of those is published separately, with its limits and the observation that would retire it, as `HE-CLAIM-001` through `HE-CLAIM-004` — query them with `get_claim`.
 
 **Who it is for.** Harness Engineering is for the teams accountable for putting agents into production where it matters: platform engineers building agent runtimes, ML and applied-AI engineers shipping agentic features, security and governance functions who must sign off, and the architects who own the whole. It is explicitly *enterprise-first* — the constraints that define the discipline (audit, regulation, SLAs, adversaries, scale) are precisely the ones hobbyist tooling ignores.
 

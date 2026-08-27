@@ -1,0 +1,43 @@
+{
+  "id": "HE-CLAIM-004",
+  "slug": "harness-is-the-durable-asset",
+  "claimType": "strategic_hypothesis",
+  "confidenceLevel": "low",
+  "reviewed": "2026-08-27",
+  "version": "1.0.0",
+  "updated": "2026-08-27",
+  "supports": [
+    "HRN-001",
+    "HRN-012",
+    "harness-engineering"
+  ],
+  "sources": [
+    {
+      "title": "Harness Engineering: Definition and Overview",
+      "author": "Santa María, S.",
+      "venue": "SANTISMM Harness Engineering Handbook",
+      "year": "2026",
+      "type": "personal_experience"
+    }
+  ],
+  "locales": {
+    "en": {
+      "statement": "As frontier model capability commoditises, the harness becomes the durable source of competitive advantage for an enterprise.",
+      "basis": "Models are bought by everyone on comparable terms, while the harness encodes an organisation's own data access, policies, tool contracts, evaluation suites and authority limits — none of which transfer with a model swap.",
+      "limitations": "A bet about the future, held at low confidence and with no supporting measurement. The opposite is equally arguable: capability gains may absorb harness work, and much of today's harness exists to compensate for limitations that the next model generation removes.",
+      "falsifiedBy": "Successive model generations reducing the harness needed to reach the same verified outcome — measurably fewer components for equal or better results — or enterprises finding that swapping models, not harness quality, is what moves their outcomes."
+    },
+    "es": {
+      "statement": "A medida que la capacidad de los modelos de frontera se comoditiza, el harness pasa a ser la fuente duradera de ventaja competitiva de una empresa.",
+      "basis": "Los modelos los compra todo el mundo en condiciones comparables, mientras que el harness codifica el acceso a datos propios, las políticas, los contratos de herramientas, las suites de evaluación y los límites de autoridad de una organización concreta — y nada de eso viaja al cambiar de modelo.",
+      "limitations": "Es una apuesta sobre el futuro, sostenida con confianza baja y sin medición que la respalde. Lo contrario es igual de defendible: las mejoras de capacidad pueden absorber el trabajo de harness, y buena parte del harness de hoy existe para compensar limitaciones que la siguiente generación de modelos elimina.",
+      "falsifiedBy": "Que generaciones sucesivas de modelos reduzcan el harness necesario para el mismo resultado verificado —medidamente menos componentes para resultados iguales o mejores— o que a las empresas les mueva los resultados cambiar de modelo y no la calidad del harness."
+    },
+    "pt": {
+      "statement": "À medida que a capacidade dos modelos de fronteira se comoditiza, o harness torna-se a fonte duradoura de vantagem competitiva de uma empresa.",
+      "basis": "Os modelos são comprados por todos em condições comparáveis, ao passo que o harness codifica o acesso a dados próprios, as políticas, os contratos de ferramentas, as suites de avaliação e os limites de autoridade de uma organização concreta — e nada disso viaja ao mudar de modelo.",
+      "limitations": "É uma aposta sobre o futuro, sustentada com confiança baixa e sem medição que a apoie. O contrário é igualmente defensável: os ganhos de capacidade podem absorver o trabalho de harness, e boa parte do harness de hoje existe para compensar limitações que a geração seguinte elimina.",
+      "falsifiedBy": "Que gerações sucessivas de modelos reduzam o harness necessário para o mesmo resultado verificado — mensuravelmente menos componentes para resultados iguais ou melhores — ou que às empresas o que lhes move os resultados seja mudar de modelo e não a qualidade do harness."
+    }
+  }
+}

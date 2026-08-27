@@ -1,0 +1,58 @@
+{
+  "id": "HE-CLAIM-002",
+  "slug": "practice-converges-on-eight-components",
+  "claimType": "industry_synthesis",
+  "confidenceLevel": "medium",
+  "reviewed": "2026-08-27",
+  "version": "1.0.0",
+  "updated": "2026-08-27",
+  "supports": [
+    "HRN-003",
+    "HRN-004",
+    "harness-engineering",
+    "agentic-ai"
+  ],
+  "sources": [
+    {
+      "title": "Building Effective Agents",
+      "author": "Anthropic",
+      "venue": "Anthropic Engineering",
+      "year": "2024",
+      "type": "industry_observation"
+    },
+    {
+      "title": "A Survey on Large Language Model based Autonomous Agents",
+      "author": "Wang, L. et al.",
+      "venue": "survey",
+      "year": "2023",
+      "type": "paper"
+    },
+    {
+      "title": "AI Risk Management Framework (AI RMF 1.0)",
+      "author": "NIST",
+      "venue": "NIST",
+      "year": "2023",
+      "type": "industry_observation"
+    }
+  ],
+  "locales": {
+    "en": {
+      "statement": "Independent practitioners are converging on the same small set of concerns around the model — context and memory, tools, planning and orchestration, observability, evaluation, governance and security — even where they use different names for them.",
+      "basis": "Vendor engineering guidance, agent surveys and the control catalogues of AI governance frameworks describe overlapping concerns from different starting points, without citing one another as the source of the taxonomy.",
+      "limitations": "Convergence of concerns is not agreement on a taxonomy. No standard names, boundaries or component count exists, and SANTISMM's grouping into eight components across three layers is one cut among several defensible ones. Absence of cross-citation makes independence plausible, not proven.",
+      "falsifiedBy": "A published, adopted taxonomy that partitions the same space differently — or evidence that the apparent convergence traces back to a single common source rather than independent practice."
+    },
+    "es": {
+      "statement": "Practicantes independientes están convergiendo en el mismo conjunto reducido de preocupaciones alrededor del modelo —contexto y memoria, herramientas, planificación y orquestación, observabilidad, evaluación, gobierno y seguridad— aunque las nombren de forma distinta.",
+      "basis": "Las guías de ingeniería de los proveedores, los estudios sobre agentes y los catálogos de control de los marcos de gobierno describen preocupaciones solapadas partiendo de sitios distintos, sin citarse entre sí como origen de la taxonomía.",
+      "limitations": "Converger en las preocupaciones no es acordar una taxonomía. No existen nombres, fronteras ni número de componentes estándar, y agruparlos en ocho componentes y tres capas es un corte entre varios defendibles. Que no se citen hace plausible la independencia, no la demuestra.",
+      "falsifiedBy": "Una taxonomía publicada y adoptada que reparta el mismo espacio de otra forma, o evidencia de que la convergencia aparente procede de una fuente común y no de práctica independiente."
+    },
+    "pt": {
+      "statement": "Praticantes independentes estão a convergir no mesmo conjunto reduzido de preocupações à volta do modelo — contexto e memória, ferramentas, planeamento e orquestração, observabilidade, avaliação, governo e segurança — ainda que lhes deem nomes diferentes.",
+      "basis": "Os guias de engenharia dos fornecedores, os estudos sobre agentes e os catálogos de controlo dos quadros de governo descrevem preocupações sobrepostas partindo de pontos distintos, sem se citarem como origem da taxonomia.",
+      "limitations": "Convergir nas preocupações não é acordar uma taxonomia. Não existem nomes, fronteiras nem número de componentes padrão, e agrupá-los em oito componentes e três camadas é um corte entre vários defensáveis. Não se citarem torna a independência plausível, não provada.",
+      "falsifiedBy": "Uma taxonomia publicada e adotada que reparta o mesmo espaço de outra forma, ou evidência de que a convergência aparente vem de uma fonte comum e não de prática independente."
+    }
+  }
+}

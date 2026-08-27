@@ -1,0 +1,57 @@
+{
+  "id": "HE-CLAIM-001",
+  "slug": "harness-changes-outcomes",
+  "claimType": "observed_fact",
+  "confidenceLevel": "high",
+  "reviewed": "2026-08-27",
+  "version": "1.0.0",
+  "updated": "2026-08-27",
+  "supports": [
+    "HRN-001",
+    "HRN-003",
+    "harness-engineering"
+  ],
+  "sources": [
+    {
+      "title": "Building Effective Agents",
+      "author": "Anthropic",
+      "venue": "Anthropic Engineering",
+      "year": "2024",
+      "type": "industry_observation"
+    },
+    {
+      "title": "How we built our multi-agent research system",
+      "author": "Anthropic",
+      "venue": "Anthropic Engineering",
+      "year": "2025",
+      "type": "industry_observation"
+    },
+    {
+      "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+      "author": "Jimenez, C. et al.",
+      "venue": "ICLR",
+      "year": "2024",
+      "type": "benchmark"
+    }
+  ],
+  "locales": {
+    "en": {
+      "statement": "Holding the model fixed and changing only the harness materially changes the outcome of the same task.",
+      "basis": "Published agentic benchmarks report different resolution rates for the same underlying model depending on the scaffold that drives it, and vendor engineering writeups describe the same effect when they change loop, tools or context strategy without changing the model.",
+      "limitations": "Establishes that the harness matters, not how much, nor which component carries the effect, nor whether it generalises across models. Published comparisons are self-reported and rarely control cost, repetitions or variance.",
+      "falsifiedBy": "A controlled study holding model, task, effort and budget constant across several harnesses that finds no difference in verified success rate beyond run-to-run variance."
+    },
+    "es": {
+      "statement": "Con el modelo fijo, cambiar solo el harness cambia materialmente el resultado de la misma tarea.",
+      "basis": "Los benchmarks agénticos publicados dan tasas de resolución distintas para el mismo modelo según el andamiaje que lo conduce, y los informes de ingeniería de los proveedores describen el mismo efecto al cambiar bucle, herramientas o estrategia de contexto sin tocar el modelo.",
+      "limitations": "Establece que el harness importa, no cuánto, ni qué componente produce el efecto, ni si generaliza entre modelos. Las comparaciones publicadas son autodeclaradas y rara vez controlan coste, repeticiones ni varianza.",
+      "falsifiedBy": "Un estudio controlado que, fijando modelo, tarea, esfuerzo y presupuesto, no encuentre diferencia en la tasa de éxito verificado entre varios harnesses más allá de la varianza entre ejecuciones."
+    },
+    "pt": {
+      "statement": "Com o modelo fixo, mudar apenas o harness muda materialmente o resultado da mesma tarefa.",
+      "basis": "Os benchmarks agênticos publicados dão taxas de resolução diferentes para o mesmo modelo consoante o andaime que o conduz, e os relatos de engenharia dos fornecedores descrevem o mesmo efeito ao mudar ciclo, ferramentas ou estratégia de contexto sem tocar no modelo.",
+      "limitations": "Estabelece que o harness importa, não quanto, nem que componente produz o efeito, nem se generaliza entre modelos. As comparações publicadas são autodeclaradas e raramente controlam custo, repetições ou variância.",
+      "falsifiedBy": "Um estudo controlado que, fixando modelo, tarefa, esforço e orçamento, não encontre diferença na taxa de sucesso verificado entre vários harnesses para além da variância entre execuções."
+    }
+  }
+}

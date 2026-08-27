@@ -60,6 +60,8 @@ export interface McpContent {
    */
   listHomeric(kind: HomericKind, locale?: Locale): unknown[];
   getHomeric(kind: HomericKind, slug: string, locale?: Locale): unknown;
+  listClaims(type?: string, locale?: Locale): unknown[];
+  getClaim(id: string, locale?: Locale): unknown;
 }
 
 /** The three artifact kinds of the Homeric Atlas. */
@@ -296,6 +298,7 @@ const ESPACIOS = [
   { domain: "homeric/places", listTool: "list_homeric_places", getTool: "get_homeric_place" },
   { domain: "homeric/episodes", listTool: "list_homeric_episodes", getTool: "get_homeric_episode" },
   { domain: "homeric/routes", listTool: "list_homeric_routes", getTool: "get_homeric_route" },
+  { domain: "claims", listTool: "list_claims", getTool: "get_claim" },
 ] as const;
 
 type EspacioNombre = (typeof ESPACIOS)[number]["domain"];
@@ -316,6 +319,7 @@ function identificadores(cards: unknown[]): string[] {
 /** The cards of one space, whichever loader serves it. */
 function cardsDe(content: McpContent, domain: EspacioNombre, locale: Locale): unknown[] {
   if (domain === "handbook") return content.listHandbook(locale);
+  if (domain === "claims") return content.listClaims(undefined, locale);
   if (domain.startsWith("homeric/")) {
     return content.listHomeric(domain.slice("homeric/".length) as HomericKind, locale);
   }
@@ -508,6 +512,26 @@ const homericListOutput = {
 };
 
 const homericUnitOutput = z.object({}).passthrough();
+
+/**
+ * Claims get their own shape for the same reason the atlas does: forcing them
+ * into the corpus card would mean inventing an `evidence` block they do not
+ * have. A claim is not a unit with provenance — it IS the provenance, and what
+ * it carries instead is the rung of the ladder it sits on.
+ */
+const claimCard = z.object({
+  type: z.literal("claim"),
+  id: z.string(),
+  slug: z.string(),
+  claim_type: z.enum(["observed_fact", "industry_synthesis", "santismm_thesis", "strategic_hypothesis"]),
+  confidence_level: z.string(),
+  statement: z.string().optional(),
+  supports: z.array(z.string()),
+  reviewed: z.string(),
+});
+
+const claimListOutput = { count: z.number(), results: z.array(claimCard) };
+const claimUnitOutput = z.object({}).passthrough();
 
 export function registerTools(server: McpToolServer, content: McpContent): void {
   // ── Orientation ────────────────────────────────────────────────────────────
@@ -860,6 +884,49 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     async ({ slug, locale }) => {
       const entry = content.getHomeric("routes", slug, locale as Locale | undefined);
       return entry ? out(entry as Record<string, unknown>) : noEncontrado(content, "homeric/routes", slug, (locale ?? "en") as Locale);
+    },
+  );
+
+  // ── Claims (ADR 0003) ────────────────────────────────────────────────────
+  // Everything else in this server answers "what does the corpus say?". These
+  // two answer "how strongly, and on what?" — which of the corpus's statements
+  // are observed fact, which are a reading of the industry, which are our own
+  // position and which are a bet. Without them an agent has to infer the
+  // epistemic status from prose, and prose does not distinguish those.
+  server.registerTool(
+    "list_claims",
+    {
+      title: "List the corpus claims and their epistemic status",
+      annotations: READ_ONLY,
+      description:
+        "List the load-bearing claims of the corpus, each tagged as observed_fact, industry_synthesis, santismm_thesis or strategic_hypothesis, with its confidence and the units it underpins. Use this before quoting the handbook to know whether a statement is evidence, a reading of the industry, or a position taken. Filter by `claim_type` to get only what is checkable.",
+      inputSchema: z.object({
+        claim_type: z
+          .enum(["observed_fact", "industry_synthesis", "santismm_thesis", "strategic_hypothesis"])
+          .optional()
+          .describe("Restrict to one rung of the ladder. Omit for all."),
+        locale: localeSchema,
+      }),
+      outputSchema: claimListOutput,
+    },
+    async ({ claim_type, locale }) => outList(content.listClaims(claim_type, (locale ?? "en") as Locale)),
+  );
+  server.registerTool(
+    "get_claim",
+    {
+      title: "Get one claim with its limits and what would refute it",
+      annotations: READ_ONLY,
+      description:
+        "Get one claim by id (HE-CLAIM-001) or slug: the statement, what it rests on, its structured sources, and — always present — what it does NOT establish and the observation that would retire it. Use this to cite the corpus honestly, or to check whether a result you have just measured confirms or falsifies a claim it makes.",
+      inputSchema: z.object({
+        id: z.string().describe("Claim id (e.g. 'HE-CLAIM-001') or slug."),
+        locale: localeSchema,
+      }),
+      outputSchema: claimUnitOutput,
+    },
+    async ({ id, locale }) => {
+      const c = content.getClaim(id, locale as Locale | undefined);
+      return c ? out(c as Record<string, unknown>) : noEncontrado(content, "claims", id, (locale ?? "en") as Locale);
     },
   );
 }

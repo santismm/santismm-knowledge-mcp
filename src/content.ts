@@ -190,4 +190,17 @@ function loadHomeric(kind: "places" | "episodes" | "routes"): HomericArtifact[] 
 }
 
 /** Content provider backed by the local filesystem (used by the stdio CLI). */
-export const fsContent = makeContent(loadAll, loadHandbook, loadHomeric);
+/**
+ * Claims (ADR 0003): the epistemic ladder over the corpus. A registry, not a
+ * fifth domain — it points into the corpus rather than sitting beside it.
+ */
+function loadClaims(): Record<string, unknown>[] {
+  const dir = path.join(CONTENT_ROOT, "claims");
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")));
+}
+
+export const fsContent = makeContent(loadAll, loadHandbook, loadHomeric, loadClaims);

@@ -1,0 +1,43 @@
+{
+  "id": "HE-CLAIM-003",
+  "slug": "harness-engineering-is-a-distinct-discipline",
+  "claimType": "santismm_thesis",
+  "confidenceLevel": "medium",
+  "reviewed": "2026-08-27",
+  "version": "1.0.0",
+  "updated": "2026-08-27",
+  "supports": [
+    "HRN-001",
+    "HRN-002",
+    "harness-engineering"
+  ],
+  "sources": [
+    {
+      "title": "Harness Engineering: Definition and Overview",
+      "author": "Santa María, S.",
+      "venue": "SANTISMM Harness Engineering Handbook",
+      "year": "2026",
+      "type": "personal_experience"
+    }
+  ],
+  "locales": {
+    "en": {
+      "statement": "Building the system around the model is an emerging engineering discipline in its own right, not a specialism of machine learning or of backend engineering.",
+      "basis": "The failure modes are new — the same input can take different paths and reach different conclusions — so confidence comes from measuring distributions and bounding authority rather than from assertions. The skills it demands (probabilistic reliability, evaluation design, context engineering, tool-contract design, adversarial security) sit cleanly in neither parent field.",
+      "limitations": "This is SANTISMM's position, not an industry consensus. There is no accreditation, no standard curriculum, no agreed body of knowledge and no professional body. 'Emerging' is doing real work in this sentence: the claim is that the discipline is forming, not that it is established.",
+      "falsifiedBy": "The concerns being absorbed as a normal specialism of platform or ML engineering — standard curricula and job ladders treating it as such — or model capability advancing far enough that the surrounding system stops needing distinct engineering."
+    },
+    "es": {
+      "statement": "Construir el sistema que rodea al modelo es una disciplina de ingeniería emergente por derecho propio, no una especialidad del aprendizaje automático ni de la ingeniería de backend.",
+      "basis": "Los modos de fallo son nuevos —la misma entrada puede seguir caminos distintos y llegar a conclusiones distintas—, así que la confianza sale de medir distribuciones y acotar la autoridad, no de aserciones. Las competencias que exige (fiabilidad probabilística, diseño de evaluación, ingeniería de contexto, diseño de contratos de herramientas, seguridad adversaria) no encajan limpiamente en ninguna de las dos disciplinas madre.",
+      "limitations": "Es la posición de SANTISMM, no un consenso del sector. No hay acreditación, ni currículo estándar, ni cuerpo de conocimiento acordado, ni organismo profesional. «Emergente» hace trabajo real en esta frase: se afirma que la disciplina se está formando, no que esté establecida.",
+      "falsifiedBy": "Que esas preocupaciones se absorban como una especialidad normal de la ingeniería de plataforma o de ML —currículos y carreras profesionales tratándola así—, o que la capacidad de los modelos avance lo bastante como para que el sistema alrededor deje de necesitar ingeniería propia."
+    },
+    "pt": {
+      "statement": "Construir o sistema que rodeia o modelo é uma disciplina de engenharia emergente por direito próprio, não uma especialidade da aprendizagem automática nem da engenharia de backend.",
+      "basis": "Os modos de falha são novos — a mesma entrada pode seguir caminhos diferentes e chegar a conclusões diferentes —, pelo que a confiança vem de medir distribuições e limitar a autoridade, não de asserções. As competências que exige (fiabilidade probabilística, desenho de avaliação, engenharia de contexto, desenho de contratos de ferramentas, segurança adversária) não encaixam de forma limpa em nenhuma das disciplinas-mãe.",
+      "limitations": "É a posição da SANTISMM, não um consenso do setor. Não há acreditação, currículo padrão, corpo de conhecimento acordado nem organismo profissional. «Emergente» faz trabalho real nesta frase: afirma-se que a disciplina se está a formar, não que esteja estabelecida.",
+      "falsifiedBy": "Que essas preocupações sejam absorvidas como especialidade normal da engenharia de plataforma ou de ML — currículos e carreiras a tratá-la assim —, ou que a capacidade dos modelos avance o suficiente para o sistema à volta deixar de precisar de engenharia própria."
+    }
+  }
+}

@@ -613,6 +613,7 @@ export function makeContent(
   loadAll: (domain: Domain) => Entry[],
   loadHandbook?: () => HandbookEntry[],
   loadHomeric?: (kind: HomericKind) => HomericArtifact[],
+  loadClaims?: () => Record<string, unknown>[],
 ): McpContent {
   const getOne = (domain: Domain, slug: string) =>
     loadAll(domain).find((e) => e.slug === slug);
@@ -808,6 +809,43 @@ export function makeContent(
 
       scored.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
       return scored.slice(0, limit);
+    },
+
+    /**
+     * Claims (ADR 0003). The card carries the type and the confidence, because
+     * that is the whole point: an agent must be able to tell an observed fact
+     * from a bet without reading the prose and guessing.
+     */
+    listClaims(type, locale = "en") {
+      if (!loadClaims) return [];
+      return loadClaims()
+        .filter((c) => !type || c.claimType === type)
+        // Orden estable por id: el del directorio no lo es, y un listado que
+        // cambia de orden entre llamadas es un listado en el que no se confía.
+        .sort((a, b) => String(a.id).localeCompare(String(b.id)))
+        .map((c) => {
+          const L = ((c.locales as Record<string, Record<string, string>>) ?? {})[locale] ?? {};
+          return {
+            type: "claim",
+            id: c.id,
+            slug: c.slug,
+            claim_type: c.claimType,
+            confidence_level: c.confidenceLevel,
+            statement: L.statement,
+            supports: c.supports,
+            reviewed: c.reviewed,
+          };
+        });
+    },
+
+    /** By `HE-CLAIM-nnn` or slug: an agent that saw either can come back. */
+    getClaim(id, locale = "en") {
+      if (!loadClaims) return undefined;
+      const key = String(id).toUpperCase();
+      const c = loadClaims().find((x) => String(x.id).toUpperCase() === key || x.slug === id);
+      if (!c) return undefined;
+      const L = ((c.locales as Record<string, Record<string, string>>) ?? {})[locale] ?? {};
+      return { type: "claim", ...c, body: L };
     },
 
     listHomeric(kind, locale = "en") {

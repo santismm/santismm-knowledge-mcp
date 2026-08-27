@@ -1,0 +1,457 @@
+{
+  "id": "HSC",
+  "version": "1.0",
+  "updated": "2026-08-27",
+  "claim": "HE-CLAIM-005",
+  "primary": "cvo",
+  "formula": {
+    "expression": "CVO = total cost of the run set / outcomes that passed independent verification",
+    "locales": {
+      "en": {
+        "numerator": "Every cost attributable to the run set: inference, tools, infrastructure, and the human time spent approving, correcting or escalating. Failed and abandoned attempts are in the numerator. They cost money and they happened.",
+        "denominator": "Only outcomes that passed a check which does not share a failure mode with the agent that produced them. Runs that finished do not count. Runs the agent declared successful do not count.",
+        "independence": "A verifier is independent when it can fail on inputs the producer succeeds on. A rule, a test, a second system or a person all qualify. The same model prompted to grade its own output does not: it inherits the blind spots that produced the error.",
+        "whyNotSuccessfulRuns": "Successful runs is a self-report, and it is the number every vendor already publishes. It counts the agent finishing, which is the one thing a broken harness is still good at. Cost per correctly verified outcome refuses to move until something outside the agent agrees that the work is done."
+      },
+      "es": {
+        "numerator": "Todo coste imputable al conjunto de ejecuciones: inferencia, herramientas, infraestructura y el tiempo humano dedicado a aprobar, corregir o escalar. Los intentos fallidos y abandonados están en el numerador. Costaron dinero y ocurrieron.",
+        "denominator": "Solo los resultados que pasaron una comprobación que no comparte modo de fallo con el agente que los produjo. Las ejecuciones que terminaron no cuentan. Las que el agente declaró exitosas tampoco.",
+        "independence": "Un verificador es independiente cuando puede fallar en entradas en las que el productor acierta. Una regla, un test, un segundo sistema o una persona valen. El mismo modelo al que se le pide que califique su propia salida no: hereda los puntos ciegos que produjeron el error.",
+        "whyNotSuccessfulRuns": "«Ejecuciones exitosas» es una autodeclaración, y es el número que ya publica todo proveedor. Cuenta que el agente termine, que es justo lo único que un harness roto sigue haciendo bien. El coste por resultado correctamente verificado se niega a moverse hasta que algo ajeno al agente da el trabajo por hecho."
+      },
+      "pt": {
+        "numerator": "Todo custo imputável ao conjunto de execuções: inferência, ferramentas, infraestrutura e o tempo humano gasto aprovando, corrigindo ou escalando. As tentativas fracassadas e abandonadas estão no numerador. Custaram dinheiro e aconteceram.",
+        "denominator": "Apenas os resultados que passaram por uma verificação que não compartilha modo de falha com o agente que os produziu. Execuções que terminaram não contam. As que o agente declarou bem-sucedidas também não.",
+        "independence": "Um verificador é independente quando pode falhar em entradas nas quais o produtor acerta. Uma regra, um teste, um segundo sistema ou uma pessoa servem. O mesmo modelo a quem se pede que avalie a própria saída não: ele herda os pontos cegos que produziram o erro.",
+        "whyNotSuccessfulRuns": "“Execuções bem-sucedidas” é uma autodeclaração, e é o número que todo fornecedor já publica. Conta que o agente termine, que é justamente a única coisa que um harness quebrado ainda faz bem. O custo por resultado corretamente verificado se recusa a mudar até que algo alheio ao agente dê o trabalho por feito."
+      }
+    }
+  },
+  "groups": [
+    "outcome",
+    "cost",
+    "reliability",
+    "evidence"
+  ],
+  "units": [
+    "currency/outcome",
+    "percent",
+    "percentage points",
+    "tokens/outcome",
+    "interventions/outcome",
+    "seconds"
+  ],
+  "directions": [
+    "lower",
+    "higher"
+  ],
+  "evidence": {
+    "evidenceLevel": "theoretical",
+    "confidenceLevel": "low",
+    "sourceType": [
+      "personal_experience",
+      "industry_observation"
+    ]
+  },
+  "reporting": [
+    "model",
+    "task_set",
+    "verifier",
+    "repeats",
+    "date",
+    "cost_basis"
+  ],
+  "metrics": [
+    {
+      "id": "HSC-01",
+      "key": "cvo",
+      "group": "outcome",
+      "unit": "currency/outcome",
+      "direction": "lower",
+      "controls": [
+        "ACM-11"
+      ],
+      "patterns": [],
+      "knowledge": [
+        "agentic-evaluation"
+      ],
+      "locales": {
+        "en": {
+          "name": "Cost per correctly verified outcome",
+          "definition": "Every cost attributable to a run set — inference, tools, infrastructure and the human time spent approving, correcting or escalating — divided by the number of outcomes that passed an independent check.",
+          "howToMeasure": "Fix the task set and the verifier before running anything. Sum the cost of the whole set, failed attempts included. Divide by outcomes the verifier passed, not by runs that finished.",
+          "gamedBy": "Narrow what counts as an outcome, or let the agent's own report stand as verification. Both shrink the denominator's honesty rather than the numerator's cost."
+        },
+        "es": {
+          "name": "Coste por resultado correctamente verificado",
+          "definition": "Todo coste imputable a un conjunto de ejecuciones —inferencia, herramientas, infraestructura y el tiempo humano dedicado a aprobar, corregir o escalar— dividido por el número de resultados que pasaron una comprobación independiente.",
+          "howToMeasure": "Fija el conjunto de tareas y el verificador antes de ejecutar nada. Suma el coste del conjunto entero, incluidos los intentos fallidos. Divide por los resultados que el verificador dio por buenos, no por las ejecuciones que terminaron.",
+          "gamedBy": "Estrechar lo que cuenta como resultado, o dejar que el propio informe del agente valga como verificación. Las dos cosas encogen la honestidad del denominador, no el coste del numerador."
+        },
+        "pt": {
+          "name": "Custo por resultado corretamente verificado",
+          "definition": "Todo custo imputável a um conjunto de execuções — inferência, ferramentas, infraestrutura e o tempo humano gasto aprovando, corrigindo ou escalando — dividido pelo número de resultados que passaram por uma verificação independente.",
+          "howToMeasure": "Fixe o conjunto de tarefas e o verificador antes de executar qualquer coisa. Some o custo do conjunto inteiro, tentativas fracassadas incluídas. Divida pelos resultados que o verificador aprovou, não pelas execuções que terminaram.",
+          "gamedBy": "Estreitar o que conta como resultado, ou deixar que o próprio relato do agente valha como verificação. As duas coisas encolhem a honestidade do denominador, não o custo do numerador."
+        }
+      }
+    },
+    {
+      "id": "HSC-02",
+      "key": "vyr",
+      "group": "outcome",
+      "unit": "percent",
+      "direction": "higher",
+      "controls": [
+        "ACM-11"
+      ],
+      "patterns": [],
+      "knowledge": [
+        "agentic-evaluation"
+      ],
+      "locales": {
+        "en": {
+          "name": "Verified yield rate",
+          "definition": "The share of attempted tasks that produce an outcome passing independent verification.",
+          "howToMeasure": "Attempts in the denominator, verified outcomes in the numerator. An attempt abandoned by a timeout is still an attempt, and a run the agent gave up on is still an attempt.",
+          "gamedBy": "Attempt only the tasks the harness already handles. A yield rate with no declared task set is a number about the task set, not about the harness."
+        },
+        "es": {
+          "name": "Tasa de rendimiento verificado",
+          "definition": "La proporción de tareas intentadas que producen un resultado que pasa una verificación independiente.",
+          "howToMeasure": "Intentos en el denominador, resultados verificados en el numerador. Un intento abandonado por un tiempo de espera sigue siendo un intento, y una ejecución que el agente dio por perdida también.",
+          "gamedBy": "Intentar solo las tareas que el harness ya resuelve. Una tasa de rendimiento sin conjunto de tareas declarado es un número sobre el conjunto de tareas, no sobre el harness."
+        },
+        "pt": {
+          "name": "Taxa de rendimento verificado",
+          "definition": "A proporção de tarefas tentadas que produzem um resultado que passa por verificação independente.",
+          "howToMeasure": "Tentativas no denominador, resultados verificados no numerador. Uma tentativa abandonada por tempo esgotado continua sendo uma tentativa, e uma execução que o agente desistiu também.",
+          "gamedBy": "Tentar apenas as tarefas que o harness já resolve. Uma taxa de rendimento sem conjunto de tarefas declarado é um número sobre o conjunto de tarefas, não sobre o harness."
+        }
+      }
+    },
+    {
+      "id": "HSC-03",
+      "key": "vgap",
+      "group": "outcome",
+      "unit": "percentage points",
+      "direction": "lower",
+      "controls": [
+        "ACM-10",
+        "ACM-11"
+      ],
+      "patterns": [
+        "evaluator-optimizer"
+      ],
+      "knowledge": [
+        "agentic-evaluation"
+      ],
+      "locales": {
+        "en": {
+          "name": "Verification gap",
+          "definition": "The self-reported success rate minus the independently verified one, in percentage points. It measures whether the harness can tell that it succeeded.",
+          "howToMeasure": "Record what the agent claimed for each run and what the verifier found, then subtract. Report the sign: a harness that underclaims has a different problem from one that overclaims, not a smaller one.",
+          "gamedBy": "Stop asking the agent to self-report. The gap disappears and so does the only signal that the harness cannot distinguish success from failure."
+        },
+        "es": {
+          "name": "Brecha de verificación",
+          "definition": "La tasa de éxito autodeclarada menos la verificada de forma independiente, en puntos porcentuales. Mide si el harness es capaz de saber que ha tenido éxito.",
+          "howToMeasure": "Registra qué afirmó el agente en cada ejecución y qué encontró el verificador, y resta. Informa del signo: un harness que se subestima tiene un problema distinto del que se sobreestima, no uno menor.",
+          "gamedBy": "Dejar de pedirle al agente que se autoevalúe. La brecha desaparece, y con ella la única señal de que el harness no distingue el éxito del fracaso."
+        },
+        "pt": {
+          "name": "Lacuna de verificação",
+          "definition": "A taxa de sucesso autodeclarada menos a verificada de forma independente, em pontos percentuais. Mede se o harness consegue saber que teve sucesso.",
+          "howToMeasure": "Registre o que o agente afirmou em cada execução e o que o verificador encontrou, e subtraia. Informe o sinal: um harness que se subestima tem um problema diferente do que se superestima, não um menor.",
+          "gamedBy": "Parar de pedir ao agente que se autoavalie. A lacuna desaparece, e com ela o único sinal de que o harness não distingue sucesso de fracasso."
+        }
+      }
+    },
+    {
+      "id": "HSC-04",
+      "key": "tvo",
+      "group": "cost",
+      "unit": "tokens/outcome",
+      "direction": "lower",
+      "controls": [],
+      "patterns": [
+        "context-compression"
+      ],
+      "knowledge": [
+        "context-engineering"
+      ],
+      "locales": {
+        "en": {
+          "name": "Tokens per verified outcome",
+          "definition": "Model tokens, input and output, across every attempt, divided by verified outcomes. The cost figure that does not move when a vendor changes its price list.",
+          "howToMeasure": "Count tokens for the whole run set — retries and abandoned attempts included. Report the model and its version alongside; without them the number compares nothing.",
+          "gamedBy": "Move work out of the model and into an uncounted tool or a longer human review. The tokens fall and the actual cost does not."
+        },
+        "es": {
+          "name": "Tokens por resultado verificado",
+          "definition": "Tokens de modelo, de entrada y de salida, en todos los intentos, divididos por los resultados verificados. La cifra de coste que no se mueve cuando un proveedor cambia su lista de precios.",
+          "howToMeasure": "Cuenta los tokens del conjunto entero de ejecuciones, reintentos e intentos abandonados incluidos. Informa del modelo y su versión al lado; sin eso el número no compara nada.",
+          "gamedBy": "Sacar trabajo del modelo y meterlo en una herramienta que nadie cuenta o en una revisión humana más larga. Los tokens bajan y el coste real no."
+        },
+        "pt": {
+          "name": "Tokens por resultado verificado",
+          "definition": "Tokens de modelo, de entrada e de saída, em todas as tentativas, divididos pelos resultados verificados. O número de custo que não se move quando um fornecedor muda sua tabela de preços.",
+          "howToMeasure": "Conte os tokens do conjunto inteiro de execuções, retentativas e tentativas abandonadas incluídas. Informe o modelo e sua versão ao lado; sem isso o número não compara nada.",
+          "gamedBy": "Tirar trabalho do modelo e colocá-lo numa ferramenta que ninguém conta ou numa revisão humana mais longa. Os tokens caem e o custo real não."
+        }
+      }
+    },
+    {
+      "id": "HSC-05",
+      "key": "hir",
+      "group": "cost",
+      "unit": "interventions/outcome",
+      "direction": "lower",
+      "controls": [
+        "ACM-08",
+        "ACM-09"
+      ],
+      "patterns": [
+        "human-approval-gate",
+        "human-escalation"
+      ],
+      "knowledge": [
+        "human-in-the-loop"
+      ],
+      "locales": {
+        "en": {
+          "name": "Human interventions per verified outcome",
+          "definition": "Approvals, escalations and manual corrections per verified outcome. Not whether a person is in the loop, but how often the loop closes on one.",
+          "howToMeasure": "Count every event that required a person to act before the outcome could stand. Rubber-stamped approvals count: what is measured is the demand placed on people, not the quality of their attention.",
+          "gamedBy": "Remove the gates. The rate falls to zero and nothing about the harness improved — which is why this is read next to the verification gap and never alone."
+        },
+        "es": {
+          "name": "Intervenciones humanas por resultado verificado",
+          "definition": "Aprobaciones, escalados y correcciones manuales por resultado verificado. No si hay una persona en el bucle, sino con qué frecuencia el bucle se cierra sobre una.",
+          "howToMeasure": "Cuenta todo evento que exigió que una persona actuara antes de que el resultado pudiera sostenerse. Las aprobaciones de trámite cuentan: lo que se mide es la demanda sobre las personas, no la calidad de su atención.",
+          "gamedBy": "Quitar las compuertas. La tasa cae a cero y nada del harness ha mejorado; por eso esta métrica se lee junto a la brecha de verificación y nunca sola."
+        },
+        "pt": {
+          "name": "Intervenções humanas por resultado verificado",
+          "definition": "Aprovações, escalonamentos e correções manuais por resultado verificado. Não se há uma pessoa no laço, mas com que frequência o laço se fecha sobre uma.",
+          "howToMeasure": "Conte todo evento que exigiu que uma pessoa agisse antes de o resultado poder valer. Aprovações de carimbo contam: o que se mede é a demanda sobre as pessoas, não a qualidade da atenção delas.",
+          "gamedBy": "Tirar as comportas. A taxa cai a zero e nada do harness melhorou; por isso esta métrica é lida junto à lacuna de verificação e nunca sozinha."
+        }
+      }
+    },
+    {
+      "id": "HSC-06",
+      "key": "tvt",
+      "group": "cost",
+      "unit": "seconds",
+      "direction": "lower",
+      "controls": [
+        "ACM-07"
+      ],
+      "patterns": [],
+      "knowledge": [
+        "ai-observability"
+      ],
+      "locales": {
+        "en": {
+          "name": "Time to verified outcome",
+          "definition": "Wall-clock time from a task being accepted to its outcome passing verification, including the wait in front of any human step.",
+          "howToMeasure": "Report the median and the 95th percentile, or do not report it: a long tail of stuck runs is exactly what a mean hides.",
+          "gamedBy": "Measure to the agent finishing rather than to verification passing. The queue in front of a human reviewer is where the hours actually are."
+        },
+        "es": {
+          "name": "Tiempo hasta resultado verificado",
+          "definition": "Tiempo de reloj desde que se acepta una tarea hasta que su resultado pasa la verificación, incluida la espera delante de cualquier paso humano.",
+          "howToMeasure": "Informa de la mediana y del percentil 95, o no informes: una cola larga de ejecuciones atascadas es justo lo que una media esconde.",
+          "gamedBy": "Medir hasta que el agente termina y no hasta que la verificación pasa. La cola delante de un revisor humano es donde están de verdad las horas."
+        },
+        "pt": {
+          "name": "Tempo até resultado verificado",
+          "definition": "Tempo de relógio desde que uma tarefa é aceita até seu resultado passar pela verificação, incluída a espera diante de qualquer etapa humana.",
+          "howToMeasure": "Informe a mediana e o percentil 95, ou não informe: uma cauda longa de execuções travadas é exatamente o que uma média esconde.",
+          "gamedBy": "Medir até o agente terminar e não até a verificação passar. A fila diante de um revisor humano é onde as horas realmente estão."
+        }
+      }
+    },
+    {
+      "id": "HSC-07",
+      "key": "dband",
+      "group": "reliability",
+      "unit": "percent",
+      "direction": "higher",
+      "controls": [
+        "ACM-11"
+      ],
+      "patterns": [],
+      "knowledge": [
+        "agentic-evaluation"
+      ],
+      "locales": {
+        "en": {
+          "name": "Determinism band",
+          "definition": "The share of the evaluation set that reaches the same verified verdict across repeated runs of the same input, with the harness unchanged.",
+          "howToMeasure": "Run the whole set at least five times and declare N. A case is inside the band when every repeat lands on the same verdict — not when the average is good.",
+          "gamedBy": "Run once and report the score. A single-run number contains this metric's answer and hides it."
+        },
+        "es": {
+          "name": "Banda de determinismo",
+          "definition": "La proporción del conjunto de evaluación que llega al mismo veredicto verificado en ejecuciones repetidas de la misma entrada, con el harness sin cambios.",
+          "howToMeasure": "Ejecuta el conjunto entero al menos cinco veces y declara N. Un caso está dentro de la banda cuando todas las repeticiones caen en el mismo veredicto, no cuando la media sale bien.",
+          "gamedBy": "Ejecutar una sola vez e informar de la puntuación. Un número de una sola ejecución contiene la respuesta de esta métrica y la esconde."
+        },
+        "pt": {
+          "name": "Banda de determinismo",
+          "definition": "A proporção do conjunto de avaliação que chega ao mesmo veredito verificado em execuções repetidas da mesma entrada, com o harness sem mudanças.",
+          "howToMeasure": "Execute o conjunto inteiro pelo menos cinco vezes e declare N. Um caso está dentro da banda quando todas as repetições caem no mesmo veredito, não quando a média sai bem.",
+          "gamedBy": "Executar uma única vez e informar a pontuação. Um número de uma única execução contém a resposta desta métrica e a esconde."
+        }
+      }
+    },
+    {
+      "id": "HSC-08",
+      "key": "recov",
+      "group": "reliability",
+      "unit": "percent",
+      "direction": "higher",
+      "controls": [
+        "ACM-10"
+      ],
+      "patterns": [
+        "recovery-strategy",
+        "correlated-run-trace"
+      ],
+      "knowledge": [
+        "ai-observability"
+      ],
+      "locales": {
+        "en": {
+          "name": "Recovery rate",
+          "definition": "Of the runs that hit a failure — a tool error, a refusal, a timeout, a rejected plan — the share that still reach a verified outcome.",
+          "howToMeasure": "The failure has to be visible in the trace before it can be counted, so this cannot be computed without a correlated run trace. Never having failed is not recovery and must not be counted as it.",
+          "gamedBy": "Suppress the failures instead of recovering from them. A retry loop that swallows a tool error raises this number and the verification gap at the same time."
+        },
+        "es": {
+          "name": "Tasa de recuperación",
+          "definition": "De las ejecuciones que sufrieron un fallo —error de herramienta, negativa, tiempo agotado, plan rechazado—, la proporción que aun así llega a un resultado verificado.",
+          "howToMeasure": "El fallo tiene que ser visible en la traza para poder contarlo, así que esto no se calcula sin traza correlacionada. No haber fallado nunca no es recuperarse y no debe contarse como tal.",
+          "gamedBy": "Silenciar los fallos en lugar de recuperarse de ellos. Un bucle de reintentos que se traga un error de herramienta sube este número y la brecha de verificación a la vez."
+        },
+        "pt": {
+          "name": "Taxa de recuperação",
+          "definition": "Das execuções que sofreram uma falha — erro de ferramenta, recusa, tempo esgotado, plano rejeitado —, a proporção que ainda assim chega a um resultado verificado.",
+          "howToMeasure": "A falha tem de estar visível no rastro para poder ser contada, então isto não se calcula sem rastro correlacionado. Nunca ter falhado não é recuperar-se e não deve ser contado como tal.",
+          "gamedBy": "Silenciar as falhas em vez de se recuperar delas. Um laço de retentativas que engole um erro de ferramenta sobe este número e a lacuna de verificação ao mesmo tempo."
+        }
+      }
+    },
+    {
+      "id": "HSC-09",
+      "key": "contain",
+      "group": "reliability",
+      "unit": "percent",
+      "direction": "higher",
+      "controls": [
+        "ACM-01",
+        "ACM-03",
+        "ACM-17"
+      ],
+      "patterns": [
+        "least-privilege-tooling",
+        "sandboxed-execution"
+      ],
+      "knowledge": [
+        "ai-cyberdefense"
+      ],
+      "locales": {
+        "en": {
+          "name": "Containment ratio",
+          "definition": "The share of the harness's write-capable, irreversible or regulated actions that sit behind a control which is both feedforward and deterministic.",
+          "howToMeasure": "List the actions from the tool catalogue, name the control that stops each one, and read that control's two axes off the Agentic Control Matrix. Gates decided by judgement do not count here — the human intervention rate counts those.",
+          "gamedBy": "Reclassify actions as reversible. The ratio rises and the blast radius does not move."
+        },
+        "es": {
+          "name": "Ratio de contención",
+          "definition": "La proporción de las acciones del harness que escriben, son irreversibles o están reguladas y que están detrás de un control a la vez de prealimentación y determinista.",
+          "howToMeasure": "Lista las acciones a partir del catálogo de herramientas, nombra el control que detiene cada una y lee los dos ejes de ese control en la Matriz de Control Agéntico. Las compuertas que decide un criterio no cuentan aquí: esas las cuenta la tasa de intervención humana.",
+          "gamedBy": "Reclasificar acciones como reversibles. El ratio sube y el radio de impacto no se mueve."
+        },
+        "pt": {
+          "name": "Razão de contenção",
+          "definition": "A proporção das ações do harness que escrevem, são irreversíveis ou reguladas e que estão atrás de um controle ao mesmo tempo de pré-alimentação e determinístico.",
+          "howToMeasure": "Liste as ações a partir do catálogo de ferramentas, nomeie o controle que detém cada uma e leia os dois eixos desse controle na Matriz de Controle Agêntico. Comportas decididas por critério não contam aqui: essas são contadas pela taxa de intervenção humana.",
+          "gamedBy": "Reclassificar ações como reversíveis. A razão sobe e o raio de impacto não se move."
+        }
+      }
+    },
+    {
+      "id": "HSC-10",
+      "key": "recon",
+      "group": "evidence",
+      "unit": "percent",
+      "direction": "higher",
+      "controls": [
+        "ACM-10"
+      ],
+      "patterns": [
+        "correlated-run-trace"
+      ],
+      "knowledge": [
+        "ai-observability"
+      ],
+      "locales": {
+        "en": {
+          "name": "Reconstructability",
+          "definition": "Of a random sample of past runs, the share that can be reconstructed end to end from the log alone: inputs, model, tool calls, outcome.",
+          "howToMeasure": "Sample runs nobody chose, and reconstruct them without asking the team and without the original operator present. A run that needs a person to explain it did not pass.",
+          "gamedBy": "Sample the runs already known to be clean — or log everything, secrets included. This is read together with whether the log holds data it never needed."
+        },
+        "es": {
+          "name": "Reconstruibilidad",
+          "definition": "De una muestra aleatoria de ejecuciones pasadas, la proporción que puede reconstruirse de principio a fin solo con el registro: entradas, modelo, llamadas a herramientas, resultado.",
+          "howToMeasure": "Muestrea ejecuciones que no eligió nadie y reconstrúyelas sin preguntar al equipo y sin el operador original delante. Una ejecución que necesita que alguien la explique no ha pasado.",
+          "gamedBy": "Muestrear las ejecuciones que ya se sabe que están limpias, o registrarlo todo, secretos incluidos. Esto se lee junto a si el registro guarda datos que nunca necesitó."
+        },
+        "pt": {
+          "name": "Reconstrutibilidade",
+          "definition": "De uma amostra aleatória de execuções passadas, a proporção que pode ser reconstruída de ponta a ponta só com o registro: entradas, modelo, chamadas de ferramentas, resultado.",
+          "howToMeasure": "Amostre execuções que ninguém escolheu e reconstrua-as sem perguntar à equipe e sem o operador original presente. Uma execução que precisa de alguém para explicá-la não passou.",
+          "gamedBy": "Amostrar as execuções que já se sabe estarem limpas, ou registrar tudo, segredos incluídos. Isto é lido junto com se o registro guarda dados de que nunca precisou."
+        }
+      }
+    },
+    {
+      "id": "HSC-11",
+      "key": "catch",
+      "group": "evidence",
+      "unit": "percent",
+      "direction": "higher",
+      "controls": [
+        "ACM-11"
+      ],
+      "patterns": [],
+      "knowledge": [
+        "agentic-evaluation"
+      ],
+      "locales": {
+        "en": {
+          "name": "Regression catch rate",
+          "definition": "Of defects deliberately planted in the system, the share the evaluation suite catches before release.",
+          "howToMeasure": "Plant the kinds of defect you actually fear, one at a time, and run the suite on each. A suite never seen failing has an unknown catch rate, not a perfect one.",
+          "gamedBy": "Plant the defects the suite was written from. The rate goes to 100% and measures nothing but the author's memory."
+        },
+        "es": {
+          "name": "Tasa de captura de regresiones",
+          "definition": "De los defectos plantados a propósito en el sistema, la proporción que la suite de evaluación detecta antes de publicar.",
+          "howToMeasure": "Planta los tipos de defecto que de verdad temes, de uno en uno, y ejecuta la suite con cada uno. Una suite a la que nadie ha visto fallar tiene una tasa de captura desconocida, no perfecta.",
+          "gamedBy": "Plantar los defectos a partir de los cuales se escribió la suite. La tasa sube al 100 % y no mide más que la memoria de quien la escribió."
+        },
+        "pt": {
+          "name": "Taxa de captura de regressões",
+          "definition": "Dos defeitos plantados de propósito no sistema, a proporção que a suite de avaliação detecta antes de publicar.",
+          "howToMeasure": "Plante os tipos de defeito que você de fato teme, um de cada vez, e rode a suite com cada um. Uma suite que ninguém viu falhar tem uma taxa de captura desconhecida, não perfeita.",
+          "gamedBy": "Plantar os defeitos a partir dos quais a suite foi escrita. A taxa sobe a 100 % e não mede mais que a memória de quem a escreveu."
+        }
+      }
+    }
+  ]
+}

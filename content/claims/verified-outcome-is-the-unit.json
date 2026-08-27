@@ -1,0 +1,50 @@
+{
+  "id": "HE-CLAIM-005",
+  "slug": "verified-outcome-is-the-unit",
+  "claimType": "santismm_thesis",
+  "confidenceLevel": "low",
+  "reviewed": "2026-08-27",
+  "version": "1.0.0",
+  "updated": "2026-08-27",
+  "supports": [
+    "HRN-007",
+    "agentic-evaluation",
+    "harness-engineering"
+  ],
+  "sources": [
+    {
+      "title": "Evaluation of Agentic Systems",
+      "author": "Santa María, S.",
+      "venue": "SANTISMM Harness Engineering Handbook",
+      "year": "2026",
+      "type": "personal_experience"
+    },
+    {
+      "title": "The Stopwatch and the Exam",
+      "author": "Santa María, S.",
+      "venue": "SANTISMM Library",
+      "year": "2026",
+      "type": "personal_experience"
+    }
+  ],
+  "locales": {
+    "en": {
+      "statement": "The primary unit for comparing harnesses is cost per correctly verified outcome, not successful runs: a run the agent declares successful is a self-report, and it is the one thing a broken harness is still good at producing.",
+      "basis": "Every failure mode a harness exists to catch — a hallucinated result, an action taken on a hijacked instruction, a plan abandoned halfway and reported as done — is compatible with a run that finished. Moving the denominator to outcomes confirmed by something that does not share the agent's failure modes makes the number refuse to move until the work is actually done, and puts the cost of the failed attempts where it belongs, in the numerator.",
+      "limitations": "This is a proposal, not a measured result. Nothing here has been run against a real system, no threshold is calibrated, and the eleven metrics around it were chosen by argument rather than by finding out which ones predict anything. The independence rule is also the hardest part to satisfy honestly: for many agentic tasks the only available verifier is another model, and the rule then says the number cannot be trusted — which is correct and unhelpful at the same time.",
+      "falsifiedBy": "Two harnesses ranked differently by cost per correctly verified outcome and by outcomes their operators actually care about, repeatedly and in the same direction; or evidence that the self-reported success rate tracks the independently verified one closely enough that the distinction buys nothing."
+    },
+    "es": {
+      "statement": "La unidad principal para comparar harnesses es el coste por resultado correctamente verificado, no las ejecuciones exitosas: una ejecución que el agente declara exitosa es una autodeclaración, y es justo lo único que un harness roto sigue produciendo bien.",
+      "basis": "Todos los modos de fallo que un harness existe para atrapar —un resultado alucinado, una acción tomada sobre una instrucción secuestrada, un plan abandonado a medias y reportado como hecho— son compatibles con una ejecución que terminó. Llevar el denominador a los resultados confirmados por algo que no comparte los modos de fallo del agente hace que el número se niegue a moverse hasta que el trabajo esté hecho de verdad, y pone el coste de los intentos fallidos donde corresponde, en el numerador.",
+      "limitations": "Esto es una propuesta, no un resultado medido. Nada de esto se ha ejecutado contra un sistema real, ningún umbral está calibrado, y las once métricas que lo rodean se eligieron por argumento y no por averiguar cuáles predicen algo. La regla de independencia es además la parte más difícil de satisfacer con honestidad: en muchas tareas agénticas el único verificador disponible es otro modelo, y entonces la regla dice que el número no es de fiar, lo cual es correcto e inútil al mismo tiempo.",
+      "falsifiedBy": "Que dos harnesses queden ordenados de forma distinta por el coste por resultado correctamente verificado y por los resultados que a sus operadores les importan de verdad, de forma repetida y en la misma dirección; o evidencia de que la tasa de éxito autodeclarada sigue a la verificada de forma independiente lo bastante de cerca como para que la distinción no compre nada."
+    },
+    "pt": {
+      "statement": "A unidade principal para comparar harnesses é o custo por resultado corretamente verificado, não as execuções bem-sucedidas: uma execução que o agente declara bem-sucedida é uma autodeclaração, e é justamente a única coisa que um harness quebrado ainda produz bem.",
+      "basis": "Todos os modos de falha que um harness existe para pegar — um resultado alucinado, uma ação tomada sobre uma instrução sequestrada, um plano abandonado pela metade e relatado como feito — são compatíveis com uma execução que terminou. Levar o denominador aos resultados confirmados por algo que não compartilha os modos de falha do agente faz o número se recusar a mudar até o trabalho estar realmente feito, e põe o custo das tentativas fracassadas onde é devido, no numerador.",
+      "limitations": "Isto é uma proposta, não um resultado medido. Nada disto foi executado contra um sistema real, nenhum limiar está calibrado, e as onze métricas em volta foram escolhidas por argumento e não por descobrir quais delas predizem alguma coisa. A regra de independência é também a parte mais difícil de satisfazer com honestidade: em muitas tarefas agênticas o único verificador disponível é outro modelo, e então a regra diz que o número não é confiável, o que é correto e inútil ao mesmo tempo.",
+      "falsifiedBy": "Que dois harnesses fiquem ordenados de forma diferente pelo custo por resultado corretamente verificado e pelos resultados com que seus operadores realmente se importam, de forma repetida e na mesma direção; ou evidência de que a taxa de sucesso autodeclarada acompanha a verificada de forma independente perto o bastante para que a distinção não compre nada."
+    }
+  }
+}

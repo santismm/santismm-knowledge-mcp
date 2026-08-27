@@ -1,7 +1,7 @@
 {
   "id": "ACM",
-  "version": "1.0",
-  "updated": "2026-08-22",
+  "version": "1.2",
+  "updated": "2026-08-27",
   "groups": [
     "permissions",
     "egress",
@@ -9,6 +9,21 @@
     "oversight",
     "observability",
     "lifecycle"
+  ],
+  "axes": {
+    "moment": [
+      "feedforward",
+      "feedback"
+    ],
+    "mechanism": [
+      "deterministic",
+      "inferential"
+    ]
+  },
+  "expiry": [
+    "measurement",
+    "architecture",
+    "never"
   ],
   "frameworks": [
     {
@@ -56,6 +71,18 @@
     {
       "id": "ACM-01",
       "group": "permissions",
+      "axes": {
+        "moment": "feedforward",
+        "mechanism": "inferential"
+      },
+      "expiry": {
+        "expiresOn": "architecture",
+        "improves": [
+          "contain"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "least-privilege-tooling"
       ],
@@ -92,16 +119,25 @@
         "en": {
           "name": "Scoped tool catalogue",
           "statement": "Every tool the agent can call is listed, with its scope, whether it writes, and what an attacker gains by calling it. A tool nobody documented is a permission nobody reviewed.",
+          "axisNote": "It constrains what may exist before anything runs, but nothing enforces its completeness: a catalogue is worth the diligence of whoever wrote it.",
+          "assumes": "That nobody can hold the tool surface in their head, and that the surface changes faster than memory does.",
+          "retireWhen": "The runtime can enumerate every callable tool with its scope and its owner on demand, at which point a maintained document is a second copy of a fact the platform already holds.",
           "test": "Produce the catalogue. Every entry has a written scope and a named owner, and nothing the agent can call is missing from it."
         },
         "es": {
           "name": "Catálogo de herramientas acotado",
           "statement": "Toda herramienta que el agente puede invocar está listada, con su alcance, si escribe y qué gana un atacante al invocarla. Una herramienta que nadie documentó es un permiso que nadie revisó.",
+          "axisNote": "Acota lo que puede existir antes de que nada se ejecute, pero nada garantiza que esté completo: un catálogo vale lo que la diligencia de quien lo escribió.",
+          "assumes": "Que nadie es capaz de retener la superficie de herramientas en la cabeza, y que esa superficie cambia más rápido que la memoria.",
+          "retireWhen": "El runtime puede enumerar bajo demanda toda herramienta invocable con su alcance y su responsable, momento en que un documento mantenido a mano es una segunda copia de un hecho que la plataforma ya tiene.",
           "test": "Produce el catálogo. Cada entrada tiene alcance escrito y responsable con nombre, y nada de lo que el agente puede invocar falta en él."
         },
         "pt": {
           "name": "Catálogo de ferramentas delimitado",
           "statement": "Toda ferramenta que o agente pode invocar está listada, com seu escopo, se escreve e o que um atacante ganha ao invocá-la. Uma ferramenta que ninguém documentou é uma permissão que ninguém revisou.",
+          "axisNote": "Delimita o que pode existir antes de qualquer execução, mas nada garante que esteja completo: um catálogo vale a diligência de quem o escreveu.",
+          "assumes": "Que ninguém consegue reter a superfície de ferramentas na cabeça, e que essa superfície muda mais rápido que a memória.",
+          "retireWhen": "O runtime consegue enumerar sob demanda toda ferramenta invocável com seu escopo e seu responsável, momento em que um documento mantido à mão é uma segunda cópia de um dado que a plataforma já tem.",
           "test": "Produza o catálogo. Cada entrada tem escopo escrito e responsável nomeado, e nada do que o agente pode invocar está fora dele."
         }
       }
@@ -109,6 +145,18 @@
     {
       "id": "ACM-02",
       "group": "permissions",
+      "axes": {
+        "moment": "feedforward",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "architecture",
+        "improves": [
+          "contain"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "least-privilege-tooling"
       ],
@@ -144,16 +192,25 @@
         "en": {
           "name": "Per-tool credentials at minimum scope",
           "statement": "Each tool holds its own credential, issued at the narrowest scope the upstream system supports. A read-only tool backed by an admin token is one bug away from being a write tool.",
+          "axisNote": "The scope is enforced upstream, on the input side: a call outside it fails the same way every time, whatever the model intended.",
+          "assumes": "That upstream systems issue credentials narrower than the account, and that a compromised tool is a plausible event.",
+          "retireWhen": "Tool calls carry per-call, per-user authorisation that the upstream system evaluates, leaving a long-lived credential with nothing left to over-grant.",
           "test": "For each tool, show the credential and its server-side scope. No two tools share a credential whose reach exceeds either one."
         },
         "es": {
           "name": "Credenciales por herramienta con alcance mínimo",
           "statement": "Cada herramienta tiene su credencial, emitida con el alcance más estrecho que soporte el sistema de arriba. Una herramienta de solo lectura respaldada por un token de administrador está a un bug de ser de escritura.",
+          "axisNote": "El alcance lo impone el sistema de origen, del lado de la entrada: una llamada fuera de él falla igual siempre, con independencia de lo que pretendiera el modelo.",
+          "assumes": "Que los sistemas de origen emiten credenciales más estrechas que la cuenta, y que una herramienta comprometida es un suceso plausible.",
+          "retireWhen": "Las llamadas a herramientas llevan autorización por llamada y por usuario que evalúa el sistema de origen, de modo que a una credencial de larga vida no le queda nada que conceder de más.",
           "test": "Para cada herramienta, muestra la credencial y su alcance en el servidor. Ninguna pareja de herramientas comparte una credencial cuyo alcance exceda al de cualquiera de las dos."
         },
         "pt": {
           "name": "Credenciais por ferramenta no escopo mínimo",
           "statement": "Cada ferramenta tem sua credencial, emitida no escopo mais estreito que o sistema a montante suporta. Uma ferramenta somente leitura apoiada por um token de administrador está a um bug de virar de escrita.",
+          "axisNote": "O escopo é imposto pelo sistema de origem, do lado da entrada: uma chamada fora dele falha sempre da mesma forma, independentemente do que o modelo pretendesse.",
+          "assumes": "Que os sistemas de origem emitem credenciais mais estreitas que a conta, e que uma ferramenta comprometida é um evento plausível.",
+          "retireWhen": "As chamadas de ferramentas carregam autorização por chamada e por usuário que o sistema de origem avalia, de modo que a uma credencial de vida longa não sobra nada para conceder a mais.",
           "test": "Para cada ferramenta, mostre a credencial e seu escopo no servidor. Nenhum par de ferramentas compartilha credencial cujo alcance exceda o de qualquer uma delas."
         }
       }
@@ -161,6 +218,18 @@
     {
       "id": "ACM-03",
       "group": "permissions",
+      "axes": {
+        "moment": "feedforward",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "architecture",
+        "improves": [
+          "contain"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "least-privilege-tooling"
       ],
@@ -194,16 +263,25 @@
         "en": {
           "name": "Parameter allowlists",
           "statement": "The targets a tool may address — paths, repositories, tables, accounts, recipients — are constrained server-side, so a hijacked agent cannot repoint a legitimate tool at an illegitimate target.",
+          "axisNote": "It inspects the argument before the call happens, and refuses by rule rather than by opinion.",
+          "assumes": "That the model can be induced to point a legitimate tool at an illegitimate target, and that the upstream system will not stop it.",
+          "retireWhen": "The upstream system enforces the same constraint through its own authority model, at which point the allowlist is a duplicate that can drift out of agreement with it.",
           "test": "Call each write-capable tool with an out-of-scope target. The call is refused by the tool's own boundary, not by the model declining."
         },
         "es": {
           "name": "Listas de permitidos de parámetros",
           "statement": "Los objetivos a los que una herramienta puede dirigirse —rutas, repositorios, tablas, cuentas, destinatarios— están acotados en el servidor, de modo que un agente secuestrado no pueda reapuntar una herramienta legítima a un objetivo ilegítimo.",
+          "axisNote": "Inspecciona el argumento antes de que la llamada ocurra, y rechaza por regla, no por criterio.",
+          "assumes": "Que al modelo se le puede inducir a apuntar una herramienta legítima a un destino ilegítimo, y que el sistema de origen no lo va a impedir.",
+          "retireWhen": "El sistema de origen impone la misma restricción con su propio modelo de autoridad, momento en que la lista permitida es un duplicado que puede desalinearse con él.",
           "test": "Invoca cada herramienta con escritura contra un objetivo fuera de alcance. La llamada se rechaza en la frontera de la propia herramienta, no porque el modelo se niegue."
         },
         "pt": {
           "name": "Listas de permitidos de parâmetros",
           "statement": "Os alvos que uma ferramenta pode endereçar — caminhos, repositórios, tabelas, contas, destinatários — são limitados no servidor, de modo que um agente sequestrado não consiga reapontar uma ferramenta legítima para um alvo ilegítimo.",
+          "axisNote": "Inspeciona o argumento antes de a chamada acontecer, e recusa por regra, não por critério.",
+          "assumes": "Que o modelo pode ser induzido a apontar uma ferramenta legítima para um destino ilegítimo, e que o sistema de origem não vai impedir.",
+          "retireWhen": "O sistema de origem impõe a mesma restrição com seu próprio modelo de autoridade, momento em que a lista permitida é uma duplicata que pode se desalinhar dele.",
           "test": "Invoque cada ferramenta com escrita contra um alvo fora do escopo. A chamada é recusada na fronteira da própria ferramenta, não porque o modelo se recusou."
         }
       }
@@ -211,6 +289,18 @@
     {
       "id": "ACM-04",
       "group": "egress",
+      "axes": {
+        "moment": "feedforward",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "never",
+        "improves": [
+          "contain"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "egress-allowlist"
       ],
@@ -246,16 +336,25 @@
         "en": {
           "name": "Default-deny egress",
           "statement": "Outbound traffic reaches only named destinations; everything else is refused. Every exfiltration path ends in an outbound request, so this is the control that still works after the model has been convinced.",
+          "axisNote": "The destination is checked before the request leaves; no outcome is measured and no judgement is involved.",
+          "assumes": "That every exfiltration path ends in an outbound request, and that the set of legitimate destinations is knowable in advance.",
+          "retireWhen": "Not on capability grounds. Retire it when the agent has nothing worth exfiltrating — which is a statement about the data, not about the model.",
           "test": "From inside the agent's environment, request a host that is not on the list. It fails at the network or proxy layer and the refusal is logged."
         },
         "es": {
           "name": "Salida denegada por defecto",
           "statement": "El tráfico saliente solo llega a destinos nombrados; todo lo demás se rechaza. Toda ruta de exfiltración termina en una petición saliente, así que este es el control que sigue funcionando cuando ya han convencido al modelo.",
+          "axisNote": "El destino se comprueba antes de que la petición salga; no se mide ningún resultado ni interviene criterio alguno.",
+          "assumes": "Que toda vía de exfiltración termina en una petición saliente, y que el conjunto de destinos legítimos se puede conocer de antemano.",
+          "retireWhen": "No por capacidad. Retíralo cuando el agente no tenga nada que valga la pena exfiltrar, que es una afirmación sobre los datos y no sobre el modelo.",
           "test": "Desde dentro del entorno del agente, pide un host que no esté en la lista. Falla en la capa de red o de proxy y el rechazo queda registrado."
         },
         "pt": {
           "name": "Saída negada por padrão",
           "statement": "O tráfego de saída alcança apenas destinos nomeados; todo o resto é recusado. Todo caminho de exfiltração termina em uma requisição de saída, então este é o controle que continua funcionando depois que o modelo foi convencido.",
+          "axisNote": "O destino é verificado antes de a requisição sair; nenhum resultado é medido e nenhum critério intervém.",
+          "assumes": "Que toda via de exfiltração termina em uma requisição de saída, e que o conjunto de destinos legítimos pode ser conhecido de antemão.",
+          "retireWhen": "Não por capacidade. Remova-o quando o agente não tiver nada que valha a pena exfiltrar, o que é uma afirmação sobre os dados e não sobre o modelo.",
           "test": "De dentro do ambiente do agente, requisite um host fora da lista. Falha na camada de rede ou de proxy e a recusa fica registrada."
         }
       }
@@ -263,6 +362,18 @@
     {
       "id": "ACM-05",
       "group": "egress",
+      "axes": {
+        "moment": "feedback",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "architecture",
+        "improves": [
+          "recon"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "egress-allowlist"
       ],
@@ -296,16 +407,25 @@
         "en": {
           "name": "Denied egress is an alert, not an error",
           "statement": "Refused outbound requests are logged as security signal and reach a human. A denial is one of the few unambiguous attack signals an agent stack produces, and it is worthless if it lands in the same bucket as a timeout.",
+          "axisNote": "It acts on something that already happened — a refusal — and it fires by rule, on every one of them.",
+          "assumes": "That a refused outbound request is rare enough to be signal rather than noise.",
+          "retireWhen": "The platform surfaces denials as security events on its own, or denials become routine — which means the allowlist is wrong, not that the alert is.",
           "test": "Trigger a denial. It appears as a distinct, alertable event with the destination and the calling agent, not as a generic network error."
         },
         "es": {
           "name": "Una salida denegada es una alerta, no un error",
           "statement": "Las peticiones salientes rechazadas se registran como señal de seguridad y llegan a una persona. Una denegación es una de las pocas señales de ataque inequívocas que produce una pila agéntica, y no vale nada si cae en el mismo cajón que un timeout.",
+          "axisNote": "Actúa sobre algo que ya ocurrió —una denegación— y se dispara por regla, en todas ellas.",
+          "assumes": "Que una petición saliente denegada es lo bastante rara como para ser señal y no ruido.",
+          "retireWhen": "La plataforma expone las denegaciones como eventos de seguridad por su cuenta, o las denegaciones se vuelven rutina, lo que significa que la lista está mal, no la alerta.",
           "test": "Provoca una denegación. Aparece como evento distinguible y alertable, con el destino y el agente que llamó, no como un error de red genérico."
         },
         "pt": {
           "name": "Uma saída negada é um alerta, não um erro",
           "statement": "As requisições de saída recusadas são registradas como sinal de segurança e chegam a uma pessoa. Uma negação é um dos poucos sinais de ataque inequívocos que uma pilha agêntica produz, e não vale nada se cair no mesmo balde de um timeout.",
+          "axisNote": "Age sobre algo que já aconteceu — uma recusa — e dispara por regra, em todas elas.",
+          "assumes": "Que uma requisição de saída recusada é rara o bastante para ser sinal e não ruído.",
+          "retireWhen": "A plataforma expõe as recusas como eventos de segurança por conta própria, ou as recusas viram rotina, o que significa que a lista está errada, não o alerta.",
           "test": "Provoque uma negação. Ela aparece como evento distinguível e alertável, com o destino e o agente que chamou, não como erro de rede genérico."
         }
       }
@@ -313,6 +433,18 @@
     {
       "id": "ACM-06",
       "group": "execution",
+      "axes": {
+        "moment": "feedforward",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "architecture",
+        "improves": [
+          "contain"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "sandboxed-execution"
       ],
@@ -346,16 +478,25 @@
         "en": {
           "name": "Ephemeral, credential-free execution",
           "statement": "Anything the agent generates or invokes runs in an environment created per task and destroyed after, holding no ambient credentials. Persistence is how a one-off compromise becomes a foothold.",
+          "axisNote": "The environment is built without the credentials before the task starts; there is nothing to measure and nothing to decide.",
+          "assumes": "That a compromise of one task should not survive into the next, and that setup cost is lower than the cost of persistence.",
+          "retireWhen": "Execution environments are per-call and credential-free by construction, so “ephemeral” stops being something anyone can switch off.",
           "test": "Inside a live task, enumerate the environment. No credential is present that the task did not need, and the environment does not survive the task."
         },
         "es": {
           "name": "Ejecución efímera y sin credenciales",
           "statement": "Todo lo que el agente genera o invoca corre en un entorno creado por tarea y destruido al terminar, sin credenciales ambientales. La persistencia es cómo un compromiso puntual se convierte en punto de apoyo.",
+          "axisNote": "El entorno se construye sin las credenciales antes de que la tarea empiece; no hay nada que medir ni nada que decidir.",
+          "assumes": "Que el compromiso de una tarea no debe sobrevivir a la siguiente, y que el coste de montar el entorno es menor que el coste de la persistencia.",
+          "retireWhen": "Los entornos de ejecución son por llamada y sin credenciales por construcción, con lo que «efímero» deja de ser algo que alguien pueda desactivar.",
           "test": "Dentro de una tarea en vivo, enumera el entorno. No hay ninguna credencial que la tarea no necesitara, y el entorno no sobrevive a la tarea."
         },
         "pt": {
           "name": "Execução efêmera e sem credenciais",
           "statement": "Tudo o que o agente gera ou invoca roda em um ambiente criado por tarefa e destruído ao final, sem credenciais ambientais. A persistência é como um comprometimento pontual vira ponto de apoio.",
+          "axisNote": "O ambiente é construído sem as credenciais antes de a tarefa começar; não há nada a medir nem nada a decidir.",
+          "assumes": "Que o comprometimento de uma tarefa não deve sobreviver à seguinte, e que o custo de montar o ambiente é menor que o custo da persistência.",
+          "retireWhen": "Os ambientes de execução são por chamada e sem credenciais por construção, com o que “efêmero” deixa de ser algo que alguém possa desativar.",
           "test": "Dentro de uma tarefa ao vivo, enumere o ambiente. Não há credencial que a tarefa não precisasse, e o ambiente não sobrevive à tarefa."
         }
       }
@@ -363,6 +504,19 @@
     {
       "id": "ACM-07",
       "group": "execution",
+      "axes": {
+        "moment": "feedback",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "never",
+        "improves": [
+          "tvt",
+          "cvo"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "sandboxed-execution",
         "recovery-strategy"
@@ -396,16 +550,25 @@
         "en": {
           "name": "Resource caps and timeouts",
           "statement": "CPU, memory, disk, wall-clock and call count are bounded by the host. Runaway consumption is the failure mode that arrives first and most often, usually with no adversary involved at all.",
+          "axisNote": "A cap is a feedback loop in the strict sense: it measures consumption as it happens and acts when a threshold is crossed.",
+          "assumes": "That an agent will consume without bound if nothing stops it, with or without an adversary.",
+          "retireWhen": "Not on capability grounds. Runaway consumption is a property of loops, and better models attempt longer tasks rather than shorter ones.",
           "test": "Run a task designed not to terminate. It is stopped by a quota, the stop is recorded, and the cost of the attempt is bounded and known."
         },
         "es": {
           "name": "Límites de recursos y timeouts",
           "statement": "CPU, memoria, disco, tiempo de reloj y número de llamadas los acota el anfitrión. El consumo desbocado es el modo de fallo que llega primero y más a menudo, normalmente sin ningún adversario.",
+          "axisNote": "Un tope es un lazo de realimentación en sentido estricto: mide el consumo según ocurre y actúa al cruzar un umbral.",
+          "assumes": "Que un agente consumirá sin límite si nada lo detiene, con adversario o sin él.",
+          "retireWhen": "No por capacidad. El consumo desbocado es una propiedad de los bucles, y los modelos mejores intentan tareas más largas, no más cortas.",
           "test": "Ejecuta una tarea diseñada para no terminar. La detiene una cuota, la parada queda registrada y el coste del intento es acotado y conocido."
         },
         "pt": {
           "name": "Limites de recursos e timeouts",
           "statement": "CPU, memória, disco, tempo de relógio e número de chamadas são limitados pelo host. O consumo descontrolado é o modo de falha que chega primeiro e com mais frequência, normalmente sem adversário algum.",
+          "axisNote": "Um teto é uma malha de realimentação em sentido estrito: mede o consumo enquanto acontece e age ao cruzar um limiar.",
+          "assumes": "Que um agente consumirá sem limite se nada o detiver, com adversário ou sem ele.",
+          "retireWhen": "Não por capacidade. O consumo desenfreado é uma propriedade dos laços, e os modelos melhores tentam tarefas mais longas, não mais curtas.",
           "test": "Execute uma tarefa projetada para não terminar. Ela é interrompida por uma cota, a parada fica registrada e o custo da tentativa é limitado e conhecido."
         }
       }
@@ -413,6 +576,19 @@
     {
       "id": "ACM-08",
       "group": "oversight",
+      "axes": {
+        "moment": "feedforward",
+        "mechanism": "inferential"
+      },
+      "expiry": {
+        "expiresOn": "measurement",
+        "improves": [
+          "vgap",
+          "hir"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "human-approval-gate"
       ],
@@ -447,16 +623,25 @@
         "en": {
           "name": "Approval gate on high-impact actions",
           "statement": "Actions that are irreversible, regulated or expensive stop for a person who can approve, edit or reject, with enough context to decide. Gate by risk, not by default — over-gating produces rubber-stamping, which is worse than no gate because it looks like one.",
+          "axisNote": "It stops the action before it happens, but what it stops for is a person's decision, and the same case can be decided two ways.",
+          "assumes": "That the model's judgement on high-impact actions is worse than a person's, and that a person given the context decides better than a rule would.",
+          "retireWhen": "The verification gap on the gated action types reaches zero across a task set large enough to trust. Past that point the gate is buying rubber stamps at the price of latency.",
           "test": "List the gated actions and the risk criterion that put them there. Attempt one; it suspends, routes, and records the decision with the identity of who made it."
         },
         "es": {
           "name": "Puerta de aprobación en acciones de alto impacto",
           "statement": "Las acciones irreversibles, reguladas o caras se detienen ante una persona que puede aprobar, editar o rechazar, con contexto suficiente para decidir. Acota por riesgo, no por defecto: poner puertas de más produce aprobación automática, que es peor que no tener puerta porque lo parece.",
+          "axisNote": "Detiene la acción antes de que ocurra, pero lo que decide es el criterio de una persona, y el mismo caso puede resolverse de dos maneras.",
+          "assumes": "Que el criterio del modelo sobre acciones de alto impacto es peor que el de una persona, y que una persona con el contexto decide mejor que una regla.",
+          "retireWhen": "La brecha de verificación en los tipos de acción con compuerta llega a cero sobre un conjunto de tareas lo bastante grande como para fiarse. Pasado ese punto, la compuerta compra sellos de goma al precio de la latencia.",
           "test": "Lista las acciones con puerta y el criterio de riesgo que las puso ahí. Intenta una; se suspende, se enruta y se registra la decisión con la identidad de quien la tomó."
         },
         "pt": {
           "name": "Portão de aprovação em ações de alto impacto",
           "statement": "Ações irreversíveis, reguladas ou caras param diante de uma pessoa que pode aprovar, editar ou rejeitar, com contexto suficiente para decidir. Delimite por risco, não por padrão: portões demais produzem aprovação automática, que é pior do que não ter portão porque parece um.",
+          "axisNote": "Detém a ação antes de acontecer, mas o que decide é o critério de uma pessoa, e o mesmo caso pode ser resolvido de duas maneiras.",
+          "assumes": "Que o critério do modelo sobre ações de alto impacto é pior que o de uma pessoa, e que uma pessoa com o contexto decide melhor que uma regra.",
+          "retireWhen": "A lacuna de verificação nos tipos de ação com comporta chega a zero sobre um conjunto de tarefas grande o bastante para confiar. Passado esse ponto, a comporta compra carimbos ao preço da latência.",
           "test": "Liste as ações com portão e o critério de risco que as colocou ali. Tente uma; ela suspende, roteia e registra a decisão com a identidade de quem a tomou."
         }
       }
@@ -464,6 +649,19 @@
     {
       "id": "ACM-09",
       "group": "oversight",
+      "axes": {
+        "moment": "feedback",
+        "mechanism": "inferential"
+      },
+      "expiry": {
+        "expiresOn": "measurement",
+        "improves": [
+          "recov",
+          "hir"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "human-escalation"
       ],
@@ -493,16 +691,25 @@
         "en": {
           "name": "Escalation path with a named owner",
           "statement": "When the agent is uncertain, blocked or out of policy, there is a defined path to a person, and that person is named. An escalation route with no owner is a queue.",
+          "axisNote": "It triggers on a state the run has already reached — uncertain, blocked, out of policy — and what happens next is a judgement.",
+          "assumes": "That the agent can recognise being blocked or out of policy, and that a person can unblock it.",
+          "retireWhen": "Recovery rate at parity with and without the escalation path, measured on the failures that actually occur rather than the ones anticipated.",
           "test": "Force an escalation. It reaches a named human within the stated time, and the handoff carries the context needed to act without re-deriving it."
         },
         "es": {
           "name": "Vía de escalado con responsable con nombre",
           "statement": "Cuando el agente duda, se bloquea o se sale de política, hay una vía definida hacia una persona, y esa persona tiene nombre. Una vía de escalado sin responsable es una cola.",
+          "axisNote": "Se dispara ante un estado que la ejecución ya alcanzó —incertidumbre, bloqueo, fuera de política— y lo que sigue es criterio.",
+          "assumes": "Que el agente es capaz de reconocer que está bloqueado o fuera de política, y que una persona puede desbloquearlo.",
+          "retireWhen": "Que la tasa de recuperación sea igual con y sin la vía de escalado, medida sobre los fallos que ocurren de verdad y no sobre los previstos.",
           "test": "Fuerza un escalado. Llega a un humano con nombre dentro del tiempo declarado, y el traspaso lleva el contexto necesario para actuar sin volver a deducirlo."
         },
         "pt": {
           "name": "Via de escalonamento com responsável nomeado",
           "statement": "Quando o agente hesita, trava ou sai da política, há uma via definida até uma pessoa, e essa pessoa tem nome. Uma via de escalonamento sem responsável é uma fila.",
+          "axisNote": "Dispara perante um estado que a execução já atingiu — incerteza, bloqueio, fora da política — e o que vem depois é critério.",
+          "assumes": "Que o agente consegue reconhecer que está bloqueado ou fora da política, e que uma pessoa pode desbloqueá-lo.",
+          "retireWhen": "Que a taxa de recuperação seja igual com e sem a via de escalonamento, medida sobre as falhas que de fato ocorrem e não sobre as previstas.",
           "test": "Force um escalonamento. Ele chega a um humano nomeado dentro do tempo declarado, e a passagem carrega o contexto necessário para agir sem rededuzi-lo."
         }
       }
@@ -510,6 +717,18 @@
     {
       "id": "ACM-10",
       "group": "observability",
+      "axes": {
+        "moment": "feedback",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "never",
+        "improves": [
+          "recon"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "correlated-run-trace"
       ],
@@ -545,16 +764,25 @@
         "en": {
           "name": "Correlated trace of every decision and tool call",
           "statement": "Each run produces an immutable, correlated record: inputs, model and version, tool calls with arguments and outcomes, and the final action. Enough to reconstruct what happened, and nothing that turns the log itself into the breach.",
+          "axisNote": "Pure measurement after the fact: it changes nothing about the run it records, and it records by rule.",
+          "assumes": "That something will need to be reconstructed later by somebody who was not there.",
+          "retireWhen": "Not on capability grounds. This is the control every other measurement is computed from; removing it removes the ability to know whether removing anything else was a good idea.",
           "test": "Pick a past run at random and reconstruct it end to end from the log alone. Then confirm the log holds no secret or raw personal data it did not need."
         },
         "es": {
           "name": "Traza correlada de cada decisión y llamada a herramienta",
           "statement": "Cada ejecución produce un registro inmutable y correlado: entradas, modelo y versión, llamadas a herramientas con argumentos y resultados, y la acción final. Lo suficiente para reconstruir qué pasó, y nada que convierta el propio log en la brecha.",
+          "axisNote": "Medición pura a posteriori: no cambia nada de la ejecución que registra, y registra por regla.",
+          "assumes": "Que algo tendrá que reconstruirlo más tarde alguien que no estaba.",
+          "retireWhen": "No por capacidad. Es el control a partir del cual se calcula todo lo demás que se mide; quitarlo quita la capacidad de saber si quitar cualquier otra cosa fue buena idea.",
           "test": "Coge una ejecución pasada al azar y reconstrúyela de punta a punta solo desde el log. Después confirma que el log no guarda ningún secreto ni dato personal en crudo que no necesitara."
         },
         "pt": {
           "name": "Trace correlacionado de cada decisão e chamada de ferramenta",
           "statement": "Cada execução produz um registro imutável e correlacionado: entradas, modelo e versão, chamadas de ferramentas com argumentos e resultados, e a ação final. O suficiente para reconstruir o que aconteceu, e nada que transforme o próprio log na brecha.",
+          "axisNote": "Medição pura a posteriori: não muda nada da execução que registra, e registra por regra.",
+          "assumes": "Que algo terá de ser reconstruído mais tarde por alguém que não estava lá.",
+          "retireWhen": "Não por capacidade. É o controle a partir do qual todo o resto que se mede é calculado; removê-lo remove a capacidade de saber se remover qualquer outra coisa foi boa ideia.",
           "test": "Pegue uma execução passada ao acaso e reconstrua-a de ponta a ponta só pelo log. Depois confirme que o log não guarda nenhum segredo ou dado pessoal cru de que não precisava."
         }
       }
@@ -562,6 +790,19 @@
     {
       "id": "ACM-11",
       "group": "observability",
+      "axes": {
+        "moment": "feedback",
+        "mechanism": "inferential"
+      },
+      "expiry": {
+        "expiresOn": "never",
+        "improves": [
+          "catch",
+          "dband"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "evaluator-optimizer"
       ],
@@ -594,16 +835,25 @@
         "en": {
           "name": "Evaluation suite gating change",
           "statement": "A curated set of cases runs on every change, and a regression blocks release. Without it, 'it seems to work' is the entire quality argument, and nothing distinguishes a fix from a change.",
+          "axisNote": "It measures outputs the system already produced, and what counts as a regression in agentic output is a judgement — the suite covers whichever cases someone chose.",
+          "assumes": "That changes regress behaviour in ways nobody predicts, and that a curated set catches more of them than judgement does.",
+          "retireWhen": "Not as a category. Individual cases retire constantly: a case no change has failed in two years is measuring the past, and keeping it is how suites get expensive without getting better.",
           "test": "Introduce a known regression. The suite catches it and the change does not ship. A suite never seen failing is a suite never verified."
         },
         "es": {
           "name": "Suite de evaluación que condiciona los cambios",
           "statement": "Un conjunto curado de casos se ejecuta en cada cambio, y una regresión bloquea el despliegue. Sin eso, «parece que funciona» es todo el argumento de calidad, y nada distingue un arreglo de un cambio.",
+          "axisNote": "Mide salidas que el sistema ya produjo, y qué cuenta como regresión en una salida agéntica es criterio: la suite cubre los casos que alguien eligió.",
+          "assumes": "Que los cambios provocan regresiones que nadie predice, y que un conjunto curado atrapa más de ellas que el criterio.",
+          "retireWhen": "No como categoría. Los casos concretos se retiran continuamente: un caso que ningún cambio ha hecho fallar en dos años está midiendo el pasado, y conservarlo es como las suites se encarecen sin mejorar.",
           "test": "Introduce una regresión conocida. La suite la caza y el cambio no sale. Una suite que nunca se ha visto fallar es una suite que nunca se ha verificado."
         },
         "pt": {
           "name": "Suíte de avaliação que condiciona mudanças",
-          "statement": "Um conjunto curado de casos roda a cada mudança, e uma regressão bloqueia o lançamento. Sem isso, «parece que funciona» é todo o argumento de qualidade, e nada distingue uma correção de uma mudança.",
+          "statement": "Um conjunto curado de casos roda a cada mudança, e uma regressão bloqueia o lançamento. Sem isso, “parece que funciona” é todo o argumento de qualidade, e nada distingue uma correção de uma mudança.",
+          "axisNote": "Mede saídas que o sistema já produziu, e o que conta como regressão numa saída agêntica é critério: a suite cobre os casos que alguém escolheu.",
+          "assumes": "Que as mudanças provocam regressões que ninguém prevê, e que um conjunto curado pega mais delas que o critério.",
+          "retireWhen": "Não como categoria. Os casos concretos são removidos continuamente: um caso que nenhuma mudança fez falhar em dois anos está medindo o passado, e mantê-lo é como as suites encarecem sem melhorar.",
           "test": "Introduza uma regressão conhecida. A suíte a pega e a mudança não sai. Uma suíte que nunca foi vista falhando é uma suíte que nunca foi verificada."
         }
       }
@@ -611,6 +861,18 @@
     {
       "id": "ACM-12",
       "group": "lifecycle",
+      "axes": {
+        "moment": "feedforward",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "measurement",
+        "improves": [
+          "vyr"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "least-privilege-tooling",
         "egress-allowlist"
@@ -647,16 +909,25 @@
         "en": {
           "name": "Untrusted content is isolated and marked",
           "statement": "Retrieved documents, tool results and third-party output are delimited as data, never merged into the instruction channel. The model cannot reliably tell them apart, so the harness must.",
+          "axisNote": "The delimiting happens on the input, before the model reads it, and it applies to every document without asking what is inside.",
+          "assumes": "That the model cannot reliably tell instruction from data inside its own context window.",
+          "retireWhen": "The injection cases in the evaluation suite stop succeeding with this control removed — measured, not announced. That would mean the separation is enforced below the prompt rather than inside it.",
           "test": "Plant an instruction inside a document the agent retrieves. The agent may read it; it must not act on it, and the attempt must be visible afterwards."
         },
         "es": {
           "name": "El contenido no confiable se aísla y se marca",
           "statement": "Documentos recuperados, resultados de herramientas y salida de terceros se delimitan como datos, nunca se funden con el canal de instrucciones. El modelo no sabe distinguirlos de forma fiable, así que tiene que hacerlo el arnés.",
+          "axisNote": "La delimitación ocurre sobre la entrada, antes de que el modelo la lea, y se aplica a todo documento sin preguntar qué contiene.",
+          "assumes": "Que el modelo no distingue de forma fiable instrucción de dato dentro de su propia ventana de contexto.",
+          "retireWhen": "Que los casos de inyección de la suite dejen de tener éxito con este control quitado, medido y no anunciado. Eso significaría que la separación se impone por debajo del prompt y no dentro de él.",
           "test": "Planta una instrucción dentro de un documento que el agente recupere. El agente puede leerla; no debe actuar sobre ella, y el intento debe quedar visible después."
         },
         "pt": {
           "name": "O conteúdo não confiável é isolado e marcado",
           "statement": "Documentos recuperados, resultados de ferramentas e saída de terceiros são delimitados como dados, nunca fundidos ao canal de instruções. O modelo não sabe distingui-los de forma confiável, então o harness precisa fazê-lo.",
+          "axisNote": "A delimitação ocorre sobre a entrada, antes de o modelo a ler, e aplica-se a todo documento sem perguntar o que há dentro.",
+          "assumes": "Que o modelo não distingue de forma confiável instrução de dado dentro da própria janela de contexto.",
+          "retireWhen": "Que os casos de injeção da suite deixem de ter sucesso com este controle removido, medido e não anunciado. Isso significaria que a separação é imposta abaixo do prompt e não dentro dele.",
           "test": "Plante uma instrução dentro de um documento que o agente recupere. O agente pode lê-la; não deve agir sobre ela, e a tentativa deve ficar visível depois."
         }
       }
@@ -664,6 +935,18 @@
     {
       "id": "ACM-13",
       "group": "lifecycle",
+      "axes": {
+        "moment": "feedforward",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "never",
+        "improves": [
+          "vyr"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "output-boundary-encoding"
       ],
@@ -697,16 +980,25 @@
         "en": {
           "name": "Model output treated as untrusted input",
           "statement": "Anything the model emits that reaches a renderer, a shell, a query or another system is encoded and validated exactly as input from a stranger would be.",
+          "axisNote": "The moment is relative to the action being protected: the encoding acts on the sink's input, before the sink does anything with it.",
+          "assumes": "That downstream sinks trust what reaches them, and that the model will emit whatever it was steered into emitting.",
+          "retireWhen": "Not on model grounds. This is a property of the sink, not of the producer: the same encoding would be required if a person had typed the string.",
           "test": "Make the model emit a payload for each downstream sink you have. Each is neutralised at the boundary before it arrives."
         },
         "es": {
           "name": "La salida del modelo se trata como entrada no confiable",
           "statement": "Todo lo que el modelo emita y llegue a un renderizador, un shell, una consulta u otro sistema se codifica y valida exactamente igual que la entrada de un desconocido.",
+          "axisNote": "El momento es relativo a la acción que se protege: la codificación actúa sobre la entrada del destino, antes de que este haga nada con ella.",
+          "assumes": "Que los destinos aguas abajo se fían de lo que les llega, y que el modelo emitirá aquello a lo que se le haya dirigido.",
+          "retireWhen": "No por el modelo. Es una propiedad del destino, no del productor: la misma codificación haría falta si la cadena la hubiera escrito una persona.",
           "test": "Haz que el modelo emita un payload para cada destino que tengas aguas abajo. Cada uno se neutraliza en la frontera antes de llegar."
         },
         "pt": {
           "name": "A saída do modelo é tratada como entrada não confiável",
           "statement": "Tudo o que o modelo emite e chega a um renderizador, a um shell, a uma consulta ou a outro sistema é codificado e validado exatamente como a entrada de um desconhecido.",
+          "axisNote": "O momento é relativo à ação que se protege: a codificação atua sobre a entrada do destino, antes de este fazer qualquer coisa com ela.",
+          "assumes": "Que os destinos a jusante confiam no que lhes chega, e que o modelo emitirá aquilo para o qual foi direcionado.",
+          "retireWhen": "Não por causa do modelo. É uma propriedade do destino, não do produtor: a mesma codificação seria necessária se a string tivesse sido digitada por uma pessoa.",
           "test": "Faça o modelo emitir um payload para cada destino a jusante que você tenha. Cada um é neutralizado na fronteira antes de chegar."
         }
       }
@@ -714,6 +1006,18 @@
     {
       "id": "ACM-14",
       "group": "lifecycle",
+      "axes": {
+        "moment": "feedback",
+        "mechanism": "inferential"
+      },
+      "expiry": {
+        "expiresOn": "architecture",
+        "improves": [
+          "vgap"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "attributed-memory"
       ],
@@ -749,16 +1053,25 @@
         "en": {
           "name": "Memory integrity and expiry",
           "statement": "What the agent writes to persistent memory is attributed, reviewable and expirable. Memory is what turns a one-shot attack into one that re-triggers on future, unrelated tasks.",
+          "axisNote": "Its teeth close on what was already written, and deciding that a stored fact is false is a judgement no rule makes for you.",
+          "assumes": "That written memory persists across tasks, and that a false fact written once will be read many times.",
+          "retireWhen": "The memory system attributes and expires writes on its own, so integrity stops being a discipline the harness has to impose from outside.",
           "test": "Write a false fact through a normal interaction. Show where it came from, who can remove it, and when it would expire on its own."
         },
         "es": {
           "name": "Integridad y caducidad de la memoria",
           "statement": "Lo que el agente escribe en memoria persistente está atribuido, es revisable y caduca. La memoria es lo que convierte un ataque puntual en uno que se vuelve a disparar en tareas futuras sin relación.",
+          "axisNote": "Sus dientes se cierran sobre lo ya escrito, y decidir que un hecho almacenado es falso es un criterio que ninguna regla toma por ti.",
+          "assumes": "Que la memoria escrita persiste entre tareas, y que un hecho falso escrito una vez se leerá muchas.",
+          "retireWhen": "Que el propio sistema de memoria atribuya y caduque las escrituras, con lo que la integridad deja de ser una disciplina que el harness tenga que imponer desde fuera.",
           "test": "Escribe un hecho falso a través de una interacción normal. Muestra de dónde vino, quién puede retirarlo y cuándo caducaría por sí solo."
         },
         "pt": {
           "name": "Integridade e expiração da memória",
           "statement": "O que o agente grava em memória persistente é atribuído, revisável e expira. A memória é o que transforma um ataque pontual em um que volta a disparar em tarefas futuras e não relacionadas.",
+          "axisNote": "Seus dentes se fecham sobre o que já foi escrito, e decidir que um dado armazenado é falso é um critério que nenhuma regra toma por você.",
+          "assumes": "Que a memória escrita persiste entre tarefas, e que um dado falso escrito uma vez será lido muitas.",
+          "retireWhen": "Que o próprio sistema de memória atribua e expire as escritas, com o que a integridade deixa de ser uma disciplina que o harness tenha de impor de fora.",
           "test": "Grave um fato falso por meio de uma interação normal. Mostre de onde veio, quem pode removê-lo e quando expiraria sozinho."
         }
       }
@@ -766,6 +1079,18 @@
     {
       "id": "ACM-15",
       "group": "lifecycle",
+      "axes": {
+        "moment": "feedforward",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "never",
+        "improves": [
+          "dband"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [],
       "knowledge": [
         "mcp-security",
@@ -802,16 +1127,25 @@
         "en": {
           "name": "Provenance for models, prompts and servers",
           "statement": "Models, system prompts, MCP servers, packages and datasets are pinned, reviewed on change, and traceable to a source. A dependency that can rewrite a tool description can rewrite the agent's behaviour.",
+          "axisNote": "A pin is checked before the dependency is used, and a tool description that changed is a diff, not an opinion.",
+          "assumes": "That a dependency can change under you, and that the change can alter behaviour without altering your code.",
+          "retireWhen": "Not on capability grounds. This is what makes the determinism band mean anything: without pinning, repeated runs measure the vendor's release schedule.",
           "test": "For each external dependency, name the pinned version and who reviewed the last change. Change a tool description upstream; the change is detected before it reaches production."
         },
         "es": {
           "name": "Procedencia de modelos, prompts y servidores",
           "statement": "Modelos, system prompts, servidores MCP, paquetes y datasets están fijados, se revisan al cambiar y son trazables a un origen. Una dependencia que puede reescribir la descripción de una herramienta puede reescribir el comportamiento del agente.",
+          "axisNote": "Un anclaje se comprueba antes de usar la dependencia, y una descripción de herramienta que cambió es un diff, no una opinión.",
+          "assumes": "Que una dependencia puede cambiar bajo tus pies, y que el cambio puede alterar el comportamiento sin alterar tu código.",
+          "retireWhen": "No por capacidad. Es lo que hace que la banda de determinismo signifique algo: sin anclaje, las ejecuciones repetidas miden el calendario de versiones del proveedor.",
           "test": "Para cada dependencia externa, nombra la versión fijada y quién revisó el último cambio. Cambia una descripción de herramienta aguas arriba; el cambio se detecta antes de llegar a producción."
         },
         "pt": {
           "name": "Procedência de modelos, prompts e servidores",
           "statement": "Modelos, system prompts, servidores MCP, pacotes e datasets são fixados, revisados a cada mudança e rastreáveis até uma origem. Uma dependência que pode reescrever a descrição de uma ferramenta pode reescrever o comportamento do agente.",
+          "axisNote": "Uma fixação é verificada antes de usar a dependência, e uma descrição de ferramenta que mudou é um diff, não uma opinião.",
+          "assumes": "Que uma dependência pode mudar sob seus pés, e que a mudança pode alterar o comportamento sem alterar seu código.",
+          "retireWhen": "Não por capacidade. É o que faz a banda de determinismo significar alguma coisa: sem fixação, as execuções repetidas medem o calendário de versões do fornecedor.",
           "test": "Para cada dependência externa, nomeie a versão fixada e quem revisou a última mudança. Altere uma descrição de ferramenta a montante; a mudança é detectada antes de chegar à produção."
         }
       }
@@ -819,6 +1153,18 @@
     {
       "id": "ACM-16",
       "group": "egress",
+      "axes": {
+        "moment": "feedforward",
+        "mechanism": "deterministic"
+      },
+      "expiry": {
+        "expiresOn": "never",
+        "improves": [
+          "contain"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [],
       "knowledge": [
         "mcp-security"
@@ -850,16 +1196,25 @@
         "en": {
           "name": "Transport and origin validation on exposed endpoints",
           "statement": "An agent endpoint reachable from outside validates its transport before doing work: origin checked against an allowlist, browser-initiated cross-site calls rejected, and every caller rate limited with a real 429.",
+          "axisNote": "The request is judged by its Origin header before any handler runs; the same call gets the same answer every time.",
+          "assumes": "That the endpoint is reachable from outside, and that browsers will be pointed at it by somebody else's page.",
+          "retireWhen": "The endpoint stops being externally reachable. A better model does not make an unvalidated Origin safe.",
           "test": "Call the endpoint with a foreign Origin and with no Origin. The first is rejected before any handler runs; the second is served and counted against its caller's limit."
         },
         "es": {
           "name": "Validación de transporte y origen en endpoints expuestos",
           "statement": "Un endpoint de agente accesible desde fuera valida el transporte antes de trabajar: origen comprobado contra una lista, llamadas cross-site iniciadas por navegador rechazadas y todo llamante con límite de tasa y un 429 real.",
+          "axisNote": "La petición se juzga por su cabecera Origin antes de que corra ningún manejador; la misma llamada obtiene siempre la misma respuesta.",
+          "assumes": "Que el endpoint es alcanzable desde fuera, y que a los navegadores los va a apuntar hacia él la página de otro.",
+          "retireWhen": "Que el endpoint deje de ser alcanzable desde fuera. Un modelo mejor no hace seguro un Origin sin validar.",
           "test": "Llama al endpoint con un Origin ajeno y sin Origin. El primero se rechaza antes de ejecutar ningún handler; el segundo se sirve y cuenta contra el límite de su llamante."
         },
         "pt": {
           "name": "Validação de transporte e origem em endpoints expostos",
           "statement": "Um endpoint de agente acessível de fora valida o transporte antes de trabalhar: origem verificada contra uma lista, chamadas cross-site iniciadas por navegador recusadas e todo chamador com limite de taxa e um 429 real.",
+          "axisNote": "A requisição é julgada pelo seu cabeçalho Origin antes de qualquer manipulador rodar; a mesma chamada obtém sempre a mesma resposta.",
+          "assumes": "Que o endpoint é alcançável de fora, e que os navegadores serão apontados para ele pela página de outra pessoa.",
+          "retireWhen": "Que o endpoint deixe de ser alcançável de fora. Um modelo melhor não torna seguro um Origin sem validação.",
           "test": "Chame o endpoint com um Origin alheio e sem Origin. O primeiro é recusado antes de qualquer handler rodar; o segundo é servido e conta contra o limite do seu chamador."
         }
       }
@@ -867,6 +1222,19 @@
     {
       "id": "ACM-17",
       "group": "execution",
+      "axes": {
+        "moment": "feedback",
+        "mechanism": "inferential"
+      },
+      "expiry": {
+        "expiresOn": "measurement",
+        "improves": [
+          "contain",
+          "recov"
+        ],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [
         "recovery-strategy"
       ],
@@ -900,16 +1268,25 @@
         "en": {
           "name": "Reversibility and a stop control",
           "statement": "Every action the agent can take is either reversible or gated, and a person can stop the agent mid-run without stopping the whole system. Autonomy without an off switch is not autonomy, it is exposure.",
+          "axisNote": "Somebody has to be watching and decide that this run should end; the mechanism is deterministic, the trigger is not.",
+          "assumes": "That a run can go wrong in a way a person notices before the harness does.",
+          "retireWhen": "The verification gap reaches zero and the recovery rate is at parity without it — meaning the harness notices its own failures at least as fast as the person watching. Nothing in this corpus measures that today.",
           "test": "Stop a running agent. It halts within the stated time, leaves no half-applied change, and the stop is recorded with who issued it."
         },
         "es": {
           "name": "Reversibilidad y control de parada",
           "statement": "Toda acción que el agente puede tomar es reversible o tiene puerta, y una persona puede pararlo a mitad de ejecución sin parar el sistema entero. Autonomía sin interruptor no es autonomía, es exposición.",
+          "axisNote": "Alguien tiene que estar mirando y decidir que esta ejecución debe terminar; el mecanismo es determinista, el disparador no.",
+          "assumes": "Que una ejecución puede torcerse de una forma que una persona nota antes que el harness.",
+          "retireWhen": "Que la brecha de verificación llegue a cero y la tasa de recuperación sea igual sin él, es decir, que el harness note sus propios fallos al menos tan rápido como quien mira. Hoy nada en este corpus mide eso.",
           "test": "Para un agente en marcha. Se detiene dentro del tiempo declarado, no deja ningún cambio a medio aplicar y la parada queda registrada con quién la ordenó."
         },
         "pt": {
           "name": "Reversibilidade e controle de parada",
           "statement": "Toda ação que o agente pode tomar é reversível ou tem portão, e uma pessoa pode pará-lo no meio da execução sem parar o sistema inteiro. Autonomia sem interruptor não é autonomia, é exposição.",
+          "axisNote": "Alguém tem de estar olhando e decidir que essa execução deve terminar; o mecanismo é determinista, o gatilho não.",
+          "assumes": "Que uma execução pode dar errado de uma forma que uma pessoa percebe antes do harness.",
+          "retireWhen": "Que a lacuna de verificação chegue a zero e a taxa de recuperação seja igual sem ele, isto é, que o harness perceba as próprias falhas pelo menos tão rápido quanto quem observa. Hoje nada neste corpus mede isso.",
           "test": "Pare um agente em execução. Ele para dentro do tempo declarado, não deixa nenhuma mudança pela metade e a parada fica registrada com quem a ordenou."
         }
       }
@@ -917,6 +1294,16 @@
     {
       "id": "ACM-18",
       "group": "lifecycle",
+      "axes": {
+        "moment": "feedback",
+        "mechanism": "inferential"
+      },
+      "expiry": {
+        "expiresOn": "architecture",
+        "improves": [],
+        "validatedAgainst": null,
+        "validatedOn": null
+      },
       "patterns": [],
       "knowledge": [
         "agentic-threat-model",
@@ -953,16 +1340,25 @@
         "en": {
           "name": "A threat model that is maintained and tested",
           "statement": "The attack surfaces are written down with a control and an owner each, accepted risks are named as accepted, and the document is revisited whenever a tool, a data source or an autonomy level changes.",
+          "axisNote": "Its test compares two dates, but what the document says is judgement, and it is revised in response to changes that already landed.",
+          "assumes": "That the attack surface changes when tools, data sources or autonomy levels change, and that nobody notices unless somebody is made responsible for noticing.",
+          "retireWhen": "The threat model is generated from the tool catalogue and the autonomy configuration, so it cannot lag them. At that point this control has been replaced, not retired.",
           "test": "Show the current threat model and the date of the last change to the tool catalogue. If the catalogue is newer than the model, the model is out of date and this control fails."
         },
         "es": {
           "name": "Un modelo de amenazas mantenido y probado",
           "statement": "Las superficies de ataque están escritas, cada una con control y responsable, los riesgos aceptados se nombran como aceptados, y el documento se revisa siempre que cambia una herramienta, una fuente de datos o un nivel de autonomía.",
+          "axisNote": "Su prueba compara dos fechas, pero lo que el documento dice es criterio, y se revisa como respuesta a cambios que ya aterrizaron.",
+          "assumes": "Que la superficie de ataque cambia cuando cambian las herramientas, las fuentes de datos o los niveles de autonomía, y que nadie se da cuenta salvo que se haga responsable a alguien de darse cuenta.",
+          "retireWhen": "Que el modelo de amenazas se genere a partir del catálogo de herramientas y de la configuración de autonomía, con lo que no puede quedarse atrás. En ese punto este control ha sido sustituido, no retirado.",
           "test": "Muestra el modelo de amenazas vigente y la fecha del último cambio en el catálogo de herramientas. Si el catálogo es más nuevo que el modelo, el modelo está caducado y este control falla."
         },
         "pt": {
           "name": "Um modelo de ameaças mantido e testado",
           "statement": "As superfícies de ataque estão escritas, cada uma com controle e responsável, os riscos aceitos são nomeados como aceitos, e o documento é revisitado sempre que uma ferramenta, uma fonte de dados ou um nível de autonomia muda.",
+          "axisNote": "Seu teste compara duas datas, mas o que o documento diz é critério, e é revisado em resposta a mudanças que já aconteceram.",
+          "assumes": "Que a superfície de ataque muda quando mudam as ferramentas, as fontes de dados ou os níveis de autonomia, e que ninguém percebe a menos que alguém seja responsabilizado por perceber.",
+          "retireWhen": "Que o modelo de ameaças seja gerado a partir do catálogo de ferramentas e da configuração de autonomia, com o que não pode ficar para trás. Nesse ponto este controle foi substituído, não removido.",
           "test": "Mostre o modelo de ameaças vigente e a data da última mudança no catálogo de ferramentas. Se o catálogo for mais novo que o modelo, o modelo está desatualizado e este controle falha."
         }
       }

@@ -1,0 +1,569 @@
+{
+  "id": "HMM",
+  "version": "1.0",
+  "updated": "2026-08-27",
+  "claim": "HE-CLAIM-006",
+  "rule": "cumulative",
+  "evidence": {
+    "evidenceLevel": "theoretical",
+    "confidenceLevel": "low",
+    "sourceType": [
+      "personal_experience",
+      "industry_observation"
+    ]
+  },
+  "levels": [
+    {
+      "level": 0,
+      "key": "prompted",
+      "controls": [],
+      "metrics": [],
+      "locales": {
+        "en": {
+          "name": "Prompted",
+          "summary": "A person drives every run. The model is called by hand, the prompts live in chat windows and in somebody's notes, and nothing about a run survives it.",
+          "whatBreaks": "Nothing is repeatable, so nothing can be improved. Two people asking for the same thing build two different systems, and neither can say why theirs works."
+        },
+        "es": {
+          "name": "Con prompts",
+          "summary": "Una persona conduce cada ejecución. Al modelo se le llama a mano, los prompts viven en ventanas de chat y en las notas de alguien, y de una ejecución no sobrevive nada.",
+          "whatBreaks": "Nada es repetible, así que nada se puede mejorar. Dos personas que piden lo mismo construyen dos sistemas distintos, y ninguna sabe decir por qué el suyo funciona."
+        },
+        "pt": {
+          "name": "Com prompts",
+          "summary": "Uma pessoa conduz cada execução. O modelo é chamado à mão, os prompts vivem em janelas de chat e nas anotações de alguém, e de uma execução não sobrevive nada.",
+          "whatBreaks": "Nada é repetível, então nada pode ser melhorado. Duas pessoas que pedem a mesma coisa constroem dois sistemas diferentes, e nenhuma sabe dizer por que o seu funciona."
+        }
+      },
+      "criteria": []
+    },
+    {
+      "level": 1,
+      "key": "scripted",
+      "controls": [
+        "ACM-15"
+      ],
+      "metrics": [],
+      "locales": {
+        "en": {
+          "name": "Scripted",
+          "summary": "The calls are in code and the prompts are versioned artefacts. A run can be reproduced from the repository instead of from someone's memory.",
+          "whatBreaks": "The agent still cannot act on anything, so its cost is bounded by its uselessness. Stopping here is a defensible choice; calling what you have an agent is not."
+        },
+        "es": {
+          "name": "Con guion",
+          "summary": "Las llamadas están en código y los prompts son artefactos versionados. Una ejecución se reproduce desde el repositorio y no desde la memoria de alguien.",
+          "whatBreaks": "El agente todavía no puede actuar sobre nada, así que su coste está acotado por su inutilidad. Quedarse aquí es una decisión defendible; llamar agente a lo que hay, no."
+        },
+        "pt": {
+          "name": "Com roteiro",
+          "summary": "As chamadas estão em código e os prompts são artefatos versionados. Uma execução se reproduz a partir do repositório e não da memória de alguém.",
+          "whatBreaks": "O agente ainda não pode agir sobre nada, então seu custo está limitado pela sua inutilidade. Parar aqui é uma decisão defensável; chamar de agente o que existe, não."
+        }
+      },
+      "criteria": [
+        {
+          "id": "HMM-1-1",
+          "controls": [
+            "ACM-15"
+          ],
+          "metrics": [],
+          "locales": {
+            "en": {
+              "test": "Take a run from last month and reproduce it. The prompt, the model and the parameters all come from version control."
+            },
+            "es": {
+              "test": "Coge una ejecución del mes pasado y reprodúcela. El prompt, el modelo y los parámetros salen todos del control de versiones."
+            },
+            "pt": {
+              "test": "Pegue uma execução do mês passado e reproduza-a. O prompt, o modelo e os parâmetros saem todos do controle de versão."
+            }
+          }
+        },
+        {
+          "id": "HMM-1-2",
+          "controls": [
+            "ACM-15"
+          ],
+          "metrics": [],
+          "locales": {
+            "en": {
+              "test": "Change a prompt. The change appears as a diff with an author and a date, and the previous version is still retrievable."
+            },
+            "es": {
+              "test": "Cambia un prompt. El cambio aparece como un diff con autor y fecha, y la versión anterior se sigue pudiendo recuperar."
+            },
+            "pt": {
+              "test": "Mude um prompt. A mudança aparece como um diff com autor e data, e a versão anterior ainda pode ser recuperada."
+            }
+          }
+        },
+        {
+          "id": "HMM-1-3",
+          "controls": [
+            "ACM-10",
+            "ACM-15"
+          ],
+          "metrics": [],
+          "locales": {
+            "en": {
+              "test": "Ask which model version served a given run. The answer comes from a record, not from an assumption about what was current that week."
+            },
+            "es": {
+              "test": "Pregunta qué versión del modelo sirvió una ejecución concreta. La respuesta sale de un registro, no de una suposición sobre qué era lo vigente esa semana."
+            },
+            "pt": {
+              "test": "Pergunte qual versão do modelo serviu uma execução concreta. A resposta sai de um registro, não de uma suposição sobre o que estava em vigor naquela semana."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "key": "tooled",
+      "controls": [
+        "ACM-01",
+        "ACM-02",
+        "ACM-03"
+      ],
+      "metrics": [
+        "contain"
+      ],
+      "locales": {
+        "en": {
+          "name": "Tooled",
+          "summary": "The agent acts on real systems through a declared tool surface: every tool listed, scoped, owned, and refused server-side when pointed somewhere it should not go.",
+          "whatBreaks": "The agent can now cause damage and nothing yet bounds how much. Every incident from here on is an incident in a system that matters."
+        },
+        "es": {
+          "name": "Con herramientas",
+          "summary": "El agente actúa sobre sistemas reales a través de una superficie de herramientas declarada: todas listadas, acotadas, con responsable, y rechazadas del lado del servidor cuando se apuntan donde no deben.",
+          "whatBreaks": "El agente ya puede causar daño y todavía nada acota cuánto. Todo incidente a partir de aquí es un incidente en un sistema que importa."
+        },
+        "pt": {
+          "name": "Com ferramentas",
+          "summary": "O agente atua sobre sistemas reais através de uma superfície de ferramentas declarada: todas listadas, delimitadas, com responsável, e recusadas do lado do servidor quando apontadas para onde não devem.",
+          "whatBreaks": "O agente já pode causar dano e ainda nada limita quanto. Todo incidente a partir daqui é um incidente em um sistema que importa."
+        }
+      },
+      "criteria": [
+        {
+          "id": "HMM-2-1",
+          "controls": [
+            "ACM-01"
+          ],
+          "metrics": [],
+          "locales": {
+            "en": {
+              "test": "Produce the tool catalogue. Every tool the agent can call is in it, with a written scope, whether it writes, and a named owner."
+            },
+            "es": {
+              "test": "Produce el catálogo de herramientas. Toda herramienta que el agente puede invocar está en él, con alcance escrito, si escribe y responsable con nombre."
+            },
+            "pt": {
+              "test": "Produza o catálogo de ferramentas. Toda ferramenta que o agente pode invocar está nele, com escopo escrito, se escreve e responsável nomeado."
+            }
+          }
+        },
+        {
+          "id": "HMM-2-2",
+          "controls": [
+            "ACM-02"
+          ],
+          "metrics": [],
+          "locales": {
+            "en": {
+              "test": "For each tool, show its credential and that credential's server-side scope. No two tools share one whose reach exceeds either of them."
+            },
+            "es": {
+              "test": "Para cada herramienta, enseña su credencial y el alcance de esa credencial en el servidor. No hay dos herramientas que compartan una cuyo alcance exceda al de cualquiera de las dos."
+            },
+            "pt": {
+              "test": "Para cada ferramenta, mostre sua credencial e o escopo dessa credencial no servidor. Não há duas ferramentas que compartilhem uma cujo alcance exceda o de qualquer uma delas."
+            }
+          }
+        },
+        {
+          "id": "HMM-2-3",
+          "controls": [
+            "ACM-03"
+          ],
+          "metrics": [
+            "contain"
+          ],
+          "locales": {
+            "en": {
+              "test": "Call a write-capable tool with an out-of-scope target. It is refused by the tool's own boundary, not by the model declining."
+            },
+            "es": {
+              "test": "Invoca una herramienta que escribe con un destino fuera de alcance. La rechaza la propia frontera de la herramienta, no el modelo negándose."
+            },
+            "pt": {
+              "test": "Invoque uma ferramenta que escreve com um destino fora de escopo. Ela é recusada pela própria fronteira da ferramenta, não pelo modelo se recusando."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "key": "bounded",
+      "controls": [
+        "ACM-04",
+        "ACM-05",
+        "ACM-07",
+        "ACM-12",
+        "ACM-13"
+      ],
+      "metrics": [
+        "contain"
+      ],
+      "locales": {
+        "en": {
+          "name": "Bounded",
+          "summary": "The harness enforces limits it does not ask the model to respect: egress is default-deny, consumption is capped by the host, and untrusted content is data rather than instruction.",
+          "whatBreaks": "The blast radius is bounded and the quality is not. The system fails safely and nobody can say whether it works."
+        },
+        "es": {
+          "name": "Acotado",
+          "summary": "El harness impone límites que no le pide al modelo que respete: la salida es denegar por defecto, el consumo lo topa el anfitrión y el contenido no confiable es dato y no instrucción.",
+          "whatBreaks": "El radio de impacto está acotado y la calidad no. El sistema falla de forma segura y nadie sabe decir si funciona."
+        },
+        "pt": {
+          "name": "Delimitado",
+          "summary": "O harness impõe limites que não pede ao modelo que respeite: a saída é negar por padrão, o consumo é limitado pelo hospedeiro e o conteúdo não confiável é dado e não instrução.",
+          "whatBreaks": "O raio de impacto está delimitado e a qualidade não. O sistema falha de forma segura e ninguém sabe dizer se funciona."
+        }
+      },
+      "criteria": [
+        {
+          "id": "HMM-3-1",
+          "controls": [
+            "ACM-04",
+            "ACM-05"
+          ],
+          "metrics": [],
+          "locales": {
+            "en": {
+              "test": "From inside the agent's environment, request a host that is not on the list. It fails at the network or proxy layer and the refusal arrives as security signal, not as a timeout."
+            },
+            "es": {
+              "test": "Desde dentro del entorno del agente, pide un host que no está en la lista. Falla en la capa de red o de proxy y la denegación llega como señal de seguridad, no como un tiempo agotado."
+            },
+            "pt": {
+              "test": "De dentro do ambiente do agente, solicite um host que não está na lista. Falha na camada de rede ou de proxy e a recusa chega como sinal de segurança, não como tempo esgotado."
+            }
+          }
+        },
+        {
+          "id": "HMM-3-2",
+          "controls": [
+            "ACM-07"
+          ],
+          "metrics": [],
+          "locales": {
+            "en": {
+              "test": "Run a task designed not to terminate. A quota stops it, the stop is recorded, and the cost of the attempt was bounded and known before it started."
+            },
+            "es": {
+              "test": "Ejecuta una tarea diseñada para no terminar. Un tope la detiene, la detención queda registrada y el coste del intento estaba acotado y era conocido antes de empezar."
+            },
+            "pt": {
+              "test": "Execute uma tarefa projetada para não terminar. Um teto a detém, a parada fica registrada e o custo da tentativa estava limitado e era conhecido antes de começar."
+            }
+          }
+        },
+        {
+          "id": "HMM-3-3",
+          "controls": [
+            "ACM-12",
+            "ACM-13"
+          ],
+          "metrics": [],
+          "locales": {
+            "en": {
+              "test": "Plant an instruction inside a document the agent retrieves. It may read it; it must not act on it, and the attempt is visible afterwards."
+            },
+            "es": {
+              "test": "Planta una instrucción dentro de un documento que el agente recupera. Puede leerla; no debe actuar sobre ella, y el intento queda visible después."
+            },
+            "pt": {
+              "test": "Plante uma instrução dentro de um documento que o agente recupera. Ele pode lê-la; não deve agir sobre ela, e a tentativa fica visível depois."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "key": "evaluated",
+      "controls": [
+        "ACM-10",
+        "ACM-11"
+      ],
+      "metrics": [
+        "catch",
+        "dband",
+        "vgap"
+      ],
+      "locales": {
+        "en": {
+          "name": "Evaluated",
+          "summary": "Change is gated by a suite somebody has watched fail. Regressions block release, repeatability is a number, and the gap between what the agent claims and what a verifier finds is measured.",
+          "whatBreaks": "Quality is measured and accountability is not. When something goes wrong you can prove that it regressed and not who allowed it through."
+        },
+        "es": {
+          "name": "Evaluado",
+          "summary": "El cambio pasa por una suite a la que alguien ha visto fallar. Las regresiones bloquean la publicación, la repetibilidad es un número y la brecha entre lo que el agente afirma y lo que encuentra un verificador está medida.",
+          "whatBreaks": "La calidad está medida y la responsabilidad no. Cuando algo sale mal puedes demostrar que hubo regresión, pero no quién la dejó pasar."
+        },
+        "pt": {
+          "name": "Avaliado",
+          "summary": "A mudança passa por uma suite que alguém viu falhar. As regressões bloqueiam a publicação, a repetibilidade é um número e a lacuna entre o que o agente afirma e o que um verificador encontra está medida.",
+          "whatBreaks": "A qualidade está medida e a responsabilidade não. Quando algo dá errado você pode provar que houve regressão, mas não quem a deixou passar."
+        }
+      },
+      "criteria": [
+        {
+          "id": "HMM-4-1",
+          "controls": [
+            "ACM-11"
+          ],
+          "metrics": [
+            "catch"
+          ],
+          "locales": {
+            "en": {
+              "test": "Introduce a known regression. The suite catches it and the change does not ship. A suite never seen failing has an unknown catch rate, not a perfect one."
+            },
+            "es": {
+              "test": "Introduce una regresión conocida. La suite la detecta y el cambio no se publica. Una suite a la que nadie ha visto fallar tiene una tasa de captura desconocida, no perfecta."
+            },
+            "pt": {
+              "test": "Introduza uma regressão conhecida. A suite a detecta e a mudança não é publicada. Uma suite que ninguém viu falhar tem uma taxa de captura desconhecida, não perfeita."
+            }
+          }
+        },
+        {
+          "id": "HMM-4-2",
+          "controls": [
+            "ACM-11"
+          ],
+          "metrics": [
+            "dband"
+          ],
+          "locales": {
+            "en": {
+              "test": "Run the evaluation set five times with nothing changed and say how many cases reached the same verdict every time. The number exists and somebody knows it."
+            },
+            "es": {
+              "test": "Ejecuta el conjunto de evaluación cinco veces sin cambiar nada y di cuántos casos llegaron al mismo veredicto todas las veces. El número existe y alguien lo sabe."
+            },
+            "pt": {
+              "test": "Execute o conjunto de avaliação cinco vezes sem mudar nada e diga quantos casos chegaram ao mesmo veredito todas as vezes. O número existe e alguém o sabe."
+            }
+          }
+        },
+        {
+          "id": "HMM-4-3",
+          "controls": [
+            "ACM-10",
+            "ACM-11"
+          ],
+          "metrics": [
+            "vgap"
+          ],
+          "locales": {
+            "en": {
+              "test": "Compare what the agent claimed for a set of runs against what an independent verifier found. The difference is a number, and it is not assumed to be zero."
+            },
+            "es": {
+              "test": "Compara lo que el agente afirmó en un conjunto de ejecuciones con lo que encontró un verificador independiente. La diferencia es un número, y no se da por supuesto que sea cero."
+            },
+            "pt": {
+              "test": "Compare o que o agente afirmou em um conjunto de execuções com o que um verificador independente encontrou. A diferença é um número, e não se presume que seja zero."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "key": "governed",
+      "controls": [
+        "ACM-08",
+        "ACM-09",
+        "ACM-10",
+        "ACM-18"
+      ],
+      "metrics": [
+        "recon",
+        "hir"
+      ],
+      "locales": {
+        "en": {
+          "name": "Governed",
+          "summary": "Authority, evidence and escalation have owners. A run can be reconstructed by somebody who was not there, gates exist because a risk criterion put them there, and the threat model is younger than the tool catalogue.",
+          "whatBreaks": "Everything is in place and nothing expires. The harness will still be enforcing, next year, the compensations a model needed last year."
+        },
+        "es": {
+          "name": "Gobernado",
+          "summary": "La autoridad, la evidencia y el escalado tienen responsables. Una ejecución la puede reconstruir alguien que no estaba, las compuertas existen porque un criterio de riesgo las puso ahí y el modelo de amenazas es más joven que el catálogo de herramientas.",
+          "whatBreaks": "Está todo en su sitio y nada caduca. El harness seguirá imponiendo, el año que viene, las compensaciones que un modelo necesitaba el año pasado."
+        },
+        "pt": {
+          "name": "Governado",
+          "summary": "A autoridade, a evidência e o escalonamento têm responsáveis. Uma execução pode ser reconstruída por alguém que não estava lá, as comportas existem porque um critério de risco as colocou ali e o modelo de ameaças é mais novo que o catálogo de ferramentas.",
+          "whatBreaks": "Está tudo no lugar e nada vence. O harness continuará impondo, no ano que vem, as compensações de que um modelo precisava no ano passado."
+        }
+      },
+      "criteria": [
+        {
+          "id": "HMM-5-1",
+          "controls": [
+            "ACM-10"
+          ],
+          "metrics": [
+            "recon"
+          ],
+          "locales": {
+            "en": {
+              "test": "Pick a past run at random and reconstruct it end to end from the log alone, without the original operator present. Then confirm the log holds no secret it did not need."
+            },
+            "es": {
+              "test": "Coge una ejecución pasada al azar y reconstrúyela de principio a fin solo con el registro, sin el operador original delante. Después confirma que el registro no guarda ningún secreto que no necesitara."
+            },
+            "pt": {
+              "test": "Pegue uma execução passada ao acaso e reconstrua-a de ponta a ponta só com o registro, sem o operador original presente. Depois confirme que o registro não guarda nenhum segredo de que não precisava."
+            }
+          }
+        },
+        {
+          "id": "HMM-5-2",
+          "controls": [
+            "ACM-08",
+            "ACM-09"
+          ],
+          "metrics": [
+            "hir"
+          ],
+          "locales": {
+            "en": {
+              "test": "List the gated actions and the risk criterion that put them there. Force an escalation; it reaches a named person within the stated time, carrying the context needed to act."
+            },
+            "es": {
+              "test": "Lista las acciones con compuerta y el criterio de riesgo que las puso ahí. Fuerza un escalado; llega a una persona con nombre dentro del tiempo declarado, con el contexto necesario para actuar."
+            },
+            "pt": {
+              "test": "Liste as ações com comporta e o critério de risco que as colocou ali. Force um escalonamento; ele chega a uma pessoa nomeada dentro do tempo declarado, com o contexto necessário para agir."
+            }
+          }
+        },
+        {
+          "id": "HMM-5-3",
+          "controls": [
+            "ACM-18"
+          ],
+          "metrics": [],
+          "locales": {
+            "en": {
+              "test": "Show the current threat model and the date of the last change to the tool catalogue. If the catalogue is newer, this criterion fails and the level is not held."
+            },
+            "es": {
+              "test": "Enseña el modelo de amenazas vigente y la fecha del último cambio en el catálogo de herramientas. Si el catálogo es más nuevo, este criterio falla y el nivel no se sostiene."
+            },
+            "pt": {
+              "test": "Mostre o modelo de ameaças vigente e a data da última mudança no catálogo de ferramentas. Se o catálogo for mais novo, este critério falha e o nível não se sustenta."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "key": "adaptive",
+      "controls": [
+        "ACM-15"
+      ],
+      "metrics": [
+        "cvo",
+        "tvo"
+      ],
+      "locales": {
+        "en": {
+          "name": "Adaptive",
+          "summary": "The harness changes on evidence, including by removing itself. Components carry the model they were validated against and the condition that would retire them, and something has actually been retired.",
+          "whatBreaks": "Nothing here is stable, and that is the point. A harness that changes on evidence needs the evidence to be good, and every metric on the scorecard can be gamed by whoever is being measured by it."
+        },
+        "es": {
+          "name": "Adaptativo",
+          "summary": "El harness cambia con la evidencia, también quitándose a sí mismo. Los componentes llevan escrito contra qué modelo se validaron y la condición que los retiraría, y algo se ha retirado de verdad.",
+          "whatBreaks": "Aquí nada es estable, y ese es el punto. Un harness que cambia con la evidencia necesita que la evidencia sea buena, y toda métrica de la scorecard la puede falsear quien está siendo medido con ella."
+        },
+        "pt": {
+          "name": "Adaptativo",
+          "summary": "O harness muda com a evidência, inclusive removendo a si mesmo. Os componentes trazem escrito contra qual modelo foram validados e a condição que os aposentaria, e algo foi realmente aposentado.",
+          "whatBreaks": "Aqui nada é estável, e esse é o ponto. Um harness que muda com a evidência precisa que a evidência seja boa, e toda métrica do scorecard pode ser falseada por quem está sendo medido com ela."
+        }
+      },
+      "criteria": [
+        {
+          "id": "HMM-6-1",
+          "controls": [],
+          "metrics": [
+            "cvo"
+          ],
+          "locales": {
+            "en": {
+              "test": "Name a control, a prompt rule or a context block removed in the last two quarters, and show the measurement that justified removing it. \"We tried it without and it seemed fine\" is not a measurement."
+            },
+            "es": {
+              "test": "Nombra un control, una regla de prompt o un bloque de contexto retirado en los dos últimos trimestres, y enseña la medición que justificó retirarlo. «Lo probamos sin él y parecía ir bien» no es una medición."
+            },
+            "pt": {
+              "test": "Nomeie um controle, uma regra de prompt ou um bloco de contexto removido nos dois últimos trimestres, e mostre a medição que justificou removê-lo. “Testamos sem ele e parecia ir bem” não é uma medição."
+            }
+          }
+        },
+        {
+          "id": "HMM-6-2",
+          "controls": [
+            "ACM-15"
+          ],
+          "metrics": [],
+          "locales": {
+            "en": {
+              "test": "For a component still in place, state the model it was validated against and the condition under which it would be retired. Both are written down, not remembered."
+            },
+            "es": {
+              "test": "Para un componente que sigue en su sitio, di contra qué modelo se validó y bajo qué condición se retiraría. Las dos cosas están escritas, no recordadas."
+            },
+            "pt": {
+              "test": "Para um componente que continua no lugar, diga contra qual modelo foi validado e sob qual condição seria removido. As duas coisas estão escritas, não lembradas."
+            }
+          }
+        },
+        {
+          "id": "HMM-6-3",
+          "controls": [],
+          "metrics": [
+            "cvo",
+            "tvo"
+          ],
+          "locales": {
+            "en": {
+              "test": "Show the cost per correctly verified outcome for the same task set across two model generations, each with the harness that generation actually needed."
+            },
+            "es": {
+              "test": "Enseña el coste por resultado correctamente verificado del mismo conjunto de tareas en dos generaciones de modelo, cada una con el harness que esa generación necesitaba de verdad."
+            },
+            "pt": {
+              "test": "Mostre o custo por resultado corretamente verificado do mesmo conjunto de tarefas em duas gerações de modelo, cada uma com o harness de que aquela geração realmente precisava."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

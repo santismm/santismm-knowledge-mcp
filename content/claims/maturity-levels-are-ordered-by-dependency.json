@@ -1,0 +1,43 @@
+{
+  "id": "HE-CLAIM-006",
+  "slug": "maturity-levels-are-ordered-by-dependency",
+  "claimType": "santismm_thesis",
+  "confidenceLevel": "low",
+  "reviewed": "2026-08-27",
+  "version": "1.0.0",
+  "updated": "2026-08-27",
+  "supports": [
+    "HRN-001",
+    "HRN-004",
+    "harness-engineering"
+  ],
+  "sources": [
+    {
+      "title": "Harness Engineering Principles",
+      "author": "Santa María, S.",
+      "venue": "SANTISMM Harness Engineering Handbook",
+      "year": "2026",
+      "type": "personal_experience"
+    }
+  ],
+  "locales": {
+    "en": {
+      "statement": "The seven levels of the maturity model are ordered by dependency rather than by preference: a harness does not hold a level while any criterion below it fails, because each level is what makes the level above it measurable.",
+      "basis": "The dependencies are concrete, not decorative. Evaluation at level 4 is meaningless without the reproducibility of level 1 — you cannot regression-test a run you cannot reproduce. Reconstructing a run at level 5 needs the declared tool surface of level 2, because a call nobody catalogued is a call nobody can read back. Retiring a component at level 6 needs the measurement of level 4, or the retirement is a preference with a date on it.",
+      "limitations": "The order is asserted from one practitioner's experience of a small number of systems, and it is self-assessed: every criterion is a test somebody runs on themselves, which is the weakest form of assessment there is. Organisations demonstrably skip rungs — most ship tools before they version prompts — and this model calls that a failure at level 1 rather than a different valid path, which may be wrong. The ladder may be encoding one route rather than the route.",
+      "falsifiedBy": "An organisation holding a level with a criterion below it failing, and its outcomes not degrading in the way the dependency predicts — measured on the scorecard, not argued. Or a common path through the levels in a materially different order, followed by systems that work."
+    },
+    "es": {
+      "statement": "Los siete niveles del modelo de madurez están ordenados por dependencia y no por preferencia: un harness no sostiene un nivel mientras falle cualquier criterio por debajo, porque cada nivel es lo que hace medible al siguiente.",
+      "basis": "Las dependencias son concretas, no decorativas. Evaluar en el nivel 4 no significa nada sin la reproducibilidad del nivel 1: no se puede hacer test de regresión sobre una ejecución que no se puede reproducir. Reconstruir una ejecución en el nivel 5 necesita la superficie de herramientas declarada del nivel 2, porque una llamada que nadie catalogó es una llamada que nadie puede releer. Retirar un componente en el nivel 6 necesita la medición del nivel 4, o la retirada es una preferencia con fecha.",
+      "limitations": "El orden se afirma desde la experiencia de un solo profesional con un número pequeño de sistemas, y es autoevaluado: cada criterio es una prueba que alguien se hace a sí mismo, que es la forma más débil de evaluación que existe. Las organizaciones se saltan peldaños de forma demostrable —la mayoría pone herramientas antes de versionar prompts— y este modelo llama a eso un fallo en el nivel 1 y no un camino válido distinto, lo cual puede ser un error. La escalera puede estar codificando una ruta y no la ruta.",
+      "falsifiedBy": "Una organización que sostenga un nivel con un criterio inferior fallando y cuyos resultados no se degraden como predice la dependencia, medido en la scorecard y no argumentado. O un camino habitual por los niveles en un orden materialmente distinto, recorrido por sistemas que funcionan."
+    },
+    "pt": {
+      "statement": "Os sete níveis do modelo de maturidade estão ordenados por dependência e não por preferência: um harness não sustenta um nível enquanto qualquer critério abaixo falhar, porque cada nível é o que torna o seguinte mensurável.",
+      "basis": "As dependências são concretas, não decorativas. Avaliar no nível 4 não significa nada sem a reprodutibilidade do nível 1: não se pode fazer teste de regressão sobre uma execução que não se pode reproduzir. Reconstruir uma execução no nível 5 precisa da superfície de ferramentas declarada do nível 2, porque uma chamada que ninguém catalogou é uma chamada que ninguém pode reler. Aposentar um componente no nível 6 precisa da medição do nível 4, ou a aposentadoria é uma preferência com data.",
+      "limitations": "A ordem é afirmada a partir da experiência de um único profissional com um número pequeno de sistemas, e é autoavaliada: cada critério é um teste que alguém faz em si mesmo, que é a forma mais fraca de avaliação que existe. As organizações pulam degraus de forma demonstrável — a maioria coloca ferramentas antes de versionar prompts — e este modelo chama isso de falha no nível 1 e não de um caminho válido diferente, o que pode ser um erro. A escada pode estar codificando uma rota e não a rota.",
+      "falsifiedBy": "Uma organização que sustente um nível com um critério inferior falhando e cujos resultados não se degradem como a dependência prevê, medido no scorecard e não argumentado. Ou um caminho habitual pelos níveis em uma ordem materialmente diferente, percorrido por sistemas que funcionam."
+    }
+  }
+}

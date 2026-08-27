@@ -1,0 +1,51 @@
+{
+  "id": "HE-CLAIM-007",
+  "slug": "a-harness-can-degrade-the-agent",
+  "claimType": "santismm_thesis",
+  "confidenceLevel": "low",
+  "reviewed": "2026-08-27",
+  "version": "1.0.0",
+  "updated": "2026-08-27",
+  "supports": [
+    "HRN-001",
+    "HRN-004",
+    "HRN-012",
+    "harness-engineering"
+  ],
+  "sources": [
+    {
+      "title": "Harness Engineering Principles",
+      "author": "Santa María, S.",
+      "venue": "SANTISMM Harness Engineering Handbook",
+      "year": "2026",
+      "type": "personal_experience"
+    },
+    {
+      "title": "Case Studies in Harness Engineering",
+      "author": "Santa María, S.",
+      "venue": "SANTISMM Harness Engineering Handbook",
+      "year": "2026",
+      "type": "personal_experience"
+    }
+  ],
+  "locales": {
+    "en": {
+      "statement": "A harness is not monotonically good. A control that was correct for one model generation can degrade the agent in the next, and current practice makes that invisible because harness components are added and almost never removed.",
+      "basis": "Three mechanisms, all of them ordinary. Prompt rules that compensate for a limitation the next model does not have, and that now spend tokens teaching it something it already knows. Static context carried because the window was scarce, back when it was scarce. Tool surfaces narrowed to what an older model could be trusted with, which now bound what a better one is allowed to attempt. Each was correct when it was written, each is a cost now, and none of them announce themselves — a harness component has no expiry date unless somebody wrote one. So each control here declares what it assumes about the model and the condition under which it should be retired.",
+      "limitations": "Asserted, not measured: nothing in this corpus has been run with and without a control across a model generation change. The classification of which controls expire is one person's reading of retirement conditions the same person wrote, so it restates a judgement rather than evidencing it. The honest counterweight is in the data and points the other way: most controls in the matrix do not expire on capability grounds at all — an unvalidated Origin does not become safe because the model improved — so this is a real risk about a minority of components, not a general law about harnesses.",
+      "falsifiedBy": "Removing components whose stated retirement condition is met and measuring no improvement in cost per correctly verified outcome across a model generation change, repeatedly; or harnesses that never retire anything tracking those that do, on the same scorecard and the same task set."
+    },
+    "es": {
+      "statement": "Un harness no es monótonamente bueno. Un control que era correcto para una generación de modelos puede degradar al agente en la siguiente, y la práctica actual lo hace invisible porque los componentes de harness se añaden y casi nunca se quitan.",
+      "basis": "Tres mecanismos, todos corrientes. Reglas de prompt que compensan una limitación que el modelo siguiente ya no tiene, y que ahora gastan tokens enseñándole algo que ya sabe. Contexto estático que se arrastra porque la ventana era escasa, cuando lo era. Superficies de herramientas estrechadas a lo que se le podía confiar a un modelo más viejo, que ahora acotan lo que a uno mejor se le permite intentar. Cada una era correcta cuando se escribió, cada una es un coste ahora, y ninguna se anuncia: un componente de harness no tiene fecha de caducidad salvo que alguien la escribiera. Por eso cada control declara aquí qué supone sobre el modelo y bajo qué condición debería retirarse.",
+      "limitations": "Afirmado, no medido: nada en este corpus se ha ejecutado con y sin un control atravesando un cambio de generación de modelo. La clasificación de qué controles caducan es la lectura de una persona sobre condiciones de retirada que escribió esa misma persona, así que reformula un criterio en lugar de evidenciarlo. El contrapeso honesto está en los datos y apunta al otro lado: la mayoría de los controles de la matriz no caducan por capacidad —un Origin sin validar no se vuelve seguro porque el modelo mejore—, así que esto es un riesgo real sobre una minoría de componentes y no una ley general sobre los harnesses.",
+      "falsifiedBy": "Quitar componentes cuya condición de retirada declarada se cumple y no medir mejora en el coste por resultado correctamente verificado al cambiar de generación de modelo, de forma repetida; o que harnesses que nunca retiran nada vayan a la par de los que sí, en la misma scorecard y el mismo conjunto de tareas."
+    },
+    "pt": {
+      "statement": "Um harness não é monotonicamente bom. Um controle que era correto para uma geração de modelos pode degradar o agente na seguinte, e a prática atual torna isso invisível porque os componentes de harness são adicionados e quase nunca removidos.",
+      "basis": "Três mecanismos, todos corriqueiros. Regras de prompt que compensam uma limitação que o modelo seguinte já não tem, e que agora gastam tokens ensinando a ele algo que já sabe. Contexto estático carregado porque a janela era escassa, quando era. Superfícies de ferramentas estreitadas ao que se podia confiar a um modelo mais velho, que agora limitam o que a um melhor é permitido tentar. Cada uma estava certa quando foi escrita, cada uma é um custo agora, e nenhuma se anuncia: um componente de harness não tem data de validade a menos que alguém a tenha escrito. Por isso cada controle declara aqui o que supõe sobre o modelo e sob qual condição deveria ser removido.",
+      "limitations": "Afirmado, não medido: nada neste corpus foi executado com e sem um controle atravessando uma mudança de geração de modelo. A classificação de quais controles expiram é a leitura de uma pessoa sobre condições de remoção escritas por essa mesma pessoa, então reformula um critério em vez de evidenciá-lo. O contrapeso honesto está nos dados e aponta para o outro lado: a maioria dos controles da matriz não expira por capacidade — um Origin sem validação não fica seguro porque o modelo melhorou —, então isto é um risco real sobre uma minoria de componentes e não uma lei geral sobre harnesses.",
+      "falsifiedBy": "Remover componentes cuja condição de remoção declarada se cumpre e não medir melhora no custo por resultado corretamente verificado ao mudar de geração de modelo, de forma repetida; ou que harnesses que nunca removem nada acompanhem os que removem, no mesmo scorecard e no mesmo conjunto de tarefas."
+    }
+  }
+}

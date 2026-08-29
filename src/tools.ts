@@ -15,8 +15,9 @@ import {
  * its identity and the tool registry. Both transports — the stdio CLI
  * (`mcp/src/index.ts`) and the HTTP endpoint (`app/mcp/route.ts`) — call
  * `registerTools(server, content)`, so the exposed tools can never drift
- * between them. The data source is injected as `content` (an `McpContent`
- * provider); both providers read the same `content/{domain}/*.json` files.
+ * between them. The local data source is injected as `content` (an
+ * `McpContent` provider); both providers read the same canonical repository
+ * data, while Article tools deliberately read the first-party Articles API.
  */
 
 export const SERVER_INFO = { name: "santismm-knowledge", version: "0.3.0" } as const;
@@ -617,7 +618,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
       title: "Corpus Overview — Start Here",
       annotations: READ_ONLY,
       description:
-        "Get the corpus map — start here. Returns every domain (knowledge, patterns, architectures, governance and the Harness Engineering Handbook) with what it holds, the categories inside it, which tool retrieves a unit and what identifier that tool expects, plus the languages, licence and bulk-ingest URLs. One call is enough to know exactly where to go next.",
+        "Get the complete MCP map — start here. Returns the five-domain core (knowledge, patterns, architectures, governance and the Harness Engineering Handbook), plus the separate Article, Homeric Atlas and claim-registry surfaces, with the tools and identifiers each expects, the languages, licence and bulk-ingest URLs.",
       inputSchema: z.object({}),
       outputSchema: z.object({
         source: z.string(),
@@ -637,6 +638,16 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
             lookup: z.string(),
             url: z.string(),
             api_url: z.string(),
+          }),
+        ),
+        extensions: z.array(
+          z.object({
+            surface: z.string(),
+            description: z.string(),
+            tools: z.array(z.string()),
+            source: z.string(),
+            lookup: z.string(),
+            citation: z.string(),
           }),
         ),
         corpus: z

@@ -2,8 +2,9 @@
 
 MCP access to the [Santismm Knowledge Platform](https://santismm.com/en/mcp) —
 harness engineering, agentic AI patterns, reference architectures, AI
-governance, the Harness Engineering Handbook and first-party essays. 24 read-only tools, content
-CC BY 4.0, in three languages (en/es/pt).
+governance, the Harness Engineering Handbook, first-party essays, the Homeric
+Atlas and epistemic claims. 24 read-only tools, content CC BY 4.0, in three
+languages (en/es/pt).
 
 This package is a **zero-dependency stdio proxy** to the hosted endpoint at
 `https://santismm.com/mcp`. It ships no corpus and no tool logic — your agent

@@ -116,6 +116,15 @@ export interface CorpusOverview {
   license_url: string;
   total: number;
   domains: DomainOverview[];
+  /** Tool surfaces adjacent to, but deliberately not flattened into, the five-domain core. */
+  extensions: Array<{
+    surface: string;
+    description: string;
+    tools: string[];
+    source: string;
+    lookup: string;
+    citation: string;
+  }>;
   /**
    * How fresh the copy answering this call is.
    *
@@ -705,6 +714,36 @@ export function makeContent(
         license_url: LICENSE_INFO.url,
         total: domains.reduce((n, d) => n + d.count, 0),
         domains,
+        extensions: [
+          {
+            surface: "articles",
+            description: "Federated first-party long-form essays, read from their canonical Articles API at call time.",
+            tools: ["list_articles", "get_article", "search_articles"],
+            source: "https://articles.santismm.com/api/articles.json",
+            lookup: "article slug",
+            citation: "Each result carries canonical_url.",
+          },
+          {
+            surface: "homeric_atlas",
+            description: "Places, episodes and rival route reconstructions using the atlas identification vocabulary and 0–12 rubric.",
+            tools: [
+              "list_homeric_places", "get_homeric_place",
+              "list_homeric_episodes", "get_homeric_episode",
+              "list_homeric_routes", "get_homeric_route",
+            ],
+            source: `${SITE_URL}/api/homeric-atlas.json`,
+            lookup: "place, episode or route slug",
+            citation: "Each content result carries canonical_url and api_url.",
+          },
+          {
+            surface: "claims",
+            description: "The corpus's load-bearing claims with epistemic type, confidence, basis, limitations and falsification criteria.",
+            tools: ["list_claims", "get_claim"],
+            source: "bundled claim registry",
+            lookup: "claim id (for example HE-CLAIM-001) or slug",
+            citation: "Claims have no public page; cite their stable id and the MCP endpoint.",
+          },
+        ],
         corpus: {
           newest_unit: newestUpdated([
             ...DOMAINS.flatMap((d) => loadAll(d)),
@@ -716,10 +755,11 @@ export function makeContent(
             "time. If total or newest_unit differ from that endpoint's, you are holding a snapshot.",
         },
         next:
-          "search(query, locale) to answer a question across the whole corpus; " +
+          "search(query, locale) to answer a question across the five-domain core; " +
           "list_<domain> to browse one; get_<domain>(slug) for a full unit with its " +
           "Evidence-First provenance; get_related(domain, slug) to traverse the graph. " +
-          "Every result carries canonical_url and api_url, so cite the canonical_url.",
+          "Use the tools named in extensions for Articles, the Homeric Atlas and claims. " +
+          "Citable content results carry canonical_url; claim records use their stable id.",
         // For agents that would rather ingest the corpus than walk it.
         bulk: {
           llms_full_txt: `${SITE_URL}/llms-full.txt`,

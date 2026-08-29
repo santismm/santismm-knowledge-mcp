@@ -2,8 +2,8 @@
 
 [![santismm-knowledge-mcp MCP server](https://glama.ai/mcp/servers/santismm/santismm-knowledge-mcp/badges/card.svg)](https://glama.ai/mcp/servers/santismm/santismm-knowledge-mcp)
 
-> MCP server for the Santismm Knowledge Platform — harness engineering, agentic
-> AI patterns, reference architectures, AI governance and the agent taxonomy.
+> MCP server for the Santismm Knowledge Platform — five core knowledge domains,
+> first-party essays, Homeric Atlas datasets and epistemic claims.
 
 **This repository is generated** from the platform at [santismm.com](https://santismm.com).
 Do not edit it by hand; changes are overwritten on the next sync. Corrections go

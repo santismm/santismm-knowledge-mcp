@@ -625,8 +625,33 @@ export function makeContent(
   loadHomeric?: (kind: HomericKind) => HomericArtifact[],
   loadClaims?: () => Record<string, unknown>[],
 ): McpContent {
-  const getOne = (domain: Domain, slug: string) =>
-    loadAll(domain).find((e) => e.slug === slug);
+  /**
+   * Una unidad se alcanza por su slug, por el identificador que ella misma
+   * declara (`ARCH-001`, `GOV-004`) y por los alias que arrastra del manual
+   * (`PAT-001`). El corpus publicaba esos identificadores —en el JSON, en el
+   * frontmatter y en la prosa de los capítulos— y después los rechazaba:
+   * `get_pattern("PAT-001")`, `get_governance("GOV-001")` y
+   * `get_architecture("ARCH-001")` devolvían `not_found` sobre unidades que
+   * existen. Es la misma inferencia por analogía que la analítica midió
+   * (`handbook/arch-001`, 15 veces): el agente no se lo inventaba, se lo
+   * habíamos anunciado nosotros.
+   *
+   * Sin distinguir mayúsculas, porque la prosa cita `PAT-001` y una URL trae
+   * `pat-001`, y el espacio de identificadores no debería depender de eso.
+   */
+  const getOne = (domain: Domain, slug: string) => {
+    const entries = loadAll(domain);
+    const exact = entries.find((e) => e.slug === slug);
+    if (exact) return exact;
+    const needle = slug.toUpperCase();
+    return entries.find((e) => {
+      const r = e as unknown as Record<string, unknown>;
+      if (typeof r.id === "string" && r.id.toUpperCase() === needle) return true;
+      if (Array.isArray(r.aliases))
+        return r.aliases.some((a) => typeof a === "string" && a.toUpperCase() === needle);
+      return false;
+    }) ?? entries.find((e) => e.slug.toUpperCase() === needle);
+  };
 
   /**
    * Enlaces entrantes por unidad — la única señal de centralidad que este

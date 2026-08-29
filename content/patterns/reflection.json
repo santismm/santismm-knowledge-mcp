@@ -1,5 +1,6 @@
 {
   "slug": "reflection",
+  "aliases": ["PAT-003"],
   "category": "reliability",
   "updated": "2026-06-21",
   "version": "1.0",

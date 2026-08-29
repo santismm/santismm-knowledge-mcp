@@ -1,6 +1,14 @@
 import { z } from "zod";
 import type { Domain, Locale } from "./content.js";
 import type { CorpusOverview } from "./shape.js";
+import {
+  ARTICLES_API_URL,
+  articleCard,
+  articlesForLocale,
+  loadArticles,
+  searchArticleCorpus,
+  type Article,
+} from "./articles.ts";
 
 /**
  * Single, framework-agnostic definition of the Santismm Knowledge MCP server:
@@ -11,7 +19,7 @@ import type { CorpusOverview } from "./shape.js";
  * provider); both providers read the same `content/{domain}/*.json` files.
  */
 
-export const SERVER_INFO = { name: "santismm-knowledge", version: "0.2.2" } as const;
+export const SERVER_INFO = { name: "santismm-knowledge", version: "0.3.0" } as const;
 
 /**
  * The subset of the MCP SDK's `McpServer` that the registry uses (just
@@ -68,9 +76,10 @@ export interface McpContent {
 export type HomericKind = "places" | "episodes" | "routes";
 
 /**
- * Every tool here reads a static corpus and nothing else, so all four hints are
- * literally true rather than aspirational: nothing mutates, the same arguments
- * always produce the same answer, and no tool reaches outside this corpus.
+ * Core tools read a static local corpus, so all four hints are literally true:
+ * nothing mutates, the same arguments produce the same answer, and no core
+ * tool reaches outside this corpus. Federated Article tools override only the
+ * open-world hint because they read another first-party origin.
  *
  * Declaring them matters because a client deciding whether a call needs
  * confirmation, and an aggregator deciding how to present the server, both read
@@ -83,6 +92,9 @@ const READ_ONLY = {
   idempotentHint: true,
   openWorldHint: false,
 } as const;
+
+/** Article tools read another first-party origin, so clients must know they are open-world. */
+const READ_ONLY_REMOTE = { ...READ_ONLY, openWorldHint: true } as const;
 
 const localeSchema = z
   .enum(["en", "es", "pt"])
@@ -301,6 +313,7 @@ const ESPACIOS = [
   { domain: "homeric/episodes", listTool: "list_homeric_episodes", getTool: "get_homeric_episode" },
   { domain: "homeric/routes", listTool: "list_homeric_routes", getTool: "get_homeric_route" },
   { domain: "claims", listTool: "list_claims", getTool: "get_claim" },
+  { domain: "articles", listTool: "list_articles", getTool: "get_article" },
 ] as const;
 
 type EspacioNombre = (typeof ESPACIOS)[number]["domain"];
@@ -320,6 +333,9 @@ function identificadores(cards: unknown[]): string[] {
 
 /** The cards of one space, whichever loader serves it. */
 function cardsDe(content: McpContent, domain: EspacioNombre, locale: Locale): unknown[] {
+  // Federated Articles are asynchronous and have their own recovery payload;
+  // keep them out of the synchronous cross-space lookup used by local units.
+  if (domain === "articles") return [];
   if (domain === "handbook") return content.listHandbook(locale);
   if (domain === "claims") return content.listClaims(undefined, locale);
   if (domain.startsWith("homeric/")) {
@@ -534,6 +550,64 @@ const claimCard = z.object({
 
 const claimListOutput = { count: z.number(), results: z.array(claimCard) };
 const claimUnitOutput = z.object({}).passthrough();
+
+const articleCardSchema = z.object({
+  slug: z.string(),
+  title: z.string(),
+  summary: z.string(),
+  language: z.string(),
+  published: z.string(),
+  modified: z.string(),
+  topics: z.array(z.string()),
+  translation_key: z.string().optional(),
+  canonical_url: z.string().describe("Cite this URL."),
+  api_url: z.string(),
+});
+
+const articleUnitOutput = articleCardSchema.extend({
+  body: z.string().describe("Full Markdown-like article body."),
+});
+
+const articleListOutput = { count: z.number(), results: z.array(articleCardSchema) };
+const articleSearchOutput = {
+  query: z.string(),
+  count: z.number(),
+  results: z.array(articleCardSchema.extend({
+    score: z.number(),
+    matchedFields: z.array(z.string()),
+    matchedTerms: z.array(z.string()),
+  })),
+};
+
+function articleFailure(error: unknown) {
+  const body = {
+    error: "articles_unavailable",
+    source: ARTICLES_API_URL,
+    hint: "The first-party Articles API could not be read. Retry later or use its llms-full.txt corpus directly.",
+    detail: error instanceof Error ? error.message : String(error),
+  };
+  return {
+    content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }],
+    isError: true as const,
+  };
+}
+
+function articleNotFound(articles: Article[], slug: string) {
+  const available = articles.map((article) => article.slug).sort();
+  const body = {
+    error: "not_found",
+    domain: "articles",
+    slug,
+    available_count: available.length,
+    available,
+    list_tool: "list_articles",
+    hint: "Call list_articles for every valid slug; article slugs are not interchangeable with core corpus identifiers.",
+  };
+  return {
+    content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }],
+    isError: true as const,
+  };
+}
 
 export function registerTools(server: McpToolServer, content: McpContent): void {
   // ── Orientation ────────────────────────────────────────────────────────────
@@ -763,6 +837,76 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
         (locale ?? "en") as Locale,
       );
       return outList(results, { query });
+    },
+  );
+
+  // ── First-party articles (federated) ─────────────────────────────────────
+  server.registerTool(
+    "list_articles",
+    {
+      title: "List first-party essays",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "List every long-form essay published on articles.santismm.com, with language, dates, topics and citable canonical URLs. Use this to browse the essay catalogue; use `search_articles` when you have a topic rather than a slug.",
+      inputSchema: z.object({
+        locale: localeSchema.describe("Restrict to en, es or pt. Omit to return every language."),
+      }),
+      outputSchema: articleListOutput,
+    },
+    async ({ locale }) => {
+      try {
+        const articles = articlesForLocale(await loadArticles(), locale as Locale | undefined);
+        return outList(articles.map(articleCard));
+      } catch (error) {
+        return articleFailure(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "get_article",
+    {
+      title: "Get a first-party essay",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Get one complete essay by slug, including its clean Markdown-like body, metadata, licence context and canonical URL. Use this after `list_articles` or `search_articles` has returned the slug you need.",
+      inputSchema: z.object({
+        slug: slugSchema.describe("Article slug, e.g. 'the-stopwatch-and-the-exam'."),
+      }),
+      outputSchema: articleUnitOutput,
+    },
+    async ({ slug }) => {
+      try {
+        const articles = await loadArticles();
+        const article = articles.find((candidate) => candidate.slug === slug);
+        return article ? out(article as unknown as Record<string, unknown>) : articleNotFound(articles, slug);
+      } catch (error) {
+        return articleFailure(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "search_articles",
+    {
+      title: "Search first-party essays",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Ranked, accent-insensitive full-text search over every first-party essay, including titles, summaries, topics and bodies. Use this when you need long-form analysis about a topic; follow with `get_article` for the complete essay.",
+      inputSchema: z.object({
+        query: querySchema.describe("Keyword or phrase to search for in any supported language."),
+        locale: localeSchema.describe("Restrict to en, es or pt. Omit to search every language."),
+        limit: z.number().int().positive().max(20).optional().describe("Maximum results (default 10)."),
+      }),
+      outputSchema: articleSearchOutput,
+    },
+    async ({ query, locale, limit }) => {
+      try {
+        const articles = articlesForLocale(await loadArticles(), locale as Locale | undefined);
+        return outList(searchArticleCorpus(articles, query, limit ?? 10), { query });
+      } catch (error) {
+        return articleFailure(error);
+      }
     },
   );
 

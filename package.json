@@ -1,6 +1,6 @@
 {
   "name": "santismm-knowledge-mcp",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "license": "MIT",
   "description": "MCP server for the Santismm Knowledge Platform — harness engineering, agentic AI patterns, reference architectures and AI governance. Ships the corpus; the hosted endpoint at https://santismm.com/mcp is the always-fresh alternative.",
   "type": "module",

@@ -727,6 +727,7 @@ export function makeContent(
           homeric_atlas: `${SITE_URL}/api/homeric-atlas.json`,
           articles: "https://articles.santismm.com/llms-full.txt",
           articles_index: "https://articles.santismm.com/ai-index.json",
+          articles_api: "https://articles.santismm.com/api/articles.json",
           labs: "https://labs.santismm.com/llms-full.txt",
           labs_api: "https://labs.santismm.com/api/labs",
           labs_openapi: "https://labs.santismm.com/openapi.json",

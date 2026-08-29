@@ -26,8 +26,9 @@ Docs: https://santismm.com/en/mcp · Registry: `com.santismm/knowledge`
 npm ci && npm run build && npm start
 ```
 
-The corpus ships in `content/` and is read from disk, so this works offline.
-Point it elsewhere with `SANTISMM_CONTENT_DIR`.
+The core corpus ships in `content/` and is read from disk, so its tools work
+offline. The three federated Article tools read the canonical Articles API over
+HTTPS. Point the core corpus elsewhere with `SANTISMM_CONTENT_DIR`.
 
 ## Install from npm
 
@@ -67,11 +68,12 @@ is not a software licence and MIT is not a content licence.
 
 ## What it exposes
 
-21 read-only tools over knowledge, patterns, architectures, governance and the
-Harness Engineering Handbook, each declaring an `outputSchema` and returning
-validated `structuredContent`. Every tool is annotated `readOnlyHint: true`,
-`destructiveHint: false`, `idempotentHint: true`, `openWorldHint: false` —
-literally true: it reads a static corpus and nothing else.
+24 read-only tools over knowledge, patterns, architectures, governance, the
+Harness Engineering Handbook and first-party Articles, each declaring an
+`outputSchema` and returning validated `structuredContent`. Every tool is
+annotated `readOnlyHint: true`, `destructiveHint: false` and
+`idempotentHint: true`. The three federated Article tools declare
+`openWorldHint: true`; local-corpus tools remain `false`.
 
 Content in three languages (en/es/pt).
 

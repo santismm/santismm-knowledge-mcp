@@ -1,5 +1,6 @@
 {
   "slug": "human-approval-gate",
+  "aliases": ["PAT-001"],
   "category": "safety",
   "updated": "2026-06-21",
   "version": "1.0",

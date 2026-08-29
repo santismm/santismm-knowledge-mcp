@@ -1,5 +1,6 @@
 {
   "slug": "supervisor-agent",
+  "aliases": ["PAT-002"],
   "category": "orchestration",
   "updated": "2026-06-21",
   "version": "1.0",

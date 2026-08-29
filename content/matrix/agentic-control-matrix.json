@@ -512,7 +512,8 @@
         "expiresOn": "never",
         "improves": [
           "tvt",
-          "cvo"
+          "cvo",
+          "tvo"
         ],
         "validatedAgainst": null,
         "validatedOn": null
@@ -1300,7 +1301,9 @@
       },
       "expiry": {
         "expiresOn": "architecture",
-        "improves": [],
+        "improves": [
+          "contain"
+        ],
         "validatedAgainst": null,
         "validatedOn": null
       },

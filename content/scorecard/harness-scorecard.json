@@ -173,7 +173,9 @@
       "group": "cost",
       "unit": "tokens/outcome",
       "direction": "lower",
-      "controls": [],
+      "controls": [
+        "ACM-07"
+      ],
       "patterns": [
         "context-compression"
       ],
@@ -353,7 +355,8 @@
       "controls": [
         "ACM-01",
         "ACM-03",
-        "ACM-17"
+        "ACM-17",
+        "ACM-18"
       ],
       "patterns": [
         "least-privilege-tooling",

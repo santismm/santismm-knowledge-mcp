@@ -192,6 +192,8 @@ const unitOutput = z.object({
   domain: z.string().optional(),
   id: z.string().optional(),
   slug: z.string().optional(),
+  /** Legacy identifiers that resolve to this canonical unit. */
+  aliases: z.array(z.string()).optional(),
   category: z.string().optional(),
   updated: z.string().optional(),
   version: z.string().optional(),

@@ -1,5 +1,6 @@
 {
   "slug": "long-term-memory",
+  "aliases": ["PAT-004", "PAT-006"],
   "category": "retrieval",
   "updated": "2026-08-25",
   "version": "1.2",

@@ -1,5 +1,6 @@
 {
   "slug": "orchestrator-workers",
+  "aliases": ["PAT-005"],
   "category": "orchestration",
   "updated": "2026-06-24",
   "version": "1.1",

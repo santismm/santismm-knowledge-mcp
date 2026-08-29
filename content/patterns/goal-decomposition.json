@@ -1,5 +1,6 @@
 {
   "slug": "goal-decomposition",
+  "aliases": ["PAT-010"],
   "category": "orchestration",
   "updated": "2026-06-21",
   "version": "1.0",

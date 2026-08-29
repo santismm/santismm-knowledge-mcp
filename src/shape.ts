@@ -310,6 +310,7 @@ function buildSearchFields(entry: Entry): Record<string, string> {
     name: norm(names.join(" ")),
     slug: norm(entry.slug ?? ""),
     id: norm(str(raw.id)),
+    aliases: norm(arr(raw.aliases)),
     summary: norm(summaries.join(" ")),
     category: norm(entry.category ?? ""),
     keyConcepts: norm(concepts.join(" ")),
@@ -643,6 +644,10 @@ export function makeContent(
         entries.push(e as unknown as Record<string, unknown>);
         const id = (e as Record<string, unknown>).id;
         if (typeof id === "string") bySlug.set(id.toUpperCase(), e.slug);
+        const aliases = (e as Record<string, unknown>).aliases;
+        if (Array.isArray(aliases)) {
+          for (const alias of aliases) if (typeof alias === "string") bySlug.set(alias.toUpperCase(), e.slug);
+        }
       }
     }
     if (loadHandbook) {
@@ -720,6 +725,11 @@ export function makeContent(
           llms_full_txt: `${SITE_URL}/llms-full.txt`,
           graph: `${SITE_URL}/api/graph.json`,
           homeric_atlas: `${SITE_URL}/api/homeric-atlas.json`,
+          articles: "https://articles.santismm.com/llms-full.txt",
+          articles_index: "https://articles.santismm.com/ai-index.json",
+          labs: "https://labs.santismm.com/llms-full.txt",
+          labs_api: "https://labs.santismm.com/api/labs",
+          labs_openapi: "https://labs.santismm.com/openapi.json",
         },
       };
     },

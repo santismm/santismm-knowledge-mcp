@@ -62,7 +62,7 @@ function validArticle(value: unknown): value is Article {
 
 async function fetchCorpus(): Promise<ArticleCorpus> {
   const response = await fetch(ARTICLES_API_URL, {
-    headers: { Accept: "application/json", "User-Agent": "santismm-knowledge-mcp/0.3.0" },
+    headers: { Accept: "application/json", "User-Agent": "santismm-knowledge-mcp/0.4.0" },
     signal: AbortSignal.timeout(8_000),
     cache: "no-store",
   });

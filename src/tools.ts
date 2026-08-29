@@ -9,6 +9,13 @@ import {
   searchArticleCorpus,
   type Article,
 } from "./articles.ts";
+import {
+  LABS_API_URL,
+  executeLabCalculator,
+  loadLabs,
+  searchLabCorpus,
+  type LabDefinition,
+} from "./labs.ts";
 
 /**
  * Single, framework-agnostic definition of the Santismm Knowledge MCP server:
@@ -20,7 +27,7 @@ import {
  * data, while Article tools deliberately read the first-party Articles API.
  */
 
-export const SERVER_INFO = { name: "santismm-knowledge", version: "0.3.0" } as const;
+export const SERVER_INFO = { name: "santismm-knowledge", version: "0.4.0" } as const;
 
 /**
  * The subset of the MCP SDK's `McpServer` that the registry uses (just
@@ -315,6 +322,7 @@ const ESPACIOS = [
   { domain: "homeric/routes", listTool: "list_homeric_routes", getTool: "get_homeric_route" },
   { domain: "claims", listTool: "list_claims", getTool: "get_claim" },
   { domain: "articles", listTool: "list_articles", getTool: "get_article" },
+  { domain: "labs", listTool: "list_labs", getTool: "get_lab" },
 ] as const;
 
 type EspacioNombre = (typeof ESPACIOS)[number]["domain"];
@@ -334,9 +342,9 @@ function identificadores(cards: unknown[]): string[] {
 
 /** The cards of one space, whichever loader serves it. */
 function cardsDe(content: McpContent, domain: EspacioNombre, locale: Locale): unknown[] {
-  // Federated Articles are asynchronous and have their own recovery payload;
-  // keep them out of the synchronous cross-space lookup used by local units.
-  if (domain === "articles") return [];
+  // Federated Articles and Labs are asynchronous and have their own recovery
+  // payloads; keep them out of the synchronous cross-space lookup for locals.
+  if (domain === "articles" || domain === "labs") return [];
   if (domain === "handbook") return content.listHandbook(locale);
   if (domain === "claims") return content.listClaims(undefined, locale);
   if (domain.startsWith("homeric/")) {
@@ -580,6 +588,103 @@ const articleSearchOutput = {
   })),
 };
 
+const relatedContentSchema = z.object({
+  title: z.string(),
+  url: z.string(),
+  relationship: z.string(),
+});
+
+const labCardSchema = z.object({
+  slug: z.string(),
+  kind: z.enum(["calculator", "converter", "experiment", "educational-game"]),
+  label: z.string(),
+  title: z.string(),
+  description: z.string(),
+  inputs: z.array(z.string()),
+  outputs: z.array(z.string()),
+  formulas: z.array(z.string()).optional(),
+  assumptions: z.array(z.string()),
+  version: z.string(),
+  updated: z.string(),
+  canonical_url: z.string().describe("Cite this URL."),
+  api_url: z.string(),
+  calculation_url: z.string().optional(),
+  related_content: z.array(relatedContentSchema).optional(),
+});
+
+const labListOutput = { count: z.number(), results: z.array(labCardSchema) };
+
+const calculationBaseSchema = z.object({
+  schema_version: z.string(),
+  source: z.string(),
+  language: z.string(),
+  slug: z.string(),
+  version: z.string(),
+  updated: z.string(),
+  canonical_url: z.string().describe("Cite this URL."),
+  api_url: z.string(),
+  methodology_url: z.string(),
+  inputs: z.record(z.string(), z.number()),
+  units: z.record(z.string(), z.string()),
+  interpretation: z.string(),
+  assumptions: z.array(z.string()),
+  formulas: z.array(z.string()),
+  warnings: z.array(z.string()),
+  license: z.object({ name: z.string(), spdx: z.string(), url: z.string() }),
+});
+
+const agentEconomicsOutput = calculationBaseSchema.extend({
+  results: z.object({
+    attempts: z.number(), executionCost: z.number(), reviewCost: z.number(), failedCases: z.number(),
+    reworkCost: z.number(), operatingCost: z.number(), manualCost: z.number(), savings: z.number(),
+    roi: z.number(), successfulOutcomes: z.number(), costPerSuccess: z.number(), costPerResolved: z.number(),
+    breakEvenSuccess: z.number(),
+    verdict: z.object({ tone: z.enum(["positive", "watch", "negative"]), title: z.string(), body: z.string() }),
+  }),
+});
+
+const evaluationSampleOutput = calculationBaseSchema.extend({
+  results: z.object({ detect: z.number(), estimate: z.number(), expected: z.number(), zero: z.number() }),
+});
+
+const humanSupervisionOutput = calculationBaseSchema.extend({
+  results: z.object({
+    routine: z.number(), escalations: z.number(), workload: z.number(), productivePerFte: z.number(),
+    requiredFte: z.number(), headroom: z.number(), cost: z.number(), backlogDays: z.number(),
+    sustainableVolume: z.number(),
+  }),
+});
+
+const globalSearchCard = z.object({
+  surface: z.enum(["core", "articles", "labs", "claims"]),
+  score: z.number(),
+  source_score: z.number(),
+  rank_within_surface: z.number(),
+  id: z.string().optional(),
+  slug: z.string(),
+  domain: z.string().optional(),
+  kind: z.string().optional(),
+  title: z.string(),
+  summary: z.string().optional(),
+  canonical_url: z.string().optional(),
+  api_url: z.string().optional(),
+  calculation_url: z.string().optional(),
+  suggested_tool: z.string(),
+  matchedFields: z.array(z.string()),
+  matchedTerms: z.array(z.string()),
+}).passthrough();
+
+const globalSearchOutput = {
+  query: z.string(),
+  count: z.number(),
+  results: z.array(globalSearchCard),
+  unavailable_surfaces: z.array(z.object({
+    surface: z.enum(["articles", "labs"]),
+    error: z.string(),
+    retry_tool: z.string(),
+  })),
+};
+
 function articleFailure(error: unknown) {
   const body = {
     error: "articles_unavailable",
@@ -610,6 +715,80 @@ function articleNotFound(articles: Article[], slug: string) {
   };
 }
 
+function labsFailure(error: unknown) {
+  const body = {
+    error: "labs_unavailable",
+    source: LABS_API_URL,
+    hint: "The first-party Labs API could not be read. Retry later or bind directly to its OpenAPI document.",
+    detail: error instanceof Error ? error.message : String(error),
+  };
+  return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
+}
+
+function globalSearchFailure(error: unknown) {
+  const body = {
+    error: "federated_search_unavailable",
+    hint: "One federated source could not be read. Retry search_all with a restricted surfaces array, or use search for the local core corpus.",
+    detail: error instanceof Error ? error.message : String(error),
+  };
+  return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
+}
+
+function labNotFound(labs: LabDefinition[], slug: string) {
+  const available = labs.map((lab) => lab.slug).sort();
+  const body = {
+    error: "not_found",
+    domain: "labs",
+    slug,
+    available_count: available.length,
+    available,
+    list_tool: "list_labs",
+    hint: "Call list_labs for every valid slug. Only Labs with calculation_url can be executed.",
+  };
+  return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
+}
+
+function termsFor(query: string): string[] {
+  return [...new Set(query.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter((term) => term.length > 1))];
+}
+
+function claimSearch(content: McpContent, query: string, locale: Locale, limit: number) {
+  const terms = termsFor(query);
+  return (content.listClaims(undefined, locale) as Array<Record<string, unknown>>)
+    .map((claim) => {
+      const fields: Array<[string, number]> = [["statement", 7], ["slug", 6], ["id", 5], ["claim_type", 4]];
+      let score = 0;
+      const matchedFields = new Set<string>();
+      const matchedTerms = new Set<string>();
+      for (const [field, weight] of fields) {
+        const value = String(claim[field] ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        for (const term of terms) {
+          if (!value.includes(term)) continue;
+          score += weight;
+          matchedFields.add(field);
+          matchedTerms.add(term);
+        }
+      }
+      return { claim, score, matchedFields: [...matchedFields], matchedTerms: [...matchedTerms] };
+    })
+    .filter((hit) => hit.score > 0)
+    .sort((a, b) => b.score - a.score || String(a.claim.id).localeCompare(String(b.claim.id)))
+    .slice(0, limit);
+}
+
+const GET_TOOL_FOR_DOMAIN: Record<string, string> = {
+  knowledge: "get_knowledge", patterns: "get_pattern", architectures: "get_architecture",
+  governance: "get_governance", handbook: "get_handbook",
+};
+
+function intentBoost(query: string, surface: "core" | "articles" | "labs" | "claims"): number {
+  const normal = termsFor(query).join(" ");
+  if (surface === "labs" && /\b(calcul\w*|how many|cuant\w*|sample|muestra|roi|cost\w*|coste\w*|supervis\w*|fte|capacity|capacidad|break even|token\w*|pages|paginas)\b/.test(normal)) return 30;
+  if (surface === "claims" && /\b(claim|claims|evidence|fact|thesis|tesis|hypothesis|hipotesis|falsif|refut)\b/.test(normal)) return 25;
+  if (surface === "articles" && /\b(article|articles|essay|essays|articulo|artículo|ensayo|recent|latest|nuevo|reciente)\b/.test(normal)) return 20;
+  return 0;
+}
+
 export function registerTools(server: McpToolServer, content: McpContent): void {
   // ── Orientation ────────────────────────────────────────────────────────────
   server.registerTool(
@@ -618,7 +797,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
       title: "Corpus Overview — Start Here",
       annotations: READ_ONLY,
       description:
-        "Get the complete MCP map — start here. Returns the five-domain core (knowledge, patterns, architectures, governance and the Harness Engineering Handbook), plus the separate Article, Homeric Atlas and claim-registry surfaces, with the tools and identifiers each expects, the languages, licence and bulk-ingest URLs.",
+        "Get the complete MCP map — start here. Returns the five-domain core plus the separate Article, Labs, Homeric Atlas and claim-registry surfaces, with their tools, identifiers, citation rules, languages, licence and bulk-ingest URLs.",
       inputSchema: z.object({}),
       outputSchema: z.object({
         source: z.string(),
@@ -663,6 +842,121 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
       }),
     },
     async () => out({ ...content.overview() }),
+  );
+
+  server.registerTool(
+    "search_all",
+    {
+      title: "Search every SANTISMM knowledge surface",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Search the core corpus, first-party essays, executable Labs and epistemic claims in one call. Use this first when a natural-language question might require a calculation, a long-form essay or a claim audit rather than only a core knowledge unit. Results name the next tool to call; calculator-shaped questions are routed toward Labs.",
+      inputSchema: z.object({
+        query: querySchema.describe("Question or topic, in English, Spanish or Portuguese."),
+        surfaces: z.array(z.enum(["core", "articles", "labs", "claims"])).min(1).optional()
+          .describe("Restrict the search. Omit to search all four surfaces."),
+        limit_per_surface: z.number().int().positive().max(10).optional().describe("Maximum hits from each surface. Default: 5."),
+        locale: localeSchema,
+      }),
+      outputSchema: z.object(globalSearchOutput),
+    },
+    async ({ query, surfaces, limit_per_surface, locale }) => {
+      try {
+        const selected = new Set<string>(surfaces ?? ["core", "articles", "labs", "claims"]);
+        const limit = limit_per_surface ?? 5;
+        const lang = (locale ?? "en") as Locale;
+        const [articleLoad, labLoad] = await Promise.allSettled([
+          selected.has("articles") ? loadArticles() : Promise.resolve([]),
+          selected.has("labs") ? loadLabs() : Promise.resolve([]),
+        ]);
+        const unavailableSurfaces: Array<{ surface: "articles" | "labs"; error: string; retry_tool: string }> = [];
+        const articles = articleLoad.status === "fulfilled" ? articleLoad.value : [];
+        const labs = labLoad.status === "fulfilled" ? labLoad.value : [];
+        if (selected.has("articles") && articleLoad.status === "rejected") {
+          unavailableSurfaces.push({
+            surface: "articles",
+            error: articleLoad.reason instanceof Error ? articleLoad.reason.message : String(articleLoad.reason),
+            retry_tool: "search_articles",
+          });
+        }
+        if (selected.has("labs") && labLoad.status === "rejected") {
+          unavailableSurfaces.push({
+            surface: "labs",
+            error: labLoad.reason instanceof Error ? labLoad.reason.message : String(labLoad.reason),
+            retry_tool: "list_labs",
+          });
+        }
+        const hits: Array<Record<string, unknown>> = [];
+
+        if (selected.has("core")) {
+          const boost = intentBoost(query, "core");
+          for (const [index, raw] of (content.search(query, undefined, limit, lang) as Array<Record<string, unknown>>).entries()) {
+            const sourceScore = Number(raw.score ?? 0);
+            hits.push({
+              ...raw,
+              surface: "core",
+              score: sourceScore + boost,
+              source_score: sourceScore,
+              rank_within_surface: index + 1,
+              title: String(raw.name ?? raw.slug ?? ""),
+              suggested_tool: GET_TOOL_FOR_DOMAIN[String(raw.domain)] ?? "search",
+              matchedFields: raw.matchedFields ?? [],
+              matchedTerms: raw.matchedTerms ?? [],
+            });
+          }
+        }
+
+        if (selected.has("articles")) {
+          const boost = intentBoost(query, "articles");
+          for (const [index, raw] of searchArticleCorpus(articles, query, limit).entries()) {
+            hits.push({
+              surface: "articles", score: raw.score + boost, source_score: raw.score,
+              rank_within_surface: index + 1, slug: raw.slug, title: raw.title, summary: raw.summary,
+              canonical_url: raw.canonical_url, api_url: raw.api_url, suggested_tool: "get_article",
+              matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
+            });
+          }
+        }
+
+        if (selected.has("labs")) {
+          const boost = intentBoost(query, "labs");
+          const calculatorTools: Record<string, string> = {
+            "agent-economics": "calculate_agent_economics",
+            "evaluation-sample-size": "calculate_evaluation_sample_size",
+            "human-supervision-capacity": "calculate_human_supervision_capacity",
+          };
+          for (const [index, raw] of searchLabCorpus(labs, query, limit).entries()) {
+            hits.push({
+              surface: "labs", score: raw.score + boost, source_score: raw.score,
+              rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind, title: raw.title,
+              summary: raw.description, canonical_url: raw.canonical_url, api_url: raw.api_url,
+              calculation_url: raw.calculation_url,
+              suggested_tool: calculatorTools[raw.slug] ?? "get_lab",
+              matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
+            });
+          }
+        }
+
+        if (selected.has("claims")) {
+          const boost = intentBoost(query, "claims");
+          for (const [index, raw] of claimSearch(content, query, lang, limit).entries()) {
+            const claim = raw.claim;
+            hits.push({
+              surface: "claims", score: raw.score + boost, source_score: raw.score,
+              rank_within_surface: index + 1, id: claim.id, slug: claim.slug,
+              kind: claim.claim_type, title: String(claim.statement ?? claim.slug),
+              summary: `Epistemic type: ${String(claim.claim_type)}; confidence: ${String(claim.confidence_level)}.`,
+              suggested_tool: "get_claim", matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
+            });
+          }
+        }
+
+        hits.sort((a, b) => Number(b.score) - Number(a.score) || Number(a.rank_within_surface) - Number(b.rank_within_surface));
+        return out({ query, count: hits.length, results: hits, unavailable_surfaces: unavailableSurfaces }, hits);
+      } catch (error) {
+        return globalSearchFailure(error);
+      }
+    },
   );
 
   // ── Knowledge base ─────────────────────────────────────────────────────────
@@ -917,6 +1211,137 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
         return outList(searchArticleCorpus(articles, query, limit ?? 10), { query });
       } catch (error) {
         return articleFailure(error);
+      }
+    },
+  );
+
+  // ── SANTISMM Labs (federated metadata + deterministic execution) ─────────
+  server.registerTool(
+    "list_labs",
+    {
+      title: "List calculators, converters, experiments and educational Labs",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "List every SANTISMM Lab with its inputs, outputs, assumptions, formulas and citation URL. Use this to discover interactive and machine-readable tools; filter by kind when the user specifically asks for a calculator, converter, experiment or educational game.",
+      inputSchema: z.object({
+        kind: z.enum(["calculator", "converter", "experiment", "educational-game"]).optional(),
+      }),
+      outputSchema: z.object(labListOutput),
+    },
+    async ({ kind }) => {
+      try {
+        const labs = await loadLabs();
+        return outList(kind ? labs.filter((lab) => lab.kind === kind) : labs);
+      } catch (error) {
+        return labsFailure(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "get_lab",
+    {
+      title: "Get one SANTISMM Lab definition",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Get one Lab by slug, including formulas, assumptions, related SANTISMM content and its executable endpoint when one exists. Use this after list_labs or search_all; use the named calculate_* tool rather than reimplementing a published formula.",
+      inputSchema: z.object({ slug: slugSchema.describe("Lab slug, e.g. 'evaluation-sample-size'.") }),
+      outputSchema: labCardSchema,
+    },
+    async ({ slug }) => {
+      try {
+        const labs = await loadLabs();
+        const lab = labs.find((candidate) => candidate.slug === slug);
+        return lab ? out(lab as unknown as Record<string, unknown>) : labNotFound(labs, slug);
+      } catch (error) {
+        return labsFailure(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "calculate_agent_economics",
+    {
+      title: "Calculate the operational economics of an AI agent",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Calculate monthly operating cost, cost per verified outcome, manual baseline, savings, ROI and break-even success rate from explicit assumptions. Use this for an agent business case or scenario comparison; keep every monetary input in the same currency and cite the returned canonical_url.",
+      inputSchema: z.object({
+        monthlyVolume: z.number().min(0).max(1_000_000_000).describe("Cases attempted per month."),
+        manualMinutes: z.number().min(0).max(10_080).describe("Manual handling time per case."),
+        hourlyCost: z.number().min(0).max(1_000_000).describe("Fully loaded human hourly cost, in the chosen currency."),
+        inputTokens: z.number().min(0).max(100_000_000).describe("Input tokens per agent attempt."),
+        outputTokens: z.number().min(0).max(100_000_000).describe("Output tokens per agent attempt."),
+        inputPrice: z.number().min(0).max(1_000_000).describe("Model input price per million tokens, in the chosen currency."),
+        outputPrice: z.number().min(0).max(1_000_000).describe("Model output price per million tokens, in the chosen currency."),
+        toolCost: z.number().min(0).max(1_000_000).describe("External tool cost per attempt."),
+        retryRate: z.number().min(0).max(500).describe("Extra attempts as a percentage of initial volume."),
+        successRate: z.number().min(1).max(100).describe("Correctly verified outcomes as a percentage of cases."),
+        reviewRate: z.number().min(0).max(100).describe("Share of cases reviewed by a person."),
+        reviewMinutes: z.number().min(0).max(10_080).describe("Human review minutes per reviewed case."),
+        reworkMinutes: z.number().min(0).max(10_080).describe("Human rework minutes per failed case."),
+      }),
+      outputSchema: agentEconomicsOutput,
+    },
+    async (inputs) => {
+      try {
+        return out(await executeLabCalculator("agent-economics", inputs));
+      } catch (error) {
+        return labsFailure(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "calculate_evaluation_sample_size",
+    {
+      title: "Calculate an agent evaluation sample size",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Calculate two different samples: how many independent evaluations are needed to detect at least one failure, and how many are needed to estimate its rate at a chosen margin. Use this when a user asks how many tests are enough; do not interpret zero observed failures as proof of zero risk.",
+      inputSchema: z.object({
+        failureRate: z.number().min(0.0001).max(99.9999).describe("Failure rate to detect, in percent."),
+        confidence: z.union([z.literal(90), z.literal(95), z.literal(99)]).describe("Confidence level, in percent."),
+        margin: z.number().min(0.1).max(50).describe("Margin for estimating the failure rate, in percentage points."),
+        population: z.number().min(1).max(1_000_000_000).describe("Number of distinct evaluable cases."),
+      }),
+      outputSchema: evaluationSampleOutput,
+    },
+    async (inputs) => {
+      try {
+        return out(await executeLabCalculator("evaluation-sample-size", inputs));
+      } catch (error) {
+        return labsFailure(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "calculate_human_supervision_capacity",
+    {
+      title: "Calculate human supervision capacity for an AI agent",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Calculate review and escalation workload, required FTE, available headroom or backlog, monthly labour cost and sustainable case volume. Use this before production rollout to test whether the stated human-oversight model is operationally credible; the result uses averages and is not a queueing simulation.",
+      inputSchema: z.object({
+        volume: z.number().min(0).max(1_000_000_000).describe("Agent cases per month."),
+        sample: z.number().min(0).max(100).describe("Share of all cases selected for routine review, in percent."),
+        reviewMinutes: z.number().min(0).max(10_080).describe("Minutes per routine review."),
+        escalationRate: z.number().min(0).max(100).describe("Share of cases escalated, in percent."),
+        escalationMinutes: z.number().min(0).max(10_080).describe("Minutes per escalation."),
+        workdays: z.number().min(1).max(31).describe("Working days per month."),
+        hoursDay: z.number().min(0.1).max(24).describe("Paid hours per working day."),
+        utilization: z.number().min(1).max(100).describe("Share of paid time available for review and escalation, in percent."),
+        reviewers: z.number().min(0.1).max(1_000_000).describe("Available reviewer FTE."),
+        hourlyCost: z.number().min(0).max(1_000_000).describe("Fully loaded reviewer hourly cost, in the chosen currency."),
+      }),
+      outputSchema: humanSupervisionOutput,
+    },
+    async (inputs) => {
+      try {
+        return out(await executeLabCalculator("human-supervision-capacity", inputs));
+      } catch (error) {
+        return labsFailure(error);
       }
     },
   );

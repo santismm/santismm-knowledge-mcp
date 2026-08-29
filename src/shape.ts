@@ -743,6 +743,19 @@ export function makeContent(
             lookup: "claim id (for example HE-CLAIM-001) or slug",
             citation: "Claims have no public page; cite their stable id and the MCP endpoint.",
           },
+          {
+            surface: "labs",
+            description: "Interactive calculators, converters, experiments and educational games; three calculators execute deterministic, versioned formulas through the canonical Labs API.",
+            tools: [
+              "list_labs", "get_lab",
+              "calculate_agent_economics",
+              "calculate_evaluation_sample_size",
+              "calculate_human_supervision_capacity",
+            ],
+            source: "https://labs.santismm.com/api/labs",
+            lookup: "Lab slug; executable tools take typed numeric assumptions",
+            citation: "Definitions and calculation results carry canonical_url, api_url, version, assumptions and warnings.",
+          },
         ],
         corpus: {
           newest_unit: newestUpdated([
@@ -755,7 +768,8 @@ export function makeContent(
             "time. If total or newest_unit differ from that endpoint's, you are holding a snapshot.",
         },
         next:
-          "search(query, locale) to answer a question across the five-domain core; " +
+          "search_all(query, locale) when a question may need core knowledge, an essay, a Lab calculation or a claim audit; " +
+          "search(query, locale) to search only the five-domain core; " +
           "list_<domain> to browse one; get_<domain>(slug) for a full unit with its " +
           "Evidence-First provenance; get_related(domain, slug) to traverse the graph. " +
           "Use the tools named in extensions for Articles, the Homeric Atlas and claims. " +

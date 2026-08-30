@@ -1,4 +1,5 @@
 import type { HomericKind, McpContent } from "./tools.js";
+import { SURFACE_TOOLS } from "./surfaces.ts";
 import type { Domain, Entry, Locale } from "./content.js";
 
 /**
@@ -744,7 +745,7 @@ export function makeContent(
           {
             surface: "articles",
             description: "Federated first-party long-form essays, read from their canonical Articles API at call time.",
-            tools: ["list_articles", "get_article", "search_articles"],
+            tools: [...SURFACE_TOOLS.articles],
             source: "https://articles.santismm.com/api/articles.json",
             lookup: "article slug",
             citation: "Each result carries canonical_url.",
@@ -752,11 +753,7 @@ export function makeContent(
           {
             surface: "homeric_atlas",
             description: "Places, episodes and rival route reconstructions using the atlas identification vocabulary and 0–12 rubric.",
-            tools: [
-              "list_homeric_places", "get_homeric_place",
-              "list_homeric_episodes", "get_homeric_episode",
-              "list_homeric_routes", "get_homeric_route",
-            ],
+            tools: [...SURFACE_TOOLS.homeric_atlas],
             source: `${SITE_URL}/api/homeric-atlas.json`,
             lookup: "place, episode or route slug",
             citation: "Each content result carries canonical_url and api_url.",
@@ -764,7 +761,7 @@ export function makeContent(
           {
             surface: "claims",
             description: "The corpus's load-bearing claims with epistemic type, confidence, basis, limitations and falsification criteria.",
-            tools: ["list_claims", "get_claim"],
+            tools: [...SURFACE_TOOLS.claims],
             source: "bundled claim registry",
             lookup: "claim id (for example HE-CLAIM-001) or slug",
             citation: "Claims have no public page; cite their stable id and the MCP endpoint.",
@@ -772,12 +769,7 @@ export function makeContent(
           {
             surface: "labs",
             description: "Interactive calculators, converters, experiments and educational games; three calculators execute deterministic, versioned formulas through the canonical Labs API.",
-            tools: [
-              "list_labs", "get_lab",
-              "calculate_agent_economics",
-              "calculate_evaluation_sample_size",
-              "calculate_human_supervision_capacity",
-            ],
+            tools: [...SURFACE_TOOLS.labs],
             source: "https://labs.santismm.com/api/labs",
             lookup: "Lab slug; executable tools take typed numeric assumptions",
             citation: "Definitions and calculation results carry canonical_url, api_url, version, assumptions and warnings.",

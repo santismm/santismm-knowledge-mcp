@@ -878,7 +878,29 @@ function intentBoost(query: string, surface: (typeof SEARCH_SURFACES)[number]): 
   return 0;
 }
 
-export function registerTools(server: McpToolServer, content: McpContent): void {
+/**
+ * Telemetría opcional del servidor alojado.
+ *
+ * El registro de herramientas es compartido con el CLI de stdio, que
+ * deliberadamente no toca Upstash: la analítica es del endpoint alojado, no
+ * de una copia que alguien se instaló. Por eso esto se inyecta en vez de
+ * importarse — sin hook, el CLI se comporta exactamente igual que antes.
+ */
+export interface McpTelemetry {
+  /** Qué superficies consultó `search_all`, cuál ganó y qué propuso. */
+  globalSearch?(detail: {
+    queried: string[];
+    topSurface?: string;
+    suggestedTool?: string;
+    unavailable?: string[];
+  }): void;
+}
+
+export function registerTools(
+  server: McpToolServer,
+  content: McpContent,
+  telemetry?: McpTelemetry,
+): void {
   // ── Orientation ────────────────────────────────────────────────────────────
   server.registerTool(
     "get_overview",
@@ -1055,6 +1077,16 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
         }
 
         hits.sort((a, b) => Number(b.score) - Number(a.score) || Number(a.rank_within_surface) - Number(b.rank_within_surface));
+        // El apunte sale de la respuesta ya montada: nada se recalcula y nada
+        // se parsea del stream. `queried` es lo que se pidió, no lo que
+        // devolvió resultados — un cero en una superficie consultada es el
+        // dato interesante.
+        telemetry?.globalSearch?.({
+          queried: [...selected],
+          topSurface: hits[0] ? String(hits[0].surface) : undefined,
+          suggestedTool: hits[0] ? String(hits[0].suggested_tool ?? "") || undefined : undefined,
+          unavailable: unavailableSurfaces.map((u) => u.surface),
+        });
         return out({ query, count: hits.length, results: hits, unavailable_surfaces: unavailableSurfaces }, hits);
       } catch (error) {
         return globalSearchFailure(error);

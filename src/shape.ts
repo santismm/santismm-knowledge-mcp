@@ -624,6 +624,7 @@ export function makeContent(
   loadHandbook?: () => HandbookEntry[],
   loadHomeric?: (kind: HomericKind) => HomericArtifact[],
   loadClaims?: () => Record<string, unknown>[],
+  loadSiteLabs?: () => Array<Record<string, unknown>>,
 ): McpContent {
   /**
    * Una unidad se alcanza por su slug, por el identificador que ella misma
@@ -899,6 +900,14 @@ export function makeContent(
 
       scored.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
       return scored.slice(0, limit);
+    },
+
+    /**
+     * El catálogo de labs del sitio. Vacío cuando nadie lo inyecta, igual que
+     * el manual o el Atlas: el proveedor decide qué superficies existen.
+     */
+    listSiteLabs() {
+      return loadSiteLabs ? loadSiteLabs() : [];
     },
 
     /**

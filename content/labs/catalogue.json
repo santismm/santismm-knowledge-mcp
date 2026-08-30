@@ -1,0 +1,205 @@
+{
+  "source": "SANTISMM Labs catalogue",
+  "count": 21,
+  "results": [
+    {
+      "slug": "homeric-atlas",
+      "category": "experiments",
+      "status": "live",
+      "title": "Homeric Atlas",
+      "summary": "A probabilistic map of where the episodes of the Iliad and the Odyssey might have happened — each location classed as accepted, plausible, speculative or mythical, scored 0–12 against a published rubric, with sources, rival theories and reusable JSON/GeoJSON.",
+      "canonical_url": "https://santismm.com/en/labs/homeric-atlas",
+      "owner_server": "santismm.com"
+    },
+    {
+      "slug": "control-sandbox",
+      "category": "simulators",
+      "status": "live",
+      "title": "Agentic control sandbox",
+      "summary": "Interactive sandbox: configure an agent on six axes, pick an OWASP LLM Top 10 threat, switch the eighteen controls of the Agentic Control Matrix on and off, and read the coverage — quadrants filled, quadrants left empty, frameworks answered. Deliberately without a residual-risk score.",
+      "canonical_url": "https://santismm.com/en/labs/control-sandbox",
+      "owner_server": "santismm.com"
+    },
+    {
+      "slug": "agent-taxonomy",
+      "category": "experiments",
+      "status": "live",
+      "title": "Taxonomy of autonomous agents",
+      "summary": "An interactive taxonomy that encodes 24 AI agents — from OpenAI, Anthropic, Google, Microsoft, Amazon and SpaceXAI to the open-source frontier — as vectors across six orthogonal axes plus an action surface, with a filterable table, an A×T×I governance-risk matrix and a machine-readable JSON API.",
+      "canonical_url": "https://santismm.com/en/labs/agent-taxonomy",
+      "owner_server": "santismm.com"
+    },
+    {
+      "slug": "agent-economics",
+      "category": "calculators",
+      "status": "live",
+      "title": "The real economics of an AI agent",
+      "summary": "Estimate monthly operating cost, cost per correct outcome, savings, ROI and break-even from workload volume, token prices, tools, retries, human review and rework.",
+      "canonical_url": "https://labs.santismm.com/agent-economics",
+      "api_url": "https://labs.santismm.com/api/labs/agent-economics",
+      "owner_server": "labs.santismm.com"
+    },
+    {
+      "slug": "evaluation-sample-size",
+      "category": "calculators",
+      "status": "live",
+      "title": "How many evaluations do I need?",
+      "summary": "Calculate how many cases you need to detect at least one failure at a chosen confidence level and to estimate its frequency with an explicit margin.",
+      "canonical_url": "https://labs.santismm.com/evaluation-sample-size",
+      "api_url": "https://labs.santismm.com/api/labs/evaluation-sample-size",
+      "owner_server": "labs.santismm.com"
+    },
+    {
+      "slug": "human-supervision-capacity",
+      "category": "calculators",
+      "status": "live",
+      "title": "Human oversight capacity",
+      "summary": "Size review hours, escalations, FTE, cost, sustainable volume and backlog before putting an AI system into production.",
+      "canonical_url": "https://labs.santismm.com/human-supervision-capacity",
+      "api_url": "https://labs.santismm.com/api/labs/human-supervision-capacity",
+      "owner_server": "labs.santismm.com"
+    },
+    {
+      "slug": "agent-vector",
+      "category": "converters",
+      "status": "live",
+      "title": "Use case → agentic vector",
+      "summary": "Classify a system across six behavioural axes and its action surfaces, estimate its governance-risk band, surface control signals and find its nearest neighbours among 24 mapped agents.",
+      "canonical_url": "https://labs.santismm.com/agent-vector",
+      "api_url": "https://labs.santismm.com/api/labs/agent-vector",
+      "owner_server": "labs.santismm.com"
+    },
+    {
+      "slug": "control-framework-translator",
+      "category": "converters",
+      "status": "live",
+      "title": "Control and framework translator",
+      "summary": "Crosswalk the 18 Agentic Control Matrix controls to the EU AI Act, ISO 42001, NIST AI RMF, OWASP LLM Top 10 and MITRE ATLAS—with an explicit caveat: mapping is not compliance.",
+      "canonical_url": "https://labs.santismm.com/control-framework-translator",
+      "api_url": "https://labs.santismm.com/api/labs/control-framework-translator",
+      "owner_server": "labs.santismm.com"
+    },
+    {
+      "slug": "llm-context-converter",
+      "category": "converters",
+      "status": "live",
+      "title": "LLM context in human terms",
+      "summary": "Convert tokens into words, pages, documents, reading and speaking minutes, context-window usage and approximate input cost.",
+      "canonical_url": "https://labs.santismm.com/llm-context-converter",
+      "api_url": "https://labs.santismm.com/api/labs/llm-context-converter",
+      "owner_server": "labs.santismm.com"
+    },
+    {
+      "slug": "close-the-gap",
+      "category": "games",
+      "status": "live",
+      "title": "Close the gap",
+      "summary": "A five-round educational game: choose the right governance controls under a limited budget, close each agent's essential gaps and learn from immediate explanations.",
+      "canonical_url": "https://labs.santismm.com/close-the-gap",
+      "api_url": "https://labs.santismm.com/api/labs/close-the-gap",
+      "owner_server": "labs.santismm.com"
+    },
+    {
+      "slug": "model-agent-harness",
+      "category": "games",
+      "status": "live",
+      "title": "Model, agent or harness?",
+      "summary": "Twelve cases to distinguish the base capability, the entity pursuing goals and the infrastructure connecting context, memory, tools and controls.",
+      "canonical_url": "https://labs.santismm.com/model-agent-harness",
+      "api_url": "https://labs.santismm.com/api/labs/model-agent-harness",
+      "owner_server": "labs.santismm.com"
+    },
+    {
+      "slug": "benchmark-detective",
+      "category": "games",
+      "status": "live",
+      "title": "Benchmark detective",
+      "summary": "Investigate AI claims, choose the evidence that actually tests them and spot saturation, contamination, uncertainty and misleading metrics.",
+      "canonical_url": "https://labs.santismm.com/benchmark-detective",
+      "api_url": "https://labs.santismm.com/api/labs/benchmark-detective",
+      "owner_server": "labs.santismm.com"
+    },
+    {
+      "slug": "world-exam-challenge",
+      "category": "games",
+      "status": "live",
+      "title": "World exam challenge",
+      "summary": "A twelve-round game about 18 university-entrance systems: compare demandingness, identify countries and separate cognitive profile from selective pressure.",
+      "canonical_url": "https://labs.santismm.com/world-exam-challenge",
+      "api_url": "https://labs.santismm.com/api/labs/world-exam-challenge",
+      "owner_server": "labs.santismm.com"
+    },
+    {
+      "slug": "profesiones-ia",
+      "category": "experiments",
+      "status": "live",
+      "title": "The professions most exposed to AI",
+      "summary": "An interactive map of the 22 occupational groups, comparing AI's theoretical capability against its observed real-world use (as of June 2026), with a category ranking, the most-exposed occupations and the macro figures — rigorously sourced.",
+      "canonical_url": "https://santismm.com/en/labs/profesiones-ia",
+      "owner_server": "santismm.com"
+    },
+    {
+      "slug": "ai-agent-benchmarks",
+      "category": "benchmarks",
+      "status": "snapshot",
+      "title": "AI Agent Benchmarks",
+      "summary": "A saturation tracker for AI-agent benchmarks: what they measure, SOTA, headroom, the human gap and research priority.",
+      "canonical_url": "https://benchmarks.santismm.com/",
+      "owner_server": "santismm.com"
+    },
+    {
+      "slug": "exigencia",
+      "category": "benchmarks",
+      "status": "live",
+      "title": "How demanding is each exam in the world?",
+      "summary": "An interactive benchmark comparing the academic demandingness of 18 university-entrance exams (PAES, PAU, IB, SAT, Gaokao, Suneung, JEE…) across 7 dimensions, with a world map, radars and ranking.",
+      "canonical_url": "https://santismm.com/labs/exigencia",
+      "owner_server": "santismm.com"
+    },
+    {
+      "slug": "paes-pau-ib",
+      "category": "benchmarks",
+      "status": "live",
+      "title": "PAES vs PAU vs IB",
+      "summary": "An interactive benchmark comparing the academic demandingness of Chile's PAES, Spain's PAU and the IB Diploma across 6 cognitive dimensions and 8 subjects, with radar charts.",
+      "canonical_url": "https://santismm.com/labs/paes-pau-ib",
+      "owner_server": "santismm.com"
+    },
+    {
+      "slug": "mundial-del-dinero",
+      "category": "experiments",
+      "status": "live",
+      "title": "The money World Cup",
+      "summary": "Which national team punches above its squad value at the 2026 World Cup. A live efficiency index — points vs €-value — team by team.",
+      "canonical_url": "https://santismm.com/en/labs/mundial-del-dinero",
+      "owner_server": "santismm.com"
+    },
+    {
+      "slug": "surf-atlas",
+      "category": "experiments",
+      "status": "live",
+      "title": "World Surf Atlas",
+      "summary": "An interactive atlas of 100+ world-class waves — wave direction (left / right / both), break type, level and month-by-month average wave height, plotted on a world map.",
+      "canonical_url": "https://santismm.com/en/sports/surf",
+      "owner_server": "santismm.com"
+    },
+    {
+      "slug": "ski-atlas",
+      "category": "experiments",
+      "status": "live",
+      "title": "World Ski Atlas",
+      "summary": "130+ ski resorts on a world map — skiable km, runs by difficulty, snow quality, monthly snowfall, temperature and sun, plus lift-pass prices.",
+      "canonical_url": "https://santismm.com/en/sports/ski",
+      "owner_server": "santismm.com"
+    },
+    {
+      "slug": "ebike-atlas",
+      "category": "experiments",
+      "status": "live",
+      "title": "World Bike Park Atlas",
+      "summary": "40+ lift-served MTB / e-bike parks worldwide — trails by difficulty, vertical drop, km, season window and day-pass prices, on a world map.",
+      "canonical_url": "https://santismm.com/en/sports/ebike",
+      "owner_server": "santismm.com"
+    }
+  ]
+}

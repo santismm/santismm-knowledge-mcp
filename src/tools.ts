@@ -75,6 +75,12 @@ export interface McpContent {
    * kind of claim.
    */
   listHomeric(kind: HomericKind, locale?: Locale): unknown[];
+  /**
+   * Las 21 unidades que el sitio llama lab, con quién sirve cada una.
+   * Diez las ejecuta el servicio federado y once son páginas del ápice; el
+   * catálogo del ápice anunciaba las 21 y `list_labs` servía diez.
+   */
+  listSiteLabs(): Array<Record<string, unknown>>;
   getHomeric(kind: HomericKind, slug: string, locale?: Locale): unknown;
   listClaims(type?: string, locale?: Locale): unknown[];
   getClaim(id: string, locale?: Locale): unknown;
@@ -594,7 +600,22 @@ const relatedContentSchema = z.object({
   relationship: z.string(),
 });
 
-const labCardSchema = z.object({
+/**
+ * Un lab es una de dos cosas y el contrato lo dice en vez de difuminarlo.
+ *
+ * Las diez que ejecuta el servicio federado traen fórmulas, entradas, salidas
+ * y supuestos: eso es lo que hace verificable un cálculo y no se afloja a
+ * opcional para que quepan las otras. Las once del ápice son páginas que se
+ * leen —el Atlas Homérico, el sandbox, la taxonomía, los benchmarks, los
+ * atlas deportivos— y declararles `inputs: []` sería mentir con la forma.
+ *
+ * `executable` es el discriminante, y responde la única pregunta que un
+ * agente necesita antes de decidir qué hacer con la unidad: ¿esto se calcula
+ * o esto se lee?
+ */
+const executableLabSchema = z.object({
+  executable: z.literal(true),
+  owner_server: z.string().describe("Host that serves and versions this unit."),
   slug: z.string(),
   kind: z.enum(["calculator", "converter", "experiment", "educational-game"]),
   label: z.string(),
@@ -611,6 +632,19 @@ const labCardSchema = z.object({
   calculation_url: z.string().optional(),
   related_content: z.array(relatedContentSchema).optional(),
 });
+
+const pageLabSchema = z.object({
+  executable: z.literal(false),
+  owner_server: z.string().describe("Host that serves this unit."),
+  slug: z.string(),
+  category: z.string().describe("benchmarks, simulators, experiments, games…"),
+  status: z.string(),
+  title: z.string(),
+  summary: z.string().optional(),
+  canonical_url: z.string().describe("Cite this URL."),
+});
+
+const labCardSchema = z.discriminatedUnion("executable", [executableLabSchema, pageLabSchema]);
 
 const labListOutput = { count: z.number(), results: z.array(labCardSchema) };
 
@@ -744,7 +778,7 @@ function globalSearchFailure(error: unknown) {
   return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
 }
 
-function labNotFound(labs: LabDefinition[], slug: string) {
+function labNotFound(labs: Array<{ slug: string }>, slug: string) {
   const available = labs.map((lab) => lab.slug).sort();
   const body = {
     error: "not_found",
@@ -1284,6 +1318,49 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
   );
 
+/**
+ * Las 21 unidades que el sitio llama lab, en un solo listado.
+ *
+ * Eran dos catálogos con el mismo nombre: `labs.santismm.com/api/labs` sirve
+ * las diez que ejecuta —con fórmulas, entradas, salidas y endpoint de cálculo—
+ * y el ápice publica esas diez más once páginas propias: el Atlas Homérico, el
+ * sandbox de control, la taxonomía, los benchmarks y los tres atlas
+ * deportivos. `ai-index.json` anunciaba `count: 21` y `list_labs` devolvía 10,
+ * así que un agente que leyera el índice y llamara a la herramienta no podía
+ * alcanzar once de ellas por ninguna vía.
+ *
+ * La definición ejecutable gana cuando existe: trae todo lo que trae la
+ * entrada del catálogo y además las fórmulas. `owner_server` dice quién sirve
+ * cada unidad, que es lo que distingue «esto se calcula» de «esto se lee».
+ *
+ * Deliberadamente sin `resource_uri`: los Resources de MCP no existen todavía
+ * (REG-19), y anunciar un identificador que no resuelve es el fallo que SEG-06
+ * documentó — cuesta más que una función que falta.
+ */
+const LABS_HOST = new URL(LABS_API_URL).host;
+
+async function mergedLabs(
+  content: McpContent,
+  kind?: string,
+): Promise<Array<Record<string, unknown>>> {
+  const ejecutables = await loadLabs();
+  const porSlug = new Map<string, Record<string, unknown>>();
+  for (const entrada of content.listSiteLabs())
+    porSlug.set(String(entrada.slug), { ...entrada, executable: false });
+  for (const lab of ejecutables) {
+    // Sin heredar la entrada del catálogo: `category`/`status`/`summary`
+    // dirían con otras palabras lo que `kind`/`description` ya dicen, y dos
+    // vocabularios para un concepto es justo lo que SEG-07 limpió.
+    porSlug.set(lab.slug, {
+      ...(lab as unknown as Record<string, unknown>),
+      owner_server: LABS_HOST,
+      executable: true,
+    });
+  }
+  const todos = [...porSlug.values()];
+  return kind ? todos.filter((lab) => lab.kind === kind) : todos;
+}
+
   // ── SANTISMM Labs (federated metadata + deterministic execution) ─────────
   server.registerTool(
     "list_labs",
@@ -1299,8 +1376,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ kind }) => {
       try {
-        const labs = await loadLabs();
-        return outList(kind ? labs.filter((lab) => lab.kind === kind) : labs);
+        return outList(await mergedLabs(content, kind));
       } catch (error) {
         return labsFailure(error);
       }
@@ -1319,9 +1395,11 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ slug }) => {
       try {
-        const labs = await loadLabs();
+        const labs = await mergedLabs(content);
         const lab = labs.find((candidate) => candidate.slug === slug);
-        return lab ? out(lab as unknown as Record<string, unknown>) : labNotFound(labs, slug);
+        return lab
+          ? out(lab as unknown as Record<string, unknown>)
+          : labNotFound(labs as Array<{ slug: string }>, slug);
       } catch (error) {
         return labsFailure(error);
       }

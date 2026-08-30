@@ -203,4 +203,19 @@ function loadClaims(): Record<string, unknown>[] {
     .map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")));
 }
 
-export const fsContent = makeContent(loadAll, loadHandbook, loadHomeric, loadClaims);
+/**
+ * El catálogo de labs, desde la copia generada que viaja con el corpus.
+ *
+ * El paquete publicado no ve `lib/labs.ts`, así que sin este fichero el CLI
+ * serviría diez labs mientras el ápice anuncia veintiuno. Un catálogo ausente
+ * se lee como cero, no como error: por eso el validador comprueba que existe
+ * y que coincide con lo que saldría de regenerarlo.
+ */
+function loadSiteLabs(): Array<Record<string, unknown>> {
+  const file = path.join(CONTENT_ROOT, "labs", "catalogue.json");
+  if (!fs.existsSync(file)) return [];
+  const raw = JSON.parse(fs.readFileSync(file, "utf8")) as { results?: unknown };
+  return Array.isArray(raw.results) ? (raw.results as Array<Record<string, unknown>>) : [];
+}
+
+export const fsContent = makeContent(loadAll, loadHandbook, loadHomeric, loadClaims, loadSiteLabs);

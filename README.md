@@ -20,6 +20,20 @@ repository:
 
 Docs: https://santismm.com/en/mcp · Registry: `com.santismm/knowledge`
 
+## Where this server is listed
+
+Derived from the same list the site renders on its own MCP page, so a registry
+added there is linked from here too — and a directory that checks for a backlink
+before ranking a server finds one without anybody remembering to add it.
+
+- [registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io/v0/servers?search=com.santismm/knowledge)
+- [npmjs.com](https://www.npmjs.com/package/santismm-knowledge-mcp)
+- [pypi.org](https://pypi.org/project/santismm-knowledge-mcp/)
+- [github.com](https://github.com/santismm/santismm-knowledge-mcp)
+- [smithery.ai](https://smithery.ai/servers/santismm/knowledge)
+- [glama.ai](https://glama.ai/mcp/servers/santismm/santismm-knowledge-mcp)
+- [mcpservers.org](https://mcpservers.org/servers/santismm/santismm-knowledge-mcp)
+
 ## Run it locally (stdio)
 
 ```bash

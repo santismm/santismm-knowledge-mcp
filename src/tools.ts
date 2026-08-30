@@ -655,8 +655,18 @@ const humanSupervisionOutput = calculationBaseSchema.extend({
   }),
 });
 
+/**
+ * Las superficies que `search_all` recorre, en un solo sitio: el esquema de
+ * entrada dice cuáles se pueden pedir y el de salida cuáles pueden aparecer,
+ * y estaban escritas dos veces. Al añadir la homérica solo se actualizó la
+ * de entrada, así que el servidor aceptaba la consulta y después rechazaba
+ * su propia respuesta por validación de salida — un fallo mudo que devolvía
+ * cero resultados en vez de un error. Ahora no pueden discrepar.
+ */
+export const SEARCH_SURFACES = ["core", "articles", "labs", "claims", "homeric_atlas"] as const;
+
 const globalSearchCard = z.object({
-  surface: z.enum(["core", "articles", "labs", "claims"]),
+  surface: z.enum(SEARCH_SURFACES),
   score: z.number(),
   source_score: z.number(),
   rank_within_surface: z.number(),
@@ -752,27 +762,71 @@ function termsFor(query: string): string[] {
   return [...new Set(query.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter((term) => term.length > 1))];
 }
 
+/**
+ * Puntuación por campos con peso, compartida por las superficies que no
+ * tienen scorer propio. Este corpus ya arrastra cuatro implementaciones del
+ * ranking (núcleo, artículos, labs y claims) y la lección de REG-12 vale
+ * igual aquí: dos implementaciones del scoring divergirían. La homérica no
+ * añade una quinta — reutiliza ésta.
+ */
+function fieldScore(
+  record: Record<string, unknown>,
+  fields: Array<[string, number]>,
+  terms: string[],
+): { score: number; matchedFields: string[]; matchedTerms: string[] } {
+  let score = 0;
+  const matchedFields = new Set<string>();
+  const matchedTerms = new Set<string>();
+  for (const [field, weight] of fields) {
+    const value = String(record[field] ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    for (const term of terms) {
+      if (!value.includes(term)) continue;
+      score += weight;
+      matchedFields.add(field);
+      matchedTerms.add(term);
+    }
+  }
+  return { score, matchedFields: [...matchedFields], matchedTerms: [...matchedTerms] };
+}
+
 function claimSearch(content: McpContent, query: string, locale: Locale, limit: number) {
   const terms = termsFor(query);
+  const fields: Array<[string, number]> = [["statement", 7], ["slug", 6], ["id", 5], ["claim_type", 4]];
   return (content.listClaims(undefined, locale) as Array<Record<string, unknown>>)
-    .map((claim) => {
-      const fields: Array<[string, number]> = [["statement", 7], ["slug", 6], ["id", 5], ["claim_type", 4]];
-      let score = 0;
-      const matchedFields = new Set<string>();
-      const matchedTerms = new Set<string>();
-      for (const [field, weight] of fields) {
-        const value = String(claim[field] ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-        for (const term of terms) {
-          if (!value.includes(term)) continue;
-          score += weight;
-          matchedFields.add(field);
-          matchedTerms.add(term);
-        }
-      }
-      return { claim, score, matchedFields: [...matchedFields], matchedTerms: [...matchedTerms] };
-    })
+    .map((claim) => ({ claim, ...fieldScore(claim, fields, terms) }))
     .filter((hit) => hit.score > 0)
     .sort((a, b) => b.score - a.score || String(a.claim.id).localeCompare(String(b.claim.id)))
+    .slice(0, limit);
+}
+
+/**
+ * El Atlas Homérico tiene seis herramientas propias desde hace semanas, así
+ * que su contenido SÍ es alcanzable — pero `search_all` declaraba cuatro
+ * superficies y ninguna era la suya. Quien preguntase por Ítaca en la
+ * búsqueda global no encontraba nada y no tenía por qué saber que existe un
+ * `list_homeric_places` al que llamar. Es el hueco que REG-17 nombra: no
+ * falta contenido, falta que el catálogo represente la superficie entera.
+ */
+const HOMERIC_TOOL: Record<HomericKind, string> = {
+  places: "get_homeric_place",
+  episodes: "get_homeric_episode",
+  routes: "get_homeric_route",
+};
+
+function homericSearch(content: McpContent, query: string, locale: Locale, limit: number) {
+  const terms = termsFor(query);
+  const fields: Array<[string, number]> = [
+    ["name", 8], ["slug", 7], ["summary", 6], ["identification", 5],
+    ["region", 4], ["work", 3], ["citation", 2], ["kind", 1],
+  ];
+  const hits: Array<Record<string, unknown> & { score: number; kind: HomericKind }> = [];
+  for (const kind of ["places", "episodes", "routes"] as const)
+    for (const raw of content.listHomeric(kind, locale) as Array<Record<string, unknown>>) {
+      const scored = fieldScore(raw, fields, terms);
+      if (scored.score > 0) hits.push({ ...raw, ...scored, kind });
+    }
+  return hits
+    .sort((a, b) => b.score - a.score || String(a.slug).localeCompare(String(b.slug)))
     .slice(0, limit);
 }
 
@@ -781,10 +835,11 @@ const GET_TOOL_FOR_DOMAIN: Record<string, string> = {
   governance: "get_governance", handbook: "get_handbook",
 };
 
-function intentBoost(query: string, surface: "core" | "articles" | "labs" | "claims"): number {
+function intentBoost(query: string, surface: (typeof SEARCH_SURFACES)[number]): number {
   const normal = termsFor(query).join(" ");
   if (surface === "labs" && /\b(calcul\w*|how many|cuant\w*|sample|muestra|roi|cost\w*|coste\w*|supervis\w*|fte|capacity|capacidad|break even|token\w*|pages|paginas)\b/.test(normal)) return 30;
   if (surface === "claims" && /\b(claim|claims|evidence|fact|thesis|tesis|hypothesis|hipotesis|falsif|refut)\b/.test(normal)) return 25;
+  if (surface === "homeric_atlas" && /\b(homer\w*|homér\w*|iliad\w*|ilíad\w*|odyssey|odisea|odisseia|ithaca|itaca|ítaca|troy|troya|ulysses|ulises|odysseus|odiseo)\b/.test(normal)) return 25;
   if (surface === "articles" && /\b(article|articles|essay|essays|articulo|artículo|ensayo|recent|latest|nuevo|reciente)\b/.test(normal)) return 20;
   return 0;
 }
@@ -850,11 +905,11 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
       title: "Search every SANTISMM knowledge surface",
       annotations: READ_ONLY_REMOTE,
       description:
-        "Search the core corpus, first-party essays, executable Labs and epistemic claims in one call. Use this first when a natural-language question might require a calculation, a long-form essay or a claim audit rather than only a core knowledge unit. Results name the next tool to call; calculator-shaped questions are routed toward Labs.",
+        "Search the core corpus, first-party essays, executable Labs, epistemic claims and the Homeric Atlas in one call. Use this first when a natural-language question might require a calculation, a long-form essay or a claim audit rather than only a core knowledge unit. Results name the next tool to call; calculator-shaped questions are routed toward Labs.",
       inputSchema: z.object({
         query: querySchema.describe("Question or topic, in English, Spanish or Portuguese."),
-        surfaces: z.array(z.enum(["core", "articles", "labs", "claims"])).min(1).optional()
-          .describe("Restrict the search. Omit to search all four surfaces."),
+        surfaces: z.array(z.enum(SEARCH_SURFACES)).min(1).optional()
+          .describe("Restrict the search. Omit to search all five surfaces."),
         limit_per_surface: z.number().int().positive().max(10).optional().describe("Maximum hits from each surface. Default: 5."),
         locale: localeSchema,
       }),
@@ -862,7 +917,7 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
     },
     async ({ query, surfaces, limit_per_surface, locale }) => {
       try {
-        const selected = new Set<string>(surfaces ?? ["core", "articles", "labs", "claims"]);
+        const selected = new Set<string>(surfaces ?? SEARCH_SURFACES);
         const limit = limit_per_surface ?? 5;
         const lang = (locale ?? "en") as Locale;
         const [articleLoad, labLoad] = await Promise.allSettled([
@@ -947,6 +1002,20 @@ export function registerTools(server: McpToolServer, content: McpContent): void 
               kind: claim.claim_type, title: String(claim.statement ?? claim.slug),
               summary: `Epistemic type: ${String(claim.claim_type)}; confidence: ${String(claim.confidence_level)}.`,
               suggested_tool: "get_claim", matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
+            });
+          }
+        }
+
+        if (selected.has("homeric_atlas")) {
+          const boost = intentBoost(query, "homeric_atlas");
+          for (const [index, raw] of homericSearch(content, query, lang, limit).entries()) {
+            hits.push({
+              surface: "homeric_atlas", score: raw.score + boost, source_score: raw.score,
+              rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind,
+              title: String(raw.name ?? raw.slug), summary: raw.summary,
+              canonical_url: raw.canonical_url, api_url: raw.api_url,
+              suggested_tool: HOMERIC_TOOL[raw.kind],
+              matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
             });
           }
         }

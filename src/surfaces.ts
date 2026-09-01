@@ -49,6 +49,14 @@ export type Surface = keyof typeof SURFACE_TOOLS;
 export const SURFACES = Object.keys(SURFACE_TOOLS) as Surface[];
 
 /**
+ * Surfaces queried by the federated search, shared by its schemas, handler and
+ * final-outcome observer. Keeping this beside the import-free surface registry
+ * avoids a tools.ts <-> outcomes.ts cycle and makes a search-surface change
+ * atomic for both execution and measurement.
+ */
+export const SEARCH_SURFACES = ["core", "articles", "labs", "claims", "homeric_atlas"] as const;
+
+/**
  * Las tres primitivas del protocolo. Hoy todo se expresa con `tool`, y por eso
  * el eje se registra desde el principio: si Resources y Prompts (REG-19,
  * REG-20) llegaran a una analítica que solo cuenta herramientas, dos semanas

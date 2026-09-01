@@ -16,6 +16,13 @@ import {
   searchLabCorpus,
   type LabDefinition,
 } from "./labs.ts";
+import {
+  lookupRequestForTool,
+  summarizeToolResult,
+  type McpToolObservation,
+  type McpToolResultEvent,
+} from "./outcomes.ts";
+import { SEARCH_SURFACES } from "./surfaces.ts";
 
 /**
  * Single, framework-agnostic definition of the Santismm Knowledge MCP server:
@@ -387,6 +394,84 @@ function normalizar(s: string): string {
   return s.toLowerCase().replace(/[\s_]+/g, "-");
 }
 
+function urlSlug(value: unknown): string | undefined {
+  if (typeof value !== "string") return undefined;
+  try {
+    return new URL(value).pathname.split("/").filter(Boolean).at(-1);
+  } catch {
+    return undefined;
+  }
+}
+
+/**
+ * Enrich a direct lookup miss without delaying the tool response itself.
+ *
+ * Local recovery payloads already carry `found_in`. Federated Articles and
+ * Labs cannot be inspected synchronously by `noEncontrado`, so the hosted
+ * analytics callback runs this after the response and checks their cached
+ * canonical catalogues. A Portuguese Article slug sent to
+ * `get_architecture`, for example, is a wrong-tool event, not a content gap.
+ */
+export async function observeToolResult(
+  event: McpToolResultEvent,
+  content: McpContent,
+): Promise<McpToolObservation> {
+  const observation = summarizeToolResult(event);
+  if (observation.demandClass !== "invalid_identifier") return observation;
+  const lookup = lookupRequestForTool(event.tool, event.args);
+  if (!lookup) return observation;
+  const wanted = normalizar(lookup.identifier);
+
+  for (const space of ESPACIOS) {
+    if (space.domain === lookup.domain || space.domain === "articles" || space.domain === "labs") continue;
+    try {
+      const exact = cardsDe(content, space.domain, "en").find((candidate) => {
+        const item = candidate as Record<string, unknown> | null;
+        return [item?.id, item?.slug].some(
+          (identifier) => typeof identifier === "string" && normalizar(identifier) === wanted,
+        );
+      }) as Record<string, unknown> | undefined;
+      const id = exact && (typeof exact.slug === "string" ? exact.slug : exact.id);
+      if (typeof id === "string") {
+        return {
+          ...observation,
+          demandClass: "wrong_tool",
+          foundIn: { domain: space.domain, id, tool: space.getTool },
+        };
+      }
+    } catch {
+      // One optional recovery surface cannot hide the original observation.
+    }
+  }
+
+  const [articleLoad, labLoad] = await Promise.allSettled([loadArticles(), loadLabs()]);
+  if (lookup.domain !== "articles" && articleLoad.status === "fulfilled") {
+    const article = articleLoad.value.find((candidate) =>
+      [candidate.slug, urlSlug(candidate.canonical_url), urlSlug(candidate.api_url)].some(
+        (identifier) => typeof identifier === "string" && normalizar(identifier) === wanted,
+      ),
+    );
+    if (article) {
+      return {
+        ...observation,
+        demandClass: "wrong_tool",
+        foundIn: { domain: "articles", id: article.slug, tool: "get_article" },
+      };
+    }
+  }
+  if (lookup.domain !== "labs" && labLoad.status === "fulfilled") {
+    const lab = labLoad.value.find((candidate) => normalizar(candidate.slug) === wanted);
+    if (lab) {
+      return {
+        ...observation,
+        demandClass: "wrong_tool",
+        foundIn: { domain: "labs", id: lab.slug, tool: "get_lab" },
+      };
+    }
+  }
+  return observation;
+}
+
 /** Most identifiers a not-found payload will spell out before summarising. */
 const MUESTRA_MAXIMA = 30;
 
@@ -689,16 +774,6 @@ const humanSupervisionOutput = calculationBaseSchema.extend({
   }),
 });
 
-/**
- * Las superficies que `search_all` recorre, en un solo sitio: el esquema de
- * entrada dice cuáles se pueden pedir y el de salida cuáles pueden aparecer,
- * y estaban escritas dos veces. Al añadir la homérica solo se actualizó la
- * de entrada, así que el servidor aceptaba la consulta y después rechazaba
- * su propia respuesta por validación de salida — un fallo mudo que devolvía
- * cero resultados en vez de un error. Ahora no pueden discrepar.
- */
-export const SEARCH_SURFACES = ["core", "articles", "labs", "claims", "homeric_atlas"] as const;
-
 const globalSearchCard = z.object({
   surface: z.enum(SEARCH_SURFACES),
   score: z.number(),
@@ -887,13 +962,45 @@ function intentBoost(query: string, surface: (typeof SEARCH_SURFACES)[number]): 
  * importarse — sin hook, el CLI se comporta exactamente igual que antes.
  */
 export interface McpTelemetry {
-  /** Qué superficies consultó `search_all`, cuál ganó y qué propuso. */
-  globalSearch?(detail: {
-    queried: string[];
-    topSurface?: string;
-    suggestedTool?: string;
-    unavailable?: string[];
-  }): void;
+  /** El resultado final que devolvió una herramienta, nunca un sub-buscador. */
+  toolResult?(event: McpToolResultEvent): void;
+}
+
+/**
+ * Wrap the registry once, rather than remembering telemetry in 30 handlers.
+ *
+ * The callback receives the handler's final value and runs only when a hosted
+ * transport injects it. The stdio package passes no telemetry and remains a
+ * local, analytics-free server. Telemetry is best-effort: observing a result
+ * can never turn that result into an error for the caller.
+ */
+function withToolResultTelemetry(server: McpToolServer, telemetry?: McpTelemetry): McpToolServer {
+  if (!telemetry?.toolResult) return server;
+  return {
+    registerTool(name, config, handler) {
+      return server.registerTool(name, config, async (rawArgs: unknown) => {
+        const args = rawArgs && typeof rawArgs === "object"
+          ? (rawArgs as Record<string, unknown>)
+          : {};
+        try {
+          const result = await handler(rawArgs);
+          try {
+            telemetry.toolResult?.({ tool: name, args, result });
+          } catch {
+            // Analytics can never break a tool response.
+          }
+          return result;
+        } catch (error) {
+          try {
+            telemetry.toolResult?.({ tool: name, args, error });
+          } catch {
+            // Preserve the original tool error.
+          }
+          throw error;
+        }
+      });
+    },
+  };
 }
 
 export function registerTools(
@@ -901,6 +1008,10 @@ export function registerTools(
   content: McpContent,
   telemetry?: McpTelemetry,
 ): void {
+  // Reassign the structural adapter so the existing registry remains the
+  // single list every validator derives from. Every registerTool below now
+  // gains the same final-result boundary without 30 hand-written callbacks.
+  server = withToolResultTelemetry(server, telemetry);
   // ── Orientation ────────────────────────────────────────────────────────────
   server.registerTool(
     "get_overview",
@@ -1077,16 +1188,6 @@ export function registerTools(
         }
 
         hits.sort((a, b) => Number(b.score) - Number(a.score) || Number(a.rank_within_surface) - Number(b.rank_within_surface));
-        // El apunte sale de la respuesta ya montada: nada se recalcula y nada
-        // se parsea del stream. `queried` es lo que se pidió, no lo que
-        // devolvió resultados — un cero en una superficie consultada es el
-        // dato interesante.
-        telemetry?.globalSearch?.({
-          queried: [...selected],
-          topSurface: hits[0] ? String(hits[0].surface) : undefined,
-          suggestedTool: hits[0] ? String(hits[0].suggested_tool ?? "") || undefined : undefined,
-          unavailable: unavailableSurfaces.map((u) => u.surface),
-        });
         return out({ query, count: hits.length, results: hits, unavailable_surfaces: unavailableSurfaces }, hits);
       } catch (error) {
         return globalSearchFailure(error);

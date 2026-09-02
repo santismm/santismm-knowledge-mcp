@@ -1530,7 +1530,10 @@ export function registerTools(
       description:
         "List every SANTISMM Lab with its inputs, outputs, assumptions, formulas and citation URL. Use this to discover interactive and machine-readable tools; filter by kind when the user specifically asks for a calculator, converter, experiment or educational game.",
       inputSchema: z.object({
-        kind: z.enum(["calculator", "converter", "experiment", "educational-game"]).optional(),
+        kind: z
+          .enum(["calculator", "converter", "experiment", "educational-game"])
+          .optional()
+          .describe("Restrict results to one Lab kind. Omit to list every Lab."),
       }),
       outputSchema: z.object(labListOutput),
     },
@@ -1665,7 +1668,9 @@ export function registerTools(
       description:
         "Traverse the knowledge graph: given a unit, return its neighbours — the units it links to (outgoing) and the units that reference it (incoming), each with the relationship type. Use this after a `get_*` call to widen an answer with adjacent units.",
       inputSchema: z.object({
-        domain: z.enum(["knowledge", "patterns", "architectures", "governance", "handbook"]),
+        domain: z
+          .enum(["knowledge", "patterns", "architectures", "governance", "handbook"])
+          .describe("Core knowledge domain containing the starting unit."),
         slug: z
           .string()
           .describe("Slug of the unit to start from (or an HRN id when domain is 'handbook')."),

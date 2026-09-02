@@ -3,6 +3,7 @@ import { McpServer } from "@modelcontextprotocol/server";
 import { StdioServerTransport } from "@modelcontextprotocol/server/stdio";
 import { registerTools, SERVER_INFO } from "./tools.js";
 import { registerResources } from "./resources.js";
+import { registerPrompts } from "./prompts.js";
 import { fsContent } from "./content.js";
 
 /**
@@ -18,6 +19,7 @@ import { fsContent } from "./content.js";
 const server = new McpServer(SERVER_INFO);
 registerTools(server, fsContent);
 registerResources(server, fsContent);
+registerPrompts(server, fsContent);
 
 async function main() {
   const transport = new StdioServerTransport();

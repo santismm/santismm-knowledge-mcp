@@ -1,6 +1,7 @@
 import type { HomericKind, McpContent } from "./tools.js";
 import { SURFACE_TOOLS } from "./surfaces.ts";
 import type { Domain, Entry, Locale } from "./content.js";
+import { resourceUri } from "./resource-uris.ts";
 
 /**
  * Framework-agnostic shaping layer for the MCP corpus.
@@ -109,6 +110,8 @@ export interface DomainOverview {
 }
 
 export interface CorpusOverview {
+  /** MCP-native address for reading this same document without a tool call. */
+  resource_uri: string;
   source: string;
   site: string;
   locales: Locale[];
@@ -211,6 +214,7 @@ export function summarize(domain: Domain, entry: Entry, locale: Locale = "en") {
     // Canonical, citable URL for this unit in the requested language.
     canonical_url: `${SITE_URL}/${locale}/${domain}/${entry.slug}`,
     api_url: `${SITE_URL}/api/${domain}/${entry.slug}`,
+    resource_uri: resourceUri.core(domain, entry.slug, locale),
   };
 }
 
@@ -522,6 +526,7 @@ export function summarizeHandbook(e: HandbookEntry, locale: Locale = "en") {
     // Localized handbook routes exist and render, but the prose is English.
     canonical_url: `${SITE_URL}/${locale}/handbook/${e.slug}`,
     api_url: `${SITE_URL}/api/handbook/${e.id}`,
+    resource_uri: resourceUri.handbook(e.id, locale),
   };
 }
 
@@ -637,6 +642,7 @@ function summarizeHomeric(kind: HomericKind, e: HomericArtifact, locale: Locale)
     locale,
     canonical_url: `${SITE_URL}/en/labs/homeric-atlas/${kind}/${e.slug}`,
     api_url: `${SITE_URL}/api/homeric/${kind}/${e.slug}`,
+    resource_uri: resourceUri.homeric(kind, e.slug, locale),
   };
 }
 
@@ -751,6 +757,7 @@ export function makeContent(
       if (loadHandbook) domains.push(domainOverview("handbook" as Domain, loadHandbook()));
 
       return {
+        resource_uri: resourceUri.overview(),
         source: "santismm.com",
         site: SITE_URL,
         locales: ALL_LOCALES,
@@ -840,6 +847,7 @@ export function makeContent(
         domain,
         canonical_url: `${SITE_URL}/${locale ?? "en"}/${domain}/${entry.slug}`,
         api_url: `${SITE_URL}/api/${domain}/${entry.slug}`,
+        resource_uri: resourceUri.core(domain, entry.slug, locale ?? "en"),
       };
       if (!locale) return { ...entry, ...links };
       const { locales, ...meta } = entry;
@@ -942,6 +950,7 @@ export function makeContent(
             statement: L.statement,
             supports: c.supports,
             reviewed: c.reviewed,
+            resource_uri: resourceUri.claim(String(c.id ?? c.slug), locale),
           };
         });
     },
@@ -953,7 +962,12 @@ export function makeContent(
       const c = loadClaims().find((x) => String(x.id).toUpperCase() === key || x.slug === id);
       if (!c) return undefined;
       const L = ((c.locales as Record<string, Record<string, string>>) ?? {})[locale] ?? {};
-      return { type: "claim", ...c, body: L };
+      return {
+        type: "claim",
+        ...c,
+        body: L,
+        resource_uri: resourceUri.claim(String(c.id ?? c.slug), locale),
+      };
     },
 
     listHomeric(kind, locale = "en") {

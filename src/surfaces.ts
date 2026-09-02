@@ -57,10 +57,10 @@ export const SURFACES = Object.keys(SURFACE_TOOLS) as Surface[];
 export const SEARCH_SURFACES = ["core", "articles", "labs", "claims", "homeric_atlas"] as const;
 
 /**
- * Las tres primitivas del protocolo. Hoy todo se expresa con `tool`, y por eso
- * el eje se registra desde el principio: si Resources y Prompts (REG-19,
- * REG-20) llegaran a una analítica que solo cuenta herramientas, dos semanas
- * de datos dirían que nadie los usa cuando lo que pasa es que nadie los mide.
+ * Las tres primitivas del protocolo. Tools y Resources (REG-19) ya se sirven;
+ * Prompts (REG-20) es el siguiente incremento. Declarar el eje aquí hace que
+ * la ventana de medición compare primitivas en vez de confundir «no medido»
+ * con «no usado».
  */
 export const PRIMITIVES = ["tool", "resource", "prompt"] as const;
 export type Primitive = (typeof PRIMITIVES)[number];

@@ -23,6 +23,7 @@ import {
   type McpToolResultEvent,
 } from "./outcomes.ts";
 import { SEARCH_SURFACES } from "./surfaces.ts";
+import { resourceUri } from "./resource-uris.ts";
 
 /**
  * Single, framework-agnostic definition of the Santismm Knowledge MCP server:
@@ -185,6 +186,7 @@ const cardSchema = z.object({
   locale: z.string().optional(),
   canonical_url: z.string().optional().describe("Cite this URL."),
   api_url: z.string().optional(),
+  resource_uri: z.string().optional().describe("Read this card as an MCP Resource."),
 }).passthrough();
 
 const listOutput = {
@@ -234,6 +236,7 @@ const unitOutput = z.object({
   evidence: evidenceSchema,
   canonical_url: z.string().optional(),
   api_url: z.string().optional(),
+  resource_uri: z.string().optional(),
   references: z.array(referenceSchema).optional(),
   featured: z.boolean().optional(),
   /** Cross-references, by slug (or HRN id inside the handbook). */
@@ -646,6 +649,7 @@ const claimCard = z.object({
   statement: z.string().optional(),
   supports: z.array(z.string()),
   reviewed: z.string(),
+  resource_uri: z.string(),
 });
 
 const claimListOutput = { count: z.number(), results: z.array(claimCard) };
@@ -662,6 +666,7 @@ const articleCardSchema = z.object({
   translation_key: z.string().optional(),
   canonical_url: z.string().describe("Cite this URL."),
   api_url: z.string(),
+  resource_uri: z.string(),
 });
 
 const articleUnitOutput = articleCardSchema.extend({
@@ -716,6 +721,7 @@ const executableLabSchema = z.object({
   api_url: z.string(),
   calculation_url: z.string().optional(),
   related_content: z.array(relatedContentSchema).optional(),
+  resource_uri: z.string(),
 });
 
 const pageLabSchema = z.object({
@@ -727,6 +733,7 @@ const pageLabSchema = z.object({
   title: z.string(),
   summary: z.string().optional(),
   canonical_url: z.string().describe("Cite this URL."),
+  resource_uri: z.string(),
 });
 
 const labCardSchema = z.discriminatedUnion("executable", [executableLabSchema, pageLabSchema]);
@@ -1021,6 +1028,35 @@ function withToolResultTelemetry(server: McpToolServer, telemetry?: McpTelemetry
   };
 }
 
+/** Join the apex and executable Lab catalogues into one Resource-aware list. */
+const LABS_HOST = new URL(LABS_API_URL).host;
+
+export async function mergedLabs(
+  content: McpContent,
+  kind?: string,
+): Promise<Array<Record<string, unknown>>> {
+  const executable = await loadLabs();
+  const bySlug = new Map<string, Record<string, unknown>>();
+  for (const entry of content.listSiteLabs()) {
+    const slug = String(entry.slug);
+    bySlug.set(slug, {
+      ...entry,
+      executable: false,
+      resource_uri: resourceUri.lab(slug),
+    });
+  }
+  for (const lab of executable) {
+    bySlug.set(lab.slug, {
+      ...(lab as unknown as Record<string, unknown>),
+      owner_server: LABS_HOST,
+      executable: true,
+      resource_uri: resourceUri.lab(lab.slug),
+    });
+  }
+  const all = [...bySlug.values()];
+  return kind ? all.filter((lab) => lab.kind === kind) : all;
+}
+
 export function registerTools(
   server: McpToolServer,
   content: McpContent,
@@ -1040,6 +1076,7 @@ export function registerTools(
         "Get the complete MCP map — start here. Returns the five-domain core plus the separate Article, Labs, Homeric Atlas and claim-registry surfaces, with their tools, identifiers, citation rules, languages, licence and bulk-ingest URLs.",
       inputSchema: z.object({}),
       outputSchema: z.object({
+        resource_uri: z.string().describe("Read this same document with resources/read."),
         source: z.string(),
         site: z.string(),
         locales: z.array(z.string()),
@@ -1153,6 +1190,7 @@ export function registerTools(
               surface: "articles", score: raw.score + boost, source_score: raw.score,
               rank_within_surface: index + 1, slug: raw.slug, title: raw.title, summary: raw.summary,
               canonical_url: raw.canonical_url, api_url: raw.api_url, suggested_tool: "get_article",
+              resource_uri: resourceUri.article(raw.slug),
               matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
             });
           }
@@ -1171,6 +1209,7 @@ export function registerTools(
               rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind, title: raw.title,
               summary: raw.description, canonical_url: raw.canonical_url, api_url: raw.api_url,
               calculation_url: raw.calculation_url,
+              resource_uri: resourceUri.lab(raw.slug),
               suggested_tool: calculatorTools[raw.slug] ?? "get_lab",
               matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
             });
@@ -1186,6 +1225,7 @@ export function registerTools(
               rank_within_surface: index + 1, id: claim.id, slug: claim.slug,
               kind: claim.claim_type, title: String(claim.statement ?? claim.slug),
               summary: `Epistemic type: ${String(claim.claim_type)}; confidence: ${String(claim.confidence_level)}.`,
+              resource_uri: resourceUri.claim(String(claim.id ?? claim.slug), lang),
               suggested_tool: "get_claim", matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
             });
           }
@@ -1199,6 +1239,7 @@ export function registerTools(
               rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind,
               title: String(raw.name ?? raw.slug), summary: raw.summary,
               canonical_url: raw.canonical_url, api_url: raw.api_url,
+              resource_uri: raw.resource_uri,
               suggested_tool: HOMERIC_TOOL[raw.kind],
               matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
             });
@@ -1415,7 +1456,10 @@ export function registerTools(
     async ({ locale }) => {
       try {
         const articles = articlesForLocale(await loadArticles(), locale as Locale | undefined);
-        return outList(articles.map(articleCard));
+        return outList(articles.map((article) => ({
+          ...articleCard(article),
+          resource_uri: resourceUri.article(article.slug),
+        })));
       } catch (error) {
         return articleFailure(error);
       }
@@ -1438,7 +1482,9 @@ export function registerTools(
       try {
         const articles = await loadArticles();
         const article = articles.find((candidate) => candidate.slug === slug);
-        return article ? out(article as unknown as Record<string, unknown>) : articleNotFound(articles, slug);
+        return article
+          ? out({ ...article, resource_uri: resourceUri.article(article.slug) } as unknown as Record<string, unknown>)
+          : articleNotFound(articles, slug);
       } catch (error) {
         return articleFailure(error);
       }
@@ -1462,55 +1508,18 @@ export function registerTools(
     async ({ query, locale, limit }) => {
       try {
         const articles = articlesForLocale(await loadArticles(), locale as Locale | undefined);
-        return outList(searchArticleCorpus(articles, query, limit ?? 10), { query });
+        return outList(
+          searchArticleCorpus(articles, query, limit ?? 10).map((article) => ({
+            ...article,
+            resource_uri: resourceUri.article(article.slug),
+          })),
+          { query },
+        );
       } catch (error) {
         return articleFailure(error);
       }
     },
   );
-
-/**
- * Las 21 unidades que el sitio llama lab, en un solo listado.
- *
- * Eran dos catálogos con el mismo nombre: `labs.santismm.com/api/labs` sirve
- * las diez que ejecuta —con fórmulas, entradas, salidas y endpoint de cálculo—
- * y el ápice publica esas diez más once páginas propias: el Atlas Homérico, el
- * sandbox de control, la taxonomía, los benchmarks y los tres atlas
- * deportivos. `ai-index.json` anunciaba `count: 21` y `list_labs` devolvía 10,
- * así que un agente que leyera el índice y llamara a la herramienta no podía
- * alcanzar once de ellas por ninguna vía.
- *
- * La definición ejecutable gana cuando existe: trae todo lo que trae la
- * entrada del catálogo y además las fórmulas. `owner_server` dice quién sirve
- * cada unidad, que es lo que distingue «esto se calcula» de «esto se lee».
- *
- * Deliberadamente sin `resource_uri`: los Resources de MCP no existen todavía
- * (REG-19), y anunciar un identificador que no resuelve es el fallo que SEG-06
- * documentó — cuesta más que una función que falta.
- */
-const LABS_HOST = new URL(LABS_API_URL).host;
-
-async function mergedLabs(
-  content: McpContent,
-  kind?: string,
-): Promise<Array<Record<string, unknown>>> {
-  const ejecutables = await loadLabs();
-  const porSlug = new Map<string, Record<string, unknown>>();
-  for (const entrada of content.listSiteLabs())
-    porSlug.set(String(entrada.slug), { ...entrada, executable: false });
-  for (const lab of ejecutables) {
-    // Sin heredar la entrada del catálogo: `category`/`status`/`summary`
-    // dirían con otras palabras lo que `kind`/`description` ya dicen, y dos
-    // vocabularios para un concepto es justo lo que SEG-07 limpió.
-    porSlug.set(lab.slug, {
-      ...(lab as unknown as Record<string, unknown>),
-      owner_server: LABS_HOST,
-      executable: true,
-    });
-  }
-  const todos = [...porSlug.values()];
-  return kind ? todos.filter((lab) => lab.kind === kind) : todos;
-}
 
   // ── SANTISMM Labs (federated metadata + deterministic execution) ─────────
   server.registerTool(

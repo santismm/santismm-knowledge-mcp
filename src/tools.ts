@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { Domain, Locale } from "./content.js";
-import type { CorpusOverview } from "./shape.js";
+import { norm, queryTerms, type CorpusOverview } from "./shape.ts";
 import {
   ARTICLES_API_URL,
   articleCard,
@@ -34,7 +34,7 @@ import { SEARCH_SURFACES } from "./surfaces.ts";
  * data, while Article tools deliberately read the first-party Articles API.
  */
 
-export const SERVER_INFO = { name: "santismm-knowledge", version: "0.4.0" } as const;
+export const SERVER_INFO = { name: "santismm-knowledge", version: "0.4.1" } as const;
 
 /**
  * The subset of the MCP SDK's `McpServer` that the registry uses (just
@@ -868,7 +868,7 @@ function labNotFound(labs: Array<{ slug: string }>, slug: string) {
 }
 
 function termsFor(query: string): string[] {
-  return [...new Set(query.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter((term) => term.length > 1))];
+  return queryTerms(query);
 }
 
 /**
@@ -887,7 +887,7 @@ function fieldScore(
   const matchedFields = new Set<string>();
   const matchedTerms = new Set<string>();
   for (const [field, weight] of fields) {
-    const value = String(record[field] ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const value = norm(String(record[field] ?? ""));
     for (const term of terms) {
       if (!value.includes(term)) continue;
       score += weight;
@@ -895,7 +895,12 @@ function fieldScore(
       matchedTerms.add(term);
     }
   }
-  return { score, matchedFields: [...matchedFields], matchedTerms: [...matchedTerms] };
+  const coverage = terms.length > 0 ? matchedTerms.size / terms.length : 0;
+  return {
+    score: Math.round(score * coverage * coverage * 100) / 100,
+    matchedFields: [...matchedFields],
+    matchedTerms: [...matchedTerms],
+  };
 }
 
 function claimSearch(content: McpContent, query: string, locale: Locale, limit: number) {
@@ -932,7 +937,18 @@ function homericSearch(content: McpContent, query: string, locale: Locale, limit
   for (const kind of ["places", "episodes", "routes"] as const)
     for (const raw of content.listHomeric(kind, locale) as Array<Record<string, unknown>>) {
       const scored = fieldScore(raw, fields, terms);
-      if (scored.score > 0) hits.push({ ...raw, ...scored, kind });
+      // A natural question often adds generic qualifiers ("how strong is the
+      // evidence?") after naming the entity. Those words may occur together
+      // in another entry's prose; an exact slug/name still has to win because
+      // it is the object the caller explicitly named.
+      const identifiers = [raw.slug, raw.name, raw.id]
+        .map((value) => norm(String(value ?? "")))
+        .filter(Boolean);
+      const exactIdentifier = identifiers.some((identifier) =>
+        identifier.split(" ").every((part) => terms.includes(part)),
+      );
+      const score = scored.score + (exactIdentifier ? 12 : 0);
+      if (score > 0) hits.push({ ...raw, ...scored, score, kind });
     }
   return hits
     .sort((a, b) => b.score - a.score || String(a.slug).localeCompare(String(b.slug)))
@@ -945,7 +961,9 @@ const GET_TOOL_FOR_DOMAIN: Record<string, string> = {
 };
 
 function intentBoost(query: string, surface: (typeof SEARCH_SURFACES)[number]): number {
-  const normal = termsFor(query).join(" ");
+  // Intent words such as "how many" are useful for routing even though they
+  // are deliberately removed from lexical relevance scoring.
+  const normal = norm(query);
   if (surface === "labs" && /\b(calcul\w*|how many|cuant\w*|sample|muestra|roi|cost\w*|coste\w*|supervis\w*|fte|capacity|capacidad|break even|token\w*|pages|paginas)\b/.test(normal)) return 30;
   if (surface === "claims" && /\b(claim|claims|evidence|fact|thesis|tesis|hypothesis|hipotesis|falsif|refut)\b/.test(normal)) return 25;
   if (surface === "homeric_atlas" && /\b(homer\w*|homér\w*|iliad\w*|ilíad\w*|odyssey|odisea|odisseia|ithaca|itaca|ítaca|troy|troya|ulysses|ulises|odysseus|odiseo)\b/.test(normal)) return 25;
@@ -1560,12 +1578,13 @@ async function mergedLabs(
         reviewRate: z.number().min(0).max(100).describe("Share of cases reviewed by a person."),
         reviewMinutes: z.number().min(0).max(10_080).describe("Human review minutes per reviewed case."),
         reworkMinutes: z.number().min(0).max(10_080).describe("Human rework minutes per failed case."),
+        locale: localeSchema.describe("Language for interpretations, assumptions, formulas and warnings (default en)."),
       }),
       outputSchema: agentEconomicsOutput,
     },
-    async (inputs) => {
+    async ({ locale, ...inputs }) => {
       try {
-        return out(await executeLabCalculator("agent-economics", inputs));
+        return out(await executeLabCalculator("agent-economics", inputs, (locale ?? "en") as Locale));
       } catch (error) {
         return labsFailure(error);
       }
@@ -1584,12 +1603,13 @@ async function mergedLabs(
         confidence: z.union([z.literal(90), z.literal(95), z.literal(99)]).describe("Confidence level, in percent."),
         margin: z.number().min(0.1).max(50).describe("Margin for estimating the failure rate, in percentage points."),
         population: z.number().min(1).max(1_000_000_000).describe("Number of distinct evaluable cases."),
+        locale: localeSchema.describe("Language for interpretations, assumptions, formulas and warnings (default en)."),
       }),
       outputSchema: evaluationSampleOutput,
     },
-    async (inputs) => {
+    async ({ locale, ...inputs }) => {
       try {
-        return out(await executeLabCalculator("evaluation-sample-size", inputs));
+        return out(await executeLabCalculator("evaluation-sample-size", inputs, (locale ?? "en") as Locale));
       } catch (error) {
         return labsFailure(error);
       }
@@ -1614,12 +1634,13 @@ async function mergedLabs(
         utilization: z.number().min(1).max(100).describe("Share of paid time available for review and escalation, in percent."),
         reviewers: z.number().min(0.1).max(1_000_000).describe("Available reviewer FTE."),
         hourlyCost: z.number().min(0).max(1_000_000).describe("Fully loaded reviewer hourly cost, in the chosen currency."),
+        locale: localeSchema.describe("Language for interpretations, assumptions, formulas and warnings (default en)."),
       }),
       outputSchema: humanSupervisionOutput,
     },
-    async (inputs) => {
+    async ({ locale, ...inputs }) => {
       try {
-        return out(await executeLabCalculator("human-supervision-capacity", inputs));
+        return out(await executeLabCalculator("human-supervision-capacity", inputs, (locale ?? "en") as Locale));
       } catch (error) {
         return labsFailure(error);
       }

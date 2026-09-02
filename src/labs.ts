@@ -1,3 +1,5 @@
+import { norm, queryTerms } from './shape.ts';
+
 /**
  * Federated SANTISMM Labs catalogue and deterministic calculators.
  *
@@ -76,7 +78,7 @@ function validLab(value: unknown): value is LabDefinition {
 
 async function fetchCorpus(): Promise<LabCorpus> {
   const response = await fetch(LABS_API_URL, {
-    headers: { Accept: 'application/json', 'User-Agent': 'santismm-knowledge-mcp/0.4.0' },
+    headers: { Accept: 'application/json', 'User-Agent': 'santismm-knowledge-mcp/0.4.1' },
     signal: AbortSignal.timeout(8_000),
     cache: 'no-store',
   });
@@ -109,10 +111,6 @@ export async function loadLabs(): Promise<LabDefinition[]> {
   return (await pending).results;
 }
 
-function normalise(value: string): string {
-  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-}
-
 export interface LabSearchResult extends LabDefinition {
   score: number;
   matchedFields: string[];
@@ -120,8 +118,8 @@ export interface LabSearchResult extends LabDefinition {
 }
 
 export function searchLabCorpus(labs: LabDefinition[], query: string, limit: number): LabSearchResult[] {
-  const terms = [...new Set(normalise(query).split(/[^a-z0-9]+/).filter((term) => term.length > 1))];
-  const phrase = normalise(query).trim();
+  const terms = queryTerms(query);
+  const phrase = norm(query).trim();
   if (terms.length === 0) return [];
   const fields: Array<[keyof LabDefinition, number]> = [
     ['title', 8], ['slug', 7], ['description', 6], ['inputs', 4], ['outputs', 4],
@@ -134,7 +132,7 @@ export function searchLabCorpus(labs: LabDefinition[], query: string, limit: num
       let score = 0;
       for (const [field, weight] of fields) {
         const raw = lab[field];
-        const value = normalise(Array.isArray(raw) ? raw.join(' ') : String(raw ?? ''));
+        const value = norm(Array.isArray(raw) ? raw.join(' ') : String(raw ?? ''));
         for (const term of terms) {
           if (!value.includes(term)) continue;
           score += weight;
@@ -143,7 +141,13 @@ export function searchLabCorpus(labs: LabDefinition[], query: string, limit: num
         }
         if (phrase.length > 2 && value.includes(phrase)) score += weight * 2;
       }
-      return { ...lab, score, matchedFields: [...matchedFields], matchedTerms: [...matchedTerms] };
+      const coverage = matchedTerms.size / terms.length;
+      return {
+        ...lab,
+        score: Math.round(score * coverage * coverage * 100) / 100,
+        matchedFields: [...matchedFields],
+        matchedTerms: [...matchedTerms],
+      };
     })
     .filter((lab) => lab.score > 0)
     .sort((a, b) => b.score - a.score || b.updated.localeCompare(a.updated) || a.slug.localeCompare(b.slug))
@@ -153,13 +157,14 @@ export function searchLabCorpus(labs: LabDefinition[], query: string, limit: num
 export async function executeLabCalculator(
   slug: ExecutableLabSlug,
   inputs: Record<string, number>,
+  locale: 'en' | 'es' | 'pt' = 'en',
 ): Promise<Record<string, unknown>> {
-  const response = await fetch(`${LABS_SERVICE_ORIGIN}/api/calculate/${slug}`, {
+  const response = await fetch(`${LABS_SERVICE_ORIGIN}/api/calculate/${slug}?locale=${locale}`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'User-Agent': 'santismm-knowledge-mcp/0.4.0',
+      'User-Agent': 'santismm-knowledge-mcp/0.4.1',
     },
     body: JSON.stringify(inputs),
     signal: AbortSignal.timeout(8_000),

@@ -235,14 +235,19 @@ const STOPWORDS = new Set([
   // en
   "the", "a", "an", "of", "for", "and", "or", "to", "in", "on", "with", "is",
   "are", "what", "how", "why", "when", "that", "this", "it", "as", "by", "from",
-  "at", "be", "can", "do", "does",
+  "at", "be", "can", "do", "does", "where", "who", "which", "would",
+  "could", "should", "need", "was", "were", "has", "have", "had", "my",
+  "your", "their", "about", "into", "than", "then",
   // es
   "el", "la", "los", "las", "un", "una", "unos", "unas", "de", "del", "y", "o",
   "para", "por", "con", "en", "que", "es", "son", "como", "cual", "cuando",
-  "sobre", "al", "se", "su", "sus", "antes", "despues", "mas",
+  "sobre", "al", "se", "su", "sus", "antes", "despues", "mas", "donde",
+  "quien", "necesito", "necesita", "hay", "ha", "han", "mi", "tu", "este",
+  "esta", "estos", "estas",
   // pt
   "o", "os", "as", "um", "uma", "e", "ou", "para", "por", "com", "em", "que",
   "sao", "como", "quando", "sobre", "ao", "dos", "das", "no", "na", "se", "seu",
+  "onde", "quem", "preciso", "precisa", "ha", "meu", "minha", "este", "esta",
 ]);
 
 /**
@@ -255,6 +260,21 @@ function stem(token: string): string {
   if (token.length >= 6 && token.endsWith("es")) return token.slice(0, -2);
   if (token.length >= 5 && token.endsWith("s")) return token.slice(0, -1);
   return token;
+}
+
+/**
+ * One query parser for every MCP search surface.
+ *
+ * The core search already discarded function words, but Articles, Labs,
+ * claims and the Homeric Atlas each tokenised the raw question independently.
+ * In `search_all`, a Lab matching only "to" and "do" could therefore outrank
+ * the calculator named by the informative terms. Keeping the parser here
+ * makes the five surfaces agree on what a term is and prevents that drift.
+ */
+export function queryTerms(query: string): string[] {
+  const all = norm(query).split(/[^a-z0-9]+/).filter((token) => token.length >= 2);
+  const meaningful = all.filter((token) => !STOPWORDS.has(token));
+  return [...new Set((meaningful.length > 0 ? meaningful : all).map(stem))];
 }
 
 /** Relative importance of each field when scoring a search hit. */
@@ -835,10 +855,7 @@ export function makeContent(
     search(query, domains = [...DOMAINS, "handbook" as Domain], limit = 20, locale = "en") {
       // norm() has already stripped diacritics, so a plain alphanumeric split
       // is enough (and avoids needing Unicode property escapes).
-      const all = norm(query).split(/[^a-z0-9]+/).filter((t) => t.length >= 2);
-      // Drop function words — unless that would leave nothing to search for.
-      const meaningful = all.filter((t) => !STOPWORDS.has(t));
-      const tokens = [...new Set((meaningful.length > 0 ? meaningful : all).map(stem))];
+      const tokens = queryTerms(query);
       if (tokens.length === 0) return [];
 
       // Collect the candidate documents first, so term specificity (IDF) can be

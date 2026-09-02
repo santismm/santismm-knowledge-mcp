@@ -1,6 +1,6 @@
 {
   "name": "santismm-knowledge-mcp",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "license": "MIT",
   "description": "MCP server for the Santismm Knowledge Platform — core knowledge, first-party essays, Homeric Atlas datasets and epistemic claims. Ships the core corpus; the hosted endpoint at https://santismm.com/mcp is the always-fresh alternative.",
   "type": "module",

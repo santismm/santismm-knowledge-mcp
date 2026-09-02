@@ -1,3 +1,5 @@
+import { norm, queryTerms } from "./shape.ts";
+
 /**
  * Federated first-party article corpus.
  *
@@ -62,7 +64,7 @@ function validArticle(value: unknown): value is Article {
 
 async function fetchCorpus(): Promise<ArticleCorpus> {
   const response = await fetch(ARTICLES_API_URL, {
-    headers: { Accept: "application/json", "User-Agent": "santismm-knowledge-mcp/0.4.0" },
+    headers: { Accept: "application/json", "User-Agent": "santismm-knowledge-mcp/0.4.1" },
     signal: AbortSignal.timeout(8_000),
     cache: "no-store",
   });
@@ -107,13 +109,6 @@ export function articlesForLocale(articles: Article[], locale?: "en" | "es" | "p
   return articles.filter((article) => article.language.toLowerCase().split("-")[0] === locale);
 }
 
-function normalise(value: string): string {
-  return value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
-}
-
 export interface ArticleSearchResult extends ArticleCard {
   score: number;
   matchedFields: string[];
@@ -122,8 +117,8 @@ export interface ArticleSearchResult extends ArticleCard {
 
 /** Ranked accent-insensitive full-text search over the canonical API payload. */
 export function searchArticleCorpus(articles: Article[], query: string, limit: number): ArticleSearchResult[] {
-  const terms = [...new Set(normalise(query).split(/[^a-z0-9]+/).filter((term) => term.length > 1))];
-  const phrase = normalise(query).trim();
+  const terms = queryTerms(query);
+  const phrase = norm(query).trim();
   if (terms.length === 0) return [];
 
   const weights: Array<[keyof Article, number]> = [
@@ -141,7 +136,7 @@ export function searchArticleCorpus(articles: Article[], query: string, limit: n
       let score = 0;
 
       for (const [field, weight] of weights) {
-        const value = normalise(Array.isArray(article[field]) ? article.topics.join(" ") : String(article[field]));
+        const value = norm(Array.isArray(article[field]) ? article.topics.join(" ") : String(article[field]));
         for (const term of terms) {
           if (!value.includes(term)) continue;
           score += weight;
@@ -151,9 +146,10 @@ export function searchArticleCorpus(articles: Article[], query: string, limit: n
         if (phrase.length > 2 && value.includes(phrase)) score += weight * 2;
       }
 
+      const coverage = matchedTerms.size / terms.length;
       return {
         ...articleCard(article),
-        score,
+        score: Math.round(score * coverage * coverage * 100) / 100,
         matchedFields: [...matchedFields],
         matchedTerms: [...matchedTerms],
       };

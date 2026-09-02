@@ -10,5 +10,4 @@ thumbnail: "https://i.ytimg.com/vi/eC66YJDR8yA/hqdefault.jpg"
 canonicalUrl: "https://www.youtube.com/watch?v=eC66YJDR8yA"
 links:
   - { platform: "youtube", lang: "en", url: "https://www.youtube.com/watch?v=eC66YJDR8yA" }
-  - { platform: "spotify", lang: "en", url: "https://open.spotify.com/show/4ESPCD6LXZGHsbYbV9KSQ7", label: "Listen on Spotify" }
 ---

@@ -39,6 +39,65 @@ export interface LabDefinition {
   related_content?: Array<{ title: string; url: string; relationship: string }>;
 }
 
+type LabLocale = 'en' | 'es' | 'pt';
+type LabCopy = Pick<LabDefinition, 'title' | 'description'>;
+
+/**
+ * The Labs catalogue is currently served in Spanish. Search still accepts a
+ * locale, so returning that Spanish display copy for English and Portuguese
+ * requests made the contract formally valid but semantically false. Keep the
+ * executable definition and formula ownership in Labs; this small projection
+ * only localizes the two fields search_all displays and ranks.
+ */
+const LAB_SEARCH_COPY: Record<string, Record<'en' | 'pt', LabCopy>> = {
+  'agent-economics': {
+    en: { title: 'The real economics of an AI agent', description: 'Compare an agent\'s cost, capacity and return with the manual process.' },
+    pt: { title: 'A economia real de um agente', description: 'Compare custo, capacidade e retorno de um agente com o processo manual.' },
+  },
+  'evaluation-sample-size': {
+    en: { title: 'Evaluation sample size', description: 'Calculate how many evaluations are needed to detect and estimate failures.' },
+    pt: { title: 'Tamanho da amostra de avaliacao', description: 'Calcule quantas avaliacoes sao necessarias para detectar e estimar falhas.' },
+  },
+  'human-supervision-capacity': {
+    en: { title: 'Human supervision capacity', description: 'Size hours, FTE, cost, sustainable volume and the operational queue.' },
+    pt: { title: 'Capacidade de supervisao humana', description: 'Dimensione horas, FTE, custo, volume sustentavel e a fila operacional.' },
+  },
+  'llm-context-converter': {
+    en: { title: 'LLM context converter', description: 'Convert tokens into words, pages, messages, cost and reading time.' },
+    pt: { title: 'Conversor de contexto de LLM', description: 'Converta tokens em palavras, paginas, mensagens, custo e tempo de leitura.' },
+  },
+  'control-framework-translator': {
+    en: { title: 'Control framework translator', description: 'Map operational controls across AI governance frameworks.' },
+    pt: { title: 'Tradutor de controles', description: 'Relacione controles operacionais entre estruturas de governanca de IA.' },
+  },
+  'agent-vector': {
+    en: { title: 'Agent vector', description: 'Describe and compare agents through their operational dimensions.' },
+    pt: { title: 'Vetor de um agente', description: 'Descreva e compare agentes por meio de suas dimensoes operacionais.' },
+  },
+  'benchmark-detective': {
+    en: { title: 'Benchmark detective', description: 'Learn to identify misleading metrics and weak claims.' },
+    pt: { title: 'Detetive de benchmarks', description: 'Aprenda a identificar metricas enganosas e alegacoes fracas.' },
+  },
+  'model-agent-harness': {
+    en: { title: 'Model, agent or harness', description: 'Classify the layers of an AI system and understand their responsibilities.' },
+    pt: { title: 'Modelo, agente ou harness', description: 'Classifique as camadas de um sistema de IA e entenda suas responsabilidades.' },
+  },
+  'world-exam-challenge': {
+    en: { title: 'World exam challenge', description: 'Compare education systems by coverage, rigor and cognitive demand.' },
+    pt: { title: 'Desafio mundial de exames', description: 'Compare sistemas educacionais por cobertura, rigor e exigencia cognitiva.' },
+  },
+  'close-the-gap': {
+    en: { title: 'Close the gap', description: 'Choose controls that close operational gaps in agentic systems.' },
+    pt: { title: 'Feche a lacuna', description: 'Escolha controles que fechem lacunas operacionais em sistemas agenticos.' },
+  },
+};
+
+function localizedLab(lab: LabDefinition, locale: LabLocale): LabDefinition {
+  if (locale === 'es') return lab;
+  const copy = LAB_SEARCH_COPY[lab.slug]?.[locale];
+  return copy ? { ...lab, ...copy } : lab;
+}
+
 interface LabCorpus {
   source: string;
   canonical_url: string;
@@ -117,7 +176,12 @@ export interface LabSearchResult extends LabDefinition {
   matchedTerms: string[];
 }
 
-export function searchLabCorpus(labs: LabDefinition[], query: string, limit: number): LabSearchResult[] {
+export function searchLabCorpus(
+  labs: LabDefinition[],
+  query: string,
+  limit: number,
+  locale: LabLocale = 'en',
+): LabSearchResult[] {
   const terms = queryTerms(query);
   const phrase = norm(query).trim();
   if (terms.length === 0) return [];
@@ -126,6 +190,7 @@ export function searchLabCorpus(labs: LabDefinition[], query: string, limit: num
     ['formulas', 3], ['assumptions', 2], ['kind', 1],
   ];
   return labs
+    .map((lab) => localizedLab(lab, locale))
     .map((lab) => {
       const matchedFields = new Set<string>();
       const matchedTerms = new Set<string>();

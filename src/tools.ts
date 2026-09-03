@@ -1203,7 +1203,7 @@ export function registerTools(
             "evaluation-sample-size": "calculate_evaluation_sample_size",
             "human-supervision-capacity": "calculate_human_supervision_capacity",
           };
-          for (const [index, raw] of searchLabCorpus(labs, query, limit).entries()) {
+          for (const [index, raw] of searchLabCorpus(labs, query, limit, lang).entries()) {
             hits.push({
               surface: "labs", score: raw.score + boost, source_score: raw.score,
               rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind, title: raw.title,

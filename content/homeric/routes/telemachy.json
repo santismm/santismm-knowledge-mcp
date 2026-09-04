@@ -95,6 +95,22 @@
         "pt": {
           "label": "Ítaca — Pilos — Esparta — Ítaca",
           "note": "O único itinerário homérico que hoje pode ser percorrido a pé e de barco. Todas as escalas, exceto o ilhéu da emboscada, são lugares reais e consensuais, e duas delas são sítios palacianos escavados. É, de longe, a rota mais bem pontuada do atlas."
+        },
+        "fr": {
+          "label": "Ithaque — Pylos — Sparte — Ithaque",
+          "note": "Le seul itinéraire homérique qui puisse être parcouru à pied et en bateau aujourd'hui. Chaque étape, à l'exception de l'îlot d'embuscade, est un lieu réel et reconnu, et deux d'entre elles sont des sites palatiaux fouillés. C'est, de loin, l'itinéraire le mieux noté de l'atlas."
+        },
+        "zh": {
+          "label": "伊萨卡 — 皮洛斯 — 斯巴达 — 伊萨卡",
+          "note": "这是如今唯一一条可以徒步和航行的荷马史诗路线。除了设伏的小岛外，每一个停靠点都是真实且公认的地点，其中两个还是已发掘的宫殿遗址。它是该地图集中得分最高的路线，且优势明显。"
+        },
+        "de": {
+          "label": "Ithaka — Pylos — Sparta — Ithaka",
+          "note": "Die einzige homerische Reiseroute, die man heute erwandern und ersegeln kann. Jeder Zwischenstopp außer der Hinterhalt-Insel ist ein realer, anerkannter Ort, und zwei davon sind ausgegrabene Palastanlagen. Sie ist mit großem Abstand die am besten bewertete Route im Atlas."
+        },
+        "ja": {
+          "label": "イタカ — ピュロス — スパルタ — イタカ",
+          "note": "今日でも徒歩と船で辿ることができる、唯一のホメロスの旅程。待ち伏せの小島を除くすべての目的地は、実在し合意された場所であり、そのうちの2つは発掘された宮殿跡である。これはアトラスの中で群を抜いて最高スコアのルートである。"
         }
       }
     }
@@ -129,6 +145,46 @@
         "Essa normalidade é o que importa aqui. Ao lado do nostos, mostra a aparência da confiança do atlas quando o poema fica dentro do mundo que seu público conhecia."
       ],
       "debate": "Quase nada sobre a rota. O que se discute é o ilhéu da emboscada, Astéris, que nenhum mapa produziu, e se o palácio de Menelau jaz por descobrir no vale do Eurotas."
+    },
+    "fr": {
+      "name": "La Télémachie",
+      "summary": "Le voyage d'un jeune homme d'Ithaque à Pylos et Sparte, puis son retour, à la recherche de nouvelles de son père. C'est l'autre voyage de l'Odyssée — et le seul que l'atlas peut tracer avec confiance d'un bout à l'autre.",
+      "description": [
+        "Athéna envoie Télémaque demander à Nestor et Ménélas ce qu'il est advenu d'Ulysse. Il navigue vers Pylos, y est reçu puis envoyé en char à Sparte, écoute le récit de Ménélas sur Protée et l'Égypte, et revient par la mer tandis que les prétendants lui tendent une embuscade.",
+        "Tout dans ce voyage est ordinaire : un navire emprunté, un équipage de volontaires, de l'hospitalité, des présents, deux nuits de discussion. Il n'y a aucun monstre ni aucun dieu qu'un public grec aurait trouvé remarquable.",
+        "C'est précisément cette banalité qui importe ici. Placée aux côtés du nostos, elle montre à quoi ressemble la confiance de l'atlas lorsque le poème reste ancré dans le monde que son public connaissait."
+      ],
+      "debate": "Presque rien sur l'itinéraire. Ce qui fait débat, c'est l'îlot d'embuscade d'Astéris, qu'aucune carte n'a jamais localisé, et la question de savoir si le palais de Ménélas repose encore inconnu dans la vallée de l'Eurotas."
+    },
+    "de": {
+      "name": "Die Telemachie",
+      "summary": "Die Reise eines jungen Mannes von Ithaka nach Pylos und Sparta und zurück auf der Suche nach Nachrichten über seinen Vater. Es ist die andere Reise der Odyssee – und die einzige, die der Atlas durchgehend mit Zuversicht darstellen kann.",
+      "description": [
+        "Athena schickt Telemachos los, um Nestor und Menelaos zu fragen, was aus Odysseus geworden ist. Er segelt nach Pylos, wird dort empfangen und mit dem Streitwagen nach Sparta weitergeschickt, hört Menelaos' Bericht über Proteus und Ägypten und kehrt auf dem Seeweg zurück, während die Freier ihm im Hinterhalt auflauern.",
+        "Alles an dieser Reise ist gewöhnlich: ein geliehenes Schiff, eine freiwillige Besatzung, Gastfreundschaft, Geschenke, zwei Nächte voller Gespräche. Es gibt kein Ungeheuer und keinen Gott, den ein griechisches Publikum bemerkenswert gefunden hätte.",
+        "Diese Gewöhnlichkeit ist der Grund, warum sie hier von Bedeutung ist. Neben den Nostos gestellt, zeigt sie, wie die Zuversicht des Atlas aussieht, wenn das Epos in der Welt bleibt, die sein Publikum kannte."
+      ],
+      "debate": "Fast nichts über die Route. Umstritten ist die Hinterhalt-Insel Asteris, die auf keiner Karte verzeichnet ist, und ob der Palast von Menelaos unentdeckt im Eurotas-Tal liegt."
+    },
+    "ja": {
+      "name": "テレマコスの旅",
+      "summary": "父親の消息を求めて、イタカからピュロス、スパルタへと向かい、再び戻る若者の旅。『オデュッセイア』におけるもう一つの航海であり、本地図帳において全行程を確信をもってプロットできる唯一のルートである。",
+      "description": [
+        "アテナはテレマコスを送り出し、ネストルとメネラオスにオデュッセウスの消息を尋ねさせる。彼はピュロスへ航海し、そこで歓迎されて戦車でスパルタへと送られ、メネラオスからプロテウスとエジプトの話を聞き、求婚者たちが待ち伏せする中、海路で帰還する。",
+        "旅のすべてが平凡である。借りた船、志願した乗組員、もてなし、贈り物、2晩にわたる語らい。ギリシャの観客が驚くような怪物も神も登場しない。",
+        "その平凡さこそが、ここで重要となる理由である。帰郷（ノストス）と並べることで、詩が観客の知る世界にとどまっているときに、アトラスの確信がどのような姿を見せるかを示している。"
+      ],
+      "debate": "ルートについてはほとんど議論がない。議論されているのは、どの地図にも描かれていない待ち伏せの小島アステリスについて、そしてメネラオスの宮殿がエウロタス渓谷に未発見のまま眠っているかどうかである。"
+    },
+    "zh": {
+      "name": "《忒勒马科斯游记》",
+      "summary": "一个年轻人为了寻找父亲的消息，从伊萨卡前往皮洛斯和斯巴达并返回的旅程。这是《奥德赛》中的另一段航程——也是本图册唯一能够全程充满信心地绘制的航程。",
+      "description": [
+        "雅典娜派忒勒马科斯去向涅斯托尔和墨涅拉俄斯打听奥德修斯的下落。他乘船前往皮洛斯，受到款待后乘战车前往斯巴达，听取了墨涅拉俄斯关于普罗透斯和埃及的叙述，并在求婚者们设伏等待时乘船返回。",
+        "旅途中的一切都很普通：借来的船只、志愿加入的船员、热情的款待、赠送的礼物、两晚的交谈。没有希腊观众会觉得奇异的怪物，也没有神明出现。",
+        "这种普通性正是其在此处具有重要意义的原因。与“归航”（nostos）并置，它展示了当史诗停留在观众所熟知的世界内部时，地图集所呈现出的信心。"
+      ],
+      "debate": "关于路线几乎没有任何争议。争论的焦点在于设伏的小岛阿斯泰里斯（没有任何地图标出其位置），以及墨涅拉俄斯的宫殿是否仍未在欧罗塔斯河谷被发现。"
     }
   }
 }

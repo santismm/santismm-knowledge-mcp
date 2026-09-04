@@ -328,6 +328,390 @@
         "load": "Tráfego contínuo e não assistido de agentes desde o lançamento, mais rastreadores de registries e verificações de saúde de diretórios.",
         "results": "Um cliente deste servidor sequestrado por injeção de prompts não obtém nada que não pudesse ter baixado do site público, porque o conjunto alcançável é exatamente o corpus publicado. Não há credencial a revogar nem caminho de escrita a abusar."
       }
+    },
+    "fr": {
+      "name": "Outils de moindre privilège",
+      "summary": "Attribuez à un agent l'ensemble d'outils le plus restreint, et à chaque outil la portée la plus étroite, dont la tâche a réellement besoin. Ce modèle accepte le fait que l'injection de prompt réussira parfois et limite ce qu'un agent compromis peut faire — vous ne pouvez pas corriger le modèle, mais vous pouvez décider de ce qu'il est capable d'atteindre.",
+      "definition": "La mise en œuvre d'outils de moindre privilège consiste à restreindre le catalogue d'outils d'un agent, ainsi que les identifiants sous-jacents de chaque outil, au strict minimum requis par la tâche — de sorte que les conséquences d'une attaque réussie ou d'une erreur de modèle soient limitées par conception plutôt que par la conformité du modèle.",
+      "problem": "Un agent doté d'outils et d'identifiants étendus transforme toute injection, jailbreak ou hallucination réussie en une action réelle disposant de toute la portée du compte associé.",
+      "context": "Utilisez ce modèle partout où un agent peut agir — appeler des API, écrire des fichiers, envoyer des messages, transférer de l'argent. Plus l'autonomie est grande et moins il y a de contrôle humain, plus le rayon d'impact doit être défini au niveau de la couche d'autorisation plutôt que dans le prompt.",
+      "solution": [
+        "Partez de la tâche, pas de la plateforme. Listez les opérations que l'agent doit effectuer et exposez précisément celles-ci. Un catalogue assemblé à partir de « ce que propose l'API » constitue une attribution d'autorisations que personne n'a examinée.",
+        "Séparez la lecture de l'écriture : outils distincts, identifiants distincts, et aucun chemin d'écriture accessible via un argument d'un outil de lecture. Les points de terminaison de « requête » qui peuvent également modifier des données constituent l'escalade silencieuse la plus courante.",
+        "Limitez la portée de l'identifiant, pas seulement de l'outil. Un outil en lecture seule s'appuyant sur un jeton d'administration n'est qu'à un bug près de devenir un outil d'écriture ; émettez des identifiants par outil avec la portée la plus étroite prise en charge par le système amont.",
+        "Limitez les paramètres. Autorisez explicitement (allowlist) les chemins, dépôts, tables, comptes ou destinataires qu'un outil peut cibler, afin qu'un agent compromis ne puisse pas rediriger un outil légitime vers une cible illégitime.",
+        "Faites en sorte que les autorisations expirent et soient réévaluées. Les outils s'accumulent ; supprimez ceux qui ne sont jamais appelés et considérez l'ajout d'un outil comme la modification d'autorisation qu'il représente réellement.",
+        "Enregistrez l'autorisation et l'appel séparément. Ce que l'agent pouvait faire et ce qu'il a fait constituent deux audits d'incidents différents, et la résolution d'un incident nécessite les deux."
+      ],
+      "components": [
+        "Un catalogue d'outils avec une portée explicite et écrite pour chaque outil.",
+        "Des identifiants par outil émis avec la portée la plus étroite proposée par le système amont.",
+        "Des listes d'autorisation (allowlists) de paramètres pour les cibles qu'un outil peut adresser.",
+        "Une couche de politique qui autorise chaque appel indépendamment du modèle.",
+        "Un journal d'audit couvrant à la fois les autorisations et les appels.",
+        "Un rythme de réévaluation qui supprime les outils qu'aucun élément n'appelle."
+      ],
+      "benefits": [
+        "Limite les dommages d'une injection réussie sans dépendre du bon comportement du modèle.",
+        "Transforme la question « cet agent est-il sûr ? » en un artefact vérifiable : une liste d'outils, de portées et de propriétaires.",
+        "Améliore la précision de la sélection des outils comme effet secondaire — il est plus facile pour un modèle de choisir parmi des outils moins nombreux et plus précis.",
+        "Rend les incidents analysables, car l'ensemble accessible était connu avant l'incident."
+      ],
+      "risks": [
+        "Dérive de la portée par commodité : un jeton étendu collé pendant le débogage et jamais restreint par la suite.",
+        "Fragmentation : des dizaines d'outils extrêmement spécifiques que le modèle ne parvient pas à distinguer, troquant un gain de sécurité contre une perte de fiabilité.",
+        "Faux sentiment de sécurité. Le moindre privilège limite les conséquences ; il n'empêche pas l'attaque et ne dit rien sur l'exfiltration via un outil de lecture légitimement autorisé.",
+        "Lenteur des processus : si l'émission d'un identifiant restreint est plus difficile que la réutilisation d'un identifiant étendu, le processus lui-même devient la vulnérabilité."
+      ],
+      "whenNot": [
+        "Prototypes sur des données synthétiques sans accès à la production, où le formalisme coûte plus cher que le risque qu'il élimine.",
+        "Lorsque la plateforme amont ne peut pas du tout exprimer de portées — le contrôle se déplace alors vers un proxy placé devant elle, plutôt que d'être considéré comme résolu.",
+        "Lorsque restreindre l'agent reviendrait à transférer le travail vers un parcours humain qui est lui-même moins limité et moins audité."
+      ],
+      "examples": [
+        "Un agent de codage disposant d'un jeton de dépôt limité à un seul dépôt et à un seul préfixe de branche, sans accès en lecture à l'échelle de l'organisation. Une injection via le fichier README d'une dépendance peut toujours ouvrir une branche, mais elle ne peut pas accéder aux quarante autres dépôts.",
+        "Un agent de support dont les outils CRM sont séparés : read_customer avec une clé en lecture seule, et update_ticket restreint aux tickets déjà présents dans la conversation. Une session détournée peut perturber un ticket, mais pas exporter la base de clients.",
+        "Un serveur MCP public dont l'ensemble du catalogue est constitué d'accesseurs (getters) sur du contenu déjà publié, sans aucun identifiant d'accès associé — il n'y a rien à révoquer car il n'y a rien à divulguer."
+      ],
+      "kpis": [
+        {
+          "metric": "Outils par agent",
+          "note": "La taille du catalogue. Une croissance sans suppressions indique que les autorisations s'accumulent sans être passées en revue."
+        },
+        {
+          "metric": "Part des outils disposant de droits d'écriture",
+          "note": "La proportion du catalogue capable de modifier l'état. Un indicateur qu'il convient de réduire au strict minimum requis par la tâche."
+        },
+        {
+          "metric": "Âge de l'outil inutilisé le plus ancien",
+          "note": "Nombre de jours écoulés depuis le dernier appel d'un outil autorisé. Une ancienne autorisation inutilisée représente un accès inutile dont un attaquant pourrait hériter."
+        },
+        {
+          "metric": "Couverture de la documentation des portées",
+          "note": "Part des outils disposant d'une portée documentée et d'un propriétaire désigné. Un outil non documenté est un outil sans limites."
+        }
+      ],
+      "failureModes": [
+        "Le jeton d'administration derrière l'outil en lecture seule : portée déclarée au niveau de l'outil, mais illimitée au niveau des identifiants.",
+        "Redirection de paramètre : l'outil est légitime mais la cible ne l'est pas, car rien ne contraignait l'argument.",
+        "Député confus (confused deputy) : restreindre les outils sans restreindre l'autorité sous laquelle ils s'exécutent ne change rien, car l'appelant hérite toujours de la portée de l'agent.",
+        "Dérive du catalogue : les outils ajoutés pour une expérimentation restent en place, et l'ensemble de permissions initialement validé ne correspond plus à celui qui est déployé."
+      ],
+      "lessons": [
+        "Définissez le rayon d'impact par écrit avant d'autoriser l'outil, et non après l'incident.",
+        "Le nom d'un outil ne définit pas sa portée. Seul l'identifiant côté serveur le fait.",
+        "Supprimer un outil que personne n'appelle est l'action de sécurité la plus économique qui soit.",
+        "Le moindre privilège est doublement rentable : il limite les attaques et permet à l'agent de mieux choisir ses outils."
+      ],
+      "faqs": [
+        {
+          "q": "Le moindre privilège permet-il d'empêcher l'injection de requêtes (prompt injection) ?",
+          "a": "Non, et ce n'est pas son but. Il part du principe que l'injection réussira parfois et détermine à l'avance ce qu'une attaque réussie peut accomplir. La prévention et le confinement sont deux tâches distinctes ; seul le confinement est sous votre contrôle."
+        },
+        {
+          "q": "À partir de quand une restriction devient-elle excessive ?",
+          "a": "Lorsque le modèle ne parvient plus à distinguer deux outils, ou lorsqu'une tâche courante nécessite quatre appels qui auraient pu, en toute sécurité, n'en faire qu'un. Diviser améliore la sécurité jusqu'à ce que cela provoque de mauvais choix d'outils, et un appel erroné constitue un échec en soi."
+        },
+        {
+          "q": "Nous utilisons un seul compte de service pour tout. Est-ce si grave ?",
+          "a": "Cela signifie que chaque agent, et chaque attaquant qui en compromet un, dispose de la portée de la tâche la plus large exécutée par l'un d'eux. Utiliser un compte unique revient à appliquer ce modèle avec un rayon d'impact égal à « l'intégralité du système »."
+        }
+      ],
+      "productionEvidence": {
+        "context": "Le point de terminaison MCP public de cette base de connaissances, accessible par n'importe quel agent sur Internet.",
+        "scenario": "Le corpus étant public et en lecture seule, le catalogue est entièrement composé d'accesseurs (getters). Aucun outil n'effectue d'écriture, aucun outil n'accède à une base de données que le site ne publie pas déjà, et aucun identifiant n'est accessible depuis un outil.",
+        "technology": "JSON-RPC sans état sur HTTP via un gestionnaire de route Next.js, liste d'autorisation d'origine vérifiée avant l'exécution de tout gestionnaire, limitation du débit par appelant dans Redis, journalisation d'audit structurée par appel.",
+        "load": "Trafic continu d'agents autonomes depuis le lancement, ainsi que des robots d'indexation de registres et des vérifications de l'état des répertoires.",
+        "results": "Un client de ce serveur détourné par injection de requêtes ne peut rien obtenir qu'il n'aurait pu récupérer sur le site public, car l'ensemble accessible correspond exactement au corpus publié. Il n'y a aucun identifiant à révoquer ni aucun chemin d'écriture à exploiter."
+      }
+    },
+    "de": {
+      "name": "Least-Privilege-Tooling",
+      "summary": "Geben Sie einem Agenten die minimal erforderliche Auswahl an Tools und jedem Tool den engsten Scope, den die Aufgabe tatsächlich benötigt. Das Pattern akzeptiert, dass Prompt Injections manchmal erfolgreich sein werden, und begrenzt, was ein gekaperter Agent tun kann – Sie können das Modell nicht patchen, aber Sie können entscheiden, worauf es zugreifen darf.",
+      "definition": "Least-Privilege-Tooling bezeichnet die Praxis, den Tool-Katalog eines Agenten und die den einzelnen Tools zugrunde liegenden Anmeldedaten auf das für die Aufgabe erforderliche Minimum zu beschränken. So werden die Folgen eines erfolgreichen Angriffs oder eines Modellfehlers durch das Systemdesign begrenzt und hängen nicht von der Compliance des Modells ab.",
+      "problem": "Ein Agent mit weitreichenden Tools und Berechtigungen verwandelt jede erfolgreiche Injection, jeden Jailbreak oder jede Halluzination in eine reale Aktion, die den vollen Zugriffsumfang des dahinterstehenden Kontos nutzt.",
+      "context": "Nutzen Sie dieses Pattern überall dort, wo umsetzbare Aktionen ausgeführt werden – beim Aufrufen von APIs, Schreiben von Dateien, Senden von Nachrichten oder Überweisen von Geld. Je mehr Autonomie und je weniger menschliche Überprüfung vorhanden ist, desto dringender muss der Schadensradius auf der Berechtigungsebene statt im Prompt begrenzt werden.",
+      "solution": [
+        "Gehen Sie von der Aufgabe aus, nicht von der Plattform. Listen Sie die Operationen auf, die der Agent ausführen muss, und geben Sie genau diese frei. Ein Katalog, der einfach aus dem zusammengestellt wird, „was die API bietet“, ist eine Berechtigungserteilung, die niemand überprüft hat.",
+        "Trennen Sie Lese- von Schreibvorgängen: separate Tools, separate Anmeldedaten und kein Schreibpfad, der über ein Argument eines Lese-Tools erreichbar ist. „Query“-Endpunkte, die auch Mutationen durchführen können, sind das häufigste Einfallstor für unbemerkte Rechteausweitung.",
+        "Beschränken Sie die Anmeldedaten, nicht nur das Tool. Ein Nur-Lese-Tool, das mit einem Admin-Token hinterlegt ist, ist nur einen Bug davon entfernt, ein Schreib-Tool zu sein; stellen Sie Anmeldedaten pro Tool mit dem engsten Scope aus, den das vorgeschaltete System unterstützt.",
+        "Begrenzen Sie die Parameter. Setzen Sie Pfade, Repositories, Tabellen, Konten oder Empfänger, die ein Tool ansprechen darf, auf eine Allowlist, damit ein gekaperter Agent ein legitimes Tool nicht auf ein illegitimes Ziel umleiten kann.",
+        "Lassen Sie Berechtigungen ablaufen und überprüfen Sie diese regelmäßig. Tools sammeln sich an; entfernen Sie, was nicht aufgerufen wurde, und behandeln Sie das Hinzufügen eines Tools als die Berechtigungsänderung, die es tatsächlich ist.",
+        "Protokollieren Sie die Berechtigungserteilung und den Aufruf separat. Was der Agent tun durfte und was er tatsächlich getan hat, sind zwei verschiedene Audits – und bei einem Vorfall werden beide benötigt."
+      ],
+      "components": [
+        "Ein Tool-Katalog mit einem expliziten, schriftlich festgelegten Scope pro Tool.",
+        "Pro Tool ausgestellte Anmeldedaten mit dem engsten Scope, den das vorgeschaltete System bietet.",
+        "Parameter-Allowlists für die Ziele, die ein Tool ansprechen darf.",
+        "Ein Policy-Layer, der jeden Aufruf unabhängig vom Modell autorisiert.",
+        "Ein Audit-Log, das sowohl Berechtigungserteilungen als auch Aufrufe abdeckt.",
+        "Ein Überprüfungszyklus, der Tools entfernt, die nicht aufgerufen werden."
+      ],
+      "benefits": [
+        "Begrenzt den Schaden einer erfolgreichen Injection, ohne darauf angewiesen zu sein, dass sich das Modell korrekt verhält.",
+        "Verwandelt die Frage „Ist dieser Agent sicher?“ in ein überprüfbares Artefakt: eine Liste von Tools, Scopes und Verantwortlichen.",
+        "Verbessert als Nebeneffekt die Genauigkeit bei der Tool-Auswahl – zwischen weniger, präziser definierten Tools kann ein Modell leichter wählen.",
+        "Macht Vorfälle untersuchbar, da die erreichbare Menge bereits vor dem Vorfall bekannt war."
+      ],
+      "risks": [
+        "Scope Creep aus Bequemlichkeit: Ein weitreichender Token, der beim Debugging eingefügt und danach nie wieder eingeschränkt wurde.",
+        "Fragmentierung: Dutzende extrem feingliedrige Tools, die das Modell nicht voneinander unterscheiden kann, wodurch ein Sicherheitsgewinn gegen einen Zuverlässigkeitsverlust eingetauscht wird.",
+        "Trügerische Sicherheit. Least Privilege begrenzt die Folgen; es verhindert nicht den Angriff und schützt nicht vor Datenabfluss (Exfiltration) über ein legitim freigegebenes Lese-Tool.",
+        "Prozessverzögerung: Wenn das Ausstellen spezifisch eingeschränkter Anmeldedaten schwieriger ist als die Wiederverwendung weitreichender Daten, wird der Prozess selbst zur Schwachstelle."
+      ],
+      "whenNot": [
+        "Prototypen auf synthetischen Daten ohne Produktionszugriff, bei denen der Aufwand die damit verringerten Risiken übersteigt.",
+        "Wenn das vorgeschaltete System Scopes überhaupt nicht abbilden kann – in diesem Fall verlagert sich die Kontrolle auf einen vorgeschalteten Proxy, anstatt die Anforderung als erfüllt zu betrachten.",
+        "Wenn die Einschränkung des Agenten die Arbeit auf einen menschlichen Pfad verlagern würde, der selbst weniger begrenzt und weniger auditiert ist."
+      ],
+      "examples": [
+        "Ein Coding-Agent, der ein Repository-Token erhält, das auf ein einziges Repository und ein einziges Branch-Präfix beschränkt ist, ohne organisationsweiten Lesezugriff. Eine Injection über die README einer Abhängigkeit kann zwar immer noch einen Branch erstellen, aber nicht auf die anderen vierzig Repositories zugreifen.",
+        "Ein Support-Agent, dessen CRM-Tools aufgeteilt sind: `read_customer` mit einem schreibgeschützten Schlüssel und `update_ticket` beschränkt auf Tickets, die sich bereits in der Konversation befinden. Eine gekaperte Sitzung kann ein einzelnes Ticket stören, aber nicht den gesamten Kundenstamm exportieren.",
+        "Ein öffentlicher MCP-Server, dessen gesamter Katalog aus Gettern für bereits veröffentlichte Inhalte besteht und der keinerlei Anmeldedaten benötigt – es gibt nichts zu widerrufen, da nichts durchsickern kann."
+      ],
+      "kpis": [
+        {
+          "metric": "Tools pro Agent",
+          "note": "Die Größe des Katalogs. Ein Wachstum ohne Bereinigungen ist das Signal dafür, dass sich Berechtigungen ungeprüft ansammeln."
+        },
+        {
+          "metric": "Anteil schreibberechtigter Tools",
+          "note": "Wie viel des Katalogs den Zustand ändern kann. Der Wert, den man auf das für die Aufgabe erforderliche Minimum reduzieren sollte."
+        },
+        {
+          "metric": "Alter des ältesten ungenutzten Tools",
+          "note": "Tage seit dem letzten Aufruf eines freigegebenen Tools. Eine alte, ungenutzte Freigabe ist eine Reichweite, die niemand benötigt und die ein Angreifer übernimmt."
+        },
+        {
+          "metric": "Dokumentationsabdeckung des Scopes",
+          "note": "Anteil der Tools mit schriftlich definiertem Scope und benanntem Owner. Ein undokumentiertes Tool ist ein unbegrenztes Tool."
+        }
+      ],
+      "failureModes": [
+        "Das Admin-Token hinter dem schreibgeschützten Tool: Der Scope ist auf der Tool-Ebene deklariert, aber auf der Credential-Ebene unbegrenzt.",
+        "Parameter-Repointing: Das Tool ist legitim, das Ziel jedoch nicht, da das Argument durch nichts eingeschränkt wurde.",
+        "Confused Deputy: Das Einschränken der Tools ohne Einschränkung der Autorität, unter der sie ausgeführt werden, ändert nichts, da der Aufrufer weiterhin die Reichweite des Agenten erbt.",
+        "Katalog-Drift: Für ein Experiment hinzugefügte Tools bleiben bestehen, und das überprüfte Berechtigungsset entspricht nicht mehr dem bereitgestellten."
+      ],
+      "lessons": [
+        "Definieren Sie den Explosionsradius (Blast Radius) vor der Freigabe des Tools, nicht erst nach dem Vorfall.",
+        "Der Name eines Tools ist nicht sein Scope. Das sind nur die serverseitigen Anmeldedaten.",
+        "Das Entfernen eines Tools, das von nichts aufgerufen wird, ist die günstigste Sicherheitsmaßnahme überhaupt.",
+        "Least Privilege zahlt sich doppelt aus: Es begrenzt Angriffe und sorgt dafür, dass der Agent Tools besser auswählt."
+      ],
+      "faqs": [
+        {
+          "q": "Verhindert Least Privilege Prompt Injection?",
+          "a": "Nein, und das soll es auch nicht. Es setzt voraus, dass Injections manchmal erfolgreich sein werden, und legt im Vorfeld fest, was ein erfolgreicher Angriff ausrichten kann. Prävention und Schadensbegrenzung (Containment) sind unterschiedliche Aufgaben; nur die Schadensbegrenzung liegt in Ihrer Hand."
+        },
+        {
+          "q": "Wie eng ist zu eng?",
+          "a": "Wenn das Modell zwei Tools nicht mehr voneinander unterscheiden kann oder wenn eine Routineaufgabe vier Aufrufe erfordert, die sicherer in einem hätten zusammengefasst werden können. Die Aufteilung verbessert die Sicherheit nur so lange, bis sie zu falschen Tool-Entscheidungen führt – und ein falscher Aufruf ist ein eigener Fehler."
+        },
+        {
+          "q": "Wir nutzen ein einziges Dienstkonto für alles. Ist das wirklich so schlimm?",
+          "a": "Das bedeutet, dass jeder Agent – und jeder Angreifer, der einen davon erreicht – die Reichweite der umfangreichsten Aufgabe hat, die einer von ihnen ausführt. Ein einziges Konto ist die Variante dieses Musters, bei der der Explosionsradius „alles“ umfasst."
+        }
+      ],
+      "productionEvidence": {
+        "context": "Der öffentliche MCP-Endpunkt für diese Wissensdatenbank, der für jeden Agenten im Internet erreichbar ist.",
+        "scenario": "Der Korpus ist öffentlich und schreibgeschützt, sodass der Katalog ausschließlich aus Gettern besteht. Es gibt kein Tool, das schreibt, kein Tool, das auf eine Datenbank zugreift, die die Website nicht ohnehin schon veröffentlicht, und keine Anmeldedaten, die von irgendeinem Tool aus erreichbar sind.",
+        "technology": "Zustandsloses JSON-RPC über HTTP auf einem Next.js-Route-Handler, Überprüfung der Origin-Allowlist vor der Ausführung eines Handlers, Rate-Limiting pro Aufrufer in Redis, strukturiertes Audit-Logging pro Aufruf.",
+        "load": "Kontinuierlicher, unbeaufsichtigter Agent-Traffic seit dem Start, plus Registry-Crawler und Directory-Health-Checks.",
+        "results": "Ein Client dieses Servers, der durch Prompt Injection gekapert wird, kann nichts erhalten, was er nicht auch von der öffentlichen Website hätte abrufen können, da die erreichbare Menge genau dem veröffentlichten Korpus entspricht. Es gibt keine Anmeldedaten zu widerrufen und keinen Schreibpfad zu missbrauchen."
+      }
+    },
+    "ja": {
+      "name": "最小権限ツール",
+      "summary": "エージェントにはタスクが実際に必要とする最も狭いツールのセットを、各ツールには最も狭いスコープを提供します。このパターンは、プロンプトインジェクションが成功することがあるという前提を受け入れ、乗っ取られたエージェントができることを制限します。モデルにパッチを当てることはできませんが、モデルがアクセスできる範囲を決定することはできます。",
+      "definition": "最小権限ツールとは、エージェントのツールカタログと各ツールの基盤となる資格情報を、タスクが必要とする最小限に制限するプラクティスです。これにより、攻撃の成功やモデルのエラーによる影響は、モデルのコンプライアンスではなく、設計によって制限されます。",
+      "problem": "広範なツールと広範な資格情報を与えられたエージェントは、インジェクション、ジェイルブレイク、またはハルシネーションの成功を、その背景にあるアカウントの全権限を伴う実際のアクションに変えてしまいます。",
+      "context": "APIの呼び出し、ファイルの書き込み、メッセージの送信、資金の移動など、エージェントがアクションを実行できるあらゆる場所で使用します。自律性が高く、人間によるレビューが少ないほど、プロンプトではなく権限レイヤーで影響範囲を設定する必要があります。",
+      "solution": [
+        "プラットフォームからではなく、タスクから始めてください。エージェントが実行する必要がある操作をリストアップし、それらのみを公開します。『APIが提供するもの』から組み立てられたカタログは、誰もレビューしていない権限付与になってしまいます。",
+        "読み取りと書き込みを分割します。ツールを分け、資格情報を分け、読み取りツールの引数からアクセスできる書き込みパスを排除します。データの変更も可能な『クエリ』エンドポイントは、最も一般的な、気付きにくい権限昇格の原因です。",
+        "ツールだけでなく、資格情報もスコープ制限します。管理者トークンに裏打ちされた読み取り専用ツールは、バグが1つあるだけで書き込みツールになり得ます。アップストリームシステムがサポートする最も狭いスコープで、ツールごとの資格情報を発行してください。",
+        "パラメータを制限します。ツールがアクセスできるパス、リポジトリ、テーブル、アカウント、または受信者をホワイトリストに登録し、乗っ取られたエージェントが正当なツールを不正なターゲットに向け直すことができないようにします。",
+        "権限付与に有効期限を設け、レビューを実施します。ツールは蓄積されていくため、呼び出されていないものは削除し、ツールの追加は権限の変更として扱ってください。",
+        "権限付与と呼び出しを個別にログに記録します。エージェントが実行できたことと、実際に実行したことは異なる監査対象であり、インシデント対応にはその両方が必要です。"
+      ],
+      "components": [
+        "ツールごとに明示的かつ書面で定義されたスコープを持つツールカタログ。",
+        "アップストリームシステムが提供する最も狭いスコープで発行された、ツールごとの資格情報。",
+        "ツールがアクセスできるターゲットのパラメータホワイトリスト。",
+        "モデルとは独立して各呼び出しを認可するポリシーレイヤー。",
+        "権限付与と呼び出しの両方をカバーする監査ログ。",
+        "呼び出されていないツールを削除する定期的なレビュー。"
+      ],
+      "benefits": [
+        "モデルが適切に動作することに依存せずに、インジェクション成功時の被害を制限します。",
+        "『このエージェントは安全か？』という問いを、ツール、スコープ、所有者のリストというレビュー可能な成果物へと変換します。",
+        "副次的な効果として、ツールの選択精度が向上します。ツールが少なく、役割が明確であるほど、モデルは選択しやすくなります。",
+        "インシデント発生前にアクセス可能な範囲が判明しているため、インシデントの調査が可能になります。"
+      ],
+      "risks": [
+        "利便性によるスコープの肥大化。デバッグ中に広範なトークンを貼り付け、その後スコープを狭めないまま放置すること。",
+        "断片化。モデルが区別できないほど細分化された多数のツールが存在し、セキュリティ上のメリットと引き換えに信頼性が低下すること。",
+        "誤った安心感。最小権限は影響を制限するだけであり、攻撃を防ぐものではなく、正当に付与された読み取りツールを介した情報漏洩については何も保証しません。",
+        "プロセスの停滞。スコープ制限された資格情報の発行が、広範な資格情報の再利用よりも困難な場合、プロセス自体が脆弱性になります。"
+      ],
+      "whenNot": [
+        "本番環境へのアクセスがない合成データ上のプロトタイプなど、手続きのコストが排除されるリスクを上回る場合。",
+        "アップストリームプラットフォームがスコープをまったく表現できない場合。この場合、制御は要件を満たしたと宣言するのではなく、その手前にあるプロキシに移動します。",
+        "エージェントの権限を狭めることで、それ自体が制限や監査の不十分な人間のプロセスに作業が押し付けられてしまう場合。"
+      ],
+      "examples": [
+        "1つのリポジトリと1つのブランチプレフィックスにスコープが限定され、組織全体の読み取り権限を持たないリポジトリトークンを付与されたコーディングエージェント。依存関係のREADMEを介したインジェクションによってブランチが作成される可能性はありますが、他の40のリポジトリにアクセスすることはできません。",
+        "CRMツールが分割されているサポートエージェント：読み取り専用キーを持つ `read_customer` と、すでに会話内にあるチケットに制限された `update_ticket`。セッションが乗っ取られたとしても、1つのチケットに嫌がらせをすることはできますが、顧客ベース全体をエクスポートすることはできません。",
+        "カタログ全体がすでに公開されているコンテンツに対するゲッター（getter）のみで構成され、資格情報を一切持たないパブリックMCPサーバー。漏洩するものが何もないため、失効させるべきものもありません。"
+      ],
+      "kpis": [
+        {
+          "metric": "エージェントあたりのツール数",
+          "note": "カタログの規模。削除を伴わない増加は、権限がレビューされずに蓄積されている兆候です。"
+        },
+        {
+          "metric": "書き込み可能なツールの割合",
+          "note": "カタログのうち、状態を変更できるものの割合。タスクが許容する最小限に向けて削減すべき数値です。"
+        },
+        {
+          "metric": "最も古い未使用ツールの経過日数",
+          "note": "付与されたツールが最後に呼び出されてからの日数。長期間未使用の権限は、誰も必要としないにもかかわらず、攻撃者に引き継がれてしまうアクセス権となります。"
+        },
+        {
+          "metric": "スコープドキュメントのカバー率",
+          "note": "文書化されたスコープと指名された所有者を持つツールの割合。ドキュメントのないツールは、制限のないツールと同義です。"
+        }
+      ],
+      "failureModes": [
+        "読み取り専用ツールの背後にある管理者トークン：スコープはツールレイヤーで宣言されているものの、資格情報レイヤーでは制限されていません。",
+        "パラメータの再指定：引数を制限するものが何もないため、ツール自体は正当であっても、ターゲットが不正になります。",
+        "混乱した代理（Confused deputy）：実行権限の主体を絞り込まずにツールだけを絞り込んでも、呼び出し元がエージェントのアクセス権を引き継ぐため、何も変わりません。",
+        "カタログのドリフト：実験のために追加されたツールがそのまま残り、レビューされた権限セットと実際にデプロイされている権限セットが乖離してしまいます。"
+      ],
+      "lessons": [
+        "インシデントが発生した後ではなく、ツールを付与する前に影響範囲（ブラスト半径）を文書化してください。",
+        "ツールの名前はそのスコープではありません。サーバー側の資格情報のみがスコープを決定します。",
+        "誰からも呼び出されないツールを削除することは、最も低コストで実施できるセキュリティ対策です。",
+        "最小権限は2つのメリットをもたらします。攻撃を制限することと、エージェントによるツールの選択精度を向上させることです。"
+      ],
+      "faqs": [
+        {
+          "q": "最小権限はプロンプトインジェクションを防げますか？",
+          "a": "いいえ、それを目的としたものではありません。インジェクションは時として成功することを前提とし、成功した場合に何ができるかを事前に制限します。予防と封じ込めは異なる役割であり、制御可能なのは封じ込めだけです。"
+        },
+        {
+          "q": "どの程度まで絞り込むと狭すぎる（過剰な制限になる）のでしょうか？",
+          "a": "モデルが2つのツールを区別できなくなったとき、または1回で安全に処理できる定型タスクに4回の呼び出しが必要になったときです。分割はセキュリティを向上させますが、ツールの誤選択を招くようになれば逆効果であり、誤った呼び出し自体が失敗の原因となります。"
+        },
+        {
+          "q": "すべての処理に1つのサービスアカウントを使用しています。それはそんなに悪いことですか？",
+          "a": "それは、すべてのエージェント（およびエージェントに到達したすべての攻撃者）が、実行される最も広範なタスクのアクセス権を持つことを意味します。1つのアカウントを使用することは、このパターンにおいて影響範囲（ブラスト半径）が『すべて』になることを意味します。"
+        }
+      ],
+      "productionEvidence": {
+        "context": "インターネット上のあらゆるエージェントからアクセス可能な、このナレッジベースのパブリックMCPエンドポイント。",
+        "scenario": "コーパスは公開されており読み取り専用であるため、カタログはすべてゲッター（getter）です。書き込みを行うツールや、サイトがすでに公開しているもの以外のデータベースにアクセスするツールはなく、どのツールからもアクセスできる資格情報はありません。",
+        "technology": "Next.jsのルートハンドラー上でのHTTP経由のステートレスJSON-RPC、ハンドラー実行前のオリジン許可リストのチェック、Redisによる呼び出し元ごとのレート制限、呼び出しごとの構造化監査ログの記録。",
+        "load": "ローンチ以来、継続している無人のエージェントトラフィックに加え、レジストリクローラーやディレクトリのヘルスチェック。",
+        "results": "プロンプトインジェクションによってこのサーバーのクライアントが乗っ取られたとしても、アクセス可能な範囲は公開されているコーパスと完全に一致しているため、公開サイトから取得できるもの以外の情報は取得できません。失効させるべき資格情報も、悪用される書き込みパスも存在しません。"
+      }
+    },
+    "zh": {
+      "name": "最小特权工具化",
+      "summary": "为智能体提供任务实际所需的最窄工具集，并为每个工具赋予最窄的范围。该模式承认提示词注入有时会成功，并限制了被劫持的智能体所能执行的操作——您无法修补模型，但可以决定它能够触及的内容。",
+      "definition": "最小特权工具化是指将智能体的工具目录以及每个工具的底层凭据限制在任务所需的最低限度的实践——这样，成功攻击或模型错误所带来的后果在设计上就是受限的，而不是依赖于模型的合规性。",
+      "problem": "如果赋予智能体广泛的工具和广泛的凭据，任何成功的注入、越狱或幻觉都会转化为真实的行动，并带有其背后账户的全部权限。",
+      "context": "适用于智能体可以执行操作的任何场景——调用 API、写入文件、发送消息、转移资金。自主性越高、人工审查越少，就越需要将爆炸半径设置在权限层，而不是提示词中。",
+      "solution": [
+        "从任务出发，而不是从平台出发。列出智能体必须执行的操作，并仅公开这些操作。根据“API 提供了什么”来构建目录，无异于授予了未经审查的权限。",
+        "读写分离：独立的工具、独立的凭据，并且不能通过读取工具的参数触及写入路径。同时支持变更的“查询”端点是最常见的隐性越权漏洞。",
+        "限制凭据范围，而不仅仅是工具。由管理员令牌支持的只读工具，只要出现一个 Bug 就会变成写入工具；应在上游系统支持的最窄范围内，为每个工具单独颁发凭据。",
+        "限制参数。将工具可以访问的路径、仓库、表、账户或接收者列入白名单，这样被劫持的智能体就无法将合法的工具重新指向非法的目标。",
+        "使授权可过期并进行审查。工具会不断累积；移除从未被调用过的工具，并将添加工具视为实质上的权限变更。",
+        "分别记录授权和调用。智能体“能做什么”和“做了什么”是两个不同的审计内容，而应对安全事件时两者都需要。"
+      ],
+      "components": [
+        "一个工具目录，其中明确书写了每个工具的范围。",
+        "在上游系统提供的最窄范围内为每个工具颁发的凭据。",
+        "工具可以访问的目标的参数白名单。",
+        "一个独立于模型对每次调用进行授权的策略层。",
+        "涵盖授权和调用的审计日志。",
+        "定期审查机制，用于移除未被调用的工具。"
+      ],
+      "benefits": [
+        "在不依赖模型表现良好的情况下，限制成功注入所造成的损害。",
+        "将“这个智能体安全吗？”转化为可审查的产物：工具、范围和所有者的列表。",
+        "顺带提高了工具选择的准确性——更少、更精准的工具更便于模型进行选择。",
+        "使安全事件可调查，因为在事件发生前，可触及的范围就是已知的。"
+      ],
+      "risks": [
+        "因图方便而导致的范围蔓延：在调试时粘贴了宽泛的令牌，此后从未对其进行收窄。",
+        "碎片化：数十个极细粒度的工具导致模型无法区分，用可靠性的降低换取安全性的提升。",
+        "虚假的安全感。最小特权只是限制了后果；它并不能阻止攻击，也无法防范通过合法授予的读取工具进行的数据外泄。",
+        "流程拖累：如果颁发有范围限制的凭据比复用宽泛的凭据更困难，那么流程本身就会成为漏洞。"
+      ],
+      "whenNot": [
+        "在不涉及生产环境的合成数据上进行原型设计，此时流程成本高于其消除的风险。",
+        "当上游平台完全无法表达范围时——此时控制权应移至其前置代理，而不是直接声明满足要求。",
+        "当限制智能体反而会将工作推向本身限制更少、审计更少的人工路径时。"
+      ],
+      "examples": [
+        "一个编码智能体被赋予了仅限于单个代码库和单个分支前缀的仓库 Token，且没有组织范围的读取权限。通过依赖项 README 进行的注入攻击虽然仍能创建分支，但无法触及其他四十个代码库。",
+        "一个支持智能体，其 CRM 工具被拆分：使用只读密钥的 read_customer，以及限制为仅处理已在对话中的工单的 update_ticket。被劫持的会话只能干扰单个工单，而无法导出客户数据库。",
+        "一个公开的 MCP 服务器，其整个目录都是针对已发布内容的 getter（获取器），完全不需要任何凭据——因为没有什么可泄露的，所以也无需撤销任何内容。"
+      ],
+      "kpis": [
+        {
+          "metric": "每个智能体的工具数",
+          "note": "工具目录的大小。只增不减表明权限正在未经审核地累积。"
+        },
+        {
+          "metric": "具备写能力的工具占比",
+          "note": "目录中能够改变状态的工具比例。该数值应尽可能降低至任务允许的最小值。"
+        },
+        {
+          "metric": "最老未使用工具的闲置时长",
+          "note": "自上次调用已授权工具以来的天数。长期未使用的授权属于不必要的权限范围，极易被攻击者利用。"
+        },
+        {
+          "metric": "范围文档覆盖率",
+          "note": "拥有书面范围定义和明确所有者的工具比例。未记录文档的工具即为未受限的工具。"
+        }
+      ],
+      "failureModes": [
+        "只读工具背后的管理员 Token：范围仅在工具层声明，但在凭据层未作限制。",
+        "参数重定向：工具本身是合法的，但目标不合法，因为没有任何机制对参数进行约束。",
+        "混淆代理：仅缩减工具而不缩减其运行所依附的权限，无法解决任何问题，因为调用者仍然会继承智能体的权限范围。",
+        "目录漂移：为实验添加的工具被残留，导致经过审核的权限集与实际部署的权限集不一致。"
+      ],
+      "lessons": [
+        "应在授予工具权限之前明确爆炸半径，而不是在安全事件发生之后。",
+        "工具的名称并不代表其作用范围，只有服务器端的凭据才是。",
+        "移除无人调用的工具是最廉价且有效的安全工作。",
+        "最小特权原则带来双重收益：它既能限制攻击范围，又能让智能体更好地选择工具。"
+      ],
+      "faqs": [
+        {
+          "q": "最小特权原则能阻止提示词注入吗？",
+          "a": "不能，它也不是为了这个目的而设计的。它假设注入有时会成功，并预先限制成功注入后所能造成的破坏。预防和遏制是不同的工作，而只有遏制是完全在您控制之下的。"
+        },
+        {
+          "q": "限制到什么程度算过度限制？",
+          "a": "当模型无法再区分两个工具，或者一个常规任务需要四次调用（而这些调用本可以安全地合并为一次）时。拆分工具可以提高安全性，但如果开始导致错误的工具选择，那么错误的调用本身就是一种失败。"
+        },
+        {
+          "q": "我们所有的操作都使用同一个服务账号。这真的很糟糕吗？",
+          "a": "这意味着每个智能体，以及任何接触到智能体的攻击者，都拥有所有任务中最大任务的权限范围。使用单一账号相当于将该模式下的爆炸半径设为“全部”。"
+        }
+      ],
+      "productionEvidence": {
+        "context": "该知识库的公开 MCP 端点，互联网上的任何智能体均可访问。",
+        "scenario": "语料库是公开且只读的，因此目录完全由 getter（获取器）组成。没有写操作工具，没有工具能访问该网站未公开的数据库，也没有任何工具可以获取凭据。",
+        "technology": "基于 Next.js 路由处理程序的 HTTP 无状态 JSON-RPC，在运行任何处理程序之前检查源白名单，在 Redis 中进行针对每个调用者的速率限制，以及结构化的单次调用审计日志。",
+        "load": "自发布以来持续的无人值守智能体流量，以及注册表爬虫和目录健康检查。",
+        "results": "即使该服务器的客户端因提示词注入而被劫持，攻击者也无法获取公开网站之外的任何内容，因为可访问的范围完全等同于已发布的语料库。这里没有需要撤销的凭据，也没有可以滥用的写入路径。"
+      }
     }
   }
 }

@@ -283,6 +283,338 @@
           "a": "É um gatilho útil mas raramente suficiente sozinho, porque a autoconfiança do modelo muitas vezes não acompanha a precisão real. Combine-o com detecção de laço, verificações de ambiguidade e sinais de sensibilidade, e valide que sua medida de confiança realmente correlaciona com resultados corretos antes de confiar em um limiar."
         }
       ]
+    },
+    "fr": {
+      "name": "Escalade humaine",
+      "summary": "Confiez l'intégralité de la tâche à un humain lorsque l'agent détecte qu'il est dépassé — faible confiance, échecs répétés, ambiguïté ou situations sensibles — et transmettez tout le contexte pour que la personne puisse prendre le relais sans avoir à tout réanalyser. Contrairement à une porte d'approbation, qui suspend une action pour validation, l'escalade transfère la responsabilité de sorte que l'agent cesse de piloter. La difficulté réside dans le calibrage des déclencheurs pour éviter à la fois la sur-escalade et la sous-escalade.",
+      "problem": "Un agent autonome rencontrera inévitablement des cas qu'il ne peut pas gérer correctement : des entrées hors de sa distribution d'entraînement, des requêtes qu'il ne parvient pas à satisfaire de manière répétée, des objectifs réellement ambigus ou des moments sensibles sur le plan émotionnel ou juridique. S'il s'obstine malgré tout, il produit des réponses erronées avec assurance, tourne en boucle ou génère des actions préjudiciables — et l'utilisateur découvre la défaillance trop tard. Pourtant, tout orienter vers des humains va à l'encontre de l'intérêt de l'automatisation et surcharge le personnel. Le système a besoin d'un moyen rigoureux pour reconnaître les limites de sa compétence et transférer la tâche avant que des dommages ne surviennent.",
+      "context": "Utilisez ce modèle partout où un agent agit avec une autonomie significative et où le coût d'un résultat erroné dépasse le coût d'un examen rapide par un humain : support client, gestion des réclamations et des dossiers, tri financier ou médical, modération de contenu et copilotes opérationnels. Il suppose qu'une file d'attente humaine ou une fonction d'astreinte existe pour recevoir les escalades et que l'agent peut observer des signaux concernant ses propres performances. Il est particulièrement précieux lorsque les défaillances sont silencieuses — lorsqu'une réponse erronée formulée avec assurance est pire que l'absence de réponse — et lorsqu'un sous-ensemble de cas est connu pour être difficile, rare ou réglementé.",
+      "solution": [
+        "Définissez des déclencheurs d'escalade explicites et intégrez-les dans la boucle principale de l'agent en tant que conditions de sortie de premier ordre, et non après coup. Les déclencheurs courants sont un niveau de confiance inférieur à un seuil (issu des scores du modèle, d'une auto-critique ou d'un vérificateur), la détection de boucles ou d'échecs répétés (l'agent réessaie la même étape sans progresser), une ambiguïté structurelle (plusieurs interprétations valides de l'objectif) et des signaux de sensibilité (sentiment négatif, mots-clés de sécurité, comptes à haute valeur ou sujets réglementés). Chaque déclencheur doit correspondre à une décision d'aiguillage : vers quel humain ou équipe, avec quelle priorité. Traitez les seuils comme des paramètres ajustables appartenant à l'équipe, examinés par rapport aux résultats réels, car ils traduisent le compromis entre le taux d'automatisation et le taux d'erreur.\n\nLorsqu'un déclencheur s'active, l'agent doit effectuer un transfert propre : cesser d'agir, rassembler tout le contexte — requête d'origine, tentatives effectuées, résultats intermédiaires, sa meilleure estimation actuelle et la raison de l'escalade — et l'orienter vers la bonne file d'attente via un ticket ou un transfert en direct. L'humain qui reçoit la tâche doit pouvoir prendre le relais sans avoir à tout réanalyser depuis le début ; la qualité du contexte est ce qui fait de l'escalade une aide plutôt qu'un abandon de tâche. Fournissez toujours un message de repli bienveillant à l'utilisateur final (« Je fais appel à un spécialiste ») afin que l'expérience se dégrade en douceur. Enfin, enregistrez chaque escalade avec son déclencheur et sa résolution afin de pouvoir mesurer sa pertinence et réajuster les déclencheurs."
+      ],
+      "components": [
+        "Évaluateur de déclencheur",
+        "Assembleur de contexte",
+        "Routeur",
+        "Canal de transfert",
+        "Répondeur de repli",
+        "Journal d'audit"
+      ],
+      "benefits": [
+        "Les cas difficiles parviennent à un humain avant que l'agent ne produise un résultat erroné avec assurance, limitant ainsi la zone d'impact des erreurs.",
+        "Seuls les cas réellement complexes sont transmis, de sorte que le volume d'opérations courantes reste automatisé et que le personnel se concentre sur ce qui requiert du discernement.",
+        "Un transfert propre accompagné de contexte permet d'aider les utilisateurs plutôt que de les renvoyer d'un service à l'autre, et les humains reprennent le fil sans avoir à tout recommencer.",
+        "L'enregistrement des déclencheurs et des résolutions fournit la piste d'audit que les régulateurs et les responsables des risques attendent pour une supervision humaine significative."
+      ],
+      "risks": [
+        "Des seuils définis de manière trop prudente renvoient les cas simples vers les humains, annulant les gains de l'automatisation et submergeant le personnel sous un bruit inutile.",
+        "Des seuils définis de manière trop permissive permettent à l'agent de traiter des cas qu'il aurait dû transférer, entraînant des échecs silencieux.",
+        "Si les données transmises sont insuffisantes, l'humain doit reprendre l'investigation à zéro et l'escalade est perçue comme une tâche abandonnée plutôt que comme une assistance.",
+        "L'auto-évaluation de la confiance d'un modèle ne correspond souvent pas à sa précision réelle ; ainsi, des seuils de score simplistes escaladent les mauvais cas dans les deux sens."
+      ],
+      "whenNot": [
+        "S'il n'y a pas de file d'attente gérée par du personnel ou de fonction d'astreinte pour prendre le relais, l'escalade n'aboutira nulle part ; investissez plutôt dans un arrêt sécurisé ou un chemin de récupération.",
+        "Lorsque vous avez uniquement besoin d'une approbation pour une étape spécifique à fort impact alors que l'agent conserve la tâche, utilisez une barrière d'approbation humaine (human-approval gate) plutôt qu'un transfert complet de responsabilité.",
+        "Pour des tâches peu coûteuses et facilement réversibles où une mauvaise réponse n'a aucune conséquence, la surcharge et la latence de l'escalade l'emportent sur les bénéfices."
+      ],
+      "examples": [
+        "Un agent de support résout les questions courantes mais escalade vers une file d'attente humaine en cas de frustration détectée, de réponses répétées inutiles ou de demandes sensibles liées au compte, en transmettant l'intégralité de la conversation.",
+        "Un agent d'assurance traite automatiquement les sinistres clairs et escalade ceux qui sont ambigus, de grande valeur ou signalés comme frauduleux vers un gestionnaire de sinistres, en y joignant ses conclusions et le motif.",
+        "Un agent de codage autonome qui échoue à plusieurs reprises au même test s'arrête, résume ce qu'il a tenté et l'endroit où il est bloqué, puis confie la tâche à un ingénieur au lieu de tourner en boucle."
+      ],
+      "kpis": [
+        {
+          "metric": "Taux d'escalade",
+          "note": "Part des tâches confiées à des humains. Surveillez la tendance et la distribution plutôt qu'un chiffre cible — un pic ou une baisse soudaine signale un déclencheur mal calibré ou un changement dans la répartition des entrées."
+        },
+        {
+          "metric": "Pertinence de l'escalade",
+          "note": "Parmi les cas escaladés, combien nécessitaient réellement un humain (vrais positifs) par rapport à ceux qui auraient pu être traités automatiquement. Une revue humaine par échantillonnage des escalades constitue la mesure la plus fiable."
+        },
+        {
+          "metric": "Taux d'escalades manquées",
+          "note": "Parmi les résolutions automatisées, combien se sont avérées erronées par la suite et auraient dû être escaladées. C'est le signal le plus difficile et le plus important à obtenir ; analysez les plaintes, les réouvertures de tickets et les audits pour les identifier."
+        },
+        {
+          "metric": "Suffisance du contexte de transfert",
+          "note": "Fréquence à laquelle l'humain qui reçoit le relais peut prendre la suite sans recontacter l'utilisateur ni refaire l'investigation. À suivre via les retours des agents sur la complétude des informations fournies."
+        }
+      ],
+      "failureModes": [
+        "Les déclencheurs configurés une fois pour toutes et jamais réévalués deviennent obsolètes à mesure que les entrées et les modèles évoluent, déplaçant silencieusement l'équilibre entre automatisation et erreurs.",
+        "Les cas sont orientés vers une file d'attente sans responsable ou surchargée, de sorte que les utilisateurs escaladés attendent indéfiniment — ce qui est pire qu'une mauvaise réponse.",
+        "Un agent optimisé pour éviter l'escalade apprend à exprimer une fausse confiance, supprimant ainsi le signal même sur lequel repose ce modèle.",
+        "Le transfert supprime la mise en forme, le raisonnement intermédiaire ou les pièces jointes, obligeant l'humain à reconstituer la situation et annulant le gain de rapidité."
+      ],
+      "lessons": [
+        "Validez que votre signal de confiance est corrélé à la précision réelle avant de définir un seuil basé sur celui-ci ; associez les scores du modèle à un vérificateur ou à une auto-critique.",
+        "La différence entre une bonne et une mauvaise escalade réside presque entièrement dans les données de transfert ; investissez dans cet aspect avant d'ajuster les seuils.",
+        "Traisez les seuils comme des paramètres vivants, examinés par rapport à des échantillons d'escalades et d'escalades manquées, gérés par l'équipe et non figés lors du lancement.",
+        "Même un déclencheur parfait échoue parfois ; un message d'attente soigné et une file d'attente bien gérée évitent que les échecs ne se transforment en abandons."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il d'une barrière d'approbation humaine (human-approval gate) ?",
+          "a": "Une barrière d'approbation suspend une action spécifique à fort impact et demande la validation d'un humain, après quoi l'agent continue. L'escalade transfère la responsabilité de l'ensemble de la tâche — l'agent cesse de la piloter car il ne doit plus progresser du tout. Utilisez une barrière pour la question « Dois-je faire cette action précise ? » et l'escalade pour « Je suis dépassé, veuillez prendre le relais »."
+        },
+        {
+          "q": "Quel est le bon taux d'escalade ?",
+          "a": "Il n'y a pas de chiffre universel ; cela dépend de la complexité des tâches et du coût des erreurs. Optimisez la pertinence plutôt qu'un taux cible : escaladez les cas qui nécessitent réellement un humain et minimisez à la fois les transferts inutiles et les escalades manquées. Analysez le taux comme un signal de mauvais calibrage, et non comme un objectif en soi."
+        },
+        {
+          "q": "Puis-je simplement escalader chaque fois que la confiance du modèle est faible ?",
+          "a": "C'est un déclencheur utile mais rarement suffisant à lui seul, car l'auto-évaluation de la confiance d'un modèle ne correspond souvent pas à sa précision réelle. Combinez-le avec la détection de boucles, des vérifications d'ambiguïté et des signaux de sensibilité, et validez que votre mesure de confiance est réellement corrélée à des résultats corrects avant de vous fier à un seuil."
+        }
+      ]
+    },
+    "de": {
+      "name": "Menschliche Eskalation",
+      "summary": "Übergeben Sie die gesamte Aufgabe an einen Menschen, wenn der Agent erkennt, dass er überfordert ist – bei geringem Vertrauen, wiederholtem Scheitern, Mehrdeutigkeit oder sensiblen Situationen – und übermitteln Sie den vollständigen Kontext, damit die Person die Aufgabe ohne erneute Untersuchung übernehmen kann. Im Gegensatz zu einem Freigabe-Gate, das eine einzelne Aktion für eine Freigabe pausiert, überträgt die Eskalation die Verantwortung, sodass der Agent die Steuerung abgibt. Die Schwierigkeit liegt in der Kalibrierung der Trigger, um sowohl Über- als auch Untereskalation zu vermeiden.",
+      "problem": "Ein autonomer Agent wird unweigerlich auf Fälle stoßen, die er nicht gut bewältigen kann: Eingaben außerhalb seiner Trainingsverteilung, Anfragen, die er wiederholt nicht erfüllen kann, wirklich mehrdeutige Ziele oder emotional und rechtlich sensible Momente. Wenn er dennoch weitermacht, erzeugt er selbstbewusst falsche Antworten, Schleifen oder schädliche Aktionen – und der Benutzer entdeckt den Fehler erst zu spät. Doch alles an Menschen weiterzuleiten, macht den Zweck der Automatisierung zunichte und überlastet das Personal. Das System benötigt eine disziplinierte Methode, um die Grenzen seiner Kompetenz zu erkennen und die Aufgabe zu übertragen, bevor Schaden entsteht.",
+      "context": "Verwenden Sie dieses Muster überall dort, wo ein Agent mit nennenswerter Autonomie agiert und die Kosten eines falschen Ergebnisses die Kosten eines kurzen Blicks durch einen Menschen übersteigen: im Kundensupport, bei der Schadens- und Fallbearbeitung, bei der finanziellen oder medizinischen Triage, bei der Inhaltsmoderation und bei operativen Copilots. Es setzt voraus, dass eine menschliche Warteschlange oder ein Bereitschaftsdienst für den Empfang von Eskalationen existiert und dass der Agent Signale über seine eigene Leistung beobachten kann. Es ist am wertvollsten, wenn Fehler unbemerkt bleiben – wenn eine selbstbewusst falsche Antwort schlimmer ist als keine Antwort – und wenn eine Teilmenge von Fällen bekanntermaßen schwierig, selten oder reguliert ist.",
+      "solution": [
+        "Definieren Sie explizite Eskalationstrigger und binden Sie diese als erstklassige Exit-Bedingungen in die Hauptschleife des Agenten ein, nicht als nachträglichen Einfall. Typische Trigger sind ein Konfidenzwert unter einem Schwellenwert (aus Modell-Scores, Selbstkritik oder einem Verifizierer), die Erkennung von Schleifen oder wiederholten Fehlern (der Agent versucht denselben Schritt ohne Fortschritt erneut), strukturelle Mehrdeutigkeit (mehrere gültige Interpretationen des Ziels) und Sensibilitätssignale (negative Stimmung, Sicherheits-Keywords, wertvolle Konten oder regulierte Themen). Jeder Trigger sollte einer Routing-Entscheidung zugeordnet sein: welcher Mensch oder welches Team mit welcher Priorität. Behandeln Sie Schwellenwerte als anpassbare Parameter im Besitz des Teams, die anhand realer Ergebnisse überprüft werden, da sie den Kompromiss zwischen Automatisierungsrate und Fehlerrate codieren.\n\nWenn ein Trigger auslöst, muss der Agent eine saubere Übergabe durchführen: die Aktivität einstellen, den vollständigen Kontext packen – ursprüngliche Anfrage, was versucht wurde, Zwischenergebnisse, die aktuelle beste Vermutung und der Grund für die Eskalation – und ihn über ein Ticket oder eine Live-Übergabe an die richtige Warteschlange leiten. Der empfangende Mensch sollte in der Lage sein, die Aufgabe zu übernehmen, ohne von vorne recherchieren zu müssen; die Qualität des Kontextes entscheidet darüber, ob sich die Eskalation wie eine Hilfe oder wie ein fallengelassener Ball anfühlt. Bieten Sie dem Endbenutzer immer eine freundliche Fallback-Nachricht an („Ich ziehe einen Spezialisten hinzu“), damit sich das Benutzererlebnis nahtlos anpasst. Protokollieren Sie schließlich jede Eskalation mit ihrem Trigger und ihrer Lösung, damit die Angemessenheit gemessen und die Trigger neu kalibriert werden können."
+      ],
+      "components": [
+        "Trigger-Evaluator",
+        "Kontext-Packager",
+        "Router",
+        "Übergabekanal",
+        "Fallback-Responder",
+        "Audit-Protokoll"
+      ],
+      "benefits": [
+        "Schwierige Fälle erreichen einen Menschen, bevor der Agent ein selbstbewusst falsches Ergebnis liefert, was den Schadensradius von Fehlern begrenzt.",
+        "Nur wirklich schwierige Fälle werden übergeben, sodass das Routinevolumen automatisiert bleibt und sich die Mitarbeiter auf Aufgaben konzentrieren können, die menschliches Urteilsvermögen erfordern.",
+        "Eine saubere Übergabe mit Kontext sorgt dafür, dass Benutzern geholfen wird, anstatt sie abzuweisen, und Menschen die Arbeit fortsetzen können, ohne von vorn beginnen zu müssen.",
+        "Protokollierte Auslöser und Lösungen liefern den Nachweispfad, den Regulierungsbehörden und Risikoverantwortliche für eine sinnvolle menschliche Aufsicht erwarten."
+      ],
+      "risks": [
+        "Zu konservativ gesetzte Schwellenwerte leiten einfache Fälle an Menschen weiter, was die Automatisierungsgewinne zunichte macht und die Mitarbeiter in Rauschen untergehen lässt.",
+        "Zu locker gesetzte Schwellenwerte führen dazu, dass der Agent Fälle durcharbeitet, die er hätte übergeben müssen, was zu unbemerkt schlechten Ergebnissen führt.",
+        "Wenn die Payload unvollständig ist, muss der Mensch die Untersuchung von Grund auf neu beginnen, und die Eskalation fühlt sich wie eine fallengelassene Aufgabe an, nicht wie eine Unterstützung.",
+        "Das Selbstvertrauen des Modells korreliert oft nicht mit der tatsächlichen Genauigkeit, sodass naive Score-Schwellenwerte in beide Richtungen die falschen Fälle eskalieren."
+      ],
+      "whenNot": [
+        "Wenn es keine besetzte Warteschlange oder Rufbereitschaft zur Übernahme gibt, läuft die Eskalation ins Leere; investieren Sie stattdessen in einen sicheren Stopp oder einen Wiederherstellungspfad.",
+        "Wenn Sie nur die Genehmigung für einen bestimmten, folgenschweren Schritt benötigen, während der Agent die Aufgabe behält, nutzen Sie ein Human-Approval-Gate und keine vollständige Übergabe der Verantwortung.",
+        "Bei kostengünstigen, leicht umkehrbaren Aufgaben, bei denen eine falsche Antwort nichts kostet, überwiegen der Overhead und die Latenz einer Eskalation den Nutzen."
+      ],
+      "examples": [
+        "Ein Support-Agent beantwortet Routinefragen, eskaliert jedoch bei erkannter Frustration, wiederholt nicht hilfreichen Antworten oder kontosensitiven Anfragen an eine menschliche Warteschlange und übergibt dabei den gesamten Gesprächsverlauf.",
+        "Ein Versicherungs-Agent verarbeitet eindeutige Schadensfälle automatisch und eskaliert unklare, wertvolle oder als betrugsverdächtig markierte Fälle an einen Schadensregulierer, inklusive der eigenen Erkenntnisse und der Begründung.",
+        "Ein autonomer Coding-Agent, der wiederholt am selben Test scheitert, stoppt, fasst zusammen, was er versucht hat und wo er blockiert ist, und übergibt die Aufgabe an einen Entwickler, anstatt sich im Kreis zu drehen."
+      ],
+      "kpis": [
+        {
+          "metric": "Eskalationsrate",
+          "note": "Anteil der an Menschen übergebenen Aufgaben. Achten Sie auf den Trend und die Verteilung, nicht auf einen Zielwert – ein plötzlicher Anstieg oder Abfall signalisiert einen falsch kalibrierten Auslöser oder eine Verschiebung im Input-Mix."
+        },
+        {
+          "metric": "Angemessenheit der Eskalation",
+          "note": "Wie viele der eskalierten Fälle benötigten tatsächlich einen Menschen (True Positives) im Vergleich zu solchen, die hätten automatisiert verarbeitet werden können. Eine stichprobenartige menschliche Überprüfung der Eskalationen liefert die verlässlichsten Erkenntnisse."
+        },
+        {
+          "metric": "Rate verpasster Eskalationen",
+          "note": "Wie viele der automatisierten Lösungen stellten sich später als falsch heraus und hätten eskaliert werden müssen. Das schwierigste und wichtigste Signal; werten Sie Beschwerden, Wiedereröffnungen und Audits aus, um diese zu finden."
+        },
+        {
+          "metric": "Kontextvollständigkeit bei der Übergabe",
+          "note": "Wie oft der übernehmende Mensch die Aufgabe fortführen kann, ohne den Benutzer erneut kontaktieren oder den Fall neu untersuchen zu müssen. Messen Sie dies über das Feedback der Mitarbeiter zur Vollständigkeit des übergebenen Pakets."
+        }
+      ],
+      "failureModes": [
+        "Einmalig eingestellte und nie wieder überprüfte Auslöser geraten aus dem Takt, wenn sich Inputs und Modelle ändern, was das Verhältnis zwischen Automatisierung und Fehlern unbemerkt verschiebt.",
+        "Fälle werden in eine Warteschlange geleitet, für die niemand zuständig oder die überlastet ist, sodass eskalierte Benutzer unbegrenzt warten – was schlimmer ist als eine falsche Antwort.",
+        "Ein Agent, der darauf optimiert ist, Eskalationen zu vermeiden, lernt, falsches Selbstvertrauen vorzutäuschen, wodurch genau das Signal unterdrückt wird, auf dem dieses Pattern basiert.",
+        "Die Übergabe entfernt Formatierungen, Zwischenschritte der Argumentation oder Anhänge, was den Menschen zwingt, die Situation mühsam zu rekonstruieren, und den Geschwindigkeitsvorteil zunichtemacht."
+      ],
+      "lessons": [
+        "Validieren Sie, dass Ihr Konfidenzsignal mit der tatsächlichen Genauigkeit korreliert, bevor Sie Schwellenwerte darauf anwenden; kombinieren Sie Modell-Scores mit einem Verifizierer oder einer Selbstkritik.",
+        "Der Unterschied zwischen einer guten und einer schlechten Eskalation liegt fast ausschließlich in der übergebenen Payload; investieren Sie hier, bevor Sie Schwellenwerte anpassen.",
+        "Betrachten Sie Schwellenwerte als lebendige Parameter, die anhand von stichprobenartigen Eskalationen und verpassten Eskalationen überprüft werden. Sie sollten im Verantwortungsbereich des Teams liegen und nicht nach dem Go-Live unverändert bleiben.",
+        "Selbst ein perfekter Auslöser versagt manchmal; eine freundliche Wartemeldung und eine klar zugewiesene Warteschlange verhindern, dass aus Fehlern Abbrüche werden."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies von einem Human-Approval-Gate?",
+          "a": "Ein Approval-Gate pausiert eine bestimmte, folgenschwere Aktion und bittet einen Menschen um Freigabe, woraufhin der Agent fortfährt. Eine Eskalation überträgt die Verantwortung für die gesamte Aufgabe – der Agent stoppt die Ausführung, da er überhaupt nicht weitermachen sollte. Nutzen Sie ein Gate für „Soll ich diese eine Sache tun?“ und eine Eskalation für „Ich weiß nicht mehr weiter, bitte übernehmen“."
+        },
+        {
+          "q": "Was ist die richtige Eskalationsrate?",
+          "a": "Es gibt keinen universellen Wert; er hängt von der Mischung der Aufgabenschwierigkeiten und den Fehlerkosten ab. Optimieren Sie auf Angemessenheit, nicht auf eine Zielrate: Eskalieren Sie Fälle, die tatsächlich einen Menschen erfordern, und minimieren Sie sowohl unnötige Übergaben als auch verpasste Eskalationen. Betrachten Sie die Rate als Signal für eine Fehlkalibrierung, nicht als Selbstzweck."
+        },
+        {
+          "q": "Kann ich nicht einfach immer dann eskalieren, wenn die Konfidenz des Modells niedrig ist?",
+          "a": "Das ist ein nützlicher Auslöser, reicht aber allein selten aus, da das Selbstvertrauen des Modells oft nicht mit der tatsächlichen Genauigkeit korreliert. Kombinieren Sie es mit Schleifenerkennung, Eindeutigkeitsprüfungen und Sensitivitätssignalen und validieren Sie, dass Ihr Konfidenzmaß tatsächlich mit korrekten Ergebnissen korreliert, bevor Sie einem Schwellenwert vertrauen."
+        }
+      ]
+    },
+    "ja": {
+      "name": "人へのエスカレーション",
+      "summary": "エージェントが自身の能力を超えている（信頼度の低さ、繰り返される失敗、曖昧さ、または機密性の高い状況など）と検出した場合、タスク全体を人間に引き渡し、十分なコンテキストを渡すことで、その人が再調査することなく引き継げるようにします。1つのアクションをサインオフのために一時停止する承認ゲートとは異なり、エスカレーションは所有権を移転するため、エージェントは処理の主導を停止します。難しいのは、過剰なエスカレーションとエスカレーション不足の両方を避けるためにトリガーを調整することです。",
+      "problem": "自律型エージェントは、トレーニングデータの分布外の入力、対応に失敗し続けるリクエスト、真に曖昧なゴール、感情的または法的にデリケートな状況など、うまく処理できないケースに必ず遭遇します。それでも処理を強行すると、自信満々に間違った回答を出力したり、ループに陥ったり、有害なアクションを実行したりして、ユーザーが失敗に気づくのが遅すぎることになります。しかし、すべてを人間にルーティングしていては自動化の意味がなくなり、スタッフが過負荷になります。システムには、自身の能力の限界を認識し、被害が発生する前にタスクを移転するための規律ある方法が必要です。",
+      "context": "エージェントが実質的な自律性を持って動作し、誤った結果によるコストが、人間が目を通すコストを上回るあらゆる場所（カスタマーサポート、請求およびケース処理、財務または医療のトリアージ、コンテンツモデレーション、運用のコパイロットなど）でこのパターンを使用します。これは、エスカレーションを受け取るための人間のキューまたはオンコール機能が存在し、エージェントが自身のパフォーマンスに関するシグナルを観察できることを前提としています。このパターンが最も価値を発揮するのは、失敗がサイレントである場合（自信満々に間違った回答をすることが、回答がないことよりも悪い場合）、および一部のケースが困難、稀、または規制対象であることがわかっている場合です。",
+      "solution": [
+        "明示的なエスカレーショントリガーを定義し、後付けではなく、第一級の終了条件としてエージェントのメインループに組み込みます。一般的なトリガーには、しきい値未満の信頼度（モデルのスコア、自己批判、または検証器によるもの）、ループまたは繰り返される失敗の検出（エージェントが進捗なしに同じステップを再試行する）、構造的な曖昧さ（ゴールの複数の有効な解釈）、および機密性シグナル（ネガティブな感情、セーフティキーワード、高価値のアカウント、または規制対象のトピック）があります。各トリガーは、どの人間またはチームに、どの優先度でルーティングするかという決定にマッピングされる必要があります。しきい値は、自動化率とエラー率のトレードオフを規定するものであるため、チームが所有し、実際の結果に照らし合わせてレビューする調整可能なパラメータとして扱います。\\n\\nトリガーが起動すると、エージェントはクリーンなハンドオフを実行する必要があります。つまり、動作を停止し、元のリクエスト、試みたこと、中間結果、現在の最善の推測、およびエスカレーションした理由を含む完全なコンテキストをパッケージ化し、チケットまたはライブハンドオフを介して適切なキューにルーティングします。受け取る人間は、最初から再調査することなく引き継ぐことができる必要があります。コンテキストの品質こそが、エスカレーションを「丸投げ」ではなく「支援」と感じさせる要素です。エンドユーザーには、体験がスムーズに移行するよう、常に適切なフォールバックメッセージ（「専門の担当者にお繋ぎします」など）を提供してください。最後に、適切性を測定しトリガーを再調整できるよう、すべてのエスカレーションをそのトリガーおよび解決策とともにログに記録します。"
+      ],
+      "components": [
+        "トリガー評価器",
+        "コンテキストパケッジャー",
+        "ルーター",
+        "ハンドオフチャネル",
+        "フォールバック応答器",
+        "監査ログ"
+      ],
+      "benefits": [
+        "エージェントが自信満々に間違った結果を出す前に、困難なケースが人間に届くため、ミスの影響範囲を最小限に抑えることができます。",
+        "本当に困難なケースのみが引き継がれるため、定型的な業務は自動化されたまま維持され、スタッフは判断を要する業務に集中できます。",
+        "コンテキストを伴うスムーズな引き継ぎにより、ユーザーはたらい回しにされることなくサポートを受けられ、担当者は最初からやり直すことなく業務を再開できます。",
+        "記録されたトリガーと解決策は、規制当局やリスク所有者が実質的な人間による監視に期待する証跡を提供します。"
+      ],
+      "risks": [
+        "しきい値を保守的に設定しすぎると、簡単なケースまで人間に回されてしまい、自動化によるメリットが失われ、スタッフがノイズに埋もれてしまいます。",
+        "しきい値を緩く設定しすぎると、エージェントが引き継ぐべきケースまで無理に進めてしまい、気付かないうちに悪い結果を招くことになります。",
+        "ペイロード（引き継ぎ情報）が不十分な場合、人間が最初から調査し直すことになり、エスカレーションは支援ではなく、放置されたタスクのように感じられます。",
+        "モデルの自己確信度は実際の正確性と一致しないことが多いため、単純なスコアしきい値では、両方の方向で誤ったケースをエスカレーションしてしまいます。"
+      ],
+      "whenNot": [
+        "引き継ぎ先となるスタッフの控えるキューやオンコール機能がない場合、エスカレーションの行き先がありません。代わりに、安全停止やリカバリパスに投資してください。",
+        "エージェントがタスクを維持したまま、影響の大きい特定の1ステップのみに承認が必要な場合は、完全な所有権の移転ではなく、人間による承認ゲートを使用してください。",
+        "誤った回答によるコストが発生しない、低コストで容易に差し戻し可能なタスクの場合、エスカレーションのオーバーヘッドと遅延はメリットを上回ります。"
+      ],
+      "examples": [
+        "サポートエージェントは定型的な質問を解決しますが、不満の検出、役に立たない回答の繰り返し、またはアカウントに影響する機密性の高いリクエストが発生した場合は、会話の全履歴を渡して人間のキューにエスカレーションします。",
+        "保険エージェントは、明確な請求を自動処理し、曖昧な請求、高額な請求、または不正のフラグが立った請求については、調査結果と理由を添付してアジャスターにエスカレーションします。",
+        "自律型コーディングエージェントは、同じテストに繰り返し失敗した場合、処理を空回りさせるのではなく、停止して試行内容とブロックされている箇所を要約し、タスクをエンジニアに引き継ぎます。"
+      ],
+      "kpis": [
+        {
+          "metric": "エスカレーション率",
+          "note": "人間に引き継がれたタスクの割合。目標値ではなく、トレンドと分布を監視してください。急激な上昇や低下は、トリガーの調整ミスや入力ミックスの変化を示しています。"
+        },
+        {
+          "metric": "エスカレーションの適切性",
+          "note": "エスカレーションされたケースのうち、本当に人間が必要だったもの（真陽性）と、自動処理できたものの割合。エスカレーションのサンプリングによる人間によるレビューが、最も信頼性の高い把握方法です。"
+        },
+        {
+          "metric": "エスカレーション漏れ率",
+          "note": "自動解決されたもののうち、後から誤りであることが判明し、エスカレーションすべきだったケースの割合。最も困難でありながら最も重要なシグナルです。これらを発見するには、苦情、再オープン、監査を分析してください。"
+        },
+        {
+          "metric": "引き継ぎコンテキストの十分性",
+          "note": "引き継ぎを受けた人間が、ユーザーに再連絡したり再調査したりすることなく、どの程度の割合で業務を引き継げるか。パッケージが完全であったかどうかに関するエージェントのフィードバックを通じて追跡します。"
+        }
+      ],
+      "failureModes": [
+        "一度調整されたきり見直されないトリガーは、入力やモデルの変化に伴って乖離が生じ、自動化とエラーのバランスを気付かないうちに変化させてしまいます。",
+        "ケースが、誰も所有していないキューや、処理能力を超えたキューにルーティングされるため、エスカレーションされたユーザーがいつまでも待たされることになります。これは誤った回答よりも悪質です。",
+        "エスカレーションを回避するように最適化されたエージェントは、誤った自信を表現することを学習し、このパターンが依存しているシグナルそのものを抑制してしまいます。",
+        "引き継ぎによってフォーマット、中間推論、または添付ファイルが失われると、人間が状況を再構築せざるを得なくなり、速度のメリットが失われます。"
+      ],
+      "lessons": [
+        "確信度シグナルをしきい値として使用する前に、それが実際の正確性と相関していることを検証してください。モデルのスコアを検証器や自己批判と組み合わせてください。",
+        "優れたエスカレーションと不適切なエスカレーションの違いは、ほぼ完全に引き継ぎペイロードにあります。しきい値を調整する前に、そこに投資してください。",
+        "しきい値は、リリース時に固定するのではなく、サンプリングされたエスカレーションやエスカレーション漏れに照らして見直される、チームが所有する動的なパラメータとして扱ってください。",
+        "完璧なトリガーであっても失敗することはあります。適切な保留メッセージと所有者の明確なキューを用意することで、失敗がユーザーの離脱につながるのを防ぐことができます。"
+      ],
+      "faqs": [
+        {
+          "q": "これは人間による承認ゲートとどう違うのですか？",
+          "a": "承認ゲートは、影響の大きい特定の1つのアクションを一時停止し、人間に承認を求めた後、エージェントが処理を続行します。エスカレーションはタスク全体の所有権を移転します。これ以上進めるべきではないため、エージェントは主導を停止します。『この1つのことを行うべきか？』にはゲートを使用し、『私の手には負えないので、引き継いでください』にはエスカレーションを使用します。"
+        },
+        {
+          "q": "適切なエスカレーション率はどれくらいですか？",
+          "a": "普遍的な数値はありません。タスクの難易度の組み合わせやエラーのコストによって異なります。目標率ではなく適切性を最適化してください。本当に人間が必要なケースをエスカレーションし、不要な引き継ぎとエスカレーション漏れの両方を最小限に抑えます。エスカレーション率は、それ自体を目標とするのではなく、調整ミスのシグナルとして見直してください。"
+        },
+        {
+          "q": "モデルの確信度が低いときは、いつでもエスカレーションしてよいですか？",
+          "a": "これは有用なトリガーですが、モデルの自己確信度は実際の正確性と一致しないことが多いため、単独では不十分なことがほとんどです。ループ検出、曖昧さのチェック、感度シグナルと組み合わせ、しきい値を信頼する前に、確信度の測定値が実際に正しい結果と相関していることを検証してください。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "人工升级",
+      "summary": "当智能体检测到自身无能为力时（置信度低、重复失败、存在歧义或敏感情况），将整个任务移交给人类，并传递完整的上下文，以便人员无需重新调查即可接管。与暂停单个操作以等待签字批准的审批关卡不同，升级会转移所有权，使智能体停止主导。难点在于校准触发器，以避免过度升级和升级不足。",
+      "problem": "自主智能体不可避免地会遇到其无法妥善处理的情况：超出其训练分布的输入、持续无法满足的请求、真正模糊的目标，或者在情感和法律上敏感的时刻。如果它仍然强行推进，就会产生看似自信却错误的答案、陷入死循环或采取有害的操作，而用户发现失败时为时已晚。然而，将所有事情都路由给人类又违背了自动化的初衷，并会让员工不堪重负。系统需要一种规范的方法来识别其能力的边界，并在造成损害之前转移任务。",
+      "context": "只要智能体在进行具有实质自主性的操作，且错误结果的成本超过人类快速浏览的成本，就可以使用此模式：例如客户支持、索赔和案件处理、财务或医疗分诊、内容审核以及运营 Copilot。它假设存在人工队列或值班机制来接收升级，并且智能体能够观察到有关自身表现的信号。当失败是隐性的时候（即看似自信却错误的答案比没有答案更糟糕），以及已知某些子集案例属于困难、罕见或受监管的情况时，该模式最具价值。",
+      "solution": [
+        "定义明确的升级触发器，并将其作为一等公民（first-class）退出条件接入智能体的主循环中，而不是事后补救。常见的触发器包括置信度低于阈值（来自模型评分、自我批判或验证器）、死循环或重复失败检测（智能体在没有进展的情况下重试同一步骤）、结构性歧义（对目标有多种有效解释）以及敏感性信号（负面情绪、安全关键词、高价值账户或受监管的主题）。每个触发器都应映射到一个路由决策：路由给哪个人员或团队，以及具有什么优先级。将阈值视为由团队拥有的可调参数，并根据实际结果进行审查，因为它们体现了自动化率与错误率之间的权衡。\\n\\n当触发器激活时，智能体必须执行干净的交接：停止操作，打包完整的上下文——原始请求、尝试过的操作、中间结果、当前的最佳猜测以及升级原因——并通过工单或实时交接将其路由到正确的队列。接收的人员应该能够直接接管，而无需从头开始重新调查；上下文的质量决定了升级是真正提供帮助，还是像一次搞砸的交接。始终向终端用户提供友好的回退消息（“我正在为您引入专家”），以便体验平稳降级。最后，记录每次升级及其触发器和解决结果，以便衡量其合理性并重新调整触发器。"
+      ],
+      "components": [
+        "触发器评估器",
+        "上下文打包器",
+        "路由器",
+        "交接通道",
+        "回退响应器",
+        "审计日志"
+      ],
+      "benefits": [
+        "棘手的案例会在智能体产生看似自信却错误的结果之前到达人类手中，从而限制了错误的影响范围。",
+        "仅将真正困难的案例进行交接，从而使常规工作保持自动化，让员工专注于需要判断力的事务。",
+        "带有上下文的清晰交接意味着用户能得到切实帮助，而不是被推诿，且人工客服可以直接继续处理而无需重新开始。",
+        "记录在案的触发因素和解决方案提供了监管机构和风险所有者所期望的证据链，以实现有意义的人工监督。"
+      ],
+      "risks": [
+        "阈值设置过于保守会将简单的案例推给人工，从而抹杀自动化带来的收益，并使员工淹没在噪音中。",
+        "阈值设置过于宽松会导致智能体强行处理本应交接的案例，从而引发隐性的不良后果。",
+        "如果传递的数据（payload）过于单薄，人工人员就必须从头开始重新调查，这会让升级感觉像是被丢弃的任务，而不是协助。",
+        "模型的置信度往往与实际准确率不一致，因此简单的分数阈值会导致双向的错误升级。"
+      ],
+      "whenNot": [
+        "如果没有配备人员的队列或值班功能来接管，升级将无处可去；此时应转而投资于安全停止或恢复路径。",
+        "当您只需要对某个特定的高影响步骤进行审批，而智能体仍保留该任务时，请使用人工审批关卡，而不是完全转移所有权。",
+        "对于成本低、易于逆转且错误答案无需付出代价的任务，升级带来的开销和延迟将大于其收益。"
+      ],
+      "examples": [
+        "支持智能体负责解答常规问题，但在检测到用户沮丧情绪、重复出现无用回答或涉及账户敏感的请求时，会升级到人工队列，并传递完整的对话内容。",
+        "保险智能体自动处理明确的理赔，并将含糊不清、高价值或标记为欺诈的理赔升级给理赔员，并附带其调查结果和原因。",
+        "自主编码智能体在重复失败于同一个测试时会停止运行，总结已尝试的操作和受阻的位置，并将任务移交给工程师，而不是无休止地无效循环。"
+      ],
+      "kpis": [
+        {
+          "metric": "升级率",
+          "note": "移交给人工的任务比例。应关注趋势和分布，而不是单一的目标数值——突然的飙升或下降表明触发器校准有误或输入组合发生了变化。"
+        },
+        {
+          "metric": "升级合理性",
+          "note": "在升级的案例中，有多少是真正需要人工处理的（真阳性），有多少是本可以自动处理的。对升级案例进行人工抽样审查是最可靠的评估方式。"
+        },
+        {
+          "metric": "漏升级率",
+          "note": "在自动解决的案例中，事后证明有多少是错误的且本应升级的。这是最难也最重要的信号；可通过挖掘投诉、重新打开的工单和审计来发现它们。"
+        },
+        {
+          "metric": "交接上下文充分性",
+          "note": "接收人员在无需重新联系用户或重新调查的情况下即可接管工作的频率。通过人工对交接包是否完整提供的反馈来进行跟踪。"
+        }
+      ],
+      "failureModes": [
+        "一次性调优后便不再维护的触发器会随着输入和模型的改变而脱节，从而在无形中打破自动化与错误之间的平衡。",
+        "案例被路由到无人负责或已超负荷的队列中，导致升级的用户无限期等待——这比得到错误的答案还要糟糕。",
+        "为了避免升级而进行优化的智能体会学会表达虚假的置信度，从而抑制了该模式所依赖的关键信号。",
+        "交接过程丢失了格式、中间推理或附件，迫使人工重新构建场景，从而抹杀了速度优势。"
+      ],
+      "lessons": [
+        "在根据置信度信号设置阈值之前，先验证其是否与实际准确率相关；将模型评分与验证器或自我批判相结合。",
+        "好升级与坏升级之间的区别几乎完全取决于交接的数据（payload）；在调整阈值之前，应先在这方面进行投入。",
+        "将阈值视为动态参数，根据抽样的升级和漏升级案例进行审查，由团队共同维护，而不是在发布后便一成不变。",
+        "即使是完美的触发器有时也会失效；友好的等待提示和专人负责的队列可以防止失败演变成用户流失。"
+      ],
+      "faqs": [
+        {
+          "q": "这与人工审批关卡有什么不同？",
+          "a": "审批关卡会暂停某个特定的高影响操作，并要求人工进行审批，通过后智能体继续执行。而升级则会转移整个任务的所有权——智能体停止主导，因为它根本不应该继续进行。对于“我是否应该做这一件事？”使用关卡；对于“我无能为力了，请接管”，则使用升级。"
+        },
+        {
+          "q": "合适的升级率是多少？",
+          "a": "没有一个通用的数值；这取决于任务难度的组合和错误的成本。应针对合理性进行优化，而不是针对目标率：将真正需要人工的案例进行升级，并尽量减少不必要的交接和漏升级。将升级率视为校准失误的信号，而不是其本身的目标。"
+        },
+        {
+          "q": "我可以在模型置信度低时直接进行升级吗？",
+          "a": "这是一个有用的触发因素，但仅凭这一点很少足够，因为模型的自我置信度往往与实际准确率不一致。应将其与循环检测、歧义检查和敏感性信号相结合，并在信任某个阈值之前，先验证您的置信度度量是否确实与正确的结果相关。"
+        }
+      ]
     }
   }
 }

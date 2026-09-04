@@ -78,6 +78,22 @@
         "pt": {
           "label": "A costa de Maroneia, Trácia",
           "note": "Os cícones foram um povo trácio real cujo território as fontes antigas situam nesta costa, e uma serra aqui ainda carrega o nome de Ismaro. O vinho que Odisseu recebe de Máron é descrito com detalhe suficiente — forte, doce, cortado com vinte partes de água — para se ler como conhecimento de um produto regional concreto."
+        },
+        "fr": {
+          "label": "La côte de Maronée, en Thrace",
+          "note": "Les Cicones étaient un véritable peuple thrace dont les sources antiques situent le territoire sur cette côte, et une crête y porte encore le nom d'Ismaros. Le vin qu'Ulysse reçoit de Maron est décrit avec suffisamment de détails — fort, doux, coupé de vingt volumes d'eau — pour s'apparenter à la connaissance d'un produit régional spécifique."
+        },
+        "zh": {
+          "label": "色雷斯马罗尼亚（Maroneia）的海岸",
+          "note": "喀科涅斯人是真实的色雷斯民族，古代文献将其领土置于该海岸，这里的一处山脊仍保留着伊斯马罗斯（Ismaros）的名字。奥德修斯从马隆那里带走的美酒有着足够详细的描述——强劲、甘甜、需兑二十份水稀释——这可以解读为对特定地区特产的了解。"
+        },
+        "de": {
+          "label": "Die Küste bei Maroneia, Thrakien",
+          "note": "Die Kikonen waren ein reales thrakisches Volk, dessen Territorium antike Quellen an dieser Küste verorten, und ein dortiger Höhenrücken trägt noch heute den Namen Ismaros. Der Wein, den Odysseus von Maron erhält, wird detailliert genug beschrieben – stark, süß, mit zwanzig Teilen Wasser gemischt –, um als Kenntnis eines bestimmten regionalen Produkts gedeutet zu werden."
+        },
+        "ja": {
+          "label": "トラキア、マロニアの海岸",
+          "note": "キコネス人は実在したトラキアの民族であり、古代の史料はその領土をこの海岸に位置づけている。また、ここの尾根には今もイスマロスの名が残っている。オデュッセウスがマロンから受け取るワインは、非常に詳細に描写されており（強く、甘く、20倍の水で薄めて飲む）、特定の地域産品に関する知識として読み取ることができる。"
         }
       }
     }
@@ -115,6 +131,46 @@
       ],
       "identificationNote": "Plausível: um povo real, uma costa real e um nome sobrevivente, sem uma escavação que ligue o sítio ao episódio. Pontua 9/12.",
       "debate": "Se Ísmaro era uma cidade concreta ou um distrito, e o quanto a descrição do vinho reflete conhecimento genuíno da produção trácia e não hipérbole épica."
+    },
+    "fr": {
+      "name": "Ismaros",
+      "summary": "La première étape après Troie, et la seule qu'Ulysse atteint par une navigation ordinaire : une ville thrace qu'il pille, et où le refus de son équipage de repartir coûte la vie à six hommes par navire.",
+      "description": [
+        "Le raid contre les Cicones est la charnière entre la guerre et les errances. C'est un raid classique de l'âge du bronze ou de l'époque archaïque — prendre la ville, s'emparer des femmes et des biens, et déguerpir avant l'arrivée des voisins. L'équipage s'attarde pour boire, les Cicones de l'intérieur contre-attaquent, et la flotte repart en ayant subi des pertes.",
+        "Le vin de Maron réapparaît plus tard comme le narcotique qui endort le Cyclope, ce qui constitue l'un des rares fils reliant les épisodes fantastiques à un lieu réel."
+      ],
+      "identificationNote": "Plausible : un peuple réel, une côte réelle et un nom qui a survécu, sans fouilles reliant le site à l'épisode. Il obtient un score de 9/12.",
+      "debate": "La question de savoir si Ismaros était une ville spécifique ou un district, et dans quelle mesure la description du vin reflète une connaissance réelle de la production thrace plutôt qu'une hyperbole épique."
+    },
+    "de": {
+      "name": "Ismaros",
+      "summary": "Die erste Station nach Troja und die einzige, die Odysseus durch gewöhnliches Segeln erreicht: eine thrakische Stadt, die er plündert und in der die Weigerung seiner Mannschaft, abzureisen, sechs Männer pro Schiff das Leben kostet.",
+      "description": [
+        "Der Überfall auf die Kikonen ist das Bindeglied zwischen dem Krieg und den Irrfahrten. Es ist ein typischer bronzezeitlicher oder archaischer Raubzug – die Stadt einnehmen, Frauen und Güter rauben und verschwinden, bevor die Nachbarn eintreffen. Die Mannschaft bleibt zum Trinken, die Kikonen aus dem Landesinneren starten einen Gegenangriff, und die Flotte zieht mit Verlusten ab.",
+        "Der Wein des Maron taucht später wieder als das Mittel auf, das den Kyklopen einschläfert, was einer der wenigen Fäden ist, die die fantastischen Episoden mit einem realen Ort verknüpfen."
+      ],
+      "identificationNote": "Plausibel: ein reales Volk, eine reale Küste und ein überlieferter Name, ohne eine Ausgrabung, die die Fundstätte mit der Episode verbindet. Erreicht 9/12 Punkte.",
+      "debate": "Ob Ismaros eine bestimmte Stadt oder ein Bezirk war und wie sehr die Beschreibung des Weins echtes Wissen über die thrakische Produktion widerspiegelt und nicht nur epische Übertreibung ist."
+    },
+    "ja": {
+      "name": "イスマロス",
+      "summary": "トロイを出発して最初の寄港地であり、オデュッセウスが通常の航海で到達した唯一の場所。彼が略奪したトラキアの町であり、乗組員が立ち去ることを拒んだために、船1隻につき6人の犠牲者を出すことになった。",
+      "description": [
+        "キコネス人への襲撃は、戦争と漂流の間の転換点である。それは青銅器時代や古拙期の典型的な襲撃行為であり、町を攻略し、女や財宝を奪い、近隣の住民が駆けつける前に立ち去るというものである。乗組員が酒を飲むために留まったため、内陸のキコネス人が反撃し、艦隊は損失を被って出発することになった。",
+        "マロンのワインは、後にキュクロプスを眠らせる薬として再登場する。これは、空想的なエピソードを実在の場所へと結びつける数少ない糸口の1つである。"
+      ],
+      "identificationNote": "妥当：実在の民族、実在の海岸、そして現存する名前はあるが、遺跡をそのエピソードに結びつける発掘調査は行われていない。スコアは12点満点中9点。",
+      "debate": "イスマロスが特定の町であったのか、それとも地域であったのか、そしてワインの描写が叙事詩的な誇張ではなく、トラキアの生産に関する本物の知識をどの程度反映しているかという議論。"
+    },
+    "zh": {
+      "name": "伊斯马鲁斯",
+      "summary": "离开特洛伊后的第一站，也是奥德修斯通过普通航行到达的唯一一站：一个被他洗劫的色雷斯城镇，在那里，他的船员因拒绝离开而导致每艘船损失了六个人。",
+      "description": [
+        "对喀科涅斯人（Cicones）的袭击是战争与漂泊之间的枢纽。这是一次典型的青铜时代或古风时期的袭击——占领城镇，夺取妇女和财物，并在邻居赶来之前撤离。船员们留下来喝酒，内陆的喀科涅斯人发起反击，舰队蒙受损失后撤离。",
+        "马隆（Maron）的美酒后来再次出现，作为让独眼巨人入睡的迷药，这是将奇幻情节与真实地点联系起来的少数线索之一。"
+      ],
+      "identificationNote": "似是而非：真实的民族、真实的海岸和幸存的地名，但没有将该遗址与该事件联系起来的发掘工作。得分为 9/12。",
+      "debate": "伊斯马鲁斯是一个具体的城镇还是一个地区，以及对美酒的描述在多大程度上反映了对色雷斯产地的真实了解，而非史诗般的夸张。"
     }
   }
 }

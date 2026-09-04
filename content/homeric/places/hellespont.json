@@ -83,6 +83,22 @@
         "pt": {
           "label": "Os Dardanelos",
           "note": "O estreito entre o Egeu e o mar de Mármara, com sessenta quilômetros de comprimento e cerca de um quilômetro e meio no ponto mais estreito. A Ilíada situa o acampamento aqueu em sua margem e chama o mar de “largo” e “de forte corrente” — uma corrente que é um fato náutico real e uma razão plausível para um assentamento do Bronze importar em Hisarlık."
+        },
+        "fr": {
+          "label": "Les Dardanelles",
+          "note": "Le détroit entre la mer Égée et la mer de Marmara, long de soixante kilomètres et large d'environ un kilomètre et demi à son point le plus étroit. L'Iliade place le camp achéen sur sa rive et qualifie la mer de « large » et de « rapide » — un courant qui est une réalité de navigation bien réelle et une raison plausible de l'importance d'un établissement de l'âge du bronze à Hisarlık."
+        },
+        "zh": {
+          "label": "达达尼尔海峡",
+          "note": "爱琴海与马尔马拉海之间的海峡，长六十公里，最窄处约一公里半。《伊利亚特》将阿开亚人的营地设在其岸边，并称这片海域“宽阔”且“水流湍急”——这种洋流是真实的航海事实，也是青铜时代定居点在希萨尔利克（Hisarlık）具有重要地位的合理原因。"
+        },
+        "de": {
+          "label": "Die Dardanellen",
+          "note": "Die Meerenge zwischen der Ägäis und dem Marmarameer, sechzig Kilometer lang und an ihrer schmalsten Stelle etwa anderthalb Kilometer breit. Die Ilias verortet das Lager der Achäer an ihrem Ufer und nennt das Meer „breit“ und „stark strömend“ – eine Strömung, die eine reale navigatorische Tatsache und ein plausibler Grund dafür ist, dass eine bronzezeitliche Siedlung auf dem Hisarlık von Bedeutung war."
+        },
+        "ja": {
+          "label": "ダーダネルス海峡",
+          "note": "エーゲ海とマルマラ海を隔てる全長60キロメートルの海峡で、最も狭い場所の幅は約1.5キロメートルである。『イリアス』はアカイア人の陣営をその岸辺に配置し、この海を「広い」「流れの速い」と呼んでいる。この潮流は実際の航海上の事実であり、ヒサルルクにおける青銅器時代の集落が重要であったことの説得力のある理由となっている。"
         }
       }
     }
@@ -120,6 +136,46 @@
       ],
       "identificationNote": "Aceita: um acidente inconfundível e universalmente consensual, e um cujo comportamento físico o poema descreve com exatidão.",
       "debate": "Não a identificação, mas a inferência: quanto da importância de Troia se apoiava de fato no controle do estreito está em discussão, e foi um dos pontos mais ásperos do debate em torno da leitura do sítio feita por Korfmann."
+    },
+    "fr": {
+      "name": "L'Hellespont",
+      "summary": "Le détroit au cœur de la guerre. Les navires achéens y sont échoués, les jeux funéraires d'Achille s'y déroulent, et son courant est la raison économique la plus plausible de l'existence même de Troie.",
+      "description": [
+        "L'Hellespont d'Homère est le lieu où se trouve la flotte et où les morts sont brûlés. Il marque la limite de la position achéenne et la frontière du monde du poème vers le nord-est : au-delà se trouvent la Thrace et des alliés, pas l'aventure.",
+        "Le courant du détroit s'écoule puissamment de la mer de Marmara vers la mer Égée, ce qui rend le passage difficile à la voile depuis le sud et donne un avantage permanent à tout établissement contrôlant la zone d'attente en amont. C'est l'argument non littéraire le plus solide expliquant pourquoi une ville s'est dressée à Hisarlık pendant trois mille ans."
+      ],
+      "identificationNote": "Accepté : une caractéristique géographique indubitable et universellement reconnue, dont le poème décrit avec précision le comportement physique.",
+      "debate": "Non pas l'identification mais l'inférence : la part réelle de l'importance de Troie liée au contrôle du détroit fait débat, et ce fut l'un des points de discorde les plus vifs autour de l'interprétation du site par Korfmann."
+    },
+    "de": {
+      "name": "Der Hellespont",
+      "summary": "Die Meerenge neben dem Krieg. Die Schiffe der Achäer sind dort am Strand aufgereiht, Achilleus' Leichenspiele werden dort abgehalten, und ihre Strömung ist der plausibelste wirtschaftliche Grund dafür, dass Troja überhaupt existierte.",
+      "description": [
+        "Homers Hellespont ist der Ort, an dem die Flotte liegt und die Toten verbrannt werden. Er markiert den Rand der achäischen Stellung und die Grenze der Welt des Epos nach Nordosten: Dahinter liegen Thrakien und Verbündete, nicht das Abenteuer.",
+        "Die Strömung der Meerenge verläuft stark vom Marmarameer zur Ägäis, was die Durchfahrt unter Segeln von Süden her erschwert und jeder Siedlung, die den Warteplatz stromaufwärts kontrolliert, einen dauerhaften Vorteil verschafft. Das ist das stärkste nicht-literarische Argument dafür, warum dreitausend Jahre lang eine Stadt auf dem Hisarlık stand."
+      ],
+      "identificationNote": "Akzeptiert: ein unverkennbares, allgemein anerkanntes geografisches Merkmal, dessen physikalisches Verhalten im Epos genau beschrieben wird.",
+      "debate": "Nicht die Identifizierung, sondern die Schlussfolgerung ist umstritten: Wie viel von Trojas Bedeutung tatsächlich auf der Kontrolle der Meerenge beruhte, wird diskutiert, und es war einer der schärfsten Streitpunkte um Korfmanns Interpretation der Fundstätte."
+    },
+    "ja": {
+      "name": "ヘレスポントス",
+      "summary": "戦争の傍らにある海峡。アカイア人の船がその岸辺に引き揚げられ、アキレウスの葬儀の競技がその傍らで開催される。その潮流こそが、トロイがそもそも存在したことに対する最も説得力のある経済的理由である。",
+      "description": [
+        "ホメロスのヘレスポントスは、艦隊が停泊し、死者が火葬される場所である。それはアカイア人の陣地の端であり、詩の世界の北東の境界を示している。その先にあるのは冒険ではなく、トラキアと同盟国である。",
+        "この海峡 of 潮流はマルマラ海からエーゲ海へと強く流れており、南からの帆走による通過を困難にしている。そのため、その上流にある待機場所を支配するいかなる集落も、永続的な優位性を得ることになる。これこそが、ヒサルルクに3000年もの間都市が存在した理由を示す、文学的ではない最も強力な論拠である。"
+      ],
+      "identificationNote": "合意あり：間違いようのない、誰もが認める地理的特徴であり、詩の中でその物理的な挙動が正確に描写されている。",
+      "debate": "同定そのものではなく、そこからの推論が議論の対象となっている。トロイの重要性のうち、どの程度が実際に海峡の支配に基づいていたのかが議論されており、これはコルフマンによる遺跡の解釈をめぐる最も激しい論争点の一つであった。"
+    },
+    "zh": {
+      "name": "赫勒斯滂",
+      "summary": "战争旁的海峡。阿开亚人的船只停泊在岸边，阿喀琉斯的葬礼竞技在其旁举行，而它的洋流是特洛伊之所以存在的最合理的经济原因。",
+      "description": [
+        "荷马史诗中的赫勒斯滂是舰队停泊和焚烧死者的地方。它标志着阿开亚人阵地的边缘以及史诗世界向东北方向的边界：越过它便是色雷斯及其盟友，而非冒险之地。",
+        "该海峡的洋流强劲地从马尔马拉海流向爱琴海，这使得从南方乘帆船通过变得十分困难，并使任何控制其上游等待区的定居点获得永久优势。这是解释为什么一座城市能在希萨尔利克（Hisarlık）屹立三千年最强有力的非文学论据。"
+      ],
+      "identificationNote": "已公认：一个清晰无误、举世公认的地理特征，且史诗准确地描述了其物理特性。",
+      "debate": "争论的不是认定，而是推论：特洛伊的重要性究竟有多少是建立在控制海峡之上的，这存在争议，也是围绕科夫曼（Korfmann）对该遗址的解读最激烈的争论点之一。"
     }
   }
 }

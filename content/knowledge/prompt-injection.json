@@ -3,15 +3,31 @@
   "category": "governance",
   "updated": "2026-06-21",
   "version": "1.0",
-  "related": ["guardrails", "tool-use", "ai-governance", "model-context-protocol", "ai-cyberdefense", "agentic-threat-model"],
+  "related": [
+    "guardrails",
+    "tool-use",
+    "ai-governance",
+    "model-context-protocol",
+    "ai-cyberdefense",
+    "agentic-threat-model"
+  ],
   "references": [
-    { "title": "OWASP — Top 10 for LLM Applications (LLM01: Prompt Injection)", "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/" },
-    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+    {
+      "title": "OWASP — Top 10 for LLM Applications (LLM01: Prompt Injection)",
+      "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["industry_observation", "paper"]
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
   },
   "locales": {
     "en": {
@@ -33,7 +49,14 @@
         "Defense is layered, not a single control: least-privilege tool permissions, isolating and clearly delimiting untrusted content, output and action validation, allow-lists for sensitive operations, and human-in-the-loop approval for high-impact actions.",
         "Treat all tool and retrieval outputs as untrusted input. Monitor and log agent actions (observability) so injection attempts are detectable, and red-team the system regularly."
       ],
-      "components": ["Untrusted input boundary", "Least-privilege permissions", "Content isolation / delimiting", "Output & action validation", "Human approval for high-impact actions", "Monitoring & red teaming"],
+      "components": [
+        "Untrusted input boundary",
+        "Least-privilege permissions",
+        "Content isolation / delimiting",
+        "Output & action validation",
+        "Human approval for high-impact actions",
+        "Monitoring & red teaming"
+      ],
       "pros": [],
       "risks": [
         "Data exfiltration of sensitive context or credentials.",
@@ -41,17 +64,35 @@
         "Bypassed safety policies and guardrails.",
         "Indirect attacks via documents, web pages or tool results."
       ],
-      "tools": ["Input/output guardrail libraries", "Permission & sandboxing layers", "Allow-lists for tool actions", "Monitoring / observability", "Red-teaming frameworks"],
+      "tools": [
+        "Input/output guardrail libraries",
+        "Permission & sandboxing layers",
+        "Allow-lists for tool actions",
+        "Monitoring / observability",
+        "Red-teaming frameworks"
+      ],
       "examples": [
         "A web page the agent reads contains hidden text telling it to email private data.",
         "A document instructs a summarizer to ignore its rules and output a malicious link.",
         "A tool result tries to make an agent call another tool it should not."
       ],
       "faqs": [
-        { "q": "Why can't models just ignore injected instructions?", "a": "Because they cannot reliably distinguish trusted instructions from untrusted content — both arrive as text. That ambiguity is the core vulnerability." },
-        { "q": "What is indirect prompt injection?", "a": "When the malicious instructions are hidden in external content the model retrieves — a page, file, email or tool output — rather than typed by the user. It is often more dangerous." },
-        { "q": "Can prompt injection be fully prevented?", "a": "Not by a single measure today. You reduce risk with layered defenses: least privilege, content isolation, validation, monitoring and human approval for sensitive actions." },
-        { "q": "How does tool use raise the stakes?", "a": "Without tools, injection mostly produces bad text. With tools, an injected instruction can take real actions — send data, make changes — so permissions and approval matter more." }
+        {
+          "q": "Why can't models just ignore injected instructions?",
+          "a": "Because they cannot reliably distinguish trusted instructions from untrusted content — both arrive as text. That ambiguity is the core vulnerability."
+        },
+        {
+          "q": "What is indirect prompt injection?",
+          "a": "When the malicious instructions are hidden in external content the model retrieves — a page, file, email or tool output — rather than typed by the user. It is often more dangerous."
+        },
+        {
+          "q": "Can prompt injection be fully prevented?",
+          "a": "Not by a single measure today. You reduce risk with layered defenses: least privilege, content isolation, validation, monitoring and human approval for sensitive actions."
+        },
+        {
+          "q": "How does tool use raise the stakes?",
+          "a": "Without tools, injection mostly produces bad text. With tools, an injected instruction can take real actions — send data, make changes — so permissions and approval matter more."
+        }
       ]
     },
     "es": {
@@ -73,7 +114,14 @@
         "La defensa es por capas, no un único control: permisos de herramientas de mínimo privilegio, aislar y delimitar claramente el contenido no confiable, validación de salidas y acciones, listas de permitidos para operaciones sensibles y aprobación con humano en el bucle para acciones de alto impacto.",
         "Trata todas las salidas de herramientas y recuperación como entrada no confiable. Monitoriza y registra las acciones del agente (observabilidad) para que los intentos de inyección sean detectables, y haz red teaming del sistema con regularidad."
       ],
-      "components": ["Frontera de entrada no confiable", "Permisos de mínimo privilegio", "Aislamiento / delimitación de contenido", "Validación de salidas y acciones", "Aprobación humana para acciones de alto impacto", "Monitorización y red teaming"],
+      "components": [
+        "Frontera de entrada no confiable",
+        "Permisos de mínimo privilegio",
+        "Aislamiento / delimitación de contenido",
+        "Validación de salidas y acciones",
+        "Aprobación humana para acciones de alto impacto",
+        "Monitorización y red teaming"
+      ],
       "pros": [],
       "risks": [
         "Exfiltración de contexto sensible o credenciales.",
@@ -81,17 +129,35 @@
         "Políticas de seguridad y guardarraíles evitados.",
         "Ataques indirectos vía documentos, páginas web o resultados de herramientas."
       ],
-      "tools": ["Librerías de guardarraíles de entrada/salida", "Capas de permisos y sandboxing", "Listas de permitidos para acciones de herramientas", "Monitorización / observabilidad", "Frameworks de red teaming"],
+      "tools": [
+        "Librerías de guardarraíles de entrada/salida",
+        "Capas de permisos y sandboxing",
+        "Listas de permitidos para acciones de herramientas",
+        "Monitorización / observabilidad",
+        "Frameworks de red teaming"
+      ],
       "examples": [
         "Una página web que el agente lee contiene texto oculto que le dice que envíe datos privados por correo.",
         "Un documento instruye a un resumidor a ignorar sus reglas y emitir un enlace malicioso.",
         "El resultado de una herramienta intenta que un agente llame a otra herramienta que no debería."
       ],
       "faqs": [
-        { "q": "¿Por qué los modelos no pueden simplemente ignorar las instrucciones inyectadas?", "a": "Porque no pueden distinguir de forma fiable las instrucciones confiables del contenido no confiable: ambas llegan como texto. Esa ambigüedad es la vulnerabilidad central." },
-        { "q": "¿Qué es la inyección de prompts indirecta?", "a": "Cuando las instrucciones maliciosas se esconden en contenido externo que el modelo recupera —una página, fichero, correo o salida de herramienta— en vez de escribirlas el usuario. Suele ser más peligrosa." },
-        { "q": "¿Se puede prevenir por completo la inyección de prompts?", "a": "Hoy no con una sola medida. Reduces el riesgo con defensas por capas: mínimo privilegio, aislamiento de contenido, validación, monitorización y aprobación humana para acciones sensibles." },
-        { "q": "¿Cómo eleva la apuesta el uso de herramientas?", "a": "Sin herramientas, la inyección produce sobre todo texto malo. Con herramientas, una instrucción inyectada puede tomar acciones reales —enviar datos, hacer cambios—, así que importan más los permisos y la aprobación." }
+        {
+          "q": "¿Por qué los modelos no pueden simplemente ignorar las instrucciones inyectadas?",
+          "a": "Porque no pueden distinguir de forma fiable las instrucciones confiables del contenido no confiable: ambas llegan como texto. Esa ambigüedad es la vulnerabilidad central."
+        },
+        {
+          "q": "¿Qué es la inyección de prompts indirecta?",
+          "a": "Cuando las instrucciones maliciosas se esconden en contenido externo que el modelo recupera —una página, fichero, correo o salida de herramienta— en vez de escribirlas el usuario. Suele ser más peligrosa."
+        },
+        {
+          "q": "¿Se puede prevenir por completo la inyección de prompts?",
+          "a": "Hoy no con una sola medida. Reduces el riesgo con defensas por capas: mínimo privilegio, aislamiento de contenido, validación, monitorización y aprobación humana para acciones sensibles."
+        },
+        {
+          "q": "¿Cómo eleva la apuesta el uso de herramientas?",
+          "a": "Sin herramientas, la inyección produce sobre todo texto malo. Con herramientas, una instrucción inyectada puede tomar acciones reales —enviar datos, hacer cambios—, así que importan más los permisos y la aprobación."
+        }
       ]
     },
     "pt": {
@@ -113,7 +179,14 @@
         "A defesa é em camadas, não um único controle: permissões de ferramentas de privilégio mínimo, isolar e delimitar claramente o conteúdo não confiável, validação de saídas e ações, listas de permitidos para operações sensíveis e aprovação com humano no laço para ações de alto impacto.",
         "Trate todas as saídas de ferramentas e recuperação como entrada não confiável. Monitore e registre as ações do agente (observabilidade) para que as tentativas de injeção sejam detectáveis, e faça red teaming do sistema regularmente."
       ],
-      "components": ["Fronteira de entrada não confiável", "Permissões de privilégio mínimo", "Isolamento / delimitação de conteúdo", "Validação de saídas e ações", "Aprovação humana para ações de alto impacto", "Monitoramento e red teaming"],
+      "components": [
+        "Fronteira de entrada não confiável",
+        "Permissões de privilégio mínimo",
+        "Isolamento / delimitação de conteúdo",
+        "Validação de saídas e ações",
+        "Aprovação humana para ações de alto impacto",
+        "Monitoramento e red teaming"
+      ],
       "pros": [],
       "risks": [
         "Exfiltração de contexto sensível ou credenciais.",
@@ -121,17 +194,295 @@
         "Políticas de segurança e guard-rails contornados.",
         "Ataques indiretos via documentos, páginas web ou resultados de ferramentas."
       ],
-      "tools": ["Bibliotecas de guard-rails de entrada/saída", "Camadas de permissões e sandboxing", "Listas de permitidos para ações de ferramentas", "Monitoramento / observabilidade", "Frameworks de red teaming"],
+      "tools": [
+        "Bibliotecas de guard-rails de entrada/saída",
+        "Camadas de permissões e sandboxing",
+        "Listas de permitidos para ações de ferramentas",
+        "Monitoramento / observabilidade",
+        "Frameworks de red teaming"
+      ],
       "examples": [
         "Uma página web que o agente lê contém texto oculto que lhe diz para enviar dados privados por e-mail.",
         "Um documento instrui um resumidor a ignorar suas regras e emitir um link malicioso.",
         "O resultado de uma ferramenta tenta fazer um agente chamar outra ferramenta que não deveria."
       ],
       "faqs": [
-        { "q": "Por que os modelos não podem simplesmente ignorar as instruções injetadas?", "a": "Porque não conseguem distinguir de forma confiável as instruções confiáveis do conteúdo não confiável: ambas chegam como texto. Essa ambiguidade é a vulnerabilidade central." },
-        { "q": "O que é injeção de prompts indireta?", "a": "Quando as instruções maliciosas se escondem em conteúdo externo que o modelo recupera — uma página, arquivo, e-mail ou saída de ferramenta — em vez de digitadas pelo usuário. Costuma ser mais perigosa." },
-        { "q": "A injeção de prompts pode ser totalmente prevenida?", "a": "Hoje não com uma única medida. Você reduz o risco com defesas em camadas: privilégio mínimo, isolamento de conteúdo, validação, monitoramento e aprovação humana para ações sensíveis." },
-        { "q": "Como o uso de ferramentas eleva a aposta?", "a": "Sem ferramentas, a injeção produz sobretudo texto ruim. Com ferramentas, uma instrução injetada pode tomar ações reais — enviar dados, fazer mudanças —, então permissões e aprovação importam mais." }
+        {
+          "q": "Por que os modelos não podem simplesmente ignorar as instruções injetadas?",
+          "a": "Porque não conseguem distinguir de forma confiável as instruções confiáveis do conteúdo não confiável: ambas chegam como texto. Essa ambiguidade é a vulnerabilidade central."
+        },
+        {
+          "q": "O que é injeção de prompts indireta?",
+          "a": "Quando as instruções maliciosas se escondem em conteúdo externo que o modelo recupera — uma página, arquivo, e-mail ou saída de ferramenta — em vez de digitadas pelo usuário. Costuma ser mais perigosa."
+        },
+        {
+          "q": "A injeção de prompts pode ser totalmente prevenida?",
+          "a": "Hoje não com uma única medida. Você reduz o risco com defesas em camadas: privilégio mínimo, isolamento de conteúdo, validação, monitoramento e aprovação humana para ações sensíveis."
+        },
+        {
+          "q": "Como o uso de ferramentas eleva a aposta?",
+          "a": "Sem ferramentas, a injeção produz sobretudo texto ruim. Com ferramentas, uma instrução injetada pode tomar ações reais — enviar dados, fazer mudanças —, então permissões e aprovação importam mais."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que l'injection de prompt ?",
+      "summary": "L'injection de prompt est une attaque dans laquelle des instructions malveillantes masquées dans l'entrée d'un modèle de langage détournent son comportement — l'amenant à ignorer ses règles, à divulguer des données ou à faire un mauvais usage des outils. Elle figure en tête du Top 10 de l'OWASP pour les applications LLM. La cause profonde est que les modèles ne peuvent pas séparer de manière fiable les instructions de confiance du contenu non fiable, de sorte que tout texte lu par un agent — une page web, un document, un résultat d'outil — peut véhiculer une attaque.",
+      "definition": "L'injection de prompt est une attaque de sécurité dans laquelle des instructions contradictoires intégrées dans une entrée non fiable amènent un modèle de langage à s'écarter de son comportement prévu, à contourner les garde-fous ou à effectuer des actions involontaires.",
+      "takeaways": [
+        "Le texte non fiable lu par un modèle peut contenir des instructions masquées.",
+        "C'est le risque numéro 1 du Top 10 de l'OWASP pour les applications LLM.",
+        "L'injection indirecte masque les charges utiles (payloads) dans des documents, des pages ou des sorties d'outils.",
+        "Le risque augmente avec l'accès aux outils — l'injection peut déclencher des actions réelles.",
+        "Il n'existe pas de solution unique ; la défense est multicouche (moindre privilège, isolation, approbation humaine)."
+      ],
+      "context": [
+        "Les modèles suivent des instructions en langage naturel et ne peuvent pas distinguer de manière fiable les instructions système de confiance du contenu non fiable de l'utilisateur ou d'un document. Un attaquant exploite cela en plaçant des instructions telles que 'ignorez les instructions précédentes et...' là où le modèle les lira.",
+        "L'injection directe provient de l'utilisateur ; l'injection indirecte (et plus dangereuse) se cache dans le contenu récupéré par l'agent — une page web, un e-mail, un fichier, un résultat d'outil MCP. À mesure que les agents accèdent aux outils, une injection réussie peut exfiltrer des données ou entreprendre des actions préjudiciables."
+      ],
+      "architecture": [
+        "La défense est multicouche et ne repose pas sur un contrôle unique : autorisations d'outils selon le principe du moindre privilège, isolation et délimitation claire du contenu non fiable, validation des sorties et des actions, listes d'autorisation pour les opérations sensibles et approbation humaine (human-in-the-loop) pour les actions à fort impact.",
+        "Traitez toutes les sorties d'outils et de récupération comme des entrées non fiables. Surveillez et journalisez les actions de l'agent (observabilité) afin que les tentatives d'injection soient détectables, et effectuez régulièrement des simulations d'attaque (red-teaming) sur le système."
+      ],
+      "components": [
+        "Limite des entrées non fiables",
+        "Autorisations de moindre privilège",
+        "Isolation / délimitation du contenu",
+        "Validation des sorties et des actions",
+        "Approbation humaine pour les actions à fort impact",
+        "Surveillance et red-teaming"
+      ],
+      "pros": [],
+      "risks": [
+        "Exfiltration de données de contextes sensibles ou d'identifiants.",
+        "Actions d'outils non autorisées dans les systèmes connectés.",
+        "Contournement des politiques de sécurité et des garde-fous.",
+        "Attaques indirectes via des documents, des pages web ou des résultats d'outils."
+      ],
+      "tools": [
+        "Bibliothèques de garde-fous d'entrée/sortie",
+        "Couches d'autorisation et de sandboxing",
+        "Listes d'autorisation pour les actions d'outils",
+        "Surveillance / observabilité",
+        "Frameworks de red-teaming"
+      ],
+      "examples": [
+        "Une page web lue par l'agent contient du texte masqué lui demandant d'envoyer des données privées par e-mail.",
+        "Un document ordonne à un outil de synthèse d'ignorer ses règles et de générer un lien malveillant.",
+        "Le résultat d'un outil tente de forcer un agent à appeler un autre outil qu'il ne devrait pas."
+      ],
+      "faqs": [
+        {
+          "q": "Pourquoi les modèles ne peuvent-ils pas simplement ignorer les instructions injectées ?",
+          "a": "Parce qu'ils ne peuvent pas distinguer de manière fiable les instructions de confiance du contenu non fiable — les deux se présentant sous forme de texte. Cette ambiguïté constitue la vulnérabilité principale."
+        },
+        {
+          "q": "Qu'est-ce que l'injection de prompt indirecte ?",
+          "a": "C'est lorsque les instructions malveillantes sont masquées dans un contenu externe récupéré par le modèle — une page, un fichier, un e-mail ou une sortie d'outil — plutôt que saisies par l'utilisateur. Elle est souvent plus dangereuse."
+        },
+        {
+          "q": "L'injection de prompt peut-elle être totalement évitée ?",
+          "a": "Pas par une mesure unique aujourd'hui. Vous réduisez les risques grâce à des défenses multicouches : moindre privilège, isolation du contenu, validation, surveillance et approbation humaine pour les actions sensibles."
+        },
+        {
+          "q": "En quoi l'utilisation d'outils augmente-t-elle les enjeux ?",
+          "a": "Sans outils, l'injection produit principalement du texte erroné. Avec des outils, une instruction injectée peut entreprendre des actions réelles — envoyer des données, effectuer des modifications — de sorte que les autorisations et l'approbation revêtent une importance accrue."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist Prompt Injection?",
+      "summary": "Prompt Injection ist ein Angriff, bei dem bösartige Anweisungen, die in der Eingabe eines Sprachmodells verborgen sind, dessen Verhalten kapern – was dazu führt, dass es seine Regeln ignoriert, Daten preisgibt oder Tools missbraucht. Es steht an der Spitze der OWASP Top 10 für LLM-Anwendungen. Die Ursache liegt darin, dass Modelle vertrauenswürdige Anweisungen nicht zuverlässig von nicht vertrauenswürdigen Inhalten trennen können. Jeder Text, den ein Agent liest – eine Webseite, ein Dokument, ein Tool-Ergebnis –, kann daher einen Angriff enthalten.",
+      "definition": "Prompt Injection ist ein Sicherheitsangriff, bei dem gegnerische Anweisungen, die in nicht vertrauenswürdige Eingaben eingebettet sind, ein Sprachmodell dazu bringen, von seinem beabsichtigten Verhalten abzuweichen, Sicherheitsvorkehrungen zu umgehen oder unbeabsichtigte Aktionen auszuführen.",
+      "takeaways": [
+        "Nicht vertrauenswürdiger Text, den ein Modell liest, kann versteckte Anweisungen enthalten.",
+        "Es ist das Risiko Nummer 1 in den OWASP Top 10 für LLM-Anwendungen.",
+        "Indirekte Injection verbirgt Payloads in Dokumenten, Seiten oder Tool-Ausgaben.",
+        "Das Risiko wächst mit dem Tool-Zugriff – eine Injection kann echte Aktionen auslösen.",
+        "Es gibt keine Universallösung; die Verteidigung ist mehrschichtig (Least Privilege, Isolation, menschliche Freigabe)."
+      ],
+      "context": [
+        "Modelle folgen Anweisungen in natürlicher Sprache und können vertrauenswürdige Systemanweisungen nicht zuverlässig von nicht vertrauenswürdigen Benutzer- oder Dokumenteninhalten unterscheiden. Ein Angreifer nutzt dies aus, indem er Anweisungen wie „Ignoriere vorherige Anweisungen und...“ dort platziert, wo das Modell sie liest.",
+        "Direkte Injection geht vom Benutzer aus; indirekte (und gefährlichere) Injection verbirgt sich in Inhalten, die der Agent abruft – einer Webseite, einer E-Mail, einer Datei oder einem MCP-Tool-Ergebnis. Da Agenten Zugriff auf Tools erhalten, kann eine erfolgreiche Injection Daten exfiltrieren oder schädliche Aktionen ausführen."
+      ],
+      "architecture": [
+        "Die Verteidigung ist mehrschichtig und besteht nicht aus einer einzelnen Kontrollmaßnahme: Tool-Berechtigungen nach dem Prinzip der minimalen Rechtevergabe (Least Privilege), Isolierung und klare Abgrenzung von nicht vertrauenswürdigen Inhalten, Validierung von Ausgaben und Aktionen, Allow-Lists für sensible Operationen und Human-in-the-Loop-Freigaben für folgenschwere Aktionen.",
+        "Behandeln Sie alle Tool- und Retrieval-Ausgaben als nicht vertrauenswürdige Eingaben. Überwachen und protokollieren Sie die Aktionen des Agenten (Observability), damit Injection-Versuche erkennbar sind, und führen Sie regelmäßig Red-Teaming für das System durch."
+      ],
+      "components": [
+        "Grenze für nicht vertrauenswürdige Eingaben",
+        "Berechtigungen nach dem Prinzip der minimalen Rechtevergabe (Least Privilege)",
+        "Inhaltsisolierung / -abgrenzung",
+        "Validierung von Ausgaben und Aktionen",
+        "Menschliche Freigabe für folgenschwere Aktionen",
+        "Monitoring & Red-Teaming"
+      ],
+      "pros": [],
+      "risks": [
+        "Datenexfiltration von sensiblem Kontext oder Anmeldedaten.",
+        "Unbefugte Tool-Aktionen in verbundenen Systemen.",
+        "Umgehung von Sicherheitsrichtlinien und Guardrails.",
+        "Indirekte Angriffe über Dokumente, Webseiten oder Tool-Ergebnisse."
+      ],
+      "tools": [
+        "Bibliotheken für Input/Output-Guardrails",
+        "Berechtigungs- und Sandboxing-Ebenen",
+        "Allow-Lists für Tool-Aktionen",
+        "Monitoring / Observability",
+        "Red-Teaming-Frameworks"
+      ],
+      "examples": [
+        "Eine Webseite, die der Agent liest, enthält versteckten Text, der ihn anweist, private Daten per E-Mail zu senden.",
+        "Ein Dokument weist ein Zusammenfassungstool an, seine Regeln zu ignorieren und einen schädlichen Link auszugeben.",
+        "Ein Tool-Ergebnis versucht, einen Agenten dazu zu bringen, ein anderes Tool aufzurufen, das er nicht aufrufen sollte."
+      ],
+      "faqs": [
+        {
+          "q": "Warum können Modelle injizierte Anweisungen nicht einfach ignorieren?",
+          "a": "Weil sie vertrauenswürdige Anweisungen nicht zuverlässig von nicht vertrauenswürdigen Inhalten unterscheiden können – beides kommt als Text an. Diese Mehrdeutigkeit ist die Kernschwachstelle."
+        },
+        {
+          "q": "Was ist indirekte Prompt Injection?",
+          "a": "Wenn die bösartigen Anweisungen in externen Inhalten verborgen sind, die das Modell abruft – einer Seite, Datei, E-Mail oder Tool-Ausgabe –, anstatt vom Benutzer eingegeben zu werden. Dies ist oft gefährlicher."
+        },
+        {
+          "q": "Kann Prompt Injection vollständig verhindert werden?",
+          "a": "Heutzutage nicht durch eine einzelne Maßnahme. Sie reduzieren das Risiko durch mehrschichtige Verteidigung: Least Privilege, Inhaltsisolierung, Validierung, Monitoring und menschliche Freigabe für sensible Aktionen."
+        },
+        {
+          "q": "Wie erhöht die Nutzung von Tools das Risiko?",
+          "a": "Ohne Tools führt eine Injection meist nur zu schlechtem Text. Mit Tools kann eine injizierte Anweisung echte Aktionen ausführen – Daten senden, Änderungen vornehmen –, weshalb Berechtigungen und Freigaben umso wichtiger sind."
+        }
+      ]
+    },
+    "ja": {
+      "title": "プロンプトインジェクションとは？",
+      "summary": "プロンプトインジェクションとは、言語モデルへの入力に隠された悪意のある指示によってモデルの挙動が乗っ取られ、ルールを無視させられたり、データを漏洩させられたり、ツールを悪用させられたりする攻撃です。これはLLMアプリケーションにおけるOWASP Top 10の第1位に挙げられています。根本的な原因は、モデルが信頼できる指示と信頼できないコンテンツを確実に分離できないことにあります。そのため、エージェントが読み取るあらゆるテキスト（Webページ、ドキュメント、ツールの実行結果など）が攻撃を媒介する可能性があります。",
+      "definition": "プロンプトインジェクションとは、信頼できない入力に埋め込まれた敵対的な指示によって、言語モデルが意図された挙動から逸脱したり、安全対策をバイパスしたり、意図しないアクションを実行したりするセキュリティ攻撃です。",
+      "takeaways": [
+        "モデルが読み取る信頼できないテキストには、隠された指示が含まれている可能性があります。",
+        "LLMアプリケーションにおけるOWASP Top 10の第1位のリスクです。",
+        "間接的インジェクションは、ドキュメント、Webページ、またはツールの出力にペイロードを隠します。",
+        "ツールへのアクセス権限が増えるほどリスクが高まります。インジェクションによって実際のアクションが引き起こされる可能性があります。",
+        "単一の解決策はありません。防御は多層的（最小権限、隔離、人間による承認）に行う必要があります。"
+      ],
+      "context": [
+        "モデルは自然言語の指示に従うため、信頼できるシステム指示と、信頼できないユーザーやドキュメントのコンテンツを確実に区別することができません。攻撃者はこの弱点を突き、モデルが読み取る場所に「これまでの指示を無視して…」といった指示を仕込みます。",
+        "直接的インジェクションはユーザーから行われます。間接的（かつより危険な）インジェクションは、エージェントが取得するコンテンツ（Webページ、メール、ファイル、MCPツールの実行結果など）に隠されています。エージェントがツールへのアクセス権限を持つようになると、インジェクションの成功によってデータが外部に送信されたり、有害なアクションが実行されたりする可能性があります。"
+      ],
+      "architecture": [
+        "防御は単一の制御ではなく、多層的に行います。ツールの最小権限、信頼できないコンテンツの隔離と明確な境界設定、出力とアクションの検証、機密性の高い操作の許可リスト（アローリスト）、影響の大きいアクションに対する人間による承認（Human-in-the-loop）などです。",
+        "すべてのツールおよび検索の出力を、信頼できない入力として扱います。インジェクションの試みを検出できるようにエージェントのアクションを監視およびログ記録（オブザーバビリティ）し、定期的にシステムのレッドチーム演習を実施します。"
+      ],
+      "components": [
+        "信頼できない入力の境界",
+        "最小権限",
+        "コンテンツの隔離 / 境界設定",
+        "出力とアクションの検証",
+        "影響の大きいアクションに対する人間による承認",
+        "監視とレッドチーム演習"
+      ],
+      "pros": [],
+      "risks": [
+        "機密性の高いコンテキストや資格情報のデータ漏洩。",
+        "接続されたシステムにおける不正なツールアクション。",
+        "安全ポリシーやガードレールのバイパス。",
+        "ドキュメント、Webページ、またはツールの実行結果を介した間接的な攻撃。"
+      ],
+      "tools": [
+        "入出力ガードレールライブラリ",
+        "権限およびサンドボックスレイヤー",
+        "ツールアクションの許可リスト",
+        "監視 / オブザーバビリティ",
+        "レッドチーム演習フレームワーク"
+      ],
+      "examples": [
+        "エージェントが読み取るWebページに、個人データをメールで送信するよう指示する隠しテキストが含まれている。",
+        "要約ツールに対し、ルールを無視して悪意のあるリンクを出力するよう指示するドキュメント。",
+        "ツールの実行結果が、エージェントに呼び出すべきではない別のツールを呼び出させようとする。"
+      ],
+      "faqs": [
+        {
+          "q": "なぜモデルはインジェクションされた指示を単に無視できないのですか？",
+          "a": "信頼できる指示と信頼できないコンテンツを確実に区別できないためです。どちらも同じテキストとして入力されます。この曖昧さが根本的な脆弱性です。"
+        },
+        {
+          "q": "間接的プロンプトインジェクションとは何ですか？",
+          "a": "ユーザーが直接入力するのではなく、モデルが取得する外部コンテンツ（Webページ、ファイル、メール、ツールの出力など）に悪意のある指示が隠されている場合を指します。多くの場合、こちらの方がより危険です。"
+        },
+        {
+          "q": "プロンプトインジェクションは完全に防ぐことができますか？",
+          "a": "現在のところ、単一の対策で完全に防ぐことはできません。最小権限、コンテンツの隔離、検証、監視、機密性の高いアクションに対する人間による承認など、多層的な防御によってリスクを軽減します。"
+        },
+        {
+          "q": "ツールの使用によって、なぜリスク（影響）が高まるのですか？",
+          "a": "ツールがない場合、インジェクションの影響は主に不適切なテキストの生成にとどまります。ツールを使用する場合、インジェクションされた指示によって、データの送信や変更といった実際のアクションが実行される可能性があるため、権限管理と承認がより重要になります。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是提示词注入？",
+      "summary": "提示词注入是一种攻击方式，隐藏在语言模型输入中的恶意指令会劫持其行为——使其忽略自身规则、泄露数据或滥用工具。它位列 OWASP LLM 应用十大安全风险之首。其根本原因在于模型无法可靠地将可信指令与不可信内容区分开来，因此智能体读取的任何文本（网页、文档、工具结果）都可能携带攻击载荷。",
+      "definition": "提示词注入是一种安全攻击，嵌入在不可信输入中的对抗性指令会导致语言模型偏离其预期行为、绕过安全防护或执行非预期的操作。",
+      "takeaways": [
+        "模型读取的不可信文本可能包含隐藏指令。",
+        "它是 OWASP LLM 应用十大安全风险中排名第一的风险。",
+        "间接注入将攻击载荷隐藏在文档、网页或工具输出中。",
+        "风险随着工具访问权限的增加而增长——注入可能会触发真实的物理操作。",
+        "没有单一的解决方案；防御需要分层进行（最小权限、隔离、人工审批）。"
+      ],
+      "context": [
+        "模型遵循自然语言指令，无法可靠地将可信的系统指令与不可信的用户或文档内容区分开来。攻击者利用这一点，在模型会读取的地方植入诸如“忽略之前的指令并……”之类的指令。",
+        "直接注入来自用户；间接注入（且更具危险性）隐藏在智能体检索的内容中——如网页、电子邮件、文件或 MCP 工具结果。随着智能体获得工具访问权限，成功的注入可能会导致数据外泄或执行有害操作。"
+      ],
+      "architecture": [
+        "防御是分层的，而不是单一的控制措施：最小权限的工具权限、隔离并清晰界定不可信内容、输出与操作验证、敏感操作的白名单，以及高影响操作的人工介入审批。",
+        "将所有工具和检索输出视为不可信输入。监控并记录智能体操作（可观测性）以便检测注入尝试，并定期对系统进行红队测试。"
+      ],
+      "components": [
+        "不可信输入边界",
+        "最小权限许可",
+        "内容隔离 / 界定",
+        "输出与操作验证",
+        "高影响操作的人工审批",
+        "监控与红队测试"
+      ],
+      "pros": [],
+      "risks": [
+        "敏感上下文或凭据的数据外泄。",
+        "在连接的系统中执行未授权的工具操作。",
+        "绕过安全策略和护栏。",
+        "通过文档、网页或工具结果进行的间接攻击。"
+      ],
+      "tools": [
+        "输入/输出护栏库",
+        "权限与沙箱层",
+        "工具操作白名单",
+        "监控 / 可观测性",
+        "红队测试框架"
+      ],
+      "examples": [
+        "智能体读取的网页包含隐藏文本，指示其通过电子邮件发送私密数据。",
+        "一份文档指示摘要生成器忽略其规则并输出恶意链接。",
+        "工具结果试图让智能体调用另一个它不应该调用的工具。"
+      ],
+      "faqs": [
+        {
+          "q": "为什么模型不能直接忽略注入的指令？",
+          "a": "因为它们无法可靠地将可信指令与不可信内容区分开来——两者都以文本形式呈现。这种模糊性是核心漏洞所在。"
+        },
+        {
+          "q": "什么是间接提示词注入？",
+          "a": "指恶意指令隐藏在模型检索的外部内容（如网页、文件、电子邮件或工具输出）中，而不是由用户直接输入。这通常更具危险性。"
+        },
+        {
+          "q": "提示词注入可以被完全防止吗？",
+          "a": "目前无法通过单一措施完全防止。您可以通过分层防御来降低风险：最小权限、内容隔离、验证、监控以及对敏感操作的人工审批。"
+        },
+        {
+          "q": "工具的使用如何提高了风险？",
+          "a": "在没有工具的情况下，注入大多只会产生不良文本。而有了工具，注入的指令可以执行真实的物理操作——发送数据、进行修改——因此权限和审批变得更加重要。"
+        }
       ]
     }
   }

@@ -62,6 +62,22 @@
         "pt": {
           "label": "Um sítio na costa sul da Trôade",
           "note": "Estrabão nomeia candidatos e a região não está em dúvida; nenhuma cidade escavada foi ligada ao nome Crise."
+        },
+        "fr": {
+          "label": "Un site sur la côte sud de la Troade",
+          "note": "Strabon cite des candidats et la région ne fait aucun doute ; aucune ville fouillée n'a été formellement associée au nom de Chryse."
+        },
+        "zh": {
+          "label": "特罗阿德（Troad）南部海岸的一个遗址",
+          "note": "斯特拉博列出了候选地点，该地区是毋庸置疑的；但目前还没有发掘出的城镇与克律塞（Chryse）这一名称联系在一起。"
+        },
+        "de": {
+          "label": "Eine Fundstätte an der südlichen Küste der Troas",
+          "note": "Strabon nennt Kandidaten, und die Region steht außer Zweifel; bisher wurde keine ausgegrabene Stadt mit dem Namen Chryse in Verbindung gebracht."
+        },
+        "ja": {
+          "label": "トロアス地方南部沿岸の遺跡",
+          "note": "ストラボンが候補を挙げており、この地域であることは疑いないが、発掘された町でクリュセの名に結びつけられたものはない。"
         }
       }
     }
@@ -124,6 +140,86 @@
         {
           "q": "Por que a peste importa para o atlas?",
           "a": "Em si, não importa. O que importa é que o episódio se passa numa paisagem local verificável e que o poema trata essa paisagem como familiar."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Chryse et la peste",
+      "summary": "L'Iliade s'ouvre sur une querelle locale au sujet d'une captive originaire d'une ville côtière voisine — et sur neuf jours de flèches décochées par Apollon.",
+      "narrative": [
+        "Chrysès, prêtre d'Apollon, vient aux navires pour racheter sa fille. Agamemnon le rejette brutalement ; le prêtre prie ; le dieu descend « semblable à la nuit » et crible l'armée de flèches pendant neuf jours. La querelle avec Achille découle du remède proposé.",
+        "La géographie est restreinte et familière : une ville accessible facilement en bateau depuis le camp, un temple, un navire envoyé pour restituer la jeune fille et accomplir un sacrifice. C'est la description la plus claire du poème montrant la Troade comme une côte habitée plutôt que comme un simple champ de bataille."
+      ],
+      "whyItMatters": "Cela ancre le début de la guerre sur la côte locale plutôt que sur la citadelle, et rappelle que l'essentiel de la géographie de l'Iliade est ordinaire : des villes, des temples, des ports et une journée de navigation.",
+      "debate": "L'emplacement exact de Chryse, et le rapport entre la description des pillages et des rançons sur cette côte dans le poème et la réalité de l'âge du bronze récent.",
+      "faqs": [
+        {
+          "q": "Chryse est-elle un lieu réel ?",
+          "a": "Très probablement une véritable ville côtière du sud de la Troade, bien que le site exact ne soit pas identifié. L'atlas la classe comme plausible."
+        },
+        {
+          "q": "Pourquoi la peste importe-t-elle pour l'atlas ?",
+          "a": "Elle n'importe pas en soi. Ce qui compte, c'est que l'épisode se déroule dans un paysage local qui peut être étudié, et que le poème traite ce paysage comme familier."
+        }
+      ]
+    },
+    "de": {
+      "title": "Chryse und die Pest",
+      "summary": "Die Ilias beginnt mit einem lokalen Streit um eine gefangene Frau aus einer nahe gelegenen Küstenstadt – und mit neun Tagen voller Pfeile von Apollon.",
+      "narrative": [
+        "Chryses, ein Priester des Apollon, kommt zu den Schiffen, um seine Tochter freizukaufen. Agamemnon weist ihn schroff ab; der Priester betet; der Gott fährt herab „wie die Nacht“ und beschießt das Heer neun Tage lang. Der Streit mit Achilleus ergibt sich aus der Abhilfe.",
+        "Die Geografie ist klein und vertraut: eine Stadt in bequemer Segeldistanz zum Lager, ein Tempel, ein Schiff, das ausgesandt wird, um das Mädchen zurückzubringen und zu opfern. Es ist das klarste Bild des Epos von der Troas als bewohnter Küste und nicht nur als Schlachtfeld."
+      ],
+      "whyItMatters": "Es verankert den Beginn des Krieges an der lokalen Küste statt an der Zitadelle und erinnert daran, dass der Großteil der Geografie der Ilias alltäglich ist: Städte, Tempel, Häfen und eine Tagesreise unter Segeln.",
+      "debate": "Wo genau Chryse lag und wie das im Epos gezeichnete Bild von Raubzügen und Lösegeldzahlungen an dieser Küste mit der spätbronzezeitlichen Realität zusammenhängt.",
+      "faqs": [
+        {
+          "q": "Ist Chryse ein realer Ort?",
+          "a": "Höchstwahrscheinlich eine reale Küstenstadt der südlichen Troas, wenngleich ungeklärt ist, um welche Fundstätte es sich handelte. Der Atlas stuft sie als plausibel ein."
+        },
+        {
+          "q": "Warum ist die Pest für den Atlas von Bedeutung?",
+          "a": "An sich ist sie das nicht. Wichtig ist, dass die Episode in einer lokalen Landschaft spielt, die überprüft werden kann, und dass das Epos diese Landschaft als vertraut behandelt."
+        }
+      ]
+    },
+    "ja": {
+      "title": "クリュセと疫病",
+      "summary": "『イリアス』は、近くの沿岸の町から捕らえられた女性をめぐる局地的な紛争と、アポロンから放たれた9日間にわたる矢の雨で幕を開ける。",
+      "narrative": [
+        "アポロンの神官クリュセスは、娘の身代金を払うために船を訪れる。アガメムノンは彼を乱暴に拒絶し、神官は祈りを捧げる。神は『夜のように』降臨し、9日間にわたって軍勢を射抜く。アキレウスとの不和は、その解決策をめぐって生じる。",
+        "その地理は小規模で日常的である。陣営から容易に航行できる距離にある町、神殿、少女を返還し生贄を捧げるために派遣された船。これは、トロアス地方が戦場としてではなく、人々が暮らす沿岸地域として描かれている、この詩の中で最も鮮明な描写である。"
+      ],
+      "whyItMatters": "これは戦争の始まりを城塞ではなく地元の沿岸地域に結びつけており、『イリアス』の地理の大部分が、町、神殿、港、そして1日の航程といった、ありふれたものであることを思い出させてくれる。",
+      "debate": "クリュセが正確にはどこに位置していたのか、 Magdalene、そしてこの沿岸での略奪と身代金をめぐる詩の描写が、後期青銅器時代の現実とどのように結びついているのか。",
+      "faqs": [
+        {
+          "q": "クリュセは実在の場所ですか？",
+          "a": "ほぼ確実にトロアス地方南部の実在の沿岸の町であるが、どの遺跡がそれに該当するかは未解決である。本アトラスでは、これを『妥当（plausible）』に分類している。"
+        },
+        {
+          "q": "なぜ疫病がアトラスにとって重要なのでしょうか？",
+          "a": "疫病それ自体が重要なのではない。重要なのは、このエピソードが検証可能な地元の風景を舞台にしており、詩がその風景を馴染み深いものとして扱っていることである。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "克律塞与瘟疫",
+      "summary": "《伊利亚特》以一场关于附近沿海城镇被俘女子的局部争端拉开序幕——伴随着阿波罗连续九天射出的箭雨。",
+      "narrative": [
+        "阿波罗的祭司克律塞斯来到船前赎回他的女儿。阿伽门农粗暴地拒绝了他；祭司祈祷；神明“如黑夜般”降临，向军队射击了九天。与阿喀琉斯的争吵正是由于解决这一问题的对策而引起的。",
+        "地理范围狭小且生活化：一个距离营地航程很近的城镇、一座神庙、一艘送回女孩并进行祭祀的船只。这是史诗中对特罗阿德（Troad）最清晰的描绘——它是一个有人居住的海岸，而非仅仅是一个战场。"
+      ],
+      "whyItMatters": "它将战争的开端锚定在当地海岸而非城堡，并提醒人们，《伊利亚特》中的大部分地理环境都是普通的：城镇、神庙、港口和一天的航程。",
+      "debate": "克律塞（Chryse）确切位于何处，以及史诗中关于该海岸袭击和赎金的描绘与青铜时代晚期的现实有何关联。",
+      "faqs": [
+        {
+          "q": "克律塞（Chryse）是一个真实的地方吗？",
+          "a": "几乎可以肯定它是特罗阿德（Troad）南部海岸的一个真实城镇，尽管具体是哪一个遗址尚未解决。地图集将其归为“看似合理”。"
+        },
+        {
+          "q": "为什么瘟疫对地图集很重要？",
+          "a": "就其本身而言并不重要。重要的是，该事件发生在一个可以被检验的当地景观中，并且史诗将该景观视为熟悉之地。"
         }
       ]
     }

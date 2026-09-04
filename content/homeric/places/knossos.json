@@ -90,6 +90,22 @@
         "pt": {
           "label": "O palácio de Cnossos",
           "note": "O maior complexo do Bronze em Creta, escavado por Evans desde 1900 e ocupado durante o período micênico, quando sua administração escrevia grego em Linear B. A Creta odisseica das “noventa cidades” e sua “grande cidade de Cnossos, onde Minos reinou” encaixam numa ilha cuja arqueologia palaciana é a mais densa do Egeu."
+        },
+        "fr": {
+          "label": "Le palais de Cnossos",
+          "note": "Le plus grand complexe de l'âge du bronze en Crète, fouillé par Evans à partir de 1900 et occupé tout au long de la période mycénienne, époque à laquelle son administration écrivait le grec en linéaire B. La Crète aux « quatre-vingt-dix cités » de l'Odyssée et sa « grande cité de Cnossos où régnait Minos » correspondent à une île dont l'archéologie palatiale est la plus dense de l'Égée."
+        },
+        "zh": {
+          "label": "克诺索斯宫殿",
+          "note": "克里特岛上最大的青铜时代建筑群，由埃文斯自1900年起发掘，并在迈锡尼时期一直有人居住，当时其行政机构使用线形文字B书写希腊语。《奥德赛》中拥有“九十座城市”的克里特岛以及“米诺斯统治的伟大城市克诺索斯”，与这个在爱琴海中宫殿考古遗存最密集的岛屿相吻合。"
+        },
+        "de": {
+          "label": "Der Palast von Knossos",
+          "note": "Der größte bronzezeitliche Komplex auf Kreta, ab 1900 von Evans ausgegraben und bis in die mykenische Zeit bewohnt, als seine Verwaltung Griechisch in Linear B schrieb. Das Kreta der Odyssee mit seinen „neunzig Städten“ und seiner „großen Stadt Knossos, in der Minos herrschte“ passt zu einer Insel, deren Palastarchäologie die dichteste in der Ägäis ist."
+        },
+        "ja": {
+          "label": "クノッソスの宮殿",
+          "note": "クレタ島最大の青銅器時代の複合遺跡。1900年からエヴァンズによって発掘され、ミケーネ時代を通じて使用された。その行政機関は線文字Bでギリシャ語を記録していた。『オデュッセイア』に登場する『90の都市』を擁するクレタ、そして『ミノスが支配した大都市クノッソス』は、エーゲ海で最も宮殿考古学の密度が高いこの島に合致する。"
         }
       }
     }
@@ -127,6 +143,46 @@
       ],
       "identificationNote": "Aceita: o sítio, o nome e a escala concordam, e a identificação nunca foi contestada. O interesse da ficha não é a localização, mas a distância entre a lembrança e o material.",
       "debate": "Quanto da Creta homérica é memória minoica, quanto micênica e quanto conhecimento contemporâneo do século VIII sobre uma ilha grande e populosa. A reconstrução do palácio feita por Evans — concreto, repinturas, partes conjeturais — segue sendo um argumento metodológico vivo."
+    },
+    "fr": {
+      "name": "Cnossos",
+      "summary": "La cité de Minos dans l'Odyssée et le plus grand palais de Crète — une identification que personne ne conteste, rattachée à une civilisation dont les poèmes ne se souviennent qu'à moitié.",
+      "description": [
+        "Ulysse, mentant à Pénélope au chant XIX, s'invente une identité crétoise et donne de l'île une description qui n'est pas inventée : quatre-vingt-dix cités, de nombreux peuples, et Cnossos où régnait Minos. Le Catalogue de l'Iliade énumère les contingents crétois sous la direction d'Idoménée, venus de Cnossos, Gortyne et Lyctos.",
+        "Le palais qu'Evans a fouillé à partir de 1900 est minoen, plus ancien que le monde décrit par les poèmes, mais il était encore occupé à l'époque mycénienne et ses archives en linéaire B sont en grec. Ce que les poèmes conservent est un souvenir de l'importance de la Crète plutôt que de la civilisation minoenne telle que l'archéologie la comprend aujourd'hui."
+      ],
+      "identificationNote": "Acceptée : le site, le nom et l'échelle concordent tous, et l'identification n'a jamais été contestée. L'intérêt de cette entrée n'est pas la localisation, mais l'écart entre la mémoire et les vestiges matériels.",
+      "debate": "Quelle part de la Crète d'Homère relève de la mémoire minoenne, quelle part de la mémoire mycénienne, et quelle part des connaissances contemporaines du VIIIe siècle d'une grande île peuplée. La reconstruction du palais lui-même par Evans — en béton, repeint, en partie conjectural — reste un débat méthodologique d'actualité."
+    },
+    "de": {
+      "name": "Knossos",
+      "summary": "Die Stadt des Minos in der Odyssee und der größte Palast auf Kreta – eine Identifizierung, die niemand bestreitet, verbunden mit einer Zivilisation, an die sich die Epen nur halb erinnern.",
+      "description": [
+        "Odysseus, der Penelope im 19. Buch belügt, erfindet eine kretische Identität und beschreibt die Insel auf eine Weise, die nicht erfunden ist: neunzig Städte, viele Völker und Knossos, wo Minos herrschte. Der Schiffskatalog der Ilias listet kretische Kontingente unter Idomeneus aus Knossos, Gortyn und Lyktos auf.",
+        "Der Palast, den Evans ab 1900 ausgrub, ist minoisch und älter als die in den Epen beschriebene Welt, aber er war in der mykenischen Zeit noch bewohnt, und sein Linear-B-Archiv ist auf Griechisch verfasst. Was die Epen bewahren, ist eher eine Erinnerung an die kretische Bedeutung als an die minoische Zivilisation, wie sie die Archäologie heute versteht."
+      ],
+      "identificationNote": "Akzeptiert: Fundort, Name und Ausmaß stimmen überein, und die Identifizierung wurde nie bestritten. Das Interesse an diesem Eintrag gilt nicht der Lage, sondern der Kluft zwischen der Erinnerung und den materiellen Funden.",
+      "debate": "Wie viel von Homers Kreta ist minoische Erinnerung, wie viel mykenisch und wie viel zeitgenössisches Wissen des achten Jahrhunderts über eine große, bevölkerungsreiche Insel. Evans' Rekonstruktion des Palastes selbst – aus Beton, neu bemalt, teils hypothetisch – bleibt eine aktuelle methodische Debatte."
+    },
+    "ja": {
+      "name": "クノッソス",
+      "summary": "『オデュッセイア』に登場するミノスの都市であり、クレタ島最大の宮殿。この同定に異論を唱える者はいないが、詩の中で半分しか記憶されていない文明に結びついている。",
+      "description": [
+        "第19歌でペネロペイアに嘘をつくオデュッセウスは、クレタ人としての素性を捏造するが、その島については捏造ではない描写（90の都市、多くの民族、そしてミノスが支配したクノッソス）を語る。『イリアス』の軍船のカタログには、イドメネウス率いるクノッソス、ゴルテュン、リュクトスからのクレタ勢が記載されている。",
+        "エヴァンズが1900年から発掘した宮殿はミノア文明のものであり、詩が描写する世界よりも古い。しかし、ミケーネ文明の時代にも依然として居住されており、その線文字Bの記録はギリシャ語で書かれている。詩が保存しているのは、現在の考古学が理解しているようなミノア文明の記憶というよりも、クレタの重要性の記憶である。"
+      ],
+      "identificationNote": "合意あり：遺跡、名称、規模のすべてが一致しており、この同定に異論が出されたことはない。この項目の関心は、位置そのものではなく、記憶と物質的証拠との間の隔たりにある。",
+      "debate": "ホメロスの描くクレタのうち、どの程度がミノアの記憶で、どの程度がミケーネの記憶であり、どの程度が人口の多い大島に関する当時の紀元前8世紀の知識なのか。エヴァンズによる宮殿自体の復元（コンクリート製、塗り直され、一部は推測に基づく）は、現在も活発な方法論的議論の対象となっている。"
+    },
+    "zh": {
+      "name": "克诺索斯",
+      "summary": "《奥德赛》中米诺斯的城市，也是克里特岛上最大的宫殿——这一认定无人争议，它与诗作中仅存模糊记忆的文明相联系。",
+      "description": [
+        "在第19卷中，奥德修斯对珀涅罗珀撒谎，虚构了一个克里特人的身份，并对该岛进行了并非虚构的描述：九十座城市，众多民族，以及米诺斯统治的克诺索斯。《伊利亚特》的船名录列出了伊多墨纽斯率领的克里特分遣队，他们来自克诺索斯、戈尔廷（Gortyn）和利克托斯（Lyctus）。",
+        "埃文斯（Evans）自1900年起发掘的宫殿属于米诺斯文明，比诗作所描述的世界更为古老，但在迈锡尼时期仍有人居住，其线形文字B（Linear B）档案是用希腊语写成的。诗作所保留的是对克里特岛重要地位的记忆，而非现代考古学所理解的米诺斯文明。"
+      ],
+      "identificationNote": "已确认：遗址、名称和规模完全吻合，且该认定从未受到质疑。该条目的趣味不在于地理位置，而在于记忆与实物之间的差距。",
+      "debate": "荷马笔下的克里特岛有多少是米诺斯时期的记忆，有多少是迈锡尼时期的，又有多少是公元前八世纪当时对一个人口稠密的大岛的了解。埃文斯对宫殿本身的重建——使用混凝土、重新粉刷、部分带有推测性——仍然是一个活跃的方法论争论。"
     }
   }
 }

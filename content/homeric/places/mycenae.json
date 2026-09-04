@@ -106,6 +106,22 @@
         "pt": {
           "label": "A cidadela de Micenas",
           "note": "Uma cidadela fortificada do Bronze Final com muralhas ciclópicas, a Porta dos Leões, túmulos de fossa e um complexo palaciano; sua identificação nunca se perdeu: Pausânias visitou as ruínas no século II d.C. e as apontou como a cidade de Agamêmnon."
+        },
+        "fr": {
+          "label": "La citadelle de Mycènes",
+          "note": "Une citadelle fortifiée de l'âge du Bronze récent avec des murs cyclopéens, la porte des Lionnes, des tombes à fosse et un complexe palatial, occupée de manière continue depuis l'Antiquité en mémoire comme en fait — Pausanias a visité les ruines au IIe siècle de notre ère et les a identifiées comme la ville d'Agamemnon."
+        },
+        "zh": {
+          "label": "迈锡尼卫城",
+          "note": "一座防御森严的青铜时代晚期卫城，拥有巨石城墙、狮子门、竖穴墓和宫殿建筑群。无论是从记忆还是从事实上看，该地自古以来一直有人居住——公元二世纪，保萨尼亚斯曾造访这些废墟，并认定其为阿伽门农的城市。"
+        },
+        "de": {
+          "label": "Die Zitadelle von Mykene",
+          "note": "Eine befestigte spätbronzezeitliche Zitadelle mit zyklopischen Mauern, dem Löwentor, Schachtgräbern und einem Palastkomplex, die seit der Antike sowohl in der Erinnerung als auch in der Realität kontinuierlich besetzt war – Pausanias besuchte die Ruinen im zweiten Jahrhundert n. Chr. und identifizierte sie als die Stadt Agamemnons."
+        },
+        "ja": {
+          "label": "マイケナイの城塞",
+          "note": "巨石記念物的な城壁、獅子門、竪穴墓、宮殿複合体を備えた、青銅器時代後期の要塞化された城塞。事実としても記憶としても古代から継続的に占有されており、紀元2世紀にパウサニアスがこの遺跡を訪れ、アガメムノンの都市と同定した。"
         }
       }
     }
@@ -147,6 +163,50 @@
       ],
       "identificationNote": "Aceita: o sítio nunca esteve em dúvida, seu material do Bronze é esmagador e a geografia ao redor — a planície argiva, a estrada para Corinto, as cidadelas de Tirinto e Argos — encaixa na paisagem política que o Catálogo das Naus descreve.",
       "debate": "Não se discute que o lugar seja Micenas, mas o que esse lugar foi. Se um rei micênico algum dia exerceu a autoridade que a Ilíada dá a Agamêmnon, e o quanto a economia palaciana do Linear B se parece com o mundo dos poemas, seguem questões abertas na arqueologia egeia."
+    },
+    "fr": {
+      "name": "Mycènes",
+      "summary": "La cité d'Agamemnon, et la seule capitale homérique qui n'ait jamais eu besoin d'être retrouvée : la citadelle est restée visible hors de terre tout au long de l'Antiquité et donne son nom à l'ensemble de la civilisation de l'âge du bronze.",
+      "description": [
+        "L'Iliade qualifie Mycènes de « riche en or » et en fait le siège du grand roi de la coalition. Le site, situé sur la crête de l'Argolide, répond à cette description avec une force que le poème aurait difficilement pu inventer : des fortifications cyclopéennes, une porte monumentale, des tombes à fosse dont les masques d'or ont rejoint le musée d'Athènes en 1876, et un palais incendié à la fin de l'âge du bronze récent.",
+        "L'identification n'a jamais été perdue. Pausanias a parcouru les ruines au IIe siècle de notre ère et les a nommées ; Schliemann les a fouillées en 1876 en croyant avoir trouvé la tombe d'Agamemnon, ce qui n'était pas le cas. Ce qu'il avait découvert, c'était le centre d'une civilisation qui tire aujourd'hui son nom de cette colline.",
+        "Ce que Mycènes apporte à l'atlas, c'est une référence. C'est à cela que ressemble un lieu homérique lorsque le texte, la tradition et les fouilles concordent parfaitement — et c'est le modèle par rapport auquel les identifications contestées sont évaluées."
+      ],
+      "identificationNote": "Accepté : le site n'a jamais fait de doute, son matériel de l'âge du Bronze est écrasant, et la géographie environnante — la plaine d'Argolide, la route de Corinthe, les citadelles de Tirynthe et d'Argos — correspond au paysage politique décrit par le Catalogue des vaisseaux.",
+      "debate": "La question n'est pas de savoir si le lieu est Mycènes, mais ce qu'il était. Si un grand roi mycénien a jamais exercé l'autorité que l'Iliade attribue à Agamemnon, et dans quelle mesure l'économie palatiale en linéaire B ressemble au monde des poèmes, restent des questions ouvertes dans l'archéologie égéenne."
+    },
+    "de": {
+      "name": "Mykene",
+      "summary": "Die Stadt Agamemnons und die einzige homerische Hauptstadt, die nie gesucht werden musste: Die Zitadelle war während der gesamten Antike oberirdisch sichtbar und gibt der gesamten bronzezeitlichen Zivilisation ihren Namen.",
+      "description": [
+        "Die Ilias nennt Mykene „goldreich“ und macht es zum Sitz des Oberkönigs der Koalition. Die Fundstätte auf dem Höhenrücken der Argolis entspricht dieser Beschreibung mit einer Deutlichkeit, die das Epos kaum hätte erfinden können: zyklopische Befestigungsanlagen, ein monumentales Tor, Schachtgräber, deren Goldmasken 1876 in das Museum von Athen gelangten, und ein Palast, der am Ende der Spätbronzezeit niederbrannte.",
+        "Die Identifizierung ging nie verloren. Pausanias durchwanderte die Ruinen im zweiten Jahrhundert n. Chr. und benannte sie; Schliemann grub sie 1876 aus, im Glauben, er habe das Grab Agamemnons gefunden, was jedoch nicht der Fall war. Was er gefunden hatte, war das Zentrum einer Zivilisation, die heute ihren Namen von diesem Hügel ableitet.",
+        "Was Mykene dem Atlas liefert, ist eine Ausgangsbasis. So sieht ein homerischer Ort aus, wenn Text, Tradition und Ausgrabung völlig übereinstimmen – und es ist der Maßstab, an dem die umstrittenen Identifizierungen gemessen werden."
+      ],
+      "identificationNote": "Akzeptiert: Die Fundstätte stand nie infrage, ihre bronzezeitlichen Funde sind überwältigend, und die umgebende Geographie – die argivische Ebene, die Straße nach Korinth, die Zitadellen von Tiryns und Argos – entspricht der politischen Landschaft, die der Schiffskatalog beschreibt.",
+      "debate": "Nicht, ob der Ort Mykene ist, sondern was der Ort war. Ob ein mykenischer Großkönig jemals die Autorität ausübte, die die Ilias Agamemnon zuschreibt, und inwieweit die Palastwirtschaft der Linear-B-Schrift der Welt der Epen ähnelt, sind offene Fragen der ägäischen Archäologie."
+    },
+    "ja": {
+      "name": "ミケーネ",
+      "summary": "アガメムノンの都市であり、発見される必要のなかった唯一のホメロスの首都。その城塞は古代を通じて地上に見えており、青銅器時代文明全体の名前の由来となっている。",
+      "description": [
+        "『イリアス』はミケーネを『黄金に富む』と呼び、連合軍の上級王の王座が置かれた場所としている。アルゴリスの尾根にあるこの遺跡は、詩が到底捏造できなかったであろう強調をもってその描写に応えている。すなわち、巨石の城壁、記念碑的な門、1876年にアテネの博物館に収蔵された黄金のマスクが出土した竪穴墓、および後期青銅器時代の終わりに焼失した宮殿である。",
+        "その同定が失われることはなかった。パウサニアスは紀元2世紀にこの遺跡を歩いてその名を呼び、シュリーマンは1876年にアガメムノンの墓を見つけたと信じて発掘したが、実際には違っていた。彼が発見したのは、現在この丘にちなんで名付けられている文明の中心地であった。",
+        "マイケナイがこの地図帳に提供するのは基準（ベースライン）である。それは、文献、伝承、そして発掘調査が完全に一致したときのホメロスの地名がどのようなものであるかを示しており、異論のある同定を評価するための基準となっている。"
+      ],
+      "identificationNote": "合意あり：この遺跡の存在に疑いの余地はなく、青銅器時代の遺物は圧倒的であり、周囲の地理（アルゴス平野、コリントスへの道、ティリンスとアルゴスの城塞）は『船のカタログ』に描かれている政治的景観と一致している。",
+      "debate": "論点はそこがマイケナイであるかどうかではなく、そこがどのような場所であったかである。マイケナイの最高王が『イリアス』でアガメムノンに与えられているような権力を実際に行使したのか、そして線文字Bの宮殿経済が詩の世界にどの程度類似しているのかは、エーゲ海考古学における未解決の課題である。"
+    },
+    "zh": {
+      "name": "迈锡尼",
+      "summary": "阿伽门农的城市，也是唯一一个无需寻找的荷马史诗首都：在整个古代，其卫城在地面上都清晰可见，并为整个青铜时代文明命名。",
+      "description": [
+        "《伊利亚特》称迈锡尼“富于黄金”，并使其成为联军盟主的所在地。阿尔戈利斯（Argolid）山脊上的遗址印证了这一描述，其特征之鲜明是诗作几乎无法虚构的：巨石防御工事、纪念性城门、竖穴墓（其出土的金面具于1876年入藏雅典博物馆），以及一座在晚期青铜时代末期被焚毁的宫殿。",
+        "这一认定从未遗失。公元二世纪，保萨尼亚斯曾漫步于这些废墟之中并为其命名；1876年，施里曼在此进行挖掘，坚信自己找到了阿伽门农的陵墓，但事实并非如此。他所发现的，其实是一个如今以这座山丘命名的文明中心。",
+        "迈锡尼为本图册提供了一个基准。当文献、传说与考古发掘完全吻合时，一个荷马史诗中的地点就应当是这个样子——它也是衡量其他存在争议的认定地点的标准。"
+      ],
+      "identificationNote": "已公认：该遗址的存在从未受到怀疑，其青铜时代的文物极其丰富，且周边的地理环境——阿耳戈斯平原、通往科林斯的道路、蒂林斯和阿耳戈斯的卫城——与《战船名录》中所描述的政治版图完全吻合。",
+      "debate": "争论的焦点不在于该地是否为迈锡尼，而在于该地曾扮演什么角色。迈锡尼的高级国王是否曾行使过《伊利亚特》赋予阿伽门农的那种权力，以及线形文字B所代表的宫殿经济在多大程度上与诗歌中的世界相似，这些在爱琴海考古学中仍是悬而未决的问题。"
     }
   }
 }

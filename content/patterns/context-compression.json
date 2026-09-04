@@ -27,7 +27,11 @@
   "evidence": {
     "evidenceLevel": "production",
     "confidenceLevel": "low",
-    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+    "sourceType": [
+      "production_system",
+      "personal_experience",
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {
@@ -297,6 +301,366 @@
         {
           "q": "Como sei se a compressão está prejudicando a qualidade?",
           "a": "Rode um conjunto de avaliação com compressão ligada e desligada e compare os resultados de tarefa, não apenas as contagens de tokens. Observe respostas erradas com confiança e restrições descartadas: essa é a assinatura de uma compressão com perda que foi longe demais."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Compression de contexte",
+      "summary": "La compression de contexte réduit les tokens fournis à un modèle lors de chaque appel tout en préservant les informations dont il a réellement besoin pour agir. Utilisez-la sur des agents à exécution longue et des conversations prolongées pour réduire les coûts et la latence, et pour rester dans les limites de la fenêtre de contexte. Les trois leviers sont le résumé de l'historique, l'élagage du contexte non pertinent et la compression des prompts. Le risque principal est la perte d'informations : omettre le seul détail qui importait. Mesurez les informations conservées, et pas seulement les tokens économisés.",
+      "problem": "Les agents à exécution longue et les conversations multi-tours accumulent du contexte : chaque résultat d'outil, message précédent et document récupéré est rejoué lors de l'appel suivant. Le nombre de tokens augmente de manière quasi linéaire avec l'interaction, de sorte que le coût par appel et la latence grimpent, et le fenêtrage finit par déborder, tronquant silencieusement le contenu le plus ancien (parfois le plus important). Les corrections naïves — fenêtres plus grandes, troncature plus agressive — augmentent les coûts ou détruisent les informations dont le modèle a besoin pour rester cohérent.",
+      "context": "S'applique lorsque le contexte croît de manière illimitée par rapport aux besoins d'une seule étape : assistants conversationnels avec de longs historiques, agents autonomes bouclant sur de nombreux appels d'outils, pipelines RAG qui récupèrent trop d'informations, et tâches par lots où la taille du prompt domine le coût. Cela convient lorsque la majeure partie du contexte accumulé est redondante ou obsolète, lorsque vous contrôlez l'assemblage du prompt et lorsque vous pouvez tolérer une certaine erreur de reconstruction. Cela ne convient pas lorsque chaque token est crucial (tâches juridiques, d'audit ou de rappel exact) ou lorsque les interactions sont suffisamment courtes pour que la fenêtre ne soit jamais sous pression.",
+      "solution": [
+        "Traisez le contexte actif comme un budget que vous gérez activement plutôt que comme un journal en ajout uniquement. Il existe trois leviers complémentaires. La synthèse remplace une partie de l'historique par un synopsis plus court — généralement un résumé glissant des échanges plus anciens, actualisé périodiquement, tandis que les échanges récents restent textuels. L'élagage supprime le contexte non pertinent pour l'étape en cours : dédupliquez, supprimez les sorties d'outils obsolètes et sélectionnez uniquement les fragments récupérés dont le score est supérieur à un seuil de pertinence. La compression de prompt (par exemple LLMLingua) utilise un modèle plus petit pour supprimer ou reformuler les tokens à faible valeur informative avant d'envoyer le prompt, troquant une légère perte de précision contre d'importantes réductions de tokens.\\n\\nComposez ces éléments dans un pipeline aux limites explicites : conservez une fenêtre récente textuelle, un résumé glissant de l'historique plus ancien et un emplacement de récupération rempli à la demande. Protégez une zone « épinglée » pour les faits qui ne doivent jamais être compressés — identifiants, contraintes, objectif actuel. Surtout, instrumentez le résultat : exécutez un ensemble d'évaluations comparant les réponses avec et sans compression afin de détecter toute dégradation de la qualité, et ajustez l'agressivité par charge de travail plutôt que de manière globale. La compression est un curseur entre qualité et coût, pas un gain gratuit."
+      ],
+      "components": [
+        "Synthétiseur glissant",
+        "Élagueur par pertinence",
+        "Compresseur de prompt",
+        "Zone épinglée",
+        "Contrôleur de budget de contexte",
+        "Évaluateur de rétention"
+      ],
+      "benefits": [
+        "L'envoi de moins de tokens réduit directement le coût d'entrée de chaque appel, ce qui se cumule sur les longues boucles d'agents et le trafic à haut volume.",
+        "Des prompts plus petits signifient moins d'encodage et un délai d'obtention du premier token plus court, ce qui améliore la réactivité dans les flux interactifs et d'agents.",
+        "Limiter le contexte actif permet aux longues conversations et aux agents multi-étapes de se poursuivre sans déborder de la fenêtre ni subir de troncature silencieuse.",
+        "La suppression du contexte redondant et obsolète peut améliorer la qualité en réduisant les distractions, aidant ainsi le modèle à se concentrer sur ce qui importe actuellement."
+      ],
+      "risks": [
+        "Les résumés et l'élagage peuvent écarter le détail unique qui s'avérera plus tard décisif, produisant des réponses erronées formulées avec assurance.",
+        "Les résumés glissants synthétisent des résumés antérieurs ; de petites omissions se cumulent au fil des cycles jusqu'à ce que le fil de la conversation dérive discrètement.",
+        "L'exécution d'un synthétiseur ou d'un compresseur ajoute sa propre latence, son coût et sa surface de défaillance, ce qui peut annuler les économies réalisées sur les interactions courtes.",
+        "Une éviction agressive peut supprimer silencieusement des contraintes ou des instructions dont le modèle dépend encore, sans signal d'erreur évident."
+      ],
+      "whenNot": [
+        "Lorsque chaque token est crucial — affaires juridiques, audit, conformité ou extraction précise de données —, une compression avec perte est inacceptable.",
+        "Si les conversations mettent rarement la fenêtre sous pression, le surcoût de la compression dépasse les économies réalisées et ajoute une complexité inutile.",
+        "Sans un harness d'évaluation de la rétention, ne déployez rien : vous ne pouvez pas savoir si la compression dégrade silencieusement les réponses."
+      ],
+      "examples": [
+        "Un agent itérant sur une base de code volumineuse conserve une fenêtre récente textuelle ainsi qu'un résumé glissant des étapes précédentes, en épinglant la spécification de la tâche et les chemins de fichiers afin de ne pas perdre de vue l'objectif.",
+        "Un bot de support multi-session synthétise les échanges précédents en un résumé de dossier compact, élaguant les sous-problèmes résolus tout en épinglant les contraintes du compte client.",
+        "Un pipeline de récupération qui extrait de nombreux fragments applique un élagage par pertinence et une compression de prompt pour n'envoyer que les passages à fort signal, réduisant les tokens sans perdre la réponse."
+      ],
+      "productionEvidence": {
+        "context": "Déploiement OpenClaw mono-opérateur, local-first, observé sur 57 jours (161 sessions / 2 776 tours), agrégé à partir des traces de trajectoire propres à l'agent.",
+        "scenario": "Les longs transcriptions autonomes sont compactées de manière préventive et les résultats des outils sont tronqués pour respecter le budget du prompt.",
+        "technology": "Compactage préventif avec marge de sécurité, troncature des résultats d'outils, hook d'élagage de contexte et pré-vérification de dépassement en milieu de tour.",
+        "load": "2 810 événements compilés par contexte sur 2 776 tours en 57 jours.",
+        "results": "Le compactage s'est exécuté en ligne tout au long de la fenêtre, maintenant les tours autonomes multi-étapes dans le budget (p95 87,6 s par tour) sans qu'aucune défaillance par dépassement de contexte ne survienne. Déploiement mono-opérateur local-first."
+      },
+      "kpis": [
+        {
+          "metric": "Tokens par appel (entrée)",
+          "note": "Le principal facteur de coût. Suivez la distribution avant et après compression ; un résultat sain se traduit par une réduction nette sans augmentation des erreurs en aval."
+        },
+        {
+          "metric": "Rétention de l'information / qualité de la tâche",
+          "note": "Comparez les réponses avec et sans compression sur un ensemble d'évaluation. Un bon résultat montre une qualité stable dans vos limites de tolérance à mesure que les tokens diminuent."
+        },
+        {
+          "metric": "Latence de bout en bout",
+          "note": "Nette du surcoût de compression. Un bon résultat est une latence totale plus faible ; veillez à ce que les appels au synthétiseur ou au compresseur n'annulent pas les économies."
+        },
+        {
+          "metric": "Taux de dépassement de contexte / de troncature",
+          "note": "Fréquence à laquelle les interactions atteignent la limite de la fenêtre. Un bon résultat consiste à ramener ce taux vers zéro sans avoir à abandonner le contenu épinglé."
+        }
+      ],
+      "failureModes": [
+        "Un résumé omet une contrainte mentionnée au début ; de nombreux tours plus tard, l'agent la viole car ce fait a tout simplement disparu du contexte.",
+        "La re-synthétisation répétée amplifie les erreurs de paraphrase et les omissions jusqu'à ce que le résumé glissant ne reflète plus ce qui s'est réellement passé.",
+        "Un budget mal configuré compresse des identifiants ou des instructions qui devaient être protégés, rompant silencieusement l'exactitude.",
+        "Un seuil de pertinence agressif filtre un contexte important pour un cas limite, de sorte que la qualité semble correcte lors des tests mais échoue en production."
+      ],
+      "lessons": [
+        "Maximiser la réduction des tokens est trivial et n'a aucun sens en soi ; la véritable métrique est de savoir si le modèle répond toujours correctement.",
+        "Protégez explicitement les identifiants, les contraintes et l'objectif actuel afin qu'aucune étape de compression ne puisse les évincer.",
+        "Compressez l'historique ancien, pas le contexte actif ; les échanges les plus récents portent le signal le plus pertinent pour la décision.",
+        "Ajustez l'agressivité par charge de travail par rapport à un ensemble d'évaluation ; ce qui est sûr pour du bavardage est imprudent pour une tâche d'audit."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il de la mémoire à long terme ?",
+          "a": "La mémoire à long terme conserve les faits en dehors du prompt et les récupère à la demande ; la compression de contexte réduit le contexte actif envoyé à chaque appel. Elles sont complémentaires : la mémoire décide de ce qu'il faut ramener, la compression décide de la compacité de son intégration dans la fenêtre."
+        },
+        {
+          "q": "Synthétiser, élaguer ou compresser — que dois-je utiliser ?",
+          "a": "Élaguez d'abord (gratuit, sans perte lors de la suppression d'une réelle redondance), synthétisez l'historique plus ancien lorsqu'il croît de manière illimitée, et n'ajoutez la compression de prompt que si vous avez encore besoin de marge et pouvez valider le coût en qualité. La plupart des systèmes combinent les trois."
+        },
+        {
+          "q": "Comment savoir si la compression nuit à la qualité ?",
+          "a": "Exécutez un ensemble d'évaluation avec et sans compression et comparez les résultats des tâches, pas seulement le nombre de tokens. Surveillez les réponses erronées formulées avec assurance et les contraintes abandonnées — ce sont les signatures d'une compression avec perte qui est allée trop loin."
+        }
+      ]
+    },
+    "de": {
+      "name": "Kontextkomprimierung",
+      "summary": "Die Kontextkomprimierung reduziert die Token, die einem Modell bei jedem Aufruf übergeben werden, während die Informationen, die es tatsächlich zum Handeln benötigt, erhalten bleiben. Nutzen Sie sie bei langlebigen Agenten und langen Konversationen, um Kosten und Latenzzeiten zu senken und innerhalb des Kontextfensters zu bleiben. Die drei Hebel sind das Zusammenfassen des Verlaufs, das Bereinigen irrelevanter Kontexte und das Komprimieren von Prompts. Das zentrale Risiko ist der Informationsverlust (Lossiness): das Weglassen des einen Details, auf das es ankam. Messen Sie die erhaltenen Informationen, nicht nur die eingesparten Token.",
+      "problem": "Langlebige Agenten und Multi-Turn-Konversationen akkumulieren Kontext: Jedes Tool-Ergebnis, jede vorherige Nachricht und jedes abgerufene Dokument wird beim nächsten Aufruf erneut abgespielt. Die Token-Anzahl wächst annähernd linear mit der Interaktion, sodass die Kosten pro Aufruf und die Latenz steigen. Schließlich läuft das Kontextfenster über und die ältesten (manchmal wichtigsten) Inhalte werden stillschweigend abgeschnitten. Naive Lösungen – größere Fenster, aggressiveres Abschneiden – erhöhen entweder die Kosten oder zerstören die Informationen, die das Modell benötigt, um kohärent zu bleiben.",
+      "context": "Trifft zu, wenn der Kontext im Verhältnis zu dem, was ein einzelner Schritt benötigt, unbegrenzt wächst: Konversationsassistenten mit langen Verläufen, autonome Agenten, die viele Tool-Aufrufe in Schleifen durchlaufen, RAG-Pipelines, die zu viele Daten abrufen (Over-Retrieval), und Batch-Jobs, bei denen die Prompt-Größe die Kosten dominiert. Es eignet sich, wenn ein Großteil des akkumulierten Kontexts redundant oder veraltet ist, wenn Sie die Prompt-Zusammenstellung kontrollieren und wenn Sie gewisse Rekonstruktionsfehler tolerieren können. Es ist ungeeignet, wenn jedes Token tragend ist (Rechts-, Audit- oder Exact-Recall-Aufgaben) oder wenn Interaktionen so kurz sind, dass das Kontextfenster nie an seine Grenzen stößt.",
+      "solution": [
+        "Betrachten Sie den Live-Kontext als ein Budget, das Sie aktiv verwalten, und nicht als ein Log, an das nur angehängt wird. Es gibt drei komplementäre Hebel. Die Zusammenfassung (Summarization) ersetzt einen Teil des Verlaufs durch eine kürzere Synopse – typischerweise eine fortlaufende Zusammenfassung älterer Turns, die regelmäßig aktualisiert wird, während neuere Turns wortwörtlich erhalten bleiben. Das Pruning (Bereinigen) entfernt Kontext, der für den aktuellen Schritt irrelevant ist: Duplikate entfernen, veraltete Tool-Ausgaben verwerfen und nur diejenigen abgerufenen Chunks auswählen, deren Score über einem Relevanzschwellenwert liegt. Die Prompt-Komprimierung (z. B. LLMLingua) nutzt ein kleineres Modell, um informationsarme Token vor dem Senden des Prompts zu löschen oder umzuformulieren, was einen geringen Genauigkeitsverlust gegen eine erhebliche Token-Reduzierung eintauscht.\n\nFügen Sie diese Komponenten zu einer Pipeline mit expliziten Grenzen zusammen: Behalten Sie ein wortwörtliches aktuelles Fenster, eine fortlaufende Zusammenfassung des älteren Verlaufs und einen bei Bedarf gefüllten Retrieval-Slot bei. Schützen Sie einen „angepinnten“ Bereich für Fakten, die niemals komprimiert werden dürfen – Identifikatoren, Einschränkungen, das aktuelle Ziel. Instrumentieren Sie das Ergebnis unbedingt: Führen Sie ein Evaluierungsset aus, das Antworten mit und ohne Komprimierung vergleicht, damit Sie sehen, wann die Qualität nachlässt, und passen Sie die Aggressivität pro Workload statt global an. Komprimierung ist ein Regler zwischen Qualität und Kosten, kein kostenloser Gewinn."
+      ],
+      "components": [
+        "Fortlaufender Summarizer",
+        "Relevanz-Pruner",
+        "Prompt-Kompressor",
+        "Angepinnter Bereich",
+        "Kontext-Budget-Controller",
+        "Retention-Evaluator"
+      ],
+      "benefits": [
+        "Das Senden von weniger Token reduziert direkt die Input-Kosten bei jedem Aufruf, was sich über lange Agenten-Schleifen und hohes Traffic-Volumen summiert.",
+        "Kleinere Prompts bedeuten weniger Kodierungsaufwand und eine kürzere Time-to-First-Token, was die Reaktionsfähigkeit in interaktiven und agentischen Abläufen verbessert.",
+        "Die Begrenzung des Live-Kontexts ermöglicht es, lange Konversationen und mehrschrittige Agenten fortzuführen, ohne dass das Fenster überläuft oder Inhalte stillschweigend abgeschnitten werden.",
+        "Das Entfernen von redundantem und veraltetem Kontext kann die Qualität verbessern, indem Ablenkungen reduziert werden, sodass sich das Modell auf das konzentrieren kann, was aktuell wichtig ist."
+      ],
+      "risks": [
+        "Zusammenfassungen und Pruning können genau das eine Detail verwerfen, das sich später als entscheidend herausstellt, was zu selbstbewusst falschen Antworten führt.",
+        "Fortlaufende Zusammenfassungen fassen vorherige Zusammenfassungen zusammen; kleine Auslassungen summieren sich über viele Zyklen, bis der rote Faden unbemerkt verloren geht.",
+        "Der Betrieb eines Summarizers oder Kompressors verursacht eigene Latenz, Kosten und Fehlerquellen, was die Einsparungen bei kurzen Interaktionen wieder aufheben kann.",
+        "Aggressives Verwerfen kann stillschweigend Einschränkungen oder Anweisungen entfernen, von denen das Modell weiterhin abhängt, ohne dass ein offensichtliches Fehlersignal ausgegeben wird."
+      ],
+      "whenNot": [
+        "Wenn jedes Token tragend ist – bei rechtlichen Fragen, Audits, Compliance oder präziser Datenextraktion –, ist eine verlustbehaftete Komprimierung inakzeptabel.",
+        "Wenn Konversationen das Fenster selten an seine Grenzen bringen, kostet der Komprimierungs-Overhead mehr, als er einspart, und sorgt für unnötige Komplexität.",
+        "Führen Sie ohne ein Retention-Evaluierungs-Harness kein Deployment durch: Sie können sonst nicht feststellen, ob die Komprimierung die Antworten stillschweigend verschlechtert."
+      ],
+      "examples": [
+        "Ein Agent, der eine große Codebasis iteriert, behält ein wortwörtliches aktuelles Fenster sowie eine fortlaufende Zusammenfassung früherer Schritte bei und pinnt die Aufgabenspezifikation sowie Dateipfade an, um das Ziel nicht aus den Augen zu verlieren.",
+        "Ein Multi-Session-Support-Bot fasst vorherige Turns in einer kompakten Fallzusammenfassung zusammen, bereinigt gelöste Teilprobleme und pinnt gleichzeitig die Account-Einschränkungen des Kunden an.",
+        "Eine Retrieval-Pipeline, die viele Chunks abruft, wendet Relevanz-Pruning und Prompt-Komprimierung an, um nur Passagen mit starkem Signal zu senden, wodurch Token eingespart werden, ohne die Antwort zu verlieren."
+      ],
+      "productionEvidence": {
+        "context": "Single-Operator, Local-First OpenClaw-Deployment, beobachtet über 57 Tage (161 Sessions / 2.776 Turns), aggregiert aus den eigenen Trajektorien-Traces des Agenten.",
+        "scenario": "Lange autonome Transkripte werden präventiv verdichtet und Tool-Ergebnisse abgeschnitten, um innerhalb des Prompt-Budgets zu bleiben.",
+        "technology": "Präventive Verdichtung mit Sicherheitsmarge, Abschneiden von Tool-Ergebnissen, ein Context-Pruning-Hook und eine Vorabprüfung auf Überlauf mitten im Turn.",
+        "load": "2.810 kontextkompilierte Ereignisse über 2.776 Turns hinweg in 57 Tagen.",
+        "results": "Die Verdichtung lief inline über das gesamte Fenster hinweg und hielt mehrschrittige autonome Turns im Budget (p95 87,6 s pro Turn), ohne dass Fehler durch Kontextüberlauf auftraten. Single-Operator, Local-First-Deployment."
+      },
+      "kpis": [
+        {
+          "metric": "Token pro Aufruf (Input)",
+          "note": "Der primäre Kostentreiber. Verfolgen Sie die Verteilung vor und nach der Komprimierung; ein gesundes Ergebnis ist eine deutliche Reduzierung ohne Anstieg nachgelagerter Fehler."
+        },
+        {
+          "metric": "Informationserhalt / Aufgabenqualität",
+          "note": "Vergleichen Sie Antworten mit und ohne Komprimierung in einem Evaluierungsset. Ein gutes Ergebnis zeigt sich darin, dass die Qualität bei sinkender Token-Zahl innerhalb Ihrer Toleranz stabil bleibt."
+        },
+        {
+          "metric": "End-to-End-Latenz",
+          "note": "Netto nach Komprimierungs-Overhead. Ein gutes Ergebnis ist eine geringere Gesamtlatenz; achten Sie darauf, dass Aufrufe des Summarizers oder Kompressors die Einsparungen nicht wieder zunichtemachen."
+        },
+        {
+          "metric": "Kontextüberlauf- / Abschneiderate",
+          "note": "Wie oft Interaktionen an das Limit des Fensters stoßen. Ein gutes Ergebnis ist es, diesen Wert gegen Null zu senken, ohne auf das Verwerfen angepinnter Inhalte zurückgreifen zu müssen."
+        }
+      ],
+      "failureModes": [
+        "Eine Zusammenfassung lässt eine früh erwähnte Einschränkung aus; viele Turns später verletzt der Agent diese, weil dieser Fakt schlichtweg aus dem Kontext verschwunden ist.",
+        "Wiederholtes erneutes Zusammenfassen verstärkt Paraphrasierungsfehler und Auslassungen, bis die fortlaufende Zusammenfassung nicht mehr widerspiegelt, was tatsächlich passiert ist.",
+        "Ein falsch konfiguriertes Budget komprimiert Identifikatoren oder Anweisungen, die eigentlich geschützt sein sollten, was die Korrektheit stillschweigend beeinträchtigt.",
+        "Ein aggressiver Relevanzschwellenwert filtert Kontext heraus, der für einen Edge Case wichtig war, sodass die Qualität in Tests gut aussieht, in der Praxis jedoch versagt."
+      ],
+      "lessons": [
+        "Die Token-Reduzierung lässt sich trivial maximieren, ist allein jedoch bedeutungslos; die eigentliche Metrik ist, ob das Modell immer noch korrekt antwortet.",
+        "Schützen Sie Identifikatoren, Einschränkungen und das aktuelle Ziel explizit, damit keine Komprimierungsstufe sie verwerfen kann.",
+        "Komprimieren Sie den alten Verlauf, nicht den aktiven Kontext; die jüngsten Interaktionen enthalten das am stärksten entscheidungsrelevante Signal.",
+        "Passen Sie die Aggressivität pro Workload anhand eines Evaluierungssets an; was für Smalltalk sicher ist, ist für eine Audit-Aufgabe leichtsinnig."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies vom Langzeitgedächtnis?",
+          "a": "Das Langzeitgedächtnis speichert Fakten außerhalb des Prompts und ruft sie bei Bedarf ab; die Kontextkomprimierung verkleinert den bei jedem Aufruf gesendeten Live-Kontext. Sie ergänzen sich: Das Gedächtnis entscheidet, was zurückgeholt wird, die Komprimierung entscheidet, wie kompakt es im Fenster platziert wird."
+        },
+        {
+          "q": "Zusammenfassen, bereinigen oder komprimieren – was sollte ich verwenden?",
+          "a": "Zuerst bereinigen (kostenlos, verlustfrei beim Entfernen echter Redundanz), den älteren Verlauf zusammenfassen, wenn er unbegrenzt wächst, und eine Prompt-Komprimierung erst dann hinzufügen, wenn Sie immer noch mehr Spielraum benötigen und die Qualitätskosten validieren können. Die meisten Systeme kombinieren alle drei Ansätze."
+        },
+        {
+          "q": "Woran erkenne ich, dass die Komprimierung der Qualität schadet?",
+          "a": "Führen Sie ein Evaluierungsset mit ein- und ausgeschalteter Komprimierung aus und vergleichen Sie die Aufgabenergebnisse, nicht nur die Token-Zahlen. Achten Sie auf selbstbewusst falsche Antworten und verworfene Einschränkungen – das sind die typischen Anzeichen einer verlustbehafteten Komprimierung, die zu weit gegangen ist."
+        }
+      ]
+    },
+    "ja": {
+      "name": "Context Compression",
+      "summary": "Context Compressionは、モデルが動作するために実際に必要な情報を保持しながら、各呼び出しでモデルに提供されるトークン数を削減します。長期稼働するエージェントや長い会話で使用することで、コストとレイテンシを削減し、コンテキストウィンドウ内に収めることができます。3つの手段は、履歴の要約、無関係なコンテキストの整理、およびプロンプトの圧縮です。主なリスクは、重要な詳細を1つ落としてしまうという、情報の非可逆性（ロス）です。単に節約されたトークン数だけでなく、保持された情報を測定してください。",
+      "problem": "長時間実行されるエージェントや複数ターンの会話はコンテキストを蓄積します。すべてのツール実行結果、過去のメッセージ、取得されたドキュメントが次の呼び出し時に再送されます。トークン数はインタラクションに伴ってほぼ線形に増加するため、呼び出しごとのコストとレイテンシが上昇し、最終的にはウィンドウが溢れて最も古い（時には最も重要な）コンテンツが暗黙的に切り捨てられます。単純な解決策（ウィンドウの拡大、よりアグレッシブな切り捨てなど）は、コストを上昇させるか、モデルが一貫性を維持するために必要な情報を破壊するかのどちらかです。",
+      "context": "単一のステップが必要とする量に対して、コンテキストが際限なく増加する場合に適用されます。例えば、長い履歴を持つ会話型アシスタント、多数のツール呼び出しをループする自律型エージェント、過剰に取得を行うRAGパイプライン、プロンプトサイズがコストの大部分を占めるバッチジョブなどです。蓄積されたコンテキストの多くが冗長または古くなっており、プロンプトの組み立てを制御でき、ある程度の再構成エラーを許容できる場合に適しています。すべてのトークンが不可欠である場合（法務、監査、正確な想起が求められるタスク）や、インタラクションが十分に短くウィンドウが圧迫されることがない場合には適していません。",
+      "solution": [
+        "稼働中のコンテキストを、単なる追記専用のログではなく、能動的に管理すべき「予算」として扱います。これには、相互に補完し合う3つの手段があります。要約（Summarization）は、履歴の一部をより短い概要に置き換えます。通常、古いターンのローリングサマリーを定期的に更新し、最近のターンはそのまま残します。プルーニング（Pruning）は、現在のステップに関連のないコンテキストを削除します。重複を排除し、古いツールの出力を破棄し、関連性しきい値を超える取得済みチャンクのみを選択します。プロンプト圧縮（Prompt compression、例：LLMLingua）は、より小さなモデルを使用して、プロンプトを送信する前に情報量の少ないトークンを削除または言い換え、わずかな精度低下と引き換えに大幅なトークン削減を実現します。\n\nこれらを明確な境界を持つパイプラインに構成します。そのまま残す直近のウィンドウ、古い履歴のローリングサマリー、そしてオンデマンドで埋められる取得スロットを維持します。識別子、制約事項、現在の目標など、決して圧縮してはならない事実のために「ピン留め（pinned）」領域を保護します。極めて重要なのは、結果を計測可能にすることです。圧縮ありと圧縮なしの回答を比較する評価セットを実行して、品質が低下するタイミングを把握し、グローバルではなくワークロードごとに圧縮の強度を調整します。圧縮は品質とコストのバランスを調整するダイヤルであり、無条件のメリットではありません。"
+      ],
+      "components": [
+        "ローリングサマライザー",
+        "関連性プルーナー",
+        "プロンプトコンプレッサー",
+        "ピン留め領域",
+        "コンテキスト予算コントローラー",
+        "保持評価器"
+      ],
+      "benefits": [
+        "送信するトークン数を減らすことで、呼び出しごとの入力コストが直接削減され、長いエージェントループや大量のトラフィック全体でその効果が累積されます。",
+        "プロンプトが小さくなると、エンコード量が減り、Time-to-First-Token（TTFT）が短縮されるため、インタラクティブなフローやエージェントフローにおける応答性が向上します。",
+        "稼働中のコンテキストを制限することで、ウィンドウのオーバーフローや暗黙的な切り捨てを発生させることなく、長い会話や多数のステップを持つエージェントの実行を継続できます。",
+        "冗長で古いコンテキストを削除することで、ノイズ（注意をそらす要素）が減り、モデルが現在重要な事項に集中できるようになるため、品質が向上する可能性があります。"
+      ],
+      "risks": [
+        "要約やプルーニングによって、後から決定打となるはずだった唯一の詳細情報が破棄され、もっともらしい誤回答（ハルシネーション）が生成される可能性があります。",
+        "ローリングサマリーは過去のサマリーをさらに要約するため、わずかな欠落が多くのサイクルを経て累積し、最終的に会話の文脈がいつの間にか逸脱してしまう可能性があります。",
+        "要約器や圧縮器を実行すること自体がレイテンシ、コスト、および障害点を増加させ、短いインタラクティブなやり取りにおいては削減効果が相殺される可能性があります。",
+        "アグレッシブな排除を行うと、モデルが依然として依存している制約や指示が、明確なエラーシグナルなしに暗黙的に削除されてしまう可能性があります。"
+      ],
+      "whenNot": [
+        "すべてのトークンが不可欠である場合（法務、監査、コンプライアンス、または正確なデータ抽出など）、非可逆圧縮は許容されません。",
+        "会話がウィンドウを圧迫することがほとんどない場合、圧縮のオーバーヘッドは節約できるコストを上回り、不要な複雑さを招くだけです。",
+        "保持評価ハーネス（retention evaluation harness）がない場合は、何もデプロイすべきではありません。圧縮によって回答の品質が暗黙的に低下しているかどうかを判断できないためです。"
+      ],
+      "examples": [
+        "大規模なコードベースを反復処理するエージェントが、直近のウィンドウをそのまま残しつつ、以前のステップのローリングサマリーを保持し、タスク仕様とファイルパスをピン留めすることで目標を見失わないようにします。",
+        "マルチセッションのサポートボットが、過去のターンをコンパクトなケースサマリーに要約し、解決済みのサブイシューをプルーニング（削除）する一方で、顧客のアカウント制約をピン留めします。",
+        "多数のチャンクを取得する検索パイプラインが、関連性プルーニングとプロンプト圧縮を適用してシグナルの高い一節のみを送信し、回答を損なうことなくトークンを削減します。"
+      ],
+      "productionEvidence": {
+        "context": "57日間にわたり観察された、シングルオペレーターかつローカルファーストのOpenClawデプロイメント（161セッション / 2,776ターン）。エージェント自身のトラジェクトリトレースから集計。",
+        "scenario": "長い自律的なトランスクリプトが先制的に圧縮され、プロンプト予算内に収まるようにツールの実行結果が切り捨てられます。",
+        "technology": "安全マージンを設けた先制的な圧縮、ツール実行結果の切り捨て、コンテキストプルーニングフック、およびターン途中でのオーバーフロー事前チェック。",
+        "load": "57日間にわたる2,776ターンにおける、2,810件のコンテキストコンパイルイベント。",
+        "results": "圧縮処理がウィンドウ全体でインライン実行され、コンテキストオーバーフローによる障害を発生させることなく、複数ステップの自律的なターンを予算内（ターンあたりp95 87.6秒）に維持しました。シングルオペレーターかつローカルファーストのデプロイメント。"
+      },
+      "kpis": [
+        {
+          "metric": "呼び出しあたりのトークン数（入力）",
+          "note": "主要なコスト要因。圧縮前後の分布を追跡します。健全な結果とは、下流の（後続の）エラーが増加することなく、明確に削減されている状態です。"
+        },
+        {
+          "metric": "情報保持 / タスク品質",
+          "note": "評価セットを用いて、圧縮ありと圧縮なしの回答を比較します。良好な状態とは、トークン数が減少しても、許容範囲内で品質が安定している状態です。"
+        },
+        {
+          "metric": "エンドツーエンドのレイテンシ",
+          "note": "圧縮のオーバーヘッドを差し引いた正味の値。良好な状態とは全体のレイテンシが低下することです。要約器や圧縮器の呼び出しによって削減効果が相殺されないよう注意してください。"
+        },
+        {
+          "metric": "コンテキストオーバーフロー / 切り捨て率",
+          "note": "インタラクションがウィンドウ制限に達する頻度。良好な状態とは、ピン留めされたコンテンツの破棄に頼ることなく、この頻度をゼロに近づけることです。"
+        }
+      ],
+      "failureModes": [
+        "要約によって初期に言及された制約が省略され、何ターンも後に、その事実がコンテキストから完全に消失したためにエージェントが制約に違反してしまいます。",
+        "再要約が繰り返されることで、言い換えのエラーや省略が増幅され、最終的に実行中のサマリーが実際に起こったことを反映しなくなります。",
+        "予算の設定ミスにより、保護されるべき識別子や指示が圧縮され、暗黙的に正確性が損なわれます。",
+        "アグレッシブな関連性しきい値によって、エッジケースで重要となるコンテキストが除外されてしまい、テストでは品質に問題がないように見えても、本番環境で失敗します。"
+      ],
+      "lessons": [
+        "トークン削減を最大化することは容易ですが、それ単体では意味がありません。真の指標は、モデルが依然として正しく回答できるかどうかです。",
+        "識別子、制約事項、および現在の目標を明示的に保護し、いかなる圧縮ステージでもそれらが排除されないようにします。",
+        "アクティブなコンテキストではなく、古い履歴を圧縮します。直近のやり取りには、意思決定に最も関連するシグナルが含まれています。",
+        "評価セットを用いて、ワークロードごとに圧縮の強度を調整します。雑談において安全な設定であっても、監査タスクにおいては無謀な設定になり得ます。"
+      ],
+      "faqs": [
+        {
+          "q": "これは長期記憶とどのように違うのですか？",
+          "a": "長期記憶はプロンプトの外部に事実を永続化し、必要に応じてそれらを取得します。一方、コンテキスト圧縮は、呼び出しごとに送信される稼働中のコンテキストを縮小します。これらは補完関係にあります。記憶が「何を呼び戻すか」を決定し、圧縮が「それをいかにコンパクトにウィンドウ内に収めるか」を決定します。"
+        },
+        {
+          "q": "要約、プルーニング、圧縮のどれを使用すべきですか？",
+          "a": "まずプルーニングを行います（コストがかからず、真の冗長性を排除する場合はロスレスです）。次に、古い履歴が際限なく増加する場合は要約を行い、さらに余裕（ヘッドルーム）が必要で、品質への影響を検証できる場合にのみプロンプト圧縮を追加します。ほとんどのシステムでは、これら3つすべてを組み合わせて使用します。"
+        },
+        {
+          "q": "圧縮が品質を損ねているかどうかをどのように判断すればよいですか？",
+          "a": "圧縮のオンとオフを切り替えて評価セットを実行し、トークン数だけでなくタスクの結果を比較します。もっともらしい誤回答や制約の欠落に注意してください。これらは、非可逆圧縮が過度に行われた際の特徴的な兆候です。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "上下文压缩",
+      "summary": "上下文压缩在减少每次调用时输入给模型的 token 数量的同时，保留了模型实际执行操作所需的信息。在长期运行的智能体和长对话中使用它，可以降低成本和延迟，并保持在上下文窗口限制之内。其三大手段是总结历史记录、剪裁无关上下文以及压缩提示词。核心风险是信息有损：遗漏了那一个至关重要的细节。应衡量保留的信息量，而不仅仅是节省的 token 数量。",
+      "problem": "长期运行的智能体（Agent）和多轮对话会不断累积上下文：每次工具调用结果、先前的消息以及检索到的文档都会在下一次调用中被重新传入。Token 数量随着交互呈近似线性增长，导致单次调用的成本和延迟不断攀升，最终导致窗口溢出，而最旧的（有时也是最重要的）内容会被静默截断。简单的解决方法——如扩大窗口、更激进地截断——要么会增加成本，要么会破坏模型保持连贯性所需的信息。",
+      "context": "适用于上下文增长无界且远超单步执行所需的情况：具有漫长历史记录的对话助手、循环执行多次工具调用的自主智能体、检索过度的 RAG 流水线，以及 Prompt 大小主导成本的批处理任务。当累积的大部分上下文是冗余或过时的、你可以控制 Prompt 的组装，并且可以容忍一定的重构误差时，该模式非常适用。如果每个 Token 都至关重要（如法律、审计、精确召回任务），或者交互足够短以至于窗口从未面临压力，则不适用此模式。",
+      "solution": [
+        "将实时上下文视为需要主动管理的预算，而不是一个只能追加的日志。存在三种互补的手段。摘要（Summarization）用更短的梗概替换一段历史记录——通常是定期更新的旧轮次滚动摘要，而最近的轮次则保持原样。剪枝（Pruning）移除与当前步骤无关的上下文：去重、丢弃过时的工具输出，并仅选择评分高于相关性阈值的检索分块。Prompt 压缩（Prompt compression）（例如 LLMLingua）在发送 Prompt 之前，使用较小的模型删除或改写低信息量的 Token，以微小的准确率损失换取大量的 Token 减少。\\n\\n将这些组合成一个具有明确边界的流水线：保留一个原样呈现的近期窗口、一个旧历史记录的滚动摘要，以及一个按需填充的检索插槽。保护一个“固定（pinned）”区域，用于存放绝不能被压缩的事实——如标识符、约束条件、当前目标。至关重要的是，对结果进行检测：运行评估集来对比启用和未启用压缩时的回答，以便观察质量何时下降，并针对每个工作负载（而非全局）调整压缩强度。压缩是质量与成本之间的权衡拨盘，而不是无代价的获益。"
+      ],
+      "components": [
+        "滚动摘要器",
+        "相关性剪枝器",
+        "Prompt 压缩器",
+        "固定区域",
+        "上下文预算控制器",
+        "保留评估器"
+      ],
+      "benefits": [
+        "发送更少的 Token 可以直接降低每次调用的输入成本，这在长周期的智能体循环和高并发流量中会产生累积效应。",
+        "更小的 Prompt 意味着更少的编码工作量和更短的首字延迟（Time-to-First-Token），从而提高交互式和智能体工作流中的响应速度。",
+        "限制实时上下文的边界可以让长对话和多步骤智能体持续运行，而不会导致窗口溢出或静默截断。",
+        "移除冗余和过时的上下文可以通过减少干扰来提高质量，帮助模型专注于当前重要的内容。"
+      ],
+      "risks": [
+        "摘要和剪枝可能会丢弃事后证明起决定性作用的单一细节，从而导致模型给出看似笃定却完全错误的回答。",
+        "滚动摘要是对先前的摘要进行再摘要；微小的遗漏会在多个循环中累积，直到对话主题在不知不觉中偏离。",
+        "运行摘要器或压缩器会增加其自身的延迟、成本和故障点，这可能会抵消在短期交互中节省的开销。",
+        "激进的剔除可能会静默移除模型仍依赖的约束或指令，且不会发出明显的错误信号。"
+      ],
+      "whenNot": [
+        "当每个 Token 都至关重要时（如法律、审计、合规或精确数据提取），有损压缩是不可接受的。",
+        "如果对话极少对窗口造成压力，压缩带来的开销将超过其节省的成本，并增加不必要的复杂性。",
+        "在没有保留评估框架的情况下，不要部署任何内容：因为你无法判断压缩是否在静默降低回答的质量。"
+      ],
+      "examples": [
+        "在大型代码库上进行迭代的智能体保留了原样呈现的近期窗口以及早期步骤的滚动摘要，同时固定了任务规范和文件路径，以确保不会偏离目标。",
+        "多会话支持机器人将先前的轮次总结为紧凑的案例摘要，剪枝已解决的子问题，同时固定客户的账户限制条件。",
+        "获取多个分块的检索流水线应用相关性剪枝和 Prompt 压缩，以仅发送高信号段落，在不丢失答案的情况下减少 Token 数量。"
+      ],
+      "productionEvidence": {
+        "context": "在 57 天内（161 个会话 / 2,776 轮次）观察到的单操作员、本地优先的 OpenClaw 部署，数据从智能体自身的轨迹追踪中聚合而来。",
+        "scenario": "预先压缩长篇自主运行记录，并截断工具调用结果，以保持在 Prompt 预算之内。",
+        "technology": "具有安全余量的预先压缩、工具结果截断、上下文剪枝钩子（Hook）以及轮次中途溢出预检。",
+        "load": "在 57 天内的 2,776 轮次中，共发生 2,810 次上下文编译事件。",
+        "results": "压缩在整个窗口中内联运行，使多步自主轮次保持在预算范围内（p95 为每轮 87.6 秒），且未出现上下文溢出故障。单操作员、本地优先部署。"
+      },
+      "kpis": [
+        {
+          "metric": "单次调用 Token 数（输入）",
+          "note": "主要的成本驱动因素。追踪压缩前后的分布情况；健康的结果是 Token 数量明显减少，且下游错误没有增加。"
+        },
+        {
+          "metric": "信息保留度 / 任务质量",
+          "note": "在评估集上对比启用和未启用压缩时的回答。理想的情况是，随着 Token 数量下降，质量在可接受的容差范围内保持稳定。"
+        },
+        {
+          "metric": "端到端延迟",
+          "note": "扣除压缩开销后的净延迟。理想情况是降低总延迟；需注意避免摘要器或压缩器的调用开销抵消了节省的延迟。"
+        },
+        {
+          "metric": "上下文溢出 / 截断率",
+          "note": "交互触及窗口限制的频率。理想情况是将此概率降至接近零，且无需丢弃固定内容。"
+        }
+      ],
+      "failureModes": [
+        "摘要遗漏了早期提到的约束条件；许多轮次后，智能体违反了该约束，因为该事实已完全从上下文中消失。",
+        "重复的重新摘要会放大改写错误和遗漏，直到运行中的摘要不再反映实际发生的情况。",
+        "预算配置错误导致本应受到保护的标识符或指令被压缩，从而静默破坏了正确性。",
+        "激进的相关性阈值过滤掉了对边缘情况至关重要的上下文，导致质量在测试中看起来很好，但在实际应用中却出现失败。"
+      ],
+      "lessons": [
+        "最大化减少 Token 数量非常简单，但孤立来看毫无意义；真正的衡量标准是模型是否仍能正确回答。",
+        "显式保护标识符、约束条件和当前目标，确保任何压缩阶段都无法将其剔除。",
+        "压缩旧的历史记录，而不是当前的活跃上下文；最近的交流承载着与决策最相关的信号。",
+        "针对评估集调整每个工作负载的压缩强度；对闲聊安全的操作在审计任务中可能是鲁莽的。"
+      ],
+      "faqs": [
+        {
+          "q": "这与长期记忆有什么不同？",
+          "a": "长期记忆将事实持久化保存在 Prompt 之外，并根据需要进行检索；而上下文压缩则缩小了每次调用时发送的实时上下文。两者是互补的：记忆决定召回什么内容，压缩决定这些内容在窗口中以多紧凑的方式呈现。"
+        },
+        {
+          "q": "摘要、剪枝还是压缩——我应该使用哪一种？",
+          "a": "首先进行剪枝（免费，且在移除真正的冗余时是无损的），当旧历史记录无界增长时对其进行摘要，并且只有在仍需要更多空间且能够验证质量损失时才加入 Prompt 压缩。大多数系统会结合使用这三者。"
+        },
+        {
+          "q": "我该如何知道压缩是否损害了质量？",
+          "a": "在启用和禁用压缩的情况下运行评估集，并对比任务结果，而不仅仅是 Token 数量。留意看似笃定却完全错误的回答以及丢失的约束条件——这些都是有损压缩过度时的典型特征。"
         }
       ]
     }

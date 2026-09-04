@@ -315,6 +315,362 @@
           "a": "Sim, se algo que o modelo lê vem de fora: uma página buscada, um arquivo do usuário, o resultado de uma ferramenta, um registro de memória. A instrução não precisa chegar pelo seu prompt: chega por aquilo que o modelo lê, e o seu prompt ser fixo não restringe isso."
         }
       ]
+    },
+    "fr": {
+      "name": "Encodage aux limites de sortie",
+      "summary": "Traitez tout ce que le modèle émet comme une entrée hostile pour tout ce qui la consomme. Encodez et validez au niveau de chaque destination — moteur de rendu, shell, requête, agent en aval — en utilisant les règles propres à cette destination. Un outil d'assainissement global unique ne peut pas faire cela : un échappement correct pour HTML n'a aucun sens pour un shell.",
+      "definition": "L'encodage aux limites de sortie consiste à appliquer un encodage et une validation spécifiques à la destination sur la sortie du modèle à chaque point de passage vers un système qui l'interprétera, plutôt que de la filtrer une seule fois de manière générique à la sortie du modèle. Son absence constitue la vulnérabilité que l'OWASP qualifie de traitement incorrect des sorties (improper output handling).",
+      "problem": "Les équipes sécurisent le côté entrée contre l'injection de requêtes (prompt injection) et laissent le côté sortie ouvert. Le texte du modèle atteint alors un moteur de rendu, un shell, une base de données ou le contexte d'un autre agent, où il est interprété comme une instruction plutôt que d'être affiché comme une donnée. L'attaquant n'a jamais besoin d'atteindre directement le modèle.",
+      "context": "Tout agent dont la sortie atteint un élément qui l'analyse : une interface de chat affichant du markdown, un agent de codage exécutant une commande suggérée, un appel d'outil construit à partir d'arguments générés, un résumé injecté dans l'invite d'un second agent, ou un webhook qui transmet le texte plus loin.",
+      "solution": [
+        "Énumérez les destinations avant d'écrire le moindre filtre. Chaque endroit où la sortie du modèle atterrit et est interprétée — moteur de rendu HTML, shell, requête, chemin de fichier, récupérateur d'URL, contexte d'un autre agent, webhook en aval — constitue une limite distincte avec des règles distinctes.",
+        "Encodez à la destination, pas à la source. Échappez le HTML pour le moteur de rendu, paramétrez pour la requête, passez un tableau `argv` au processus. L'encodage doit se faire là où l'interprétation a lieu, car c'est seulement à cet endroit que vous savez ce qui sera interprété.",
+        "Privilégiez les sorties structurées plutôt que de la prose que vous devez analyser a posteriori. Un appel d'outil avec des arguments typés dispose d'un schéma de validation ; une phrase dans laquelle vous recherchez un nom de fichier par expression régulière n'en a pas.",
+        "Validez la valeur, pas seulement la syntaxe. Un chemin encodé reste un chemin : vérifiez qu'il se résout bien à l'intérieur du répertoire prévu avant de l'ouvrir.",
+        "Traitez les URL sortantes comme une destination à part entière. Les images et les liens affichés provoquent une requête de récupération sans clic, exfiltrant ainsi des données ; autorisez uniquement (via une liste d'autorisation) les hôtes qu'un lien affiché peut atteindre.",
+        "Faites de la limite l'unique voie de passage. Si un chemin de code peut consommer la sortie brute du modèle sans passer par un encodeur de destination, le contrôle est indicatif plutôt que réel."
+      ],
+      "components": [
+        "Un inventaire des destinations : chaque consommateur de la sortie du modèle, avec l'encodeur requis pour chacun.",
+        "Des encodeurs par destination — HTML, `argv` de processus, paramètres de requête, résolution de chemin, liste d'autorisation d'URL — plutôt qu'un seul outil d'assainissement partagé.",
+        "Des sorties structurées validées par schéma pour les appels d'outils, afin que les arguments soient typés plutôt qu'extraits de la prose.",
+        "Une liste d'autorisation de sortie couvrant les hôtes accessibles depuis les liens et images affichés.",
+        "Des tests de contrat qui émettent une charge utile (payload) par destination et vérifient qu'elle est neutralisée à la limite.",
+        "La journalisation lorsqu'un encodeur neutralise un élément, afin que la limite puisse vous signaler qu'elle est bien sur le chemin."
+      ],
+      "benefits": [
+        "Brise la chaîne d'injection là où cela compte : même un modèle entièrement manipulé ne peut pas faire agir un système en aval, car ce système n'interprète jamais son texte.",
+        "Indépendant du comportement du modèle. Cela continue de fonctionner malgré les mises à niveau du modèle, les nouveaux jailbreaks et les modifications d'invites, car cela ne dépend pas du refus du modèle.",
+        "Testable. Chaque destination a une charge utile et un résultat de réussite ou d'échec, de sorte que le contrôle produit des preuves plutôt que de simples assurances.",
+        "Peu coûteux s'il est appliqué tôt. Ajouter un encodeur est une modification de limite ; en intégrer un après coup, une fois que la destination est partout, relève de la refonte."
+      ],
+      "risks": [
+        "Un seul outil d'assainissement pour toutes les destinations. Cela donne l'impression d'un contrôle, valide la liste de contrôle, mais s'avère incorrect à chaque limite, sauf celle pour laquelle il a été écrit.",
+        "Un encodage qui altère le produit : un sur-échappement transforme le markdown légitime, les blocs de code et le texte non latin en bruit, et la pression pour l'assouplir pèse sur l'encodeur plutôt que sur la liste des destinations.",
+        "Un inventaire des destinations qui vieillit. Les nouvelles intégrations ajoutent des consommateurs, et rien ne signale d'erreur lorsqu'un consommateur est oublié.",
+        "Confondre la détection et l'encodage. Analyser la sortie à la recherche de chaînes suspectes permet de détecter les charges utiles de l'année dernière ; l'encodage n'a pas du tout besoin de reconnaître l'attaque."
+      ],
+      "whenNot": [
+        "Une sortie qui n'est jamais interprétée — un score, une énumération, un booléen comparé par l'appelant. Contraignez plutôt le type ; un encodeur sur un ensemble de valeurs fermé est superflu.",
+        "Des outils mono-utilisateur entièrement locaux, sans rendu ni exécution de processus, où le seul consommateur est une personne lisant du texte.",
+        "Lorsque la destination applique déjà un paramétrage par construction, comme une liaison ORM ou un moteur de template qui échappe par défaut. Un second encodeur n'apporte rien et peut provoquer un double encodage."
+      ],
+      "examples": [
+        "Un agent de support résume un ticket dont le corps contient une image markdown pointant vers l'hôte d'un attaquant. La console l'affiche, le navigateur récupère l'URL et la conversation est divulguée sans que personne n'ait cliqué sur quoi que ce soit. Désactiver le HTML brut et autoriser uniquement certains hôtes d'images permet de résoudre ce problème.",
+        "Un agent de codage propose une commande shell. L'exécuteur transmet la chaîne à un shell, de sorte qu'un nom de fichier contenant un séparateur de commande est exécuté. Passer un tableau `argv` à la place supprime complètement l'étape d'analyse du shell.",
+        "Le résumé d'un agent est placé dans l'invite d'un second agent. Le résumé contenait des instructions, et le second agent les a suivies. Encadrer la zone non approuvée et la marquer comme donnée constitue la limite dans ce cas."
+      ],
+      "kpis": [
+        {
+          "metric": "Couverture des destinations",
+          "note": "Part des consommateurs connus de la sortie du modèle disposant d'un encodeur à la limite. En dessous de 100 %, le contrôle présente une faille spécifique, et nommer la destination est plus utile qu'un pourcentage qui masque la réalité par une moyenne."
+        },
+        {
+          "metric": "Taux de neutralisation des charges utiles",
+          "note": "Part des charges utiles de test par destination neutralisées à la limite. L'objectif est de 100 % : tout autre résultat désigne une destination à corriger plutôt qu'un chiffre à améliorer."
+        },
+        {
+          "metric": "Délai de couverture d'une nouvelle destination",
+          "note": "Temps écoulé entre la mise en production d'une nouvelle intégration et la création de son encodeur. Permet de mesurer si l'inventaire suit l'évolution du produit plutôt que de savoir s'il a été correct à un instant T."
+        },
+        {
+          "metric": "Volume de déclenchement aux limites",
+          "note": "Fréquence à laquelle les encodeurs neutralisent un élément en production. Un zéro absolu signifie généralement que l'encodeur n'est pas sur le chemin, et non qu'aucun élément hostile n'arrive."
+        }
+      ],
+      "failureModes": [
+        "Exfiltration silencieuse via un balisage affiché : une image ou un lien provoque une requête de récupération sans clic, de sorte que les données s'échappent sans action de l'utilisateur et sans erreur visible.",
+        "Injection de second ordre : une sortie encodée correctement pour la console est stockée puis affichée ailleurs — un visualiseur de journaux, un ticket, un e-mail récapitulatif — là où cet encodage ne s'applique pas.",
+        "L'encodeur qui ne se trouve que sur le chemin nominal (happy path). Les branches d'erreur, les tentatives et les solutions de repli émettent le même texte via un chemin de code différent dépourvu de tout contrôle.",
+        "Double encodage. Deux couches effectuent chacune un échappement correct, les utilisateurs voient des entités échappées dans le produit, et la correction supprime la mauvaise couche."
+      ],
+      "lessons": [
+        "Énumérez les destinations avant d'écrire des filtres. Presque chaque défaillance réelle ici provient d'un consommateur que personne n'a répertorié, et non d'un encodeur mal écrit.",
+        "La destination que vous oubliez est rarement un écran. Il s'agit d'un webhook, d'un visualiseur de journaux, d'un export ou d'un e-mail récapitulatif — un endroit où la sortie est envoyée sans que personne ne l'assimile à un rendu.",
+        "L'encodage l'emporte sur la détection car il n'a pas besoin de reconnaître l'attaque. Une liste de blocage de charges utiles n'est qu'une description des attaques déjà publiques.",
+        "Ne laissez pas une unique fonction `sanitise()` devenir la solution. Son nom suggère l'exhaustivité alors que son comportement n'est correct que pour une seule et unique destination."
+      ],
+      "faqs": [
+        {
+          "q": "N'est-ce pas la même chose que de filtrer les entrées contre l'injection de requêtes (prompt injection) ?",
+          "a": "Non — ils défendent des extrémités opposées. Le filtrage des entrées tente d'empêcher le modèle d'être manipulé, ce qui dépend du modèle. Cette approche suppose que la manipulation a déjà réussi et empêche l'exécution de la sortie, ce qui ne dépend pas du tout du modèle. Un système doté uniquement de la première protection échoue dès qu'un nouveau jailbreak apparaît."
+        },
+        {
+          "q": "Ne s'agit-il pas simplement d'un assainissement des sorties ? Pourquoi ne pas utiliser un seul outil d'assainissement pour tout ?",
+          "a": "Parce que l'encodage est contextuel. Échapper un guillemet protège un moteur de rendu HTML mais ne fait rien pour un shell ; l'échappement pour shell protège un shell mais corrompt le texte affiché. Une fonction partagée doit choisir un contexte unique, s'avère incorrecte dans les autres, et donne l'illusion d'une couverture tout en constituant un point de défaillance unique."
+        },
+        {
+          "q": "Le modèle nous appartient et l'invite est fixe. En avons-nous tout de même besoin ?",
+          "a": "Oui, si un contenu lu par le modèle provient de l'extérieur : une page récupérée, un fichier utilisateur, un résultat d'outil, un enregistrement de mémoire. L'instruction n'a pas besoin d'arriver via votre prompt — elle arrive via tout ce que le modèle lit, et le fait que votre prompt soit fixe ne limite pas cela."
+        }
+      ]
+    },
+    "de": {
+      "name": "Output-Boundary-Encoding",
+      "summary": "Behandeln Sie alles, was das Modell ausgibt, als feindliche Eingabe für das nachfolgende System. Codieren und validieren Sie an jedem Ziel – Renderer, Shell, Query, nachgelagerter Agent – unter Verwendung der spezifischen Regeln dieses Ziels. Ein einziger globaler Sanitizer kann dies nicht leisten: Ein Escaping, das für HTML korrekt ist, ist für eine Shell bedeutungslos.",
+      "definition": "Output-Boundary-Encoding ist die Praxis, zielspezifische Codierung und Validierung auf die Modellausgabe an jedem Punkt anzuwenden, an dem sie in ein System übergeht, das sie interpretiert, anstatt sie einmal generisch beim Verlassen des Modells zu filtern. Ihr Fehlen entspricht der Schwachstelle, die OWASP als unzureichende Ausgabeverarbeitung (Improper Output Handling) bezeichnet.",
+      "problem": "Teams härten die Eingabeseite gegen Prompt Injection ab und lassen die Ausgabeseite offen. Der Text des Modells gelangt dann in einen Renderer, eine Shell, eine Datenbank oder den Kontext eines anderen Agenten, wo er als Anweisung interpretiert statt als Daten angezeigt wird. Der Angreifer muss das Modell so niemals direkt erreichen.",
+      "context": "Jeder Agent, dessen Ausgabe ein System erreicht, das sie parst: eine Chat-Schnittstelle, die Markdown rendert, ein Coding-Agent, der einen vorgeschlagenen Befehl ausführt, ein Tool-Aufruf, der aus generierten Argumenten erstellt wird, eine Zusammenfassung, die in den Prompt eines zweiten Agenten einfließt, oder ein Webhook, der den Text weiterleitet.",
+      "solution": [
+        "Listen Sie alle Ziele auf, bevor Sie Filter schreiben. Jeder Ort, an dem die Modellausgabe landet und interpretiert wird – HTML-Renderer, Shell, Query, Dateipfad, URL-Fetcher, Kontext eines anderen Agenten, nachgelagerter Webhook – ist eine eigene Grenze mit eigenen Regeln.",
+        "Codieren Sie am Ziel, nicht an der Quelle. Nutzen Sie HTML-Escaping für den Renderer, parametrisieren Sie Queries, übergeben Sie ein argv-Array an den Prozess. Die Codierung gehört dorthin, wo die Interpretation stattfindet, da nur dort bekannt ist, was interpretiert wird.",
+        "Bevorzugen Sie strukturierten Output gegenüber Fließtext, den Sie wieder parsen müssen. Ein Tool-Aufruf mit typisierten Argumenten verfügt über ein Schema, gegen das validiert werden kann; ein Satz, den Sie per Regex nach einem Dateinamen durchsuchen, nicht.",
+        "Validieren Sie den Wert, nicht nur die Syntax. Ein codierter Pfad ist immer noch ein Pfad: Überprüfen Sie vor dem Öffnen, ob er sich innerhalb des beabsichtigten Verzeichnisses auflösen lässt.",
+        "Behandeln Sie ausgehende URLs als eigenständiges Ziel. Gerenderte Bilder und Links führen zu einem Abruf ohne Klick und transportieren so Daten nach außen; setzen Sie die Hosts, die ein gerenderter Link erreichen darf, auf eine Allowlist.",
+        "Machen Sie die Grenze zum einzigen Pfad. Wenn irgendein Codepfad rohe Modellausgaben konsumieren kann, ohne einen zielspezifischen Encoder zu durchlaufen, ist die Schutzmaßnahme eher theoretischer Natur."
+      ],
+      "components": [
+        "Ein Zielinventar: jeder Konsument von Modellausgaben zusammen mit dem jeweils erforderlichen Encoder.",
+        "Zielspezifische Encoder – HTML, Prozess-argv, Query-Parameter, Pfadauflösung, URL-Allowlist – anstelle eines einzigen gemeinsamen Sanitizers.",
+        "Schemavalidierter strukturierter Output für Tool-Aufrufe, sodass Argumente typisiert sind, anstatt aus Fließtext herausgeparst zu werden.",
+        "Eine Egress-Allowlist für die Hosts, die über gerenderte Links und Bilder erreichbar sind.",
+        "Contract-Tests, die ein Payload pro Ziel senden und sicherstellen, dass dieses an der Grenze neutralisiert wird.",
+        "Protokollierung, wenn ein Encoder etwas neutralisiert, damit die Grenze signalisieren kann, dass sie aktiv im Pfad liegt."
+      ],
+      "benefits": [
+        "Unterbricht die Injection-Kette an der entscheidenden Stelle: Selbst ein vollständig manipuliertes Modell kann ein nachgelagertes System nicht zum Handeln zwingen, da dieses System seinen Text niemals interpretiert.",
+        "Unabhängig vom Modellverhalten. Es funktioniert auch bei Modell-Upgrades, neuen Jailbreaks und Prompt-Änderungen weiterhin, da es nicht darauf angewiesen ist, dass das Modell eine Anfrage verweigert.",
+        "Testbar. Jedes Ziel hat ein Payload und ein klares Ergebnis (Erfolg oder Fehlschlag), sodass die Schutzmaßnahme Belege statt bloßer Zusicherungen liefert.",
+        "Kostengünstig bei frühzeitiger Implementierung. Das Hinzufügen eines Encoders ist eine Änderung an der Grenze; das nachträgliche Hinzufügen, wenn das Ziel bereits überall verteilt ist, erfordert ein Refactoring."
+      ],
+      "risks": [
+        "Ein einziger Sanitizer für alle Ziele. Es fühlt sich wie eine Schutzmaßnahme an, erfüllt die Checkliste, ist aber an jeder Grenze falsch, außer an derjenigen, für die er geschrieben wurde.",
+        "Eine Codierung, die das Produkt unbrauchbar macht: Übermäßiges Escaping verwandelt legitimes Markdown, Codeblöcke und nicht-lateinischen Text in Zeichensalat, und der Druck, dies zu lockern, lastet dann auf dem Encoder statt auf der Zielliste.",
+        "Ein veraltendes Zielinventar. Neue Integrationen fügen Konsumenten hinzu, und es kommt zu keinem Fehler, wenn einer übersehen wird.",
+        "Verwechslung von Erkennung mit Codierung. Das Scannen von Ausgaben nach verdächtigen Zeichenketten fängt die Payloads des letzten Jahres ab; Codierung muss den Angriff überhaupt nicht erkennen."
+      ],
+      "whenNot": [
+        "Ausgaben, die niemals interpretiert werden – ein Score, ein Enum, ein Boolean, den der Aufrufer vergleicht. Schränken Sie stattdessen den Typ ein; ein Encoder auf einer geschlossenen Wertemenge ist reine Formsache.",
+        "Vollständig lokale Single-User-Tools ohne Rendering und ohne Prozessausführung, bei denen der einzige Konsument eine Person ist, die den Text liest.",
+        "Wenn das Ziel bereits konstruktionsbedingt parametrisiert, wie z. B. ein ORM-Binding oder eine Template-Engine, die standardmäßig escapet. Ein zweiter Encoder bringt keinen Gewinn und kann zu doppelter Codierung führen."
+      ],
+      "examples": [
+        "Ein Support-Agent fasst ein Ticket zusammen, dessen Text ein Markdown-Bild enthält, das auf den Host eines Angreifers verweist. Die Konsole rendert es, der Browser ruft die URL ab und die Konversation fließt ab, ohne dass jemand auf etwas klickt. Das Deaktivieren von rohem HTML und das Setzen von Bild-Hosts auf eine Allowlist schließt diese Lücke.",
+        "Ein Coding-Agent schlägt einen Shell-Befehl vor. Der Runner übergibt den String an eine Shell, sodass ein Dateiname, der ein Befehlstrennzeichen enthält, ausgeführt wird. Die Übergabe eines argv-Arrays stattdessen eliminiert den Parsing-Schritt der Shell vollständig.",
+        "Die Zusammenfassung eines Agenten wird in den Prompt eines zweiten Agenten eingefügt. Die Zusammenfassung enthielt Anweisungen, und der zweite Agent hat diese befolgt. Das Eingrenzen (Fencing) des nicht vertrauenswürdigen Bereichs und dessen Kennzeichnung als Daten stellt in diesem Fall die Grenze dar."
+      ],
+      "kpis": [
+        {
+          "metric": "Zielabdeckung",
+          "note": "Anteil der bekannten Konsumenten von Modellausgaben mit einem Encoder an der Grenze. Unter 100 % weist die Schutzmaßnahme eine konkrete Lücke auf, und die Benennung des Ziels ist nützlicher als ein Prozentsatz, der diese Lücke wegrechnet."
+        },
+        {
+          "metric": "Payload-Neutralisierungsrate",
+          "note": "Anteil der zielspezifischen Test-Payloads, die an der Grenze neutralisiert wurden. Das Ziel liegt bei 100 %: Alles andere benennt ein zu behebendes Ziel und nicht eine zu verbessernde Zahl."
+        },
+        {
+          "metric": "Zeit bis zur Abdeckung eines neuen Ziels",
+          "note": "Zeitspanne vom Livegang einer neuen Integration bis zur Existenz ihres Encoders. Misst, ob das Inventar mit dem Produkt Schritt hält, und nicht, ob es einmalig korrekt war."
+        },
+        {
+          "metric": "Auslösungsvolumen an den Grenzen",
+          "note": "Wie oft Encoder in der Produktion etwas neutralisieren. Eine glatte Null bedeutet meist, dass der Encoder nicht im Pfad liegt, und nicht, dass keine feindlichen Daten eingehen."
+        }
+      ],
+      "failureModes": [
+        "Stille Exfiltration durch gerendertes Markup: Ein Bild oder Link führt zu einem Abruf ohne Klick, sodass Daten ohne Benutzeraktion und ohne einen für jemanden bemerkbaren Fehler abfließen.",
+        "Second-Order-Injection: Eine für die Konsole korrekt codierte Ausgabe wird gespeichert und später an anderer Stelle gerendert – einem Log-Viewer, einem Ticket, einer Digest-E-Mail –, wo diese Codierung nicht greift.",
+        "Der Encoder, der sich nur auf dem Happy Path befindet. Fehlerzweige, Retries und Fallbacks geben denselben Text über einen anderen Codepfad aus, auf dem sich keine Schutzmaßnahme befindet.",
+        "Doppelte Codierung. Zwei Schichten escapen jeweils korrekt, Benutzer sehen gecodete Entities im Produkt, und die Behebung entfernt die falsche Schicht."
+      ],
+      "lessons": [
+        "Listen Sie Ziele auf, bevor Sie Filter schreiben. Fast jeder reale Fehler hier ist ein Konsument, den niemand aufgeführt hat, und kein falsch geschriebener Encoder.",
+        "Das Ziel, das Sie vergessen, ist selten ein Bildschirm. Es ist ein Webhook, ein Log-Viewer, ein Export oder eine Digest-E-Mail – ein Ort, an den die Ausgabe gelangt, ohne dass jemand an ein Rendering denkt.",
+        "Codierung schlägt Erkennung, da Codierung den Angriff nicht erkennen muss. Eine Payload-Blocklist ist lediglich eine Beschreibung der Angriffe, die bereits öffentlich waren.",
+        "Lassen Sie nicht zu, dass ein einzelnes sanitise() zur Universallösung wird. Der Name suggeriert Vollständigkeit, und das Verhalten ist für genau ein Ziel korrekt."
+      ],
+      "faqs": [
+        {
+          "q": "Ist das nicht dasselbe wie das Filtern von Eingaben gegen Prompt Injection?",
+          "a": "Nein – sie sichern entgegengesetzte Enden ab. Die Eingabefilterung versucht zu verhindern, dass das Modell manipuliert wird, was vom Modell abhängt. Dieser Ansatz setzt voraus, dass die Manipulation bereits erfolgreich war, und verhindert, dass die Ausgabe ausgeführt wird, was überhaupt nicht vom Modell abhängt. Ein System, das nur Ersteres nutzt, scheitert in dem Moment, in dem ein neuer Jailbreak auftaucht."
+        },
+        {
+          "q": "Ist das nicht einfach Output-Sanitization? Warum nicht ein einziger Sanitizer für alles?",
+          "a": "Weil Codierung kontextabhängig ist. Das Escaping eines Anführungszeichens schützt einen HTML-Renderer, bewirkt aber nichts für eine Shell; Shell-Quoting schützt eine Shell und zerstört angezeigten Text. Eine gemeinsam genutzte Funktion muss sich für einen Kontext entscheiden, ist in den anderen falsch und erweckt den Anschein von Abdeckung, während sie einen Single Point of Failure darstellt."
+        },
+        {
+          "q": "Das Modell gehört uns und der Prompt ist fest vorgegeben. Benötigen wir das trotzdem?",
+          "a": "Ja, wenn Inhalte, die das Modell liest, von außen stammen: eine abgerufene Seite, eine Benutzerdatei, ein Tool-Ergebnis, ein Speichereintrag. Die Anweisung muss nicht über Ihren Prompt erfolgen – sie erfolgt über alles, was das Modell liest, und die Tatsache, dass Ihr Prompt fest vorgegeben ist, schränkt dies nicht ein."
+        }
+      ]
+    },
+    "ja": {
+      "name": "出力境界エンコーディング",
+      "summary": "モデルが出力するすべてのものを、それを消費するシステムに対する敵対的な入力として扱います。レンダラー、シェル、クエリ、下流のエージェントなど、各宛先において、その宛先独自のルールを使用してエンコードと検証を行います。単一のグローバルなサニタイザーではこれを行うことはできません。HTMLにとって正しいエスケープ処理は、シェルにとっては無意味だからです。",
+      "definition": "出力境界エンコーディングとは、モデルの出力がそれを解釈するシステムに渡されるすべてのポイントにおいて、モデルの出力時に一度だけ汎用的なフィルタリングを行うのではなく、宛先固有のエンコードと検証を適用するプラティスです。これが欠如している状態は、OWASPが「不適切な出力処理（improper output handling）」と呼ぶ脆弱性に該当します。",
+      "problem": "開発チームはプロンプトインジェクションに対して入力側を堅牢化する一方で、出力側を無防備なままにしがちです。その結果、モデルのテキストがレンダラー、シェル、データベース、または別のエージェントのコンテキストに到達し、データとして表示されるのではなく、命令として解釈されてしまいます。攻撃者はモデルに直接アクセスする必要すらありません。",
+      "context": "出力がそれを解析（パース）する何らかの対象に到達するすべてのエージェントが該当します。例えば、Markdownをレンダリングするチャットインターフェース、提案されたコマンドを実行するコーディングエージェント、生成された引数から構築されるツール呼び出し、2番目のエージェントのプロンプトに投入される要約、あるいはテキストを前方に転送するWebhookなどです。",
+      "solution": [
+        "フィルターを作成する前に、宛先を列挙します。モデルの出力が到達し、解釈されるすべての場所（HTMLレンダラー、シェル、クエリ、ファイルパス、URLフェッチャー、別のエージェントのコンテキスト、下流のWebhookなど）は、それぞれ異なるルールを持つ個別の境界です。",
+        "送信元ではなく、宛先でエンコードします。HTML-escapeはレンダラー向けに行い、クエリ向けにはパラメータ化し、プロセスにはargv配列を渡します。エンコードは解釈が行われる場所で実施すべきです。なぜなら、そこで初めて何が解釈されるのかが分かるからです。",
+        "パースし直す必要のある自然文よりも、構造化された出力を優先します。型定義された引数を持つツール呼び出しには検証用のスキーマがありますが、正規表現でファイル名を抽出するような文章にはスキーマがありません。",
+        "構文だけでなく、値も検証します。エンコードされたパスであってもパスであることに変わりはありません。ファイルを開く前に、意図したディレクトリ内で解決されるかを確認してください。",
+        "外部へのURLは、それ自体を独自の宛先として扱います。レンダリングされた画像やリンクは、クリックしなくてもフェッチを発生させるため、データを外部に持ち出す可能性があります。レンダリングされたリンクが到達できるホストをホワイトリストに登録してください。",
+        "境界を唯一のルートにします。宛先エンコーダーを通さずに生のモデル出力を消費できるコードパスが1つでも存在する場合、その制御は形骸化しており、実質的な効果はありません。"
+      ],
+      "components": [
+        "宛先インベントリ：モデル出力を消費するすべてのシステムと、それぞれが必要とするエンコーダーの一覧。",
+        "共有された1つのサニタイザーではなく、宛先ごとのエンコーダー（HTML、プロセスargv、クエリパラメータ、パス解決、URLホワイトリストなど）。",
+        "ツール呼び出しのためのスキーマ検証済み構造化出力。これにより、引数は自然文からパースされるのではなく、型定義されます。",
+        "レンダリングされたリンクや画像から到達可能なホストをカバーする、送信（エグレス）ホワイトリスト。",
+        "宛先ごとにペイロードを送信し、それが境界で無害化されていることをアサートする契約（コントラクト）テスト。",
+        "エンコーダーが何かを無害化した際のロギング。これにより、境界が処理経路上で機能していることを確認できます。"
+      ],
+      "benefits": [
+        "重要なポイントでインジェクションの連鎖を断ち切ります。モデルが完全に誘導されてしまったとしても、下流のシステムがそのテキストを解釈することはないため、下流のシステムを動作させることはできません。",
+        "モデルの挙動に依存しません。モデルが拒否することに依存しないため、モデルのアップグレード、新しいジェイルブレイク（脱獄）、プロンプトの変更を経ても機能し続けます。",
+        "テスト可能です。各宛先にはペイロードと合否（パス/フェイル）が存在するため、この制御は単なる安心感ではなく、確実な証拠をもたらします。",
+        "早期に適用すれば低コストで済みます。エンコーダーの追加は境界の変更ですが、宛先がいたるところに存在した後に後付けするのは大規模なリファクタリングになります。"
+      ],
+      "risks": [
+        "すべての宛先に対して1つのサニタイザーを使用すること。これは制御が行われているように感じられ、チェックリストを満たしますが、それが想定して書かれた境界以外のすべての境界において誤った処理となります。",
+        "プロダクトを破損させるエンコーディング：過剰なエスケープ処理により、正当なMarkdown、コードブロック、非ラテン文字テキストがノイズに変わってしまいます。そして、それを緩和しようとする圧力は、宛先リストではなくエンコーダーにかかることになります。",
+        "陳腐化する宛先インベントリ。新しい連携によって消費システムが追加されても、それを見落としたときにエラーが発生することはありません。",
+        "検知とエンコーディングの混同。不審な文字列がないか出力をスキャンすることは、過去のペイロードを捉えるのには役立ちますが、エンコーディングは攻撃をまったく認識する必要がありません。"
+      ],
+      "whenNot": [
+        "出力が一切解釈されない場合（スコア、列挙型、呼び出し元が比較するブール値など）。代わりに型を制約してください。閉じられた値のセットに対してエンコーダーを適用するのは、形式的な手続きにすぎません。",
+        "レンダリングもプロセス実行も行わず、唯一の消費者がテキストを読む人間だけである、完全にローカルなシングルユーザー向けツールのケース。",
+        "ORMバインディングや、デフォルトでエスケープを行うテンプレートエンジンなど、宛先が構造上すでにパラメータ化されている場合。2つ目のエンコーダーを導入しても何も得られず、二重エンコードが発生する可能性があります。"
+      ],
+      "examples": [
+        "サポートエージェントが、攻撃者のホストを指すMarkdown画像が本文に含まれるチケットを要約します。コンソールがそれをレンダリングし、ブラウザがそのURLをフェッチするため、誰も何もクリックしていないにもかかわらず会話が漏洩します。生のHTMLを無効化し、画像ホストをホワイトリストに登録することで、この問題を解決できます。",
+        "コーディングエージェントがシェルコマンドを提案します。ランナーがその文字列をシェルに渡すため、コマンド区切り文字を含むファイル名が実行されてしまいます。代わりにargv配列を渡すことで、シェルのパースステップを完全に排除できます。",
+        "あるエージェントの要約が、2番目のエージェントのプロンプトに配置されます。要約に指示が含まれており、2番目のエージェントがそれに従いました。この場合、信頼できないスパンをフェンスで囲み、データとしてラベル付けすることが境界となります。"
+      ],
+      "kpis": [
+        {
+          "metric": "宛先カバー率",
+          "note": "境界にエンコーダーが設置されている、既知のモデル出力消費システムの割合。100%未満の場合、制御に特定の抜け穴が存在することになります。平均化されたパーセンテージを示すよりも、具体的な宛先を特定する方が有用です。"
+        },
+        {
+          "metric": "ペイロード無害化率",
+          "note": "境界で無害化された宛先ごとのテストペイロードの割合。目標は100%です。それ以外の数値は、改善すべき数値というよりも、修正すべき宛先を示しています。"
+        },
+        {
+          "metric": "新規宛先のカバーに要する時間",
+          "note": "新しい連携が本番稼働してから、そのエンコーダーが用意されるまでの期間。インベントリが一度正しかったかどうかではなく、プロダクトの進化に追従できているかを測定します。"
+        },
+        {
+          "metric": "境界トリガー数",
+          "note": "本番環境でエンコーダーが何かを無害化した頻度。完全にゼロである場合は、敵対的な入力が届いていないのではなく、通常はエンコーダーが処理経路上に存在しないことを意味します。"
+        }
+      ],
+      "failureModes": [
+        "レンダリングされたマークアップを介したサイレントな情報漏洩：画像やリンクがクリックなしでフェッチを発生させるため、ユーザーの操作なしに、また誰も気づかないようなエラーも発生せずにデータが外部に流出します。",
+        "二次インジェクション：コンソール向けに正しくエンコードされた出力が保存され、その後、そのエンコーディングが適用されない別の場所（ログビューア、チケット、ダイジェストメールなど）でレンダリングされます。",
+        "正常系パスにしか存在しないエンコーダー。エラー分岐、再試行、フォールバックが、何も対策が施されていない別のコードパスを介して同じテキストを出力してしまいます。",
+        "二重エンコード。2つのレイヤーがそれぞれ正しくエスケープ処理を行い、ユーザーにはプロダクト内でエスケープされた実体参照が表示され、その修正において誤ったレイヤーが削除されてしまいます。"
+      ],
+      "lessons": [
+        "フィルターを作成する前に宛先を列挙します。ここでの実際の失敗のほぼすべては、エンコーダーの書き間違いではなく、誰もリストアップしていなかった消費システムが存在することに起因します。",
+        "忘れがちな宛先が画面であることは稀です。それはWebhook、ログビューア、エクスポート、またはダイジェストメールなど、レンダリングであると誰も意識しないまま出力が送られる場所です。",
+        "エンコーディングは検知よりも優れています。なぜなら、エンコーディングは攻撃を認識する必要がないからです。ペイロードのブラックリストは、すでに公開されている攻撃の記述にすぎません。",
+        "単一の `sanitise()` を解決策にしないでください。その名前は完全性を連想させますが、その挙動は正確には1つの宛先に対してのみ正しいものです。"
+      ],
+      "faqs": [
+        {
+          "q": "これはプロンプトインジェクション対策として入力をフィルタリングすることと同じではないのですか？",
+          "a": "いいえ、これらは相反する両端を防御するものです。入力フィルタリングはモデルが誘導されるのを防ごうとするもので、モデルに依存します。一方、出力境界エンコーディングは、誘導がすでに成功したと仮定した上で、出力が実行されるのを防ぐものであり、モデルには一切依存しません。前者のみを備えたシステムは、新しいジェイルブレイク（脱獄）が現れた瞬間に破綻します。"
+        },
+        {
+          "q": "これは単なる出力サニタイズではないのですか？なぜすべてに対して1つのサニタイザーではいけないのですか？",
+          "a": "エンコーディングは文脈に依存するからです。引用符のエスケープはHTMLレンダラーを保護しますが、シェルに対しては何の効果もありません。シェルクォーティングはシェルを保護しますが、表示されるテキストを破損させます。共有関数は1つの文脈を選択せざるを得ず、他の文脈では誤った処理となり、カバーできているように見えて単一障害点になってしまいます。"
+        },
+        {
+          "q": "モデルは自社のものであり、プロンプトも固定されています。それでもこれが必要ですか？",
+          "a": "はい。モデルが読み込むコンテンツが、取得したページ、ユーザーファイル、ツールの実行結果、メモリレコードなど、外部から提供されるものである場合は該当します。指示はプロンプトから直接与えられる必要はありません。モデルが読み込むあらゆるコンテンツを介して指示が入り込むため、プロンプトが固定されているからといって、それを防げるわけではありません。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "输出边界编码",
+      "summary": "将模型输出的所有内容都视为对其消费端的恶意输入。在每个目标端（渲染器、shell、查询、下游智能体）使用该目标端自身的规则进行编码和验证。单一的全局净化器无法做到这一点：对 HTML 正确的转义对 shell 来说毫无意义。",
+      "definition": "输出边界编码是指在模型输出跨入将对其进行解析的系统的每一个节点上，应用针对特定目标端的编码和验证，而不是在输出模型时进行一次通用的过滤。缺少这一实践即是 OWASP 所称的“不当输出处理”漏洞。",
+      "problem": "团队往往会针对提示词注入对输入端进行加固，却让输出端处于不设防状态。随后，模型的文本到达渲染器、shell、数据库或其他智能体的上下文，并在那里被解析为指令而非作为数据展示。攻击者根本不需要直接接触模型。",
+      "context": "任何其输出会到达对其进行解析的系统的智能体：例如渲染 markdown 的聊天界面、运行建议命令的编码智能体、根据生成的参数构建的工具调用、输入到第二个智能体提示词中的摘要，或者向前转发文本的 webhook。",
+      "solution": [
+        "在编写任何过滤器之前，先列举所有的目标端。模型输出落地并被解析的每个地方——HTML 渲染器、shell、查询、文件路径、URL 获取器、另一个智能体的上下文、下游 webhook——都是一个具有不同规则的独立边界。",
+        "在目标端进行编码，而不是在源端。为渲染器进行 HTML 转义，为查询进行参数化，向进程传递 argv 数组。编码应当发生在解析发生的地方，因为只有在那里你才知道什么将被解析。",
+        "优先选择结构化输出，而不是需要重新解析的自然语言。带有类型化参数的工具调用具有可用于验证的 schema；而你用正则表达式提取文件名的句子则没有。",
+        "不仅要验证语法，还要验证值。编码后的路径仍然是路径：在打开它之前，请检查它是否解析在你预期的目录内。",
+        "将出站 URL 视为一个独立的目标端。渲染的图片和链接会在无需点击的情况下触发获取请求，从而将数据带出；请将渲染链接可以访问的主机加入白名单。",
+        "使该边界成为唯一的路径。如果任何代码路径可以在不经过目标端编码器的情况下消费原始模型输出，那么这种控制只是建议性的，而非实质性的。"
+      ],
+      "components": [
+        "目标端清单：模型输出的每个消费者，以及它们各自所需的编码器。",
+        "针对每个目标端的编码器（HTML、进程 argv、查询参数、路径解析、URL 白名单），而不是一个共享的净化器。",
+        "针对工具调用的、经过 schema 验证的结构化输出，从而使参数具有类型，而不是从自然语言中解析出来。",
+        "一个出口白名单，涵盖渲染的链接和图片可访问的主机。",
+        "契约测试，针对每个目标端发送有效载荷，并断言其在边界处已被中和。",
+        "在编码器中和某些内容时记录日志，以便边界能够告知您它正在发挥作用。"
+      ],
+      "benefits": [
+        "在关键环节切断注入链：即使模型被完全说服，也无法让下游系统执行操作，因为该系统绝不会解析其文本。",
+        "独立于模型行为。它在模型升级、新的越狱和提示词更改时依然有效，因为它不依赖于模型拒绝任何内容。",
+        "可测试。每个目标端都有一个有效载荷以及通过或失败的结果，因此该控制措施产生的是证据而非口头保证。",
+        "尽早应用成本较低。添加编码器属于边界变更；而在目标端无处不在之后再进行补救则属于重构。"
+      ],
+      "risks": [
+        "对所有目标端使用同一个净化器。这看起来像是一种控制措施，满足了检查清单的要求，但除了它专门针对的那个边界之外，在其他所有边界上都是错误的。",
+        "编码破坏了产品：过度转义会将合法的 markdown、代码块和非拉丁文本变成噪音，而放宽限制的压力最终会落在编码器上，而不是目标端清单上。",
+        "目标端清单老化。新的集成增加了消费者，而当遗漏某个消费者时，系统并不会报错。",
+        "混淆检测与编码。扫描输出中的可疑字符串只能捕获去年的有效载荷；而编码根本不需要识别攻击。"
+      ],
+      "whenNot": [
+        "绝不会被解析的输出——例如调用者进行比较的分数、枚举或布尔值。此时应限制其类型；在封闭的值集上使用编码器只是流于形式。",
+        "完全本地的单用户工具，没有渲染，也没有进程执行，唯一的消费者是阅读文本的人。",
+        "目标端在构建时已经进行了参数化，例如 ORM 绑定或默认进行转义的模板引擎。第二个编码器不会带来任何好处，反而可能导致双重编码。"
+      ],
+      "examples": [
+        "支持智能体对工单进行摘要，该工单正文中包含一个指向攻击者主机的 markdown 图片。控制台渲染了该图片，浏览器获取了该 URL，于是在无人点击任何内容的情况下，对话内容泄露了。禁用原始 HTML 并将图片主机加入白名单可以解决此问题。",
+        "编码智能体建议了一条 shell 命令。运行器将该字符串传递给 shell，导致包含命令分隔符的文件名被执行。改为传递 argv 数组则可以完全省去 shell 的解析步骤。",
+        "一个智能体的摘要被放入第二个智能体的提示词中。该摘要包含指令，而第二个智能体执行了这些指令。在这种情况下，隔离不可信的跨度并将其标记为数据就是其边界。"
+      ],
+      "kpis": [
+        {
+          "metric": "目标端覆盖率",
+          "note": "在边界处设有编码器的已知模型输出消费者的比例。低于 100% 意味着控制措施存在特定的漏洞，指明具体的目标端比用一个平均百分比将其掩盖更有用。"
+        },
+        {
+          "metric": "有效载荷中和率",
+          "note": "在边界处被中和的每个目标端测试有效载荷的比例。目标是 100%：任何其他结果都意味着需要指出待修复的目标端，而不是需要提高的数字。"
+        },
+        {
+          "metric": "覆盖新目标端所需的时间",
+          "note": "从新集成上线到其编码器就绪所需的时间。这衡量的是清单是否能跟上产品的步伐，而不是它是否曾经正确过。"
+        },
+        {
+          "metric": "边界触发量",
+          "note": "编码器在生产环境中中和内容的频率。完全为零通常意味着编码器未处于路径上，而不是没有恶意内容到达。"
+        }
+      ],
+      "failureModes": [
+        "通过渲染的标记进行静默外传：图片或链接在无需点击的情况下触发获取请求，从而在没有用户操作且无人会注意到的错误的情况下将数据带出。",
+        "二阶注入：针对控制台正确编码的输出被存储，随后在其他地方（日志查看器、工单、摘要邮件）进行渲染，而那里的编码并不适用。",
+        "仅存在于正常路径（happy path）上的编码器。错误分支、重试和回退通过一条没有任何防护的、不同的代码路径发送相同的文本。",
+        "双重编码。两层都进行了正确的转义，用户在产品中看到了转义后的实体，而修复措施却移除了错误的一层。"
+      ],
+      "lessons": [
+        "在编写过滤器之前，先列举所有的目标端。这里几乎所有实际的失败都是因为存在无人列出的消费者，而不是因为编码器写错了。",
+        "你遗忘的目标端很少是屏幕。它通常是 webhook、日志查看器、导出或摘要邮件——即输出所流向的、但没人会将其视为渲染的某个地方。",
+        "编码优于检测，因为编码不需要识别攻击。有效载荷黑名单只是对已经公开的攻击的描述。",
+        "不要让单一的 `sanitise()` 成为解决方案。这个名字暗示了完整性，但其行为仅对恰好一个目标端是正确的。"
+      ],
+      "faqs": [
+        {
+          "q": "这与针对提示词注入过滤输入不是一回事吗？",
+          "a": "不——它们防御的是相反的两端。输入过滤试图阻止模型被说服，这取决于模型。而本方法假设说服已经成功，并阻止输出被执行，这完全不依赖于模型。仅具有前者的系统在出现新的越狱手段时就会失效。"
+        },
+        {
+          "q": "这不就是输出净化吗？为什么不使用一个通用的净化器呢？",
+          "a": "因为编码是与上下文相关的。转义引号可以保护 HTML 渲染器，但对 shell 毫无作用；shell 引号转义可以保护 shell，但会破坏显示的文本。共享函数必须选择一种上下文，在其他上下文中则是错误的，这看起来实现了覆盖，实则是一个单点故障。"
+        },
+        {
+          "q": "模型是我们的，提示词也是固定的。我们还需要这个吗？",
+          "a": "是的，只要模型读取的任何内容来自外部：获取的页面、用户文件、工具结果、内存记录。指令不一定非要通过你的提示词传入——它可以通过模型读取的任何内容传入，而你的提示词是固定的并不能约束这一点。"
+        }
+      ]
     }
   }
 }

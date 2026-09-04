@@ -27,7 +27,11 @@
   "evidence": {
     "evidenceLevel": "production",
     "confidenceLevel": "low",
-    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+    "sourceType": [
+      "production_system",
+      "personal_experience",
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {
@@ -300,6 +304,370 @@
         {
           "q": "Como impeço que tarefas de baixa prioridade nunca rodem?",
           "a": "Use envelhecimento para elevar gradualmente a prioridade das tarefas que esperam há muito tempo, ou reserve uma fração de capacidade para os níveis inferiores, e monitore o tempo de espera de cauda para confirmar que nada fica sem recursos."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Priorisation des tâches",
+      "summary": "Ordonner les tâches candidates d'un agent par valeur, urgence, dépendances et coût plutôt que de les traiter selon le principe du premier entré, premier sorti (FIFO). Une fonction de score et une file d'attente prioritaire déterminent l'exécution suivante, afin d'allouer les ressources de calcul, le budget et le temps limités aux travaux les plus importants. Réévaluer les scores à chaque changement d'état et limiter la taille de la file d'attente pour éviter une croissance infinie.",
+      "problem": "Un agent qui décompose un objectif se retrouve souvent avec de nombreuses tâches candidates simultanées : recherches à effectuer, fichiers à lire, outils à appeler, sous-objectifs à poursuivre. Les traiter par ordre d'arrivée revient à accorder la même importance à une étape de nettoyage triviale qu'à une tâche bloquante soumise à une échéance. Les travaux importants attendent derrière des bruits de fond mineurs, les dépendances ne sont pas respectées et le budget est gaspillé pour des tâches devenues inutiles suite à l'évolution de la situation.",
+      "context": "À utiliser lorsqu'un agent ou un orchestrateur gère un backlog de tâches indépendantes ou faiblement couplées et ne peut pas toutes les exécuter immédiatement en raison de contraintes de calcul, de limites de débit, de coût ou de temps réel. Ce modèle convient aux architectures de planification et de supervision où un composant choisit la prochaine exécution. Il suppose que vous pouvez associer des signaux — impact, échéance, dépendance, coût — à chaque tâche, et que les priorités peuvent évoluer à mesure que de nouvelles observations apparaissent.",
+      "solution": [
+        "Associer des signaux explicites à chaque tâche : impact attendu sur l'objectif, urgence ou échéance, relations de dépendance (ce qui doit se terminer en premier) et coût estimé en jetons, en argent ou en latence. Combiner ces éléments en un score unique à l'aide d'une fonction transparente et auditable plutôt que d'un jugement de modèle opaque. Injecter les tâches évaluées dans une file d'attente prioritaire afin d'exécuter la tâche prête ayant la plus haute valeur. Respecter systématiquement les dépendances en premier : une tâche dont les prérequis ne sont pas satisfaits n'est pas considérée comme « prête », quel que soit son score, ce qui garantit un ordonnancement correct et évite les tentatives infructueuses.",
+        "Rendre la priorisation dynamique. Après chaque étape, réévaluer le score des tâches concernées car les nouveaux résultats modifient l'impact, les échéances approchent et certaines tâches deviennent obsolètes et peuvent être abandonnées. Se prémunir contre la famine par le vieillissement (aging) — en augmentant progressivement la priorité des tâches en attente depuis longtemps — ou en réservant de la capacité pour les niveaux inférieurs. Limiter le backlog par un plafond explicite et une politique d'admission : lorsque la file d'attente est pleine, rejeter, fusionner ou évincer les tâches les moins prioritaires au lieu de la laisser croître indéfiniment. Conserver des poids de notation configurables et consigner les raisons du choix de chaque tâche afin de garantir l'explicabilité du comportement."
+      ],
+      "components": [
+        "Extracteur de signaux",
+        "Fonction de notation",
+        "File d'attente prioritaire",
+        "Résolveur de dépendances",
+        "Boucle de repriorisation",
+        "Contrôleur d'admission et de vieillissement"
+      ],
+      "benefits": [
+        "Les ressources de calcul, le budget et le temps limités sont consacrés aux travaux à forte valeur ajoutée et urgents, plutôt qu'à ce qui est arrivé en premier.",
+        "Le respect des prérequis évite les tentatives infructueuses et les retouches inutiles causées par l'exécution de tâches avant que leurs entrées ne soient disponibles.",
+        "La réévaluation des scores permet à l'agent d'abandonner les tâches devenues inutiles et de promouvoir celles nouvellement urgentes à mesure que la situation évolue.",
+        "Une notation sensible aux coûts et une file d'attente limitée permettent de maîtriser les budgets de jetons et de latence plutôt que de les laisser illimités."
+      ],
+      "risks": [
+        "Une mauvaise pondération ou une estimation erronée des coûts peut systématiquement priver de ressources les travaux importants ou privilégier des tâches de faible valeur ; la formule nécessite un examen et un étalonnage.",
+        "Sans vieillissement ni capacité réservée, les tâches à faible priorité risquent de ne jamais être exécutées, laissant les travaux de nettoyage ou de fond nécessaires définitivement inachevés.",
+        "Une réévaluation trop fréquente des scores peut amener l'agent à changer constamment de focus, subissant ainsi le coût des changements de contexte sans jamais rien terminer.",
+        "Si la décomposition ajoute des tâches plus rapidement qu'elles ne sont accomplies, un backlog non limité gonfle la mémoire, les coûts et la latence de planification."
+      ],
+      "whenNot": [
+        "Lorsqu'il n'y a qu'une poignée de tâches similaires, le FIFO ou un parallélisme simple est plus aisé et le surcoût lié à la notation n'en vaut pas la peine.",
+        "Si les tâches doivent s'exécuter selon une séquence fixe dictée par le domaine, un flux de travail statique ou un DAG est plus clair qu'une file d'attente prioritaire dynamique.",
+        "Lorsque vous pouvez tout exécuter immédiatement dans le respect du budget et des limites, il n'y a rien à prioriser et l'ordonnancement ajoute une complexité inutile."
+      ],
+      "examples": [
+        "Un agent chargé de rassembler des preuves priorise les recherches les plus susceptibles de résoudre les questions en suspens et ignore les requêtes redondantes une fois qu'une affirmation est confirmée.",
+        "Un agent d'exploitation ordonne les étapes de remédiation selon le rayon d'impact et l'échéance, traitant l'interruption de service côté client avant les avertissements à faible impact.",
+        "Un agent de pipeline planifie en priorité les documents à forte valeur ou proches de leur échéance et diffère les éléments de traitement par lots peu coûteux, tandis que le vieillissement empêche la file d'attente de traitement par lots de stagner indéfiniment."
+      ],
+      "productionEvidence": {
+        "context": "Déploiement OpenClaw mono-opérateur, local-first, observé sur 57 jours (161 sessions / 2 776 tours), agrégé à partir des traces de trajectoire propres à l'agent.",
+        "scenario": "Un agent autonome est activé selon un calendrier (heartbeat + cron), avec un décalage en début d'heure et un délai de récupération (cooldown) du heartbeat fournissant une contre-pression pour éviter l'accumulation des tâches.",
+        "technology": "Planificateur CronService, heartbeat-runner, décalage de 5 minutes en début d'heure, logique de report par heartbeat-cooldown, et champ de priorité faible/normale/haute sur les résultats du heartbeat.",
+        "load": "2 801 tours de heartbeat + 57 tours de cron + 106 tours d'utilisateur sur 57 jours (le heartbeat représentant environ 94 % des déclenchements).",
+        "results": "Le planificateur a maintenu environ cinquante réveils autonomes par jour, le décalage et le délai de récupération empêchant l'accumulation des tâches ; aucun mode de défaillance lié à la planification n'est apparu. Déploiement mono-opérateur local-first."
+      },
+      "kpis": [
+        {
+          "metric": "Valeur pondérée des tâches accomplies par unité de coût",
+          "note": "Indique si l'effort se concentre sur les travaux à fort impact ; un bon résultat correspond à une valeur plus pertinente par rapport à l'objectif fournie par jeton ou par dollar par rapport à une référence FIFO."
+        },
+        {
+          "metric": "Respect des échéances / SLA pour les tâches critiques",
+          "note": "Montre que les signaux d'urgence fonctionnent ; un bon résultat correspond à des tâches urgentes se terminant avant leur échéance la plupart du temps."
+        },
+        {
+          "metric": "Indicateur de famine (temps d'attente maximal et de traîne pour les tâches à faible priorité)",
+          "note": "Révèle si le vieillissement est efficace ; un bon résultat correspond à des attentes maximales limitées, sans qu'aucune tâche ne reste bloquée indéfiniment."
+        },
+        {
+          "metric": "Profondeur de la file d'attente par rapport au plafond et taux d'admission/éviction",
+          "note": "Confirme que le backlog reste limité ; un bon résultat correspond à une profondeur maintenue sous le plafond, l'éviction étant réservée aux tâches de valeur réellement faible."
+        }
+      ],
+      "failureModes": [
+        "Une tâche hautement prioritaire attend un prérequis de faible priorité qui n'est jamais planifié ; le résolveur doit propager l'urgence aux éléments bloquants.",
+        "Des priorités calculées une seule fois et jamais actualisées entraînent des décisions basées sur des informations d'impact ou d'échéance obsolètes ; la réévaluation des scores doit donc être déclenchée lors des changements d'état pertinents.",
+        "Sous-estimer le coût d'une tâche lui permet de monopoliser le budget ; les estimations ont besoin des retours de la consommation réelle mesurée.",
+        "Une politique d'admission agressive abandonne une tâche qui s'avère ultérieurement nécessaire, imposant une redécouverte coûteuse ; l'éviction devrait privilégier les éléments véritablement redondants."
+      ],
+      "lessons": [
+        "Une formule auditable et configurable est plus facile à déboguer et à ajuster qu'un jugement de modèle opaque sur l'action suivante à mener.",
+        "Traiter la finalisation des prérequis comme une vérification de disponibilité distincte afin qu'un score élevé ne permette jamais à une tâche de devancer ses entrées.",
+        "Ajouter du vieillissement ou de la capacité réservée dès le départ ; les travaux de fond à faible priorité qui ne s'exécutent jamais deviennent un écart de conformité silencieux.",
+        "Une limite stricte assortie d'une politique d'admission claire constitue la défense la plus simple contre une décomposition incontrôlée qui gonflerait les coûts et la latence."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il de la décomposition des objectifs ?",
+          "a": "La décomposition produit les tâches ; la priorisation détermine l'ordre dans lequel les tâches résultantes sont exécutées. Elles sont complémentaires : la décomposition remplit le backlog, la priorisation le vide de manière sensée."
+        },
+        {
+          "q": "Le LLM doit-il lui-même évaluer les priorités ?",
+          "a": "Il peut proposer des signaux tels que l'impact estimé, mais il convient de les combiner avec une fonction transparente et auditable. Une formule déterministe basée sur des signaux nommés est plus facile à calibrer, à journaliser et à faire confiance qu'un unique appel de classement opaque."
+        },
+        {
+          "q": "Comment éviter que les tâches de faible priorité ne s'exécutent jamais ?",
+          "a": "Utilisez le vieillissement pour augmenter progressivement la priorité des tâches en attente depuis longtemps, ou réservez une fraction de la capacité aux niveaux inférieurs, et surveillez le temps d'attente de queue pour confirmer que rien n'est laissé de côté."
+        }
+      ]
+    },
+    "de": {
+      "name": "Aufgabenpriorisierung",
+      "summary": "Ordnen Sie die potenziellen Aufgaben eines Agenten nach Wert, Dringlichkeit, Abhängigkeiten und Kosten, anstatt sie nach dem First-In-First-Out-Prinzip zu verarbeiten. Eine Scoring-Funktion und eine Priority Queue entscheiden, was als Nächstes ausgeführt wird, sodass begrenzte Rechenleistung, Budget und Zeit in die wichtigste Arbeit fließen. Berechnen Sie Scores bei Zustandsänderungen neu und begrenzen Sie die Queue, damit sie nicht unendlich wächst.",
+      "problem": "Ein Agent, der ein Ziel zerlegt, steht oft vor vielen potenziellen Aufgaben gleichzeitig: Suchen ausführen, Dateien lesen, Tools aufrufen, Unterziele verfolgen. Die Verarbeitung in der Reihenfolge des Eintreffens behandelt einen trivialen Bereinigungsschritt gleichwertig mit einer blockierenden, termingebundenen Aufgabe. Wichtige Arbeit wartet hinter unwichtigem Rauschen, Abhängigkeiten werden verletzt und Budget wird für Aufgaben ausgegeben, die nach einer Lageänderung keine Rolle mehr spielen.",
+      "context": "Verwenden Sie dieses Muster, wenn ein Agent oder Orchestrator ein Backlog unabhängiger oder lose gekoppelter Aufgaben verwaltet und diese aufgrund von Einschränkungen bei Rechenleistung, Rate-Limits, Kosten oder realer Zeit nicht alle sofort ausführen kann. Es eignet sich für Planer- und Supervisor-Architekturen, bei denen eine Komponente entscheidet, was als Nächstes ausgeführt wird. Es setzt voraus, dass Sie jeder Aufgabe Signale – Auswirkung, Deadline, Abhängigkeit, Kosten – zuweisen können und dass sich Prioritäten verschieben können, wenn neue Beobachtungen eintreffen.",
+      "solution": [
+        "Weisen Sie jeder Aufgabe explizite Signale zu: erwartete Auswirkung auf das Ziel, Dringlichkeit oder Deadline, Abhängigkeitsbeziehungen (was zuerst abgeschlossen sein muss) und geschätzte Kosten in Token, Geld oder Latenz. Kombinieren Sie diese mithilfe einer transparenten, überprüfbaren Funktion zu einem einzigen Score, statt sich auf ein undurchsichtiges Modellurteil zu verlassen. Leiten Sie bewertete Aufgaben in eine Priority Queue, sodass die bereitstehende Aufgabe mit dem höchsten Wert als Nächstes ausgeführt wird. Berücksichtigen Sie Abhängigkeiten immer zuerst: Eine Aufgabe, deren Voraussetzungen nicht erfüllt sind, ist unabhängig von ihrem Score nicht „bereit“, was die korrekte Reihenfolge wahrt und unnötige Fehlversuche verhindert.",
+        "Gestalten Sie die Priorisierung dynamisch. Berechnen Sie nach jedem Schritt die Scores betroffener Aufgaben neu, da neue Ergebnisse die Auswirkung verändern, Deadlines näher rücken und manche Aufgaben obsolet werden und verworfen werden können. Schützen Sie sich vor Starvation durch Aging – indem Sie die Priorität lange wartender Aufgaben schrittweise erhöhen – oder durch die Reservierung von Kapazitäten für niedrigere Stufen. Begrenzen Sie das Backlog mit einem expliziten Limit und einer Admission Policy: Wenn die Queue voll ist, weisen Sie die schwächsten Aufgaben ab, führen Sie sie zusammen oder verwerfen Sie sie, anstatt die Queue unbegrenzt wachsen zu lassen. Halten Sie die Scoring-Gewichtungen konfigurierbar und protokollieren Sie, warum jede Aufgabe ausgewählt wurde, damit das Verhalten nachvollziehbar bleibt."
+      ],
+      "components": [
+        "Signal-Extraktor",
+        "Scoring-Funktion",
+        "Priority Queue",
+        "Abhängigkeits-Resolver",
+        "Repriorisierungs-Loop",
+        "Admission- und Aging-Controller"
+      ],
+      "benefits": [
+        "Begrenzte Rechenleistung, Budget und Zeit fließen in wertvolle, zeitkritische Arbeit statt in das, was zuerst eingetroffen ist.",
+        "Die Berücksichtigung von Voraussetzungen vermeidet unnötige Fehlversuche und Nacharbeiten, die entstehen, wenn Aufgaben ausgeführt werden, bevor ihre Inputs vorliegen.",
+        "Die Neuberechnung der Scores ermöglicht es dem Agenten, inzwischen irrelevante Aufgaben zu verwerfen und neu dringliche Aufgaben vorzuziehen, wenn sich die Situation weiterentwickelt.",
+        "Kostenbewusstes Scoring und eine begrenzte Queue halten Token- und Latenz-Budgets unter Kontrolle, statt sie ausufern zu lassen."
+      ],
+      "risks": [
+        "Eine falsche Gewichtung oder eine schlechte Kostenschätzung kann systematisch wichtige Arbeit blockieren (Starvation) oder unwichtigen Aufgaben hinterherjagen; die Formel erfordert Überprüfung und Kalibrierung.",
+        "Ohne Aging oder reservierte Kapazitäten werden Aufgaben mit niedriger Priorität möglicherweise nie ausgeführt, wodurch notwendige Bereinigungen oder Hintergrundarbeiten dauerhaft unerledigt bleiben.",
+        "Zu häufiges Repriorisieren kann dazu führen, dass der Agent ständig den Fokus wechselt, Latenz durch Kontextwechsel verursacht und nie etwas zu Ende bringt.",
+        "Wenn die Zerlegung schneller neue Aufgaben hinzufügt, als diese abgeschlossen werden, bläht ein unbegrenztes Backlog den Speicherbedarf, die Kosten und die Planungslatenz auf."
+      ],
+      "whenNot": [
+        "Wenn es nur eine Handvoll ähnlicher Aufgaben gibt, ist FIFO oder einfache Parallelisierung unkomplizierter und der Scoring-Overhead lohnt sich nicht.",
+        "Wenn Aufgaben in einer festen, durch die Domäne vorgegebenen Reihenfolge ausgeführt werden müssen, ist ein statischer Workflow oder ein DAG klarer als eine dynamische Priority Queue.",
+        "Wenn Sie alles sofort innerhalb des Budgets und der Limits ausführen können, gibt es nichts zu priorisieren, und eine Sortierung bringt nur unnötige Komplexität."
+      ],
+      "examples": [
+        "Ein Agent, der Beweise sammelt, priorisiert die Suchen, die am wahrscheinlichsten offene Fragen klären, und überspringt redundante Abfragen, sobald eine Behauptung bestätigt ist.",
+        "Ein Operations-Agent ordnet Behebungsschritte nach Schadensradius und Deadline und behebt den kundenwirksamen Ausfall vor Warnungen mit geringer Auswirkung.",
+        "Ein Pipeline-Agent plant wertvolle oder zeitkritische Dokumente zuerst ein und stellt günstige Massenaufgaben zurück, während Aging verhindert, dass die Massen-Queue dauerhaft blockiert."
+      ],
+      "productionEvidence": {
+        "context": "Single-Operator, Local-First OpenClaw-Bereitstellung, beobachtet über 57 Tage (161 Sessions / 2.776 Turns), aggregiert aus den eigenen Trajektorien-Traces des Agenten.",
+        "scenario": "Ein autonomer Agent wird nach einem Zeitplan geweckt (Heartbeat + Cron), wobei ein Staggering zu Beginn jeder Stunde und ein Heartbeat-Cooldown für Backpressure sorgen, damit sich Jobs nicht anhäufen.",
+        "technology": "CronService-Scheduler, Heartbeat-Runner, ein 5-minütiges Staggering zu Beginn jeder Stunde, Heartbeat-Cooldown-Verzögerungslogik und ein Feld für niedrige/normale/hohe Priorität bei Heartbeat-Ergebnissen.",
+        "load": "2.801 Heartbeat-Turns + 57 Cron-Turns + 106 User-Turns über 57 Tage (Heartbeat ~94 % der Trigger).",
+        "results": "Der Scheduler hielt täglich etwa fünfzig autonome Aktivierungen aufrecht, wobei Staggering und Cooldown ein Anhäufen von Jobs verhinderten; es trat kein zeitplangesteuerter Fehler auf. Single-Operator, Local-First-Bereitstellung."
+      },
+      "kpis": [
+        {
+          "metric": "Gewichteter Wert abgeschlossener Aufgaben pro Kosteneinheit",
+          "note": "Erfasst, ob der Aufwand in hochwirksame Arbeit fließt; ein gutes Ergebnis zeigt sich in mehr zielrelevantem Wert pro Token oder Dollar im Vergleich zu einer FIFO-Baseline."
+        },
+        {
+          "metric": "Einhaltung von Deadlines / SLAs bei zeitkritischen Aufgaben",
+          "note": "Zeigt, ob Dringlichkeitssignale funktionieren; ein gutes Ergebnis bedeutet, dass dringende Aufgaben meist vor ihrer Deadline abgeschlossen werden."
+        },
+        {
+          "metric": "Starvation-Indikator (maximale und Tail-Wartezeit für Aufgaben mit niedriger Priorität)",
+          "note": "Zeigt, ob Aging effektiv ist; ein gutes Ergebnis sind begrenzte Wartezeiten im Worst Case, ohne dass eine Aufgabe unendlich festsitzt."
+        },
+        {
+          "metric": "Queue-Tiefe im Verhältnis zum Limit und Admission-/Eviction-Rate",
+          "note": "Bestätigt, dass das Backlog begrenzt bleibt; ein gutes Ergebnis zeigt sich in einer Tiefe unter dem Limit, wobei das Verwerfen (Eviction) wirklich geringwertigen Aufgaben vorbehalten bleibt."
+        }
+      ],
+      "failureModes": [
+        "Eine hochpriorisierte Aufgabe wartet auf eine Voraussetzung mit niedriger Priorität, die nie eingeplant wird; der Resolver muss die Dringlichkeit auf Blockierer übertragen.",
+        "Einmalig berechnete und nie aktualisierte Prioritäten führen zu Entscheidungen auf Basis veralteter Auswirkungs- oder Deadline-Informationen; daher muss eine Neuberechnung bei relevanten Zustandsänderungen getriggert werden.",
+        "Eine Unterschätzung der Kosten einer Aufgabe führt dazu, dass sie das Budget monopolisiert; Schätzungen benötigen Feedback aus dem tatsächlich gemessenen Verbrauch.",
+        "Eine aggressive Admission Policy verwirft eine Aufgabe, die sich später als notwendig herausstellt, was eine teure erneute Ermittlung erzwingt; das Verwerfen (Eviction) sollte wirklich redundante Elemente bevorzugen."
+      ],
+      "lessons": [
+        "Eine überprüfbare, konfigurierbare Formel ist einfacher zu debuggen und abzustimmen als ein undurchsichtiges Modellurteil darüber, was als Nächstes zu tun ist.",
+        "Behandeln Sie den Abschluss von Voraussetzungen als separate Bereitschaftsprüfung, damit ein hoher Score eine Aufgabe niemals vor ihre Inputs springen lässt.",
+        "Fügen Sie von Anfang an Aging oder reservierte Kapazitäten hinzu; Hintergrundarbeit mit niedriger Priorität, die nie ausgeführt wird, führt zu einer unbemerkten Korrektheitslücke.",
+        "Eine harte Obergrenze mit einer klaren Zulassungsrichtlinie ist der einfachste Schutz gegen eine ausufernde Dekomposition, die Kosten und Latenz in die Höhe treibt."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies von der Zieldekomposition?",
+          "a": "Die Dekomposition erzeugt die Aufgaben; die Priorisierung entscheidet über die Reihenfolge, in der die resultierenden Aufgaben ausgeführt werden. Sie ergänzen sich gegenseitig: Die Dekomposition füllt das Backlog, die Priorisierung baut es sinnvoll ab."
+        },
+        {
+          "q": "Sollte das LLM selbst die Prioritäten bewerten?",
+          "a": "Es kann Signale wie den geschätzten Impact vorschlagen, aber kombinieren Sie diese mit einer transparenten, überprüfbaren Funktion. Eine deterministische Formel über benannte Signale ist einfacher zu kalibrieren, zu protokollieren und vertrauenswürdiger als ein einzelner, undurchsichtiger Ranking-Aufruf."
+        },
+        {
+          "q": "Wie verhindere ich, dass Aufgaben mit niedriger Priorität niemals ausgeführt werden?",
+          "a": "Nutzen Sie Aging, um die Priorität von lange wartenden Aufgaben schrittweise zu erhöhen, oder reservieren Sie einen Teil der Kapazität für niedrigere Stufen, und überwachen Sie die Tail-Wartezeit, um sicherzustellen, dass nichts verhungert."
+        }
+      ]
+    },
+    "ja": {
+      "name": "タスクの優先順位付け",
+      "summary": "エージェントの候補タスクを先入れ先出し（FIFO）で処理するのではなく、価値、緊急度、依存関係、およびコストに基づいて順序付けします。スコアリング関数と優先度付きキューが次に実行するタスクを決定するため、限られた計算リソース、予算、時間を最も重要な作業に割り当てることができます。状態の変化に応じて再スコアリングを行い、キューに上限を設けて無制限に肥大化するのを防ぎます。",
+      "problem": "ゴールを分解するエージェントは、実行すべき検索、読み込むべきファイル、呼び出すべきツール、追求すべきサブゴールなど、一度に多くの候補タスクを抱えがちです。これらを到着順に処理すると、些細なクリーンアップステップが、期限付きのブロッキングタスクと同等に扱われてしまいます。重要な作業が低価値のノイズの後回しになり、依存関係が侵害され、状況が変わった後ではもはや重要ではないタスクに予算が費やされてしまいます。",
+      "context": "エージェントまたはオーケストレーターが、独立した、あるいは疎結合のタスクのバックログを保持しており、計算リソース、レート制限、コスト、または実時間の制約により、それらすべてを即座に実行できない場合に使用します。これは、1つのコンポーネントが次に実行するものを選択するプランナーやスーパーバイザーのアーキテクチャに適しています。各タスクにシグナル（影響度、期限、依存関係、コスト）を付与でき、新しい観測結果が得られるにつれて優先度がシフトする可能性があることを前提としています。",
+      "solution": [
+        "すべてのタスクに明示的なシグナルを付与します。これには、ゴールに対する期待される影響度、緊急度または期限、依存関係（最初に完了すべきもの）、およびトークン、費用、またはレイテンシにおける推定コストが含まれます。これらを、不透明なモデルの判断ではなく、透明で監査可能な関数を使用して単一のスコアに結合します。スコアリングされたタスクを優先度付きキューに投入し、最も価値の高い「準備完了（ready）」状態のタスクが次に実行されるようにします。常に依存関係を最優先してください。前提条件が満たされていないタスクは、スコアに関係なく「準備完了」とはみなされません。これにより、順序付けが正しく保たれ、無駄な再試行を防ぐことができます。",
+        "優先順位付けを動的に行います。各ステップの後、影響を受けるタスクを再スコアリングします。新しい結果によって影響度が変化し、期限が近づき、一部のタスクは不要になって破棄できるためです。エイジング（長時間待機しているタスクの優先度を徐々に上げる）や、下位層向けのキャパシティ確保によって、スターベーション（飢餓状態）を防ぎます。明示的な上限と受付ポリシーによってバックログを制限します。キューが満杯のときは、無制限に肥大化させるのではなく、最も優先度の低いタスクを拒否、マージ、または破棄（エビクト）します。スコアリングの重みを設定可能に保ち、各タスクが選択された理由をログに記録することで、動作の説明可能性を維持します。"
+      ],
+      "components": [
+        "シグナル抽出器",
+        "スコアリング関数",
+        "優先度付きキュー",
+        "依存関係リゾルバー",
+        "再優先順位付けループ",
+        "受付・エイジングコントローラー"
+      ],
+      "benefits": [
+        "限られた計算リソース、予算、時間が、最初に到着したものにではなく、価値が高く時間的制約のある作業に費やされます。",
+        "前提条件を尊重することで、インプットが存在する前にタスクを実行することによる無駄な再試行や手戻りを回避できます。",
+        "再スコアリングにより、状況の進展に応じて、エージェントは関連性のなくなったタスクを破棄し、新たに緊急性の高まったタスクを昇格させることができます。",
+        "コストを意識したスコアリングと上限付きキューにより、トークンとレイテンシのバジェットを、際限なく膨らむことなく管理下に置くことができます。"
+      ],
+      "risks": [
+        "重み付けの誤りや不適切なコスト見積もりは、重要な作業をシステム的にスターベーション（飢餓状態）に陥らせたり、低価値のタスクを追いかけさせたりする可能性があります。数式の見直しとキャリブレーションが必要です。",
+        "エイジングや予約されたキャパシティがないと、優先度の低いタスクが実行されず、必要なクリーンアップやバックグラウンド作業が永久に未完了のまま放置される可能性があります。",
+        "頻繁すぎる再スコアリングは、エージェントに絶え間ないフォーカスの切り替えを発生させ、コンテキストスイッチのコストを支払うだけで、何も完了できなくなる可能性があります。",
+        "タスクの分解によって追加されるタスクのペースが完了ペースを上回る場合、上限のないバックログはメモリ、コスト、およびプランニングのレイテンシを膨張させます。"
+      ],
+      "whenNot": [
+        "同様のタスクが数個しかない場合は、FIFOや単純な並列処理の方がシンプルであり、スコアリングのオーバーヘッドに見合う価値はありません。",
+        "ドメインによって規定された固定の順序でタスクを実行する必要がある場合は、動的な優先度付きキューよりも、静的なワークフローやDAG（有向非巡回グラフ）の方が明確です。",
+        "予算と制限の範囲内ですべてを即座に実行できる場合、優先順位を付ける必要はなく、順序付けは不要な複雑さを招くだけです。"
+      ],
+      "examples": [
+        "証拠を収集するエージェントは、未解決の疑問を解決する可能性が最も高い検索を優先し、主張が確認された後は冗長なクエリをスキップします。",
+        "運用エージェントは、影響範囲（ブラスト半径）と期限に基づいて修復ステップを順序付けし、影響の少ない警告よりも先に、顧客に影響する障害に対応します。",
+        "パイプラインエージェントは、価値の高いドキュメントや期限の近いドキュメントを優先してスケジュールし、低コストの一括処理（バルク）アイテムを後回しにします。その際、エイジングによってバルクキューが永久に失速するのを防ぎます。"
+      ],
+      "productionEvidence": {
+        "context": "57日間にわたり観測された、シングルオペレーター、ローカルファーストのOpenClawデプロイメント（161セッション / 2,776ターン）。エージェント自身のトラジェクトリトレースから集計。",
+        "scenario": "自律エージェントがスケジュール（ハートビート + cron）に基づいて起動されます。毎正時のスタッガー（時間差起動）とハートビートのクールダウンがバックプレッシャーを提供し、ジョブが集中するのを防ぎます。",
+        "technology": "CronServiceスケジューラー、heartbeat-runner、5分間の毎正時スタッガー、heartbeat-cooldown遅延ロジック、およびハートビート結果のlow/normal/high優先度フィールド。",
+        "load": "57日間にわたる2,801回のハートビートターン + 57回のcronターン + 106回のユーザーターン（トリガーの約94%がハートビート）。",
+        "results": "スケジューラーは1日あたり約50回の自律的な起動を維持し、スタッガーとクールダウンによって集中を防止しました。スケジュール起因の障害モードは発生しませんでした。シングルオペレーター、ローカルファーストのデプロイメント。"
+      },
+      "kpis": [
+        {
+          "metric": "単位コストあたりに完了した重み付けタスク価値",
+          "note": "取り組みが影響度の高い作業に向けられているかを捉えます。良好な状態とは、FIFOの基準値と比較して、トークンまたはドルあたりに提供されるゴール関連の価値がより多くなることです。"
+        },
+        {
+          "metric": "時間的制約のあるタスクにおける期限/SLA遵守率",
+          "note": "緊急度シグナルが機能していることを示します。良好な状態とは、緊急タスクの大部分が期限前に完了することです。"
+        },
+        {
+          "metric": "スターベーション指標（低優先度タスクの最大およびテール待ち時間）",
+          "note": "エイジングが効果的であるかを示します。良好な状態とは、最悪の場合の待ち時間が制限され、タスクが永久にスタックしないことです。"
+        },
+        {
+          "metric": "キューの深さ対上限、および受付/破棄（エビクション）率",
+          "note": "バックログが制限内に収まっていることを確認します。良好な状態とは、キューの深さが上限未満に維持され、破棄が真に低価値のタスクのみに限定されていることです。"
+        }
+      ],
+      "failureModes": [
+        "高優先度のタスクが、スケジュールされない低優先度の前提タスクを待機してしまう。リゾルバーはブロッキングタスクに緊急度を伝播させる必要があります。",
+        "一度計算されたきり更新されない優先度に基づいて、古い影響度や期限の情報で意思決定が行われてしまう。関連する状態の変化に応じて再スコアリングをトリガーする必要があります。",
+        "タスクのコストを過小評価すると、そのタスクが予算を独占してしまいます。見積もりには、実際に測定された消費量からのフィードバックが必要です。",
+        "積極的な受付ポリシーによって、後から必要であることが判明するタスクを破棄してしまい、高コストな再検出を余儀なくされる。破棄（エビクション）は、真に冗長なアイテムを優先すべきです。"
+      ],
+      "lessons": [
+        "次に何をすべきかに関する不透明なモデルの判断よりも、監査可能で設定可能な数式の方が、デバッグや調整が容易です。",
+        "前提条件の完了を個別の準備完了チェックとして扱うことで、高いスコアによってタスクがインプットよりも先に実行されるのを防ぎます。",
+        "最初からエイジングまたは予約されたキャパシティを追加してください。実行されない低優先度のバックグラウンド作業は、静かな正確性の欠如につながります。",
+        "明確な受け入れポリシーを伴う厳格な上限（ハードキャップ）を設定することは、タスク分解の暴走によるコストやレイテンシの膨張を防ぐ最もシンプルな防御策です。"
+      ],
+      "faqs": [
+        {
+          "q": "これはゴールの分解とどう違うのですか？",
+          "a": "分解はタスクを生成し、優先順位付けは生成されたタスクを実行する順序を決定します。これらは相互補完的です。分解がバックログを満たし、優先順位付けがそれを合理的に消化します。"
+        },
+        {
+          "q": "LLM自体が優先度をスコアリングすべきですか？",
+          "a": "推定される影響度などのシグナルをLLMに提案させることは可能ですが、それらは透明で監査可能な関数と組み合わせるべきです。名前付きシグナルに基づく決定論的な数式は、単一の不透明なランキング呼び出しよりも、調整、ログ記録、そして信頼が容易になります。"
+        },
+        {
+          "q": "低優先度のタスクがいつまでも実行されないのを防ぐにはどうすればよいですか？",
+          "a": "エイジング（経年処理）を使用して長時間待機しているタスクの優先度を徐々に上げるか、キャパシティの一部を低優先度層のために確保し、テールの待ち時間を監視してスターベーションが発生していないことを確認します。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "任务优先级排序",
+      "summary": "根据价值、紧急程度、依赖关系和成本对智能体的候选任务进行排序，而不是按照先进先出（FIFO）的方式进行处理。通过评分函数和优先级队列决定下一步运行什么，从而将有限的算力、预算和时间投入到最重要的工作中。随着状态的变化重新评分，并限制队列大小以防止其无限制增长。",
+      "problem": "分解目标的智能体通常会同时产生许多候选任务：要运行的搜索、要读取的文件、要调用的工具、要追求的子目标。按到达顺序处理这些任务会将琐碎的清理步骤与具有截止日期的阻塞性任务同等对待。重要的工作在廉价的噪音之后等待，依赖关系被破坏，并且在情况发生变化后，预算被浪费在不再重要的任务上。",
+      "context": "当智能体或编排器积压了独立或松耦合的任务，且由于算力、速率限制、成本或实际时间限制而无法立即运行所有任务时，请使用此模式。它适用于由一个组件选择下一步执行内容的规划器和主管智能体架构。它假设你可以为每个任务附加信号（影响、截止日期、依赖关系、成本），并且随着新观测结果的到来，优先级可能会发生变化。",
+      "solution": [
+        "为每个任务附加显式信号：对目标的预期影响、紧急程度或截止日期、依赖关系（必须先完成什么）以及在 token、资金或延迟方面的预估成本。通过透明、可审计的函数将这些信号组合成一个分数，而不是依靠不透明的模型判断。将评分后的任务输入优先级队列，以便下一步运行价值最高且已就绪的任务。务必首先遵守依赖关系：无论分数如何，前置条件未满足的任务都不是“就绪”状态，这可以保持正确的顺序并防止无谓的重试。",
+        "使优先级排序动态化。在每一步之后，重新对受影响的任务进行评分，因为新结果会改变影响、截止日期会临近，且某些任务会变得过时并可以丢弃。通过老化机制（aging，逐渐提高等待时间较长任务的优先级）或为较低层级保留容量来防止饥饿。通过显式上限和准入策略限制积压工作：当队列满时，拒绝、合并或驱逐最弱的任务，而不是让其无限制增长。保持评分权重可配置，并记录选择每个任务的原因，以确保行为保持可解释性。"
+      ],
+      "components": [
+        "信号提取器",
+        "评分函数",
+        "优先级队列",
+        "依赖解析器",
+        "重新优先级排序循环",
+        "准入与老化控制器"
+      ],
+      "benefits": [
+        "有限的算力、预算和时间会被投入到高价值、时间紧迫的工作中，而不是最先到达的任务。",
+        "遵守前置条件可以避免因在输入存在之前运行任务而导致的无谓重试和返工。",
+        "重新评分使智能体能够随着情况的演变放弃目前已无关紧要的任务，并提升新紧急任务的优先级。",
+        "成本感知评分和受限队列使 token 和延迟预算保持在可控范围内，而不是无限制的。"
+      ],
+      "risks": [
+        "错误的权重或糟糕的成本估算可能会系统性地导致重要工作饥饿，或盲目追求低价值任务；该公式需要审查和校准。",
+        "如果没有老化机制或保留容量，低优先级任务可能永远不会运行，导致必要的清理或后台工作永久处于未完成状态。",
+        "过于频繁的重新评分会导致智能体不断切换焦点，付出上下文切换的成本且永远无法完成任何工作。",
+        "如果任务分解添加任务的速度快于完成速度，未设上限的积压工作将导致内存、成本和规划延迟膨胀。"
+      ],
+      "whenNot": [
+        "当只有少数几个相似的任务时，FIFO 或简单的并行处理会更简单，评分的开销并不划算。",
+        "如果任务必须按照领域规定的固定顺序运行，那么静态工作流或 DAG 会比动态优先级队列更清晰。",
+        "当你可以立即在预算和限制范围内运行所有内容时，就没有什么需要排定优先级的，排序只会增加不必要的复杂性。"
+      ],
+      "examples": [
+        "收集证据的智能体会优先处理最有可能解决未决问题的搜索，并在断言得到确认后跳过冗余查询。",
+        "运维智能体根据爆炸半径和截止日期对修复步骤进行排序，在处理低影响告警之前先处理面向客户的停机故障。",
+        "流水线智能体会优先调度高价值或临近截止日期的文档，并推迟廉价的批量项目，同时老化机制可防止批量队列永久停滞。"
+      ],
+      "productionEvidence": {
+        "context": "在 57 天内（161 个会话 / 2,776 个轮次）观察到的单操作员、本地优先的 OpenClaw 部署，数据从智能体自身的轨迹追踪中聚合而来。",
+        "scenario": "自主智能体按计划被唤醒（心跳 + cron），通过整点错峰和心跳冷却提供背压，以防止任务堆积。",
+        "technology": "CronService 调度器、心跳运行器、5 分钟整点错峰、心跳冷却推迟逻辑，以及心跳结果上的低/中/高优先级字段。",
+        "load": "57 天内包含 2,801 个心跳轮次 + 57 个 cron 轮次 + 106 个用户轮次（心跳约占触发源的 94%）。",
+        "results": "调度器每天维持大约 50 次自主唤醒，错峰和冷却机制防止了任务堆积；未出现由调度驱动的失效模式。单操作员本地优先部署。"
+      },
+      "kpis": [
+        {
+          "metric": "单位成本完成的加权任务价值",
+          "note": "捕获精力是否投入到高影响力的工作上；表现良好意味着与 FIFO 基线相比，每个 token 或美元交付了更多与目标相关的价值。"
+        },
+        {
+          "metric": "时间紧迫型任务的截止日期 / SLA 遵守率",
+          "note": "表明紧急信号正在发挥作用；表现良好意味着紧急任务在大多数情况下都能在截止日期前完成。"
+        },
+        {
+          "metric": "饥饿指标（低优先级任务的最大和尾部等待时间）",
+          "note": "揭示老化机制是否有效；表现良好意味着最坏情况下的等待时间是有界的，且没有任务无限期卡住。"
+        },
+        {
+          "metric": "队列深度与上限对比以及准入/驱逐率",
+          "note": "确认积压工作保持有界；表现良好意味着深度保持在上限以下，且驱逐仅针对真正低价值的任务。"
+        }
+      ],
+      "failureModes": [
+        "高优先级任务等待一个永远不会被调度的低优先级前置条件；解析器必须将紧急程度传播给阻塞任务。",
+        "仅计算一次且从未刷新的优先级会基于过时的影响或截止日期信息做出决策，因此必须在相关状态发生变化时触发重新评分。",
+        "低估任务成本会导致其垄断预算；估算需要来自实际测量消耗的反馈。",
+        "激进的准入策略会丢弃后来被证明是必需的任务，从而迫使进行昂贵的重新发现；驱逐应优先选择真正冗余的项目。"
+      ],
+      "lessons": [
+        "与关于下一步做什么的不透明模型判断相比，可审计、可配置的公式更容易调试和微调。",
+        "将前置条件的完成视为独立的就绪检查，这样高评分绝不会让任务抢在其输入之前执行。",
+        "从一开始就添加老化机制或保留容量；永远不运行的低优先级后台工作会成为隐蔽的正确性缺陷。",
+        "设立具有明确准入策略的硬性上限，是防止失控的任务分解导致成本和延迟飙升的最简单防御手段。"
+      ],
+      "faqs": [
+        {
+          "q": "这与目标分解有什么不同？",
+          "a": "分解产生任务；优先级排序决定这些任务的执行顺序。它们是互补的：分解负责填充待办列表，优先级排序负责合理地消耗它。"
+        },
+        {
+          "q": "LLM 本身应该对优先级进行评分吗？",
+          "a": "它可以提出诸如预估影响之类的信号，但应将这些信号与透明、可审计的函数结合起来。相比于单次不透明的排序调用，基于命名信号的确定性公式更容易校准、记录和信任。"
+        },
+        {
+          "q": "如何防止低优先级任务永远无法运行？",
+          "a": "使用老化（aging）机制逐渐提高等待时间较长任务的优先级，或者为较低层级保留一部分容量，并监控尾部等待时间以确保没有任务被饿死。"
         }
       ]
     }

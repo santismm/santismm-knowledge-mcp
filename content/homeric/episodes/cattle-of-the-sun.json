@@ -62,6 +62,22 @@
         "pt": {
           "label": "Sicília, pelo nome Trinácria",
           "note": "Filologia plausível e prova nenhuma sobre o episódio. A ilha do gado do Sol define-se pelo que acontece nela, não por onde fica."
+        },
+        "fr": {
+          "label": "La Sicile, via le nom de Trinacrie",
+          "note": "Philologie plausible, aucune preuve concernant l'épisode. L'île des troupeaux du Soleil se définit par ce qui s'y passe, non par son emplacement."
+        },
+        "zh": {
+          "label": "西西里岛，通过特里纳克里亚（Trinacria）之名",
+          "note": "语言学上看似合理，但没有关于该事件的证据。太阳神牛群所在的岛屿是由岛上发生的事情定义的，而不是由它的位置定义的。"
+        },
+        "de": {
+          "label": "Sizilien, über den Namen Trinakria",
+          "note": "Plausible Philologie, keine Beweise für die Episode. Die Insel der Rinder des Helios wird durch das definiert, was auf ihr geschieht, nicht durch ihre Lage."
+        },
+        "ja": {
+          "label": "トゥリナクリアの名を介したシチリア島",
+          "note": "言語学的には妥当であるが、このエピソードに関する証拠はない。太陽神の牛の島は、それがどこにあるかではなく、そこで何が起こるかによって定義されている。"
         }
       }
     }
@@ -124,6 +140,86 @@
         {
           "q": "A culpa é da tripulação?",
           "a": "O poema diz explicitamente que foram avisados pelo nome e o fizeram assim mesmo, e começa dizendo que morreram “por sua própria cegueira”. Também diz explicitamente que estavam morrendo de fome."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Les troupeaux du Soleil",
+      "summary": "La dernière erreur de l'équipage. Avertis deux fois nommément, bloqués pendant un mois par des vents contraires et affamés, ils tuent les troupeaux immortels du Soleil pendant que leur capitaine dort.",
+      "narrative": [
+        "Tirésias et Circé nomment tous deux la Thrinacie et disent la même chose : laissez les troupeaux tranquilles et vous pourrez encore rentrer chez vous, faites-leur du mal et vous perdrez votre navire. Le vent les bloque pendant un mois ; les vivres s'épuisent ; Euryloque soutient que mourir de faim est la pire des morts.",
+        "Les peaux rampent et la viande mugit sur les broches. Six jours plus tard, ils prennent la mer, et Zeus détruit le navire d'un coup de foudre. Ulysse seul survit et atteint Ogygie sur la quille."
+      ],
+      "whyItMatters": "C'est la fin de l'équipage et la dernière étape avant les deux lieux les plus impossibles à situer du poème. Son identification repose sur un seul nom.",
+      "debate": "La question de savoir si Thrinacie et Trinacrie sont le même mot, et si une île définie par un tabou peut être localisée.",
+      "faqs": [
+        {
+          "q": "Où se trouve la Thrinacie ?",
+          "a": "La tradition antique l'assimile à la Sicile en se basant sur le nom de Trinacrie. L'atlas qualifie cette hypothèse de spéculative avec une note de 6/12."
+        },
+        {
+          "q": "Est-ce la faute de l'équipage ?",
+          "a": "Le poème indique explicitement qu'ils avaient été avertis nommément et qu'ils l'ont fait quand même, et il s'ouvre en affirmant qu'ils sont morts « par leur propre folie ». Il précise également qu'ils mouraient de faim."
+        }
+      ]
+    },
+    "de": {
+      "title": "Die Rinder des Helios",
+      "summary": "Der letzte Fehler der Gefährten. Zweimal namentlich gewarnt, einen Monat lang von Gegenwinden gefangen und hungernd, töten sie die unsterblichen Rinder des Helios, während ihr Anführer schläft.",
+      "narrative": [
+        "Sowohl Teiresias als auch Kirke nennen Thrinakia und sagen dasselbe: Lasst die Rinder ungeschoren, und ihr könntet noch nach Hause gelangen; schadet ihr ihnen, verliert ihr das Schiff. Der Wind hält sie einen Monat lang fest; die Vorräte gehen zur Neige; Eurylochos argumentiert, dass der Tod durch Verhungern der schlimmste sei.",
+        "Die Häute kriechen und das Fleisch brüllt auf den Spießen. Sechs Tage später segeln sie ab, und Zeus zerschmettert das Schiff mit einem Blitz. Nur Odysseus überlebt und erreicht auf dem Kiel Ogygia."
+      ],
+      "whyItMatters": "Es ist das Ende der Gefährten und die letzte Station vor den beiden am schwersten zu lokalisierenden Orten des Epos. Seine Identifizierung beruht auf einem einzigen Namen.",
+      "debate": "Ob Thrinakia und Trinakria dasselbe Wort sind und ob eine Insel, die durch ein Tabu definiert ist, überhaupt lokalisiert werden kann.",
+      "faqs": [
+        {
+          "q": "Wo liegt Thrinakia?",
+          "a": "Die antike Tradition setzt sie aufgrund des Namens Trinakria mit Sizilien gleich. Der Atlas stuft dies mit 6/12 als spekulativ ein."
+        },
+        {
+          "q": "Sind die Gefährten selbst schuld?",
+          "a": "Das Epos sagt ausdrücklich, dass sie namentlich gewarnt wurden und es trotzdem taten, und es beginnt mit der Feststellung, dass sie „durch eigene Torheit“ starben. Es wird auch ausdrücklich erwähnt, dass sie hungerten."
+        }
+      ]
+    },
+    "ja": {
+      "title": "太陽神の牛",
+      "summary": "乗組員たちの最後の過ち。名指しで二度も警告され、逆風によって1ヶ月間足止めされて飢えに苦しむ中、彼らは船長が眠っている間に太陽神の不死の牛を殺してしまう。",
+      "narrative": [
+        "テイレシアスとキルケはともにトゥリナキアの名を挙げ、同じことを告げる。牛に手を触れなければ無事に帰郷できるかもしれないが、危害を加えれば船を失うことになる、と。風のせいで1ヶ月間足止めされ、食料が尽きると、エウリュロコスは飢え死にするくらいなら他の死に方のほうがましだと主張する。",
+        "剥ぎ取られた皮が蠢き、串に刺された肉がうめき声を上げる。6日後、彼らは出航するが、ゼウスは雷霆で船を打ち砕く。オデュッセウスだけが生き残り、竜骨にしがみついてオギュギア島にたどり着く。"
+      ],
+      "whyItMatters": "これは乗組員たちの最期であり、この詩の中で最も場所を特定しがたい2つの場所へ至る前の最後の寄港地である。その場所の特定は、単一の名前のみに依存している。",
+      "debate": "トゥリナキア（Thrinacia）とトゥリナクリア（Trinacria）が同じ言葉であるかどうか、そして禁忌によって定義される島をそもそも特定できるのかどうか。",
+      "faqs": [
+        {
+          "q": "トゥリナキアはどこにありますか？",
+          "a": "古代の伝承では、トゥリナクリアという名に基づき、ここをシチリア島と同一視している。本アトラスでは、これを12段階中6の『推測の域を出ない（speculative）』ものとして記録している。"
+        },
+        {
+          "q": "これは乗組員たちの責任ですか？",
+          "a": "詩の中では、彼らが名指しで警告されていたにもかかわらずそれを実行したことが明記されており、冒頭でも彼らが『自らの愚行によって』命を落としたと述べられている。また、彼らが飢えに苦しんでいたことも明記されている。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "太阳神的牛群",
+      "summary": "船员们犯下的最后一个错误。他们曾两次受到指名道姓的警告，却因逆风被困了一个月并面临挨饿，最终在船长熟睡时宰杀了太阳神不朽的牛群。",
+      "narrative": [
+        "提瑞西阿斯和喀耳刻都提到了斯里纳基亚（Thrinacia）这个名字，并且说了同样的话：不要碰那些牛，你或许还能回家；伤害它们，你就会失去船只。风把他们困了一个月；食物吃光了；欧律洛科斯辩称，饿死是更痛苦的死法。",
+        "牛皮在蠕动，烤肉在烤叉上发出低鸣。六天后他们启航，宙斯用一道霹雳击碎了船只。只有奥德修斯幸存下来，靠着龙骨漂流到了奥吉吉亚（Ogygia）。"
+      ],
+      "whyItMatters": "这是船员们的终点，也是该史诗中两个最无法定位的地点之前的最后一站。对其身份的认定仅凭一个名字。",
+      "debate": "斯里纳基亚（Thrinacia）和特里纳克里亚（Trinacria）是否为同一个词，以及一个由禁忌定义的岛屿究竟能否被定位。",
+      "faqs": [
+        {
+          "q": "斯里纳基亚（Thrinacia）在哪里？",
+          "a": "古代传统凭借特里纳克里亚（Trinacria）这一名称将其等同于西西里岛。地图集将此记录为推测性的，可信度为 6/12。"
+        },
+        {
+          "q": "这是船员的错吗？",
+          "a": "史诗明确指出，他们受到了指名道姓的警告，但还是这么做了，且开篇就说他们死于“自己的愚蠢”。史诗也明确指出他们当时正在挨饿。"
         }
       ]
     }

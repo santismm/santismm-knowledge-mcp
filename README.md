@@ -89,7 +89,7 @@ annotated `readOnlyHint: true`, `destructiveHint: false` and
 `idempotentHint: true`. The three federated Article tools declare
 `openWorldHint: true`; local-corpus tools remain `false`.
 
-Content in three languages (en/es/pt).
+Content in seven languages (en/es/pt/fr/de/ja/zh).
 
 ## Licence
 

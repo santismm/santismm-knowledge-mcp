@@ -78,6 +78,22 @@
         "pt": {
           "label": "O ilhéu de Daskalio",
           "note": "O único ilhéu do estreito em que a emboscada funcionaria geograficamente. Homero dá a Astéris “dois portos”; Daskalio é uma rocha nua sem nenhum, que é exatamente a objeção que Estrabão já registra."
+        },
+        "fr": {
+          "label": "L'îlot de Daskalio",
+          "note": "Le seul îlot du détroit où l'embuscade fonctionnerait géographiquement. Homère attribue à Astéris « deux ports » ; Daskalio est un rocher nu qui n'en possède aucun, ce qui est précisément l'objection déjà rapportée par Strabon."
+        },
+        "zh": {
+          "label": "达斯卡利奥小岛",
+          "note": "该海峡中唯一在地理上适合进行伏击的小岛。荷马赋予了阿斯泰里斯“两个港口”；而达斯卡利奥是一块毫无港口的荒凉礁石，这恰恰是斯特拉博早已记录的反对意见。"
+        },
+        "de": {
+          "label": "Inselchen Daskalio",
+          "note": "Die einzige kleine Insel in der Meerenge, auf der der Hinterhalt geografisch funktionieren würde. Homer schreibt Asteris „zwei Häfen“; Daskalio ist ein kahler Felsen ohne Häfen, was genau der Einwand ist, den bereits Strabo festhält."
+        },
+        "ja": {
+          "label": "ダスカリオ小島",
+          "note": "地理的に待ち伏せが成立する、海峡内の唯一の小島。ホメロスはアステリスに「2つの港」があるとしているが、ダスカリオは港のないむき出しの岩礁であり、これはまさにストラボンがすでに記録している異論そのものである。"
         }
       }
     }
@@ -115,6 +131,46 @@
       ],
       "identificationNote": "Especulativa: um candidato tradicional, contrariado pela descrição do próprio poema, sem nada escavado e sem consenso. Pontua 4/12 e é um dos casos mais claros do atlas de uma descrição precisa que não aterrissa.",
       "debate": "Se Astéris é um ilhéu real mal lembrado, um lugar perdido por mudanças sísmicas — o Jônico é tectonicamente ativo — ou uma conveniência narrativa. A reconstrução de Paliki de Bittlestone realoca toda a emboscada, o que é um de seus atrativos e um de seus custos."
+    },
+    "fr": {
+      "name": "Astéris",
+      "summary": "L'îlot où les prétendants attendent Télémaque en embuscade — un lieu que le poème décrit précisément et que la carte n'a jamais révélé.",
+      "description": [
+        "Astéris se situe entre Ithaque et Samé, possède deux ports, et c'est là que vingt prétendants tendent une embuscade à Télémaque sur le chemin du retour. Le détail est opérationnel : il nomme un lieu, une position et un aménagement.",
+        "Le seul candidat dans le bon détroit est Daskalio, un rocher dépourvu de tout port. Strabon avait déjà remarqué cette divergence. Soit le poème exagère, soit le littoral a changé, soit la géographie est imaginaire."
+      ],
+      "identificationNote": "Spéculatif : un candidat traditionnel, contredit par la description même du poème, sans aucune fouille ni consensus. Il obtient un score de 4/12 et constitue l'un des cas les plus évidents de l'atlas d'une description précise qui ne correspond à rien sur le terrain.",
+      "debate": "Savoir si Astéris est un îlot réel mal mémorisé, un lieu disparu suite à un changement sismique — la mer Ionienne est tectoniquement active — ou une commodité narrative. La reconstruction de Paliki par Bittlestone déplace l'ensemble de l'embuscade, ce qui est l'un de ses arguments de vente et l'un de ses inconvénients."
+    },
+    "de": {
+      "name": "Asteris",
+      "summary": "Die kleine Insel, auf der die Freier Telemach auflauern – ein Ort, den das Epos präzise beschreibt und den die Landkarte nie hervorgebracht hat.",
+      "description": [
+        "Asteris liegt zwischen Ithaka und Same, hat zwei Häfen und ist der Ort, an dem zwanzig Freier Telemach auf dem Heimweg auflauern. Das Detail ist operativ: Es nennt einen Ort, eine Position und eine Gegebenheit.",
+        "Der einzige Kandidat in der richtigen Meerenge ist Daskalio, ein Felsen ohne jegliche Häfen. Schon Strabo bemerkte diese Diskrepanz. Entweder übertreibt das Epos, oder die Küstenlinie hat sich verändert, oder die Geografie ist erfunden."
+      ],
+      "identificationNote": "Spekulativ: ein traditioneller Kandidat, der der eigenen Beschreibung des Epos widerspricht, ohne Ausgrabungen und ohne Konsens. Er erreicht 4/12 Punkten und ist einer der klarsten Fälle im Atlas für eine präzise Beschreibung, die sich nicht zuordnen lässt.",
+      "debate": "Ob Asteris eine reale, falsch in Erinnerung gebliebene Insel ist, ein durch seismische Veränderungen verlorener Ort – das Ionische Meer ist tektonisch aktiv – oder ein erzählerisches Mittel. Bittlestones Paliki-Rekonstruktion verlegt den gesamten Hinterhalt, was einer ihrer Vorzüge und zugleich einer ihrer Schwachpunkte ist."
+    },
+    "ja": {
+      "name": "アステリス",
+      "summary": "求婚者たちがテレマコスを待ち伏せする小島。詩では正確に描写されているが、地図上には一度も現れたことがない場所である。",
+      "description": [
+        "アステリスはイタカとサメの間に位置し、2つの港を持ち、帰途につくテレマコスを20人の求婚者が待ち伏せする場所である。その詳細は実務的であり、地名、位置、そして設備を挙げている。",
+        "該当する海峡にある唯一の候補は、港がまったくない岩礁であるダスカリオ島である。ストラボンはすでにこの不一致に気づいていた。詩が誇張しているか、海岸線が変化したか、あるいは地理が架空のものであるかのいずれかである。"
+      ],
+      "identificationNote": "推測の域を出ない：伝統的な候補が1つあるが、詩自体の描写と矛盾しており、発掘調査も行われておらず、合意もない。スコアは12点満点中4点であり、正確な描写が現実と一致しない、アトラスにおける最も明白な事例の1つである。",
+      "debate": "アステリスが記憶違いされた実在の小島なのか、地震による変化（イオニア地方は地殻活動が活発である）で失われた場所なのか、あるいは物語上の都合によるものなのか。ビトルストーンによるパリキの再構成では、待ち伏せの場所全体を移転させており、これがその説のセールスポイントであると同時に、弱点でもある。"
+    },
+    "zh": {
+      "name": "阿斯泰里斯",
+      "summary": "求婚者们埋伏等待忒勒马科斯的小岛——诗歌对其进行了精确的描述，但地图上从未出现过这样一个地方。",
+      "description": [
+        "阿斯泰里斯位于伊萨卡和萨梅之间，拥有两个港口，是二十名求婚者在忒勒马科斯回家途中伏击他的地方。这些细节具有可操作性：它指明了地点、位置和设施。",
+        "在正确海峡中唯一的候选地点是达斯卡利奥，那是一块完全没有港口的礁石。斯特拉博早就注意到了这种不匹配。要么是诗歌夸大了事实，要么是海岸线发生了变化，要么是地理环境纯属虚构。"
+      ],
+      "identificationNote": "推测性：一个传统的候选地点，与诗歌自身的描述相矛盾，未进行任何发掘，也未达成共识。其评分为 4/12，是本图集中最明显的精确描述与实际无法对应的案例之一。",
+      "debate": "阿斯泰里斯究竟是一个被错误记忆的真实小岛，一个因地震变化而消失的地方——爱奥尼亚群岛处于地壳活动活跃带——还是为了叙事方便而虚构的。比特尔斯通对帕利基的重建重新定位了整个伏击地点，这既是其卖点之一，也是其代价之一。"
     }
   }
 }

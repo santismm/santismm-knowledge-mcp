@@ -98,6 +98,22 @@
         "pt": {
           "label": "Lêucade",
           "note": "Um dos dois candidatos vigentes. Lêucade é grande o bastante para fornecer os cinquenta e dois pretendentes que Dulíquio envia, e os trabalhos de Dörpfeld situaram material do Bronze na ilha — embora ele defendesse que era Ítaca, não Dulíquio."
+        },
+        "fr": {
+          "label": "Leucade",
+          "note": "L'un des deux candidats en lice. Leucade est assez grande pour fournir les cinquante-deux prétendants envoyés par Doulichion, et les travaux de Dörpfeld ont mis au jour des vestiges de l'âge du bronze sur l'île — bien qu'il ait soutenu qu'il s'agissait d'Ithaque et non de Doulichion."
+        },
+        "zh": {
+          "label": "莱夫卡斯",
+          "note": "两个现存的候选地之一。莱夫卡斯岛（Lefkada）的规模足够大，可以提供杜利基翁（Dulichium）派出的五十二名求婚者，而且德普费尔德（Dörpfeld）的研究工作在该岛上发现了青铜时代的遗存——尽管他当时主张这里是伊萨卡（Ithaca），而不是杜利基翁。"
+        },
+        "de": {
+          "label": "Lefkada",
+          "note": "Einer der beiden verbleibenden Kandidaten. Lefkada ist groß genug, um die zweiundfünfzig Freier zu stellen, die Dulichion entsendet, und Dörpfelds Arbeit brachte bronzezeitliches Material auf der Insel ans Licht – obwohl er argumentierte, es handle sich um Ithaka und nicht um Dulichion."
+        },
+        "ja": {
+          "label": "レフカダ島",
+          "note": "有力な2つの候補のうちの1つ。レフカダ島は、ドゥリキオンが送り出した52人の求婚者を賄うのに十分な大きさであり、デルプフェルトの研究によって島に青銅器時代の遺物がもたらされた。ただし、彼はそれがドゥリキオンではなくイタカであると主張していた。"
         }
       }
     },
@@ -135,6 +151,22 @@
         "pt": {
           "label": "As Equínades ou um distrito costeiro",
           "note": "Leitores antigos e modernos também situaram Dulíquio entre as ilhotas diante da foz do Aqueloo, ou na costa da Acarnânia. Nenhum dos candidatos é grande o bastante para ser evidente, e esse é exatamente o problema."
+        },
+        "fr": {
+          "label": "Les Échinades ou un district côtier",
+          "note": "Les lecteurs anciens et modernes ont également situé Doulichion parmi les petites îles au large de l'embouchure de l'Achéloos, ou sur la côte acarnanienne. Aucun des candidats n'est assez grand pour s'imposer avec évidence, ce qui est précisément le problème."
+        },
+        "zh": {
+          "label": "埃奇纳德斯群岛（Echinades）或沿海地区",
+          "note": "古代和现代的读者也将杜利基翁（Dulichium）置于阿克洛奥斯（Acheloos）河口附近的小岛上，或阿卡纳尼亚（Acarnanian）海岸。没有一个候选地大到显而易见的程度，而这恰恰是问题所在。"
+        },
+        "de": {
+          "label": "Die Echinaden oder ein Küstenbezirk",
+          "note": "Antike und moderne Leser haben Dulichion auch unter den kleinen Inseln vor der Mündung des Acheloos oder an der akarnanischen Küste verortet. Keiner der Kandidaten ist groß genug, um offensichtlich zu sein, was genau das Problem darstellt."
+        },
+        "ja": {
+          "label": "エキナデス諸島または沿岸地域",
+          "note": "古代および現代の読者は、ドゥリキオンをアケロオス川河口沖の小島群、あるいはアカルナニア沿岸に位置づけてもいる。どの候補も明らかにそれと分かるほど大きくはなく、それこそがまさに問題なのである。"
         }
       }
     }
@@ -172,6 +204,46 @@
       ],
       "identificationNote": "Especulativa: dois candidatos reais, nenhum com apoio arqueológico que o ligue ao nome, e sem consenso nem na Antiguidade nem na erudição moderna. A melhor pontuação que uma hipótese alcança aqui é 6/12.",
       "debate": "Se Dulíquio algum dia foi um lugar real com esse nome, se é um dublê de outra ilha e quanto peso as entradas ocidentais do Catálogo das Naus podem suportar."
+    },
+    "fr": {
+      "name": "Doulichion",
+      "summary": "L'île du royaume d'Ulysse qui a tout simplement disparu. Elle envoie plus de prétendants que n'importe quel autre endroit et ne correspond à rien sur la carte moderne.",
+      "description": [
+        "Doulichion fournit cinquante-deux des cent huit prétendants, le poème l'imagine donc comme la partie la plus peuplée du royaume. L'Antiquité n'a pu s'accorder sur son emplacement, pas plus que la recherche moderne : Leucade, les Échinades et des portions de la côte acarnanienne ont toutes été proposées.",
+        "Cet échec est instructif. Il suggère soit que les noms ioniens ont changé entre l'âge du bronze et le VIIIe siècle, soit que la géographie occidentale d'Homère est assemblée plutôt que relevée sur le terrain."
+      ],
+      "identificationNote": "Spéculatif : deux candidats réels, aucun ne disposant d'un soutien archéologique le liant à ce nom, et aucun consensus dans l'Antiquité comme dans la recherche moderne. Le meilleur score atteint par une hypothèse ici est de 6/12.",
+      "debate": "Savoir si Doulichion a jamais été un lieu réel sous ce nom, s'il s'agit d'un doublon d'une autre île, et quel poids accorder aux entrées occidentales du Catalogue des vaisseaux."
+    },
+    "de": {
+      "name": "Dulichion",
+      "summary": "Die Insel aus dem Reich des Odysseus, die einfach verschwunden ist. Sie stellt mehr Freier als jeder andere Ort und entspricht nichts auf der modernen Landkarte.",
+      "description": [
+        "Dulichion stellt zweiundfünfzig der einhundertacht Freier, das Epos stellt es sich also als den bevölkerungsreichsten Teil des Reiches vor. Die Antike konnte sich nicht auf seine Lage einigen, und ebenso wenig die moderne Forschung: Lefkada, die Echinaden und Abschnitte der akarnanischen Küste wurden vorgeschlagen.",
+        "Dieses Scheitern ist aufschlussreich. Es deutet entweder darauf hin, dass sich die ionischen Namen zwischen der Bronzezeit und dem achten Jahrhundert verschoben haben, oder dass Homers westliche Geografie eher zusammengestellt als vermessen ist."
+      ],
+      "identificationNote": "Spekulativ: zwei reale Kandidaten, keiner mit archäologischen Belegen, die ihn mit dem Namen verknüpfen, und kein Konsens in der Antike oder der modernen Forschung. Die beste Hypothese erreicht hier eine Bewertung von 6/12.",
+      "debate": "Ob Dulichion jemals ein realer Ort unter diesem Namen war, ob es sich um ein Doublett einer anderen Insel handelt und wie viel Gewicht die westlichen Einträge des Schiffskatalogs haben."
+    },
+    "ja": {
+      "name": "ドゥリキオン",
+      "summary": "オデュッセウスの王国に属しながら、単に行方不明になっている島。他のどこよりも多くの求婚者を送り出しているが、現代の地図上の何物とも一致しない。",
+      "description": [
+        "ドゥリキオンは108人の求婚者のうち52人を送り出しているため、詩の中では王国で最も人口の多い場所として想定されている。古代においてもその位置について合意はなく、現代の学術研究でも同様である。レフカダ島、エキナデス諸島、アカルナニア海岸の一部などが提案されている。",
+        "この不一致は示唆に富んでいる。青銅器時代から紀元前8世紀の間にイオニア地方の地名が変化したか、あるいはホメロスの西方地理が実測に基づくものではなく、つなぎ合わされたものであることを示唆している。"
+      ],
+      "identificationNote": "推測の域を出ない：2つの実在する候補があるが、いずれもその名前に結びつく考古学的な裏付けはなく、古代においても現代の学術研究においても合意はない。ここでの仮説が獲得する最高スコアは12点満点中6点である。",
+      "debate": "ドゥリキオンがその名前で実在した場所だったのか、別の島の重複（ダブレット）なのか、そして『艦船のカタログ』の西方に関する記述がどれほどの信憑性を持つのか。"
+    },
+    "zh": {
+      "name": "杜利基翁",
+      "summary": "奥德修斯王国中神秘失踪的岛屿。它派出的求婚者比其他任何地方都多，但在现代地图上却找不到任何与之匹配的地方。",
+      "description": [
+        "在108位求婚者中，杜利基翁提供了52位，因此诗歌将其想象为王国中人口最稠密的部分。古人对其具体位置无法达成共识，现代学术界也同样如此：莱夫卡斯、埃奇纳德斯群岛以及阿卡纳尼亚海岸的部分地区都曾被提出。",
+        "这一失败具有启发性。它表明，要么是爱奥尼亚群岛的名称在青铜时代和公元前八世纪之间发生了变化，要么是荷马的西部地理是拼凑而成而非实地勘测的。"
+      ],
+      "identificationNote": "推测性：两个真实的候选地点，均缺乏将该名称与考古发现联系起来的支持，且在古代和现代学术界均未达成共识。在此，任何假说所能达到的最高评分仅为 6/12。",
+      "debate": "杜利基翁是否曾是以该名称存在的真实地点，它是否是另一个岛屿的重复称呼，以及《船名录》中西部条目的分量究竟有多大。"
     }
   }
 }

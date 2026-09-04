@@ -8,16 +8,41 @@
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["paper", "industry_observation"]
+    "sourceType": [
+      "paper",
+      "industry_observation"
+    ]
   },
-  "frameworks": ["NIST AI RMF"],
-  "patterns": ["human-approval-gate", "evaluator-optimizer"],
-  "knowledge": ["ai-governance", "agentic-evaluation", "ai-observability", "guardrails"],
-  "references": [
-    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
-    { "title": "NIST AI 600-1 — Generative AI Profile", "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence" }
+  "frameworks": [
+    "NIST AI RMF"
   ],
-  "related": ["eu-ai-act", "iso-42001", "agentic-ai-governance-checklist", "owasp-llm-top10", "mitre-atlas"],
+  "patterns": [
+    "human-approval-gate",
+    "evaluator-optimizer"
+  ],
+  "knowledge": [
+    "ai-governance",
+    "agentic-evaluation",
+    "ai-observability",
+    "guardrails"
+  ],
+  "references": [
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "NIST AI 600-1 — Generative AI Profile",
+      "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+    }
+  ],
+  "related": [
+    "eu-ai-act",
+    "iso-42001",
+    "agentic-ai-governance-checklist",
+    "owasp-llm-top10",
+    "mitre-atlas"
+  ],
   "locales": {
     "en": {
       "name": "NIST AI Risk Management Framework",
@@ -33,11 +58,26 @@
         "Pairs well with ISO/IEC 42001 (management system) and the EU AI Act (law)."
       ],
       "controls": [
-        { "control": "Govern", "note": "Establish the policies, accountability, culture and roles that make risk management real — the foundation the other functions stand on." },
-        { "control": "Map", "note": "Establish context: intended use, stakeholders, and the risks and impacts of the AI system before building." },
-        { "control": "Measure", "note": "Use quantitative and qualitative methods to assess, benchmark and monitor risk and trustworthiness — you can't manage what you don't measure." },
-        { "control": "Manage", "note": "Prioritize, respond to and track risks over time, including incident response and decommissioning." },
-        { "control": "Trustworthiness characteristics", "note": "Steer toward valid, safe, secure, accountable, explainable, privacy-enhanced and fair outcomes as explicit design targets." }
+        {
+          "control": "Govern",
+          "note": "Establish the policies, accountability, culture and roles that make risk management real — the foundation the other functions stand on."
+        },
+        {
+          "control": "Map",
+          "note": "Establish context: intended use, stakeholders, and the risks and impacts of the AI system before building."
+        },
+        {
+          "control": "Measure",
+          "note": "Use quantitative and qualitative methods to assess, benchmark and monitor risk and trustworthiness — you can't manage what you don't measure."
+        },
+        {
+          "control": "Manage",
+          "note": "Prioritize, respond to and track risks over time, including incident response and decommissioning."
+        },
+        {
+          "control": "Trustworthiness characteristics",
+          "note": "Steer toward valid, safe, secure, accountable, explainable, privacy-enhanced and fair outcomes as explicit design targets."
+        }
       ],
       "checklist": [
         "Stand up the Govern function: policy, accountability and roles.",
@@ -60,9 +100,18 @@
         "A Manage process with incident response for a deployed GenAI assistant."
       ],
       "faqs": [
-        { "q": "Is the NIST AI RMF mandatory?", "a": "No. It is a voluntary framework. But it is widely adopted as a common language and backbone for operational AI risk management, and often referenced in policy and procurement." },
-        { "q": "What are the four functions?", "a": "Govern, Map, Measure and Manage. Govern is cross-cutting and supports the other three, which run across the AI lifecycle." },
-        { "q": "How does it handle generative AI?", "a": "Through the companion Generative AI Profile (NIST AI 600-1), which identifies GenAI-specific risks and suggested actions mapped to the four functions." }
+        {
+          "q": "Is the NIST AI RMF mandatory?",
+          "a": "No. It is a voluntary framework. But it is widely adopted as a common language and backbone for operational AI risk management, and often referenced in policy and procurement."
+        },
+        {
+          "q": "What are the four functions?",
+          "a": "Govern, Map, Measure and Manage. Govern is cross-cutting and supports the other three, which run across the AI lifecycle."
+        },
+        {
+          "q": "How does it handle generative AI?",
+          "a": "Through the companion Generative AI Profile (NIST AI 600-1), which identifies GenAI-specific risks and suggested actions mapped to the four functions."
+        }
       ]
     },
     "es": {
@@ -79,11 +128,26 @@
         "Encaja bien con ISO/IEC 42001 (sistema de gestión) y el EU AI Act (ley)."
       ],
       "controls": [
-        { "control": "Gobernar", "note": "Establece las políticas, la rendición de cuentas, la cultura y los roles que hacen real la gestión de riesgos: la base sobre la que se apoyan las demás funciones." },
-        { "control": "Mapear", "note": "Establece el contexto: uso previsto, partes interesadas, y los riesgos e impactos del sistema de IA antes de construir." },
-        { "control": "Medir", "note": "Usa métodos cuantitativos y cualitativos para evaluar, comparar y monitorizar el riesgo y la confiabilidad: no puedes gestionar lo que no mides." },
-        { "control": "Gestionar", "note": "Prioriza, responde y haz seguimiento de los riesgos en el tiempo, incluyendo respuesta a incidentes y retirada." },
-        { "control": "Características de confiabilidad", "note": "Dirige hacia resultados válidos, seguros, responsables, explicables, con privacidad reforzada y justos como objetivos de diseño explícitos." }
+        {
+          "control": "Gobernar",
+          "note": "Establece las políticas, la rendición de cuentas, la cultura y los roles que hacen real la gestión de riesgos: la base sobre la que se apoyan las demás funciones."
+        },
+        {
+          "control": "Mapear",
+          "note": "Establece el contexto: uso previsto, partes interesadas, y los riesgos e impactos del sistema de IA antes de construir."
+        },
+        {
+          "control": "Medir",
+          "note": "Usa métodos cuantitativos y cualitativos para evaluar, comparar y monitorizar el riesgo y la confiabilidad: no puedes gestionar lo que no mides."
+        },
+        {
+          "control": "Gestionar",
+          "note": "Prioriza, responde y haz seguimiento de los riesgos en el tiempo, incluyendo respuesta a incidentes y retirada."
+        },
+        {
+          "control": "Características de confiabilidad",
+          "note": "Dirige hacia resultados válidos, seguros, responsables, explicables, con privacidad reforzada y justos como objetivos de diseño explícitos."
+        }
       ],
       "checklist": [
         "Pon en marcha la función Gobernar: política, rendición de cuentas y roles.",
@@ -106,9 +170,18 @@
         "Un proceso de Gestionar con respuesta a incidentes para un asistente de GenAI desplegado."
       ],
       "faqs": [
-        { "q": "¿El NIST AI RMF es obligatorio?", "a": "No. Es un marco voluntario. Pero está ampliamente adoptado como lenguaje común y columna vertebral para la gestión operativa del riesgo de IA, y se referencia a menudo en políticas y compras." },
-        { "q": "¿Cuáles son las cuatro funciones?", "a": "Gobernar, Mapear, Medir y Gestionar. Gobernar es transversal y sustenta a las otras tres, que recorren el ciclo de vida de la IA." },
-        { "q": "¿Cómo aborda la IA generativa?", "a": "Mediante el Perfil de IA Generativa complementario (NIST AI 600-1), que identifica riesgos específicos de la GenAI y acciones sugeridas mapeadas a las cuatro funciones." }
+        {
+          "q": "¿El NIST AI RMF es obligatorio?",
+          "a": "No. Es un marco voluntario. Pero está ampliamente adoptado como lenguaje común y columna vertebral para la gestión operativa del riesgo de IA, y se referencia a menudo en políticas y compras."
+        },
+        {
+          "q": "¿Cuáles son las cuatro funciones?",
+          "a": "Gobernar, Mapear, Medir y Gestionar. Gobernar es transversal y sustenta a las otras tres, que recorren el ciclo de vida de la IA."
+        },
+        {
+          "q": "¿Cómo aborda la IA generativa?",
+          "a": "Mediante el Perfil de IA Generativa complementario (NIST AI 600-1), que identifica riesgos específicos de la GenAI y acciones sugeridas mapeadas a las cuatro funciones."
+        }
       ]
     },
     "pt": {
@@ -125,11 +198,26 @@
         "Combina bem com a ISO/IEC 42001 (sistema de gestão) e o EU AI Act (lei)."
       ],
       "controls": [
-        { "control": "Governar", "note": "Estabeleça as políticas, a prestação de contas, a cultura e os papéis que tornam a gestão de riscos real: a base sobre a qual as demais funções se apoiam." },
-        { "control": "Mapear", "note": "Estabeleça o contexto: uso pretendido, partes interessadas, e os riscos e impactos do sistema de IA antes de construir." },
-        { "control": "Medir", "note": "Use métodos quantitativos e qualitativos para avaliar, comparar e monitorar o risco e a confiabilidade: você não gere o que não mede." },
-        { "control": "Gerir", "note": "Priorize, responda e acompanhe os riscos ao longo do tempo, incluindo resposta a incidentes e descomissionamento." },
-        { "control": "Características de confiabilidade", "note": "Direcione para resultados válidos, seguros, responsáveis, explicáveis, com privacidade reforçada e justos como metas de design explícitas." }
+        {
+          "control": "Governar",
+          "note": "Estabeleça as políticas, a prestação de contas, a cultura e os papéis que tornam a gestão de riscos real: a base sobre a qual as demais funções se apoiam."
+        },
+        {
+          "control": "Mapear",
+          "note": "Estabeleça o contexto: uso pretendido, partes interessadas, e os riscos e impactos do sistema de IA antes de construir."
+        },
+        {
+          "control": "Medir",
+          "note": "Use métodos quantitativos e qualitativos para avaliar, comparar e monitorar o risco e a confiabilidade: você não gere o que não mede."
+        },
+        {
+          "control": "Gerir",
+          "note": "Priorize, responda e acompanhe os riscos ao longo do tempo, incluindo resposta a incidentes e descomissionamento."
+        },
+        {
+          "control": "Características de confiabilidade",
+          "note": "Direcione para resultados válidos, seguros, responsáveis, explicáveis, com privacidade reforçada e justos como metas de design explícitas."
+        }
       ],
       "checklist": [
         "Coloque em marcha a função Governar: política, prestação de contas e papéis.",
@@ -152,9 +240,298 @@
         "Um processo de Gerir com resposta a incidentes para um assistente de GenAI implantado."
       ],
       "faqs": [
-        { "q": "O NIST AI RMF é obrigatório?", "a": "Não. É um framework voluntário. Mas é amplamente adotado como linguagem comum e espinha dorsal para a gestão operacional do risco de IA, e frequentemente referenciado em políticas e compras." },
-        { "q": "Quais são as quatro funções?", "a": "Governar, Mapear, Medir e Gerir. Governar é transversal e sustenta as outras três, que percorrem o ciclo de vida da IA." },
-        { "q": "Como aborda a IA generativa?", "a": "Por meio do Perfil de IA Generativa complementar (NIST AI 600-1), que identifica riscos específicos da GenAI e ações sugeridas mapeadas para as quatro funções." }
+        {
+          "q": "O NIST AI RMF é obrigatório?",
+          "a": "Não. É um framework voluntário. Mas é amplamente adotado como linguagem comum e espinha dorsal para a gestão operacional do risco de IA, e frequentemente referenciado em políticas e compras."
+        },
+        {
+          "q": "Quais são as quatro funções?",
+          "a": "Governar, Mapear, Medir e Gerir. Governar é transversal e sustenta as outras três, que percorrem o ciclo de vida da IA."
+        },
+        {
+          "q": "Como aborda a IA generativa?",
+          "a": "Por meio do Perfil de IA Generativa complementar (NIST AI 600-1), que identifica riscos específicos da GenAI e ações sugeridas mapeadas para as quatro funções."
+        }
+      ]
+    },
+    "fr": {
+      "name": "NIST AI Risk Management Framework",
+      "summary": "Le NIST AI RMF 1.0 est un cadre volontaire et largement adopté pour gérer les risques liés à l'IA tout au long de son cycle de vie. Il s'articule autour de quatre fonctions — Gouverner, Cartographier, Mesurer et Gérer (Govern, Map, Measure, Manage) — et d'un ensemble de caractéristiques d'une IA digne de confiance (valide et fiable, sûre, sécurisée et résiliente, responsable et transparente, explicable, respectueuse de la vie privée, et équitable avec gestion des biais préjudiciables). Un profil compagnon pour l'IA générative adapte ce cadre aux risques de la GenAI. Contrairement à l'EU AI Act, il ne s'agit pas d'une loi, mais il constitue un socle commun pour la gouvernance opérationnelle de l'IA.",
+      "definition": "Le NIST AI Risk Management Framework est un cadre volontaire qui aide les organisations à gouverner, cartographier, mesurer et gérer les risques des systèmes d'IA tout en tendant vers les caractéristiques d'une IA digne de confiance.",
+      "scope": "Toute organisation concevant, développant, déployant ou utilisant l'IA, quel que soit le secteur. Il est volontaire, axé sur les résultats, conçu pour être adapté au contexte et utilisé en parallèle des normes et réglementations.",
+      "keyPoints": [
+        "Quatre fonctions clés : Gouverner (culture et responsabilité), Cartographier (contexte et risques), Mesurer (évaluer et suivre), Gérer (prioriser et répondre).",
+        "La fonction Gouverner est transversale — elle sous-tend les trois autres.",
+        "Définit les caractéristiques d'une IA digne de confiance à cibler, et pas seulement les risques à éviter.",
+        "Un profil compagnon pour l'IA générative (NIST AI 600-1) traite des risques spécifiques à la GenAI.",
+        "Volontaire et flexible — conçu pour être adapté, et non pour faire l'objet d'une certification.",
+        "S'associe parfaitement avec la norme ISO/IEC 42001 (système de management) et l'EU AI Act (législation)."
+      ],
+      "controls": [
+        {
+          "control": "Gouverner",
+          "note": "Établir les politiques, la responsabilité, la culture et les rôles qui concrétisent la gestion des risques — le socle sur lequel reposent les autres fonctions."
+        },
+        {
+          "control": "Cartographier",
+          "note": "Définir le contexte : utilisation prévue, parties prenantes, ainsi que les risques et impacts du système d'IA avant sa construction."
+        },
+        {
+          "control": "Mesurer",
+          "note": "Utiliser des méthodes quantitatives et qualitatives pour évaluer, comparer et surveiller les risques et la fiabilité — on ne peut gérer ce que l'on ne mesure pas."
+        },
+        {
+          "control": "Gérer",
+          "note": "Prioriser, traiter et suivre les risques dans le temps, y compris la réponse aux incidents et le démantèlement."
+        },
+        {
+          "control": "Caractéristiques de confiance",
+          "note": "S'orienter vers des résultats valides, sûrs, sécurisés, responsables, explicables, respectueux de la vie privée et équitables en tant qu'objectifs de conception explicites."
+        }
+      ],
+      "checklist": [
+        "Mettre en place la fonction Gouverner : politique, responsabilité et rôles.",
+        "Cartographier le contexte de chaque système, son utilisation prévue, ses parties prenantes et ses risques.",
+        "Définir des métriques et Mesurer la validité, la sécurité, la sûreté, les biais et la robustesse.",
+        "Manage : hiérarchiser les risques, planifier les réponses et en assurer le suivi dans le temps.",
+        "Appliquer le Generative AI Profile pour les systèmes d'IA générative (GenAI).",
+        "Mettre en place la réponse aux incidents et la surveillance pour les systèmes déployés.",
+        "Faire correspondre le cadre avec vos obligations au titre d'ISO 42001 et de l'EU AI Act."
+      ],
+      "pitfalls": [
+        "Réaliser les étapes Map et Measure tout en négligeant Govern, ce qui empêche toute responsabilisation.",
+        "Mesurer ce qui est facile plutôt que ce qui importe pour la fiabilité.",
+        "Le traiter comme une simple liste de contrôle plutôt que comme une pratique continue de gestion des risques.",
+        "Ignorer le Generative AI Profile pour les LLM et les systèmes d'agents autonomes."
+      ],
+      "examples": [
+        "Une équipe utilisant Map pour documenter l'utilisation prévue d'un agent et ses parties prenantes avant sa construction.",
+        "Une étape Measure évaluant un modèle par rapport à un jeu d'évaluation pour mesurer le biais et la robustesse.",
+        "Un processus Manage incluant la réponse aux incidents pour un assistant de GenAI déployé."
+      ],
+      "faqs": [
+        {
+          "q": "Le NIST AI RMF est-il obligatoire ?",
+          "a": "Non. Il s'agit d'un cadre volontaire. Cependant, il est largement adopté comme langage commun et pilier de la gestion opérationnelle des risques liés à l'IA, et il est souvent référencé dans les politiques et les processus d'achat."
+        },
+        {
+          "q": "Quelles sont les quatre fonctions ?",
+          "a": "Govern, Map, Measure et Manage. Govern est transversale et soutient les trois autres, qui s'appliquent tout au long du cycle de vie de l'IA."
+        },
+        {
+          "q": "Comment gère-t-il l'IA générative ?",
+          "a": "Grâce au document d'accompagnement Generative AI Profile (NIST AI 600-1), qui identifie les risques spécifiques à la GenAI et suggère des actions associées aux quatre fonctions."
+        }
+      ]
+    },
+    "de": {
+      "name": "NIST AI Risk Management Framework",
+      "summary": "Das NIST AI RMF 1.0 is ein freiwilliges, weit verbreitetes Framework für das Management von KI-Risiken über den gesamten Lebenszyklus hinweg. Es ist um vier Kernfunktionen herum organisiert – Govern (Steuern), Map (Abbilden), Measure (Messen) und Manage (Verwalten) – sowie um eine Reihe von Merkmalen vertrauenswürdiger KI (valide und zuverlässig, sicher, geschützt und widerstandsfähig, rechenschaftspflichtig und transparent, erklärbar, datenschutzfreundlich sowie fair bei kontrollierter schädlicher Verzerrung). Ein begleitendes Generative AI Profile passt es an GenAI-Risiken an. Im Gegensatz zum EU AI Act ist es kein Gesetz, dient aber als gemeinsames Rückgrat für die operative KI-Governance.",
+      "definition": "Das NIST AI Risk Management Framework ist ein freiwilliges Framework, das Organisationen dabei unterstützt, die Risiken von KI-Systemen zu steuern, abzubilden, zu messen und zu verwalten, während sie gleichzeitig die Merkmale vertrauenswürdiger KI anstreben.",
+      "scope": "Jede Organisation in jedem Sektor, die KI entwirft, entwickelt, bereitstellt oder nutzt. Es ist freiwillig und ergebnisorientiert, so konzipiert, dass es an den jeweiligen Kontext angepasst und zusammen mit Standards und Vorschriften angewendet werden kann.",
+      "keyPoints": [
+        "Vier Kernfunktionen: Govern (Kultur & Rechenschaftspflicht), Map (Kontext & Risiken), Measure (Bewerten & Verfolgen), Manage (Priorisieren & Reagieren).",
+        "Govern ist eine Querschnittsfunktion – sie bildet das Fundament für die anderen drei.",
+        "Definiert Merkmale vertrauenswürdiger KI, die angestrebt werden sollen, und nicht nur Risiken, die es zu vermeiden gilt.",
+        "Ein begleitendes Generative AI Profile (NIST AI 600-1) befasst sich mit GenAI-spezifischen Risiken.",
+        "Freiwillig und flexibel – zur Anpassung gedacht, nicht zur Zertifizierung.",
+        "Lässt sich gut mit ISO/IEC 42001 (Managementsystem) und dem EU AI Act (Gesetz) kombinieren."
+      ],
+      "controls": [
+        {
+          "control": "Govern",
+          "note": "Etablieren Sie die Richtlinien, Rechenschaftspflichten, Kultur und Rollen, die das Risikomanagement mit Leben füllen – das Fundament, auf dem die anderen Funktionen aufbauen."
+        },
+        {
+          "control": "Map",
+          "note": "Kontext herstellen: Bestimmen Sie den Verwendungszweck, die Stakeholder sowie die Risiken und Auswirkungen des KI-Systems vor der Entwicklung."
+        },
+        {
+          "control": "Measure",
+          "note": "Nutzen Sie quantitative und qualitative Methoden, um Risiken und Vertrauenswürdigkeit zu bewerten, zu vergleichen und zu überwachen – man kann nur verwalten, was man auch misst."
+        },
+        {
+          "control": "Manage",
+          "note": "Priorisieren, reagieren Sie auf und verfolgen Sie Risiken im Laufe der Zeit, einschließlich der Reaktion auf Vorfälle und der Außerbetriebnahme."
+        },
+        {
+          "control": "Trustworthiness characteristics",
+          "note": "Steuern Sie auf valide, sichere, geschützte, rechenschaftspflichtige, erklärbare, datenschutzfreundliche und faire Ergebnisse als explizite Designziele hin."
+        }
+      ],
+      "checklist": [
+        "Etablieren Sie die Govern-Funktion: Richtlinien, Rechenschaftspflicht und Rollen.",
+        "Bilden Sie den Kontext, den Verwendungszweck, die Stakeholder und die Risiken jedes Systems ab.",
+        "Definieren Sie Metriken und messen Sie Validität, Sicherheit, Schutz, Verzerrung (Bias) und Robustheit.",
+        "Manage: Risiken priorisieren, Reaktionen planen und im Zeitverlauf nachverfolgen.",
+        "Das Generative AI Profile für GenAI-Systeme anwenden.",
+        "Incident Response und Monitoring für bereitgestellte Systeme einrichten.",
+        "Das Framework Ihren Verpflichtungen unter ISO 42001 und dem EU AI Act zuordnen."
+      ],
+      "pitfalls": [
+        "„Map“ und „Measure“ durchführen, aber „Govern“ vernachlässigen, sodass keine Rechenschaftspflicht besteht.",
+        "Das messen, was einfach ist, anstatt dessen, was für die Vertrauenswürdigkeit wichtig ist.",
+        "Es als Checkliste statt als kontinuierliche Risikopraxis behandeln.",
+        "Das Generative AI Profile für LLM- und agentenbasierte Systeme ignorieren."
+      ],
+      "examples": [
+        "Ein Team, das „Map“ nutzt, um den beabsichtigten Verwendungszweck eines Agenten und die Stakeholder vor der Entwicklung zu dokumentieren.",
+        "Ein „Measure“-Schritt, bei dem ein Modell hinsichtlich Bias und Robustheit anhand eines Evaluierungsdatensatzes gebenchmarkt wird.",
+        "Ein „Manage“-Prozess mit Incident Response für einen bereitgestellten GenAI-Assistenten."
+      ],
+      "faqs": [
+        {
+          "q": "Ist das NIST AI RMF verpflichtend?",
+          "a": "Nein. Es ist ein freiwilliges Framework. Es ist jedoch als gemeinsame Sprache und Rückgrat für das operative KI-Risikomanagement weit verbreitet und wird häufig in Richtlinien und bei der Beschaffung referenziert."
+        },
+        {
+          "q": "Was sind die vier Funktionen?",
+          "a": "Govern, Map, Measure und Manage. Govern ist ein übergreifender Bereich und unterstützt die anderen drei Funktionen, die sich über den gesamten KI-Lebenszyklus erstrecken."
+        },
+        {
+          "q": "Wie geht es mit generativer KI um?",
+          "a": "Durch das begleitende Generative AI Profile (NIST AI 600-1), das GenAI-spezifische Risiken identifiziert und empfohlene Maßnahmen vorschlägt, die den vier Funktionen zugeordnet sind."
+        }
+      ]
+    },
+    "ja": {
+      "name": "NIST AIリスクマネジメントフレームワーク",
+      "summary": "NIST AI RMF 1.0は、ライフサイクル全体でAIリスクを管理するための、自主的かつ広く採用されているフレームワークです。これは、「Govern（統治）」、「Map（位置づけ）」、「Measure（測定）」、「Manage（管理）」の4つの機能と、信頼できるAIの特徴（妥当性と信頼性、安全性、セキュリティと回復力、説明責任と透明性、説明可能性、プライバシー強化、有害なバイアスが管理された公平性）を中心に構成されています。関連する「Generative AI Profile」は、これをGenAIのリスクに適応させています。EU AI法とは異なり法律ではありませんが、実務的なAIガバナンスの共通の基盤となっています。",
+      "definition": "NIST AIリスクマネジメントフレームワークは、組織が信頼できるAIの特徴を追求しながら、AIシステムの管理、位置づけ、測定、およびリスク管理を行うのを支援する自主的なフレームワークです。",
+      "scope": "あらゆるセクターにおいて、AIの設計、開発、展開、または利用を行うすべての組織が対象です。これは自主的かつ成果重視のフレームワークであり、文脈に合わせてカスタマイズし、他の標準規格や規制と併用するように設計されています。",
+      "keyPoints": [
+        "4つのコア機能：Govern（文化と説明責任）、Map（文脈とリスク）、Measure（評価と追跡）、Manage（優先順位付けと対応）。",
+        "Govern（統治）は横断的な機能であり、他の3つの機能を支える基盤となります。",
+        "回避すべきリスクだけでなく、目指すべき「信頼できるAI」の特徴を定義しています。",
+        "関連するGenerative AI Profile（NIST AI 600-1）は、GenAI特有のリスクに対処しています。",
+        "自主的かつ柔軟であり、認証を受けるためのものではなく、カスタマイズして使用することを前提としています。",
+        "ISO/IEC 42001（マネジメントシステム）やEU AI法（法律）と良好に組み合わせることができます。"
+      ],
+      "controls": [
+        {
+          "control": "Govern（統治）",
+          "note": "リスク管理を実効性のあるものにするためのポリシー、説明責任、文化、および役割を確立します。これは、他の機能が立脚する基盤となります。"
+        },
+        {
+          "control": "Map（位置づけ）",
+          "note": "構築前に、意図された用途、ステークホルダー、AIシステムのリスクと影響などの文脈を確立します。"
+        },
+        {
+          "control": "Measure（測定）",
+          "note": "定量的および定性的手法を使用して、リスクと信頼性を評価、ベンチマーク、および監視します。測定できないものは管理できません。"
+        },
+        {
+          "control": "Manage（管理）",
+          "note": "インシデント対応や廃止措置を含め、時間の経過に伴うリスクの優先順位付け、対応、および追跡を行います。"
+        },
+        {
+          "control": "信頼性の特徴",
+          "note": "明示的な設計目標として、妥当、安全、セキュア、説明責任、説明可能、プライバシー強化、および公平な成果を目指します。"
+        }
+      ],
+      "checklist": [
+        "Govern（統治）機能を立ち上げる：ポリシー、説明責任、および役割。",
+        "各システムについて、文脈、意図された用途、ステークホルダー、およびリスクを位置づける（Map）。",
+        "メトリクスを定義し、妥当性、安全性、セキュリティ、バイアス、および堅牢性を測定（Measure）する。",
+        "Manage（管理）：リスクの優先順位付け、対応の計画、および長期的な追跡を行います。",
+        "GenAI（生成AI）システムにGenerative AI Profile（生成AIプロファイル）を適用します。",
+        "デプロイされたシステムに対してインシデント対応とモニタリングを設定します。",
+        "フレームワークを、ISO 42001およびEU AI法に基づく義務にマッピングします。"
+      ],
+      "pitfalls": [
+        "Map（マッピング）とMeasure（測定）は行うものの、Govern（ガバナンス）を怠るため、説明責任が果たされない。",
+        "信頼性にとって重要なことではなく、測定しやすいことだけを測定する。",
+        "継続的なリスク管理の実践としてではなく、単なるチェックリストとして扱う。",
+        "LLMやエージェント型システムにおいて、Generative AI Profileを無視する。"
+      ],
+      "examples": [
+        "構築前に、Map（マッピング）を使用してエージェントの想定される用途とステークホルダーを文書化するチーム。",
+        "評価セットに対してモデルのバイアスと堅牢性をベンチマーク測定するMeasure（測定）ステップ。",
+        "デプロイされたGenAIアシスタントに対するインシデント対応を含むManage（管理）プロセス。"
+      ],
+      "faqs": [
+        {
+          "q": "NIST AI RMFは義務化されていますか？",
+          "a": "いいえ。これは自主的なフレームワークです。しかし、実務的なAIリスク管理の共通言語および基盤として広く採用されており、ポリシーや調達において頻繁に参照されています。"
+        },
+        {
+          "q": "4つの機能とは何ですか？",
+          "a": "Govern（ガバナンス）、Map（マッピング）、Measure（測定）、Manage（管理）です。Governは横断的な機能であり、AIライフサイクル全体にわたって実行される他の3つの機能をサポートします。"
+        },
+        {
+          "q": "生成AIにはどのように対応していますか？",
+          "a": "4つの機能にマッピングされた、GenAI特有のリスクと推奨されるアクションを特定する、コンパニオン文書のGenerative AI Profile（NIST AI 600-1）を通じて対応しています。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "NIST AI 风险管理框架",
+      "summary": "NIST AI RMF 1.0 是一个自愿采用且被广泛接受的框架，用于管理整个生命周期中的 AI 风险。它围绕四个功能展开——治理（Govern）、映射（Map）、测量（Measure）和管理（Manage），以及一套可信 AI 的特征（有效且可靠、安全、安全且有弹性、可问责且透明、可解释、隐私增强以及管理有害偏见的公平性）。配套的生成式 AI 配置文件（Generative AI Profile）使其适用于 GenAI 风险。与《欧盟 AI 法案》不同，它不是法律，但它是运营 AI 治理的通用支柱。",
+      "definition": "NIST AI 风险管理框架是一个自愿性框架，旨在帮助组织治理、映射、测量和管理 AI 系统的风险，同时追求可信 AI 的特征。",
+      "scope": "任何行业中设计、开发、部署或使用 AI 的组织。它是自愿性的且以结果为导向，旨在根据具体背景进行定制，并与标准和法规配合使用。",
+      "keyPoints": [
+        "四大核心功能：治理（Govern，文化与问责）、映射（Map，背景与风险）、测量（Measure，评估与跟踪）、管理（Manage，优先级与响应）。",
+        "治理（Govern）是横向贯穿的——它是其他三个功能的基础。",
+        "定义了要追求的可信 AI 特征，而不仅仅是要避免的风险。",
+        "配套的生成式 AI 配置文件（NIST AI 600-1）应对了 GenAI 特有的风险。",
+        "自愿且灵活——旨在进行定制，而非用于认证。",
+        "能与 ISO/IEC 42001（管理体系）和《欧盟 AI 法案》（法律）良好配合。"
+      ],
+      "controls": [
+        {
+          "control": "治理（Govern）",
+          "note": "建立使风险管理落地的政策、问责制、文化和角色——这是其他功能赖以建立的基础。"
+        },
+        {
+          "control": "映射（Map）",
+          "note": "确立背景：在构建之前，明确 AI 系统的预期用途、利益相关者以及风险和影响。"
+        },
+        {
+          "control": "测量（Measure）",
+          "note": "使用定量和定性的方法来评估、基准测试和监控风险与可信度——无法测量就无法管理。"
+        },
+        {
+          "control": "管理（Manage）",
+          "note": "随着时间的推移，对风险进行优先级排序、响应和跟踪，包括事件响应和退役。"
+        },
+        {
+          "control": "可信度特征",
+          "note": "将有效、安全、可靠、可问责、可解释、隐私增强和公平的结果作为明确的设计目标。"
+        }
+      ],
+      "checklist": [
+        "建立治理（Govern）功能：政策、问责制和角色。",
+        "映射每个系统的背景、预期用途、利益相关者和风险。",
+        "定义指标并测量（Measure）有效性、安全性、可靠性、偏见和鲁棒性。",
+        "管理（Manage）：确定风险优先级、规划应对措施并进行长期跟踪。",
+        "针对 GenAI 系统应用生成式人工智能配置文件（Generative AI Profile）。",
+        "为已部署系统设置事件响应和监控。",
+        "将该框架映射到您在 ISO 42001 和《欧盟人工智能法案》（EU AI Act）下的义务。"
+      ],
+      "pitfalls": [
+        "只进行映射（Map）和测量（Measure）却忽略了治理（Govern），导致无人对结果负责。",
+        "测量容易测量的指标，而不是对可信度至关重要的指标。",
+        "将其视为一份核对清单，而不是一种持续的风险管理实践。",
+        "在 LLM 和智能体（agentic）系统中忽略了生成式人工智能配置文件（Generative AI Profile）。"
+      ],
+      "examples": [
+        "团队在构建前使用“映射”（Map）来记录智能体的预期用途和利益相关者。",
+        "“测量”（Measure）步骤，根据评估集对模型的偏差和鲁棒性进行基准测试。",
+        "“管理”（Manage）流程，包含针对已部署 GenAI 助手的事件响应。"
+      ],
+      "faqs": [
+        {
+          "q": "NIST AI RMF 是强制性的吗？",
+          "a": "不是。它是一个自愿性框架。但它被广泛采纳为运营 AI 风险管理的通用语言和骨干，并经常在政策和采购中被引用。"
+        },
+        {
+          "q": "这四个功能是什么？",
+          "a": "治理（Govern）、映射（Map）、测量（Measure）和管理（Manage）。治理是横向贯穿的，支持其他三个贯穿整个 AI 生命周期的功能。"
+        },
+        {
+          "q": "它是如何处理生成式 AI 的？",
+          "a": "通过配套的生成式人工智能配置文件（Generative AI Profile，即 NIST AI 600-1），该文件识别了 GenAI 特有的风险，并提出了映射到这四个功能的建议行动。"
+        }
       ]
     }
   }

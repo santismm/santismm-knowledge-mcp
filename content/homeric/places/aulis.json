@@ -80,6 +80,22 @@
         "pt": {
           "label": "A baía de Áulis, Beócia",
           "note": "Um ancoradouro abrigado no estreito do Euripo, diante da Eubeia, identificado sem interrupção na Antiguidade e marcado por um santuário de Ártemis. O lugar é real e a localização é consensual; a arqueologia visível ali é arcaica e posterior, não a concentração de uma frota da Idade do Bronze."
+        },
+        "fr": {
+          "label": "La baie d'Aulis, Béotie",
+          "note": "Un mouillage abrité sur le détroit de l'Euripe, face à l'Eubée, identifié sans interruption dans l'Antiquité et marqué par un sanctuaire d'Artémis. Le site est réel et l'emplacement fait consensus ; l'archéologie visible y est d'époque archaïque et ultérieure, et non celle du rassemblement d'une flotte de l'âge du bronze."
+        },
+        "zh": {
+          "label": "波奥蒂亚的奥利斯湾",
+          "note": "位于优卑亚对面的尤里普斯海峡上的避风锚地，在古代一直被认定，并以阿耳忒弥斯圣所为标志。该遗址是真实的，位置也是公认的；那里可见的考古遗存属于古风时期及更晚时期，而非青铜时代舰队的集结地。"
+        },
+        "de": {
+          "label": "Die Bucht von Aulis, Böotien",
+          "note": "Ein geschützter Ankerplatz an der Euripos-Meerenge gegenüber von Euböa, in der Antike durchgehend identifiziert und durch ein Heiligtum der Artemis gekennzeichnet. Die Fundstätte ist real und die Lage unumstritten; die dort sichtbare Archäologie ist archaisch und jünger, nicht die Musterung einer bronzezeitlichen Flotte."
+        },
+        "ja": {
+          "label": "ボイオティアのアウリス湾",
+          "note": "エウボイアの対岸、エウリポス海峡にある遮蔽された停泊地。古代から途切れることなく同定されており、アルテミスの聖域が残されている。遺跡は実在し、位置も合意されているが、そこで確認できる考古学的遺物はアルカイック期以降のものであり、青銅器時代の艦隊の集結を示すものではない。"
         }
       }
     }
@@ -117,6 +133,46 @@
       ],
       "identificationNote": "Aceita: a localização nunca se perdeu e a geografia é indiscutível. O critério arqueológico pontua 1 porque o santuário escavado ali é séculos posterior aos fatos que o poema situa no local.",
       "debate": "Se a concentração em Áulis preserva alguma lembrança histórica de uma frota de coalizão, ou se é o recurso narrativo que parece ser: uma linha de partida traçada onde a geografia a tornava óbvia."
+    },
+    "fr": {
+      "name": "Aulis",
+      "summary": "Le lieu de rassemblement de la flotte avant Troie — un mouillage réel et incontesté dont l'événement homérique est un présage, non une bataille : le serpent et les moineaux qui annoncèrent aux Grecs que la guerre durerait dix ans.",
+      "description": [
+        "L'Aulis de l'Iliade est un souvenir évoqué dans un discours. Ulysse rappelle à l'armée le présage qu'ils y ont vu pendant que les navires attendaient, et le lieu n'est plus jamais visité. La tradition ultérieure du sacrifice d'Iphigénie appartient à la tragédie, non à Homère.",
+        "La baie elle-même est simple : un passage abrité dans le détroit, au point le plus étroit entre la Béotie et l'Eubée, soit exactement là où se rassemblerait une flotte issue de la Grèce centrale."
+      ],
+      "identificationNote": "Accepté : l'emplacement n'a jamais été perdu et la géographie est indiscutable. Le score archéologique est de 1 car le sanctuaire qui y a été fouillé est postérieur de plusieurs siècles aux événements que le poème situe sur le site.",
+      "debate": "Savoir si le rassemblement à Aulis conserve un souvenir historique d'une flotte de coalition, ou s'il s'agit du procédé narratif qu'il semble être — une ligne de départ tracée là où la géographie en imposait une de manière évidente."
+    },
+    "de": {
+      "name": "Aulis",
+      "summary": "Wo sich die Flotte vor Troja sammelte – ein realer, unumstrittener Ankerplatz, dessen homerisches Ereignis ein Omen ist, keine Schlacht: die Schlange und die Sperlinge, die den Griechen verkündeten, dass der Krieg zehn Jahre dauern würde.",
+      "description": [
+        "Das Aulis der Ilias ist eine Erinnerung innerhalb einer Rede. Odysseus erinnert das Heer an das Omen, das sie dort sahen, während die Schiffe warteten, und der Ort wird nie wieder aufgesucht. Die spätere Tradition von Iphigenies Opferung gehört zur Tragödie, nicht zu Homer.",
+        "Die Bucht selbst ist unkompliziert: eine geschützte Meerenge an der schmalsten Stelle zwischen Böotien und Euböa, genau dort, wo sich eine aus Mittelgriechenland stammende Flotte sammeln würde."
+      ],
+      "identificationNote": "Akzeptiert: Die Lage ging nie verloren und die Geografie ist unbestreitbar. Die archäologische Bewertung liegt bei 1, da das dort ausgegrabene Heiligtum Jahrhunderte jünger ist als die Ereignisse, die das Epos an diesem Ort verortet.",
+      "debate": "Ob die Musterung in Aulis eine historische Erinnerung an eine Koalitionsflotte bewahrt oder ob sie das erzählerische Mittel ist, als das sie erscheint – eine Startlinie, die dort gezogen wurde, wo die Geografie sie nahelegte."
+    },
+    "ja": {
+      "name": "アウリス",
+      "summary": "トロイアに向けて艦隊が集結した場所。実在し、合意されている停泊地であるが、ホメロスが描く出来事は戦闘ではなく前兆である。すなわち、戦争が10年続くことをギリシャ人に告げた蛇とスズメの逸話である。",
+      "description": [
+        "『イリアス』におけるアウリスは、演説の中の記憶として登場する。オデュッセウスは、船が待機している間にそこで見た前兆を軍隊に思い出させるが、この場所が再び訪れられることはない。後世のイフィゲニアの生贄の伝承は悲劇に属するものであり、ホメロスのものではない。",
+        "湾自体は単純明快である。ボイオティアとエウボイアの間の最も狭い地点を横切る、遮蔽された海峡であり、まさにギリシャ中部から集められた艦隊が集結するのにふさわしい場所である。"
+      ],
+      "identificationNote": "合意：位置が失われたことはなく、地理的にも議論の余地がない。そこで発掘された聖域が、詩がその場所に設定している出来事よりも数世紀後のものであるため、考古学的スコアは1である。",
+      "debate": "アウリスでの集結が連合艦隊に関する歴史的記憶を留めているのか、それとも地理的に明白な場所に引かれたスタートラインという、見たままの物語上の仕掛けにすぎないのか。"
+    },
+    "zh": {
+      "name": "奥利斯",
+      "summary": "出征特洛伊前舰队集结的地方——一个真实且公认的锚地，其在荷马史诗中的事件是一个预兆，而非一场战斗：蛇和麻雀预示着希腊人这场战争将持续十年。",
+      "description": [
+        "《伊利亚特》中的奥利斯是演说中的一段记忆。奥德修斯提醒军队注意他们在船只等待时在那里看到的预兆，此后诗歌再未提及该地。后来关于伊菲革涅亚献祭的传统属于悲剧，而非荷马史诗。",
+        "海湾本身一目了然：位于波奥蒂亚和优卑亚之间最窄处的避风海峡通道，这正是来自希腊中部的舰队集结的绝佳地点。"
+      ],
+      "identificationNote": "公认：该位置从未遗失，地理位置无可争议。考古学评分为 1，因为在那里发掘的圣所比诗歌中定位在该遗址的事件晚了几个世纪。",
+      "debate": "在奥利斯的集结是否保留了联合舰队的任何历史记忆，或者它是否只是一个叙事手段——在地理位置显而易见的地方画出的一条起跑线。"
     }
   }
 }

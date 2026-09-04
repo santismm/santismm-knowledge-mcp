@@ -270,6 +270,310 @@
           "a": "Mostre contexto inteligível para cada decisão, limite e exija justificativa para as aprovações, monitore o tempo de aprovação e a taxa de anulações, e mantenha os supervisores competentes por meio de treinamento e rotação."
         }
       ]
+    },
+    "fr": {
+      "name": "Politique de surveillance humaine et de responsabilité",
+      "summary": "Une politique opérationnelle qui concrétise la surveillance humaine de l'article 14 de l'EU AI Act pour l'IA agentique. Elle attribue un responsable désigné par agent, définit le niveau de surveillance (dans la boucle, sur la boucle, hors de la boucle) selon le risque, et détermine l'autorité d'intervention, de contournement et d'arrêt, ainsi que les parcours d'escalade. Elle exige que les surveillants soient compétents et disposent du temps nécessaire pour agir, et elle prémunit contre la validation automatique et le biais d'automatisation. Elle vise à éviter deux défaillances : l'humain absent et l'humain de façade qui ne peut ni comprendre, ni contourner, ni répondre des actions de l'agent.",
+      "definition": "Une politique de surveillance humaine et de responsabilité est un ensemble de règles contraignantes qui attribue un responsable humain désigné pour chaque agent et garantit qu'une personne compétente puisse comprendre, intervenir et arrêter ses actions.",
+      "scope": "Chaque agent en production ou en phase pilote qui utilise des outils, agit sur des systèmes ou prend des décisions importantes, ainsi que les propriétaires de systèmes, approbateurs et opérateurs qui les surveillent. Elle opérationnalise l'article 14 ; elle ne remplace pas un avis juridique.",
+      "keyPoints": [
+        "Chaque agent a un unique responsable désigné — la responsabilité n'est jamais transférée au modèle.",
+        "Le niveau de surveillance est adapté au risque : dans la boucle pour les actions à fort impact ou irréversibles, sur la boucle pour les actions réversibles à grand volume, hors de la boucle uniquement pour les tâches réversibles à faible risque.",
+        "Chaque agent expose des commandes testées de rejet, de modification et d'arrêt d'urgence (kill-switch) avec le contexte nécessaire pour une décision éclairée.",
+        "Des seuils d'escalade orientent les décisions importantes vers des humains en fonction de l'impact, de l'irréversibilité, des droits ou de la sécurité, de la confiance et de la nouveauté.",
+        "Les surveillants doivent être compétents, informés de manière intelligible, et disposer d'une autorité réelle ainsi que du temps nécessaire pour agir.",
+        "Le biais d'automatisation et la validation automatique systématique sont activement combattus, et non ignorés."
+      ],
+      "controls": [
+        {
+          "control": "Responsable désigné",
+          "note": "Attribuez un responsable humain unique pour les résultats de chaque agent. « Le modèle a décidé » n'est pas une explication acceptable."
+        },
+        {
+          "control": "Niveau de surveillance adapté au risque",
+          "note": "Définir le niveau d'intervention humaine (in-the-loop, on-the-loop ou out-of-the-loop) par agent en fonction de l'impact et de la réversibilité de l'action. Implémente le modèle de barrière d'approbation humaine (human-approval-gate) pour les actions à fort impact."
+        },
+        {
+          "control": "Autorité de contournement et d'arrêt",
+          "note": "Exposer des commandes testées de rejet, de modification et d'arrêt ; présenter suffisamment de contexte pour permettre un contournement éclairé. L'arrêt doit être rapide et accessible."
+        },
+        {
+          "control": "Seuils d'escalade",
+          "note": "Aiguiller les décisions vers des humains lorsque les seuils d'impact, d'irréversibilité, de droits/sécurité, de faible confiance ou de nouveauté sont franchis. Implémente le modèle d'escalade humaine (human-escalation)."
+        },
+        {
+          "control": "Compétence des superviseurs",
+          "note": "Former et certifier les superviseurs sur le domaine et les limites de l'agent afin que la supervision soit réelle et non purement nominale."
+        },
+        {
+          "control": "Garanties contre la validation automatique",
+          "note": "Réguler et exiger une justification pour les approbations ; surveiller le temps d'approbation et les taux de contournement pour détecter le biais d'automatisation."
+        }
+      ],
+      "checklist": [
+        "Désigner un responsable unique pour chaque agent en production et l'enregistrer.",
+        "Classifier les actions de chaque agent par impact et réversibilité, et attribuer un niveau de supervision.",
+        "Implémenter et tester des commandes de rejet, de modification et d'arrêt d'urgence (kill-switch) pour chaque agent.",
+        "S'assurer que l'agent présente un contexte intelligible pour toute décision nécessitant une supervision.",
+        "Définir et configurer des seuils d'escalade pour l'impact, les droits/sécurité, la confiance et la nouveauté.",
+        "Former les superviseurs sur le domaine et les limites de l'agent et maintenir leur certification à jour.",
+        "Ajouter des garanties contre la validation automatique et surveiller le temps d'approbation ainsi que les taux de contournement.",
+        "Consigner chaque approbation et contournement avec l'auteur, le motif et l'horodatage, et réviser périodiquement les seuils."
+      ],
+      "pitfalls": [
+        "Supervision de façade : un humain clique sur approuver sans disposer du contexte, de l'autorité ou du temps nécessaire pour évaluer réellement l'action.",
+        "Biais d'automatisation : les approbateurs font tellement confiance à l'agent qu'ils cessent d'examiner ses résultats.",
+        "Responsabilité diffuse : aucun responsable unique n'est désigné, de sorte qu'une défaillance ne peut être imputée à aucun humain.",
+        "Contournement inaccessible : une commande d'arrêt lente, masquée ou jamais testée.",
+        "Dérive des seuils : des limites d'escalade définies une fois pour toutes et jamais mises à jour à mesure que le périmètre de l'agent s'étend."
+      ],
+      "examples": [
+        "Un agent financier dont les paiements supérieurs à un plafond de dépenses nécessitent une approbation humaine directe (in-the-loop), tandis que les rapprochements s'effectuent sous supervision indirecte (on-the-loop).",
+        "Un agent de support qui escalade vers un humain lorsque son niveau de confiance est faible ou qu'une demande affecte les droits d'un client.",
+        "Un incident pour lequel le responsable désigné est tenu pour responsable et où le journal des contournements indique qui a approuvé l'action et pourquoi."
+      ],
+      "faqs": [
+        {
+          "q": "La supervision humaine signifie-t-elle qu'un humain doit tout approuver ?",
+          "a": "Non. La supervision est hiérarchisée : intervention directe (in-the-loop) pour les actions à fort impact ou irréversibles, surveillance indirecte (on-the-loop) pour les actions réversibles à grand volume, et une posture globale de contrôle humain (human-in-command). Le modèle s'adapte au risque afin que la supervision reste pertinente au lieu de générer une lassitude face aux approbations."
+        },
+        {
+          "q": "La responsabilité peut-elle incomber au fournisseur d'IA ?",
+          "a": "Non. Les relations avec les fournisseurs sont régies séparément, mais le responsable désigné de votre système reste redevable de la manière dont l'agent est déployé et utilisé. L'automatisation est un outil, pas une défense."
+        },
+        {
+          "q": "Comment éviter la validation automatique et le biais d'automatisation ?",
+          "a": "Présenter un contexte intelligible pour chaque décision, réguler et exiger une justification pour les approbations, surveiller le temps d'approbation et les taux de contournement, et maintenir la compétence des superviseurs par la formation et la rotation."
+        }
+      ]
+    },
+    "de": {
+      "name": "Richtlinie für menschliche Aufsicht und Rechenschaftspflicht",
+      "summary": "Eine operative Richtlinie, die die menschliche Aufsicht gemäß Artikel 14 des EU AI Act für agentische KI in die Praxis umsetzt. Sie weist jedem Agenten eine namentlich benannte verantwortliche Person zu, legt die Aufsichtsstufe (In-the-Loop, On-the-Loop, Out-of-the-Loop) je nach Risiko fest und definiert Eingriffs-, Override- und Stopp-Befugnisse sowie Eskalationspfade. Sie setzt voraus, dass die Aufsichtspersonen kompetent sind und Zeit zum Handeln haben, und schützt vor blindem Abnicken (Rubber-Stamping) und Automatisierungsbias. Sie dient dazu, zwei Fehler zu vermeiden: den abwesenden Menschen und den Alibi-Menschen, der das Handeln des Agenten weder verstehen noch überschreiben oder dafür geradestehen kann.",
+      "definition": "Eine Richtlinie für menschliche Aufsicht und Rechenschaftspflicht ist ein verbindliches Regelwerk, das jedem Agenten eine namentlich benannte Person zuweist, die für ihn verantwortlich ist, und garantiert, dass eine kompetente Person seine Aktionen verstehen, in diese eingreifen und sie stoppen kann.",
+      "scope": "Jeder produktive oder Pilot-Agent, der Tools nutzt, auf Systemen agiert oder folgenschwere Entscheidungen trifft, sowie die Systemverantwortlichen, Genehmiger und Bediener, die sie beaufsichtigen. Sie operationalisiert Artikel 14; sie ist kein Ersatz für eine Rechtsberatung.",
+      "keyPoints": [
+        "Jeder Agent hat eine namentlich benannte, verantwortliche Person – die Verantwortung wird niemals auf das Modell übertragen.",
+        "Die Aufsichtsstufe ist auf das Risiko abgestimmt: In-the-Loop bei folgenschweren oder unumkehrbaren Aktionen, On-the-Loop bei umkehrbaren Aktionen mit hohem Volumen, Out-of-the-Loop nur bei risikoarmen, umkehrbaren Aufgaben.",
+        "Jeder Agent bietet getestete Kontrollmöglichkeiten zum Ablehnen, Ändern und Stoppen (Notaus/Kill-Switch) mit dem für eine fundierte Entscheidung erforderlichen Kontext.",
+        "Eskalationsschwellen leiten folgenschwere Entscheidungen basierend auf Auswirkungen, Unumkehrbarkeit, Rechten oder Sicherheit, Konfidenz und Neuartigkeit an Menschen weiter.",
+        "Aufsichtspersonen müssen kompetent und verständlich informiert sein sowie über echte Befugnisse und ausreichend Zeit zum Handeln verfügen.",
+        "Automatisierungsbias und blindes Abnicken (Rubber-Stamping) werden aktiv bekämpft und nicht einfach als nicht existent vorausgesetzt."
+      ],
+      "controls": [
+        {
+          "control": "Namentlich benannte verantwortliche Person",
+          "note": "Weisen Sie jedem Agenten eine Person zu, die für dessen Ergebnisse verantwortlich ist. \"Das Modell hat entschieden\" ist keine akzeptable Erklärung."
+        },
+        {
+          "control": "Risikoangepasste Aufsichtsstufe",
+          "note": "Definieren Sie In-the-Loop, On-the-Loop oder Out-of-the-Loop pro Agent basierend auf den Auswirkungen und der Reversibilität von Aktionen. Implementiert das Human-Approval-Gate-Muster für folgenschwere Aktionen."
+        },
+        {
+          "control": "Befugnis zum Überschreiben und Stoppen",
+          "note": "Stellen Sie getestete Steuerelemente zum Ablehnen, Ändern und Stoppen bereit; stellen Sie ausreichend Kontext für ein fundiertes Überschreiben zur Verfügung. Der Stopp muss schnell und erreichbar sein."
+        },
+        {
+          "control": "Eskalationsschwellenwerte",
+          "note": "Leiten Sie Entscheidungen an Menschen weiter, wenn Schwellenwerte für Auswirkungen, Irreversibilität, Rechte/Sicherheit, geringes Vertrauen oder Neuartigkeit überschritten werden. Implementiert das Human-Escalation-Muster."
+        },
+        {
+          "control": "Kompetenz der Aufsichtspersonen",
+          "note": "Schulen und zertifizieren Sie Aufsichtspersonen für den Bereich und die Grenzen des Agenten, damit die Aufsicht effektiv und nicht nur nominell ist."
+        },
+        {
+          "control": "Schutzmaßnahmen gegen blindes Abnicken",
+          "note": "Drosseln Sie Genehmigungen und fordern Sie Begründungen dafür ein; überwachen Sie die Genehmigungszeit und die Überschreibungsraten, um Automation Bias (Automatisierungsgläubigkeit) zu erkennen."
+        }
+      ],
+      "checklist": [
+        "Benennen Sie einen verantwortlichen Eigentümer für jeden produktiven Agenten und dokumentieren Sie dies.",
+        "Klassifizieren Sie die Aktionen jedes Agenten nach Auswirkung und Reversibilität und weisen Sie eine Aufsichtsstufe zu.",
+        "Implementieren und testen Sie Steuerelemente zum Ablehnen, Ändern und Stoppen (Kill-Switch) für jeden Agenten.",
+        "Stellen Sie sicher, dass der Agent verständlichen Kontext für jede Entscheidung liefert, die einer Aufsicht bedarf.",
+        "Definieren und konfigurieren Sie Eskalationsschwellenwerte für Auswirkungen, Rechte/Sicherheit, Vertrauen und Neuartigkeit.",
+        "Schulen Sie Aufsichtspersonen für den Bereich und die Grenzen des Agenten und halten Sie deren Zertifizierung auf dem neuesten Stand.",
+        "Fügen Sie Schutzmaßnahmen gegen blindes Abnicken hinzu und überwachen Sie die Genehmigungszeit sowie die Überschreibungsraten.",
+        "Protokollieren Sie jede Genehmigung und Überschreibung mit Akteur, Grund und Zeitstempel, und überprüfen Sie die Schwellenwerte regelmäßig."
+      ],
+      "pitfalls": [
+        "Alibi-Aufsicht: Ein Mensch klickt auf Genehmigen, ohne den Kontext, die Befugnis oder die Zeit zu haben, die Aktion tatsächlich zu bewerten.",
+        "Automation Bias (Automatisierungsgläubigkeit): Genehmigende vertrauen dem Agenten so sehr, dass sie aufhören, dessen Ergebnisse kritisch zu prüfen.",
+        "Diffuse Verantwortlichkeit: Es gibt keinen namentlich genannten Eigentümer, sodass bei einem Fehler kein Mensch zur Rechenschaft gezogen werden kann.",
+        "Unerreichbares Überschreiben: Ein Stopp-Steuerelement, das langsam, versteckt oder nie getestet ist.",
+        "Schwellenwert-Drift: Eskalationsgrenzen werden einmal festgelegt und nie aktualisiert, wenn der Aufgabenbereich des Agenten wächst."
+      ],
+      "examples": [
+        "Ein Finanz-Agent, dessen Zahlungen über einer Ausgabengrenze eine menschliche Genehmigung (In-the-Loop) erfordern, während Abstimmungen On-the-Loop laufen.",
+        "Ein Support-Agent, der an einen Menschen eskaliert, wenn sein Vertrauen gering ist oder eine Anfrage die Rechte eines Kunden betrifft.",
+        "Ein Vorfall, bei dem der namentlich genannte Eigentümer zur Rechenschaft gezogen wird und das Überschreibungsprotokoll zeigt, wer die Aktion genehmigt hat und warum."
+      ],
+      "faqs": [
+        {
+          "q": "Bedeutet menschliche Aufsicht, dass ein Mensch alles genehmigen muss?",
+          "a": "Nein. Die Aufsicht ist gestuft: In-the-Loop für folgenschwere oder irreversible Aktionen, On-the-Loop-Überwachung für reversible Aktionen mit hohem Volumen und eine übergeordnete Human-in-Command-Haltung. Das Modell skaliert mit dem Risiko, sodass die Aufsicht sinnvoll bleibt, anstatt zu einer Genehmigungsmüdigkeit zu führen."
+        },
+        {
+          "q": "Kann die Verantwortung beim KI-Anbieter liegen?",
+          "a": "Nein. Beziehungen zu Anbietern werden separat geregelt, aber Ihr namentlich genannter Systemverantwortlicher bleibt dafür verantwortlich, wie der Agent bereitgestellt und verwendet wird. Automatisierung ist ein Werkzeug, keine Rechtfertigung."
+        },
+        {
+          "q": "Wie verhindern wir blindes Abnicken und Automation Bias?",
+          "a": "Stellen Sie verständlichen Kontext für jede Entscheidung bereit, drosseln Sie Genehmigungen und fordern Sie Begründungen dafür ein, überwachen Sie die Genehmigungszeit sowie die Überschreibungsraten und halten Sie die Aufsichtspersonen durch Schulungen und Rotation kompetent."
+        }
+      ]
+    },
+    "ja": {
+      "name": "人間による監視と説明責任に関するポリシー",
+      "summary": "EU AI Act第14条の人間による監視を、エージェント型AI向けに実践へと落とし込む運用ポリシーです。エージェントごとに明確な責任ある所有者を割り当て、リスクに応じて監視レベル（in-the-loop、on-the-loop、out-of-the-loop）を設定し、介入、オーバーライド、停止権限、およびエスカレーションパスを定義します。監視者が有能であり、行動を起こす時間があることを要求し、形骸化（ラバースタンプ）や自動化バイアスを防ぎます。このポリシーは、2つの失敗、すなわち「人間が不在であること」と、エージェントの行動を実際に理解、オーバーライド、または説明できない「名ばかりの人間」を防ぐために存在します。",
+      "definition": "人間による監視と説明責任に関するポリシーとは、各エージェントに対して責任を負う特定の人間を割り当て、有能な人物がその行動を理解、介入、および停止できることを保証する、拘束力のあるルールセットです。",
+      "scope": "ツールを使用する、システム上で動作する、または重大な意思決定を行うすべての本番環境またはパイロット版のエージェント、およびそれらを監視するシステム所有者、承認者、オペレーター。これは第14条を運用可能にするものであり、法的助言に代わるものではありません。",
+      "keyPoints": [
+        "各エージェントには、特定の責任ある所有者が1名割り当てられます。説明責任がモデルに移転されることは決してありません。",
+        "監視レベルはリスクに適合させます。影響が大きい、または不可逆的なアクションにはin-the-loop、可逆的で大量のアクションにはon-the-loop、低リスクで可逆的なタスクにのみout-of-the-loopを適用します。",
+        "すべてのエージェントは、十分な情報に基づいた意思決定に必要なコンテキストとともに、テスト済みの拒否、修正、および停止（キルスイッチ）コントロールを公開します。",
+        "エスカレーションのしきい値により、影響、不可逆性、権利または安全性、確信度、および新規性に基づいて、重大な意思決定が人間にルーティングされます。",
+        "監視者は、有能であり、分かりやすく情報を与えられ、行動するための真の権限と時間を持っていなければなりません。",
+        "自動化バイアスや形骸化（ラバースタンプ）は、想定から排除するのではなく、積極的に対策を講じます。"
+      ],
+      "controls": [
+        {
+          "control": "特定の責任ある所有者",
+          "note": "各エージェントの成果に対して責任を負う人間を1名割り当てます。「モデルが決定した」という説明は受け入れられません。"
+        },
+        {
+          "control": "リスクに適合した監視レベル",
+          "note": "アクションの影響度と可逆性に基づいて、エージェントごとに in-the-loop、on-the-loop、または out-of-the-loop を定義します。影響度の高いアクションに対して human-approval-gate パターンを実装します。"
+        },
+        {
+          "control": "オーバーライドおよび停止の権限",
+          "note": "テスト済みの拒否、変更、および停止のコントロールを公開し、十分な情報に基づいたオーバーライドを行うための十分なコンテキストを提示します。停止は迅速かつ到達可能でなければなりません。"
+        },
+        {
+          "control": "エスカレーションのしきい値",
+          "note": "影響度、不可逆性、権利/安全性、信頼度の低さ、または新規性のしきい値を超えた場合、意思決定を人間にルーティングします。human-escalation パターンを実装します。"
+        },
+        {
+          "control": "監視者の適格性",
+          "note": "監視が名目上のものではなく有意義なものとなるよう、エージェントのドメインと限界について監視者をトレーニングし、認定します。"
+        },
+        {
+          "control": "形骸化防止のセーフガード",
+          "note": "承認を制限し、理由の提示を義務付けます。自動化バイアスを検出するために、承認時間とオーバーライド率を監視します。"
+        }
+      ],
+      "checklist": [
+        "本番環境の各エージェントに対して責任あるオーナーを1名指名し、記録します。",
+        "各エージェントのアクションを影響度と可逆性によって分類し、監視レベルを割り当てます。",
+        "すべてのエージェントに対して、拒否、変更、および停止（キルスイッチ）のコントロールを実装し、テストします。",
+        "監視が必要な意思決定について、エージェントが理解可能なコンテキストを提示するようにします。",
+        "影響度、権利/安全性、信頼度、および新規性のエスカレーションしきい値を定義し、設定します。",
+        "エージェントのドメインと限界について監視者をトレーニングし、その認定を最新の状態に維持します。",
+        "形骸化防止のセーフガードを追加し、承認時間とオーバーライド率を監視します。",
+        "すべての承認とオーバーライドを実行者、理由、タイムスタンプとともにログに記録し、定期的にしきい値を見直します。"
+      ],
+      "pitfalls": [
+        "形ばかりの監視：人間が、アクションを実際に評価するためのコンテキスト、権限、または時間がないまま「承認」をクリックしてしまうこと。",
+        "自動化バイアス：承認者がエージェントを過度に信頼し、その出力を精査しなくなること。",
+        "責任の分散：指名された単一のオーナーが存在しないため、障害が発生した際に対応すべき責任者が曖昧になること。",
+        "到達不可能なオーバーライド：停止コントロールの動作が遅い、隠されている、または一度もテストされていないこと。",
+        "しきい値のドリフト：エスカレーションの制限が一度設定されたきり、エージェントの適用範囲が拡大しても更新されないこと。"
+      ],
+      "examples": [
+        "支出上限を超える支払いには人間による in-the-loop の承認が必要である一方、照合業務は on-the-loop で実行される財務エージェント。",
+        "信頼度が低い場合や、リクエストが顧客の権利に影響を与える場合に、人間にエスカレーションするサポートエージェント。",
+        "指名されたオーナーが責任を問われ、オーバーライドログによって誰がなぜそのアクションを承認したかが示されるインシデント。"
+      ],
+      "faqs": [
+        {
+          "q": "人間による監視とは、人間がすべてを承認することを意味しますか？",
+          "a": "いいえ。監視は階層化されています。影響度が高いアクションや不可逆的なアクションには in-the-loop、可逆的で大量のアクションには on-the-loop のモニタリング、そして全体として human-in-command の姿勢をとります。このモデルはリスクに応じて拡張されるため、監視が承認疲れに陥ることなく、有意義な状態を維持できます。"
+        },
+        {
+          "q": "責任をAIベンダーに負わせることはできますか？",
+          "a": "いいえ。ベンダーとの関係は別途管理されますが、エージェントがどのようにデプロイされ使用されるかについては、指名されたシステムオーナーが引き続き責任を負います。自動化はツールであり、言い訳にはなりません。"
+        },
+        {
+          "q": "形骸化や自動化バイアスを防ぐにはどうすればよいですか？",
+          "a": "各意思決定について理解可能なコンテキストを提示し、承認を制限して理由の提示を義務付け、承認時間とオーバーライド率を監視し、トレーニングやローテーションを通じて監視者の適格性を維持します。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "人工监督与问责政策",
+      "summary": "一项将 EU AI Act 第 14 条的人工监督要求转化为智能体 AI（agentic AI）实践的运营政策。它为每个智能体分配一名指定的明确责任人，根据风险设定监督级别（人机协同 in-the-loop、人机监视 on-the-loop、人机脱离 out-of-the-loop），并定义干预、覆盖和终止权限以及升级路径。它要求监督人员具备相应能力并有充足的时间采取行动，同时防范流于形式的审批和自动化偏见。该政策旨在防止两种失败情况：人员缺位，以及无法真正理解、覆盖智能体行为或为其负责的“工具人”式监督。",
+      "definition": "人工监督与问责政策是一套具有约束力的规则集，它为每个智能体分配一名指定的负责人，并确保有能力的人员能够理解、干预和终止其行为。",
+      "scope": "每一个在生产或试点环境中运行、使用工具、对系统执行操作或做出重大决策的智能体，以及负责监督它们的系统所有者、审批者和操作员。它使第 14 条具有可操作性；它不能替代法律建议。",
+      "keyPoints": [
+        "每个智能体都有一名指定的明确责任人——问责权绝不能转移给模型。",
+        "监督级别与风险相匹配：对于高影响或不可逆的行为采用人机协同（in-the-loop），对于可逆的高频行为采用人机监视（on-the-loop），仅对于低风险且可逆的任务采用人机脱离（out-of-the-loop）。",
+        "每个智能体都提供经过测试的拒绝、修改和终止（紧急停止开关）控制，并附带做出明智决策所需的上下文信息。",
+        "升级阈值根据影响、不可逆性、权利或安全、置信度以及新颖性，将重大决策路由给人工处理。",
+        "监督人员必须具备相应能力、获取清晰的信息，并拥有真正的授权和充足的行动时间。",
+        "积极应对自动化偏见和流于形式的审批，而不是假定这些问题不存在。"
+      ],
+      "controls": [
+        {
+          "control": "指定的明确责任人",
+          "note": "为每个智能体的结果分配一名负责人。“模型做出的决定”不是可接受的解释。"
+        },
+        {
+          "control": "与风险相匹配的监督级别",
+          "note": "根据操作影响和可逆性，为每个智能体定义“人在环路中”（in-the-loop）、“人在环路上”（on-the-loop）或“人在环路外”（out-of-the-loop）。针对高影响操作实现“人工审批关卡”（human-approval-gate）模式。"
+        },
+        {
+          "control": "覆盖与终止权限",
+          "note": "提供经过测试的拒绝、修改和终止控制；呈现足够的上下文以实现知情覆盖。终止操作必须快速且触手可及。"
+        },
+        {
+          "control": "升级上报阈值",
+          "note": "当跨越影响、不可逆性、权利/安全、低置信度或新颖性阈值时，将决策路由给人工。实现“人工升级上报”（human-escalation）模式。"
+        },
+        {
+          "control": "监督人员能力",
+          "note": "针对智能体的领域和局限性对监督人员进行培训和认证，使监督具有实质意义，而非流于形式。"
+        },
+        {
+          "control": "防走过场保护机制",
+          "note": "对审批进行限流并要求提供理由；监控审批时间和覆盖率，以检测自动化偏差。"
+        }
+      ],
+      "checklist": [
+        "为每个生产环境中的智能体指定一名负责的拥有者并予以记录。",
+        "根据影响和可逆性对每个智能体的操作进行分类，并分配监督级别。",
+        "为每个智能体实现并测试拒绝、修改和终止（紧急停止开关）控制。",
+        "确保智能体为任何需要监督的决策呈现易于理解的上下文。",
+        "针对影响、权利/安全、置信度和新颖性定义并配置升级上报阈值。",
+        "针对智能体的领域和局限性对监督人员进行培训，并保持其认证的有效性。",
+        "增加防走过场保护机制，并监控审批时间和覆盖率。",
+        "记录每次审批和覆盖的操作人员、原因及时间戳，并定期审查阈值。"
+      ],
+      "pitfalls": [
+        "象征性监督：人员在缺乏上下文、权限或时间来实际评估操作的情况下直接点击批准。",
+        "自动化偏差：审批者过度信任智能体，以至于不再仔细审查其输出。",
+        "责任分散：没有指定单一的拥有者，导致发生故障时没有可追责的人员。",
+        "无法触及的覆盖：终止控制响应缓慢、隐藏过深或从未经过测试。",
+        "阈值漂移：升级上报限制仅在设置时确定一次，随着智能体业务范围的扩大而从未更新。"
+      ],
+      "examples": [
+        "一个财务智能体，其超过支出上限的付款需要“人在环路中”的人工审批，而对账工作则在“人在环路上”运行。",
+        "一个支持智能体，当其置信度较低或请求影响到客户权益时，会升级上报给人工处理。",
+        "在发生事件时，由指定的拥有者承担责任，且覆盖日志能够显示是谁批准了该操作以及原因。"
+      ],
+      "faqs": [
+        {
+          "q": "人工监督是否意味着每件事都需要人工批准？",
+          "a": "不。监督是分层的：针对高影响或不可逆的操作采用“人在环路中”（in-the-loop），针对可逆的高频操作采用“人在环路上”（on-the-loop）监控，并在整体上保持“人为主导”（human-in-command）的态势。该模式根据风险进行扩展，使监督保持实质意义，而不是演变成审批疲劳。"
+        },
+        {
+          "q": "责任可以由 AI 厂商承担吗？",
+          "a": "不能。与厂商的关系是单独管理的，但您指定的系统拥有者仍需对智能体的部署和使用方式负责。自动化是一种工具，而不是免责辩护。"
+        },
+        {
+          "q": "我们如何防止走过场和自动化偏差？",
+          "a": "为每个决策呈现易于理解的上下文，对审批进行限流并要求提供理由，监控审批时间和覆盖率，并通过培训和轮岗保持监督人员的能力。"
+        }
+      ]
     }
   }
 }

@@ -104,6 +104,22 @@
         "pt": {
           "label": "Menelau: oito anos passando pelo Egito",
           "note": "Desviado no Maleia, naufragado em Creta e retido no Egito o bastante para voltar rico. Todas as escalas são lugares reais; o especulativo é o itinerário, que o poema dá num único discurso retrospectivo."
+        },
+        "fr": {
+          "label": "Ménélas : huit ans en passant par l'Égypte",
+          "note": "Dérivé au large du cap Malée, naufragé en Crète et retenu en Égypte assez longtemps pour rentrer riche. Chaque étape est un lieu réel ; ce qui est spéculatif est l'itinéraire, que le poème livre en un seul discours rétrospectif."
+        },
+        "zh": {
+          "label": "墨涅拉俄斯：途经埃及的八年",
+          "note": "在马勒阿被风吹离航线，在克里特岛遭遇海难，并在埃及滞留了足够长的时间以致满载而归。每一个停靠点都是真实的地方；具有推测性的是其行程，史诗仅在一段回顾性的演讲中提及。"
+        },
+        "de": {
+          "label": "Menelaos: acht Jahre über Ägypten",
+          "note": "Bei Malea vom Kurs abgekommen, vor Kreta Schiffbruch erlitten und lange genug in Ägypten festgehalten, um reich nach Hause zurückzukehren. Jede Station ist ein realer Ort; spekulativ ist die Reiseroute, die das Epos in einer einzigen rückblickenden Rede wiedergibt."
+        },
+        "ja": {
+          "label": "メネラオス：エジプト経由の8年間",
+          "note": "マレア岬で進路を阻まれ、クレタ島で難破し、エジプトに足止めされて富を得て帰還する。すべての経由地は実在の場所であるが、叙事詩の中で1つの回想演説として語られるその旅程自体は推測の域を出ない。"
         }
       }
     },
@@ -166,6 +182,22 @@
         "pt": {
           "label": "Nestor em casa, Agamêmnon assassinado",
           "note": "A versão curta e a fatal. Nestor navega direto e chega a Pilos sem incidentes; Agamêmnon é desviado além do Maleia, desembarca na costa errada e é morto à própria mesa. Ambos os extremos são sítios aceitos."
+        },
+        "fr": {
+          "label": "Nestor rentré chez lui, Agamemnon assassiné",
+          "note": "La version courte et la version fatale. Nestor navigue en ligne droite et atteint Pylos sans encombre ; Agamemnon est emporté au-delà du cap Malée, débarque sur la mauvaise côte et est tué à sa propre table. Les deux points d'arrivée sont des sites acceptés."
+        },
+        "zh": {
+          "label": "涅斯托尔归家，阿伽门农遇害",
+          "note": "短暂的版本与致命的版本。涅斯托尔径直航行并平安抵达皮洛斯；阿伽门农被驱赶越过马勒阿，在错误的海岸登陆，并在自己的餐桌上被杀。两个终点都是公认的遗址。"
+        },
+        "de": {
+          "label": "Nestors Heimkehr, Agamemnons Ermordung",
+          "note": "Die kurze Version und die tödliche. Nestor segelt direkt und erreicht Pylos ohne Zwischenfälle; Agamemnon wird an Malea vorbeigetrieben, landet an der falschen Küste und wird an seiner eigenen Tafel getötet. Beide Endpunkte sind akzeptierte Fundstätten."
+        },
+        "ja": {
+          "label": "ネストルの帰宅とアガメムノンの暗殺",
+          "note": "短い帰還と、致命的な帰還。ネストルは直行して何事もなくピュロスに到着する。一方、アガメムノンはマレア岬を越えて流され、誤った海岸に上陸し、自身の食卓で殺害される。両者の目的地はともに承認された遺跡である。"
         }
       }
     }
@@ -200,6 +232,46 @@
         "Lida diante do nostos de Odisseu, esta rota é o argumento de que a Odisseia sabe perfeitamente como é uma viagem real e escolhe outra coisa para seu herói."
       ],
       "debate": "Quanto da tradição dos retornos é anterior à Odisseia — o Ciclo Épico atesta um poema Nostoi perdido — e se os anos egípcios de Menelau refletem um padrão real de contato egeu ou a ideia que um narrador tinha do sul distante."
+    },
+    "fr": {
+      "name": "Les autres retours",
+      "summary": "Ulysse n'est pas le seul à rentrer chez lui. L'Odyssée consacre ses premiers chants aux autres nostoi — le retour facile de Nestor, le détour de huit ans de Ménélas, le meurtre d'Agamemnon — et ils constituent le groupe de contrôle de l'ensemble du poème.",
+      "description": [
+        "Nestor raconte à Télémaque comment la flotte s'est divisée à Ténédos sur la question de savoir s'il fallait d'abord naviguer ou faire des sacrifices, et comment chaque contingent s'en est sorti. Protée raconte le reste à Ménélas. Entre ces deux récits, le poème offre un panorama de retours allant du plus paisible au plus catastrophique.",
+        "Leur géographie est le miroir de celle des errances : elle reste à l'intérieur du monde connu. Le cap Malée, la Crète, l'Égypte, Pharos, Mycènes, Pylos — chaque étape est un lieu que l'atlas peut classer comme accepté ou plausible, et le seul élément spéculatif est l'ordre des étapes.",
+        "Mise en regard du nostos d'Ulysse, cette route démontre que l'Odyssée sait parfaitement à quoi ressemble un voyage réel, et choisit autre chose pour son héros."
+      ],
+      "debate": "Dans quelle mesure la tradition des retours est antérieure à l'Odyssée — un poème perdu des Nostoi est attesté dans le Cycle épique — et si les années égyptiennes de Ménélas reflètent un modèle réel de contacts égéens ou l'idée qu'un conteur se faisait du grand Sud."
+    },
+    "de": {
+      "name": "Die anderen Heimkehren",
+      "summary": "Odysseus is not the only one coming home. The Odyssey spends its early books on the other nostoi — Nestor's easy one, Menelaus' eight-year detour, Agamemnon's murder — and they are the control group for the whole poem.",
+      "description": [
+        "Nestor erzählt Telemach, wie sich die Flotte bei Tenedos spaltete über die Frage, ob man zuerst segeln oder opfern solle, und wie es den einzelnen Kontingenten erging. Proteus erzählt Menelaos den Rest. Zwischen diesen beiden Berichten bietet das Epos einen Überblick über Heimkehren, die von ereignislos bis katastrophal reichen.",
+        "Ihre Geografie ist das Spiegelbild der Irrfahrten: Sie bleibt innerhalb der bekannten Welt. Malea, Kreta, Ägypten, Pharos, Mykene, Pylos – jede Station ist ein Ort, den der Atlas als akzeptiert oder plausibel einstufen kann, und das einzige spekulative Element ist die Reihenfolge der Etappen.",
+        "Gelesen im Vergleich zum Nostos des Odysseus ist diese Route der Beweis dafür, dass die Odyssee sehr wohl weiß, wie eine reale Seereise aussieht, und für ihren Helden etwas anderes wählt."
+      ],
+      "debate": "Wie viel der Heimkehrertradition älter ist als die Odyssee – ein verlorenes Nostoi-Epos ist im Epischen Zyklus bezeugt – und ob Menelaos' ägyptische Jahre ein reales Muster ägäischen Kontakts widerspiegeln oder die Vorstellung eines Geschichtenerzählers vom fernen Süden."
+    },
+    "ja": {
+      "name": "その他の帰還",
+      "summary": "帰路についたのはオデュッセウスだけではない。『オデュッセイア』は序盤の数巻を割いて、他の者たちの帰還（ノストイ）を描いている。ネストルの平穏な帰還、メネラオスの8年に及ぶ回り道、アガメムノンの暗殺などであり、これらは叙事詩全体における対照群（コントロール）となっている。",
+      "description": [
+        "ネストルはテレマコスに対し、テネドス島で船出を優先するか生贄を捧げるかをめぐって艦隊が分裂した経緯と、それぞれの部隊がどのような運命をたどったかを語る。残りの部分はプロテウスがメネラオスに語る。これら2つの語りを通じて、叙事詩は平穏無事なものから破滅的なものに至るまで、様々な帰還のあり方を概観している。",
+        "彼らの地理は、オデュッセウスの漂流の地理とは対照的であり、既知の世界にとどまっている。マレア、クレタ、エジプト、ファロス、ミケーネ、ピュロスなど、すべての経由地は本地図帳において「承認」または「妥当」に分類できる場所であり、推測の域を出ない要素は各区間の順序だけである。",
+        "オデュッセウスの帰還（ノストス）と対比して読むと、このルートは、『オデュッセイア』が現実の航海がどのようなものであるかを完全に理解した上で、その主人公にはあえて異なる旅路を選ばせたという論拠になる。"
+      ],
+      "debate": "帰還の伝承のどれほどが『オデュッセイア』よりも古いものなのか（叙事詩の環の一部として、失われた叙事詩『帰還（ノストイ）』の存在が証明されている）、そしてメネラオスのエジプトでの歳月が、エーゲ海世界との実際の接触パターンを反映しているのか、あるいは語り手が想像した遥か南方のイメージに過ぎないのか、という議論。"
+    },
+    "zh": {
+      "name": "其他人的归途",
+      "summary": "奥德修斯并非唯一回家的人。《奥德赛》在开篇几卷中描述了其他人的归途（nostoi）——涅斯托尔的顺风顺水、墨涅拉俄斯长达八年的绕道、阿伽门农的遇害——它们是整部史诗的对照组。",
+      "description": [
+        "涅斯托尔告诉忒勒马科斯，舰队在特涅多斯岛如何因先启航还是先献祭而分裂，以及各支部队的遭遇。普罗透斯则告诉了墨涅拉俄斯其余的事情。在这两段叙述之间，史诗对归途进行了一次全景式的展现，从平淡无奇到灾难深重不等。",
+        "他们的地理轨迹是奥德修斯漂泊之旅的镜像：它保持在已知世界之内。马勒阿（Malea）、克里特、埃及、法罗斯（Pharos）、迈锡尼、皮洛斯（Pylos）——每一个停靠点都是本图册可以归类为公认或合理的地点，唯一的推测性元素是各航段的顺序。",
+        "与奥德修斯的归途（nostos）相对照，这条路线证明了《奥德赛》非常清楚真实的航行是什么样子，只是为它的英雄选择了另一种旅程。"
+      ],
+      "debate": "归途传统中有多少比《奥德赛》更古老——《史诗体诗系》中证实了一部已失传的《归途》（Nostoi）史诗——以及墨涅拉俄斯在埃及的岁月是反映了爱琴海交往的真实模式，还是仅仅是说书人对遥远南方的想象。"
     }
   }
 }

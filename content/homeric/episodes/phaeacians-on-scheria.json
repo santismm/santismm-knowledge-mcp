@@ -60,6 +60,22 @@
         "pt": {
           "label": "Córcira (Corfu)",
           "note": "A identificação em que a Antiguidade se assentou, ainda marcada por uma rocha mostrada como a nau feácia petrificada. Uma tradição longa sem apoio material."
+        },
+        "fr": {
+          "label": "Corcyre (Corfou)",
+          "note": "L'identification retenue par l'Antiquité, toujours marquée par un rocher présenté comme le navire phéacien pétrifié. Une longue tradition sans aucun support matériel."
+        },
+        "zh": {
+          "label": "科尔基拉（科孚岛）",
+          "note": "古代确立的认定，至今仍有一块被指为石化费阿基亚船的岩石作为标记。这是一个历史悠久的传统，但缺乏实物证据支持。"
+        },
+        "de": {
+          "label": "Kerkyra (Korfu)",
+          "note": "Die Identifizierung, auf die sich die Antike einigte, wird noch heute durch einen Felsen markiert, der als das versteinerte phäakische Schiff gilt. Eine lange Tradition ohne materielle Belege."
+        },
+        "ja": {
+          "label": "コルキュラ（コルフ島）",
+          "note": "古代に定まった比定地であり、今でも石化したパイアケス人の船とされる岩が残っています。物質的な裏付けのない、長い伝統を持つ説です。"
         }
       }
     }
@@ -122,6 +138,86 @@
         {
           "q": "Por que os feácios são punidos?",
           "a": "Por levar estrangeiros para casa com facilidade demais. Posêidon petrifica sua nau à vista do porto, e o poema deixa sem resolver a ameaça de uma montanha fechando sua cidade."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Les Phéaciens sur Schérie",
+      "summary": "Ulysse échoue nu sur le rivage et est découvert par une princesse qui fait sa lessive. Ce qui suit est la séquence la plus civilisée du poème — et le dernier endroit qu'il visite avant de rentrer chez lui.",
+      "narrative": [
+        "Nausicaa lui donne des vêtements et des conseils sur la manière d'aborder ses parents ; le palais est décrit d'or et de bronze ; les jeux ont lieu, Démodocos chante, et Ulysse révèle enfin son nom et raconte le récit de ses errances.",
+        "Les Phéaciens le ramènent chez lui en une nuit, à bord d'un navire qui n'a pas besoin de pilote, et en sont punis. Leur île est le lieu où s'arrête la géographie fantastique du poème et où reprend la géographie réelle d'Ithaque."
+      ],
+      "whyItMatters": "Schérie est la frontière entre les deux moitiés de l'Odyssée, c'est pourquoi son identification importe plus que ne le suggère son score de 5/12.",
+      "debate": "Reste à savoir si Schérie est une île réelle idéalisée, une idéalisation dotée des attributs d'une île, ou la propre tradition de Corcyre intégrée au poème.",
+      "faqs": [
+        {
+          "q": "Schérie est-elle Corfou ?",
+          "a": "C'est l'identification antique et elle ne repose sur aucun support matériel. L'atlas la classe comme spéculative."
+        },
+        {
+          "q": "Pourquoi les Phéaciens sont-ils punis ?",
+          "a": "Pour avoir ramené des étrangers chez eux trop facilement. Poséidon change leur navire en pierre à la vue du port, et le poème laisse en suspens la menace d'une montagne se refermant sur leur ville."
+        }
+      ]
+    },
+    "de": {
+      "title": "Die Phäaken auf Scheria",
+      "summary": "Odysseus wird nackt an Land gespült und von einer Königstochter beim Wäschewaschen gefunden. Was folgt, ist die zivilisierteste Sequenz des Gedichts – und der letzte Ort, den er vor seiner Heimat besucht.",
+      "narrative": [
+        "Nausikaa gibt ihm Kleidung und Ratschläge, wie er sich ihren Eltern nähern soll; der Palast wird in Gold und Bronze beschrieben; die Spiele werden abgehalten, Demodokos singt, und Odysseus gibt schließlich seinen Namen preis und erzählt die Geschichte seiner Irrfahrten.",
+        "Die Phäaken bringen ihn in einer Nacht in einem Schiff, das keinen Steuermann braucht, nach Hause und werden dafür bestraft. Auf ihrer Insel endet die fantastische Geografie des Gedichts, und die reale Geografie Ithakas beginnt wieder."
+      ],
+      "whyItMatters": "Scheria ist die Grenze zwischen den beiden Hälften der Odyssee, weshalb ihre Identifizierung wichtiger ist, als ihre Bewertung von 5/12 vermuten lässt.",
+      "debate": "Ob Scheria eine idealisierte reale Insel ist, eine Idealisierung, die mit den Attributen einer Insel ausgestattet wurde, oder ob Corcyras eigene Tradition in das Gedicht einbezogen wurde.",
+      "faqs": [
+        {
+          "q": "Ist Scheria Korfu?",
+          "a": "Das ist die antike Identifizierung, und sie entbehrt jeder materiellen Grundlage. Der Atlas verzeichnet sie als spekulativ."
+        },
+        {
+          "q": "Warum werden die Phäaken bestraft?",
+          "a": "Weil sie Fremde zu leichtfertig nach Hause bringen. Poseidon verwandelt ihr Schiff in Sichtweite des Hafens in Stein, und das Epos lässt die Drohung, dass sich ein Berg über ihrer Stadt schließen wird, ungelöst."
+        }
+      ]
+    },
+    "ja": {
+      "title": "スケリア島のパイアケス人",
+      "summary": "オデュッセウスは裸で海岸に打ち上げられ、洗濯をしていた王女に発見されます。それに続くのは、この詩の中で最も文明化された一連の場面であり、彼が故郷に戻る前に訪れる最後の場所です。",
+      "narrative": [
+        "ナウシカアは彼に衣服を与え、両親への近づき方を助言します。宮殿は金と青銅で描写され、競技会が開催され、デモドコスが歌い、そしてオデュッセウスはついに自らの名を明かして漂流の物語を語ります。",
+        "パイアケス人は、舵取りを必要としない船で、一晩のうちに彼を故郷へと送り届け、そのために罰を受けます。彼らの島は、この詩の空想的な地理が終わり、イタケの実在の地理が再開する場所です。"
+      ],
+      "whyItMatters": "スケリア島は『オデュッセイア』の前後半を分ける境界線であり、だからこそ、その特定は5/12という評価点が示す以上に重要な意味を持っています。",
+      "debate": "スケリア島が理想化された実在の島なのか、それとも島の体裁を与えられた理想化そのものなのか、あるいはコルキュラ独自の伝承が詩に取り入れられたものなのか。",
+      "faqs": [
+        {
+          "q": "スケリア島はコルフ島ですか？",
+          "a": "それは古代の特定ですが、具体的な裏付けはありません。地図帳ではこれを推測の域を出ないものとして記録しています。"
+        },
+        {
+          "q": "なぜパイアケス人は罰せられるのですか？",
+          "a": "見知らぬ者をあまりにも容易に故郷へと送り届けたためです。ポセイドンは港の目の前で彼らの船を石に変え、詩は彼らの都市が山に覆い尽くされるという脅威を未解決のまま残しています。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "斯克里亚岛上的法埃亚科斯人",
+      "summary": "奥德修斯一丝不挂地被冲上海岸，被一位正在洗衣服的公主发现。接下来的情节是史诗中最具文明气息的片段——也是他回家前访问的最后一个地方。",
+      "narrative": [
+        "瑙西卡给了他衣服，并建议他如何接近她的父母；宫殿被描述为金碧辉煌、青铜闪耀；竞技会举行，德摩多科斯歌唱，奥德修斯最终透露了自己的名字，并讲述了漂泊的故事。",
+        "法埃亚科斯人乘着一艘不需要舵手的船，在一天夜里将他送回了家，并因此受到了惩罚。他们的岛屿是史诗中奇幻地理的终点，也是伊萨卡真实地理的起点。"
+      ],
+      "whyItMatters": "斯克里亚岛是《奥德赛》前后两部分的分界线，这就是为什么对它的认定比其 5/12 的得分所暗示的更为重要。",
+      "debate": "究竟斯克里亚岛是一个被理想化的真实岛屿，还是一个被赋予了岛屿陈设的理想化产物，抑或是科尔库拉（Corcyra）自身的传统被引入了史诗之中。",
+      "faqs": [
+        {
+          "q": "斯克里亚岛是科孚岛吗？",
+          "a": "这是古代的认定，且没有任何实物证据支持。地图集将其记录为推测性的。"
+        },
+        {
+          "q": "为什么法埃亚科斯人会受到惩罚？",
+          "a": "因为他们过于轻易地护送陌生人回家。波塞冬在港口清晰可见的地方将他们的船化为石头，而史诗对于大山合拢将他们的城市合围掩埋的威胁，最终未作交代。"
         }
       ]
     }

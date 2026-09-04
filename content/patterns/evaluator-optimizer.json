@@ -1,18 +1,36 @@
 {
   "slug": "evaluator-optimizer",
-  "aliases": ["PAT-009", "PAT-015"],
+  "aliases": [
+    "PAT-009",
+    "PAT-015"
+  ],
   "category": "reliability",
   "updated": "2026-06-21",
   "version": "1.0",
-  "technologies": ["LangGraph", "LLM-as-judge", "OpenAI Agents SDK", "Evaluation suites"],
-  "related": ["reflection", "prompt-chaining", "orchestrator-workers"],
+  "technologies": [
+    "LangGraph",
+    "LLM-as-judge",
+    "OpenAI Agents SDK",
+    "Evaluation suites"
+  ],
+  "related": [
+    "reflection",
+    "prompt-chaining",
+    "orchestrator-workers"
+  ],
   "references": [
-    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" }
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["industry_observation", "paper"]
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
   },
   "locales": {
     "en": {
@@ -24,7 +42,13 @@
         "A generator produces a candidate; an evaluator (a separate LLM call or a deterministic check) scores it against explicit criteria and returns actionable feedback. The generator revises, and the cycle repeats until criteria are met or a budget is reached.",
         "Separating generation from evaluation mirrors how a human writer benefits from an editor: the critic catches issues the author misses, and explicit criteria keep the loop converging."
       ],
-      "components": ["Generator", "Evaluator (LLM judge or rule check)", "Explicit criteria", "Revision loop", "Stop condition / budget"],
+      "components": [
+        "Generator",
+        "Evaluator (LLM judge or rule check)",
+        "Explicit criteria",
+        "Revision loop",
+        "Stop condition / budget"
+      ],
       "benefits": [
         "Higher quality on tasks with clear criteria.",
         "Catches errors a single pass would ship.",
@@ -46,10 +70,22 @@
         "Writing to a rubric with a critic enforcing each criterion."
       ],
       "kpis": [
-        { "metric": "Acceptance rate", "note": "Share of candidate outputs the evaluator accepts on first pass — too high means the bar is too low, too low means the generator or rubric is off." },
-        { "metric": "Iterations to accept", "note": "Average evaluate→revise loops before acceptance; rising counts flag a weak generator or vague criteria." },
-        { "metric": "Cost & latency per accepted output", "note": "Total tokens and wall-clock across all loop iterations, not just the final call — the loop multiplies both." },
-        { "metric": "Eval–human agreement", "note": "How often the evaluator's verdict matches a human reviewer on a sampled set; the loop is only as good as the evaluator." }
+        {
+          "metric": "Acceptance rate",
+          "note": "Share of candidate outputs the evaluator accepts on first pass — too high means the bar is too low, too low means the generator or rubric is off."
+        },
+        {
+          "metric": "Iterations to accept",
+          "note": "Average evaluate→revise loops before acceptance; rising counts flag a weak generator or vague criteria."
+        },
+        {
+          "metric": "Cost & latency per accepted output",
+          "note": "Total tokens and wall-clock across all loop iterations, not just the final call — the loop multiplies both."
+        },
+        {
+          "metric": "Eval–human agreement",
+          "note": "How often the evaluator's verdict matches a human reviewer on a sampled set; the loop is only as good as the evaluator."
+        }
       ],
       "failureModes": [
         "Reward hacking: the generator learns to satisfy the evaluator's wording rather than the real goal.",
@@ -64,9 +100,18 @@
         "Use the loop only where quality justifies the multiplied cost — not for cheap, low-stakes outputs."
       ],
       "faqs": [
-        { "q": "How is this different from reflection?", "a": "Reflection has the same model self-critique. Evaluator-optimizer separates the roles: a distinct evaluator judges the generator, which often gives sharper, less biased feedback." },
-        { "q": "Can the evaluator be deterministic?", "a": "Yes. For code, a test runner is an ideal evaluator; for structured output, a schema check works. Use a model judge for nuanced criteria." },
-        { "q": "How many iterations?", "a": "Set a budget (e.g. 2–3) and stop when criteria pass. Unbounded loops waste cost and may not converge." }
+        {
+          "q": "How is this different from reflection?",
+          "a": "Reflection has the same model self-critique. Evaluator-optimizer separates the roles: a distinct evaluator judges the generator, which often gives sharper, less biased feedback."
+        },
+        {
+          "q": "Can the evaluator be deterministic?",
+          "a": "Yes. For code, a test runner is an ideal evaluator; for structured output, a schema check works. Use a model judge for nuanced criteria."
+        },
+        {
+          "q": "How many iterations?",
+          "a": "Set a budget (e.g. 2–3) and stop when criteria pass. Unbounded loops waste cost and may not converge."
+        }
       ]
     },
     "es": {
@@ -78,7 +123,13 @@
         "Un generador produce un candidato; un evaluador (otra llamada al LLM o una comprobación determinista) lo puntúa contra criterios explícitos y devuelve feedback accionable. El generador revisa y el ciclo se repite hasta cumplir los criterios o alcanzar un presupuesto.",
         "Separar generación de evaluación imita cómo un escritor humano se beneficia de un editor: el crítico atrapa problemas que el autor pasa por alto, y los criterios explícitos mantienen el bucle convergiendo."
       ],
-      "components": ["Generador", "Evaluador (juez LLM o comprobación de reglas)", "Criterios explícitos", "Bucle de revisión", "Condición de parada / presupuesto"],
+      "components": [
+        "Generador",
+        "Evaluador (juez LLM o comprobación de reglas)",
+        "Criterios explícitos",
+        "Bucle de revisión",
+        "Condición de parada / presupuesto"
+      ],
       "benefits": [
         "Mayor calidad en tareas con criterios claros.",
         "Atrapa errores que una sola pasada publicaría.",
@@ -100,10 +151,22 @@
         "Escribir contra una rúbrica con un crítico que exige cada criterio."
       ],
       "kpis": [
-        { "metric": "Tasa de aceptación", "note": "Proporción de salidas que el evaluador acepta a la primera; demasiado alta indica un listón bajo, demasiado baja, un generador o rúbrica deficientes." },
-        { "metric": "Iteraciones hasta aceptar", "note": "Bucles evaluar→revisar promedio antes de aceptar; si suben, el generador es débil o los criterios, vagos." },
-        { "metric": "Coste y latencia por salida aceptada", "note": "Tokens y tiempo total de todas las iteraciones, no solo la llamada final: el bucle multiplica ambos." },
-        { "metric": "Concordancia evaluador–humano", "note": "Con qué frecuencia el veredicto del evaluador coincide con un revisor humano en una muestra; el bucle vale lo que su evaluador." }
+        {
+          "metric": "Tasa de aceptación",
+          "note": "Proporción de salidas que el evaluador acepta a la primera; demasiado alta indica un listón bajo, demasiado baja, un generador o rúbrica deficientes."
+        },
+        {
+          "metric": "Iteraciones hasta aceptar",
+          "note": "Bucles evaluar→revisar promedio antes de aceptar; si suben, el generador es débil o los criterios, vagos."
+        },
+        {
+          "metric": "Coste y latencia por salida aceptada",
+          "note": "Tokens y tiempo total de todas las iteraciones, no solo la llamada final: el bucle multiplica ambos."
+        },
+        {
+          "metric": "Concordancia evaluador–humano",
+          "note": "Con qué frecuencia el veredicto del evaluador coincide con un revisor humano en una muestra; el bucle vale lo que su evaluador."
+        }
       ],
       "failureModes": [
         "Reward hacking: el generador aprende a satisfacer la redacción del evaluador en vez del objetivo real.",
@@ -118,9 +181,18 @@
         "Usa el bucle solo donde la calidad justifique el coste multiplicado, no para salidas baratas y de bajo riesgo."
       ],
       "faqs": [
-        { "q": "¿En qué se diferencia de la reflexión?", "a": "La reflexión hace que el mismo modelo se autocritique. El evaluador-optimizador separa los roles: un evaluador distinto juzga al generador, lo que suele dar feedback más afilado y menos sesgado." },
-        { "q": "¿El evaluador puede ser determinista?", "a": "Sí. Para código, un runner de tests es un evaluador ideal; para salida estructurada, sirve una comprobación de esquema. Usa un juez modelo para criterios con matices." },
-        { "q": "¿Cuántas iteraciones?", "a": "Fija un presupuesto (p. ej. 2-3) y para cuando se cumplan los criterios. Los bucles sin límite malgastan coste y pueden no converger." }
+        {
+          "q": "¿En qué se diferencia de la reflexión?",
+          "a": "La reflexión hace que el mismo modelo se autocritique. El evaluador-optimizador separa los roles: un evaluador distinto juzga al generador, lo que suele dar feedback más afilado y menos sesgado."
+        },
+        {
+          "q": "¿El evaluador puede ser determinista?",
+          "a": "Sí. Para código, un runner de tests es un evaluador ideal; para salida estructurada, sirve una comprobación de esquema. Usa un juez modelo para criterios con matices."
+        },
+        {
+          "q": "¿Cuántas iteraciones?",
+          "a": "Fija un presupuesto (p. ej. 2-3) y para cuando se cumplan los criterios. Los bucles sin límite malgastan coste y pueden no converger."
+        }
       ]
     },
     "pt": {
@@ -132,7 +204,13 @@
         "Um gerador produz um candidato; um avaliador (outra chamada ao LLM ou uma verificação determinística) o pontua contra critérios explícitos e devolve feedback acionável. O gerador revisa e o ciclo se repete até cumprir os critérios ou alcançar um orçamento.",
         "Separar geração de avaliação imita como um escritor humano se beneficia de um editor: o crítico captura problemas que o autor deixa passar, e os critérios explícitos mantêm o laço convergindo."
       ],
-      "components": ["Gerador", "Avaliador (juiz LLM ou verificação de regras)", "Critérios explícitos", "Laço de revisão", "Condição de parada / orçamento"],
+      "components": [
+        "Gerador",
+        "Avaliador (juiz LLM ou verificação de regras)",
+        "Critérios explícitos",
+        "Laço de revisão",
+        "Condição de parada / orçamento"
+      ],
       "benefits": [
         "Maior qualidade em tarefas com critérios claros.",
         "Captura erros que uma única passagem publicaria.",
@@ -154,10 +232,22 @@
         "Escrever contra uma rubrica com um crítico que exige cada critério."
       ],
       "kpis": [
-        { "metric": "Taxa de aceitação", "note": "Proporção de saídas que o avaliador aceita de primeira; alta demais indica régua baixa, baixa demais, gerador ou rubrica ruins." },
-        { "metric": "Iterações até aceitar", "note": "Loops avaliar→revisar médios antes de aceitar; se sobem, o gerador é fraco ou os critérios, vagos." },
-        { "metric": "Custo e latência por saída aceita", "note": "Tokens e tempo total de todas as iterações, não só a chamada final: o loop multiplica ambos." },
-        { "metric": "Concordância avaliador–humano", "note": "Com que frequência o veredito do avaliador coincide com um revisor humano numa amostra; o loop vale o que seu avaliador." }
+        {
+          "metric": "Taxa de aceitação",
+          "note": "Proporção de saídas que o avaliador aceita de primeira; alta demais indica régua baixa, baixa demais, gerador ou rubrica ruins."
+        },
+        {
+          "metric": "Iterações até aceitar",
+          "note": "Loops avaliar→revisar médios antes de aceitar; se sobem, o gerador é fraco ou os critérios, vagos."
+        },
+        {
+          "metric": "Custo e latência por saída aceita",
+          "note": "Tokens e tempo total de todas as iterações, não só a chamada final: o loop multiplica ambos."
+        },
+        {
+          "metric": "Concordância avaliador–humano",
+          "note": "Com que frequência o veredito do avaliador coincide com um revisor humano numa amostra; o loop vale o que seu avaliador."
+        }
       ],
       "failureModes": [
         "Reward hacking: o gerador aprende a satisfazer a redação do avaliador em vez do objetivo real.",
@@ -172,9 +262,342 @@
         "Use o loop só onde a qualidade justifique o custo multiplicado, não para saídas baratas e de baixo risco."
       ],
       "faqs": [
-        { "q": "Como difere da reflexão?", "a": "A reflexão faz o mesmo modelo se autocriticar. O avaliador-otimizador separa os papéis: um avaliador distinto julga o gerador, o que costuma dar feedback mais afiado e menos enviesado." },
-        { "q": "O avaliador pode ser determinístico?", "a": "Sim. Para código, um runner de testes é um avaliador ideal; para saída estruturada, serve uma verificação de esquema. Use um juiz modelo para critérios com nuances." },
-        { "q": "Quantas iterações?", "a": "Defina um orçamento (ex.: 2-3) e pare quando os critérios passarem. Laços sem limite desperdiçam custo e podem não convergir." }
+        {
+          "q": "Como difere da reflexão?",
+          "a": "A reflexão faz o mesmo modelo se autocriticar. O avaliador-otimizador separa os papéis: um avaliador distinto julga o gerador, o que costuma dar feedback mais afiado e menos enviesado."
+        },
+        {
+          "q": "O avaliador pode ser determinístico?",
+          "a": "Sim. Para código, um runner de testes é um avaliador ideal; para saída estruturada, serve uma verificação de esquema. Use um juiz modelo para critérios com nuances."
+        },
+        {
+          "q": "Quantas iterações?",
+          "a": "Defina um orçamento (ex.: 2-3) e pare quando os critérios passarem. Laços sem limite desperdiçam custo e podem não convergir."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Évaluateur-Optimiseur",
+      "summary": "Un premier LLM génère une réponse tandis qu'un second l'évalue par rapport à des critères et renvoie des commentaires ; le générateur la révise et la boucle se répète jusqu'à ce que l'évaluation soit validée. Cela améliore la qualité sur les tâches dotées de critères d'évaluation clairs, au prix d'appels supplémentaires.",
+      "problem": "Un résultat généré en une seule passe peut omettre certaines exigences, et il n'existe aucun mécanisme intégré pour le vérifier et l'améliorer avant son utilisation.",
+      "context": "Utilisez le pattern évaluateur-optimiseur lorsque vous pouvez formuler des critères d'évaluation clairs et que l'affinement itératif améliore le résultat de manière mesurable — par exemple pour la qualité d'une traduction, du code devant passer des tests ou de la rédaction basée sur une grille d'évaluation.",
+      "solution": [
+        "Un générateur produit une proposition ; un évaluateur (un appel LLM distinct ou un contrôle déterministe) lui attribue un score selon des critères explicites et renvoie des commentaires exploitables. Le générateur révise sa proposition, et le cycle se répète jusqu'à ce que les critères soient satisfaits ou qu'un budget limite soit atteint.",
+        "Séparer la génération de l'évaluation s'apparente à la relation entre un auteur et son éditeur : le critique détecte les problèmes qui ont échappé à l'auteur, et des critères explicites permettent à la boucle de converger."
+      ],
+      "components": [
+        "Générateur",
+        "Évaluateur (juge LLM ou contrôle de règles)",
+        "Critères explicites",
+        "Boucle de révision",
+        "Condition d'arrêt / budget"
+      ],
+      "benefits": [
+        "Qualité supérieure sur les tâches dotées de critères clairs.",
+        "Détecte les erreurs qu'une seule passe aurait laissées passer.",
+        "Les retours sont explicites et exploitables."
+      ],
+      "risks": [
+        "Les appels supplémentaires augmentent la latence et les coûts.",
+        "Un évaluateur peu performant fournit des retours trompeurs.",
+        "Les boucles peuvent ne pas converger en l'absence de budget limite."
+      ],
+      "whenNot": [
+        "Lorsque les critères ne peuvent pas être définis clairement.",
+        "Lorsqu'une seule passe est déjà amplement suffisante.",
+        "Lorsque les budgets de latence ou de coût sont très serrés."
+      ],
+      "examples": [
+        "Générer du code, exécuter des tests et réviser jusqu'à ce qu'ils réussissent.",
+        "Rédiger une traduction et l'affiner par rapport au texte source.",
+        "Rédiger selon une grille d'évaluation avec un critique veillant au respect de chaque critère."
+      ],
+      "kpis": [
+        {
+          "metric": "Taux d'acceptation",
+          "note": "Part des propositions acceptées par l'évaluateur dès la première passe — un taux trop élevé signifie que la barre est placée trop bas, un taux trop bas indique un problème avec le générateur ou la grille d'évaluation."
+        },
+        {
+          "metric": "Itérations jusqu'à acceptation",
+          "note": "Nombre moyen de boucles évaluation→révision avant acceptation ; une augmentation de ce nombre signale un générateur faible ou des critères vagues."
+        },
+        {
+          "metric": "Coût et latence par résultat accepté",
+          "note": "Nombre total de tokens et temps réel écoulé sur l'ensemble des itérations de la boucle, et pas seulement lors de l'appel final — la boucle multipliant ces deux facteurs."
+        },
+        {
+          "metric": "Accord évaluateur-humain",
+          "note": "Fréquence à laquelle le verdict de l'évaluateur correspond à celui d'un réviseur humain sur un ensemble échantillonné ; la boucle ne vaut que ce que vaut l'évaluateur."
+        }
+      ],
+      "failureModes": [
+        "Détournement de récompense (reward hacking) : le générateur apprend à satisfaire la formulation de l'évaluateur plutôt que l'objectif réel.",
+        "Évaluateur faible ou mal calibré : il accepte de mauvaises sorties ou rejette les bonnes, de sorte que la boucle ajoute du coût sans apporter de qualité.",
+        "Boucles infinies ou oscillantes lorsqu'aucun candidat ne franchit le seuil — sans limite d'itérations, le coût est illimité.",
+        "Dérive des critères : des grilles d'évaluation vagues ou changeantes rendent l'acceptation non déterministe et difficile à auditer."
+      ],
+      "lessons": [
+        "Limitez les itérations et définissez une solution de repli (renvoyer le meilleur résultat obtenu jusqu'à présent, ou escalader) afin que la boucle se termine toujours.",
+        "Rendez les critères d'acceptation explicites et stables ; un évaluateur ne vaut que ce que vaut sa grille d'évaluation.",
+        "Validez l'évaluateur par rapport au jugement humain avant de lui faire confiance comme filtre de validation.",
+        "N'utilisez la boucle que là où la qualité justifie le coût multiplié — pas pour des sorties peu coûteuses et à faibles enjeux."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il de la réflexion ?",
+          "a": "La réflexion repose sur l'autocritique du même modèle. Le modèle évaluateur-optimisateur sépare les rôles : un évaluateur distinct juge le générateur, ce qui donne souvent des retours plus précis et moins biaisés."
+        },
+        {
+          "q": "L'évaluateur peut-il être déterministe ?",
+          "a": "Oui. Pour du code, un exécuteur de tests est un évaluateur idéal ; pour une sortie structurée, une vérification de schéma convient. Utilisez un modèle comme juge pour des critères nuancés."
+        },
+        {
+          "q": "Combien d'itérations ?",
+          "a": "Définissez un budget (par exemple, 2 à 3) et arrêtez-vous lorsque les critères sont respectés. Les boucles illimitées gaspillent du budget et peuvent ne pas converger."
+        }
+      ]
+    },
+    "de": {
+      "name": "Evaluator-Optimizer",
+      "summary": "Ein LLM generiert eine Antwort, während ein zweites LLM diese anhand von Kriterien bewertet und Feedback zurückgibt; der Generator überarbeitet die Antwort und die Schleife wiederholt sich, bis die Bewertung erfolgreich ist. Dies steigert die Qualität bei Aufgaben mit klaren Bewertungskriterien auf Kosten zusätzlicher Aufrufe.",
+      "problem": "Eine im ersten Durchlauf generierte Ausgabe erfüllt möglicherweise nicht alle Anforderungen, und es gibt keinen integrierten Mechanismus, um sie vor der Verwendung zu überprüfen und zu verbessern.",
+      "context": "Verwenden Sie den Evaluator-Optimizer, wenn Sie klare Bewertungskriterien formulieren können und eine iterative Verfeinerung das Ergebnis messbar verbessert – beispielsweise bei der Übersetzungsqualität, bei Code, der Tests bestehen muss, oder beim Schreiben anhand eines Bewertungsbogens.",
+      "solution": [
+        "Ein Generator erzeugt einen Kandidaten; ein Evaluator (ein separater LLM-Aufruf oder eine deterministische Prüfung) bewertet diesen anhand expliziter Kriterien und liefert umsetzbares Feedback. Der Generator überarbeitet den Entwurf, und der Zyklus wiederholt sich, bis die Kriterien erfüllt sind oder ein Budget erreicht ist.",
+        "Die Trennung von Generierung und Bewertung spiegelt wider, wie ein menschlicher Autor von einem Lektor profitiert: Der Kritiker findet Probleme, die der Autor übersieht, und explizite Kriterien sorgen dafür, dass die Schleife konvergiert."
+      ],
+      "components": [
+        "Generator",
+        "Evaluator (LLM-Judge oder Regelprüfung)",
+        "Explizite Kriterien",
+        "Überarbeitungsschleife",
+        "Stoppbedingung / Budget"
+      ],
+      "benefits": [
+        "Höhere Qualität bei Aufgaben mit klaren Kriterien.",
+        "Erfasst Fehler, die bei einem einzigen Durchlauf ausgeliefert würden.",
+        "Feedback ist explizit und umsetzbar."
+      ],
+      "risks": [
+        "Zusätzliche Aufrufe erhöhen die Latenz und die Kosten.",
+        "Ein schwacher Evaluator liefert irreführendes Feedback.",
+        "Schleifen konvergieren möglicherweise nicht, wenn kein Budget festgelegt ist."
+      ],
+      "whenNot": [
+        "Wenn Kriterien nicht klar definiert werden können.",
+        "Wenn ein einziger Durchlauf bereits gut genug ist.",
+        "Wenn Latenz- oder Kostenbudgets sehr knapp bemessen sind."
+      ],
+      "examples": [
+        "Generieren von Code, Ausführen von Tests und Überarbeiten, bis diese bestanden werden.",
+        "Entwerfen einer Übersetzung und Verfeinern im Abgleich mit der Quelle.",
+        "Schreiben anhand eines Bewertungsbogens, wobei ein Kritiker jedes Kriterium durchsetzt."
+      ],
+      "kpis": [
+        {
+          "metric": "Akzeptanzrate",
+          "note": "Anteil der Kandidatenausgaben, die der Evaluator im ersten Durchlauf akzeptiert – ein zu hoher Wert bedeutet, dass die Messlatte zu niedrig liegt, ein zu niedriger Wert bedeutet, dass der Generator oder der Bewertungsbogen fehlerhaft ist."
+        },
+        {
+          "metric": "Iterationen bis zur Akzeptanz",
+          "note": "Durchschnittliche evaluate→revise-Schleifen vor der Akzeptanz; steigende Zahlen weisen auf einen schwachen Generator oder vage Kriterien hin."
+        },
+        {
+          "metric": "Kosten und Latenz pro akzeptierter Ausgabe",
+          "note": "Gesamtzahl der Token und reale Laufzeit über alle Schleifeniterationen hinweg, nicht nur für den finalen Aufruf – die Schleife multipliziert beides."
+        },
+        {
+          "metric": "Übereinstimmung zwischen Evaluator und Mensch",
+          "note": "Wie oft das Urteil des Evaluators mit dem eines menschlichen Prüfers bei einer Stichprobe übereinstimmt; die Schleife ist nur so gut wie der Evaluator."
+        }
+      ],
+      "failureModes": [
+        "Reward Hacking: Der Generator lernt, die Formulierung des Evaluators zu bedienen, anstatt das eigentliche Ziel zu erreichen.",
+        "Schwacher oder falsch kalibrierter Evaluator: Er akzeptiert schlechte Ausgaben oder lehnt gute ab, sodass die Schleife Kosten verursacht, ohne die Qualität zu steigern.",
+        "Unendliche oder oszillierende Schleifen, wenn kein Kandidat jemals die Hürde nimmt – ohne eine Iterationsbegrenzung sind die Kosten unbegrenzt.",
+        "Kriteriendrift: Vage oder sich ändernde Bewertungsrichtlinien machen die Abnahme nicht-deterministisch und schwer überprüfbar."
+      ],
+      "lessons": [
+        "Begrenzen Sie die Iterationen und definieren Sie einen Fallback (das bisher beste Ergebnis zurückgeben oder eskalieren), damit die Schleife immer beendet wird.",
+        "Machen Sie die Abnahkriterien explizit und stabil; ein Evaluator ist nur so gut wie seine Bewertungsrichtlinie.",
+        "Validieren Sie den Evaluator anhand menschlicher Urteile, bevor Sie ihm als Kontrollinstanz vertrauen.",
+        "Nutzen Sie die Schleife nur dort, wo die Qualität die multiplizierten Kosten rechtfertigt – nicht für günstige Ausgaben mit geringer Tragweite."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies von Reflection?",
+          "a": "Reflection nutzt die Selbstkritik desselben Modells. Evaluator-Optimizer trennt die Rollen: Ein separater Evaluator beurteilt den Generator, was oft präziseres und unvoreingenommeneres Feedback liefert."
+        },
+        {
+          "q": "Kann der Evaluator deterministisch sein?",
+          "a": "Ja. Für Code ist ein Test-Runner ein idealer Evaluator; für strukturierten Output eignet sich eine Schema-Prüfung. Nutzen Sie ein Modell als Richter für nuancierte Kriterien."
+        },
+        {
+          "q": "Wie viele Iterationen?",
+          "a": "Legen Sie ein Budget fest (z. B. 2–3) und stoppen Sie, sobald die Kriterien erfüllt sind. Unbegrenzte Schleifen verursachen unnötige Kosten und konvergieren möglicherweise nicht."
+        }
+      ]
+    },
+    "ja": {
+      "name": "エバリュエーター・オプティマイザー",
+      "summary": "1つのLLMが応答を生成し、2つ目のLLMが基準に照らしてそれを評価してフィードバックを返します。生成器（ジェネレーター）が修正を行い、評価をクリアするまでループが繰り返されます。追加の呼び出しコストが発生する代わりに、明確な評価基準を持つタスクの品質を向上させます。",
+      "problem": "1回の実行（シングルパス）による出力では要件を満たせない可能性があり、使用前にそれをチェックして改善するための組み込みメカニズムが存在しません。",
+      "context": "明確な評価基準を定義でき、反復的な改善によって結果が測定可能に向上する場合（翻訳品質、テストに合格する必要があるコード、ルーブリックに沿った執筆など）に、エバリュエーター・オプティマイザーを使用します。",
+      "solution": [
+        "生成器（ジェネレーター）が候補を作成し、評価器（エバリュエーター：別のLLM呼び出しまたは決定論的チェック）が明示的な基準に照らしてスコアを測定し、実行可能なフィードバックを返します。生成器が修正を行い、基準が満たされるか予算（上限）に達するまでサイクルが繰り返されます。",
+        "生成と評価を分離することは、人間のライターが編集者から恩恵を受ける仕組みに似ています。批評家は著者が気づかない問題を捉え、明示的な基準によってループを収束へと導きます。"
+      ],
+      "components": [
+        "ジェネレーター",
+        "エバリュエーター（LLMによる判定またはルールチェック）",
+        "明示的な基準",
+        "修正ループ",
+        "停止条件 / 予算（上限）"
+      ],
+      "benefits": [
+        "明確な基準を持つタスクにおける品質の向上。",
+        "1回の実行（シングルパス）では見逃されてリリースされてしまうエラーを検出。",
+        "フィードバックが明示的かつ実行可能。"
+      ],
+      "risks": [
+        "追加の呼び出しにより、レイテンシーとコストが増加。",
+        "性能の低いエバリュエーターが誤解を招くフィードバックを提供する。",
+        "予算（上限）がないと、ループが収束しない可能性がある。"
+      ],
+      "whenNot": [
+        "基準を明確に定義できない場合。",
+        "1回の実行（シングルパス）で十分に良好な結果が得られる場合。",
+        "レイテンシーやコストの予算（上限）が非常に厳しい場合。"
+      ],
+      "examples": [
+        "コードを生成し、テストを実行し、合格するまで修正する。",
+        "翻訳の下訳を作成し、原文に照らし合わせて洗練させる。",
+        "批評家が各基準を強制するルーブリックに沿って執筆する。"
+      ],
+      "kpis": [
+        {
+          "metric": "承認率",
+          "note": "エバリュエーターが最初のパスで承認した候補出力の割合。高すぎる場合は基準が低すぎ、低すぎる場合はジェネレーターまたはルーブリックに問題があります。"
+        },
+        {
+          "metric": "承認までの反復回数",
+          "note": "承認されるまでの平均的な「評価→修正」ループ回数。回数の増加は、ジェネレーターの性能不足または基準の曖昧さを示しています。"
+        },
+        {
+          "metric": "承認された出力あたりのコストとレイテンシー",
+          "note": "最終的な呼び出しだけでなく、すべてのループ反復における総トークン数と実時間（ウォールクロック時間）。ループによって両方が乗算されます。"
+        },
+        {
+          "metric": "評価と人間の合致度",
+          "note": "サンプルセットにおいて、評価器の判定が人間のレビュー担当者と一致する頻度。ループの品質は評価器の品質に依存します。"
+        }
+      ],
+      "failureModes": [
+        "報酬ハッキング：生成器が本来の目標ではなく、評価器の文言を満たすように学習してしまうこと。",
+        "脆弱または調整不足の評価器：不適切な出力を受け入れたり、適切な出力を拒否したりするため、品質が向上しないままループのコストだけが増加すること。",
+        "無限ループまたは振動ループ：どの候補も基準をクリアできない場合、反復回数の上限を設定していないとコストが無限に膨らむこと。",
+        "基準のドリフト：評価基準（ルーブリック）が曖昧または変動することで、承認プロセスが非決定論的になり、監査が困難になること。"
+      ],
+      "lessons": [
+        "反復回数に上限を設け、フォールバック（これまでの最善策を返す、またはエスカレーションする）を定義して、ループが必ず終了するようにします。",
+        "承認基準を明確かつ安定したものにします。評価器の品質は、その評価基準（ルーブリック）の品質に依存します。",
+        "評価器をゲートとして信頼する前に、人間の判断と照らし合わせて検証します。",
+        "コストの倍増に見合う品質が求められる場合にのみループを使用し、低コストでリスクの低い出力には使用しません。"
+      ],
+      "faqs": [
+        {
+          "q": "リフレクション（自己反省）とはどのように違うのですか？",
+          "a": "リフレクションは、同一のモデルが自己批判を行います。評価器-最適化器（Evaluator-Optimizer）パターンでは役割を分離し、独立した評価器が生成器を判定するため、より鋭く偏りの少ないフィードバックが得られることが多くなります。"
+        },
+        {
+          "q": "評価器を決定論的にすることはできますか？",
+          "a": "はい。コードの場合はテストランナーが理想的な評価器となり、構造化出力の場合はスキーマチェックが有効です。ニュアンスの伴う基準には、モデルによる判定（Model Judge）を使用します。"
+        },
+        {
+          "q": "反復回数は何回にすべきですか？",
+          "a": "予算（例：2〜3回）を設定し、基準をクリアした時点で停止します。制限のないループはコストを浪費し、収束しない可能性があります。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "评估器-优化器",
+      "summary": "一个 LLM 生成响应，而第二个 LLM 根据标准对其进行评估并返回反馈；生成器进行修改，循环重复，直到评估通过。它以增加额外调用为代价，提高了具有明确评估标准的任务的质量。",
+      "problem": "单次输出可能会遗漏要求，并且在使用之前没有内置机制来检查和改进它。",
+      "context": "当您可以制定明确的评估标准，并且迭代优化能显著改善结果时（例如翻译质量、必须通过测试的代码或根据评分标准进行写作），请使用评估器-优化器。",
+      "solution": [
+        "生成器产生一个候选结果；评估器（独立的 LLM 调用或确定性检查）根据明确的标准对其进行评分并返回可操作的反馈。生成器进行修改，循环往复，直到满足标准或达到预算上限。",
+        "将生成与评估分离，类似于人类作者如何从编辑中受益：批评者发现作者遗漏的问题，而明确的标准使循环保持收敛。"
+      ],
+      "components": [
+        "生成器",
+        "评估器（LLM 裁判或规则检查）",
+        "明确的标准",
+        "修改循环",
+        "停止条件 / 预算"
+      ],
+      "benefits": [
+        "在具有明确标准的任务上获得更高的质量。",
+        "捕获单次运行可能会漏过的错误。",
+        "反馈明确且具有可操作性。"
+      ],
+      "risks": [
+        "额外的调用会增加延迟和成本。",
+        "能力较弱的评估器会给出误导性的反馈。",
+        "在没有预算限制的情况下，循环可能无法收敛。"
+      ],
+      "whenNot": [
+        "当无法明确定义标准时。",
+        "当单次运行的结果已经足够好时。",
+        "当延迟或成本预算非常紧张时。"
+      ],
+      "examples": [
+        "生成代码、运行测试并进行修改，直到测试通过。",
+        "起草翻译并对照原文进行润色。",
+        "根据评分标准进行写作，并由评审人员强制执行每项标准。"
+      ],
+      "kpis": [
+        {
+          "metric": "采纳率",
+          "note": "评估器在首轮通过中接受的候选输出比例 —— 比例过高意味着门槛太低，过低则意味着生成器或评分标准存在偏差。"
+        },
+        {
+          "metric": "达到接受所需的迭代次数",
+          "note": "接受前平均经历的“评估→修改”循环次数；次数上升标志着生成器较弱或标准模糊。"
+        },
+        {
+          "metric": "每个被接受输出的成本与延迟",
+          "note": "所有循环迭代中的总 token 数和实际消耗时间（Wall-clock time），而不仅仅是最终调用 —— 循环会使这两者成倍增加。"
+        },
+        {
+          "metric": "评估器与人工的一致性",
+          "note": "评估器的判定在抽样集合中与人工评审员一致的频率；该循环的效果完全取决于评估器的质量。"
+        }
+      ],
+      "failureModes": [
+        "奖励黑客行为（Reward hacking）：生成器学会了迎合评估器的措辞，而不是实现真正的目标。",
+        "评估器较弱或校准不当：它接受了糟糕的输出或拒绝了优秀的输出，导致循环增加了成本却未能提升质量。",
+        "当没有候选方案能够达标时，会出现无限循环或振荡循环——如果没有迭代上限，成本将是无底洞。",
+        "标准漂移：模糊或不断变化的评估细则导致采纳结果具有不确定性，且难以审计。"
+      ],
+      "lessons": [
+        "限制迭代次数并定义回退方案（返回迄今为止的最佳结果，或进行升级上报），以确保循环始终能够终止。",
+        "使准入标准明确且稳定；评估器的效果完全取决于其评估细则。",
+        "在将评估器作为准入关卡予以信任之前，先对照人工判断对其进行验证。",
+        "仅在质量提升能够证明成倍增加的成本是合理的情况下才使用该循环——不要用于廉价、低风险的输出。"
+      ],
+      "faqs": [
+        {
+          "q": "这与自我反思（reflection）有什么不同？",
+          "a": "自我反思是由同一个模型进行自我批判。评估器-优化器（Evaluator-optimizer）则分离了角色：由一个独立的评估器来评判生成器，这通常能提供更敏锐、更少偏见的反馈。"
+        },
+        {
+          "q": "评估器可以是确定性的吗？",
+          "a": "可以。对于代码，测试运行器（test runner）是理想的评估器；对于结构化输出，Schema 检查非常有效。对于微妙复杂的标准，可以使用模型作为裁判。"
+        },
+        {
+          "q": "需要迭代多少次？",
+          "a": "设定一个预算（例如 2-3 次），并在标准通过时停止。无限制的循环会浪费成本，且可能无法收敛。"
+        }
       ]
     }
   }

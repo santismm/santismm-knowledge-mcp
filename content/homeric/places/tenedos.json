@@ -89,6 +89,22 @@
         "pt": {
           "label": "Bozcaada (Tênedos)",
           "note": "A ilha a vinte quilômetros da costa da Trôade, nomeada igual em toda época e habitada continuamente. É onde a tradição posterior faz a frota se esconder enquanto o cavalo está em Troia — um dado do Ciclo Épico, não de Homero."
+        },
+        "fr": {
+          "label": "Bozcaada (Ténédos)",
+          "note": "L'île située à vingt kilomètres de la côte de la Troade, nommée à l'identique à toutes les époques et habitée sans interruption. C'est là que la tradition ultérieure fait cacher la flotte pendant que le cheval se trouve dans Troie — un détail issu du Cycle épique plutôt que d'Homère."
+        },
+        "zh": {
+          "label": "博兹贾岛（特涅多斯岛）",
+          "note": "距离特罗阿德海岸20公里的岛屿，在各个历史时期名称相同，且一直有人居住。在后来的传统中，当木马留在特洛伊时，船队便隐藏于此——这一细节出自《史诗集成》，而非荷马史诗。"
+        },
+        "de": {
+          "label": "Bozcaada (Tenedos)",
+          "note": "Die Insel zwanzig Kilometer vor der Küste der Troas, die in jeder Epoche gleich benannt und durchgehend bewohnt war. Hier versteckte sich laut späterer Tradition die Flotte, während das Pferd in Troja stand – ein Detail aus dem Epischen Zyklus und nicht von Homer."
+        },
+        "ja": {
+          "label": "ボズジャアダ（テネドス）",
+          "note": "トロアス海岸の20キロメートル沖合にある島で、あらゆる時代を通じて同じ名前で呼ばれ、一貫して人が住んできた。後世の伝承において、木馬がトロイアにある間に艦隊が隠れたとされる場所であり、これはホメロスではなく叙事詩の環（エピック・サイクル）に由来する詳細である。"
         }
       }
     }
@@ -124,6 +140,46 @@
       ],
       "identificationNote": "Aceita: uma ilha inconfundível, nomeada continuamente e habitada sem interrupção.",
       "debate": "Nada sobre a ilha em si. A pergunta interessante é quanto do material sobre Tênedos pertence a Homero e quanto ao Ciclo que cresceu ao seu redor."
+    },
+    "fr": {
+      "name": "Ténédos",
+      "summary": "L'île au large de Troie : un point d'étape dans l'Iliade, un lieu de refuge dans la tradition ultérieure, et un rappel que le paysage marin de la Troade est aussi vérifiable que sa terre.",
+      "description": [
+        "Ténédos apparaît tôt — Apollon y est invoqué comme souverain au chant I — puis à nouveau comme première escale de la flotte sur le chemin du retour dans le récit des Retours (Nostoi) de l'Odyssée. Le Cycle épique situe la flotte achéenne derrière elle lors de la ruse du cheval.",
+        "C'est une mention mineure, qui mérite sa place par corroboration : les îles, les détroits et la montagne de la Troade se trouvent tous là où les poèmes le suggèrent."
+      ],
+      "identificationNote": "Accepté : une île indubitable, nommée de manière continue et occupée sans interruption.",
+      "debate": "Rien sur l'île elle-même. La question intéressante est de savoir quelle part des éléments relatifs à Ténédos appartient à Homère et quelle part revient au Cycle qui s'est développé autour de lui."
+    },
+    "de": {
+      "name": "Tenedos",
+      "summary": "Die Insel vor der Küste von Troja: ein Stützpunkt in der Ilias, ein Versteck in der späteren Tradition und eine Erinnerung daran, dass die Meereslandschaft der Troas ebenso überprüfbar ist wie ihr Festland.",
+      "description": [
+        "Tenedos erscheint früh – Apollon wird im 1. Buch als sein Herr angerufen – und erneut als erster Halt der Flotte auf dem Heimweg im Bericht der Odyssee über die Nostoi. Der Epische Zyklus verortet die achaische Flotte während des Listenstreichs mit dem Pferd hinter der Insel.",
+        "Es ist ein kleiner Eintrag, der seinen Platz durch Bestätigung verdient: Die Inseln, Meerengen und Berge der Troas befinden sich alle dort, wo die Epen sie vermuten lassen."
+      ],
+      "identificationNote": "Akzeptiert: eine unverkennbare, durchgehend benannte Insel mit kontinuierlicher Besiedlung.",
+      "debate": "Nichts über die Insel selbst. Die interessante Frage ist, wie viel des Tenedos-Materials zu Homer gehört und wie viel zu dem Zyklus, der um ihn herum entstand."
+    },
+    "ja": {
+      "name": "テネドス",
+      "summary": "トロイア沖の島：『イリアス』における中継地であり、後世の伝承における隠れ場所であり、トロアス地方の海景がその陸地と同様に検証可能であることを思い出させるものである。",
+      "description": [
+        "テネドスは初期に登場し（第1巻でアポロンがその主として呼びかけられる）、『オデュッセイア』の帰郷（ノストイ）の記述では艦隊の最初の寄港地として再び登場する。叙事詩の環（エピック・サイクル）では、木馬の計略の際、アカイア人の艦隊がこの島の陰に隠れたとされている。",
+        "これは小さな記述であるが、裏付けによってその地位を得ている。トロアス地方の島々、海峡、山はすべて、詩が示唆する通りの場所にある。"
+      ],
+      "identificationNote": "合意（Accepted）：紛れもなく、継続的に命名され、継続的に居住されてきた島。",
+      "debate": "島自体については議論の余地はない。興味深い問いは、テネドスに関する素材のうち、どれだけがホメロスに帰属し、どれだけが彼の周囲で発展した叙事詩の環（サイクル）に帰属するのかということである。"
+    },
+    "zh": {
+      "name": "特涅多斯岛",
+      "summary": "特洛伊近海的岛屿：在《伊利亚特》中是集结地，在后来的传统中是藏匿处，它提醒人们，特罗阿德的海景与它的陆地一样是可以考证的。",
+      "description": [
+        "特涅多斯岛很早就出现了——在第1卷中阿波罗被尊为该岛的主宰——并在《奥德赛》关于归航（nostoi）的叙述中再次作为船队返乡的首站出现。在“木马计”期间，《史诗集成》（Epic Cycle）将阿开亚人的船队置于该岛后方隐蔽。",
+        "这是一个较小的条目，它因相互印证而占有一席之地：特罗阿德的岛屿、海峡和山脉都恰好位于史诗所暗示的位置。"
+      ],
+      "identificationNote": "公认：一个绝无仅有、名称沿用至今且一直有人居住的岛屿。",
+      "debate": "关于岛屿本身并无争议。有趣的问题在于，关于特涅多斯岛的素材有多少属于荷马，又有多少属于围绕他发展起来的《史诗集成》。"
     }
   }
 }

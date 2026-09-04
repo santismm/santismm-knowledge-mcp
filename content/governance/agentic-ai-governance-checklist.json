@@ -320,6 +320,362 @@
           "a": "Cada controle mapeia para padrões que o implementam —portão de aprovação humana para a supervisão, reflexão e avaliador-otimizador para a qualidade— e para unidades de conhecimento como guard-rails e observabilidade de IA."
         }
       ]
+    },
+    "fr": {
+      "name": "Checklist de gouvernance de l'IA agentique",
+      "summary": "Une checklist pratique et neutre vis-à-vis des fournisseurs pour gouverner l'IA agentique en entreprise — traduisant les principes de l'EU AI Act, de l'ISO/IEC 42001 et du NIST AI RMF en contrôles concrets à implémenter dans un harness. Elle couvre la supervision humaine, les guardrails, la journalisation d'audit, l'évaluation, le contrôle d'accès, la défense contre l'injection de prompts et la réponse aux incidents, et associe chaque contrôle aux patterns et unités de connaissance qui l'opérationnalisent. Utilisez-la comme un jalon de validation (readiness gate) avant de laisser un agent agir en production.",
+      "definition": "La checklist de gouvernance de l'IA agentique est un ensemble de contrôles opérationnels qui transforme les cadres de gouvernance de l'IA en exigences concrètes et applicables pour les agents autonomes opérant en production.",
+      "scope": "Les équipes qui conçoivent ou déploient des agents autonomes ou semi-autonomes qui utilisent des outils, agissent sur des systèmes ou prennent des décisions importantes. C'est un compagnon pratique pour les cadres formels, et non un substitut à un avis juridique.",
+      "keyPoints": [
+        "Supervision humaine basée sur le risque : soumettre les actions à fort impact, irréversibles ou réglementées à une approbation humaine.",
+        "Guardrails sur les entrées et les sorties, y compris la défense contre l'injection de prompts et la protection des données personnelles (PII).",
+        "Journalisation d'audit complète et observabilité pour que chaque action soit traçable.",
+        "Évaluation avant et après le déploiement, par rapport à un ensemble d'évaluation (eval set) maintenu.",
+        "Accès de moindre privilège pour les outils et les données auxquels l'agent peut accéder.",
+        "Une réponse aux incidents définie et un bouton d'arrêt d'urgence (kill-switch) pour les agents en production."
+      ],
+      "controls": [
+        {
+          "control": "Portes d'approbation humaine",
+          "note": "Acheminer les actions à fort impact via un point de contrôle humain (EU AI Act Art. 14). Implémente le pattern human-approval-gate."
+        },
+        {
+          "control": "Guardrails",
+          "note": "Valider et contraindre les entrées et les sorties ; se défendre contre l'injection de prompts et bloquer les actions non conformes aux politiques."
+        },
+        {
+          "control": "Journalisation d'audit et observabilité",
+          "note": "Tracer chaque décision, appel d'outil et action afin que l'agent soit auditable et que les incidents puissent être reconstitués."
+        },
+        {
+          "control": "Harness d'évaluation",
+          "note": "Évaluer le comportement par rapport à un ensemble d'évaluation (eval set) avant le déploiement et surveiller les régressions après — NIST 'Measure'."
+        },
+        {
+          "control": "Accès de moindre privilège",
+          "note": "Restreindre les outils, les données et les permissions auxquels un agent peut accéder au strict minimum requis par sa tâche."
+        },
+        {
+          "control": "Réponse aux incidents et bouton d'arrêt d'urgence (kill-switch)",
+          "note": "Définir comment détecter, arrêter et corriger un agent au comportement anormal, y compris un moyen de l'interrompre immédiatement."
+        }
+      ],
+      "checklist": [
+        "Classifier le risque de l'agent et identifier les actions qui nécessitent une approbation humaine.",
+        "Implémenter des guardrails pour les entrées/sorties et une défense contre l'injection de prompts.",
+        "Activer la journalisation d'audit et l'observabilité de bout en bout.",
+        "Mettre en place un ensemble d'évaluation (eval set) et l'exécuter avant le déploiement ainsi qu'en continu.",
+        "Appliquer une restriction de moindre privilège aux outils, données et identifiants.",
+        "Définir la réponse aux incidents, les seuils de surveillance et un bouton d'arrêt d'urgence (kill-switch).",
+        "Associer chaque contrôle à vos obligations en vertu de l'EU AI Act, de l'ISO 42001 et du NIST AI RMF.",
+        "Documenter la responsabilité (ownership) et réévaluer l'agent de manière périodique."
+      ],
+      "pitfalls": [
+        "Accorder à un agent un accès étendu aux outils et aux données « par sécurité », ce qui crée une zone d'impact (blast radius) importante.",
+        "Tout filtrer (fatigue de l'approbation) ou ne rien filtrer (absence de supervision) au lieu de filtrer en fonction du risque.",
+        "Déployer sans ensemble d'évaluation (eval set), de sorte que la qualité et la sécurité ne sont pas mesurées.",
+        "Aucun bouton d'arrêt d'urgence (kill-switch) ni plan d'incident lorsqu'un agent se comporte de manière anormale en production.",
+        "Ignorer l'injection de prompts comme surface d'attaque pour les agents utilisant des outils."
+      ],
+      "productionEvidence": {
+        "context": "Équipes mettant en production un agent autonome ou semi-autonome qui utilise des outils et prend des décisions importantes.",
+        "scenario": "Avant la mise en service, l'équipe utilise la checklist comme jalon de validation (readiness gate) : classifier le risque de l'agent, soumettre les actions à fort impact à une approbation humaine, ajouter des guardrails et une défense contre l'injection de prompts, activer la journalisation d'audit et l'observabilité, mettre en place un ensemble d'évaluation, restreindre l'accès au moindre privilège, et définir la réponse aux incidents ainsi qu'un bouton d'arrêt d'urgence (kill-switch).",
+        "technology": "Un harness combinant une porte d'approbation humaine, des guardrails, une journalisation d'audit/observabilité, un harness d'évaluation et un accès restreint aux outils et identifiants.",
+        "load": "Appliqué par agent avant le déploiement et réévalué périodiquement ; le contrôle le plus lourd (approbation humaine) est réservé au groupe restreint d'actions à fort impact.",
+        "results": "Pattern observé : les équipes qui filtrent par risque, appliquent le moindre privilège et instrumentent dès le premier jour limitent la zone d'impact (blast radius) des erreurs de l'agent ; celles qui accordent un accès étendu « par sécurité » ou déploient sans évaluations découvrent les défaillances en production. Mesurez la pertinence de l'escalade, le taux de fausses actions et le temps moyen de détection (MTTD)."
+      },
+      "lessons": [
+        "Traitez la checklist comme un jalon de validation (readiness gate), et non comme un audit ponctuel — réexécutez-la à mesure que les outils et l'autonomie de l'agent se développent.",
+        "L'accès de moindre privilège et l'approbation humaine basée sur le risque limitent la zone d'impact (blast radius) bien plus que n'importe quel guardrail individuel.",
+        "Sans ensemble d'évaluation et journalisation d'audit en place avant le lancement, vous ne pouvez pas distinguer un agent sûr d'un agent chanceux.",
+        "Associez chaque contrôle à un responsable concret ; la gouvernance sans responsabilité n'est que de la documentation."
+      ],
+      "examples": [
+        "Un agent dont l'action de remboursement est soumise à une approbation humaine tandis que les consultations en lecture seule s'exécutent librement.",
+        "Un guardrail bloquant une instruction issue d'une injection de prompts visant à exfiltrer des données via un outil.",
+        "Une exécution d'évaluation détectant une régression de sécurité avant le déploiement d'une mise à jour de l'agent."
+      ],
+      "faqs": [
+        {
+          "q": "Est-ce un substitut à l'EU AI Act ou à l'ISO 42001 ?",
+          "a": "Non. Il s'agit d'un ensemble de contrôles pratiques qui opérationnalise leurs principes pour les agents. Utilisez-le en complément des cadres formels et des conseils juridiques, et non à leur place."
+        },
+        {
+          "q": "Quel contrôle importe le plus pour les agents autonomes ?",
+          "a": "La supervision humaine basée sur le risque, combinée à l'accès de moindre privilège et à la journalisation d'audit — ensemble, ils limitent ce qu'un agent peut faire et rendent chaque action auditable."
+        },
+        {
+          "q": "Comment se connecte-t-elle à la bibliothèque de patterns ?",
+          "a": "Chaque contrôle est associé aux patterns qui l'implémentent — human-approval-gate pour la supervision, reflection et evaluator-optimizer pour la qualité — ainsi qu'à des unités de connaissance comme les guardrails et l'observabilité de l'IA."
+        }
+      ]
+    },
+    "de": {
+      "name": "Governance-Checkliste für agentische KI",
+      "summary": "Eine praktische, herstellerneutrale Checkliste für die Governance agentischer KI im Unternehmen – sie übersetzt die Prinzipien des EU AI Act, der ISO/IEC 42001 und des NIST AI RMF in konkrete Kontrollmechanismen, die Sie in einem Harness implementieren können. Sie deckt menschliche Aufsicht, Guardrails, Audit-Protokollierung, Evaluierung, Zugriffskontrolle, Abwehr von Prompt-Injections sowie Incident Response ab und ordnet jeden Kontrollmechanismus den Patterns und Wissenseinheiten zu, die ihn operationalisieren. Nutzen Sie sie als Freigabeprüfung (Readiness Gate), bevor Sie einen Agenten in der Produktionsumgebung agieren lassen.",
+      "definition": "Die Governance-Checkliste für agentische KI ist ein operativer Satz von Kontrollmechanismen, der KI-Governance-Frameworks in konkrete, umsetzbare Anforderungen für autonome Agenten in der Produktionsumgebung überführt.",
+      "scope": "Teams, die autonome oder teilautonome Agenten entwickeln oder bereitstellen, welche Tools nutzen, auf Systeme einwirken oder folgenschwere Entscheidungen treffen. Sie ist ein praktischer Begleiter zu den formalen Frameworks und kein Ersatz für eine Rechtsberatung.",
+      "keyPoints": [
+        "Risikobasierte menschliche Aufsicht: Knüpfen Sie folgenschwere, unumkehrbare oder regulierte Aktionen an eine menschliche Freigabe.",
+        "Guardrails für Ein- und Ausgaben, einschließlich der Abwehr von Prompt-Injections und dem Schutz personenbezogener Daten (PII).",
+        "Vollständige Audit-Protokollierung und Observability, damit jede Aktion nachvollziehbar ist.",
+        "Evaluierung vor und nach der Bereitstellung anhand eines gepflegten Evaluierungssets (Eval-Set).",
+        "Zugriffsrechte nach dem Prinzip der minimalen Rechtevergabe (Least Privilege) für Tools und Daten, auf die der Agent zugreifen kann.",
+        "Eine definierte Incident Response und ein Notausschalter (Kill-Switch) für Agenten in der Produktionsumgebung."
+      ],
+      "controls": [
+        {
+          "control": "Menschliche Freigabestufen",
+          "note": "Leiten Sie folgenschwere Aktionen über einen menschlichen Kontrollpunkt (EU AI Act Art. 14). Implementiert das Pattern „human-approval-gate“."
+        },
+        {
+          "control": "Guardrails",
+          "note": "Validieren und beschränken Sie Ein- und Ausgaben; wehren Sie Prompt-Injections ab und blockieren Sie richtlinienwidrige Aktionen."
+        },
+        {
+          "control": "Audit-Protokollierung & Observability",
+          "note": "Verfolgen Sie jede Entscheidung, jeden Tool-Aufruf und jede Aktion, damit der Agent überprüfbar ist und Vorfälle rekonstruiert werden können."
+        },
+        {
+          "control": "Evaluierungs-Harness",
+          "note": "Bewerten Sie das Verhalten vor der Auslieferung anhand eines Eval-Sets und überwachen Sie es danach auf Regressionen – NIST „Measure“."
+        },
+        {
+          "control": "Least-Privilege-Zugriff",
+          "note": "Beschränken Sie die Tools, Daten und Berechtigungen, auf die ein Agent zugreifen kann, auf das für seine Aufgabe erforderliche Minimum."
+        },
+        {
+          "control": "Incident Response & Notausschalter",
+          "note": "Definieren Sie, wie ein Fehlverhalten des Agenten erkannt, gestoppt und behoben werden kann, einschließlich einer Möglichkeit, ihn sofort anzuhalten."
+        }
+      ],
+      "checklist": [
+        "Klassifizieren Sie das Risiko des Agenten und identifizieren Sie, welche Aktionen eine menschliche Freigabe erfordern.",
+        "Implementieren Sie Guardrails für Ein-/Ausgaben und die Abwehr von Prompt-Injections.",
+        "Aktivieren Sie eine durchgängige Audit-Protokollierung und Observability.",
+        "Richten Sie ein Evaluierungsset ein und führen Sie es vor der Bereitstellung sowie kontinuierlich aus.",
+        "Wenden Sie das Least-Privilege-Prinzip auf Tools, Daten und Anmeldedaten an.",
+        "Definieren Sie Incident Response, Überwachungsschwellenwerte und einen Notausschalter.",
+        "Ordnen Sie jeden Kontrollmechanismus Ihren Verpflichtungen aus dem EU AI Act, der ISO 42001 und dem NIST AI RMF zu.",
+        "Dokumentieren Sie die Zuständigkeiten und überprüfen Sie den Agenten in regelmäßigen Abständen."
+      ],
+      "pitfalls": [
+        "Einem Agenten „sicherheitshalber“ weitreichenden Zugriff auf Tools/Daten zu gewähren, was zu einem großen Schadensradius (Blast Radius) führt.",
+        "Alles freigabepflichtig zu machen (Freigabemüdigkeit) oder gar nichts (keine Aufsicht), anstatt risikobasiert zu steuern.",
+        "Bereitstellung ohne ein Eval-Set, sodass Qualität und Sicherheit ungemessen bleiben.",
+        "Kein Notausschalter oder Incident-Plan für den Fall, dass sich ein Agent in der Produktionsumgebung fehlerhaft verhält.",
+        "Ignorieren von Prompt-Injections als Angriffsfläche für Agenten, die Tools nutzen."
+      ],
+      "productionEvidence": {
+        "context": "Teams, die einen autonomen oder teilautonomen Agenten in der Produktionsumgebung einsetzen, wo er Tools nutzt und folgenschwere Aktionen durchführt.",
+        "scenario": "Vor dem Go-Live nutzt das Team die Checkliste als Freigabeprüfung (Readiness Gate): Klassifizierung des Risikos des Agenten, Verknüpfung folgenschwerer Aktionen mit menschlicher Freigabe, Hinzufügen von Guardrails und Schutz vor Prompt-Injections, Aktivierung von Audit-Protokollierung und Observability, Einrichtung eines Evaluierungssets, Beschränkung des Zugriffs nach dem Least-Privilege-Prinzip sowie Definition von Incident Response und eines Notausschalters.",
+        "technology": "Ein Harness, das eine menschliche Freigabestufe, Guardrails, Audit-Protokollierung/Observability, ein Evaluierungs-Harness und einen beschränkten Zugriff auf Tools/Anmeldedaten kombiniert.",
+        "load": "Wird vor der Bereitstellung pro Agent angewendet und regelmäßig überprüft; der aufwendigste Kontrollmechanismus (menschliche Freigabe) ist der kleinen Gruppe folgenschwerer Aktionen vorbehalten.",
+        "results": "Beobachtetes Pattern: Teams, die risikobasiert steuern, das Least-Privilege-Prinzip durchsetzen und von Tag eins an Instrumentierung nutzen, begrenzen den Schadensradius von Agentenfehlern; diejenigen, die „sicherheitshalber“ weitreichenden Zugriff gewähren oder ohne Evals ausliefern, entdecken Fehler erst in der Produktion. Messen Sie die Angemessenheit von Eskalationen, die Rate fehlerhafter Aktionen und die mittlere Zeit bis zur Erkennung (Mean Time to Detect)."
+      },
+      "lessons": [
+        "Betrachten Sie die Checkliste als Freigabeprüfung (Readiness Gate), nicht als einmaliges Audit – führen Sie sie erneut aus, wenn die Tools und die Autonomie des Agenten zunehmen.",
+        "Der Least-Privilege-Zugriff und die risikobasierte menschliche Freigabe begrenzen den Schadensradius stärker als jede einzelne Guardrail.",
+        "Ohne ein Evaluierungsset und eine Audit-Protokollierung vor dem Start können Sie einen sicheren Agenten nicht von einem glücklichen unterscheiden.",
+        "Ordnen Sie jeden Kontrollmechanismus einem konkreten Verantwortlichen zu; Governance ohne Rechenschaftspflicht ist lediglich Dokumentation."
+      ],
+      "examples": [
+        "Ein Agent, dessen Rückerstattungsaktion an eine menschliche Freigabe geknüpft ist, während schreibgeschützte Abfragen frei ausgeführt werden.",
+        "Eine Guardrail, die eine per Prompt-Injection eingeschleuste Anweisung zur Datenexfiltration über ein Tool blockiert.",
+        "Ein Evaluierungslauf, der eine Sicherheitsregression abfängt, bevor ein Agenten-Update ausgeliefert wird."
+      ],
+      "faqs": [
+        {
+          "q": "Ist dies ein Ersatz für den EU AI Act oder die ISO 42001?",
+          "a": "Nein. Es handelt sich um einen praktischen Satz von Kontrollmechanismen, der deren Prinzipien für Agenten operationalisiert. Nutzen Sie ihn neben den formalen Frameworks und der Rechtsberatung, nicht anstelle dieser."
+        },
+        {
+          "q": "Welcher Kontrollmechanismus ist für autonome Agenten am wichtigsten?",
+          "a": "Risikobasierte menschliche Aufsicht plus Least-Privilege-Zugriff und Audit-Protokollierung – zusammen begrenzen sie, was ein Agent tun kann, und machen jede Aktion nachvollziehbar."
+        },
+        {
+          "q": "Wie hängt dies mit der Patterns-Bibliothek zusammen?",
+          "a": "Jeder Kontrollmechanismus ist Patterns zugeordnet, die ihn implementieren – „human-approval-gate“ für die Aufsicht, „reflection“ und „evaluator-optimizer“ für die Qualität – sowie Wissenseinheiten wie Guardrails und KI-Observability."
+        }
+      ]
+    },
+    "ja": {
+      "name": "エージェント型AIガバナンスチェックリスト",
+      "summary": "企業におけるエージェント型AIを統制するための、実用的かつベンダーニュートラルなチェックリスト。EU AI法、ISO/IEC 42001、NIST AI RMFの原則を、ハーネスに実装可能な具体的なコントロールに変換します。人間による監視、ガードレール、監査ログ、評価、アクセス制御、プロンプトインジェクション対策、インシデント対応をカバーし、各コントロールをそれを具現化するパターンやナレッジユニットにマッピングします。エージェントを本番環境で動作させる前のレディネスゲートとしてご活用ください。",
+      "definition": "エージェント型AIガバナンスチェックリストは、AIガバナンスフレームワークを、本番環境で動作する自律型エージェント向けの具体的かつ実装可能な要件へと変換する、運用コントロールセットです。",
+      "scope": "ツールを使用し、システム上で動作し、または重大な意思決定を行う、自律型または半自律型エージェントを構築またはデプロイするチーム。本チェックリストは、公式なフレームワークを補完する実用的なガイドであり、法的助言に代わるものではありません。",
+      "keyPoints": [
+        "リスクに応じた人間による監視：影響が大きく、不可逆的、または規制対象となるアクションを、人間の承認ゲートに通すこと。",
+        "プロンプトインジェクションやPII（個人特定情報）保護を含む、入力および出力に対するガードレール。",
+        "すべてのアクションを追跡可能にするための、完全な監査ログとオブザーバビリティ。",
+        "メンテナンスされた評価セットを用いた、デプロイ前後での評価。",
+        "エージェントがアクセスできるツールおよびデータに対する、最小権限アクセスの適用。",
+        "本番環境のエージェントに対する、定義されたインシデント対応とキルスイッチ。"
+      ],
+      "controls": [
+        {
+          "control": "人間の承認ゲート",
+          "note": "影響の大きいアクションを人間のチェックポイント経由でルーティングする（EU AI法 第14条）。human-approval-gateパターンを実装します。"
+        },
+        {
+          "control": "ガードレール",
+          "note": "入出力を検証・制限し、プロンプトインジェクションを防御し、ポリシー違反のアクションをブロックする。"
+        },
+        {
+          "control": "監査ログとオブザーバビリティ",
+          "note": "すべての意思決定、ツール呼び出し、アクションを追跡し、エージェントのレビューを可能にし、インシデントを再構成できるようにする。"
+        },
+        {
+          "control": "評価ハーネス",
+          "note": "リリース前に評価セットに対して振る舞いをスコアリングし、リリース後にデグレード（退行）を監視する（NISTの「測定（Measure）」に該当）。"
+        },
+        {
+          "control": "最小権限アクセス",
+          "note": "エージェントがアクセスできるツール、データ、権限のスコープを、タスクに必要な最小限に制限する。"
+        },
+        {
+          "control": "インシデント対応とキルスイッチ",
+          "note": "異常な動作をするエージェントを検知、停止、修復する方法（即時停止する方法を含む）を定義する。"
+        }
+      ],
+      "checklist": [
+        "エージェントのリスクを分類し、どのアクションに人間の承認が必要かを特定する。",
+        "入出力に対するガードレールとプロンプトインジェクション対策を実装する。",
+        "エンドツーエンドの監査ログとオブザーバビリティを有効にする。",
+        "評価セットを構築し、デプロイ前および継続的に実行する。",
+        "ツール、データ、資格情報に対して最小権限のスコープを適用する。",
+        "インシデント対応、監視しきい値、およびキルスイッチを定義する。",
+        "各コントロールを、EU AI法、ISO 42001、NIST AI RMFに基づく義務にマッピングする。",
+        "所有権を文書化し、定期的なスケジュールでエージェントをレビューする。"
+      ],
+      "pitfalls": [
+        "「念のため」としてエージェントに広範なツールやデータへのアクセス権を付与し、影響範囲（ブラストライジアス）を拡大させてしまうこと。",
+        "リスクに応じたゲート設定を行わず、すべてをゲートに通す（承認疲れを招く）、あるいは何も通さない（監視がない）状態にしてしまうこと。",
+        "評価セットなしでリリースしてしまい、品質と安全性が測定されないこと。",
+        "本番環境でエージェントが異常な動作をした際の、キルスイッチやインシデント計画がないこと。",
+        "ツールを使用するエージェントのアタックサーフェス（攻撃対象領域）としてのプロンプトインジェクションを無視すること。"
+      ],
+      "productionEvidence": {
+        "context": "ツールを使用し、重大なアクションを実行する自律型または半自律型エージェントを本番環境に導入するチーム。",
+        "scenario": "本番稼働前に、チームはレディネスゲートとしてチェックリストを実行します。エージェントのリスクを分類し、影響の大きいアクションを人間の承認ゲートに通し、ガードレールとプロンプトインジェクション対策を追加し、監査ログとオブザーバビリティを有効にし、評価セットを構築し、最小権限アクセスのスコープを設定し、インシデント対応とキルスイッチを定義します。",
+        "technology": "人間の承認ゲート、ガードレール、監査ログ/オブザーバビリティ、評価ハーネス、およびスコープ制限されたツール/資格情報アクセスを組み合わせたハーネス。",
+        "load": "デプロイ前にエージェントごとに適用され、定期的なスケジュールで再レビューされます。最も重いコントロール（人間の承認）は、影響の大きい少数のアクションに限定して適用されます。",
+        "results": "観察されたパターン：リスクに応じてゲートを設定し、最小権限を強制し、初日から計測（インストルメンテーション）を行うチームは、エージェントのエラーによる影響範囲を抑制できています。一方で、「念のため」として広範なアクセス権を付与したり、評価なしでリリースしたりするチームは、本番環境で障害に直面します。エスカレーションの適切性、誤アクション率、および平均検出時間を測定してください。"
+      },
+      "lessons": [
+        "チェックリストは1回限りの監査ではなく、レディネスゲートとして扱い、エージェントのツールや自律性が向上するたびに再実行してください。",
+        "最小権限アクセスとリスクに基づく人間の承認は、単一のガードレールよりも影響範囲を効果的に制限します。",
+        "ローンチ前に評価セットと監査ログが整備されていなければ、安全なエージェントと、単に運が良いだけのエージェントを区別することはできません。",
+        "各コントロールを具体的な所有者にマッピングしてください。説明責任のないガバナンスは、単なる文書にすぎません。"
+      ],
+      "examples": [
+        "返金アクションは人間の承認ゲートに通される一方で、読み取り専用の照会は自由に実行されるエージェント。",
+        "ツールを介してデータを流出させようとする、プロンプトインジェクションによる指示をブロックするガードレール。",
+        "エージェントのアップデートがリリースされる前に、安全性のデグレード（退行）を検出する評価の実行。"
+      ],
+      "faqs": [
+        {
+          "q": "これはEU AI法やISO 42001の代わりになりますか？",
+          "a": "いいえ。これは、それらの原則をエージェント向けに運用可能にする実用的なコントロールセットです。公式なフレームワークや法的助言の代わりとしてではなく、それらと併せて使用してください。"
+        },
+        {
+          "q": "自律型エージェントにとって最も重要なコントロールは何ですか？",
+          "a": "リスクに基づく人間による監視に加えて、最小権限アクセスと監査ログです。これらが組み合わさることで、エージェントができることを制限し、すべてのアクションに説明責任を持たせることができます。"
+        },
+        {
+          "q": "これはパターンライブラリとどのように接続していますか？",
+          "a": "各コントロールは、それを実装するパターン（監視のためのhuman-approval-gate、品質のためのreflectionやevaluator-optimizerなど）や、ガードレール、AIオブザーバビリティなどのナレッジユニットにマッピングされています。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "智能体 AI 治理清单",
+      "summary": "一份实用且不绑定特定厂商的清单，用于在企业中治理智能体 AI —— 将 EU AI Act、ISO/IEC 42001 和 NIST AI RMF 的原则转化为可在支撑系统中实施的具体控制措施。它涵盖了人工监督、护栏、审计日志、评估、访问控制、提示词注入防御和事件响应，并将每项控制措施映射到使其落地运行的模式和知识单元。在允许智能体在生产环境中运行之前，将其用作就绪性闸口。",
+      "definition": "智能体 AI 治理清单是一套操作性控制集，它将 AI 治理框架转化为针对在生产环境中运行的自主智能体的具体、可实施的要求。",
+      "scope": "适用于构建或部署使用工具、在系统上执行操作或做出重大决策的自主或半自主智能体的团队。它是正式框架的实用指南，不能替代法律咨询。",
+      "keyPoints": [
+        "基于风险的人工监督：对高影响、不可逆或受监管的操作设置人工审批闸口。",
+        "输入和输出的护栏，包括提示词注入 and PII 防御。",
+        "完整的审计日志和可观测性，确保每项操作都可追溯。",
+        "部署前后的评估，对照维护的评估集进行。",
+        "对智能体可触及的工具和数据实行最小特权访问。",
+        "为生产环境中的智能体定义明确的事件响应和紧急停机开关（kill-switch）。"
+      ],
+      "controls": [
+        {
+          "control": "人工审批闸口",
+          "note": "将高影响操作路由至人工检查点（EU AI Act 第 14 条）。实现 human-approval-gate 模式。"
+        },
+        {
+          "control": "护栏",
+          "note": "验证并约束输入和输出；防御提示词注入并阻止违反策略的操作。"
+        },
+        {
+          "control": "审计日志与可观测性",
+          "note": "追溯每一次决策、工具调用和操作，使智能体可被审查，且事件可被重现。"
+        },
+        {
+          "control": "评估支撑系统",
+          "note": "在发布前对照评估集对行为进行评分，并在发布后监控退化情况 —— NIST 'Measure'。"
+        },
+        {
+          "control": "最小特权访问",
+          "note": "将智能体可触及的工具、数据和权限限制在其任务所需的最低限度。"
+        },
+        {
+          "control": "事件响应与紧急停机开关",
+          "note": "定义如何检测、停止和纠正行为异常的智能体，包括立即暂停其运行的方法。"
+        }
+      ],
+      "checklist": [
+        "对智能体的风险进行分类，并识别哪些操作需要人工审批。",
+        "实施输入/输出护栏和提示词注入防御。",
+        "启用端到端审计日志和可观测性。",
+        "建立评估集，并在部署前及运行中持续运行该评估集。",
+        "对工具、数据和凭据应用最小特权范围限制。",
+        "定义事件响应、监控阈值 and 紧急停机开关。",
+        "将每项控制措施映射到您在 EU AI Act、ISO 42001 和 NIST AI RMF 下的义务。",
+        "记录所有权并定期审查智能体。"
+      ],
+      "pitfalls": [
+        "为了“安全起见”授予智能体广泛的工具/数据访问权限，从而造成巨大的爆炸半径。",
+        "对所有操作都设置闸口（导致审批疲劳）或完全不设闸口（缺乏监督），而不是基于风险设置闸口。",
+        "在没有评估集的情况下发布，导致质量和安全性无法衡量。",
+        "当智能体在生产环境中行为异常时，没有紧急停机开关或事件应对计划。",
+        "忽视提示词注入作为使用工具的智能体的攻击面。"
+      ],
+      "productionEvidence": {
+        "context": "将自主或半自主智能体投入生产环境，使其使用工具并执行重大操作的团队。",
+        "scenario": "在上线前，团队将该清单作为就绪性闸口运行：对智能体的风险进行分类、对高影响操作设置人工审批闸口、添加护栏和提示词注入防御、启用审计日志和可观测性、建立评估集、限制最小特权访问，并定义事件响应和紧急停机开关。",
+        "technology": "一个结合了人工审批闸口、护栏、审计日志/可观测性、评估支撑系统以及受限工具/凭据访问的支撑系统。",
+        "load": "在部署前应用于每个智能体，并定期重新审查；最重的控制措施（人工审批）仅保留给少数高影响操作。",
+        "results": "观察到的模式：从第一天起就基于风险设置闸口、强制执行最小特权并进行插桩的团队，能够控制智能体错误的影响范围；而那些为了“安全起见”授予广泛访问权限或在没有评估的情况下发布的团队，则会在生产环境中发现故障。衡量指标包括升级适当性、错误操作率和平均检测时间。"
+      },
+      "lessons": [
+        "将清单视为就绪性闸口，而不是一次性审计 —— 随着智能体工具和自主性的增加，应重新运行该清单。",
+        "与任何单一护栏相比，最小特权访问和基于风险的人工审批更能限制爆炸半径。",
+        "如果在发布前没有建立评估集和审计日志，你将无法区分一个安全的智能体和一个仅仅是运气好的智能体。",
+        "将每项控制措施映射到具体的责任人；没有问责制的治理仅仅是文档。"
+      ],
+      "examples": [
+        "一个退款操作需要人工审批，而只读查询可以自由运行的智能体。",
+        "一个阻止通过工具外泄数据的提示词注入指令的护栏。",
+        "在智能体更新发布前捕获安全性退化的评估运行。"
+      ],
+      "faqs": [
+        {
+          "q": "这可以替代 EU AI Act 或 ISO 42001 吗？",
+          "a": "不能。它是一套实用的控制集，旨在将这些原则落实到智能体的运行中。请将其与正式框架和法律咨询结合使用，而不是取而代之。"
+        },
+        {
+          "q": "对于自主智能体来说，哪项控制措施最重要？",
+          "a": "基于风险的人工监督，加上最小特权访问和审计日志 —— 它们共同限制了智能体可以执行的操作，并使每项操作都可问责。"
+        },
+        {
+          "q": "它如何与模式库相联系？",
+          "a": "每项控制措施都映射到实现它的模式 —— 用于监督的 human-approval-gate，用于质量的 reflection 和 evaluator-optimizer —— 以及诸如护栏和 AI 可观测性等知识单元。"
+        }
+      ]
     }
   }
 }

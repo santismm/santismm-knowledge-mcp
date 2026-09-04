@@ -61,6 +61,22 @@
         "pt": {
           "label": "A ilha de Faros",
           "note": "A ilha é certa e a distância que o poema lhe dá não é: Homero a situa a um dia de navegação da costa, e ela fica a cerca de um quilômetro. Estrabão já tentou explicar a discrepância pelo assoreamento."
+        },
+        "fr": {
+          "label": "L'île de Pharos",
+          "note": "L'île est certaine, mais pas la distance indiquée par le poème : Homère la situe à une journée de navigation au large, alors qu'elle se trouve à environ un kilomètre. Strabon a déjà tenté d'expliquer cet écart par l'alluvionnement."
+        },
+        "zh": {
+          "label": "法罗斯岛",
+          "note": "该岛的存在是确凿的，但史诗中给出的距离却并非如此：荷马将其置于离岸一天航程的地方，而它实际上距离海岸仅约一公里。斯特拉波曾试图用泥沙淤积来解释这一差异。"
+        },
+        "de": {
+          "label": "Die Insel Pharos",
+          "note": "Die Insel ist sicher, die im Gedicht angegebene Entfernung hingegen nicht: Homer verortet sie eine Tagesreise unter Segel vor der Küste, tatsächlich liegt sie jedoch etwa einen Kilometer entfernt. Schon Strabon versuchte, die Diskrepanz durch Verlandung zu erklären."
+        },
+        "ja": {
+          "label": "ファロス島",
+          "note": "島の実在は確実ですが、詩に描かれる距離は不正確です。ホメロスはそこを沖合へ丸一日の航程に位置づけていますが、実際には約1キロメートルしか離れていません。ストラボンはすでに、この不一致を土砂の堆積によって説明しようとしていました。"
         }
       }
     }
@@ -123,6 +139,86 @@
         {
           "q": "A distância errada invalida a identificação?",
           "a": "Não, e é nisso que consiste pontuar os critérios separadamente: o lugar pontua alto em identificação e mais baixo em coerência geográfica, e ambos os fatos ficam à vista."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Ménélas et Protée à Pharos",
+      "summary": "Immobilisé par le calme plat au large de l'Égypte, Ménélas tend un piège à un dieu métamorphe pour lui demander le chemin du retour — et apprend, à la place, que son frère a été assassiné.",
+      "narrative": [
+        "Eidothée conseille à Ménélas de se cacher parmi les phoques à midi et de se saisir de son père Protée pendant qu'il compte son troupeau. Protée se transforme en lion, en serpent, en léopard, en sanglier, en eau et en arbre, puis, fatigué, il répond : comment apaiser les dieux, comment les autres sont revenus, et qu'Ulysse est vivant sur une île avec Calypso.",
+        "La scène se déroule sur une île réelle, décrite avec un détail réel — la puanteur des phoques, qu'Eidothée masque avec de l'ambroisie — et une distance erronée."
+      ],
+      "whyItMatters": "C'est l'exemple le plus clair de l'atlas d'une identification correcte avec un détail incorrect : Pharos est bien Pharos, et pourtant Homère la situe à une journée de navigation de l'Égypte.",
+      "debate": "Reste à savoir si cette distance est une erreur, une exagération ou le souvenir d'un littoral différent. L'argument de Strabon sur l'alluvionnement ne fonctionne pas à cette échelle.",
+      "faqs": [
+        {
+          "q": "Pharos est-elle l'île au phare ?",
+          "a": "Oui — la même île, des siècles avant que le phare ptolémaïque n'y soit construit."
+        },
+        {
+          "q": "La distance erronée remet-elle en cause l'identification ?",
+          "a": "Non, et c'est tout l'intérêt d'évaluer les critères séparément : le lieu obtient un score élevé pour l'identification et plus faible pour la cohérence géographique, et ces deux faits restent visibles."
+        }
+      ]
+    },
+    "de": {
+      "title": "Menelaos und Proteus auf Pharos",
+      "summary": "Wegen Flaute vor Ägypten festsitzend, lauert Menelaos einem gestaltwandelnden Gott auf, um nach dem Weg nach Hause zu fragen – und erfährt stattdessen, dass sein Bruder ermordet wurde.",
+      "narrative": [
+        "Eidothea rät Menelaos, sich mittags unter den Robben zu verstecken und ihren Vater Proteus zu packen, wenn er seine Herde zählt. Proteus verwandelt sich in einen Löwen, eine Schlange, einen Leoparden, einen Eber, in Wasser und einen Baum, und als er müde wird, antwortet er: wie man die Götter besänftigt, wie die anderen heimkehrten und dass Odysseus lebend auf einer Insel bei Kalypso festsitzt.",
+        "Die Szene spielt auf einer realen Insel, beschrieben mit einem realen Detail – dem Gestank der Robben, den Eidothea mit Ambrosia überdeckt – und einer falschen Entfernung."
+      ],
+      "whyItMatters": "Es ist das deutlichste Beispiel des Atlas für eine korrekte Identifizierung mit einem unkorrekten Detail: Pharos is Pharos, und dennoch verortet Homer es eine Tagesreise unter Segel von Ägypten entfernt.",
+      "debate": "Ob die Entfernung ein Irrtum, eine Übertreibung oder die Erinnerung an eine andere Küstenlinie ist. Strabons Argument der Verlandung funktioniert in dieser Größenordnung nicht.",
+      "faqs": [
+        {
+          "q": "Ist Pharos die Insel mit dem Leuchtturm?",
+          "a": "Ja – dieselbe Insel, Jahrhunderte bevor der ptolemäische Leuchtturm darauf errichtet wurde."
+        },
+        {
+          "q": "Untergräbt die falsche Entfernung die Identifizierung?",
+          "a": "Nein, und genau das ist der Sinn einer getrennten Bewertung der Kriterien: Der Ort schneidet bei der Identifizierung gut ab, bei der geografischen Kohärenz jedoch schlechter, und beide Fakten bleiben sichtbar."
+        }
+      ]
+    },
+    "ja": {
+      "title": "ファロス島におけるメネラオスとプロテウス",
+      "summary": "エジプト沖で風が止まり立ち往生したメネラオスは、帰郷の道を尋ねるために姿を変える神を待ち伏せします。しかし代わりに得たのは、兄が殺害されたという知らせでした。",
+      "narrative": [
+        "エイドテアはメネラオスに対し、真昼にアザラシの群れに身を隠し、父プロテウスが群れを数えているところを捕らえるよう告げます。プロテウスはライオン、蛇、ヒョウ、猪、水、そして木へと姿を変えますが、疲れ果てると問いに答えます。神々をなだめる方法、他の者たちの帰還の様子、そしてオデュッセウスがカリュプソとともに島で生きていることを。",
+        "舞台は実在の島であり、アザラシの悪臭（エイドテアがアンブロシアで和らげるもの）というリアルな詳細描写とともに描かれていますが、距離の記述は誤っています。"
+      ],
+      "whyItMatters": "これは、正しい特定の中に誤った詳細が含まれているという、この地図帳における最も明確な例です。ファロス島はファロス島ですが、ホメロスは依然としてそこをエジプトから丸一日の航程にある場所として描いています。",
+      "debate": "その距離が誤りなのか、誇張なのか、あるいは別の海岸線の記憶なのか。ストラボンの堆積説は、その規模では成り立ちません。",
+      "faqs": [
+        {
+          "q": "ファロス島とは、あの灯台のある島ですか？",
+          "a": "はい。プトレマイオス朝の灯台が建設される数世紀前の、まさに同じ島です。"
+        },
+        {
+          "q": "距離の誤りは、特定の信頼性を損ないますか？",
+          "a": "いいえ、それこそが評価基準を個別に設定している理由です。この場所は特定の面では高得点ですが、地理的一貫性の面では低得点となり、両方の事実が可視化されたままになります。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "墨涅拉俄斯与普罗透斯在法罗斯岛",
+      "summary": "在埃及近海因无风而滞留的墨涅拉俄斯，伏击了一位能幻化外形的真神以询问回家的路——然而，他得到的却是哥哥被谋杀的噩耗。",
+      "narrative": [
+        "埃多泰娅告诉墨涅拉俄斯，正午时分躲在海豹群中，并在她父亲普罗透斯清点兽群时将其制服。普罗透斯变成了狮子、毒蛇、豹子、野猪、水和树木，当他疲惫不堪时，他给出了答案：如何平息神怒、其他人是如何归国的，以及奥德修斯还活着，正和卡吕普索一起留在岛上。",
+        "这一场景设定在一个真实的岛屿上，并伴有真实的细节描述——海豹的恶臭（埃多泰娅用神馔掩盖了这种臭味）——以及错误的距离。"
+      ],
+      "whyItMatters": "这是该地图集中最清晰的“认定正确但细节错误”的例子：法罗斯岛就是法罗斯岛，但荷马仍将其置于距离埃及一天航程的地方。",
+      "debate": "这一距离究竟是错误、夸张，还是对另一条海岸线的记忆。斯特拉波关于泥沙淤积的论点在如此尺度上并不成立。",
+      "faqs": [
+        {
+          "q": "法罗斯岛是建有灯塔的那个岛吗？",
+          "a": "是的——就是同一个岛，只不过是在托勒密灯塔建成前几个世纪。"
+        },
+        {
+          "q": "错误的距离会推翻这一认定吗？",
+          "a": "不会，这正是分别评分标准的意义所在：该地点在“认定”上得分较高，而在“地理一致性”上得分较低，这两个事实都清晰可见。"
         }
       ]
     }

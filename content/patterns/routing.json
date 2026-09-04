@@ -23,7 +23,11 @@
   "evidence": {
     "evidenceLevel": "production",
     "confidenceLevel": "low",
-    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+    "sourceType": [
+      "production_system",
+      "personal_experience",
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {
@@ -287,6 +291,358 @@
         {
           "q": "E se o classificador errar?",
           "a": "Forneça uma rota padrão sensata e monitore os erros de rota; um manipulador de fallback e boa observabilidade limitam o impacto da má classificação."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Routage",
+      "summary": "Le routage classifie une entrée et la dirige vers le gestionnaire, le prompt ou le modèle spécialisé le plus approprié. Il améliore la qualité en permettant d'optimiser chaque chemin pour son cas d'usage, et maîtrise les coûts en envoyant les requêtes simples vers des modèles économiques et les requêtes complexes vers des modèles performants.",
+      "definition": "Le routage est un modèle de conception (pattern) qui classifie chaque requête entrante et l'oriente vers le gestionnaire ou le modèle le plus approprié, de sorte que les entrées simples utilisent des chemins économiques et les entrées complexes des chemins performants.",
+      "problem": "Un prompt ou un modèle unique traitant tous les types d'entrées est moins performant sur chacun d'eux, et utiliser un modèle coûteux pour tout gaspille de l'argent sur les requêtes simples.",
+      "context": "Utilisez le routage lorsque les entrées se répartissent en catégories distinctes qui bénéficient d'un traitement différent — prompts, outils, modèles ou workflows différents — et que ces catégories peuvent être classifiées de manière fiable.",
+      "solution": [
+        "Un classificateur léger (un appel LLM ou un modèle) étiquette l'entrée, puis un routeur l'envoie au gestionnaire en aval correspondant. Chaque gestionnaire est spécialisé et optimisé pour sa catégorie.",
+        "Le routage permet également une hiérarchisation coût-performance : orientez les requêtes simples vers un modèle rapide et économique, et les requêtes complexes vers un modèle de raisonnement plus puissant, afin de ne payer pour la performance que lorsque c'est nécessaire."
+      ],
+      "components": [
+        "Classificateur",
+        "Logique de routage",
+        "Gestionnaires spécialisés",
+        "Route de secours / par défaut"
+      ],
+      "benefits": [
+        "Chaque chemin est optimisé pour son cas d'usage, ce qui améliore la qualité.",
+        "Contrôle des coûts en adaptant les modèles à la difficulté.",
+        "La séparation des préoccupations permet de garder chaque gestionnaire simple."
+      ],
+      "risks": [
+        "Une mauvaise classification envoie les entrées sur le mauvais chemin.",
+        "Le classificateur ajoute une étape et de la latence.",
+        "La dérive des catégories au fil du temps dégrade la précision du routage."
+      ],
+      "whenNot": [
+        "Lorsque les entrées sont homogènes — un seul gestionnaire suffit.",
+        "Lorsque les catégories ne peuvent pas être classifiées de manière fiable.",
+        "Lorsque l'étape de classification ajoutée ne vaut pas le gain obtenu."
+      ],
+      "examples": [
+        "Routage des tickets de support vers des gestionnaires de facturation, techniques ou commerciaux.",
+        "Envoi de questions simples à un petit modèle et de questions complexes à un modèle de raisonnement.",
+        "Orientation de différents types de documents vers des extracteurs spécifiques au type."
+      ],
+      "productionEvidence": {
+        "context": "Déploiement OpenClaw mono-opérateur, local-first, observé sur 57 jours (161 sessions / 2 776 tours), agrégé à partir des traces de trajectoire de l'agent.",
+        "scenario": "Les messages des canaux entrants et les réveils autonomes sont routés vers un agent via des points d'entrée distincts, les liaisons canal/pair/rôle sélectionnant la session.",
+        "technology": "Liaison + registre de routes (resolveAgentRoute), clés de session par canal et cache de routes résolues.",
+        "load": "3 canaux (Telegram, chat web, WhatsApp) et 4 types de déclencheurs (utilisateur, heartbeat, cron, mémoire).",
+        "results": "Le routage a fonctionné sur les trois canaux et les quatre types de déclencheurs, sans qu'aucun mauvais routage ne se traduise par un échec (98,8 % de réussite globale des sessions). Déploiement mono-opérateur local-first — une référence fonctionnelle, pas un benchmark d'échelle."
+      },
+      "kpis": [
+        {
+          "metric": "Précision du routage",
+          "note": "Part des entrées envoyées au bon gestionnaire/modèle ; la métrique unique qui définit la valeur du modèle de conception."
+        },
+        {
+          "metric": "Économies de coûts par rapport au meilleur modèle systématique",
+          "note": "Argent économisé en routant les entrées simples vers des modèles moins chers au lieu d'utiliser le meilleur modèle pour tout."
+        },
+        {
+          "metric": "Coût d'un mauvais routage",
+          "note": "Les dommages en aval des mauvaises routes — un mauvais routage peut coûter bien plus cher que les économies recherchées."
+        },
+        {
+          "metric": "Surcoût de latence du routeur",
+          "note": "Temps que la décision de routage elle-même ajoute avant que le travail réel ne commence."
+        }
+      ],
+      "failureModes": [
+        "Mauvaise classification : le routeur envoie une entrée vers le mauvais modèle ou chemin, dégradant la réponse.",
+        "Entrées ambiguës qui ne correspondent clairement à aucune route et se retrouvent forcées dans une route inadaptée.",
+        "Le routeur devient un goulot d'étranglement ou un point de défaillance unique pour chaque requête.",
+        "Dérive : la distribution des entrées évolue au fil du temps et les catégories du routeur deviennent obsolètes."
+      ],
+      "lessons": [
+        "Optimisez pour le coût d'une erreur d'aiguillage, pas seulement pour la précision du routage — certains mauvais aiguillages coûtent beaucoup plus cher que d'autres.",
+        "Ajoutez une route par défaut / de secours pour les entrées qui ne correspondent bien à rien.",
+        "Gardez le routeur économique et rapide ; s'il coûte aussi cher que le travail lui-même, cela va à l'encontre du but recherché.",
+        "Surveillez la dérive des entrées et réajustez les routes à mesure que la distribution change."
+      ],
+      "faqs": [
+        {
+          "q": "Qu'est-ce qui classifie l'entrée ?",
+          "a": "Généralement un appel LLM léger ou un modèle de classification dédié ; pour les cas évidents, des règles déterministes peuvent effectuer le routage sans modèle."
+        },
+        {
+          "q": "Comment le routage permet-il de réduire les coûts ?",
+          "a": "Par la hiérarchisation : les requêtes simples vont vers des modèles économiques et rapides, et seules les requêtes complexes atteignent les modèles de raisonnement coûteux, de sorte que vous ne payez pour la performance que lorsque c'est nécessaire."
+        },
+        {
+          "q": "Que se passe-t-il si le classificateur se trompe ?",
+          "a": "Prévoyez une route par défaut cohérente et surveillez les erreurs d'aiguillage ; un gestionnaire de secours et une bonne observabilité limitent l'impact d'une mauvaise classification."
+        }
+      ]
+    },
+    "de": {
+      "name": "Routing",
+      "summary": "Routing klassifiziert eine Eingabe und leitet sie an den am besten geeigneten spezialisierten Handler, Prompt oder das passende Modell weiter. Es verbessert die Qualität, indem jeder Pfad für seinen spezifischen Fall optimiert werden kann, und kontrolliert die Kosten, indem einfache Anfragen an günstige Modelle und komplexe an leistungsfähigere Modelle gesendet werden.",
+      "definition": "Routing ist ein Pattern, das jede eingehende Anfrage klassifiziert und an den am besten geeigneten Handler oder das passende Modell weiterleitet, sodass einfache Eingaben kostengünstige Pfade nutzen und komplexe Eingaben leistungsfähigere Modelle beanspruchen.",
+      "problem": "Wenn ein einziger Prompt oder ein einziges Modell jede Art von Eingabe verarbeitet, führt dies zu schlechteren Ergebnissen bei den einzelnen Aufgaben. Zudem verschwendet der Einsatz eines teuren Modells für alles Geld bei einfachen Anfragen.",
+      "context": "Nutzen Sie Routing, wenn Eingaben in eindeutige Kategorien fallen, die von einer unterschiedlichen Handhabung profitieren – verschiedene Prompts, Tools, Modelle oder Workflows – und sich diese Kategorien zuverlässig klassifizieren lassen.",
+      "solution": [
+        "Ein leichtgewichtiger Klassifizierer (ein LLM-Aufruf oder ein Modell) kennzeichnet die Eingabe, woraufhin ein Router sie an den passenden nachgelagerten Handler sendet. Jeder Handler ist auf seine Kategorie spezialisiert und optimiert.",
+        "Routing ermöglicht zudem ein Preis-Leistungs-Tiering: Leiten Sie einfache Abfragen an ein schnelles, günstiges Modell und komplexe an ein stärkeres Reasoning-Modell weiter, sodass Sie nur dann für Leistung bezahlen, wenn sie tatsächlich benötigt wird."
+      ],
+      "components": [
+        "Klassifizierer",
+        "Routing-Logik",
+        "Spezialisierte Handler",
+        "Fallback- / Standard-Route"
+      ],
+      "benefits": [
+        "Jeder Pfad ist für seinen Fall optimiert, was die Qualität steigert.",
+        "Kostenkontrolle durch Staffelung der Modelle nach Schwierigkeitsgrad.",
+        "Die Trennung von Zuständigkeiten (Separation of Concerns) hält jeden Handler einfach."
+      ],
+      "risks": [
+        "Fehlklassifizierungen leiten Eingaben auf den falschen Pfad.",
+        "Der Klassifizierer fügt einen zusätzlichen Schritt und Latenz hinzu.",
+        "Kategoriendrift im Laufe der Zeit verschlechtert die Routing-Genauigkeit."
+      ],
+      "whenNot": [
+        "Wenn die Eingaben homogen sind – ein einziger Handler reicht aus.",
+        "Wenn Kategorien nicht zuverlässig klassifiziert werden können.",
+        "Wenn der zusätzliche Klassifizierungsschritt den Gewinn nicht wert ist."
+      ],
+      "examples": [
+        "Routing von Support-Tickets an Abrechnungs-, Technik- oder Vertriebs-Handler.",
+        "Senden einfacher Fragen an ein kleines Modell und komplexer Fragen an ein Reasoning-Modell.",
+        "Leiten verschiedener Dokumenttypen an typspezifische Extraktoren."
+      ],
+      "productionEvidence": {
+        "context": "Single-Operator, Local-First OpenClaw-Bereitstellung, beobachtet über 57 Tage (161 Sessions / 2.776 Turns), aggregiert aus den eigenen Trajektorien-Traces des Agenten.",
+        "scenario": "Eingehende Kanalnachrichten und autonome Aktivierungen werden über verschiedene Einstiegspunkte an einen Agenten geleitet, wobei Kanal-/Peer-/Rollenbindungen die Session auswählen.",
+        "technology": "Binding + Route-Registry (resolveAgentRoute), Session-Keys pro Kanal und ein Cache für aufgelöste Routen.",
+        "load": "3 Kanäle (Telegram, Web-Chat, WhatsApp) und 4 Trigger-Arten (User, Heartbeat, Cron, Memory).",
+        "results": "Das Routing funktionierte über alle drei Kanäle und vier Trigger-Typen hinweg, ohne dass eine Fehlleitung als Fehler auftrat (98,8 % Session-Erfolgsquote insgesamt). Single-Operator, Local-First-Bereitstellung – eine funktionierende Referenz, kein Skalierungs-Benchmark."
+      },
+      "kpis": [
+        {
+          "metric": "Routing-Genauigkeit",
+          "note": "Anteil der Eingaben, die an den korrekten Handler/das korrekte Modell gesendet wurden; die entscheidende Metrik, die den Wert des Patterns definiert."
+        },
+        {
+          "metric": "Kosteneinsparungen im Vergleich zu „Immer das beste Modell“",
+          "note": "Eingespartes Geld durch das Routing einfacher Eingaben an günstigere Modelle, anstatt für alles das Spitzenmodell zu nutzen."
+        },
+        {
+          "metric": "Fehlrouting-Kosten",
+          "note": "Der nachgelagerte Schaden durch falsche Routen – ein Fehlrouting kann weitaus mehr kosten als die angestrebten Einsparungen."
+        },
+        {
+          "metric": "Latenz-Overhead des Routers",
+          "note": "Zeit, die die Routing-Entscheidung selbst beansprucht, bevor die eigentliche Arbeit beginnt."
+        }
+      ],
+      "failureModes": [
+        "Fehlklassifizierung: Der Router sendet eine Eingabe an das falsche Modell oder den falschen Pfad, was die Antwortqualität verschlechtert.",
+        "Mehrdeutige Eingaben, die in keine Route sauber hineinpassen und in eine ungeeignete Route gezwungen werden.",
+        "Der Router wird zum Engpass (Bottleneck) oder Single Point of Failure für jede Anfrage.",
+        "Drift: Die Verteilung der Eingaben verschiebt sich im Laufe der Zeit und die Kategorien des Routers veralten."
+      ],
+      "lessons": [
+        "Optimieren Sie für die Kosten einer Fehlleitung, nicht nur für die Routing-Genauigkeit – manche falschen Routen sind weitaus kostspieliger als andere.",
+        "Fügen Sie eine Standard-/Fallback-Route für Eingaben hinzu, die auf nichts gut passen.",
+        "Halten Sie den Router kostengünstig und schnell; wenn er so viel kostet wie die eigentliche Arbeit, verfehlt er seinen Zweck.",
+        "Überwachen Sie den Input-Drift und passen Sie die Routen an, wenn sich die Verteilung ändert."
+      ],
+      "faqs": [
+        {
+          "q": "Was klassifiziert die Eingabe?",
+          "a": "In der Regel ein leichtgewichtiger LLM-Aufruf oder ein dediziertes Klassifikatormodell; bei eindeutigen Fällen können deterministische Regeln das Routing auch ohne Modell übernehmen."
+        },
+        {
+          "q": "Wie spart Routing Kosten?",
+          "a": "Durch Tiering: Einfache Anfragen gehen an günstige, schnelle Modelle, und nur komplexe Anfragen erreichen teure Reasoning-Modelle. So zahlen Sie nur dann für Leistungsfähigkeit, wenn sie tatsächlich benötigt wird."
+        },
+        {
+          "q": "Was passiert, wenn der Klassifikator falsch liegt?",
+          "a": "Bieten Sie eine sinnvolle Standardroute und überwachen Sie Fehlleitungen; ein Fallback-Handler und gute Observability begrenzen die Auswirkungen von Fehlklassifizierungen."
+        }
+      ]
+    },
+    "ja": {
+      "name": "ルーティング",
+      "summary": "ルーティングは、入力を分類し、最も適切な専用のハンドラー、プロンプト、またはモデルに転送します。各パスをそのケースに合わせて最適化できるようにすることで品質を向上させ、簡単なリクエストは安価なモデルに、難しいリクエストは能力の高いモデルに送信することでコストを制御します。",
+      "definition": "ルーティングは、入ってくる各リクエストを分類し、最も適切なハンドラーまたはモデルにディスパッチするパターンです。これにより、簡単な入力には安価なパスを使用し、難しい入力には能力の高いパスを使用します。",
+      "problem": "単一のプロンプトやモデルですべての種類の入力を処理すると、それぞれの処理品質が低下します。また、すべてに1つの高価なモデルを使用すると、簡単なリクエストに対して無駄なコストが発生します。",
+      "context": "入力が、異なる処理（異なるプロンプト、ツール、モデル、またはワークフロー）から恩恵を受ける明確なカテゴリに分類され、かつそれらのカテゴリを高い信頼性で分類できる場合にルーティングを使用します。",
+      "solution": [
+        "軽量な分類器（LLM呼び出しまたはモデル）が入力にラベルを付け、ルーターがそれを対応するダウンストリームのハンドラーに送信します。各ハンドラーはそのカテゴリに特化し、最適化されています。",
+        "ルーティングは、コストパフォーマンスの階層化（ティアリング）も可能にします。単純なクエリは高速で安価なモデルにルーティングし、複雑なクエリはより強力な推論モデルにルーティングすることで、必要なときにのみ能力に対してコストを支払うことができます。"
+      ],
+      "components": [
+        "分類器",
+        "ルーティングロジック",
+        "専用ハンドラー",
+        "フォールバック / デフォルトルート"
+      ],
+      "benefits": [
+        "各パスがそのケースに合わせて最適化され、品質が向上します。",
+        "難易度に応じてモデルを階層化することによるコスト制御。",
+        "関心の分離により、各ハンドラーをシンプルに保つことができます。"
+      ],
+      "risks": [
+        "誤分類により、入力が誤ったパスに送信されます。",
+        "分類器によってステップが追加され、一定のレイテンシーが発生します。",
+        "時間の経過に伴うカテゴリのドリフトにより、ルーティングの精度が低下します。"
+      ],
+      "whenNot": [
+        "入力が均一である場合：1つのハンドラーで十分です。",
+        "カテゴリを高い信頼性で分類できない場合。",
+        "追加される分類ステップが、得られる効果に見合わない場合。"
+      ],
+      "examples": [
+        "サポートチケットを請求、技術、または営業のハンドラーにルーティングする。",
+        "単純な質問は小規模なモデルに、難しい質問は推論モデルに送信する。",
+        "異なるドキュメントタイプを、タイプ固有の抽出器に転送する。"
+      ],
+      "productionEvidence": {
+        "context": "エージェント自身のトラジェクトリトレースから集計された、57日間にわたる（161セッション / 2,776ターン）シングルオペレーター、ローカルファーストのOpenClawデプロイメントの観察結果。",
+        "scenario": "インバウンドチャネルのメッセージと自律的な起動は、異なるエントリポイントを介して1つのエージェントにルーティングされ、チャネル/ピア/ロールのバインディングによってセッションが選択されます。",
+        "technology": "バインディング + ルートレジストリ（resolveAgentRoute）、チャネルごとのセッションキー、および解決済みルートキャッシュ。",
+        "load": "3つのチャネル（Telegram、Webチャット、WhatsApp）と4つのトリガータイプ（ユーザー、ハートビート、cron、メモリ）。",
+        "results": "ルーティングは3つのチャネルすべてと4つのトリガータイプすべてで維持され、障害として表面化するような誤ルーティングはありませんでした（全体で98.8%のセッション成功率）。シングルオペレーター、ローカルファーストのデプロイメントであり、スケールベンチマークではなく、動作するリファレンスです。"
+      },
+      "kpis": [
+        {
+          "metric": "ルーティング精度",
+          "note": "正しいハンドラー/モデルに送信された入力の割合。このパターンの価値を定義する唯一のメトリックです。"
+        },
+        {
+          "metric": "常に最良 of モデルを使用した場合と比較したコスト削減",
+          "note": "すべてに最上位のモデルを使用する代わりに、簡単な入力をより安価なモデルにルーティングすることによって節約されたコスト。"
+        },
+        {
+          "metric": "誤ルーティングコスト",
+          "note": "誤ったルートによるダウンストリームへの被害。誤ルーティングは、追求した削減コストをはるかに上回るコストを伴う可能性があります。"
+        },
+        {
+          "metric": "ルーターのレイテンシーオーバーヘッド",
+          "note": "実際の処理が開始される前に、ルーティングの決定自体によって追加される時間。"
+        }
+      ],
+      "failureModes": [
+        "誤分類：ルーターが誤ったモデルまたはパスに入力を送信し、回答の品質を低下させます。",
+        "どのルートにも明確に適合せず、不適切なルートに強制的に割り当てられてしまう曖昧な入力。",
+        "ルーターがすべてのリクエストのボトルネックまたは単一障害点になります。",
+        "ドリフト：時間の経過とともに入力の分布が変化し、ルーターのカテゴリが陳腐化します。"
+      ],
+      "lessons": [
+        "ルーティングの正確性だけでなく、誤ルーティングのコストを最適化します。一部の誤ったルートは、他のルートよりもはるかにコストが高くなります。",
+        "いずれにもうまく一致しない入力に対して、デフォルト/フォールバックルートを追加します。",
+        "ルーターは安価かつ高速に保ちます。ルーターのコストが実際の処理と同等になってしまっては、本末転倒です。",
+        "入力のドリフトを監視し、分布の変化に応じてルートを再調整します。"
+      ],
+      "faqs": [
+        {
+          "q": "入力はどのように分類されますか？",
+          "a": "通常は軽量なLLM呼び出しや専用の分類モデルを使用します。明確なケースでは、モデルを使用せずに決定論的なルールでルーティングすることも可能です。"
+        },
+        {
+          "q": "ルーティングによってどのようにコストを削減できますか？",
+          "a": "階層化（ティアリング）によるものです。簡単なリクエストは安価で高速なモデルに送り、困難なリクエストのみを高価な推論モデルに送ることで、必要なときにだけ機能に対するコストを支払うようにします。"
+        },
+        {
+          "q": "分類器が誤っていた場合はどうなりますか？",
+          "a": "適切なデフォルトルートを用意し、誤ルーティングを監視します。フォールバックハンドラーと優れたオブザーバビリティにより、誤分類の影響を抑えることができます。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "路由",
+      "summary": "路由对输入进行分类，并将其引导至最合适的专用处理器、提示词或模型。它通过让每条路径针对其具体情况进行优化来提高质量，并通过将简单的请求发送给便宜的模型、将困难的请求发送给能力更强的模型来控制成本。",
+      "definition": "路由是一种对每个传入请求进行分类并将其分发到最合适的处理器或模型的模式，从而使简单的输入使用便宜的路径，而困难的输入使用能力更强的路径。",
+      "problem": "由单个提示词或模型处理每种输入会导致每种情况的效果都变差，而对所有事情都使用一个昂贵的模型会在简单的请求上浪费资金。",
+      "context": "当输入属于不同的类别，且这些类别能从不同的处理方式（不同的提示词、工具、模型或工作流）中受益，并且这些类别可以被可靠地分类时，请使用路由。",
+      "solution": [
+        "轻量级分类器（LLM 调用或模型）对输入进行标记，然后路由器将其发送到匹配的下游处理器。每个处理器都针对其类别进行了专门化和优化。",
+        "路由还支持性价比分层：将简单的查询路由到快速、便宜的模型，将复杂的查询路由到更强大的推理模型，仅在需要时才为高能力付费。"
+      ],
+      "components": [
+        "分类器",
+        "路由逻辑",
+        "专用处理器",
+        "后备/默认路由"
+      ],
+      "benefits": [
+        "每条路径都针对其具体情况进行了优化，从而提高了质量。",
+        "通过根据难度对模型进行分层来控制成本。",
+        "关注点分离使每个处理器保持简单。"
+      ],
+      "risks": [
+        "错误分类会导致输入走向错误的路径。",
+        "分类器增加了一个步骤和一些延迟。",
+        "随着时间的推移，类别漂移会降低路由准确性。"
+      ],
+      "whenNot": [
+        "当输入是同质的——一个处理器就足够了。",
+        "当类别无法被可靠地分类时。",
+        "当增加的分类步骤不值得其带来的收益时。"
+      ],
+      "examples": [
+        "将支持工单路由到计费、技术或销售处理器。",
+        "将简单的问题发送给小模型，将困难的问题发送给推理模型。",
+        "将不同的文档类型引导至特定类型的提取器。"
+      ],
+      "productionEvidence": {
+        "context": "在 57 天内（161 个会话/2,776 轮）观察到的单操作员、本地优先的 OpenClaw 部署，数据从智能体自身的轨迹追踪中聚合而来。",
+        "scenario": "入站通道消息和自主唤醒通过不同的入口点路由到同一个智能体，并通过通道/对等体/角色绑定来选择会话。",
+        "technology": "绑定 + 路由注册表（resolveAgentRoute）、每通道会话密钥以及已解析路由缓存。",
+        "load": "3 个通道（Telegram、网页聊天、WhatsApp）和 4 种触发类型（用户、心跳、cron、内存）。",
+        "results": "路由在所有三个通道和四种触发类型中均保持正常，没有出现因路由错误导致的失败（整体会话成功率为 98.8%）。单操作员本地优先部署——这是一个可运行的参考，而非规模基准。"
+      },
+      "kpis": [
+        {
+          "metric": "路由准确性",
+          "note": "发送到正确处理器/模型的输入比例；这是定义该模式价值的唯一指标。"
+        },
+        {
+          "metric": "相比于“始终使用最佳模型”所节省的成本",
+          "note": "通过将简单的输入路由到更便宜的模型，而不是对所有内容都使用顶级模型所节省的资金。"
+        },
+        {
+          "metric": "路由错误成本",
+          "note": "错误路由带来的下游损害——一次路由错误所付出的代价可能远远超过其试图节省的成本。"
+        },
+        {
+          "metric": "路由器延迟开销",
+          "note": "在任何实际工作开始之前，路由决策本身所增加的时间。"
+        }
+      ],
+      "failureModes": [
+        "错误分类：路由器将输入发送到错误的模型或路径，从而降低回答质量。",
+        "模糊的输入无法清晰地适应任何路由，从而被强行归入不佳的路由。",
+        "路由器成为每个请求的瓶颈或单点故障。",
+        "漂移：输入分布随着时间的推移而发生偏移，导致路由器的类别过时。"
+      ],
+      "lessons": [
+        "针对误路由的成本进行优化，而不仅仅是路由准确率——某些错误的路由路径其代价远比其他路径高昂。",
+        "为无法良好匹配任何路径的输入添加默认/备用路由。",
+        "保持路由器廉价且快速；如果路由本身的开销与实际工作的开销相当，那就失去了路由的意义。",
+        "监控输入漂移，并在分布发生变化时重新调整路由。"
+      ],
+      "faqs": [
+        {
+          "q": "由什么来对输入进行分类？",
+          "a": "通常是轻量级的 LLM 调用或专用的分类器模型；对于界限清晰的情况，确定性规则可以在无需模型的情况下进行路由。"
+        },
+        {
+          "q": "路由是如何节省成本的？",
+          "a": "通过分层：简单的请求流向便宜、快速的模型，只有复杂的请求才会到达昂贵的推理模型，从而实现仅在需要时才为高能力付费。"
+        },
+        {
+          "q": "如果分类器出错怎么办？",
+          "a": "提供合理的默认路由并监控误路由；备用处理器和良好的可观测性可以限制误分类的影响。"
         }
       ]
     }

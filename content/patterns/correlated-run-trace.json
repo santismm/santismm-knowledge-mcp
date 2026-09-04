@@ -324,6 +324,374 @@
           "a": "Exatamente a necessária para passar no teste de reconstrução sobre uma execução escolhida ao acaso, e nada além. Esse limiar se descobre tentando, e é por isso que o teste pertence à rotina e não a uma auditoria. Tudo o que for capturado além disso é custo e responsabilidade sem uma pergunta a que responda."
         }
       ]
+    },
+    "fr": {
+      "name": "Trace d'exécution corrélée",
+      "summary": "Un identifiant unique relie toute une exécution d'agent — entrées, modèle et version, chaque appel d'outil avec ses arguments et son résultat, l'action finale — dans un enregistrement que vous pouvez rejouer des mois plus tard. Le plus difficile n'est pas la capture. C'est d'être assez complet pour reconstruire l'exécution et assez mesuré pour que le stockage des traces ne devienne pas une seconde copie des données qu'il décrit.",
+      "definition": "Une trace d'exécution corrélée est un enregistrement immuable, doté d'un identifiant unique, de tout ce qu'une exécution d'agent a décidé et fait, capturé avec une fidélité qui permet de reconstruire l'exécution de bout en bout a posteriori sans accès aux systèmes qui l'ont produite, et expurgé afin que la trace ne devienne pas une cible plus facile que la source. Il s'agit d'un enregistrement des décisions de l'agent, et non d'un journal de requêtes.",
+      "problem": "Les agents sont non déterministes et multi-étapes, de sorte que « ce qui s'est passé » ne peut être déduit du résultat. La plupart des équipes effectuent des journaux d'activité, mais ne peuvent toujours pas expliquer pourquoi une exécution spécifique a agi ainsi : les étapes se trouvent dans des systèmes différents sans identifiant partagé, le prompt a été enregistré sous forme de référence de modèle qui a changé depuis, ou la version du modèle n'a jamais été capturée, de sorte que personne ne peut dire si c'est le comportement ou le modèle qui a dérivé.",
+      "context": "Tout agent dont les actions ont des conséquences sur lesquelles on s'interrogera plus tard : un processus réglementé où la trace constitue la piste d'audit et où la traçabilité est une obligation plutôt qu'une préférence, un incident nécessitant une analyse de cause racine, un client contestant un résultat, ou une boucle d'évaluation qui a besoin de défaillances réelles pour apprendre.",
+      "solution": [
+        "Générez un identifiant d'exécution unique au point d'entrée et propagez-le à travers chaque étape, service et tentative. La corrélation fait toute la valeur : des enregistrements non liés d'une même exécution ne sont que trois journaux, pas une trace.",
+        "Enregistrez le prompt généré, pas une référence à celui-ci. Un ID de template résout ce que le template contient aujourd'hui, ce qui n'est pas ce que le modèle a vu.",
+        "Capturez le modèle et sa version lors de chaque appel. Sans cela, un changement de comportement et un changement de modèle sont impossibles à distinguer après coup.",
+        "Enregistrez les appels d'outils sous forme d'arguments accompagnés de leur résultat, y compris les échecs et les tentatives. Une trace qui ne montre que les appels réussis décrit une exécution qui n'a pas eu lieu.",
+        "Masquez lors de la capture, pas à la lecture. Appliquez des règles au niveau des champs pour supprimer ou hacher les secrets et les données personnelles avant l'écriture de l'enregistrement, car un masquage appliqué au moment de la requête laisse toujours la valeur brute dans le stockage.",
+        "Échantillonnez sur la fin (tail-based), pas au début (head-based). Décidez de ce qu'il faut conserver après la fin de l'exécution, afin que les erreurs, les escalades et les anomalies soient conservées et que les succès de routine soient ceux qui sont réduits.",
+        "Rendez le stockage accessible uniquement en écriture à la suite (append-only) et attribuez-lui les contrôles d'accès du système le plus sensible qu'il décrit, et non ceux fournis par défaut avec un backend de journalisation."
+      ],
+      "components": [
+        "Un identifiant d'exécution généré à l'entrée et propagé à travers chaque étape, service, tentative et continuation asynchrone.",
+        "Un span par étape avec un schéma stable : entrées, modèle et version, nom de l'outil, arguments, résultat, latence, utilisation des tokens.",
+        "Un masquage au niveau des champs appliqué lors de la capture, avec une liste explicite de ce qui est supprimé, de ce qui est haché et de ce qui est conservé intact.",
+        "Un échantillonnage tail-based qui décide après coup, de sorte que les exécutions anormales survivent et que les exécutions de routine soient réduites.",
+        "Un stockage en écriture à la suite (append-only) avec une rétention alignée sur l'obligation qui justifie l'enregistrement, et un contrôle d'accès correspondant aux systèmes sources.",
+        "Un chemin de relecture qui reconstruit une exécution à partir de la seule trace, utilisé assez souvent pour que ses lacunes soient connues."
+      ],
+      "benefits": [
+        "Rend les échecs non déterministes diagnostiquables : vous pouvez expliquer pourquoi cette exécution a agi ainsi, au lieu de la reproduire jusqu'à ce que cela se reproduise.",
+        "Transforme les obligations de tenue de registres en un artefact plutôt qu'en une promesse. La reconstruction fonctionne sur une exécution passée aléatoire, ou elle ne fonctionne pas.",
+        "Alimente l'évaluation avec des échecs réels plutôt qu'inventés, ce qui fait toute la différence entre un benchmark et une suite de non-régression.",
+        "Sépare la dérive du déploiement. Avec la version du modèle dans l'enregistrement, « cela s'est dégradé » devient une question qui a une réponse."
+      ],
+      "risks": [
+        "Le stockage des traces comme cible la plus vulnérable : il contient les mêmes données que les systèmes qu'il décrit, généralement avec un contrôle d'accès plus faible et une rétention plus longue.",
+        "Un coût de capture qui augmente avec le trafic jusqu'à ce que quelqu'un applique un échantillonnage head-based pour économiser de l'argent, supprimant discrètement les exécutions qui méritaient précisément d'être conservées.",
+        "Un masquage qui supprime ce dont la reconstruction avait besoin. Un sur-masquage reste invisible jusqu'au jour où quelqu'un tente de rejouer une exécution et n'y parvient pas.",
+        "Le volume confondu avec la couverture. Des téraoctets de spans sans identifiant partagé ne permettent toujours pas de répondre à une seule question sur une exécution donnée."
+      ],
+      "whenNot": [
+        "Appels déterministes à étape unique où l'entrée et la sortie résument toute l'histoire. Un journal de requêtes permet déjà de les reconstruire.",
+        "Prototypes sans utilisateurs ni obligations, où le coût du pipeline de traces dépasse tout ce que vous pourriez en apprendre.",
+        "Lorsque la règle applicable interdit totalement de conserver le contenu. Dans ce cas, la trace enregistre qu'une décision a eu lieu ainsi que ses métadonnées, et le contenu reste exclu — il s'agit d'un artefact différent, et prétendre le contraire crée la responsabilité que la règle visait à éviter."
+      ],
+      "examples": [
+        "Un incident où un agent a envoyé un e-mail au mauvais client. L'identifiant d'exécution lie la récupération qui a renvoyé le mauvais enregistrement, l'appel d'outil qui l'a utilisé et le message envoyé, de sorte que la cause racine se résume à une seule requête plutôt qu'à une semaine de tentatives de reproduction.",
+        "Un régulateur demande comment une décision a été prise il y a six mois. Le chemin de relecture reconstruit l'exécution à partir de la seule trace, y compris la version du modèle en vigueur ce jour-là.",
+        "Une baisse de qualité après la mise à niveau d'un modèle. Comme chaque span contient la version du modèle, la comparaison s'effectue entre deux populations d'exécutions réelles plutôt qu'entre des impressions."
+      ],
+      "kpis": [
+        {
+          "metric": "Taux de réussite de la reconstruction",
+          "note": "Part des exécutions passées choisies au hasard qui peuvent être reconstruites de bout en bout à partir de la seule trace. Il s'agit du propre test du contrôle, et c'est le seul chiffre ici qui ne peut pas être amélioré simplement en capturant davantage de données."
+        },
+        {
+          "metric": "Complétude de la corrélation",
+          "note": "Part des spans d'une exécution qui portent l'identifiant d'exécution. Tout résultat inférieur à 100 % signifie qu'une étape est invisible, et l'étape manquante est rarement la plus banale."
+        },
+        {
+          "metric": "Taux d'échappement des champs sensibles",
+          "note": "Part des enregistrements échantillonnés contenant une valeur que les règles de masquage auraient dû supprimer. L'objectif est de zéro ; tout autre chiffre signifie que le stockage des traces accumule un risque juridique."
+        },
+        {
+          "metric": "Rétention des exécutions anormales",
+          "note": "Part des exécutions en erreur ou escaladées conservées après échantillonnage. L'échantillonnage head-based pousse ce chiffre vers le taux d'échantillonnage global, ce qui constitue précisément la défaillance que cette métrique vise à détecter."
+        }
+      ],
+      "failureModes": [
+        "La trace qui ne prouve rien : chaque étape est journalisée, aucune étape ne partage d'identifiant, et reconstruire une exécution implique de corréler les horodatages à la main.",
+        "Le prompt enregistré par référence. Le template a changé, de sorte que le journal décrit désormais un prompt que le modèle n'a jamais vu, et personne ne s'en aperçoit jusqu'à ce qu'une reconstruction contredise la sortie.",
+        "L'échantillonnage head-based qui conserve l'ordinaire. L'exécution dont vous avez besoin a été rejetée au point d'entrée, avant même que l'on sache qu'elle allait être intéressante.",
+        "Le journal comme source de violation de données : les arguments bruts des outils acheminent des données personnelles vers un stockage doté d'un accès plus large et d'une rétention plus longue que la base de données dont ils proviennent.",
+        "Version du modèle manquante. Un changement de comportement et une mise à jour silencieuse du modèle semblent identiques dans l'enregistrement, et l'investigation stagne sur une question à laquelle la trace aurait dû répondre."
+      ],
+      "lessons": [
+        "La corrélation est le produit ; la capture est la matière première. Les équipes qui achètent un backend de tracing et font l'impasse sur l'identifiant se retrouvent avec du stockage plutôt qu'avec des réponses.",
+        "Testez la reconstruction, pas le pipeline. Choisissez une exécution passée au hasard et reconstruisez-la — les lacunes se trouvent toujours là où personne n'a placé d'instrumentation, et seule cette tentative permet de les trouver.",
+        "Masquez au moment de l'écriture. Chaque masquage différé au moment de la lecture est une décision de conserver la valeur brute, et le stockage survit à l'intention.",
+        "Échantillonnez sur la fin (tail-based). L'échantillonnage head-based est une décision d'écarter les exécutions intéressantes avant même de savoir de quelles exécutions il s'agit.",
+        "Enregistrez la version du modèle partout. Cela ne coûte qu'un champ et cela fait toute la différence entre diagnostiquer une dérive et en débattre."
+      ],
+      "faqs": [
+        {
+          "q": "Nous utilisons déjà un backend de tracing. Le problème n'est-il pas résolu ?",
+          "a": "Un backend vous fournit la capture et le stockage. Ce pattern concerne les trois aspects qu'un backend ne décide pas pour vous : si un identifiant unique relie l'ensemble de l'exécution, si la fidélité est suffisante pour la reconstruire sans les systèmes sources, et si ce que vous avez enregistré peut être conservé en toute sécurité. Des équipes disposant d'excellents outils échouent régulièrement au test de reconstruction."
+        },
+        {
+          "q": "Une capture complète n'entre-t-elle pas en conflit avec la minimisation des données ?",
+          "a": "Ce serait le cas si la capture signifiait tout conserver à l'état brut. Le contrôle énonce délibérément les deux aspects — assez pour reconstruire, rien qui ne transforme le journal en violation de données — et le moyen de concilier les deux est le masquage au niveau des champs lors de la capture, associé à une rétention liée à l'obligation qui justifie l'enregistrement. Ce que vous ne pouvez pas faire, c'est éluder cette tension en conservant tout et en qualifiant cela de conformité."
+        },
+        {
+          "q": "Quel niveau de fidélité est suffisant ?",
+          "a": "Exactement assez pour réussir le test de reconstruction sur une exécution choisie au hasard, et pas plus. Ce seuil peut être découvert en essayant, c'est pourquoi le test doit faire partie de la routine plutôt que d'un audit. Tout ce qui est capturé au-delà représente un coût et un risque juridique sans répondre à aucune question."
+        }
+      ]
+    },
+    "de": {
+      "name": "Correlated Run Trace",
+      "summary": "Ein einziger Identifikator verknüpft einen gesamten Agenten-Run – Inputs, Modell und Version, jeden Tool-Aufruf mit seinen Argumenten und Ergebnissen, die finale Aktion – zu einem Datensatz, den Sie Monate später erneut abspielen können. Der schwierige Teil ist nicht die Erfassung. Es geht darum, vollständig genug zu sein, um den Run zu rekonstruieren, und gleichzeitig so zurückhaltend, dass der Trace-Speicher nicht zu einer zweiten Kopie der beschriebenen Daten wird.",
+      "definition": "Ein Correlated Run Trace ist eine unveränderliche Aufzeichnung mit einem einzigen Identifikator, die alles erfasst, was ein Agenten-Run entschieden und getan hat. Sie wird mit einer Detailgenauigkeit aufgezeichnet, die es ermöglicht, den Run im Nachhinein lückenlos zu rekonstruieren, ohne Zugriff auf die erzeugenden Systeme zu haben, und ist so redigiert, dass der Trace kein leichteres Angriffsziel darstellt als die Quelle. Es handelt sich um eine Aufzeichnung der Entscheidungen des Agenten, nicht um ein Request-Log.",
+      "problem": "Agenten sind nicht-deterministisch und arbeiten mehrschrittig, sodass sich das Geschehene nicht einfach aus dem Output ableiten lässt. Die meisten Teams protokollieren zwar, können aber dennoch nicht beantworten, warum ein bestimmter Run so agiert hat: Die Schritte befinden sich in verschiedenen Systemen ohne gemeinsamen Identifikator, der Prompt wurde als Template-Referenz aufgezeichnet, die sich inzwischen geändert hat, oder die Modellversion wurde nie erfasst, sodass niemand sagen kann, ob sich das Verhalten oder das Modell verändert hat.",
+      "context": "Jeder Agent, dessen Aktionen Konsequenzen haben, nach denen später gefragt wird: ein regulierter Prozess, bei dem der Trace der Audit-Trail ist und Nachvollziehbarkeit eine Pflicht statt einer Präferenz darstellt, ein Vorfall, der eine Ursachenanalyse erfordert, ein Kunde, der ein Ergebnis anfechtet, oder eine Evaluierungsschleife, die echte Fehler benötigt, um daraus zu lernen.",
+      "solution": [
+        "Erzeugen Sie am Einstiegspunkt einen eindeutigen Run-Identifikator und leiten Sie diesen durch jeden Schritt, Service und Wiederholungsversuch (Retry) weiter. Die Korrelation macht den gesamten Wert aus: Unverknüpfte Datensätze desselben Runs sind lediglich drei Protokolleinträge, kein Trace.",
+        "Erfassen Sie den gerenderten Prompt, nicht nur einen Verweis darauf. Eine Template-ID verweist auf den aktuellen Stand des Templates, der sich von dem unterscheiden kann, was das Modell tatsächlich gesehen hat.",
+        "Erfassen Sie bei jedem Aufruf das Modell und seine Version. Ohne diese Angaben lassen sich eine Verhaltensänderung und eine Modelländerung im Nachhinein nicht voneinander unterscheiden.",
+        "Protokollieren Sie Tool-Aufrufe als Argumente plus Ergebnis, einschließlich Fehlern und Wiederholungsversuchen. Ein Trace, der nur erfolgreiche Aufrufe zeigt, beschreibt einen Run, der so nie stattgefunden hat.",
+        "Schwärzen Sie Daten bei der Erfassung, nicht erst beim Lesen. Nutzen Sie Regeln auf Feldebene, die Geheimnisse und personenbezogene Daten verwerfen oder hashen, bevor der Datensatz geschrieben wird. Eine Schwärzung bei der Abfrage belässt den Rohwert weiterhin im Speicher.",
+        "Führen Sie das Sampling am Ende (Tail-based Sampling) und nicht am Anfang (Head-based Sampling) durch. Entscheide erst nach Abschluss des Runs, was aufbewahrt wird, damit Fehler, Eskalationen und Anomalien erhalten bleiben und nur routinemäßige Erfolge ausgedünnt werden.",
+        "Gestalten Sie den Speicher als Append-only und versehen Sie ihn mit den Zugriffskontrollen des sensibelsten Systems, das er beschreibt – nicht mit den Standardeinstellungen eines Logging-Backends."
+      ],
+      "components": [
+        "Ein am Einstiegspunkt erzeugter Run-Identifikator, der durch jeden Schritt, Service, Wiederholungsversuch und jede asynchrone Fortsetzung weitergeleitet wird.",
+        "Ein Span pro Schritt mit einem stabilen Schema: Inputs, Modell und Version, Tool-Name, Argumente, Ergebnis, Latenz, Token-Nutzung.",
+        "Schwärzung auf Feldebene bei der Erfassung mit einer expliziten Liste darüber, was verworfen, was gehasht und was unverändert beibehalten wird.",
+        "Tail-based Sampling, das im Nachhinein entscheidet, sodass anomale Runs erhalten bleiben und routinemäßige ausgedünnt werden.",
+        "Append-only-Speicher mit einer Aufbewahrungsfrist, die auf die Verpflichtung zur Protokollierung abgestimmt ist, und Zugriffskontrollen, die denen der Quellsysteme entsprechen.",
+        "Ein Replay-Pfad, der einen Run allein aus dem Trace rekonstruiert und oft genug genutzt wird, damit etwaige Lücken bekannt sind."
+      ],
+      "benefits": [
+        "Macht nicht-deterministische Fehler diagnostizierbar: Sie können beantworten, warum dieser spezifische Run so reagiert hat, anstatt den Fehler so lange zu reproduzieren, bis er wieder auftritt.",
+        "Macht Nachweispflichten zu einem greifbaren Artefakt statt zu einem bloßen Versprechen. Die Rekonstruktion eines zufällig ausgewählten vergangenen Runs funktioniert entweder oder sie funktioniert nicht.",
+        "Speist die Evaluierung mit echten statt mit erfundenen Fehlern – das ist der Unterschied zwischen einem Benchmark und einer Regressions-Testsuite.",
+        "Trennt Drift von Deployments. Wenn die Modellversion im Datensatz enthalten ist, wird aus der vagen Aussage „Es ist schlechter geworden“ eine präzise beantwortbare Frage."
+      ],
+      "risks": [
+        "Der Trace-Speicher als leichtestes Angriffsziel: Er enthält dieselben Daten wie die Systeme, die er beschreibt, meist jedoch mit schwächeren Zugriffskontrollen und längeren Aufbewahrungsfristen.",
+        "Erfassungskosten, die mit dem Traffic steigen, bis jemand aus Kostengründen auf Head-based Sampling umstellt und damit unbemerkt genau die Runs verwirft, die erhaltenswert gewesen wären.",
+        "Eine Schwärzung, die Daten entfernt, die für die Rekonstruktion benötigt worden wären. Eine Überschwärzung bleibt so lange unbemerkt, bis jemand versucht, einen Run zu replizieren, und scheitert.",
+        "Datenvolumen wird mit Abdeckung verwechselt. Terabytes an Spans ohne gemeinsamen Identifikator können dennoch keine einzige Frage zu einem bestimmten Run beantworten."
+      ],
+      "whenNot": [
+        "Einstufige, deterministische Aufrufe, bei denen Input und Output bereits die gesamte Geschichte erzählen. Diese lassen sich bereits über ein einfaches Request-Log rekonstruieren.",
+        "Prototypen ohne Nutzer und ohne Verpflichtungen, bei denen die Kosten für die Trace-Pipeline den Erkenntnisgewinn übersteigen würden.",
+        "Fälle, in denen geltende Regeln die Aufbewahrung von Inhalten gänzlich untersagen. In diesem Fall protokolliert der Trace lediglich, dass eine Entscheidung getroffen wurde, sowie deren Metadaten, während der Inhalt außen vor bleibt. Dies ist ein anderes Artefakt, und etwas anderes vorzugeben, schafft genau die Haftungsrisiken, die die Regel eigentlich verhindern sollte."
+      ],
+      "examples": [
+        "Ein Vorfall, bei dem ein Agent eine E-Mail an den falschen Kunden gesendet hat. Der Run-Identifikator verknüpft den Retrieval-Vorgang, der den falschen Datensatz zurückgegeben hat, den Tool-Aufruf, der ihn verwendet hat, und die gesendete Nachricht. So lässt sich die Ursache auf eine einzige Abfrage zurückführen, statt eine Woche lang Reproduktionsversuche zu starten.",
+        "Eine Regulierungsbehörde fragt nach, wie eine Entscheidung vor sechs Monaten zustande kam. Der Replay-Pfad rekonstruiert den Run allein aus dem Trace, einschließlich der an diesem Tag aktiven Modellversion.",
+        "Ein Qualitätsabfall nach einem Modell-Upgrade. Da jeder Span die Modellversion enthält, basiert der Vergleich auf zwei Gruppen realer Runs und nicht auf subjektiven Eindrücken."
+      ],
+      "kpis": [
+        {
+          "metric": "Erfolgsquote der Rekonstruktion",
+          "note": "Anteil zufällig ausgewählter vergangener Runs, die sich allein aus dem Trace durchgängig rekonstruieren lassen. Dies ist der eigentliche Test für diese Kontrollmaßnahme und die einzige Kennzahl hier, die sich nicht einfach durch das Erfassen von mehr Daten verbessern lässt."
+        },
+        {
+          "metric": "Vollständigkeit der Korrelation",
+          "note": "Anteil der Spans in einem Run, die den Run-Identifikator tragen. Jeder Wert unter 100 % bedeutet, dass ein Schritt unsichtbar ist – und der fehlende Schritt ist selten der uninteressante."
+        },
+        {
+          "metric": "Abflussrate sensibler Felder",
+          "note": "Anteil der stichprobenartig geprüften Datensätze, die einen Wert enthalten, den die Schwärzungsregeln hätten entfernen müssen. Der Zielwert ist null; jeder andere Wert bedeutet, dass der Trace-Speicher Haftungsrisiken anhäuft."
+        },
+        {
+          "metric": "Aufbewahrungsquote anomaler Runs",
+          "note": "Anteil fehlerhafter oder eskalierter Runs, die nach dem Sampling aufbewahrt werden. Head-based Sampling drückt diesen Wert in Richtung der allgemeinen Sampling-Rate – genau das ist der Fehler, den diese Metrik aufdecken soll."
+        }
+      ],
+      "failureModes": [
+        "Der Trace, der nichts beweist: Jeder Schritt wird protokolliert, kein Schritt teilt sich einen Identifikator, und die Rekonstruktion eines Runs erfordert das manuelle Korrelieren von Zeitstempeln.",
+        "Der per Verweis aufgezeichnete Prompt. Das Template wurde geändert, sodass das Protokoll nun einen Prompt beschreibt, den das Modell nie gesehen hat – was niemand bemerkt, bis eine Rekonstruktion im Widerspruch zum Output steht.",
+        "Head-based Sampling, das das Gewöhnliche bewahrt. Der benötigte Run wurde bereits am Einstiegspunkt verworfen, noch bevor absehbar war, dass er von Interesse sein würde.",
+        "Das Protokoll als Sicherheitslücke: Unbearbeitete Tool-Argumente übertragen personenbezogene Daten in einen Speicher mit breiterem Zugriff und längerer Aufbewahrungsfrist als die Datenbank, aus der sie stammen.",
+        "Fehlende Modellversion. Eine Verhaltensänderung und ein stilles Modell-Update sehen im Datensatz identisch aus, und die Untersuchung scheitert an einer Frage, die der Trace hätte beantworten müssen."
+      ],
+      "lessons": [
+        "Die Korrelation ist das Produkt, die Erfassung nur das Rohmaterial. Teams, die ein Tracing-Backend kaufen, aber auf den Identifikator verzichten, erhalten lediglich Speicherplatz statt Antworten.",
+        "Testen Sie die Rekonstruktion, nicht die Pipeline. Wählen Sie einen zufälligen vergangenen Run aus und bauen Sie ihn nach – Lücken befinden sich immer dort, wo niemand eine Instrumentierung vorgenommen hat, und nur der Versuch deckt sie auf.",
+        "Schwärzen Sie beim Schreiben. Jede Schwärzung, die auf den Lesezeitpunkt verschoben wird, ist eine Entscheidung, den Rohwert aufzubewahren – und Speicher überdauert die ursprüngliche Absicht.",
+        "Führen Sie das Sampling am Ende (Tail-based) durch. Head-based Sampling ist die Entscheidung, interessante Runs zu verwerfen, noch bevor man wissen kann, welche das sein werden.",
+        "Erfassen Sie überall die Modellversion. Das kostet nur ein Feld und macht den Unterschied aus, ob man Drift diagnostizieren oder nur darüber spekulieren kann."
+      ],
+      "faqs": [
+        {
+          "q": "Wir nutzen bereits ein Tracing-Backend. Ist das Problem damit nicht gelöst?",
+          "a": "Ein Backend bietet Ihnen Erfassung und Speicherung. Bei diesem Pattern geht es um drei Dinge, die ein Backend Ihnen nicht abnimmt: ob ein einziger Identifikator den gesamten Run durchzieht, ob die Detailgenauigkeit ausreicht, um ihn ohne die Quellsysteme zu rekonstruieren, und ob die aufgezeichneten Daten sicher aufbewahrt werden können. Teams mit hervorragenden Tools scheitern regelmäßig am Rekonstruktionstest."
+        },
+        {
+          "q": "Steht eine vollständige Erfassung nicht im Widerspruch zur Datenminimierung?",
+          "a": "Das würde es, wenn Erfassung bedeuten würde, alles im Rohzustand aufzubewahren. Die Kontrollmaßnahme formuliert bewusst beide Seiten – genug zur Rekonstruktion, aber nichts, was das Protokoll zur Sicherheitslücke macht. Der Weg, beides zu vereinbaren, ist die Schwärzung auf Feldebene bei der Erfassung in Kombination mit einer Aufbewahrungsfrist, die an die rechtfertigende Verpflichtung gekoppelt ist. Was Sie nicht tun können, ist, diesen Konflikt zu ignorieren, indem Sie einfach alles aufbewahren und es Compliance nennen."
+        },
+        {
+          "q": "Wie viel Detailgenauigkeit ist ausreichend?",
+          "a": "Genau so viel, wie nötig ist, um den Rekonstruktionstest bei einem zufällig ausgewählten Run zu bestehen – nicht mehr. Dieser Schwellenwert lässt sich durch Ausprobieren ermitteln, weshalb der Test in die Routine und nicht erst in ein Audit gehört. Alles, was darüber hinaus erfasst wird, verursacht Kosten und Risiken, ohne eine konkrete Frage zu beantworten."
+        }
+      ]
+    },
+    "ja": {
+      "name": "関連付けられた実行トレース (Correlated Run Trace)",
+      "summary": "単一の識別子が、エージェントの実行全体（入力、モデルとバージョン、引数と結果を伴うすべてのツール呼び出し、最終的なアクション）をスレッド化し、数ヶ月後でも再現可能な記録としてまとめます。難しいのはキャプチャすること自体ではありません。実行を再構成できるほど完全でありながら、トレースストアが記述対象データの単なる二重コピーにならないよう抑制を効かせることです。",
+      "definition": "関連付けられた実行トレースとは、エージェントの実行におけるすべての決定と行動を記録した、単一の識別子を持つ不変のレコードです。これは、実行を生成したシステムにアクセスすることなく、後からエンドツーエンドで実行を再構成できるほどの忠実度でキャプチャされ、かつトレース自体が元のソースよりも脆弱な標的にならないよう墨消し（編集）が施されています。これはリクエストログではなく、エージェントの意思決定の記録です。",
+      "problem": "エージェントは非決定論的かつマルチステップであるため、出力から「何が起こったか」を推測することはできません。ほとんどの開発チームはログを記録していますが、それでも特定の実行がなぜそのような動作をしたのかを説明できません。各ステップが共有識別子のない異なるシステムに存在していたり、プロンプトがその後変更されたテンプレート参照として記録されていたり、モデルのバージョンがキャプチャされていなかったりするため、動作が変化したのか、それともモデル自体が変化したのかを誰も判断できないのです。",
+      "context": "後から誰かにその行動の結果について問われる可能性のある、あらゆるエージェントが対象となります。例えば、トレースが監査証跡となり、トレーサビリティが単なる好みではなく義務である規制プロセス、根本原因の特定が必要なインシデント、結果に異議を唱える顧客、あるいは学習のために実際の失敗事例を必要とする評価ループなどがこれに該当します。",
+      "solution": [
+        "エントリーポイントで実行識別子を1つ生成し、すべてのステップ、サービス、リトライに伝播させます。相関関係こそが価値のすべてです。同じ実行のリンクされていないレコードは、トレースではなく、単なる3つのログにすぎません。",
+        "テンプレートへの参照ではなく、レンダリングされたプロンプトそのものを記録します。テンプレートIDが解決するのは「今日のテンプレートの内容」であり、モデルが実際に目にしたものではありません。",
+        "すべての呼び出しにおいて、モデルとそのバージョンを併せてキャプチャします。これがないと、事後的に挙動の変化とモデルの変化を区別することができなくなります。",
+        "ツール呼び出しは、引数と結果（失敗やリトライを含む）をログに記録します。成功した呼び出しのみを示すトレースは、実際には起こらなかった実行を記述していることになります。",
+        "読み取り時ではなく、キャプチャ時にマスキングを行います。レコードが書き込まれる前に、機密情報や個人データを削除またはハッシュ化するフィールドレベルのルールを適用します。クエリ実行時にマスキングを適用しても、ストレージには生の値が残ったままになるためです。",
+        "ヘッド（開始時）ではなく、テール（終了時）でサンプリングを行います。実行が終了した後に何を保持するかを決定することで、エラー、エスカレーション、異常値は保持し、日常的な成功例を間引くことができます。",
+        "ストアを追記専用（append-only）にし、ロギングバックエンドにデフォルトで付属しているものではなく、そのストアが記述している最も機密性の高いシステムと同等のアクセス制御を設定します。"
+      ],
+      "components": [
+        "エントリー時に生成され、すべてのステップ、サービス、リトライ、および非同期の継続処理に伝播される実行識別子。",
+        "安定したスキーマ（入力、モデルとバージョン、ツール名、引数、結果、レイテンシ、トークン使用量）を持つ、ステップごとのスパン。",
+        "キャプチャ時に適用されるフィールドレベルのマスキング。何を削除し、何をハッシュ化し、何をそのまま保持するかを明示したリストを含みます。",
+        "事後に決定を行うテールベースのサンプリング。これにより、異常な実行は残され、日常的な実行は間引かれます。",
+        "記録を正当化する義務に合わせた保存期間を持ち、ソースシステムと一致するアクセス制御を備えた、追記専用のストレージ。",
+        "トレースのみから実行を再構築するリプレイパス。そのギャップが把握できるほど十分に頻繁に使用されているもの。"
+      ],
+      "benefits": [
+        "非決定論的な失敗の診断を可能にします。再現するまで何度も実行を繰り返す代わりに、「なぜこの実行がこのような挙動を示したのか」に答えることができます。",
+        "記録保持の義務を、単なる約束事ではなく「成果物」へと変えます。過去のランダムな実行に対する再構築が機能するか、機能しないかのどちらかです。",
+        "作り出された失敗ではなく、実際の失敗を評価にフィードバックします。これは、ベンチマークと回帰テストスイートの違いに相当します。",
+        "ドリフト（傾向の変化）とデプロイを分離します。レコードにモデルバージョンが含まれていれば、「悪化した」という問題に対して明確な答えを出すことができます。"
+      ],
+      "risks": [
+        "最も脆弱な標的としてのトレースストア：記述対象のシステムと同じデータを保持しているにもかかわらず、通常はアクセス制御がより脆弱で、保存期間がより長く設定されています。",
+        "トラフィックとともに増大するキャプチャコスト。コスト削減のために誰かがヘッド（開始時）でサンプリングを行うようになると、保持する価値のある実行が密かに、かつ確実に削除されてしまいます。",
+        "再構築に必要な情報まで削除してしまうマスキング。過剰なマスキングは、ある日誰かが実行をリプレイしようとして失敗するまで、表面化することはありません。",
+        "ボリューム（データ量）をカバレッジと誤認すること。共有識別子のないテラバイト規模のスパンがあっても、特定の1つの実行に関する疑問には何一つ答えることができません。"
+      ],
+      "whenNot": [
+        "入力と出力がすべてである、単一ステップの決定論的な呼び出し。これらはリクエストログだけで十分に再構築可能です。",
+        "ユーザーもおらず義務もないプロトタイプであり、トレースパイプラインのコストが、そこから得られる知見を上回る場合。",
+        "適用される規則によってコンテンツの保持が一切禁止されている場合。その場合、トレースには決定が行われたこととそのメタデータのみを記録し、コンテンツ自体は除外します。これは別の成果物であり、そうでないふりをすることは、その規則が回避するために作られた法的責任（ライアビリティ）を生み出すことになります。"
+      ],
+      "examples": [
+        "エージェントが誤った顧客にメールを送信したインシデント。実行識別子によって、誤ったレコードを返したリトリーバル、それを使用したツール呼び出し、および送信されたメッセージがリンクされるため、1週間の再現テストを繰り返すことなく、1つのクエリが根本原因であることを特定できます。",
+        "規制当局から、6ヶ月前にどのように決定が下されたかについての問い合わせがあった場合。リプレイパスにより、その日に有効だったモデルバージョンを含め、トレースのみから実行を再構築します。",
+        "モデルのアップグレード後に品質が低下した場合。すべてのスパンにモデルバージョンが含まれているため、主観的な印象ではなく、実際の実行における2つの母集団を比較することができます。"
+      ],
+      "kpis": [
+        {
+          "metric": "再構築成功率",
+          "note": "トレースのみからエンドツーエンドで再構築できる、ランダムに選択された過去の実行の割合。これはコントロール自体のテストであり、単にキャプチャ量を増やすだけでは改善できない、ここでの唯一の数値です。"
+        },
+        {
+          "metric": "相関関係の完全性",
+          "note": "実行識別子を持つ、実行内のスパンの割合。100%未満であることは、一部のステップが不可視であることを意味し、欠落しているステップが退屈なものであることは滅多にありません。"
+        },
+        {
+          "metric": "機密フィールドの漏洩率",
+          "note": "マスキングルールによって削除されるべき値が含まれている、サンプリングされたレコードの割合。目標値はゼロです。それ以外の数値は、トレースストアに法的責任（ライアビリティ）が蓄積されていることを意味します。"
+        },
+        {
+          "metric": "異常な実行の保持率",
+          "note": "サンプリング後に保持される、エラーまたはエスカレーションが発生した実行の割合。ヘッドベースのサンプリングでは、この数値がサンプリング率に近づいてしまいます。この指標は、まさにその失敗を検知するために存在します。"
+        }
+      ],
+      "failureModes": [
+        "何も証明できないトレース：すべてのステップがログに記録されているものの、どのステップも識別子を共有しておらず、1つの実行を再構築するためにタイムスタンプを手動で関連付ける必要があります。",
+        "参照によって記録されたプロンプト。テンプレートが変更されたため、ログにはモデルが実際には見ていないプロンプトが記述されるようになり、再構築結果が出力と矛盾するまで誰もそのことに気づきません。",
+        "平凡な実行を保持するヘッドベースのサンプリング。必要となる実行は、それが興味深いものになると判明する前に、エントリーポイントで破棄されてしまいます。",
+        "情報漏洩の原因となるログ：ツールの生の引数によって個人データがストアに持ち込まれ、そのデータが元々あったデータベースよりも広いアクセス権限と長い保存期間で保管されてしまいます。",
+        "モデルバージョンの欠落。挙動の変化とサイレントなモデルアップデートがレコード上で同一に見えてしまい、トレースが答えるべきであった疑問のところで調査が頓挫します。"
+      ],
+      "lessons": [
+        "相関関係こそが成果物であり、キャプチャは原材料にすぎません。トレースバックエンドを購入しながら識別子の付与を省くチームは、答えではなく、単なるストレージを手に入れることになります。",
+        "パイプラインではなく、再構築をテストします。過去のランダムな実行を選択して再構築してみてください。ギャップは常に誰もインスツルメンテーションを行わなかった場所にあり、実際に試してみることでしか見つけることができません。",
+        "書き込み時にマスキングを行います。読み取り時までマスキングを延期することは、生の実データを保持することを決定したのと同じであり、ストレージは意図よりも長く存続します。",
+        "テールでサンプリングを行います。ヘッドベースのサンプリングは、どの実行が興味深いものになるか判明する前に、それらを破棄することを決定してしまいます。",
+        "すべての場所でモデルバージョンを記録します。必要なコストはフィールド1つ分であり、これによってドリフトを診断できるか、それとも不毛な議論に終始するかの違いが生まれます。"
+      ],
+      "faqs": [
+        {
+          "q": "すでにトレースバックエンドを使用しています。これで解決しているのではないでしょうか？",
+          "a": "バックエンドが提供するのはキャプチャとストレージです。このパターンが扱うのは、バックエンドが決定してくれない3つの事項です。すなわち、1つの識別子が実行全体を貫いているか、ソースシステムなしで再構築できるほどの十分な忠実度（fidelity）があるか、そして記録した内容を安全に保持できるか、です。優れたツールを導入しているチームであっても、再構築テストに日常的に失敗しています。"
+        },
+        {
+          "q": "完全なキャプチャはデータの最小化原則と矛盾しませんか？",
+          "a": "キャプチャが生のデータですべてを保持することを意味するのであれば、矛盾するでしょう。このコントロールは意図的に両面を規定しています。つまり、再構築には十分でありながら、ログが情報漏洩の原因にならないようにすることです。この両立を実現する方法は、キャプチャ時のフィールドレベルのマスキングと、記録を正当化する義務に紐づいた保存期間の設定です。やってはならないのは、すべてを保持した上でそれをコンプライアンスと呼び、この対立から目を背けることです。"
+        },
+        {
+          "q": "どの程度の忠実度（fidelity）があれば十分ですか？",
+          "a": "ランダムに選ばれた実行に対する再構築テストに合格するのに必要十分なレベルであり、それ以上は不要です。そのしきい値は実際に試してみることで発見できるため、このテストは監査時ではなく日常のルーティンに組み込むべきです。それを超えてキャプチャされたものはすべて、何の疑問にも答えないまま、コストと法的責任（ライアビリティ）を増大させるだけです。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "关联运行追踪",
+      "summary": "一个标识符将整个智能体运行过程串联起来——输入、模型及版本、每次工具调用及其参数和结果、最终动作——形成一条可在数月后重新播放的记录。难点不在于捕获，而在于既要足够完整以重构运行过程，又要足够克制以避免追踪存储库成为其所描述数据的第二份副本。",
+      "definition": "关联运行追踪是关于智能体运行所做出的所有决策和行为的不可变、单标识符记录。它以极高的保真度进行捕获，以便他人事后能够在无法访问生成该运行的系统的情况下，端到端地重构该运行，并经过脱敏处理，以确保追踪记录不会比源系统更容易成为攻击目标。它是智能体决策的记录，而不是请求日志。",
+      "problem": "智能体具有非确定性和多步骤的特点，因此无法仅从输出中推断出“发生了什么”。大多数团队确实进行了日志记录，但仍然无法回答为什么特定的运行会做出那样的行为：各步骤分散在不同的系统中且没有共享的标识符，Prompt 被记录为自那以后已发生更改的模板引用，或者从未捕获模型版本，导致无人能分清是行为发生了漂移还是模型发生了漂移。",
+      "context": "适用于任何其行为后果在日后会被追问的智能体：如追踪记录作为审计线索且可追溯性是义务而非偏好的受监管流程、需要寻找根本原因的事件、客户对结果提出异议，或者需要从真实失败中学习的评估循环。",
+      "solution": [
+        "在入口点生成一个运行标识符，并将其传播到每个步骤、服务和重试中。关联性是其全部价值所在：同一运行中未关联的记录只是三条日志，而不是一条追踪。",
+        "记录渲染后的提示词，而不是其引用。模板 ID 解析出的是该模板今天的具体内容，这与模型当时看到的并不相同。",
+        "在每次调用时同时捕获模型及其版本。如果没有它，事后将无法区分是行为变化还是模型变化。",
+        "将工具调用记录为参数加结果，包括失败和重试。仅显示成功调用的追踪所描述的运行在现实中并未发生。",
+        "在捕获时进行脱敏，而不是在读取时。在写入记录之前，通过字段级规则丢弃或哈希处理机密和个人数据，因为在查询时应用的脱敏仍会将原始值留在存储中。",
+        "在尾部进行采样，而不是在头部。在运行结束后决定保留什么，以便保留错误、升级和异常，而稀释常规的成功记录。",
+        "使存储保持只追加（append-only）状态，并为其赋予其所描述的最敏感系统的访问控制权限，而不是日志后端自带的权限。"
+      ],
+      "components": [
+        "在入口处生成的运行标识符，并传播到每个步骤、服务、重试和异步延续中。",
+        "每个步骤一个具有稳定 Schema 的 Span：输入、模型与版本、工具名称、参数、结果、延迟、Token 使用情况。",
+        "在捕获时应用的字段级脱敏，并附有明确的列表，说明哪些被丢弃、哪些被哈希处理以及哪些被完整保留。",
+        "基于尾部的采样，在事后做出决定，从而保留异常运行并稀释常规运行。",
+        "只追加存储，其保留期限与证明该记录合理性的合规义务相一致，且访问控制与源系统相匹配。",
+        "一条仅凭追踪即可重构运行的重放路径，其使用频率足够高，以至于其缺陷是已知的。"
+      ],
+      "benefits": [
+        "使非确定性故障可诊断：你可以回答为什么这次运行会执行此操作，而不是不断复现直到它再次发生。",
+        "将记录保存义务转化为具体的产物，而不是一种承诺。重构要么对随机选择的过去运行有效，要么无效。",
+        "用真实的失败而非虚构的失败来喂养评估，这就是基准测试（benchmark）与回归测试套件（regression suite）之间的区别。",
+        "将漂移与部署分离开来。通过在记录中包含模型版本，“情况变糟了”就变成了一个有答案的问题。"
+      ],
+      "risks": [
+        "追踪存储是最容易受到攻击的目标：它保存着与其所描述的系统相同的数据，但通常访问控制更弱且保留时间更长。",
+        "捕获成本随着流量增长，直到有人为了省钱而在头部进行采样，从而悄无声息地移除了恰恰最值得保留的运行记录。",
+        "脱敏移除了重构所需的内容。过度脱敏是隐蔽的，直到有一天有人试图重放某次运行却无法实现时才会暴露。",
+        "将数据量误认为覆盖率。数 TB 没有共享标识符的 Span 仍然无法回答关于单次运行的任何一个问题。"
+      ],
+      "whenNot": [
+        "单步、确定性的调用，其中输入和输出就是全部内容。请求日志已经可以重构这些调用。",
+        "没有用户且没有合规义务的原型，其追踪流水线的成本超过了你能从中获得的任何收获。",
+        "适用规则完全禁止保留内容的情况。此时，追踪仅记录决策的发生及其元数据，而内容则不予保留——这是一种不同的产物，假装并非如此会产生该规则旨在避免的法律责任。"
+      ],
+      "examples": [
+        "智能体向错误的客户发送电子邮件的事件。运行标识符将返回错误记录的检索、使用该记录的工具调用以及发送的消息关联起来，因此根本原因在于某一次查询，而不是耗费一周时间去尝试复现。",
+        "监管机构询问六个月前是如何做出某项决策的。重放路径仅凭追踪即可重建该运行，包括当天生效的模型版本。",
+        "模型升级后质量下降。因为每个 Span 都带有模型版本，所以对比是在两组真实运行的数据之间进行，而不是凭主观印象。"
+      ],
+      "kpis": [
+        {
+          "metric": "重构成功率",
+          "note": "仅凭追踪即可端到端重建的随机选择的过去运行的比例。这是该控制项自身的测试，也是此处唯一一个无法通过捕获更多数据来满足的数字。"
+        },
+        {
+          "metric": "关联完整性",
+          "note": "一次运行中带有运行标识符的 Span 比例。任何低于 100% 的情况都意味着某些步骤是不可见的，而缺失的步骤往往不是无关紧要的步骤。"
+        },
+        {
+          "metric": "敏感字段逃逸率",
+          "note": "抽样记录中包含脱敏规则本应移除的值的比例。目标是零；任何其他数字都意味着追踪存储正在累积法律责任。"
+        },
+        {
+          "metric": "异常运行保留率",
+          "note": "采样后保留的出错或升级运行的比例。基于头部的采样会使该指标趋向于采样率，而这正是该指标旨在捕获的失效情况。"
+        }
+      ],
+      "failureModes": [
+        "无法证明任何事情的追踪：记录了每个步骤，但没有步骤共享标识符，重构一次运行意味着需要手动关联时间戳。",
+        "通过引用记录的提示词。模板发生了变化，因此日志现在描述的是模型从未见过的提示词，而且直到重构与输出相矛盾时才有人注意到。",
+        "保留常规记录的头部采样。你需要的运行在入口点就被丢弃了，而当时还没有人知道它会变得有价值。",
+        "作为泄露源的日志：原始工具参数将个人数据带入了一个比其来源数据库具有更广泛访问权限和更长保留期限的存储中。",
+        "缺失模型版本。行为变化和静默的模型更新在记录中看起来完全相同，导致调查卡在了一个本应由追踪来回答的问题上。"
+      ],
+      "lessons": [
+        "关联性是最终产物，捕获只是原材料。购买了追踪后端却跳过标识符的团队，最终得到的只是存储空间而不是答案。",
+        "测试重构，而不是流水线。随机选择一次过去的运行并重建它——缺陷总是存在于没有人进行插桩的地方，只有尝试才能发现它们。",
+        "在写入时进行脱敏。任何推迟到读取时的脱敏都是保留原始值的决定，而存储的寿命往往比意图更长。",
+        "在尾部进行采样。基于头部的采样是在知道哪些运行有价值之前，就做出了丢弃这些有价值运行的决定。",
+        "在所有地方记录模型版本。它只占用一个字段，却能决定你是能诊断漂移还是只能为此争论不休。"
+      ],
+      "faqs": [
+        {
+          "q": "我们已经使用了追踪后端。这难道还没有解决吗？",
+          "a": "后端为你提供捕获和存储。而此模式关注的是后端无法为你决定的三件事：是否有一个标识符贯穿整个运行、保真度是否足以在没有源系统的情况下重构它，以及你记录的内容是否可以安全保留。拥有优秀工具链的团队也经常无法通过重构测试。"
+        },
+        {
+          "q": "完整捕获是否与数据最小化原则相冲突？",
+          "a": "如果捕获意味着保留所有原始数据，那确实会冲突。该控制项有意兼顾了这两个方面——既足以重构，又不会使日志变成泄露源——而兼顾两者的关键在于捕获时的字段级脱敏，以及与证明记录合理性的合规义务相绑定的保留期限。你不能通过保留所有内容并称之为合规来消除这种张力。"
+        },
+        {
+          "q": "多高的保真度才足够？",
+          "a": "恰好足以通过对随机抽取的运行进行的重构测试即可，无需更多。这个阈值可以通过尝试来发现，这就是为什么该测试应该属于日常工作而不是审计。超出此范围捕获的任何内容都是成本和法律责任，而无法回答任何问题。"
+        }
+      ]
     }
   }
 }

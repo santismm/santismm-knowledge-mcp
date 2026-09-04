@@ -3,15 +3,29 @@
   "category": "orchestration",
   "updated": "2026-06-21",
   "version": "1.0",
-  "technologies": ["LangGraph", "Async runtimes", "OpenAI Agents SDK", "Map-reduce frameworks"],
-  "related": ["prompt-chaining", "orchestrator-workers", "evaluator-optimizer"],
+  "technologies": [
+    "LangGraph",
+    "Async runtimes",
+    "OpenAI Agents SDK",
+    "Map-reduce frameworks"
+  ],
+  "related": [
+    "prompt-chaining",
+    "orchestrator-workers",
+    "evaluator-optimizer"
+  ],
   "references": [
-    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" }
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["industry_observation"]
+    "sourceType": [
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {
@@ -23,7 +37,11 @@
         "Sectioning: split the work into independent pieces, run them concurrently, and combine the outputs. Voting: run the same prompt multiple times (or with variations) and aggregate by majority, union or a judge.",
         "Both reduce wall-clock time versus sequential execution; voting additionally trades extra cost for higher reliability on tasks where a single sample is risky."
       ],
-      "components": ["Task splitter", "Concurrent workers", "Aggregator (merge / vote / judge)"],
+      "components": [
+        "Task splitter",
+        "Concurrent workers",
+        "Aggregator (merge / vote / judge)"
+      ],
       "benefits": [
         "Lower latency by running calls concurrently.",
         "Voting improves reliability and coverage.",
@@ -45,10 +63,22 @@
         "Sampling an answer several times and taking the majority."
       ],
       "kpis": [
-        { "metric": "Latency reduction vs. sequential", "note": "Wall-clock saved by running calls concurrently; the whole point of the pattern." },
-        { "metric": "Aggregation quality", "note": "Whether merging the parallel outputs preserves correctness — the hard part is the join, not the fan-out." },
-        { "metric": "Concurrency cost", "note": "Total tokens across all parallel branches; you trade money for speed, so watch the multiplier." },
-        { "metric": "Rate-limit / throttle rate", "note": "How often parallel calls hit provider rate limits, which silently serializes or fails them." }
+        {
+          "metric": "Latency reduction vs. sequential",
+          "note": "Wall-clock saved by running calls concurrently; the whole point of the pattern."
+        },
+        {
+          "metric": "Aggregation quality",
+          "note": "Whether merging the parallel outputs preserves correctness — the hard part is the join, not the fan-out."
+        },
+        {
+          "metric": "Concurrency cost",
+          "note": "Total tokens across all parallel branches; you trade money for speed, so watch the multiplier."
+        },
+        {
+          "metric": "Rate-limit / throttle rate",
+          "note": "How often parallel calls hit provider rate limits, which silently serializes or fails them."
+        }
       ],
       "failureModes": [
         "Aggregation errors: parallel results are correct individually but combined wrongly (double-counting, contradictions).",
@@ -63,9 +93,18 @@
         "Decide explicitly how partial failures are handled before they happen in production."
       ],
       "faqs": [
-        { "q": "What is the difference between sectioning and voting?", "a": "Sectioning splits one task into different independent subtasks; voting runs the same task multiple times to aggregate for reliability." },
-        { "q": "Does voting always improve quality?", "a": "Often, on tasks where samples vary, but it multiplies cost. Reserve it for high-stakes steps where a single sample is risky." },
-        { "q": "How do I combine parallel results?", "a": "Depending on the case: concatenate sections, take a majority vote, union the findings, or use a judge model to synthesize." }
+        {
+          "q": "What is the difference between sectioning and voting?",
+          "a": "Sectioning splits one task into different independent subtasks; voting runs the same task multiple times to aggregate for reliability."
+        },
+        {
+          "q": "Does voting always improve quality?",
+          "a": "Often, on tasks where samples vary, but it multiplies cost. Reserve it for high-stakes steps where a single sample is risky."
+        },
+        {
+          "q": "How do I combine parallel results?",
+          "a": "Depending on the case: concatenate sections, take a majority vote, union the findings, or use a judge model to synthesize."
+        }
       ]
     },
     "es": {
@@ -77,7 +116,11 @@
         "Seccionado: divide el trabajo en piezas independientes, ejecútalas en paralelo y combina las salidas. Votación: ejecuta el mismo prompt varias veces (o con variaciones) y agrega por mayoría, unión o un juez.",
         "Ambas reducen el tiempo real frente a la ejecución secuencial; la votación además cambia coste extra por mayor fiabilidad en tareas donde una sola muestra es arriesgada."
       ],
-      "components": ["Divisor de tareas", "Trabajadores concurrentes", "Agregador (fusión / voto / juez)"],
+      "components": [
+        "Divisor de tareas",
+        "Trabajadores concurrentes",
+        "Agregador (fusión / voto / juez)"
+      ],
       "benefits": [
         "Menor latencia al ejecutar llamadas en concurrencia.",
         "La votación mejora la fiabilidad y la cobertura.",
@@ -99,10 +142,22 @@
         "Muestrear una respuesta varias veces y tomar la mayoría."
       ],
       "kpis": [
-        { "metric": "Reducción de latencia vs. secuencial", "note": "Tiempo ahorrado al ejecutar llamadas en paralelo; la razón de ser del patrón." },
-        { "metric": "Calidad de la agregación", "note": "Si combinar las salidas paralelas preserva la corrección; lo difícil es la unión, no el fan-out." },
-        { "metric": "Coste de concurrencia", "note": "Tokens totales de todas las ramas paralelas; cambias dinero por velocidad, vigila el multiplicador." },
-        { "metric": "Tasa de límite de tasa / throttle", "note": "Con qué frecuencia las llamadas paralelas chocan con los límites del proveedor, que las serializa o falla en silencio." }
+        {
+          "metric": "Reducción de latencia vs. secuencial",
+          "note": "Tiempo ahorrado al ejecutar llamadas en paralelo; la razón de ser del patrón."
+        },
+        {
+          "metric": "Calidad de la agregación",
+          "note": "Si combinar las salidas paralelas preserva la corrección; lo difícil es la unión, no el fan-out."
+        },
+        {
+          "metric": "Coste de concurrencia",
+          "note": "Tokens totales de todas las ramas paralelas; cambias dinero por velocidad, vigila el multiplicador."
+        },
+        {
+          "metric": "Tasa de límite de tasa / throttle",
+          "note": "Con qué frecuencia las llamadas paralelas chocan con los límites del proveedor, que las serializa o falla en silencio."
+        }
       ],
       "failureModes": [
         "Errores de agregación: resultados paralelos correctos por separado pero mal combinados (doble conteo, contradicciones).",
@@ -117,9 +172,18 @@
         "Decide explícitamente cómo se manejan los fallos parciales antes de que ocurran en producción."
       ],
       "faqs": [
-        { "q": "¿Diferencia entre seccionado y votación?", "a": "El seccionado divide una tarea en subtareas independientes distintas; la votación ejecuta la misma tarea varias veces para agregar por fiabilidad." },
-        { "q": "¿La votación siempre mejora la calidad?", "a": "A menudo, en tareas donde las muestras varían, pero multiplica el coste. Resérvala para pasos críticos donde una sola muestra es arriesgada." },
-        { "q": "¿Cómo combino resultados paralelos?", "a": "Según el caso: concatenar secciones, tomar voto mayoritario, unir los hallazgos o usar un modelo juez para sintetizar." }
+        {
+          "q": "¿Diferencia entre seccionado y votación?",
+          "a": "El seccionado divide una tarea en subtareas independientes distintas; la votación ejecuta la misma tarea varias veces para agregar por fiabilidad."
+        },
+        {
+          "q": "¿La votación siempre mejora la calidad?",
+          "a": "A menudo, en tareas donde las muestras varían, pero multiplica el coste. Resérvala para pasos críticos donde una sola muestra es arriesgada."
+        },
+        {
+          "q": "¿Cómo combino resultados paralelos?",
+          "a": "Según el caso: concatenar secciones, tomar voto mayoritario, unir los hallazgos o usar un modelo juez para sintetizar."
+        }
       ]
     },
     "pt": {
@@ -131,7 +195,11 @@
         "Seccionamento: divida o trabalho em peças independentes, execute-as em paralelo e combine as saídas. Votação: execute o mesmo prompt várias vezes (ou com variações) e agregue por maioria, união ou um juiz.",
         "Ambas reduzem o tempo real frente à execução sequencial; a votação além disso troca custo extra por maior confiabilidade em tarefas em que uma única amostra é arriscada."
       ],
-      "components": ["Divisor de tarefas", "Trabalhadores concorrentes", "Agregador (fusão / voto / juiz)"],
+      "components": [
+        "Divisor de tarefas",
+        "Trabalhadores concorrentes",
+        "Agregador (fusão / voto / juiz)"
+      ],
       "benefits": [
         "Menor latência ao executar chamadas em concorrência.",
         "A votação melhora a confiabilidade e a cobertura.",
@@ -153,10 +221,22 @@
         "Amostrar uma resposta várias vezes e tomar a maioria."
       ],
       "kpis": [
-        { "metric": "Redução de latência vs. sequencial", "note": "Tempo economizado ao executar chamadas em paralelo; a razão de ser do padrão." },
-        { "metric": "Qualidade da agregação", "note": "Se combinar as saídas paralelas preserva a correção; o difícil é a junção, não o fan-out." },
-        { "metric": "Custo de concorrência", "note": "Tokens totais de todas as ramificações paralelas; você troca dinheiro por velocidade, vigie o multiplicador." },
-        { "metric": "Taxa de rate limit / throttle", "note": "Com que frequência as chamadas paralelas batem nos limites do provedor, que as serializa ou falha em silêncio." }
+        {
+          "metric": "Redução de latência vs. sequencial",
+          "note": "Tempo economizado ao executar chamadas em paralelo; a razão de ser do padrão."
+        },
+        {
+          "metric": "Qualidade da agregação",
+          "note": "Se combinar as saídas paralelas preserva a correção; o difícil é a junção, não o fan-out."
+        },
+        {
+          "metric": "Custo de concorrência",
+          "note": "Tokens totais de todas as ramificações paralelas; você troca dinheiro por velocidade, vigie o multiplicador."
+        },
+        {
+          "metric": "Taxa de rate limit / throttle",
+          "note": "Com que frequência as chamadas paralelas batem nos limites do provedor, que as serializa ou falha em silêncio."
+        }
       ],
       "failureModes": [
         "Erros de agregação: resultados paralelos corretos isoladamente mas mal combinados (dupla contagem, contradições).",
@@ -171,9 +251,334 @@
         "Decida explicitamente como as falhas parciais são tratadas antes que ocorram em produção."
       ],
       "faqs": [
-        { "q": "Diferença entre seccionamento e votação?", "a": "O seccionamento divide uma tarefa em subtarefas independentes distintas; a votação executa a mesma tarefa várias vezes para agregar por confiabilidade." },
-        { "q": "A votação sempre melhora a qualidade?", "a": "Muitas vezes, em tarefas em que as amostras variam, mas multiplica o custo. Reserve-a para passos críticos em que uma única amostra é arriscada." },
-        { "q": "Como combino resultados paralelos?", "a": "Conforme o caso: concatenar seções, tomar voto majoritário, unir os achados ou usar um modelo juiz para sintetizar." }
+        {
+          "q": "Diferença entre seccionamento e votação?",
+          "a": "O seccionamento divide uma tarefa em subtarefas independentes distintas; a votação executa a mesma tarefa várias vezes para agregar por confiabilidade."
+        },
+        {
+          "q": "A votação sempre melhora a qualidade?",
+          "a": "Muitas vezes, em tarefas em que as amostras variam, mas multiplica o custo. Reserve-a para passos críticos em que uma única amostra é arriscada."
+        },
+        {
+          "q": "Como combino resultados paralelos?",
+          "a": "Conforme o caso: concatenar seções, tomar voto majoritário, unir os achados ou usar um modelo juiz para sintetizar."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Parallélisation",
+      "summary": "La parallélisation exécute plusieurs appels de LLM en même temps et agrège les résultats. Deux variantes : le sectionnement (diviser une tâche en sous-tâches indépendantes exécutées en parallèle) et le vote (exécuter la même tâche plusieurs fois pour améliorer la fiabilité ou la couverture). Elle réduit la latence et peut améliorer la qualité.",
+      "problem": "Exécuter des sous-tâches indépendantes les unes après les autres fait perdre du temps, et un échantillon unique d'une tâche difficile peut s'avérer peu fiable.",
+      "context": "Utilisez la parallélisation lorsque les sous-tâches sont indépendantes (sectionnement), ou lorsque plusieurs tentatives pour une même tâche améliorent la confiance ou la couverture (vote).",
+      "solution": [
+        "Sectionnement : diviser le travail en parties indépendantes, les exécuter simultanément et combiner les résultats. Vote : exécuter le même prompt plusieurs fois (ou avec des variantes) et agréger par majorité, union ou via un juge.",
+        "Les deux approches réduisent le temps d'exécution réel par rapport à une exécution séquentielle ; le vote permet en outre d'échanger un coût supplémentaire contre une plus grande fiabilité sur les tâches où un échantillon unique est risqué."
+      ],
+      "components": [
+        "Diviseur de tâche",
+        "Workers concurrents",
+        "Agrégateur (fusion / vote / juge)"
+      ],
+      "benefits": [
+        "Latence réduite en exécutant les appels de manière concurrente.",
+        "Le vote améliore la fiabilité et la couverture.",
+        "Chaque appel parallèle reste simple et ciblé."
+      ],
+      "risks": [
+        "Le vote multiplie le coût en jetons.",
+        "La logique d'agrégation peut être difficile à mettre au point.",
+        "Des sous-tâches supposées indépendantes peuvent en réalité interagir."
+      ],
+      "whenNot": [
+        "Lorsque les sous-tâches dépendent du résultat les unes des autres — enchaînez-les.",
+        "Lorsque le budget est serré et qu'un seul appel suffit.",
+        "Lorsque les résultats ne peuvent pas être agrégés de manière significative."
+      ],
+      "examples": [
+        "Résumer plusieurs documents à la fois, puis fusionner les résumés.",
+        "Exécuter un contrôle de sécurité en parallèle de la réponse principale.",
+        "Échantillonner une réponse plusieurs fois et retenir la majorité."
+      ],
+      "kpis": [
+        {
+          "metric": "Réduction de la latence par rapport au séquentiel",
+          "note": "Temps réel économisé en exécutant les appels de manière concurrente ; c'est tout l'intérêt de ce pattern."
+        },
+        {
+          "metric": "Qualité de l'agrégation",
+          "note": "Le fait que la fusion des résultats parallèles préserve ou non l'exactitude — la difficulté réside dans la jointure, pas dans la distribution (fan-out)."
+        },
+        {
+          "metric": "Coût de la concurrence",
+          "note": "Total des jetons sur l'ensemble des branches parallèles ; vous échangez de l'argent contre de la vitesse, surveillez donc le multiplicateur."
+        },
+        {
+          "metric": "Taux de dépassement des limites de requêtes (rate-limit / throttle)",
+          "note": "Fréquence à laquelle les appels parallèles atteignent les limites de requêtes du fournisseur, ce qui les sérialise silencieusement ou les fait échouer."
+        }
+      ],
+      "failureModes": [
+        "Erreurs d'agrégation : les résultats parallèles sont corrects individuellement mais mal combinés (double comptage, contradictions).",
+        "La limitation du débit (rate limiting) transforme la parallélisation prévue en appels séquentiels lents.",
+        "Surprise sur les coûts : N branches parallèles coûtent N fois plus cher, même si un seul résultat est utilisé.",
+        "Gestion des échecs partiels : une branche échoue et l'agrégateur bloque ou l'ignore silencieusement."
+      ],
+      "lessons": [
+        "Concevez d'abord l'étape d'agrégation — bien combiner les résultats est plus difficile que de diviser le travail.",
+        "Respectez les limites de requêtes du fournisseur avec du traitement par lots (batching) ou du backoff, sous peine de voir la parallélisation s'évaporer.",
+        "Ne parallélisez que les sous-tâches indépendantes ; les dépendances imposent de toute façon un enchaînement séquentiel.",
+        "Décidez explicitement de la manière dont les échecs partiels sont gérés avant qu'ils ne surviennent en production."
+      ],
+      "faqs": [
+        {
+          "q": "Quelle est la différence entre le sectionnement et le vote ?",
+          "a": "Le sectionnement divise une tâche en différentes sous-tâches indépendantes ; le vote exécute la même tâche plusieurs fois afin d'agréger les résultats pour plus de fiabilité."
+        },
+        {
+          "q": "Le vote améliore-t-il toujours la qualité ?",
+          "a": "Souvent, sur les tâches où les échantillons varient, mais cela multiplie les coûts. Réservez-le aux étapes à enjeux élevés où un échantillon unique est risqué."
+        },
+        {
+          "q": "Comment combiner les résultats parallèles ?",
+          "a": "Selon le cas : concaténer les sections, procéder à un vote majoritaire, unir les résultats ou utiliser un modèle juge pour faire la synthèse."
+        }
+      ]
+    },
+    "de": {
+      "name": "Parallelisierung",
+      "summary": "Parallelisierung führt mehrere LLM-Aufrufe gleichzeitig aus und aggregiert die Ergebnisse. Zwei Varianten: Sektionierung (Aufteilen einer Aufgabe in unabhängige, parallel ausgeführte Teilaufgaben) und Voting (mehrfaches Ausführen derselben Aufgabe zur Verbesserung der Zuverlässigkeit oder Abdeckung). Sie verringert die Latenz und kann die Qualität steigern.",
+      "problem": "Das nacheinander Ausführen unabhängiger Teilaufgaben verschwendet Zeit, und ein einzelner Durchlauf einer schwierigen Aufgabe kann unzuverlässig sein.",
+      "context": "Nutzen Sie Parallelisierung, wenn Teilaufgaben unabhängig sind (Sektionierung) oder wenn mehrere Versuche bei derselben Aufgabe das Vertrauen oder die Abdeckung verbessern (Voting).",
+      "solution": [
+        "Sektionierung: Teilen Sie die Arbeit in unabhängige Teile auf, führen Sie diese gleichzeitig aus und kombinieren Sie die Ausgaben. Voting: Führen Sie denselben Prompt mehrmals (oder mit Variationen) aus und aggregieren Sie die Ergebnisse per Mehrheitsentscheid, Vereinigung oder durch ein Judge-Modell.",
+        "Beide Ansätze reduzieren die tatsächliche Laufzeit im Vergleich zur sequenziellen Ausführung; Voting tauscht zudem zusätzliche Kosten gegen eine höhere Zuverlässigkeit bei Aufgaben ein, bei denen ein einzelner Durchlauf riskant ist."
+      ],
+      "components": [
+        "Task-Splitter",
+        "Gleichzeitige Worker",
+        "Aggregator (Zusammenführung / Voting / Bewertung)"
+      ],
+      "benefits": [
+        "Geringere Latenz durch gleichzeitiges Ausführen von Aufrufen.",
+        "Voting verbessert die Zuverlässigkeit und Abdeckung.",
+        "Jeder parallele Aufruf bleibt einfach und fokussiert."
+      ],
+      "risks": [
+        "Voting vervielfacht die Token-Kosten.",
+        "Die Aggregationslogik kann in der korrekten Umsetzung knifflig sein.",
+        "Teilaufgaben, von denen angenommen wird, dass sie unabhängig sind, können sich tatsächlich gegenseitig beeinflussen."
+      ],
+      "whenNot": [
+        "Wenn Teilaufgaben von den Ausgaben der jeweils anderen abhängen – verketten Sie diese.",
+        "Wenn das Budget knapp ist und ein einzelner Aufruf ausreicht.",
+        "Wenn Ergebnisse nicht sinnvoll aggregiert werden können."
+      ],
+      "examples": [
+        "Gleichzeitiges Zusammenfassen vieler Dokumente und anschließendes Zusammenführen der Zusammenfassungen.",
+        "Paralleles Ausführen einer Sicherheitsprüfung zur Hauptantwort.",
+        "Mehrfaches Generieren einer Antwort und Auswahl der Mehrheit."
+      ],
+      "kpis": [
+        {
+          "metric": "Latenzreduktion im Vergleich zu sequenziell",
+          "note": "Eingesparte tatsächliche Laufzeit durch gleichzeitiges Ausführen von Aufrufen; der eigentliche Zweck dieses Musters."
+        },
+        {
+          "metric": "Aggregationsqualität",
+          "note": "Ob das Zusammenführen der parallelen Ausgaben die Korrektheit bewahrt – der schwierige Teil ist der Join, nicht der Fan-out."
+        },
+        {
+          "metric": "Parallelitätskosten",
+          "note": "Gesamte Token über alle parallelen Zweige hinweg; Sie tauschen Geld gegen Geschwindigkeit, achten Sie also auf den Multiplikator."
+        },
+        {
+          "metric": "Rate-Limit- / Drosselungsrate",
+          "note": "Wie oft parallele Aufrufe an die Rate-Limits des Anbieters stoßen, was sie unbemerkt serialisiert oder fehlschlagen lässt."
+        }
+      ],
+      "failureModes": [
+        "Aggregationsfehler: Parallele Ergebnisse sind einzeln korrekt, werden aber falsch kombiniert (Doppelzählung, Widersprüche).",
+        "Rate-Limiting verwandelt die beabsichtigte Parallelität wieder in langsame, sequenzielle Aufrufe.",
+        "Kostenüberraschung: N parallele Zweige kosten das N-Fache, selbst wenn nur ein Ergebnis verwendet wird.",
+        "Umgang mit Teilausfällen: Ein Zweig schlägt fehl und der Aggregator blockiert entweder oder verwirft ihn stillschweigend."
+      ],
+      "lessons": [
+        "Entwerfen Sie zuerst den Aggregationsschritt – das gute Kombinieren von Ergebnissen ist schwieriger als das Aufteilen der Arbeit.",
+        "Beachten Sie die Rate-Limits des Anbieters durch Batching oder Backoff, da die Parallelität sonst verpufft.",
+        "Parallelisieren Sie nur unabhängige Teilaufgaben; Abhängigkeiten erzwingen ohnehin eine Sequenz.",
+        "Entscheiden Sie explizit, wie mit Teilausfällen umgegangen wird, bevor sie in der Produktion auftreten."
+      ],
+      "faqs": [
+        {
+          "q": "Was ist der Unterschied zwischen Sektionierung und Voting?",
+          "a": "Sektionierung teilt eine Aufgabe in verschiedene unabhängige Teilaufgaben auf; Voting führt dieselbe Aufgabe mehrfach aus, um die Ergebnisse für eine höhere Zuverlässigkeit zu aggregieren."
+        },
+        {
+          "q": "Verbessert Voting immer die Qualität?",
+          "a": "Oft bei Aufgaben, bei denen die Ergebnisse variieren, aber es vervielfacht die Kosten. Reservieren Sie es für kritische Schritte, bei denen ein einzelner Durchlauf riskant ist."
+        },
+        {
+          "q": "Wie kombiniere ich parallele Ergebnisse?",
+          "a": "Je nach Fall: Verketten Sie Abschnitte, führen Sie einen Mehrheitsentscheid durch, vereinigen Sie die Ergebnisse oder nutzen Sie ein Judge-Modell zur Synthese."
+        }
+      ]
+    },
+    "ja": {
+      "name": "並列化",
+      "summary": "並列化は、複数のLLM呼び出しを同時に実行し、その結果を集約します。これには2つのパターンがあります。セクショニング（タスクを独立したサブタスクに分割して並列実行する）と、ボーティング（信頼性やカバレッジを向上させるために同じタスクを複数回実行する）です。これにより、レイテンシが短縮され、品質が向上します。",
+      "problem": "独立したサブタスクを順次実行すると時間が無駄になり、また、難易度の高いタスクを1回だけ試行した結果は信頼性に欠ける場合があります。",
+      "context": "サブタスクが独立している場合（セクショニング）、または同じタスクを複数回試行することで確信度やカバレッジが向上する場合（ボーティング）に、並列化を使用します。",
+      "solution": [
+        "セクショニング：作業を独立した部分に分割し、それらを並行して実行し、出力を結合します。ボーティング：同じプロンプト（またはバリエーション）を複数回実行し、多数決、和集合、または判定モデルによって集約します。",
+        "どちらの方法も、順次実行と比較して実時間（ウォールクロックタイム）を短縮します。さらにボーティングは、1回の試行ではリスクが伴うタスクにおいて、追加のコストと引き換えに高い信頼性を得ることができます。"
+      ],
+      "components": [
+        "タスクスプリッター",
+        "並行ワーカー",
+        "アグリゲーター（マージ / ボーティング / 判定）"
+      ],
+      "benefits": [
+        "呼び出しを並行して実行することで、レイテンシを短縮します。",
+        "ボーティングにより、信頼性とカバレッジが向上します。",
+        "個々の並列呼び出しをシンプルかつ焦点を絞った状態に維持できます。"
+      ],
+      "risks": [
+        "ボーティングにより、トークンコストが倍増します。",
+        "集約ロジックを正しく構築するのが難しい場合があります。",
+        "独立していると想定されたサブタスクが、実際には相互に影響を及ぼし合う可能性があります。"
+      ],
+      "whenNot": [
+        "サブタスクが互いの出力に依存している場合（この場合はチェーニングを行います）。",
+        "コストに余裕がなく、1回の呼び出しで十分な場合。",
+        "結果を有意義に集約できない場合。"
+      ],
+      "examples": [
+        "多数のドキュメントを一度に要約し、その後、要約をマージする。",
+        "メインの応答と並行して安全性チェックを実行する。",
+        "回答を複数回サンプリングし、多数決をとる。"
+      ],
+      "kpis": [
+        {
+          "metric": "順次実行と比較したレイテンシ削減率",
+          "note": "呼び出しを並行して実行することで節約される実時間。このパターンの本質です。"
+        },
+        {
+          "metric": "集約品質",
+          "note": "並列出力をマージしても正確性が維持されるかどうか。難しいのはファンアウトではなく、結合（ジョイン）の部分です。"
+        },
+        {
+          "metric": "並行実行コスト",
+          "note": "すべての並列ブランチにおける総トークン数。速度と引き換えにコストを支払うことになるため、倍率に注意してください。"
+        },
+        {
+          "metric": "レート制限 / スロットリング発生率",
+          "note": "並列呼び出しがプロバイダーのレート制限に達する頻度。制限に達すると、暗黙的に順次実行に切り替わるか、呼び出しが失敗します。"
+        }
+      ],
+      "failureModes": [
+        "集約エラー：個々の並列結果は正しいものの、結合方法が誤っている（二重カウント、矛盾など）。",
+        "レート制限により、意図した並列処理が低速な順次呼び出しに戻ってしまう。",
+        "予期せぬコスト：1つの結果しか使用しない場合でも、N個の並列ブランチにはN倍のコストがかかります。",
+        "部分的な失敗の処理：1つのブランチが失敗した際に、アグリゲーターが処理をブロックするか、あるいはエラーを暗黙的に無視してドロップしてしまう。"
+      ],
+      "lessons": [
+        "最初に集約ステップを設計してください。作業を分割することよりも、結果を適切に結合することの方が困難です。",
+        "バッチ処理やバックオフを使用してプロバイダーのレート制限を遵守してください。さもないと、並列処理のメリットが失われます。",
+        "独立したサブタスクのみを並列化してください。依存関係がある場合は、いずれにせよ順次実行せざるを得なくなります。",
+        "本番環境で発生する前に、部分的な失敗をどのように処理するかを明示的に決定しておいてください。"
+      ],
+      "faqs": [
+        {
+          "q": "セクショニングとボーティングの違いは何ですか？",
+          "a": "セクショニングは1つのタスクを異なる独立したサブタスクに分割します。ボーティングは、信頼性を高めるために同じタスクを複数回実行して集約します。"
+        },
+        {
+          "q": "ボーティングを行えば、常に品質が向上しますか？",
+          "a": "試行結果にばらつきが生じるタスクでは向上することが多いですが、コストが倍増します。1回の試行ではリスクが伴う、極めて重要なステップに限定して使用してください。"
+        },
+        {
+          "q": "並列処理の結果はどのように結合すればよいですか？",
+          "a": "ユースケースに応じて、セクションを結合する、多数決をとる、検出結果の和集合をとる、または判定モデルを使用して統合します。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "并行化",
+      "summary": "并行化同时运行多个 LLM 调用并汇总结果。它有两种形式：分段（将任务拆分为独立子任务并并行运行）和投票（多次运行同一任务以提高可靠性或覆盖率）。它能降低延迟并提高质量。",
+      "problem": "依次运行独立的子任务会浪费时间，而且对困难任务进行单次采样可能不可靠。",
+      "context": "当子任务相互独立时（分段），或者当对同一任务进行多次尝试可以提高置信度或覆盖率时（投票），请使用并行化。",
+      "solution": [
+        "分段：将工作拆分为独立的部分，并发运行它们，然后合并输出。投票：多次运行相同的提示词（或带有变体），并通过多数票、并集或裁判模型进行汇总。",
+        "与顺序执行相比，两者都能减少实际运行时间；此外，在单次采样存在风险的任务中，投票通过增加额外成本来换取更高的可靠性。"
+      ],
+      "components": [
+        "任务拆分器",
+        "并发工作器",
+        "聚合器（合并/投票/裁判）"
+      ],
+      "benefits": [
+        "通过并发运行调用来降低延迟。",
+        "投票可以提高可靠性和覆盖率。",
+        "每个并行调用都保持简单和专注。"
+      ],
+      "risks": [
+        "投票会成倍增加 Token 成本。",
+        "聚合逻辑可能很难处理得当。",
+        "假设独立的子任务实际上可能会相互影响。"
+      ],
+      "whenNot": [
+        "当子任务依赖于彼此的输出时——请使用链式调用。",
+        "当预算紧张且单次调用已足够时。",
+        "当结果无法进行有意义的聚合时。"
+      ],
+      "examples": [
+        "同时总结多个文档，然后合并这些摘要。",
+        "与主响应并行运行安全检查。",
+        "对一个回答进行多次采样并取多数意见。"
+      ],
+      "kpis": [
+        {
+          "metric": "相比顺序执行的延迟降低幅度",
+          "note": "通过并发运行调用节省的实际运行时间；这是该模式的核心意义。"
+        },
+        {
+          "metric": "聚合质量",
+          "note": "合并并行输出是否能保持正确性——难点在于合并，而不是分发。"
+        },
+        {
+          "metric": "并发成本",
+          "note": "所有并行分支的总 Token 数；这是用资金换取速度，因此需要注意倍数效应。"
+        },
+        {
+          "metric": "速率限制/限流率",
+          "note": "并行调用触发服务商速率限制的频率，这会默默地将调用转为串行或导致失败。"
+        }
+      ],
+      "failureModes": [
+        "聚合错误：并行结果单独来看是正确的，但合并方式错误（如重复计算、相互矛盾）。",
+        "速率限制将预期的并行执行重新变回缓慢的串行调用。",
+        "意外的成本：即使只使用一个结果，N 个并行分支也会产生 N 倍的成本。",
+        "部分失败处理：某个分支失败，导致聚合器阻塞或默默丢弃该分支。"
+      ],
+      "lessons": [
+        "优先设计聚合步骤——良好地合并结果比拆分工作更难。",
+        "通过批处理或退避机制来遵守服务商的速率限制，否则并行性将不复存在。",
+        "仅对独立的子任务进行并行化；存在依赖关系的任务无论如何都必须按顺序执行。",
+        "在生产环境中发生部分失败之前，明确决定如何处理它们。"
+      ],
+      "faqs": [
+        {
+          "q": "分段和投票有什么区别？",
+          "a": "分段将一个任务拆分为不同的独立子任务；投票则多次运行同一任务并进行聚合以提高可靠性。"
+        },
+        {
+          "q": "投票总能提高质量吗？",
+          "a": "在样本存在差异的任务中通常如此，但它会成倍增加成本。请将其保留用于单次采样存在风险的高风险步骤。"
+        },
+        {
+          "q": "如何合并并行结果？",
+          "a": "视具体情况而定：拼接各段内容、采用多数票、取结果的并集，或使用裁判模型进行综合。"
+        }
       ]
     }
   }

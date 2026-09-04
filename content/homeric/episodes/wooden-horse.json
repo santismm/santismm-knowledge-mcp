@@ -74,6 +74,22 @@
         "pt": {
           "label": "O cavalo como máquina de cerco ou navio",
           "note": "A sugestão de que o cavalo racionaliza um aríete coberto de peles, ou um navio com carranca de cavalo. É antiga, popular e infalsificável: nada na arqueologia de Troia se pronuncia a respeito."
+        },
+        "fr": {
+          "label": "Le cheval comme machine de siège ou comme navire",
+          "note": "L'hypothèse selon laquelle le cheval rationalise un bélier sous un toit de peau, ou un navire doté d'une figure de proue en forme de cheval. Elle est ancienne, populaire et infalsifiable : rien dans l'archéologie de Troie ne permet de trancher dans un sens ou dans l'autre."
+        },
+        "zh": {
+          "label": "作为攻城器械或船只的木马",
+          "note": "这种观点认为木马是对兽皮屋顶下的攻城槌或带有马头雕像的船只的合理化想象。这一观点古老、流行且无法被证伪：特洛伊的考古发现没有提供任何支持或反对的证据。"
+        },
+        "de": {
+          "label": "Das Pferd als Belagerungsgerät oder Schiff",
+          "note": "Der Vorschlag, dass das Pferd einen Rammbock unter einem Lederdach oder ein Schiff mit einer Pferde-Galionsfigur rationalisiert. Er ist alt, populär und unwiderlegbar: Nichts in der Archäologie Trojas spricht in die eine oder andere Richtung dafür."
+        },
+        "ja": {
+          "label": "攻城兵器または船としての木馬",
+          "note": "木馬は、獣皮の屋根で覆われた破城槌、あるいは馬の船首像を持つ船を合理化したものであるという説。これは古くからあり人気もありますが、反証不可能です。トロイアの考古学において、これを肯定または否定する証拠は何もありません。"
         }
       }
     },
@@ -99,6 +115,22 @@
         "pt": {
           "label": "A camada de destruição de Troia VIIa",
           "note": "Troia VIIa termina em fogo e violência no século XII a.C., com sinais de aglomeração e armazenamento apressado intramuros. Que uma cidade foi destruída é prova; que uma coalizão liderada por um rei micênico a destruiu é inferência."
+        },
+        "fr": {
+          "label": "La couche de destruction de Troie VIIa",
+          "note": "Troie VIIa s'achève dans le feu et la violence au XIIe siècle avant notre ère, avec des signes de surpopulation et de stockage hâtif à l'intérieur des remparts. Qu'une ville ait été détruite est un fait avéré ; qu'une coalition menée par un grand roi mycénien l'ait détruite est une déduction."
+        },
+        "zh": {
+          "label": "特洛伊 VIIa 的毁灭层",
+          "note": "特洛伊 VIIa 在公元前12世纪毁于大火和暴力，城墙内有拥挤和仓促储存物资的迹象。一座城市被摧毁是事实证据；而由迈锡尼至高国王领导的联军摧毁了它则是推论。"
+        },
+        "de": {
+          "label": "Die Zerstörungsschicht von Troja VIIa",
+          "note": "Troja VIIa endet im 12. Jahrhundert v. Chr. in Feuer und Gewalt, mit Anzeichen von Überfüllung und hastiger Vorratshaltung innerhalb der Mauern. Dass eine Stadt zerstört wurde, ist ein Beleg; dass eine von einem mykenischen Großkönig angeführte Koalition sie zerstört hat, ist eine Schlussfolgerung."
+        },
+        "ja": {
+          "label": "トロイアVIIa層の破壊層",
+          "note": "トロイアVIIa層は紀元前12世紀に火災と暴力によって終焉を迎えており、城壁内には過密状態や急いで物資を貯蔵した痕跡が見られます。都市が破壊されたことは証拠ですが、ミケーネの最高王が率いる連合軍がそれを破壊したというのは推論にすぎません。"
         }
       }
     }
@@ -161,6 +193,86 @@
         {
           "q": "A arqueologia confirma o saque de Troia?",
           "a": "A arqueologia confirma que Troia VIIa foi destruída por fogo e violência no século XII a.C. Não pode confirmar quem a destruiu nem por quê, e nenhum objeto liga essa destruição aos fatos que os poemas narram."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Le cheval de bois et la chute de Troie",
+      "summary": "L'épisode le plus célèbre de la guerre n'est raconté dans aucun des deux poèmes : l'Odyssée le fait chanter par un aède en vingt vers. Sa localisation est la plus sûre de l'atlas, et son historicité la moins établie.",
+      "narrative": [
+        "Au chant VIII de l'Odyssée, à la cour des Phéaciens, Démodocos chante le cheval de bois dressé sur l'acropole de Troie, le débat des Troyens sur le sort à lui réserver, et les Grecs se déversant pour saccager la ville. Ulysse, encore anonyme parmi ses hôtes, pleure et se trahit.",
+        "Le récit complet appartenait à d'autres poèmes du Cycle Épique — la Petite Iliade et le Sac de Troie (Iliou Persis) — qui ne nous sont parvenus que sous forme de résumés. L'Iliade s'achève sur les funérailles d'Hector ; le sac est toujours raconté de manière indirecte."
+      ],
+      "whyItMatters": "Il ancre la guerre à une acropole spécifique, de sorte que la géographie ne fait aucun doute. Ce qu'il ne peut faire, c'est dater l'événement ou le confirmer : l'indice de confiance de l'épisode est limité par le texte (un chant au sein d'un poème) et par l'archéologie (une couche de destruction compatible avec un sac, parmi bien d'autres explications).",
+      "debate": "La question est de savoir si le cheval est un souvenir, une métaphore, une machine de siège rationalisée ou un motif de conte populaire greffé sur un siège réel. L'atlas attribue à l'épisode la note de 7/12 — confiance géographique élevée, faible consensus scientifique sur ce qui s'est réellement passé.",
+      "faqs": [
+        {
+          "q": "Le cheval de Troie est-il présent dans l'Iliade ?",
+          "a": "Non. L'Iliade se termine avant le sac. Le cheval apparaît dans l'Odyssée sous la forme d'un chant interprété par l'aède Démodocos (VIII, 499-520) et dans les souvenirs de Ménélas et d'Ulysse (IV, 271-289 ; XI, 523-532), et il était raconté en détail dans les poèmes perdus du Cycle Épique."
+        },
+        {
+          "q": "L'archéologie confirme-t-elle le sac de Troie ?",
+          "a": "L'archéologie confirme que Troie VIIa a été détruite par le feu et la violence au XIIe siècle avant notre ère. Elle ne peut confirmer qui l'a détruite ni pourquoi, et aucun artefact ne relie cette destruction aux événements décrits dans les poèmes."
+        }
+      ]
+    },
+    "de": {
+      "title": "Das Trojanische Pferd und der Fall Trojas",
+      "summary": "Die bekannteste Episode des Krieges wird in keinem der beiden Epen direkt erzählt: In der Odyssee lässt ein Sänger sie in zwanzig Versen besingen. Ihr Schauplatz ist der sicherste im Atlas, ihre Historizität der unsicherste.",
+      "narrative": [
+        "Im 8. Buch der Odyssee singt Demodokos am Hof der Phäaken vom Pferd, das auf der trojanischen Akropolis steht, von der Debatte unter den Trojanern darüber, was damit zu tun sei, und von den Griechen, die herbeiströmen, um die Stadt zu plündern. Odysseus, der unter seinen Gastgebern immer noch ungenannt ist, weint und gibt sich zu erkennen.",
+        "Die vollständige Erzählung gehörte zu anderen Epen des Epischen Zyklus – der Kleinen Ilias und der Ilioupersis –, die nur in Zusammenfassungen erhalten sind. Die Ilias endet mit Hektors Bestattung; die Plünderung wird immer nur indirekt erzählt."
+      ],
+      "whyItMatters": "Es verankert den Krieg an einer bestimmten Akropolis, sodass die Geografie außer Zweifel steht. Was es nicht leisten kann, ist, das Ereignis zu datieren oder zu bestätigen: Der Vertrauenswert der Episode wird durch den Text (ein Lied innerhalb eines Epos) und durch die Archäologie (eine Zerstörungsschicht, die zu einer Plünderung passt, und viele andere Dinge) eingeschränkt.",
+      "debate": "Ob das Pferd eine Erinnerung, eine Metapher, ein rationalisiertes Belagerungsgerät oder ein an eine reale Belagerung geknüpftes Märchenmotiv ist. Der Atlas bewertet die Episode mit 7/12 – hohe geografische Sicherheit, geringe wissenschaftliche Übereinstimmung darüber, was tatsächlich geschah.",
+      "faqs": [
+        {
+          "q": "Kommt das Trojanische Pferd in der Ilias vor?",
+          "a": "Nein. Die Ilias endet vor der Plünderung. Das Pferd erscheint in der Odyssee als ein vom Sänger Demodokos vorgetragenes Lied (8,499–520) sowie in den Erinnerungen von Menelaos und Odysseus (4,271–289; 11,523–532), und es wurde in den verlorenen Epen des Epischen Zyklus ausführlich erzählt."
+        },
+        {
+          "q": "Bestätigt die Archäologie die Plünderung Trojas?",
+          "a": "Die Archäologie bestätigt, dass Troja VIIa im 12. Jahrhundert v. Chr. durch Feuer und Gewalt zerstört wurde. Sie kann nicht bestätigen, wer es zerstört hat oder warum, und kein Artefakt verbindet diese Zerstörung mit den in den Epen beschriebenen Ereignissen."
+        }
+      ]
+    },
+    "ja": {
+      "title": "木馬とトロイアの陥落",
+      "summary": "この戦争で最もよく知られたエピソードは、どちらの詩でも直接語られていない。『オデュッセイア』では、吟遊詩人が20行でそれを歌うのみである。その場所はアトラスの中で最も確実であるが、その歴史的真実性は最も低い。",
+      "narrative": [
+        "『オデュッセイア』第8巻のパイアケス人の宮廷において、デモドコスはトロイアのアクロポリスに立つ木馬、それをどう扱うかを巡るトロイア人たちの議論、およびギリシャ人たちが飛び出して都市を略奪する様子を歌う。もてなす人々の中でまだ名を明かしていないオデュッセウスは、涙を流して正体を露呈してしまう。",
+        "完全な物語は、要約のみが現存する叙事詩の環（エピック・サイクル）の他の詩（『小イリアス』や『トロイアの破壊』）に属していた。『イリアス』はヘクトルの葬儀で終わるため、都市の略奪は常に間接的に語られる。"
+      ],
+      "whyItMatters": "これは戦争を特定のアクロポリスに結びつけるため、地理的な疑いはない。しかし、出来事の年代を特定したり、それを確証したりすることはできない。このエピソードの信頼度スコアは、テキスト（詩の中の歌）と考古学（略奪に合致する破壊層、およびその他の多くの要素）によって制限されている。",
+      "debate": "木馬が記憶なのか、比喩なのか、合理化された攻城兵器なのか、あるいは実際の包囲戦に結びつけられた民話のモチーフなのかという議論。アトラスはこのエピソードに7/12のスコアを与えている。地理的な確実性は高いが、実際に何が起こったかについての学術的な合意は低い。",
+      "faqs": [
+        {
+          "q": "トロイアの木馬は『イリアス』に登場しますか？",
+          "a": "いいえ。『イリアス』は都市の略奪の前に終わります。木馬は『オデュッセイア』において、吟遊詩人デモドコスが歌う歌（8.499–520）として、またメネラオスとオデュッセウスの回想（4.271–289、11.523–532）として登場し、散逸した叙事詩の環の詩の中で詳しく語られていました。"
+        },
+        {
+          "q": "考古学はトロイアの略奪を裏付けていますか？",
+          "a": "考古学は、トロイアVIIa層が紀元前12世紀に火災と暴力によって破壊されたことを裏付けています。しかし、誰がどのような理由で破壊したのかを特定することはできず、その破壊を詩に描かれた出来事と結びつける遺物も存在しません。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "木马与特洛伊的陷落",
+      "summary": "这场战争中最著名的事件在两部史诗中均未被详细叙述：《奥德赛》中由一位吟游诗人用二十行诗句唱出。它的地理位置在地图集中最为确凿，而其历史真实性则最不可靠。",
+      "narrative": [
+        "在《奥德赛》第8卷中，在法埃亚科斯（Phaeacian）的宫廷里，德摩多科斯（Demodocus）歌唱了立于特洛伊卫城上的木马、特洛伊人关于如何处理它的争论，以及希腊人涌出木马洗劫城市的情景。在主人面前仍隐姓埋名的奥德修斯流下眼泪，从而暴露了身份。",
+        "完整的叙事属于史诗系列（Epic Cycle）的其他诗作——《小伊利亚特》（Little Iliad）和《特洛伊的陷落》（Iliou Persis）——这些诗作仅存梗概。《伊利亚特》以赫克托尔的葬礼结束；洗劫特洛伊的故事总是被侧面提及。"
+      ],
+      "whyItMatters": "它将战争锚定在一个特定的卫城上，因此地理位置毋庸置疑。但它无法确定该事件的日期或证实其真实性：该事件的可信度评分受到文本（史诗中的一首歌）和考古学（符合洗劫特征的毁灭层，以及许多其他因素）的限制。",
+      "debate": "木马究竟是一个记忆、一个隐喻、一个被合理化的攻城器械，还是一个与真实围城战相结合的民间故事母题。地图集给该事件打分为 7/12——地理可信度高，但学术界对实际发生的事情认同度较低。",
+      "faqs": [
+        {
+          "q": "特洛伊木马出现在《伊利亚特》中吗？",
+          "a": "没有。《伊利亚特》在特洛伊陷落前结束。木马出现在《奥德赛》中，作为吟游诗人德摩多科斯演唱的一首歌（8.499–520），以及墨涅拉俄斯和奥德修斯的回忆（4.271–289；11.523–532），并且在史诗系列已散佚的诗作中曾有详尽叙述。"
+        },
+        {
+          "q": "考古学证实了特洛伊的陷落吗？",
+          "a": "考古学证实，特洛伊 VIIa 在公元前12世纪被大火和暴力摧毁。但它无法证实是谁摧毁了它或出于何种原因，也没有任何文物将那次毁灭与史诗中所描述的事件联系起来。"
         }
       ]
     }

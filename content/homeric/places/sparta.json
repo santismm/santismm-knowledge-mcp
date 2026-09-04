@@ -97,6 +97,22 @@
         "pt": {
           "label": "O vale do Eurotas (Lacedemônia)",
           "note": "A região que Homero chama de Lacedemônia não está em dúvida: um vale fluvial largo entre o Taígeto e o Parnon, exatamente o “oco” que os poemas descrevem. O que fica em aberto é o centro do Bronze dentro dele, não o vale."
+        },
+        "fr": {
+          "label": "La vallée de l'Eurotas (Lacédémone)",
+          "note": "La région qu'Homère appelle Lacédémone ne fait aucun doute : une large vallée fluviale encadrée par le Taygète et le Parnon, correspondant exactement à la « creuse » décrite dans les poèmes. Le centre de l'âge du bronze en son sein reste la question ouverte, non la vallée."
+        },
+        "zh": {
+          "label": "埃夫罗塔斯河谷（拉刻代蒙）",
+          "note": "荷马所称的拉刻代蒙地区是毋庸置疑的：一个由泰格特斯山脉和帕尔农山脉环抱的宽阔河谷，正是史诗中所描述的“低洼”之地。其中的青铜时代中心才是悬而未决的问题，而非河谷本身。"
+        },
+        "de": {
+          "label": "Das Eurotas-Tal (Lakedaimon)",
+          "note": "Die Region, die Homer Lakedaimon nennt, steht außer Zweifel: ein breites Flusstal, das vom Taygetos und Parnon umschlossen wird, genau das „schluchtenreiche“ Land, das die Epen beschreiben. Das bronzezeitliche Zentrum darin ist die offene Frage, nicht das Tal."
+        },
+        "ja": {
+          "label": "エウロタス渓谷（ラケダイモン）",
+          "note": "ホメロスがラケダイモンと呼ぶ地域に疑いの余地はない。タイゲトスとパルノンに囲まれた広い川の渓谷であり、まさに詩が描写する「窪地」そのものである。未解決の問いは、渓谷そのものではなく、その中にあった青銅器時代の中心地である。"
         }
       }
     },
@@ -136,6 +152,22 @@
         "pt": {
           "label": "O Menelaion de Terapne",
           "note": "Uma colina sobre o Eurotas com mansões micênicas de porte e, desde a época arcaica, um santuário a Menelau e Helena. O culto prova que os gregos situavam Menelau ali; não prova que ele viveu ali, e na Lacônia não apareceu nenhum palácio da classe de Pilos ou Micenas."
+        },
+        "fr": {
+          "label": "Le Ménélaion de Thérapné",
+          "note": "Une colline dominant l'Eurotas, abritant d'importantes demeures mycéniennes et, à partir de l'époque archaïque, un sanctuaire dédié à Ménélas et Hélène. Le culte prouve que les Grecs situaient Ménélas ici ; il ne prouve pas qu'il y ait vécu, et aucun palais de la catégorie de Pylos ou de Mycènes n'a été découvert en Laconie."
+        },
+        "zh": {
+          "label": "塞拉普涅的墨涅拉俄斯神庙",
+          "note": "埃夫罗塔斯河上方的一座山丘，建有规模宏大的迈锡尼时期宅邸，并自古风时期起建有墨涅拉俄斯和海伦的神龛。这种崇拜是希腊人将墨涅拉俄斯定位于此的证据，但并不能证明他曾居住于此，且在拉科尼亚尚未发现任何属于皮洛斯或迈锡尼级别的宫殿。"
+        },
+        "de": {
+          "label": "Das Menelaion bei Therapne",
+          "note": "Ein Hügel über dem Eurotas mit bedeutenden mykenischen Herrenhäusern und ab der archaischen Zeit einem Heiligtum für Menelaos und Helena. Der Kult ist ein Beweis dafür, dass die Griechen Menelaos hier verorteten; er ist kein Beweis dafür, dass er hier lebte, und in Lakonien wurde kein Palast der Pylos- oder Mykene-Klasse gefunden."
+        },
+        "ja": {
+          "label": "テラプネのメネライオン",
+          "note": "エウロタス川を見下ろす丘で、大規模なミケーネ時代の邸宅があり、アルカイック期からはメネラオスとヘレネの神殿があった。この信仰はギリシャ人がメネラオスをここに位置づけた証拠ではあるが、彼がここに住んでいたという証拠ではなく、ラコニアではピュロスやミケーネ級の宮殿は見つかっていない。"
         }
       }
     }
@@ -174,6 +206,46 @@
       ],
       "identificationNote": "Aceita na escala da região e plausível na escala do palácio, e por isso o lugar carrega duas hipóteses com pontuações diferentes. O critério arqueológico é o que as separa: o vale pontua por paisagem e continuidade; o Menelaion, por edifícios escavados e culto.",
       "debate": "Se sob a planície do Eurotas jaz por descobrir um centro palaciano micênico da classe de Pilos, ou se a Lacônia era governada de outro modo — e, portanto, se o palácio espartano da Odisseia é lembrança, anacronismo ou invenção."
+    },
+    "fr": {
+      "name": "Sparte (Lacédémone)",
+      "summary": "Le royaume de Ménélas et d'Hélène. La vallée est certaine, le palais ne l'est pas : la Laconie a livré des demeures mycéniennes et un culte précoce de Ménélas, mais aucun palais comparable à Pylos ou Mycènes.",
+      "description": [
+        "Télémaque atteint Lacédémone en char au chant IV et trouve Ménélas dans une salle si éclatante qu'il la compare à la cour de Zeus. La Lacédémone d'Homère est « creuse » et « semée de ravins » — une excellente description de la vallée de l'Eurotas entre le Taygète et le Parnon.",
+        "Le Ménélaion de Thérapné est le lieu où les anciens Grecs le situaient. La colline abrite des édifices mycéniens et, à partir de l'époque archaïque, un sanctuaire de Ménélas et d'Hélène où Hérodote rapporte déjà une histoire concernant Hélène. Il s'agit d'une solide tradition cultuelle liée à un site réel de l'âge du bronze, et c'est ce que la Laconie offre de mieux."
+      ],
+      "identificationNote": "Accepté à l'échelle de la région et plausible à l'échelle du palais, c'est pourquoi le lieu fait l'objet de deux hypothèses aux scores différents. Le critère archéologique est ce qui les sépare : la vallée obtient des points pour le paysage et la continuité, le Ménélaion pour les bâtiments fouillés et le culte.",
+      "debate": "La question est de savoir si un centre palatial mycénien du niveau de Pylos reste à découvrir sous la plaine de l'Eurotas, ou si la Laconie était gouvernée différemment — et donc si le palais spartiate de l'Odyssée est un souvenir, un anachronisme ou une invention."
+    },
+    "de": {
+      "name": "Sparta (Lakedaimon)",
+      "summary": "Das Königreich von Menelaos und Helena. Das Tal ist sicher, der Palast nicht: Lakonien hat mykenische Herrenhäuser und einen frühen Kult des Menelaos hervorgebracht, aber keinen Palast, der mit Pylos oder Mykene vergleichbar wäre.",
+      "description": [
+        "Telemachos erreicht Lakedaimon im 4. Buch mit dem Streitwagen und findet Menelaos in einer so glänzenden Halle vor, dass er sie mit dem Hof des Zeus vergleicht. Homers Lakedaimon ist „schluchtenreich“ und „tief gelegen“ – eine treffende Beschreibung des Eurotas-Tals zwischen Taygetos und Parnon.",
+        "Das Menelaion bei Therapne ist der Ort, an den die alten Griechen ihn verorteten. Der Hügel trägt mykenische Gebäude und ab der archaischen Zeit ein Heiligtum für Menelaos und Helena, über das bereits Herodot eine Geschichte über Helena berichtet. Dies ist eine starke Kulttradition, die mit einer realen bronzezeitlichen Stätte verbunden ist, und das Beste, was Lakonien zu bieten hat."
+      ],
+      "identificationNote": "Auf regionaler Ebene akzeptiert und auf Palastebene plausibel, weshalb der Ort zwei Hypothesen mit unterschiedlichen Bewertungen aufweist. Das archäologische Kriterium unterscheidet sie: Das Tal punktet mit Landschaft und Kontinuität, das Menelaion mit ausgegrabenen Gebäuden und Kult.",
+      "debate": "Ob ein mykenisches Palastzentrum der Pylos-Klasse unentdeckt unter der Eurotas-Ebene liegt oder ob Lakonien anders regiert wurde – und somit, ob der spartanische Palast der Odyssee eine Erinnerung, ein Anachronismus oder eine Erfindung ist."
+    },
+    "ja": {
+      "name": "スパルタ（ラケダイモン）",
+      "summary": "メネラオスとヘレネの王国。渓谷は確実だが、宮殿は不確実である。ラコニアからはミケーネ時代の邸宅や初期のメネラオス信仰の跡が出土しているが、ピュロスやミケーネに匹敵する宮殿は見つかっていない。",
+      "description": [
+        "テレマコスは第4巻で戦車に乗ってラケダイモンに到着し、ゼウスの宮廷に例えるほどまばゆい大広間でメネラオスに会う。ホメロスの描くラケダイモンは「窪んだ」「深い谷の多い」場所であり、これはタイゲトス山脈とパルノン山脈の間に位置するエウロタス渓谷をよく表している。",
+        "テラプネのメネライオンは、古代ギリシャ人が彼を位置づけた場所である。この丘にはミケーネ時代の建物があり、アルカイック期以降はメネラオスとヘレネの聖域となっており、ヘロドトスはすでにヘレネの物語を報告している。これは、実在する青銅器時代の遺跡に結びついた強力な信仰の伝承であり、ラコニアが提供する最良のものである。"
+      ],
+      "identificationNote": "地域レベルでは「合意（Accepted）」、宮殿レベルでは「妥当（Plausible）」であり、そのためこの場所には異なるスコアの2つの仮説が立てられている。それらを分けるのは考古学的な基準である。渓谷は景観と継続性でスコアを獲得し、メネライオンは発掘された建物と信仰でスコアを獲得している。",
+      "debate": "ピュロス級のミケーネ時代の宮殿中心地がエウロタス平原の下に未発見のまま眠っているのか、それともラコニアの統治形態が異なっていたのか。したがって、『オデュッセイア』に登場するスパルタの宮殿が、記憶なのか、時代錯誤なのか、あるいは創作なのかという点である。"
+    },
+    "zh": {
+      "name": "斯巴达（拉刻代蒙）",
+      "summary": "墨涅拉俄斯和海伦的王国。山谷是确定的，但宫殿并不确定：拉科尼亚出土了迈锡尼时期的宅邸以及早期的墨涅拉俄斯崇拜遗迹，但没有发现能与皮洛斯或迈锡尼相媲美的宫殿。",
+      "description": [
+        "特勒马科斯在第4卷中乘战车抵达拉刻代蒙，发现墨涅拉俄斯身处一座明亮的大厅中，他甚至将其比作宙斯的宫殿。荷马笔下的拉刻代蒙是“低洼”且“沟壑纵横”的——这是对泰格特斯山脉和帕尔农山脉之间的埃夫罗塔斯河谷的极佳描述。",
+        "塞拉普涅的墨涅拉俄斯神庙（Menelaion）是古希腊人认定他所在的地方。该山丘上建有迈锡尼时期的建筑，且自古风时期起就建有墨涅拉俄斯和海伦的神庙，希罗多德曾在此记载过关于海伦的故事。这是一个与真实的青铜时代遗址相联系的强大崇拜传统，也是拉科尼亚所能提供的最佳实证。"
+      ],
+      "identificationNote": "在区域层面上被公认，在宫殿层面上似真，这就是为什么该地点带有两个不同评分的假说。考古学标准是区分它们的原因：河谷在景观 and 连续性上得分，而墨涅拉俄斯神庙则在已发掘的建筑和崇拜遗迹上得分。",
+      "debate": "在埃夫罗塔斯平原下方是否埋藏着一个尚未被发现的、属于皮洛斯级别的迈锡尼宫殿中心，抑或是拉科尼亚的统治方式有所不同——从而决定了《奥德赛》中的斯巴达宫殿究竟是一种记忆、一种时代错误，还是一种虚构。"
     }
   }
 }

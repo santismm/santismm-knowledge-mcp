@@ -53,6 +53,30 @@
       "basis": "Os guias de engenharia dos fornecedores, os estudos sobre agentes e os catálogos de controle dos quadros de governo descrevem preocupações sobrepostas partindo de pontos distintos, sem se citarem como origem da taxonomia.",
       "limitations": "Convergir nas preocupações não é acordar uma taxonomia. Não existem nomes, fronteiras nem número de componentes padrão, e agrupá-los em oito componentes e três camadas é um corte entre vários defensáveis. Não se citarem torna a independência plausível, não provada.",
       "falsifiedBy": "Uma taxonomia publicada e adotada que reparta o mesmo espaço de outra forma, ou evidência de que a convergência aparente vem de uma fonte comum e não de prática independente."
+    },
+    "fr": {
+      "statement": "Les praticiens indépendants convergent vers le même ensemble restreint de préoccupations autour du modèle — contexte et mémoire, outils, planification et orchestration, observabilité, évaluation, gouvernance et sécurité — même s'ils utilisent des noms différents pour les désigner.",
+      "basis": "Les guides d'ingénierie des fournisseurs, les enquêtes sur les agents et les catalogues de contrôles des cadres de gouvernance de l'IA décrivent des préoccupations qui se recoupent à partir de points de départ différents, sans se citer mutuellement comme source de la taxonomie.",
+      "limitations": "La convergence des préoccupations ne signifie pas un accord sur une taxonomie. Il n'existe pas de noms, de limites ou de nombre de composants standard, et le regroupement de SANTISMM en huit composants répartis sur trois couches est un découpage parmi d'autres tout aussi défendables. L'absence de citations croisées rend l'indépendance plausible, mais non prouvée.",
+      "falsifiedBy": "Une taxonomie publiée et adoptée qui partitionne le même espace différemment — ou la preuve que la convergence apparente remonte à une source commune unique plutôt qu'à une pratique indépendante."
+    },
+    "de": {
+      "statement": "Unabhängige Praktiker konvergieren auf dieselbe kleine Gruppe von Kernbereichen rund um das Modell – Kontext und Gedächtnis, Tools, Planung und Orchestrierung, Observability, Evaluation, Governance und Sicherheit –, selbst wenn sie unterschiedliche Bezeichnungen dafür verwenden.",
+      "basis": "Technische Leitfäden von Anbietern, Agenten-Umfragen und die Kontrollkataloge von KI-Governance-Frameworks beschreiben überschneidende Kernbereiche aus unterschiedlichen Ausgangspunkten, ohne sich gegenseitig als Quelle für die Taxonomie zu nennen.",
+      "limitations": "Die Konvergenz der Kernbereiche bedeutet keine Einigung auf eine Taxonomie. Es gibt keine Standardnamen, -grenzen oder -komponentenzahlen, und die Gruppierung von SANTISMM in acht Komponenten auf drei Ebenen ist nur eine von mehreren vertretbaren Einteilungen. Das Fehlen von gegenseitigen Verweisen macht Unabhängigkeit plausibel, aber nicht bewiesen.",
+      "falsifiedBy": "Eine veröffentlichte, anerkannte Taxonomie, die denselben Raum anders aufteilt – oder der Nachweis, dass die scheinbare Konvergenz auf eine einzige gemeinsame Quelle und nicht auf unabhängige Praxis zurückzuführen ist."
+    },
+    "ja": {
+      "statement": "独立した実務者たちは、異なる名称を使用している場合であっても、モデルを取り巻く同じ少数の関心事（コンテキストとメモリ、ツール、プランニングとオーケストレーション、オブザーバビリティ、評価、ガバナンス、およびセキュリティ）に収束しつつあります。",
+      "basis": "ベンダーのエンジニアリングガイダンス、エージェントの調査、およびAIガバナンスフレームワークの制御カタログは、互いを分類法の情報源として引用することなく、異なる出発点から重複する関心事について説明しています。",
+      "limitations": "関心事の収束は、分類法への合意を意味するものではありません。標準的な名称、境界、またはコンポーネント数は存在せず、SANTISMMによる3つのレイヤーにわたる8つのコンポーネントへのグループ化は、擁護可能な複数の切り口のうちの1つにすぎません。相互引用がないことは、独立性を妥当なものとしますが、証明するものではありません。",
+      "falsifiedBy": "同じ領域を異なる方法で分割する、公開され採用されている分類法。または、一見収束しているように見えるものが、独立した実践ではなく、単一の共通の情報源に遡るという証拠。"
+    },
+    "zh": {
+      "statement": "独立的从业者们正逐渐聚焦于围绕模型的同一组核心关注点——上下文与记忆、工具、规划与编排、可观测性、评估、治理和安全——即使他们使用了不同的名称。",
+      "basis": "厂商的工程指南、智能体调查以及 AI 治理框架的控制目录从不同的起点描述了重叠的关注点，且并未相互引用作为分类法的来源。",
+      "limitations": "关注点的趋同并不等同于对分类法达成一致。目前不存在标准的名称、边界或组件数量，SANTISMM 将其划分为跨越三个层级的八个组件，只是几种合理划分方式中的一种。缺乏交叉引用使得独立性显得合理，但并未得到证实。",
+      "falsifiedBy": "一套已发布并被采用的分类法，对同一空间进行了不同的划分——或者有证据表明，这种表面上的趋同可以追溯到单一的共同源头，而非独立的实践。"
     }
   }
 }

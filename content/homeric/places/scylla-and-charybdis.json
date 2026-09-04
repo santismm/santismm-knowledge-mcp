@@ -93,6 +93,22 @@
         "pt": {
           "label": "O estreito de Messina",
           "note": "A mais antiga e firme das identificações das andanças. O estreito produz de fato uma corrente de maré violenta e um redemoinho estável, diante de uma margem calabresa de falésias; a Antiguidade nomeou os dois perigos Cila e Caribdes e os situou ali sem discordância. Uma cidade chamada Scilla ainda está de pé sobre a rocha."
+        },
+        "fr": {
+          "label": "Le détroit de Messine",
+          "note": "La plus ancienne et la plus solide des identifications de l'errance. Le détroit produit réellement un violent courant de marée et un tourbillon permanent, face à une côte calabraise bordée de falaises, et l'Antiquité a nommé ces deux dangers Scylla et Charybde en les situant ici à l'unanimité. Une ville nommée Scilla s'élève toujours sur le rocher."
+        },
+        "zh": {
+          "label": "美西纳海峡",
+          "note": "在所有漂泊地点认定中最古老、最有力的一个。该海峡确实会产生剧烈的急流和常现的漩涡，其对岸是悬崖环绕的卡拉布里亚海岸，古代学者毫无异议地将这两个险境命名为斯库拉和卡律布狄斯并定位于此。如今，一座名为希拉（Scilla）的小镇依然耸立在岩石上。"
+        },
+        "de": {
+          "label": "Die Straße von Messina",
+          "note": "Die älteste und stärkste der Identifizierungen der Irrfahrten. Die Meerenge erzeugt tatsächlich eine heftige Gezeitenströmung und einen stehenden Strudel gegenüber einer von Klippen gesäumten kalabrischen Küste, und die Antike nannte die beiden Gefahren Skylla und Charybdis und verortete sie ohne Widerspruch hier. Auf dem Felsen steht heute noch eine Stadt namens Scilla."
+        },
+        "ja": {
+          "label": "メッシーナ海峡",
+          "note": "漂流の同定の中で最も古く、最も強力なもの。この海峡は、崖に囲まれたカラブリアの海岸の向かい側に、激しい潮流と定常的な渦巻きを実際に発生させており、古代の人々はこの2つの危険をスキュラとカリュブディスと名付け、異論なくここに比定した。シッラ（Scilla）と呼ばれる町が今でもその岩の上に立っている。"
         }
       }
     }
@@ -130,6 +146,46 @@
       ],
       "identificationNote": "Plausível: a classe mais alta que qualquer um dos lugares das andanças alcança. Pontua 8/12: forte em texto e geografia, com acordo acadêmico suficiente, e necessariamente zero em arqueologia, porque um estreito não deixa escavação.",
       "debate": "Se a identificação é lembrança ou anexação posterior: os marinheiros gregos conheciam o estreito desde o século VIII, de modo que um poema composto então poderia descrevê-lo de ouvido. Isso faria de Cila e Caribdes geografia real dentro de uma viagem fictícia — que é, discutivelmente, do que trata todo este atlas."
+    },
+    "fr": {
+      "name": "Scylla et Charybde",
+      "summary": "Le seul péril des errances qui se comporte comme un lieu réel : un détroit étroit avec un courant de marée mortel d'un côté et des falaises de l'autre. L'Antiquité l'a situé à Messine sans jamais le contester.",
+      "description": [
+        "Circé décrit le passage avant qu'Ulysse ne le franchisse : un monstre tapi dans une grotte en haut d'une falaise qui s'empare de six hommes, et un tourbillon qui engloutit la mer trois fois par jour et emporterait le navire entier. Elle lui conseille de raser la falaise et de perdre six hommes plutôt que de tout perdre, ce qu'il fait.",
+        "Le détroit de Messine présente un véritable courant de marée, un réel tourbillon à certaines heures de la marée, et une côte calabraise bordée de falaises. C'est la seule étape du voyage où le péril décrit dans le poème et le monde physique concordent sans argumentation forcée."
+      ],
+      "identificationNote": "Plausible — la catégorie la plus élevée atteinte par l'un des lieux d'errance. Score : 8/12 : solide sur le plan textuel et géographique, faisant l'objet d'un consensus scientifique suffisant pour être pris en compte, et nécessairement nul sur le plan archéologique, car un détroit ne laisse aucune trace de fouilles.",
+      "debate": "La question est de savoir si cette identification est un souvenir ou un rattachement ultérieur : les marins grecs connaissaient le détroit dès le VIIIe siècle, de sorte qu'un poème composé à cette époque pouvait le décrire d'après des récits. Cela ferait de Scylla et Charybde une géographie réelle au sein d'un voyage fictif — ce qui est précisément l'objet de tout cet atlas."
+    },
+    "de": {
+      "name": "Skylla und Charybdis",
+      "summary": "Die einzige Gefahr auf den Irrwegen, die sich wie ein realer Ort verhält: eine Meerenge mit einer tödlichen Gezeitenströmung auf der einen und Klippen auf der anderen Seite. Die Antike verortete sie in Messina und stellte dies nie infrage.",
+      "description": [
+        "Kirke beschreibt die Passage, bevor Odysseus sie durchsegelt: ein Ungeheuer in einer Höhle hoch oben auf einer Klippe, das sechs Männer raubt, und ein Strudel, der dreimal am Tag das Meer verschlingt und das ganze Schiff mitreißen würde. Sie rät ihm, sich an die Klippe zu halten und lieber sechs Männer zu opfern, als alles zu verlieren, was er auch tut.",
+        "Die Straße von Messina weist eine echte Gezeitenströmung, einen realen Strudel bei bestimmten Gezeitenständen und eine von Klippen gesäumte kalabrische Küste auf. Es ist die einzige Station der Reise, an der die Gefahr des Epos und die physische Welt ohne mühsame Erklärungsversuche übereinstimmen."
+      ],
+      "identificationNote": "Plausibel – die höchste Kategorie, die einer der Orte der Irrfahrten erreicht. Bewertung: 8/12: stark in Text und Geografie, in der Forschung einhellig genug, um zu zählen, und zwangsläufig null in der Archäologie, da eine Meerenge keine Ausgrabungsspuren hinterlässt.",
+      "debate": "Ob die Identifizierung eine Erinnerung oder eine spätere Zuschreibung ist: Griechische Seeleute kannten die Meerenge seit dem achten Jahrhundert, sodass ein damals verfasstes Epos sie aus Berichten beschreiben konnte. Das würde Skylla und Charybdis zu realer Geografie innerhalb einer fiktiven Reise machen – worum es im gesamten Atlas wohl letztlich geht."
+    },
+    "ja": {
+      "name": "スキュラとカリュブディス",
+      "summary": "漂流の旅における危険の中で、唯一実在の場所のように振る舞うもの：片側に致命的な激しい潮流があり、もう片側に崖がある狭い海峡。古代の人々はこれをメッシーナに比定し、異論を挟まなかった。",
+      "description": [
+        "キルケはオデュッセウスが航海する前にその航路について説明している。崖の上の高い洞窟に住み、6人の男を奪う怪物と、1日に3回海水を飲み込み、船全体を飲み込んでしまう渦巻きである。彼女は、すべてを失うよりも、崖に寄り添って6人の男を失う方がよいと彼に告げ、彼はその通りにする。",
+        "メッシーナ海峡には本物の激しい潮流があり、特定の潮の状態では本物の渦巻きが発生し、崖に囲まれたカラブリアの海岸がある。これは、詩の中の危険と物理的な世界が、特別な言い訳なしに一致する、航海中唯一の寄港地である。"
+      ],
+      "identificationNote": "妥当（Plausible） — 漂流の地が到達する最高ランク。スコアは12点満点中8点：テキストと地理の面で強力であり、学術的にも十分に一致しているとみなせるが、海峡は発掘調査の対象にならないため、考古学の面では必然的にゼロとなる。",
+      "debate": "この同定が記憶によるものなのか、それとも後から結びつけられたものなのか：ギリシャの船乗りたちは8世紀からこの海峡を知っていたため、その当時に作られた詩であれば、伝聞に基づいて描写することができた。そうなると、スキュラとカリュブディスは架空の航海の中の実在の地理ということになり、これこそがこのアトラス全体のテーマであると言える。"
+    },
+    "zh": {
+      "name": "斯库拉和卡律布狄斯",
+      "summary": "漂泊旅程中唯一表现得像个真实地点的险境：一条狭窄的海峡，一侧是致命的急流，另一侧是悬崖。古代学者将其定在美西纳，且从未有过争议。",
+      "description": [
+        "喀耳刻在奥德修斯航经此地前描述了这条通道：悬崖高处洞穴中的一只怪物会夺走六个人，而一个每天吞吐海水三次的漩涡则会吞没整艘船。她告诉他要紧贴悬崖，宁可损失六个人也不要全军覆没，他也确实照做了。",
+        "美西纳海峡确实有强烈的急流，在特定潮汐状态下有真实的漩涡，以及悬崖环绕的卡拉布里亚海岸。这是整个航程中唯一一处无需刻意辩解，史诗中的险境便能与现实地理完全吻合的站点。"
+      ],
+      "identificationNote": "似真：这是所有漂泊地点中所能达到的最高级别。得分为 8/12：在文本和地理上证据充分，学术界意见足够一致，但在考古学上必然为零，因为海峡无法留下可供发掘的遗迹。",
+      "debate": "这一认定究竟是一种记忆还是后期的附会：希腊水手自公元前八世纪起就了解该海峡，因此当时创作的史诗完全可以根据传闻对其进行描述。这将使斯库拉和卡律布狄斯成为虚构航程中的真实地理——而这可以说正是整部地图集的核心所在。"
     }
   }
 }

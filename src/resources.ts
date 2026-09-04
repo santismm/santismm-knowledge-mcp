@@ -8,7 +8,7 @@ import { resourceSurfaceOf, resourceUri } from "./resource-uris.ts";
 import type { Surface } from "./surfaces.ts";
 import { mergedLabs, type HomericKind, type McpContent } from "./tools.ts";
 
-const LOCALES = ["en", "es", "pt"] as const satisfies readonly Locale[];
+const LOCALES = ["en", "es", "pt", "fr", "de", "ja", "zh"] as const satisfies readonly Locale[];
 const LOCAL_CACHE = { ttlMs: 60 * 60 * 1000, cacheScope: "public" } as const;
 const FEDERATED_CACHE = { ttlMs: 5 * 60 * 1000, cacheScope: "public" } as const;
 

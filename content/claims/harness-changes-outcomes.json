@@ -52,6 +52,30 @@
       "basis": "Os benchmarks agênticos publicados dão taxas de resolução diferentes para o mesmo modelo consoante o andaime que o conduz, e os relatos de engenharia dos fornecedores descrevem o mesmo efeito ao mudar ciclo, ferramentas ou estratégia de contexto sem tocar no modelo.",
       "limitations": "Estabelece que o harness importa, não quanto, nem que componente produz o efeito, nem se generaliza entre modelos. As comparações publicadas são autodeclaradas e raramente controlam custo, repetições ou variância.",
       "falsifiedBy": "Um estudo controlado que, fixando modelo, tarefa, esforço e orçamento, não encontre diferença na taxa de sucesso verificado entre vários harnesses para além da variância entre execuções."
+    },
+    "fr": {
+      "statement": "Maintenir le modèle fixe et modifier uniquement le harness change de manière significative le résultat d'une même tâche.",
+      "basis": "Les benchmarks d'agents publiés font état de taux de résolution différents pour un même modèle sous-jacent selon l'échafaudage (scaffold) qui le pilote, et les rapports techniques des fournisseurs décrivent le même effet lorsqu'ils modifient la boucle, les outils ou la stratégie de contexte sans changer de modèle.",
+      "limitations": "Établit que le harness a de l'importance, mais pas à quel point, ni quel composant porte l'effet, ni si cela se généralise à d'autres modèles. Les comparaisons publiées sont autodéclarées et contrôlent rarement les coûts, les répétitions ou la variance.",
+      "falsifiedBy": "Une étude contrôlée maintenant constants le modèle, la tâche, l'effort et le budget à travers plusieurs harnesses, qui ne constaterait aucune différence dans le taux de réussite vérifié au-delà de la variance d'une exécution à l'autre."
+    },
+    "de": {
+      "statement": "Wenn man das Modell unverändert lässt und nur den Harness ändert, ändert sich das Ergebnis derselben Aufgabe erheblich.",
+      "basis": "Veröffentlichte agentische Benchmarks berichten von unterschiedlichen Lösungsraten für dasselbe zugrunde liegende Modell, je nach dem Scaffold, das es steuert, und technische Berichte von Anbietern beschreiben denselben Effekt, wenn sie Loop-, Tool- oder Kontextstrategien ändern, ohne das Modell zu wechseln.",
+      "limitations": "Belegt, dass der Harness eine Rolle spielt, aber nicht, wie sehr, welche Komponente den Effekt trägt oder ob er sich auf andere Modelle verallgemeinern lässt. Veröffentlichte Vergleiche beruhen auf Selbsteinschätzungen und kontrollieren selten Kosten, Wiederholungen oder Varianz.",
+      "falsifiedBy": "Eine kontrollierte Studie, die Modell, Aufgabe, Aufwand und Budget über mehrere Harnesses hinweg konstant hält und keinen Unterschied in der verifizierten Erfolgsquote feststellt, der über die Varianz zwischen den Durchläufen hinausgeht."
+    },
+    "ja": {
+      "statement": "モデルを固定したまま、ハーネスのみを変更すると、同一タスクの成果が実質的に変化します。",
+      "basis": "公開されているエージェントのベンチマークでは、それを駆動するスキャフォールドによって、同一の基盤モデルであっても解決率が異なることが報告されています。また、ベンダーのエンジニアリングレポートでも、モデルを変更せずにループ、ツール、またはコンテキスト戦略を変更した際に同様の効果が生じることが説明されています。",
+      "limitations": "ハーネスが重要であることは立証していますが、どの程度重要なのか、どのコンポーネントがその効果をもたらしているのか、またそれがモデル間で一般化できるのかは示していません。公開されている比較は自己申告によるものが多く、コスト、反復回数、または分散が制御されていることは稀です。",
+      "falsifiedBy": "モデル、タスク、労力、および予算を一定に保ち、複数のハーネス間で比較した対照実験において、実行ごとのばらつきを超える検証済み成功率の差が見られないこと。"
+    },
+    "zh": {
+      "statement": "保持模型不变，仅改变支撑系统，会实质性地改变同一任务的结果。",
+      "basis": "已发表的智能体基准测试报告显示，对于相同的底层模型，其解决率因驱动它的脚手架（scaffold）不同而异；厂商的工程报告也描述了在不改变模型的情况下，改变循环、工具或上下文策略时会产生相同的效果。",
+      "limitations": "仅证实了支撑系统至关重要，但未说明其重要程度、哪个组件产生了该效果，以及该效果是否适用于其他模型。已发表的对比多为自我报告，极少对成本、重复次数或方差进行控制。",
+      "falsifiedBy": "一项在多个支撑系统之间保持模型、任务、工作量和预算恒定的对照研究，发现验证成功率的差异未超出运行间的正常方差。"
     }
   }
 }

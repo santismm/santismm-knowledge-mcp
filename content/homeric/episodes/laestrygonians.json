@@ -60,6 +60,22 @@
         "pt": {
           "label": "Bonifácio, Córsega",
           "note": "A enseada corresponde ao porto do poema tão bem quanto qualquer lugar do Mediterrâneo, e esse é todo o argumento."
+        },
+        "fr": {
+          "label": "Bonifacio, Corse",
+          "note": "Le goulet correspond au port du poème aussi bien que n'importe quel endroit de la Méditerranée, et c'est là tout l'argument."
+        },
+        "zh": {
+          "label": "科西嘉岛博尼法乔",
+          "note": "该海湾与史诗中港口的吻合程度不亚于地中海的任何地方，而这便是该论点的全部依据。"
+        },
+        "de": {
+          "label": "Bonifacio, Korsika",
+          "note": "Die Bucht entspricht dem Hafen des Gedichts so gut wie kaum ein anderer Ort im Mittelmeer, und das ist auch schon das ganze Argument."
+        },
+        "ja": {
+          "label": "コルシカ島のボニファシオ",
+          "note": "この入り江は、地中海のどの場所よりも詩に登場する港とよく一致しており、主張の根拠はそれだけです。"
         }
       }
     },
@@ -84,6 +100,22 @@
         "pt": {
           "label": "A costa lacial de Fórmias",
           "note": "Uma tradição literária romana, não um argumento geográfico."
+        },
+        "fr": {
+          "label": "La côte latiale à Formies",
+          "note": "Une tradition littéraire romaine plutôt qu'un argument géographique."
+        },
+        "zh": {
+          "label": "福尔米亚的拉提姆海岸",
+          "note": "这更像是一种罗马文学传统，而非地理学论证。"
+        },
+        "de": {
+          "label": "Die latinische Küste bei Formiae",
+          "note": "Eher eine römische literarische Tradition als ein geografisches Argument."
+        },
+        "ja": {
+          "label": "フォルミアイのラティウム海岸",
+          "note": "地理的な議論というよりも、ローマの文学的伝承です。"
         }
       }
     }
@@ -146,6 +178,86 @@
         {
           "q": "Por que o episódio importa?",
           "a": "Porque é o momento em que a expedição se reduz a uma só nau — e porque mostra como uma descrição precisa pode ainda assim não identificar um lugar."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Les Lestrygons",
+      "summary": "Onze navires perdus dans un seul port. Le mouillage le plus précisément décrit de l'Odyssée est aussi le plus meurtrier, et personne ne peut prouver où il se trouve.",
+      "narrative": [
+        "La flotte pénètre dans un port à l'embouchure étroite entre des falaises, où aucune houle ne s'élève jamais. Chaque capitaine s'amarre à l'intérieur, sauf Ulysse, qui s'attache à l'extérieur sur la roche. Les Lestrygons s'avèrent être des géants ; ils harponnent les hommes comme des poissons et fracassent les navires avec des blocs de pierre depuis les hauteurs.",
+        "Ulysse tranche son câble et s'éloigne à la rame. Il repart avec un seul navire sur douze, et l'arithmétique des pertes du poème est complète : à partir de là, c'est un équipage unique qui s'amenuise."
+      ],
+      "whyItMatters": "C'est le cas d'école de l'atlas d'une description vivante qui ne peut être convertie en un lieu : textuel 3, archéologique 0, et aucun consensus.",
+      "debate": "Reste à savoir si le détail des nuits très courtes conserve le récit de hautes latitudes ou s'il s'agit d'une touche fantastique. Les deux interprétations sont anciennes et aucune n'est vérifiable.",
+      "faqs": [
+        {
+          "q": "Le port des Lestrygons est-il Bonifacio ?",
+          "a": "Bonifacio correspond bien à la description et ne bénéficie d'aucun autre soutien. L'atlas le classe comme spéculatif, à 6/12."
+        },
+        {
+          "q": "Pourquoi cet épisode est-il important ?",
+          "a": "Parce que c'est le moment où l'expédition se réduit à un seul navire — et parce qu'il montre comment une description précise peut tout de même échouer à identifier un lieu."
+        }
+      ]
+    },
+    "de": {
+      "title": "Die Laistrygonen",
+      "summary": "Elf Schiffe in einem einzigen Hafen verloren. Der am präzisesten beschriebene Ankerplatz in der Odyssee ist auch ihr tödlichster, und niemand kann beweisen, wo er liegt.",
+      "narrative": [
+        "Die Flotte läuft in einen Hafen mit einer engen Mündung zwischen Klippen ein, in dem sich nie eine Dünung erhebt. Jeder Kapitän macht im Inneren fest, außer Odysseus, der sein Schiff außen am Felsen anbindet. Die Laistrygonen entpuppen sich als Riesen; sie spießen die Männer wie Fische auf und zertrümmern die Schiffe mit Felsbrocken von den Höhen.",
+        "Odysseus kappt sein Tau und rudert hinaus. Er entkommt mit einem von zwölf Schiffen, und die Verlustarithmetik des Gedichts ist vollendet: Von hier an schrumpft eine einzige Besatzung."
+      ],
+      "whyItMatters": "Es ist das Paradebeispiel des Atlas für eine lebendige Beschreibung, die sich nicht in einen Ort übertragen lässt: Textbefund 3, Archäologie 0 und kein Konsens.",
+      "debate": "Ob das Detail der sehr kurzen Nächte einen Bericht aus hohen Breitengraden bewahrt oder ein fantastisches Element ist. Beide Lesarten sind alt und keine von beiden ist überprüfbar.",
+      "faqs": [
+        {
+          "q": "Ist der Hafen der Laistrygonen Bonifacio?",
+          "a": "Bonifacio passt gut zur Beschreibung, hat aber keine weitere Stützung. Der Atlas verzeichnet es mit 6/12 als spekulativ."
+        },
+        {
+          "q": "Warum ist diese Episode von Bedeutung?",
+          "a": "Weil es der Moment ist, in dem die Expedition auf ein einziges Schiff schrumpft – und weil es zeigt, wie eine präzise Beschreibung dennoch daran scheitern kann, einen Ort zu identifizieren."
+        }
+      ]
+    },
+    "ja": {
+      "title": "ライストリュゴネス族",
+      "summary": "たった一つの港で11隻の船が失われた。『オデュッセイア』の中で最も精密に描写されている停泊地は、同時に最も致命的な場所でもあり、それがどこにあるのかを証明できる者は誰もいません。",
+      "narrative": [
+        "艦隊は、崖に挟まれた狭い入り口を持つ、うねりの全く立たない港に入ります。オデュッセウスを除くすべての船長が港内に係留しますが、オデュッセウスだけは外側の岩に船を繋ぎます。ライストリュゴネス族は巨人であることが判明し、彼らは男たちを魚のように突き刺し、高所から巨石を投げ落として船を粉砕します。",
+        "オデュッセウスは係留索を切り、船を漕ぎ出します。彼は12隻のうちわずか1隻の船とともに脱出し、詩における損失の計算は完了します。これ以降、減少していくのは単一の乗組員のみとなります。"
+      ],
+      "whyItMatters": "これは、鮮明な描写があるにもかかわらず場所を特定できないという、この地図帳における教科書的な事例です。テキスト評価は3、考古学評価は0であり、合意は存在しません。",
+      "debate": "極めて短い夜という詳細な描写が、高緯度地方からの報告を留めているのか、それとも空想的な味付けに過ぎないのか。どちらの解釈も古くから存在し、いずれも検証不可能です。",
+      "faqs": [
+        {
+          "q": "ライストリュゴネス族の港はボニファシオですか？",
+          "a": "ボニファシオは描写とよく一致していますが、それ以外の裏付けはありません。地図帳では、これを6/12の評価で「推測の域を出ない」と記録しています。"
+        },
+        {
+          "q": "なぜこのエピソードが重要なのですか？",
+          "a": "遠征隊が1隻の船になってしまう瞬間だからであり、また、いかに精密な描写であっても場所の特定には至らないことがあるということを示しているからです。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "莱斯特律戈涅斯人",
+      "summary": "十一艘船在同一个港口中丧失。《奥德赛》中描述最精确的锚地也是最致命的，而且无人能证实它究竟在哪里。",
+      "narrative": [
+        "船队驶入一个两旁悬崖峭壁、入口狭窄的港口，那里风平浪静，毫无波澜。除奥德修斯外，每位船长都将船停泊在港内，而奥德修斯则将船系在港外的岩石上。莱斯特律戈涅斯人原来是巨人；他们像叉鱼一样用长矛刺穿人们，并从高处投掷巨石砸毁船只。",
+        "奥德修斯砍断缆绳，划船逃离。十二艘船中他仅带走了一艘，史诗中关于损失的算术至此完成：从这里开始，只剩下一支不断减员的船员队伍。"
+      ],
+      "whyItMatters": "这是该地图集中关于“生动描述无法转化为具体位置”的教科书级案例：文本得分 3，考古得分 0，且未达成共识。",
+      "debate": "关于极短夜晚的细节究竟是保留了来自高纬度地区的报告，还是纯属奇幻笔触。这两种解读都由来已久，且都无法验证。",
+      "faqs": [
+        {
+          "q": "莱斯特律戈涅斯人的港口是博尼法乔吗？",
+          "a": "博尼法乔与描述非常吻合，但没有其他证据支持。地图集将其记录为推测性的，得分为 6/12。"
+        },
+        {
+          "q": "为什么这一情节很重要？",
+          "a": "因为在这一时刻，远征船队只剩下了一艘船——而且它表明，即使是精确的描述也可能无法确定一个地点。"
         }
       ]
     }

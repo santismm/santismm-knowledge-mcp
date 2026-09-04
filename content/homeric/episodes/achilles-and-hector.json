@@ -70,6 +70,22 @@
         "pt": {
           "label": "Uma volta às muralhas de Troia VI",
           "note": "A perseguição exige uma cidade murada com espaço para contorná-la e nascentes por perto. O circuito de Troia VI é grande o bastante; as nascentes são o detalhe que um dia ancorou a identificação rival de Pınarbaşı."
+        },
+        "fr": {
+          "label": "Un circuit autour des murs de Troie VI",
+          "note": "La poursuite nécessite une ville fortifiée avec de l'espace pour en faire le tour en courant et des sources à proximité. Le périmètre de Troie VI est assez grand ; les sources sont le détail qui ancrait autrefois l'identification rivale de Pınarbaşı."
+        },
+        "zh": {
+          "label": "绕特洛伊VI期城墙的环行路线",
+          "note": "这场追逐需要一座有城墙的城市，周围有奔跑的空间，且附近有泉水。特洛伊VI期的城墙周长足够大；而泉水则是曾用于支撑竞争对手皮纳尔巴希身份认定的细节。"
+        },
+        "de": {
+          "label": "Ein Rundlauf um die Mauern von Troja VI",
+          "note": "Die Verfolgungsjagd erfordert eine von Mauern umgebene Stadt mit Platz zum Umlaufen und Quellen in der Nähe. Der Umfang von Troja VI ist groß genug; die Quellen sind das Detail, das einst die konkurrierende Identifizierung mit Pınarbaşı stützte."
+        },
+        "ja": {
+          "label": "トロイVIの城壁を巡るルート",
+          "note": "追跡劇には、周囲を走り回るスペースのある城壁都市と、その近くにある泉が必要です。トロイVIの城壁の周囲は十分に広く、泉はかつて対抗馬であったプナルバシュの同定を支えていた細部です。"
         }
       }
     }
@@ -132,6 +148,86 @@
         {
           "q": "Isso enfraquece a identificação de Troia?",
           "a": "Não materialmente. Mostra que um poema pode acertar sobre uma cidade e ser inverificável sobre um detalhe — e por isso este atlas pontua os critérios separadamente."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Achille et Hector",
+      "summary": "Trois tours de la ville en courant, devant les sources où les femmes de Troie lavaient leur linge — la scène d'action la plus précise sur le plan topographique de l'épopée grecque.",
+      "narrative": [
+        "Hector attend devant la porte, perd courage à l'arrivée d'Achille et s'enfuit. Ils passent devant le poste d'observation, le figuier battu par les vents, le chemin des chariots et les deux sources du Scamandre, l'une chaude et l'autre froide. Trois fois le tour de la ville, puis Athéna pousse Hector par la ruse à faire face.",
+        "Les sources ont guidé un siècle de topographie troyenne : Lechevalier les situait à Pınarbaşı, Maclaren lui répondit par Hisarlık, et les fouilles de Schliemann ont fixé l'emplacement du site sans jamais résoudre la question des sources."
+      ],
+      "whyItMatters": "C'est le passage où l'Iliade se lit le plus comme une carte, et où la carte a échoué de la manière la plus instructive : les sources n'ont jamais été identifiées à Hisarlık.",
+      "debate": "La question est de savoir si ces sources sont un élément réel de l'âge du bronze aujourd'hui tari ou enseveli, un doublet poétique, ou la preuve que la topographie du poème est composite.",
+      "faqs": [
+        {
+          "q": "Les sources chaude et froide existent-elles à Troie ?",
+          "a": "Aucune paire correspondant à la description n'a été identifiée à Hisarlık. Les sources constituaient l'argument le plus solide en faveur du site rival de Pınarbaşı, que les fouilles ont par ailleurs exclu."
+        },
+        {
+          "q": "Cela fragilise-t-il l'identification de Troie ?",
+          "a": "Pas de manière significative. Cela montre qu'un poème peut voir juste pour une ville tout en restant invérifiable sur un détail — c'est pourquoi cet atlas évalue les critères séparément."
+        }
+      ]
+    },
+    "de": {
+      "title": "Achilles und Hektor",
+      "summary": "Drei Runden im Laufschritt um die Stadt, vorbei an den Quellen, an denen die Frauen von Troja zu waschen pflegten – die topografisch präziseste Actionszene im griechischen Epos.",
+      "narrative": [
+        "Hektor wartet vor dem Tor, verliert die Nerven, als Achilles kommt, und flieht. Sie passieren den Spähpunkt, den windgepeitschten Feigenbaum, den Wagenweg und die zwei Quellen des Skamander, eine heiß und eine kalt. Dreimal umrunden sie die Stadt, und dann bringt Athena Hektor durch eine List dazu, sich zu stellen.",
+        "Die Quellen prägten ein Jahrhundert der Topographie Trojas: Lechevalier verortete sie in Pınarbaşı, Maclaren entgegnete mit Hisarlık, und Schliemanns Ausgrabung legte die Fundstätte fest, ohne jemals die Frage der Quellen zu klären."
+      ],
+      "whyItMatters": "Es ist die Passage, in der sich die Ilias am ehesten wie eine Karte liest und in der die Karte am lehrreichsten versagt hat: Die Quellen konnten in Hisarlık nie nachgewiesen werden.",
+      "debate": "Ob die Quellen ein reales bronzezeitliches Merkmal sind, das heute ausgetrocknet oder verschüttet ist, ein poetisches Doublett oder ein Beweis dafür, dass die Topographie des Epos zusammengesetzt ist.",
+      "faqs": [
+        {
+          "q": "Gibt es die heißen und kalten Quellen in Troja?",
+          "a": "In Hisarlık wurde kein Paar identifiziert, das der Beschreibung entspricht. Die Quellen waren das stärkste Argument für die konkurrierende Fundstätte Pınarbaşı, die durch Ausgrabungen ansonsten ausgeschlossen wurde."
+        },
+        {
+          "q": "Schwächt das die Identifizierung von Troja?",
+          "a": "Nicht wesentlich. Es zeigt, dass ein Epos in Bezug auf eine Stadt recht haben kann, während ein Detail nicht verifizierbar ist – weshalb dieser Atlas Kriterien separat bewertet."
+        }
+      ]
+    },
+    "ja": {
+      "title": "アキレウスとヘクトル",
+      "summary": "トロイの女性たちがかつて洗濯をしていた泉を通り過ぎ、走って街を3周する。ギリシャ叙事詩の中で最も地形的に具体的なアクションシーン。",
+      "narrative": [
+        "ヘクトルは門の外で待ち、アキレウスが来ると怯んで逃げ出す。彼らは見張り台、風に吹かれるイチジクの木、馬車のわだち、およびスカマンドロス川の2つの泉（1つは温かく、1つは冷たい）を通り過ぎる。街を3周したところで、アテナがヘクトルを騙して立ち向かわせる。",
+        "これらの泉は、1世紀にわたるトロイの地形学を方向付けました。ルシュヴァリエはそれらをプナルバシュに比定し、マクラーレンはヒサルルクを挙げて反論し、シュリーマンの発掘調査は遺跡の場所を確定させたものの、泉の謎を解決することはありませんでした。"
+      ],
+      "whyItMatters": "これは『イリアス』が最も地図のように読める一節であり、同時にその地図が最も示唆に富む形で失敗している箇所でもあります。ヒサルルクでは、これらの泉に一致するものは一度も見つかっていません。",
+      "debate": "これらの泉が、現在は枯れるか埋もれてしまった実在する青銅器時代の地形なのか、詩的な重複（ダブレット）なのか、あるいはこの詩の地形が複合的なものであることを示す証拠なのかという議論。",
+      "faqs": [
+        {
+          "q": "トロイに温泉と冷泉は実在するのですか？",
+          "a": "ヒサルルクでは、その描写に一致する一対の泉は確認されていません。これらの泉は、対抗馬であったプナルバシュ遺跡を支持する最大の根拠でしたが、発掘調査によって同遺跡の可能性はそれ以外に否定されています。"
+        },
+        {
+          "q": "それによってトロイの同定は揺らぐのでしょうか？",
+          "a": "実質的には揺らぎません。これは、詩が都市については正しく語っていても、細部については検証不可能である場合があることを示しています。だからこそ、このアトラスでは評価基準を個別にスコア化しているのです。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "阿喀琉斯与赫克托耳",
+      "summary": "奔跑着绕城三圈，经过特洛伊妇女过去洗衣服的泉水——这是希腊史诗中地形描述最具体的动作场景。",
+      "narrative": [
+        "赫克托耳在城门外等待，当阿喀琉斯到来时，他丧失了勇气并开始逃跑。他们经过了瞭望点、风吹的无花果树、车辙以及斯卡曼德罗斯河的两口泉水（一热一冷）。绕城跑了三圈后，雅典娜诱骗赫克托耳停下对峙。",
+        "这些泉水主导了一个世纪的特洛伊地形学研究：勒舍瓦利耶将其解读为皮纳尔巴希，麦克拉伦则以希萨尔利克作为回应，而施里曼的发掘虽然确定了遗址的位置，却从未解决泉水的问题。"
+      ],
+      "whyItMatters": "在这一段落中，《伊利亚特》读起来最像一幅地图，而地图失效的方式也最具有启发意义：在希萨尔利克从未找到与这些泉水相匹配的地点。",
+      "debate": "这些泉水究竟是青铜时代真实存在但如今已干涸或被掩埋的地貌，还是诗歌中的双重意象，抑或是该史诗的地形具有复合性的证据。",
+      "faqs": [
+        {
+          "q": "特洛伊是否存在冷热泉？",
+          "a": "在希萨尔利克尚未发现符合该描述的成对泉水。这些泉水曾是支持竞争对手皮纳尔巴希遗址的最强有力论据，但考古发掘在其他方面已排除了该遗址的可能性。"
+        },
+        {
+          "q": "这是否削弱了对特洛伊身份的认定？",
+          "a": "并没有实质性影响。这表明一部史诗对一座城市的描述可以是正确的，但对某个细节却无法考证——这也正是本图册对各项标准分别评分的原因。"
         }
       ]
     }

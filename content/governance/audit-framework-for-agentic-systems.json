@@ -275,6 +275,310 @@
           "a": "Traços e registros dão suporte a Medir e Gerenciar do NIST AI RMF e à auditoria interna da Cláusula 9 da ISO/IEC 42001; um mapeamento de controles ou Declaração de Aplicabilidade vincula cada controle à evidência que prova que ele operou."
         }
       ]
+    },
+    "fr": {
+      "name": "Cadre d'audit pour les systèmes agentiques",
+      "summary": "Un cadre pratique et neutre vis-à-vis des fournisseurs pour rendre un agent auditable et pour l'auditer. Il définit les preuves dont un réviseur indépendant a besoin — des traces immuables et corrélées de chaque décision et appel d'outil, la provenance du modèle et de sa version, les rapports d'évaluation, les enregistrements d'approbations et d'incidents — ainsi que la manière de tester les contrôles et d'échantillonner les exécutions à grand volume. Chaque type de preuve est associé à l'ISO/IEC 42001 et au NIST AI RMF afin qu'un auditeur puisse vérifier que l'agent est resté dans ses limites gouvernées. Utilisez-le pour concevoir l'auditabilité dès le départ, et non après coup.",
+      "definition": "Un audit d'agent est un examen indépendant et basé sur des preuves qui détermine si un système agentique a fonctionné dans le cadre de son périmètre, de ses contrôles et de ses politiques autorisés sur une période définie, et si les affirmations de gouvernance formulées à son sujet sont étayées par des preuves fiables.",
+      "scope": "Les auditeurs, les équipes d'assurance et de gestion des risques, ainsi que les propriétaires de systèmes qui doivent rendre leurs agents auditables dès la conception (auditable by design). Il s'applique aux agents autonomes ou semi-autonomes qui utilisent des outils et agissent dans le temps, et prend en charge à la fois l'assurance interne et l'audit externe ou réglementaire. C'est un compagnon pratique pour les cadres formels, et non un substitut à un avis juridique.",
+      "keyPoints": [
+        "Auditabilité dès la conception (auditability by design) : l'agent doit émettre suffisamment de preuves structurées au moment de l'exécution pour pouvoir reconstituer n'importe quelle exécution ultérieurement.",
+        "Chaque exécution produit une trace immuable et corrélée : l'objectif, chaque étape et appel d'outil avec paramètres et résultats, les approbations, les contournements (overrides) et le résultat final.",
+        "Les preuves doivent être complètes, attribuables, horodatées et inviolables (tamper-evident) pour avoir une valeur probante.",
+        "La provenance du modèle et de sa version (prompt, outils, modèle) est capturée à chaque exécution afin que le comportement soit lié à une configuration connue.",
+        "L'échantillonnage est structuré en couches : stratifié par risque, statistique, et examen à 100 % de l'ensemble des exceptions, contournements, refus et incidents.",
+        "Les preuves d'audit correspondent à l'audit interne de la norme ISO/CEI 42001 (Clause 9) et aux fonctions Measure et Manage du NIST AI RMF."
+      ],
+      "controls": [
+        {
+          "control": "Journaux d'audit immuables et traçabilité",
+          "note": "Capturer une trace corrélée par exécution — identité et version de l'agent, objectif, chaque étape, appel d'outil, résultat, approbations et issue — et la protéger contre toute altération. Implémente l'observabilité de l'IA."
+        },
+        {
+          "control": "Provenance du modèle et de la version",
+          "note": "Enregistrer le prompt exact, le jeu d'outils et la version du modèle derrière chaque exécution afin que le comportement soit attribuable à une référence connue et reproductible par configuration."
+        },
+        {
+          "control": "Preuves d'évaluation",
+          "note": "Conserver les rapports d'évaluation pré-déploiement et continus ainsi que les résultats des jalons de validation afin que l'auditeur puisse vérifier que la sécurité et la qualité ont été mesurées — fonction « Measure » du NIST."
+        },
+        {
+          "control": "Test des contrôles et échantillonnage",
+          "note": "Tester chaque contrôle par rapport aux preuves en utilisant une méthodologie d'échantillonnage documentée : stratifiée par risque, statistique, et examen complet des exceptions."
+        },
+        {
+          "control": "Registres d'approbation et d'incident",
+          "note": "Capturer les approbations humaines, les contournements et les incidents avec l'identité de l'acteur et l'horodatage. Implémente le modèle de jalon de validation par approbation humaine."
+        },
+        {
+          "control": "Attestations et gestion des constats",
+          "note": "Les propriétaires de systèmes et de contrôles signent des attestations appuyées par des preuves ; les constats sont suivis jusqu'à leur résolution avec un niveau de gravité et des échéances."
+        }
+      ],
+      "checklist": [
+        "Confirmer que chaque exécution d'agent produit une trace complète et corrélée, liée par un identifiant de trace stable.",
+        "Vérifier que les journaux sont infalsifiables, horodatés et conservés pendant toute la période d'audit et de conformité réglementaire.",
+        "Vérifier que chaque exécution enregistre la provenance du modèle et de la version (prompt, outils, version du modèle).",
+        "Récupérer une cartographie des contrôles / Déclaration d'applicabilité liant chaque contrôle à ses preuves.",
+        "Conserver et examiner les rapports d'évaluation pré-déploiement et continus ainsi que les résultats des jalons de validation.",
+        "Confirmer l'existence de registres d'approbation, de contournement et d'incident comportant l'identité de l'acteur et l'horodatage.",
+        "Appliquer une méthodologie d'échantillonnage documentée — stratifiée par risque, statistique, et couverture à 100 % des exceptions.",
+        "Suivre les constats jusqu'à leur résolution avec un niveau de gravité et des échéances, et recueillir les attestations signées des propriétaires."
+      ],
+      "pitfalls": [
+        "Agents non auditables : journalisation ajoutée après coup, laissant des lacunes qu'aucun audit ne peut combler.",
+        "Journaux modifiables : enregistrements susceptibles d'être altérés, détruisant leur valeur probante.",
+        "Angles morts de l'échantillonnage : échantillonnage uniquement aléatoire qui passe à côté d'actions rares mais catastrophiques.",
+        "Attestation sans preuve : propriétaires validant des contrôles qu'ils ne peuvent pas démontrer.",
+        "Cimetière de constats : problèmes soulevés mais jamais corrigés ni re-testés."
+      ],
+      "examples": [
+        "Un auditeur reconstitue un remboursement contesté en suivant sa trace corrélée, de l'objectif à l'appel d'outil, puis à l'approbation humaine.",
+        "Un contrôle d'audit continu signale un appel d'outil en dehors de la liste d'autorisation par rapport au flux de journaux en direct.",
+        "Les rapports d'évaluation conservés correspondent à la fonction Measure du NIST AI RMF, prouvant que les jalons de sécurité ont été franchis avec succès avant le déploiement."
+      ],
+      "faqs": [
+        {
+          "q": "Peut-on vraiment auditer un agent non déterministe ?",
+          "a": "Oui — vous auditez les contrôles et le comportement enregistré, pas le déterminisme. Des traces complètes et immuables permettent de reconstituer n'importe quelle exécution spécifique, même si elle ne peut pas être reproduite à l'identique."
+        },
+        {
+          "q": "Quelle doit être la taille de l'échantillon d'audit ?",
+          "a": "Assez grande pour atteindre statistiquement votre niveau d'assurance cible, plus 100 % des exceptions et des actions à fort impact. L'échantillonnage ne remplace jamais un examen complet des exceptions."
+        },
+        {
+          "q": "Comment les preuves d'audit correspondent-elles aux référentiels ?",
+          "a": "Les traces et les journaux soutiennent les fonctions Measure et Manage du NIST AI RMF ainsi que l'audit interne de la clause 9 de l'ISO/CEI 42001 ; une cartographie des contrôles ou une Déclaration d'applicabilité lie chaque contrôle aux preuves qui démontrent son fonctionnement."
+        }
+      ]
+    },
+    "de": {
+      "name": "Audit-Framework für agentische Systeme",
+      "summary": "Ein praktisches, herstellerneutrales Framework, um einen Agenten auditierbar zu machen und ihn zu prüfen. Es definiert die Nachweise, die ein unabhängiger Prüfer benötigt – unveränderliche, korrelierte Traces jeder Entscheidung und jedes Tool-Aufrufs, Modell- und Versionsherkunft (Provenance), Evaluierungsberichte, Freigabe- und Incident-Protokolle – sowie Methoden zum Testen von Kontrollmechanismen und zur Stichprobenprüfung von Läufen mit hohem Volumen. Jede Nachweisart ist der ISO/IEC 42001 und dem NIST AI RMF zugeordnet, sodass ein Auditor überprüfen kann, ob der Agent innerhalb seiner vorgegebenen Grenzen geblieben ist. Nutzen Sie es, um Auditierbarkeit von Anfang an einzuplanen, statt sie nachträglich hinzuzufügen.",
+      "definition": "Ein Agenten-Audit ist eine unabhängige, evidenzbasierte Prüfung, die feststellt, ob ein agentisches System über einen definierten Zeitraum innerhalb seines autorisierten Rahmens, seiner Kontrollmechanismen und Richtlinien agiert hat und ob die darüber aufgestellten Governance-Behauptungen durch verlässliche Nachweise gestützt werden.",
+      "scope": "Auditoren, Assurance- und Risikoteams sowie Systemverantwortliche, die ihre Agenten von Grund auf auditierbar gestalten müssen (Auditability by Design). Es gilt für autonome oder teilautonome Agenten, die Tools nutzen und über längere Zeit agieren, und unterstützt sowohl die interne Qualitätssicherung als auch externe oder regulatorische Audits. Es ist ein praktischer Begleiter zu den formalen Frameworks und kein Ersatz für eine Rechtsberatung.",
+      "keyPoints": [
+        "Auditability by Design: Der Agent muss zur Laufzeit genügend strukturierte Nachweise liefern, um jeden Durchlauf später rekonstruieren zu können.",
+        "Jeder Durchlauf erzeugt einen unveränderlichen, korrelierten Trace: Ziel, jeder Schritt und Tool-Aufruf mit Parametern und Ergebnissen, Freigaben, Overrides und das Endergebnis.",
+        "Nachweise müssen vollständig, zuordenbar, mit Zeitstempeln versehen und manipulationssicher sein, um Beweiskraft zu besitzen.",
+        "Modell- und Versionsherkunft (Prompt, Tools, Modell) werden pro Durchlauf erfasst, sodass das Verhalten an eine bekannte Konfiguration gebunden ist.",
+        "Die Stichprobenentnahme ist gestuft: risikostratifiziert, statistisch und eine 100-prozentige Überprüfung aller Ausnahmen, Overrides, Ablehnungen und Vorfälle.",
+        "Audit-Nachweise lassen sich dem internen Audit nach ISO/IEC 42001 (Klausel 9) und den Measure- und Manage-Funktionen des NIST AI RMF zuordnen."
+      ],
+      "controls": [
+        {
+          "control": "Unveränderliche Audit-Logs und Rückverfolgbarkeit",
+          "note": "Erfassen Sie pro Durchlauf einen korrelierten Trace – Agenten-Identität und -Version, Ziel, jeden Schritt, Tool-Aufruf, Ergebnis, Genehmigungen und Resultat – und schützen Sie diesen vor Änderungen. Implementiert KI-Observability."
+        },
+        {
+          "control": "Modell- und Versionsherkunft",
+          "note": "Erfassen Sie den genauen Prompt, das Tool-Set und die Modellversion hinter jedem Durchlauf, sodass das Verhalten einer bekannten, per Konfiguration reproduzierbaren Baseline zugeordnet werden kann."
+        },
+        {
+          "control": "Evaluierungsnachweise",
+          "note": "Bewahren Sie Berichte zur Vorab- und laufenden Evaluierung sowie Gate-Ergebnisse auf, damit Auditoren überprüfen können, ob Sicherheit und Qualität gemessen wurden – NIST „Measure“."
+        },
+        {
+          "control": "Kontrollprüfungen und Stichprobenentnahme",
+          "note": "Prüfen Sie jede Kontrolle anhand von Nachweisen unter Verwendung einer dokumentierten Stichprobenmethodik: risikostratifiziert, statistisch und vollständige Überprüfung von Ausnahmen."
+        },
+        {
+          "control": "Genehmigungs- und Vorfallprotokolle",
+          "note": "Erfassen Sie menschliche Genehmigungen, Overrides und Vorfälle mit der Identität des Akteurs und Zeitstempeln. Implementiert das Human-Approval-Gate-Muster."
+        },
+        {
+          "control": "Attestierungen und Feststellungsmanagement",
+          "note": "System- und Kontrollverantwortliche unterzeichnen durch Nachweise gestützte Attestierungen; Feststellungen werden mit Schweregrad und Fristen bis zur Behebung nachverfolgt."
+        }
+      ],
+      "checklist": [
+        "Bestätigen Sie, dass jeder Agenten-Durchlauf einen vollständigen, korrelierten Trace erzeugt, der an eine stabile Trace-ID gebunden ist.",
+        "Überprüfen Sie, ob Logs manipulationssicher und zeitgestempelt sind sowie für den gesamten Audit- und regulatorischen Aufbewahrungszeitraum vorgehalten werden.",
+        "Prüfen Sie, ob jeder Durchlauf die Modell- und Versionsherkunft aufzeichnet (Prompt, Tools, Modellversion).",
+        "Rufen Sie ein Control-Mapping / eine Anwendbarkeitserklärung (Statement of Applicability) ab, die jede Kontrolle mit ihren Nachweisen verknüpft.",
+        "Bewahren und überprüfen Sie Berichte zur Vorab- und laufenden Evaluierung sowie Gate-Ergebnisse.",
+        "Bestätigen Sie, dass Protokolle für Genehmigungen, Overrides und Vorfälle mit der Identität des Akteurs und Zeitstempeln vorhanden sind.",
+        "Wenden Sie eine dokumentierte Stichprobenmethodik an – risikostratifiziert, statistisch und mit 100-prozentiger Abdeckung von Ausnahmen.",
+        "Verfolgen Sie Feststellungen mit Schweregrad und Fristen bis zur Behebung und holen Sie unterzeichnete Attestierungen der Verantwortlichen ein."
+      ],
+      "pitfalls": [
+        "Nicht auditierbare Agenten: Die Protokollierung wird erst nachträglich hinzugefügt, was Lücken hinterlässt, die kein Audit schließen kann.",
+        "Veränderbare Logs: Datensätze, die geändert werden könnten, was ihren Beweiswert zerstört.",
+        "Blinde Flecken bei Stichproben: Rein zufällige Stichproben, bei denen seltene, aber katastrophale Aktionen übersehen werden.",
+        "Attestierung ohne Nachweise: Verantwortliche zeichnen Kontrollen ab, die sie nicht nachweisen können.",
+        "Friedhof der Feststellungen: Aufgeworfene Probleme, die nie behoben oder erneut geprüft werden."
+      ],
+      "examples": [
+        "Ein Auditor rekonstruiert eine umstrittene Rückerstattung, indem er deren korrelierten Trace vom Ziel über den Tool-Aufruf bis zur menschlichen Genehmigung verfolgt.",
+        "Eine kontinuierliche Audit-Prüfung schlägt bei einem Tool-Aufruf außerhalb der Allow-List im Live-Log-Stream Alarm.",
+        "Aufbewahrte Evaluierungsberichte lassen sich dem Bereich „Measure“ des NIST AI RMF zuordnen und belegen, dass Sicherheits-Gates vor der Bereitstellung erfolgreich durchlaufen wurden."
+      ],
+      "faqs": [
+        {
+          "q": "Kann man einen nicht-deterministischen Agenten überhaupt auditieren?",
+          "a": "Ja – Sie auditieren die Kontrollen und das aufgezeichnete Verhalten, nicht den Determinismus. Vollständige, unveränderliche Traces machen jeden spezifischen Durchlauf rekonstruierbar, selbst wenn er nicht exakt reproduziert werden kann."
+        },
+        {
+          "q": "Wie groß sollte die Audit-Stichprobe sein?",
+          "a": "Statistisch gesehen groß genug für Ihr angestrebtes Sicherheitsniveau, plus 100 % der Ausnahmen und folgenschweren Aktionen. Stichproben ersetzen niemals eine vollständige Überprüfung von Ausnahmen."
+        },
+        {
+          "q": "Wie lassen sich Audit-Nachweise den Frameworks zuordnen?",
+          "a": "Traces und Logs unterstützen die Bereiche „Measure“ und „Manage“ des NIST AI RMF sowie das interne Audit nach ISO/IEC 42001 Klausel 9; ein Control-Mapping oder eine Anwendbarkeitserklärung (Statement of Applicability) verknüpft jede Kontrolle mit dem Nachweis, dass sie wirksam war."
+        }
+      ]
+    },
+    "ja": {
+      "name": "エージェント型システム向け監査フレームワーク",
+      "summary": "エージェントを監査可能にし、実際に監査を行うための、実用的かつベンダーニュートラルなフレームワーク。独立したレビュー担当者が必要とする証拠（すべての意思決定とツール呼び出しの不変かつ関連付けられたトレース、モデルとバージョンのプロベナンス、評価レポート、承認およびインシデントの記録など）を定義し、コントロールのテスト方法や大量の実行データのサンプリング方法を示します。各証拠タイプはISO/IEC 42001およびNIST AI RMFにマッピングされており、監査人はエージェントが管理された境界内に留まっているかを検証できます。後付けではなく、最初から監査可能性を考慮して設計するためにご活用ください。",
+      "definition": "エージェント監査とは、エージェント型システムが定義された期間において、承認されたスコープ、コントロール、およびポリシーの範囲内で動作したか、また、そのシステムに関して行われたガバナンスの主張が信頼できる証拠によって裏付けられているかを判断する、独立した証拠に基づく検査です。",
+      "scope": "監査人、アシュアランスおよびリスク管理チーム、そして設計段階からエージェントを監査可能にする必要があるシステム所有者。ツールを使用し、長期にわたって動作する自律型または半自律型エージェントに適用され、内部アシュアランスと外部または規制監査の両方をサポートします。本フレームワークは、公式なフレームワークを補完する実用的なガイドであり、法的助言に代わるものではありません。",
+      "keyPoints": [
+        "設計段階からの監査可能性（Auditability by design）：エージェントは、後から任意の実行を再構成できるように、実行時に十分な構造化された証拠を出力しなければなりません。",
+        "すべての実行において、不変かつ関連付けられたトレース（目標、パラメータと結果を伴う各ステップおよびツール呼び出し、承認、オーバーライド、および最終結果）が生成されます。",
+        "証拠価値を持つためには、証拠が完全であり、帰属性があり、タイムスタンプが付与され、改ざん検知可能（tamper-evident）でなければなりません。",
+        "モデルとバージョンのプロベナンス（プロンプト、ツール、モデル）が実行ごとに記録され、振る舞いが既知の構成に関連付けられます。",
+        "サンプリングは階層化されています。リスク層別化、統計的サンプリング、およびすべての例外、オーバーライド、拒否、インシデントに対する100%のレビューで構成されます。",
+        "監査証跡は、ISO/IEC 42001の内部監査（箇条9）およびNIST AI RMFのMeasure（測定）およびManage（管理）機能に対応しています。"
+      ],
+      "controls": [
+        {
+          "control": "不変の監査ログとトレーサビリティ",
+          "note": "実行ごとに、エージェントの識別情報とバージョン、目標、各ステップ、ツール呼び出し、結果、承認、最終結果を紐付けたトレースを記録し、改ざんから保護します。これによりAIオブザーバビリティを実装します。"
+        },
+        {
+          "control": "モデルとバージョンのプロバナンス（来歴）",
+          "note": "各実行の背景にある正確なプロンプト、ツールセット、モデルバージョンを記録し、動作が構成によって再現可能な既知のベースラインに起因するようにします。"
+        },
+        {
+          "control": "評価の証跡",
+          "note": "監査人が安全性と品質が測定されたことを検証できるように、デプロイ前および継続的な評価レポートとゲート結果を保持します（NISTの「Measure」に対応）。"
+        },
+        {
+          "control": "コントロールのテストとサンプリング",
+          "note": "文書化されたサンプリング手法（リスク層別化、統計的サンプリング、および完全な例外レビュー）を使用して、証跡に照らし合わせて各コントロールをテストします。"
+        },
+        {
+          "control": "承認およびインシデントの記録",
+          "note": "実行者の識別情報とタイムスタンプとともに、人の承認、オーバーライド、インシデントを記録します。これにより、人の承認ゲート（human-approval-gate）パターンを実装します。"
+        },
+        {
+          "control": "アテステーション（証明）と指摘事項の管理",
+          "note": "システムおよびコントロールの所有者は、証跡に裏付けられたアテステーションに署名します。指摘事項は、深刻度と期限を設定して解決まで追跡されます。"
+        }
+      ],
+      "checklist": [
+        "すべてのエージェントの実行が、一貫したトレースIDによって紐付けられた、完全で関連性のあるトレースを生成することを確認する。",
+        "ログが改ざん検知可能であり、タイムスタンプが付与され、監査および規制で定められた全期間にわたって保持されていることを検証する。",
+        "各実行において、モデルとバージョンのプロバナンス（プロンプト、ツール、モデルバージョン）が記録されていることを確認する。",
+        "各コントロールをその証跡に関連付けるコントロールマッピングまたは適用宣言書（Statement of Applicability）を取得する。",
+        "デプロイ前および継続的な評価レポートとゲート結果を保持し、レビューする。",
+        "実行者の識別情報とタイムスタンプを含む、承認、オーバーライド、インシデントの記録が存在することを確認する。",
+        "文書化されたサンプリング手法（リスク層別化、統計的サンプリング、および100%の例外カバー）を適用する。",
+        "深刻度と期限を設定して指摘事項を解決まで追跡し、所有者による署名済みのアテステーションを回収する。"
+      ],
+      "pitfalls": [
+        "監査不可能なエージェント：ロギングが後回しにされ、監査では埋められないギャップが残ること。",
+        "変更可能なログ：記録が改ざんされる可能性があり、証拠としての価値が損なわれること。",
+        "サンプリングの盲点：ランダムサンプリングのみに頼ることで、まれではあるが壊滅的なアクションを見落とすこと。",
+        "証跡のないアテステーション：実証できないコントロールに対して、所有者が承認の署名をしてしまうこと。",
+        "指摘事項の放置：問題が提起されたものの、是正や再テストが一切行われないこと。"
+      ],
+      "examples": [
+        "監査人が、目標からツール呼び出し、人の承認に至るまでの関連付けられたトレースを追跡することで、紛争のある返金処理を再構成する。",
+        "継続的監査チェックにより、ライブログストリームに対して許可リスト外のツール呼び出しを検知し、アラートを発信する。",
+        "保持された評価レポートがNIST AI RMFのMeasureに対応し、デプロイ前に安全ゲートを通過したことを証明する。"
+      ],
+      "faqs": [
+        {
+          "q": "非決定的なエージェントを監査することはそもそも可能ですか？",
+          "a": "はい。決定性ではなく、コントロールと記録された動作を監査します。完全で不変のトレースがあれば、特定の実行を正確に再現できなくても、再構成することが可能です。"
+        },
+        {
+          "q": "監査サンプルの規模はどの程度にするべきですか？",
+          "a": "統計的に目標とする保証レベルに達するのに十分な大きさに加え、例外および影響の大きいアクションの100%を含める必要があります。サンプリングが完全な例外レビューの代わりになることはありません。"
+        },
+        {
+          "q": "監査証跡はフレームワークにどのように対応しますか？",
+          "a": "トレースとログは、NIST AI RMFのMeasureおよびManage、ならびにISO/IEC 42001の箇条9（内部監査）をサポートします。コントロールマッピングまたは適用宣言書（Statement of Applicability）により、各コントロールがその運用を証明する証跡に関連付けられます。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "智能体系统审计框架",
+      "summary": "一个实用且不绑定特定厂商的框架，用于使智能体具备可审计性并对其进行审计。它定义了独立审查员所需的证据 —— 每次决策和工具调用的不可变且关联的追踪记录、模型 and 版本溯源、评估报告、审批和事件记录 —— 以及如何测试控制措施和对高吞吐量运行进行抽样。每种证据类型都映射到 ISO/IEC 42001 和 NIST AI RMF，以便审计员能够验证智能体是否保持在其治理边界内。使用它从一开始就设计可审计性，而不是事后弥补。",
+      "definition": "智能体审计是一项独立的、基于证据的检查，旨在确定智能体系统在特定时期内是否在其授权范围、控制措施和策略内运行，以及针对其提出的治理声明是否有可靠证据支持。",
+      "scope": "适用于审计员、合规与风险团队，以及必须使智能体具备“源自设计”的可审计性的系统所有者。它适用于在一段时间内使用工具并执行操作的自主或半自主智能体，并支持内部合规和外部或监管审计。它是正式框架的实用指南，不能替代法律咨询。",
+      "keyPoints": [
+        "源自设计的可审计性：智能体必须在运行时输出足够的结构化证据，以便日后重构任何运行过程。",
+        "每次运行都会产生不可变且关联的追踪记录：目标、包含参数和结果的每个步骤及工具调用、审批、覆盖和最终结果。",
+        "证据必须完整、可归属、带有时间戳且防篡改，才具有证据价值。",
+        "每次运行都会捕获模型和版本溯源（提示词、工具、模型），从而将行为与已知配置绑定。",
+        "抽样是分层的：包括风险分层抽样、统计抽样，以及对所有异常、覆盖、拒绝和事件进行 100% 的审查。",
+        "审计证据映射到 ISO/IEC 42001 内部审计（第 9 条）以及 NIST AI RMF 的 Measure（测量）和 Manage（管理）功能。"
+      ],
+      "controls": [
+        {
+          "control": "不可变审计日志与可追溯性",
+          "note": "捕获每次运行的相关联 trace——智能体身份和版本、目标、每个步骤、工具调用、结果、审批和最终产出——并防止其被篡改。这实现了 AI 可观测性。"
+        },
+        {
+          "control": "模型与版本溯源",
+          "note": "记录每次运行背后的确切提示词、工具集和模型版本，以便将行为归因于已知的、可通过配置复现的基线。"
+        },
+        {
+          "control": "评估证据",
+          "note": "保留部署前和持续的评估报告及关卡结果，以便审计员能够验证安全性和质量已得到测量——即 NIST 的 'Measure'。"
+        },
+        {
+          "control": "控制测试与抽样",
+          "note": "使用文件化的抽样方法对照证据测试每个控制项：风险分层抽样、统计抽样以及全面的异常审查。"
+        },
+        {
+          "control": "审批与事件记录",
+          "note": "捕获人工审批、覆盖和事件，并附带操作者身份和时间戳。这实现了人工审批关卡模式。"
+        },
+        {
+          "control": "证明与发现项管理",
+          "note": "系统和控制所有者签署以证据为支撑的证明；对发现项进行跟踪直至关闭，并明确严重程度和截止日期。"
+        }
+      ],
+      "checklist": [
+        "确认每次智能体运行都生成一个完整的、通过稳定 trace ID 绑定的关联 trace。",
+        "验证日志具有防篡改特征、带有时间戳，并在整个审计和监管窗口期内予以保留。",
+        "检查每次运行是否记录了模型和版本溯源信息（提示词、工具、模型版本）。",
+        "获取将每个控制项与其证据相关联的控制映射表 / 适用性声明（Statement of Applicability）。",
+        "保留并审查部署前和持续的评估报告及关卡结果。",
+        "确认存在审批、覆盖和事件记录，并附带操作者身份和时间戳。",
+        "应用文件化的抽样方法——风险分层抽样、统计抽样以及 100% 的异常覆盖。",
+        "跟踪发现项直至关闭，明确严重程度和截止日期，并收集所有者签署的证明。"
+      ],
+      "pitfalls": [
+        "不可审计的智能体：日志记录是事后才补上的，留下了任何审计都无法填补的空白。",
+        "可变日志：记录可能会被篡改，从而破坏其证据价值。",
+        "抽样盲区：仅进行随机抽样，从而遗漏了罕见但灾难性的行为。",
+        "无证据的证明：所有者对他们无法证明的控制项进行签字确认。",
+        "发现项坟墓：提出了问题，但从未进行整改或重新测试。"
+      ],
+      "examples": [
+        "审计员通过跟踪一笔争议退款的相关联 trace（从目标到工具调用再到人工审批），来重构该退款过程。",
+        "持续审计检查针对实时日志流中超出准允列表的工具调用发出告警。",
+        "保留的评估报告映射到 NIST AI RMF Measure，证明在部署前已通过安全关卡。"
+      ],
+      "faqs": [
+        {
+          "q": "非确定性智能体真的可以被审计吗？",
+          "a": "可以。您审计的是控制项和记录的行为，而不是其确定性。完整、不可变的 trace 使得任何特定的运行都是可重构的，即使它无法被完全精确地复现。"
+        },
+        {
+          "q": "审计抽样规模应该有多大？",
+          "a": "在统计学上足够大以达到您的目标保证水平，外加 100% 的异常和高影响行为。抽样永远不能取代全面的异常审查。"
+        },
+        {
+          "q": "审计证据如何映射到各个框架？",
+          "a": "trace 和日志支持 NIST AI RMF Measure 和 Manage 以及 ISO/IEC 42001 第 9 条内部审计；控制映射表或适用性声明将每个控制项与证明其已运行的证据相关联。"
+        }
+      ]
     }
   }
 }

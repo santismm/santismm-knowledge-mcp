@@ -105,6 +105,22 @@
         "pt": {
           "label": "Ano Englianós (o Palácio de Nestor)",
           "note": "Blegen achou tabuinhas em Linear B no primeiro dia de escavação, em 1939, e com o tempo um palácio do Bronze Final bem preservado, incendiado por volta de 1200 a.C. O arquivo nomeia um lugar e uma administração; não nomeia Nestor. O palácio é o candidato mais forte à Pilos homérica, e a identificação se apoia na escala, na data e na localização, não numa inscrição."
+        },
+        "fr": {
+          "label": "Ano Englianos (le palais de Nestor)",
+          "note": "Blegen a trouvé des tablettes en linéaire B dès le premier jour des fouilles en 1939 et, par la suite, un palais de l'âge du Bronze récent bien conservé, incendié vers 1200 avant notre ère. Les archives nomment un lieu et une administration ; elles ne nomment pas Nestor. Le palais est le candidat le plus solide pour la Pylos homérique, et l'identification repose sur la taille, la date et l'emplacement plutôt que sur une inscription."
+        },
+        "zh": {
+          "label": "阿诺·恩格利亚诺斯（涅斯托尔宫殿）",
+          "note": "布莱根（Blegen）在1939年发掘的第一天就发现了线形文字B泥板，并最终发现了一座保存完好的青铜时代晚期宫殿，该宫殿于公元前1200年左右被焚毁。档案中命名了一个地点和行政机构，但并未提及涅斯托尔。该宫殿是荷马史诗中皮洛斯的最强候选地，其认定依据是规模、年代和位置，而非铭文。"
+        },
+        "de": {
+          "label": "Ano Englianos (der Palast des Nestor)",
+          "note": "Blegen fand am ersten Ausgrabungstag im Jahr 1939 Linear-B-Tafeln und schließlich einen gut erhaltenen spätbronzezeitlichen Palast, der um 1200 v. Chr. niederbrannte. Das Archiv nennt einen Ort und eine Verwaltung; es nennt Nestor nicht. Der Palast ist der stärkste Kandidat für das homerische Pylos, und die Identifizierung beruht eher auf Größe, Datierung und Lage als auf einer Inschrift."
+        },
+        "ja": {
+          "label": "アノ・エンリアノス（ネストルの宮殿）",
+          "note": "ブレゲンは1939年の発掘初日に線文字Bの粘土板を発見し、最終的に紀元前1200年頃に焼失した保存状態の良い青銅器時代後期の宮殿を発見した。アーカイブには地名と行政が記されているが、ネストルの名は記されていない。この宮殿はホメロスのピュロスの最も有力な候補であり、その同定は碑文ではなく、規模、年代、位置に基づいている。"
         }
       }
     },
@@ -142,6 +158,22 @@
         "pt": {
           "label": "Uma Pilos trifília ou eleia",
           "note": "A Antiguidade já discutia qual Pilos Nestor governava: Estrabão registra reivindicações rivais da Trifília e da Élide, mais ao norte. A disputa é antiga e real, e hoje foi em grande parte resolvida pela escavação, não pela argumentação."
+        },
+        "fr": {
+          "label": "Une Pylos triphylienne ou éléenne",
+          "note": "L'Antiquité se disputait déjà sur la Pylos que gouvernait Nestor : Strabon rapporte des revendications rivales de Triphylie et d'Élide plus au nord. La dispute est ancienne, réelle, et aujourd'hui largement tranchée par les fouilles plutôt que par les arguments."
+        },
+        "zh": {
+          "label": "三菲利亚或伊利斯皮洛斯",
+          "note": "古人早已对涅斯托尔统治哪一个皮洛斯争论不休：斯特拉博记录了来自更北方的三菲利亚（Triphylia）和伊利斯（Elis）的相互竞争的主张。这一争议历史悠久且真实存在，而现在主要通过考古发掘而非口头争论得到了解决。"
+        },
+        "de": {
+          "label": "Ein triphylisches oder elisches Pylos",
+          "note": "Bereits die Antike stritt darüber, welches Pylos Nestor beherrschte: Strabo berichtet von konkurrierenden Ansprüchen aus Triphylien und Elis weiter nördlich. Der Streit ist alt, real und heute weitgehend durch Ausgrabungen statt durch Argumente beigelegt."
+        },
+        "ja": {
+          "label": "トリピュリアまたはエリスのピュロス",
+          "note": "古代においてすでに、ネストルがどのピュロスを支配していたかについて議論があった。ストラボンは、さらに北にあるトリピュリアとエリスからの対立する主張を報告している。この論争は古く、実在するものであるが、現在では議論よりも発掘調査によってほぼ解決されている。"
         }
       }
     }
@@ -183,6 +215,50 @@
       ],
       "identificationNote": "Aceita: um palácio do Bronze escavado, na escala, data e região corretas, com consenso acadêmico por trás da identificação. O critério geográfico pontua 2 e não 3 porque os detalhes náuticos da Odisseia e a disposição exata do porto não se resolvem com clareza.",
       "debate": "Em que enseada Telêmaco desembarcou, se a antiga disputa sobre a localização da Pilos de Nestor preserva a memória real de mais de uma Pilos, e como uma burocracia palaciana em Linear B se relaciona com a sociedade heroica dos poemas."
+    },
+    "fr": {
+      "name": "Pylos",
+      "summary": "Le royaume de Nestor, et le palais homérique que nous pouvons réellement visiter : le complexe de l'âge du Bronze récent à Ano Englianos, dont les archives en linéaire B ont survécu parce que le bâtiment a brûlé.",
+      "description": [
+        "Télémaque navigue vers Pylos au chant III de l'Odyssée et trouve Nestor faisant des sacrifices sur le rivage. Le catalogue de l'Iliade attribue à Nestor quatre-vingt-dix navires, le deuxième plus grand contingent. Tous deux désignent une puissance messénienne majeure, et l'une d'elles a été retrouvée : un palais sur la crête d'Ano Englianos avec une salle du trône, une baignoire, des magasins et des archives de plus de mille tablettes d'argile.",
+        "Les tablettes sont administratives — rations, offrandes, personnel — et elles sont en grec, ce qui est la découverte la plus importante que le site nous ait apportée. Elles ne mentionnent ni Nestor ni la guerre, et leur monde est une bureaucratie que les poèmes ne décrivent jamais.",
+        "À proximité, la tombe du Guerrier-Griffon, fouillée à partir de 2015, a ajouté une riche sépulture mycénienne ancienne au tableau, rattachant encore davantage la région à la période dont les poèmes se souviennent."
+      ],
+      "identificationNote": "Accepté : un palais de l'âge du Bronze fouillé, de la bonne taille, de la bonne époque et dans la bonne région, avec un consensus scientifique derrière cette identification. Le score géographique est de 2 plutôt que 3 car les détails de navigation de l'Odyssée et la configuration exacte du port ne concordent pas parfaitement.",
+      "debate": "Dans quelle baie Télémaque a débarqué, si la dispute antique sur l'emplacement de la Pylos de Nestor conserve un souvenir réel de plus d'une Pylos, et comment une bureaucratie palatiale en linéaire B se rapporte à la société héroïque des poèmes."
+    },
+    "de": {
+      "name": "Pylos",
+      "summary": "Nestors Königreich und der homerische Palast, den wir tatsächlich durchschreiten können: der spätbronzezeitliche Komplex bei Ano Englianos, dessen Linear-B-Archiv überlebte, weil das Gebäude niederbrannte.",
+      "description": [
+        "Telemachos segelt im 3. Buch der Odyssee nach Pylos und findet Nestor beim Opfern am Ufer vor. Der Katalog der Ilias weist Nestor neunzig Schiffe zu, das zweitgrößte Kontingent. Beide deuten auf eine bedeutende messenische Macht hin, und eine solche wurde gefunden: ein Palast auf dem Höhenrücken von Ano Englianos mit einem Thronsaal, einer Badewanne, Vorratsräumen und einem Archiv von mehr als tausend Tontafeln.",
+        "Die Tafeln sind administrativer Natur – Rationen, Opfergaben, Personal – und sie sind auf Griechisch verfasst, was die folgenreichste Erkenntnis ist, die uns die Fundstätte geliefert hat. Sie erwähnen weder Nestor noch den Krieg, und ihre Welt ist eine Bürokratie, die die Epen nie beschreiben.",
+        "In der Nähe hat das seit 2015 ausgegrabene Grab des Greifenkriegers das Bild um eine reiche frühmykenische Bestattung erweitert, was die Region noch enger mit der Zeit verknüpft, an die sich die Epen erinnern."
+      ],
+      "identificationNote": "Akzeptiert: Ein ausgegrabener bronzezeitlicher Palast von passender Größe, Datierung und Region, mit einem wissenschaftlichen Konsens hinter der Identifizierung. Die geographische Bewertung liegt bei 2 statt 3, da sich die Segeldetails der Odyssee und die genauen Hafenverhältnisse nicht eindeutig auflösen lassen.",
+      "debate": "In welcher Bucht Telemachos landete, ob der antike Streit über die Lage von Nestors Pylos eine reale Erinnerung an mehr als ein Pylos bewahrt und wie eine Palastbürokratie in Linear B mit der heroischen Gesellschaft der Epen zusammenhängt."
+    },
+    "ja": {
+      "name": "ピュロス",
+      "summary": "ネストルの王国であり、私たちが実際に歩くことができるホメロスの宮殿。アノ・エンリアノスにある青銅器時代後期の複合遺跡で、建物が焼失したために線文字Bのアーカイブが残された。",
+      "description": [
+        "テレマコスは『オデュッセイア』第3巻でピュロスへ航海し、海岸で生贄を捧げているネストルを見つける。『イリアス』のカタログではネストルに2番目に多い90隻の船が与えられている。どちらもメッセニアの主要な勢力を指し示しており、実際にそれが発見された。アノ・エンリアノスの尾根にある宮殿で、玉座の間、浴槽、貯蔵室、そして1,000枚以上の粘土板のアーカイブを備えている。",
+        "粘土板は行政的なもの（配給、供物、人員）であり、ギリシャ語で書かれている。これがこの遺跡から得られた最も重大な事実である。粘土板にはネストルや戦争に関する言及はなく、そこに描かれている世界は詩が決して描写しない官僚制である。",
+        "近くでは、2015年から発掘された「グリフィンの戦士の墓」により、豊かなマイケナイ初期の埋葬が加わり、この地域と詩が記憶する時代との結びつきがさらに強まった。"
+      ],
+      "identificationNote": "合意あり：規模、年代、地域が一致する発掘された青銅器時代の宮殿であり、同定の背後には学術的な合意がある。地理的スコアが3ではなく2なのは、『オデュッセイア』の航海の詳細や正確な港の配置が明確に解決しないためである。",
+      "debate": "テレマコスがどの湾に上陸したのか、ネストルのピュロスの位置をめぐる古代の論争が複数のピュロスの実在の記憶を保存しているのか、および線文字Bに記された宮殿の官僚制が詩の英雄社会とどのように関連しているのかという点。"
+    },
+    "zh": {
+      "name": "皮洛斯",
+      "summary": "涅斯托尔的王国，也是我们真正可以漫步其中的荷马史诗宫殿：位于阿诺·恩格利亚诺斯（Ano Englianos）的青铜时代晚期建筑群，其线形文字B档案因建筑被焚毁而得以幸存。",
+      "description": [
+        "在《奥德赛》第三卷中，忒勒马科斯航行到皮洛斯，发现涅斯托尔正在岸边举行祭祀。《伊利亚特》的名录赋予涅斯托尔九十艘战船，是第二大兵力阵容。两者都指向一个主要的麦西尼亚强国，而其中一个已被发现：位于阿诺·恩格利亚诺斯山脊上的一座宫殿，内有王座室、浴缸、储藏室以及存有千余块泥板的档案馆。",
+        "这些泥板属于行政记录——配给、祭品、人员——且使用的是希腊语，这是该遗址告诉我们的最重要的一件事。泥板中并未提及涅斯托尔或战争，它们所展现的世界是一个诗歌中从未描述过的官僚体制。",
+        "附近自2015年起发掘的“格里芬战士”（Griffin Warrior）墓为这一图景增添了一座丰富的早期迈锡尼墓葬，进一步将该地区与诗歌所记忆的时期联系在一起。"
+      ],
+      "identificationNote": "已公认：一座经发掘的青铜时代宫殿，其规模、年代和区域均符合要求，且该认定已获得学术界共识。地理评分定为 2 而非 3，是因为《奥德赛》中的航行细节和确切的港口布局无法完全吻合。",
+      "debate": "忒勒马科斯在哪个海湾登陆，古代关于涅斯托尔的皮洛斯位置的争议是否保留了对不止一个皮洛斯的真实记忆，以及线形文字B所记录的宫殿官僚体制如何与诗歌中的英雄社会相联系。"
     }
   }
 }

@@ -19,7 +19,7 @@ export const DOMAINS: Domain[] = ["knowledge", "patterns", "architectures", "gov
 /** Canonical origin for citable URLs returned with every card. */
 export const SITE_URL = "https://santismm.com";
 
-export const ALL_LOCALES: Locale[] = ["en", "es", "pt"];
+export const ALL_LOCALES: Locale[] = ["en", "es", "pt", "fr", "de", "ja", "zh"];
 
 /** The handbook is authored in English; a chapter without a translation falls back to it. */
 export const HANDBOOK_BODY_LOCALE: Locale = "en";
@@ -220,8 +220,7 @@ export function summarize(domain: Domain, entry: Entry, locale: Locale = "en") {
 
 /**
  * Diacritic- and case-insensitive normalisation. "Aprobación" → "aprobacion",
- * so Spanish and Portuguese queries match regardless of how the user types the
- * accents.
+ * so queries in Latin-script locales match regardless of how accents are typed.
  */
 export function norm(s: string): string {
   return s
@@ -231,7 +230,7 @@ export function norm(s: string): string {
 }
 
 /**
- * Function words in the three corpus languages. They carry no topical signal
+ * Function words in the whitespace-delimited corpus languages. They carry no topical signal
  * but do appear inside titles ("Framework FOR…", "Política DE…"), so leaving
  * them in lets an unrelated unit win on a stopword `name` match.
  */
@@ -252,6 +251,16 @@ const STOPWORDS = new Set([
   "o", "os", "as", "um", "uma", "e", "ou", "para", "por", "com", "em", "que",
   "sao", "como", "quando", "sobre", "ao", "dos", "das", "no", "na", "se", "seu",
   "onde", "quem", "preciso", "precisa", "ha", "meu", "minha", "este", "esta",
+  // fr
+  "le", "la", "les", "un", "une", "des", "de", "du", "et", "ou", "pour",
+  "par", "avec", "dans", "que", "est", "sont", "comment", "quoi", "quel",
+  "quelle", "quand", "sur", "au", "aux", "se", "son", "sa", "ses", "avant",
+  "apres", "plus", "ou", "qui", "besoin", "mon", "ma", "ce", "cette",
+  // de
+  "der", "die", "das", "ein", "eine", "einer", "eines", "und", "oder", "fur",
+  "von", "mit", "in", "im", "auf", "ist", "sind", "wie", "was", "warum",
+  "wann", "uber", "zu", "zur", "zum", "des", "den", "dem", "vor", "nach",
+  "mehr", "wo", "wer", "welche", "welcher", "mein", "meine", "dieser", "diese",
 ]);
 
 /**
@@ -276,7 +285,12 @@ function stem(token: string): string {
  * makes the five surfaces agree on what a term is and prevents that drift.
  */
 export function queryTerms(query: string): string[] {
-  const all = norm(query).split(/[^a-z0-9]+/).filter((token) => token.length >= 2);
+  // Unicode letters are required here: the old ASCII split reduced every
+  // Japanese and Chinese query to zero tokens and silently made those
+  // published locales unsearchable. CJK runs remain intact, which is enough
+  // for the literal, explainable search contract used here (not segmentation
+  // or semantic retrieval).
+  const all = norm(query).split(/[^\p{L}\p{N}]+/u).filter((token) => token.length >= 2);
   const meaningful = all.filter((token) => !STOPWORDS.has(token));
   return [...new Set((meaningful.length > 0 ? meaningful : all).map(stem))];
 }
@@ -307,8 +321,8 @@ const FIELD_WEIGHTS: Record<string, number> = {
 
 /**
  * Build the searchable field map for an entry, across EVERY locale (not just
- * English — searching only `locales.en` was why Spanish/Portuguese queries
- * returned nothing). Values are normalised once, at index time.
+ * English — searching only `locales.en` was why localized queries returned
+ * nothing). Values are normalised once, at index time.
  */
 const fieldCache = new WeakMap<object, Record<string, string>>();
 

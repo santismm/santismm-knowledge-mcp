@@ -83,6 +83,22 @@
         "pt": {
           "label": "Cabo Maleia, Lacônia",
           "note": "A ponta sudeste do Peloponeso, onde acaba a geografia real do poema e começam as andanças. Sua fama de mau tempo não é literária: o cabo é proverbial entre marinheiros há três mil anos, e os roteiros ainda descrevem a aceleração do vento ao seu redor."
+        },
+        "fr": {
+          "label": "Cap Malée, Laconie",
+          "note": "La pointe sud-est du Péloponnèse, où s'arrête la géographie réelle du poème et où commencent les errances. Sa réputation de mauvais temps n'est pas littéraire : le cap est un symbole de danger pour les marins depuis trois mille ans, et les instructions nautiques décrivent encore aujourd'hui l'accélération du vent à son approche."
+        },
+        "zh": {
+          "label": "拉科尼亚的马莱阿角",
+          "note": "伯罗奔尼撒半岛的东南端，诗歌中真实的地理在此结束，漂泊之旅在此开始。它恶劣天气的名声并非文学虚构：三千年来，该海角一直是水手们的代名词，航海指南至今仍在描述其周围风速加剧的情况。"
+        },
+        "de": {
+          "label": "Kap Malea, Lakonien",
+          "note": "Die südöstliche Spitze des Peloponnes, wo die reale Geografie des Epos endet und die Irrfahrten beginnen. Sein Ruf für schlechtes Wetter ist nicht literarischer Natur: Das Kap ist seit dreitausend Jahren ein Begriff unter Seeleuten, und Handbücher für Schiffsführer beschreiben noch heute die Windbeschelung in seiner Umgebung."
+        },
+        "ja": {
+          "label": "ラコニアのマレア岬",
+          "note": "ペロポネソス半島の南東端であり、詩における現実の地理が終わり、漂流が始まる場所。悪天候で知られるその評判は文学的な誇張ではない。この岬は3000年もの間、船乗りの間で悪名高く、現代の航路誌にも依然として岬周辺での風の加速について記載されている。"
         }
       }
     }
@@ -121,6 +137,46 @@
       ],
       "identificationNote": "Aceita: um promontório inconfundível, nomeado igual em toda época, cujas condições de navegação o poema descreve com exatidão.",
       "debate": "Nada sobre o cabo. O que merece discussão é se a virada do poema para o fantástico no Maleia é uma fronteira deliberada — a borda do mar conhecido — ou um acidente do modo como a história cresceu."
+    },
+    "fr": {
+      "name": "Cap Malée",
+      "summary": "Le pivot de toute l'Odyssée. En le doublant, Ulysse est dévié de sa route pour dix ans — et la géographie du poème passe d'une carte à un récit exactement à cet endroit.",
+      "description": [
+        "Ulysse quitte Troie, pille les Cicones, et est entraîné au-delà de Cythère par un vent du nord au niveau du cap Malée. Tout ce qui précède le cap peut être cartographié ; presque rien de ce qui le suit ne le peut. Ce même cap gâche le retour de Ménélas et réapparaît dans les récits mensongers crétois d'Ulysse.",
+        "C'est pourquoi l'atlas traite le cap Malée comme une entrée structurelle plutôt que comme un toponyme mineur : il constitue la frontière entre les deux moitiés du jeu de données, le localisé et le débattu."
+      ],
+      "identificationNote": "Accepté : un promontoire unique, nommé de manière identique à toutes les époques, dont le poème décrit avec précision les conditions de navigation.",
+      "debate": "Rien sur le cap lui-même. Ce qui mérite d'être débattu, c'est de savoir si le tournant fantastique du poème au cap Malée est une frontière délibérée — la limite de la mer connue — ou un accident dans le développement du récit."
+    },
+    "de": {
+      "name": "Kap Malea",
+      "summary": "Der Wendepunkt der gesamten Odyssee. Bei seiner Umrundung wird Odysseus für zehn Jahre vom Kurs abgebracht – und die Geografie des Epos wandelt sich genau an dieser Stelle von einer Landkarte zu einer Erzählung.",
+      "description": [
+        "Odysseus verlässt Troja, überfällt die Kikonen und wird bei Malea von einem Nordwind an Kythera vorbeigetrieben. Alles vor dem Kap lässt sich kartografieren; fast nichts danach. Dasselbe Kap vereitelt Menelaos' Rückkehr und taucht in Odysseus' kretischen Lügengeschichten wieder auf.",
+        "Aus diesem Grund behandelt der Atlas Malea eher als strukturellen Eintrag denn als unbedeutendes Toponym: Es ist die Grenze zwischen den beiden Hälften des Datensatzes, den lokalisierten und den umstrittenen Orten."
+      ],
+      "identificationNote": "Akzeptiert: eine unverkennbare Landzunge, die in jeder Epoche gleich benannt wurde und deren Segelbedingungen im Epos zutreffend beschrieben werden.",
+      "debate": "Nichts über das Kap selbst. Diskutabel ist vielmehr, ob die Wendung des Epos ins Fantastische bei Malea eine bewusste Grenze darstellt – den Rand des bekannten Meeres – oder ein Zufall der Entstehungsgeschichte der Erzählung ist."
+    },
+    "ja": {
+      "name": "マレア岬",
+      "summary": "『オデュッセイア』全体の転換点。この岬を回る際、オデュッセウスは進路を外れて10年間漂流することになり、詩の地理はまさにこの地点で地図から物語へと変化する。",
+      "description": [
+        "オデュッセウスはトロイアを出発し、キコネス人を襲撃した後、マレア岬で北風に流されてキュテラ島を通り過ぎる。この岬より前の出来事はすべて地図上にプロットできるが、それ以降の出来事はほとんどプロットできない。同じ岬がメネラオスの帰還を阻み、オデュッセウスのクレタに関する嘘の中にも再び登場する。",
+        "これが、アトラスがマレアを単なるマイナーな地名ではなく、構造的なエントリーとして扱う理由である。マレアは、位置が特定されているデータと、議論の対象となっているデータの2つの半分を分ける境界線なのである。"
+      ],
+      "identificationNote": "合意：どの時代にも同じ名前で呼ばれている紛れもない岬であり、詩はその航海条件を正確に描写している。",
+      "debate": "岬自体について議論の余地はない。議論に値するのは、マレア岬で詩が空想的な世界へと舵を切るのが、意図的な境界線（既知の海の端）なのか、それとも物語が発展していく過程での偶然なのかという点である。"
+    },
+    "zh": {
+      "name": "马莱阿角",
+      "summary": "整部《奥德赛》的转折点。绕过它时，奥德修斯被吹离航线长达十年——诗歌的地理也恰恰在这一刻从地图转变为故事。",
+      "description": [
+        "奥德修斯离开特洛伊，袭击了基科涅斯人，并在马莱阿角被北风吹过库瑟拉岛。海角之前的一切都可以绘制在地图上；而海角之后的一切几乎都无法绘制。同一个海角也摧毁了墨涅拉俄斯的归途，并再次出现在奥德修斯关于克里特岛的谎言中。",
+        "这就是为什么本图集将马莱阿角视为一个结构性条目，而非一个次要地名：它是数据集两部分之间的边界，即已定位的部分和有争议的部分。"
+      ],
+      "identificationNote": "公认：一个清晰可辨的海岬，在各个时期名称完全相同，诗歌准确地描述了其航行条件。",
+      "debate": "关于海角本身无可争议。值得争论的是，诗歌在马莱阿角转向奇幻色彩，究竟是一个刻意设立的边界——已知海洋的边缘——还是故事发展过程中的偶然结果。"
     }
   }
 }

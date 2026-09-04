@@ -87,6 +87,22 @@
         "pt": {
           "label": "O sítio de Mesopótamos, Tesprócia",
           "note": "Um edifício helenístico real na confluência do Aqueronte com seus afluentes, escavado por Dakaris e apresentado por décadas como o Necromanteion do submundo homérico. A erudição posterior lê o mesmo edifício como fazenda fortificada; o rio, o culto e a fama antiga não estão em dúvida, apenas a identificação da estrutura."
+        },
+        "fr": {
+          "label": "Le site de Mesopotamos, en Thesprotie",
+          "note": "Un véritable bâtiment hellénistique au confluent de l'Achéron et de ses affluents, fouillé par Dakaris et longtemps présenté comme le Nékyomanteion des enfers d'Homère. Les recherches ultérieures interprètent ce même bâtiment comme une ferme fortifiée ; le fleuve, le culte et la réputation antique ne font aucun doute, seule l'identification de la structure est contestée."
+        },
+        "zh": {
+          "label": "塞斯普罗蒂亚梅索波塔莫斯（Mesopotamos）的遗址",
+          "note": "位于阿刻戎河及其支流交汇处的一座真实的希腊化时期建筑，由达卡里斯（Dakaris）发掘，长期以来被认为是荷马史诗中冥界的亡灵神谕所（Nekyomanteion）。后来的学术研究将同一建筑解读为防御性农舍；河流、崇拜仪式和古代名声是毋庸置疑的，有争议的仅仅是该建筑的认定。"
+        },
+        "de": {
+          "label": "Die Fundstätte bei Mesopotamos, Thesprotien",
+          "note": "Ein reales hellenistisches Gebäude am Zusammenfluss des Acheron und seiner Nebenflüsse, das von Dakaris ausgegraben und lange Zeit als das Nekyomanteion von Homers Unterwelt präsentiert wurde. Die neuere Forschung deutet dasselbe Gebäude als befestigtes Gehöft; der Fluss, der Kult und der antike Ruf stehen außer Zweifel, lediglich die Identifizierung des Bauwerks ist umstritten."
+        },
+        "ja": {
+          "label": "テスプロティア、メソポタモスの遺跡",
+          "note": "アケロン川とその支流の合流点にある実在のヘレニズム時代の建物。ダカリスによって発掘され、長年にわたりホメロスの冥界のネキオマンテイオン（死者託宣所）として紹介されてきた。後年の研究では、同じ建物が要塞化された農家と解釈されている。川、信仰、そして古代の評判に疑いの余地はなく、問題となっているのは構造物の同定のみである。"
         }
       }
     }
@@ -122,6 +138,46 @@
       ],
       "identificationNote": "Plausível: um sítio real e escavado, com história de culto real, cuja função é discutida. Pontua 9/12 como lugar; a ficha da própria Nekyia pontua 3/12, e a distância entre esses dois números é justamente o ponto.",
       "debate": "Se o edifício escavado é sequer um oráculo dos mortos, e se os nomes homéricos dos rios vêm desta paisagem ou lhe foram atribuídos depois."
+    },
+    "fr": {
+      "name": "Éphyre et l'Achéron",
+      "summary": "Un véritable fleuve réputé pour être lié aux enfers, et le site le plus souvent confondu avec l'entrée de l'Hadès d'Homère. L'atlas les sépare : ce lieu est ici, l'autre ne l'est pas.",
+      "description": [
+        "L'Achéron de Thesprotie est un véritable fleuve qui traverse une gorge pour se jeter dans la mer, et Hérodote signale un oracle des morts à ses côtés, consulté par Périandre de Corinthe. Éphyre apparaît également dans l'Odyssée comme le lieu où Ulysse s'est rendu pour chercher du poison pour ses flèches.",
+        "Les indications de Circé pour se rendre aux enfers nomment l'Achéron ainsi que le Pyriphlégéthon et le Cocyte. La question de savoir si le poème a emprunté le nom à la Thesprotie ou si la Thesprotie a acquis son culte à partir du poème reste totalement ouverte — et dans les deux cas, la demeure d'Hadès reste non localisée dans cet atlas."
+      ],
+      "identificationNote": "Plausible : un site réel, fouillé, avec une véritable histoire cultuelle, dont la fonction est contestée. Il obtient un score de 9/12 en tant que lieu ; l'entrée propre de la Nekyia obtient 3/12, et l'écart entre ces deux chiffres est précisément tout l'intérêt.",
+      "debate": "La question de savoir si le bâtiment fouillé est bien un oracle des morts, et si les noms des fleuves homériques proviennent de ce paysage ou s'y sont rattachés plus tard."
+    },
+    "de": {
+      "name": "Ephyra und der Acheron",
+      "summary": "Ein realer Fluss mit dem Ruf der Unterwelt und der Ort, der am häufigsten mit dem Eingang zu Homers Hades verwechselt wird. Der Atlas hält sie auseinander: Dieser Ort ist hier, jener nicht.",
+      "description": [
+        "Der Acheron in Thesprotien ist ein realer Fluss, der durch eine Schlucht zum Meer fließt, und Herodot berichtet von einem Totenorakel an seinem Ufer, das von Periander von Korinth befragt wurde. Ephyra erscheint auch in der Odyssee als der Ort, an den Odysseus reiste, um Pfeilgift zu beschaffen.",
+        "Kirkes Wegbeschreibung zur Unterwelt nennt den Acheron zusammen mit Pyriphlegethon und Kokytos. Ob das Epos den Namen aus Thesprotien übernommen hat oder ob Thesprotien seinen Kult aus dem Epos erhalten hat, ist völlig offen – und so oder so bleibt das Haus des Hades in diesem Atlas unlokalisiert."
+      ],
+      "identificationNote": "Plausibel: eine reale, ausgegrabene Stätte mit einer reale Kultgeschichte, deren Funktion umstritten ist. Sie erhält 9/12 Punkte als Ort; der eigene Eintrag der Nekyia erhält 3/12 Punkte, und die Lücke zwischen diesen beiden Zahlen ist der entscheidende Punkt.",
+      "debate": "Ob das ausgegrabene Gebäude überhaupt ein Totenorakel ist und ob die homerischen Flussnamen aus dieser Landschaft stammen oder ihr erst später zugeschrieben wurden."
+    },
+    "ja": {
+      "name": "エピュラとアケロン川",
+      "summary": "冥界の噂を持つ実在の川であり、ホメロスのハデス（冥界）の入り口と最も頻繁に混同される場所。この地図帳では両者を区別している。この場所はここにあり、あちらの場所はここにはない。",
+      "description": [
+        "テスプロティアのアケロン川は、峡谷を抜けて海へと流れる実在の川であり、ヘロドトスはその傍らに、コリントスのペリアンドロスが神託を求めた死者の神託所があったと報告している。エピュラも『オデュッセイア』に登場し、オデュッセウスが矢毒を手に入れるために赴いた場所とされている。",
+        "キルケによる冥界への道案内では、ピュリフレゲトン川やコキュトス川とともにアケロン川の名が挙げられている。詩がテスプロティアからその名を借用したのか、それともテスプロティアが詩からその信仰を取り入れたのかは、完全に未解決のままである。いずれにせよ、この地図帳においてハデスの館は位置未特定のままである。"
+      ],
+      "identificationNote": "妥当：実在し、発掘され、実際の信仰の歴史を持つが、その機能については議論がある場所。場所としてのスコアは12点満点中9点。ネキア自体のエントリーは12点満点中3点であり、これら2つの数値の乖離こそが重要な点である。",
+      "debate": "発掘された建物がそもそも死者の神託所であるのかどうか、そしてホメロスの川の名がこの景観に由来するのか、あるいは後から結びつけられたものなのかという議論。"
+    },
+    "zh": {
+      "name": "埃菲拉与阿刻戎河",
+      "summary": "一条拥有冥界名声的真实河流，也是最常与荷马史诗中哈迪斯（Hades）入口混淆的遗址。本图册将它们区分开来：这个地方在这里，而那个地方不在这里。",
+      "description": [
+        "塞斯普罗蒂亚（Thesprotia）的阿刻戎河（Acheron）是一条穿过峡谷流入大海的真实河流，希罗多德记载其旁有一个亡灵神谕所，科林斯的佩里安德（Periander）曾在此咨询。埃菲拉（Ephyra）也出现在《奥德赛》中，是奥德修斯去寻找箭毒的地方。",
+        "喀耳刻（Circe）前往冥界的指引中，将阿刻戎河与皮里弗勒戈同河（Pyriphlegethon）和科库托斯河（Cocytus）并列。究竟是史诗从塞斯普罗蒂亚借用了这个名字，还是塞斯普罗蒂亚从史诗中获得了其崇拜仪式，这完全是一个悬而未决的问题——无论哪种情况，哈迪斯的居所在本图册中依然是未定位的。"
+      ],
+      "identificationNote": "似是而非：一个经过发掘的真实遗址，拥有真实的崇拜历史，其功能存在争议。作为地点，它得分为 9/12；《招魂术》（Nekyia）本身的条目得分为 3/12，这两个数字之间的差距正是关键所在。",
+      "debate": "被发掘的建筑是否真的是亡灵神谕所，以及荷马史诗中的河流名称是源自这一地貌，还是后来才附会于此。"
     }
   }
 }

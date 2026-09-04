@@ -73,6 +73,22 @@
         "pt": {
           "label": "A baía de Dexa como porto de Fórcis",
           "note": "A enseada perto de Vathy normalmente mostrada aos visitantes como local do desembarque. Corresponde aos dois promontórios e às águas abrigadas do poema; várias outras baías do Jônico também correspondem."
+        },
+        "fr": {
+          "label": "La baie de Dexa comme port de Phorcys",
+          "note": "La baie près de Vathy, généralement présentée aux visiteurs comme le lieu de débarquement. Elle correspond aux deux promontoires et aux eaux abritées du poème ; c'est également le cas de plusieurs autres baies de la mer Ionienne."
+        },
+        "zh": {
+          "label": "德克萨湾即福耳库斯港",
+          "note": "瓦西（Vathy）附近的海湾，通常作为登陆地向游客展示。它符合史诗中描述的两座海岬和避风水域；伊奥尼亚群岛的其他几个海湾也同样符合。"
+        },
+        "de": {
+          "label": "Die Dexa-Bucht als Hafen von Phorkys",
+          "note": "Die Bucht bei Vathy, die Besuchern meist als Landeplatz gezeigt wird. Sie stimmt mit den zwei Landzungen und dem geschützten Gewässer des Epos überein; das gilt allerdings auch für mehrere andere Buchten im Ionischen Meer."
+        },
+        "ja": {
+          "label": "ポルキュスの港としてのデクサ湾",
+          "note": "ヴァティの近くにある入り江で、通常、観光客に上陸地として紹介される場所です。詩に描かれている2つの岬と穏やかな水域に合致していますが、イオニア諸島の他のいくつかの入り江も同様の条件を満たしています。"
         }
       }
     },
@@ -98,6 +114,22 @@
         "pt": {
           "label": "Um desembarque em Paliki",
           "note": "Se Ítaca é Paliki, o porto de Fórcis é uma de suas baías ocidentais e todo o retorno se desloca cerca de 25 km a oeste. A leitura depende de um canal marinho da Idade do Bronze que a geologia não confirmou."
+        },
+        "fr": {
+          "label": "Un débarquement sur Paliki",
+          "note": "Si Ithaque est Paliki, le port de Phorcys est l'une de ses baies occidentales et tout le retour au pays se décale d'environ 25 km vers l'ouest. Cette interprétation dépend d'un canal maritime de l'âge du bronze que la géologie n'a pas confirmé."
+        },
+        "zh": {
+          "label": "在帕利基登陆",
+          "note": "如果伊萨卡就是帕利基，那么福耳库斯港就是其西部海湾之一，整个归家路线将向西偏移约 25 公里。这种解读取决于一条青铜时代的海峡，但地质学尚未证实其存在。"
+        },
+        "de": {
+          "label": "Eine Landung auf Paliki",
+          "note": "Wenn Ithaka Paliki ist, ist der Hafen von Phorkys eine seiner westlichen Buchten, und die gesamte Heimkehr verschiebt sich um etwa 25 km nach Westen. Diese Lesart hängt von einem bronzezeitlichen Meereskanal ab, den die Geologie nicht bestätigt hat."
+        },
+        "ja": {
+          "label": "パリキへの上陸",
+          "note": "もしイタカがパリキ（半島）であるならば、ポルキュスの港はその西側の入り江の一つとなり、帰郷の地全体が西に約25kmずれることになります。この解釈は青銅器時代の海峡の存在を前提としていますが、地質学的には確認されていません。"
         }
       }
     }
@@ -160,6 +192,86 @@
         {
           "q": "Por que Odisseu chega dormindo?",
           "a": "Narrativamente, retira do poema o último trecho de navegação. Também significa que a Odisseia nunca descreve a rota de Esquéria a Ítaca — uma lacuna que toda reconstrução da viagem precisa preencher por inferência."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Le retour au pays : le débarquement dans le port de Phorcys",
+      "summary": "Les Phéaciens ramènent Ulysse endormi chez lui et le laissent sur son propre rivage avec son trésor. Le poème décrit le lieu de débarquement avec des détails topographiques inhabituels — deux promontoires, un olivier, une grotte des nymphes.",
+      "narrative": [
+        "Ulysse atteint Ithaque inconscient, transporté par un équipage qui ne lui parle jamais et qui est changé en pierre sur le chemin du retour. Il se réveille sans savoir où il se trouve ; Athéna a répandu une brume sur l'île, et la reconnaissance de sa propre patrie est la première des reconnaissances du poème.",
+        "La description du port de Phorcys est l'un des éléments de paysage les plus précis des deux poèmes, c'est pourquoi on l'associe à de véritables baies depuis deux siècles — et pourquoi aucune de ces associations n'est décisive."
+      ],
+      "whyItMatters": "C'est l'épisode qui résoudrait la question d'Ithaque si l'un de ses points de repère pouvait être rattaché à un site. Il obtient un score textuel de 3 — le poème est exceptionnellement explicite — mais archéologique de 1, car aucun port ou sanctuaire fouillé ne correspond.",
+      "debate": "Quelle baie, sur quelle île. Les candidates suivent les candidatures des îles : Dexa sur Ithaki, une baie occidentale sur Paliki, Nydri sur Leucade. L'atlas enregistre les trois et ne se prononce pour aucune.",
+      "faqs": [
+        {
+          "q": "Le port de Phorcys existe-t-il ?",
+          "a": "Plusieurs baies réelles correspondent à la description. Aucune n'a fourni de preuves archéologiques la reliant au poème, l'atlas enregistre donc ces identifications comme des théories concurrentes plutôt que comme un emplacement précis."
+        },
+        {
+          "q": "Pourquoi Ulysse dort-il à son arrivée ?",
+          "a": "Sur le plan narratif, cela supprime la dernière étape de navigation du poème. Cela signifie également que l'Odyssée ne décrit jamais la route de Schérie à Ithaque — une lacune que chaque reconstruction du voyage doit combler par déduction."
+        }
+      ]
+    },
+    "de": {
+      "title": "Die Heimkehr: Landung im Hafen von Phorkys",
+      "summary": "Die Phäaken bringen den schlafenden Odysseus segelnd nach Hause und lassen ihn mit seinem Schatz an seiner eigenen Küste zurück. Das Epos beschreibt den Landeplatz in ungewöhnlicher topografischer Detailgenauigkeit – zwei Landzungen, ein Olivenbaum, eine Nymphengrotte.",
+      "narrative": [
+        "Odysseus erreicht Ithaka bewusstlos, getragen von einer Besatzung, die nie mit ihm spricht und auf dem Heimweg in Stein verwandelt wird. Er wacht auf, ohne zu wissen, wo er ist; Athena hat die Insel in Nebel gehüllt, und das Erkennen der eigenen Heimat ist das erste Wiedererkennen des Epos.",
+        "Die Beschreibung des Hafens von Phorkys ist eine der spezifischsten Landschaftsdarstellungen in beiden Epen, weshalb sie seit zwei Jahrhunderten mit realen Buchten verglichen wird – und weshalb keiner dieser Vergleiche eindeutig ist."
+      ],
+      "whyItMatters": "Dies ist die Episode, die die Ithaka-Frage klären würde, wenn sich eine ihrer Landmarken einem realen Ort zuordnen ließe. Sie erreicht einen Textwert von 3 – das Epos ist ungewöhnlich explizit –, aber einen archäologischen Wert von 1, da kein ausgegrabener Hafen oder Heiligtum damit übereinstimmt.",
+      "debate": "Welche Bucht auf welcher Insel. Die Kandidaten folgen den Inselkandidaturen: Dexa auf Ithaka, eine westliche Bucht auf Paliki, Nydri auf Lefkas. Der Atlas verzeichnet alle drei und legt sich auf keine fest.",
+      "faqs": [
+        {
+          "q": "Existiert der Hafen von Phorkys?",
+          "a": "Mehrere reale Buchten passen auf die Beschreibung. Keine hat archäologische Belege hervorgebracht, die sie mit dem Epos verbinden, daher verzeichnet der Atlas die Identifizierungen eher als konkurrierende Theorien denn als gesicherten Ort."
+        },
+        {
+          "q": "Warum schläft Odysseus bei seiner Ankunft?",
+          "a": "Erzählerisch entfernt es das letzte Stück der Seefahrt aus dem Epos. Es bedeutet auch, dass die Odyssee die Route von Scheria nach Ithaka nie beschreibt – eine Lücke, die jede Rekonstruktion der Reise durch Schlussfolgerungen füllen muss."
+        }
+      ]
+    },
+    "ja": {
+      "title": "帰郷：ポルキュスの港への上陸",
+      "summary": "パイアケス人は眠っているオデュッセウスを船で故郷へと送り届け、財宝とともに彼を自身の故郷の海岸に残します。この詩は、2つの岬、1本のオリーブの木、ニンフの洞窟など、上陸地を異例なほど詳細な地形描写で表現しています。",
+      "narrative": [
+        "オデュッセウスは、彼に一度も話しかけることなく、帰路に石に変えられた乗組員たちに運ばれ、意識を失った状態でイタカに到着します。目覚めた彼は自分がどこにいるのか分かりません。アテナが島に霧を立ち込めさせたためであり、彼が自身の祖国を認識することが、この詩における最初の「認知（アナグノリシス）」となります。",
+        "ポルキュスの港の描写は、両叙事詩の中でも最も具体的な風景描写の一つであり、それゆえに2世紀にわたって実際の入り江との照合が試みられてきました。そして、そのいずれも決定的な一致を見ていない理由でもあります。"
+      ],
+      "whyItMatters": "もしその目印のいずれか一つでも実際の遺跡と結びつけることができれば、イタカ問題を解決できるはずのエピソードです。テキストの評価は3（詩の描写が異例なほど明確であるため）ですが、発掘された港や聖域でこれに対応するものがないため、考古学の評価は1となります。",
+      "debate": "どの島の、どの入り江かという議論です。候補地は島の候補地に対応しています。イタキ島のデクサ、パリキ半島の西側の入り江、レフカダ島のニドリです。この地図帳（アトラス）は3つすべてを記録し、いずれか一つに特定することはしていません。",
+      "faqs": [
+        {
+          "q": "ポルキュスの港は実在しますか？",
+          "a": "描写に合致する実際の入り江はいくつか存在します。しかし、詩と結びつける考古学的な証拠が見つかった場所はないため、この地図帳では特定の場所としてではなく、対立する諸説として比定地を記録しています。"
+        },
+        {
+          "q": "なぜオデュッセウスは到着時に眠っているのですか？",
+          "a": "物語上、航海の最後の区間を詩から排除するためです。また、これにより『オデュッセイア』ではスケリアからイタカへの航路が一切描写されないことになり、航海の復元を試みるすべての研究が推測によってこの空白を埋めなければならなくなります。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "归家：在福耳库斯港登陆",
+      "summary": "费阿基亚人乘船护送熟睡中的奥德修斯回家，并将他和他的财宝留在了他自己的海岸上。史诗以不同寻常的详尽地形细节描述了登陆地点——两座海岬、一棵橄榄树、一个宁芙仙女的山洞。",
+      "narrative": [
+        "奥德修斯在无意识状态下抵达伊萨卡，由一队从未与他交谈过的船员运送，而这些船员在返航途中化为了石头。他醒来时不知道自己身在何处；雅典娜在岛上笼罩了一层迷雾，而认出自己的祖国是这部史诗中一系列“相认”场景的开端。",
+        "对福耳库斯港的描述是两部史诗中最具体的景观描写之一，这就是为什么两个世纪以来人们一直试图将其与现实中的海湾相对应，也是为什么没有任何一种对应是决定性的。"
+      ],
+      "whyItMatters": "如果该地点的任何地标能够与实际遗址联系起来，这一章本可以解决伊萨卡之谜。它的文本评分为 3（史诗的描述异常明确），但考古评分仅为 1，因为没有任何已发掘的港口或圣所与之对应。",
+      "debate": "究竟是哪座岛上的哪个海湾。候选地点与候选岛屿相对应：伊萨基岛（Ithaki）上的德克萨（Dexa）、帕利基（Paliki）上的一个西部海湾、莱夫卡斯岛（Lefkada）上的尼德里（Nydri）。本图集记录了这三个地点，但未做定论。",
+      "faqs": [
+        {
+          "q": "福耳库斯港存在吗？",
+          "a": "有几个现实中的海湾符合这一描述。但没有一个海湾能提供将其与史诗联系起来的考古证据，因此本图集将这些认定记录为相互竞争的假说，而非确切的地点。"
+        },
+        {
+          "q": "为什么奥德修斯抵达时在睡觉？",
+          "a": "从叙事上看，它省去了史诗中最后一段航程。这也意味着《奥德赛》从未描述过从斯克里亚（Scheria）到伊萨卡的路线——这一空白是每一次航线复原都必须通过推论来填补的。"
         }
       ]
     }

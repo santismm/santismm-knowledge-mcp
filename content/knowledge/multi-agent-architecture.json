@@ -3,15 +3,29 @@
   "category": "architecture",
   "updated": "2026-06-21",
   "version": "1.0",
-  "related": ["agentic-ai", "ai-agent", "harness-engineering", "model-context-protocol"],
+  "related": [
+    "agentic-ai",
+    "ai-agent",
+    "harness-engineering",
+    "model-context-protocol"
+  ],
   "references": [
-    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
-    { "title": "Yao et al. — ReAct (2022)", "url": "https://arxiv.org/abs/2210.03629" }
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    },
+    {
+      "title": "Yao et al. — ReAct (2022)",
+      "url": "https://arxiv.org/abs/2210.03629"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["industry_observation", "paper"]
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
   },
   "locales": {
     "en": {
@@ -33,7 +47,15 @@
         "Orchestrator-workers: a lead agent plans and delegates subtasks to worker agents, then synthesizes results. Pipeline: agents are arranged in stages, each transforming the output of the previous. Peer patterns: agents debate, critique or vote to improve quality.",
         "Cross-cutting concerns — shared memory, message passing, error handling, budgets and observability — are where most multi-agent systems succeed or fail. Clear contracts between agents matter more than clever role names."
       ],
-      "components": ["Orchestrator / lead agent", "Worker / specialist agents", "Shared memory & state", "Message passing", "Tools (often via MCP)", "Guardrails & budgets", "Observability"],
+      "components": [
+        "Orchestrator / lead agent",
+        "Worker / specialist agents",
+        "Shared memory & state",
+        "Message passing",
+        "Tools (often via MCP)",
+        "Guardrails & budgets",
+        "Observability"
+      ],
       "pros": [
         "Modular, specialized roles that are easier to evaluate.",
         "Parallelism for independent subtasks.",
@@ -46,17 +68,35 @@
         "Higher token cost from inter-agent communication.",
         "Premature complexity when one agent would suffice."
       ],
-      "tools": ["LangGraph", "CrewAI", "AutoGen", "OpenAI Agents SDK", "Model Context Protocol (MCP)"],
+      "tools": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "OpenAI Agents SDK",
+        "Model Context Protocol (MCP)"
+      ],
       "examples": [
         "An orchestrator delegating research, drafting and review to specialist agents.",
         "A pipeline that extracts, transforms and validates data across stages.",
         "A critic agent reviewing another agent's output before it is finalized."
       ],
       "faqs": [
-        { "q": "Is multi-agent always better than a single agent?", "a": "No. It adds coordination, cost and failure modes. Prefer a single agent and adopt multi-agent only when a task is clearly separable and a single agent underperforms." },
-        { "q": "What is the orchestrator-workers pattern?", "a": "A lead agent plans a task, delegates subtasks to specialized worker agents, and synthesizes their results into a final answer." },
-        { "q": "How do multi-agent systems fail?", "a": "Through unclear contracts between agents, lost context, runaway loops, and compounding errors — which is why budgets and observability are essential." },
-        { "q": "How does MCP relate to multi-agent systems?", "a": "MCP standardizes how each agent connects to tools and data, making integrations reusable across the agents in the system." }
+        {
+          "q": "Is multi-agent always better than a single agent?",
+          "a": "No. It adds coordination, cost and failure modes. Prefer a single agent and adopt multi-agent only when a task is clearly separable and a single agent underperforms."
+        },
+        {
+          "q": "What is the orchestrator-workers pattern?",
+          "a": "A lead agent plans a task, delegates subtasks to specialized worker agents, and synthesizes their results into a final answer."
+        },
+        {
+          "q": "How do multi-agent systems fail?",
+          "a": "Through unclear contracts between agents, lost context, runaway loops, and compounding errors — which is why budgets and observability are essential."
+        },
+        {
+          "q": "How does MCP relate to multi-agent systems?",
+          "a": "MCP standardizes how each agent connects to tools and data, making integrations reusable across the agents in the system."
+        }
       ]
     },
     "es": {
@@ -78,7 +118,15 @@
         "Orquestador-trabajadores: un agente líder planifica y delega subtareas a agentes trabajadores, y luego sintetiza los resultados. Pipeline: los agentes se disponen en etapas, cada una transformando la salida de la anterior. Patrones entre pares: los agentes debaten, critican o votan para mejorar la calidad.",
         "Las preocupaciones transversales —memoria compartida, paso de mensajes, gestión de errores, presupuestos y observabilidad— son donde la mayoría de sistemas multiagente triunfan o fracasan. Los contratos claros entre agentes importan más que los nombres ingeniosos de roles."
       ],
-      "components": ["Orquestador / agente líder", "Agentes trabajadores / especialistas", "Memoria y estado compartidos", "Paso de mensajes", "Herramientas (a menudo vía MCP)", "Guardarraíles y presupuestos", "Observabilidad"],
+      "components": [
+        "Orquestador / agente líder",
+        "Agentes trabajadores / especialistas",
+        "Memoria y estado compartidos",
+        "Paso de mensajes",
+        "Herramientas (a menudo vía MCP)",
+        "Guardarraíles y presupuestos",
+        "Observabilidad"
+      ],
       "pros": [
         "Roles modulares y especializados, más fáciles de evaluar.",
         "Paralelismo para subtareas independientes.",
@@ -91,17 +139,35 @@
         "Mayor coste de tokens por la comunicación entre agentes.",
         "Complejidad prematura cuando bastaría un agente."
       ],
-      "tools": ["LangGraph", "CrewAI", "AutoGen", "OpenAI Agents SDK", "Model Context Protocol (MCP)"],
+      "tools": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "OpenAI Agents SDK",
+        "Model Context Protocol (MCP)"
+      ],
       "examples": [
         "Un orquestador que delega investigación, redacción y revisión a agentes especialistas.",
         "Un pipeline que extrae, transforma y valida datos por etapas.",
         "Un agente crítico que revisa la salida de otro agente antes de finalizarla."
       ],
       "faqs": [
-        { "q": "¿Multiagente es siempre mejor que un solo agente?", "a": "No. Añade coordinación, coste y modos de fallo. Prefiere un solo agente y adopta multiagente solo cuando la tarea sea claramente separable y un agente rinda peor." },
-        { "q": "¿Qué es el patrón orquestador-trabajadores?", "a": "Un agente líder planifica una tarea, delega subtareas a agentes trabajadores especializados y sintetiza sus resultados en una respuesta final." },
-        { "q": "¿Cómo fallan los sistemas multiagente?", "a": "Por contratos poco claros entre agentes, pérdida de contexto, bucles descontrolados y acumulación de errores; por eso presupuestos y observabilidad son esenciales." },
-        { "q": "¿Cómo se relaciona MCP con los sistemas multiagente?", "a": "MCP estandariza cómo cada agente se conecta a herramientas y datos, haciendo las integraciones reutilizables entre los agentes del sistema." }
+        {
+          "q": "¿Multiagente es siempre mejor que un solo agente?",
+          "a": "No. Añade coordinación, coste y modos de fallo. Prefiere un solo agente y adopta multiagente solo cuando la tarea sea claramente separable y un agente rinda peor."
+        },
+        {
+          "q": "¿Qué es el patrón orquestador-trabajadores?",
+          "a": "Un agente líder planifica una tarea, delega subtareas a agentes trabajadores especializados y sintetiza sus resultados en una respuesta final."
+        },
+        {
+          "q": "¿Cómo fallan los sistemas multiagente?",
+          "a": "Por contratos poco claros entre agentes, pérdida de contexto, bucles descontrolados y acumulación de errores; por eso presupuestos y observabilidad son esenciales."
+        },
+        {
+          "q": "¿Cómo se relaciona MCP con los sistemas multiagente?",
+          "a": "MCP estandariza cómo cada agente se conecta a herramientas y datos, haciendo las integraciones reutilizables entre los agentes del sistema."
+        }
       ]
     },
     "pt": {
@@ -123,7 +189,15 @@
         "Orquestrador-trabalhadores: um agente líder planeja e delega subtarefas a agentes trabalhadores, e depois sintetiza os resultados. Pipeline: os agentes são dispostos em etapas, cada uma transformando a saída da anterior. Padrões entre pares: os agentes debatem, criticam ou votam para melhorar a qualidade.",
         "As preocupações transversais — memória compartilhada, passagem de mensagens, tratamento de erros, orçamentos e observabilidade — são onde a maioria dos sistemas multiagente tem sucesso ou falha. Contratos claros entre agentes importam mais que nomes engenhosos de papéis."
       ],
-      "components": ["Orquestrador / agente líder", "Agentes trabalhadores / especialistas", "Memória e estado compartilhados", "Passagem de mensagens", "Ferramentas (muitas vezes via MCP)", "Guard-rails e orçamentos", "Observabilidade"],
+      "components": [
+        "Orquestrador / agente líder",
+        "Agentes trabalhadores / especialistas",
+        "Memória e estado compartilhados",
+        "Passagem de mensagens",
+        "Ferramentas (muitas vezes via MCP)",
+        "Guard-rails e orçamentos",
+        "Observabilidade"
+      ],
       "pros": [
         "Papéis modulares e especializados, mais fáceis de avaliar.",
         "Paralelismo para subtarefas independentes.",
@@ -136,17 +210,319 @@
         "Maior custo de tokens pela comunicação entre agentes.",
         "Complexidade prematura quando bastaria um agente."
       ],
-      "tools": ["LangGraph", "CrewAI", "AutoGen", "OpenAI Agents SDK", "Model Context Protocol (MCP)"],
+      "tools": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "OpenAI Agents SDK",
+        "Model Context Protocol (MCP)"
+      ],
       "examples": [
         "Um orquestrador que delega pesquisa, redação e revisão a agentes especialistas.",
         "Um pipeline que extrai, transforma e valida dados por etapas.",
         "Um agente crítico que revisa a saída de outro agente antes de finalizá-la."
       ],
       "faqs": [
-        { "q": "Multiagente é sempre melhor que um único agente?", "a": "Não. Adiciona coordenação, custo e modos de falha. Prefira um único agente e adote multiagente só quando a tarefa for claramente separável e um agente tiver desempenho pior." },
-        { "q": "O que é o padrão orquestrador-trabalhadores?", "a": "Um agente líder planeja uma tarefa, delega subtarefas a agentes trabalhadores especializados e sintetiza seus resultados numa resposta final." },
-        { "q": "Como os sistemas multiagente falham?", "a": "Por contratos pouco claros entre agentes, perda de contexto, laços descontrolados e acúmulo de erros; por isso orçamentos e observabilidade são essenciais." },
-        { "q": "Como o MCP se relaciona com sistemas multiagente?", "a": "O MCP padroniza como cada agente se conecta a ferramentas e dados, tornando as integrações reutilizáveis entre os agentes do sistema." }
+        {
+          "q": "Multiagente é sempre melhor que um único agente?",
+          "a": "Não. Adiciona coordenação, custo e modos de falha. Prefira um único agente e adote multiagente só quando a tarefa for claramente separável e um agente tiver desempenho pior."
+        },
+        {
+          "q": "O que é o padrão orquestrador-trabalhadores?",
+          "a": "Um agente líder planeja uma tarefa, delega subtarefas a agentes trabalhadores especializados e sintetiza seus resultados numa resposta final."
+        },
+        {
+          "q": "Como os sistemas multiagente falham?",
+          "a": "Por contratos pouco claros entre agentes, perda de contexto, laços descontrolados e acúmulo de erros; por isso orçamentos e observabilidade são essenciais."
+        },
+        {
+          "q": "Como o MCP se relaciona com sistemas multiagente?",
+          "a": "O MCP padroniza como cada agente se conecta a ferramentas e dados, tornando as integrações reutilizáveis entre os agentes do sistema."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce qu'une architecture multi-agent ?",
+      "summary": "Une architecture multi-agent divise une tâche entre plusieurs agents spécialisés qui collaborent, délèguent ou rivalisent pour atteindre un objectif, plutôt que de s'appuyer sur un seul agent généraliste. Les configurations courantes incluent un orchestrateur qui délègue à des exécutants (workers), des pipelines où chaque agent gère une étape, et des modèles de débat ou de critique. Elle peut améliorer la modularité et la fiabilité pour les tâches complexes, mais ajoute une surcharge de coordination et ne devrait être adoptée que lorsqu'un agent unique s'avère manifestement insuffisant.",
+      "definition": "Une architecture multi-agent est une conception de système dans laquelle plusieurs agents d'IA spécialisés se coordonnent — via un orchestrateur, un pipeline ou une interaction entre pairs — pour accomplir une tâche qui est répartie entre eux.",
+      "takeaways": [
+        "Plusieurs agents spécialisés surpassent un seul généraliste pour certaines tâches complexes.",
+        "Modèles courants : orchestrateur-exécutants (workers), pipelines, débat/critique.",
+        "La spécialisation améliore la modularité et la concentration par rôle.",
+        "La coordination, la latence et la surcharge de coûts sont les principaux inconvénients.",
+        "Privilégiez par défaut un agent unique ; ne passez au multi-agent que si des mesures le justifient."
+      ],
+      "context": [
+        "À mesure que les tâches s'intensifient, le contexte et le raisonnement d'un agent unique sont mis à rude épreuve. Diviser le travail en rôles ciblés — chercheur, rédacteur, réviseur ; ou planificateur et exécutants — peut rendre chaque partie plus fiable et plus facile à évaluer.",
+        "Mais le multi-agent n'est pas systématiquement meilleur. Chaque agent supplémentaire ajoute de la communication, des modes de défaillance et des coûts. La rigueur consiste à ne décomposer que là où les rôles sont réellement distincts et où un agent unique est mesurablement moins performant."
+      ],
+      "architecture": [
+        "Orchestrateur-exécutants (workers) : un agent principal planifie et délègue des sous-tâches à des agents exécutants, puis synthétise les résultats. Pipeline : les agents sont organisés par étapes, chacun transformant la sortie du précédent. Modèles de pairs : les agents débattent, critiquent ou votent pour améliorer la qualité.",
+        "Les aspects transversaux — mémoire partagée, passage de messages, gestion des erreurs, budgets et observabilité — sont les éléments clés de la réussite ou de l'échec de la plupart des systèmes multi-agents. Des contrats clairs entre agents importent plus que des noms de rôles astucieux."
+      ],
+      "components": [
+        "Orchestrateur / agent principal",
+        "Agents exécutants (workers) / spécialistes",
+        "Mémoire partagée et état",
+        "Passage de messages",
+        "Outils (souvent via MCP)",
+        "Garde-fous et budgets",
+        "Observabilité"
+      ],
+      "pros": [
+        "Des rôles modulaires et spécialisés, plus faciles à évaluer.",
+        "Parallélisme pour les sous-tâches indépendantes.",
+        "Séparation des préoccupations à travers des flux de travail complexes.",
+        "Les modèles de critique/débat peuvent améliorer la qualité des résultats."
+      ],
+      "risks": [
+        "Surcharge de coordination et latence accrue.",
+        "Davantage de modes de défaillance et débogage plus difficile.",
+        "Coût en jetons (tokens) plus élevé dû à la communication entre agents.",
+        "Complexité prématurée lorsqu'un seul agent suffirait."
+      ],
+      "tools": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "OpenAI Agents SDK",
+        "Model Context Protocol (MCP)"
+      ],
+      "examples": [
+        "Un orchestrateur déléguant la recherche, la rédaction et la révision à des agents spécialisés.",
+        "Un pipeline qui extrait, transforme et valide les données à travers différentes étapes.",
+        "Un agent critique révisant la sortie d'un autre agent avant sa finalisation."
+      ],
+      "faqs": [
+        {
+          "q": "Le multi-agent est-il toujours préférable à un agent unique ?",
+          "a": "Non. Cela ajoute de la coordination, des coûts et des modes de défaillance. Privilégiez un agent unique et n'adoptez le multi-agent que lorsqu'une tâche est clairement divisible et qu'un agent unique s'avère insuffisant."
+        },
+        {
+          "q": "Qu'est-ce que le modèle orchestrateur-exécutants (orchestrator-workers) ?",
+          "a": "Un agent principal planifie une tâche, délègue des sous-tâches à des agents exécutants spécialisés, puis synthétise leurs résultats en une réponse finale."
+        },
+        {
+          "q": "Comment les systèmes multi-agents échouent-ils ?",
+          "a": "Par des contrats flous entre agents, des pertes de contexte, des boucles infinies et des erreurs cumulatives — c'est pourquoi les budgets et l'observabilité sont essentiels."
+        },
+        {
+          "q": "Quel est le rapport entre MCP et les systèmes multi-agents ?",
+          "a": "MCP standardise la manière dont chaque agent se connecte aux outils et aux données, rendant les intégrations réutilisables pour l'ensemble des agents du système."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist eine Multi-Agenten-Architektur?",
+      "summary": "Eine Multi-Agenten-Architektur teilt eine Aufgabe auf mehrere spezialisierte Agenten auf, die zusammenarbeiten, delegieren oder konkurrieren, um ein Ziel zu erreichen, anstatt sich auf einen einzigen universellen Agenten zu verlassen. Zu den gängigen Mustern gehören ein Orchestrator, der an Worker delegiert, Pipelines, bei denen jeder Agent eine Phase verantwortet, sowie Debatten- oder Kritiker-Muster. Sie kann die Modularität und Zuverlässigkeit bei komplexen Aufgaben verbessern, verursacht jedoch Koordinationsaufwand und sollte nur dann eingeführt werden, wenn ein einzelner Agent nachweislich unzureichend ist.",
+      "definition": "Eine Multi-Agenten-Architektur ist ein Systemdesign, bei dem sich mehrere spezialisierte KI-Agenten – über einen Orchestrator, eine Pipeline oder Peer-Interaktion – koordinieren, um eine Aufgabe zu bewältigen, die auf sie aufgeteilt ist.",
+      "takeaways": [
+        "Mehrere spezialisierte Agenten sind bei bestimmten komplexen Aufgaben einem Generalisten überlegen.",
+        "Gängige Muster: Orchestrator-Worker, Pipelines, Debatte/Kritiker.",
+        "Spezialisierung verbessert die Modularität und den Fokus pro Rolle.",
+        "Koordinationsaufwand, Latenz und zusätzliche Kosten sind die Hauptnachteile.",
+        "Nutzen Sie standardmäßig einen einzelnen Agenten; wechseln Sie nur zu Multi-Agenten-Systemen, wenn Messungen dies rechtfertigen."
+      ],
+      "context": [
+        "Mit wachsenden Aufgaben stoßen der Kontext und die logische Argumentation (Reasoning) eines einzelnen Agenten an ihre Grenzen. Die Aufteilung der Arbeit in fokussierte Rollen – wie Researcher, Writer, Reviewer oder Planer und Executor – kann jeden Teilbereich zuverlässiger und einfacher zu evaluieren machen.",
+        "Multi-Agenten-Systeme sind jedoch nicht automatisch besser. Jeder zusätzliche Agent bringt Kommunikationsaufwand, neue Fehlerquellen und Kosten mit sich. Die Kunst besteht darin, Aufgaben nur dort aufzuteilen, wo Rollen wirklich trennbar sind und ein einzelner Agent messbar unzureichende Ergebnisse liefert."
+      ],
+      "architecture": [
+        "Orchestrator-Worker: Ein leitender Agent plant und delegiert Teilaufgaben an Worker-Agenten und führt die Ergebnisse anschließend zusammen. Pipeline: Agenten sind in Phasen angeordnet, wobei jeder die Ausgabe des vorherigen transformiert. Peer-Muster: Agenten debattieren, kritisieren oder stimmen ab, um die Qualität zu steigern.",
+        "Übergreifende Aspekte – wie gemeinsamer Speicher (Shared Memory), Message Passing, Fehlerbehandlung, Budgets und Observability – entscheiden meist über Erfolg oder Misserfolg von Multi-Agenten-Systemen. Klare Verträge (Contracts) zwischen den Agenten sind wichtiger als originelle Rollennamen."
+      ],
+      "components": [
+        "Orchestrator / leitender Agent",
+        "Worker / spezialisierte Agenten",
+        "Gemeinsamer Speicher & Zustand",
+        "Message Passing",
+        "Tools (oft über MCP)",
+        "Guardrails & Budgets",
+        "Observability"
+      ],
+      "pros": [
+        "Modulare, spezialisierte Rollen, die einfacher zu evaluieren sind.",
+        "Parallelität für unabhängige Teilaufgaben.",
+        "Separation of Concerns über komplexe Workflows hinweg.",
+        "Kritiker-/Debatten-Muster können die Ausgabequalität steigern."
+      ],
+      "risks": [
+        "Koordinationsaufwand und zusätzliche Latenz.",
+        "Mehr Fehlerquellen und schwierigeres Debugging.",
+        "Höhere Token-Kosten durch die Kommunikation zwischen Agenten.",
+        "Vorzeitige Komplexität, wenn ein einzelner Agent ausreichen würde."
+      ],
+      "tools": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "OpenAI Agents SDK",
+        "Model Context Protocol (MCP)"
+      ],
+      "examples": [
+        "Ein Orchestrator, der Recherche, Entwurf und Review an spezialisierte Agenten delegiert.",
+        "Eine Pipeline, die Daten über verschiedene Phasen hinweg extrahiert, transformiert und validiert.",
+        "Ein Kritiker-Agent, der die Ausgabe eines anderen Agenten überprüft, bevor sie finalisiert wird."
+      ],
+      "faqs": [
+        {
+          "q": "Ist ein Multi-Agenten-System immer besser als ein einzelner Agent?",
+          "a": "Nein. Es bringt Koordinationsaufwand, Kosten und zusätzliche Fehlerquellen mit sich. Bevorzugen Sie einen einzelnen Agenten und wechseln Sie nur dann zu Multi-Agenten-Systemen, wenn eine Aufgabe klar aufteilbar ist und ein einzelner Agent unzureichende Ergebnisse liefert."
+        },
+        {
+          "q": "Was ist das Orchestrator-Worker-Muster?",
+          "a": "Ein leitender Agent plant eine Aufgabe, delegiert Teilaufgaben an spezialisierte Worker-Agenten und führt deren Ergebnisse zu einer finalen Antwort zusammen."
+        },
+        {
+          "q": "Wie schlagen Multi-Agenten-Systeme fehl?",
+          "a": "Durch unklare Verträge (Contracts) zwischen Agenten, Kontextverlust, Endlosschleifen und sich kaskadierende Fehler – weshalb Budgets und Observability unerlässlich sind."
+        },
+        {
+          "q": "Welche Beziehung besteht zwischen MCP und Multi-Agenten-Systemen?",
+          "a": "MCP standardisiert, wie sich jeder Agent mit Tools und Daten verbindet, wodurch Integrationen für alle Agenten im System wiederverwendbar werden."
+        }
+      ]
+    },
+    "ja": {
+      "title": "マルチエージェントアーキテクチャとは何ですか？",
+      "summary": "マルチエージェントアーキテクチャとは、1つの汎用エージェントに依存するのではなく、目標を達成するために、連携、委譲、または競合する複数の特化型エージェントにタスクを分割する仕組みです。一般的な形態には、ワーカーに委譲するオーケストレーター、各エージェントがステージを担当するパイプライン、ディベートやクリティック（批評）のパターンなどがあります。複雑なタスクにおけるモジュール性と信頼性を向上させることができますが、調整のオーバーヘッドが加わるため、単一のエージェントでは明らかに不十分な場合にのみ採用すべきです。",
+      "definition": "マルチエージェントアーキテクチャとは、複数の特化型AIエージェントが、オーケストレーター、パイプライン、またはピア間の相互作用を通じて連携し、分解されたタスクを共同で達成するシステム設計です。",
+      "takeaways": [
+        "一部の複雑なタスクでは、複数の特化型エージェントが1つの汎用エージェントよりも優れた成果を上げます。",
+        "一般的なパターン：オーケストレーター・ワーカー、パイプライン、ディベート／クリティック。",
+        "特化させることで、モジュール性が向上し、役割ごとの集中度が高まります。",
+        "主なコストは、調整、レイテンシー、およびコストのオーバーヘッドです。",
+        "基本は単一のエージェントとし、測定によって妥当性が証明された場合にのみマルチエージェントに移行します。"
+      ],
+      "context": [
+        "タスクが大きくなると、単一のエージェントのコンテキストと推論能力は限界に達します。作業を、リサーチャー、ライター、レビュアー、あるいはプランナーと実行者のような、焦点を絞った役割に分割することで、各部分の信頼性を高め、評価を容易にすることができます。",
+        "しかし、マルチエージェントが自動的に優れているわけではありません。エージェントを追加するたびに、通信、障害モード、およびコストが増加します。役割が真に分離可能であり、単一のエージェントでは測定可能なレベルでパフォーマンスが低下する場合にのみ分解するという規律が必要です。"
+      ],
+      "architecture": [
+        "オーケストレーター・ワーカー：リードエージェントが計画を立て、サブタスクをワーカーエージェントに委譲し、その結果を統合します。パイプライン：エージェントがステージごとに配置され、それぞれが前段の出力を変換します。ピアパターン：エージェント同士がディベート、批評、または投票を行い、品質を向上させます。",
+        "共有メモリ、メッセージパッシング、エラーハンドリング、予算、オブザーバビリティなどの横断的関心事は、ほとんどのマルチエージェントシステムの成否を分けるポイントです。巧妙な役割名よりも、エージェント間の明確な契約（インターフェース）の方が重要です。"
+      ],
+      "components": [
+        "オーケストレーター／リードエージェント",
+        "ワーカー／特化型エージェント",
+        "共有メモリと状態",
+        "メッセージパッシング",
+        "ツール（多くはMCP経由）",
+        "ガードレールと予算",
+        "オブザーバビリティ"
+      ],
+      "pros": [
+        "評価が容易な、モジュール化された特化型の役割。",
+        "独立したサブタスクの並列処理。",
+        "複雑なワークフローにおける関心の分離。",
+        "クリティック／ディベートパターンによる出力品質の向上。"
+      ],
+      "risks": [
+        "調整のオーバーヘッドとレイテンシーの増加。",
+        "障害モードの増加とデバッグの難化。",
+        "エージェント間通信によるトークンコストの増加。",
+        "単一のエージェントで十分な場合における、時期尚早な複雑化。"
+      ],
+      "tools": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "OpenAI Agents SDK",
+        "Model Context Protocol (MCP)"
+      ],
+      "examples": [
+        "リサーチ、ドラフト作成、レビューを特化型エージェントに委譲するオーケストレーター。",
+        "各ステージでデータの抽出、変換、検証を行うパイプライン。",
+        "別のエージェントの出力が確定する前に、それをレビューするクリティックエージェント。"
+      ],
+      "faqs": [
+        {
+          "q": "マルチエージェントは常に単一のエージェントよりも優れていますか？",
+          "a": "いいえ。調整、コスト、障害モードが増加します。基本的には単一のエージェントを優先し、タスクが明確に分離可能で、単一のエージェントではパフォーマンスが低下する場合にのみマルチエージェントを採用してください。"
+        },
+        {
+          "q": "オーケストレーター・ワーカーパターンとは何ですか？",
+          "a": "リードエージェントがタスクを計画し、特化型のワーカーエージェントにサブタスクを委譲し、それらの結果を統合して最終的な回答を作成するパターンです。"
+        },
+        {
+          "q": "マルチエージェントシステムはどのように失敗しますか？",
+          "a": "エージェント間の不明確な契約、コンテキストの喪失、無限ループ、エラーの連鎖などによって失敗します。そのため、予算管理とオブザーバビリティが不可欠です。"
+        },
+        {
+          "q": "MCPはマルチエージェントシステムとどのように関係していますか？",
+          "a": "MCPは、各エージェントがツールやデータに接続する方法を標準化し、システム内のエージェント間で統合を再利用できるようにします。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是多智能体架构？",
+      "summary": "多智能体架构将任务分配给多个协同、委派或竞争以达成目标的专业化智能体，而不是依赖单个通用智能体。常见形态包括向工作智能体委派任务的编排器、每个智能体负责一个阶段的流水线，以及辩论或批判模式。它可以提高复杂任务的模块化程度和可靠性，但会增加协调开销，只有在单个智能体明显无法胜任时才应采用。",
+      "definition": "多智能体架构是一种系统设计，其中多个专业化 AI 智能体通过编排器、流水线或对等交互进行协同，以完成分解给它们的任务。",
+      "takeaways": [
+        "对于某些复杂任务，多个专业化智能体的表现优于单个通用智能体。",
+        "常见模式：编排器-工作智能体（orchestrator-workers）、流水线（pipelines）、辩论/批判（debate/critic）。",
+        "专业化提高了模块化程度，使每个角色更加专注。",
+        "协调、延迟和成本开销是主要的代价。",
+        "默认使用单个智能体；只有在评估数据证明有必要时才转向多智能体。"
+      ],
+      "context": [
+        "随着任务规模的增长，单个智能体的上下文和推理能力会显得捉襟见肘。将工作拆分为专注的角色（如研究员、撰写员、审核员；或规划器和执行器）可以使每个部分更加可靠且更易于评估。",
+        "但多智能体并不自然就更好。每增加一个智能体，就会增加通信开销、故障模式和成本。其原则是仅在角色确实可分离且单个智能体表现明显不佳时才进行拆分。"
+      ],
+      "architecture": [
+        "编排器-工作智能体：主智能体进行规划并将子任务委派给工作智能体，然后汇总结果。流水线：智能体按阶段排列，每个阶段对前一个阶段的输出进行转换。对等模式：智能体通过辩论、批判或投票来提高质量。",
+        "横切关注点（如共享内存、消息传递、错误处理、预算和可观测性）是大多数多智能体系统成败的关键。智能体之间清晰的契约比巧妙的角色名称更重要。"
+      ],
+      "components": [
+        "编排器 / 主智能体",
+        "工作智能体 / 专业智能体",
+        "共享内存与状态",
+        "消息传递",
+        "工具（通常通过 MCP）",
+        "护栏与预算",
+        "可观测性"
+      ],
+      "pros": [
+        "模块化、专业化的角色，更易于评估。",
+        "独立子任务的并行处理。",
+        "复杂工作流中的关注点分离。",
+        "批判/辩论模式可以提高输出质量。"
+      ],
+      "risks": [
+        "协调开销和增加的延迟。",
+        "更多的故障模式和更难的调试。",
+        "智能体间通信带来的更高 Token 成本。",
+        "在单个智能体即足够时引入过早的复杂性。"
+      ],
+      "tools": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "OpenAI Agents SDK",
+        "Model Context Protocol (MCP)"
+      ],
+      "examples": [
+        "将研究、起草和审核委派给专业智能体的编排器。",
+        "跨阶段提取、转换和验证数据的流水线。",
+        "在最终确定之前审查另一个智能体输出的批判智能体。"
+      ],
+      "faqs": [
+        {
+          "q": "多智能体总是优于单个智能体吗？",
+          "a": "不是。它会增加协调、成本和故障模式。应优先使用单个智能体，只有在任务明显可分离且单个智能体表现不佳时才采用多智能体。"
+        },
+        {
+          "q": "什么是编排器-工作智能体模式？",
+          "a": "主智能体规划任务，将子任务委派给专业的工作智能体，并将其结果汇总为最终答案。"
+        },
+        {
+          "q": "多智能体系统是如何失效的？",
+          "a": "通过智能体之间不清晰的契约、丢失的上下文、失控的循环以及复合错误——这就是为什么预算和可观测性至关重要的原因。"
+        },
+        {
+          "q": "MCP 与多智能体系统有什么关系？",
+          "a": "MCP 规范了每个智能体连接到工具和数据的方式，使集成在系统中的各个智能体之间可复用。"
+        }
       ]
     }
   }

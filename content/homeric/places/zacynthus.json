@@ -84,6 +84,22 @@
         "pt": {
           "label": "Zacinto moderna",
           "note": "A única ilha do reino de Odisseu cujo nome e posição nunca foram contestados: a “arborizada Zacinto” é a mais meridional do grupo, carregou o nome continuamente e seus sepultamentos micênicos confirmam ocupação na Idade do Bronze."
+        },
+        "fr": {
+          "label": "Zakynthos moderne",
+          "note": "La seule île du royaume d'Ulysse dont le nom et la position n'ont jamais été contestés : « la boisée Zacinthe » est la plus méridionale du groupe, elle a porté ce nom de manière continue, et des sépultures mycéniennes confirment une occupation à l'âge du bronze."
+        },
+        "zh": {
+          "label": "现代扎金索斯",
+          "note": "奥德修斯王国中唯一一座名称和位置从未受到质疑的岛屿：“树木茂密的扎金索斯”是该群岛中最南端的一座，它一直沿用这一名称，且迈锡尼时期的墓葬证实了青铜时代的居住痕迹。"
+        },
+        "de": {
+          "label": "Das moderne Zakynthos",
+          "note": "Die einzige Insel im Königreich des Odysseus, deren Name und Lage nie bestritten wurden: Das „waldige Zakynthos“ ist die südlichste der Gruppe, trägt den Namen seit jeher und mykenische Gräber bestätigen eine bronzezeitliche Besiedlung."
+        },
+        "ja": {
+          "label": "現代のザキントス島",
+          "note": "オデュッセウスの王国において、名前と位置が一度も争われたことのない唯一の島。「森に覆われたザキントス」はこの島々の中で最も南に位置し、その名を一貫して受け継いできた。また、ミケーネ時代の埋葬跡から青銅器時代の居住が確認されている。"
         }
       }
     }
@@ -121,6 +137,46 @@
       ],
       "identificationNote": "Aceita: nome contínuo, posição consensual, ocupação no Bronze. O critério textual pontua 2 porque “arborizada” é quase tudo o que o poema diz dela.",
       "debate": "Nada sobre a ilha. Seu papel no debate é o de perna fixa de toda reconstrução rival da geografia jônica."
+    },
+    "fr": {
+      "name": "Zacinthe",
+      "summary": "Le point fixe de l'énigme ionienne. Toutes les reconstructions du royaume d'Ulysse, aussi radicales soient-elles, s'accordent sur l'emplacement de Zacinthe.",
+      "description": [
+        "Homère nomme quatre îles dans le domaine d'Ulysse — Ithaque, Doulichion, Samé et la boisée Zacinthe — et les prétendants viennent de chacune d'elles. Trois des quatre font l'objet de débats depuis deux siècles. Pas Zacinthe.",
+        "Cela importe sur le plan méthodologique : c'est un élément de contrôle. Toute théorie déplaçant Ithaque doit maintenir Zacinthe là où elle se trouve tout en préservant la cohérence des directions relatives du poème."
+      ],
+      "identificationNote": "Accepté : dénomination continue, position consensuelle, occupation à l'âge du bronze. Le score textuel est de 2 car « boisée » est presque tout ce que le poème en dit.",
+      "debate": "Rien concernant l'île elle-même. Son rôle dans le débat est de servir de point d'ancrage fixe à chaque reconstruction concurrente de la géographie ionienne."
+    },
+    "de": {
+      "name": "Zakynthos",
+      "summary": "Der Fixpunkt im ionischen Rätsel. Jede Rekonstruktion von Odysseus' Königreich, wie radikal sie auch sein mag, stimmt darin überein, wo Zakynthos liegt.",
+      "description": [
+        "Homer nennt vier Inseln im Reich des Odysseus – Ithaka, Dulichion, Same und das waldige Zakynthos – und die Freier kommen von all diesen Inseln. Über drei der vier wird seit zwei Jahrhunderten gestritten. Über Zakynthos nicht.",
+        "Das ist methodisch von Bedeutung: Es dient als Kontrolle. Jede Theorie, die Ithaka verlegt, muss Zakynthos dort belassen, wo es ist, und dennoch die relativen Richtungsangaben des Epos stimmig erklären."
+      ],
+      "identificationNote": "Akzeptiert: kontinuierliche Namensgebung, übereinstimmende Lage, bronzezeitliche Besiedlung. Textbewertung 2, da „waldig“ fast alles ist, was das Epos darüber sagt.",
+      "debate": "Nichts über die Insel selbst. Ihre Rolle in der Debatte ist die des festen Ankers jeder konkurrierenden Rekonstruktion der ionischen Geografie."
+    },
+    "ja": {
+      "name": "ザキントス",
+      "summary": "イオニアの謎における不動の基準点。オデュッセウスの王国のいかなる再構成案も、それがどれほど急進的なものであっても、ザキントスの位置については一致している。",
+      "description": [
+        "ホメロスはオデュッセウスの領地として、イタカ、ドゥリキオン、サメ、および「森に覆われたザキントス」の4つの島を挙げており、求婚者たちはこれらすべての島からやって来る。4つのうち3つの島については2世紀にわたり議論が続けられてきたが、ザキントスについては議論の余地がない。",
+        "これは方法論的に重要であり、対照群（コントロール）の役割を果たす。イタカの位置を移動させるいかなる説も、ザキントスの位置はそのままに保ちつつ、叙事詩に描かれる相対的な方角を成立させなければならない。"
+      ],
+      "identificationNote": "承認：継続的な命名、合意された位置、青銅器時代の居住痕跡。叙事詩における記述は「森に覆われた」という表現がほぼすべてであるため、テキストの評価スコアは2となる。",
+      "debate": "この島自体に関する議論はない。議論におけるその役割は、イオニア地方の地理をめぐるあらゆる対立する再構成案において、不動の支点となることである。"
+    },
+    "zh": {
+      "name": "扎金索斯",
+      "summary": "伊奥尼亚谜题中的固定点。对奥德修斯王国的每一种重建方案，无论多么激进，在扎金索斯的位置上都达成了一致。",
+      "description": [
+        "荷马命名了奥德修斯领地内的四座岛屿——伊萨卡（Ithaca）、杜利基翁（Dulichium）、萨梅（Same）和树木茂密的扎金索斯，求婚者来自所有这些岛屿。两百年来，这四座岛屿中有三座一直存在争议。而扎金索斯则没有。",
+        "这在方法论上至关重要：它是一个对照组。任何移动伊萨卡位置的理论都必须保持扎金索斯的位置不变，并且仍能使史诗中的相对方向说得通。"
+      ],
+      "identificationNote": "已确认：名称延续、位置一致、有青铜时代居住痕迹。文献得分2分，因为“树木茂密”几乎是史诗对它的全部描述。",
+      "debate": "关于该岛本身没有任何争议。它在辩论中的作用是作为每个相互竞争的伊奥尼亚地理重建方案的固定支点。"
     }
   }
 }

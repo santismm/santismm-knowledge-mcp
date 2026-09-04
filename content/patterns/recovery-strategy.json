@@ -305,6 +305,366 @@
           "a": "Não retente automaticamente sobre ela. Salve um ponto de verificação antes da etapa irreversível e, diante de uma falha, escale para um humano ou agente supervisor em vez de adivinhar. A irreversibilidade é um sinal para ir mais devagar, não para retentar com mais força."
         }
       ]
+    },
+    "fr": {
+      "name": "Stratégie de récupération",
+      "summary": "Donnez à l'agent un plan explicite en cas de panne. Détectez les défaillances en validant les sorties et en interceptant les erreurs des outils ; puis réessayez avec ajustement, basculez vers un chemin alternatif, annulez les actions partielles ou escaladez. Limitez les tentatives pour éviter les boucles infinies et les coûts, rendez les actions idempotentes et distinguez les défaillances transitoires des défaillances permanentes. L'objectif est une dégradation progressive plutôt que des plantages ou des résultats silencieusement erronés.",
+      "problem": "Les agents échouent constamment : les outils expirent, les API renvoient des erreurs, les modèles émettent des sorties malformées, les plans se retrouvent dans des impasses et les flux de travail multi-étapes laissent derrière eux des effets secondaires partiels. Sans chemin de récupération explicite, un agent soit plante à la première erreur, soit — pire encore — continue sur la base de données erronées et produit silencieusement des résultats faux avec assurance. Les boucles de tentative naïves aggravent la situation, pilonnant une dépendance défaillante, consommant des jetons et tournant indéfiniment. Le plus difficile n'est pas d'intercepter une erreur, mais de déterminer de quel type de défaillance il s'agit et quelle réponse est sûre.",
+      "context": "Utilisez ce modèle dans tout agent qui appelle des outils externes, exécute des plans multi-étapes ou effectue des actions importantes où une exécution partielle est possible. Il est particulièrement crucial pour les flux de travail autonomes ou de longue durée qu'aucun humain ne surveille en temps réel, et pour les actions ayant des effets secondaires (paiements, écritures, e-mails) où une tentative aveugle pourrait dupliquer le travail. Il suppose que vous pouvez valider les sorties par rapport à un contrat et qu'au moins certaines opérations peuvent être rendues idempotentes ou compensées. Il est moins pertinent pour les prompts ponctuels, en lecture seule et à faibles enjeux.",
+      "solution": [
+        "Traisez la récupération comme une boucle de contrôle de premier ordre superposée à l'exécution normale de l'agent. Chaque appel d'outil et chaque sortie de modèle passe par une barrière de validation : interceptez les exceptions et les expirations de délai, et vérifiez les sorties par rapport à un schéma ou un contrat avant de leur faire confiance. En cas d'échec, classifiez-le. Les défaillances transitoires (expirations, limites de débit, 5xx) font l'objet d'une tentative limitée avec un backoff exponentiel et du jitter, idéalement sur une opération idempotente pour qu'une requête dupliquée soit sans danger. Les défaillances permanentes (arguments invalides, erreurs d'authentification, violations de contrat) ignorent les tentatives et passent directement à une alternative : un outil différent, un plan plus simple ou une réponse de secours.\n\nLorsque la progression est importante, sauvegardez l'état (checkpoint) afin que l'agent puisse reprendre à partir de la dernière étape valide plutôt que de redémarrer. Lorsqu'une étape a déjà produit des effets secondaires et ne peut pas continuer, exécutez des actions de compensation pour annuler — annuler la commande, supprimer le brouillon, rembourser le débit. Enveloppez l'ensemble de la boucle dans des budgets stricts : nombre maximal de tentatives, temps d'exécution maximal et plafond de coût, plus un disjoncteur (circuit breaker) qui cesse d'appeler une dépendance qui échoue continuellement. Lorsque toutes les options de récupération sont épuisées, escaladez proprement — remontez la défaillance à un humain ou à un agent superviseur avec suffisamment de contexte pour agir, plutôt que de deviner."
+      ],
+      "components": [
+        "Barrière de validation",
+        "Classificateur de défaillances",
+        "Tentative limitée avec backoff",
+        "Routeur de secours",
+        "Stockage de checkpoints",
+        "Gestionnaire de compensation"
+      ],
+      "benefits": [
+        "L'agent produit un résultat partiel ou de secours et un statut clair au lieu de planter ou de renvoyer des données aberrantes avec assurance.",
+        "Les limites strictes de tentatives, de temps et de coût empêchent les boucles de tentative infinies de consommer le budget sur une dépendance défaillante.",
+        "Les actions de compensation et les checkpoints maintiennent la cohérence des systèmes externes et de l'état des tâches lorsqu'un flux de travail s'arrête à mi-parcours.",
+        "En cas d'échec de la récupération, l'agent passe la main avec suffisamment de contexte pour qu'un humain ou un superviseur puisse agir, plutôt que de deviner."
+      ],
+      "risks": [
+        "Des tentatives agressives contre une dépendance en difficulté augmentent la charge et peuvent transformer une brève anomalie en une panne en cascade.",
+        "Réessayer une action non idempotente peut entraîner une double facturation, un double envoi ou une double écriture si des clés de requête ne sont pas utilisées.",
+        "Des solutions de secours trop zélées peuvent masquer des défaillances systématiques, de sorte qu'un outil en panne semble sain tout en dégradant discrètement chaque résultat.",
+        "La logique d'annulation est souvent incomplète ou échoue elle-même, laissant les systèmes dans un état incohérent difficile à détecter."
+      ],
+      "whenNot": [
+        "Pour les prompts à faibles enjeux, sans effets secondaires et sans plan multi-étapes, une simple logique de tentative ou d'échec suffit ; un mécanisme complet de récupération est superflu.",
+        "Lorsqu'une défaillance signifie que la tâche est réellement impossible (autorisation manquante, API obsolète), les tentatives et les solutions de secours ne font que perdre du temps — échouez rapidement et escaladez.",
+        "Si un effet secondaire est irréversible et ne peut pas être rendu idempotent, ne lancez pas de tentative automatique ; exigez plutôt une confirmation ou une approbation humaine."
+      ],
+      "examples": [
+        "L'outil de recherche d'un agent de recherche renvoie une erreur 503 ; l'agent réessaie avec un backoff, réussit à la troisième tentative et continue sans faire planter l'exécution.",
+        "Un agent de code génère du JSON qui échoue à la validation du schéma ; la barrière de validation le rejette et relance le prompt avec l'erreur, au lieu de transmettre des données malformées en aval.",
+        "Un agent de réservation réserve un vol mais l'étape de l'hôtel échoue définitivement ; le gestionnaire de compensation annule la réservation et escalade plutôt que de laisser un voyage à moitié réservé."
+      ],
+      "productionEvidence": {
+        "context": "Déploiement OpenClaw mono-opérateur, local-first, observé sur 57 jours (161 sessions / 2 776 tours), agrégé à partir des traces de trajectoire de l'agent lui-même.",
+        "scenario": "Les erreurs, les abandons et les expirations de délai pendant les tours autonomes sont absorbés par des tentatives/backoffs et une chaîne de secours de modèles (model-fallback) afin que l'agent continue de fonctionner.",
+        "technology": "retryAsync avec backoff exponentiel et jitter, runWithModelFallback, propagation d'abandon et autoprotection cron contre les boucles de redéclenchement.",
+        "load": "2 942 tours terminaux ; 52 erreurs, 126 abandons, 120 expirations de délai et 31 erreurs de prompt observées.",
+        "results": "Un taux d'erreur terminale de 1,77 % sur 2 942 tours ; les primitives de récupération ont absorbé les défaillances transitoires et le déploiement a maintenu un taux de réussite de session de 98,8 %. Déploiement mono-opérateur local-first."
+      },
+      "kpis": [
+        {
+          "metric": "Taux de réussite de la récupération",
+          "note": "Part des défaillances résolues automatiquement par tentative ou secours sans intervention humaine ; une valeur saine est élevée et stable, sans dérive descendante silencieuse."
+        },
+        {
+          "metric": "Nombre moyen de tentatives par tâche réussie",
+          "note": "Nombre de tentatives nécessaires pour réussir ; surveillez toute augmentation progressive, qui signale une dégradation de dépendance plutôt qu'une véritable récupération."
+        },
+        {
+          "metric": "Taux de boucle infinie / dépassement de budget",
+          "note": "Fréquence à laquelle les exécutions atteignent les plafonds de tentative, de temps ou de coût ; cela devrait être rare, et les pics signifient que les limites ou la classification doivent être ajustées."
+        },
+        {
+          "metric": "Complétude de la compensation",
+          "note": "Fraction des flux de travail multi-étapes échoués qui se terminent dans un état cohérent ; l'objectif est une annulation complète sans effets secondaires orphelins."
+        }
+      ],
+      "failureModes": [
+        "Des limites de tentatives manquantes ou trop élevées permettent à l'agent de réessayer indéfiniment une défaillance permanente, ce qui engendre des coûts sans jamais progresser.",
+        "Traiter une erreur permanente comme transitoire gaspille des tentatives ; traiter une erreur transitoire comme permanente conduit à abandonner trop tôt et déclenche des solutions de secours inutiles.",
+        "Un chemin de secours renvoie une réponse plausible mais erronée sans signaler qu'une récupération a eu lieu, de sorte que les consommateurs en aval font confiance à une mauvaise sortie.",
+        "L'agent échoue après une écriture ou une action externe mais avant l'exécution de la compensation, laissant des enregistrements en double ou orphelins."
+      ],
+      "lessons": [
+        "La décision de tenter, de basculer ou d'escalader repose sur la distinction entre transitoire et permanent ; investissez dans une classification claire avant d'ajuster les courbes de backoff.",
+        "Les clés d'idempotence transforment une tentative risquée en une tentative sûre ; concevez-les dès le départ plutôt que d'ajouter une déduplication après coup.",
+        "Les limites strictes sur les tentatives, le temps et le coût sont non négociables ; un agent qui en est dépourvu finira par trouver un moyen de s'exécuter indéfiniment.",
+        "Enregistrez chaque tentative, solution de secours et compensation afin qu'une dégradation silencieuse apparaisse sous forme de métrique plutôt que comme un incident surprise."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il de l'ajout d'un bloc try/except et d'une boucle de tentative ?",
+          "a": "Le bloc try/except gère une seule erreur ; une stratégie de récupération détermine le type de défaillance et choisit entre la tentative, la solution de secours, l'annulation et l'escalade sous des budgets stricts. C'est la logique de contrôle et l'idempotence qui en constituent l'essence, et non la gestion des exceptions."
+        },
+        {
+          "q": "Combien de tentatives dois-je autoriser ?",
+          "a": "Peu — généralement une petite limite fixe avec un backoff exponentiel et du jitter, plus des plafonds de temps et de coût distincts. Le nombre exact dépend de la dépendance, mais la boucle doit toujours se terminer, et les défaillances permanentes ne doivent pas faire l'objet de tentatives."
+        },
+        {
+          "q": "Que se passe-t-il si une action ne peut pas être annulée ou rendue idempotente ?",
+          "a": "Ne lancez pas de tentative automatique sur cette action. Créez un checkpoint avant l'étape irréversible et, en cas d'échec, escaladez vers un humain ou un agent superviseur plutôt que de deviner. L'irréversibilité est un signal pour ralentir, pas pour insister davantage."
+        }
+      ]
+    },
+    "de": {
+      "name": "Recovery-Strategie",
+      "summary": "Geben Sie dem Agenten einen expliziten Plan für den Fall, dass Fehler auftreten. Erkennen Sie Fehler, indem Sie Ausgaben validieren und Tool-Fehler abfangen; führen Sie dann einen erneuten Versuch mit Anpassungen durch, weichen Sie auf einen alternativen Pfad aus, machen Sie Teilaktionen rückgängig oder eskalieren Sie. Begrenzen Sie die Anzahl der Versuche, um unkontrollierte Schleifen und Kosten zu vermeiden, machen Sie Aktionen idempotent und unterscheiden Sie zwischen vorübergehenden und dauerhaften Fehlern. Das Ziel ist ein kontrollierter Funktionsabbau (Graceful Degradation) anstelle von Abstürzen oder unbemerkt fehlerhaften Ergebnissen.",
+      "problem": "Agenten fallen ständig aus: Tools laufen in Timeouts, APIs geben Fehler zurück, Modelle liefern fehlerhafte Ausgaben, Pläne geraten in Sackgassen und mehrstufige Workflows hinterlassen unvollständige Nebeneffekte. Ohne einen expliziten Recovery-Pfad stürzt ein Agent entweder beim ersten Fehler ab oder – was noch schlimmer ist – arbeitet mit fehlerhaften Daten weiter und liefert unbemerkt, aber mit scheinbarer Gewissheit falsche Ergebnisse. Naive Wiederholungsschleifen verschlimmern das Problem, indem sie eine fehlerhafte Abhängigkeit überlasten, Token verbrauchen und endlos laufen. Die Schwierigkeit liegt nicht darin, einen einzelnen Fehler abzufangen, sondern zu entscheiden, um welche Art von Fehler es sich handelt und welche Reaktion sicher ist.",
+      "context": "Verwenden Sie dieses Pattern bei jedem Agenten, der externe Tools aufruft, mehrstufige Pläne ausführt oder folgenschwere Aktionen durchführt, bei denen ein unvollständiger Abschluss möglich ist. Es ist besonders wichtig für langlebige oder autonome Workflows, die von keinem Menschen in Echtzeit überwacht werden, sowie für Aktionen mit Nebeneffekten (Zahlungen, Schreibvorgänge, E-Mails), bei denen ein blinder Wiederholungsversuch zu doppelter Arbeit führen könnte. Es setzt voraus, dass Sie Ausgaben anhand eines Kontrakts validieren können und dass zumindest einige Operationen idempotent gestaltet oder kompensiert werden können. Für einmalige, schreibgeschützte Prompts mit geringem Risiko ist es weniger relevant.",
+      "solution": [
+        "Behandeln Sie Recovery als erstklassigen Kontrollkreis (Control Loop), der um die normale Ausführung des Agenten gelegt wird. Jeder Tool-Aufruf und jede Modellausgabe durchläuft ein Validierungs-Gate: Fangen Sie Exceptions und Timeouts ab und prüfen Sie Ausgaben anhand eines Schemas oder Kontrakts, bevor Sie ihnen vertrauen. Klassifizieren Sie den Fehler im Fall eines Fehlschlags. Vorübergehende Fehler (Timeouts, Ratenbegrenzungen, 5xx) erhalten eine begrenzte Anzahl von Wiederholungsversuchen mit exponentiellem Backoff und Jitter, idealerweise bezogen auf eine idempotente Operation, sodass eine doppelte Anfrage harmlos ist. Dauerhafte Fehler (ungültige Argumente, Authentifizierungsfehler, Kontraktverletzungen) überspringen Wiederholungsversuche und führen direkt zu einer Alternative: einem anderen Tool, einem einfacheren Plan oder einer Fallback-Antwort.\n\nWenn der Fortschritt entscheidend ist, speichern Sie den Zustand über Checkpoints, damit der Agent beim letzten erfolgreichen Schritt fortfahren kann, anstatt neu zu starten. Wenn ein Schritt bereits Nebeneffekte erzeugt hat und nicht fortgesetzt werden kann, führen Sie kompensierende Aktionen aus, um den Zustand zurückzusetzen – stornieren Sie die Bestellung, löschen Sie den Entwurf, buchen Sie die Gebühr zurück. Schließen Sie die gesamte Schleife in harte Budgets ein: maximale Versuche, maximale Echtzeit (Wall-Clock Time) und eine Kostenobergrenze, ergänzt durch einen Circuit Breaker, der Aufrufe an eine dauerhaft fehlerhafte Abhängigkeit stoppt. Wenn alle Recovery-Optionen ausgeschöpft sind, eskalieren Sie sauber – leiten Sie den Fehler an einen Menschen oder einen überwachenden Agenten mit ausreichend Kontext weiter, anstatt Vermutungen anzustellen."
+      ],
+      "components": [
+        "Validierungs-Gate",
+        "Fehler-Klassifizierer",
+        "Begrenzter Wiederholungsversuch mit Backoff",
+        "Fallback-Router",
+        "Checkpoint-Speicher",
+        "Kompensations-Handler"
+      ],
+      "benefits": [
+        "Der Agent liefert ein unvollständiges Ergebnis oder ein Fallback-Ergebnis sowie einen klaren Status, anstatt abzustürzen oder mit scheinbarer Gewissheit unbrauchbare Daten zurückzugeben.",
+        "Harte Limits für Versuche, Zeit und Kosten verhindern, dass unkontrollierte Wiederholungsschleifen Budget für eine fehlerhafte Abhängigkeit verbrauchen.",
+        "Kompensierende Aktionen und Checkpoints halten externe Systeme und den Aufgabenstatus konsistent, wenn ein Workflow mittendrin abbricht.",
+        "Wenn die Recovery fehlschlägt, übergibt der Agent die Aufgabe mit ausreichend Kontext, damit ein Mensch oder ein Supervisor handeln kann, anstatt Vermutungen anzustellen."
+      ],
+      "risks": [
+        "Aggressive Wiederholungsversuche bei einer überlasteten Abhängigkeit erhöhen die Last und können eine kurze Störung in einen kaskadierenden Ausfall verwandeln.",
+        "Der Wiederholungsversuch einer nicht-idempotenten Aktion kann zu doppelten Abbuchungen, doppeltem Senden oder doppelten Schreibvorgängen führen, wenn keine Request-Keys verwendet werden.",
+        "Zu voreilige Fallbacks können systematische Fehler verbergen, sodass ein defektes Tool fehlerfrei erscheint, während es im Hintergrund jedes Ergebnis verschlechtert.",
+        "Rollback-Logik ist oft unvollständig oder schlägt selbst fehl, was Systeme in einem inkonsistenten Zustand hinterlässt, der schwer zu erkennen ist."
+      ],
+      "whenNot": [
+        "Bei risikoarmen Prompts ohne Nebeneffekte und ohne mehrstufigen Plan reicht ein einfaches Wiederholen-oder-Abbrechen aus; eine vollständige Recovery-Infrastruktur bedeutet hier nur unnötigen Overhead.",
+        "Wenn ein Fehler bedeutet, dass die Aufgabe tatsächlich unmöglich ist (fehlende Berechtigung, veraltete API), verschwenden Wiederholungsversuche und Fallbacks nur Zeit – brechen Sie schnell ab (Fail-Fast) und eskalieren Sie.",
+        "Wenn ein Nebeneffekt unumkehrbar ist und nicht idempotent gemacht werden kann, führen Sie keine automatischen Wiederholungsversuche durch; fordern Sie stattdessen eine Bestätigung oder eine menschliche Freigabe an."
+      ],
+      "examples": [
+        "Das Such-Tool eines Recherche-Agenten gibt einen 503-Fehler zurück; der Agent versucht es mit Backoff erneut, ist beim dritten Versuch erfolgreich und fährt fort, ohne den Durchlauf abzubrechen.",
+        "Ein Code-Agent generiert JSON, das die Schema-Validierung nicht besteht; das Validierungs-Gate lehnt es ab und fordert das Modell unter Angabe des Fehlers erneut auf (Re-Prompt), anstatt fehlerhafte Daten an nachgelagerte Systeme weiterzugeben.",
+        "Ein Buchungs-Agent reserviert einen Flug, aber der Schritt für das Hotel schlägt dauerhaft fehl; der Kompensations-Handler storniert die Reservierung und eskaliert, anstatt eine halb gebuchte Reise zu hinterlassen."
+      ],
+      "productionEvidence": {
+        "context": "Lokale OpenClaw-Bereitstellung (Single-Operator), beobachtet über 57 Tage (161 Sitzungen / 2.776 Turns), aggregiert aus den eigenen Trajektorien-Traces des Agenten.",
+        "scenario": "Fehler, Abbrüche und Timeouts während autonomer Turns werden durch Retry/Backoff und eine Modell-Fallback-Kette abgefangen, sodass der Agent weiterläuft.",
+        "technology": "retryAsync mit exponentiellem Backoff und Jitter, runWithModelFallback, Abort-Propagierung und Cron-Selbstschutz gegen wiederholte Auslöseschleifen.",
+        "load": "2.942 Terminal-Turns; 52 Fehler, 126 Abbrüche, 120 Timeouts und 31 Prompt-Fehler beobachtet.",
+        "results": "Eine Terminal-Fehlerrate von 1,77 % bei 2.942 Turns; Recovery-Primitive fingen vorübergehende Fehler ab und die Bereitstellung hielt eine Sitzungserfolgsquote von 98,8 %. Lokale Bereitstellung (Single-Operator)."
+      },
+      "kpis": [
+        {
+          "metric": "Recovery-Erfolgsquote",
+          "note": "Anteil der Fehler, die automatisch durch Wiederholungsversuche oder Fallbacks ohne menschliche Hilfe behoben wurden; ein gesunder Wert ist hoch und stabil, ohne unbemerkt abfallenden Trend."
+        },
+        {
+          "metric": "Mittlere Anzahl der Versuche pro erfolgreicher Aufgabe",
+          "note": "Wie viele Versuche für einen Erfolg nötig sind; achten Sie auf einen schleichenden Anstieg, der eher auf eine sich verschlechternde Abhängigkeit als auf eine echte Recovery hindeutet."
+        },
+        {
+          "metric": "Quote unbegrenzter Schleifen / Budgetüberschreitungen",
+          "note": "Wie oft Durchläufe an Wiederholungs-, Zeit- oder Kostenobergrenzen stoßen; dies sollte selten vorkommen, und Spitzen deuten darauf hin, dass Limits oder die Klassifizierung angepasst werden müssen."
+        },
+        {
+          "metric": "Vollständigkeit der Kompensation",
+          "note": "Anteil fehlgeschlagener mehrstufiger Workflows, die in einem konsistenten Zustand enden; das Ziel ist ein vollständiges Rollback ohne verwaiste Nebeneffekte."
+        }
+      ],
+      "failureModes": [
+        "Fehlende oder zu hohe Obergrenzen für Versuche führen dazu, dass der Agent einen dauerhaften Fehler endlos wiederholt, was Kosten verursacht und keinen Fortschritt bringt.",
+        "Die Behandlung eines dauerhaften Fehlers als vorübergehend verschwendet Wiederholungsversuche; die Behandlung eines vorübergehenden Fehlers als dauerhaft führt zu einem zu frühen Aufgeben und löst unnötige Fallbacks aus.",
+        "Ein Fallback-Pfad gibt eine plausible, aber falsche Antwort zurück, ohne zu signalisieren, dass eine Recovery stattgefunden hat, sodass nachgelagerte Konsumenten fehlerhaften Ausgaben vertrauen.",
+        "Der Agent fällt nach einem Schreibvorgang oder einer externen Aktion aus, aber bevor die Kompensation ausgeführt wird, was zu doppelten oder verwaisten Datensätzen führt."
+      ],
+      "lessons": [
+        "Die Entscheidung zwischen Wiederholungsversuch, Fallback und Eskalation hängt von der Unterscheidung zwischen vorübergehenden und dauerhaften Fehlern ab; investieren Sie in eine klare Klassifizierung, bevor Sie Backoff-Kurven optimieren.",
+        "Idempotenz-Keys machen aus einem riskanten Wiederholungsversuch einen sicheren; planen Sie dies von Anfang an ein, anstatt später eine Deduplizierung dranzuflanschen.",
+        "Harte Obergrenzen für Versuche, Zeit und Kosten sind nicht verhandelbar; ein Agent ohne diese Limits wird irgendwann einen Weg finden, endlos zu laufen.",
+        "Protokollieren Sie jeden Wiederholungsversuch, jedes Fallback und jede Kompensation, damit eine unbemerkte Verschlechterung als Metrik sichtbar wird und nicht als überraschender Vorfall."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies vom einfachen Hinzufügen von try/except und einer Wiederholungsschleife?",
+          "a": "Try/except behandelt einen einzelnen Fehler; eine Recovery-Strategie entscheidet, um welche Art von Fehler es sich handelt, und wählt unter harten Budgets zwischen Wiederholungsversuch, Fallback, Rollback und Eskalation. Der Kern liegt in der Kontrolllogik und der Idempotenz, nicht in der Ausnahmebehandlung."
+        },
+        {
+          "q": "Wie viele Wiederholungsversuche sollte ich zulassen?",
+          "a": "Wenige – typischerweise eine niedrige, feste Obergrenze mit exponentiellem Backoff und Jitter, plus separate Zeit- und Kostenobergrenzen. Die genaue Anzahl hängt von der Abhängigkeit ab, aber die Schleife muss immer enden, und dauerhafte Fehler sollten überhaupt nicht wiederholt werden."
+        },
+        {
+          "q": "Was passiert, wenn eine Aktion nicht rückgängig gemacht oder idempotent gestaltet werden kann?",
+          "a": "Führen Sie darüber hinweg keine automatischen Wiederholungsversuche aus. Setzen Sie vor dem unumkehrbaren Schritt einen Checkpoint und eskalieren Sie bei einem Fehler an einen Menschen oder einen überwachenden Agenten, anstatt Vermutungen anzustellen. Unumkehrbarkeit ist ein Signal, langsamer vorzugehen, nicht, es noch intensiver zu versuchen."
+        }
+      ]
+    },
+    "ja": {
+      "name": "リカバリ戦略",
+      "summary": "エージェントに対して、問題が発生した際の明示的な計画を提供します。出力の検証やツールのエラーのキャッチによって失敗を検出し、調整を伴う再試行、代替パスへのフォールバック、部分的なアクションのロールバック、またはエスカレーションを行います。無限ループやコストの急増を防ぐために再試行回数を制限し、アクションを冪等（べきとう）にし、一時的な失敗と永続的な失敗を区別します。目標は、クラッシュやサイレントな誤り（誤った結果をそのまま出力すること）を避け、段階的に機能を縮小（グレースフルデグラデーション）させることです。",
+      "problem": "エージェントは常に失敗に直面します。ツールのタイムアウト、APIのエラー、モデルによる不正な形式の出力、計画の行き詰まり、そして複数ステップのワークフローによる部分的な副作用の残存などです。明示的なリカバリパスがなければ、エージェントは最初のエラーでクラッシュするか、さらに悪いことには、不正なデータに基づいて処理を強行し、自信ありげに誤った結果をサイレントに出力してしまいます。単純な再試行ループは状況を悪化させ、失敗している依存先に負荷をかけ続け、トークンを浪費し、無限に回り続けます。難しいのは、単一のエラーをキャッチすることではなく、それがどのような種類の失敗であるかを判断し、どのアクションをとるのが安全かを決定することです。",
+      "context": "このパターンは、外部ツールの呼び出し、複数ステップの計画の実行、または部分的な完了が発生し得る重要なアクションを実行するすべてのエージェントで使用します。これは、人間がリアルタイムで監視しない長期実行型または自律型のワークフローや、盲目的な再試行によって処理が重複する可能性がある副作用を伴うアクション（支払い、書き込み、メール送信など）において最も重要です。このパターンは、何らかの規約（コントラクト）に照らして出力を検証できること、および少なくとも一部の操作を冪等にできるか、または補償トランザクションを実行できることを前提としています。1回限りの読み取り専用で、リスクの低いプロンプトにはあまり適していません。",
+      "solution": [
+        "リカバリを、エージェントの通常の実行を囲むレイヤーとして、第一級の制御ループとして扱います。すべてのツール呼び出しとモデル出力は検証ゲートを通過します。例外やタイムアウトをキャッチし、出力を信頼する前にスキーマや規約（コントラクト）に照らしてチェックします。失敗した場合は、それを分類します。一時的な失敗（タイムアウト、レート制限、5xxエラーなど）に対しては、指数バックオフとジッターを伴う制限付きの再試行を行います。これは、重複リクエストが無害になるよう、理想的には冪等な操作に対して行います。永続的な失敗（無効な引数、認証エラー、規約違反など）は、再試行をスキップして、別のツール、よりシンプルな計画、またはフォールバック回答などの代替手段に直接移行します。\\n\\n進捗が重要な場合は、状態のチェックポイントを作成し、エージェントが最初からやり直すのではなく、最後に正常だったステップから再開できるようにします。あるステップですでに副作用が発生しており、それ以上進められない場合は、補償アクションを実行してロールバックします（注文のキャンセル、下書きの削除、課金の取り消しなど）。ループ全体を、最大試行回数、最大実時間、コスト上限などの厳格な予算（バジェット）で囲み、失敗し続ける依存先への呼び出しを停止するサーキットブレーカーも導入します。すべてのリカバリ手段が尽きた場合は、推測で動くのではなく、対応に必要な十分なコンテキストとともに、人間または監視エージェントに失敗を明確にエスカレーションします。"
+      ],
+      "components": [
+        "検証ゲート",
+        "失敗分類器",
+        "バックオフを伴う制限付き再試行",
+        "フォールバックルーター",
+        "チェックポイントストア",
+        "補償ハンドラー"
+      ],
+      "benefits": [
+        "エージェントは、クラッシュしたり自信ありげにゴミデータを返したりする代わりに、部分的な結果やフォールバック結果、および明確なステータスを出力します。",
+        "試行回数、時間、コストに対する厳格な制限により、制御不能な再試行ループが失敗している依存先に対して予算を浪費するのを防ぎます。",
+        "補償アクションとチェックポイントにより、ワークフローが途中で停止した場合でも、外部システムとタスクの状態の一貫性が維持されます。",
+        "リカバリに失敗した場合、エージェントは推測で動くのではなく、人間や監視者が対応するために十分なコンテキストを提供して引き継ぎます。"
+      ],
+      "risks": [
+        "負荷がかかっている依存先に対する過剰な再試行は負荷を増大させ、一時的な不具合を連鎖的なシステム障害へと発展させる可能性があります。",
+        "リクエストキーを使用しない場合、冪等ではないアクションを再試行すると、二重課金、二重送信、または二重書き込みが発生する可能性があります。",
+        "性急すぎるフォールバックはシステム的な障害を隠蔽してしまうため、壊れたツールが正常に動作しているように見えながら、裏ですべての結果の品質を低下させる原因になります。",
+        "ロールバックロジックは不完全であることが多く、それ自体が失敗することもあるため、検出が困難な不整合な状態にシステムが取り残される可能性があります。"
+      ],
+      "whenNot": [
+        "副作用がなく、複数ステップの計画もない低リスクのプロンプトの場合、単純な「再試行または失敗」で十分であり、完全なリカバリ機構はオーバーヘッドになります。",
+        "失敗の原因がタスクの実行が本質的に不可能であること（権限不足、非推奨のAPIなど）である場合、再試行やフォールバックは時間の無駄です。速やかに失敗（フェイルファスト）させ、エスカレーションしてください。",
+        "副作用が不可逆であり、冪等にできない場合は、それをまたぐ自動再試行は行わないでください。代わりに、確認や人間の承認を求めるようにします。"
+      ],
+      "examples": [
+        "調査エージェントの検索ツールが503エラーを返した際、エージェントはバックオフを伴う再試行を行い、3回目の試行で成功し、実行をクラッシュさせることなく処理を継続します。",
+        "コード生成エージェントがスキーマ検証に失敗するJSONを生成した際、検証ゲートはそれを拒否し、不正な形式のデータを後続の処理に渡す代わりに、エラー内容を含めて再プロンプトを実行します。",
+        "予約エージェントがフライトを予約したものの、ホテルの予約ステップで永続的な失敗が発生した際、補償ハンドラーは中途半端な予約状態のまま放置するのではなく、フライトの予約をキャンセルしてエスカレーションします。"
+      ],
+      "productionEvidence": {
+        "context": "57日間にわたり観察されたシングルオペレーター、ローカルファーストのOpenClawデプロイメント（161セッション / 2,776ターン）。エージェント自身のトラジェクトリトレースから集計。",
+        "scenario": "自律的なターンにおけるエラー、中断、タイムアウトは、再試行/バックオフおよびモデルフォールバックチェーンによって吸収され、エージェントは実行を継続します。",
+        "technology": "指数バックオフとジッターを伴う retryAsync、runWithModelFallback、中断（abort）の伝播、および再実行ループに対するcron自己保護。",
+        "load": "2,942回のターミナルターン。52件のエラー、126件の中断、120件のタイムアウト、31件のプロンプトエラーを観測。",
+        "results": "2,942ターン全体で1.77%のターミナルエラー率。リカバリプリミティブが一時的な失敗を吸収し、デプロイメントは98.8%のセッション成功率を維持しました。シングルオペレーター、ローカルファーストのデプロイメント。"
+      },
+      "kpis": [
+        {
+          "metric": "リカバリ成功率",
+          "note": "人間の介入なしに、再試行またはフォールバックによって自動的に解決された失敗の割合。健全な状態では、この値は高く安定しており、気づかないうちに低下することはありません。"
+        },
+        {
+          "metric": "成功タスクあたりの平均試行回数",
+          "note": "成功するまでに必要な試行回数。この値の増加に注意してください。増加している場合は、真のリカバリではなく、依存先の品質低下を示唆しています。"
+        },
+        {
+          "metric": "無限ループ/予算超過率",
+          "note": "実行が再試行、時間、またはコストの上限に達する頻度。これは稀であるべきであり、急増している場合は制限値や分類の調整が必要です。"
+        },
+        {
+          "metric": "補償完了率",
+          "note": "失敗した複数ステップのワークフローのうち、一貫した状態で終了した割合。目標は、孤立した副作用を残さない完全なロールバックです。"
+        }
+      ],
+      "failureModes": [
+        "試行回数の上限がない、または高すぎる場合、エージェントは永続的な失敗を無限に再試行し続け、コストを浪費して一向に進捗が得られなくなります。",
+        "永続的なエラーを一時的なものとして扱うと再試行が無駄になり、一時的なエラーを永続的なものとして扱うと、早期に諦めすぎて不要なフォールバックを誘発します。",
+        "フォールバックパスが、リカバリが発生したというシグナルなしに、もっともらしいが誤った回答を返すと、後続のコンシューマーがその不正な出力を信頼してしまいます。",
+        "書き込みや外部アクションの後、補償処理が実行される前にエージェントが失敗し、重複したレコードや宙に浮いたレコードが残ってしまいます。"
+      ],
+      "lessons": [
+        "再試行、フォールバック、エスカレーションの決定は、一時的なものか永続的なものかによって決まります。バックオフ曲線を調整する前に、明確な分類に投資してください。",
+        "冪等性キーは、リスクのある再試行を安全なものに変えます。後から重複排除を付け足すのではなく、最初からそれを考慮して設計してください。",
+        "試行回数、時間、コストに対する厳格な上限設定は必須です。これらがないエージェントは、最終的に無限に実行され続ける方法を見つけ出してしまいます。",
+        "すべての再試行、フォールバック、補償処理をログに記録し、サイレントな品質低下が突然のインシデントではなく、メトリクスとして表面化するようにします。"
+      ],
+      "faqs": [
+        {
+          "q": "単に try/except と再試行ループを追加することと、何が違うのですか？",
+          "a": "Try/except は単一のエラーを処理します。一方、リカバリ戦略は、失敗の種類を判断し、厳格な予算制限のもとで再試行、フォールバック、ロールバック、エスカレーションの中から選択します。本質は例外処理ではなく、制御ロジックと冪等性にあります。"
+        },
+        {
+          "q": "再試行は何回まで許可すべきですか？",
+          "a": "少数です。通常は、指数バックオフとジッターを伴う小さな固定上限を設定し、それとは別に時間とコストの上限を設けます。正確な回数は依存先によって異なりますが、ループは必ず終了する必要があり、永続的な失敗に対しては一切再試行すべきではありません。"
+        },
+        {
+          "q": "アクションを取り消すことも、冪等にすることもできない場合はどうすればよいですか？",
+          "a": "そのアクションをまたぐ自動再試行は行わないでください。不可逆なステップの前にチェックポイントを設定し、失敗した場合は推測で動くのではなく、人間または監視エージェントにエスカレーションします。不可逆性とは、再試行を強化するのではなく、処理を慎重に進めるべきというシグナルです。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "恢复策略",
+      "summary": "为智能体提供明确的应对故障的计划。通过验证输出和捕获工具错误来检测故障；然后通过调整进行重试、回退到备用路径、回滚部分操作或进行升级。限制重试次数以避免失控循环和成本超支，使操作具备幂等性，并区分瞬态故障与永久故障。其目标是实现优雅降级，而不是崩溃或产生隐蔽的错误结果。",
+      "problem": "智能体经常发生故障：工具超时、API 返回错误、模型输出格式错误、计划陷入死胡同，以及多步骤工作流留下部分副作用。如果没有明确的恢复路径，智能体要么在遇到第一个错误时崩溃，要么（更糟糕的是）继续使用错误的数据，并默默地产生看似笃定实则错误的输出。幼稚的重试循环会让情况变得更糟，不断冲击发生故障的依赖项、消耗 Token 并陷入无限循环。难点不在于捕获单个错误，而在于判断故障的类型以及采取何种应对措施才是安全的。",
+      "context": "在任何调用外部工具、运行多步骤计划或执行可能部分完成的重要操作的智能体中，都可以使用此模式。它对于无人实时监控的长期运行或自主工作流，以及具有副作用的操作（支付、写入、发送电子邮件，其中盲目重试可能会导致重复工作）最为重要。它假设您可以根据某种契约验证输出，并且至少某些操作可以实现幂等或得到补偿。对于单次、只读、低风险的提示词，该模式的关联性较低。",
+      "solution": [
+        "将恢复视为围绕智能体正常执行构建的一等控制循环。每次工具调用和模型输出都要通过验证门：捕获异常和超时，并在信任输出之前根据 Schema 或契约对其进行检查。发生故障时，对其进行分类。瞬态故障（超时、速率限制、5xx 错误）将通过指数退避和抖动进行有界重试，最好是针对幂等操作，这样重复请求就是无害的。永久故障（无效参数、身份验证错误、契约违规）则跳过重试，直接转向备用方案：不同的工具、更简单的计划或回退答案。\\n\\n当进度至关重要时，对状态进行检查点记录，以便智能体可以从上一个正常步骤恢复，而不是重新启动。当某个步骤已经产生副作用且无法继续时，运行补偿操作以进行回滚——取消订单、删除草稿、撤销收费。将整个循环封装在硬性预算中：最大尝试次数、最大实际运行时间以及成本上限，外加一个熔断器，用于停止调用持续失败的依赖项。当所有恢复选项都耗尽时，进行干净的升级——将故障呈现给人类或主管智能体，并提供足够的上下文以便其采取行动，而不是凭空猜测。"
+      ],
+      "components": [
+        "验证门",
+        "故障分类器",
+        "带退避的有界重试",
+        "回退路由",
+        "检查点存储",
+        "补偿处理器"
+      ],
+      "benefits": [
+        "智能体会产生部分或回退结果以及清晰的状态，而不是崩溃或返回看似笃定实则是垃圾的信息。",
+        "硬性的尝试次数、时间和成本限制可以阻止失控的重试循环在发生故障的依赖项上烧掉预算。",
+        "当工作流中途停止时，补偿操作和检查点可以保持外部系统和任务状态的一致性。",
+        "当恢复失败时，智能体在移交工作时会提供足够的上下文，以便人类或主管采取行动，而不是凭空猜测。"
+      ],
+      "risks": [
+        "对处于困境的依赖项进行激进的重试会增加负载，并可能将短暂的波动演变成级联故障。",
+        "如果不使用请求 Key，重试非幂等操作可能会导致重复收费、重复发送或重复写入。",
+        "过于急切的回退可能会掩盖系统性故障，使损坏的工具看起来正常，同时却在悄悄降低每个结果的质量。",
+        "回滚逻辑通常不完整，或者其自身也会失败，从而使系统处于难以检测的不一致状态。"
+      ],
+      "whenNot": [
+        "对于没有副作用且没有多步骤计划的低风险提示词，简单的“重试或失败”就足够了；完整的恢复机制反而是额外开销。",
+        "当故障意味着任务确实无法完成时（例如缺少权限、API 已弃用），重试和回退只会浪费时间——应快速失败并进行升级。",
+        "如果某种副作用是不可逆的，且无法实现幂等，请勿跨越该步骤进行自动重试；相反，应要求确认或人工审批。"
+      ],
+      "examples": [
+        "研究智能体的搜索工具返回 503 错误；智能体通过退避进行重试，在第三次尝试时成功，并在不导致运行崩溃的情况下继续执行。",
+        "代码智能体生成的 JSON 未通过 Schema 验证；验证门将其拒绝，并带上错误信息重新进行提示，而不是将格式错误的数据传递给下游。",
+        "预订智能体预订了机票，但酒店预订步骤发生永久性失败；补偿处理器会取消机票预订并进行升级，而不是留下一个只预订了一半的行程。"
+      ],
+      "productionEvidence": {
+        "context": "在 57 天内（161 个会话 / 2,776 轮）观察到的单操作员、本地优先的 OpenClaw 部署，数据从智能体自身的轨迹追踪中聚合而来。",
+        "scenario": "自主轮次期间的错误、中止和超时会被重试/退避和模型回退链吸收，从而使智能体保持运行。",
+        "technology": "具有指数退避和抖动的 retryAsync、runWithModelFallback、中止传播以及针对重复触发循环的 cron 自我保护。",
+        "load": "观察到 2,942 个终端轮次；其中包含 52 个错误、126 个中止、120 个超时和 31 个提示词错误。",
+        "results": "在 2,942 轮中，终端错误率为 1.77%；恢复原语吸收了瞬态故障，部署保持了 98.8% 的会话成功率。单操作员本地优先部署。"
+      },
+      "kpis": [
+        {
+          "metric": "恢复成功率",
+          "note": "在没有人工帮助的情况下，通过重试或回退自动解决的故障比例；健康的值应当较高且稳定，没有无声的下降趋势。"
+        },
+        {
+          "metric": "每个成功任务的平均尝试次数",
+          "note": "成功需要尝试多少次；注意观察次数的攀升，这通常预示着依赖项性能下降，而非真正的恢复。"
+        },
+        {
+          "metric": "无限循环/预算超支率",
+          "note": "运行达到重试、时间或成本上限的频率；这应该是罕见的，出现峰值意味着限制或分类需要调整。"
+        },
+        {
+          "metric": "补偿完整性",
+          "note": "以一致状态结束的失败多步骤工作流的比例；目标是完全回滚，不留下孤立的副作用。"
+        }
+      ],
+      "failureModes": [
+        "缺失或过高的尝试次数上限会导致智能体无限期地重试永久性故障，从而烧掉成本且永远无法取得进展。",
+        "将永久性错误视为瞬态错误会浪费重试次数；将瞬态错误视为永久性错误则会过早放弃并触发不必要的回退。",
+        "回退路径返回了一个看似合理但错误的答案，且没有发出已发生恢复的信号，导致下游使用者信任了错误的输出。",
+        "智能体在写入或执行外部操作之后、但在运行补偿之前发生故障，从而留下重复或悬空的记录。"
+      ],
+      "lessons": [
+        "重试/回退/升级的决策取决于故障是瞬态的还是永久性的；在调整退避曲线之前，应先投入精力进行清晰的分类。",
+        "幂等 Key 可以将高风险的重试转化为安全的重试；应在前期进行设计，而不是在后期才强行加入去重机制。",
+        "对尝试次数、时间和成本的硬性限制是不可妥协的；没有这些限制的智能体最终总会找到一种无限运行下去的方法。",
+        "记录每一次重试、回退和补偿，以便将隐蔽的降级转化为可见的指标，而不是突发的意外事件。"
+      ],
+      "faqs": [
+        {
+          "q": "这与仅仅添加 try/except 和重试循环有什么区别？",
+          "a": "Try/except 只能处理单个错误；而恢复策略则负责判断故障的类型，并在硬性预算下在重试、回退、回滚和升级之间做出选择。其实质在于控制逻辑和幂等性，而非异常处理本身。"
+        },
+        {
+          "q": "我应该允许多少次重试？",
+          "a": "很少——通常是一个较小的固定上限，配合指数退避和抖动，外加独立的时间和成本上限。确切的次数取决于依赖项，但循环必须始终能够终止，且根本不应该对永久性故障进行重试。"
+        },
+        {
+          "q": "如果某个操作无法撤销或无法实现幂等怎么办？",
+          "a": "不要跨越该步骤进行自动重试。在不可逆步骤之前记录检查点，并在失败时升级给人类或主管智能体，而不是凭空猜测。不可逆性是放慢速度的信号，而不是加大重试力度的信号。"
+        }
+      ]
     }
   }
 }

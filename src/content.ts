@@ -54,7 +54,7 @@ function resolveContentRoot(): string {
 export const CONTENT_ROOT = resolveContentRoot();
 
 export type Domain = "knowledge" | "patterns" | "architectures" | "governance";
-export type Locale = "en" | "es" | "pt";
+export type Locale = "en" | "es" | "pt" | "fr" | "de" | "ja" | "zh";
 
 export interface Entry {
   id?: string;
@@ -125,7 +125,7 @@ export function loadHandbook(): HandbookEntry[] {
   return fs
     .readdirSync(dir)
     // `.es.md` / `.pt.md` are translations of a chapter, not chapters.
-    .filter((f) => f.endsWith(".md") && !/\.(es|pt)\.md$/.test(f))
+    .filter((f) => f.endsWith(".md") && !/\.(es|pt|fr|de|ja|zh)\.md$/.test(f))
     .map((f) => {
       const { data, body } = parseFrontmatter(fs.readFileSync(path.join(dir, f), "utf8"));
       const str = (v: unknown) => (typeof v === "string" ? v : undefined);
@@ -135,7 +135,7 @@ export function loadHandbook(): HandbookEntry[] {
       const locales: HandbookEntry["locales"] = {
         en: { title: str(data.title) ?? f, summary: str(data.summary), body },
       };
-      for (const loc of ["es", "pt"] as const) {
+      for (const loc of ["es", "pt", "fr", "de", "ja", "zh"] as const) {
         const tf = path.join(dir, f.replace(/\.md$/, `.${loc}.md`));
         if (!fs.existsSync(tf)) continue;
         const t = parseFrontmatter(fs.readFileSync(tf, "utf8"));

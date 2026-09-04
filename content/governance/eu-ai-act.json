@@ -8,17 +8,42 @@
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["paper", "industry_observation"]
+    "sourceType": [
+      "paper",
+      "industry_observation"
+    ]
   },
-  "frameworks": ["EU AI Act"],
-  "patterns": ["human-approval-gate"],
-  "knowledge": ["ai-governance", "guardrails", "human-in-the-loop", "ai-observability"],
-  "references": [
-    { "title": "European Union — Artificial Intelligence Act (Regulation (EU) 2024/1689)", "url": "https://artificialintelligenceact.eu/" },
-    { "title": "EU AI Act — Article 14 (Human oversight)", "url": "https://artificialintelligenceact.eu/article/14/" },
-    { "title": "European Commission — AI Act overview", "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" }
+  "frameworks": [
+    "EU AI Act"
   ],
-  "related": ["iso-42001", "nist-ai-rmf", "agentic-ai-governance-checklist"],
+  "patterns": [
+    "human-approval-gate"
+  ],
+  "knowledge": [
+    "ai-governance",
+    "guardrails",
+    "human-in-the-loop",
+    "ai-observability"
+  ],
+  "references": [
+    {
+      "title": "European Union — Artificial Intelligence Act (Regulation (EU) 2024/1689)",
+      "url": "https://artificialintelligenceact.eu/"
+    },
+    {
+      "title": "EU AI Act — Article 14 (Human oversight)",
+      "url": "https://artificialintelligenceact.eu/article/14/"
+    },
+    {
+      "title": "European Commission — AI Act overview",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+    }
+  ],
+  "related": [
+    "iso-42001",
+    "nist-ai-rmf",
+    "agentic-ai-governance-checklist"
+  ],
   "locales": {
     "en": {
       "name": "EU AI Act",
@@ -34,11 +59,26 @@
         "Phased application with significant penalties for non-compliance."
       ],
       "controls": [
-        { "control": "Risk classification", "note": "Determine each system's tier first — it decides every other obligation. Misclassifying a high-risk system is the costliest early mistake." },
-        { "control": "Human oversight (Art. 14)", "note": "High-risk systems must be overseeable by a person who can intervene or stop them — the regulatory basis for human-approval gates." },
-        { "control": "Technical documentation & logging", "note": "Maintain documentation and automatic event logs so the system is traceable and auditable across its lifecycle." },
-        { "control": "Transparency to users", "note": "Disclose AI interaction and label AI-generated or manipulated content (deepfakes)." },
-        { "control": "Post-market monitoring", "note": "Monitor performance in the field and report serious incidents; governance does not end at deployment." }
+        {
+          "control": "Risk classification",
+          "note": "Determine each system's tier first — it decides every other obligation. Misclassifying a high-risk system is the costliest early mistake."
+        },
+        {
+          "control": "Human oversight (Art. 14)",
+          "note": "High-risk systems must be overseeable by a person who can intervene or stop them — the regulatory basis for human-approval gates."
+        },
+        {
+          "control": "Technical documentation & logging",
+          "note": "Maintain documentation and automatic event logs so the system is traceable and auditable across its lifecycle."
+        },
+        {
+          "control": "Transparency to users",
+          "note": "Disclose AI interaction and label AI-generated or manipulated content (deepfakes)."
+        },
+        {
+          "control": "Post-market monitoring",
+          "note": "Monitor performance in the field and report serious incidents; governance does not end at deployment."
+        }
       ],
       "checklist": [
         "Inventory your AI systems and classify each by risk tier.",
@@ -61,9 +101,18 @@
         "A GPAI provider publishing model documentation and a training-data summary."
       ],
       "faqs": [
-        { "q": "Does the EU AI Act apply to companies outside the EU?", "a": "Yes. It applies to providers and deployers whose AI systems are placed on the EU market or whose output is used in the EU, regardless of where the company is established." },
-        { "q": "What is a 'high-risk' AI system?", "a": "Systems used in sensitive areas (e.g. employment, credit, critical infrastructure, certain biometrics) or as safety components of regulated products. They carry the strictest obligations short of prohibition." },
-        { "q": "How does it relate to human-in-the-loop?", "a": "Article 14 requires effective human oversight for high-risk systems — a person able to understand, intervene in or stop the system. The human-approval-gate pattern is one way to implement it." }
+        {
+          "q": "Does the EU AI Act apply to companies outside the EU?",
+          "a": "Yes. It applies to providers and deployers whose AI systems are placed on the EU market or whose output is used in the EU, regardless of where the company is established."
+        },
+        {
+          "q": "What is a 'high-risk' AI system?",
+          "a": "Systems used in sensitive areas (e.g. employment, credit, critical infrastructure, certain biometrics) or as safety components of regulated products. They carry the strictest obligations short of prohibition."
+        },
+        {
+          "q": "How does it relate to human-in-the-loop?",
+          "a": "Article 14 requires effective human oversight for high-risk systems — a person able to understand, intervene in or stop the system. The human-approval-gate pattern is one way to implement it."
+        }
       ]
     },
     "es": {
@@ -80,11 +129,26 @@
         "Aplicación escalonada con sanciones significativas por incumplimiento."
       ],
       "controls": [
-        { "control": "Clasificación de riesgo", "note": "Determina primero el nivel de cada sistema: decide todas las demás obligaciones. Clasificar mal un sistema de alto riesgo es el error temprano más costoso." },
-        { "control": "Supervisión humana (Art. 14)", "note": "Los sistemas de alto riesgo deben poder ser supervisados por una persona que pueda intervenir o detenerlos: la base regulatoria de las puertas de aprobación humana." },
-        { "control": "Documentación técnica y registros", "note": "Mantén documentación y registros automáticos de eventos para que el sistema sea trazable y auditable durante su ciclo de vida." },
-        { "control": "Transparencia hacia el usuario", "note": "Revela la interacción con IA y etiqueta el contenido generado o manipulado por IA (deepfakes)." },
-        { "control": "Vigilancia poscomercialización", "note": "Monitoriza el rendimiento en el campo y reporta incidentes graves; la gobernanza no termina en el despliegue." }
+        {
+          "control": "Clasificación de riesgo",
+          "note": "Determina primero el nivel de cada sistema: decide todas las demás obligaciones. Clasificar mal un sistema de alto riesgo es el error temprano más costoso."
+        },
+        {
+          "control": "Supervisión humana (Art. 14)",
+          "note": "Los sistemas de alto riesgo deben poder ser supervisados por una persona que pueda intervenir o detenerlos: la base regulatoria de las puertas de aprobación humana."
+        },
+        {
+          "control": "Documentación técnica y registros",
+          "note": "Mantén documentación y registros automáticos de eventos para que el sistema sea trazable y auditable durante su ciclo de vida."
+        },
+        {
+          "control": "Transparencia hacia el usuario",
+          "note": "Revela la interacción con IA y etiqueta el contenido generado o manipulado por IA (deepfakes)."
+        },
+        {
+          "control": "Vigilancia poscomercialización",
+          "note": "Monitoriza el rendimiento en el campo y reporta incidentes graves; la gobernanza no termina en el despliegue."
+        }
       ],
       "checklist": [
         "Inventaría tus sistemas de IA y clasifica cada uno por nivel de riesgo.",
@@ -107,9 +171,18 @@
         "Un proveedor de GPAI que publica la documentación del modelo y un resumen de los datos de entrenamiento."
       ],
       "faqs": [
-        { "q": "¿El Reglamento aplica a empresas fuera de la UE?", "a": "Sí. Aplica a proveedores y responsables del despliegue cuyos sistemas de IA se comercialicen en el mercado de la UE o cuya salida se use en la UE, con independencia de dónde esté la empresa." },
-        { "q": "¿Qué es un sistema de IA de 'alto riesgo'?", "a": "Sistemas usados en ámbitos sensibles (p. ej. empleo, crédito, infraestructuras críticas, ciertos usos biométricos) o como componentes de seguridad de productos regulados. Tienen las obligaciones más estrictas sin llegar a la prohibición." },
-        { "q": "¿Cómo se relaciona con el human-in-the-loop?", "a": "El Artículo 14 exige supervisión humana efectiva para los sistemas de alto riesgo: una persona capaz de entender, intervenir o detener el sistema. El patrón de puerta de aprobación humana es una forma de implementarlo." }
+        {
+          "q": "¿El Reglamento aplica a empresas fuera de la UE?",
+          "a": "Sí. Aplica a proveedores y responsables del despliegue cuyos sistemas de IA se comercialicen en el mercado de la UE o cuya salida se use en la UE, con independencia de dónde esté la empresa."
+        },
+        {
+          "q": "¿Qué es un sistema de IA de 'alto riesgo'?",
+          "a": "Sistemas usados en ámbitos sensibles (p. ej. empleo, crédito, infraestructuras críticas, ciertos usos biométricos) o como componentes de seguridad de productos regulados. Tienen las obligaciones más estrictas sin llegar a la prohibición."
+        },
+        {
+          "q": "¿Cómo se relaciona con el human-in-the-loop?",
+          "a": "El Artículo 14 exige supervisión humana efectiva para los sistemas de alto riesgo: una persona capaz de entender, intervenir o detener el sistema. El patrón de puerta de aprobación humana es una forma de implementarlo."
+        }
       ]
     },
     "pt": {
@@ -126,11 +199,26 @@
         "Aplicação faseada com sanções significativas por descumprimento."
       ],
       "controls": [
-        { "control": "Classificação de risco", "note": "Determine primeiro o nível de cada sistema: ele decide todas as demais obrigações. Classificar mal um sistema de alto risco é o erro inicial mais custoso." },
-        { "control": "Supervisão humana (Art. 14)", "note": "Os sistemas de alto risco devem poder ser supervisionados por uma pessoa que possa intervir ou pará-los: a base regulatória dos portões de aprovação humana." },
-        { "control": "Documentação técnica e registros", "note": "Mantenha documentação e registros automáticos de eventos para que o sistema seja rastreável e auditável ao longo do seu ciclo de vida." },
-        { "control": "Transparência ao usuário", "note": "Revele a interação com IA e rotule o conteúdo gerado ou manipulado por IA (deepfakes)." },
-        { "control": "Vigilância pós-mercado", "note": "Monitore o desempenho em campo e reporte incidentes graves; a governança não termina na implantação." }
+        {
+          "control": "Classificação de risco",
+          "note": "Determine primeiro o nível de cada sistema: ele decide todas as demais obrigações. Classificar mal um sistema de alto risco é o erro inicial mais custoso."
+        },
+        {
+          "control": "Supervisão humana (Art. 14)",
+          "note": "Os sistemas de alto risco devem poder ser supervisionados por uma pessoa que possa intervir ou pará-los: a base regulatória dos portões de aprovação humana."
+        },
+        {
+          "control": "Documentação técnica e registros",
+          "note": "Mantenha documentação e registros automáticos de eventos para que o sistema seja rastreável e auditável ao longo do seu ciclo de vida."
+        },
+        {
+          "control": "Transparência ao usuário",
+          "note": "Revele a interação com IA e rotule o conteúdo gerado ou manipulado por IA (deepfakes)."
+        },
+        {
+          "control": "Vigilância pós-mercado",
+          "note": "Monitore o desempenho em campo e reporte incidentes graves; a governança não termina na implantação."
+        }
       ],
       "checklist": [
         "Inventarie seus sistemas de IA e classifique cada um por nível de risco.",
@@ -153,9 +241,298 @@
         "Um fornecedor de GPAI que publica a documentação do modelo e um resumo dos dados de treinamento."
       ],
       "faqs": [
-        { "q": "O Regulamento se aplica a empresas fora da UE?", "a": "Sim. Aplica-se a fornecedores e implantadores cujos sistemas de IA sejam comercializados no mercado da UE ou cuja saída seja usada na UE, independentemente de onde a empresa esteja." },
-        { "q": "O que é um sistema de IA de 'alto risco'?", "a": "Sistemas usados em áreas sensíveis (ex.: emprego, crédito, infraestrutura crítica, certos usos biométricos) ou como componentes de segurança de produtos regulados. Têm as obrigações mais estritas aquém da proibição." },
-        { "q": "Como se relaciona com o human-in-the-loop?", "a": "O Artigo 14 exige supervisão humana efetiva para os sistemas de alto risco: uma pessoa capaz de entender, intervir ou parar o sistema. O padrão de portão de aprovação humana é uma forma de implementá-lo." }
+        {
+          "q": "O Regulamento se aplica a empresas fora da UE?",
+          "a": "Sim. Aplica-se a fornecedores e implantadores cujos sistemas de IA sejam comercializados no mercado da UE ou cuja saída seja usada na UE, independentemente de onde a empresa esteja."
+        },
+        {
+          "q": "O que é um sistema de IA de 'alto risco'?",
+          "a": "Sistemas usados em áreas sensíveis (ex.: emprego, crédito, infraestrutura crítica, certos usos biométricos) ou como componentes de segurança de produtos regulados. Têm as obrigações mais estritas aquém da proibição."
+        },
+        {
+          "q": "Como se relaciona com o human-in-the-loop?",
+          "a": "O Artigo 14 exige supervisão humana efetiva para os sistemas de alto risco: uma pessoa capaz de entender, intervir ou parar o sistema. O padrão de portão de aprovação humana é uma forma de implementá-lo."
+        }
+      ]
+    },
+    "fr": {
+      "name": "EU AI Act",
+      "summary": "L'EU AI Act est la législation complète de l'Union européenne sur l'intelligence artificielle, basée sur le risque. Il classe les systèmes d'IA en différents niveaux de risque — inacceptable (interdit), haut risque (obligations strictes), risque limité (devoirs de transparence) et risque minimal — et ajoute des obligations spécifiques pour les modèles d'IA à usage général. Il s'applique de manière extraterritoriale à quiconque met sur le marché de l'UE des systèmes d'IA et entre en vigueur de manière progressive sur plusieurs années, avec des sanctions pouvant atteindre jusqu'à 7 % du chiffre d'affaires annuel mondial pour les infractions les plus graves.",
+      "definition": "L'EU AI Act est un règlement européen horizontal qui encadre l'IA par niveau de risque, imposant aux fournisseurs et aux déployeurs des obligations proportionnelles au risque qu'un système d'IA présente pour la santé, la sécurité et les droits fondamentaux.",
+      "scope": "Les fournisseurs et déployeurs qui mettent sur le marché de l'UE des systèmes d'IA ou des modèles d'IA à usage général, ou dont les résultats sont utilisés dans l'UE — quel que soit leur lieu d'établissement. Certains usages (par exemple, purement personnels ou certaines recherches) sont hors du champ d'application.",
+      "keyPoints": [
+        "Niveaux basés sur le risque : inacceptable (interdit), haut risque, risque limité (transparence), risque minimal.",
+        "Les pratiques interdites incluent la notation sociale ainsi que certains usages biométriques et de manipulation.",
+        "Les systèmes à haut risque requièrent une gestion des risques, une gouvernance des données, une documentation technique, une journalisation, une surveillance humaine, de la précision/robustesse et un suivi après commercialisation.",
+        "Les modèles d'IA à usage général (GPAI) comportent leurs propres obligations de transparence et, pour les modèles à risque systémique, des obligations supplémentaires.",
+        "Devoirs de transparence : les utilisateurs doivent être informés lorsqu'ils interagissent avec une IA, et les contenus synthétiques doivent être marqués.",
+        "Application progressive avec des sanctions importantes en cas de non-conformité."
+      ],
+      "controls": [
+        {
+          "control": "Classification des risques",
+          "note": "Déterminez d'abord le niveau de risque de chaque système — il conditionne toutes les autres obligations. Une mauvaise classification d'un système à haut risque est l'erreur initiale la plus coûteuse."
+        },
+        {
+          "control": "Surveillance humaine (Art. 14)",
+          "note": "Les systèmes à haut risque doivent pouvoir être surveillés par une personne capable d'intervenir ou de les arrêter — le fondement réglementaire des jalons d'approbation humaine."
+        },
+        {
+          "control": "Documentation technique et journalisation",
+          "note": "Maintenez la documentation et les journaux d'événements automatiques afin que le système soit traçable et auditable tout au long de son cycle de vie."
+        },
+        {
+          "control": "Transparence envers les utilisateurs",
+          "note": "Divulguez l'interaction avec l'IA et étiquetez les contenus générés ou manipulés par l'IA (deepfakes)."
+        },
+        {
+          "control": "Suivi après commercialisation",
+          "note": "Surveillez les performances sur le terrain et signalez les incidents graves ; la gouvernance ne s'arrête pas au déploiement."
+        }
+      ],
+      "checklist": [
+        "Inventoriez vos systèmes d'IA et classifiez chacun d'eux par niveau de risque.",
+        "Confirmez qu'aucun ne relève de pratiques interdites.",
+        "Pour les systèmes à haut risque, mettez en place une gestion des risques, une gouvernance des données et une documentation technique.",
+        "Mettez en œuvre une surveillance humaine avec la capacité d'intervenir ou d'arrêter le système.",
+        "Activez la journalisation/traçabilité et définissez le suivi après commercialisation ainsi que la notification des incidents.",
+        "Ajoutez la transparence envers les utilisateurs et l'étiquetage des contenus là où cela est requis.",
+        "Suivez les dates d'application progressive qui s'appliquent à vos systèmes."
+      ],
+      "pitfalls": [
+        "Supposer que le règlement ne s'applique pas parce que vous êtes en dehors de l'UE — il est extraterritorial.",
+        "Traiter les obligations relatives aux GPAI comme identiques à celles des systèmes d'IA ; elles sont distinctes.",
+        "Greffer à la va-vite une surveillance humaine qui ne peut pas réellement intervenir à temps.",
+        "Sous-documenter : l'absence de documentation technique et de journaux est une lacune courante."
+      ],
+      "examples": [
+        "Un outil de présélection des candidatures classé à haut risque, nécessitant une documentation, une surveillance humaine et un suivi.",
+        "Un chatbot ajoutant une mention claire « vous parlez à une IA » pour répondre aux devoirs de transparence.",
+        "Un fournisseur de GPAI publiant la documentation du modèle et un résumé des données d'entraînement."
+      ],
+      "faqs": [
+        {
+          "q": "L'EU AI Act s'applique-t-il aux entreprises situées en dehors de l'UE ?",
+          "a": "Oui. Il s'applique aux fournisseurs et déployeurs dont les systèmes d'IA sont mis sur le marché de l'UE ou dont les résultats sont utilisés dans l'UE, quel que soit le lieu d'établissement de l'entreprise."
+        },
+        {
+          "q": "Qu'est-ce qu'un système d'IA « à haut risque » ?",
+          "a": "Des systèmes utilisés dans des domaines sensibles (par exemple, l'emploi, le crédit, les infrastructures critiques, certains systèmes biométriques) ou comme composants de sécurité de produits réglementés. Ils comportent les obligations les plus strictes juste avant l'interdiction."
+        },
+        {
+          "q": "Quel est le rapport avec le principe de l'humain dans la boucle (human-in-the-loop) ?",
+          "a": "L'article 14 exige une surveillance humaine efficace pour les systèmes à haut risque — une personne capable de comprendre, d'intervenir ou d'arrêter le système. Le modèle du jalon d'approbation humaine est un moyen de le mettre en œuvre."
+        }
+      ]
+    },
+    "de": {
+      "name": "EU AI Act",
+      "summary": "Der EU AI Act ist das umfassende, risikobasierte Gesetz der Europäischen Union für künstliche Intelligenz. Er teilt KI-Systeme in Risikostufen ein – unannehmbar (verboten), hohes Risiko (strenge Auflagen), begrenztes Risiko (Transparenzpflichten) und minimales Risiko – und führt spezifische Verpflichtungen für KI-Modelle mit allgemeinem Verwendungszweck (General-Purpose AI) ein. Er gilt extraterritorial für jeden, der KI auf dem EU-Markt bereitstellt, und wird über mehrere Jahre hinweg schrittweise eingeführt, wobei die Strafen bei schwerwiegenden Verstößen bis zu 7 % des weltweiten Jahresumsatzes betragen können.",
+      "definition": "Der EU AI Act ist eine horizontale europäische Verordnung, die KI nach Risikostufen reguliert und Anbietern sowie Betreibern Verpflichtungen auferlegt, die proportional zu dem Risiko sind, das ein KI-System für Gesundheit, Sicherheit und Grundrechte darstellt.",
+      "scope": "Anbieter und Betreiber, die KI-Systeme oder KI-Modelle mit allgemeinem Verwendungszweck auf dem EU-Markt bereitstellen oder deren Ergebnisse in der EU genutzt werden – unabhängig von ihrem Niederlassungsort. Einige Verwendungszwecke (z. B. rein persönliche Nutzung, bestimmte Forschungsarbeiten) fallen nicht in den Anwendungsbereich.",
+      "keyPoints": [
+        "Risikobasierte Stufen: unannehmbar (verboten), hohes Risiko, begrenztes Risiko (Transparenz), minimales Risiko.",
+        "Zu den verbotenen Praktiken gehören Social Scoring sowie bestimmte biometrische und manipulative Verwendungszwecke.",
+        "Hochrisiko-Systeme erfordern Risikomanagement, Data Governance, technische Dokumentation, Protokollierung, menschliche Aufsicht, Genauigkeit/Robustheit und eine Überwachung nach dem Inverkehrbringen (Post-Market Monitoring).",
+        "KI-Modelle mit allgemeinem Verwendungszweck (GPAI) unterliegen eigenen Transparenzpflichten und, bei Modellen mit systemischem Risiko, zusätzlichen Verpflichtungen.",
+        "Transparenzpflichten: Nutzer müssen darüber informiert werden, wenn sie mit einer KI interagieren, und synthetische Inhalte müssen gekennzeichnet werden.",
+        "Schrittweise Anwendung mit erheblichen Strafen bei Nichteinhaltung."
+      ],
+      "controls": [
+        {
+          "control": "Risikoklassifizierung",
+          "note": "Bestimmen Sie zuerst die Risikostufe jedes Systems – sie entscheidet über alle weiteren Verpflichtungen. Die Fehlklassifizierung eines Hochrisiko-Systems ist der kostspieligste Fehler zu Beginn."
+        },
+        {
+          "control": "Menschliche Aufsicht (Art. 14)",
+          "note": "Hochrisiko-Systeme müssen von einer Person beaufsichtigt werden können, die eingreifen oder sie stoppen kann – die regulatorische Grundlage für Freigabeprozesse durch den Menschen (Human-Approval Gates)."
+        },
+        {
+          "control": "Technische Dokumentation & Protokollierung",
+          "note": "Führen Sie Dokumentationen und automatische Ereignisprotokolle, damit das System über seinen gesamten Lebenszyklus hinweg rückverfolgbar und prüfbar bleibt."
+        },
+        {
+          "control": "Transparenz gegenüber Nutzern",
+          "note": "Offenlegung der KI-Interaktion und Kennzeichnung von KI-generierten oder manipulierten Inhalten (Deepfakes)."
+        },
+        {
+          "control": "Überwachung nach dem Inverkehrbringen",
+          "note": "Überwachen Sie die Leistung im praktischen Einsatz und melden Sie schwerwiegende Vorfälle; Governance endet nicht mit der Bereitstellung."
+        }
+      ],
+      "checklist": [
+        "Erfassen Sie Ihre KI-Systeme in einem Inventar und klassifizieren Sie jedes nach seiner Risikostufe.",
+        "Stellen Sie sicher, dass keines der Systeme unter die verbotenen Praktiken fällt.",
+        "Richten Sie für Hochrisiko-Systeme Risikomanagement, Data Governance und technische Dokumentation ein.",
+        "Implementieren Sie eine menschliche Aufsicht mit der Möglichkeit, einzugreifen oder das System zu stoppen.",
+        "Ermöglichen Sie die Protokollierung/Rückverfolgbarkeit und definieren Sie die Überwachung nach dem Inverkehrbringen sowie die Meldung von Vorfällen.",
+        "Fügen Sie bei Bedarf Transparenzhinweise für Nutzer und Inhaltskennzeichnungen hinzu.",
+        "Verfolgen Sie die für Ihre Systeme geltenden Termine der schrittweisen Anwendung."
+      ],
+      "pitfalls": [
+        "Die Annahme, das Gesetz gelte nicht, weil Sie sich außerhalb der EU befinden – es ist extraterritorial wirksam.",
+        "Die Behandlung von GPAI-Verpflichtungen als identisch mit den Verpflichtungen für KI-Systeme; diese sind unterschiedlich.",
+        "Das nachträgliche Aufpfropfen einer menschlichen Aufsicht, die im Ernstfall nicht rechtzeitig eingreifen kann.",
+        "Unzureichende Dokumentation: Fehlende technische Dokumentation und Protokolle sind eine häufige Schwachstelle."
+      ],
+      "examples": [
+        "Ein Tool zur Vorauswahl von Bewerbern, das als hochriskant eingestuft ist und Dokumentation, menschliche Aufsicht sowie Überwachung erfordert.",
+        "Ein Chatbot, der einen klaren Hinweis \"Sie sprechen mit einer KI\" anzeigt, um die Transparenzpflichten zu erfüllen.",
+        "Ein GPAI-Anbieter, der die Modelldokumentation und eine Zusammenfassung der Trainingsdaten veröffentlicht."
+      ],
+      "faqs": [
+        {
+          "q": "Gilt der EU AI Act auch für Unternehmen außerhalb der EU?",
+          "a": "Ja. Er gilt für Anbieter und Betreiber, deren KI-Systeme auf dem EU-Markt bereitgestellt werden oder deren Ergebnisse in der EU genutzt werden, unabhängig vom Sitz des Unternehmens."
+        },
+        {
+          "q": "Was ist ein \"Hochrisiko\"-KI-System?",
+          "a": "Systeme, die in sensiblen Bereichen (z. B. Beschäftigung, Kreditwürdigkeit, kritische Infrastruktur, bestimmte Biometrie) oder als Sicherheitsbauteile regulierter Produkte eingesetzt werden. Sie unterliegen den strengsten Verpflichtungen direkt unterhalb eines Verbots."
+        },
+        {
+          "q": "Wie verhält es sich zu Human-in-the-Loop?",
+          "a": "Artikel 14 fordert eine wirksame menschliche Aufsicht für Hochrisiko-Systeme – eine Person, die in der Lage ist, das System zu verstehen, einzugreifen oder es zu stoppen. Das Muster des \"Human-Approval-Gate\" (Freigabe durch den Menschen) ist eine Möglichkeit, dies umzusetzen."
+        }
+      ]
+    },
+    "ja": {
+      "name": "EU AI Act",
+      "summary": "EU AI Actは、欧州連合（EU）による人工知能に関する包括的かつリスクベースの法律です。AIシステムを、許容できないリスク（禁止）、高リスク（厳格な義務）、限定的なリスク（透明性の義務）、最小限のリスクというリスクティアに分類し、汎用AI（GPAI）モデルに対する特定の義務を追加しています。EU市場にAIを投入するすべての主体に域外適用され、数年かけて段階的に施行されます。最も深刻な違反に対しては、世界年間売上高の最大7%に達する制裁金が科されます。",
+      "definition": "EU AI Actは、リスクティアに基づいてAIを規制する横断的な欧州の規則であり、AIシステムが健康、安全、および基本的人権に及ぼすリスクに比例した義務を提供者および展開者に課します。",
+      "scope": "設立地に関わらず、EU市場にAIシステムや汎用AIモデルを投入する、またはその出力がEU内で使用される提供者および展開者。一部の用途（純粋に個人的な使用、特定の研究など）は対象外です。",
+      "keyPoints": [
+        "リスクベースのティア：許容できないリスク（禁止）、高リスク、限定的なリスク（透明性）、最小限のリスク。",
+        "禁止される行為には、ソーシャルスコアリング、特定の生体認証、および人を操作するような使用が含まれます。",
+        "高リスクシステムには、リスク管理、データガバナンス、技術文書、ログ記録、人間による監視、正確性/堅牢性、および市後監視（ポストマーケットモニタリング）が求められます。",
+        "汎用AI（GPAI）モデルには独自の透明性の義務があり、システム的リスクを伴うモデルにはさらなる義務が課されます。",
+        "透明性の義務：ユーザーはAIと対話していることを知らされる必要があり、合成コンテンツにはマークを付す必要があります。",
+        "段階的な適用と、非準拠に対する重大な制裁金。"
+      ],
+      "controls": [
+        {
+          "control": "リスク分類",
+          "note": "まず各システムのリスクティアを決定します。これが他のすべての義務を左右します。高リスクシステムを誤って分類することは、初期段階における最もコストのかかる過ちです。"
+        },
+        {
+          "control": "人間による監視（第14条）",
+          "note": "高リスクシステムは、介入または停止できる人間によって監視可能でなければなりません。これが「人間による承認ゲート」の規制上の根拠となります。"
+        },
+        {
+          "control": "技術文書とログ記録",
+          "note": "ライフサイクル全体でシステムを追跡および監査できるように、文書と自動イベントログを維持します。"
+        },
+        {
+          "control": "ユーザーに対する透明性",
+          "note": "AIとの対話を明示し、AIによって生成または操作されたコンテンツ（ディープフェイク）にラベルを付します。"
+        },
+        {
+          "control": "市後監視（ポストマーケットモニタリング）",
+          "note": "現場でのパフォーマンスを監視し、重大なインシデントを報告します。ガバナンスはデプロイして終わりではありません。"
+        }
+      ],
+      "checklist": [
+        "AIシステムのインベントリ（台帳）を作成し、それぞれをリスクティアごとに分類します。",
+        "禁止されている行為に該当するものがないことを確認します。",
+        "高リスクシステムについては、リスク管理、データガバナンス、および技術文書を整備します。",
+        "システムに介入または停止する権限を持つ、人間による監視を実装します。",
+        "ログ記録/追跡可能性を有効にし、市後監視とインシデント報告を定義します。",
+        "必要に応じて、ユーザー向けの透明性の確保とコンテンツへのラベル付加を行います。",
+        "自社システムに適用される段階的な施行日を追跡します。"
+      ],
+      "pitfalls": [
+        "EU域外にいるため、この法律が適用されないと仮定すること。これは域外適用されます。",
+        "GPAIの義務をAIシステムの義務と同一視すること。これらは異なります。",
+        "実際には適時に介入できないような、形ばかりの人間による監視を後付けすること。",
+        "文書化の不足：技術文書やログの欠落は、よくあるギャップです。"
+      ],
+      "examples": [
+        "高リスクに分類され、文書化、人間による監視、およびモニタリングが要求される採用選考ツール。",
+        "透明性の義務を果たすために、「AIと対話しています」という明確な開示を追加したチャットボット。",
+        "モデルの文書とトレーニングデータの要約を公開するGPAI提供者。"
+      ],
+      "faqs": [
+        {
+          "q": "EU AI ActはEU域外の企業にも適用されますか？",
+          "a": "はい。会社の設立地に関わらず、AIシステムがEU市場に投入される、またはその出力がEU内で使用される提供者および展開者に適用されます。"
+        },
+        {
+          "q": "「高リスク」AIシステムとは何ですか？",
+          "a": "機微な領域（雇用、与信、重要インフラ、特定の生体認証など）で使用されるシステム、または規制対象製品の安全構成要素として使用されるシステムです。禁止措置を除けば、最も厳格な義務が課されます。"
+        },
+        {
+          "q": "Human-in-the-loop（人間による関与）とはどのような関係がありますか？",
+          "a": "第14条は、高リスクシステムに対して効果的な人間による監視（システムを理解し、介入し、または停止できる人物）を求めています。人間による承認ゲートのパターンは、これを実装する1つの方法です。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "EU AI Act",
+      "summary": "EU AI Act 是欧盟针对人工智能制定的全面的、基于风险的法律。它将 AI 系统划分为不同的风险等级——不可接受（禁用）、高风险（严格义务）、有限风险（透明度义务）和极低风险，并对通用 AI 模型增加了特定合规义务。该法案具有域外效力，适用于任何将 AI 引入欧盟市场的主体，并在数年内分阶段实施，对最严重的违规行为处以最高可达全球年营业额 7% 的罚款。",
+      "definition": "EU AI Act 是一项横向的欧洲法规，通过风险分级来监管 AI，对提供商和部署商施加与其 AI 系统对健康、安全和基本权利所构成风险相匹配的义务。",
+      "scope": "在欧盟市场投放 AI 系统或通用 AI 模型，或者其输出在欧盟境内使用的提供商和部署商——无论其注册地在何处。某些用途（例如纯个人用途、特定研究）不属于适用范围。",
+      "keyPoints": [
+        "基于风险的分级：不可接受（禁止）、高风险、有限风险（透明度）、极低风险。",
+        "禁止的行为包括社会信用评分以及某些生物识别和操纵性用途。",
+        "高风险系统需要进行风险管理、数据治理、技术文档记录、日志记录、人工监督、准确性/鲁棒性保障以及上市后监控。",
+        "通用 AI（GPAI）模型有其自身的透明度要求，对于具有系统性风险的模型，还需承担额外义务。",
+        "透明度义务：当用户与 AI 交互时必须予以告知，且合成内容必须进行标记。",
+        "分阶段实施，对不合规行为处以重罚。"
+      ],
+      "controls": [
+        {
+          "control": "风险分类",
+          "note": "首先确定每个系统的风险等级——它决定了所有其他合规义务。将高风险系统错误分类是前期代价最昂贵的错误。"
+        },
+        {
+          "control": "人工监督（第 14 条）",
+          "note": "高风险系统必须可由人员进行监督，且该人员能够进行干预或终止系统——这是设置人工审批关卡的监管依据。"
+        },
+        {
+          "control": "技术文档与日志记录",
+          "note": "维护文档和自动事件日志，确保系统在整个生命周期内可追溯、可审计。"
+        },
+        {
+          "control": "对用户的透明度",
+          "note": "披露 AI 交互情况，并对 AI 生成或操纵的内容（深度伪造）进行标记。"
+        },
+        {
+          "control": "上市后监控",
+          "note": "监控实际运行中的性能并报告严重事件；治理并不会在部署后结束。"
+        }
+      ],
+      "checklist": [
+        "盘点您的 AI 系统并按风险等级对每个系统进行分类。",
+        "确认没有任何系统属于被禁止的行为。",
+        "对于高风险系统，建立风险管理、数据治理和技术文档记录机制。",
+        "实施人工监督，并具备干预或终止系统的能力。",
+        "启用日志记录/可追溯性，并定义上市后监控和事件报告机制。",
+        "在需要时增加面向用户的透明度提示和内容标记。",
+        "跟踪适用于您系统的分阶段实施日期。"
+      ],
+      "pitfalls": [
+        "误以为因为自身处于欧盟境外，该法案便不适用——实际上它具有域外效力。",
+        "将 GPAI 义务与 AI 系统义务混为一谈；它们是不同的。",
+        "强行附加无法真正及时干预的人工监督。",
+        "文档记录不足：缺少技术文档 and 日志是常见的漏洞。"
+      ],
+      "examples": [
+        "被归类为高风险的招聘筛选工具，需要文档记录、人工监督和监控。",
+        "聊天机器人添加清晰的“您正在与 AI 对话”披露信息，以满足透明度义务。",
+        "GPAI 提供商发布模型文档和训练数据摘要。"
+      ],
+      "faqs": [
+        {
+          "q": "EU AI Act 是否适用于欧盟境外的公司？",
+          "a": "是的。它适用于将其 AI 系统投放到欧盟市场或其输出在欧盟境内使用的提供商和部署商，无论该公司的注册地在何处。"
+        },
+        {
+          "q": "什么是“高风险”AI 系统？",
+          "a": "用于敏感领域（例如就业、信贷、关键基础设施、特定生物识别）或作为受监管产品安全组件的系统。除禁用外，它们承担着最严格的合规义务。"
+        },
+        {
+          "q": "它与“人机协同（human-in-the-loop）”有何关系？",
+          "a": "第 14 条要求对高风险系统进行有效的人工监督——即由能够理解、干预或终止系统的人员进行监督。人工审批关卡模式是实现这一要求的一种方式。"
+        }
       ]
     }
   }

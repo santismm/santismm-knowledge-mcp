@@ -8,7 +8,10 @@
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "medium",
-    "sourceType": ["industry_observation", "paper"]
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
   },
   "technologies": [
     "LangGraph / orchestration",
@@ -18,14 +21,37 @@
     "Guardrails / PII redaction",
     "Observability (LangSmith / Langfuse)"
   ],
-  "patterns": ["routing", "human-approval-gate", "semantic-caching", "reflection"],
-  "knowledge": ["ai-agent", "tool-use", "enterprise-rag", "guardrails", "human-in-the-loop", "ai-observability"],
-  "references": [
-    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
-    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
-    { "title": "Santiago Santa María — The Stopwatch and the Exam", "url": "https://articles.santismm.com/the-stopwatch-and-the-exam/" }
+  "patterns": [
+    "routing",
+    "human-approval-gate",
+    "semantic-caching",
+    "reflection"
   ],
-  "related": ["enterprise-knowledge-assistant"],
+  "knowledge": [
+    "ai-agent",
+    "tool-use",
+    "enterprise-rag",
+    "guardrails",
+    "human-in-the-loop",
+    "ai-observability"
+  ],
+  "references": [
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "Santiago Santa María — The Stopwatch and the Exam",
+      "url": "https://articles.santismm.com/the-stopwatch-and-the-exam/"
+    }
+  ],
+  "related": [
+    "enterprise-knowledge-assistant"
+  ],
   "locales": {
     "en": {
       "name": "Customer Service Agent",
@@ -91,11 +117,26 @@
         "Instrument from day one; you cannot improve what you cannot trace."
       ],
       "kpis": [
-        { "metric": "Containment / deflection rate", "note": "Share of conversations resolved without a human; the headline value metric — but only meaningful alongside CSAT." },
-        { "metric": "Grounded-answer accuracy", "note": "How often answers are correct and supported by a citation, measured against an eval set." },
-        { "metric": "Escalation rate & quality", "note": "Share escalated to humans and whether those escalations were warranted; too high wastes the automation, too low risks bad outcomes." },
-        { "metric": "Cost per resolved conversation", "note": "Total tokens, tools and cache effect per resolution; routing and caching should keep this low on the common path." },
-        { "metric": "CSAT / resolution time", "note": "Customer satisfaction and time-to-resolution; guards against optimizing deflection at the expense of experience." }
+        {
+          "metric": "Containment / deflection rate",
+          "note": "Share of conversations resolved without a human; the headline value metric — but only meaningful alongside CSAT."
+        },
+        {
+          "metric": "Grounded-answer accuracy",
+          "note": "How often answers are correct and supported by a citation, measured against an eval set."
+        },
+        {
+          "metric": "Escalation rate & quality",
+          "note": "Share escalated to humans and whether those escalations were warranted; too high wastes the automation, too low risks bad outcomes."
+        },
+        {
+          "metric": "Cost per resolved conversation",
+          "note": "Total tokens, tools and cache effect per resolution; routing and caching should keep this low on the common path."
+        },
+        {
+          "metric": "CSAT / resolution time",
+          "note": "Customer satisfaction and time-to-resolution; guards against optimizing deflection at the expense of experience."
+        }
       ],
       "scaling": [
         "Volume scales with the stateless orchestration loop; the vector store and tool backends are the real capacity limits.",
@@ -109,9 +150,18 @@
         "An ambiguous billing dispute escalated to an agent with the full conversation context attached."
       ],
       "faqs": [
-        { "q": "How is this different from a chatbot?", "a": "A chatbot answers; this architecture also acts — it uses tools to read and write enterprise systems — and it grounds answers in retrieved knowledge, escalating by risk rather than following fixed scripts." },
-        { "q": "Why keep a human in the loop at all?", "a": "Because some actions are irreversible or regulated. A risk-based approval gate keeps accountability with a person for high-impact steps while automating the safe majority." },
-        { "q": "What makes it reliable?", "a": "Grounding in retrieval, guardrails on inputs and outputs, and observability that lets you evaluate every conversation and catch regressions before they ship." }
+        {
+          "q": "How is this different from a chatbot?",
+          "a": "A chatbot answers; this architecture also acts — it uses tools to read and write enterprise systems — and it grounds answers in retrieved knowledge, escalating by risk rather than following fixed scripts."
+        },
+        {
+          "q": "Why keep a human in the loop at all?",
+          "a": "Because some actions are irreversible or regulated. A risk-based approval gate keeps accountability with a person for high-impact steps while automating the safe majority."
+        },
+        {
+          "q": "What makes it reliable?",
+          "a": "Grounding in retrieval, guardrails on inputs and outputs, and observability that lets you evaluate every conversation and catch regressions before they ship."
+        }
       ]
     },
     "es": {
@@ -178,11 +228,26 @@
         "Instrumenta desde el día uno; no puedes mejorar lo que no puedes trazar."
       ],
       "kpis": [
-        { "metric": "Tasa de contención / desviación", "note": "Proporción de conversaciones resueltas sin un humano; la métrica de valor principal, pero solo significativa junto al CSAT." },
-        { "metric": "Precisión de respuesta fundamentada", "note": "Con qué frecuencia las respuestas son correctas y respaldadas por una cita, medido contra un conjunto de evaluación." },
-        { "metric": "Tasa y calidad de escalado", "note": "Proporción escalada a humanos y si esos escalados estaban justificados; demasiado alto desperdicia la automatización, demasiado bajo arriesga malos resultados." },
-        { "metric": "Coste por conversación resuelta", "note": "Tokens, herramientas y efecto de caché totales por resolución; el enrutado y la caché deben mantenerlo bajo en el camino común." },
-        { "metric": "CSAT / tiempo de resolución", "note": "Satisfacción del cliente y tiempo hasta la resolución; evita optimizar la desviación a costa de la experiencia." }
+        {
+          "metric": "Tasa de contención / desviación",
+          "note": "Proporción de conversaciones resueltas sin un humano; la métrica de valor principal, pero solo significativa junto al CSAT."
+        },
+        {
+          "metric": "Precisión de respuesta fundamentada",
+          "note": "Con qué frecuencia las respuestas son correctas y respaldadas por una cita, medido contra un conjunto de evaluación."
+        },
+        {
+          "metric": "Tasa y calidad de escalado",
+          "note": "Proporción escalada a humanos y si esos escalados estaban justificados; demasiado alto desperdicia la automatización, demasiado bajo arriesga malos resultados."
+        },
+        {
+          "metric": "Coste por conversación resuelta",
+          "note": "Tokens, herramientas y efecto de caché totales por resolución; el enrutado y la caché deben mantenerlo bajo en el camino común."
+        },
+        {
+          "metric": "CSAT / tiempo de resolución",
+          "note": "Satisfacción del cliente y tiempo hasta la resolución; evita optimizar la desviación a costa de la experiencia."
+        }
       ],
       "scaling": [
         "El volumen escala con el bucle de orquestación sin estado; el almacén vectorial y los backends de herramientas son los límites reales de capacidad.",
@@ -196,9 +261,18 @@
         "Una disputa de facturación ambigua escalada a un agente con todo el contexto de la conversación adjunto."
       ],
       "faqs": [
-        { "q": "¿En qué se diferencia de un chatbot?", "a": "Un chatbot responde; esta arquitectura además actúa —usa herramientas para leer y escribir en sistemas empresariales— y fundamenta las respuestas en conocimiento recuperado, escalando por riesgo en vez de seguir guiones fijos." },
-        { "q": "¿Por qué mantener un humano en el bucle?", "a": "Porque algunas acciones son irreversibles o reguladas. Una puerta de aprobación basada en riesgo mantiene la responsabilidad en una persona para los pasos de alto impacto mientras automatiza la mayoría segura." },
-        { "q": "¿Qué la hace fiable?", "a": "La fundamentación en la recuperación, los guardarraíles en entradas y salidas, y la observabilidad que permite evaluar cada conversación y detectar regresiones antes de desplegar." }
+        {
+          "q": "¿En qué se diferencia de un chatbot?",
+          "a": "Un chatbot responde; esta arquitectura además actúa —usa herramientas para leer y escribir en sistemas empresariales— y fundamenta las respuestas en conocimiento recuperado, escalando por riesgo en vez de seguir guiones fijos."
+        },
+        {
+          "q": "¿Por qué mantener un humano en el bucle?",
+          "a": "Porque algunas acciones son irreversibles o reguladas. Una puerta de aprobación basada en riesgo mantiene la responsabilidad en una persona para los pasos de alto impacto mientras automatiza la mayoría segura."
+        },
+        {
+          "q": "¿Qué la hace fiable?",
+          "a": "La fundamentación en la recuperación, los guardarraíles en entradas y salidas, y la observabilidad que permite evaluar cada conversación y detectar regresiones antes de desplegar."
+        }
       ]
     },
     "pt": {
@@ -265,11 +339,26 @@
         "Instrumente desde o dia um; você não pode melhorar o que não consegue rastrear."
       ],
       "kpis": [
-        { "metric": "Taxa de contenção / desvio", "note": "Proporção de conversas resolvidas sem um humano; a métrica de valor principal, mas só significativa junto ao CSAT." },
-        { "metric": "Precisão de resposta fundamentada", "note": "Com que frequência as respostas são corretas e apoiadas por uma citação, medido contra um conjunto de avaliação." },
-        { "metric": "Taxa e qualidade de escalonamento", "note": "Proporção escalada a humanos e se esses escalonamentos eram justificados; alto demais desperdiça a automação, baixo demais arrisca maus resultados." },
-        { "metric": "Custo por conversa resolvida", "note": "Tokens, ferramentas e efeito do cache totais por resolução; o roteamento e o cache devem mantê-lo baixo no caminho comum." },
-        { "metric": "CSAT / tempo de resolução", "note": "Satisfação do cliente e tempo até a resolução; evita otimizar o desvio às custas da experiência." }
+        {
+          "metric": "Taxa de contenção / desvio",
+          "note": "Proporção de conversas resolvidas sem um humano; a métrica de valor principal, mas só significativa junto ao CSAT."
+        },
+        {
+          "metric": "Precisão de resposta fundamentada",
+          "note": "Com que frequência as respostas são corretas e apoiadas por uma citação, medido contra um conjunto de avaliação."
+        },
+        {
+          "metric": "Taxa e qualidade de escalonamento",
+          "note": "Proporção escalada a humanos e se esses escalonamentos eram justificados; alto demais desperdiça a automação, baixo demais arrisca maus resultados."
+        },
+        {
+          "metric": "Custo por conversa resolvida",
+          "note": "Tokens, ferramentas e efeito do cache totais por resolução; o roteamento e o cache devem mantê-lo baixo no caminho comum."
+        },
+        {
+          "metric": "CSAT / tempo de resolução",
+          "note": "Satisfação do cliente e tempo até a resolução; evita otimizar o desvio às custas da experiência."
+        }
       ],
       "scaling": [
         "O volume escala com o loop de orquestração sem estado; o armazenamento vetorial e os backends de ferramentas são os limites reais de capacidade.",
@@ -283,9 +372,462 @@
         "Uma disputa de faturamento ambígua escalada a um agente com todo o contexto da conversa anexado."
       ],
       "faqs": [
-        { "q": "Como difere de um chatbot?", "a": "Um chatbot responde; esta arquitetura também age —usa ferramentas para ler e escrever em sistemas empresariais— e fundamenta as respostas em conhecimento recuperado, escalando por risco em vez de seguir roteiros fixos." },
-        { "q": "Por que manter um humano no laço?", "a": "Porque algumas ações são irreversíveis ou reguladas. Um portão de aprovação baseado em risco mantém a responsabilidade com uma pessoa nos passos de alto impacto enquanto automatiza a maioria segura." },
-        { "q": "O que a torna confiável?", "a": "A fundamentação na recuperação, os guard-rails em entradas e saídas, e a observabilidade que permite avaliar cada conversa e detectar regressões antes de implantar." }
+        {
+          "q": "Como difere de um chatbot?",
+          "a": "Um chatbot responde; esta arquitetura também age —usa ferramentas para ler e escrever em sistemas empresariais— e fundamenta as respostas em conhecimento recuperado, escalando por risco em vez de seguir roteiros fixos."
+        },
+        {
+          "q": "Por que manter um humano no laço?",
+          "a": "Porque algumas ações são irreversíveis ou reguladas. Um portão de aprovação baseado em risco mantém a responsabilidade com uma pessoa nos passos de alto impacto enquanto automatiza a maioria segura."
+        },
+        {
+          "q": "O que a torna confiável?",
+          "a": "A fundamentação na recuperação, os guard-rails em entradas e saídas, e a observabilidade que permite avaliar cada conversa e detectar regressões antes de implantar."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Agent de service client",
+      "summary": "Une architecture de référence pour un agent de service client d'entreprise qui résout les requêtes courantes de bout en bout : il répond à partir d'une base de connaissances ancrée, agit dans le CRM et les systèmes de tickets via des outils, et escalade vers un humain lorsque le niveau de confiance est faible ou que l'action a un impact élevé. Elle associe la recherche pour l'ancrage à une approbation humaine basée sur le risque pour la sécurité, et est observable afin que chaque conversation puisse être évaluée et améliorée.",
+      "keyConcepts": [
+        "Ancrage (grounding) : les réponses proviennent de connaissances récupérées et citables, et non de la mémoire du modèle.",
+        "Utilisation d'outils : l'agent lit et écrit dans les systèmes de CRM/tickets via des outils bien décrits.",
+        "Escalade basée sur le risque : les actions à faible confiance ou à fort impact sont soumises à une validation humaine.",
+        "Observabilité : chaque échange est tracé afin que le système puisse être évalué et amélioré."
+      ],
+      "definition": "L'architecture de l'agent de service client est un agent conversationnel ancré utilisant des outils, qui résout les requêtes des clients de manière autonome dans le cadre de garde-fous, escalade vers des humains selon le risque et le niveau de confiance, avec un traçage complet pour l'évaluation.",
+      "architecture": [
+        "Au cœur du système se trouve une boucle d'orchestration qui classifie la requête entrante, récupère les connaissances pertinentes, décide s'il peut répondre ou s'il doit agir, puis répond, appelle un outil ou escalade. L'aiguillage (routing) oriente les FAQ simples vers un parcours économique de recherche et réponse, et les cas complexes ou sensibles vers un parcours plus riche et plus prudent.",
+        "L'ancrage est non négociable : l'agent répond à partir d'une couche de recherche couvrant le centre d'aide et les documents de politique interne, et cite ses sources. Lorsque la requête nécessite une action (effectuer un remboursement, modifier une commande, fermer un ticket), l'agent prépare l'action et oriente celles à fort impact vers une validation humaine avant exécution.",
+        "Des couches transversales garantissent la sécurité et l'évolutivité : des garde-fous masquent les données personnelles (PII) et bloquent les réponses non conformes aux politiques, un cache sémantique absorbe les questions répétitives pour réduire les coûts et la latence, et une couche d'observabilité trace chaque échange afin que les conversations puissent être évaluées par rapport à un jeu de test."
+      ],
+      "flow": [
+        "1. Réception : le message de l'utilisateur arrive ; les données personnelles (PII) sont détectées et masquées pour la journalisation.",
+        "2. Aiguillage : classification de l'intention et du risque (FAQ, action sur le compte ou candidat à l'escalade).",
+        "3. Recherche : récupération des passages d'ancrage dans la base de connaissances (après vérification du cache).",
+        "4. Décision : répondre à partir de l'ancrage, appeler un outil de CRM/tickets ou escalader.",
+        "5. Validation : les actions à fort impact sont suspendues dans l'attente d'une approbation humaine ; celles à faible impact sont exécutées.",
+        "6. Réponse : répondre en incluant les citations ; enregistrer la trace et le résultat pour évaluation."
+      ],
+      "components": [
+        "Routeur d'intention et de risque",
+        "Couche de recherche (RAG) avec citations",
+        "Outils de CRM / de gestion des tickets",
+        "Étape de validation humaine",
+        "Garde-fous et masquage des données personnelles (PII)",
+        "Cache sémantique",
+        "Observabilité et évaluation"
+      ],
+      "referenceScenario": {
+        "context": "Un centre de support B2C illustratif gérant les questions relatives aux commandes, à la facturation et aux comptes via chat et e-mail.",
+        "scenario": "Les requêtes de niveau 1 (statut de commande, réinitialisation de mot de passe, questions sur les politiques) sont résolues par l'agent ; les remboursements et les modifications de compte sont préparés par l'agent et approuvés par un humain ; tout cas ambigu est escaladé avec l'ensemble du contexte.",
+        "technology": "Boucle d'orchestration, RAG sur le centre d'aide, outils d'appel de fonctions vers le CRM, étape de validation basée sur le risque et traçage des conversations.",
+        "load": "Trafic irrégulier, concentré sur les heures de bureau, avec une longue traîne d'intentions rares ; un petit ensemble de FAQ représente la majorité du volume, absorbé par le cache sémantique.",
+        "results": "Cible de référence : la majeure partie du volume de niveau 1 est détournée grâce à des réponses ancrées et citées ; les actions à fort impact restent soumises à une validation humaine ; les coûts se concentrent sur les cas rares et complexes plutôt que sur les cas répétitifs. Les chiffres dépendent de la répartition de votre trafic et doivent être mesurés, non supposés."
+      },
+      "benefits": [
+        "Résout les requêtes courantes de bout en bout tout en soumettant les actions risquées à une validation humaine.",
+        "Les réponses ancrées et citées réduisent les hallucinations et renforcent la confiance des clients.",
+        "La mise en cache sémantique et l'aiguillage concentrent les dépenses sur les cas qui le nécessitent.",
+        "Le traçage complet rend la qualité mesurable et permet de détecter les régressions."
+      ],
+      "risks": [
+        "Réponses non ancrées si la qualité de la recherche est médiocre.",
+        "Sur-automatisation d'actions qui devraient rester soumises à une validation humaine.",
+        "Fuite de données personnelles (PII) si les garde-fous sont incomplets.",
+        "Goulots d'étranglement au niveau des approbations si trop d'actions sont soumises à validation."
+      ],
+      "failureModes": [
+        "La recherche échoue ou renvoie une politique obsolète, ce qui conduit l'agent à répondre avec assurance mais de manière erronée.",
+        "Des erreurs d'outils (délais d'attente CRM dépassés, dérive de schéma) laissent des actions appliquées à moitié sans possibilité de récupération.",
+        "Surcharge d'escalades lorsque le routeur envoie trop de cas aux humains, ce qui annule les bénéfices de l'automatisation.",
+        "Des correspondances erronées dans le cache renvoient le contexte d'un client précédent ou une réponse obsolète."
+      ],
+      "lessons": [
+        "Ancrez d'abord : investissez dans la qualité de la recherche avant d'étendre l'autonomie — la plupart des réponses erronées sont dues à des échecs de recherche.",
+        "Valisez selon le risque, pas par défaut ; réservez l'approbation humaine aux actions irréversibles ou réglementées.",
+        "Limitez la portée du cache par client/contexte et valisez les correspondances, sous peine de divulguer une réponse erronée.",
+        "Instrumentez dès le premier jour ; vous ne pouvez pas améliorer ce que vous ne pouvez pas tracer."
+      ],
+      "kpis": [
+        {
+          "metric": "Taux de résolution autonome / de déviation",
+          "note": "Part des conversations résolues sans intervention humaine ; la métrique de valeur principale — mais qui n'a de sens qu'associée au CSAT."
+        },
+        {
+          "metric": "Précision des réponses ancrées",
+          "note": "Fréquence à laquelle les réponses sont correctes et étayées par une citation, mesurée par rapport à un jeu de test."
+        },
+        {
+          "metric": "Taux et qualité des escalades",
+          "note": "Part des requêtes escaladées vers des humains et pertinence de ces escalades ; un taux trop élevé annule l'intérêt de l'automatisation, un taux trop bas risque d'entraîner de mauvais résultats."
+        },
+        {
+          "metric": "Coût par conversation résolue",
+          "note": "Total des jetons, des outils et de l'effet de cache par résolution ; l'aiguillage et la mise en cache doivent maintenir ce coût à un niveau bas sur le parcours classique."
+        },
+        {
+          "metric": "CSAT / temps de résolution",
+          "note": "Satisfaction client et temps de résolution ; permet d'éviter d'optimiser la déviation au détriment de l'expérience utilisateur."
+        }
+      ],
+      "scaling": [
+        "Le volume évolue avec la boucle d'orchestration sans état ; la base de données vectorielle et les backends d'outils constituent les véritables limites de capacité.",
+        "Le cache sémantique stabilise les coûts à mesure que les questions répétitives augmentent, de sorte que le coût unitaire diminue avec l'échelle sur le parcours classique.",
+        "L'approbation humaine est le goulot d'étranglement qui n'évolue pas de manière linéaire — limitez le nombre d'actions soumises à validation et triez-les.",
+        "Le coût est dominé par les conversations rares et complexes, et non par la majorité des FAQ mises en cache."
+      ],
+      "examples": [
+        "Une question sur le statut d'une commande répondue instantanément depuis le cache avec une citation.",
+        "Un remboursement que l'agent prépare et qu'un humain approuve avant qu'il ne soit émis.",
+        "Un litige de facturation ambigu escaladé vers un conseiller avec l'ensemble du contexte de la conversation joint."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il d'un chatbot ?",
+          "a": "Un chatbot se contente de répondre ; cette architecture agit également — elle utilise des outils pour lire et écrire dans les systèmes de l'entreprise — et elle ancre ses réponses dans les connaissances récupérées, en escaladant selon le risque plutôt qu'en suivant des scénarios figés."
+        },
+        {
+          "q": "Pourquoi conserver une intervention humaine ?",
+          "a": "Parce que certaines actions sont irréversibles ou réglementées. Une étape de validation basée sur le risque permet de maintenir la responsabilité humaine pour les étapes à fort impact, tout en automatisant la majorité des actions sûres."
+        },
+        {
+          "q": "Qu'est-ce qui le rend fiable ?",
+          "a": "Un ancrage dans la recherche, des garde-fous sur les entrées et les sorties, et une observabilité qui vous permet d'évaluer chaque conversation et de détecter les régressions avant leur mise en production."
+        }
+      ]
+    },
+    "de": {
+      "name": "Kundenservice-Agent",
+      "summary": "Eine Referenzarchitektur für einen Enterprise-Kundenservice-Agenten, der häufige Anfragen End-to-End löst – er antwortet auf Basis einer fundierten (grounded) Wissensdatenbank, agiert über Tools in CRM- und Ticketing-Systemen und eskaliert an einen Menschen, wenn das Vertrauen (Confidence) gering oder die Aktion folgenschwer ist. Sie kombiniert Retrieval für das Grounding mit risikobasierter menschlicher Freigabe zur Sicherheit und ist beobachtbar (observable), sodass jede Konversation evaluiert und verbessert werden kann.",
+      "keyConcepts": [
+        "Grounding: Antworten stammen aus abgerufenem, zitierfähigem Wissen, nicht aus dem Speicher des Modells.",
+        "Tool-Nutzung: Der Agent liest und schreibt über präzise beschriebene Tools in CRM- und Ticketing-Systeme.",
+        "Risikobasierte Eskalation: Aktionen mit geringer Konfidenz oder hoher Tragweite werden an eine menschliche Kontrollinstanz übergeben.",
+        "Observability: Jeder Interaktionsschritt (Turn) wird aufgezeichnet (traced), damit das System evaluiert und verbessert werden kann."
+      ],
+      "definition": "Die Customer-Service-Agent-Architektur ist ein auf Grounding basierender, Tool-nutzender Konversations-Agent, der Kundenanfragen autonom innerhalb von Guardrails löst, risiko- und konfidenzbasiert an Menschen eskaliert und vollständiges Tracing zur Evaluierung bietet.",
+      "architecture": [
+        "Im Zentrum steht ein Orchestrierungs-Loop, der die eingehende Anfrage klassifiziert, relevantes Wissen abruft, entscheidet, ob er antworten kann oder handeln muss, und entweder antwortet, ein Tool aufruft oder eskaliert. Das Routing leitet einfache FAQs über einen kostengünstigen Retrieval-and-Answer-Pfad und komplexe oder sensible Fälle über einen umfassenderen, sorgfältigeren Pfad.",
+        "Grounding ist unverzichtbar: Der Agent antwortet aus einem Retrieval-Layer über das Help Center und die Richtliniendokumente und zitiert seine Quellen. Wenn die Anfrage eine Aktion erfordert – wie eine Rückerstattung, eine Bestelländerung oder das Schließen eines Tickets –, bereitet der Agent die Aktion vor und leitet folgenschwere Aktionen vor der Ausführung über eine menschliche Freigabeinstanz.",
+        "Übergreifende Layer machen das System sicher und verbesserungswürdig: Guardrails schwärzen PII (personenbezogene Daten) und blockieren richtlinienwidrige Antworten, ein semantischer Cache fängt wiederholte Fragen ab, um Kosten und Latenz zu senken, und ein Observability-Layer zeichnet jeden Turn auf, sodass Konversationen anhand eines Evaluierungssets bewertet werden können."
+      ],
+      "flow": [
+        "1. Intake: Die Benutzernachricht geht ein; PII wird erkannt und für das Logging geschwärzt.",
+        "2. Route: Klassifizierung von Intent und Risiko – FAQ, Kontoaktion oder Eskalationskandidat.",
+        "3. Retrieve: Abrufen von Grounding-Passagen aus der Wissensdatenbank (zuerst im Cache geprüft).",
+        "4. Decide: Antworten basierend auf Grounding, Aufrufen eines CRM-/Ticketing-Tools oder Eskalieren.",
+        "5. Gate: Folgenschwere Aktionen pausieren für die menschliche Freigabe; risikoarme Aktionen werden ausgeführt.",
+        "6. Respond: Antworten mit Quellenangaben; Protokollieren des Traces und des Ergebnisses zur Evaluierung."
+      ],
+      "components": [
+        "Intent- & Risiko-Router",
+        "Retrieval-Layer (RAG) mit Quellenangaben",
+        "CRM- / Ticketing-Tools",
+        "Menschliche Freigabeinstanz",
+        "Guardrails & PII-Schwärzung",
+        "Semantischer Cache",
+        "Observability & Evaluierung"
+      ],
+      "referenceScenario": {
+        "context": "Ein beispielhafter B2C-Support-Desk, der Bestell-, Abrechnungs- und Kontofragen über Chat und E-Mail bearbeitet.",
+        "scenario": "Tier-1-Anfragen (Bestellstatus, Passwortzurücksetzung, Richtlinienfragen) werden vom Agenten gelöst; Rückerstattungen und Kontoänderungen werden vom Agenten entworfen und von einem Menschen freigegeben; Unklarheiten werden mit dem vollständigen Konversationskontext eskaliert.",
+        "technology": "Orchestrierungs-Loop, RAG über das Help Center, Function-calling-Tools für das CRM, eine risikobasierte Freigabeinstanz und Konversations-Tracing.",
+        "load": "Stoßartiger, stark auf die Geschäftszeiten konzentrierter Traffic mit einem Long Tail seltener Intents; eine kleine Anzahl von FAQs macht den Großteil des Volumens aus, das vom semantischen Cache abgefangen wird.",
+        "results": "Referenzziel: Der Großteil des Tier-1-Volumens wird durch fundierte Antworten mit Quellenangaben abgefangen; folgenschwere Aktionen bleiben hinter einer menschlichen Freigabeinstanz; Kosten konzentrieren sich auf seltene, komplexe Fälle statt auf repetitive Aufgaben. Die genauen Zahlen hängen von Ihrem Traffic-Mix ab und sollten gemessen, nicht vorausgesetzt werden."
+      },
+      "benefits": [
+        "Löst häufige Anfragen End-to-End, während risikoreiche Aktionen einer menschlichen Freigabe bedürfen.",
+        "Fundierte Antworten mit Quellenangaben reduzieren Halluzinationen und stärken das Kundenvertrauen.",
+        "Semantisches Caching und Routing konzentrieren die Ausgaben auf die Fälle, in denen sie tatsächlich benötigt werden.",
+        "Vollständiges Tracing macht Qualität messbar und Regressionen erkennbar."
+      ],
+      "risks": [
+        "Nicht fundierte Antworten bei mangelhafter Retrieval-Qualität.",
+        "Überautomatisierung von Aktionen, die einer menschlichen Freigabe bedürfen sollten.",
+        "Abfluss von PII (personenbezogenen Daten), wenn Guardrails unvollständig sind.",
+        "Freigabe-Engpässe, wenn zu viele Aktionen blockiert werden."
+      ],
+      "failureModes": [
+        "Das Retrieval schlägt fehl oder liefert veraltete Richtlinien, sodass der Agent zwar selbstsicher, aber falsch antwortet.",
+        "Tool-Fehler (CRM-Timeouts, Schema-Drift) führen dazu, dass Aktionen ohne Wiederherstellungsmöglichkeit nur halb ausgeführt werden.",
+        "Eskalationsüberlastung, wenn der Router zu viele Fälle an Menschen weiterleitet, was den Nutzen der Automatisierung zunichte macht.",
+        "Fehlerhafte Cache-Treffer (False Hits) liefern den Kontext eines vorherigen Kunden oder eine veraltete Antwort."
+      ],
+      "lessons": [
+        "Zuerst Grounding: Investieren Sie in die Retrieval-Qualität, bevor Sie die Autonomie ausbauen – die meisten falschen Antworten sind auf Retrieval-Fehler zurückzuführen.",
+        "Freigabe nach Risiko, nicht standardmäßig; behalten Sie die menschliche Freigabe für irreversible oder regulierte Aktionen vor.",
+        "Grenzen Sie den Cache pro Kunde/Kontext ab und validieren Sie Treffer, da sonst falsche Antworten durchsickern.",
+        "Instrumentieren Sie von Tag eins an; Sie können nicht verbessern, was Sie nicht aufzeichnen (tracen) können."
+      ],
+      "kpis": [
+        {
+          "metric": "Containment- / Deflection-Rate",
+          "note": "Anteil der Konversationen, die ohne menschliches Zutun gelöst wurden; die wichtigste Wertmetrik – aber nur in Kombination mit dem CSAT aussagekräftig."
+        },
+        {
+          "metric": "Genauigkeit fundierter Antworten (Grounded-answer accuracy)",
+          "note": "Wie oft Antworten korrekt und durch eine Quellenangabe belegt sind, gemessen an einem Evaluierungsset."
+        },
+        {
+          "metric": "Eskalationsrate & -qualität",
+          "note": "Anteil der an Menschen eskalierten Fälle und ob diese Eskalationen berechtigt waren; eine zu hohe Rate schmälert den Nutzen der Automatisierung, eine zu niedrige birgt das Risiko schlechter Ergebnisse."
+        },
+        {
+          "metric": "Kosten pro gelöster Konversation",
+          "note": "Gesamtzahl der Token, Tools und Cache-Effekte pro Lösung; Routing und Caching sollten diese Kosten auf dem Standardpfad niedrig halten."
+        },
+        {
+          "metric": "CSAT / Lösungszeit",
+          "note": "Kundenzufriedenheit und Zeit bis zur Lösung; schützt davor, die Deflection-Rate auf Kosten der Customer Experience zu optimieren."
+        }
+      ],
+      "scaling": [
+        "Das Volumen skaliert mit dem zustandslosen Orchestrierungs-Loop; der Vector Store und die Tool-Backends bilden die tatsächlichen Kapazitätsgrenzen.",
+        "Der semantische Cache dämpft den Kostenanstieg bei zunehmenden wiederholten Fragen, sodass die Stückkosten bei Skalierung auf dem Standardpfad sinken.",
+        "Die menschliche Freigabe ist der Flaschenhals, der nicht linear skaliert – halten Sie die Menge der zu prüfenden Aktionen klein und vorsortiert.",
+        "Die Kosten werden von den seltenen, komplexen Konversationen dominiert, nicht von der Mehrheit der im Cache gespeicherten FAQs."
+      ],
+      "examples": [
+        "Eine Frage zum Bestellstatus, die sofort aus dem Cache mit einer Quellenangabe beantwortet wird.",
+        "Eine Rückerstattung, die der Agent entwirft und ein Mensch freigibt, bevor sie veranlasst wird.",
+        "Ein unklarer Abrechnungsstreit, der mit dem vollständigen Konversationskontext an einen Mitarbeiter eskaliert wird."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies von einem Chatbot?",
+          "a": "Ein Chatbot antwortet nur; diese Architektur handelt auch – sie nutzt Tools, um in Enterprise-Systemen zu lesen und zu schreiben – und sie stützt ihre Antworten auf abgerufenes Wissen (Grounding), wobei sie risikobasiert eskaliert, anstatt starren Skripten zu folgen."
+        },
+        {
+          "q": "Warum sollte überhaupt ein Mensch in den Prozess eingebunden bleiben (Human-in-the-Loop)?",
+          "a": "Weil manche Aktionen unumkehrbar oder reguliert sind. Eine risikobasierte Freigabeinstanz stellt sicher, dass die Verantwortung für folgenschwere Schritte beim Menschen verbleibt, während die sichere Mehrheit automatisiert wird."
+        },
+        {
+          "q": "Was macht das System zuverlässig?",
+          "a": "Grounding in Retrieval, Guardrails für Inputs und Outputs sowie Observability, mit der Sie jede Konversation evaluieren und Regressionen vor dem Release abfangen können."
+        }
+      ]
+    },
+    "ja": {
+      "name": "カスタマーサービスエージェント",
+      "summary": "一般的なリクエストをエンドツーエンドで解決する、エンタープライズ向けカスタマーサービスエージェントのリファレンスアーキテクチャです。グラウンディングされたナレッジベースに基づいて回答し、ツールを介してCRMやチケット管理システムでアクションを実行し、確信度が低い場合や影響の大きいアクションの場合は人間にエスカレーションします。安全性のためにグラウンディング用の検索とリスクベースの人間による承認を組み合わせ、すべての会話を評価・改善できるようにオブザーバビリティ（可観測性）を確保しています。",
+      "keyConcepts": [
+        "グラウンディング：回答はモデルの記憶からではなく、検索された引用可能なナレッジから生成されます。",
+        "ツールの利用：エージェントは、明確に定義されたツールを介してCRMやチケット管理システムへの読み書きを行います。",
+        "リスクベースのエスカレーション：確信度が低いアクションや影響の大きいアクションは、人間による承認ゲートに送られます。",
+        "オブザーバビリティ：すべてのやり取り（ターン）がトレースされ、システムの評価と改善が可能になります。"
+      ],
+      "definition": "カスタマーサービスエージェントのアーキテクチャは、ガードレールの範囲内で自律的に顧客のリクエストを解決する、グラウンディングとツール利用を備えた対話型エージェントです。リスクと確信度に基づいて人間にエスカレーションし、評価のための完全なトレース機能を備えています。",
+      "architecture": [
+        "その中核となるのは、受信したリクエストを分類し、関連するナレッジを検索し、回答可能かアクションが必要かを判断して、応答、ツールの呼び出し、またはエスカレーションを行うオーケストレーションループです。ルーティングにより、シンプルなFAQは低コストな「検索と回答」のパスに送られ、複雑または機密性の高いケースは、より高度で慎重なパスに送られます。",
+        "グラウンディングは必須要件です。エージェントはヘルプセンターやポリシー文書に対する検索レイヤーから回答を生成し、その情報源を引用します。返金処理、注文変更、チケットのクローズなどのアクションがリクエストに必要な場合、エージェントはアクションを準備し、影響の大きいものは実行前に人間による承認ゲートにルーティングします。",
+        "横断的なレイヤーにより、安全性と改善可能性が確保されます。ガードレールがPII（個人特定情報）を墨消しし、ポリシー違反の応答をブロックします。セマンティックキャッシュが重複する質問を吸収してコストとレイテンシーを削減し、オブザーバビリティレイヤーがすべてのやり取りをトレースして、評価セットに照らし合わせて会話をスコアリングできるようにします。"
+      ],
+      "flow": [
+        "1. 受付：ユーザーメッセージが到着します。PIIが検出され、ログ記録のために墨消しされます。",
+        "2. ルーティング：インテント（意図）とリスクを分類します（FAQ、アカウント操作、またはエスカレーション候補）。",
+        "3. 検索：ナレッジベースからグラウンディング用の文章をプルします（最初にキャッシュがチェックされます）。",
+        "4. 判断：グラウンディングに基づいて回答するか、CRM/チケット管理ツールを呼び出すか、あるいはエスカレーションします。",
+        "5. ゲート：影響の大きいアクションは人間による承認のために一時停止し、影響の小さいアクションは実行されます。",
+        "6. 応答：引用付きで返答します。評価のためにトレースと結果をログに記録します。"
+      ],
+      "components": [
+        "インテント＆リスクルーター",
+        "引用付き検索レイヤー（RAG）",
+        "CRM / チケット管理ツール",
+        "人間による承認ゲート",
+        "ガードレール＆PIIの墨消し",
+        "セマンティックキャッシュ",
+        "オブザーバビリティ＆評価"
+      ],
+      "referenceScenario": {
+        "context": "チャットやメールを通じて、注文、請求、アカウントに関する質問に対応する、B2Cサポートデスクの図解例。",
+        "scenario": "ティア1のリクエスト（注文ステータス、パスワードリセット、ポリシーに関する質問）はエージェントによって解決されます。返金やアカウント変更はエージェントが下書きを作成し、人間が承認します。曖昧なものはすべて、完全なコンテキストを添えてエスカレーションされます。",
+        "technology": "オーケストレーションループ、ヘルプセンターに対するRAG、CRMへのファンクションコーリングツール、リスクベースの承認ゲート、および会話のトレース。",
+        "load": "営業時間内に集中するバースト性の高いトラフィックと、まれなインテントのロングテール。少数のFAQがボリュームの大半を占め、これをセマンティックキャッシュが吸収します。",
+        "results": "リファレンスターゲット：ティア1のボリュームの大部分を、グラウンディングされ引用を伴う回答によって回避（デフレクション）します。影響の大きいアクションは人間によるゲートの後方に維持し、コストを反復的なケースではなく、まれで複雑なケースに集中させます。数値はトラフィックの構成比に依存するため、想定するのではなく測定する必要があります。"
+      },
+      "benefits": [
+        "リスクのあるアクションを人間によるゲートで保護しつつ、一般的なリクエストをエンドツーエンドで解決します。",
+        "グラウンディングされ引用を伴う回答により、ハルシネーションを減らし、顧客の信頼を築きます。",
+        "セマンティックキャッシュとルーティングにより、対応が必要なケースに支出を集中させます。",
+        "完全なトレースにより品質を測定可能にし、デグレード（先祖返り）を検知できるようにします。"
+      ],
+      "risks": [
+        "検索品質が低い場合、グラウンディングされていない回答が生成されるリスク。",
+        "人間によるゲートにとどめるべきアクションの過剰な自動化。",
+        "ガードレールが不完全な場合におけるPIIの漏洩。",
+        "ゲートされるアクションが多すぎる場合における承認のボトルネック。"
+      ],
+      "failureModes": [
+        "検索漏れが発生するか、古いポリシーが返されることで、エージェントが自信ありげに誤った回答をしてしまう。",
+        "ツールエラー（CRMのタイムアウト、スキーマの乖離など）により、アクションが回復不能なまま中途半端に適用された状態になる。",
+        "ルーターが人間に多くを送りすぎることでエスカレーションが過負荷になり、自動化の効果が損なわれる。",
+        "キャッシュの誤ヒットにより、以前の顧客のコンテキストや古い回答が返されてしまう。"
+      ],
+      "lessons": [
+        "まずグラウンディングを：自律性を拡大する前に検索品質に投資してください。誤った回答のほとんどは検索の失敗に起因します。",
+        "デフォルトではなくリスクに基づいてゲートを設定してください。人間による承認は、取り消し不可能なアクションや規制対象のアクションに限定します。",
+        "キャッシュのスコープを顧客またはコンテキストごとに設定し、ヒット内容を検証してください。そうしないと、誤った回答が漏洩する原因になります。",
+        "初日からインストルメンテーション（計測機能の実装）を行ってください。トレースできないものを改善することはできません。"
+      ],
+      "kpis": [
+        {
+          "metric": "解決率 / 回避率（デフレクション率）",
+          "note": "人間を介さずに解決された会話の割合。主要な価値指標ですが、CSAT（顧客満足度）と併せて評価して初めて意味を持ちます。"
+        },
+        {
+          "metric": "グラウンディングされた回答の正確性",
+          "note": "回答が正確であり、かつ引用によって裏付けられている頻度。評価セットに照らし合わせて測定します。"
+        },
+        {
+          "metric": "エスカレーション率＆品質",
+          "note": "人間にエスカレーションされた割合と、それらのエスカレーションが妥当であったかどうか。高すぎると自動化が無駄になり、低すぎると悪い結果を招くリスクがあります。"
+        },
+        {
+          "metric": "解決された会話あたりのコスト",
+          "note": "解決あたりの総トークン数、ツール、およびキャッシュの効果。ルーティングとキャッシュにより、一般的なパスではこれを低く抑える必要があります。"
+        },
+        {
+          "metric": "CSAT / 解決時間",
+          "note": "顧客満足度および解決までの時間。顧客体験を犠牲にして回避率（デフレクション）を最適化してしまうのを防ぎます。"
+        }
+      ],
+      "scaling": [
+        "ボリュームはステートレスなオーケストレーションループによってスケールしますが、実際の容量制限となるのはベクトルストアとツールのバックエンドです。",
+        "重複する質問が増えてもセマンティックキャッシュがコストを平準化するため、一般的なパスではスケールに応じてユニットコストが低下します。",
+        "人間による承認は線形にスケールしないボトルネックです。ゲート対象となるセットを小さく保ち、優先順位付け（トリアージ）を行ってください。",
+        "コストの大部分を占めるのは、キャッシュされた多数 of FAQではなく、まれで複雑な会話です。"
+      ],
+      "examples": [
+        "注文ステータスに関する質問に対し、キャッシュから引用付きで即座に回答する。",
+        "エージェントが返金の下書きを作成し、発行前に人間が承認する。",
+        "曖昧な請求に関する紛争を、会話の完全なコンテキストを添付して人間のエージェントにエスカレーションする。"
+      ],
+      "faqs": [
+        {
+          "q": "これはチャットボットとどう違うのですか？",
+          "a": "チャットボットは回答するだけですが、このアーキテクチャはアクションも実行します。ツールを使用してエンタープライズシステムへの読み書きを行い、検索されたナレッジに基づいて回答をグラウンディングし、固定のスクリプトに従うのではなくリスクに基づいてエスカレーションします。"
+        },
+        {
+          "q": "なぜ人間を関与させ続ける（Human-in-the-loop）必要があるのですか？",
+          "a": "一部のアクションは取り消し不可能であったり、規制対象であったりするためです。リスクベースの承認ゲートを設けることで、安全な大部分の自動化を進めつつ、影響の大きいステップにおける説明責任を人間にとどめることができます。"
+        },
+        {
+          "q": "何が信頼性を担保するのですか？",
+          "a": "検索によるグラウンディング（根拠付け）、入力と出力に対するガードレール、そしてすべての会話を評価して本番リリース前にデグレード（退行）を検知できるオブザーバビリティです。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "客户服务智能体",
+      "summary": "企业级客户服务智能体的参考架构，可端到端地解决常见请求——基于可靠的知识库进行回答，通过工具在 CRM 和工单系统中执行操作，并在置信度较低或操作影响重大时升级给人工处理。它将用于知识对齐（grounding）的检索与基于风险的人工审批相结合以确保安全，并具备可观测性，以便对每次对话进行评估和改进。",
+      "keyConcepts": [
+        "知识对齐（Grounding）：回答来自检索到的、可引用的知识，而非模型的记忆。",
+        "工具使用：智能体通过描述清晰的工具对 CRM/工单系统进行读写操作。",
+        "基于风险的升级：置信度较低或高影响的操作将流转至人工审核关卡。",
+        "可观测性：对每一次交互进行追踪，以便对系统进行评估和改进。"
+      ],
+      "definition": "客户服务智能体架构是一种基于知识对齐、使用工具的对话式智能体，它能在安全护栏内自主解决客户请求，根据风险和置信度升级给人工处理，并提供完整的追踪以供评估。",
+      "architecture": [
+        "其核心是一个编排循环，用于对传入的请求进行分类、检索相关知识、决定是可以直接回答还是必须执行操作，然后做出响应、调用工具或进行升级。路由机制会将简单的常见问题解答（FAQ）分流到低成本的检索与回答路径，而将复杂或敏感的案例分流到更丰富、更谨慎的路径。",
+        "知识对齐（Grounding）是必不可少的：智能体基于帮助中心和政策文档的检索层进行回答，并引用其来源。当请求需要执行操作（如退款、修改订单、关闭工单）时，智能体会准备好该操作，并在执行前将高影响的操作路由到人工审批关卡。",
+        "横切关注层使其具备安全性和可改进性：安全护栏可脱敏个人身份信息（PII）并拦截不符合政策的响应；语义缓存可吸收重复问题以降低成本 and 延迟；可观测性层可追踪每一次交互，以便对照评估集对对话进行评分。"
+      ],
+      "flow": [
+        "1. 接收：用户消息到达；检测并脱敏个人身份信息（PII）以进行日志记录。",
+        "2. 路由：对意图和风险进行分类——常见问题解答（FAQ）、账户操作或待升级候选件。",
+        "3. 检索：从知识库中提取用于对齐的段落（首先检查缓存）。",
+        "4. 决策：基于对齐的知识进行回答、调用 CRM/工单工具，或进行升级。",
+        "5. 关卡：高影响操作暂停以等待人工审批；低影响操作直接执行。",
+        "6. 响应：附带引用进行回复；记录追踪信息 and 结果以供评估。"
+      ],
+      "components": [
+        "意图与风险路由器",
+        "带引用的检索层（RAG）",
+        "CRM / 工单工具",
+        "人工审批关卡",
+        "安全护栏与 PII 脱敏",
+        "语义缓存",
+        "可观测性与评估"
+      ],
+      "referenceScenario": {
+        "context": "一个典型的 B2C 支持服务台，通过聊天和电子邮件处理订单、账单和账户问题。",
+        "scenario": "一线请求（订单状态、密码重置、政策咨询）由智能体解决；退款和账户变更由智能体起草并由人工审批；任何含糊不清的问题都会附带完整的上下文升级给人工处理。",
+        "technology": "编排循环、基于帮助中心的 RAG、调用 CRM 的函数调用工具、基于风险的审批关卡以及对话追踪。",
+        "load": "具有突发性且集中在工作时间的流量，伴有长尾的罕见意图；少数常见问题解答（FAQ）占了大部分流量，这些流量由语义缓存吸收。",
+        "results": "参考目标：大部分一线流量通过基于知识对齐且附带引用的回答进行分流；高影响操作保留在人工关卡之后；成本集中在罕见、复杂的案例上，而非重复性的案例。具体数值取决于您的流量组合，应进行实际测量，而非主观假设。"
+      },
+      "benefits": [
+        "端到端解决常见请求，同时将高风险操作保留在人工审批关卡之后。",
+        "基于知识对齐且附带引用的回答可减少幻觉，建立客户信任。",
+        "语义缓存和路由机制可将开销集中在真正需要的案例上。",
+        "完整的追踪使质量可衡量，并能捕获回归问题。"
+      ],
+      "risks": [
+        "如果检索质量差，会导致回答缺乏知识对齐。",
+        "过度自动化本应保留在人工审批关卡之后的操作。",
+        "如果安全护栏不完整，会导致个人身份信息（PII）泄露。",
+        "如果设置审批关卡的操作过多，会导致审批瓶颈。"
+      ],
+      "failureModes": [
+        "检索遗漏或返回了过时的政策，导致智能体给出了看似笃定但实际上错误的回答。",
+        "工具错误（CRM 超时、Schema 漂移）导致操作处于半应用状态且无法恢复。",
+        "当路由器将过多请求发送给人工时，会导致升级过载，从而使自动化失去意义。",
+        "缓存错误命中返回了前一个客户的上下文或过时的回答。"
+      ],
+      "lessons": [
+        "对齐优先：在扩大自主权之前，先投入精力提升检索质量——大多数错误的回答都是检索失败导致的。",
+        "按风险设置关卡，而非默认设置；将人工审批保留给不可逆或受监管的操作。",
+        "按客户/上下文限制缓存范围并验证命中情况，否则会泄露错误的回答。",
+        "从第一天起就进行插桩；无法追踪就无法改进。"
+      ],
+      "kpis": [
+        {
+          "metric": "自助解决率 / 分流率",
+          "note": "无需人工介入即可解决的对话比例；这是核心价值指标——但只有与客户满意度（CSAT）结合时才有意义。"
+        },
+        {
+          "metric": "对齐回答准确率",
+          "note": "对照评估集衡量，回答正确且有引用支持的频率。"
+        },
+        {
+          "metric": "升级率与升级质量",
+          "note": "升级到人工处理的比例以及这些升级是否合理；比例过高会浪费自动化资源，过低则可能导致不良后果。"
+        },
+        {
+          "metric": "单次解决对话的成本",
+          "note": "每次解决所需的总 Token 数、工具调用和缓存效果；路由和缓存机制应使常规路径上的这一成本保持在较低水平。"
+        },
+        {
+          "metric": "CSAT / 解决时间",
+          "note": "客户满意度和解决时间；防止以牺牲客户体验为代价来优化分流率。"
+        }
+      ],
+      "scaling": [
+        "业务量随无状态编排循环进行扩展；向量存储和工具后端才是真正的容量限制瓶颈。",
+        "随着重复问题的增加，语义缓存可以平抑成本，因此在常规路径上，单位成本会随着规模的扩大而下降。",
+        "人工审批是无法线性扩展的瓶颈——应保持需要审批的操作集规模较小并做好分类。",
+        "成本主要由罕见、复杂的对话决定，而非占大多数的已缓存常见问题解答（FAQ）。"
+      ],
+      "examples": [
+        "一个订单状态问题，通过缓存立即回答并附带引用。",
+        "由智能体起草并在发放前由人工审批的退款。",
+        "一个含糊不清的账单争议，附带完整的对话上下文升级给人工客服处理。"
+      ],
+      "faqs": [
+        {
+          "q": "这与聊天机器人有什么不同？",
+          "a": "聊天机器人只负责回答；而该架构还能执行操作——它使用工具对企业系统进行读写——并且它将回答与检索到的知识进行对齐，根据风险进行升级，而不是遵循固定的脚本。"
+        },
+        {
+          "q": "为什么还要保留人工参与？",
+          "a": "因为某些操作是不可逆的或受监管的。基于风险的审批关卡可确保高影响步骤的责任落实到人，同时实现绝大多数安全操作的自动化。"
+        },
+        {
+          "q": "是什么使其具有可靠性？",
+          "a": "基于检索的真实性锚定（Grounding）、针对输入和输出的安全护栏，以及能够让您评估每一次对话并在发布前捕获退化问题的可观测性。"
+        }
       ]
     }
   }

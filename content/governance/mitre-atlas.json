@@ -275,6 +275,306 @@
           "a": "Primeiro como backlog de red team. Mesmo sem um programa de detecção, a matriz dá uma lista priorizada de ataques a tentar contra o próprio sistema — e tentá-los é a forma mais barata de descobrir quais dos seus controles só existem no papel."
         }
       ]
+    },
+    "fr": {
+      "name": "MITRE ATLAS",
+      "summary": "MITRE ATLAS représente le côté adverse de la carte. Là où OWASP nomme les classes de vulnérabilités de votre application, ATLAS répertorie les tactiques et techniques que les attaquants utilisent réellement contre les systèmes basés sur l'IA — reconnaissance d'un modèle, obtention d'accès, préparation d'une attaque, contournement des défenses, exfiltration de données — organisées de la même manière que MITRE ATT&CK structure les intrusions conventionnelles, et fondées sur des études de cas documentées plutôt que sur des hypothèses.",
+      "definition": "MITRE ATLAS (Adversarial Threat Landscape for Artificial-Intelligence Systems) est une base de connaissances publique répertoriant les tactiques, techniques et études de cas d'adversaires observées contre les systèmes basés sur l'IA. Elle est structurée selon le modèle MITRE ATT&CK afin que les attaques spécifiques à l'IA puissent être décrites dans les mêmes termes que le reste du renseignement sur les menaces de l'organisation.",
+      "scope": "Toute organisation qui conçoit, déploie ou défend des systèmes basés sur l'IA, et toute équipe de sécurité qui maîtrise déjà ATT&CK. Il s'agit d'une base de connaissances et non d'une norme : elle ne donne lieu à aucune certification et ne prescrit aucun contrôle — elle décrit les actions des adversaires afin que les défenseurs puissent décider quoi détecter et prévenir.",
+      "keyPoints": [
+        "Structuré sous forme de tactiques (l'objectif de l'adversaire) et de techniques (la manière d'y parvenir), reflétant délibérément MITRE ATT&CK pour que les attaques d'IA s'intègrent dans les modèles de menaces existants plutôt que de s'ajouter à côté.",
+        "Il couvre l'ensemble du cycle d'intrusion — reconnaissance, accès au modèle, exécution, persistance, contournement des défenses, découverte, collecte, exfiltration, impact — avec des étapes spécifiques à l'IA comme la préparation d'une attaque contre un modèle.",
+        "Il est basé sur des preuves : les entrées s'appuient sur des incidents documentés et des exercices de red-teaming, ce qui le distingue d'une simple liste de problèmes théoriques.",
+        "Il complète OWASP plutôt que de le concurrencer. OWASP classifie les faiblesses de votre conception ; ATLAS décrit le comportement de l'adversaire qui les exploite.",
+        "Sa valeur pratique réside dans la détection et le red-teaming : une technique est à la fois une action que vous pouvez tester contre votre propre système et un signal que vous pouvez rechercher dans vos journaux.",
+        "La matrice est mise à jour et enrichie à mesure que de nouvelles attaques sont documentées, ce qui en fait une référence vivante et non une liste de contrôle figée."
+      ],
+      "controls": [
+        {
+          "control": "Cartographier votre pile d'agents sur la matrice",
+          "note": "Parcourez les tactiques au regard de votre propre architecture et identifiez les techniques accessibles. C'est l'accessibilité, et non la plausibilité, qui détermine si une technique mérite d'être contrée."
+        },
+        {
+          "control": "Transformer les techniques accessibles en détections",
+          "note": "Pour chacune d'elles, identifiez le signal qui la révélerait dans votre télémétrie. Une technique sans signal correspondant est une technique que vous avez choisi d'ignorer."
+        },
+        {
+          "control": "L'utiliser comme backlog de red-team",
+          "note": "Les techniques sont testables par définition. Exécutez-les contre votre propre système et considérez le résultat « impossible à reproduire » comme une information digne d'être enregistrée, et non comme une absence de travail."
+        },
+        {
+          "control": "Utiliser le langage ATT&CK là où l'organisation l'emploie déjà",
+          "note": "Rapportez les vulnérabilités d'IA selon la terminologie ATLAS afin qu'elles intègrent les mêmes processus de renseignement, de tri et de réponse que le reste. L'introduction d'un nouveau vocabulaire est le meilleur moyen pour que le risque lié à l'IA ne soit géré par personne."
+        },
+        {
+          "control": "Lire les études de cas, pas seulement la matrice",
+          "note": "Les études de cas contiennent les détails opérationnels — comment l'accès a été obtenu, ce que l'adversaire a fait ensuite — qui sont transposables à votre propre environnement."
+        },
+        {
+          "control": "Réintégrer les données dans le modèle de menaces",
+          "note": "ATLAS constitue l'apport externe d'un modèle de menaces basé sur des agents ; c'est au sein de ce modèle que ses techniques se traduisent en surfaces d'attaque sous votre responsabilité, associées à des contrôles et des responsables."
+        }
+      ],
+      "checklist": [
+        "Identifier quelles tactiques ATLAS sont effectivement accessibles au sein de votre architecture.",
+        "Pour chaque technique accessible, enregistrer le contrôle qui la limite et le signal qui la détecte.",
+        "En l'absence de détection, mentionnez-le explicitement plutôt que de laisser la ligne vide.",
+        "Planifier des exercices de red-teaming basés sur la matrice, et constater l'échec ou la réussite de chaque tentative avant de revendiquer une couverture.",
+        "Rapporter les résultats en utilisant les identifiants ATLAS afin qu'ils s'intègrent au flux de renseignement existant de l'organisation.",
+        "Examiner périodiquement la matrice, car de nouvelles techniques sont documentées au fur et à mesure de leur observation.",
+        "Établir des correspondances avec le Top 10 OWASP pour les LLM afin de lier les faiblesses aux comportements des adversaires, plutôt que de les suivre séparément."
+      ],
+      "pitfalls": [
+        "Le traiter comme une liste de contrôle de conformité. Rien ne certifie la conformité à ATLAS, et « nous avons examiné la matrice » ne constitue pas un contrôle.",
+        "Cartographier chaque technique sans tenir compte de son accessibilité, ce qui produit un document volumineux sans priorités.",
+        "Maintenir le renseignement sur les menaces d'IA dans un processus distinct de celui existant dans l'organisation — précisément ce que l'alignement avec ATT&CK cherche à éviter.",
+        "Lire la matrice en ignorant les études de cas, alors que c'est là que résident les détails opérationnels transposables.",
+        "Présumer d'une couverture sans test préalable. Une technique que vous n'avez jamais tentée contre votre propre système reste une simple hypothèse."
+      ],
+      "examples": [
+        "Une équipe cartographie son agent de retrieval sur ATLAS et constate que l'accès au modèle est trivial (le point de terminaison est public), la préparation est peu coûteuse (n'importe quel éditeur de wiki peut injecter du contenu) et l'exfiltration ne fait l'objet d'aucun contrôle (les flux sortants sont illimités). Trois techniques, dont une seule les préoccupait déjà.",
+        "Une organisation de sécurité qui pratique déjà l'ingénierie de détection basée sur ATT&CK ajoute les techniques ATLAS au même backlog, de sorte que les détections spécifiques à l'IA soient conçues, révisées et gérées en astreinte par l'équipe dédiée à cette tâche.",
+        "Une équipe de red-teaming utilise la matrice comme liste de cibles pour l'évaluation d'un agent, et transmet ses résultats avec les identifiants ATLAS — ce qui permet aux personnes n'ayant jamais travaillé sur un agent de trier les vulnérabilités."
+      ],
+      "faqs": [
+        {
+          "q": "ATLAS remplace-t-il ATT&CK ?",
+          "a": "Non, c'est un complément. ATT&CK couvre les comportements conventionnels des adversaires ; ATLAS couvre les étapes spécifiques à l'IA, délibérément structurées de la même manière afin qu'une attaque commençant par un e-mail de phishing et se terminant sur un modèle puisse être décrite de bout en bout."
+        },
+        {
+          "q": "Ai-je besoin d'ATLAS si je suis déjà le Top 10 OWASP pour les LLM ?",
+          "a": "Ils répondent à des objectifs différents et leur association est essentielle. OWASP vous indique la classe de faiblesse présente ; ATLAS vous décrit ce qu'un adversaire en fait, ce qui est indispensable pour la détection et le red-teaming."
+        },
+        {
+          "q": "Quelle est sa place au sein d'une petite équipe ?",
+          "a": "D'abord comme backlog de red-team. Même sans programme de détection, la matrice fournit une liste prioritaire d'attaques à tester contre votre propre système — et ces tests constituent le moyen le plus économique de découvrir quels contrôles n'existent que sur le papier."
+        }
+      ]
+    },
+    "de": {
+      "name": "MITRE ATLAS",
+      "summary": "MITRE ATLAS ist die gegnerische Seite der Landkarte. Während OWASP die Schwachstellenklassen in Ihrer Anwendung benennt, katalogisiert ATLAS die Taktiken und Techniken, die Angreifer tatsächlich gegen KI-gestützte Systeme einsetzen – Aufklärung eines Modells, Erlangung von Zugriff, Vorbereitung eines Angriffs, Umgehen von Abwehrmechanismen, Exfiltration von Daten – organisiert auf dieselbe Weise, wie MITRE ATT&CK konventionelle Einbrüche strukturiert, und gestützt auf dokumentierte Fallstudien statt auf Hypothesen.",
+      "definition": "MITRE ATLAS (Adversarial Threat Landscape for Artificial-Intelligence Systems) ist eine öffentlich zugängliche Wissensdatenbank für Taktiken, Techniken und Fallstudien von Angreifern, die bei KI-gestützten Systemen beobachtet wurden. Sie ist nach dem Vorbild von MITRE ATT&CK strukturiert, sodass KI-spezifische Angriffe mit denselben Begriffen beschrieben werden können wie die übrige Threat Intelligence einer Organisation.",
+      "scope": "Jede Organisation, die KI-gestützte Systeme entwickelt, bereitstellt oder verteidigt, und jedes Sicherheitsteam, das bereits mit ATT&CK arbeitet. Es handelt sich um eine Wissensdatenbank, nicht um einen Standard: Es gibt keine Zertifizierung danach und es werden keine Kontrollen vorgeschrieben – es beschreibt, was Angreifer tun, damit Verteidiger entscheiden können, was sie erkennen und verhindern wollen.",
+      "keyPoints": [
+        "Strukturiert in Taktiken (das Ziel des Angreifers) und Techniken (wie es erreicht wird), wobei MITRE ATT&CK bewusst gespiegelt wird, damit sich KI-Angriffe in bestehende Bedrohungsmodelle einfügen, anstatt isoliert daneben zu stehen.",
+        "Es deckt den gesamten Verlauf eines Einbruchs ab – Aufklärung, Zugriff auf das Modell, Ausführung, Persistenz, Umgehung der Verteidigung, Entdeckung, Erfassung, Exfiltration, Auswirkungen – einschließlich KI-spezifischer Phasen wie der Vorbereitung eines Angriffs auf ein Modell.",
+        "Es ist evidenzbasiert: Die Einträge stützen sich auf dokumentierte Vorfälle und Red-Teaming-Übungen, was es von einer bloßen Liste theoretisch möglicher Probleme unterscheidet.",
+        "Es ergänzt OWASP, anstatt damit zu konkurrieren. OWASP klassifiziert Schwachstellen in Ihrem Design; ATLAS beschreibt das Verhalten von Angreifern, die diese ausnutzen.",
+        "Sein praktischer Nutzen liegt in der Erkennung und im Red-Teaming: Eine Technik ist etwas, das Sie an Ihrem eigenen System ausprobieren und in Ihren Protokollen suchen können.",
+        "Die Matrix wird gepflegt und erweitert, sobald neue Angriffe dokumentiert werden. Sie ist somit eine lebendige Referenz und keine starre Checkliste."
+      ],
+      "controls": [
+        {
+          "control": "Ordnen Sie Ihren Agenten-Stack der Matrix zu",
+          "note": "Gehen Sie die Taktiken anhand Ihrer eigenen Architektur durch und markieren Sie, welche Techniken erreichbar sind. Die Erreichbarkeit, nicht die Plausibilität, macht eine Technik verteidigungswürdig."
+        },
+        {
+          "control": "Erreichbare Techniken in Erkennungsmechanismen umwandeln",
+          "note": "Benennen Sie für jede Technik das Signal, das sie in Ihrer Telemetrie anzeigen würde. Eine Technik ohne entsprechendes Signal ist eine, die Sie bewusst ignorieren."
+        },
+        {
+          "control": "Nutzen Sie es als Red-Team-Backlog",
+          "note": "Techniken sind von Natur aus testbar. Führen Sie sie gegen Ihr eigenes System aus und betrachten Sie 'konnten wir nicht reproduzieren' als ein aufzeichnungswürdiges Ergebnis, nicht als mangelnde Arbeit."
+        },
+        {
+          "control": "Sprechen Sie ATT&CK, wo die Organisation es bereits tut",
+          "note": "Melden Sie KI-Ergebnisse in ATLAS-Begriffen, damit sie in dieselben Analyse-, Triage- und Reaktionsprozesse einfließen wie alles andere. Ein neuartiges Vokabular führt nur dazu, dass sich am Ende niemand für das KI-Risiko verantwortlich fühlt."
+        },
+        {
+          "control": "Lesen Sie die Fallstudien, nicht nur die Matrix",
+          "note": "Die Fallstudien enthalten die operativen Details – wie der Zugriff erlangt wurde, was der Angreifer als Nächstes tat –, also genau den Teil, der sich auf Ihre eigene Umgebung übertragen lässt."
+        },
+        {
+          "control": "Führen Sie es in das Bedrohungsmodell zurück",
+          "note": "ATLAS ist der externe Input für ein agentenbasiertes Bedrohungsmodell; im Bedrohungsmodell werden seine Techniken zu Angriffsflächen in Ihrem Besitz, denen Kontrollen und Verantwortliche zugeordnet sind."
+        }
+      ],
+      "checklist": [
+        "Identifizieren Sie, welche ATLAS-Taktiken in Ihrer Architektur überhaupt erreichbar sind.",
+        "Erfassen Sie für jede erreichbare Technik die Kontrollmaßnahme, die sie eingrenzt, und das Signal, das sie erkennt.",
+        "Wenn keine Erkennung vorhanden ist, geben Sie dies explizit an, anstatt die Zeile leer zu lassen.",
+        "Planen Sie Red-Teaming-Übungen auf Basis der Matrix und prüfen Sie, ob jeder Versuch fehlschlägt oder erfolgreich ist, bevor Sie eine Abdeckung beanspruchen.",
+        "Melden Sie Ergebnisse unter Verwendung von ATLAS-Identifikatoren, damit sie in den bestehenden Informationsfluss der Organisation einfließen.",
+        "Überprüfen Sie die Matrix regelmäßig, da neue Techniken dokumentiert werden, sobald sie beobachtet werden.",
+        "Verknüpfen Sie die Ergebnisse mit den OWASP LLM Top 10, damit Schwachstellen und Angreiferverhalten einander zugeordnet und nicht separat nachverfolgt werden."
+      ],
+      "pitfalls": [
+        "Es als Compliance-Checkliste zu behandeln. Es gibt keine Zertifizierung nach ATLAS, und 'Wir haben die Matrix überprüft' ist keine Kontrollmaßnahme.",
+        "Jede Technik unabhängig von ihrer Erreichbarkeit zuzuordnen, was zu einem umfangreichen Dokument ohne Prioritäten führt.",
+        "Die KI-Bedrohungsanalyse in einem separaten Prozess von den bestehenden Prozessen der Organisation zu halten – genau das Ergebnis, das durch die Ausrichtung an ATT&CK verhindert werden soll.",
+        "Die Matrix zu lesen und die Fallstudien zu überspringen, in denen die übertragbaren operativen Details enthalten sind.",
+        "Eine Abdeckung ohne Tests anzunehmen. Eine Technik, die Sie noch nie an Ihrem eigenen System ausprobiert haben, ist eine Technik, zu der Sie lediglich eine Meinung haben."
+      ],
+      "examples": [
+        "Ein Team ordnet seinen Retrieval-Agenten ATLAS zu und stellt fest, dass der Modellzugriff trivial ist (der Endpunkt ist öffentlich), die Vorbereitung kostengünstig ist (jeder Wiki-Editor kann Inhalte einschleusen) und die Exfiltration unkontrolliert erfolgt (der ausgehende Datenverkehr ist unbeschränkt). Drei Techniken, von denen sie sich um eine bereits Sorgen gemacht haben.",
+        "Eine Sicherheitsorganisation, die bereits ATT&CK-basiertes Detection Engineering betreibt, fügt ATLAS-Techniken demselben Backlog hinzu, sodass KI-spezifische Erkennungen von dem Team erstellt, überprüft und im Bereitschaftsdienst betreut werden, das diese Arbeit ohnehin erledigt.",
+        "Ein Red Team nutzt die Matrix als Zielliste für eine Agenten-Bewertung und meldet die Ergebnisse unter Verwendung von ATLAS-Identifikatoren zurück – was es Personen, die noch nie an einem Agenten gearbeitet haben, ermöglicht, die Ergebnisse zu triagieren."
+      ],
+      "faqs": [
+        {
+          "q": "Ist ATLAS ein Ersatz für ATT&CK?",
+          "a": "Nein, es ist eine Ergänzung. ATT&CK deckt konventionelles Angreiferverhalten ab; ATLAS deckt die KI-spezifischen Phasen ab, bewusst auf dieselbe Weise strukturiert, sodass ein Angriff, der mit einer Phishing-E-Mail beginnt und bei einem Modell endet, durchgängig beschrieben werden kann."
+        },
+        {
+          "q": "Benötige ich ATLAS, wenn ich bereits die OWASP LLM Top 10 befolge?",
+          "a": "Sie dienen unterschiedlichen Zwecken, und die Kombination ist der entscheidende Punkt. OWASP sagt Ihnen, welche Klasse von Schwachstelle Sie haben; ATLAS sagt Ihnen, was ein Angreifer damit macht – und genau das ist es, was für Erkennung und Red-Teaming benötigt wird."
+        },
+        {
+          "q": "Wo lässt es sich in einem kleinen Team einsetzen?",
+          "a": "In erster Linie als Red-Team-Backlog. Selbst ohne ein Erkennungsprogramm bietet die Matrix eine priorisierte Liste von Angriffen, die Sie an Ihrem eigenen System ausprobieren können – und diese Versuche sind der günstigste Weg, um herauszufinden, welche Ihrer Kontrollmaßnahmen nur auf dem Papier existieren."
+        }
+      ]
+    },
+    "ja": {
+      "name": "MITRE ATLAS",
+      "summary": "MITRE ATLASは、攻撃者側のマップです。OWASPがアプリケーション内の脆弱性クラスを定義するのに対し、ATLASは攻撃者がAI搭載システムに対して実際に使用する戦術（タクティクス）と手法（テクニック）をカタログ化しています。これには、モデルの偵察、アクセス権の獲得、攻撃の準備、防御の回避、データの持ち出しなどが含まれ、MITRE ATT&CKが従来の侵入を整理するのと同じ方法で整理されており、仮説ではなく文書化されたケーススタディに基づいています。",
+      "definition": "MITRE ATLAS（Adversarial Threat Landscape for Artificial-Intelligence Systems）は、AI搭載システムに対して観測された攻撃者の戦術、手法、およびケーススタディをまとめた、一般に公開されているナレッジベースです。MITRE ATT&CKの構成を踏襲しているため、AI特有の攻撃を、組織の他の脅威インテリジェンスと同じ用語で記述することができます。",
+      "scope": "AI搭載システムを構築、展開、または防御するすべての組織、およびすでにATT&CKを共通言語としているすべてのセキュリティチームが対象です。これはナレッジベースであり、標準規格ではありません。これに対する認証制度はなく、管理策を規定するものでもありません。防御側が何を検知し防止すべきかを決定できるように、攻撃者の行動を記述したものです。",
+      "keyPoints": [
+        "戦術（攻撃者の目標）と手法（それがどのように達成されるか）として構成されており、意図的にMITRE ATT&CKを反映させているため、AIへの攻撃を既存の脅威モデルから切り離すことなく、その中に組み込むことができます。",
+        "偵察、モデルへのアクセス、実行、永続化、防御回避、検出、収集、持ち出し、影響といった侵入プロセス全体をカバーしており、モデルに対する攻撃の準備など、AI特有のステージも含まれています。",
+        "エビデンス主導です。各項目は文書化されたインシデントやレッドチームの演習に基づいているため、理論上起こり得る問題の単なるリストとは一線を画しています。",
+        "OWASPと競合するのではなく、補完し合う関係にあります。OWASPが設計上の弱点を分類するのに対し、ATLASはそれらを悪用する攻撃者の行動を記述します。",
+        "その実用的な価値は、検知とレッドチーム演習にあります。手法（テクニック）とは、自社システムに対して試行できるものであり、ログから探し出すことができるものです。",
+        "マトリクスは新しい攻撃が文書化されるたびに維持・拡張されるため、固定されたチェックリストではなく、生きたリファレンスとして機能します。"
+      ],
+      "controls": [
+        {
+          "control": "エージェントスタックをマトリクスにマッピングする",
+          "note": "自社のアーキテクチャに照らし合わせて戦術を検証し、どの手法が到達可能（reachable）であるかをマークします。防御する価値がある手法かどうかを決めるのは、もっともらしさ（plausibility）ではなく、到達可能性（reachability）です。"
+        },
+        {
+          "control": "到達可能な手法を検知ルールに変換する",
+          "note": "それぞれの手法について、テレメトリ上でそれを特定できるシグナルを定義します。対応するシグナルがない手法は、「気づかないことに決めた」手法と同義です。"
+        },
+        {
+          "control": "レッドチームのバックログとして活用する",
+          "note": "手法はその構造上、テスト可能です。自社システムに対して実行し、「再現できなかった」という結果も、成果なしとするのではなく、記録に値する結果として扱ってください。"
+        },
+        {
+          "control": "組織がすでにATT&CKを使用している場合は、それに合わせる",
+          "note": "AIに関する検出事項をATLASの用語で報告することで、他のすべての脅威と同じインテリジェンス、トリアージ、対応プロセスに組み込むことができます。独自の新しい語彙を使ってしまうと、AIリスクの責任の所在が曖昧になる原因になります。"
+        },
+        {
+          "control": "マトリクスだけでなく、ケーススタディも読む",
+          "note": "ケーススタディには、どのようにアクセスが取得されたか、攻撃者が次に何を行ったかといった運用の詳細が含まれており、これこそが自社の環境に応用できる部分です。"
+        },
+        {
+          "control": "脅威モデルにフィードバックする",
+          "note": "ATLAS is the external input to an agentic threat model; the threat model is where its techniques become surfaces you own, with controls and owners attached."
+        }
+      ],
+      "checklist": [
+        "自社のアーキテクチャにおいて、どのATLAS戦術がそもそも到達可能であるかを特定する。",
+        "到達可能な各手法について、それを制限する管理策と、それを検知するシグナルを記録する。",
+        "検知手段がない場合は、行を空白にするのではなく、明示的にその旨を記載する。",
+        "マトリクスから抽出したレッドチーム演習を計画し、カバレッジを主張する前に、各試行が成功したか失敗したかを確認する。",
+        "検出事項をATLASの識別子（ID）を使用して報告し、組織の既存のインテリジェンスフローに統合する。",
+        "新しい手法は観測され次第文書化されるため、マトリクスを定期的に見直す。",
+        "OWASP LLM Top 10と相互参照し、弱点と攻撃者の行動を別々に追跡するのではなく、相互にマッピングする。"
+      ],
+      "pitfalls": [
+        "コンプライアンスのチェックリストとして扱うこと。ATLASに対する認証制度はなく、「マトリクスを確認した」ことは管理策にはなりません。",
+        "到達可能性を考慮せずにすべての手法をマッピングすること。これは膨大な文書を生み出すだけで、優先順位が定まらなくなります。",
+        "AI脅威インテリジェンスを組織の既存のプロセスから切り離して管理すること。これこそが、ATT&CKとの整合性を図ることで防ごうとしている事態です。",
+        "マトリクスだけを読み、応用可能な運用の詳細が記載されているケーススタディをスキップすること。",
+        "テストをせずにカバレッジを想定すること。自社システムに対して一度も試したことがない手法は、単なる主観的な意見にすぎません。"
+      ],
+      "examples": [
+        "あるチームが自社の検索エージェントをATLASにマッピングしたところ、モデルへのアクセスが容易（エンドポイントが公開されている）、準備が容易（Wikiの編集者なら誰でもコンテンツを仕込める）、持ち出しに対する管理策がない（送信制限がない）ことが判明しました。これら3つの手法のうち、1つはすでに懸念していたものでした。",
+        "すでにATT&CKベースの検知エンジニアリングを運用しているセキュリティ組織が、ATLASの手法を同じバックログに追加します。これにより、AI特有の検知ルールが、その業務を担当するチームによって構築、レビュー、およびオンコール対応されるようになります。",
+        "レッドチームがマトリクスをエージェント評価のターゲットリストとして使用し、ATLASの識別子で報告します。これにより、エージェントを扱ったことがない担当者でも、その検出事項をトリアージできるようになります。"
+      ],
+      "faqs": [
+        {
+          "q": "ATLASはATT&CKの代わりになるものですか？",
+          "a": "いいえ、補完し合う関係です。ATT&CKは従来の攻撃者の行動をカバーし、ATLASはAI特有のステージをカバーします。意図的に同じ構造に設計されているため、フィッシングメールから始まりモデルで終わるような攻撃を、終始一貫して記述することができます。"
+        },
+        {
+          "q": "すでにOWASP LLM Top 10に従っている場合でも、ATLASは必要ですか？",
+          "a": "これらは異なる目的を持っており、組み合わせて使用することに意味があります。OWASPはどのような脆弱性のクラスが存在するかを示し、ATLASは攻撃者がそれをどのように悪用するかを示します。これこそが、検知やレッドチーム演習で実際に必要とされる情報です。"
+        },
+        {
+          "q": "小規模なチームでは、どのように活用できますか？",
+          "a": "まずはレッドチームのバックログとして活用するのが最適です。検知プログラムがなくても、マトリクスは自社システムに対して試行すべき攻撃の優先順位付きリストを提供します。実際に試行することは、どの管理策が机上の空論にすぎないかを明らかにする最も低コストな方法です。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "MITRE ATLAS",
+      "summary": "MITRE ATLAS 是对抗视角的防御地图。如果说 OWASP 命名了应用程序中的漏洞类别，那么 ATLAS 则编目了攻击者实际针对 AI 系统所使用的战术和技术——包括模型侦察、获取访问权限、策划攻击、规避防御、外发数据等。它按照 MITRE ATT&CK 组织传统入侵的方式进行组织，并基于已记录的案例研究而非假设。",
+      "definition": "MITRE ATLAS（人工智能系统对抗性威胁格局）是一个公开可用的知识库，收录了针对 AI 系统观察到的对手战术、技术和案例研究。它基于 MITRE ATT&CK 构建，以便能够使用与组织其他威胁情报相同的术语来描述 AI 特有的攻击。",
+      "scope": "任何构建、部署或防御 AI 系统的组织，以及任何已经熟悉 ATT&CK 的安全团队。它是一个知识库，而不是标准：没有任何机构对其进行认证，它也不规定任何控制措施——它描述了对手的行为，以便防御者能够决定检测和预防什么。",
+      "keyPoints": [
+        "结构分为战术（对手的目标）和技术（如何实现目标），刻意镜像了 MITRE ATT&CK，以便将 AI 攻击纳入现有的威胁模型中，而不是将其孤立在外。",
+        "它涵盖了整个入侵弧——侦察、获取模型访问权限、执行、持久化、防御规避、发现、收集、数据外发、影响——并包含针对模型的策划攻击等 AI 特有阶段。",
+        "它是以证据为导向的：所有条目都基于已记录的事件和红队演练，这使它区别于一份仅在理论上可能出错的清单。",
+        "它与 OWASP 互为补充，而非竞争关系。OWASP 对设计中的缺陷进行分类；ATLAS 则描述了利用这些缺陷的对手行为。",
+        "它的实际价值在于检测和红队演练：一项技术既是你可以针对自己的系统尝试的操作，也是你可以在日志中寻找的线索。",
+        "随着新攻击被记录，该矩阵会持续维护和扩展，因此它是一个动态的参考，而非固定的清单。"
+      ],
+      "controls": [
+        {
+          "control": "将您的智能体技术栈映射到矩阵上",
+          "note": "对照您自己的架构梳理这些战术，并标记哪些技术是可触达的。决定一项技术是否值得防御的是可触达性，而非合理性。"
+        },
+        {
+          "control": "将可触达的技术转化为检测规则",
+          "note": "针对每一项技术，指明在遥测数据中能够显示它的信号。没有对应信号的技术，意味着你已决定对其视而不见。"
+        },
+        {
+          "control": "将其用作红队待办任务",
+          "note": "这些技术在设计上就是可测试的。在您自己的系统上运行它们，并将“我们无法复现”视为一个值得记录的结果，而不是工作的缺失。"
+        },
+        {
+          "control": "在组织已使用 ATT&CK 的地方使用相同的语言",
+          "note": "用 ATLAS 术语报告 AI 发现，以便它们能与所有其他事件一样进入相同的威胁情报、分流和响应流程。新奇的词汇往往会导致 AI 风险最终无人负责。"
+        },
+        {
+          "control": "阅读案例研究，而不仅仅是矩阵",
+          "note": "案例研究承载了操作细节——如何获取访问权限、对手接下来做了什么——这些正是可以应用到您自己环境中的部分。"
+        },
+        {
+          "control": "将其反馈到威胁模型中",
+          "note": "ATLAS 是智能体威胁模型的外部输入；而威胁模型则是将其技术转化为您所拥有的攻击面，并为其分配控制措施和负责人的地方。"
+        }
+      ],
+      "checklist": [
+        "识别在您的架构中究竟有哪些 ATLAS 战术是可触达的。",
+        "针对每个可触达的技术，记录限制它的控制措施以及检测它的信号。",
+        "在没有检测手段的地方，应明确说明，而不是将该行留空。",
+        "安排从矩阵中提取的红队演练，并在声称覆盖之前，确认每次尝试的失败或成功。",
+        "使用 ATLAS 标识符报告发现，以便它们融入组织现有的情报流中。",
+        "定期审查矩阵，因为随着新技术的发现，它们会被记录下来。",
+        "与 OWASP LLM Top 10 进行交叉引用，以便将缺陷和对手行为相互映射，而不是分开跟踪。"
+      ],
+      "pitfalls": [
+        "将其视为合规清单。没有任何机构对 ATLAS 进行认证，且“我们审查了矩阵”并不是一种控制措施。",
+        "不考虑可触达性而映射每项技术，这会导致文档庞大且毫无优先级可言。",
+        "将 AI 威胁情报与组织现有的流程分开——这恰恰是与 ATT&CK 保持一致所要防止的结果。",
+        "只阅读矩阵而跳过案例研究，而案例研究正是可借鉴的操作细节所在。",
+        "在没有测试的情况下假设已覆盖。一项你从未针对自己的系统尝试过的技术，只能算作你对其持有某种看法。"
+      ],
+      "examples": [
+        "一个团队将其检索智能体映射到 ATLAS 上，发现模型访问非常简单（端点是公开的）、策划成本极低（任何维基编辑者都可以植入内容），且数据外发没有任何控制（出口不受限制）。这涉及三项技术，其中一项是他们之前就已经在担心的。",
+        "一个已经运行基于 ATT&CK 的检测工程的安全组织将 ATLAS 技术添加到同一个待办任务中，从而使 AI 特有的检测规则由负责该工作的团队进行构建、审查和值班响应。",
+        "红队将该矩阵用作智能体评估的目标列表，并使用 ATLAS 标识符报告结果——这使得从未接触过智能体的人员也能对发现的问题进行分流。"
+      ],
+      "faqs": [
+        {
+          "q": "ATLAS 是 ATT&CK 的替代品吗？",
+          "a": "不，它是伴侣。ATT&CK 涵盖传统的对手行为；ATLAS 涵盖 AI 特有的阶段，其结构刻意保持一致，以便能够端到端地描述从钓鱼邮件开始并以模型结束的攻击。"
+        },
+        {
+          "q": "如果已经遵循 OWASP LLM Top 10，我还需要 ATLAS 吗？",
+          "a": "它们服务于不同的目的，两者的结合才是关键。OWASP 告诉您存在哪类缺陷；ATLAS 告诉您对手会如何利用它，而这正是检测和红队演练实际需要的。"
+        },
+        {
+          "q": "它适合小团队的什么环节？",
+          "a": "首先作为红队的待办任务。即使没有检测计划，该矩阵也提供了一个针对您自己系统尝试攻击的优先级列表——而尝试这些攻击是发现哪些控制措施仅存在于纸面上的最廉价方式。"
+        }
+      ]
     }
   }
 }

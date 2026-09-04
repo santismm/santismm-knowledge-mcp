@@ -1,6 +1,8 @@
 {
   "slug": "human-approval-gate",
-  "aliases": ["PAT-001"],
+  "aliases": [
+    "PAT-001"
+  ],
   "category": "safety",
   "updated": "2026-06-21",
   "version": "1.0",
@@ -305,6 +307,370 @@
         {
           "q": "O que acontece num timeout?",
           "a": "Defina um fallback seguro: reter a ação, escalar ou cancelar. Nunca autoexecute em silêncio uma ação com portão só porque ninguém respondeu."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Porte d'approbation humaine",
+      "summary": "Une porte d'approbation humaine suspend un flux de travail automatisé à un point de contrôle défini afin qu'une personne puisse examiner, modifier ou rejeter une action proposée avant son exécution — en particulier pour les opérations à fort impact, irréversibles ou réglementées. C'est la forme opérationnelle de la supervision humaine (human-in-the-loop).",
+      "definition": "Une porte d'approbation humaine est un point de contrôle inséré avant une action automatisée à fort impact, où une personne examine et approuve, modifie ou rejette l'action proposée avant son exécution.",
+      "problem": "Laisser un système d'IA exécuter de manière autonome des actions à fort impact présente un risque d'erreurs coûteuses, irréversibles ou non conformes, sans possibilité d'intervention du jugement humain.",
+      "context": "Utilisez une porte d'approbation pour les actions dont le coût de l'erreur l'emporte sur la latence de l'examen : paiements, suppressions, communications externes, modifications en production ou tout ce qui est réglementé.",
+      "solution": [
+        "Insérez un point de contrôle avant l'action sensible : le système prépare l'action proposée avec suffisamment de contexte, puis la suspend et l'oriente vers un humain qui l'approuve, la modifie ou la rejette. En cas d'approbation, elle se poursuit ; en cas de dépassement de délai (timeout), elle se replie de manière sécurisée. Chaque décision est enregistrée pour audit.",
+        "Ne soumettez à approbation que les étapes à fort impact, pas la totalité — un excès de contrôle détruit la valeur de l'automatisation et provoque une lassitude face aux approbations. Choisissez les points de contrôle en fonction du risque."
+      ],
+      "components": [
+        "Point de contrôle basé sur le risque",
+        "Aperçu de l'action proposée",
+        "Approuver / modifier / rejeter",
+        "Dépassement de délai et repli sécurisé",
+        "Journal d'audit"
+      ],
+      "benefits": [
+        "Prévient les erreurs coûteuses ou irréversibles.",
+        "Maintient la responsabilité chez l'humain.",
+        "Répond aux exigences de conformité et de supervision.",
+        "Renforce la confiance, permettant une autonomie progressive."
+      ],
+      "risks": [
+        "Ajoute de la latence et limite le débit.",
+        "Approbation automatique (rubber-stamping) si les réviseurs manquent de contexte ou de temps.",
+        "Lassitude face aux approbations en raison d'un trop grand nombre de contrôles.",
+        "Goulots d'étranglement si les réviseurs ne sont pas disponibles."
+      ],
+      "whenNot": [
+        "Pour les actions à faible impact et facilement réversibles.",
+        "Lorsque le débit doit être élevé et le risque est faible.",
+        "Lorsqu'un garde-fou déterministe peut approuver automatiquement en toute sécurité."
+      ],
+      "examples": [
+        "Un agent rédigeant un remboursement qu'un humain approuve avant qu'il ne soit émis.",
+        "Une modification en production qui se suspend pour validation avant le déploiement.",
+        "Un e-mail sortant mis en attente pour examen avant envoi."
+      ],
+      "productionEvidence": {
+        "context": "Flux de travail d'entreprise où un agent peut déclencher des actions irréversibles ou réglementées — remboursements, modifications de compte, communications sortantes, déploiements en production.",
+        "scenario": "L'agent prépare l'action avec tout le contexte nécessaire et se met en pause ; un réviseur l'approuve, la modifie ou la rejette ; après approbation, elle s'exécute, en cas de dépassement de délai, elle se replie de manière sécurisée. Chaque décision est enregistrée.",
+        "technology": "Un moteur de flux de travail avec interruptions (par ex. LangGraph), une file d'attente/interface utilisateur d'approbation et un journal d'audit.",
+        "load": "Seule une minorité d'étapes à fort impact est soumise à approbation ; la majeure partie des étapes à faible impact s'exécute automatiquement, de sorte que le volume de travail des réviseurs reste limité.",
+        "results": "Modèle observé : les erreurs irréversibles sont interceptées avant l'exécution et la responsabilité reste humaine, au prix d'une latence accrue sur les étapes contrôlées. Filtrez par risque et mesurez la latence d'approbation ainsi que le taux d'approbation automatique sur votre propre flux de travail — il s'agit d'observations de référence, pas de chiffres garantis."
+      },
+      "kpis": [
+        {
+          "metric": "Latence d'approbation",
+          "note": "Temps pendant lequel une action attend à la porte ; le coût principal de ce modèle et le premier élément à surveiller pour détecter les goulots d'étranglement."
+        },
+        {
+          "metric": "Taux de rejet / modification",
+          "note": "Part des propositions qu'un humain rejette ou modifie — un taux proche de zéro signifie souvent une approbation automatique sans examen, un taux très élevé signifie que l'agent n'est pas encore digne de confiance."
+        },
+        {
+          "metric": "Débit par rapport aux étapes contrôlées",
+          "note": "Tâches accomplies par heure par rapport au nombre d'étapes contrôlées ; un excès de contrôle effondre le débit."
+        },
+        {
+          "metric": "Taux de dépassement de délai / repli",
+          "note": "Fréquence à laquelle les actions atteignent le dépassement de délai et adoptent le repli sécurisé ; un taux en hausse signale une surcharge des réviseurs."
+        }
+      ],
+      "failureModes": [
+        "Approbation automatique (rubber-stamping) : les réviseurs approuvent sans examen réel lorsqu'ils manquent de contexte ou de temps, ce qui neutralise l'utilité de la porte.",
+        "Lassitude face aux approbations et goulots d'étranglement dus à un excès de contrôle sur les étapes à faible impact.",
+        "Auto-exécution silencieuse en cas de dépassement de délai lorsqu'aucun repli sécurisé n'est défini.",
+        "Contexte insuffisant dans la proposition, empêchant l'humain de prendre une décision éclairée."
+      ],
+      "lessons": [
+        "Contrôlez en fonction du risque, pas par défaut — automatisez les étapes à faible impact et réservez les portes d'approbation aux actions irréversibles ou réglementées.",
+        "Fournissez aux réviseurs suffisamment de contexte et un choix clair entre approuver, modifier ou rejeter pour éviter l'approbation automatique.",
+        "Définissez toujours un repli sécurisé en cas de dépassement de délai ; n'exécutez jamais silencieusement une action contrôlée.",
+        "Enregistrez chaque décision pour audit — la porte d'approbation constitue également votre preuve de conformité."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il du concept de « human-in-the-loop » ?",
+          "a": "C'est la mise en œuvre concrète du principe de « human-in-the-loop » : un point de contrôle d'approbation spécifique dans un flux de travail avant une action sensible."
+        },
+        {
+          "q": "Les approbations ne risquent-elles pas de tout ralentir ?",
+          "a": "Seulement si vous abusez des contrôles. Appliquez des portes d'approbation en fonction du risque — automatisez les étapes à faible impact et réservez l'approbation aux actions à fort impact, irréversibles ou réglementées."
+        },
+        {
+          "q": "Que se passe-t-il en cas de dépassement de délai ?",
+          "a": "Définissez un repli sécurisé : suspendez l'action, escaladez ou annulez. N'exécutez jamais automatiquement et silencieusement une action contrôlée simplement parce que personne n'a répondu."
+        }
+      ]
+    },
+    "de": {
+      "name": "Human-Approval-Gate",
+      "summary": "Ein Human-Approval-Gate pausiert einen automatisierten Workflow an einem definierten Kontrollpunkt, sodass eine Person eine vorgeschlagene Aktion überprüfen, bearbeiten oder ablehnen kann, bevor sie ausgeführt wird – insbesondere bei folgenschweren, unumkehrbaren oder regulierten Operationen. Es ist die operative Form der Human-in-the-Loop-Überwachung.",
+      "definition": "Ein Human-Approval-Gate ist ein Kontrollpunkt, der vor einer folgenschweren automatisierten Aktion eingefügt wird und an dem eine Person die vorgeschlagene Aktion überprüft und genehmigt, bearbeitet oder ablehnt, bevor sie ausgeführt wird.",
+      "problem": "Wenn man ein KI-System folgenschwere Aktionen autonom ausführen lässt, riskieren Sie kostspielige, unumkehrbare oder nicht-konforme Fehler, ohne dass die Möglichkeit einer menschlichen Beurteilung besteht.",
+      "context": "Verwenden Sie ein Freigabe-Gate für Aktionen, bei denen die Fehlerkosten die Latenz der Überprüfung überwiegen: Zahlungen, Löschungen, externe Kommunikation, Änderungen in der Produktion oder alles Regulierte.",
+      "solution": [
+        "Fügen Sie vor der sensiblen Aktion einen Kontrollpunkt ein: Das System bereitet die vorgeschlagene Aktion mit ausreichend Kontext vor, pausiert sie dann und leitet sie an einen Menschen weiter, der sie genehmigt, bearbeitet oder ablehnt. Nach der Freigabe wird sie fortgesetzt; bei einer Zeitüberschreitung greift ein sicherer Fallback. Jede Entscheidung wird für Audits protokolliert.",
+        "Versehen Sie nur die folgenschweren Schritte mit einem Gate, nicht alles – ein Übermaß an Gates zerstört den Wert der Automatisierung und führt zu Freigabemüdigkeit. Wählen Sie Kontrollpunkte nach Risiko aus."
+      ],
+      "components": [
+        "Risikobasierter Kontrollpunkt",
+        "Vorschau der vorgeschlagenen Aktion",
+        "Genehmigen / Bearbeiten / Ablehnen",
+        "Zeitüberschreitung & sicherer Fallback",
+        "Audit-Protokoll"
+      ],
+      "benefits": [
+        "Verhindert kostspielige oder unumkehrbare Fehler.",
+        "Belässt die Verantwortung beim Menschen.",
+        "Erfüllt Compliance- und Überwachungsanforderungen.",
+        "Baut Vertrauen auf und ermöglicht eine schrittweise Autonomie."
+      ],
+      "risks": [
+        "Erhöht die Latenz und schränkt den Durchsatz ein.",
+        "Abnicken (Rubber-Stamping), wenn Prüfern Kontext oder Zeit fehlt.",
+        "Freigabemüdigkeit durch zu viele Gates.",
+        "Engpässe, wenn Prüfer nicht verfügbar sind."
+      ],
+      "whenNot": [
+        "Für risikoarme, leicht umkehrbare Aktionen.",
+        "Wenn der Durchsatz hoch und das Risiko gering sein muss.",
+        "Wenn eine deterministische Guardrail sicher automatisch freigeben kann."
+      ],
+      "examples": [
+        "Ein Agent, der eine Rückerstattung entwirft, die ein Mensch vor der Auszahlung freigibt.",
+        "Eine Produktionsänderung, die vor dem Deployment für eine Freigabe pausiert.",
+        "Eine ausgehende E-Mail, die vor dem Senden zur Überprüfung in die Warteschlange gestellt wird."
+      ],
+      "productionEvidence": {
+        "context": "Unternehmens-Workflows, bei denen ein Agent unumkehrbare oder regulierte Aktionen auslösen kann – Rückerstattungen, Kontoänderungen, ausgehende Kommunikation, Produktions-Deployments.",
+        "scenario": "Der Agent bereitet die Aktion mit vollständigem Kontext vor und pausiert; ein Prüfer genehmigt, bearbeitet oder lehnt sie ab; nach der Freigabe wird sie ausgeführt, bei einer Zeitüberschreitung greift ein sicherer Fallback. Jede Entscheidung wird protokolliert.",
+        "technology": "Eine Workflow-Engine mit Interrupts (z. B. LangGraph), einer Freigabe-Warteschlange/UI und einem Audit-Protokoll.",
+        "load": "Nur eine Minderheit der folgenschweren Schritte wird mit einem Gate versehen; der Großteil der risikoarmen Schritte läuft automatisch ab, sodass das Prüfvolumen begrenzt bleibt.",
+        "results": "Beobachtetes Muster: Unumkehrbare Fehler werden vor der Ausführung abgefangen und die Verantwortung verbleibt beim Menschen, auf Kosten einer zusätzlichen Latenz bei den mit Gates versehenen Schritten. Setzen Sie Gates risikobasiert ein und messen Sie die Freigabelatenz sowie die Abnick-Rate (Rubber-Stamp-Rate) in Ihrem eigenen Workflow – dies sind Referenzbeobachtungen, keine garantierten Zahlen."
+      },
+      "kpis": [
+        {
+          "metric": "Freigabelatenz",
+          "note": "Zeit, die eine Aktion am Gate wartet; die Hauptkosten des Musters und der erste Punkt, an dem auf Engpässe geachtet werden sollte."
+        },
+        {
+          "metric": "Ablehnungs- / Bearbeitungsrate",
+          "note": "Anteil der Vorschläge, die ein Mensch ablehnt oder bearbeitet – ein Wert nahe Null bedeutet oft bloßes Abnicken, ein sehr hoher Wert zeigt, dass dem Agenten noch nicht vertraut wird."
+        },
+        {
+          "metric": "Durchsatz vs. mit Gates versehene Schritte",
+          "note": "Pro Stunde abgeschlossene Aufgaben im Verhältnis zu den mit Gates versehenen Schritten; ein Übermaß an Gates lässt den Durchsatz einbrechen."
+        },
+        {
+          "metric": "Zeitüberschreitungs- / Fallback-Rate",
+          "note": "Wie oft Aktionen das Timeout erreichen und den sicheren Fallback nutzen; eine steigende Rate signalisiert eine Überlastung der Prüfer."
+        }
+      ],
+      "failureModes": [
+        "Abnicken (Rubber-Stamping): Prüfer genehmigen ohne echte Prüfung, wenn ihnen Kontext oder Zeit fehlt, was das Gate wirkungslos macht.",
+        "Freigabemüdigkeit und Engpässe durch ein Übermaß an Gates bei risikoarmen Schritten.",
+        "Stille automatische Ausführung bei Zeitüberschreitung, wenn kein sicherer Fallback definiert ist.",
+        "Unzureichender Kontext im Vorschlag, sodass der Mensch keine fundierte Entscheidung treffen kann."
+      ],
+      "lessons": [
+        "Setzen Sie Gates risikobasiert ein, nicht standardmäßig – automatisieren Sie risikoarme Schritte und reservieren Sie Gates für unumkehrbare oder regulierte Aktionen.",
+        "Geben Sie Prüfern ausreichend Kontext und eine klare Auswahl zwischen Genehmigen, Bearbeiten und Ablehnen, um bloßes Abnicken zu verhindern.",
+        "Definieren Sie bei einer Zeitüberschreitung immer einen sicheren Fallback; führen Sie eine mit einem Gate versehene Aktion niemals stillschweigend aus.",
+        "Protokollieren Sie jede Entscheidung für Audits – das Gate ist gleichzeitig Ihr Compliance-Nachweis."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies von Human-in-the-Loop?",
+          "a": "Es ist die konkrete Implementierung des Human-in-the-Loop-Prinzips: ein spezifischer Freigabe-Kontrollpunkt in einem Workflow vor einer sensiblen Aktion."
+        },
+        {
+          "q": "Werden Freigaben nicht alles verlangsamen?",
+          "a": "Nur, wenn Sie zu viele Gates einsetzen. Wenden Sie Gates risikobasiert an – automatisieren Sie risikoarme Schritte und reservieren Sie Freigaben für folgenschwere, unumkehrbare oder regulierte Aktionen."
+        },
+        {
+          "q": "Was passiert bei einer Zeitüberschreitung?",
+          "a": "Definieren einen sicheren Fallback: Halten Sie die Aktion an, eskalieren Sie sie oder brechen Sie sie ab. Führen Sie eine mit einem Gate versehene Aktion niemals stillschweigend automatisch aus, nur weil niemand geantwortet hat."
+        }
+      ]
+    },
+    "ja": {
+      "name": "人による承認ゲート",
+      "summary": "人による承認ゲートは、定義されたチェックポイントで自動化されたワークフローを一時停止し、提案されたアクションが実行される前に、人がそれをレビュー、編集、または拒否できるようにするものです。これは特に、影響が大きく、不可逆的、または規制対象となる操作に有効です。これは、Human-in-the-Loop（人間関与）による監視を運用可能な形にしたものです。",
+      "definition": "人による承認ゲートとは、影響の大きい自動化アクションの前に挿入される制御チェックポイントであり、アクションが実行される前に、人が提案されたアクションをレビューし、承認、編集、または拒否する場所です。",
+      "problem": "AIシステムに影響の大きいアクションを自律的に実行させると、人間の判断が介在する余地がなくなり、コストがかさむ不可逆的なミスや、コンプライアンス違反のミスが発生するリスクがあります。",
+      "context": "エラーによるコストがレビューのレイテンシーを上回るようなアクション（支払い、削除、外部通信、本番環境の変更、または規制対象のあらゆる処理）に対して、承認ゲートを使用します。",
+      "solution": [
+        "機密性の高いアクションの前にチェックポイントを挿入します。システムは十分なコンテキストを添えて提案されたアクションを準備し、処理を一時停止して、承認、編集、または拒否を行う担当者にルーティングします。承認されれば処理が進み、タイムアウトした場合は安全にフォールバックします。すべての決定は監査のためにログに記録されます。",
+        "すべてのステップではなく、影響の大きいステップのみにゲートを設定します。過剰なゲート設定は自動化の価値を損ない、承認疲れを引き起こします。リスクに基づいてチェックポイントを選択してください。"
+      ],
+      "components": [
+        "リスクベースのチェックポイント",
+        "提案されたアクションのプレビュー",
+        "承認 / 編集 / 拒否",
+        "タイムアウトと安全なフォールバック",
+        "監査ログ"
+      ],
+      "benefits": [
+        "コストのかさむミスや不可逆的なミスを防ぎます。",
+        "説明責任を人間に留めます。",
+        "コンプライアンスおよび監視の要件を満たします。",
+        "信頼を構築し、段階的な自律性を可能にします。"
+      ],
+      "risks": [
+        "レイテンシーを追加し、スループットを制限します。",
+        "レビュー担当者にコンテキストや時間が不足している場合、形骸化（目くら判）が発生します。",
+        "ゲートが多すぎることによる承認疲れ。",
+        "レビュー担当者が対応できない場合のボトルネック。"
+      ],
+      "whenNot": [
+        "影響が小さく、簡単に元に戻せるアクションの場合。",
+        "スループットを高く維持する必要があり、リスクが低い場合。",
+        "決定論的なガードレールによって安全に自動承認できる場合。"
+      ],
+      "examples": [
+        "エージェントが返金を起票し、発行前に人間が承認する。",
+        "デプロイ前にサインオフ（承認）のために一時停止する本番環境の変更。",
+        "送信前にレビューのためにキューに入れられる送信メール。"
+      ],
+      "productionEvidence": {
+        "context": "エージェントが不可逆的または規制対象のアクション（返金、アカウント変更、外部通信、本番環境へのデプロイなど）をトリガーする可能性のあるエンタープライズワークフロー。",
+        "scenario": "エージェントは完全なコンテキストを添えてアクションを準備し、一時停止します。レビュー担当者がそれを承認、編集、または拒否します。承認されると実行され、タイムアウトした場合は安全にフォールバックします。すべての決定はログに記録されます。",
+        "technology": "割り込み機能を備えたワークフローエンジン（例：LangGraph）、承認キュー/UI、および監査ログ。",
+        "load": "影響の大きい少数のステップのみにゲートが設定され、影響の小さい大部分のステップは自動的に実行されるため、レビュー担当者の作業量は制限された範囲内に収まります。",
+        "results": "観察されたパターン：ゲートが設定されたステップでレイテンシーが追加される代わりに、実行前に不可逆的なエラーが捕捉され、説明責任が人間に留まります。リスクに基づいてゲートを設定し、独自のワークフローで承認レイテンシーと形骸化率を測定してください。これらは参照用の観察結果であり、保証された数値ではありません。"
+      },
+      "kpis": [
+        {
+          "metric": "承認レイテンシー",
+          "note": "アクションがゲートで待機する時間。このパターンの主なコストであり、ボトルネックとして最初に監視すべき項目です。"
+        },
+        {
+          "metric": "拒否 / 編集率",
+          "note": "人間が拒否または編集した提案の割合。ほぼゼロの場合は形骸化（目くら判）を意味することが多く、非常に高い場合はエージェントがまだ信頼されていないことを意味します。"
+        },
+        {
+          "metric": "スループットとゲート設定ステップの比率",
+          "note": "ゲートが設定されたステップ数に対する1時間あたりの完了タスク数。過剰なゲート設定はスループットを崩壊させます。"
+        },
+        {
+          "metric": "タイムアウト / フォールバック率",
+          "note": "アクションがタイムアウトに達し、安全なフォールバックが実行される頻度。この割合の上昇は、レビュー担当者の過負荷を示しています。"
+        }
+      ],
+      "failureModes": [
+        "形骸化（目くら判）：レビュー担当者にコンテキストや時間が不足している場合、十分な精査なしに承認してしまい、ゲートの目的が果たせなくなります。",
+        "影響の小さいステップへの過剰なゲート設定による、承認疲れとボトルネック。",
+        "安全なフォールバックが定義されていない場合に、タイムアウト時にサイレントで自動実行されてしまうこと。",
+        "提案に含まれるコンテキストが不十分なため、人間が十分な情報に基づいた意思決定を行えないこと。"
+      ],
+      "lessons": [
+        "デフォルトではなくリスクに基づいてゲートを設定します。影響の小さいステップは自動化し、不可逆的または規制対象のアクションのためにゲートを予約しておきます。",
+        "形骸化を防ぐために、レビュー担当者に十分なコンテキストと、明確な「承認/編集/拒否」の選択肢を提供します。",
+        "タイムアウト時には必ず安全なフォールバックを定義してください。ゲートされたアクションをサイレントで実行してはなりません。",
+        "すべての決定を監査用にログ記録します。ゲートはコンプライアンスの証拠でもあります。"
+      ],
+      "faqs": [
+        {
+          "q": "Human-in-the-Loop（人間関与）と何が違うのですか？",
+          "a": "これはHuman-in-the-Loop原則の具体的な実装です。機密性の高いアクションの前に、ワークフロー内に特定の承認チェックポイントを設けます。"
+        },
+        {
+          "q": "承認によってすべての処理が遅くなりませんか？",
+          "a": "過剰にゲートを設定した場合のみです。リスクに基づいてゲートを適用してください。影響の小さいステップは自動化し、影響が大きい、不可逆的、または規制対象のアクションのために承認を予約しておきます。"
+        },
+        {
+          "q": "タイムアウト時には何が起こりますか？",
+          "a": "安全なフォールバック（アクションの保留、エスカレーション、またはキャンセル）を定義してください。誰も応答しなかったからといって、ゲートされたアクションをサイレントで自動実行してはなりません。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "人工审批关卡",
+      "summary": "人工审批关卡在定义的检查点暂停自动化工作流，以便人员在执行建议的操作之前进行审查、编辑或拒绝——特别是针对高影响、不可逆或受监管的操作。它是人机回环（human-in-the-loop）监督的运行形式。",
+      "definition": "人工审批关卡是在高影响自动化操作之前插入的控制检查点，人员在操作执行前对其进行审查并批准、编辑或拒绝。",
+      "problem": "让 AI 系统自主执行高影响操作会带来代价高昂、不可逆或违规的错误风险，且人类无法进行判断。",
+      "context": "对于错误成本超过审查延迟的操作，请使用审批关卡：例如支付、删除、外部通信、生产变更或任何受监管的事项。",
+      "solution": [
+        "在敏感操作之前插入一个检查点：系统准备好包含足够上下文的建议操作，然后暂停并将其路由给人工进行批准、编辑或拒绝。批准后继续执行；超时则安全回退。每个决策都会记录在日志中以备审计。",
+        "仅对高影响步骤设置关卡，而不是所有步骤——过度设置关卡会破坏自动化的价值并导致审批疲劳。根据风险选择检查点。"
+      ],
+      "components": [
+        "基于风险的检查点",
+        "建议操作预览",
+        "批准 / 编辑 / 拒绝",
+        "超时与安全回退",
+        "审计日志"
+      ],
+      "benefits": [
+        "防止代价高昂或不可逆的错误。",
+        "保持由人类承担责任。",
+        "满足合规和监督要求。",
+        "建立信任，从而逐步实现自主性。"
+      ],
+      "risks": [
+        "增加延迟并限制吞吐量。",
+        "如果审查人员缺乏上下文或时间，审批会流于形式。",
+        "关卡过多导致审批疲劳。",
+        "如果审查人员不可用，会造成瓶颈。"
+      ],
+      "whenNot": [
+        "适用于低影响、易于逆转的操作。",
+        "适用于吞吐量要求高且风险低的情况。",
+        "适用于确定性护栏可以安全自动批准的情况。"
+      ],
+      "examples": [
+        "智能体起草退款，人工在发放前进行审批。",
+        "生产变更在部署前暂停以等待签字批准。",
+        "外发电子邮件在发送前排队等待审查。"
+      ],
+      "productionEvidence": {
+        "context": "智能体可能触发不可逆或受监管操作的企业工作流——退款、账户变更、外部通信、生产部署。",
+        "scenario": "智能体准备好包含完整上下文的操作并暂停；审查人员对其进行批准、编辑或拒绝；批准后执行，超时则安全回退。每个决策都会记录在日志中。",
+        "technology": "具有中断功能的工作流引擎（例如 LangGraph）、审批队列/UI 以及审计日志。",
+        "load": "仅对少数高影响步骤设置关卡；大部分低影响步骤自动运行，因此审查人员的工作量保持在有限范围内。",
+        "results": "观察到的模式：不可逆的错误在执行前被拦截，责任由人类承担，代价是设置关卡的步骤增加了延迟。请根据风险设置关卡，并在您自己的工作流中衡量审批延迟和流于形式率——这些是参考观察结果，而非保证的数据。"
+      },
+      "kpis": [
+        {
+          "metric": "审批延迟",
+          "note": "操作在关卡处等待的时间；该模式的核心成本，也是寻找瓶颈时首先需要关注的指标。"
+        },
+        {
+          "metric": "拒绝 / 编辑率",
+          "note": "人工拒绝或编辑的建议比例——接近零通常意味着审批流于形式，非常高则意味着智能体尚未获得信任。"
+        },
+        {
+          "metric": "吞吐量与设关步骤对比",
+          "note": "每小时完成的任务数与设置关卡的步骤数对比；过度设置关卡会导致吞吐量骤降。"
+        },
+        {
+          "metric": "超时 / 回退率",
+          "note": "操作触发超时并采用安全回退的频率；该比例上升表明审查人员过载。"
+        }
+      ],
+      "failureModes": [
+        "审批流于形式：当审查人员缺乏上下文或时间时，他们会在没有真正审查的情况下予以批准，从而使关卡失效。",
+        "对低影响步骤过度设置关卡导致审批疲劳和瓶颈。",
+        "未定义安全回退时，超时后静默自动执行。",
+        "建议中上下文不足，导致人类无法做出知情决策。"
+      ],
+      "lessons": [
+        "根据风险设置关卡，而非默认设置——自动执行低影响步骤，并将关卡保留给不可逆或受监管的操作。",
+        "为审查人员提供足够的上下文以及明确的批准/编辑/拒绝选项，以防止审批流于形式。",
+        "始终定义超时安全回退；绝不静默执行设置了关卡的操作。",
+        "记录每个决策以备审计——关卡也是您的合规证据。"
+      ],
+      "faqs": [
+        {
+          "q": "这与人机协同（human-in-the-loop）有什么不同？",
+          "a": "它是人机回环原则的具体实现：工作流中敏感操作之前的特定审批检查点。"
+        },
+        {
+          "q": "审批难道不会拖慢一切吗？",
+          "a": "只有在过度设置关卡时才会如此。根据风险应用关卡——自动执行低影响步骤，并将审批保留给高影响、不可逆或受监管的操作。"
+        },
+        {
+          "q": "超时会发生什么？",
+          "a": "定义安全回退：挂起操作、升级或取消。绝不能仅仅因为无人响应就静默自动执行设置了关卡的操作。"
         }
       ]
     }

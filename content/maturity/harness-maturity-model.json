@@ -33,6 +33,26 @@
           "name": "Com prompts",
           "summary": "Uma pessoa conduz cada execução. O modelo é chamado à mão, os prompts vivem em janelas de chat e nas anotações de alguém, e de uma execução não sobrevive nada.",
           "whatBreaks": "Nada é repetível, então nada pode ser melhorado. Duas pessoas que pedem a mesma coisa constroem dois sistemas diferentes, e nenhuma sabe dizer por que o seu funciona."
+        },
+        "fr": {
+          "name": "Prompté",
+          "summary": "Une personne pilote chaque exécution. Le modèle est appelé manuellement, les prompts résident dans des fenêtres de chat et dans les notes de quelqu'un, et rien d'une exécution ne lui survit.",
+          "whatBreaks": "Rien n'est reproductible, donc rien ne peut être amélioré. Deux personnes demandant la même chose construisent deux systèmes différents, et aucune ne peut expliquer pourquoi le sien fonctionne."
+        },
+        "zh": {
+          "name": "提示词驱动",
+          "summary": "每次运行都由人工驱动。模型被手动调用，提示词存在于聊天窗口和某些人的笔记中，运行结束后不留存任何内容。",
+          "whatBreaks": "没有任何内容是可重复的，因此无法进行任何改进。两个人请求相同的内容会构建出两个不同的系统，且双方都无法说明为什么自己的系统能正常工作。"
+        },
+        "de": {
+          "name": "Prompt-gesteuert",
+          "summary": "Eine Person steuert jeden Durchlauf. Das Modell wird manuell aufgerufen, die Prompts befinden sich in Chatfenstern und in den Notizen von jemandem, und nichts von einem Durchlauf bleibt danach erhalten.",
+          "whatBreaks": "Nichts ist wiederholbar, also kann auch nichts verbessert werden. Zwei Personen, die dasselbe anfordern, bauen zwei verschiedene Systeme, und keiner von beiden kann sagen, warum seines funktioniert."
+        },
+        "ja": {
+          "name": "プロンプト駆動（Prompted）",
+          "summary": "人間がすべての実行を主導します。モデルは手動で呼び出され、プロンプトはチャットウィンドウや誰かのメモの中に存在し、実行に関する情報は何も残りません。",
+          "whatBreaks": "再現性が一切ないため、改善も不可能です。2人の人間が同じことを要求しても、異なる2つのシステムが構築され、どちらもなぜ自分のシステムが機能しているのかを説明できません。"
         }
       },
       "criteria": []
@@ -59,6 +79,26 @@
           "name": "Com roteiro",
           "summary": "As chamadas estão em código e os prompts são artefatos versionados. Uma execução se reproduz a partir do repositório e não da memória de alguém.",
           "whatBreaks": "O agente ainda não pode agir sobre nada, então seu custo está limitado pela sua inutilidade. Parar aqui é uma decisão defensável; chamar de agente o que existe, não."
+        },
+        "fr": {
+          "name": "Scripté",
+          "summary": "Les appels sont intégrés au code et les prompts sont des artefacts versionnés. Une exécution peut être reproduite à partir du dépôt plutôt qu'à partir de la mémoire de quelqu'un.",
+          "whatBreaks": "L'agent ne peut toujours agir sur rien, son coût est donc limité par son inutilité. S'arrêter là est un choix défendable ; qualifier d'agent ce que vous avez ne l'est pas."
+        },
+        "zh": {
+          "name": "脚本化",
+          "summary": "调用写在代码中，提示词是版本化的产物。可以从代码仓库中复现运行，而不是凭某人的记忆。",
+          "whatBreaks": "智能体仍然无法对任何事物采取行动，因此其成本受限于其无用性。在此处停止是一个合理的选择；但将您现有的东西称为智能体则不合理。"
+        },
+        "de": {
+          "name": "Skriptbasiert",
+          "summary": "Die Aufrufe befinden sich im Code und die Prompts sind versionierte Artefakte. Ein Durchlauf kann aus dem Repository reproduziert werden, anstatt aus dem Gedächtnis von jemandem.",
+          "whatBreaks": "Der Agent kann immer noch auf nichts einwirken, daher sind seine Kosten durch seine Nutzlosigkeit begrenzt. Hier aufzuhören ist eine vertretbare Entscheidung; das, was Sie haben, als Agenten zu bezeichnen, ist es nicht."
+        },
+        "ja": {
+          "name": "スクリプト化（Scripted）",
+          "summary": "呼び出しがコード化され、プロンプトはバージョン管理された成果物となります。実行は、誰かの記憶からではなく、リポジトリから再現できます。",
+          "whatBreaks": "エージェントはまだ何も実行できないため、そのコストは役に立たないという事実によって制限されます。ここで立ち止まるのは妥当な選択肢ですが、手元にあるものをエージェントと呼ぶのは妥当ではありません。"
         }
       },
       "criteria": [
@@ -77,6 +117,18 @@
             },
             "pt": {
               "test": "Pegue uma execução do mês passado e reproduza-a. O prompt, o modelo e os parâmetros saem todos do controle de versão."
+            },
+            "fr": {
+              "test": "Prenez une exécution du mois dernier et reproduisez-la. Le prompt, le modèle et les paramètres proviennent tous du contrôle de version."
+            },
+            "zh": {
+              "test": "获取上个月的一次运行并进行复现。提示词、模型和参数均来自版本控制。"
+            },
+            "de": {
+              "test": "Nehmen Sie einen Durchlauf aus dem letzten Monat und reproduzieren Sie ihn. Der Prompt, das Modell und die Parameter stammen alle aus der Versionskontrolle."
+            },
+            "ja": {
+              "test": "先月の実行結果を取得して再現します。プロンプト、モデル、およびパラメータはすべてバージョン管理システムから取得されます。"
             }
           }
         },
@@ -95,6 +147,18 @@
             },
             "pt": {
               "test": "Mude um prompt. A mudança aparece como um diff com autor e data, e a versão anterior ainda pode ser recuperada."
+            },
+            "fr": {
+              "test": "Modifiez un prompt. Le changement apparaît sous forme de diff avec un auteur et une date, et la version précédente reste récupérable."
+            },
+            "zh": {
+              "test": "修改提示词。该变更以包含作者和日期的差异对比（diff）形式呈现，且先前的版本仍可检索。"
+            },
+            "de": {
+              "test": "Ändern Sie einen Prompt. Die Änderung erscheint als Diff mit einem Autor und einem Datum, und die vorherige Version ist weiterhin abrufbar."
+            },
+            "ja": {
+              "test": "プロンプトを変更します。変更は作成者と日付を伴う差分（diff）として表示され、以前のバージョンも引き続き取得可能です。"
             }
           }
         },
@@ -114,6 +178,18 @@
             },
             "pt": {
               "test": "Pergunte qual versão do modelo serviu uma execução concreta. A resposta sai de um registro, não de uma suposição sobre o que estava em vigor naquela semana."
+            },
+            "fr": {
+              "test": "Demandez quelle version de modèle a servi pour une exécution donnée. La réponse provient d'un enregistrement, et non d'une supposition sur ce qui était d'actualité cette semaine-là."
+            },
+            "zh": {
+              "test": "查询是哪个模型版本服务了特定的运行。答案来自记录，而非基于对该周当前版本的假设。"
+            },
+            "de": {
+              "test": "Fragen Sie ab, welche Modellversion für einen bestimmten Durchlauf verwendet wurde. Die Antwort stammt aus einer Aufzeichnung, nicht aus einer Annahme darüber, was in dieser Woche aktuell war."
+            },
+            "ja": {
+              "test": "特定の実行を提供したモデルのバージョンを問い合わせます。回答は、その週に何が最新であったかという推測からではなく、記録から得られます。"
             }
           }
         }
@@ -145,6 +221,26 @@
           "name": "Com ferramentas",
           "summary": "O agente atua sobre sistemas reais através de uma superfície de ferramentas declarada: todas listadas, delimitadas, com responsável, e recusadas do lado do servidor quando apontadas para onde não devem.",
           "whatBreaks": "O agente já pode causar dano e ainda nada limita quanto. Todo incidente a partir daqui é um incidente em um sistema que importa."
+        },
+        "fr": {
+          "name": "Outillé",
+          "summary": "L'agent agit sur des systèmes réels via une surface d'outils déclarée : chaque outil est répertorié, délimité, attribué à un propriétaire et refusé côté serveur lorsqu'il est dirigé là où il ne devrait pas aller.",
+          "whatBreaks": "L'agent peut désormais causer des dommages et rien ne limite encore leur ampleur. À partir d'ici, chaque incident est un incident survenant dans un système qui compte."
+        },
+        "zh": {
+          "name": "工具化",
+          "summary": "智能体通过声明的工具界面对真实系统采取行动：每个工具都被列出、限定范围、明确所有者，并在指向不该去的地方时在服务端被拒绝。",
+          "whatBreaks": "智能体现在可能会造成损害，且目前没有任何限制。从现在开始，每一次事故都是在重要系统中发生的事故。"
+        },
+        "de": {
+          "name": "Tool-gestützt",
+          "summary": "Der Agent agiert auf realen Systemen über eine deklarierte Tool-Oberfläche: Jedes Tool ist aufgelistet, im Scope definiert, hat einen Verantwortlichen und wird serverseitig abgelehnt, wenn es auf ein unzulässiges Ziel gerichtet wird.",
+          "whatBreaks": "Der Agent kann nun Schaden anrichten, und noch begrenzt nichts das Ausmaß. Jeder Vorfall ab diesem Zeitpunkt ist ein Vorfall in einem System, auf das es ankommt."
+        },
+        "ja": {
+          "name": "ツール化（Tooled）",
+          "summary": "エージェントは、宣言されたツールサーフェスを介して実際のシステムに作用します。すべてのツールがリスト化され、スコープが定義され、所有者が割り当てられ、不適切な場所を指している場合はサーバー側で拒否されます。",
+          "whatBreaks": "エージェントが被害をもたらす可能性が生じ、その規模を制限するものはまだありません。これ以降のすべてのインシデントは、重要なシステムにおけるインシデントとなります。"
         }
       },
       "criteria": [
@@ -163,6 +259,18 @@
             },
             "pt": {
               "test": "Produza o catálogo de ferramentas. Toda ferramenta que o agente pode invocar está nele, com escopo escrito, se escreve e responsável nomeado."
+            },
+            "fr": {
+              "test": "Présentez le catalogue d'outils. Chaque outil que l'agent peut appeler y figure, avec un périmètre écrit, l'indication s'il effectue des écritures, et un propriétaire désigné."
+            },
+            "zh": {
+              "test": "提供工具目录。智能体可以调用的每个工具都在其中，并写明了范围、是否执行写入操作以及指定的所有者。"
+            },
+            "de": {
+              "test": "Legen Sie den Tool-Katalog vor. Jedes Tool, das der Agent aufrufen kann, ist darin enthalten, mit einem schriftlich definierten Scope, der Angabe, ob es Schreibrechte besitzt, und einem benannten Verantwortlichen."
+            },
+            "ja": {
+              "test": "ツールカタログを提示します。エージェントが呼び出せるすべてのツールがカタログに含まれており、書面によるスコープ、書き込み権限の有無、および指名された所有者が明記されている必要があります。"
             }
           }
         },
@@ -181,6 +289,18 @@
             },
             "pt": {
               "test": "Para cada ferramenta, mostre sua credencial e o escopo dessa credencial no servidor. Não há duas ferramentas que compartilhem uma cujo alcance exceda o de qualquer uma delas."
+            },
+            "fr": {
+              "test": "Pour chaque outil, montrez son identifiant d'accès (credential) et la portée de cet identifiant côté serveur. Deux outils ne doivent pas en partager un dont la portée dépasse celle de l'un ou l'autre."
+            },
+            "zh": {
+              "test": "对于每个工具，展示其凭据以及该凭据的服务端范围。没有两个工具会共享一个范围超出其各自所需范围的凭据。"
+            },
+            "de": {
+              "test": "Zeigen Sie für jedes Tool seine Anmeldedaten und deren serverseitigen Scope. Keine zwei Tools teilen sich Anmeldedaten, deren Reichweite die Anforderungen eines der beiden Tools übersteigt."
+            },
+            "ja": {
+              "test": "各ツールについて、その資格情報と、その資格情報のサーバー側のスコープを示します。2つのツールが、それぞれの範囲を超えるような資格情報を共有していないことを確認します。"
             }
           }
         },
@@ -201,6 +321,18 @@
             },
             "pt": {
               "test": "Invoque uma ferramenta que escreve com um destino fora de escopo. Ela é recusada pela própria fronteira da ferramenta, não pelo modelo se recusando."
+            },
+            "fr": {
+              "test": "Appelez un outil capable d'écrire avec une cible hors périmètre. L'appel doit être refusé par la propre limite de l'outil, et non par un refus du modèle."
+            },
+            "zh": {
+              "test": "使用超出范围的目标调用具有写入能力的工具。该调用会被工具自身的边界拒绝，而不是由模型拒绝。"
+            },
+            "de": {
+              "test": "Rufen Sie ein schreibfähiges Tool mit einem Ziel außerhalb des Scopes auf. Der Aufruf wird durch die eigene Grenze des Tools abgelehnt, nicht durch die Verweigerung des Modells."
+            },
+            "ja": {
+              "test": "スコープ外のターゲットを指定して、書き込み可能なツールを呼び出します。モデルが拒否するのではなく、ツール自体の境界によって拒否されることを確認します。"
             }
           }
         }
@@ -234,6 +366,26 @@
           "name": "Delimitado",
           "summary": "O harness impõe limites que não pede ao modelo que respeite: a saída é negar por padrão, o consumo é limitado pelo hospedeiro e o conteúdo não confiável é dado e não instrução.",
           "whatBreaks": "O raio de impacto está delimitado e a qualidade não. O sistema falha de forma segura e ninguém sabe dizer se funciona."
+        },
+        "fr": {
+          "name": "Limité",
+          "summary": "Le harness applique des limites qu'il ne demande pas au modèle de respecter : les flux sortants (egress) sont refusés par défaut, la consommation est plafonnée par l'hôte, et le contenu non approuvé est traité comme une donnée plutôt que comme une instruction.",
+          "whatBreaks": "Le rayon d'impact est limité, mais pas la qualité. Le système échoue en toute sécurité et personne ne peut dire s'il fonctionne."
+        },
+        "zh": {
+          "name": "受限",
+          "summary": "支撑系统强制执行它不要求模型遵守的限制：出口默认拒绝，消耗由主机限制，且不可信内容被视为数据而非指令。",
+          "whatBreaks": "爆炸半径受限，而质量不受限。系统安全地发生故障，且没人能说清它是否正常工作。"
+        },
+        "de": {
+          "name": "Eingegrenzt",
+          "summary": "Das Harness erzwingt Grenzen, ohne das Modell um deren Einhaltung zu bitten: Egress ist standardmäßig blockiert (Default-Deny), der Verbrauch wird durch den Host gedeckelt und nicht vertrauenswürdige Inhalte werden als Daten und nicht als Anweisungen behandelt.",
+          "whatBreaks": "Der Schadensradius (Blast Radius) ist begrenzt, die Qualität jedoch nicht. Das System fällt sicher aus (Fail-Safe), aber niemand kann sagen, ob es überhaupt funktioniert."
+        },
+        "ja": {
+          "name": "境界制限（Bounded）",
+          "summary": "ハーネスは、モデルに遵守を求めることなく制限を強制します。送信（egress）はデフォルト拒否、消費はホストによって上限が設定され、信頼できないコンテンツは命令ではなくデータとして扱われます。",
+          "whatBreaks": "影響範囲（ブラストライディアス）は制限されますが、品質は制限されません。システムは安全に失敗しますが、それが機能しているかどうかは誰にもわかりません。"
         }
       },
       "criteria": [
@@ -253,6 +405,18 @@
             },
             "pt": {
               "test": "De dentro do ambiente do agente, solicite um host que não está na lista. Falha na camada de rede ou de proxy e a recusa chega como sinal de segurança, não como tempo esgotado."
+            },
+            "fr": {
+              "test": "Depuis l'intérieur de l'environnement de l'agent, demandez un hôte qui ne figure pas sur la liste. La requête doit échouer au niveau de la couche réseau ou du proxy, et le refus doit arriver sous forme de signal de sécurité, et non de dépassement de délai (timeout)."
+            },
+            "zh": {
+              "test": "从智能体环境内部请求一个不在列表中的主机。该请求在网络或代理层失败，且拒绝信息作为安全信号到达，而非超时。"
+            },
+            "de": {
+              "test": "Fordern Sie aus der Umgebung des Agenten heraus einen Host an, der nicht auf der Liste steht. Dies schlägt auf der Netzwerk- oder Proxy-Ebene fehl, und die Ablehnung geht als Sicherheitssignal ein, nicht als Timeout."
+            },
+            "ja": {
+              "test": "エージェントの環境内部から、リストにないホストをリクエストします。ネットワークまたはプロキシレイヤーで失敗し、拒否がタイムアウトではなくセキュリティシグナルとして届くことを確認します。"
             }
           }
         },
@@ -271,6 +435,18 @@
             },
             "pt": {
               "test": "Execute uma tarefa projetada para não terminar. Um teto a detém, a parada fica registrada e o custo da tentativa estava limitado e era conhecido antes de começar."
+            },
+            "fr": {
+              "test": "Exécutez une tâche conçue pour ne pas se terminer. Un quota doit l'arrêter, l'arrêt doit être enregistré, et le coût de la tentative doit être limité et connu avant son démarrage."
+            },
+            "zh": {
+              "test": "运行一个旨在不终止的任务。配额会停止该任务，停止操作会被记录，且该尝试的成本在开始前就已受限并已知。"
+            },
+            "de": {
+              "test": "Führen Sie einen Task aus, der so konzipiert ist, dass er nicht endet. Ein Kontingent (Quota) stoppt ihn, der Stopp wird protokolliert und die Kosten des Versuchs waren begrenzt und bereits vor dem Start bekannt."
+            },
+            "ja": {
+              "test": "終了しないように設計されたタスクを実行します。クォータによって停止され、その停止が記録され、試行コストが開始前に制限され、把握されていたことを確認します。"
             }
           }
         },
@@ -290,6 +466,18 @@
             },
             "pt": {
               "test": "Plante uma instrução dentro de um documento que o agente recupera. Ele pode lê-la; não deve agir sobre ela, e a tentativa fica visível depois."
+            },
+            "fr": {
+              "test": "Introduisez une instruction au sein d'un document que l'agent récupère. Il peut la lire ; il ne doit pas l'exécuter, et la tentative doit être visible par la suite."
+            },
+            "zh": {
+              "test": "在智能体检索的文档中植入一条指令。智能体可以读取它，但绝不能对其采取行动，且该尝试在事后是可见的。"
+            },
+            "de": {
+              "test": "Platzieren Sie eine Anweisung in einem Dokument, das der Agent abruft. Er darf sie lesen; er darf sie jedoch nicht ausführen, und der Versuch muss im Nachhinein sichtbar sein."
+            },
+            "ja": {
+              "test": "エージェントが取得するドキュメント内に命令を仕込みます。エージェントはそれを読み取ることはあっても、実行してはならず、その試行が後から確認できる必要があります。"
             }
           }
         }
@@ -322,6 +510,26 @@
           "name": "Avaliado",
           "summary": "A mudança passa por uma suite que alguém viu falhar. As regressões bloqueiam a publicação, a repetibilidade é um número e a lacuna entre o que o agente afirma e o que um verificador encontra está medida.",
           "whatBreaks": "A qualidade está medida e a responsabilidade não. Quando algo dá errado você pode provar que houve regressão, mas não quem a deixou passar."
+        },
+        "fr": {
+          "name": "Évalué",
+          "summary": "Les modifications sont soumises à une suite de tests que quelqu'un a déjà vu échouer. Les régressions bloquent la mise en production, la répétabilité est quantifiée par un chiffre, et l'écart entre ce que l'agent prétend et ce qu'un vérificateur constate est mesuré.",
+          "whatBreaks": "La qualité est mesurée, mais pas la responsabilité. Quand quelque chose tourne mal, vous pouvez prouver qu'il y a eu régression, mais pas qui l'a laissée passer."
+        },
+        "zh": {
+          "name": "已评估",
+          "summary": "变更由某人曾目睹其失败的测试套件进行把关。回归会阻止发布，可重复性是一个数字，且智能体声称的内容与验证器发现的内容之间的差距是可衡量的。",
+          "whatBreaks": "质量得到了衡量，但问责制没有。当出现问题时，您可以证明它发生了回归，但无法证明是谁允许其通过的。"
+        },
+        "de": {
+          "name": "Evaluiert",
+          "summary": "Änderungen werden durch eine Testsuite abgesichert, deren Fehlschlagen bereits beobachtet wurde. Regressionen blockieren das Release, die Wiederholbarkeit ist eine messbare Kennzahl und die Lücke zwischen den Behauptungen des Agenten und den Erkenntnissen eines Verifizierers wird gemessen.",
+          "whatBreaks": "Die Qualität wird gemessen, die Verantwortlichkeit jedoch nicht. Wenn etwas schiefgeht, können Sie zwar beweisen, dass eine Regression vorliegt, aber nicht, wer sie durchgelassen hat."
+        },
+        "ja": {
+          "name": "評価（Evaluated）",
+          "summary": "変更は、誰かが失敗するのを確認したテストスイートによってゲート（制限）されます。デグレード（リグレッション）はリリースをブロックし、再現性は数値化され、エージェントの主張と検証者が発見した事実とのギャップが測定されます。",
+          "whatBreaks": "品質は測定されますが、説明責任は測定されません。問題が発生した際、それがデグレードしたことは証明できても、誰がそれを通過させたのかは証明できません。"
         }
       },
       "criteria": [
@@ -342,6 +550,18 @@
             },
             "pt": {
               "test": "Introduza uma regressão conhecida. A suite a detecta e a mudança não é publicada. Uma suite que ninguém viu falhar tem uma taxa de captura desconhecida, não perfeita."
+            },
+            "fr": {
+              "test": "Introduisez une régression connue. La suite de tests doit la détecter et la modification ne doit pas être déployée. Une suite que l'on n'a jamais vue échouer a un taux de détection inconnu, et non parfait."
+            },
+            "zh": {
+              "test": "引入一个已知的回归。测试套件捕获了它，且变更未发布。从未见其失败过的测试套件其捕获率是未知的，而非完美的。"
+            },
+            "de": {
+              "test": "Führen Sie eine bekannte Regression ein. Die Suite fängt sie ab und die Änderung wird nicht ausgeliefert. Eine Suite, die man noch nie hat fehlschlagen sehen, hat eine unbekannte Erkennungsrate, keine perfekte."
+            },
+            "ja": {
+              "test": "既知のデグレードを導入します。テストスイートがそれを検出し、変更が出荷されないことを確認します。一度も失敗したことのないテストスイートの検出率は、完璧なのではなく、不明であるとみなされます。"
             }
           }
         },
@@ -362,6 +582,18 @@
             },
             "pt": {
               "test": "Execute o conjunto de avaliação cinco vezes sem mudar nada e diga quantos casos chegaram ao mesmo veredito todas as vezes. O número existe e alguém o sabe."
+            },
+            "fr": {
+              "test": "Exécutez le jeu d'évaluation cinq fois sans aucune modification et indiquez combien de cas ont abouti au même verdict à chaque fois. Ce chiffre existe et quelqu'un le connaît."
+            },
+            "zh": {
+              "test": "在没有任何变更的情况下运行评估集五次，并说明有多少个案例每次都得出相同的结论。该数字存在且有人知道它。"
+            },
+            "de": {
+              "test": "Führen Sie das Evaluationsset fünfmal ohne Änderungen aus und geben Sie an, wie viele Fälle jedes Mal dasselbe Ergebnis erzielt haben. Die Zahl existiert und jemand kennt sie."
+            },
+            "ja": {
+              "test": "何も変更せずに評価セットを5回実行し、何件のケースが毎回同じ判定に達したかを特定します。その数値が存在し、誰かがそれを把握している必要があります。"
             }
           }
         },
@@ -383,6 +615,18 @@
             },
             "pt": {
               "test": "Compare o que o agente afirmou em um conjunto de execuções com o que um verificador independente encontrou. A diferença é um número, e não se presume que seja zero."
+            },
+            "fr": {
+              "test": "Comparez ce que l'agent a prétendu pour un ensemble d'exécutions avec ce qu'un vérificateur indépendant a constaté. La différence est un nombre, et on ne suppose pas qu'elle soit nulle."
+            },
+            "zh": {
+              "test": "将智能体在一组运行中声称的内容与独立验证器发现的内容进行比较。差异是一个数字，且不假设其为零。"
+            },
+            "de": {
+              "test": "Vergleichen Sie die Behauptungen des Agenten für eine Reihe von Durchläufen mit den Erkenntnissen eines unabhängigen Verifizierers. Die Differenz ist eine Zahl und es wird nicht davon ausgegangen, dass sie Null ist."
+            },
+            "ja": {
+              "test": "一連の実行においてエージェントが主張した内容と、独立した検証者が発見した内容を比較します。その差異は数値化され、ゼロであるとは仮定されません。"
             }
           }
         }
@@ -416,6 +660,26 @@
           "name": "Governado",
           "summary": "A autoridade, a evidência e o escalonamento têm responsáveis. Uma execução pode ser reconstruída por alguém que não estava lá, as comportas existem porque um critério de risco as colocou ali e o modelo de ameaças é mais novo que o catálogo de ferramentas.",
           "whatBreaks": "Está tudo no lugar e nada vence. O harness continuará impondo, no ano que vem, as compensações de que um modelo precisava no ano passado."
+        },
+        "fr": {
+          "name": "Gouverné",
+          "summary": "L'autorité, les preuves et l'escalade ont des propriétaires. Une exécution peut être reconstruite par quelqu'un qui n'était pas présent, des barrières de validation existent parce qu'un critère de risque les y a placées, et le modèle de menace est plus récent que le catalogue d'outils.",
+          "whatBreaks": "Tout est en place et rien n'expire. Le harness continuera d'appliquer, l'année prochaine, les mesures compensatoires dont un modèle avait besoin l'année dernière."
+        },
+        "zh": {
+          "name": "已治理",
+          "summary": "权限、证据和升级都有所有者。不在场的人也可以重建运行，把关机制的存在是因为风险标准将其置于此处，且威胁模型比工具目录更新。",
+          "whatBreaks": "一切都已就绪，且没有任何内容会过期。明年，支撑系统仍将强制执行模型去年所需的补偿措施。"
+        },
+        "de": {
+          "name": "Gesteuert",
+          "summary": "Befugnisse, Nachweise und Eskalationen haben feste Verantwortliche. Ein Durchlauf kann von jemandem rekonstruiert werden, der nicht dabei war, Gates existieren, weil ein Risikokriterium sie dort platziert hat, und das Bedrohungsmodell ist aktueller als der Tool-Katalog.",
+          "whatBreaks": "Alles ist vorhanden und nichts läuft ab. Das Harness wird auch im nächsten Jahr noch die Ausgleichsmaßnahmen erzwingen, die ein Modell im letzten Jahr benötigt hat."
+        },
+        "ja": {
+          "name": "ガバナンス（Governed）",
+          "summary": "権限、エビデンス、およびエスカレーションに所有者が存在します。その場にいなかった人でも実行を再構築でき、リスク基準に基づいてゲートが設置され、脅威モデルはツールカタログよりも新しく維持されています。",
+          "whatBreaks": "すべてが整っていますが、期限切れになるものがありません。ハーネスは、モデルが昨年必要としていた補償措置を、来年になっても強制し続けることになります。"
         }
       },
       "criteria": [
@@ -436,6 +700,18 @@
             },
             "pt": {
               "test": "Pegue uma execução passada ao acaso e reconstrua-a de ponta a ponta só com o registro, sem o operador original presente. Depois confirme que o registro não guarda nenhum segredo de que não precisava."
+            },
+            "fr": {
+              "test": "Choisissez une exécution passée au hasard et reconstruisez-la de bout en bout uniquement à partir du journal, sans la présence de l'opérateur d'origine. Confirmez ensuite que le journal ne contient aucun secret inutile."
+            },
+            "zh": {
+              "test": "随机选择过去的一次运行，仅根据日志端到端地进行重建，而无需原始操作员在场。然后确认日志中没有包含不需要的机密信息。"
+            },
+            "de": {
+              "test": "Wählen Sie zufällig einen vergangenen Durchlauf aus und rekonstruieren Sie ihn lückenlos allein anhand des Logs, ohne dass der ursprüngliche Operator anwesend sein muss. Bestätigen Sie anschließend, dass das Log keine Geheimnisse enthält, die es nicht benötigt hätte."
+            },
+            "ja": {
+              "test": "過去の実行をランダムに選択し、元のオペレーターが立ち会うことなく、ログのみから最初から最後まで再構築します。その後、ログに不要な機密情報が含まれていないことを確認します。"
             }
           }
         },
@@ -457,6 +733,18 @@
             },
             "pt": {
               "test": "Liste as ações com comporta e o critério de risco que as colocou ali. Force um escalonamento; ele chega a uma pessoa nomeada dentro do tempo declarado, com o contexto necessário para agir."
+            },
+            "fr": {
+              "test": "Listez les actions soumises à validation et le critère de risque qui les y a placées. Forcez une escalade ; elle doit atteindre une personne désignée dans le délai imparti, en apportant le contexte nécessaire pour agir."
+            },
+            "zh": {
+              "test": "列出受控的操作以及将其置于此处的风险标准。强制进行升级；它在规定时间内到达指定人员处，并携带采取行动所需的上下文。"
+            },
+            "de": {
+              "test": "Listen Sie die durch Gates geschützten Aktionen und das Risikokriterium auf, das sie dorthin geführt hat. Erzwingen Sie eine Eskalation; diese erreicht eine namentlich genannte Person innerhalb der angegebenen Zeit und enthält den für das Handeln erforderlichen Kontext."
+            },
+            "ja": {
+              "test": "ゲートが設定されたアクションと、それを設定したリスク基準をリストアップします。強制的にエスカレーションを発生させ、規定の時間内に、対応に必要なコンテキストを伴って指名された担当者に届くことを確認します。"
             }
           }
         },
@@ -475,6 +763,18 @@
             },
             "pt": {
               "test": "Mostre o modelo de ameaças vigente e a data da última mudança no catálogo de ferramentas. Se o catálogo for mais novo, este critério falha e o nível não se sustenta."
+            },
+            "fr": {
+              "test": "Présentez le modèle de menace actuel et la date de la dernière modification du catalogue d'outils. Si le catalogue est plus récent, ce critère échoue et le niveau n'est pas maintenu."
+            },
+            "zh": {
+              "test": "展示当前的威胁模型以及工具目录的最近变更日期。如果目录更新，则此标准失败，且无法保持该级别。"
+            },
+            "de": {
+              "test": "Zeigen Sie das aktuelle Bedrohungsmodell und das Datum der letzten Änderung am Tool-Katalog. Wenn der Katalog neuer ist, schlägt dieses Kriterium fehl und die Stufe wird nicht gehalten."
+            },
+            "ja": {
+              "test": "現在の脅威モデルと、ツールカタログの最終変更日を表示します。カタログの方が新しい場合、この基準は不合格となり、そのレベルは維持されません。"
             }
           }
         }
@@ -505,6 +805,26 @@
           "name": "Adaptativo",
           "summary": "O harness muda com a evidência, inclusive removendo a si mesmo. Os componentes trazem escrito contra qual modelo foram validados e a condição que os aposentaria, e algo foi realmente aposentado.",
           "whatBreaks": "Aqui nada é estável, e esse é o ponto. Um harness que muda com a evidência precisa que a evidência seja boa, e toda métrica do scorecard pode ser falseada por quem está sendo medido com ela."
+        },
+        "fr": {
+          "name": "Adaptatif",
+          "summary": "Le harness évolue en fonction des preuves, y compris en se retirant lui-même. Les composants intègrent le modèle par rapport auquel ils ont été validés ainsi que la condition qui entraînerait leur retrait, et un élément a effectivement déjà été retiré.",
+          "whatBreaks": "Rien n'est stable ici, et c'est bien là le but. Un harness qui évolue en fonction des preuves a besoin de preuves de qualité, et chaque métrique du tableau de bord peut être manipulée par la personne évaluée."
+        },
+        "zh": {
+          "name": "自适应",
+          "summary": "支撑系统根据证据进行变更，包括自行移除。组件携带了它们经过验证的模型以及废除它们的条件，并且某些内容实际上已被废除。",
+          "whatBreaks": "这里没有任何东西是稳定的，而这正是关键所在。一个根据证据进行调整的支撑系统需要高质量的证据，而且记分卡上的每一项指标都可能被被考核者钻空子。"
+        },
+        "de": {
+          "name": "Adaptiv",
+          "summary": "Das Harness verändert sich auf der Grundlage von Nachweisen, bis hin zu seiner eigenen Entfernung. Komponenten tragen das Modell, gegen das sie validiert wurden, sowie die Bedingung für ihre Ausmusterung in sich, und es wurde tatsächlich bereits etwas ausgemustert.",
+          "whatBreaks": "Nichts hier ist stabil, und genau das ist der Punkt. Ein Harness, das sich auf der Grundlage von Nachweisen ändert, benötigt verlässliche Nachweise, und jede Metrik auf der Scorecard kann von denjenigen manipuliert werden, die daran gemessen werden."
+        },
+        "ja": {
+          "name": "適応型（Adaptive）",
+          "summary": "ハーネスはエビデンスに基づいて変化し、自身を削除することもあります。コンポーネントは、検証対象となったモデルと、自身を廃止するための条件を保持しており、実際に何かが廃止された実績があります。",
+          "whatBreaks": "ここにあるものは何一つ安定していませんが、それこそが本質です。根拠に基づいて変化するハーネスには、その根拠が優れていることが求められます。また、スコアカード上のすべての指標は、測定対象となる人物によってハックされる可能性があります。"
         }
       },
       "criteria": [
@@ -523,6 +843,18 @@
             },
             "pt": {
               "test": "Nomeie um controle, uma regra de prompt ou um bloco de contexto removido nos dois últimos trimestres, e mostre a medição que justificou removê-lo. “Testamos sem ele e parecia ir bem” não é uma medição."
+            },
+            "fr": {
+              "test": "Nommez un contrôle, une règle de prompt ou un bloc de contexte supprimé au cours des deux derniers trimestres, et présentez la mesure qui a justifié sa suppression. « Nous avons essayé sans et cela semblait aller » n'est pas une mesure."
+            },
+            "zh": {
+              "test": "列举在过去两个季度中移除的一个控制项、提示词规则或上下文块，并展示证明其移除合理性的测量数据。“我们尝试了不加它，感觉还行”不能算作测量数据。"
+            },
+            "de": {
+              "test": "Nennen Sie ein Control, eine Prompt-Regel oder einen Kontextblock, das bzw. der in den letzten zwei Quartalen entfernt wurde, und zeigen Sie die Messung, die die Entfernung gerechtfertigt hat. „Wir haben es ohne versucht und es schien in Ordnung zu sein“ ist keine Messung."
+            },
+            "ja": {
+              "test": "過去2四半期に削除されたコントロール、プロンプトルール、またはコンテキストブロックを挙げ、その削除を正当化する測定結果を示してください。「それなしで試してみたが問題なさそうだった」というのは測定ではありません。"
             }
           }
         },
@@ -541,6 +873,18 @@
             },
             "pt": {
               "test": "Para um componente que continua no lugar, diga contra qual modelo foi validado e sob qual condição seria removido. As duas coisas estão escritas, não lembradas."
+            },
+            "fr": {
+              "test": "Pour un composant encore en place, indiquez le modèle par rapport auquel il a été validé et la condition sous laquelle il serait retiré. Les deux doivent être consignés par écrit, et non conservés de mémoire."
+            },
+            "zh": {
+              "test": "对于仍在使用的组件，说明其针对哪个模型进行了验证，以及在什么条件下会将其停用。这两点都必须有书面记录，而不是凭记忆。"
+            },
+            "de": {
+              "test": "Geben Sie für eine noch vorhandene Komponente das Modell an, an dem sie validiert wurde, sowie die Bedingung, unter der sie ausgemustert werden würde. Beides muss schriftlich festgehalten sein, nicht bloß in Erinnerung."
+            },
+            "ja": {
+              "test": "現在も導入されているコンポーネントについて、それが検証されたモデルと、それが廃止される条件を述べてください。これらは記憶に頼るのではなく、両方とも文書化されている必要があります。"
             }
           }
         },
@@ -560,6 +904,18 @@
             },
             "pt": {
               "test": "Mostre o custo por resultado corretamente verificado do mesmo conjunto de tarefas em duas gerações de modelo, cada uma com o harness de que aquela geração realmente precisava."
+            },
+            "fr": {
+              "test": "Présentez le coût par résultat correctement vérifié pour le même ensemble de tâches sur deux générations de modèles, chacune avec le harness dont cette génération avait réellement besoin."
+            },
+            "zh": {
+              "test": "展示在两个模型世代中，针对相同任务集，每个正确验证结果的成本，其中每个世代都配有该世代实际需要的支撑系统。"
+            },
+            "de": {
+              "test": "Zeigen Sie die Kosten pro korrekt verifiziertem Ergebnis für denselben Aufgabensatz über zwei Modellgenerationen hinweg, jeweils mit dem Harness, das diese Generation tatsächlich benötigt hat."
+            },
+            "ja": {
+              "test": "2つのモデル世代にわたり、同じタスクセットに対して正しく検証された成果あたりのコストを示してください。それぞれの世代には、その世代が実際に必要としたハーネスが適用されているものとします。"
             }
           }
         }

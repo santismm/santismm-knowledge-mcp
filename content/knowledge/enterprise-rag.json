@@ -4,15 +4,30 @@
   "updated": "2026-06-21",
   "version": "1.0",
   "featured": true,
-  "related": ["agentic-ai", "model-context-protocol", "ai-governance", "ai-agent"],
+  "related": [
+    "agentic-ai",
+    "model-context-protocol",
+    "ai-governance",
+    "ai-agent"
+  ],
   "references": [
-    { "title": "Lewis et al. — Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (2020)", "url": "https://arxiv.org/abs/2005.11401" },
-    { "title": "Model Context Protocol — Resources", "url": "https://modelcontextprotocol.io" }
+    {
+      "title": "Lewis et al. — Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (2020)",
+      "url": "https://arxiv.org/abs/2005.11401"
+    },
+    {
+      "title": "Model Context Protocol — Resources",
+      "url": "https://modelcontextprotocol.io"
+    }
   ],
   "evidence": {
     "evidenceLevel": "benchmark",
     "confidenceLevel": "high",
-    "sourceType": ["benchmark", "paper", "industry_observation"]
+    "sourceType": [
+      "benchmark",
+      "paper",
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {
@@ -34,7 +49,15 @@
         "Ingestion: documents are parsed, split into self-contained chunks, embedded and stored in a vector index (often alongside keyword search). Retrieval: a query is embedded, the nearest chunks are fetched, optionally re-ranked and filtered by permissions. Generation: the model answers using those chunks and cites them.",
         "Quality hinges on the unglamorous parts: clean parsing, sensible chunking, hybrid (vector + keyword) retrieval, re-ranking, and permission filtering. Well-structured source content makes every one of these steps easier."
       ],
-      "components": ["Ingestion & chunking", "Embeddings", "Vector / hybrid index", "Retriever & re-ranker", "Permission filter", "Generator (LLM)", "Citation layer"],
+      "components": [
+        "Ingestion & chunking",
+        "Embeddings",
+        "Vector / hybrid index",
+        "Retriever & re-ranker",
+        "Permission filter",
+        "Generator (LLM)",
+        "Citation layer"
+      ],
       "pros": [
         "Grounded, citable, up-to-date answers.",
         "Uses private knowledge without retraining.",
@@ -47,17 +70,35 @@
         "Citations can be plausible but unsupported if not verified.",
         "Retrieval latency and cost at scale."
       ],
-      "tools": ["Vector databases (e.g. pgvector, Pinecone, Vertex AI Vector Search)", "Embedding models", "Re-rankers", "Hybrid search engines", "MCP resource servers"],
+      "tools": [
+        "Vector databases (e.g. pgvector, Pinecone, Vertex AI Vector Search)",
+        "Embedding models",
+        "Re-rankers",
+        "Hybrid search engines",
+        "MCP resource servers"
+      ],
       "examples": [
         "An internal assistant answering HR policy questions with cited passages.",
         "A support agent retrieving product docs to resolve tickets.",
         "A legal assistant surfacing relevant clauses with source links."
       ],
       "faqs": [
-        { "q": "Is RAG better than fine-tuning?", "a": "They solve different problems. RAG injects fresh, governed knowledge at query time; fine-tuning adapts behavior or style. They are often combined." },
-        { "q": "Why does chunking matter so much?", "a": "Retrieval works on chunks. Self-contained, well-structured chunks retrieve cleanly; fragmented ones return noise. Chunk quality largely sets RAG quality." },
-        { "q": "What makes RAG enterprise-grade?", "a": "Access control on retrieval, source citations, auditability, freshness, and evaluation — not just a vector store plus a model." },
-        { "q": "When does RAG become agentic?", "a": "When retrieval is one step in a multi-step loop where the system decides whether, when and what to retrieve, rather than always retrieving once." }
+        {
+          "q": "Is RAG better than fine-tuning?",
+          "a": "They solve different problems. RAG injects fresh, governed knowledge at query time; fine-tuning adapts behavior or style. They are often combined."
+        },
+        {
+          "q": "Why does chunking matter so much?",
+          "a": "Retrieval works on chunks. Self-contained, well-structured chunks retrieve cleanly; fragmented ones return noise. Chunk quality largely sets RAG quality."
+        },
+        {
+          "q": "What makes RAG enterprise-grade?",
+          "a": "Access control on retrieval, source citations, auditability, freshness, and evaluation — not just a vector store plus a model."
+        },
+        {
+          "q": "When does RAG become agentic?",
+          "a": "When retrieval is one step in a multi-step loop where the system decides whether, when and what to retrieve, rather than always retrieving once."
+        }
       ]
     },
     "es": {
@@ -79,7 +120,15 @@
         "Ingesta: los documentos se parsean, se dividen en chunks autocontenidos, se embeben y se guardan en un índice vectorial (a menudo junto a búsqueda por palabras clave). Recuperación: la consulta se embebe, se traen los chunks más cercanos, se re-rankean y se filtran por permisos. Generación: el modelo responde usando esos chunks y los cita.",
         "La calidad depende de las partes poco glamurosas: parseo limpio, chunking sensato, recuperación híbrida (vector + palabras clave), re-ranking y filtrado por permisos. Un contenido fuente bien estructurado facilita cada uno de esos pasos."
       ],
-      "components": ["Ingesta y chunking", "Embeddings", "Índice vectorial / híbrido", "Recuperador y re-ranker", "Filtro de permisos", "Generador (LLM)", "Capa de citas"],
+      "components": [
+        "Ingesta y chunking",
+        "Embeddings",
+        "Índice vectorial / híbrido",
+        "Recuperador y re-ranker",
+        "Filtro de permisos",
+        "Generador (LLM)",
+        "Capa de citas"
+      ],
       "pros": [
         "Respuestas fundamentadas, citables y actualizadas.",
         "Usa conocimiento privado sin reentrenar.",
@@ -92,17 +141,35 @@
         "Las citas pueden ser plausibles pero no respaldadas si no se verifican.",
         "Latencia y coste de recuperación a escala."
       ],
-      "tools": ["Bases de datos vectoriales (p. ej. pgvector, Pinecone, Vertex AI Vector Search)", "Modelos de embeddings", "Re-rankers", "Motores de búsqueda híbrida", "Servidores de recursos MCP"],
+      "tools": [
+        "Bases de datos vectoriales (p. ej. pgvector, Pinecone, Vertex AI Vector Search)",
+        "Modelos de embeddings",
+        "Re-rankers",
+        "Motores de búsqueda híbrida",
+        "Servidores de recursos MCP"
+      ],
       "examples": [
         "Un asistente interno que responde preguntas de políticas de RRHH con pasajes citados.",
         "Un agente de soporte que recupera documentación de producto para resolver tickets.",
         "Un asistente legal que muestra cláusulas relevantes con enlaces a la fuente."
       ],
       "faqs": [
-        { "q": "¿El RAG es mejor que el fine-tuning?", "a": "Resuelven problemas distintos. El RAG inyecta conocimiento fresco y gobernado en el momento de la consulta; el fine-tuning adapta comportamiento o estilo. A menudo se combinan." },
-        { "q": "¿Por qué importa tanto el chunking?", "a": "La recuperación opera sobre chunks. Los chunks autocontenidos y bien estructurados se recuperan limpiamente; los fragmentados devuelven ruido. La calidad del chunk fija en gran medida la del RAG." },
-        { "q": "¿Qué hace a un RAG de grado empresarial?", "a": "Control de acceso en la recuperación, citas de fuentes, auditabilidad, frescura y evaluación, no solo un almacén vectorial más un modelo." },
-        { "q": "¿Cuándo se vuelve agéntico el RAG?", "a": "Cuando la recuperación es un paso de un bucle de varios pasos en el que el sistema decide si, cuándo y qué recuperar, en vez de recuperar siempre una vez." }
+        {
+          "q": "¿El RAG es mejor que el fine-tuning?",
+          "a": "Resuelven problemas distintos. El RAG inyecta conocimiento fresco y gobernado en el momento de la consulta; el fine-tuning adapta comportamiento o estilo. A menudo se combinan."
+        },
+        {
+          "q": "¿Por qué importa tanto el chunking?",
+          "a": "La recuperación opera sobre chunks. Los chunks autocontenidos y bien estructurados se recuperan limpiamente; los fragmentados devuelven ruido. La calidad del chunk fija en gran medida la del RAG."
+        },
+        {
+          "q": "¿Qué hace a un RAG de grado empresarial?",
+          "a": "Control de acceso en la recuperación, citas de fuentes, auditabilidad, frescura y evaluación, no solo un almacén vectorial más un modelo."
+        },
+        {
+          "q": "¿Cuándo se vuelve agéntico el RAG?",
+          "a": "Cuando la recuperación es un paso de un bucle de varios pasos en el que el sistema decide si, cuándo y qué recuperar, en vez de recuperar siempre una vez."
+        }
       ]
     },
     "pt": {
@@ -124,7 +191,15 @@
         "Ingestão: os documentos são parseados, divididos em chunks autocontidos, embedados e guardados num índice vetorial (muitas vezes junto à busca por palavras-chave). Recuperação: a consulta é embedada, os chunks mais próximos são trazidos, re-ranqueados e filtrados por permissões. Geração: o modelo responde usando esses chunks e os cita.",
         "A qualidade depende das partes pouco glamourosas: parsing limpo, chunking sensato, recuperação híbrida (vetor + palavras-chave), re-ranking e filtragem por permissões. Um conteúdo-fonte bem estruturado facilita cada um desses passos."
       ],
-      "components": ["Ingestão e chunking", "Embeddings", "Índice vetorial / híbrido", "Recuperador e re-ranker", "Filtro de permissões", "Gerador (LLM)", "Camada de citações"],
+      "components": [
+        "Ingestão e chunking",
+        "Embeddings",
+        "Índice vetorial / híbrido",
+        "Recuperador e re-ranker",
+        "Filtro de permissões",
+        "Gerador (LLM)",
+        "Camada de citações"
+      ],
       "pros": [
         "Respostas fundamentadas, citáveis e atualizadas.",
         "Usa conhecimento privado sem retreinar.",
@@ -137,17 +212,319 @@
         "As citações podem ser plausíveis mas não comprovadas se não forem verificadas.",
         "Latência e custo de recuperação em escala."
       ],
-      "tools": ["Bancos de dados vetoriais (ex.: pgvector, Pinecone, Vertex AI Vector Search)", "Modelos de embeddings", "Re-rankers", "Motores de busca híbrida", "Servidores de recursos MCP"],
+      "tools": [
+        "Bancos de dados vetoriais (ex.: pgvector, Pinecone, Vertex AI Vector Search)",
+        "Modelos de embeddings",
+        "Re-rankers",
+        "Motores de busca híbrida",
+        "Servidores de recursos MCP"
+      ],
       "examples": [
         "Um assistente interno que responde perguntas de políticas de RH com trechos citados.",
         "Um agente de suporte que recupera documentação de produto para resolver chamados.",
         "Um assistente jurídico que mostra cláusulas relevantes com links para a fonte."
       ],
       "faqs": [
-        { "q": "O RAG é melhor que o fine-tuning?", "a": "Resolvem problemas distintos. O RAG injeta conhecimento fresco e governado no momento da consulta; o fine-tuning adapta comportamento ou estilo. Muitas vezes são combinados." },
-        { "q": "Por que o chunking importa tanto?", "a": "A recuperação opera sobre chunks. Chunks autocontidos e bem estruturados são recuperados de forma limpa; os fragmentados retornam ruído. A qualidade do chunk define em grande parte a do RAG." },
-        { "q": "O que torna um RAG de nível empresarial?", "a": "Controle de acesso na recuperação, citações de fontes, auditabilidade, frescor e avaliação, não só um armazenamento vetorial mais um modelo." },
-        { "q": "Quando o RAG se torna agêntico?", "a": "Quando a recuperação é um passo de um laço de vários passos em que o sistema decide se, quando e o que recuperar, em vez de recuperar sempre uma vez." }
+        {
+          "q": "O RAG é melhor que o fine-tuning?",
+          "a": "Resolvem problemas distintos. O RAG injeta conhecimento fresco e governado no momento da consulta; o fine-tuning adapta comportamento ou estilo. Muitas vezes são combinados."
+        },
+        {
+          "q": "Por que o chunking importa tanto?",
+          "a": "A recuperação opera sobre chunks. Chunks autocontidos e bem estruturados são recuperados de forma limpa; os fragmentados retornam ruído. A qualidade do chunk define em grande parte a do RAG."
+        },
+        {
+          "q": "O que torna um RAG de nível empresarial?",
+          "a": "Controle de acesso na recuperação, citações de fontes, auditabilidade, frescor e avaliação, não só um armazenamento vetorial mais um modelo."
+        },
+        {
+          "q": "Quando o RAG se torna agêntico?",
+          "a": "Quando a recuperação é um passo de um laço de vários passos em que o sistema decide se, quando e o que recuperar, em vez de recuperar sempre uma vez."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que le RAG d'entreprise ?",
+      "summary": "Le RAG d'entreprise (génération augmentée de récupération) est le modèle consistant à ancrer les réponses d'un modèle dans les propres documents d'une organisation, récupérés au moment de la requête, plutôt que de s'appuyer sur la mémoire paramétrique du modèle. Il permet à une entreprise d'utiliser des connaissances privées, actuelles et gouvernées — politiques, manuels, tickets, contrats — sans réentraîner le modèle, tout en conservant le contrôle d'accès, les citations et l'auditabilité requis par les entreprises.",
+      "definition": "Le RAG d'entreprise est un modèle qui récupère des passages pertinents à partir des sources de connaissances gouvernées d'une organisation et les fournit à un modèle en tant que contexte, afin que les réponses soient ancrées, actuelles et citables.",
+      "takeaways": [
+        "Le RAG ancre les réponses dans les documents récupérés, réduisant ainsi les hallucinations.",
+        "Il utilise des connaissances privées et récentes sans réentraînement.",
+        "La qualité de la récupération (découpage + embeddings) détermine la qualité des réponses.",
+        "Le RAG de classe entreprise ajoute le contrôle d'accès, les citations et l'audit.",
+        "Devient agentique lorsque le système décide quand et quoi récupérer."
+      ],
+      "context": [
+        "Un modèle de base ne sait que ce qu'il a appris lors de son entraînement. Les connaissances de l'entreprise sont privées, évolutives et soumises à un contrôle d'accès. Le RAG comble cet écart en récupérant les bons passages au moment de la requête et en y ancrant la réponse.",
+        "La différence pour l'entreprise réside dans la gouvernance : qui est autorisé à voir quels documents, d'où proviennent les sources de la réponse et si l'ensemble de l'interaction peut être audité. Un RAG qui ignore ces aspects est un prototype, pas un système de production."
+      ],
+      "architecture": [
+        "Ingestion : les documents sont analysés, découpés en blocs autonomes, convertis en embeddings et stockés dans un index vectoriel (souvent combiné à une recherche par mots-clés). Récupération : la requête est convertie en embedding, les blocs les plus proches sont récupérés, éventuellement re-classés et filtrés selon les autorisations. Génération : le modèle répond à l'aide de ces blocs et les cite.",
+        "La qualité repose sur des aspects moins prestigieux : une analyse propre, un découpage cohérent, une récupération hybride (vectorielle + mots-clés), un re-classement et un filtrage des autorisations. Un contenu source bien structuré facilite chacune de ces étapes."
+      ],
+      "components": [
+        "Ingestion et découpage (chunking)",
+        "Embeddings",
+        "Index vectoriel / hybride",
+        "Moteur de récupération et de re-classement (retriever & re-ranker)",
+        "Filtre d'autorisations",
+        "Générateur (LLM)",
+        "Couche de citation"
+      ],
+      "pros": [
+        "Réponses ancrées, citables et à jour.",
+        "Utilise des connaissances privées sans réentraînement.",
+        "Respecte le contrôle d'accès et l'auditabilité.",
+        "Plus économique et plus rapide à mettre à jour que le fine-tuning."
+      ],
+      "risks": [
+        "Un mauvais découpage (chunking) ou une mauvaise récupération produit un contexte erroné ou non pertinent.",
+        "Des données obsolètes ou sans autorisation s'infiltrent dans les réponses.",
+        "Les citations peuvent être plausibles mais non étayées si elles ne sont pas vérifiées.",
+        "Latence de récupération et coût à grande échelle."
+      ],
+      "tools": [
+        "Bases de données vectorielles (par ex. pgvector, Pinecone, Vertex AI Vector Search)",
+        "Modèles d'embedding",
+        "Re-rankers",
+        "Moteurs de recherche hybrides",
+        "Serveurs de ressources MCP"
+      ],
+      "examples": [
+        "Un assistant interne répondant aux questions sur les politiques RH avec des passages cités.",
+        "Un agent de support récupérant la documentation produit pour résoudre des tickets.",
+        "Un assistant juridique faisant ressortir les clauses pertinentes avec des liens vers les sources."
+      ],
+      "faqs": [
+        {
+          "q": "Le RAG est-il meilleur que le fine-tuning ?",
+          "a": "Ils résolvent des problèmes différents. Le RAG injecte des connaissances fraîches et gouvernées au moment de la requête ; le fine-tuning adapte le comportement ou le style. Ils sont souvent combinés."
+        },
+        {
+          "q": "Pourquoi le découpage (chunking) est-il si important ?",
+          "a": "La récupération fonctionne sur des fragments (chunks). Des fragments autonomes et bien structurés sont récupérés proprement ; les fragments fragmentés renvoient du bruit. La qualité du découpage détermine en grande partie la qualité du RAG."
+        },
+        {
+          "q": "Qu'est-ce qui rend le RAG de niveau entreprise ?",
+          "a": "Le contrôle d'accès lors de la récupération, les citations de sources, l'auditabilité, la fraîcheur et l'évaluation — et pas seulement un stockage vectoriel associé à un modèle."
+        },
+        {
+          "q": "Quand le RAG devient-il agentique ?",
+          "a": "Lorsque la récupération est une étape dans une boucle multi-étapes où le système décide si, quand et quoi récupérer, plutôt que de toujours effectuer une récupération unique."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist Enterprise RAG?",
+      "summary": "Enterprise RAG (Retrieval-Augmented Generation) ist das Entwurfsmuster, bei dem die Antworten eines Modells auf den eigenen Dokumenten einer Organisation fundiert werden, die zum Zeitpunkt der Abfrage abgerufen werden, anstatt sich auf das parametrische Gedächtnis des Modells zu verlassen. Es ermöglicht einem Unternehmen, privates, aktuelles und kontrolliertes Wissen – Richtlinien, Handbücher, Tickets, Verträge – ohne erneutes Training eines Modells zu nutzen, während gleichzeitig die von Unternehmen geforderten Zugriffskontrollen, Zitate und Auditierbarkeit gewahrt bleiben.",
+      "definition": "Enterprise RAG ist ein Entwurfsmuster, das relevante Passagen aus den kontrollierten Wissensquellen einer Organisation abruft und sie einem Modell als Kontext zur Verfügung stellt, sodass Antworten fundiert, aktuell und zitierfähig sind.",
+      "takeaways": [
+        "RAG fundiert Antworten in abgerufenen Dokumenten und reduziert so Halluzinationen.",
+        "Es nutzt privates und aktuelles Wissen ohne erneutes Training.",
+        "Die Retrieval-Qualität (Chunking + Embeddings) bestimmt die Antwortqualität.",
+        "Enterprise-RAG bietet zusätzlich Zugriffskontrolle, Zitate und Audits.",
+        "Wird agentisch, wenn das System entscheidet, wann und was abgerufen werden soll."
+      ],
+      "context": [
+        "Ein Basismodell weiß nur, was es während des Trainings gelernt hat. Unternehmenswissen ist privat, verändert sich ständig und unterliegt Zugriffskontrollen. RAG schließt diese Lücke, indem es zum Zeitpunkt der Abfrage die richtigen Passagen abruft und die Antwort darauf fundiert.",
+        "Der Unterschied im Enterprise-Bereich liegt in der Governance: Wer darf welche Dokumente sehen, woher stammen die Quellen der Antwort und ob die gesamte Interaktion auditiert werden kann. Ein RAG, das dies ignoriert, ist ein Prototyp, kein Produktionssystem."
+      ],
+      "architecture": [
+        "Ingestion: Dokumente werden geparst, in inhaltlich geschlossene Chunks aufgeteilt, eingebettet und in einem Vektorindex gespeichert (oft zusammen mit einer Keyword-Suche). Retrieval: Eine Suchanfrage wird eingebettet, die am nächsten liegenden Chunks werden abgerufen, optional neu bewertet (Re-Ranking) und nach Berechtigungen gefiltert. Generation: Das Modell antwortet unter Verwendung dieser Chunks und zitiert sie.",
+        "Die Qualität hängt von den weniger glanzvollen Teilen ab: sauberes Parsing, sinnvolles Chunking, hybrides (Vektor- + Keyword-)Retrieval, Re-Ranking und Berechtigungsfilterung. Gut strukturierte Quellinhalte erleichtern jeden dieser Schritte."
+      ],
+      "components": [
+        "Ingestion & Chunking",
+        "Embeddings",
+        "Vektor- / Hybrid-Index",
+        "Retriever & Re-Ranker",
+        "Berechtigungsfilter",
+        "Generator (LLM)",
+        "Zitierungsebene"
+      ],
+      "pros": [
+        "Fundierte, zitierfähige und aktuelle Antworten.",
+        "Nutzt privates Wissen ohne erneutes Training.",
+        "Berücksichtigt Zugriffskontrolle und Auditierbarkeit.",
+        "Günstiger und schneller zu aktualisieren als Fine-tuning."
+      ],
+      "risks": [
+        "Mangelhaftes Chunking oder Retrieval führt zu falschem oder irrelevantem Kontext.",
+        "Veraltete oder nicht autorisierte Daten gelangen in die Antworten.",
+        "Zitate können plausibel, aber ohne Überprüfung unbelegt sein.",
+        "Retrieval-Latenz und Kosten bei hoher Skalierung."
+      ],
+      "tools": [
+        "Vektordatenbanken (z. B. pgvector, Pinecone, Vertex AI Vector Search)",
+        "Embedding-Modelle",
+        "Re-Ranker",
+        "Hybride Suchmaschinen",
+        "MCP-Ressourcenserver"
+      ],
+      "examples": [
+        "Ein interner Assistent, der Fragen zu HR-Richtlinien mit zitierten Textstellen beantwortet.",
+        "Ein Support-Agent, der Produktdokumentationen abruft, um Tickets zu lösen.",
+        "Ein Rechtsassistent, der relevante Klauseln mit Quellenlinks bereitstellt."
+      ],
+      "faqs": [
+        {
+          "q": "Ist RAG besser als Fine-tuning?",
+          "a": "Sie lösen unterschiedliche Probleme. RAG speist zum Abfragezeitpunkt aktuelles, kontrolliertes Wissen ein; Fine-tuning passt das Verhalten oder den Stil an. Beide werden oft kombiniert."
+        },
+        {
+          "q": "Warum ist Chunking so wichtig?",
+          "a": "Das Retrieval arbeitet auf Chunks. In sich geschlossene, gut strukturierte Chunks lassen sich sauber abrufen; fragmentierte Chunks führen zu Rauschen. Die Chunk-Qualität bestimmt maßgeblich die RAG-Qualität."
+        },
+        {
+          "q": "Was macht RAG unternehmenstauglich?",
+          "a": "Zugriffskontrolle beim Retrieval, Quellenzitate, Auditierbarkeit, Aktualität und Evaluierung – nicht nur ein Vektorspeicher plus ein Modell."
+        },
+        {
+          "q": "Wann wird RAG agentisch?",
+          "a": "Wenn das Retrieval ein Schritt in einer mehrstufigen Schleife ist, in der das System decides entscheidet, ob, wann und was abgerufen werden soll, anstatt immer nur einmal abzurufen."
+        }
+      ]
+    },
+    "ja": {
+      "title": "エンタープライズRAGとは何ですか？",
+      "summary": "エンタープライズRAG（検索拡張生成）は、モデルのパラメータメモリに依存するのではなく、クエリ実行時に検索された組織独自のドキュメントに基づいてモデルの回答を根拠付けるパターンです。これにより、企業はモデルを再トレーニングすることなく、ポリシー、マニュアル、チケット、契約書などのプライベートで最新の、かつガバナンスの効いた知識を利用できると同時に、企業が必要とするアクセス制御、引用、監査可能性を維持できます。",
+      "definition": "エンタープライズRAGは、組織のガバナンスが効いた知識ソースから関連する一節を検索し、コンテキストとしてモデルに提供することで、回答の根拠を明確にし、最新かつ引用可能にするパターンです。",
+      "takeaways": [
+        "RAGは検索されたドキュメントに基づいて回答を根拠付け、ハルシネーションを低減します。",
+        "再トレーニングを行うことなく、プライベートで最新の知識を利用できます。",
+        "検索品質（チャンク分割＋埋め込み）が回答の品質を左右します。",
+        "エンタープライズグレードのRAGは、アクセス制御、引用、監査機能を追加します。",
+        "システムが「いつ」「何を」検索するかを決定するようになると、エージェント型（agentic）になります。"
+      ],
+      "context": [
+        "ベースモデルは、トレーニング中に学習したことしか知りません。企業の知識はプライベートで、常に変化し、アクセス制御されています。RAGは、クエリ実行時に適切な一節を取得し、それに基づいて回答を根拠付けることで、そのギャップを埋めます。",
+        "エンタープライズにおける違いはガバナンスにあります。誰がどのドキュメントの閲覧を許可されているか、回答のソースがどこから来ているか、そしてインタラクション全体を監査できるかどうかです。これらを無視したRAGは、本番システムではなくプロトタイプにすぎません。"
+      ],
+      "architecture": [
+        "インジェスト：ドキュメントが解析され、自己完結型のチャンクに分割され、埋め込まれてベクトルインデックスに保存されます（多くの場合、キーワード検索と併用されます）。検索：クエリが埋め込まれ、最も近いチャンクが取得され、必要に応じて再ランク付けされ、権限によってフィルタリングされます。生成：モデルはそれらのチャンクを使用して回答し、それらを引用します。",
+        "品質は、クリーンな解析、適切なチャンク分割、ハイブリッド（ベクトル＋キーワード）検索、再ランク付け、権限フィルタリングといった、地味な部分にかかっています。適切に構造化されたソースコンテンツは、これらのすべてのステップを容易にします。"
+      ],
+      "components": [
+        "インジェストとチャンク分割",
+        "埋め込み",
+        "ベクトル / ハイブリッドインデックス",
+        "リトリーバー＆リランカー",
+        "権限フィルター",
+        "ジェネレーター（LLM）",
+        "引用レイヤー"
+      ],
+      "pros": [
+        "グラウンディングされた、引用可能で最新の回答。",
+        "再学習なしでプライベートな知識を利用可能。",
+        "アクセス制御と監査可能性を遵守。",
+        "ファインチューニングよりも低コストかつ迅速に更新可能。"
+      ],
+      "risks": [
+        "不適切なチャンク分割や検索により、誤ったコンテキストや無関係なコンテキストが生成される。",
+        "古いデータや権限のないデータが回答に漏洩する。",
+        "検証されない場合、引用がもっともらしく見えても根拠がない可能性がある。",
+        "大規模運用時における検索のレイテンシとコスト。"
+      ],
+      "tools": [
+        "ベクトルデータベース（例：pgvector、Pinecone、Vertex AI Vector Search）",
+        "埋め込みモデル",
+        "リランカー",
+        "ハイブリッド検索エンジン",
+        "MCPリソースサーバー"
+      ],
+      "examples": [
+        "引用箇所を提示しながら人事ポリシーに関する質問に回答する社内アシスタント。",
+        "チケットを解決するために製品ドキュメントを検索するサポートエージェント。",
+        "ソースへのリンク付きで関連する条項を提示する法務アシスタント。"
+      ],
+      "faqs": [
+        {
+          "q": "RAGはファインチューニングよりも優れていますか？",
+          "a": "これらは異なる課題を解決するものです。RAGはクエリ実行時に最新の管理された知識を注入し、ファインチューニングは振る舞いやスタイルを適応させます。これらはしばしば組み合わせて使用されます。"
+        },
+        {
+          "q": "なぜチャンク分割がそれほど重要なのでしょうか？",
+          "a": "検索はチャンク単位で機能します。自己完結型で適切に構造化されたチャンクは正確に検索されますが、断片化されたチャンクはノイズを返します。チャンクの品質がRAGの品質を大きく左右します。"
+        },
+        {
+          "q": "何がRAGをエンタープライズグレードにするのでしょうか？",
+          "a": "単にベクトルストアとモデルを組み合わせるだけでなく、検索時のアクセス制御、ソースの引用、監査可能性、最新性、および評価が備わっていることです。"
+        },
+        {
+          "q": "RAGはどのような場合にエージェント型（Agentic）になりますか？",
+          "a": "常に1回だけ検索するのではなく、システムが検索の要否、タイミング、対象を判断するマルチステップのループにおいて、検索がその一ステップとなる場合です。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是企业级 RAG？",
+      "summary": "企业级 RAG（检索增强生成）是一种在查询时检索组织自身的文档，并以此作为模型回答依据的模式，而不是依赖模型的参数化记忆。它允许企业在不重新训练模型的情况下，使用私有、最新且受治理的知识（如政策、手册、工单、合同），同时保持企业所需的访问控制、引用和可审计性。",
+      "definition": "企业级 RAG 是一种从组织受治理的知识源中检索相关段落，并将其作为上下文提供给模型的模式，从而使回答有据可依、保持最新且可引用。",
+      "takeaways": [
+        "RAG 以检索到的文档作为回答依据，从而减少幻觉。",
+        "它无需重新训练即可使用私有且最新的知识。",
+        "检索质量（分块 + Embedding）决定了回答质量。",
+        "企业级 RAG 增加了访问控制、引用和审计功能。",
+        "当系统决定何时检索以及检索什么内容时，它就具备了智能体特征。"
+      ],
+      "context": [
+        "基础模型只知道它在训练期间学到的知识。而企业知识是私有的、动态变化的且受访问控制的。RAG 通过在查询时获取正确的段落并以此作为回答的依据，弥合了这一差距。",
+        "企业级的区别在于治理：谁被允许查看哪些文档、回答的来源出自哪里，以及整个交互过程是否可以被审计。忽略这些要素的 RAG 只是原型，而非生产系统。"
+      ],
+      "architecture": [
+        "摄取：对文档进行解析，拆分为自包含的分块，进行 Embedding 并存储在向量索引中（通常与关键词搜索并存）。检索：对查询进行 Embedding，获取最接近的分块，并可选择进行重排和权限过滤。生成：模型使用这些分块进行回答并进行引用。",
+        "质量取决于那些看似不起眼的部分：干净的解析、合理的分块、混合（向量 + 关键词）检索、重排以及权限过滤。结构良好的源内容会让这些步骤中的每一步都变得更加轻松。"
+      ],
+      "components": [
+        "摄取与分块",
+        "Embeddings",
+        "向量 / 混合索引",
+        "检索器与重排器",
+        "权限过滤器",
+        "生成器（LLM）",
+        "引用层"
+      ],
+      "pros": [
+        "有据可依、可引用且最新的回答。",
+        "无需重新训练即可使用私有知识。",
+        "遵循访问控制和可审计性。",
+        "比微调更便宜、更新更快。"
+      ],
+      "risks": [
+        "糟糕的分块或检索会导致错误或不相关的上下文。",
+        "陈旧或未授权的数据泄露到回答中。",
+        "如果不进行验证，引用内容可能看似合理但实际上缺乏支持。",
+        "大规模情况下的检索延迟和成本。"
+      ],
+      "tools": [
+        "向量数据库（例如 pgvector、Pinecone、Vertex AI Vector Search）",
+        "Embedding 模型",
+        "重排器",
+        "混合搜索引擎",
+        "MCP 资源服务器"
+      ],
+      "examples": [
+        "一个通过引用段落来回答人力资源（HR）政策问题的内部助手。",
+        "一个通过检索产品文档来解决工单的支持智能体。",
+        "一个提供相关条款及来源链接的法律助手。"
+      ],
+      "faqs": [
+        {
+          "q": "RAG 比微调更好吗？",
+          "a": "它们解决不同的问题。RAG 在查询时注入新鲜且受治理的知识；微调则用于调整行为或风格。它们通常结合使用。"
+        },
+        {
+          "q": "为什么分块如此重要？",
+          "a": "检索是基于分块进行的。内容自包含、结构良好的分块能实现干净的检索；而碎片化的分块则会返回噪音。分块质量在很大程度上决定了 RAG 的质量。"
+        },
+        {
+          "q": "是什么让 RAG 达到企业级水平？",
+          "a": "检索上的访问控制、来源引用、可审计性、新鲜度以及评估——而不仅仅是一个向量存储加上一个模型。"
+        },
+        {
+          "q": "RAG 何时会具有智能体特征？",
+          "a": "当检索成为多步循环中的一个步骤，且系统能够自主决定是否检索、何时检索以及检索什么，而不是总是只进行一次固定检索时。"
+        }
       ]
     }
   }

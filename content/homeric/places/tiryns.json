@@ -81,6 +81,22 @@
         "pt": {
           "label": "A cidadela de Tirinto",
           "note": "Muralhas ciclópicas de até oito metros de espessura, galerias em falsa abóbada e um palácio com mégaron, sobre uma crista baixa que domina a planície argiva e sua costa. O único epíteto que Homero lhe dá — “Tirinto das grandes muralhas” — é a descrição exata mais econômica de um sítio arqueológico nos dois poemas."
+        },
+        "fr": {
+          "label": "La citadelle de Tirynthe",
+          "note": "Des murs cyclopéens mesurant jusqu'à huit mètres d'épaisseur, des galeries en encorbellement et un palais doté d'un mégaron, sur une crête basse dominant la plaine d'Argolide et sa côte. L'unique épithète d'Homère à son sujet — « Tirynthe aux grands murs » — est la description exacte la plus économique d'un site archéologique dans l'un ou l'autre poème."
+        },
+        "zh": {
+          "label": "蒂林斯卫城",
+          "note": "巨石筑成的城墙厚达八米，配有叠涩拱廊和一座带有大殿（megaron）的宫殿，坐落在俯瞰阿耳戈斯平原及其海岸的低矮山脊上。荷马对它唯一的修饰语——‘坚墙耸立的梯林斯’——是两部史诗中对考古遗址最精炼且准确的描述。"
+        },
+        "de": {
+          "label": "Die Festung von Tiryns",
+          "note": "Zyklopische Mauern von bis zu acht Metern Dicke, Kragbalkengalerien und ein Palast mit einem Megaron auf einem niedrigen Höhenrücken, der die argivische Ebene und ihre Küste beherrscht. Homers einziges Epitheton dafür – „Tiryns der großen Mauern“ – ist die sparsamste und treffendste Beschreibung einer archäologischen Stätte in beiden Epen."
+        },
+        "ja": {
+          "label": "ティリンスの城塞",
+          "note": "厚さ最大8メートルに達するサイクロプス式の城壁、持ち送り構造の回廊、そしてメガロン（大広間）を備えた宮殿が、アルゴス平野とその海岸線を見渡す低い尾根の上に位置している。ホメロスがこの地に対して用いた唯一の異名「堅固な城壁のティリンス」は、両叙事詩に登場する考古学遺跡の記述の中で、最も簡潔かつ正確なものである。"
         }
       }
     }
@@ -118,6 +134,46 @@
       ],
       "identificationNote": "Aceita: uma cidadela escavada de data inequívoca, identificada continuamente desde a Antiguidade. O critério textual pontua 2 apenas porque o poema quase nada diz além do epíteto.",
       "debate": "Nada sobre a localização. As questões vivas são de função: como Tirinto se relacionava politicamente com Micenas e o que sua reocupação pós-palaciana significa para o fim da Idade do Bronze."
+    },
+    "fr": {
+      "name": "Tirynthe",
+      "summary": "Une cité du Catalogue des vaisseaux dont l'épithète homérique est une description littérale de ce qui subsiste : des remparts si massifs que les Grecs des époques ultérieures pensaient que des géants les avaient bâtis.",
+      "description": [
+        "Tirynthe apparaît une fois dans l'Iliade, au sein du contingent argien de Diomède, sous le nom de « Tirynthe aux grands murs ». La citadelle se dresse à huit kilomètres de Mycènes, contrôlant l'accès de la plaine à la mer, et ses fortifications de l'âge du bronze sont les mieux préservées de l'Argolide.",
+        "C'est une mention mineure dans les poèmes mais majeure en archéologie, ce qui en fait un cas témoin utile : l'atlas ne mesure pas l'importance d'un lieu chez Homère, mais la certitude avec laquelle il peut être localisé."
+      ],
+      "identificationNote": "Accepté : une citadelle fouillée d'une époque indubitable, identifiée de manière continue depuis l'Antiquité. Le score textuel n'est que de 2 car le poème ne dit presque rien à son sujet au-delà de l'épithète.",
+      "debate": "Rien sur la localisation. Les questions d'actualité concernent sa fonction — comment Tirynthe était liée politiquement à Mycènes, et ce que la réoccupation post-palatiale signifie pour la fin de l'âge du bronze."
+    },
+    "de": {
+      "name": "Tiryns",
+      "summary": "Eine Stadt aus dem Schiffskatalog, deren homörisches Beiwort eine wörtliche Beschreibung dessen ist, was überdauert hat: Mauern, die so gewaltig sind, dass spätere Griechen annahmen, Riesen hätten sie erbaut.",
+      "description": [
+        "Tiryns erscheint einmal in der Ilias, im argivischen Kontingent des Diomedes, als „Tiryns mit den mächtigen Mauern“. Die Festung liegt acht Kilometer von Mykene entfernt, kontrolliert den Zugang der Ebene zum Meer, und ihre bronzezeitlichen Befestigungen sind die am besten erhaltenen in der Argolis.",
+        "Es ist ein kleiner Eintrag in den Epen und ein großer in der Archäologie, was ihn zu einem nützlichen Kontrollfall macht: Der Atlas misst nicht, wie wichtig ein Ort bei Homer ist, sondern wie sicher er lokalisiert werden kann."
+      ],
+      "identificationNote": "Akzeptiert: eine ausgegrabene Festung von unverkennbarem Alter, die seit der Antike durchgehend identifiziert wird. Die Textbewertung liegt nur bei 2, da das Epos außer dem Beiwort fast nichts darüber aussagt.",
+      "debate": "Nichts über die Lage. Die aktuellen Fragen betreffen die Funktion – wie Tiryns politisch mit Mykene in Beziehung stand und was die nachpalatiale Wiederbesiedlung für das Ende der Bronzezeit bedeutet."
+    },
+    "ja": {
+      "name": "ティリンス",
+      "summary": "『船名録』に登場する都市で、そのホメロス風の異名は、現存する遺構を文字通り描写したものである。あまりにも巨大な城壁であるため、後世のギリシャ人は巨人が建てたものと考えた。",
+      "description": [
+        "ティリンスは『イリアス』において、ディオメデスのアルゴス勢の軍勢の中に「堅固な城壁のティリンス」として一度だけ登場する。この城塞はミケーネから8キロメートルの場所にあり、平原から海へのアクセスを支配しており、その青銅器時代の防衛遺構はアルゴリス地方で最も無傷のまま残されている。",
+        "詩の中での記述はわずかであるが、考古学においては大きな存在であり、このことは有用な対照例となっている。すなわち、このアトラスはホメロスにおいてその場所がどれほど重要であるかではなく、どれほど確実に特定できるかを測定しているのである。"
+      ],
+      "identificationNote": "合意（Accepted）：年代が確実な発掘された城塞であり、古代から継続的に同定されている。テキストのスコアが2にとどまるのは、詩の中で異名以外にほとんど言及されていないためである。",
+      "debate": "位置については議論の余地はない。現在議論されているのは機能についてであり、ティリンスがミケーネと政治的にどのように関係していたのか、そして宮殿崩壊後の再居住が青銅器時代の終焉にとって何を意味するのかという点である。"
+    },
+    "zh": {
+      "name": "蒂林斯",
+      "summary": "《船名志》中的一座城市，其荷马史诗中的修饰语是对现存遗迹的字面描述：城墙如此雄伟，以至于后来的希腊人认为它们是由巨人建造的。",
+      "description": [
+        "蒂林斯在《伊利亚特》中出现过一次，属于迪奥墨德斯的阿耳戈斯支队，被称为“巨墙之城蒂林斯”。该卫城距离迈锡尼八公里，控制着平原通往海洋的通道，其青铜时代的防御工事是阿耳戈利斯地区保存最完好的。",
+        "它在史诗中只是一个简短的条目，但在考古学上却是一个重大发现，这使其成为一个有用的对照案例：本地图集衡量的不是一个地点在荷马史诗中的重要性，而是它能被多么确凿地定位。"
+      ],
+      "identificationNote": "公认：一座经过发掘且年代确凿的卫城，自古以来一直被认定。文本得分仅为 2，因为史诗除了修饰语之外几乎没有提及它。",
+      "debate": "关于其位置并无争议。目前关注的问题在于其功能——蒂林斯在政治上与迈锡尼的关系如何，以及后宫殿时期的重新占领对青铜时代的终结意味着什么。"
     }
   }
 }

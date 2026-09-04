@@ -272,6 +272,310 @@
           "a": "Um portão exigível mais um responsável nomeado por sistema. A política não exigida é contornada em um trimestre, e a propriedade difusa significa que ninguém responde quando um sistema falha."
         }
       ]
+    },
+    "fr": {
+      "name": "Cadre de gouvernance de l'IA d'entreprise",
+      "summary": "Un modèle opérationnel global pour gouverner l'IA au sein d'une organisation. Il définit les principes, la responsabilisation (RACI), la taxonomie des risques liés à l'IA, les jalons de validation du cycle de vie et la hiérarchie des politiques qui garantissent une utilisation de l'IA légale, sûre et alignée sur l'appétence au risque. Il harmonise l'EU AI Act, l'ISO/CEI 42001 et le NIST AI RMF en un seul programme interne — se conformer une fois, réutiliser partout — et intègre la liste de contrôle de gouvernance des agents comme son ensemble de contrôles concrets. Utilisez-le pour attribuer à chaque système d'IA en production un propriétaire désigné, un niveau de risque et un jalon de validation capable de bloquer réellement un déploiement non conforme.",
+      "definition": "Un cadre de gouvernance de l'IA d'entreprise est le système de principes, de rôles, de processus et de contrôles par lequel une organisation dirige et contrôle la manière dont elle conçoit, acquiert et exploite l'IA, afin que son utilisation reste légale, sûre, efficace et alignée sur son appétence au risque.",
+      "scope": "Conseils d'administration, comités de gouvernance de l'IA, responsables des risques et de la conformité, ainsi que les responsables produits et ingénierie qui conçoivent et exploitent l'IA dans l'ensemble de l'entreprise. Il s'agit d'un modèle opérationnel interne qui correspond à des réglementations et des normes désignées, et non d'un conseil juridique ou d'un substitut à un conseiller qualifié.",
+      "keyPoints": [
+        "Les principes d'abord : la légalité, la responsabilisation, la surveillance humaine, la transparence, l'équité, la sécurité et la protection de la vie privée dès la conception (privacy by design) ancrent chaque politique.",
+        "Responsabilisation RACI : chaque activité de gouvernance dispose d'une matrice RACI claire, et chaque système en production a un propriétaire désigné unique.",
+        "Une taxonomie des risques hiérarchise les cas d'usage (inacceptable, élevé, limité, minimal) afin que l'intensité des contrôles soit proportionnelle au risque.",
+        "Les jalons de validation du cycle de vie associent des contrôles d'entrée et de sortie à chaque étape, de la proposition au retrait.",
+        "Une hiérarchie des politiques relie les principes aux politiques, normes et contrôles concrets dotés de propriétaires désignés.",
+        "Se conformer une fois, réutiliser partout : les obligations externes sont associées aux contrôles internes une seule fois et sont partagées entre les différents régimes."
+      ],
+      "controls": [
+        {
+          "control": "Comité de gouvernance de l'IA doté d'une charte",
+          "note": "Un organe permanent doté de droits de décision publiés définit l'appétence au risque et la politique, de sorte que la responsabilisation soit structurelle plutôt qu'ad hoc."
+        },
+        {
+          "control": "Propriétaire de système responsable désigné",
+          "note": "Chaque système d'IA en production a un propriétaire humain unique ; c'est le contrôle le plus souvent associé à la détection et à la résolution des incidents."
+        },
+        {
+          "control": "Procédure de hiérarchisation des risques et registre central",
+          "note": "Une taxonomie documentée classifie chaque cas d'usage avant sa conception et l'enregistre dans un inventaire, mettant en lumière le shadow AI et calibrant les contrôles."
+        },
+        {
+          "control": "Jalons de validation d'entrée et de sortie du cycle de vie",
+          "note": "Chaque étape, de la proposition au retrait, comporte des jalons de validation adaptés au niveau de risque ; un jalon contraignant peut bloquer un déploiement non conforme."
+        },
+        {
+          "control": "Hiérarchie des politiques associée aux contrôles",
+          "note": "Les principes se traduisent en politiques, normes et contrôles concrets afin que les obligations soient opérationnelles et non de simples aspirations."
+        },
+        {
+          "control": "Audit indépendant et assurance",
+          "note": "Un examen indépendant périodique permet de tester si les jalons de validation et les contrôles sont réellement efficaces, bouclant ainsi la boucle avec le comité."
+        }
+      ],
+      "checklist": [
+        "Mettre en place un comité de gouvernance de l'IA doté d'une charte publiée et de droits de décision.",
+        "Définir les sept principes directeurs et y rattacher chaque politique.",
+        "Publier une taxonomie des risques avec différents niveaux et énumérer les cas d'usage interdits bloqués dès la phase d'admission.",
+        "Créer un registre central de tous les systèmes d'IA avec leur niveau de risque et leur propriétaire désigné.",
+        "Associer des jalons de validation d'entrée et de sortie à chaque étape du cycle de vie, adaptés au niveau de risque.",
+        "Associer l'EU AI Act, l'ISO/CEI 42001 et le NIST AI RMF aux contrôles internes une seule fois et les réutiliser.",
+        "Adopter la liste de contrôle de gouvernance des agents comme ensemble de contrôles concrets pour les systèmes à haut risque.",
+        "Planifier une réévaluation des niveaux de risque et un audit indépendant selon une cadence régulière."
+      ],
+      "pitfalls": [
+        "La gouvernance comme simple formalité administrative : les politiques existent, mais aucun jalon de contrôle ne peut réellement bloquer un déploiement non conforme.",
+        "Absence de responsable désigné : les systèmes sont mis en production avec une responsabilité diffuse et personne n'est garant en cas de défaillance.",
+        "Contrôles uniformes : chaque système est soumis au même processus lourd, ce qui pousse les équipes à contourner la gouvernance.",
+        "Shadow AI : des systèmes sont développés en dehors du registre et restent invisibles pour la gestion des risques.",
+        "Classification statique : le niveau de risque d'un cas d'usage est défini une fois pour toutes et n'est jamais réévalué à mesure que son autonomie ou sa portée s'étendent."
+      ],
+      "examples": [
+        "Une entreprise réglementée soumet chaque nouvel agent à un jalon d'évaluation basé sur les niveaux de risque avant de commencer tout développement.",
+        "Un système à haut risque destiné aux clients bénéficie de l'ensemble complet de contrôles et d'un audit indépendant, tandis qu'un outil interne à risque minimal suit uniquement les règles d'hygiène de base.",
+        "Les obligations de l'EU AI Act, de l'ISO/CEI 42001 et du NIST AI RMF sont associées à une bibliothèque de contrôles internes unique et réutilisées dans l'ensemble du portefeuille."
+      ],
+      "faqs": [
+        {
+          "q": "Ce cadre constitue-t-il un avis juridique ?",
+          "a": "Non. Il s'agit d'un modèle opérationnel professionnel qui s'aligne sur des réglementations et des normes spécifiques. Consultez un conseiller juridique qualifié pour toute décision de conformité contraignante."
+        },
+        {
+          "q": "Quel est le lien avec la checklist de gouvernance des agents et les différents cadres réglementaires ?",
+          "a": "Ce cadre définit la structure — principes, rôles, taxonomie et jalons de contrôle — et intègre l'EU AI Act, l'ISO/CEI 42001, le NIST AI RMF ainsi que la checklist pour les agents en tant que contrôles concrets."
+        },
+        {
+          "q": "Quel est l'élément unique ayant le plus fort impact ?",
+          "a": "Un jalon de contrôle contraignant associé à un responsable désigné pour chaque système. Une politique non appliquée est contournée en moins d'un trimestre, et une responsabilité diffuse signifie que personne ne répond des défaillances d'un système."
+        }
+      ]
+    },
+    "de": {
+      "name": "Enterprise AI Governance Framework",
+      "summary": "Ein übergeordnetes Betriebsmodell für die KI-Governance im gesamten Unternehmen. Es definiert die Prinzipien, Verantwortlichkeiten (RACI), die KI-Risikotaxonomie, Lifecycle-Gates und die Richtlinienhierarchie, die sicherstellen, dass die KI-Nutzung rechtmäßig, sicher und im Einklang mit der Risikobereitschaft bleibt. Es harmonisiert den EU AI Act, ISO/IEC 42001 und das NIST AI RMF in einem einzigen internen Programm – einmal erfüllen, überall wiederverwenden – und nutzt die Checkliste für agentische Governance als konkretes Kontrollset. Nutzen Sie es, um jedem produktiven KI-System einen namentlich genannten Verantwortlichen, eine Risikostufe und ein Gate zuzuweisen, das eine nicht-konforme Bereitstellung tatsächlich blockieren kann.",
+      "definition": "Ein Enterprise AI Governance Framework ist das System aus Prinzipien, Rollen, Prozessen und Kontrollen, mit dem ein Unternehmen die Entwicklung, Beschaffung und den Betrieb von KI steuert und kontrolliert, damit die KI-Nutzung rechtmäßig, sicher, effektiv und im Einklang mit der Risikobereitschaft bleibt.",
+      "scope": "Vorstände, KI-Governance-Ausschüsse, Risiko- und Compliance-Beauftragte sowie Produkt- und Engineering-Leiter, die KI im gesamten Unternehmen entwickeln und betreiben. Es handelt sich um ein internes Betriebsmodell, das sich an bestimmten Vorschriften und Standards orientiert, und nicht um eine Rechtsberatung oder einen Ersatz für eine qualifizierte Rechtsberatung.",
+      "keyPoints": [
+        "Prinzipien zuerst: Rechtmäßigkeit, Rechenschaftspflicht, menschliche Aufsicht, Transparenz, Fairness, Sicherheit und Privacy by Design verankern jede Richtlinie.",
+        "RACI-Verantwortlichkeiten: Jede Governance-Aktivität verfügt über eine klare Zuordnung (Responsible, Accountable, Consulted, Informed), und jedes Produktivsystem hat einen namentlich genannten Verantwortlichen.",
+        "Eine Risikotaxonomie unterteilt Anwendungsfälle in Stufen (unzulässig, hoch, begrenzt, minimal), sodass die Kontrollintensität proportional zum Risiko ist.",
+        "Lifecycle-Gates verknüpfen jede Phase, vom Vorschlag bis zur Außerbetriebnahme, mit Eingangs- und Ausgangsprüfungen.",
+        "Eine Richtlinienhierarchie führt Prinzipien auf Richtlinien, Standards und konkrete Kontrollen mit namentlich genannten Verantwortlichen zurück.",
+        "Einmal erfüllen, überall wiederverwenden: Externe Verpflichtungen werden ein einziges Mal internen Kontrollen zugeordnet und über verschiedene Regelwerke hinweg geteilt."
+      ],
+      "controls": [
+        {
+          "control": "KI-Governance-Ausschuss mit Statut",
+          "note": "Ein ständiges Gremium mit veröffentlichten Entscheidungsrechten legt die Risikobereitschaft und Richtlinien fest, sodass die Rechenschaftspflicht strukturell und nicht ad hoc verankert ist."
+        },
+        {
+          "control": "Namentlich genannter Systemverantwortlicher",
+          "note": "Jedes produktive KI-System hat einen menschlichen Verantwortlichen; dies ist die Kontrolle, die am ehesten dazu beiträgt, dass Vorfälle erkannt und behoben werden."
+        },
+        {
+          "control": "Verfahren zur Risikoeinstufung und zentrales Register",
+          "note": "Eine dokumentierte Taxonomie klassifiziert jeden Anwendungsfall vor der Entwicklung und erfasst ihn in einem Inventar, wodurch Schatten-KI aufgedeckt und Kontrollen kalibriert werden."
+        },
+        {
+          "control": "Lifecycle-Eingangs- und -Ausgangs-Gates",
+          "note": "Jede Phase vom Vorschlag bis zur Außerbetriebnahme verfügt über Gates, die auf die Risikostufe abgestimmt sind; ein durchsetzbares Gate kann eine nicht-konforme Bereitstellung blockieren."
+        },
+        {
+          "control": "Auf Kontrollen abgebildete Richtlinienhierarchie",
+          "note": "Prinzipien lassen sich auf Richtlinien, Standards und konkrete Kontrollen zurückführen, sodass Verpflichtungen operativ und nicht nur theoretisch sind."
+        },
+        {
+          "control": "Unabhängiges Audit und Assurance",
+          "note": "Regelmäßige unabhängige Überprüfungen testen, ob Gates und Kontrollen tatsächlich greifen, und schließen den Kreis zurück zum Ausschuss."
+        }
+      ],
+      "checklist": [
+        "Richten Sie einen KI-Governance-Ausschuss mit einem veröffentlichten Statut und Entscheidungsrechten ein.",
+        "Definieren Sie die sieben Leitprinzipien und führen Sie jede Richtlinie auf diese zurück.",
+        "Veröffentlichen Sie eine Risikotaxonomie mit Stufen und listen Sie verbotene Anwendungsfälle auf, die bereits bei der Aufnahme blockiert werden.",
+        "Erstellen Sie ein zentrales Register aller KI-Systeme mit ihrer Risikostufe und dem namentlich genannten Verantwortlichen.",
+        "Verknüpfen Sie jede Lifecycle-Phase mit Eingangs- und Ausgangs-Gates, die auf die Risikostufe abgestimmt sind.",
+        "Ordnen Sie den EU AI Act, ISO/IEC 42001 und das NIST AI RMF ein einziges Mal internen Kontrollen zu und verwenden Sie diese wieder.",
+        "Übernehmen Sie die Checkliste für agentische Governance als konkretes Kontrollset für Hochrisikosysteme.",
+        "Planen Sie die Neueinstufung (Re-Tiering) und unabhängige Audits in regelmäßigen Abständen."
+      ],
+      "pitfalls": [
+        "Governance als reine Formsache: Richtlinien existieren, aber kein Kontrollpunkt (Gate) kann eine nicht-konforme Bereitstellung tatsächlich blockieren.",
+        "Keine verantwortliche Person: Systeme werden mit unklaren Zuständigkeiten bereitgestellt, und niemand übernimmt die Verantwortung, wenn sie fehlschlagen.",
+        "Einheitliche Kontrollen: Jedes System durchläuft denselben schwerfälligen Prozess, sodass Teams die Governance umgehen.",
+        "Schatten-KI: Systeme werden außerhalb des Registers entwickelt und bleiben für das Risikomanagement unsichtbar.",
+        "Statisches Tiering: Das Risiko eines Anwendungsfalls wird einmalig festgelegt und bei zunehmender Autonomie oder wachsendem Umfang nie neu bewertet."
+      ],
+      "examples": [
+        "Ein reguliertes Unternehmen leitet jeden neuen Agenten vor Beginn der Entwicklung durch einen stufenbasierten Freigabeprozess (Intake Gate).",
+        "Ein kundenorientiertes System mit hohem Risiko erhält das vollständige Kontrollset und ein unabhängiges Audit, während ein internes Tool mit minimalem Risiko nur grundlegende Sicherheitsmaßnahmen befolgt.",
+        "Die Verpflichtungen aus dem EU AI Act, der ISO/IEC 42001 und dem NIST AI RMF werden in einer einzigen internen Kontrollbibliothek zusammengeführt und portfolioübergreifend wiederverwendet."
+      ],
+      "faqs": [
+        {
+          "q": "Stellt dieses Framework eine Rechtsberatung dar?",
+          "a": "Nein. Es handelt sich um ein professionelles Betriebsmodell, das auf genannte Vorschriften und Standards abgestimmt ist. Wenden Sie sich für verbindliche Compliance-Entscheidungen an eine qualifizierte Rechtsberatung."
+        },
+        {
+          "q": "Wie verhält es sich zur Checkliste für agentische Governance und den spezifischen Regelwerken?",
+          "a": "Dieses Framework liefert die Struktur – Prinzipien, Rollen, Taxonomie und Gates – und integriert den EU AI Act, die ISO/IEC 42001, das NIST AI RMF sowie die agentische Checkliste als konkrete Kontrollmaßnahmen."
+        },
+        {
+          "q": "Was ist das Element mit der absolut größten Hebelwirkung?",
+          "a": "Ein durchsetzbares Gate plus eine namentlich benannte verantwortliche Person pro System. Nicht durchgesetzte Richtlinien werden innerhalb eines Quartals umgangen, und unklare Zuständigkeiten führen dazu, dass sich bei einem Systemausfall niemand verantwortlich fühlt."
+        }
+      ]
+    },
+    "ja": {
+      "name": "エンタープライズAIガバナンスフレームワーク",
+      "summary": "組織全体でAIを統治するための包括的な運用モデルです。AIの利用を合法かつ安全に保ち、リスク許容度に合わせるための原則、責任（RACI）、AIリスク分類、ライフサイクルゲート、およびポリシー階層を定義します。EU AI法、ISO/IEC 42001、NIST AI RMFを1つの内部プログラムに調和させ（一度の準拠でどこでも再利用可能）、エージェント型ガバナンスチェックリストを具体的なコントロールセットとして構成します。これを使用して、本番環境のすべてのAIシステムに指名された所有者、リスク層、および非準拠のデプロイを実際にブロックできるゲートを割り当てます。",
+      "definition": "エンタープライズAIガバナンスフレームワークとは、組織がAIの構築、調達、運用を指揮・管理し、AIの利用が合法、安全、効果的であり、かつリスク許容度に合致するようにするための原則、役割、プロセス、およびコントロールの体系です。",
+      "scope": "取締役会、AIガバナンス委員会、リスク・コンプライアンス担当者、および企業全体でAIを構築・運用するプロダクトおよびエンジニアリングのリーダーを対象としています。これは、特定の規制や標準に対応する内部運用モデルであり、法的助言や資格を持つ専門家によるカウンセルの代わりとなるものではありません。",
+      "keyPoints": [
+        "原則第一：合法性、説明責任、人間による監視、透明性、公平性、安全性、およびプライバシー・バイ・デザインが、すべてのポリシーの基盤となります。",
+        "RACIによる責任の明確化：すべてのガバナンス活動に明確なRACI（実行責任者、説明責任者、協働者、報告先）マップが定義され、本番環境のすべてのシステムに1人の指名された所有者が存在します。",
+        "リスク分類によるユースケースの階層化（許容不可、高、制限あり、最小限）により、コントロールの強度がリスクに比例するようにします。",
+        "ライフサイクルゲートにより、提案から廃止に至るまでの各段階に開始および終了チェックを適用します。",
+        "ポリシー階層により、原則からポリシー、標準、および指名された所有者を持つ具体的なコントロールへと追跡できるようにします。",
+        "一度の準拠でどこでも再利用：外部の義務を内部コントロールに一度だけマッピングし、異なる制度間で共有します。"
+      ],
+      "controls": [
+        {
+          "control": "憲章を持つAIガバナンス委員会",
+          "note": "公表された決定権を持つ常設組織がリスク許容度とポリシーを設定することで、説明責任がその場しのぎではなく構造的なものになります。"
+        },
+        {
+          "control": "指名された説明責任のあるシステム所有者",
+          "note": "本番環境のすべてのAIシステムに1人の人間の所有者が存在します。これは、インシデントの検知と対応に最も深く関連するコントロールです。"
+        },
+        {
+          "control": "リスク階層化手順と中央レジストリ",
+          "note": "文書化された分類法により、構築前に各ユースケースを分類してインベントリに記録することで、シャドーAIを浮き彫りにし、コントロールを調整します。"
+        },
+        {
+          "control": "ライフサイクルの開始および終了ゲート",
+          "note": "提案から廃止までの各段階に、リスク層に応じたゲートが設定されます。強制力のあるゲートにより、非準拠 of デプロイをブロックできます。"
+        },
+        {
+          "control": "コントロールにマッピングされたポリシー階層",
+          "note": "原則からポリシー、標準、および具体的なコントロールへと追跡できるようにすることで、義務を単なる願望ではなく、運用可能なものにします。"
+        },
+        {
+          "control": "独立した監査とアシュアランス（保証）",
+          "note": "定期的な独立したレビューにより、ゲートとコントロールが実際に機能しているかをテストし、委員会へのフィードバックループを完成させます。"
+        }
+      ],
+      "checklist": [
+        "公表された憲章と決定権を持つAIガバナンス委員会を立ち上げる。",
+        "7つのガバナンス原則を定義し、すべてのポリシーをそれらに紐付ける。",
+        "階層化されたリスク分類を公表し、受付段階でブロックされる禁止されたユースケースを列挙する。",
+        "すべてのAIシステムのリスク層と指名された所有者を記載した中央レジストリを構築する。",
+        "ライフサイクルの各段階に、リスク層に応じた開始および終了ゲートを適用する。",
+        "EU AI法、ISO/IEC 42001、およびNIST AI RMFを内部コントロールに一度だけマッピングし、それらを再利用する。",
+        "高リスクシステム向けの具体的なコントロールセットとして、エージェント型ガバナンスチェックリストを採用する。",
+        "定期的なサイクルで再ティアリングと独立した監査をスケジュールします。"
+      ],
+      "pitfalls": [
+        "ペーパーワークとしてのガバナンス：ポリシーは存在するものの、コンプライアンスに準拠していないデプロイを実際にブロックできるゲートが存在しない。",
+        "責任ある所有者の不在：所有権が曖昧なままシステムがリリースされ、障害発生時に誰も責任を負わない。",
+        "画一的なコントロール：すべてのシステムに同じ重いプロセスが適用されるため、チームがガバナンスを回避してしまう。",
+        "シャドーAI：台帳の外でシステムが構築され、リスク管理の対象外（不可視）のままになる。",
+        "静的なティアリング：ユースケースのリスクが一度設定されたきり、自律性やスコープが拡大しても再評価されない。"
+      ],
+      "examples": [
+        "規制対象の企業が、構築を開始する前に、すべての新しいエージェントをティアベースのインテークゲートに通す。",
+        "高リスクの顧客向けシステムには完全なコントロールセットと独立した監査が適用される一方、最小リスクの社内ツールにはベースラインの衛生管理のみが適用される。",
+        "EU AI Act、ISO/IEC 42001、およびNIST AI RMFの義務が1つの内部コントロールライブラリにマッピングされ、ポートフォリオ全体で再利用される。"
+      ],
+      "faqs": [
+        {
+          "q": "このフレームワークは法的助言ですか？",
+          "a": "いいえ。これは、特定の規制や標準にマッピングされた専門的な運用モデルです。法的拘束力のあるコンプライアンスの決定については、資格を持つ顧問弁護士にご相談ください。"
+        },
+        {
+          "q": "エージェント型ガバナンスのチェックリストや特定の規制制度とはどのような関係がありますか？",
+          "a": "このフレームワークは、原則、役割、タクソノミー、ゲートなどの構造を定義し、EU AI Act、ISO/IEC 42001、NIST AI RMF、およびエージェント型チェックリストを具体的なコントロールとして構成します。"
+        },
+        {
+          "q": "最も効果の高い（レバレッジの効く）単一の要素は何ですか？",
+          "a": "強制力のあるゲートと、システムごとの明確な責任ある所有者（Accountable Owner）の割り当てです。強制力のないポリシーは1四半期以内に形骸化し、所有権が曖昧であればシステム障害時に誰も責任を負いません。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "企业级 AI 治理框架",
+      "summary": "一个用于在整个组织内治理 AI 的综合运行模型。它定义了原则、问责制（RACI）、AI 风险分类法、生命周期关卡和策略层级，以确保 AI 的使用合法、安全并符合风险偏好。它将《欧盟 AI 法案》（EU AI Act）、ISO/IEC 42001 和 NIST AI RMF 整合为一个内部项目——一次合规，到处复用——并将智能体治理清单作为其具体的控制集。使用它为每个生产环境中的 AI 系统指定明确的所有者、风险层级以及一个能够真正阻止非合规部署的关卡。",
+      "definition": "企业级 AI 治理框架是指组织借以指导和控制其如何构建、采购和运行 AI 的原则、角色、流程和控制体系，以确保 AI 的使用保持合法、安全、有效并符合其风险偏好。",
+      "scope": "董事会、AI 治理委员会、风险与合规官，以及在整个企业中构建和运行 AI 的产品与工程领导者。这是一个映射到指定法规和标准的内部运行模型，并非法律建议，也不能替代合格的法律顾问。",
+      "keyPoints": [
+        "原则至上：合法性、问责制、人类监督、透明度、公平性、安全性和源自设计的隐私保护（privacy by design）是每项策略的基石。",
+        "RACI 问责制：每项治理活动都有明确的负责人（Responsible）、问责人（Accountable）、咨询人（Consulted）和知情人（Informed）映射，且每个生产系统都有一个明确指定的所有者。",
+        "风险分类法将使用场景分层（不可接受、高、有限、极小），使控制强度与风险成正比。",
+        "生命周期关卡为从提议到退役的每个阶段都附加了准入和准出检查。",
+        "策略层级将原则追溯到策略、标准以及具有明确指定所有者的具体控制项。",
+        "一次合规，到处复用：外部义务仅一次性映射到内部控制，并在不同的合规体系间共享。"
+      ],
+      "controls": [
+        {
+          "control": "拥有章程的 AI 治理委员会",
+          "note": "一个拥有已公布决策权的常设机构，负责设定风险偏好和策略，使问责制成为结构性的，而非临时的。"
+        },
+        {
+          "control": "明确指定的问责系统所有者",
+          "note": "每个生产环境中的 AI 系统都有一个人类所有者；这是与发现并应对事件最密切相关的控制项。"
+        },
+        {
+          "control": "风险分层程序与中央登记簿",
+          "note": "在构建前，通过文件化的分类法对每个使用场景进行分类并记录在清单中，从而使影子 AI 显现并调整控制力度。"
+        },
+        {
+          "control": "生命周期准入和准出关卡",
+          "note": "从提议到退役的每个阶段都设有根据风险层级调整的关卡；可强制执行的关卡能够阻止非合规的部署。"
+        },
+        {
+          "control": "映射到控制项的策略层级",
+          "note": "原则追溯到策略、标准和具体的控制项，使合规义务具有可操作性，而非仅仅是愿景。"
+        },
+        {
+          "control": "独立审计与保证",
+          "note": "定期的独立审查测试关卡和控制项是否切实有效，从而向委员会形成闭环反馈。"
+        }
+      ],
+      "checklist": [
+        "组建一个拥有已公布章程和决策权的 AI 治理委员会。",
+        "定义七项治理原则，并将每项策略追溯到这些原则。",
+        "发布包含层级的风险分类法，并列出在准入阶段即被阻止的禁止使用场景。",
+        "建立所有 AI 系统的中央登记簿，记录其风险层级和明确指定的所有者。",
+        "为每个生命周期阶段附加准入和准出关卡，并根据风险层级进行调整。",
+        "将《欧盟 AI 法案》（EU AI Act）、ISO/IEC 42001 和 NIST AI RMF 一次性映射到内部控制，并进行复用。",
+        "采用智能体治理清单作为高风险系统的具体控制集。",
+        "定期安排重新分级和独立审计。"
+      ],
+      "pitfalls": [
+        "治理流于形式：政策确实存在，但没有任何关卡能真正阻止不合规的部署。",
+        "缺乏明确的责任人：系统发布时权责不清，出现故障时无人负责。",
+        "一刀切的控制：每个系统都采用同样繁重的流程，导致团队设法绕过治理。",
+        "影子 AI：系统在登记册之外构建，脱离了风险监管视线。",
+        "静态分级：用例的风险级别一经设定便不再重新评估，即使其自主性或范围有所扩大。"
+      ],
+      "examples": [
+        "受监管的企业在开始任何构建之前，都会让每个新智能体通过基于分级的准入关卡。",
+        "高风险的面向客户系统接受全套控制和独立审计，而极低风险的内部工具仅遵循基线规范。",
+        "将 EU AI Act、ISO/IEC 42001 和 NIST AI RMF 的合规义务映射到统一的内部控制库中，并在整个产品组合中复用。"
+      ],
+      "faqs": [
+        {
+          "q": "该框架是否构成法律建议？",
+          "a": "否。它是一个与特定法规和标准相映射的专业运营模型。如需做出具有约束力的合规决策，请咨询合格的法律顾问。"
+        },
+        {
+          "q": "它与智能体治理清单及具体监管机制有何关系？",
+          "a": "该框架负责定义结构（原则、角色、分类和关卡），并将 EU AI Act、ISO/IEC 42001、NIST AI RMF 以及智能体清单整合为其具体的控制措施。"
+        },
+        {
+          "q": "哪一个是杠杆效应最高的单一要素？",
+          "a": "强制执行的关卡加上每个系统指定的明确责任人。未强制执行的政策在一个季度内就会被绕过，而权责不清则意味着系统出现故障时无人负责。"
+        }
+      ]
     }
   }
 }

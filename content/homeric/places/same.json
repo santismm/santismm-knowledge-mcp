@@ -97,6 +97,22 @@
         "pt": {
           "label": "Cefalônia (a antiga Same)",
           "note": "Estrabão identifica Same com a ilha depois chamada Cefalônia, onde uma cidade de Sami ainda carrega o nome. A Cefalônia tem os cemitérios micênicos mais ricos do Jônico, o que encaixa numa ilha populosa que fornece pretendentes; o que falta é um palácio."
+        },
+        "fr": {
+          "label": "Céphalonie (l'ancienne Samé)",
+          "note": "Strabon identifie Samé à l'île appelée plus tard Céphalonie, où une ville de Sami porte toujours ce nom. Céphalonie possède les cimetières mycéniens les plus riches des îles Ioniennes, ce qui correspond à une île peuplée fournissant des prétendants ; ce qui lui manque, c'est un palais."
+        },
+        "zh": {
+          "label": "凯法利尼亚岛（古萨墨）",
+          "note": "斯特拉博将萨墨等同于后来被称为凯法利尼亚的岛屿，那里至今仍有一个名为萨米（Sami）的城镇保留着这个名字。凯法利尼亚拥有伊奥尼亚群岛中最丰富的迈锡尼墓地，这符合一个提供求婚者的人口稠密岛屿的特征；它所缺乏的是一座宫殿。"
+        },
+        "de": {
+          "label": "Kefalonia (das antike Same)",
+          "note": "Strabo identifiziert Same mit der später Kefalonia genannten Insel, auf der eine Stadt namens Sami noch immer diesen Namen trägt. Kefalonia besitzt die reichsten mykenischen Friedhöfe der Ionischen Inseln, was zu einer bevölkerungsreichen Insel passt, die Freier stellt; was ihr fehlt, ist ein Palast."
+        },
+        "ja": {
+          "label": "ケファロニア島（古代のサメ）",
+          "note": "ストラボンはサメを、後にケファロニア島と呼ばれる島と同定しており、そこにはサミという町が今もその名を残している。ケファロニア島はイオニア地方で最も豊かなマイケナイの墓地を有しており、求婚者を送り出す人口の多い島という描写に合致するが、欠けているのは宮殿である。"
         }
       }
     },
@@ -135,6 +151,22 @@
         "pt": {
           "label": "A Cefalônia oriental, se Paliki for Ítaca",
           "note": "A reconstrução de Bittlestone exige que Same seja o resto da Cefalônia a leste de um antigo canal marinho. A hipótese é internamente coerente e depende inteiramente de esse canal ter existido."
+        },
+        "fr": {
+          "label": "L'est de la Céphalonie, si Paliki is Ithaque",
+          "note": "La reconstruction de Bittlestone exige que Samé soit le reste de la Céphalonie à l'est d'un ancien chenal marin. L'hypothèse est cohérente en soi et dépend entièrement de l'existence passée de ce chenal."
+        },
+        "zh": {
+          "label": "东凯法利尼亚（若帕利基为伊萨卡）",
+          "note": "比特尔斯通（Bittlestone）的复原方案要求萨墨是昔日海峡以东的凯法利尼亚岛其余部分。该假说在逻辑上是自洽的，且完全取决于该海峡是否曾经存在。"
+        },
+        "de": {
+          "label": "Ost-Kefalonia, falls Paliki Ithaka ist",
+          "note": "Bittlestones Rekonstruktion erfordert, dass Same der Rest von Kefalonia östlich eines ehemaligen Meereskanals ist. Die Hypothese ist in sich konsistent und hängt vollständig davon ab, ob dieser Kanal existiert hat."
+        },
+        "ja": {
+          "label": "パリキがイタカである場合の東ケファロニア島",
+          "note": "ビトルストーンの再構成では、サメはかつての海峡の東側にあるケファロニア島の残りの部分である必要がある。この仮説は内部的に一貫しており、その海峡が存在したかどうかに完全に依存している。"
         }
       }
     }
@@ -172,6 +204,46 @@
       ],
       "identificationNote": "Plausível e não aceita: a identificação antiga é forte e a arqueologia é real, mas nenhum centro escavado liga a ilha ao poema, e os nomes jônicos podem não ter sido estáveis entre a Idade do Bronze e Homero.",
       "debate": "Se a geografia homérica de quatro ilhas é sequer coerente, e se Same, Dulíquio e Ítaca nomeavam no Bronze os mesmos lugares que nomeavam no século VIII."
+    },
+    "fr": {
+      "name": "Samé",
+      "summary": "La deuxième île du royaume d'Ulysse, généralement identifiée comme Céphalonie — la plus grande île du groupe, celle qui compte le plus de tombes mycéniennes et le moins de bâtiments mycéniens.",
+      "description": [
+        "Samé fournit vingt-quatre prétendants, le plus grand contingent, ce qui implique une population importante. La tradition antique et le nom de la ville qui a survécu désignent Céphalonie, et les cimetières de tombes à chambre de l'île confirment qu'elle était peuplée à l'âge du Bronze récent.",
+        "Chaque reconstruction rivale d'Ithaque doit dire quelque chose sur Samé, car les deux sont définies l'une par rapport à l'autre dans le texte. C'est pourquoi l'entrée comporte une seconde hypothèse : il ne s'agit pas d'une affirmation indépendante, mais de l'ombre de la question d'Ithaque."
+      ],
+      "identificationNote": "Plausible plutôt qu'accepté : l'identification antique est forte et l'archéologie est réelle, mais aucun centre fouillé ne relie l'île au poème, et les noms ioniens n'étaient peut-être pas stables entre l'âge du Bronze et l'époque d'Homère.",
+      "debate": "Savoir si la géographie des quatre îles d'Homère est cohérente, et si Samé, Doulichion et Ithaque désignaient à l'âge du Bronze les mêmes lieux qu'au VIIIe siècle."
+    },
+    "de": {
+      "name": "Same",
+      "summary": "Die zweite Insel von Odysseus' Königreich, die allgemein mit Kefalonia gleichgesetzt wird – der größten Insel der Gruppe und derjenigen mit den meisten mykenischen Gräbern und den wenigsten mykenischen Gebäuden.",
+      "description": [
+        "Same stellt vierundzwanzig Freier, das größte Kontingent, was auf eine beträchtliche Bevölkerung schließen lässt. Die antike Tradition und der erhaltene Stadtname weisen auf Kefalonia hin, und die Kammergrab-Nekropolen der Insel bestätigen, dass sie in der Spätbronzezeit bevölkerungsreich war.",
+        "Jede konkurrierende Rekonstruktion von Ithaka muss etwas zu Same sagen, da die beiden im Text in Abgrenzung zueinander definiert werden. Deshalb enthält der Eintrag eine zweite Hypothese: Es handelt sich nicht um eine unabhängige Behauptung, sondern um den Schatten der Ithaka-Frage."
+      ],
+      "identificationNote": "Plausibel statt akzeptiert: Die antike Identifizierung ist stark und die Archäologie ist real, aber kein ausgegrabenes Zentrum verbindet die Insel mit dem Epos, und die ionischen Namen waren zwischen der Bronzezeit und Homer möglicherweise nicht stabil.",
+      "debate": "Ob Homers Geographie der vier Inseln überhaupt kohärent ist und ob Same, Dulichion und Ithaka in der Bronzezeit dieselben Orte bezeichneten wie im achten Jahrhundert."
+    },
+    "ja": {
+      "name": "サメ",
+      "summary": "オデュッセウスの王国の第2の島。一般にケファロニア島とされる。この島々の中で最大の島であり、マイケナイの墓が最も多く、マイケナイの建物が最も少ない。",
+      "description": [
+        "サメは最多の24人の求婚者を送り出しており、これはかなりの人口を暗示している。古代の伝承と現存する町の名はケファロニア島を指し示しており、島の室墓墓地は、そこが青銅器時代後期に人口密度が高かったことを裏付けている。",
+        "イタカの対立する再構成案はすべて、サメについて何らかの言及をしなければならない。なぜなら、テキストにおいてこの2つは互いに対比して定義されているからである。この項目に第2の仮説が含まれているのはそのためであり、それは独立した主張ではなく、イタカ問題の影なのである。"
+      ],
+      "identificationNote": "合意ありというよりは妥当：古代の同定は強力であり、考古学的証拠も実在するが、島と詩を結びつける発掘された中心地はなく、イオニアの地名は青銅器時代からホメロスの時代にかけて安定していなかった可能性がある。",
+      "debate": "ホメロスの4つの島の地理がそもそも一貫しているのか、そしてサメ、ドゥリキオン、イタカが、青銅器時代に8世紀と同じ場所を指していたのかという点。"
+    },
+    "zh": {
+      "name": "萨墨",
+      "summary": "奥德修斯王国的第二大岛，通常被认为是凯法利尼亚岛（Kefalonia）——该群岛中最大的岛屿，拥有最多的迈锡尼墓葬和最少的迈锡尼建筑。",
+      "description": [
+        "萨墨提供了二十四名求婚者，是人数最多的一支，这暗示了其庞大的人口规模。古代传说和幸存的城镇名称都指向凯法利尼亚岛，而该岛的墓室墓地也证实了它在青铜时代晚期人口稠密。",
+        "每一个关于伊萨卡岛的竞争性复原方案都必须对萨墨做出解释，因为两者在文本中是互为参照定义的。这就是为什么该条目包含第二个假说：它不是一个独立的主张，而是伊萨卡岛问题的投影。"
+      ],
+      "identificationNote": "似是而非而非已公认：古代的认定很有说服力，考古发现也是真实的，但没有发掘出任何能将该岛与诗歌联系起来的中心遗址，且伊奥尼亚地名在青铜时代与荷马时代之间可能并不稳定。",
+      "debate": "荷马的四岛地理设定是否具有连贯性，以及萨墨、杜利基翁（Dulichium）和伊萨卡在青铜时代所指称的地点是否与它们在公元前八世纪所指称的相同。"
     }
   }
 }

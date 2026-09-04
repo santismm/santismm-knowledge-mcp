@@ -66,6 +66,22 @@
         "pt": {
           "label": "Além do Oceano, na borda do mundo",
           "note": "Circe manda o navio cruzar o Oceano rumo a uma costa de névoa perpétua. Lido ao pé da letra, o destino fica fora do mundo em que o resto do poema navega — que é como a maioria dos estudiosos o lê."
+        },
+        "fr": {
+          "label": "Au-delà de l'Océan, au bout du monde",
+          "note": "Circé envoie le navire de l'autre côté de l'Océan vers un rivage de brume perpétuelle. Lu littéralement, la destination se trouve en dehors du monde dans lequel navigue le reste du poème — ce qui est la lecture de la plupart des spécialistes."
+        },
+        "zh": {
+          "label": "大洋彼岸，世界边缘",
+          "note": "喀耳刻将船送过大洋，前往一片终年大雾弥漫的海岸。从字面意思理解，目的地位于史诗其余部分所航行的世界之外——大多数学者也是这样理解的。"
+        },
+        "de": {
+          "label": "Jenseits des Okeanos, am Rande der Welt",
+          "note": "Kirke schickt das Schiff über den Okeanos an ein Ufer ewigen Nebels. Wörtlich genommen liegt das Ziel außerhalb der Welt, in der der Rest des Gedichts segelt – und so lesen es auch die meisten Gelehrten."
+        },
+        "ja": {
+          "label": "大洋（オケアノス）の彼方、世界の果て",
+          "note": "キルケは船を大洋の彼方、永久の霧に包まれた海岸へと送り出します。文字通りに解釈すれば、目的地は詩の他の部分で航海される世界の「外側」にあり、大半の学者はそのように解釈しています。"
         }
       }
     },
@@ -91,6 +107,22 @@
         "pt": {
           "label": "O Aqueronte da Tesprócia",
           "note": "Um rio real, um oráculo dos mortos real citado por Heródoto e um edifício escavado exibido por décadas como o Necromanteion — identificação hoje rejeitada por muitos arqueólogos. O culto é histórico; a equação com o Érebo homérico, não."
+        },
+        "fr": {
+          "label": "L'Achéron en Thesprotie",
+          "note": "Une rivière réelle, un véritable oracle des morts rapporté par Hérodote, et un bâtiment fouillé longtemps présenté aux visiteurs comme le Nékyomanteion — une identification que de nombreux archéologues rejettent aujourd'hui. Le culte est historique ; l'assimilation à l'Érèbe d'Homère ne l'est pas."
+        },
+        "zh": {
+          "label": "塞斯普罗蒂亚的阿刻戎河",
+          "note": "一条真实的河流，希罗多德记载的真实的亡灵神谕所，以及一座长期向游客展示为亡灵神谕所的发掘建筑——许多考古学家现在否认了这一认定。该祭祀活动是历史事实，但将其等同于荷马笔下的厄瑞玻斯则不然。"
+        },
+        "de": {
+          "label": "Der Acheron in Thesprotien",
+          "note": "Ein realer Fluss, ein von Herodot überliefertes reales Totenorakel und ein ausgegrabenes Gebäude, das Besuchern lange Zeit als Nekyomanteion präsentiert wurde – eine Identifizierung, die viele Archäologen heute ablehnen. Der Kult ist historisch; die Gleichsetzung mit Homers Erebus ist es nicht."
+        },
+        "ja": {
+          "label": "テスプロティアのアケロン川",
+          "note": "実在の川であり、ヘロドトスによって報告された実在の死者の神託所であり、長年にわたり訪問者にネキオマンテイオンとして示されてきた発掘された建物ですが、現在では多くの考古学者がこの特定を否定しています。信仰は歴史的事実ですが、ホメロスのエレボスと同一視することは事実ではありません。"
         }
       }
     }
@@ -153,6 +185,86 @@
         {
           "q": "Por que o episódio pontua tão baixo?",
           "a": "Porque três dos quatro critérios falham: nada foi escavado que corresponda, não há consenso acadêmico de que a passagem localize algo e a geografia está explicitamente além do mundo conhecido. Só o critério textual pontua, e apenas em parte."
+        }
+      ]
+    },
+    "fr": {
+      "title": "La Nekyia : Ulysse interroge les morts",
+      "summary": "Le chant XI envoie Ulysse au bout du monde pour consulter le devin Tirésias. C'est le seul voyage du poème comportant des indications détaillées et aucune destination possible.",
+      "narrative": [
+        "Circé indique la route : une journée de navigation avec le vent du nord à travers l'Océan, jusqu'au rivage des Cimmériens où le soleil ne brille jamais ; échouer le navire près du bois sacré de Perséphone, là où le Pyriphlégéthon et le Cocyte se jettent dans l'Achéron. Là, Ulysse creuse une fosse, y verse du miel, du lait, du vin et de l'eau, et les morts se rassemblent autour du sang.",
+        "Ce qui suit est un catalogue des morts — Elpénor, sa mère Anticlée, Agamemnon, Achille, Ajax — et la prophétie qui structure le reste du poème."
+      ],
+      "whyItMatters": "La Nekyia est le test de vérité de l'honnêteté même de l'atlas. Elle comporte des instructions précises, de vrais noms de rivières et un site de culte antique qui lui est associé, et pourtant elle n'obtient que 3/12, car la précision d'un rituel ne constitue pas une preuve concernant un lieu.",
+      "debate": "Reste à savoir si les noms de rivières ont été empruntés à la Thesprotie pour le poème ou inversement ; si les Cimmériens permettent de situer quoi que ce soit ; et si le chant XI est une partie ancienne ou tardive de l'Odyssée. Aucune de ces questions ne permet de planter une épingle sur une carte.",
+      "faqs": [
+        {
+          "q": "Le Nékyomanteion d'Éphyre est-il l'entrée des Enfers d'Homère ?",
+          "a": "Non. C'est un site archéologique réel avec une histoire cultuelle réelle, et son identification comme oracle des morts est elle-même contestée. L'atlas le répertorie comme une théorie associée à l'épisode, et non comme un emplacement pour la demeure d'Hadès."
+        },
+        {
+          "q": "Pourquoi l'épisode obtient-il un score si bas ?",
+          "a": "Parce que trois des quatre critères échouent : rien de ce qui a été fouillé ne correspond, il n'y a pas de consensus scientifique sur le fait que le passage situe quoi que ce soit, et la géographie se situe explicitement au-delà du monde connu. Seul le critère textuel obtient des points, et seulement en partie."
+        }
+      ]
+    },
+    "de": {
+      "title": "Die Nekyia: Odysseus befragt die Toten",
+      "summary": "Gesang 11 schickt Odysseus an den Rand der Welt, um den Seher Teiresias zu befragen. Es ist die einzige Reise im Gedicht mit detaillierten Wegbeschreibungen und ohne mögliches Ziel.",
+      "narrative": [
+        "Kirke weist den Weg: eine Tagesreise mit dem Nordwind über den Okeanos an das Ufer der Kimmerier, wo die Sonne nie scheint; das Schiff beim Hain der Persephone auf den Strand ziehen, wo Pyriphlegethon und Kokytos in den Acheron fließen. Dort hebt Odysseus eine Grube aus, gießt Honig, Milch, Wein und Wasser hinein, und die Toten scharen sich um das Blut.",
+        "Was folgt, ist ein Katalog der Toten – Elpenor, seine Mutter Antikleia, Agamemnon, Achilleus, Aias – und die Prophezeiung, die den Rest des Gedichts strukturiert."
+      ],
+      "whyItMatters": "Die Nekyia ist der ehrliche Prüfstein für den Atlas selbst. Sie enthält präzise Anweisungen, reale Flussnamen und eine damit verbundene antike Kultstätte, und dennoch erreicht sie nur 3/12 Punkte, weil Präzision bei einem Ritual kein Beweis für einen Ort ist.",
+      "debate": "Ob die Flussnamen aus Thesprotien in das Gedicht übernommen wurden oder umgekehrt; ob die Kimmerier überhaupt einen Ort lokalisieren; und ob Gesang 11 ein früher oder später Teil der Odyssee ist. Keine dieser Fragen kann eine Stecknadel auf einer Karte platzieren.",
+      "faqs": [
+        {
+          "q": "Ist das Nekyomanteion von Ephyra der Eingang zu Homers Unterwelt?",
+          "a": "Nein. Es ist eine reale archäologische Stätte mit einer realen Kultgeschichte, und ihre Identifizierung als Totenorakel ist selbst umstritten. Der Atlas verzeichnet sie als eine mit der Episode verknüpfte Theorie, nicht als Ort für das Haus des Hades."
+        },
+        {
+          "q": "Warum schneidet die Episode so schlecht ab?",
+          "a": "Weil drei der vier Kriterien fehlschlagen: Es wurde nichts Entsprechendes ausgegraben, es gibt keinen wissenschaftlichen Konsens darüber, dass die Passage irgendetwas lokalisiert, und die Geografie liegt ausdrücklich außerhalb der bekannten Welt. Nur das Textkriterium punktet, und das auch nur teilweise."
+        }
+      ]
+    },
+    "ja": {
+      "title": "ネキア：オデュッセウス、死者たちに問う",
+      "summary": "第11巻で、オデュッセウスは預言者テイレシアスに相談するために世界の果てへと送り出されます。これは、この詩の中で詳細な道順が示されているにもかかわらず、到達不可能な唯一の旅です。",
+      "narrative": [
+        "キルケは道順を示します。北風に乗って大洋（オケアノス）を渡る丸一日の航海で、太陽の決して昇らないキメリア人の海岸へと向かい、ピュリプレゲトンとコキュトスがアケロンに流れ込むペルセポネの木立のそばに船を乗り上げます。そこでオデュッセウスは穴を掘り、蜂蜜、牛乳、ワイン、水を注ぎ、血を求めて死者たちが集まります。",
+        "それに続くのは、エルペノール、母アンティクレイア、アガメムノン、アキレウス、アイアスといった死者たちの系譜であり、そして詩の残りの部分を構成する預言です。"
+      ],
+      "whyItMatters": "ネキアは、この地図帳自体の誠実さを測る明確なテストです。精密な指示、実在する川の名、そして古代の祭祀遺跡が結びついているにもかかわらず、評価は3/12にとどまります。なぜなら、儀式に関する精密さは場所に関する証拠にはならないからです。",
+      "debate": "川の名前がテスプロティアから詩に借用されたのか、あるいはその逆なのか。キメリア人が特定の場所を示しているのか。そして第11巻が『オデュッセイア』の初期の部分なのか後期の部分なのか。これらの問いはいずれも、地図上にピンを立てる役には立ちません。",
+      "faqs": [
+        {
+          "q": "エピュラのネキオマンテイオンは、ホメロスの描く冥界への入り口ですか？",
+          "a": "いいえ。それは実在の考古学遺跡であり、実在の信仰の歴史を持っていますが、そこが死者の神託所であったという特定自体に異論があります。地図帳では、これをハデスの館の場所としてではなく、このエピソードに関連する仮説として記録しています。"
+        },
+        {
+          "q": "なぜこのエピソードの評価はこれほど低いのですか？",
+          "a": "4つの基準のうち3つが満たされていないためです。対応する遺物は何も発掘されておらず、その一節が特定の場所を示しているという学術的合意もなく、地理的にも明らかに既知の世界を超えた場所にあります。テキストの基準のみが、それも部分的に評価されているに過ぎません。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "招魂术：奥德修斯向亡魂发问",
+      "summary": "第11卷将奥德修斯送往世界边缘去咨询先知提瑞西阿斯。这是史诗中唯一一次有着详细路线指引却没有任何可能目的地的旅程。",
+      "narrative": [
+        "喀耳刻给出了路线：乘北风航行一天跨越俄刻阿诺斯，到达阳光永远无法照耀的基梅里人海岸；将船停靠在珀耳塞福涅的圣林旁，那里是皮里弗勒格同河与科库托斯河汇入阿刻戎河的地方。在那里，奥德修斯挖了一个坑，倒入蜂蜜、牛奶、美酒和清水，亡魂便聚集到血迹旁。",
+        "接下来的内容是亡魂名录——埃尔佩诺尔、他的母亲安提克勒亚、阿伽门农、阿喀琉斯、大埃阿斯——以及构建了史诗余下部分的预言。"
+      ],
+      "whyItMatters": "《招魂术》是对该地图集自身诚实性的纯粹检验。它有精确的指令、真实的河流名称以及与之相关的古代祭祀遗址，但得分仍仅为 3/12，因为对仪式的精确描述并不能作为地点的证据。",
+      "debate": "究竟是史诗从塞斯普罗蒂亚借用了这些河流名称，还是反其道而行之；基梅里人是否能定位任何地方；以及第11卷是《奥德赛》的早期部分还是晚期部分。这些问题都无法在地图上标出确切位置。",
+      "faqs": [
+        {
+          "q": "埃菲拉的亡灵神谕所是荷马笔下冥界的入口吗？",
+          "a": "不是。这是一个真实的考古遗址，有着真实的祭祀历史，而它作为亡灵神谕所的认定本身就存在争议。地图集将其记录为与该情节相关的一个假说，而非哈得斯之屋的具体位置。"
+        },
+        {
+          "q": "为什么这一情节的得分如此之低？",
+          "a": "因为四个标准中有三个不符合：没有发掘出任何相对应的遗迹，学术界对于该段落是否定位了任何地方未达成共识，且其地理位置明确超出了已知世界。只有文本标准得分，而且也只是部分得分。"
         }
       ]
     }

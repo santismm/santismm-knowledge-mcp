@@ -61,6 +61,22 @@
         "pt": {
           "label": "O palácio de Ano Englianós",
           "note": "O cenário do episódio coincide com um palácio escavado: um grande salão, um banho, uma praia próxima. Nada no arquivo nomeia Nestor, então a correspondência é de tipo e lugar, não de pessoa."
+        },
+        "fr": {
+          "label": "Le palais d'Ano Englianos",
+          "note": "Le cadre de l'épisode correspond à un palais mis au jour : une grande salle, un bain, une plage à proximité. Rien dans les archives ne mentionne Nestor, la correspondance concerne donc le type et le lieu, non la personne."
+        },
+        "zh": {
+          "label": "阿诺·恩格利亚诺斯（Ano Englianos）的宫殿",
+          "note": "该事件的场景与一座已发掘的宫殿相吻合：一个大厅、一个浴室，以及近在咫尺的海滩。档案中没有任何内容提及涅斯托尔（Nestor）的名字，因此这种吻合属于类型和地点的吻合，而非人物的吻合。"
+        },
+        "de": {
+          "label": "Der Palast bei Ano Englianos",
+          "note": "Der Schauplatz der Episode stimmt mit einem ausgegrabenen Palast überein: eine große Halle, ein Bad, ein Strand in Reichweite. Nichts im Archiv nennt Nestor namentlich, daher bezieht sich die Übereinstimmung auf Typus und Ort, nicht auf die Person."
+        },
+        "ja": {
+          "label": "アノ・エリアノスの宮殿",
+          "note": "このエピソードの舞台は、発掘された宮殿（大広間、浴場、近くの海岸）と一致しています。アーカイブにはネストルの名を記したものは何もないため、この一致は人物ではなく、類型と場所の一致にとどまります。"
         }
       }
     }
@@ -123,6 +139,86 @@
         {
           "q": "Por que este episódio pontua mais que a maioria?",
           "a": "Porque os quatro critérios se sustentam: o texto é específico, a arqueologia é rica, a identificação acadêmica é consensual e a geografia funciona. A maioria dos episódios do atlas falha em ao menos um."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Télémaque à Pylos",
+      "summary": "Un jeune homme arrive par bateau sur un rivage de sacrifices, est nourri avant d'être interrogé, et écoute parler un vieux roi. C'est l'épisode le plus ordinaire de l'Odyssée et le plus facile à situer.",
+      "narrative": [
+        "Télémaque et Athéna atteignent Pylos à l'aube lors d'un sacrifice de taureaux noirs à Poséidon sur la plage. Nestor les reçoit, leur raconte ce qu'il sait des retours de Troie, et envoie Télémaque à Sparte en char avec son fils.",
+        "Le détail domestique est inhabituel et précis : le bain de l'invité préparé par la fille de Nestor, la dorure des cornes d'une génisse, les arrangements pour la nuit. C'est une image de l'hospitalité palatiale à laquelle un palais fouillé peut être comparé."
+      ],
+      "whyItMatters": "C'est l'épisode le plus net de l'atlas, noté 12/12 : le lieu est accepté, le cadre correspond à un type de bâtiment réel mis au jour, et rien dans le passage ne fait appel au surnaturel.",
+      "debate": "Non pas où cela s'est produit, mais ce que signifie cette correspondance : si le poème préserve le souvenir de l'hospitalité palatiale ou s'il la reconstruit à partir de ruines et d'habitudes.",
+      "faqs": [
+        {
+          "q": "Peut-on visiter le palais de Nestor ?",
+          "a": "Oui. Le site d'Ano Englianos en Messénie est ouvert, et sa salle du trône, ses réserves et sa baignoire sont visibles. Ce qui n'est pas visible, c'est la moindre preuve nommant Nestor."
+        },
+        {
+          "q": "Pourquoi cet épisode obtient-il un score plus élevé que la plupart des autres ?",
+          "a": "Parce que les quatre critères sont réunis : le texte est précis, l'archéologie est riche, l'identification par les spécialistes fait consensus et la géographie concorde. La plupart des épisodes de l'atlas échouent sur au moins l'un d'eux."
+        }
+      ]
+    },
+    "de": {
+      "title": "Telemach in Pylos",
+      "summary": "Ein junger Mann kommt mit dem Schiff an einer Opferküste an, wird bewirtet, bevor er befragt wird, und hört einen alten König sprechen. Es ist die gewöhnlichste Episode in der Odyssee und am einfachsten zu lokalisieren.",
+      "narrative": [
+        "Telemach und Athena erreichen Pylos im Morgengrauen während eines Opfers schwarzer Stiere für Poseidon am Strand. Nestor empfängt sie, berichtet, was er über die Heimkehr aus Troja weiß, und schickt Telemach mit seinem Sohn im Streitwagen weiter nach Sparta.",
+        "Das häusliche Detail ist ungewöhnlich und spezifisch: das von Nestors Tochter bereitete Gästebad, das Vergolden der Hörner einer Färse, die Schlafgelegenheiten. Es ist ein Bild palastartiger Gastfreundschaft, mit dem ein ausgegrabener Palast verglichen werden kann."
+      ],
+      "whyItMatters": "Dies ist die am klarsten mit 12/12 bewertete Episode des Atlas: Der Ort ist anerkannt, die Kulisse entspricht einem realen, ausgegrabenen Gebäudetyp, und nichts in der Passage erfordert das Übernatürliche.",
+      "debate": "Nicht, wo es geschah, sondern was die Übereinstimmung bedeutet: ob das Epos die Erinnerung an palastartige Gastfreundschaft bewahrt oder sie aus Ruinen und Gewohnheit rekonstruiert.",
+      "faqs": [
+        {
+          "q": "Kann man den Palast des Nestor besuchen?",
+          "a": "Ja. Die Ausgrabungsstätte bei Ano Englianos in Messenien ist zugänglich, und ihr Thronsaal, die Vorratsräume und das Bad sind zu sehen. Was nicht zu sehen ist, ist irgendein Beleg, der Nestor namentlich nennt."
+        },
+        {
+          "q": "Warum schneidet diese Episode besser ab als die meisten anderen?",
+          "a": "Weil alle vier Kriterien erfüllt sind: Der Text ist spezifisch, die Archäologie ist reichhaltig, die wissenschaftliche Identifizierung ist unumstritten und die Geografie stimmt. Die meisten Episoden im Atlas scheitern an mindestens einem dieser Kriterien."
+        }
+      ]
+    },
+    "ja": {
+      "title": "ピュロスのテレマコス",
+      "summary": "若者が船で生贄の捧げられる海岸に到着し、質問を受ける前に食事を供され、老王の語りに耳を傾けます。これは『オデュッセイア』の中で最も日常的なエピソードであり、場所の特定が最も容易なものです。",
+      "narrative": [
+        "テレマコスとアテナは、浜辺でポセイドンに黒い雄牛が生贄として捧げられている夜明けにピュロスに到着します。ネストルは彼らを迎え、トロイアからの帰還について知っていることを語り、テレマコスを自身の息子とともに戦車でスパルタへと送り出します。",
+        "日常的な描写は異例なほど具体的です。ネストルの娘が用意する客用の風呂、若い雌牛の角への金箔張り、就寝の準備などです。これは、発掘された宮殿と比較することができる、宮殿におけるもてなしの様子を描いています。"
+      ],
+      "whyItMatters": "これは、この地図帳で最も非の打ち所がない12点満点のエピソードです。場所が広く認められており、設定は実際に発掘された建物の形式と一致し、この一節には超自然的な要素を必要とするものが何もありません。",
+      "debate": "どこで起きたかではなく、その一致が何を意味するのかという議論です。すなわち、この詩が宮殿でのもてなしの記憶を留めているのか、それとも廃墟や慣習からそれを再構成したのかという点です。",
+      "faqs": [
+        {
+          "q": "ネストルの宮殿を訪れることはできますか？",
+          "a": "はい。メッセニアのアノ・エリアノスにある遺跡は公開されており、玉座の間、貯蔵室、浴室を見学できます。ただし、ネストルの名を裏付ける証拠は見つかっていません。"
+        },
+        {
+          "q": "なぜこのエピソードは他の多くのエピソードよりも評価が高いのですか？",
+          "a": "4つの基準がすべて満たされているからです。すなわち、テキストが具体的であること、考古学的遺物が豊富であること、学術的な同定が合意されていること、そして地理的条件が一致していることです。このアトラスに掲載されているエピソードのほとんどは、少なくとも1つの基準を満たしていません。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "特勒马科斯在皮洛斯",
+      "summary": "一个年轻人乘船抵达举行祭祀的海岸，在接受询问前先得到了款待，并聆听了一位年迈国王的谈话。这是《奥德赛》中最寻常的章节，也是最容易定位的。",
+      "narrative": [
+        "黎明时分，特勒马科斯和雅典娜抵达皮洛斯，当时海滩上正在向波塞冬祭献黑公牛。涅斯托耳接待了他们，讲述了他所知道的从特洛伊归航的情况，并让特勒马科斯与自己的儿子一同乘战车前往斯巴达。",
+        "生活细节异常具体：涅斯托耳的女儿为客人准备的沐浴、给小母牛角包金、住宿安排。这是一幅宫廷款待的画面，可以与已发掘的宫殿遗址进行对比。"
+      ],
+      "whyItMatters": "这是本图集中最完美的12/12评分章节：地点得到公认，场景与现实中发掘的建筑类型相吻合，且段落中没有任何内容需要超自然力量。",
+      "debate": "争论的焦点不在于它发生在哪里，而在于这种吻合意味着什么：是史诗保留了宫廷款待的记忆，还是根据遗迹和习俗对其进行了重构。",
+      "faqs": [
+        {
+          "q": "可以参观涅斯托耳的宫殿吗？",
+          "a": "可以。位于麦塞尼亚（Messenia）阿诺·恩格利亚诺斯（Ano Englianos）的遗址对外开放，其王座室、储藏室和浴室都清晰可见。不可见的是任何提及涅斯托耳名字的证据。"
+        },
+        {
+          "q": "为什么这一章节的评分比大多数章节都要高？",
+          "a": "因为所有四个标准都成立：文本具体、考古发现丰富、学术界认同一致，且地理位置吻合。地图集中的大多数事件至少不符合其中之一。"
         }
       ]
     }

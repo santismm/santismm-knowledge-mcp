@@ -78,6 +78,22 @@
         "pt": {
           "label": "A ilha de Faros, Alexandria",
           "note": "Uma ilha real diante da costa egípcia, depois unida ao continente e coroada pelo farol. Homero a situa “a um dia de navegação” do Nilo, um erro de uma ordem de magnitude que Estrabão já notou e tentou justificar."
+        },
+        "fr": {
+          "label": "L'île de Pharos, Alexandrie",
+          "note": "Une île réelle au large de la côte égyptienne, plus tard reliée au continent et couronnée par le phare. Homère la situe à « une journée de navigation » du Nil, ce qui est faux d'un ordre de grandeur — Strabon l'avait déjà remarqué et avait tenté de le justifier."
+        },
+        "zh": {
+          "label": "亚历山大港的法罗斯岛",
+          "note": "埃及海岸外的一座真实岛屿，后来与大陆相连，并建有灯塔。荷马将其置于距离尼罗河“一天航程”的地方，这在数量级上是错误的——斯特拉博早就注意到了这一点，并试图予以辩解。"
+        },
+        "de": {
+          "label": "Die Insel Pharos, Alexandria",
+          "note": "Eine reale Insel vor der ägyptischen Küste, die später mit dem Festland verbunden und vom Leuchtturm gekrönt wurde. Homer verortet sie „eine Tagesreise unter Segeln“ vom Nil entfernt, was um eine Größenordnung falsch ist – Strabo bemerkte dies bereits und versuchte, es wegzuerklären."
+        },
+        "ja": {
+          "label": "アレクサンドリアのファロス島",
+          "note": "エジプト沿岸の実在の島。後に本土と結ばれ、灯台が建てられた。ホメロスはそこをナイル川から「1日の航海」の距離に配置しているが、これは桁違いに誤っており、ストラボンはすでにこれに気づき、言い訳を試みていた。"
         }
       }
     }
@@ -115,6 +131,46 @@
       ],
       "identificationNote": "Aceita como lugar, com o critério geográfico mantido em 2 justamente porque a distância do próprio poema está errada. É a ficha em que a separação de critérios da rubrica mais trabalha.",
       "debate": "Se a distância é erro genuíno, exagero poético ou lembrança de uma costa anterior ao assoreamento — alegação que Estrabão fez e que a geologia moderna não sustenta nessa escala."
+    },
+    "fr": {
+      "name": "Pharos",
+      "summary": "Là où Ménélas est bloqué par le calme plat et lutte contre le dieu marin métamorphe Protée. L'île est certaine ; la distance qu'Homère lui attribue est l'une des erreurs les plus évidentes des poèmes.",
+      "description": [
+        "Bloqué par l'absence de vent, Ménélas apprend de la fille de Protée comment tendre une embuscade à son père, le retenir à travers ses métamorphoses et le forcer à répondre. Cette scène constitue l'autre prophétie de l'Odyssée, et elle apporte la nouvelle du meurtre d'Agamemnon et de la captivité d'Ulysse sur Ogygie.",
+        "L'île est réelle et indubitable. Mais le poème la situe à une journée entière de navigation au large, alors que Pharos se trouve à peine à un kilomètre de la côte. Les critiques de l'Antiquité l'avaient remarqué ; Strabon soutenait que la côte s'était ensablée. C'est un rappel utile qu'une identification correcte ne rend pas chaque détail exact."
+      ],
+      "identificationNote": "Accepté en tant que lieu, le critère géographique étant maintenu à 2 précisément parce que la distance indiquée par le poème est erronée. C'est l'entrée où la séparation des critères de la grille d'évaluation est la plus utile.",
+      "debate": "Savoir si la distance est une véritable erreur, une exagération poétique ou le souvenir d'un littoral avant l'ensablement — une affirmation faite par Strabon et que la géologie moderne ne soutient pas à cette échelle."
+    },
+    "de": {
+      "name": "Pharos",
+      "summary": "Wo Menelaos von einer Flaute aufgehalten wird und mit dem gestaltwandelnden Meeresgott Proteus ringt. Die Insel ist sicher; die Entfernung, die Homer angibt, ist einer der eindeutigsten Fehler in den Epen.",
+      "description": [
+        "Vom windstillen Wetter gefangen, erfährt Menelaos von Proteus' Tochter, wie er ihrem Vater auflauern, ihn trotz seiner Verwandlungen festhalten und ihn zur Rede stellen kann. Die Szene ist die andere Prophezeiung der Odyssee und bringt die Nachricht von Agamemnons Ermordung und Odysseus' Gefangenschaft auf Ogygia.",
+        "Die Insel ist real und unverkennbar. Doch das Epos verortet sie eine ganze Tagesreise unter Segeln vor der Küste, während Pharos kaum einen Kilometer entfernt liegt. Antike Kritiker bemerkten dies; Strabo argumentierte, die Küste sei versandet. Dies ist eine nützliche Erinnerung daran, dass eine korrekte Identifizierung nicht jedes Detail korrekt macht."
+      ],
+      "identificationNote": "Als Ort akzeptiert, wobei das geographische Kriterium genau deshalb auf 2 gehalten wird, weil die im Epos angegebene Entfernung falsch ist. Dies ist der Eintrag, bei dem die Trennung der Kriterien in der Rubrik die größte Rolle spielt.",
+      "debate": "Ob die Entfernung ein echter Fehler, eine dichterische Übertreibung oder die Erinnerung an eine Küstenlinie vor der Versandung ist – eine Behauptung, die Strabo aufstellte und die von der modernen Geologie in diesem Ausmaß nicht gestützt wird."
+    },
+    "ja": {
+      "name": "ファロス",
+      "summary": "メネラオスが風待ちで足止めされ、姿を変える海の神プロテウスと格闘した場所。島の実在は確実だが、ホメロスが示す距離は詩の中で最も明白な誤りの一つである。",
+      "description": [
+        "無風の天候に阻まれたメネラオスは、プロテウスの娘から、彼女の父親を待ち伏せし、変身する彼を押さえつけて答えさせる方法を教わる。この場面は『オデュッセイア』におけるもう一つの予言であり、アガメムノンの殺害とオデュッセウスのオギュギアでの幽閉の知らせをもたらす。",
+        "島は実在し、間違いようがない。しかし、詩はそこを丸一日の航海が必要な沖合に配置しているのに対し、ファロスはわずか1キロメートルほどしか離れていない。古代の批評家たちもこれに気づいており、ストラボンは海岸に土砂が堆積したのだと主張した。これは、正しい同定がなされているからといって、すべての詳細が正しいとは限らないことを思い出させてくれる有用な例である。"
+      ],
+      "identificationNote": "場所としては合意あり。詩自体の距離が誤っているため、地理的基準は正確に2に留められている。これは、評価基準の分離が最も効果的に機能している項目である。",
+      "debate": "その距離が純粋な誤りなのか、詩的な誇張なのか、あるいは土砂堆積前の海岸線の記憶（ストラボンが主張したが、現代の地質学はその規模での裏付けを与えていない）なのかという点。"
+    },
+    "zh": {
+      "name": "法罗斯",
+      "summary": "墨涅拉俄斯因无风受阻并与善变的变形海神普罗透斯搏斗的地方。该岛的存在是确凿无误的；但荷马给出的距离是诗歌中最明显的错误之一。",
+      "description": [
+        "墨涅拉俄斯因无风天气受困，普罗透斯的女儿告诉他如何伏击她的父亲，在父亲变形时紧紧抓住他并迫使其回答问题。这一场景是《奥德赛》中的另一处预言，它传达了阿伽门农遇害以及奥德修斯被囚禁在奥吉吉亚的消息。",
+        "该岛是真实存在且清晰可辨的。但诗歌将其置于离岸整整一天航程的地方，而法罗斯距离陆地仅有约一公里。古代评论家注意到了这一点；斯特拉博认为这是海岸泥沙淤积所致。这提供了一个有用的启示：即使认定正确，也并不意味着每个细节都准确无误。"
+      ],
+      "identificationNote": "作为地点已被接受，但地理标准评分定为 2，恰恰是因为诗歌中给出的距离是错误的。在这一条目中，评估细则对各项标准的区分发挥了最大的作用。",
+      "debate": "这一距离究竟是真正的错误、诗意的夸张，还是对泥沙淤积前海岸线的记忆——斯特拉博曾提出这一主张，但现代地质学并不支持如此大尺度的变化。"
     }
   }
 }

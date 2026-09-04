@@ -61,6 +61,22 @@
         "pt": {
           "label": "O Menelaion de Terapne",
           "note": "O lugar que os próprios gregos associavam a Menelau e Helena, com edifícios micênicos sob um culto arcaico. Prova de crença e de ocupação no Bronze; não prova do palácio que o poema descreve."
+        },
+        "fr": {
+          "label": "Le Ménélaion de Thérapné",
+          "note": "Le lieu que les Grecs eux-mêmes associaient à Ménélas et Hélène, présentant des édifices mycéniens sous un culte archaïque. C'est une preuve de croyance et d'occupation à l'âge du bronze, mais pas du palais décrit dans le poème."
+        },
+        "zh": {
+          "label": "塞拉普涅（Therapne）的墨涅拉俄斯神庙",
+          "note": "希腊人自己将此地与墨涅拉俄斯和海伦联系在一起，在古风时期的崇拜遗址下方发现了迈锡尼时期的建筑。这是信仰以及青铜时代居住痕迹的证据，而非史诗中所描述宫殿的证据。"
+        },
+        "de": {
+          "label": "Das Menelaion bei Therapne",
+          "note": "Der Ort, den die Griechen selbst mit Menelaos und Helena in Verbindung brachten, mit mykenischen Gebäuden unter einem archaischen Kult. Ein Beleg für den Glauben und für eine bronzezeitliche Besiedlung; kein Beleg für den im Epos beschriebenen Palast."
+        },
+        "ja": {
+          "label": "テラプネのメネライオン",
+          "note": "ギリシャ人自身がメネラオスやヘレネと結びつけていた場所であり、アルカイック期の信仰遺跡の下にミケーネ時代の建物が存在します。これは信仰と青銅器時代の居住の証拠ではありますが、詩に描かれている宮殿の証拠ではありません。"
         }
       }
     }
@@ -123,6 +139,86 @@
         {
           "q": "O detalhe da droga egípcia de Helena é real?",
           "a": "É coerente com a imagem geral do poema sobre o Egito como fonte de bens e saberes exóticos, que por sua vez é coerente com o contato real entre o Egeu e o Egito. Isso é contexto, não confirmação."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Télémaque à Sparte",
+      "summary": "La scène domestique la plus étrange d'Homère : Hélène, de retour dans la maison de son mari, drogue le vin pour que l'assemblée puisse parler de Troie sans pleurer.",
+      "narrative": [
+        "Télémaque arrive pendant un double festin de mariage et est frappé par l'éclat de la salle. Ménélas lui raconte les retours ; Hélène verse dans le vin une drogue venue d'Égypte et tous deux racontent des histoires sur Ulysse à Troie, la sienne flatteuse, celle de Ménélas moins.",
+        "Le cadre est un palais doté d'une cour, de quartiers pour les invités et d'une richesse comparable à celle de l'Olympe. La Laconie n'a livré aucun bâtiment de ce type, ce qui en fait l'intérieur homérique le plus vivant avec le moins de fondement matériel."
+      ],
+      "whyItMatters": "C'est le cas d'école pour Sparte : une scène assez riche pour être confrontée à l'archéologie, dans une région dont le centre de l'âge du bronze n'a jamais été retrouvé.",
+      "debate": "La question est de savoir s'il existe un palais de cette envergure encore non découvert dans la vallée de l'Eurotas, ou si l'Odyssée a doté Ménélas d'une salle provenant d'ailleurs.",
+      "faqs": [
+        {
+          "q": "Le palais de Ménélas a-t-il été retrouvé ?",
+          "a": "Non. La Laconie possède des demeures mycéniennes au Ménélaion et un culte précoce de Ménélas et d'Hélène, mais aucun palais comparable à Pylos ou Mycènes n'a été mis au jour."
+        },
+        {
+          "q": "La drogue égyptienne d'Hélène est-elle un détail réel ?",
+          "a": "Cela concorde avec la vision plus large du poème présentant l'Égypte comme une source de marchandises et de connaissances exotiques, ce qui est cohérent avec les contacts réels entre l'Égée et l'Égypte. C'est un élément de contexte, non une confirmation."
+        }
+      ]
+    },
+    "de": {
+      "title": "Telemach in Sparta",
+      "summary": "Die seltsamste häusliche Szene bei Homer: Helena, zurück im Haus ihres Mannes, versetzt den Wein mit Drogen, damit die Gesellschaft ohne Tränen über Troja sprechen kann.",
+      "narrative": [
+        "Telemach trifft während eines doppelten Hochzeitsfestes ein und ist von der Pracht der Halle beeindruckt. Menelaos erzählt ihm von den Heimkehren; Helena mischt eine Droge aus Ägypten in den Wein, und beide erzählen Geschichten über Odysseus in Troja – ihre schmeichelhaft, seine weniger.",
+        "Der Schauplatz ist ein Palast mit einem Innenhof, Gästeunterkünften und so viel Reichtum, dass er dem Olymp gleicht. Lakonien hat kein solches Gebäude hervorgebracht, was dies zum lebendigsten homerischen Interieur mit den geringsten materiellen Belegen macht."
+      ],
+      "whyItMatters": "Es ist der Prüfstein für Sparta: eine Szene, die detailreich genug ist, um mit der Archäologie abgeglichen zu werden, in einer Region, deren bronzezeitliches Zentrum nie gefunden wurde.",
+      "debate": "Ob im Eurotas-Tal ein unentdeckter Palast dieser Klasse existiert oder ob die Odyssee Menelaos mit einer Halle von anderswo ausgestattet hat.",
+      "faqs": [
+        {
+          "q": "Wurde der Palast des Menelaos gefunden?",
+          "a": "Nein. Lakonien weist mykenische Herrenhäuser beim Menelaion und einen frühen Kult für Menelaos und Helena auf, aber es wurde kein Palast ausgegraben, der mit Pylos oder Mykene vergleichbar wäre."
+        },
+        {
+          "q": "Ist Helenas ägyptische Droge ein reales Detail?",
+          "a": "Es passt zum allgemeineren Bild des Epos von Ägypten als Quelle exotischer Güter und Kenntnisse, was wiederum mit realen ägäischen Kontakten zu Ägypten übereinstimmt. Das ist Kontext, keine Bestätigung."
+        }
+      ]
+    },
+    "ja": {
+      "title": "スパルタのテレマコス",
+      "summary": "ホメロスにおける最も奇妙な家庭の情景。夫の家に戻ったヘレネがワインに薬を混ぜ、一座が涙を流さずにトロイアについて語り合えるようにする。",
+      "narrative": [
+        "テレマコスは二重の婚礼の宴の最中に到着し、広間のまばゆい輝きに圧倒される。メネラオスは彼に帰還の物語を語り、ヘレネはエジプト由来の薬をワインに落とし、二人はトロイアでのオデュッセウスの物語を語る。彼女の語る話は彼を称えるものであり、彼の語る話はそれほどでもない。",
+        "舞台は、中庭、客室、そしてオリンポス山に匹敵するほどの富を備えた宮殿である。ラコニアからはそのような建物は出土しておらず、そのためこのエピソードは、裏付けとなる物質的証拠が最も乏しいにもかかわらず、最も鮮明に描かれたホメロスの室内情景となっている。"
+      ],
+      "whyItMatters": "これはスパルタにおける検証事例である。青銅器時代の中心地が未だ発見されていない地域において、考古学的な検証を行うのに十分なほど詳細に描かれた場面である。",
+      "debate": "このクラスの宮殿がエウロタス川流域に未発見のまま存在するのか、それとも『オデュッセイア』が他の場所から持ってきた広間をメネラオスに与えたのかという議論。",
+      "faqs": [
+        {
+          "q": "メネラオスの宮殿は発見されていますか？",
+          "a": "いいえ。ラコニアのメネライオンにはミケーネ時代の邸宅跡があり、初期のメネラオスとヘレネの信仰も存在しますが、ピュロスやミケーネに匹敵するような宮殿は発掘されていません。"
+        },
+        {
+          "q": "ヘレネのエジプトの薬というのは、実在に基づいた描写ですか？",
+          "a": "これは、エキゾチックな品々や知識の源泉としてエジプトを描く詩全体の広い描写と一致しており、それ自体はエーゲ海世界とエジプトとの実際の接触と整合しています。ただし、これは背景事情（コンテキスト）を示すものであり、裏付け（確証）ではありません。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "忒勒马科斯在斯巴达",
+      "summary": "荷马史诗中最奇特的家庭场景：海伦回到丈夫的家中，在酒中下药，以便大家可以谈论特洛伊而无需哭泣。",
+      "narrative": [
+        "忒勒马科斯在一场双重婚礼宴会期间抵达，并被大厅的明亮所震撼。墨涅拉俄斯向他讲述了归途；海伦将一种来自埃及的药物投入酒中，两人随后讲述了奥德修斯在特洛伊的故事，她的故事充满赞美，而他的则不尽然。",
+        "场景是一座拥有庭院、客房和足以媲美奥林匹斯的财富的宫殿。拉科尼亚（Laconia）并未出土过此类建筑，这使得它成为最生动的荷马史诗室内场景，却有着最少的实物支撑。"
+      ],
+      "whyItMatters": "这是斯巴达的检验案例：一个足够丰富的场景，可用于与考古学进行比对，而该地区的青铜时代中心至今尚未被发现。",
+      "debate": "在埃夫罗塔斯（Eurotas）河谷是否存在一座尚未被发现的此类级别的宫殿，抑或是《奥德赛》为墨涅拉俄斯虚构了一个来自他处的大厅。",
+      "faqs": [
+        {
+          "q": "墨涅拉俄斯的宫殿被发现了吗？",
+          "a": "没有。拉科尼亚在墨涅拉俄斯神庙（Menelaion）遗址拥有迈锡尼时期的宅邸，以及早期对墨涅拉俄斯和海伦的崇拜遗迹，但尚未发掘出可与皮洛斯或迈锡尼相媲美的宫殿。"
+        },
+        {
+          "q": "海伦的埃及药物是一个真实的细节吗？",
+          "a": "这与史诗中将埃及描绘为异域商品和知识来源的更广泛图景相一致，而这本身也与爱琴海与埃及的真实接触相吻合。这是背景，而非证实。"
         }
       ]
     }

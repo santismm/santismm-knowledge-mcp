@@ -87,6 +87,22 @@
         "pt": {
           "label": "Corfu (Córcira)",
           "note": "A identificação em que a Antiguidade se assentou e que o turismo nunca largou: Tucídides já registra a fama feácia dos corcireus, e ainda se mostra diante da costa uma rocha como a nau que Posêidon petrificou. É uma tradição de longo curso e sem base material."
+        },
+        "fr": {
+          "label": "Corfou (Corcyre)",
+          "note": "L'identification retenue par l'Antiquité et jamais abandonnée par le tourisme : Thucydide mentionne déjà la réputation phéacienne des Corcyréens, et un rocher au large des côtes est toujours présenté comme le navire pétrifié par Poséidon. C'est une tradition de longue date sans aucun fondement matériel."
+        },
+        "zh": {
+          "label": "科孚岛（科尔库拉）",
+          "note": "这是古代确立并一直为旅游业所沿用的认定：修昔底德就已经记载了科尔库拉人作为费阿基亚人的名声，而且海岸附近的一块岩石至今仍被指认为波塞冬化为石头的船只。这是一个历史悠久但缺乏物质依据的传统。"
+        },
+        "de": {
+          "label": "Korfu (Kerkyra)",
+          "note": "Die Identifizierung, auf die sich die Antike einigte und die der Tourismus nie wieder losgelassen hat: Bereits Thukydides berichtet vom phäakischen Ruf der Kerkyrer, und ein Felsen vor der Küste wird heute noch als das von Poseidon versteinerte Schiff gezeigt. Es ist eine langjährige Tradition ohne materielle Grundlage."
+        },
+        "ja": {
+          "label": "コルフ（コルキュラ）",
+          "note": "古代に定まり、観光業が決して手放さなかった同定：トゥキディデスはすでにコルキュラ人がパイアケス人としての名声を持っていたことを記録しており、沖合の岩は今でもポセイドンが石に変えた船として紹介されている。これは長い歴史を持つ伝承であるが、物質的な根拠はない。"
         }
       }
     }
@@ -124,6 +140,46 @@
       ],
       "identificationNote": "Especulativa: uma tradição antiga e contínua, com uma ilha real por trás e nada escavado que as conecte. Pontua 5/12.",
       "debate": "Se Esquéria é uma ilha real vista com distorção utópica, uma utopia mobiliada como ilha, ou a própria reivindicação de Córcira absorvida pelo poema. A rocha da nau petrificada é um bom exemplo de como uma tradição adquire um marco."
+    },
+    "fr": {
+      "name": "Schérie",
+      "summary": "L'île des Phéaciens, la dernière étape avant le retour et le lieu le plus civilisé du poème — une ville portuaire dotée de remparts, de navires et d'une cour, décrite avec plus de détails sociaux que n'importe quel endroit qu'Ulysse gouverne réellement.",
+      "description": [
+        "Ulysse s'échoue nu sur Schérie, est découvert par Nausicaa, et est accueilli par un peuple dont les navires n'ont pas besoin de gouvernail et qui le ramènent endormi à Ithaque. Le châtiment pour cette faveur — Poséidon transformant le navire en pierre et menaçant d'emmurer la ville sous une montagne — constitue le dernier acte surnaturel du poème.",
+        "L'Antiquité a identifié Schérie à Corcyre, et cette identification est restée. Le poème situe les Phéaciens « loin des hommes qui mangent du pain », ce qui témoigne de leur isolement plutôt que d'un cap géographique."
+      ],
+      "identificationNote": "Spéculatif : une tradition antique et continue reposant sur une île réelle, sans qu'aucune fouille ne permette de les relier. Score : 5/12.",
+      "debate": "La question est de savoir si Schérie est une île réelle déformée par l'utopie, une utopie dotée des attributs d'une île, ou la propre revendication de Corcyre intégrée au poème. Le rocher du navire pétrifié est un bon exemple de la manière dont une tradition s'approprie un point de repère."
+    },
+    "de": {
+      "name": "Scheria",
+      "summary": "Die Insel der Phäaken, die letzte Station vor der Heimat und der zivilisierteste Ort im Epos – eine Hafenstadt mit Mauern, Schiffen und einem Hofstaat, die in größerem gesellschaftlichen Detail beschrieben wird als jeder Ort, den Odysseus tatsächlich beherrscht.",
+      "description": [
+        "Odysseus strandet nackt auf Scheria, wird von Nausikaa gefunden und von einem Volk bewirtet, dessen Schiffe keine Steuerung benötigen und das ihn schlafend nach Ithaka bringt. Ihre Bestrafung für diesen Gefallen – Poseidon verwandelt das Schiff in Stein und droht, die Stadt mit einem Berg einzuschließen – ist die letzte übernatürliche Tat des Epos.",
+        "Die Antike setzte Scheria mit Kerkyra gleich, und diese Identifizierung setzte sich durch. Das Epos verortet die Phäaken „fern von brotessenden Menschen“, was eher eine Aussage über ihre Isolation als eine Richtungsangabe ist."
+      ],
+      "identificationNote": "Spekulativ: eine antike, kontinuierliche Tradition mit einer realen Insel dahinter, bei der jedoch keine Ausgrabungen eine Verbindung belegen. Bewertung: 5/12.",
+      "debate": "Ob Scheria eine reale, durch utopische Verzerrung gesehene Insel ist, eine Utopie mit der Ausstattung einer Insel oder der in das Epos aufgenommene Anspruch Kerkyras selbst. Der versteinerte Schiffsfelsen ist ein gutes Beispiel dafür, wie eine Tradition zu einem Wahrzeichen kommt."
+    },
+    "ja": {
+      "name": "スケリア",
+      "summary": "パイアケス人の島。帰郷前の最後の立ち寄り地であり、詩の中で最も文明化された場所。城壁、船、宮廷を備えた港湾都市であり、オデュッセウスが実際に支配しているどの場所よりも社会的な詳細が描かれている。",
+      "description": [
+        "オデュッセウスは裸でスケリア島に漂着し、ナウシカアに発見され、操舵を必要としない船を持ち、眠っている彼をイタカへと送り届ける人々から歓待を受ける。その好意に対する彼らへの罰（ポセイドンが船を石に変え、山で都市を囲い込むと脅すこと）は、この詩における最後の超自然的な行為である。",
+        "古代においてスケリアはコルキュラと同定され、その同定が定着した。詩の中では、パイアケス人は「パンを食べる人々から遠く離れた」場所に位置づけられており、これは方角というよりも孤立していることを表している。"
+      ],
+      "identificationNote": "推測の域を出ない：実在の島を背景とする古代からの継続的な伝承があるものの、それらを結びつけるものは何も発掘されていない。スコアは12点満点中5点。",
+      "debate": "スケリアがユートピア的な歪みを通して見られた実在の島なのか、島の体裁を与えられたユートピアなのか、あるいはコルキュラ自身の主張が詩に取り込まれたものなのか。石化した船とされる岩は、伝承がどのようにしてランドマークを獲得するかを示す好例である。"
+    },
+    "zh": {
+      "name": "斯克里亚",
+      "summary": "费阿基亚人的岛屿，回家前的最后一站，也是诗中最文明的地方——一个拥有城墙、船只和宫廷的港口城市，其社会细节描写比奥德修斯实际统治的任何地方都要详尽。",
+      "description": [
+        "奥德修斯赤身裸体地漂流到斯克里亚岛，被娜乌西卡发现，并受到了一群人的款待，这群人的船只无需操舵，且在奥德修斯熟睡时将他送回了伊萨卡。他们因这一善举而遭受的惩罚——波塞冬将船只化为石头，并威胁要用大山将城市围困——是这部史诗中最后的超自然行为。",
+        "古代学者将斯克里亚岛等同于科尔库拉（Corcyra），这一认定一直沿用至今。史诗将费阿基亚人置于“远离吃面包的人类”的地方，这说的是其与世隔绝，而非具体的方位。"
+      ],
+      "identificationNote": "推测性：一个古老且连续的传统，背后有一个真实的岛屿，但尚未发掘出任何能将它们联系起来的文物。得分为 5/12。",
+      "debate": "斯克里亚岛究竟是一个经过乌托邦式扭曲呈现的真实岛屿，还是一个被赋予了岛屿陈设的乌托邦，抑或是科尔库拉自身的宣称被吸纳进了史诗之中。化为石头的船形岩石是传统如何获得地标的一个极佳例证。"
     }
   }
 }

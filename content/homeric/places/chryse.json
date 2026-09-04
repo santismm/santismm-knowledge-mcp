@@ -78,6 +78,22 @@
         "pt": {
           "label": "A costa sul da Trôade",
           "note": "Estrabão já discutia onde ficava Crise e registrava mais de um candidato, todos nesta costa e a um dia de navegação do acampamento aqueu — que é o que o poema exige. Nenhum sítio escavado foi ligado ao nome."
+        },
+        "fr": {
+          "label": "La côte sud de la Troade",
+          "note": "Strabon s'interrogeait déjà sur l'emplacement de Chrysé et signalait plusieurs candidats, tous situés sur cette côte à moins d'une journée de navigation du camp achéen — ce que requiert le poème. Aucun site fouillé n'a été associé à ce nom."
+        },
+        "zh": {
+          "label": "特罗阿德南部海岸",
+          "note": "斯特拉博早就讨论过克律塞的位置，并报告了不止一个候选地点，它们都位于该海岸上，距离阿开亚人营地仅一天的航程——这正是诗歌所要求的。目前尚未有发掘出的遗址与该名称相关联。"
+        },
+        "de": {
+          "label": "Die südliche Küste der Troas",
+          "note": "Schon Strabo erörterte, wo Chryse lag, und nannte mehr als einen Kandidaten, alle an dieser Küste innerhalb einer Tagesreise unter Segel vom Lager der Achäer entfernt – was den Anforderungen des Epos entspricht. Keine ausgegrabene Fundstätte konnte mit dem Namen verknüpft werden."
+        },
+        "ja": {
+          "label": "トロアス南部の海岸",
+          "note": "ストラボンはすでにクリセがどこにあったかを議論し、複数の候補を報告している。それらはすべて、詩が要求する条件である、アカイア人の陣営から1日航海圏内にあるこの海岸に位置している。発掘された遺跡でこの名前に結びつけられたものはない。"
         }
       }
     }
@@ -115,6 +131,46 @@
       ],
       "identificationNote": "Plausível: a região é segura e o sítio concreto não, que é o estado normal das cidades menores da Trôade na Ilíada.",
       "debate": "Qual dos sítios costeiros candidatos é Crise, e se as razias que o poema atribui a Aquiles refletem um padrão real de guerra costeira no Bronze Final."
+    },
+    "fr": {
+      "name": "Chrysé",
+      "summary": "Là où commence l'Iliade. Un prêtre d'Apollon vient de Chrysé pour racheter sa fille, Agamemnon refuse, et la peste envoyée par le dieu lance toute l'action du poème.",
+      "description": [
+        "Chrysé est une ville côtière dotée d'un temple d'Apollon, assez proche du camp achéen pour qu'un navire puisse ramener la jeune fille et revenir rapidement. La querelle initiale du poème porte sur elle, et les cent premiers vers constituent de fait un élément de géographie locale.",
+        "Les géographes de l'Antiquité se sont disputés sur le site exact et les prospections modernes ne l'ont pas tranché. Ce qui ne fait aucun doute, c'est la région : la Troade méridionale, cette même côte qu'Achille pille tout au long de la guerre."
+      ],
+      "identificationNote": "Plausible : la région est certaine mais le site spécifique ne l'est pas, ce qui est le cas habituel pour les petites villes de Troade dans l'Iliade.",
+      "debate": "Lequel des sites côtiers candidats correspond à Chrysé, et si les raids que le poème attribue à Achille reflètent un modèle réel de guerre côtière à l'âge du bronze récent."
+    },
+    "de": {
+      "name": "Chryse",
+      "summary": "Wo die Ilias beginnt. Ein Apollon-Priester kommt aus Chryse, um seine Tochter freizukaufen, Agamemnon weigert sich, und die Plage des Gottes setzt das gesamte Epos in Gang.",
+      "description": [
+        "Chryse ist eine Küstenstadt mit einem Apollon-Tempel, nah genug am Lager der Achäer, damit ein Schiff das Mädchen zurückbringen und schnell wieder da sein kann. Der anfängliche Streit des Epos dreht sich um sie, und die ersten hundert Zeilen sind praktisch ein Stück lokaler Geografie.",
+        "Antike Geografen stritten über die genaue Lage, und moderne Untersuchungen haben sie nicht geklärt. Unzweifelhaft ist jedoch die Region: die südliche Troas, dieselbe Küste, die Achilleus während des gesamten Krieges auf Beutezügen plündert."
+      ],
+      "identificationNote": "Plausibel: Die Region ist gesichert, die spezifische Fundstätte hingegen nicht, was der normale Zustand für die kleineren Städte der Troas in der Ilias ist.",
+      "debate": "Welche der in Frage kommenden Küstenstätten Chryse ist und ob die Achilleus zugeschriebenen Beutezüge ein reales Muster der Küstenkriegsführung in der Spätbronzezeit widerspiegeln."
+    },
+    "ja": {
+      "name": "クリセ",
+      "summary": "『イリアス』が始まる場所。アポロンの神官が娘を身請けするためにクリセからやって来るが、アガメムノンがこれを拒絶し、神がもたらした疫病が詩全体の引き金となる。",
+      "description": [
+        "クリセはアポロンの神殿がある沿岸の町で、アカイア人の陣営に十分近く、船で娘を送り届けてすぐに戻ってくることができる距離にある。詩の冒頭の争いは彼女をめぐる紛争であり、最初の100行は事実上、現地の地理描写となっている。",
+        "古代の地理学者たちは正確な位置について議論し、現代の調査でも決着はついていない。疑いの余地がないのはその地域であり、アキレウスが戦争を通じて略奪のために襲撃したのと同じ海岸であるトロアス南部である。"
+      ],
+      "identificationNote": "妥当：地域は確実だが特定の遺跡は特定されておらず、これは『イリアス』に登場するトロアスのマイナーな町における一般的な状態である。",
+      "debate": "沿岸の候補地のうちどれがクリセであるか、そして詩がアキレウスによるものとする襲撃が、青銅器時代後期の沿岸戦争の実際のパターンを反映しているかどうか。"
+    },
+    "zh": {
+      "name": "克律塞",
+      "summary": "《伊利亚特》开始的地方。阿波罗的一位祭司从克律塞前来赎回他的女儿，阿伽门农拒绝了，神降下的瘟疫拉开了整部诗歌的序幕。",
+      "description": [
+        "克律塞是一个拥有阿波罗神庙的沿海城镇，距离阿开亚人的营地足够近，船只可以送回女孩并迅速返回。诗歌开篇的争吵就是围绕她展开的，前一百行实际上是一段局部地理描述。",
+        "古代地理学家对确切遗址争论不休，现代调查也未能解决这一问题。无可置疑的是该地区：特罗阿德南部，即阿喀琉斯在整个战争期间袭击掠夺的同一海岸。"
+      ],
+      "identificationNote": "似是而非：该地区是确定的，但具体遗址不确定，这是《伊利亚特》中特罗阿德次要城镇的常态。",
+      "debate": "候选的沿海遗址中哪一个是克律塞，以及诗歌中归因于阿喀琉斯的袭击是否反映了青铜时代晚期沿海战争的真实模式。"
     }
   }
 }

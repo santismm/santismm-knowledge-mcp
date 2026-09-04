@@ -170,6 +170,22 @@
         "pt": {
           "label": "A leitura mediterrânea",
           "note": "A rota como a Antiguidade a traçou: para fora da Trôade, além do Maleia rumo ao mar da Líbia, a oeste para águas sicilianas e tirrenas, e de volta às ilhas Jônicas. Cada escala é um lugar que alguém defendeu, e só uma — o estreito de Messina — alcança a classe plausível. A linha passa pelos candidatos que cada escala de fato nomeia, de modo que suas lacunas são as lacunas do atlas."
+        },
+        "fr": {
+          "label": "La lecture méditerranéenne",
+          "note": "La route telle que l'Antiquité l'a tracée : hors de la Troade, contournant le cap Malée vers la mer de Libye, vers l'ouest dans les eaux siciliennes et tyrrhéniennes, et retour vers les îles Ioniennes. Chaque étape est un lieu qui a été défendu par quelqu'un, et une seule d'entre elles — le détroit de Messine — atteint la catégorie plausible. La ligne est tracée à travers les candidats que chaque étape nomme réellement, de sorte que ses lacunes sont les lacunes de l'atlas."
+        },
+        "zh": {
+          "label": "地中海解读",
+          "note": "古代绘制的路线：离开特罗阿德，越过马勒阿进入利比亚海，向西进入西西里和第勒尼安海域，最后回到伊奥尼亚群岛。每一个停靠点都是有人主张过的地方，其中只有一个——墨西拿海峡（Strait of Messina）——达到了“合理”级别。线条是穿过每个停靠点实际指定的候选地点绘制的，因此其空白处即为本图册的空白处。"
+        },
+        "de": {
+          "label": "Die mediterrane Deutung",
+          "note": "Die Route, wie die Antike sie zeichnete: aus der Troas, vorbei an Malea in das Libysche Meer, westwärts in sizilianische und tyrrhenische Gewässer und heim zu den Ionischen Inseln. Jede Station ist ein Ort, für den argumentiert wurde, und nur einer davon – die Straße von Messina – erreicht die Klasse „plausibel“. Die Linie wird durch die Kandidaten gezogen, die jede Station tatsächlich benennt, sodass ihre Lücken die Lücken des Atlas sind."
+        },
+        "ja": {
+          "label": "地中海説",
+          "note": "古代の人々が描いたルート。トロアス地方を出発し、マレア岬を越えてリビア海に入り、西に進んでシチリア海域およびティレニア海域を経て、イオニア諸島の故郷へと戻る。すべての経由地は誰かが主張した場所であり、そのうち「妥当」の分類に達するのはメッシーナ海峡の1箇所のみである。路線は各経由地が実際に指し示す候補地を結んで描かれているため、その空白は本地図帳の空白をそのまま反映している。"
         }
       }
     },
@@ -268,6 +284,22 @@
         "pt": {
           "label": "A leitura atlântica",
           "note": "Toma ao pé da letra as derivas de dez dias e a jangada de dezessete e empurra as andanças para fora do Estreito. A maioria de suas escalas não nomeia candidato dentro deste quadro, então a linha simplesmente para nos lugares que a leitura compartilha com a mediterrânea. Não é falha de desenho: é o que a leitura afirma."
+        },
+        "fr": {
+          "label": "La lecture atlantique",
+          "note": "Prend au pied de la lettre les dérives de dix jours et le radeau de dix-sept jours, et pousse les errances au-delà de Gibraltar. La plupart de ses étapes ne nomment aucun candidat dans ce cadre, de sorte que la ligne s'arrête simplement aux endroits que cette lecture partage avec la lecture méditerranéenne. Il ne s'agit pas d'un défaut de rendu : c'est ce que prétend cette lecture."
+        },
+        "zh": {
+          "label": "大西洋解读",
+          "note": "字面理解十天的漂流和十七天的木筏，并将漂泊之旅向外推过直布罗陀。其大部分停靠点在此框架内未指定候选地点，因此线条仅在与地中海解读共享的地点处停止。这并非渲染失败：这正是该解读所主张的。"
+        },
+        "de": {
+          "label": "Die atlantische Deutung",
+          "note": "Nimmt das zehntägige Treiben und das siebzehntägige Floß wörtlich und verlegt die Irrfahrten hinaus durch Gibraltar. Da die meisten ihrer Stationen keinen Kandidaten innerhalb dieses Rahmens benennen, endet die Linie einfach an den Orten, die diese Deutung mit der mediterranen teilt. Das ist kein Darstellungsfehler, sondern entspricht dem Anspruch dieser Deutung."
+        },
+        "ja": {
+          "label": "大西洋説",
+          "note": "10日間の漂流や17日間の筏での航行を文字通りに受け止め、ジブラルタル海峡を越えて大西洋へと漂流の舞台を押し広げる説。この枠組みの中では、ほとんどの経由地に対応する候補地が存在しないため、路線は地中海説と共有する場所で単純に途切れている。これはレンダリングのエラーではなく、この説が主張する内容そのものを表している。"
         }
       }
     }
@@ -302,6 +334,46 @@
         "Este atlas não toma partido. Desenha as reconstruções que de fato foram defendidas, pontua cada uma e deixa fora da linha os episódios sem localização defensável."
       ],
       "debate": "A disputa é mais antiga que a arqueologia e é improvável que esta a resolva: se as andanças codificam uma rota marítima real, uma sequência de conto popular ou uma viagem deliberada para fora do mundo conhecido. As duas variantes aqui são as duas famílias de resposta, desenhadas com suas próprias pontuações."
+    },
+    "fr": {
+      "name": "Le nostos d'Ulysse",
+      "summary": "Le voyage de dix ans pour rentrer de Troie — l'itinéraire le plus cartographié et le moins cartographiable de la littérature européenne. L'atlas le trace sous forme de reconstructions concurrentes, et non comme une ligne unique.",
+      "description": [
+        "L'Odyssée ne décrit pas un voyage dans l'ordre chronologique. Les chants IX à XII sont le récit qu'Ulysse fait de sa propre histoire lors d'un banquet phéacien, devant un public qu'il cherche à impressionner, après quoi le poème revient au présent. Tout itinéraire qui en est tiré est la reconstruction d'un récit rétrospectif, et le poème ne prétend jamais le contraire.",
+        "L'Antiquité l'a néanmoins cartographié, et Strabon a défendu cette pratique : il soutenait qu'Homère connaissait la Méditerranée occidentale et y situait les errances. Ératosthène avait déjà formulé la position inverse, dans l'une des plus célèbres formules de rejet de l'érudition antique — vous trouverez où Ulysse a erré quand vous aurez trouvé le cordonnier qui a cousu l'outre des vents.",
+        "Cet atlas ne prend pas parti. Il trace les reconstructions qui ont réellement été défendues, attribue une note à chacune d'elles et laisse entièrement de côté les épisodes n'ayant aucune localisation défendable."
+      ],
+      "debate": "La dispute est plus ancienne que l'archéologie et a peu de chances d'être résolue par elle : les errances codent-elles une véritable route maritime, une suite de contes populaires ou un voyage délibéré hors du monde connu ? Les deux variantes présentées ici sont les deux familles de réponses, tracées avec leurs propres scores."
+    },
+    "de": {
+      "name": "Der Nostos des Odysseus",
+      "summary": "Die zehnjährige Heimreise von Troja – die am häufigsten kartierte und am wenigsten kartierbare Reiseroute der europäischen Literatur. Der Atlas stellt sie als konkurrierende Rekonstruktionen dar, nicht als eine Linie.",
+      "description": [
+        "Die Odyssee beschreibt eine Reise nicht in chronologischer Reihenfolge. Die Bücher 9 bis 12 bestehen aus Odysseus' eigener Erzählung bei einem phäakischen Gastmahl vor einem Publikum, das er zu beeindrucken versucht, woraufhin das Epos in die Gegenwart zurückkehrt. Jede daraus abgeleitete Route ist die Rekonstruktion einer rückblickenden Erzählung, und das Epos behauptet auch nie etwas anderes.",
+        "Die Antike kartierte sie dennoch, und Strabon verteidigte diese Praxis: Er war der Ansicht, dass Homer das westliche Mittelmeer kannte und die Irrfahrten dorthin verlegte. Eratosthenes hatte bereits die Gegenposition formuliert, in einer der großen Einzeiler-Zurückweisungen der antiken Wissenschaft: Man werde die Orte der Irrfahrten des Odysseus finden, wenn man den Schuster finde, der den Sack der Winde genäht habe.",
+        "Dieser Atlas schlägt sich auf keine der beiden Seiten. Er stellt die tatsächlich vertretenen Rekonstruktionen dar, bewertet jede einzelne und lässt Episoden ohne vertretbare Lokalisierung gänzlich abseits der Linie."
+      ],
+      "debate": "Der Streit ist älter als die Archäologie und wird durch sie wohl kaum gelöst werden: ob die Irrfahrten einen realen Seeweg, eine Abfolge von Volksmärchen oder eine bewusste Reise aus der bekannten Welt heraus kodieren. Die beiden Varianten hier sind die zwei Antwortfamilien, dargestellt mit ihren jeweiligen Bewertungen."
+    },
+    "ja": {
+      "name": "オデュッセウスの帰還",
+      "summary": "トロイからの10年に及ぶ帰郷の旅。ヨーロッパ文学において最も多く地図化され、かつ最も地図化が不可能な旅程である。本地図帳では、これを1本の線としてではなく、対立する複数の再構成案としてプロットしている。",
+      "description": [
+        "『オデュッセイア』は航海を順序立てて描写しているわけではない。第9巻から第12巻は、オデュッセウスがフェアイア人の宴席で、自らの印象を良くしようとする相手に向けて語る回想録であり、その後、叙事詩は現在へと戻る。そこから描かれるいかなるルートも回想的な語りの再構成に過ぎず、叙事詩自体もそれ以上の主張はしていない。",
+        "それでも古代の人々は地図を作成し、ストラボンはその試みを擁護した。彼はホメロスが西地中海を知っており、そこに漂流の舞台を設定したと考えた。これに対し、エラトステネスはすでに反対の立場をとっており、古代の学術における最も見事な一言での一蹴を残している。「風の袋を縫った靴屋を見つけたとき、オデュッセウスがどこを漂流したかがわかるだろう」。",
+        "地図帳はいずれの立場もとらない。実際に主張されてきた再構成案をプロットし、それぞれを評価した上で、合理的な位置を特定できないエピソードについては路線から完全に除外している。"
+      ],
+      "debate": "この論争は考古学よりも古く、考古学によって解決される見込みは薄い。すなわち、漂流が実際の航路、民話の順序、あるいは既知の世界から意図的に踏み出した旅のいずれを暗号化しているのかという点である。ここに示す2つのバリアントは、これら2つの系統の回答であり、それぞれの評価スコアとともにプロットされている。"
+    },
+    "zh": {
+      "name": "奥德修斯的归途",
+      "summary": "从特洛伊回家的十年航程——欧洲文学中被绘制地图最多、却最无法绘制地图的行程。本图册将其绘制为相互竞争的重建方案，而非单一的线条。",
+      "description": [
+        "《奥德赛》并没有按顺序描述航程。第9至12卷是奥德修斯在费阿基亚人（Phaeacian）的宴会上讲述自己的故事，听众是他试图打动的人，随后史诗回到了现在。任何据此绘制的路线都是对回顾性叙事的一种重建，而史诗本身也从未声称其为其他性质。",
+        "尽管如此，古代学者还是绘制了它的地图，斯特拉博（Strabo）也为这种做法辩护：他认为荷马了解西地中海，并将漂泊之旅设定在其中。而埃拉托斯特尼（Eratosthenes）早已给出了相反的立场，这是古代学术界最伟大的单句否定之一——当你找到缝制风袋的鞋匠时，你就会找到奥德修斯漂泊的地方。",
+        "本图册不偏向任何一方。它绘制了实际存在争议的重建方案，并为方案逐一评分，完全不将那些没有合理依据地点的片段画入路线中。"
+      ],
+      "debate": "这场争论比考古学还要古老，且不太可能通过考古学来解决：漂泊之旅究竟是编码了一条真实的航道、一个民间故事序列，还是有意驶出已知世界的航行。这里的两个变体代表了两个答案家族，并附带各自的评分进行绘制。"
     }
   }
 }

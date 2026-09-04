@@ -5,15 +5,49 @@
   "updated": "2026-06-21",
   "version": "1.0",
   "featured": true,
-  "evidence": { "evidenceLevel": "industry_observation", "confidenceLevel": "medium", "sourceType": ["industry_observation"] },
-  "technologies": ["Monitoring & alerting integration", "Runbook automation tools", "Incident management systems", "Human approval gates", "Guardrails", "Observability (LangSmith / Langfuse)"],
-  "patterns": ["routing", "recovery-strategy", "human-escalation", "evaluator-optimizer", "human-approval-gate"],
-  "knowledge": ["ai-agent", "tool-use", "ai-observability", "guardrails", "agentic-evaluation"],
-  "references": [
-    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
-    { "title": "Google SRE Book — Managing Incidents", "url": "https://sre.google/sre-book/managing-incidents/" }
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "medium",
+    "sourceType": [
+      "industry_observation"
+    ]
+  },
+  "technologies": [
+    "Monitoring & alerting integration",
+    "Runbook automation tools",
+    "Incident management systems",
+    "Human approval gates",
+    "Guardrails",
+    "Observability (LangSmith / Langfuse)"
   ],
-  "related": ["customer-service-agent", "ai-workforce"],
+  "patterns": [
+    "routing",
+    "recovery-strategy",
+    "human-escalation",
+    "evaluator-optimizer",
+    "human-approval-gate"
+  ],
+  "knowledge": [
+    "ai-agent",
+    "tool-use",
+    "ai-observability",
+    "guardrails",
+    "agentic-evaluation"
+  ],
+  "references": [
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    },
+    {
+      "title": "Google SRE Book — Managing Incidents",
+      "url": "https://sre.google/sre-book/managing-incidents/"
+    }
+  ],
+  "related": [
+    "customer-service-agent",
+    "ai-workforce"
+  ],
   "locales": {
     "en": {
       "name": "Operations Center",
@@ -79,11 +113,26 @@
         "Invest early in correlation quality; noisy incidents poison both diagnosis and human trust."
       ],
       "kpis": [
-        { "metric": "Mean time to resolution (MTTR)", "note": "Track separately for runbook-covered versus escalated incidents; good looks like a steady decline for covered cases without regressions elsewhere." },
-        { "metric": "False-action rate", "note": "Share of automated remediations that were wrong or harmful; good is near zero, sustained by tight write-action gating." },
-        { "metric": "Alert-to-incident compression", "note": "Ratio of raw alerts to correlated incidents; good means far fewer pages without hiding real distinct problems." },
-        { "metric": "Escalation precision", "note": "Fraction of escalations that genuinely needed a human; good avoids both over-escalation fatigue and missed risky cases." },
-        { "metric": "Rollback success rate", "note": "Share of failed remediations that rolled back cleanly to a safe state; good is consistently high with no lingering side effects." }
+        {
+          "metric": "Mean time to resolution (MTTR)",
+          "note": "Track separately for runbook-covered versus escalated incidents; good looks like a steady decline for covered cases without regressions elsewhere."
+        },
+        {
+          "metric": "False-action rate",
+          "note": "Share of automated remediations that were wrong or harmful; good is near zero, sustained by tight write-action gating."
+        },
+        {
+          "metric": "Alert-to-incident compression",
+          "note": "Ratio of raw alerts to correlated incidents; good means far fewer pages without hiding real distinct problems."
+        },
+        {
+          "metric": "Escalation precision",
+          "note": "Fraction of escalations that genuinely needed a human; good avoids both over-escalation fatigue and missed risky cases."
+        },
+        {
+          "metric": "Rollback success rate",
+          "note": "Share of failed remediations that rolled back cleanly to a safe state; good is consistently high with no lingering side effects."
+        }
       ],
       "scaling": [
         "Partition correlation and routing by service domain or region so incident volume scales horizontally.",
@@ -97,9 +146,18 @@
         "Escalating a novel, low-confidence networking anomaly directly to on-call with enriched context instead of guessing."
       ],
       "faqs": [
-        { "q": "Why not let the agent fix everything automatically?", "a": "Because destructive or novel actions can cause wider outages. The pattern automates safe, read-mostly diagnostics and gates every write behind human approval and a vetted runbook." },
-        { "q": "How does it reduce alert fatigue?", "a": "A correlation engine deduplicates and groups related signals into a single incident, so one underlying fault produces one page instead of dozens of redundant alerts." },
-        { "q": "What happens when a remediation goes wrong?", "a": "An evaluator compares outcomes to expected health signals and triggers a safe, tested rollback, while the full timeline is captured in the audit trail for postmortem review." }
+        {
+          "q": "Why not let the agent fix everything automatically?",
+          "a": "Because destructive or novel actions can cause wider outages. The pattern automates safe, read-mostly diagnostics and gates every write behind human approval and a vetted runbook."
+        },
+        {
+          "q": "How does it reduce alert fatigue?",
+          "a": "A correlation engine deduplicates and groups related signals into a single incident, so one underlying fault produces one page instead of dozens of redundant alerts."
+        },
+        {
+          "q": "What happens when a remediation goes wrong?",
+          "a": "An evaluator compares outcomes to expected health signals and triggers a safe, tested rollback, while the full timeline is captured in the audit trail for postmortem review."
+        }
       ]
     },
     "es": {
@@ -166,11 +224,26 @@
         "Invertir temprano en la calidad de la correlación; los incidentes ruidosos envenenan tanto el diagnóstico como la confianza humana."
       ],
       "kpis": [
-        { "metric": "Tiempo medio de resolución (MTTR)", "note": "Medirlo por separado para incidentes cubiertos por runbooks frente a escalados; lo bueno es un descenso sostenido en los casos cubiertos sin regresiones en otros." },
-        { "metric": "Tasa de acciones erróneas", "note": "Proporción de remediaciones automatizadas que fueron incorrectas o dañinas; lo bueno es cercano a cero, sostenido por un control estricto de las escrituras." },
-        { "metric": "Compresión de alertas a incidentes", "note": "Relación entre alertas crudas e incidentes correlacionados; lo bueno significa muchos menos avisos sin ocultar problemas reales distintos." },
-        { "metric": "Precisión de escalado", "note": "Fracción de escalados que realmente necesitaban un humano; lo bueno evita tanto la fatiga por sobre-escalado como los casos riesgosos omitidos." },
-        { "metric": "Tasa de éxito de rollback", "note": "Proporción de remediaciones fallidas que revirtieron limpiamente a un estado seguro; lo bueno es consistentemente alto sin efectos secundarios persistentes." }
+        {
+          "metric": "Tiempo medio de resolución (MTTR)",
+          "note": "Medirlo por separado para incidentes cubiertos por runbooks frente a escalados; lo bueno es un descenso sostenido en los casos cubiertos sin regresiones en otros."
+        },
+        {
+          "metric": "Tasa de acciones erróneas",
+          "note": "Proporción de remediaciones automatizadas que fueron incorrectas o dañinas; lo bueno es cercano a cero, sostenido por un control estricto de las escrituras."
+        },
+        {
+          "metric": "Compresión de alertas a incidentes",
+          "note": "Relación entre alertas crudas e incidentes correlacionados; lo bueno significa muchos menos avisos sin ocultar problemas reales distintos."
+        },
+        {
+          "metric": "Precisión de escalado",
+          "note": "Fracción de escalados que realmente necesitaban un humano; lo bueno evita tanto la fatiga por sobre-escalado como los casos riesgosos omitidos."
+        },
+        {
+          "metric": "Tasa de éxito de rollback",
+          "note": "Proporción de remediaciones fallidas que revirtieron limpiamente a un estado seguro; lo bueno es consistentemente alto sin efectos secundarios persistentes."
+        }
       ],
       "scaling": [
         "Particionar la correlación y el enrutamiento por dominio de servicio o región para que el volumen de incidentes escale horizontalmente.",
@@ -184,9 +257,18 @@
         "Escalar una anomalía de red novedosa y de baja confianza directamente a la guardia con contexto enriquecido en lugar de adivinar."
       ],
       "faqs": [
-        { "q": "¿Por qué no dejar que el agente lo arregle todo automáticamente?", "a": "Porque las acciones destructivas o novedosas pueden causar interrupciones más amplias. El patrón automatiza diagnósticos seguros y de solo lectura y coloca cada escritura detrás de una aprobación humana y un runbook validado." },
-        { "q": "¿Cómo reduce la fatiga de alertas?", "a": "Un motor de correlación deduplica y agrupa señales relacionadas en un solo incidente, de modo que una falla subyacente produce un aviso en lugar de docenas de alertas redundantes." },
-        { "q": "¿Qué ocurre cuando una remediación sale mal?", "a": "Un evaluador compara los resultados con las señales de salud esperadas y dispara un rollback seguro y probado, mientras la línea de tiempo completa queda registrada en el rastro de auditoría para el postmortem." }
+        {
+          "q": "¿Por qué no dejar que el agente lo arregle todo automáticamente?",
+          "a": "Porque las acciones destructivas o novedosas pueden causar interrupciones más amplias. El patrón automatiza diagnósticos seguros y de solo lectura y coloca cada escritura detrás de una aprobación humana y un runbook validado."
+        },
+        {
+          "q": "¿Cómo reduce la fatiga de alertas?",
+          "a": "Un motor de correlación deduplica y agrupa señales relacionadas en un solo incidente, de modo que una falla subyacente produce un aviso en lugar de docenas de alertas redundantes."
+        },
+        {
+          "q": "¿Qué ocurre cuando una remediación sale mal?",
+          "a": "Un evaluador compara los resultados con las señales de salud esperadas y dispara un rollback seguro y probado, mientras la línea de tiempo completa queda registrada en el rastro de auditoría para el postmortem."
+        }
       ]
     },
     "pt": {
@@ -253,11 +335,26 @@
         "Investir cedo na qualidade da correlação; incidentes ruidosos envenenam tanto o diagnóstico quanto a confiança humana."
       ],
       "kpis": [
-        { "metric": "Tempo médio de resolução (MTTR)", "note": "Medir separadamente para incidentes cobertos por runbooks versus escalados; o bom é uma queda sustentada nos casos cobertos sem regressões em outros." },
-        { "metric": "Taxa de ações erradas", "note": "Proporção de remediações automatizadas que foram incorretas ou prejudiciais; o bom é perto de zero, sustentado por um controle rígido das gravações." },
-        { "metric": "Compressão de alertas em incidentes", "note": "Relação entre alertas brutos e incidentes correlacionados; o bom significa muito menos avisos sem ocultar problemas reais distintos." },
-        { "metric": "Precisão de escalonamento", "note": "Fração de escalonamentos que realmente precisavam de um humano; o bom evita tanto a fadiga por escalonamento excessivo quanto os casos arriscados omitidos." },
-        { "metric": "Taxa de sucesso de rollback", "note": "Proporção de remediações falhas que reverteram de forma limpa para um estado seguro; o bom é consistentemente alto, sem efeitos colaterais persistentes." }
+        {
+          "metric": "Tempo médio de resolução (MTTR)",
+          "note": "Medir separadamente para incidentes cobertos por runbooks versus escalados; o bom é uma queda sustentada nos casos cobertos sem regressões em outros."
+        },
+        {
+          "metric": "Taxa de ações erradas",
+          "note": "Proporção de remediações automatizadas que foram incorretas ou prejudiciais; o bom é perto de zero, sustentado por um controle rígido das gravações."
+        },
+        {
+          "metric": "Compressão de alertas em incidentes",
+          "note": "Relação entre alertas brutos e incidentes correlacionados; o bom significa muito menos avisos sem ocultar problemas reais distintos."
+        },
+        {
+          "metric": "Precisão de escalonamento",
+          "note": "Fração de escalonamentos que realmente precisavam de um humano; o bom evita tanto a fadiga por escalonamento excessivo quanto os casos arriscados omitidos."
+        },
+        {
+          "metric": "Taxa de sucesso de rollback",
+          "note": "Proporção de remediações falhas que reverteram de forma limpa para um estado seguro; o bom é consistentemente alto, sem efeitos colaterais persistentes."
+        }
       ],
       "scaling": [
         "Particionar a correlação e o roteamento por domínio de serviço ou região para que o volume de incidentes escale horizontalmente.",
@@ -271,9 +368,462 @@
         "Escalar uma anomalia de rede inédita e de baixa confiança diretamente para o plantão com contexto enriquecido em vez de adivinhar."
       ],
       "faqs": [
-        { "q": "Por que não deixar o agente corrigir tudo automaticamente?", "a": "Porque ações destrutivas ou inéditas podem causar interrupções mais amplas. O padrão automatiza diagnósticos seguros e somente de leitura e coloca cada gravação atrás de uma aprovação humana e de um runbook validado." },
-        { "q": "Como ele reduz a fadiga de alertas?", "a": "Um motor de correlação deduplica e agrupa sinais relacionados em um único incidente, de modo que uma falha subjacente produz um aviso em vez de dezenas de alertas redundantes." },
-        { "q": "O que acontece quando uma remediação dá errado?", "a": "Um avaliador compara os resultados com os sinais de saúde esperados e dispara um rollback seguro e testado, enquanto a linha do tempo completa fica registrada na trilha de auditoria para o postmortem." }
+        {
+          "q": "Por que não deixar o agente corrigir tudo automaticamente?",
+          "a": "Porque ações destrutivas ou inéditas podem causar interrupções mais amplas. O padrão automatiza diagnósticos seguros e somente de leitura e coloca cada gravação atrás de uma aprovação humana e de um runbook validado."
+        },
+        {
+          "q": "Como ele reduz a fadiga de alertas?",
+          "a": "Um motor de correlação deduplica e agrupa sinais relacionados em um único incidente, de modo que uma falha subjacente produz um aviso em vez de dezenas de alertas redundantes."
+        },
+        {
+          "q": "O que acontece quando uma remediação dá errado?",
+          "a": "Um avaliador compara os resultados com os sinais de saúde esperados e dispara um rollback seguro e testado, enquanto a linha do tempo completa fica registrada na trilha de auditoria para o postmortem."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Centre d'opérations",
+      "summary": "Un centre d'opérations est un système d'AIOps agentique qui surveille les signaux et alertes de monitoring, les corrèle et les trie, diagnostique la cause racine probable et exécute uniquement des remédiations de runbook validées — tout en soumettant les actions destructrices ou inédites à une approbation humaine. Il réduit la fatigue liée aux alertes et raccourcit le temps moyen de résolution (MTTR) en automatisant des diagnostics sûrs, principalement en lecture seule, tout en escaladant les écritures risquées vers les ingénieurs d'astreinte. Chaque action est auditée et réversible. Le succès est mesuré de manière honnête à l'aide du MTTR, du taux de fausses actions et de la précision de l'escalade, et non par le volume d'automatisation.",
+      "keyConcepts": [
+        "Les diagnostics principalement en lecture seule s'exécutent automatiquement ; les actions d'écriture ou destructrices nécessitent une étape d'approbation humaine explicite.",
+        "La corrélation d'alertes regroupe les signaux bruyants et redondants en un seul incident afin de réduire la fatigue.",
+        "La remédiation est limitée à des runbooks validés et versionnés avec un retour arrière (rollback) sécurisé — jamais d'actions improvisées.",
+        "Chaque décision et action est consignée dans une piste d'audit immuable pour examen et apprentissage."
+      ],
+      "definition": "L'architecture du centre d'opérations est un modèle d'AIOps agentique qui trie les alertes, diagnostique la cause racine et exécute uniquement des remédiations de runbook approuvées, tout en soumettant les actions risquées à une approbation humaine.",
+      "architecture": [
+        "Les signaux entrent par une couche d'ingestion et de normalisation qui unifie les métriques, les journaux (logs), les traces et les alertes provenant d'outils de monitoring hétérogènes dans un schéma d'événements commun. Un moteur de corrélation regroupe les signaux associés par service, fenêtre temporelle et graphe de dépendances, de sorte qu'une seule faille sous-jacente apparaisse comme un incident unique plutôt que sous la forme de dizaines d'alertes redondantes.",
+        "Un agent de tri et de diagnostic analyse l'incident corrélé, extrait du contexte supplémentaire via des outils en lecture seule (tableaux de bord, déploiements récents, topologie, incidents antérieurs) et propose une cause racine probable avec une estimation de confiance. Un routeur classifie chaque incident par gravité, rayon d'impact (blast radius) et existence d'un runbook validé correspondant, puis choisit entre la remédiation automatisée, l'approbation humaine ou l'escalade directe.",
+        "La remédiation s'exécute via une couche d'action sécurisée où les étapes principalement en lecture seule s'exécutent automatiquement, mais où toute action d'écriture, de redémarrage, de mise à l'échelle (scaling) ou de retour arrière passe par une étape d'approbation humaine. Un évaluateur vérifie les résultats par rapport aux signaux d'état de santé attendus et peut déclencher un retour arrière sécurisé. L'observabilité et une piste d'audit immuable encadrent chaque étape, alimentant une boucle de rétroaction qui améliore les runbooks et le routage au fil du temps."
+      ],
+      "flow": [
+        "1. Un outil de monitoring déclenche une alerte ; la couche d'ingestion la normalise et le moteur de corrélation la fusionne avec les signaux associés en un seul incident.",
+        "2. L'agent de tri enrichit l'incident avec un contexte en lecture seule — déploiements récents, topologie, tableaux de bord et incidents passés similaires.",
+        "3. L'agent de diagnostic propose une cause racine probable avec un score de confiance et identifie si un runbook validé correspond au symptôme.",
+        "4. Le routeur décide du chemin : exécuter automatiquement des diagnostics sûrs, demander une approbation humaine pour les actions d'écriture, ou escalader les cas inédits ou à faible confiance vers l'astreinte.",
+        "5. La remédiation approuvée s'exécute étape par étape à partir du runbook ; l'évaluateur surveille les signaux d'état de santé et effectue un retour arrière automatique si la récupération échoue.",
+        "6. L'incident est résolu ou confié à un humain, et l'historique complet, les décisions et les actions sont consignés dans la piste d'audit pour examen."
+      ],
+      "components": [
+        "Couche d'ingestion et de normalisation des signaux",
+        "Moteur de corrélation et de déduplication des alertes",
+        "Agent de tri et de diagnostic de cause racine",
+        "Routeur de gravité et de runbook",
+        "Couche de remédiation sécurisée avec étapes d'approbation humaine",
+        "Évaluateur de résultats avec retour arrière sécurisé",
+        "Piste d'audit immuable et observabilité"
+      ],
+      "referenceScenario": {
+        "context": "Un fournisseur SaaS de taille moyenne fictif exécute des dizaines de microservices sur deux régions et se retrouve submergé par des alertes redondantes lors des incidents, ce qui ralentit la réponse.",
+        "scenario": "Lors d'un basculement (failover) partiel de base de données, le centre d'opérations corrèle une vague d'alertes de latence, de taux d'erreur et de dépassement de délai (timeout) en un seul incident, diagnostique une saturation du pool de connexions comme cause probable, exécute automatiquement des vérifications en lecture seule et demande une approbation humaine avant de redémarrer les processus de pool (pool workers) à partir d'un runbook validé.",
+        "technology": "Les intégrations de monitoring et d'alerte alimentent un moteur de corrélation et un agent de tri ; un système de gestion des incidents suit l'état ; l'automatisation des runbooks exécute les étapes approuvées ; des étapes d'approbation humaine et des garde-fous encadrent les actions d'écriture ; les outils d'observabilité capturent les traces.",
+        "load": "Chiffres de planification de référence uniquement : environ 4 000 alertes brutes par jour regroupées en quelques centaines d'incidents, avec des pics de plusieurs centaines de signaux en quelques minutes lors d'événements majeurs.",
+        "results": "Objectifs de référence à mesurer, non contractuels : viser à réduire les alertes redondantes grâce à la corrélation, raccourcir le MTTR pour les incidents couverts par les runbooks et maintenir le taux de fausses actions proche de zéro en soumettant toutes les écritures à approbation. Valisez chaque chiffre par rapport à vos propres références avant de vous y fier."
+      },
+      "benefits": [
+        "La corrélation et la déduplication réduisent considérablement la fatigue liée aux alertes et le volume d'appels pour le personnel d'astreinte.",
+        "L'automatisation de diagnostics sûrs, principalement en lecture seule, raccourcit le temps moyen de résolution pour les incidents bien compris.",
+        "Les étapes d'approbation humaine sécurisent les actions destructrices tout en accélérant la remédiation à faible risque.",
+        "Une piste d'audit complète améliore les post-mortems, la conformité et l'amélioration continue des runbooks."
+      ],
+      "risks": [
+        "Une confiance excessive dans les scores de confiance peut conduire un diagnostic erroné à déclencher une remédiation inappropriée.",
+        "Automatiser au-delà des runbooks validés présente le risque que des actions inédites et non testées provoquent des pannes plus étendues.",
+        "Une corrélation mal ajustée peut soit fusionner des incidents sans rapport, soit échouer à regrouper les doublons.",
+        "La fatigue liée aux étapes d'approbation peut inciter les ingénieurs à valider aveuglément les demandes sans examen réel."
+      ],
+      "failureModes": [
+        "Les tempêtes d'alertes submergent la corrélation, produisant soit un seul incident géant, soit un flux de fragments.",
+        "Un runbook défectueux exécute une action nuisible que l'évaluateur ne parvient pas à détecter et à annuler.",
+        "L'agent escalade tout, recréant ainsi la fatigue liée aux alertes qu'il était censé éliminer.",
+        "Des données de topologie ou de contexte obsolètes orientent le diagnostic vers une mauvaise cause racine."
+      ],
+      "lessons": [
+        "Privilégiez par défaut l'automatisation en lecture seule et exigez une approbation humaine pour chaque action d'écriture ou destructrice.",
+        "N'automatisez jamais la remédiation au-delà de runbooks validés et versionnés dotés de chemins de retour arrière testés et sûrs.",
+        "Mesurez le MTTR et le taux de fausses actions de manière honnête plutôt que de célébrer le volume d'automatisation.",
+        "Investissez tôt dans la qualité de la corrélation ; les incidents bruyants nuisent à la fois au diagnostic et à la confiance humaine."
+      ],
+      "kpis": [
+        {
+          "metric": "Temps moyen de résolution (MTTR)",
+          "note": "À suivre séparément pour les incidents couverts par un runbook et ceux escaladés ; un bon résultat se traduit par une baisse constante pour les cas couverts sans régression ailleurs."
+        },
+        {
+          "metric": "Taux de fausses actions",
+          "note": "Part des remédiations automatisées qui étaient erronées ou nuisibles ; un bon résultat est proche de zéro, maintenu par un contrôle strict des actions d'écriture."
+        },
+        {
+          "metric": "Compression des alertes en incidents",
+          "note": "Ratio entre les alertes brutes et les incidents corrélés ; un bon résultat signifie beaucoup moins d'appels d'astreinte sans pour autant masquer les problèmes distincts réels."
+        },
+        {
+          "metric": "Précision de l'escalade",
+          "note": "Fraction des escalations qui nécessitaient réellement une intervention humaine ; un bon résultat évite à la fois la fatigue liée à la sur-escalade et l'omission de cas risqués."
+        },
+        {
+          "metric": "Taux de réussite du retour arrière",
+          "note": "Part des remédiations ayant échoué qui ont fait l'objet d'un retour arrière propre vers un état sûr ; un bon résultat est constamment élevé, sans effets secondaires persistants."
+        }
+      ],
+      "scaling": [
+        "Partitionnez la corrélation et le routage par domaine de service ou par région afin que le volume d'incidents évolue horizontalement.",
+        "Conservez les runbooks versionnés et testables de manière indépendante afin que de nouvelles automatisations puissent être ajoutées en toute sécurité.",
+        "Limitez le débit (rate-limit) et appliquez une contre-pression (back-pressure) sur l'ingestion pour survivre aux tempêtes d'alertes sans perdre la fidélité de l'audit.",
+        "Étendez progressivement la couverture de l'automatisation, en faisant passer les runbooks d'un mode de suggestion uniquement à une exécution contrôlée à mesure que la confiance grandit."
+      ],
+      "examples": [
+        "Corréler un pic d'erreurs déclenché par un déploiement en un seul incident et recommander un retour arrière contrôlé de la dernière version.",
+        "Exécuter automatiquement des diagnostics en lecture seule sur le disque, la mémoire et les connexions, puis demander l'approbation pour redémarrer un service saturé.",
+        "Escalader directement une anomalie réseau inédite et à faible confiance vers l'astreinte avec un contexte enrichi au lieu de faire des suppositions."
+      ],
+      "faqs": [
+        {
+          "q": "Pourquoi ne pas laisser l'agent tout corriger automatiquement ?",
+          "a": "Parce que des actions destructrices ou inédites peuvent provoquer des pannes plus étendues. Ce modèle automatise les diagnostics sécurisés, principalement en lecture seule, et conditionne chaque écriture à une approbation humaine et à un runbook validé."
+        },
+        {
+          "q": "Comment réduit-il la fatigue liée aux alertes ?",
+          "a": "Un moteur de corrélation déduplique et regroupe les signaux associés au sein d'un incident unique, de sorte qu'une seule défaillance sous-jacente génère une seule notification au lieu de dizaines d'alertes redondantes."
+        },
+        {
+          "q": "Que se passe-t-il lorsqu'une remédiation échoue ?",
+          "a": "Un évaluateur compare les résultats aux signaux d'état attendus et déclenche un retour arrière (rollback) sécurisé et testé, tandis que l'historique complet est consigné dans la piste d'audit pour analyse post-mortem."
+        }
+      ]
+    },
+    "de": {
+      "name": "Operations Center",
+      "summary": "Ein Operations Center ist ein agentisches AIOps-System, das Monitoring-Signale und Warnmeldungen überwacht, diese korreliert und triagiert, die wahrscheinliche Ursache diagnostiziert und ausschließlich geprüfte Runbook-Fehlerbehebungen ausführt – wobei destruktive oder neuartige Aktionen der menschlichen Freigabe vorbehalten bleiben. Es reduziert die Alarmmüdigkeit und verkürzt die mittlere Zeit bis zur Behebung (MTTR), indem es sichere, primär lesende Diagnosen automatisiert, während riskante Schreibvorgänge an On-Call-Ingenieure eskaliert werden. Jede Aktion ist auditierbar und umkehrbar. Der Erfolg wird ehrlich anhand von MTTR, der Rate fehlerhafter Aktionen und der Eskalationspräzision gemessen, nicht am Automatisierungsvolumen.",
+      "keyConcepts": [
+        "Primär lesende Diagnosen laufen automatisch ab; schreibende oder destruktive Aktionen erfordern eine explizite menschliche Freigabe.",
+        "Die Alarmkorrelation fasst verrauschte, redundante Signale zu einem einzigen Vorfall zusammen, um die Alarmmüdigkeit zu reduzieren.",
+        "Die Fehlerbehebung ist auf geprüfte, versionierte Runbooks mit sicherem Rollback beschränkt – niemals auf improvisierte Aktionen.",
+        "Jede Entscheidung und Aktion wird in einem unveränderlichen Audit-Trail zur Überprüfung und zum Lernen erfasst."
+      ],
+      "definition": "Die Operations-Center-Architektur ist ein agentisches AIOps-Muster, das Alarme triagiert, die Ursache diagnostiziert und nur genehmigte Runbook-Fehlerbehebungen ausführt, während riskante Aktionen von einer menschlichen Freigabe abhängen.",
+      "architecture": [
+        "Signale gehen über eine Ingestions- und Normalisierungsschicht ein, die Metriken, Protokolle, Traces und Alarme aus heterogenen Monitoring-Tools in einem gemeinsamen Ereignisschema vereinheitlicht. Eine Korrelations-Engine gruppiert zusammengehörige Signale nach Dienst, Zeitfenster und Abhängigkeitsdiagramm, sodass ein einzelner zugrunde liegender Fehler als ein einziger Vorfall und nicht als Dutzende von doppelten Benachrichtigungen erscheint.",
+        "Ein Triage- und Diagnose-Agent analysiert den korrelierten Vorfall, zieht zusätzlichen Kontext über schreibgeschützte Tools (Dashboards, aktuelle Deployments, Topologie, frühere Vorfälle) heran und schlägt eine wahrscheinliche Ursache mit einer Konfidenzschätzung vor. Ein Router klassifiziert jeden Vorfall nach Schweregrad, Auswirkung (Blast Radius) und dem Vorhandensein eines passenden, geprüften Runbooks und wählt dann zwischen automatisierter Fehlerbehebung, menschlicher Freigabe oder direkter Eskalation.",
+        "Die Fehlerbehebung wird über eine geschützte Aktionsschicht ausgeführt, in der primär lesende Schritte automatisch ablaufen, aber jeder Schreibvorgang, Neustart, jede Skalierung oder jeder Rollback eine menschliche Freigabe erfordert. Ein Evaluator gleicht die Ergebnisse mit den erwarteten Zustandssignalen ab und kann einen sicheren Rollback auslösen. Observability und ein unveränderlicher Audit-Trail begleiten jeden Schritt und speisen eine Feedbackschleife, die Runbooks und Routing im Laufe der Zeit verbessert."
+      ],
+      "flow": [
+        "1. Ein Monitoring-Tool löst einen Alarm aus; die Ingestionsschicht normalisiert diesen und die Korrelations-Engine führt ihn mit zusammenhängenden Signalen zu einem einzigen Vorfall zusammen.",
+        "2. Der Triage-Agent reichert den Vorfall mit schreibgeschütztem Kontext an – aktuelle Deployments, Topologie, Dashboards und ähnliche vergangene Vorfälle.",
+        "3. Der Diagnose-Agent schlägt eine wahrscheinliche Ursache mit einem Konfidenzwert vor und prüft, ob ein geprüftes Runbook zum Symptom passt.",
+        "4. Der Router entscheidet über den Pfad: automatische Ausführung sicherer Diagnosen, Anforderung einer menschlichen Freigabe für Schreibvorgänge oder Eskalation neuartiger Fälle oder solcher mit geringer Konfidenz an das On-Call-Team.",
+        "5. Die genehmigte Fehlerbehebung wird Schritt für Schritt aus dem Runbook ausgeführt; der Evaluator überwacht die Zustandssignale und führt bei einer fehlschlagenden Wiederherstellung automatisch einen Rollback durch.",
+        "6. Der Vorfall wird gelöst oder an einen Menschen übergeben, und die gesamte Timeline, Entscheidungen und Aktionen werden zur Überprüfung in den Audit-Trail geschrieben."
+      ],
+      "components": [
+        "Signal-Ingestions- und Normalisierungsschicht",
+        "Alarmkorrelations- und Deduplizierungs-Engine",
+        "Triage- und Ursachendiagnose-Agent",
+        "Schweregrad- und Runbook-Router",
+        "Geschützte Fehlerbehebungsschicht mit menschlichen Freigabestufen",
+        "Ergebnis-Evaluator mit sicherem Rollback",
+        "Unveränderlicher Audit-Trail und Observability"
+      ],
+      "referenceScenario": {
+        "context": "Ein beispielhafter mittelgroßer SaaS-Anbieter betreibt Dutzende von Microservices in zwei Regionen und wird bei Vorfällen von redundanten Alarmen überflutet, was die Reaktion verlangsamt.",
+        "scenario": "Während eines partiellen Datenbank-Failovers korreliert das Operations Center eine Flut von Latenz-, Fehlerraten- und Timeout-Alarmen zu einem einzigen Vorfall, diagnostiziert eine Erschöpfung des Connection-Pools als wahrscheinliche Ursache, führt automatisch schreibgeschützte Prüfungen durch und fordert eine menschliche Freigabe an, bevor Pool-Worker anhand eines geprüften Runbooks neu gestartet werden.",
+        "technology": "Monitoring- und Alerting-Integrationen speisen eine Korrelations-Engine und einen Triage-Agenten; ein Incident-Management-System verfolgt den Zustand; Runbook-Automatisierung führt genehmigte Schritte aus; menschliche Freigabestufen und Guardrails begrenzen Schreibvorgänge; Observability-Tools erfassen Traces.",
+        "load": "Nur Referenz-Planungszahlen: ca. 4.000 Rohalarme pro Tag, die auf einige hundert Vorfälle komprimiert werden, mit Spitzenwerten von mehreren hundert Signalen innerhalb von Minuten bei größeren Ereignissen.",
+        "results": "Zu messende Referenzziele, keine Garantien: Ziel ist es, doppelte Benachrichtigungen durch Korrelation zu reduzieren, die MTTR für durch Runbooks abgedeckte Vorfälle zu verkürzen und die Rate fehlerhafter Aktionen durch die Freigabepflicht aller Schreibvorgänge nahe Null zu halten. Validieren Sie jede Zahl anhand Ihrer eigenen Baseline, bevor Sie sich darauf verlassen."
+      },
+      "benefits": [
+        "Korrelation und Deduplizierung reduzieren die Alarmmüdigkeit und das Benachrichtigungsvolumen für das On-Call-Personal drastisch.",
+        "Die Automatisierung sicherer, primär lesender Diagnosen verkürzt die mittlere Zeit bis zur Behebung bei gut verstandenen Vorfällen.",
+        "Menschliche Freigabestufen sichern destruktive Aktionen ab, während sie gleichzeitig die Behebung von Risiken mit geringem Potenzial beschleunigen.",
+        "Ein vollständiger Audit-Trail verbessert Postmortems, Compliance und die kontinuierliche Verbesserung von Runbooks."
+      ],
+      "risks": [
+        "Ein zu großes Vertrauen in Konfidenzwerte kann dazu führen, dass eine falsche Diagnose eine ungeeignete Fehlerbehebung auslöst.",
+        "Eine Automatisierung über geprüfte Runbooks hinaus birgt das Risiko, dass neuartige, ungetestete Aktionen zu größeren Ausfällen führen.",
+        "Eine schlecht abgestimmte Korrelation kann entweder unzusammenhängende Vorfälle zusammenführen oder doppelte Alarme nicht komprimieren.",
+        "Müdigkeit durch Freigabestufen kann dazu führen, dass Ingenieure Anfragen ohne echte Prüfung einfach durchwinken."
+      ],
+      "failureModes": [
+        "Alarmstürme überfordern die Korrelation und führen entweder zu einem einzigen riesigen Vorfall oder zu einer Flut von Fragmenten.",
+        "Ein fehlerhaftes Runbook führt eine schädliche Aktion aus, die der Evaluator nicht erkennt und nicht rückgängig macht.",
+        "Der Agent eskaliert alles und erzeugt so genau die Alarmmüdigkeit neu, die er eigentlich beseitigen sollte.",
+        "Veraltete Topologie- oder Kontextdaten führen die Diagnose zur falschen Ursache."
+      ],
+      "lessons": [
+        "Setzen Sie standardmäßig auf primär lesende Automatisierung und fordern Sie für jeden Schreibvorgang oder jede destruktive Aktion eine menschliche Freigabe.",
+        "Führen Sie niemals automatische Fehlerbehebungen über geprüfte, versionierte Runbooks mit getesteten, sicheren Rollback-Pfaden hinaus durch.",
+        "Messen Sie MTTR und die Rate fehlerhafter Aktionen ehrlich, anstatt das Automatisierungsvolumen zu feiern.",
+        "Investieren Sie frühzeitig in die Korrelationsqualität; verrauschte Vorfälle beeinträchtigen sowohl die Diagnose als auch das menschliche Vertrauen."
+      ],
+      "kpis": [
+        {
+          "metric": "Mittlere Zeit bis zur Behebung (MTTR)",
+          "note": "Separat für durch Runbooks abgedeckte versus eskalierte Vorfälle erfassen; ein gutes Ergebnis zeigt sich in einem stetigen Rückgang bei abgedeckten Fällen ohne Verschlechterungen an anderer Stelle."
+        },
+        {
+          "metric": "Rate fehlerhafter Aktionen",
+          "note": "Anteil automatisierter Fehlerbehebungen, die falsch oder schädlich waren; ein gutes Ergebnis liegt nahe Null, gestützt durch eine strenge Freigabepflicht für Schreibvorgänge."
+        },
+        {
+          "metric": "Alarm-zu-Vorfall-Komprimierung",
+          "note": "Verhältnis von Rohalarmen zu korrelierten Vorfällen; ein gutes Ergebnis bedeutet weitaus weniger Benachrichtigungen, ohne echte, eigenständige Probleme zu verbergen."
+        },
+        {
+          "metric": "Eskalationspräzision",
+          "note": "Anteil der Eskalationen, die tatsächlich einen Menschen erforderten; ein gutes Ergebnis vermeidet sowohl Müdigkeit durch Übereskalation als auch das Übersehen riskanter Fälle."
+        },
+        {
+          "metric": "Rollback-Erfolgsquote",
+          "note": "Anteil fehlgeschlagener Fehlerbehebungen, die sauber in einen sicheren Zustand zurückgesetzt wurden; ein gutes Ergebnis ist konsistent hoch ohne verbleibende Nebenwirkungen."
+        }
+      ],
+      "scaling": [
+        "Partitionieren Sie Korrelation und Routing nach Service-Domäne oder Region, sodass das Vorfallsvolumen horizontal skaliert.",
+        "Halten Sie Runbooks versioniert und unabhängig testbar, damit neue Automatisierungen sicher hinzugefügt werden können.",
+        "Nutzen Sie Rate-Limiting und Backpressure bei der Ingestion, um Alarmstürme zu überstehen, ohne die Audit-Genauigkeit zu beeinträchtigen.",
+        "Erweitern Sie die Automatisierungsabdeckung schrittweise, indem Sie Runbooks mit wachsendem Vertrauen von reinen Vorschlägen zu einer freigabepflichtigen Ausführung hochstufen."
+      ],
+      "examples": [
+        "Korrelieren einer durch ein Deployment ausgelösten Fehlerspitze zu einem einzigen Vorfall und Empfehlen eines freigabepflichtigen Rollbacks des neuesten Release.",
+        "Automatisches Ausführen von schreibgeschützten Festplatten-, Speicher- und Verbindungsdiagnosen und anschließendes Anfordern der Freigabe zum Neustart eines ausgelasteten Dienstes.",
+        "Direktes Eskalieren einer neuartigen Netzwerkanomalie mit geringer Konfidenz an das On-Call-Team mit angereichertem Kontext, anstatt zu raten."
+      ],
+      "faqs": [
+        {
+          "q": "Warum lassen wir den Agenten nicht alles automatisch beheben?",
+          "a": "Weil destruktive oder neuartige Aktionen weitreichendere Ausfälle verursachen können. Das Pattern automatisiert sichere, primär lesende Diagnosen und sichert jeden Schreibvorgang durch eine menschliche Freigabe und ein geprüftes Runbook ab."
+        },
+        {
+          "q": "Wie reduziert es Alert Fatigue?",
+          "a": "Eine Correlation Engine dedupliziert und gruppiert zusammenhängende Signale zu einem einzigen Incident, sodass ein zugrunde liegender Fehler nur eine Benachrichtigung (Page) anstelle von Dutzenden redundanter Alarme auslöst."
+        },
+        {
+          "q": "Was passiert, wenn eine Remediation fehlschlägt?",
+          "a": "Ein Evaluator vergleicht die Ergebnisse mit den erwarteten Health-Signalen und löst einen sicheren, getesteten Rollback aus, während die gesamte Timeline im Audit-Trail für die Post-Mortem-Analyse erfasst wird."
+        }
+      ]
+    },
+    "ja": {
+      "name": "オペレーションセンター",
+      "summary": "オペレーションセンターは、監視シグナルやアラートを監視し、それらを関連付けてトリアージし、可能性の高い根本原因を診断して、検証済みのランブックによる修復のみを実行する、エージェント型AIOpsシステムです。破壊的なアクションや新しいアクションは、人間の承認を必要とするように制限します。安全な読み取り主体の診断を自動化する一方で、リスクの高い書き込みアクションをオンコールエンジニアにエスカレーションすることで、アラート疲れを軽減し、平均修復時間（MTTR）を短縮します。すべてのアクションは監査可能で、取り消し可能です。成功の尺度は、自動化の量ではなく、MTTR、誤アクション率、エスカレーション精度によって誠実に測定されます。",
+      "keyConcepts": [
+        "読み取り主体の診断は自動的に実行されます。書き込みや破壊的なアクションには、明示的な人間の承認ゲートが必要です。",
+        "アラートの関連付けにより、ノイズの多い冗長なシグナルを単一のインシデントに集約し、アラート疲れを軽減します。",
+        "修復は、安全なロールバック経路を備えた、検証済みかつバージョン管理されたランブックに限定され、即興のアクションは決して行われません。",
+        "すべての意思決定とアクションは、レビューと学習のために、不変の監査証跡に記録されます。"
+      ],
+      "definition": "オペレーションセンターアーキテクチャは、アラートをトリアージし、根本原因を診断し、承認されたランブック修復のみを実行する一方で、リスクの高いアクションを人間の承認ゲートで制限する、エージェント型AIOpsパターンです。",
+      "architecture": [
+        "シグナルは、異種混在する監視ツールからのメトリクス、ログ、トレース、アラートを共通のイベントスキーマに統合する、取り込みおよび正規化レイヤーを介して入力されます。関連付けエンジンは、関連するシグナルをサービス、時間枠、依存関係グラフごとにグループ化し、単一の根本的な障害が、数十件の重複する呼び出しではなく、1つのインシデントとして表面化するようにします。",
+        "トリアージおよび診断エージェントは、関連付けられたインシデントを推論し、読み取り専用ツール（ダッシュボード、最近のデプロイ、トポロジ、過去のインシデント）を介して追加のコンテキストを取得し、信頼度の見積もりとともに可能性の高い根本原因を提案します。ルーターは、深刻度、影響範囲、および一致する検証済みランブックが存在するかどうかに基づいて各インシデントを分類し、自動修復、人間の承認、または直接のエスカレーションのいずれかを選択します。",
+        "修復は、保護されたアクションレイヤーを介して実行されます。ここでは、読み取り主体のステップは自動的に実行されますが、書き込み、再起動、スケーリング、またはロールバックは人間の承認ゲートを通過する必要があります。評価機能は、期待されるヘルスシグナルと結果を照合し、安全なロールバックをトリガーできます。オブザーバビリティと不変の監査証跡がすべてのステップをカバーし、時間の経過とともにランブックとルーティングを改善するフィードバックループを提供します。"
+      ],
+      "flow": [
+        "1. 監視ツールがアラートを発行します。取り込みレイヤーがそれを正規化し、関連付けエンジンが関連するシグナルとマージして1つのインシデントにします。",
+        "2. トリアージエージェントは、最近のデプロイ、トポロジ、ダッシュボード、類似の過去のインシデントなどの読み取り専用コンテキストを使用して、インシデント情報を強化します。",
+        "3. 診断エージェントは、信頼度スコアとともに可能性の高い根本原因を提案し、検証済みのランブックがその症状に一致するかどうかを識別します。",
+        "4. ルーターがパスを決定します。安全な診断を自動実行するか、書き込みアクションに対して人間の承認を要求するか、あるいは新しいケースや信頼度の低いケースをオンコール担当者にエスカレーションします。",
+        "5. 承認された修復がランブックからステップバイステップで実行されます。評価機能がヘルスシグナルを監視し、回復に失敗した場合は自動的にロールバックします。",
+        "6. インシデントが解決されるか人間に引き継がれ、完全なタイムライン、意思決定、およびアクションがレビューのために監査証跡に書き込まれます。"
+      ],
+      "components": [
+        "シグナル取り込みおよび正規化レイヤー",
+        "アラート関連付けおよび重複排除エンジン",
+        "トリアージおよび根本原因診断エージェント",
+        "深刻度およびランブックルーター",
+        "人間の承認ゲートを備えた保護された修復レイヤー",
+        "安全なロールバックを備えた結果評価機能",
+        "不変の監査証跡とオブザーバビリティ"
+      ],
+      "referenceScenario": {
+        "context": "実例として、2つのリージョンにわたって数十のマイクロサービスを実行している中規模のSaaSプロバイダーは、インシデント発生時に冗長なアラートに圧倒され、対応が遅れています。",
+        "scenario": "データベースの部分的なフェイルオーバー中に、オペレーションセンターは、急増したレイテンシー、エラー率、タイムアウトのアラートを単一のインシデントに関連付け、コネクションプールの枯渇を可能性の高い原因として診断し、読み取り専用のチェックを自動的に実行し、検証済みのランブックからプールワーカーを再利用（リサイクル）する前に人間の承認を要求します。",
+        "technology": "監視およびアラートの統合機能が関連付けエンジンとトリアージエージェントにデータを供給します。インシデント管理システムが状態を追跡し、ランブック自動化が承認されたステップを実行します。人間の承認ゲートとガードレールが書き込みアクションを制限し、オブザーバビリティツールがトレースをキャプチャします。",
+        "load": "参照用の計画数値のみ：1日あたり約4,000件の未加工アラートが数百件のインシデントに集約され、重大なイベント発生時には数分以内に数百件のシグナルがピークバーストとして発生します。",
+        "results": "保証値ではなく、測定すべき参照目標：関連付けによる重複呼び出しの削減、ランブック対象インシデントのMTTR短縮、およびすべての書き込みをゲート制限することによる誤アクション率のほぼゼロ維持を目指します。信頼する前に、すべての数値を独自のベースラインに対して検証してください。"
+      },
+      "benefits": [
+        "関連付けと重複排除により、オンコールスタッフのアラート疲れと呼び出し量が大幅に削減されます。",
+        "安全な読み取り主体の診断を自動化することで、十分に理解されているインシデントの平均修復時間が短縮されます。",
+        "人間の承認ゲートにより、低リスクの修復を迅速化しつつ、破壊的なアクションの安全性を維持します。",
+        "完全な監査証跡により、ポストモーテム（事後分析）、コンプライアンス、および継続的なランブックの改善が向上します。"
+      ],
+      "risks": [
+        "信頼度スコアを過信すると、誤った診断によって不適切な修復が実行される可能性があります。",
+        "検証済みのランブックを超えて自動化すると、テストされていない新しいアクションによって、より広範囲の障害が発生するリスクがあります。",
+        "関連付けの調整が不十分だと、無関係なインシデントがマージされたり、重複の集約に失敗したりする可能性があります。",
+        "承認ゲート疲れにより、エンジニアが実際のレビューを行わずに、要求を形骸的に承認（ラバースタンプ）してしまう可能性があります。"
+      ],
+      "failureModes": [
+        "アラートストームが関連付け処理を圧倒し、1つの巨大なインシデントまたは大量の断片化されたインシデントが発生します。",
+        "欠陥のあるランブックが有害なアクションを実行し、評価機能がそれを検出してロールバックすることに失敗します。",
+        "エージェントがすべてをエスカレーションしてしまい、解消するはずだったアラート疲れを再発させます。",
+        "古いトポロジやコンテキストデータにより、診断が誤った根本原因に導かれます。"
+      ],
+      "lessons": [
+        "デフォルトで読み取り主体の自動化を行い、すべての書き込みまたは破壊的なアクションには人間の承認を必須とします。",
+        "テスト済みの安全なロールバック経路を備えた、検証済みかつバージョン管理されたランブックの範囲を超えて自動修復を行わないでください。",
+        "自動化の量を誇るのではなく、MTTRと誤アクション率を誠実に測定してください。",
+        "関連付けの品質に早期に投資してください。ノイズの多いインシデントは、診断の精度と人間の信頼の両方を損ないます。"
+      ],
+      "kpis": [
+        {
+          "metric": "平均修復時間（MTTR）",
+          "note": "ランブック対象のインシデントとエスカレーションされたインシデントを分けて追跡します。良好な状態とは、他での退行（デグレード）を伴わずに、対象ケースの数値が着実に低下している状態です。"
+        },
+        {
+          "metric": "誤アクション率",
+          "note": "誤っていた、または有害であった自動修復の割合。良好な状態とは、厳格な書き込みアクションのゲート制限によって維持される、ほぼゼロに近い数値です。"
+        },
+        {
+          "metric": "アラートからインシデントへの圧縮率",
+          "note": "未加工アラートに対する関連付けられたインシデントの比率。良好な状態とは、実際に発生している個別の問題を隠すことなく、呼び出しが大幅に減少している状態です。"
+        },
+        {
+          "metric": "エスカレーション精度",
+          "note": "実際に人間を必要としたエスカレーションの割合。良好な状態とは、過剰なエスカレーションによる疲弊と、リスクの高いケースの見落としの両方を回避できている状態です。"
+        },
+        {
+          "metric": "ロールバック成功率",
+          "note": "失敗した修復のうち、安全な状態にクリーンにロールバックされた割合。良好な状態とは、後を引く副作用がなく、一貫して高い数値を維持している状態です。"
+        }
+      ],
+      "scaling": [
+        "インシデント量が水平方向にスケールするように、サービスドメインまたはリージョンごとに関連付けとルーティングを分割します。",
+        "新しい自動化を安全に追加できるように、ランブックのバージョンを管理し、個別にテスト可能な状態を維持します。",
+        "監査の忠実性を失うことなくアラートストームを乗り切るために、取り込みのレート制限とバックプレッシャーを適用します。",
+        "信頼度が高まるにつれて、ランブックを「提案のみ」から「ゲート付き実行」へと昇格させ、自動化の適用範囲を段階的に拡大します。"
+      ],
+      "examples": [
+        "デプロイによってトリガーされたエラーの急増を1つのインシデントに関連付け、最新リリースのゲート付きロールバックを推奨する。",
+        "読み取り専用のディスク、メモリ、接続の診断を自動実行し、飽和状態のサービスを再利用（リサイクル）するための承認を要求する。",
+        "推測に頼るのではなく、情報を強化したコンテキストとともに、新しい信頼度の低いネットワーク異常をオンコール担当者に直接エスカレーションする。"
+      ],
+      "faqs": [
+        {
+          "q": "なぜエージェントにすべてを自動的に修正させないのですか？",
+          "a": "破壊的または斬新なアクションは、より広範な障害を引き起こす可能性があるためです。このパターンは、安全で読み取り主体の診断を自動化し、すべての書き込みを人間の承認と検証済みのランブックによって制限します。"
+        },
+        {
+          "q": "アラート疲れをどのように軽減するのですか？",
+          "a": "相関エンジンが関連するシグナルを重複排除して単一のインシデントにグループ化するため、1つの根本的な障害に対して、数十の冗長なアラートではなく、1つのページ（呼び出し）が生成されます。"
+        },
+        {
+          "q": "修復が失敗した場合はどうなりますか？",
+          "a": "評価器が結果を期待されるヘルスシグナルと比較し、テスト済みの安全なロールバックをトリガーします。同時に、事後分析（ポストモーテム）レビューのために、全タイムラインが監査証跡に記録されます。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "运维中心",
+      "summary": "运维中心是一个智能体化（agentic）的 AIOps 系统，它监控监控信号和告警，对其进行关联和分诊，诊断可能的根本原因，并仅执行经过审核的运行手册（runbook）修复程序——将破坏性或新颖的操作置于人工审批之后。它通过自动执行安全的、以只读为主的诊断，同时将高风险的写入操作升级给值班工程师，从而减轻告警疲劳并缩短平均恢复时间（MTTR）。每项操作都经过审计且可逆。成功的衡量标准是诚实地评估 MTTR、错误操作率和升级精准度，而不是自动化执行的数量。",
+      "keyConcepts": [
+        "以只读为主的诊断自动运行；写入或破坏性操作需要明确的人工审批关卡。",
+        "告警关联将嘈杂、冗余的信号折叠为单个事件，以减轻疲劳。",
+        "修复操作仅限于经过审核、有版本控制且具备安全回滚机制的运行手册（runbook）——绝不采取即兴操作。",
+        "每一个决策和操作都会记录在不可篡改的审计追踪中，以便进行复盘和学习。"
+      ],
+      "definition": "运维中心架构是一种智能体化（agentic）的 AIOps 模式，它对告警进行分诊、诊断根本原因，并仅运行经批准的运行手册（runbook）修复程序，同时将高风险操作置于人工审批之后。",
+      "architecture": [
+        "信号通过摄入和归一化层进入，该层将来自异构监控工具的指标、日志、追踪和告警统一为通用的事件模式（schema）。关联引擎按服务、时间窗口和依赖关系图对相关信号进行分组，从而使单个底层故障表现为单个事件，而不是数十个重复的呼叫（pages）。",
+        "分诊与诊断智能体对关联的事件进行推理，通过只读工具（仪表板、近期部署、拓扑、历史事件）拉取额外的上下文，并提出可能的根本原因及置信度评估。路由器根据严重程度、爆炸半径以及是否存在匹配且经审核的运行手册（runbook）对每个事件进行分类，然后在自动修复、人工审批或直接升级之间做出选择。",
+        "修复通过受保护的操作层执行，其中以只读为主的步骤自动运行，但任何写入、重启、扩缩容或回滚操作都必须通过人工审批关卡。评估器根据预期的健康信号检查结果，并可触发安全回滚。可观测性和不可篡改的审计追踪贯穿每一步，从而形成反馈闭环，随着时间的推移不断改进运行手册（runbook）和路由机制。"
+      ],
+      "flow": [
+        "1. 监控工具触发告警；摄入层对其进行归一化，关联引擎将其与相关信号合并为单个事件。",
+        "2. 分诊智能体使用只读上下文（近期部署、拓扑、仪表板和类似的过去事件）来丰富事件信息。",
+        "3. 诊断智能体提出可能的根本原因及置信度评分，并确定是否有经审核的运行手册（runbook）与该症状匹配。",
+        "4. 路由器决定路径：自动运行安全诊断、针对写入操作请求人工审批，或者将新颖或低置信度的案例升级给值班人员。",
+        "5. 经批准的修复程序按照运行手册（runbook）逐步运行；评估器监视健康信号，如果恢复失败则自动回滚。",
+        "6. 事件得到解决或移交给人工处理，完整的事件时间线、决策和操作将被写入审计追踪以供复盘。"
+      ],
+      "components": [
+        "信号摄入与归一化层",
+        "告警关联与去重引擎",
+        "分诊与根本原因诊断智能体",
+        "严重程度与运行手册（runbook）路由器",
+        "带有人工审批关卡的受保护修复层",
+        "带有安全回滚机制的结果评估器",
+        "不可篡改的审计追踪与可观测性"
+      ],
+      "referenceScenario": {
+        "context": "一个典型的中型 SaaS 服务商在两个区域运行着数十个微服务，在发生事件时被冗余的告警所淹没，导致响应变慢。",
+        "scenario": "在部分数据库故障转移期间，运维中心将突发的延迟、错误率和超时告警关联为单个事件，诊断出连接池耗尽是可能的原因，自动运行只读检查，并在根据经审核的运行手册（runbook）回收连接池工作线程之前请求人工审批。",
+        "technology": "监控和告警集成向关联引擎和分诊智能体提供数据；事件管理系统跟踪状态；运行手册（runbook）自动化执行经批准的步骤；人工审批关卡和护栏限制写入操作；可观测性工具捕获追踪。",
+        "load": "仅供参考的规划数据：每天大约 4,000 个原始告警折叠为几百个事件，在重大事件期间，几分钟内会出现数百个信号的峰值突发。",
+        "results": "仅供衡量的参考目标，而非保证：旨在通过关联减少重复呼叫，缩短运行手册（runbook）覆盖事件的 MTTR，并通过限制所有写入操作将错误操作率保持在接近零的水平。在依赖任何数据之前，请对照您自己的基线进行验证。"
+      },
+      "benefits": [
+        "关联和去重可大幅减轻值班人员的告警疲劳并减少呼叫量。",
+        "自动执行安全的、以只读为主的诊断可缩短易于理解的事件的平均恢复时间。",
+        "人工审批关卡可确保破坏性操作的安全，同时仍能加速低风险的修复。",
+        "完整的审计追踪可改进事后复盘、合规性以及运行手册（runbook）的持续改进。"
+      ],
+      "risks": [
+        "过度信任置信度评分可能会导致错误的诊断引发不恰当的修复。",
+        "超出经审核的运行手册（runbook）范围进行自动化，可能会因新颖且未经测试的操作而导致更大范围的停机。",
+        "未经良好调优的关联可能会合并无关的事件，或者无法折叠重复的事件。",
+        "审批关卡疲劳可能会促使工程师在没有进行真正审查的情况下对请求进行“橡皮图章”式的盲目批准。"
+      ],
+      "failureModes": [
+        "告警风暴压垮关联引擎，导致产生一个巨大的事件或洪水般的碎片事件。",
+        "存在缺陷的运行手册（runbook）执行了有害操作，而评估器未能检测到并进行回滚。",
+        "智能体将所有事件升级，重新制造了原本旨在消除的告警疲劳。",
+        "过期的拓扑或上下文数据导致诊断走向错误的根本原因。"
+      ],
+      "lessons": [
+        "默认采用以只读为主的自动化，并对每次写入或破坏性操作要求人工审批。",
+        "绝不在经审核、有版本控制且具备经测试的安全回滚路径的运行手册（runbook）之外进行自动修复。",
+        "诚实地衡量 MTTR 和错误操作率，而不是盲目庆祝自动化执行的数量。",
+        "尽早投入资金提高关联质量；嘈杂的事件既会破坏诊断，也会损害人工信任。"
+      ],
+      "kpis": [
+        {
+          "metric": "平均恢复时间（MTTR）",
+          "note": "分别跟踪运行手册（runbook）覆盖的事件与升级的事件；表现良好的特征是覆盖案例的指标稳步下降，且其他地方没有出现退化。"
+        },
+        {
+          "metric": "错误操作率",
+          "note": "错误或有害的自动修复所占的比例；表现良好是接近于零，这需要通过严格限制写入操作来维持。"
+        },
+        {
+          "metric": "告警到事件的压缩率",
+          "note": "原始告警与关联事件的比率；表现良好意味着呼叫次数大幅减少，同时不会隐藏真正独立的问题。"
+        },
+        {
+          "metric": "升级精准度",
+          "note": "真正需要人工介入的升级比例；表现良好是既能避免过度升级带来的疲劳，又不会遗漏高风险案例。"
+        },
+        {
+          "metric": "回滚成功率",
+          "note": "失败的修复中干净回滚到安全状态的比例；表现良好是持续保持高水平且无遗留副作用。"
+        }
+      ],
+      "scaling": [
+        "按服务领域或区域对关联和路由进行分区，以便事件量可以水平扩展。",
+        "保持运行手册（runbook）的版本控制和独立可测试性，以便安全地添加新的自动化。",
+        "对摄入进行限流和背压控制，以便在告警风暴中幸存下来，同时不丢失审计的准确性。",
+        "逐步扩大自动化覆盖范围，随着置信度的提高，将运行手册（runbook）从“仅建议”提升为“受控执行”。"
+      ],
+      "examples": [
+        "将部署触发的错误激增关联为单个事件，并建议对最新版本进行受控回滚。",
+        "自动运行只读的磁盘、内存和连接诊断，然后请求批准以回收饱和的服务。",
+        "将新颖、低置信度的网络异常直接升级给值班人员，并提供丰富的上下文，而不是凭空猜测。"
+      ],
+      "faqs": [
+        {
+          "q": "为什么不让智能体自动修复所有问题？",
+          "a": "因为破坏性或新颖的操作可能会导致更大范围的停机。该模式实现了安全的、以只读为主的诊断自动化，并将每次写入操作都置于人工审批和经过审核的运行手册（runbook）的双重把关之下。"
+        },
+        {
+          "q": "它是如何减少告警疲劳的？",
+          "a": "关联引擎会对相关信号进行去重和分组，并将其归入单个事件中，因此一个底层故障只会产生一次呼叫，而不是数十个冗余告警。"
+        },
+        {
+          "q": "当修复操作出现问题时会发生什么？",
+          "a": "评估器会将结果与预期的健康信号进行对比，并触发安全且经过测试的回滚，同时完整的时间线会被记录在审计追踪中，以便进行事后复盘分析。"
+        }
       ]
     }
   }

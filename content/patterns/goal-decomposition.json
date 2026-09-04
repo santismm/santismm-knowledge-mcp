@@ -1,6 +1,8 @@
 {
   "slug": "goal-decomposition",
-  "aliases": ["PAT-010"],
+  "aliases": [
+    "PAT-010"
+  ],
   "category": "orchestration",
   "updated": "2026-06-21",
   "version": "1.0",
@@ -284,6 +286,342 @@
         {
           "q": "Quando planejar atrapalha mais do que ajuda?",
           "a": "Em metas simples de um único passo onde a próxima ação é óbvia, ou em ambientes que mudam mais rápido do que um plano se mantém válido. Ali, planejar com antecedência adiciona latência e risco de plano desatualizado. Detecte as metas triviais e deixe que pulem o planejador, reservando a decomposição para trabalho realmente de múltiplos passos e dependente."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Décomposition d'objectifs",
+      "summary": "La décomposition d'objectifs consiste à faire en sorte qu'un agent décompose un objectif de haut niveau en un ensemble ordonné de sous-tâches plus petites et gérables — un plan — avant d'agir, puis exécute et surveille ce plan, en replanifiant lorsque des étapes échouent. Le plan explicite devient un artefact inspectable que vous pouvez examiner, valider et déboguer. Utilisez cette approche lorsqu'un objectif nécessite plusieurs étapes dépendantes et que les agents réactifs, qui avancent étape par étape, s'égarent ou bloquent ; évitez-la pour les tâches simples et ponctuelles.",
+      "problem": "Un simple appel de LLM confronté à un objectif large et multi-étapes a tendance à improviser. Les agents réactifs qui choisissent une action à la fois peuvent perdre le fil sur de longs horizons : ils répètent des tâches, ignorent des prérequis ou s'engagent dans des impasses sans réaliser que l'objectif global est désormais inatteignable. Comme aucun plan n'existe sous forme d'artefact, vous ne pouvez pas examiner les étapes prévues avant leur exécution, vous ne pouvez pas savoir si un échec provient d'une mauvaise stratégie ou d'une mauvaise exécution, et vous ne pouvez pas facilement reprendre après une interruption. Le raisonnement de l'agent est implicite, transitoire et difficile à auditer.",
+      "context": "Ce modèle convient aux objectifs qui se décomposent en plusieurs étapes interdépendantes avec un ordre logique — rechercher puis synthétiser, migrer puis vérifier, collecter puis rapprocher puis rapporter. Il suppose que le modèle peut produire un plan raisonnable à partir de l'objectif et des outils disponibles, et que les étapes sont suffisamment observables pour détecter un échec. Il est particulièrement précieux lorsque les étapes sont coûteuses, ont des effets secondaires ou sont difficiles à annuler, de sorte que l'examen du plan avant l'exécution est rentable. Il est peu adapté lorsque l'action suivante est évidente à partir de l'état actuel, ou lorsque l'environnement change si rapidement que tout plan initial devient obsolète avant la deuxième étape.",
+      "solution": [
+        "Divisez l'agent en une phase de planification et une phase d'exécution. Le planificateur lit l'objectif, les outils disponibles et l'état actuel, puis émet un plan explicite et ordonné : une liste (ou un graphe) de sous-tâches avec leurs dépendances et les résultats attendus. Traiter le plan comme un artefact de premier ordre est l'idée centrale — il peut être consigné, présenté à un humain pour approbation, évalué par rapport à des règles et comparé d'une exécution à l'autre. Encodez explicitement les dépendances afin que les sous-tâches indépendantes puissent s'exécuter en parallèle et que les tâches dépendantes attendent leurs entrées, plutôt que d'imposer une séquence linéaire fragile inventée par le modèle.",
+        "Un exécuteur déroule ensuite le plan étape par étape, en transmettant le résultat de chaque étape à la suivante et en le vérifiant par rapport au résultat attendu. Lorsqu'une étape échoue, renvoie un résultat inutilisable ou invalide une hypothèse en aval, redonnez le contrôle au planificateur pour qu'il replanifie à partir de l'état actuel au lieu de continuer aveuglément — cette boucle fermée est ce qui distingue la décomposition robuste de la planification ponctuelle (one-shot). Gardez les plans aussi simples que l'objectif le permet : préférez quelques étapes bien choisies à un arbre profond, limitez la replanification avec un budget pour éviter que l'agent ne boucle indéfiniment, et permettez aux objectifs triviaux de contourner complètement la planification."
+      ],
+      "components": [
+        "Planificateur qui émet un plan ordonné et sensible aux dépendances",
+        "Représentation du plan (liste ou graphe de tâches) sous forme d'artefact inspectable",
+        "Exécuteur qui lance les étapes et transmet les résultats",
+        "Vérification à chaque étape par rapport aux résultats attendus",
+        "Déclencheur de replanification et boucle avec un budget d'étapes/itérations",
+        "Étape d'approbation humaine optionnelle avant l'exécution"
+      ],
+      "benefits": [
+        "Les objectifs à long terme restent cohérents car les étapes prévues sont décidées à l'avance, et non improvisées une par une.",
+        "Le plan explicite est inspectable : il peut être examiné, approuvé, audité et comparé avant l'exécution de tout effet secondaire.",
+        "Les échecs sont plus faciles à localiser — un mauvais plan se distingue d'une mauvaise exécution d'étape.",
+        "Les sous-tâches indépendantes permettent le parallélisme et permettent de reprendre le travail à partir de la dernière étape terminée après une interruption."
+      ],
+      "risks": [
+        "Une décomposition initiale défectueuse se propage : chaque étape en aval hérite d'une hypothèse erronée ou d'un prérequis manquant.",
+        "La sur-planification ajoute de la latence et des coûts pour des objectifs simples qu'un agent réactif résoudrait en une seule étape.",
+        "Les plans deviennent obsolètes dans des environnements qui changent rapidement, ce qui conduit à exécuter une étape basée sur un état du monde dépassé.",
+        "Boucles de replanification illimitées où l'agent réécrit sans cesse le plan sans faire de progrès réels."
+      ],
+      "whenNot": [
+        "L'action suivante est évidente à partir de l'état actuel et une seule étape réactive suffit à résoudre l'objectif.",
+        "L'environnement change plus vite que la durée de validité d'un plan, ce qui rend obsolète toute séquence définie à l'avance.",
+        "Les étapes sont peu coûteuses, réversibles et indépendantes, de sorte que la surcharge liée à la planification l'emporte sur ses avantages."
+      ],
+      "examples": [
+        "Un assistant de recherche planifie la collecte de sources, l'extraction d'affirmations, la vérification croisée, puis la synthèse, en exécutant la collecte de sources en parallèle avant l'étape de synthèse dépendante.",
+        "Un agent de migration de code planifie l'inventaire des utilisations, la transformation des fichiers, l'exécution des tests, puis replanifie l'étape de transformation lorsque l'étape de test révèle un cas limite non pris en compte.",
+        "Un agent de rapprochement de données décompose un objectif de « clôture des comptes » en : extraction des grands livres, normalisation, appariement des écritures et signalement des exceptions, l'appariement étant conditionné par la réussite de la normalisation."
+      ],
+      "kpis": [
+        {
+          "metric": "Taux de réussite des objectifs",
+          "note": "Part des objectifs entièrement atteints de bout en bout ; un bon résultat se traduit par une décomposition surpassant une référence réactive sur les mêmes tâches multi-étapes."
+        },
+        {
+          "metric": "Fréquence de replanification",
+          "note": "Fréquence à laquelle une exécution déclenche une replanification ; une plage saine signifie que la boucle détecte les échecs réels sans s'emballer à chaque étape."
+        },
+        {
+          "metric": "Nombre d'étapes par objectif par rapport au minimum",
+          "note": "Longueur du plan par rapport à un minimum raisonnable ; surveillez la sur-planification qui gonfle le nombre d'étapes pour des objectifs simples."
+        },
+        {
+          "metric": "Taux d'approbation des plans",
+          "note": "Fraction de plans acceptés par les réviseurs ou les contrôles de conformité avant exécution ; des taux faibles signalent une décomposition systématiquement faible."
+        }
+      ],
+      "failureModes": [
+        "Une mauvaise décomposition se propage : une hypothèse initiale erronée corrompt chaque étape dépendante en aval.",
+        "Boucle de replanification : l'agent réécrit le plan de manière répétée sans converger ni progresser.",
+        "Exécution d'un plan obsolète : une étape s'exécute par rapport à un état du monde qui a changé depuis l'élaboration du plan.",
+        "Sur-décomposition : un objectif trivial est divisé en étapes inutiles, ce qui ajoute de la latence, des coûts et de la surface d'échec."
+      ],
+      "lessons": [
+        "Faites du plan un véritable artefact — consignez-le, affichez-le, comparez-le — afin que les échecs soient déboguables plutôt que mystérieux.",
+        "Bouclez toujours la boucle : détectez l'échec d'une étape et replanifiez à partir de l'état actuel au lieu de continuer aveuglément.",
+        "Limitez à la fois la profondeur du plan et la replanification avec des budgets explicites pour éviter que des objectifs simples ne partent en spirale.",
+        "Permettez aux objectifs triviaux de contourner le planificateur ; réservez la décomposition aux travaux véritablement multi-étapes et dépendants."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il d'un agent réactif de style ReAct ?",
+          "a": "Un agent réactif décide d'une action à la fois à partir de l'état actuel, sans plan sous forme d'artefact. La décomposition d'objectifs s'engage à l'avance sur un plan ordonné, rendant les étapes prévues inspectables et l'ordre des dépendances explicite. En pratique, les deux sont souvent combinés : planifier d'abord, puis exécuter de manière réactive au sein de chaque étape et replanifier lorsqu'une étape échoue."
+        },
+        {
+          "q": "Que se passe-t-il lorsqu'une étape échoue au milieu du plan ?",
+          "a": "Redonnez le contrôle au planificateur pour qu'il replanifie à partir de l'état actuel plutôt que de continuer aveuglément. La boucle fermée de replanification est ce qui rend la décomposition robuste. Limitez-la avec un budget afin qu'une étape en échec persistant ne puisse pas déclencher des réécritures infinies sans progrès."
+        },
+        {
+          "q": "Quand la planification nuit-elle plus qu'elle n'aide ?",
+          "a": "Pour des objectifs simples et en une seule étape où l'action suivante est évidente, ou dans des environnements qui changent plus vite que la validité d'un plan. Dans ces cas, la planification préalable ajoute de la latence et un risque de plan obsolète. Détectez les objectifs triviaux et laissez-les contourner le planificateur, en réservant la décomposition aux tâches véritablement multi-étapes et interdépendantes."
+        }
+      ]
+    },
+    "de": {
+      "name": "Goal Decomposition",
+      "summary": "Bei der Goal Decomposition zerlegt ein Agent ein übergeordnetes Ziel vor dem Handeln in eine geordnete Reihe kleinerer, handhabbarer Teilaufgaben – einen Plan –, führt diesen Plan aus, überwacht ihn und plant neu, wenn Schritte fehlschlagen. Der explizite Plan wird zu einem überprüfbaren Artefakt, das Sie reviewen, steuern und debuggen können. Nutzen Sie dieses Pattern, wenn ein Ziel mehrere voneinander abhängige Schritte erfordert und reaktive, schrittweise agierende Agenten abweichen oder ins Stocken geraten; überspringen Sie es bei einfachen Single-Shot-Aufgaben.",
+      "problem": "Ein einzelner LLM-Aufruf, dem ein umfassendes, mehrstufiges Ziel übergeben wird, neigt zum Improvisieren. Reaktive Agenten, die jeweils nur eine Aktion auswählen, können bei langen Zeithorizonten den Faden verlieren: Sie wiederholen Arbeitsschritte, überspringen Voraussetzungen oder laufen in eine Sackgasse, ohne zu merken, dass das Gesamtziel mittlerweile unerreichbar ist. Da kein Plan als Artefakt existiert, können Sie die beabsichtigten Schritte vor ihrer Ausführung nicht überprüfen, nicht feststellen, ob ein Fehler auf eine schlechte Strategie oder eine fehlerhafte Ausführung zurückzuführen ist, und nach einer Unterbrechung nicht einfach fortfahren. Die Argumentation des Agenten ist implizit, flüchtig und schwer zu auditieren.",
+      "context": "Dieses Pattern eignet sich für Ziele, die sich in mehrere voneinander abhängige Schritte mit einer sinnvollen Reihenfolge zerlegen lassen – z. B. erst recherchieren, dann synthetisieren; erst migrieren, dann verifizieren; erst erfassen, dann abgleichen, dann berichten. Es setzt voraus, dass das Modell aus dem Ziel und den verfügbaren Tools einen vernünftigen Plan erstellen kann und dass die Schritte ausreichend beobachtbar sind, um Fehler zu erkennen. Es ist besonders wertvoll, wenn Schritte kostspielig sind, Nebenwirkungen haben oder schwer rückgängig zu machen sind, sodass sich eine Überprüfung des Plans vor der Ausführung auszahlt. Es ist ungeeignet, wenn die nächste Aktion aus dem aktuellen Zustand offensichtlich ist oder wenn sich die Umgebung so schnell ändert, dass jeder im Voraus erstellte Plan bereits vor dem zweiten Schritt veraltet ist.",
+      "solution": [
+        "Teilen Sie den Agenten in eine Planungsphase und eine Ausführungsphase auf. Der Planer liest das Ziel, die verfügbaren Tools sowie den aktuellen Zustand und gibt einen expliziten, geordneten Plan aus: eine Liste (oder einen Graphen) von Teilaufgaben mit ihren Abhängigkeiten und erwarteten Ergebnissen. Den Plan als First-Class-Artefakt zu behandeln, ist die Kernidee – er kann protokolliert, einem Menschen zur Genehmigung vorgelegt, mit Richtlinien abgeglichen und über verschiedene Durchläufe hinweg verglichen (diffed) werden. Codieren Sie Abhängigkeiten explizit, sodass unabhängige Teilaufgaben parallel ausgeführt werden können und abhängige auf ihre Eingaben warten, anstatt eine fragile lineare Sequenz zu erzwingen, die das Modell erfunden hat.",
+        "Ein Executor führt den Plan anschließend Schritt für Schritt aus, leitet das Ergebnis jedes Schritts weiter und gleicht es mit der erwarteten Ausgabe des Schritts ab. Wenn ein Schritt fehlschlägt, ein unbrauchbares Ergebnis liefert oder eine nachgelagerte Annahme entkräftet, übergeben Sie die Kontrolle wieder an den Planer, um ausgehend vom aktuellen Zustand neu zu planen, anstatt blind fortzufahren – dieser geschlossene Regelkreis unterscheidet eine robuste Dekomposition von einer einmaligen Planung (One-Shot Planning). Halten Sie Pläne so flach, wie es das Ziel erlaubt: Bevorzugen Sie wenige, gut gewählte Schritte gegenüber einem tiefen Baum, begrenzen Sie die Neuplanung durch ein Budget, damit der Agent nicht in Endlosschleifen gerät, und lassen Sie triviale Ziele die Planung komplett umgehen."
+      ],
+      "components": [
+        "Planer, der einen geordneten, abhängigkeitsbewussten Plan ausgibt",
+        "Plandarstellung (Aufgabenliste oder Aufgabengraph) als überprüfbares Artefakt",
+        "Executor, der Schritte ausführt und Ergebnisse weiterleitet",
+        "Schrittweise Verifizierung anhand der erwarteten Ausgaben",
+        "Trigger für Neuplanung und Schleife mit einem Schritt-/Iterationsbudget",
+        "Optionaler Freigabeschritt durch einen Menschen vor der Ausführung"
+      ],
+      "benefits": [
+        "Ziele mit langem Zeithorizont bleiben kohärent, da die beabsichtigten Schritte im Voraus festgelegt und nicht einzeln improvisiert werden.",
+        "Der explizite Plan ist überprüfbar: Er kann gereviewt, genehmigt, auditiert und verglichen werden, bevor Nebenwirkungen auftreten.",
+        "Fehler lassen sich leichter lokalisieren – ein schlechter Plan lässt sich von einer fehlerhaften Ausführung eines Schritts unterscheiden.",
+        "Unabhängige Teilaufgaben ermöglichen Parallelisierung und erlauben es, die Arbeit nach einer Unterbrechung ab dem zuletzt abgeschlossenen Schritt wieder aufzunehmen."
+      ],
+      "risks": [
+        "Eine fehlerhafte anfängliche Dekomposition pflanzt sich fort: Jeder nachfolgende Schritt übernimmt eine falsche Annahme oder eine fehlende Voraussetzung.",
+        "Übermäßige Planung (Over-Planning) erhöht die Latenz und die Kosten bei einfachen Zielen, die ein reaktiver Agent in einem einzigen Schritt erledigen würde.",
+        "Pläne veralten in sich schnell verändernden Umgebungen, sodass ein Schritt auf Basis eines veralteten Weltzustands ausgeführt wird.",
+        "Unbegrenzte Neuplanungsschleifen, in denen der Agent den Plan wiederholt umschreibt, ohne echten Fortschritt zu erzielen."
+      ],
+      "whenNot": [
+        "Die nächste Aktion ist aus dem aktuellen Zustand offensichtlich und ein einzelner reaktiver Schritt löst das Ziel.",
+        "Die Umgebung ändert sich schneller, als ein Plan gültig bleibt, wodurch jede im Voraus geplante Sequenz veraltet.",
+        "Schritte sind kostengünstig, umkehrbar und unabhängig, sodass der Planungsaufwand den Nutzen übersteigt."
+      ],
+      "examples": [
+        "Ein Forschungsassistent plant die Schritte Quellen-sammeln, Behauptungen-extrahieren, Gegenprüfung und anschließende Synthese, wobei die Quellensammlung parallel vor dem abhängigen Syntheseschritt ausgeführt wird.",
+        "Ein Code-Migrations-Agent plant die Schritte Verwendungen-inventarisieren, Dateien-transformieren, Tests-ausführen und plant den Transformationsschritt neu, wenn der Testschritt einen übersehenen Sonderfall aufdeckt.",
+        "Ein Datenabgleichs-Agent zerlegt das Ziel 'Bücher schließen' in Hauptbücher-abrufen, Normalisieren, Einträge-abgleichen und Ausnahmen-kennzeichnen, wobei der Abgleich erst nach erfolgreicher Normalisierung erfolgt."
+      ],
+      "kpis": [
+        {
+          "metric": "Zielerreichungsquote",
+          "note": "Anteil der vollständig erreichten End-to-End-Ziele; ein gutes Ergebnis zeigt sich darin, dass die Dekomposition eine reaktive Baseline bei denselben mehrstufigen Aufgaben übertrifft."
+        },
+        {
+          "metric": "Neuplanungshäufigkeit",
+          "note": "Wie oft ein Durchlauf eine Neuplanung auslöst; ein gesunder Bereich bedeutet, dass die Schleife echte Fehler abfängt, ohne bei jedem Schritt ins Stocken zu geraten."
+        },
+        {
+          "metric": "Schritte pro Ziel im Vergleich zum Minimum",
+          "note": "Planlänge im Verhältnis zu einem sinnvollen Minimum; achten Sie auf Over-Planning, das die Anzahl der Schritte bei einfachen Zielen unnötig aufbläht."
+        },
+        {
+          "metric": "Freigabequote für Pläne",
+          "note": "Anteil der Pläne, die vor der Ausführung von Reviewern oder Richtlinienprüfungen akzeptiert werden; niedrige Quoten weisen auf eine systematisch schwache Dekomposition hin."
+        }
+      ],
+      "failureModes": [
+        "Fehlerhafte Dekomposition pflanzt sich fort: Eine falsche frühe Annahme beeinträchtigt jeden nachfolgenden abhängigen Schritt.",
+        "Neuplanungsschleife: Der Agent schreibt den Plan wiederholt um, ohne zu konvergieren oder Fortschritte zu erzielen.",
+        "Ausführung eines veralteten Plans: Ein Schritt wird auf Basis eines Weltzustands ausgeführt, der sich seit der Erstellung des Plans geändert hat.",
+        "Über-Dekomposition: Ein triviales Ziel wird in unnötige Schritte zerlegt, was Latenz, Kosten und die Fehleranfälligkeit erhöht."
+      ],
+      "lessons": [
+        "Machen Sie den Plan zu einem echten Artefakt – protokollieren Sie ihn, zeigen Sie ihn an, vergleichen Sie ihn –, damit Fehler debuggbar und nicht rätselhaft sind.",
+        "Schließen Sie immer den Regelkreis: Erkennen Sie das Fehlschlagen von Schritten und planen Sie ausgehend vom aktuellen Zustand neu, anstatt blind fortzufahren.",
+        "Begrenzen Sie sowohl die Plantiefe als auch die Neuplanung durch explizite Budgets, um zu verhindern, dass einfache Ziele aus dem Ruder laufen.",
+        "Lassen Sie triviale Ziele den Planer umgehen; reservieren Sie die Dekomposition für wirklich mehrstufige, voneinander abhängige Aufgaben."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies von einem reaktiven Agenten im ReAct-Stil?",
+          "a": "Ein reaktiver Agent entscheidet jeweils eine Aktion auf Basis des aktuellen Zustands, ohne einen Plan als Artefakt zu haben. Goal Decomposition legt im Voraus einen geordneten Plan fest, wodurch die beabsichtigten Schritte überprüfbar und die Abhängigkeiten explizit werden. In der Praxis werden beide Ansätze oft kombiniert: Zuerst wird geplant, dann wird innerhalb jedes Schritts reaktiv ausgeführt und bei einem Fehlschlag neu geplant."
+        },
+        {
+          "q": "Was passiert, wenn ein Schritt mitten im Plan fehlschlägt?",
+          "a": "Übergeben Sie die Kontrolle wieder an den Planer, um ausgehend vom aktuellen Zustand neu zu planen, anstatt blind fortzufahren. Der geschlossene Regelkreis der Neuplanung macht die Dekomposition robust. Begrenzen Sie diesen durch ein Budget, damit ein dauerhaft fehlschlagender Schritt keine endlosen Umschreibungen ohne Fortschritt auslöst."
+        },
+        {
+          "q": "Wann schadet die Planung mehr, als sie nützt?",
+          "a": "Bei einfachen, einstufigen Zielen, bei denen die nächste Aktion offensichtlich ist, oder in Umgebungen, die sich schneller ändern, als ein Plan gültig bleibt. Dort führt eine Vorabplanung zu zusätzlicher Latenz und dem Risiko veralteter Pläne. Erkennen Sie triviale Ziele und lassen Sie diese den Planer umgehen, während Sie die Dekomposition für echte mehrstufige, voneinander abhängige Aufgaben reservieren."
+        }
+      ]
+    },
+    "ja": {
+      "name": "ゴール分解（Goal Decomposition）",
+      "summary": "ゴール分解（Goal Decomposition）では、エージェントが行動を起こす前に、高レベルのゴールを処理可能な小さなサブタスクの順序付きセット（計画）に分解します。その後、その計画を実行および監視し、ステップが失敗した場合には再計画を行います。明示的な計画は、レビュー、ゲート制御、デバッグが可能な「検査可能なアーティファクト」になります。このパターンは、ゴールに複数の依存ステップが必要であり、その場しのぎで一歩ずつ進むリアクティブなエージェントでは方向性を見失ったり失速したりする場合に使用します。単純なワンショットのタスクではスキップしてください。",
+      "problem": "広範で複数ステップにわたるゴールを1回のLLM呼び出しに委ねると、その場しのぎの対応になりがちです。一度に1つのアクションを選択するリアクティブなエージェントは、長期的な展望において文脈を見失う傾向があります。同じ作業を繰り返したり、前提条件をスキップしたり、全体の目標がすでに達成不可能になっていることに気づかずに袋小路に入り込んだりします。計画がアーティファクトとして存在しないため、実行前に予定されているステップをレビューできず、失敗の原因が戦略の誤りなのか実行の誤りなのかを判断することもできず、中断後に簡単に再開することもできません。エージェントの推論は暗黙的かつ一時的であり、監査が困難です。",
+      "context": "このパターンは、意味のある順序を持つ、相互に依存する複数のステップに分解できるゴール（「調査してから統合する」、「移行してから検証する」、「収集してから照合し、報告する」など）に適しています。モデルがゴールと利用可能なツールから妥当な計画を作成でき、各ステップが失敗を検知できるほど十分に観察可能であることを前提としています。ステップのコストが高く、副作用があり、または取り消しが困難な場合に最も価値を発揮し、実行前に計画をレビューするメリットが大きくなります。現在の状態から次のアクションが明白である場合や、環境の変化が非常に速く、事前に立てた計画が2番目のステップに進む前に陳腐化してしまう場合には適していません。",
+      "solution": [
+        "エージェントを計画フェーズと実行フェーズに分割します。プランナーはゴール、利用可能なツール、および現在の状態を読み取り、明示的で順序付けられた計画（依存関係と期待される出力を伴うサブタスクのリストまたはグラフ）を出力します。計画を第一級のアーティファクトとして扱うことが核心的なアイデアです。これにより、ログへの記録、人間による承認のための提示、ポリシーに照らしたスコアリング、実行間での差分（diff）比較が可能になります。モデルが考案した脆弱な線形シーケンスを強制するのではなく、依存関係を明示的にエンコードすることで、独立したサブタスクを並行して実行し、依存関係のあるサブタスクは入力が揃うまで待機できるようにします。",
+        "次に、エグゼキューターが計画をステップバイステップで実行し、各ステップの結果を次のステップに送りながら、そのステップの期待される出力と照合します。ステップが失敗したとき、使用不可能な結果を返したとき、または下流の前提条件を無効にしたときは、盲目的に実行を続けるのではなく、制御をプランナーに戻して現在の状態から再計画を行います。このクローズドループこそが、堅牢な分解とワンショットの計画を分ける要素です。計画はゴールが許す限り浅く保ちます。深いツリー構造よりも、厳選された少数のステップを優先し、エージェントが無限ループに陥らないよう予算（バジェット）で再計画を制限し、些細なゴールは計画プロセスを完全にバイパスできるようにします。"
+      ],
+      "components": [
+        "依存関係を認識した順序付きの計画を出力するプランナー",
+        "検査可能なアーティファクトとしての計画表現（タスクリストまたはタスクグラフ）",
+        "ステップを実行し、結果を転送するエグゼキューター",
+        "期待される出力に対するステップごとの検証",
+        "ステップ/反復の予算制限を伴う再計画トリガーおよびループ",
+        "実行前のオプションの人による承認ゲート"
+      ],
+      "benefits": [
+        "予定されているステップがその場しのぎで一つずつ決定されるのではなく、事前に決定されるため、長期的なゴールの一貫性が維持されます。",
+        "明示的な計画は検査可能です。副作用が発生する前に、レビュー、承認、監査、および差分比較を行うことができます。",
+        "失敗箇所の特定が容易になります。不適切な計画と、不適切なステップ実行を区別できます。",
+        "独立したサブタスクにより並行処理が可能になり、中断が発生した場合でも最後に完了したステップから作業を再開できます。"
+      ],
+      "risks": [
+        "初期段階の分解に欠陥があるとそれが伝播します。下流のすべてのステップが、誤った前提条件や欠落した前提条件を引き継ぐことになります。",
+        "過剰な計画（オーバープランニング）は、リアクティブなエージェントなら1ステップで完了できるような単純なゴールにおいて、遅延とコストを増加させます。",
+        "変化の速い環境では計画が陳腐化し、古い世界の状態に基づいたままステップが実行されてしまう可能性があります。",
+        "エージェントが実際の進捗を生まないまま計画を繰り返し書き換える、制限のない再計画ループが発生するリスクがあります。"
+      ],
+      "whenNot": [
+        "現在の状態から次のアクションが明白であり、単一のリアクティブなステップでゴールを解決できる場合。",
+        "計画の有効性が維持されるよりも早く環境が変化し、事前のシーケンスが陳腐化してしまう場合。",
+        "ステップが低コストで、取り消し可能であり、かつ独立しているため、計画に伴うオーバーヘッドがそのメリットを上回る場合。"
+      ],
+      "examples": [
+        "リサーチアシスタントが「情報源の収集」、「主張の抽出」、「クロスチェック」、「統合」を計画し、依存関係のある統合ステップの前に、情報源の収集を並行して実行します。",
+        "コード移行エージェントが「使用状況のインベントリ作成」、「ファイルの変換」、「テストの実行」を計画し、テストステップで見落とされていたエッジケースが明らかになった際に、変換ステップを再計画します。",
+        "データ照合エージェントが「決算」というゴールを「元帳の取得」、「正規化」、「エントリーの照合」、「例外のフラグ立て」に分解し、正規化の成功を条件として照合を実行します。"
+      ],
+      "kpis": [
+        {
+          "metric": "ゴール達成率",
+          "note": "エンドツーエンドで完全に達成されたゴールの割合。同じ複数ステップのタスクにおいて、ゴール分解がリアクティブなベースラインを上回っている状態が良好とみなされます。"
+        },
+        {
+          "metric": "再計画の頻度",
+          "note": "実行時に再計画がトリガーされる頻度。健全な範囲とは、すべてのステップで混乱（スラッシング）することなく、ループが実際の失敗を捉えている状態を指します。"
+        },
+        {
+          "metric": "ゴールあたりのステップ数と最小ステップ数の比較",
+          "note": "妥当な最小値に対する計画の長さ。単純なゴールにおいてステップ数を膨らませてしまう過剰な計画（オーバープランニング）に注意してください。"
+        },
+        {
+          "metric": "計画承認の合格率",
+          "note": "実行前にレビュー担当者またはポリシーチェックによって承認された計画の割合。合格率が低い場合は、システム的に分解の精度が低いことを示しています。"
+        }
+      ],
+      "failureModes": [
+        "不適切な分解の伝播：初期段階の誤った前提条件が、下流のすべての依存ステップを損なうこと。",
+        "再計画ループ：エージェントが収束や進捗を得られないまま、計画を繰り返し書き換えること。",
+        "陳腐化した計画の実行：計画作成後に変化した世界の状態に対してステップが実行されること。",
+        "過剰な分解：些細なゴールが必要のないステップに分割され、遅延、コスト、および障害発生領域が増加すること。"
+      ],
+      "lessons": [
+        "計画を実際のアーティファクト（ログへの記録、表示、差分比較など）にすることで、失敗の原因を不可解なものにせず、デバッグ可能にします。",
+        "常にループを閉じます。盲目的に継続するのではなく、ステップの失敗を検知し、現在の状態から再計画を行います。",
+        "浅いゴールがスパイラルに陥るのを防ぐため、計画の深さと再計画の両方に明示的な予算（バジェット）を設定して制限します。",
+        "些細なゴールはプランナーをスキップできるようにします。分解は、真に複数ステップに及び、依存関係のある作業に限定して使用します。"
+      ],
+      "faqs": [
+        {
+          "q": "リアクティブなReActスタイルのエージェントとはどのように違うのですか？",
+          "a": "リアクティブなエージェントは、計画をアーティファクトとして持たず、現在の状態から一度に1つのアクションを決定します。ゴール分解（Goal Decomposition）では、事前に順序付けられた計画を確定させるため、予定されているステップが検査可能になり、依存関係の順序が明示的になります。実際には、これら2つは組み合わせて使用されることが多く、最初に計画を立て、各ステップ内ではリアクティブに実行し、ステップが失敗したときに再計画を行います。"
+        },
+        {
+          "q": "計画の途中でステップが失敗した場合はどうなりますか？",
+          "a": "盲目的に継続するのではなく、制御をプランナーに戻して現在の状態から再計画を行います。このクローズドな再計画ループこそが、分解を堅牢にする要素です。継続的に失敗するステップが進捗のないまま無限に書き換えをトリガーしないよう、予算（バジェット）を設定して制限してください。"
+        },
+        {
+          "q": "計画を立てることが、メリットよりもデメリットをもたらすのはどのような場合ですか？",
+          "a": "次のアクションが明白な、単純な単一ステップのゴールや、計画の有効性が維持されるよりも早く変化する環境においてです。そのようなケースでは、事前の計画立案はレイテンシーを増大させ、計画が陳腐化するリスクを生みます。些細なゴールを検出し、プランナーをバイパスさせるようにして、分解（Decomposition）は真に複数ステップで依存関係のある作業にのみ残しておきます。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "目标分解",
+      "summary": "目标分解让智能体在行动之前，将高层目标拆分为一组有序的、易于处理的子任务（即计划），然后执行并监控该计划，在步骤失败时重新规划。显式计划会成为一个可检查的产物，供您进行评审、把关和调试。当目标需要多个相互依赖的步骤，且反应式、逐步执行的智能体容易偏离方向或停滞不前时，请使用此模式；对于简单的单次任务，请跳过此模式。",
+      "problem": "当单个 LLM 调用被赋予一个宽泛的多步骤目标时，往往会即兴发挥。一次只选择一个动作的反应式智能体在面对长周期任务时可能会迷失方向：它们会重复工作、遗漏前提条件，或者在没有意识到整体目标已无法实现的情况下陷入死胡同。由于没有作为产物的计划存在，您无法在运行前评审预期的步骤，无法判断失败是源于糟糕的策略还是糟糕的执行，也无法在中断后轻松恢复。智能体的推理是隐式的、瞬态的，且难以审计。",
+      "context": "此模式适用于可分解为多个具有明确顺序且相互依赖的步骤的目标——例如“先研究后综合”、“先迁移后验证”、“先收集后对账再报告”。它假设模型能够根据目标和可用工具制定出合理的计划，并且步骤具有足够的可见性以检测失败。在步骤成本高昂、会产生副作用或难以撤销的情况下，此模式最具价值，因为在执行前评审计划是值得的。如果根据当前状态下一步行动显而易见，或者环境变化极快以至于任何预先制定的计划在执行第二步之前就已经过时，则不适合使用此模式。",
+      "solution": [
+        "将智能体拆分为规划阶段和执行阶段。规划器读取目标、可用工具和当前状态，并输出一个显式的、有序的计划：包含子任务及其依赖关系和预期输出的列表（或图）。将计划视为一等公民（first-class artifact）是核心思想——它可以被记录、展示给人工审批、根据策略进行评分，以及在不同运行之间进行差异对比（diff）。显式地对依赖关系进行编码，以便独立的子任务可以并行运行，而有依赖关系的子任务则等待其输入，而不是强行采用模型凭空捏造的脆弱线性顺序。",
+        "然后，执行器逐步运行计划，将每一步的结果向前传递，并对照该步骤的预期输出进行检查。当某个步骤失败、返回不可用的内容或使下游假设失效时，将控制权交回给规划器，以便从当前状态重新规划，而不是盲目继续——这种闭环正是将鲁棒的分解与单次规划区分开来的关键。保持计划在目标允许的范围内尽可能浅显：相比于深层树状结构，更倾向于少数精心选择的步骤；通过预算限制重新规划，以防止智能体陷入无限循环；并允许简单的目标完全绕过规划。"
+      ],
+      "components": [
+        "输出有序且感知依赖关系的计划的规划器",
+        "作为可检查产物的计划表示（任务列表或任务图）",
+        "运行步骤并转发结果的执行器",
+        "对照预期输出进行逐步验证",
+        "带有步骤/迭代预算的重新规划触发器和循环",
+        "执行前可选的人工审批关卡"
+      ],
+      "benefits": [
+        "长周期目标能够保持连贯性，因为预期的步骤是预先决定的，而不是一次一个即兴发挥。",
+        "显式计划是可检查的：在产生任何副作用之前，可以对其进行评审、批准、审计和差异对比。",
+        "失败更容易定位——糟糕的计划与糟糕的步骤执行是可以区分开来的。",
+        "独立的子任务展现了并行性，并允许在中断后从上一个已完成的步骤恢复工作。"
+      ],
+      "risks": [
+        "有缺陷的初始分解会产生连锁反应：每一个下游步骤都会继承错误的假设或缺失的前提条件。",
+        "过度规划会增加简单目标的延迟和成本，而反应式智能体本可以在一步内完成这些目标。",
+        "在快速变化的环境中，计划会过时，导致执行步骤时仍基于陈旧的世界状态。",
+        "无限制的重新规划循环，即智能体反复重写计划而没有取得实质性进展。"
+      ],
+      "whenNot": [
+        "根据当前状态，下一步行动显而易见，且单个反应式步骤即可解决目标。",
+        "环境变化的速度快于计划保持有效的时间，导致任何预先制定的顺序都会过时。",
+        "步骤成本低廉、可逆且相互独立，因此规划的开销超过了其带来的收益。"
+      ],
+      "examples": [
+        "研究助手规划“收集来源”、“提取主张”、“交叉核对”然后“综合”，在依赖综合的步骤之前并行运行来源收集。",
+        "代码迁移智能体规划“盘点使用情况”、“转换文件”、“运行测试”，并在测试步骤暴露遗漏的边缘情况时，重新规划转换步骤。",
+        "数据对账智能体将“结账”目标分解为“拉取账簿”、“归一化”、“匹配条目”和“标记异常”，其中匹配步骤以成功归一化为前提。"
+      ],
+      "kpis": [
+        {
+          "metric": "目标完成率",
+          "note": "端到端完全实现的目标比例；优秀的表现意味着在相同的多步骤任务中，分解模式的效果超越了反应式基线。"
+        },
+        {
+          "metric": "重新规划频率",
+          "note": "一次运行触发重新规划的频率；健康的区间意味着循环能够捕获真正的失败，而不会在每一步都发生剧烈震荡。"
+        },
+        {
+          "metric": "每个目标的步骤数与最小步骤数对比",
+          "note": "计划长度相对于合理最小值的比例；注意防范过度规划导致简单目标的步骤数虚高。"
+        },
+        {
+          "metric": "计划审批通过率",
+          "note": "在执行前被评审员或策略检查接受的计划比例；低通过率表明系统性分解能力较弱。"
+        }
+      ],
+      "failureModes": [
+        "糟糕的分解会产生连锁反应：早期错误的假设会破坏下游的每一个依赖步骤。",
+        "重新规划循环：智能体反复重写计划，而无法收敛或取得进展。",
+        "执行过时的计划：执行某个步骤时，所针对的世界状态自计划制定以来已发生变化。",
+        "过度分解：将一个简单的目标拆分为不必要的步骤，增加了延迟、成本和失败面。"
+      ],
+      "lessons": [
+        "使计划成为真正的产物——记录它、展示它、对比它——这样失败就是可调试的，而不是神秘莫测的。",
+        "始终闭环：检测步骤失败并从当前状态重新规划，而不是盲目继续。",
+        "通过显式预算限制计划深度和重新规划，防止简单的目标陷入无休止的循环。",
+        "允许简单的目标跳过规划器；将分解保留给真正具有多步骤、依赖性的工作。"
+      ],
+      "faqs": [
+        {
+          "q": "这与反应式 ReAct 风格的智能体有什么不同？",
+          "a": "反应式智能体根据当前状态一次决定一个动作，没有作为产物的计划。目标分解则预先确定一个有序的计划，使预期的步骤可检查，且依赖顺序明确。在实践中，两者经常结合使用：先规划，然后在每个步骤中反应式地执行，并在步骤失败时重新规划。"
+        },
+        {
+          "q": "当步骤在计划执行中途失败时会发生什么？",
+          "a": "将控制权交回给规划器，以便从当前状态重新规划，而不是盲目继续。闭环重新规划是使分解具备鲁棒性的关键。通过预算对其进行限制，以防止持续失败的步骤在没有进展的情况下触发无休止的重写。"
+        },
+        {
+          "q": "什么时候规划弊大于利？",
+          "a": "适用于简单的、单步骤的目标（此时下一步行动显而易见），或者适用于变化速度快于计划失效速度的环境。在这些情况下，前期规划会增加延迟和计划过时的风险。检测简单目标并让其绕过规划器，将分解保留给真正多步骤、存在依赖关系的工作。"
         }
       ]
     }

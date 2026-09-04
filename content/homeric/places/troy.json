@@ -136,6 +136,22 @@
         "pt": {
           "label": "Hisarlık (Troia VI / VIIa)",
           "note": "Um tell ocupado por cerca de 3.000 anos, com uma cidadela fortificada do Bronze Final e — desde Korfmann — uma cidade baixa considerável ao redor. Fica onde a Ilíada precisa que uma cidade fique: na planície do Escamandro, à vista do Helesponto, sob o monte Ida, com Tênedos e Imbros ao largo. Os arquivos hititas nomeiam de forma independente uma Wilusa nessa região, que a maioria dos estudiosos equipara a Ἴλιος."
+        },
+        "fr": {
+          "label": "Hisarlık (Troie VI / VIIa)",
+          "note": "Un monticule occupé pendant environ 3 000 ans, doté d'une citadelle fortifiée de l'âge du bronze récent et — depuis Korfmann — d'une importante ville basse tout autour. Il se situe là où l'Iliade exige qu'une ville se trouve : sur la plaine du Scamandre, en vue de l'Hellespont, au pied du mont Ida, avec Ténédos et Imbros au large. Les archives hittites mentionnent indépendamment une Wilusa dans cette région, que la plupart des spécialistes assimilent à Ἴλιος."
+        },
+        "zh": {
+          "label": "希萨尔利克（特洛伊VI / VIIa期）",
+          "note": "一个被占领了约3000年的土丘，拥有一座青铜时代晚期的防御性卫城，并且——自科夫曼以来——周围还有一个规模庞大的下城区。它坐落在《伊利亚特》中城市应该存在的位置：在斯卡曼德罗斯（Scamander）平原上，处于赫勒斯滂的视线内，位于伊达山（Mount Ida）脚下，近海有特涅多斯岛（Tenedos）和伊姆布罗斯岛（Imbros）。赫梯文献档案独立命名了该地区的一个威路萨（Wilusa），大多数学者将其等同于Ἴλιος。"
+        },
+        "de": {
+          "label": "Hisarlık (Troja VI / VIIa)",
+          "note": "Ein rund 3.000 Jahre lang besiedelter Hügel mit einer befestigten spätbronzezeitlichen Zitadelle und – seit Korfmann – einer bedeutenden Unterstadt darum herum. Er liegt genau dort, wo die Ilias eine Stadt benötigt: in der Skamander-Ebene, in Sichtweite des Hellesponts, unter dem Berg Ida, mit Tenedos und Imbros vor der Küste. Hethitische Archive nennen unabhängig davon ein Wilusa in dieser Region, das die meisten Gelehrten mit Ἴλιος gleichsetzen."
+        },
+        "ja": {
+          "label": "ヒサルルク（トロイVI / VIIa）",
+          "note": "約3,000年にわたり居住された丘で、青銅器時代後期の要塞化された城塞があり、コルフマン以降の研究では、その周囲に大規模な下層都市が存在したとされる。『イリアス』において都市が存在すべき場所に位置している。すなわち、スカマンドロス平野にあり、ヘレスポントス海峡を望み、イダ山の麓に位置し、沖合にはテネドス島とインブロス島がある。ヒッタイトの古文書には、この地域にウィルサ（Wilusa）という地名が独自に記録されており、多くの学者がこれをἼλιος（イリオス）と同一視している。"
         }
       }
     },
@@ -175,6 +191,22 @@
         "pt": {
           "label": "Pınarbaşı (identificação abandonada)",
           "note": "A identificação que dominou a erudição europeia por um século, argumentada a partir das fontes junto às quais correm Heitor e Aquiles (Ilíada 22.147–156). As escavações não encontraram aqui uma cidade da Idade do Bronze na escala necessária, e o sítio fica longe demais do mar para os navios encalhados da Ilíada. Permanece no atlas porque errar em público foi justamente o que resolveu a questão troiana. As coordenadas são aproximadas à aldeia."
+        },
+        "fr": {
+          "label": "Pınarbaşı (identification abandonnée)",
+          "note": "L'identification qui a dominé les études européennes pendant un siècle, étayée par les sources près desquelles courent Hector et Achille (Iliade 22.147–156). Les fouilles n'ont révélé aucune ville de l'âge du bronze de l'envergure requise à cet endroit, et le site est trop éloigné de la mer pour les navires tirés au sec de l'Iliade. Il est conservé dans l'atlas car c'est en se trompant publiquement que la question de Troie a été résolue. Les coordonnées sont approximatives par rapport au village."
+        },
+        "zh": {
+          "label": "皮纳尔巴希（已废弃的认定）",
+          "note": "曾主导欧洲学术界一个世纪的认定，其依据是赫克托耳和阿喀琉斯奔跑过的泉水（《伊利亚特》22.147-156）。考古发掘在此未发现所需规模的青铜时代城市，且该遗址距离海洋太远，无法容纳《伊利亚特》中搁浅的船只。它被保留在图册中，是因为公开纠错正是特洛伊问题得以解决的方式。坐标为村庄的近似位置。"
+        },
+        "de": {
+          "label": "Pınarbaşı (aufgegebene Identifizierung)",
+          "note": "Die Identifizierung, die ein Jahrhundert lang die europäische Wissenschaft dominierte, begründet mit den Quellen, an denen Hektor und Achilles vorbeilaufen (Ilias 22,147–156). Ausgrabungen fanden hier keine bronzezeitliche Stadt von der erforderlichen Größe, und der Ort liegt zu weit vom Meer entfernt für die am Strand liegenden Schiffe der Ilias. Sie wird im Atlas beibehalten, weil das öffentliche Irren der Weg war, auf dem die Troja-Frage geklärt wurde. Die Koordinaten beziehen sich näherungsweise auf das Dorf."
+        },
+        "ja": {
+          "label": "ピナルバシュ（放棄された同定）",
+          "note": "ヘクトルとアキレウスが走り抜けた泉（『イリアス』第22巻147–156行）を根拠に、1世紀にわたりヨーロッパの学界を支配した同定。発掘調査では、この場所に求められる規模の青銅器時代の都市は発見されず、また『イリアス』で船を引き上げた海岸からも遠すぎる。公の場で誤りが証明されることこそがトロイ問題の解決につながったため、本地図帳に敢えて残されている。座標は村のおおよその位置を示している。"
         }
       }
     }
@@ -219,6 +251,50 @@
       ],
       "identificationNote": "Aceita: um sítio real com consenso arqueológico e acadêmico. A rubrica pontua 12/12 porque os quatro critérios se satisfazem de forma independente: o texto é específico, a escavação é profunda, o consenso é majoritário e a geografia ao redor encaixa sem forçar nada.",
       "debate": "O que está resolvido é o lugar, não a guerra. Se a destruição de Troia VIIa foi causada por uma coalizão aqueia, se houve algum cerco parecido com o da Ilíada e quanto do mundo do poema é do século VIII e não do XIII continuam questões abertas. As afirmações de Korfmann sobre o tamanho e a importância da cidade baixa receberam críticas duras de colegas em 2001–2002. Este atlas localiza a cidade com confiança alta e não toma posição sobre a historicidade da guerra."
+    },
+    "fr": {
+      "name": "Troie (Ilios)",
+      "summary": "La ville assiégée dans l'Iliade, identifiée depuis 1822 au monticule d'Hisarlık dans le nord-ouest de la Turquie et fouillée en continu depuis 1870. L'identification du lieu est établie ; ce qui s'y est passé ne l'est pas.",
+      "description": [
+        "Troie est le seul lieu de cet atlas où convergent les textes, les fouilles et des archives indépendantes. L'Iliade décrit une ville fortifiée sur une plaine traversée par des rivières, en vue de l'Hellespont et accessible depuis une plage où les navires peuvent être tirés au sec. Hisarlık correspond à cette description, et c'était une véritable forteresse de l'âge du bronze récent : Troie VI et VIIa présentent des murs massifs, une ville basse et des couches de destruction datant à peu près des bons siècles.",
+        "L'histoire de l'identification du site est elle-même instructive. Pendant un siècle, le lieu privilégié fut Pınarbaşı, sur la base d'un détail du texte ; Maclaren proposa Hisarlık en 1822 pour des raisons topographiques et fut ignoré jusqu'à ce que Schliemann y entreprenne des fouilles. Les fouilleurs ultérieurs — Dörpfeld, Blegen, Korfmann — ont presque entièrement remplacé les conclusions de Schliemann tout en confirmant son site.",
+        "Des documents hittites mentionnent un lieu nommé Wilusa dans cette région, ainsi qu'un roi Alaksandu de Wilusa. La plupart des spécialistes acceptent l'équivalence Wilusa = Ἴλιος (Ilios) ; cela fait de Troie la seule cité homérique attestée dans des archives étrangères contemporaines."
+      ],
+      "identificationNote": "Accepté : un site réel faisant l'objet d'un consensus à la fois archéologique et scientifique. La rubrique obtient un score de 12/12 car les quatre critères sont satisfaits de manière indépendante — le texte est précis, les fouilles sont profondes, le consensus est général et la géographie environnante correspond sans nécessiter d'arguments spécieux.",
+      "debate": "Ce qui est établi, c'est le lieu, non la guerre. La question de savoir si la destruction de Troie VIIa a été causée par une coalition achéenne, si un siège semblable à celui de l'Iliade a eu lieu, et quelle part du monde du poème relève du VIIIe siècle plutôt que du XIIIe siècle, reste entièrement ouverte. Les affirmations de Korfmann sur la taille et l'importance de la ville basse ont suscité de vives critiques de la part de ses collègues en 2001-2002. Cet atlas localise la ville avec un niveau de confiance élevé et ne prend pas position sur l'historicité de la guerre."
+    },
+    "de": {
+      "name": "Troja (Ilios)",
+      "summary": "Die von der Ilias belagerte Stadt, die seit 1822 mit dem Hügel von Hisarlık in der nordwestlichen Türkei identifiziert und seit 1870 kontinuierlich ausgegraben wird. Die Identifizierung des Ortes ist geklärt; was dort geschah, ist es nicht.",
+      "description": [
+        "Troja ist der einzige Ort in diesem Atlas, an dem Text, Ausgrabung und unabhängige Archive zusammenlaufen. Die Ilias beschreibt eine von Mauern umgebene Stadt in einer von Flüssen durchzogenen Ebene, in Sichtweite des Hellesponts und erreichbar von einem Strand, an dem Schiffe an Land gezogen werden können. Hisarlık ist ein solcher Ort, und es war eine echte Festung der Spätbronzezeit: Troja VI und VIIa weisen massive Mauern, eine Unterstadt und Zerstörungsschichten in den grob passenden Jahrhunderten auf.",
+        "Die Geschichte der Identifizierung des Ortes ist an sich schon lehrreich. Hundert Jahre lang war Pınarbaşı der bevorzugte Ort, was mit einem Detail des Textes begründet wurde; Maclaren schlug Hisarlık 1822 aus topografischen Gründen vor und wurde ignoriert, bis Schliemann dort grub. Spätere Ausgräber – Dörpfeld, Blegen, Korfmann – ersetzten Schliemanns Schlussfolgerungen fast vollständig, während sie seine Fundstätte bestätigten.",
+        "Hethitische Dokumente beziehen sich auf einen Ort namens Wilusa in dieser Region und auf einen König Alaksandu von Wilusa. Die meisten Gelehrten akzeptieren die Gleichsetzung Wilusa = Ἴλιος (Ilios); dies macht Troja zur einzigen homerischen Stadt, die in einem zeitgenössischen ausländischen Archiv bezeugt ist."
+      ],
+      "identificationNote": "Akzeptiert: eine reale Fundstätte mit sowohl archäologischem als auch wissenschaftlichem Konsens. Die Rubrik erreicht 12/12 Punkte, da alle vier Kriterien unabhängig voneinander erfüllt sind – der Text ist spezifisch, die Ausgrabung ist tiefgehend, der Konsens ist etabliert und die umgebende Geografie stimmt ohne argumentative Verrenkungen überein.",
+      "debate": "Geklärt ist der Ort, nicht der Krieg. Ob die Zerstörung von Troja VIIa durch eine achäische Koalition verursacht wurde, ob eine Belagerung stattfand, die der in der Ilias ähnelt, und wie viel der Welt des Epos eher dem 8. als dem 13. Jahrhundert angehört, bleibt völlig offen. Korfmanns Behauptungen über die Größe und Bedeutung der Unterstadt stießen 2001–2002 auf scharfe Kritik von Kollegen. Dieser Atlas verortet die Stadt mit hoher Zuverlässigkeit und bezieht keine Stellung zur Historizität des Krieges."
+    },
+    "ja": {
+      "name": "トロイ（イリオス）",
+      "summary": "『イリアス』で包囲される都市。1822年以降、トルコ北西部のヒサルルクの丘と同定され、1870年以来継続的に発掘調査が行われている。場所の同定については決着がついているが、そこで何が起きたのかについては未だ解明されていない。",
+      "description": [
+        "トロイは、本地図帳において、文献、発掘調査、そして独立した古文書の記録が一致する唯一の場所である。『イリアス』は、川が交差する平野の上にあり、ヘレスポントス海峡を望み、船を引き上げることができる海岸から到達可能な、城壁に囲まれた都市を描写している。ヒサルルクはまさにそのような場所であり、実際に青銅器時代後期の要塞であった。トロイVIおよびVIIaの遺構からは、巨大な城壁、下層都市、そしてほぼ該当する世紀の破壊層が確認されている。",
+        "この遺跡の同定の歴史それ自体が示唆に富んでいる。100年もの間、テキストの細部を根拠にピナルバシュが有力な候補地とされていた。マクラーレンは1822年に地形学的根拠からヒサルルクを提案したが、シュリーマンがそこを発掘するまで無視されていた。その後の発掘者たち（デルプフェルト、ブレゲン、コルフマン）は、シュリーマンの遺跡を認めつつも、彼の結論をほぼ全面的に覆した。",
+        "ヒッタイトの文書には、この地域にあるウィルサ（Wilusa）と呼ばれる場所と、ウィルサの王アラクサンドゥ（Alaksandu）への言及がある。多くの学者が「ウィルサ ＝ Ἴλιος（イリオス）」という等式を受け入れており、これによりトロイは、同時代の外国の古文書で存在が証明されている唯一のホメロス都市となっている。"
+      ],
+      "identificationNote": "承認：考古学的および学術的な合意が得られている実際の遺跡。4つの基準（テキストの具体性、発掘の深さ、主流派の合意、特別な言い訳を必要としない周囲の地理的一致）がすべて独立して満たされているため、評価基準は12/12の満点となる。",
+      "debate": "決着がついているのは場所であり、戦争ではない。トロイVIIaの破壊がアカイア人の連合軍によるものなのか、『イリアス』に描かれるような包囲戦が実際にあったのか、そして叙事詩の世界のどれほどが紀元前13世紀ではなく紀元前8世紀のものなのかは、すべて未解決のままである。コルフマンの下層都市の規模と重要性に関する主張は、2001年から2002年にかけて同僚たちから激しい批判を浴びた。本地図帳は、高い信頼性をもって都市の位置を特定するが、戦争の歴史性については立場をとらない。"
+    },
+    "zh": {
+      "name": "特洛伊（伊利奥斯）",
+      "summary": "《伊利亚特》中被围困的城市。自1822年起，该城被认定为土耳其西北部的希萨尔利克（Hisarlık）土丘，并自1870年起持续发掘。该地点的认定已成定论，但那里曾发生过什么仍无定论。",
+      "description": [
+        "特洛伊是本图册中唯一一个文献、考古发掘和独立文献档案相吻合的地点。《伊利亚特》描述了一座坐落在河流交汇平原上的有城墙保护的城市，该城处于赫勒斯滂（Hellespont）的视线范围内，且可从一处能拖拉船只的沙滩抵达。希萨尔利克正是这样一个地方，而且它是一座真实的青铜时代晚期要塞：特洛伊VI期和VIIa期展现了宏伟的城墙、下城区以及大致对应世纪的毁灭层。",
+        "该遗址的认定历史本身就极具启发性。一个世纪以来，人们根据文献中的一处细节，普遍认为其所在地是皮纳尔巴希（Pınarbaşı）；麦克拉伦（Maclaren）在1822年基于地形学依据提出了希萨尔利克，但一直被忽视，直到谢里曼（Schliemann）在那里进行挖掘。后来的发掘者——德普费尔德（Dörpfeld）、布莱根（Blegen）、科夫曼（Korfmann）——在确认其遗址的同时，几乎完全推翻了谢里曼的结论。",
+        "赫梯文献提到了该地区一个名为威路萨（Wilusa）的地方，以及威路萨国王阿拉克桑杜（Alaksandu）。大多数学者接受“威路萨 = Ἴλιος（伊利奥斯）”这一等式；这使得特洛伊成为唯一在同时代外国文献档案中得到证实的荷马史诗城市。"
+      ],
+      "identificationNote": "已确认：一个在考古学和学术界均达成共识的真实遗址。该评估指标得分为12/12，因为所有四个标准都独立得到了满足——文献具体、发掘深入、共识属于主流，且周围地理环境完全吻合，无需牵强解释。",
+      "debate": "已成定论的是地点，而非战争。特洛伊VIIa期的毁灭是否由阿开亚联军造成、是否发生过类似于《伊利亚特》中的围城战，以及史诗中的世界有多少属于公元前8世纪而非公元前13世纪，这些问题都悬而未决。科夫曼关于下城区规模和重要性的主张在2001-2002年间遭到了同行的尖锐批评。本图册以极高的置信度对该城市进行了定位，不对战争的历史真实性发表立场。"
     }
   }
 }

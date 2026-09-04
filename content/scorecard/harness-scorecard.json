@@ -24,6 +24,30 @@
         "denominator": "Apenas os resultados que passaram por uma verificação que não compartilha modo de falha com o agente que os produziu. Execuções que terminaram não contam. As que o agente declarou bem-sucedidas também não.",
         "independence": "Um verificador é independente quando pode falhar em entradas nas quais o produtor acerta. Uma regra, um teste, um segundo sistema ou uma pessoa servem. O mesmo modelo a quem se pede que avalie a própria saída não: ele herda os pontos cegos que produziram o erro.",
         "whyNotSuccessfulRuns": "“Execuções bem-sucedidas” é uma autodeclaração, e é o número que todo fornecedor já publica. Conta que o agente termine, que é justamente a única coisa que um harness quebrado ainda faz bem. O custo por resultado corretamente verificado se recusa a mudar até que algo alheio ao agente dê o trabalho por feito."
+      },
+      "fr": {
+        "numerator": "Chaque coût attribuable à l'ensemble d'exécutions : inférence, outils, infrastructure et temps humain consacré à approuver, corriger ou escalader. Les tentatives échouées et abandonnées figurent au numérateur. Elles ont coûté de l'argent et elles ont bien eu lieu.",
+        "denominator": "Uniquement les résultats ayant passé un contrôle qui ne partage pas de mode de défaillance avec l'agent qui les a produits. Les exécutions terminées ne comptent pas. Les exécutions déclarées réussies par l'agent ne comptent pas.",
+        "independence": "Un vérificateur est indépendant lorsqu'il peut échouer sur des entrées pour lesquelles le producteur réussit. Une règle, un test, un second système ou une personne physique sont tous éligibles. Le même modèle invité à évaluer sa propre sortie ne l'est pas : il hérite des angles morts qui ont produit l'erreur.",
+        "whyNotSuccessfulRuns": "Les exécutions réussies relèvent de l'auto-déclaration, et c'est le chiffre que chaque fournisseur publie déjà. Il comptabilise la fin de l'exécution de l'agent, ce qui est la seule chose qu'un harness défaillant sait encore faire. Le coût par résultat correctement vérifié refuse de bouger tant qu'un élément extérieur à l'agent ne confirme pas que le travail est terminé."
+      },
+      "zh": {
+        "numerator": "归属于运行集的所有成本：推理、工具、基础设施，以及用于审批、纠错或升级的人工时间。失败和放弃的尝试都包含在分子中。它们产生了成本，且确实发生过。",
+        "denominator": "仅包含通过校验的结果，且该校验与生成这些结果的智能体不共享相同的失效模式。仅完成的运行不计入其中。智能体自称成功的运行也不计入其中。",
+        "independence": "当验证器在生成器成功的输入上可能判定失败时，该验证器就是独立的。规则、测试、第二系统或人工都符合条件。而通过提示词让同一个模型对自己的输出进行评分则不符合：它会继承导致错误的盲区。",
+        "whyNotSuccessfulRuns": "“成功运行”是一种自我报告，也是每个厂商已经在公布的数据。它计算的是智能体运行结束，而这正是损坏的支撑系统唯一擅长的事。在智能体之外的机制确认工作完成之前，“每个正确验证结果的成本”这一指标是不会有任何改善的。"
+      },
+      "de": {
+        "numerator": "Alle dem Run-Set zuzuordnenden Kosten: Inferenz, Tools, Infrastruktur und die menschliche Arbeitszeit für Freigaben, Korrekturen oder Eskalationen. Fehlgeschlagene und abgebrochene Versuche stehen im Zähler. Sie kosten Geld und sie haben stattgefunden.",
+        "denominator": "Nur Ergebnisse, die eine Prüfung bestanden haben, die keine gemeinsamen Fehlerquellen (Failure Modes) mit dem Agenten teilt, der sie erzeugt hat. Abgeschlossene Runs zählen nicht. Runs, die der Agent als erfolgreich deklariert hat, zählen nicht.",
+        "independence": "Ein Verifizierer ist unabhängig, wenn er bei Eingaben fehlschlagen kann, bei denen der Erzeuger erfolgreich ist. Eine Regel, ein Test, ein zweites System oder eine Person sind alle dafür geeignet. Dasselbe Modell, das aufgefordert wird, seine eigene Ausgabe zu bewerten, ist es nicht: Es erbt die blinden Flecken, die den Fehler verursacht haben.",
+        "whyNotSuccessfulRuns": "Erfolgreiche Runs sind eine Selbsteinschätzung, und das ist die Zahl, die jeder Anbieter bereits veröffentlicht. Sie zählt das Beenden des Agenten, was das Einzige ist, worin ein defektes Harness immer noch gut ist. Die Kosten pro korrekt verifiziertem Ergebnis ändern sich erst, wenn eine Instanz außerhalb des Agenten bestätigt, dass die Arbeit erledigt ist."
+      },
+      "ja": {
+        "numerator": "実行セットに起因するすべてのコスト（推論、ツール、インフラ、および承認、修正、エスカレーションに費やされた人の時間）。失敗した試行や放棄された試行も分子に含まれます。それらにはコストが発生しており、実際に実行されたためです。",
+        "denominator": "成果物を生成したエージェントと共通の失敗モードを持たないチェックに合格した成果物のみ。完了しただけの実行はカウントされません。エージェントが成功したと宣言しただけの実行もカウントされません。",
+        "independence": "検証器（ベリファイア）が独立しているとは、生成器（プロデューサー）が成功したとみなす入力に対して、失敗と判定できる状態を指します。ルール、テスト、別システム、または人間はすべてこれに該当します。自身の出力を評価するようにプロンプトされた同一のモデルは該当しません。エラーを生み出した盲点をそのまま引き継ぐためです。",
+        "whyNotSuccessfulRuns": "「成功した実行」は自己申告であり、すべてのベンダーがすでに公表している数値です。これはエージェントが完了したことをカウントしますが、それこそが壊れたハーネスでも得意とする唯一のことです。「正しく検証された成果物あたりのコスト」は、エージェントの外部にある何かが作業の完了に同意するまで、改善することはありません。"
       }
     }
   },
@@ -93,6 +117,30 @@
           "definition": "Todo custo imputável a um conjunto de execuções — inferência, ferramentas, infraestrutura e o tempo humano gasto aprovando, corrigindo ou escalando — dividido pelo número de resultados que passaram por uma verificação independente.",
           "howToMeasure": "Fixe o conjunto de tarefas e o verificador antes de executar qualquer coisa. Some o custo do conjunto inteiro, tentativas fracassadas incluídas. Divida pelos resultados que o verificador aprovou, não pelas execuções que terminaram.",
           "gamedBy": "Estreitar o que conta como resultado, ou deixar que o próprio relato do agente valha como verificação. As duas coisas encolhem a honestidade do denominador, não o custo do numerador."
+        },
+        "fr": {
+          "name": "Coût par résultat correctement vérifié",
+          "definition": "Chaque coût attribuable à un ensemble d'exécutions — inférence, outils, infrastructure et temps humain consacré à approuver, corriger ou escalader — divisé par le nombre de résultats ayant passé un contrôle indépendant.",
+          "howToMeasure": "Fixez l'ensemble de tâches et le vérificateur avant de lancer quoi que ce soit. Sommez le coût de l'ensemble complet, tentatives échouées incluses. Divisez par les résultats validés par le vérificateur, et non par les exécutions terminées.",
+          "gamedBy": "Restreindre ce qui est considéré comme un résultat, ou laisser le propre rapport de l'agent faire office de vérification. Les deux réduisent l'honnêteté du dénominateur plutôt que le coût du numérateur."
+        },
+        "zh": {
+          "name": "每个正确验证结果的成本",
+          "definition": "归属于运行集的所有成本（推理、工具、基础设施以及用于审批、纠错或升级的人工时间）除以通过独立校验的结果数量。",
+          "howToMeasure": "在运行任何内容之前，先固定任务集和验证器。计算整个集合的总成本（包括失败的尝试）。除以验证器通过的结果数，而不是已完成的运行数。",
+          "gamedBy": "收窄算作“结果”的范围，或者直接将智能体自身的报告作为验证。这两种做法都只是降低了分母的真实性，而不是降低分子的成本。"
+        },
+        "de": {
+          "name": "Kosten pro korrekt verifiziertem Ergebnis",
+          "definition": "Alle einem Run-Set zuzuordnenden Kosten – Inferenz, Tools, Infrastruktur und die menschliche Arbeitszeit für Freigaben, Korrekturen oder Eskalationen – geteilt durch die Anzahl der Ergebnisse, die eine unabhängige Prüfung bestanden haben.",
+          "howToMeasure": "Legen Sie das Aufgabenset und den Verifizierer fest, bevor Sie etwas ausführen. Summieren Sie die Kosten des gesamten Sets, einschließlich fehlgeschlagener Versuche. Teilen Sie durch die vom Verifizierer freigegebenen Ergebnisse, nicht durch die abgeschlossenen Runs.",
+          "gamedBy": "Grenzen Sie ein, was als Ergebnis zählt, oder lassen Sie den Bericht des Agenten selbst als Verifizierung gelten. Beides verringert die Ehrlichkeit des Nenners, anstatt die Kosten des Zählers zu senken."
+        },
+        "ja": {
+          "name": "正しく検証された成果物あたりのコスト",
+          "definition": "実行セットに起因するすべてのコスト（推論、ツール、インフラ、および承認、修正、エスカレーションに費やされた人の時間）を、独立したチェックに合格した成果物の数で割った値。",
+          "howToMeasure": "実行前にタスクセットと検証器を確定させます。失敗した試行を含め、セット全体のコストを合算します。完了した実行数ではなく、検証器に合格した成果物数で割ります。",
+          "gamedBy": "成果物とみなす範囲を狭めるか、エージェント自身の報告を検証結果として代用します。どちらも分子のコストを下げるのではなく、分母の誠実さを損なう行為です。"
         }
       }
     },
@@ -127,6 +175,30 @@
           "definition": "A proporção de tarefas tentadas que produzem um resultado que passa por verificação independente.",
           "howToMeasure": "Tentativas no denominador, resultados verificados no numerador. Uma tentativa abandonada por tempo esgotado continua sendo uma tentativa, e uma execução que o agente desistiu também.",
           "gamedBy": "Tentar apenas as tarefas que o harness já resolve. Uma taxa de rendimento sem conjunto de tarefas declarado é um número sobre o conjunto de tarefas, não sobre o harness."
+        },
+        "fr": {
+          "name": "Taux de rendement vérifié",
+          "definition": "La part des tâches tentées qui produisent un résultat passant une vérification indépendante.",
+          "howToMeasure": "Les tentatives au dénominateur, les résultats vérifiés au numérateur. Une tentative abandonnée en raison d'un dépassement de délai reste une tentative, et une exécution abandonnée par l'agent reste également une tentative.",
+          "gamedBy": "Ne tenter que les tâches que le harness gère déjà. Un taux de rendement sans ensemble de tâches déclaré est un chiffre qui concerne l'ensemble de tâches, pas le harness."
+        },
+        "zh": {
+          "name": "验证通过率",
+          "definition": "在尝试的任务中，产生通过独立验证的结果所占的比例。",
+          "howToMeasure": "分母为尝试次数，分子为验证通过的结果数。因超时而放弃的尝试仍然算作一次尝试，智能体主动放弃的运行也同样算作一次尝试。",
+          "gamedBy": "仅尝试支撑系统已经能够处理的任务。在没有声明任务集的情况下，通过率只是一个关于任务集的数据，而不是关于支撑系统的数据。"
+        },
+        "de": {
+          "name": "Verifizierte Yield-Rate",
+          "definition": "Der Anteil der versuchten Aufgaben, die ein Ergebnis liefern, das eine unabhängige Verifizierung besteht.",
+          "howToMeasure": "Versuche im Nenner, verifizierte Ergebnisse im Zähler. Ein wegen eines Timeouts abgebrochener Versuch ist immer noch ein Versuch, und ein Run, den der Agent aufgegeben hat, ist ebenfalls ein Versuch.",
+          "gamedBy": "Versuchen Sie nur die Aufgaben, die das Harness bereits bewältigen kann. Eine Yield-Rate ohne definiertes Aufgabenset ist eine Aussage über das Aufgabenset, nicht über das Harness."
+        },
+        "ja": {
+          "name": "検証済み歩留まり率",
+          "definition": "試行されたタスクのうち、独立した検証に合格する成果物を生成した割合。",
+          "howToMeasure": "分母に試行回数、分子に検証済み成果物数を置きます。タイムアウトによって放棄された試行や、エージェントが途中で諦めた実行も、すべて試行としてカウントします。",
+          "gamedBy": "ハーネスがすでに対応可能なタスクのみを試行します。宣言されたタスクセットがない歩留まり率は、ハーネスの実力ではなく、タスクセットの難易度を示す数値にすぎません。"
         }
       }
     },
@@ -164,6 +236,30 @@
           "definition": "A taxa de sucesso autodeclarada menos a verificada de forma independente, em pontos percentuais. Mede se o harness consegue saber que teve sucesso.",
           "howToMeasure": "Registre o que o agente afirmou em cada execução e o que o verificador encontrou, e subtraia. Informe o sinal: um harness que se subestima tem um problema diferente do que se superestima, não um menor.",
           "gamedBy": "Parar de pedir ao agente que se autoavalie. A lacuna desaparece, e com ela o único sinal de que o harness não distingue sucesso de fracasso."
+        },
+        "fr": {
+          "name": "Écart de vérification",
+          "definition": "Le taux de réussite auto-déclaré moins le taux vérifié de manière indépendante, en points de pourcentage. Il mesure si le harness est capable de savoir s'il a réussi.",
+          "howToMeasure": "Enregistrez ce que l'agent a déclaré pour chaque exécution et ce que le vérificateur a trouvé, puis soustrayez. Indiquez le signe : un harness qui sous-déclare a un problème différent de celui qui sur-déclare, et non un problème moindre.",
+          "gamedBy": "Cesser de demander à l'agent de s'auto-déclarer. L'écart disparaît, tout comme le seul signal indiquant que le harness ne peut pas distinguer le succès de l'échec."
+        },
+        "zh": {
+          "name": "验证差距",
+          "definition": "自我报告的成功率减去独立验证的成功率（以百分点计）。它衡量支撑系统是否能够判断自己取得了成功。",
+          "howToMeasure": "记录智能体对每次运行声称的结果以及验证器发现的结果，然后相减。报告正负号：少报的支撑系统与多报的支撑系统面临的是不同的问题，而不是更小的问题。",
+          "gamedBy": "不再要求智能体进行自我报告。差距消失了，但支撑系统无法区分成功与失败的唯一信号也随之消失了。"
+        },
+        "de": {
+          "name": "Verifizierungslücke",
+          "definition": "Die selbstberichtete Erfolgsquote minus der unabhängig verifizierten Erfolgsquote in Prozentpunkten. Sie misst, ob das Harness erkennen kann, ob es erfolgreich war.",
+          "howToMeasure": "Erfassen Sie für jeden Run, was der Agent behauptet hat und was der Verifizierer festgestellt hat, und subtrahieren Sie dies dann. Geben Sie das Vorzeichen an: Ein Harness, das zu wenig meldet, hat ein anderes Problem als eines, das zu viel meldet, kein kleineres.",
+          "gamedBy": "Fragen Sie den Agenten nicht mehr nach einer Selbsteinschätzung. Die Lücke verschwindet und damit auch das einzige Signal dafür, dass das Harness Erfolg nicht von Misserfolg unterscheiden kann."
+        },
+        "ja": {
+          "name": "検証ギャップ",
+          "definition": "自己申告による成功率から、独立して検証された成功率を引いた差分（パーセンテージポイント）。ハーネスが自身の成功を正しく認識できているかを測定します。",
+          "howToMeasure": "各実行についてエージェントが主張した結果と検証器が検出した結果を記録し、その差を求めます。符号（プラス・マイナス）も報告してください。過小申告するハーネスは、過大申告するハーネスとは異なる問題を抱えており、決して問題が小さいわけではありません。",
+          "gamedBy": "エージェントに自己申告させるのをやめます。ギャップは消失しますが、同時にハーネスが成功と失敗を区別できていないことを示す唯一のシグナルも失われます。"
         }
       }
     },
@@ -200,6 +296,30 @@
           "definition": "Tokens de modelo, de entrada e de saída, em todas as tentativas, divididos pelos resultados verificados. O número de custo que não se move quando um fornecedor muda sua tabela de preços.",
           "howToMeasure": "Conte os tokens do conjunto inteiro de execuções, retentativas e tentativas abandonadas incluídas. Informe o modelo e sua versão ao lado; sem isso o número não compara nada.",
           "gamedBy": "Tirar trabalho do modelo e colocá-lo numa ferramenta que ninguém conta ou numa revisão humana mais longa. Os tokens caem e o custo real não."
+        },
+        "fr": {
+          "name": "Tokens par résultat vérifié",
+          "definition": "Les tokens du modèle, en entrée et en sortie, sur l'ensemble des tentatives, divisés par les résultats vérifiés. Le chiffre de coût qui ne varie pas lorsqu'un fournisseur modifie sa grille tarifaire.",
+          "howToMeasure": "Comptez les tokens pour l'ensemble des exécutions — y compris les essais répétés et les tentatives abandonnées. Indiquez en parallèle le modèle et sa version ; sans eux, ce chiffre ne permet aucune comparaison.",
+          "gamedBy": "Déplacer le travail hors du modèle vers un outil non comptabilisé ou une revue humaine plus longue. Les tokens diminuent, mais pas le coût réel."
+        },
+        "zh": {
+          "name": "每个验证通过结果消耗的 Token 数",
+          "definition": "所有尝试中模型消耗的输入和输出 Token 总数，除以验证通过的结果数。这是一个即使厂商更改价格表也不会改变的成本指标。",
+          "howToMeasure": "计算整个运行集的 Token 数——包括重试和放弃的尝试。同时报告模型及其版本；否则该数据将失去对比意义。",
+          "gamedBy": "将工作从模型中移出，转入未计入统计的工具或更长的人工审核中。Token 消耗下降了，但实际成本并没有下降。"
+        },
+        "de": {
+          "name": "Token pro verifiziertem Ergebnis",
+          "definition": "Modell-Token, Input und Output, über alle Versuche hinweg, geteilt durch die verifizierten Ergebnisse. Die Kostenkennzahl, die sich nicht ändert, wenn ein Anbieter seine Preisliste anpasst.",
+          "howToMeasure": "Zählen Sie die Token für das gesamte Run-Set – einschließlich Wiederholungen und abgebrochener Versuche. Geben Sie das Modell und seine Version mit an; ohne diese lässt sich mit der Zahl nichts vergleichen.",
+          "gamedBy": "Verlagern Sie Arbeit aus dem Modell in ein nicht gezähltes Tool oder eine längere menschliche Überprüfung. Die Token sinken, die tatsächlichen Kosten jedoch nicht."
+        },
+        "ja": {
+          "name": "検証済み成果物あたりのトークン数",
+          "definition": "すべての試行におけるモデルのトークン数（入力および出力）を、検証済み成果物数で割った値。ベンダーが価格表を変更しても変動しないコスト指標です。",
+          "howToMeasure": "再試行や放棄された試行を含め、実行セット全体のトークン数をカウントします。モデルとそのバージョンも併記してください。これらがないと、数値を比較する意味がありません。",
+          "gamedBy": "処理をモデルから、カウント対象外のツールや長時間の人的レビューへと移行します。トークン数は減少しますが、実際のコストは下がりません。"
         }
       }
     },
@@ -238,6 +358,30 @@
           "definition": "Aprovações, escalonamentos e correções manuais por resultado verificado. Não se há uma pessoa no laço, mas com que frequência o laço se fecha sobre uma.",
           "howToMeasure": "Conte todo evento que exigiu que uma pessoa agisse antes de o resultado poder valer. Aprovações de carimbo contam: o que se mede é a demanda sobre as pessoas, não a qualidade da atenção delas.",
           "gamedBy": "Tirar as comportas. A taxa cai a zero e nada do harness melhorou; por isso esta métrica é lida junto à lacuna de verificação e nunca sozinha."
+        },
+        "fr": {
+          "name": "Interventions humaines par résultat vérifié",
+          "definition": "Approbations, escalades et corrections manuelles par résultat vérifié. Il ne s'agit pas de savoir si une personne intervient dans le processus, mais à quelle fréquence le processus sollicite une intervention humaine.",
+          "howToMeasure": "Comptez chaque événement ayant nécessité l'action d'une personne avant que le résultat ne puisse être validé. Les approbations de pure forme comptent : ce qui est mesuré est la sollicitation des personnes, non la qualité de leur attention.",
+          "gamedBy": "Supprimer les points de contrôle. Le taux tombe à zéro sans que rien ne se soit amélioré dans le harness — c'est pourquoi cette mesure doit être lue en parallèle avec l'écart de vérification, et jamais seule."
+        },
+        "zh": {
+          "name": "每个验证通过结果的人工干预次数",
+          "definition": "每个验证通过结果对应的审批、升级和手动纠错次数。这衡量的不是流程中是否有“人机协同（human-in-the-loop）”，而是该流程闭环到人工身上的频率。",
+          "howToMeasure": "计算在结果生效前需要人工介入的每一次事件。例行公事式的审批也算在内：衡量的是对人员的需求，而不是他们关注的质量。",
+          "gamedBy": "移除准入关卡。干预率降至零，但支撑系统没有任何改善——这就是为什么该指标必须与验证差距结合阅读，而绝不能单独看的原因。"
+        },
+        "de": {
+          "name": "Menschliche Eingriffe pro verifiziertem Ergebnis",
+          "definition": "Freigaben, Eskalationen und manuelle Korrekturen pro verifiziertem Ergebnis. Nicht, ob eine Person in den Prozess eingebunden ist, sondern wie oft der Prozess einen Eingriff erfordert.",
+          "howToMeasure": "Zählen Sie jedes Ereignis, das eine menschliche Aktion erforderte, bevor das Ergebnis gültig war. Reine Formsache-Freigaben zählen mit: Gemessen wird die Beanspruchung der Personen, nicht die Qualität ihrer Aufmerksamkeit.",
+          "gamedBy": "Entfernen Sie die Kontrollpunkte (Gates). Die Quote sinkt auf null, ohne dass sich am Harness etwas verbessert hat – weshalb diese Kennzahl immer zusammen mit der Verifizierungslücke und niemals allein betrachtet werden sollte."
+        },
+        "ja": {
+          "name": "検証済み成果物あたりの人的介入回数",
+          "definition": "検証済み成果物あたりの承認、エスカレーション、および手動修正の回数。人がプロセスに関与しているか（Human-in-the-loop）ではなく、プロセスが人に依存する頻度を測定します。",
+          "howToMeasure": "成果物が確定するまでに、人の行動を必要としたすべてのイベントをカウントします。形骸化した承認（ラバースタンプ）もカウントに含めます。測定対象は、人にかかる負荷であり、その注意力の質ではありません。",
+          "gamedBy": "ゲート（承認プロセス）を撤廃します。介入率はゼロに低下しますが、ハーネス自体は何も改善されていません。これが、この指標を単独ではなく、常に検証ギャップと併せて読み解くべき理由です。"
         }
       }
     },
@@ -272,6 +416,30 @@
           "definition": "Tempo de relógio desde que uma tarefa é aceita até seu resultado passar pela verificação, incluída a espera diante de qualquer etapa humana.",
           "howToMeasure": "Informe a mediana e o percentil 95, ou não informe: uma cauda longa de execuções travadas é exatamente o que uma média esconde.",
           "gamedBy": "Medir até o agente terminar e não até a verificação passar. A fila diante de um revisor humano é onde as horas realmente estão."
+        },
+        "fr": {
+          "name": "Temps jusqu'au résultat vérifié",
+          "definition": "Temps réel écoulé entre l'acceptation d'une tâche et la validation de son résultat par la vérification, y compris l'attente avant toute étape humaine.",
+          "howToMeasure": "Indiquez la médiane et le 95e percentile, sinon ne publiez rien : une longue traîne d'exécutions bloquées est précisément ce qu'une moyenne dissimule.",
+          "gamedBy": "Mesurer jusqu'à la fin de l'exécution de l'agent plutôt que jusqu'à la validation de la vérification. C'est dans la file d'attente devant un réviseur humain que se trouvent réellement les heures."
+        },
+        "zh": {
+          "name": "获得验证通过结果的时间",
+          "definition": "从任务被接受到其结果通过验证的实际流逝时间（wall-clock time），包括在任何人工步骤前的等待时间。",
+          "howToMeasure": "报告中位数和第 95 百分位数，否则就不要报告：平均值恰恰掩盖了卡住运行的长尾效应。",
+          "gamedBy": "测量到智能体运行结束，而不是到验证通过。人工审核员前的排队才是真正耗费数小时的地方。"
+        },
+        "de": {
+          "name": "Zeit bis zum verifizierten Ergebnis",
+          "definition": "Tatsächliche Durchlaufzeit (Wall-Clock-Time) von der Annahme einer Aufgabe bis zum Bestehen der Verifizierung des Ergebnisses, einschließlich der Wartezeit vor jedem menschlichen Schritt.",
+          "howToMeasure": "Geben Sie den Median und das 95. Perzentil an, oder lassen Sie es ganz bleiben: Ein langer Tail von feststeckenden Runs ist genau das, was ein Mittelwert verbirgt.",
+          "gamedBy": "Messen Sie bis zum Abschluss des Agenten statt bis zum Bestehen der Verifizierung. Die Warteschlange vor einem menschlichen Prüfer ist der Ort, an dem die Stunden tatsächlich verloren gehen."
+        },
+        "ja": {
+          "name": "検証済み成果物までの時間",
+          "definition": "タスクが受け入れられてから、その成果物が検証に合格するまでの実時間（ウォールクロック時間）。人の手によるプロセスの前での待ち時間も含みます。",
+          "howToMeasure": "中央値と95パーセンタイル値を報告してください。これらがない報告は無意味です。平均値は、スタックした実行の長いテール（外れ値）を覆い隠してしまうからです。",
+          "gamedBy": "検証の合格時点ではなく、エージェントの完了時点までを測定します。実際には、人間のレビュー担当者の手前にあるキューで多くの時間が費やされています。"
         }
       }
     },
@@ -306,6 +474,30 @@
           "definition": "A proporção do conjunto de avaliação que chega ao mesmo veredito verificado em execuções repetidas da mesma entrada, com o harness sem mudanças.",
           "howToMeasure": "Execute o conjunto inteiro pelo menos cinco vezes e declare N. Um caso está dentro da banda quando todas as repetições caem no mesmo veredito, não quando a média sai bem.",
           "gamedBy": "Executar uma única vez e informar a pontuação. Um número de uma única execução contém a resposta desta métrica e a esconde."
+        },
+        "fr": {
+          "name": "Bande de déterminisme",
+          "definition": "La part de l'ensemble d'évaluation qui parvient au même verdict vérifié lors d'exécutions répétées de la même entrée, le harness restant inchangé.",
+          "howToMeasure": "Exécutez l'ensemble complet au moins cinq fois et déclarez N. Un cas se situe dans la bande lorsque chaque répétition aboutit au même verdict — et non lorsque la moyenne est bonne.",
+          "gamedBy": "Exécuter une seule fois et déclarer le score. Un chiffre basé sur une seule exécution contient la réponse de cette métrique tout en la masquant."
+        },
+        "zh": {
+          "name": "确定性区间",
+          "definition": "在支撑系统保持不变的情况下，对相同输入进行重复运行，评估集中得出相同验证结论的比例。",
+          "howToMeasure": "将整个集合至少运行五次并声明 N。当每次重复运行都得出相同的结论时，该用例才算在区间内——而不是平均结果良好时。",
+          "gamedBy": "仅运行一次并报告分数。单次运行的数据包含了该指标的答案，但也将其隐藏了。"
+        },
+        "de": {
+          "name": "Determinismus-Band",
+          "definition": "Der Anteil des Evaluierungssets, der bei wiederholten Runs derselben Eingabe bei unverändertem Harness dasselbe verifizierte Ergebnis erzielt.",
+          "howToMeasure": "Führen Sie das gesamte Set mindestens fünfmal aus und deklarieren Sie N. Ein Fall liegt innerhalb des Bands, wenn jede Wiederholung zum selben Ergebnis führt – nicht, wenn der Durchschnitt gut ist.",
+          "gamedBy": "Führen Sie den Test nur einmal aus und melden Sie das Ergebnis. Eine Zahl aus einem einzelnen Run enthält die Antwort dieser Metrik und verbirgt sie gleichzeitig."
+        },
+        "ja": {
+          "name": "決定論的バンド",
+          "definition": "ハーネスを変更せずに同一の入力を繰り返し実行した際に、評価セットのうち、一貫して同じ検証判定に達した割合。",
+          "howToMeasure": "セット全体を少なくとも5回実行し、N数を宣言します。平均値が良い状態ではなく、すべての試行で全く同じ判定に達した場合のみ、そのケースはバンド内にあるとみなされます。",
+          "gamedBy": "1回だけ実行してそのスコアを報告します。1回限りの実行結果は、この指標が示すべき真の回答を覆い隠してしまいます。"
         }
       }
     },
@@ -343,6 +535,30 @@
           "definition": "Das execuções que sofreram uma falha — erro de ferramenta, recusa, tempo esgotado, plano rejeitado —, a proporção que ainda assim chega a um resultado verificado.",
           "howToMeasure": "A falha tem de estar visível no rastro para poder ser contada, então isto não se calcula sem rastro correlacionado. Nunca ter falhado não é recuperar-se e não deve ser contado como tal.",
           "gamedBy": "Silenciar as falhas em vez de se recuperar delas. Um laço de retentativas que engole um erro de ferramenta sobe este número e a lacuna de verificação ao mesmo tempo."
+        },
+        "fr": {
+          "name": "Taux de récupération",
+          "definition": "Parmi les exécutions qui rencontrent une défaillance — erreur d'outil, refus, dépassement de délai, plan rejeté —, la part de celles qui parviennent tout de même à un résultat vérifié.",
+          "howToMeasure": "La défaillance doit être visible dans la trace avant de pouvoir être comptabilisée, cette mesure ne peut donc pas être calculée sans une trace d'exécution corrélée. N'avoir jamais échoué ne constitue pas une récupération et ne doit pas être comptabilisé comme tel.",
+          "gamedBy": "Masquer les défaillances au lieu de s'en remettre. Une boucle de tentative qui ignore une erreur d'outil augmente ce chiffre et l'écart de vérification en même temps."
+        },
+        "zh": {
+          "name": "恢复率",
+          "definition": "在遇到故障（工具错误、拒绝、超时、被拒绝的计划）的运行中，最终仍能获得验证通过结果的比例。",
+          "howToMeasure": "故障必须在追踪（trace）中可见才能被计算，因此在没有关联运行追踪的情况下无法计算此指标。从未失败不等于恢复，绝不能计入恢复。",
+          "gamedBy": "压制故障而不是从中恢复。吞掉工具错误的重试循环会同时提高该指标和验证差距。"
+        },
+        "de": {
+          "name": "Recovery-Rate",
+          "definition": "Der Anteil der Runs, bei denen ein Fehler aufgetreten ist – ein Tool-Fehler, eine Verweigerung, ein Timeout, ein abgelehnter Plan –, die dennoch ein verifiziertes Ergebnis erreichen.",
+          "howToMeasure": "Der Fehler muss im Trace sichtbar sein, bevor er gezählt werden kann. Daher kann dies nicht ohne einen korrelierten Run-Trace berechnet werden. Niemals fehlgeschlagen zu sein, ist keine Recovery und darf nicht als solche gezählt werden.",
+          "gamedBy": "Unterdrücken Sie die Fehler, anstatt sie zu beheben (Recovery). Eine Wiederholungsschleife (Retry Loop), die einen Tool-Fehler verschluckt, erhöht diese Zahl und gleichzeitig die Verifizierungslücke."
+        },
+        "ja": {
+          "name": "回復率",
+          "definition": "ツールエラー、拒絶、タイムアウト、計画の却下などの失敗に直面した実行のうち、最終的に検証済み成果物に到達した割合。",
+          "howToMeasure": "失敗がトレース上で確認できる必要があります。そのため、関連する実行トレースがなければ算出できません。一度も失敗しなかったケースは「回復」ではないため、回復としてカウントしてはなりません。",
+          "gamedBy": "失敗から回復させるのではなく、失敗を隠蔽します。ツールエラーを握りつぶす再試行ループは、この回復率を上げると同時に、検証ギャップも拡大させます。"
         }
       }
     },
@@ -383,6 +599,30 @@
           "definition": "A proporção das ações do harness que escrevem, são irreversíveis ou reguladas e que estão atrás de um controle ao mesmo tempo de pré-alimentação e determinístico.",
           "howToMeasure": "Liste as ações a partir do catálogo de ferramentas, nomeie o controle que detém cada uma e leia os dois eixos desse controle na Matriz de Controle Agêntico. Comportas decididas por critério não contam aqui: essas são contadas pela taxa de intervenção humana.",
           "gamedBy": "Reclassificar ações como reversíveis. A razão sobe e o raio de impacto não se move."
+        },
+        "fr": {
+          "name": "Ratio de confinement",
+          "definition": "La part des actions d'écriture, irréversibles ou réglementées du harness qui sont placées derrière un contrôle à la fois prédictif (feedforward) et déterministe.",
+          "howToMeasure": "Listez les actions du catalogue d'outils, nommez le contrôle qui bloque chacune d'elles, et lisez les deux axes de ce contrôle sur l'Agentic Control Matrix. Les points de contrôle décidés par jugement ne comptent pas ici — le taux d'intervention humaine comptabilise ceux-là.",
+          "gamedBy": "Reclasser les actions comme réversibles. Le ratio augmente mais le rayon d'impact ne change pas."
+        },
+        "zh": {
+          "name": "控制率",
+          "definition": "支撑系统具有写入能力、不可逆或受监管的操作中，处于既是前馈又是确定性的控制之下的比例。",
+          "howToMeasure": "列出工具目录中的操作，命名阻止每个操作的控制措施，并在智能体控制矩阵（Agentic Control Matrix）中读取该控制措施的两个轴。由主观判断决定的关卡不计入此处——人工干预率会计算这些。",
+          "gamedBy": "将操作重新归类为可逆操作。比例上升了，但爆炸半径并没有改变。"
+        },
+        "de": {
+          "name": "Containment-Quote",
+          "definition": "Der Anteil der schreibfähigen, irreversiblen oder regulierten Aktionen des Harness, die hinter einer Kontrolle liegen, die sowohl vorwärtskoppelnd (feedforward) als auch deterministisch ist.",
+          "howToMeasure": "Listen Sie die Aktionen aus dem Tool-Katalog auf, nennen Sie die Kontrolle, die die jeweilige Aktion stoppt, und lesen Sie die beiden Achsen dieser Kontrolle aus der Agentic Control Matrix ab. Durch Ermessensentscheidungen bestimmte Gates zählen hier nicht – diese werden durch die Quote menschlicher Eingriffe erfasst.",
+          "gamedBy": "Klassifizieren Sie Aktionen als reversibel um. Die Quote steigt, aber der Schadensradius (Blast Radius) ändert sich nicht."
+        },
+        "ja": {
+          "name": "封じ込め率",
+          "definition": "ハーネスの書き込み可能、不可逆、または規制対象となるアクションのうち、フィードフォワードかつ決定論的な制御（コントロール）の配下に置かれている割合。",
+          "howToMeasure": "ツールカタログからアクションをリストアップし、それぞれを阻止する制御を特定し、Agentic Control Matrixからその制御の2つの軸を読み取ります。主観的な判断によって決定されるゲートはここではカウントされません（それらは人的介入回数でカウントされます）。",
+          "gamedBy": "アクションを「可逆的」として再分類します。比率は上昇しますが、影響範囲（ブラストライジアス）は変わりません。"
         }
       }
     },
@@ -419,6 +659,30 @@
           "definition": "De uma amostra aleatória de execuções passadas, a proporção que pode ser reconstruída de ponta a ponta só com o registro: entradas, modelo, chamadas de ferramentas, resultado.",
           "howToMeasure": "Amostre execuções que ninguém escolheu e reconstrua-as sem perguntar à equipe e sem o operador original presente. Uma execução que precisa de alguém para explicá-la não passou.",
           "gamedBy": "Amostrar as execuções que já se sabe estarem limpas, ou registrar tudo, segredos incluídos. Isto é lido junto com se o registro guarda dados de que nunca precisou."
+        },
+        "fr": {
+          "name": "Reconstructibilité",
+          "definition": "Sur un échantillon aléatoire d'exécutions passées, la part de celles qui peuvent être reconstruites de bout en bout à partir du seul journal : entrées, modèle, appels d'outils, résultat.",
+          "howToMeasure": "Échantillonnez des exécutions que personne n'a choisies, et reconstruisez-les sans solliciter l'équipe et sans la présence de l'opérateur d'origine. Une exécution qui nécessite l'explication d'une personne n'est pas validée.",
+          "gamedBy": "Échantillonner les exécutions déjà connues pour être propres — ou tout journaliser, secrets inclus. Cette mesure est lue en parallèle avec le fait de savoir si le journal contient des données dont il n'a jamais eu besoin."
+        },
+        "zh": {
+          "name": "可重构性",
+          "definition": "在过去运行的随机样本中，仅凭日志就能端到端重构的比例：包括输入、模型、工具调用和结果。",
+          "howToMeasure": "对无人特意挑选的运行进行抽样，并在不询问团队且原始操作员不在场的情况下进行重构。需要人工解释的运行算作未通过。",
+          "gamedBy": "对已知干净的运行进行抽样——或者记录所有内容，包括敏感信息。这需要与日志是否包含其从未需要的数据结合阅读。"
+        },
+        "de": {
+          "name": "Rekonstruierbarkeit",
+          "definition": "Der Anteil einer Zufallsstichprobe vergangener Runs, der allein anhand des Logs durchgängig rekonstruiert werden kann: Eingaben, Modell, Tool-Aufrufe, Ergebnis.",
+          "howToMeasure": "Wählen Sie stichprobenartig Runs aus, die niemand gezielt ausgesucht hat, und rekonstruieren Sie diese, ohne das Team zu fragen und ohne dass der ursprüngliche Operator anwesend ist. Ein Run, der eine Person zur Erklärung benötigt, hat nicht bestanden.",
+          "gamedBy": "Wählen Sie Runs aus, von denen bereits bekannt ist, dass sie fehlerfrei sind – oder protokollieren Sie alles, einschließlich Geheimnissen (Secrets). Dies wird zusammen mit der Frage betrachtet, ob das Log Daten enthält, die es nie benötigt hätte."
+        },
+        "ja": {
+          "name": "再構成可能性",
+          "definition": "過去の実行のランダムサンプルにおいて、ログのみからエンドツーエンドで再構成（インプット、モデル、ツール呼び出し、成果物）できる割合。",
+          "howToMeasure": "誰も意図的に選んでいない実行をサンプリングし、開発チームに問い合わせることなく、また当時のオペレーターの立ち会いなしで再構成します。説明のために人を必要とする実行は不合格とみなします。",
+          "gamedBy": "すでに問題がないと分かっている実行のみをサンプリングするか、機密情報を含めすべてをログに記録します。これは、ログに不要なデータが含まれていないかという観点と併せて評価されます。"
         }
       }
     },
@@ -453,6 +717,30 @@
           "definition": "Dos defeitos plantados de propósito no sistema, a proporção que a suite de avaliação detecta antes de publicar.",
           "howToMeasure": "Plante os tipos de defeito que você de fato teme, um de cada vez, e rode a suite com cada um. Uma suite que ninguém viu falhar tem uma taxa de captura desconhecida, não perfeita.",
           "gamedBy": "Plantar os defeitos a partir dos quais a suite foi escrita. A taxa sobe a 100 % e não mede mais que a memória de quem a escreveu."
+        },
+        "fr": {
+          "name": "Taux de détection des régressions",
+          "definition": "Parmi les défauts délibérément introduits dans le système, la part que la suite d'évaluation détecte avant la mise en production.",
+          "howToMeasure": "Introduisez les types de défauts que vous redoutez réellement, un par un, et lancez la suite sur chacun d'eux. Une suite qui n'a jamais échoué présente un taux de détection inconnu, et non parfait.",
+          "gamedBy": "Introduire les défauts à partir desquels la suite a été écrite. Le taux atteint 100 % et ne mesure rien d'autre que la mémoire de l'auteur."
+        },
+        "zh": {
+          "name": "回归捕获率",
+          "definition": "在故意植入系统的缺陷中，评估套件在发布前捕获的比例。",
+          "howToMeasure": "一次植入一个你真正担心的缺陷类型，并在每个缺陷上运行套件。从未见其失败过的套件，其捕获率是未知的，而不是完美的。",
+          "gamedBy": "植入编写该套件时所依据 of 缺陷。捕获率会达到 100%，但衡量的只是作者的记忆力。"
+        },
+        "de": {
+          "name": "Regressions-Erkennungsrate",
+          "definition": "Der Anteil der absichtlich in das System eingebauten Fehler, die von der Evaluierungssuite vor dem Release erkannt werden.",
+          "howToMeasure": "Bauen Sie nacheinander genau die Arten von Fehlern ein, die Sie tatsächlich befürchten, und führen Sie die Suite für jeden einzelnen aus. Eine Suite, bei der noch nie ein Fehlschlag beobachtet wurde, hat eine unbekannte Erkennungsrate, keine perfekte.",
+          "gamedBy": "Bauen Sie genau die Fehler ein, für die die Suite geschrieben wurde. Die Rate steigt auf 100 % und misst nichts weiter als das Gedächtnis des Autors."
+        },
+        "ja": {
+          "name": "回帰検知率",
+          "definition": "システムに意図的に埋め込まれた欠陥のうち、リリース前に評価スイートが検知できた割合。",
+          "howToMeasure": "実際に懸念される種類の欠陥を1つずつ埋め込み、それぞれに対して評価スイートを実行します。一度も失敗したことがない評価スイートの検知率は「完璧」なのではなく、「不明」です。",
+          "gamedBy": "評価スイートが作成される前提となった欠陥のみを埋め込みます。検知率は100%になりますが、作成者の記憶力以外は何も測定していません。"
         }
       }
     }

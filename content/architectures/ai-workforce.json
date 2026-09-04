@@ -5,17 +5,52 @@
   "updated": "2026-06-21",
   "version": "1.0",
   "featured": true,
-  "evidence": { "evidenceLevel": "industry_observation", "confidenceLevel": "medium", "sourceType": ["industry_observation", "paper"] },
-  "technologies": ["Multi-agent orchestration (LangGraph)", "Agent registry", "Shared memory / state store", "Human oversight & approvals", "Guardrails", "Observability (LangSmith / Langfuse)"],
-  "patterns": ["supervisor-agent", "orchestrator-workers", "goal-decomposition", "human-escalation", "task-prioritization"],
-  "knowledge": ["multi-agent-architecture", "ai-agent", "agentic-evaluation", "ai-observability", "ai-governance"],
-  "references": [
-    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
-    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "medium",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "technologies": [
+    "Multi-agent orchestration (LangGraph)",
+    "Agent registry",
+    "Shared memory / state store",
+    "Human oversight & approvals",
+    "Guardrails",
+    "Observability (LangSmith / Langfuse)"
   ],
-  "related": ["customer-service-agent", "enterprise-knowledge-assistant",
+  "patterns": [
+    "supervisor-agent",
+    "orchestrator-workers",
+    "goal-decomposition",
+    "human-escalation",
+    "task-prioritization"
+  ],
+  "knowledge": [
+    "multi-agent-architecture",
+    "ai-agent",
+    "agentic-evaluation",
+    "ai-observability",
+    "ai-governance"
+  ],
+  "references": [
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
+  ],
+  "related": [
+    "customer-service-agent",
+    "enterprise-knowledge-assistant",
     "operations-center",
-    "sales-copilot"],
+    "sales-copilot"
+  ],
   "locales": {
     "en": {
       "name": "AI Workforce",
@@ -81,11 +116,26 @@
         "Design escalation and blast-radius limits from day one rather than bolting on governance after an incident."
       ],
       "kpis": [
-        { "metric": "End-to-end job success rate", "note": "Share of jobs completed correctly without human correction; the headline measure of whether the team actually works." },
-        { "metric": "Escalation rate", "note": "Fraction of jobs handed to humans; too high means weak automation, too low may mean unsafe over-automation." },
-        { "metric": "Rework / correction rate", "note": "How often outputs are sent back or fixed; rising rework signals cascading errors or weak QA." },
-        { "metric": "Cost per completed job", "note": "Total model, tool, and human-review cost per finished job; the real unit economics behind productivity claims." },
-        { "metric": "Coordination overhead", "note": "Added latency and token cost from handoffs versus a single-agent baseline; watch it grow with team size." }
+        {
+          "metric": "End-to-end job success rate",
+          "note": "Share of jobs completed correctly without human correction; the headline measure of whether the team actually works."
+        },
+        {
+          "metric": "Escalation rate",
+          "note": "Fraction of jobs handed to humans; too high means weak automation, too low may mean unsafe over-automation."
+        },
+        {
+          "metric": "Rework / correction rate",
+          "note": "How often outputs are sent back or fixed; rising rework signals cascading errors or weak QA."
+        },
+        {
+          "metric": "Cost per completed job",
+          "note": "Total model, tool, and human-review cost per finished job; the real unit economics behind productivity claims."
+        },
+        {
+          "metric": "Coordination overhead",
+          "note": "Added latency and token cost from handoffs versus a single-agent baseline; watch it grow with team size."
+        }
       ],
       "scaling": [
         "Scale by adding specialist agents behind the registry, but treat each addition as new coordination surface to evaluate.",
@@ -99,9 +149,18 @@
         "An operations back-office team of agents that triage tickets, prepare actions, and escalate exceptions to staff."
       ],
       "faqs": [
-        { "q": "How is this different from a single AI agent?", "a": "A single agent does all reasoning and tool use itself. An AI workforce is many coordinated agents under a supervisor that decomposes goals, delegates to specialists, shares state, and governs the whole team; the hard problems are coordination, ownership, and blast radius rather than any one agent's capability." },
-        { "q": "Do more agents always make the system better?", "a": "No. Each added agent introduces handoffs, latency, and new ways to fail. Add specialists only when a simpler team demonstrably cannot do the work, and measure coordination overhead so the cost of orchestration does not exceed its benefit." },
-        { "q": "How do we measure real productivity gains?", "a": "Measure end to end against an honest human baseline: job success, escalation, rework, and cost per completed job. Per-task speedups can hide downstream corrections and review time, so only count gains that survive full end-to-end evaluation." }
+        {
+          "q": "How is this different from a single AI agent?",
+          "a": "A single agent does all reasoning and tool use itself. An AI workforce is many coordinated agents under a supervisor that decomposes goals, delegates to specialists, shares state, and governs the whole team; the hard problems are coordination, ownership, and blast radius rather than any one agent's capability."
+        },
+        {
+          "q": "Do more agents always make the system better?",
+          "a": "No. Each added agent introduces handoffs, latency, and new ways to fail. Add specialists only when a simpler team demonstrably cannot do the work, and measure coordination overhead so the cost of orchestration does not exceed its benefit."
+        },
+        {
+          "q": "How do we measure real productivity gains?",
+          "a": "Measure end to end against an honest human baseline: job success, escalation, rework, and cost per completed job. Per-task speedups can hide downstream corrections and review time, so only count gains that survive full end-to-end evaluation."
+        }
       ]
     },
     "es": {
@@ -168,11 +227,26 @@
         "Diseñe la escalada y los límites de radio de impacto desde el primer día en lugar de añadir gobernanza tras un incidente."
       ],
       "kpis": [
-        { "metric": "Tasa de éxito de trabajos de extremo a extremo", "note": "Proporción de trabajos completados correctamente sin corrección humana; la medida principal de si el equipo realmente funciona." },
-        { "metric": "Tasa de escalada", "note": "Fracción de trabajos cedidos a personas; demasiado alta indica automatización débil, demasiado baja puede indicar sobreautomatización insegura." },
-        { "metric": "Tasa de retrabajo / corrección", "note": "Con qué frecuencia se devuelven o corrigen las salidas; un retrabajo creciente señala errores en cascada o un control de calidad débil." },
-        { "metric": "Coste por trabajo completado", "note": "Coste total de modelo, herramientas y revisión humana por trabajo terminado; la economía unitaria real tras las afirmaciones de productividad." },
-        { "metric": "Sobrecarga de coordinación", "note": "Latencia y coste de tokens añadidos por los traspasos frente a una línea base de un solo agente; vigile cómo crece con el tamaño del equipo." }
+        {
+          "metric": "Tasa de éxito de trabajos de extremo a extremo",
+          "note": "Proporción de trabajos completados correctamente sin corrección humana; la medida principal de si el equipo realmente funciona."
+        },
+        {
+          "metric": "Tasa de escalada",
+          "note": "Fracción de trabajos cedidos a personas; demasiado alta indica automatización débil, demasiado baja puede indicar sobreautomatización insegura."
+        },
+        {
+          "metric": "Tasa de retrabajo / corrección",
+          "note": "Con qué frecuencia se devuelven o corrigen las salidas; un retrabajo creciente señala errores en cascada o un control de calidad débil."
+        },
+        {
+          "metric": "Coste por trabajo completado",
+          "note": "Coste total de modelo, herramientas y revisión humana por trabajo terminado; la economía unitaria real tras las afirmaciones de productividad."
+        },
+        {
+          "metric": "Sobrecarga de coordinación",
+          "note": "Latencia y coste de tokens añadidos por los traspasos frente a una línea base de un solo agente; vigile cómo crece con el tamaño del equipo."
+        }
       ],
       "scaling": [
         "Escale añadiendo agentes especialistas tras el registro, pero trate cada añadido como nueva superficie de coordinación que evaluar.",
@@ -186,9 +260,18 @@
         "Un equipo de back-office de operaciones con agentes que clasifican tickets, preparan acciones y escalan excepciones al personal."
       ],
       "faqs": [
-        { "q": "¿En qué se diferencia esto de un único agente de IA?", "a": "Un único agente realiza por sí mismo todo el razonamiento y uso de herramientas. Una fuerza laboral de IA son muchos agentes coordinados bajo un supervisor que descompone objetivos, delega en especialistas, comparte estado y gobierna a todo el equipo; los problemas difíciles son la coordinación, la propiedad y el radio de impacto más que la capacidad de un solo agente." },
-        { "q": "¿Más agentes siempre mejoran el sistema?", "a": "No. Cada agente añadido introduce traspasos, latencia y nuevas formas de fallar. Añada especialistas solo cuando un equipo más simple demuestre no poder hacer el trabajo, y mida la sobrecarga de coordinación para que el coste de la orquestación no supere su beneficio." },
-        { "q": "¿Cómo medimos las ganancias reales de productividad?", "a": "Mida de extremo a extremo frente a una línea base humana honesta: éxito de trabajos, escalada, retrabajo y coste por trabajo completado. Las aceleraciones por tarea pueden ocultar correcciones posteriores y tiempo de revisión, así que cuente solo las ganancias que sobreviven a una evaluación completa de extremo a extremo." }
+        {
+          "q": "¿En qué se diferencia esto de un único agente de IA?",
+          "a": "Un único agente realiza por sí mismo todo el razonamiento y uso de herramientas. Una fuerza laboral de IA son muchos agentes coordinados bajo un supervisor que descompone objetivos, delega en especialistas, comparte estado y gobierna a todo el equipo; los problemas difíciles son la coordinación, la propiedad y el radio de impacto más que la capacidad de un solo agente."
+        },
+        {
+          "q": "¿Más agentes siempre mejoran el sistema?",
+          "a": "No. Cada agente añadido introduce traspasos, latencia y nuevas formas de fallar. Añada especialistas solo cuando un equipo más simple demuestre no poder hacer el trabajo, y mida la sobrecarga de coordinación para que el coste de la orquestación no supere su beneficio."
+        },
+        {
+          "q": "¿Cómo medimos las ganancias reales de productividad?",
+          "a": "Mida de extremo a extremo frente a una línea base humana honesta: éxito de trabajos, escalada, retrabajo y coste por trabajo completado. Las aceleraciones por tarea pueden ocultar correcciones posteriores y tiempo de revisión, así que cuente solo las ganancias que sobreviven a una evaluación completa de extremo a extremo."
+        }
       ]
     },
     "pt": {
@@ -255,11 +338,26 @@
         "Projete a escalada e os limites de raio de impacto desde o primeiro dia em vez de acrescentar governança após um incidente."
       ],
       "kpis": [
-        { "metric": "Taxa de sucesso de trabalhos de ponta a ponta", "note": "Proporção de trabalhos concluídos corretamente sem correção humana; a medida principal de se a equipe de fato funciona." },
-        { "metric": "Taxa de escalada", "note": "Fração de trabalhos passados a pessoas; alta demais indica automação fraca, baixa demais pode indicar superautomação insegura." },
-        { "metric": "Taxa de retrabalho / correção", "note": "Com que frequência as saídas são devolvidas ou corrigidas; retrabalho crescente sinaliza erros em cascata ou controle de qualidade fraco." },
-        { "metric": "Custo por trabalho concluído", "note": "Custo total de modelo, ferramentas e revisão humana por trabalho finalizado; a economia unitária real por trás das afirmações de produtividade." },
-        { "metric": "Sobrecarga de coordenação", "note": "Latência e custo de tokens acrescentados pelos repasses ante uma linha de base de um único agente; observe como cresce com o tamanho da equipe." }
+        {
+          "metric": "Taxa de sucesso de trabalhos de ponta a ponta",
+          "note": "Proporção de trabalhos concluídos corretamente sem correção humana; a medida principal de se a equipe de fato funciona."
+        },
+        {
+          "metric": "Taxa de escalada",
+          "note": "Fração de trabalhos passados a pessoas; alta demais indica automação fraca, baixa demais pode indicar superautomação insegura."
+        },
+        {
+          "metric": "Taxa de retrabalho / correção",
+          "note": "Com que frequência as saídas são devolvidas ou corrigidas; retrabalho crescente sinaliza erros em cascata ou controle de qualidade fraco."
+        },
+        {
+          "metric": "Custo por trabalho concluído",
+          "note": "Custo total de modelo, ferramentas e revisão humana por trabalho finalizado; a economia unitária real por trás das afirmações de produtividade."
+        },
+        {
+          "metric": "Sobrecarga de coordenação",
+          "note": "Latência e custo de tokens acrescentados pelos repasses ante uma linha de base de um único agente; observe como cresce com o tamanho da equipe."
+        }
       ],
       "scaling": [
         "Escale adicionando agentes especialistas atrás do registro, mas trate cada acréscimo como nova superfície de coordenação a avaliar.",
@@ -273,9 +371,462 @@
         "Uma equipe de back-office de operações com agentes que triam tickets, preparam ações e escalam exceções à equipe."
       ],
       "faqs": [
-        { "q": "Como isso difere de um único agente de IA?", "a": "Um único agente faz por si todo o raciocínio e uso de ferramentas. Uma força de trabalho de IA são muitos agentes coordenados sob um supervisor que decompõe objetivos, delega a especialistas, compartilha estado e governa a equipe inteira; os problemas difíceis são a coordenação, a propriedade e o raio de impacto, mais do que a capacidade de um único agente." },
-        { "q": "Mais agentes sempre tornam o sistema melhor?", "a": "Não. Cada agente acrescentado introduz repasses, latência e novas formas de falhar. Adicione especialistas apenas quando uma equipe mais simples comprovadamente não conseguir fazer o trabalho, e meça a sobrecarga de coordenação para que o custo da orquestração não exceda seu benefício." },
-        { "q": "Como medimos ganhos reais de produtividade?", "a": "Meça de ponta a ponta contra uma linha de base humana honesta: sucesso dos trabalhos, escalada, retrabalho e custo por trabalho concluído. Acelerações por tarefa podem esconder correções posteriores e tempo de revisão, então conte apenas os ganhos que sobrevivem a uma avaliação completa de ponta a ponta." }
+        {
+          "q": "Como isso difere de um único agente de IA?",
+          "a": "Um único agente faz por si todo o raciocínio e uso de ferramentas. Uma força de trabalho de IA são muitos agentes coordenados sob um supervisor que decompõe objetivos, delega a especialistas, compartilha estado e governa a equipe inteira; os problemas difíceis são a coordenação, a propriedade e o raio de impacto, mais do que a capacidade de um único agente."
+        },
+        {
+          "q": "Mais agentes sempre tornam o sistema melhor?",
+          "a": "Não. Cada agente acrescentado introduz repasses, latência e novas formas de falhar. Adicione especialistas apenas quando uma equipe mais simples comprovadamente não conseguir fazer o trabalho, e meça a sobrecarga de coordenação para que o custo da orquestração não exceda seu benefício."
+        },
+        {
+          "q": "Como medimos ganhos reais de produtividade?",
+          "a": "Meça de ponta a ponta contra uma linha de base humana honesta: sucesso dos trabalhos, escalada, retrabalho e custo por trabalho concluído. Acelerações por tarefa podem esconder correções posteriores e tempo de revisão, então conte apenas os ganhos que sobrevivem a uma avaliação completa de ponta a ponta."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Main-d'œuvre IA",
+      "summary": "Une main-d'œuvre IA est une équipe orchestrée d'agents spécialisés qui collaborent sur des processus métier multi-étapes sous la direction d'un superviseur. Le superviseur décompose un objectif, hiérarchise et délègue les sous-tâches à des agents spécialisés (recherche, rédaction, assurance qualité), et ces derniers partagent leur état via un magasin commun. Les agents font remonter les cas aux humains lorsqu'ils dépassent leurs compétences, et chaque étape est observable et gouvernée. Considérez cela comme la gestion de travailleurs numériques : le succès dépend moins d'un agent individuel que de la coordination, d'une responsabilité claire via un registre d'agents, d'une supervision humaine et de l'évaluation de l'ensemble de l'équipe plutôt que de ses composants.",
+      "keyConcepts": [
+        "Un superviseur décompose les objectifs et délègue aux agents spécialisés plutôt qu'un seul agent ne fasse tout.",
+        "L'état partagé et un registre d'agents dotent l'équipe d'une mémoire, d'une responsabilité claire et de capacités découvrables.",
+        "La supervision humaine, l'escalade et la gouvernance limitent le rayon d'impact en cas de comportement incorrect des agents.",
+        "Vous évaluez et mesurez la main-d'œuvre comme un système global, et non chaque agent de manière isolée."
+      ],
+      "definition": "L'architecture de main-d'œuvre IA est un système multi-agent gouverné dans lequel un superviseur décompose les objectifs et délègue des sous-tâches hiérarchisées à des agents spécialisés qui partagent leur état, font remonter les cas aux humains et sont observés de bout en bout.",
+      "architecture": [
+        "Au centre se trouve un superviseur (ou orchestrateur) qui reçoit un objectif métier, le décompose en un plan de sous-tâches, les hiérarchise et oriente chacune vers l'agent spécialisé le plus adapté. Les spécialistes — par exemple, les agents de recherche, de rédaction, d'assurance qualité et d'outillage — sont répertoriés dans un registre d'agents qui enregistre les capacités, les entrées, les sorties, le coût et le propriétaire de chaque agent, afin que le superviseur puisse les découvrir et les sélectionner, et que les humains puissent attribuer la responsabilité des comportements.",
+        "Les agents ne transmettent pas tout via des prompts. Ils lisent et écrivent dans une mémoire partagée ou un magasin d'états qui conserve le contexte évolutif de la tâche, les artefacts intermédiaires et les décisions. Cet état partagé est ce qui transforme une simple collection d'agents en une véritable équipe : il préserve la continuité entre les étapes, permet aux agents de s'appuyer sur le travail des autres et offre une source unique de vérité pour l'observabilité et l'audit. Des garde-fous sont placés entre les agents et les outils ou les données afin de contraindre les actions, de valider les sorties et d'empêcher les opérations non sécurisées.",
+        "La supervision humaine et la gouvernance encadrent l'ensemble du système. Des parcours d'escalade définis permettent à un agent de passer le relais à une personne lorsque le niveau de confiance est faible ou que les enjeux d'une tâche sont élevés, et des jalons d'approbation exigent une validation humaine avant toute action irréversible. L'observabilité (traces, évaluations, coût et latence par agent et par tâche) rend le comportement de l'équipe lisible. Étant donné que les défaillances d'un agent peuvent se propager en cascade, l'architecture limite délibérément le rayon d'impact grâce au ciblage du périmètre, aux délais d'expiration et aux disjoncteurs."
+      ],
+      "flow": [
+        "1. Réception : un objectif métier ou une tâche entre dans le système et le superviseur l'enregistre avec son contexte, sa priorité et sa responsabilité.",
+        "2. Décomposition et hiérarchisation : le superviseur décompose l'objectif en sous-tâches ordonnées et les classe en tenant compte des dépendances et de l'urgence.",
+        "3. Délégation : chaque sous-tâche est orientée vers un agent spécialisé sélectionné dans le registre d'agents en fonction de ses capacités et de son coût.",
+        "4. Exécution avec état partagé : les agents travaillent avec des outils encadrés par des garde-fous, lisant et écrivant dans le magasin partagé afin que les agents suivants s'appuient sur les résultats précédents.",
+        "5. Escalade ou approbation : lorsque le niveau de confiance est faible ou que les enjeux sont élevés, un agent fait remonter le cas à un humain ou attend à un jalon d'approbation.",
+        "6. Assemblage, vérification et clôture : une étape d'assurance qualité vérifie le résultat combiné, le superviseur finalise la tâche, et des traces ainsi que des métriques sont émises pour évaluation."
+      ],
+      "components": [
+        "Superviseur / orchestrateur qui planifie et délègue",
+        "Registre d'agents spécialistes avec propriétaires et capacités",
+        "Agents spécialisés (recherche, rédaction, assurance qualité, outillage)",
+        "Mémoire partagée / magasin d'états pour le contexte de la tâche",
+        "Garde-fous sur les outils, les données et les sorties",
+        "Supervision humaine : parcours d'escalade et jalons d'approbation",
+        "Observabilité et évaluation de l'ensemble de la main-d'œuvre"
+      ],
+      "referenceScenario": {
+        "context": "Une entreprise de taille moyenne souhaite automatiser la rédaction de réponses aux politiques destinées aux clients, qui nécessitent aujourd'hui une étape de recherche, une étape de rédaction et un examen de conformité avant validation par un humain.",
+        "scenario": "Un objectif entre dans le système ; le superviseur le décompose en sous-tâches de recherche, de rédaction et d'assurance qualité, délègue chacune à un agent spécialisé et oriente tout élément sensible en matière de conformité vers un jalon d'approbation humaine avant publication.",
+        "technology": "LangGraph pour l'orchestration multi-agent, un registre d'agents pour la découverte des capacités et la responsabilité, un magasin d'états partagé pour le contexte de la tâche, des garde-fous sur la récupération et les outils, et LangSmith ou Langfuse pour le traçage et l'évaluation.",
+        "load": "Volume illustratif de quelques milliers de tâches par semaine, avec des pics pendant les heures de bureau et une longue traîne de tâches complexes nécessitant une escalade humaine.",
+        "results": "Tous les chiffres présentés ici sont des cibles de référence à instrumenter et à mesurer dans votre propre environnement, et non des garanties : cherchez à suivre le taux de réussite des tâches de bout en bout, le taux d'escalade, le taux de retravail et le coût par tâche finalisée, puis validez-les par rapport à une référence humaine avant de revendiquer des gains de productivité."
+      },
+      "benefits": [
+        "La spécialisation permet à chaque agent d'être plus simple, mieux évalué et plus facile à attribuer qu'un agent monolithique unique.",
+        "Un superviseur doté d'une fonction de hiérarchisation gère les travaux multi-étapes comportant de nombreuses dépendances, qu'un agent unique peinerait à ordonnancer.",
+        "L'état partagé et un registre rendent l'équipe auditable, avec une responsabilité claire et des capacités découvrables.",
+        "La supervision humaine et la gouvernance vous permettent d'adopter l'automatisation de manière progressive tout en limitant les risques."
+      ],
+      "risks": [
+        "Le coût de coordination augmente de manière non linéaire ; multiplier les agents et les transferts peut accroître la latence et cumuler les erreurs.",
+        "Une erreur chez un agent peut se propager en cascade à toute l'équipe, élargissant ainsi le rayon d'impact de la défaillance.",
+        "Sans registre d'agents ni responsabilité claire, le comportement devient opaque et personne n'est tenu pour responsable.",
+        "Les gains de productivité revendiqués peuvent être illusoires s'ils sont mesurés par tâche plutôt que par rapport à une référence humaine de bout en bout honnête."
+      ],
+      "failureModes": [
+        "Défaillance en cascade : un résultat intermédiaire erroné est considéré comme fiable en aval et corrompt la sortie finale.",
+        "Impasse ou boucles de coordination : les agents s'attendent mutuellement ou redélèguent indéfiniment la même sous-tâche.",
+        "État partagé perdu ou obsolète : les agents agissent sur la base d'un contexte obsolète et produisent des résultats incohérents.",
+        "Défauts d'escalade : un agent poursuit une tâche à enjeux élevés au lieu de passer le relais à un humain."
+      ],
+      "lessons": [
+        "Commencez par la plus petite équipe fonctionnelle et n'ajoutez des spécialistes que lorsqu'il est prouvé qu'un agent unique ne peut pas faire face.",
+        "Investissez tôt dans le registre d'agents, la responsabilité et les contrats d'état partagé ; ce sont eux qui rendent le système gouvernable.",
+        "Évaluez l'ensemble de la main-d'œuvre de bout en bout, et pas seulement les agents individuels, car c'est au niveau de la coordination que le système fléchit.",
+        "Concevez l'escalade et les limites du rayon d'impact dès le premier jour, plutôt que de greffer une gouvernance après un incident."
+      ],
+      "kpis": [
+        {
+          "metric": "Taux de réussite des tâches de bout en bout",
+          "note": "Part des tâches correctement accomplies sans correction humaine ; la mesure principale pour savoir si l'équipe fonctionne réellement."
+        },
+        {
+          "metric": "Taux d'escalade",
+          "note": "Fraction des tâches confiées à des humains ; un taux trop élevé indique une automatisation faible, un taux trop bas peut signifier une sur-automatisation risquée."
+        },
+        {
+          "metric": "Taux de retravail / correction",
+          "note": "Fréquence à laquelle les sorties sont renvoyées ou corrigées ; une hausse du retravail signale des erreurs en cascade ou une assurance qualité insuffisante."
+        },
+        {
+          "metric": "Coût par tâche finalisée",
+          "note": "Coût total des modèles, des outils et de la révision humaine par tâche terminée ; l'économie unitaire réelle derrière les revendications de productivité."
+        },
+        {
+          "metric": "Surcharge de coordination",
+          "note": "Latence et coût en jetons supplémentaires générés par les transferts par rapport à une référence d'agent unique ; observez sa croissance avec la taille de l'équipe."
+        }
+      ],
+      "scaling": [
+        "Passez à l'échelle en ajoutant des agents spécialisés derrière le registre, mais traitez chaque ajout comme une nouvelle surface de coordination à évaluer.",
+        "Partitionnez le travail afin que les sous-tâches indépendantes s'exécutent en parallèle tout en préservant la cohérence de l'état partagé.",
+        "Appliquez des délais d'expiration, des tentatives avec retrait (backoff) et des disjoncteurs pour qu'un agent lent ou défaillant ne bloque pas l'ensemble de la tâche.",
+        "Échelonnez la supervision humaine : examen plus léger pour les tâches à faibles enjeux, jalons d'approbation obligatoires pour celles qui sont irréversibles ou sensibles."
+      ],
+      "examples": [
+        "Un flux de travail de recherche et de rapport dans lequel un superviseur délègue la collecte, la synthèse et l'assurance qualité de vérification des faits à des agents distincts.",
+        "Un pipeline de réponse client qui rédige des réponses mais oriente les cas sensibles en matière de conformité vers un jalon d'approbation humaine.",
+        "Une équipe d'agents de back-office opérationnel qui trie les tickets, prépare les actions et fait remonter les exceptions au personnel."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il d'un agent IA unique ?",
+          "a": "Un agent unique gère lui-même l'ensemble du raisonnement et de l'utilisation des outils. Une main-d'œuvre IA est constituée de nombreux agents coordonnés sous la direction d'un superviseur qui décompose les objectifs, délègue aux spécialistes, partage l'état et gouverne toute l'équipe ; les problèmes complexes résident dans la coordination, la responsabilité et le rayon d'impact, plutôt que dans la capacité d'un agent individuel."
+        },
+        {
+          "q": "Est-ce qu'un plus grand nombre d'agents rend toujours le système plus performant ?",
+          "a": "Non. Chaque agent supplémentaire introduit des transferts, de la latence et de nouveaux risques de défaillance. N'ajoutez des spécialistes que lorsqu'il est prouvé qu'une équipe plus simple ne peut pas effectuer le travail, et mesurez la surcharge de coordination afin que le coût de l'orchestration ne dépasse pas ses bénéfices."
+        },
+        {
+          "q": "Comment mesurer les gains de productivité réels ?",
+          "a": "Mesurez de bout en bout par rapport à une référence humaine objective : taux de réussite des tâches, escalades, retouches et coût par tâche accomplie. Les gains de vitesse par tâche peuvent masquer les corrections en aval et le temps de révision ; ne comptabilisez donc que les gains qui subsistent après une évaluation complète de bout en bout."
+        }
+      ]
+    },
+    "de": {
+      "name": "AI Workforce",
+      "summary": "Eine AI Workforce ist ein orchestriertes Team spezialisierter Agenten, die unter der Leitung eines Supervisors bei mehrstufigen Geschäftsprozessen zusammenarbeiten. Der Supervisor zerlegt ein Ziel, priorisiert und delegiert Teilaufgaben an spezialisierte Agenten (Recherche, Entwurf, QS), und diese teilen ihren Zustand über einen gemeinsamen Speicher. Agenten eskalieren an Menschen, wenn sie an ihre Grenzen stoßen, und jeder Schritt ist beobachtbar und gesteuert. Betrachten Sie dies wie das Management digitaler Mitarbeiter: Der Erfolg hängt weniger von einem einzelnen Agenten ab, sondern vielmehr von der Koordination, einer klaren Verantwortlichkeit über ein Agenten-Registry, menschlicher Aufsicht und der Bewertung des gesamten Teams anstelle einzelner Teile.",
+      "keyConcepts": [
+        "Ein Supervisor zerlegt Ziele und delegiert sie an spezialisierte Agenten, anstatt dass ein einzelner Agent alles erledigt.",
+        "Ein gemeinsamer Zustand (Shared State) und ein Agenten-Registry verleihen dem Team ein Gedächtnis, klare Verantwortlichkeiten und auffindbare Fähigkeiten.",
+        "Menschliche Aufsicht, Eskalation und Governance begrenzen den Schadensradius (Blast Radius), wenn Agenten fehlerhaft agieren.",
+        "Sie bewerten und messen die Workforce als System und nicht jeden Agenten isoliert."
+      ],
+      "definition": "Die AI-Workforce-Architektur ist ein gesteuertes Multi-Agenten-System, in dem ein Supervisor Ziele zerlegt und priorisierte Teilaufgaben an spezialisierte Agenten delegiert, die einen gemeinsamen Zustand teilen, an Menschen eskalieren und durchgängig (End-to-End) überwacht werden.",
+      "architecture": [
+        "Im Zentrum steht ein Supervisor (oder Orchestrator), der ein Geschäftsziel empfängt, es in einen Plan aus Teilaufgaben zerlegt, diese priorisiert und jede an den am besten geeigneten spezialisierten Agenten weiterleitet. Spezialisten – beispielsweise Agenten für Recherche, Entwurf, QS und Tool-Nutzung – sind in einem Agenten-Registry registriert. Dieses erfasst die Fähigkeiten, Eingaben, Ausgaben, Kosten und Verantwortlichen jedes Agenten, sodass der Supervisor sie finden und auswählen kann und Menschen die Verantwortung für deren Verhalten zuweisen können.",
+        "Agenten übergeben nicht alles über Prompts. Sie lesen und schreiben in einen gemeinsamen Speicher oder Zustandsspeicher (State Store), der den sich entwickelnden Aufgabenkontext, Zwischenergebnisse und Entscheidungen enthält. Dieser gemeinsame Zustand macht aus einer losen Sammlung von Agenten erst ein Team: Er wahrt die Kontinuität über Schritte hinweg, lässt Agenten auf der Arbeit der anderen aufbauen und bietet eine Single Source of Truth für Observability und Audits. Guardrails befinden sich zwischen Agenten und Tools oder Daten, um Aktionen einzuschränken, Ausgaben zu validieren und unsichere Operationen zu verhindern.",
+        "Das gesamte System wird von menschlicher Aufsicht und Governance umrahmt. Definierte Eskalationspfade ermöglichen es einem Agenten, an eine Person zu übergeben, wenn das Vertrauen (Confidence) gering ist oder eine Aufgabe ein hohes Risiko birgt. Approval Gates erfordern eine menschliche Freigabe vor irreversiblen Aktionen. Observability (Traces, Evaluierungen, Kosten und Latenz pro Agent und Job) macht das Verhalten des Teams nachvollziehbar. Da Fehler bei einem Agenten kaskadieren können, begrenzt die Architektur den Schadensradius (Blast Radius) bewusst durch Scoping, Timeouts und Circuit-Breaker."
+      ],
+      "flow": [
+        "1. Erfassung (Intake): Ein Geschäftsziel oder ein Job geht im System ein, und der Supervisor erfasst diesen mit Kontext, Priorität und Verantwortlichkeit.",
+        "2. Zerlegung und Priorisierung: Der Supervisor zerlegt das Ziel in geordnete Teilaufgaben und stuft diese unter Berücksichtigung von Abhängigkeiten und Dringlichkeit ein.",
+        "3. Delegation: Jede Teilaufgabe wird an einen spezialisierten Agenten weitergeleitet, der basierend auf Fähigkeiten und Kosten aus dem Agenten-Registry ausgewählt wird.",
+        "4. Ausführung mit gemeinsamem Zustand: Agenten arbeiten mit durch Guardrails geschützten Tools und lesen bzw. schreiben in den gemeinsamen Speicher, sodass nachfolgende Agenten auf früheren Ergebnissen aufbauen.",
+        "5. Eskalation oder Freigabe: Wenn das Vertrauen gering ist oder viel auf dem Spiel steht, eskaliert ein Agent an einen Menschen oder wartet an einem Approval Gate.",
+        "6. Zusammenführung, Verifizierung und Abschluss: Ein QS-Schritt prüft die kombinierte Ausgabe, der Supervisor schließt den Job ab, und Traces sowie Metriken werden zur Evaluierung ausgegeben."
+      ],
+      "components": [
+        "Supervisor / Orchestrator, der plant und delegiert",
+        "Agenten-Registry von Spezialisten mit Verantwortlichen und Fähigkeiten",
+        "Spezialisierte Agenten (Recherche, Entwurf, QS, Tool-Nutzung)",
+        "Gemeinsamer Speicher / Zustandsspeicher (State Store) für den Aufgabenkontext",
+        "Guardrails für Tools, Daten und Ausgaben",
+        "Menschliche Aufsicht: Eskalationspfade und Approval Gates",
+        "Observability und Evaluierung über die gesamte Workforce hinweg"
+      ],
+      "referenceScenario": {
+        "context": "Ein mittelständisches Unternehmen möchte die Erstellung von kundenorientierten Richtlinien-Antworten automatisieren, die heute einen Recherche-Schritt, einen Entwurfs-Schritt und eine Compliance-Prüfung erfordern, bevor ein Mensch sie freigibt.",
+        "scenario": "Ein Ziel geht im System ein; der Supervisor zerlegt es in Teilaufgaben für Recherche, Entwurf und QS, delegiert diese jeweils an einen spezialisierten Agenten und leitet alle compliance-relevanten Aspekte vor der Veröffentlichung an ein menschliches Approval Gate weiter.",
+        "technology": "LangGraph für die Multi-Agenten-Orchestrierung, ein Agenten-Registry zur Erkennung von Fähigkeiten und Verantwortlichkeiten, ein gemeinsamer Zustandsspeicher für den Aufgabenkontext, Guardrails für Retrieval und Tools sowie LangSmith oder Langfuse für Tracing und Evaluierung.",
+        "load": "Beispielhaftes Volumen von einigen tausend Jobs pro Woche, mit Spitzenwerten während der Geschäftszeiten und einem Long-Tail komplexer Jobs, die eine menschliche Eskalation erfordern.",
+        "results": "Alle hier genannten Zahlen sind Richtwerte zur Instrumentierung und Messung in Ihrer eigenen Umgebung, keine Garantien: Versuchen Sie, den End-to-End-Erfolg von Jobs, die Eskalationsrate, die Nacharbeitsquote und die Kosten pro abgeschlossenem Job zu erfassen und diese mit einer menschlichen Baseline abzugleichen, bevor Sie Produktivitätssteigerungen geltend machen."
+      },
+      "benefits": [
+        "Spezialisierung sorgt dafür, dass jeder Agent einfacher aufgebaut, besser zu evaluieren und leichter zu verwalten ist als ein einzelner monolithischer Agent.",
+        "Ein Supervisor mit Priorisierungsfunktion bewältigt mehrstufige, von Abhängigkeiten geprägte Aufgaben, bei denen ein einzelner Agent Schwierigkeiten mit der Sequenzierung hätte.",
+        "Ein gemeinsamer Zustand und ein Registry machen das Team auditierbar, mit klaren Verantwortlichkeiten und auffindbaren Fähigkeiten.",
+        "Menschliche Aufsicht und Governance ermöglichen es Ihnen, Automatisierung schrittweise einzuführen und gleichzeitig Risiken zu begrenzen."
+      ],
+      "risks": [
+        "Die Koordinationskosten steigen nicht-linear; mehr Agenten und Übergaben können zu zusätzlicher Latenz und einer Fehlerkumulation führen.",
+        "Ein Fehler in einem Agenten kann sich über das gesamte Team kaskadenartig ausbreiten und den Schadensradius des Ausfalls vergrößern.",
+        "Ohne ein Agenten-Registry und klare Verantwortlichkeiten wird das Verhalten intransparent und niemand übernimmt die Verantwortung.",
+        "Produktivitätsversprechen können illusorisch sein, wenn sie pro Aufgabe gemessen werden und nicht im Vergleich zu einer ehrlichen, durchgängigen menschlichen Baseline."
+      ],
+      "failureModes": [
+        "Kaskadierender Fehler: Ein falsches Zwischenergebnis wird im weiteren Verlauf als vertrauenswürdig eingestuft und verfälscht die endgültige Ausgabe.",
+        "Koordinations-Deadlock oder Endlosschleifen: Agenten warten aufeinander oder delegieren dieselbe Teilaufgabe unendlich oft neu.",
+        "Verlorener oder veralteter gemeinsamer Zustand: Agenten agieren auf Basis eines veralteten Kontexts und erzeugen inkonsistente Ergebnisse.",
+        "Eskalationslücken: Ein Agent fährt mit einer risikoreichen Aufgabe fort, anstatt sie an einen Menschen zu übergeben."
+      ],
+      "lessons": [
+        "Beginnen Sie mit dem kleinstmöglichen funktionierenden Team und fügen Sie Spezialisten erst dann hinzu, wenn ein einzelner Agent nachweislich überfordert ist.",
+        "Investieren Sie frühzeitig in das Agenten-Registry, Verantwortlichkeiten und Verträge für den gemeinsamen Zustand (Shared-State Contracts); sie machen das System erst steuerbar.",
+        "Evaluieren Sie die gesamte Workforce durchgängig (End-to-End) und nicht nur einzelne Agenten, da Fehler meist bei der Koordination auftreten.",
+        "Konzipieren Sie Eskalationspfade und Grenzen für den Schadensradius vom ersten Tag an, anstatt Governance erst nach einem Vorfall hinzuzufügen."
+      ],
+      "kpis": [
+        {
+          "metric": "End-to-End-Erfolgsquote von Jobs",
+          "note": "Anteil der korrekt abgeschlossenen Jobs ohne menschliche Korrektur; die wichtigste Kennzahl dafür, ob das Team tatsächlich funktioniert."
+        },
+        {
+          "metric": "Eskalationsrate",
+          "note": "Anteil der an Menschen übergebenen Jobs; ein zu hoher Wert deutet auf eine schwache Automatisierung hin, ein zu niedriger Wert kann eine unsichere Überautomatisierung bedeuten."
+        },
+        {
+          "metric": "Nacharbeits- / Korrekturquote",
+          "note": "Wie oft Ausgaben zurückgesendet oder korrigiert werden; eine steigende Nacharbeitsquote signalisiert kaskadierende Fehler oder eine schwache QS."
+        },
+        {
+          "metric": "Kosten pro abgeschlossenem Job",
+          "note": "Gesamtkosten für Modell, Tools und menschliche Überprüfung pro fertiggestelltem Job; die tatsächliche Unit Economics hinter Produktivitätsversprechen."
+        },
+        {
+          "metric": "Koordinations-Overhead",
+          "note": "Zusätzliche Latenz und Token-Kosten durch Übergaben im Vergleich zu einer Einzel-Agenten-Baseline; beobachten Sie, wie dieser Wert mit der Teamgröße wächst."
+        }
+      ],
+      "scaling": [
+        "Skalieren Sie, indem Sie spezialisierte Agenten hinter dem Registry hinzufügen, aber betrachten Sie jede Hinzufügung als neue zu evaluierende Koordinationsfläche.",
+        "Teilen Sie die Arbeit so auf, dass unabhängige Teilaufgaben parallel ausgeführt werden, während die Konsistenz des gemeinsamen Zustands gewahrt bleibt.",
+        "Wenden Sie Timeouts, Retries mit Backoff und Circuit-Breaker an, damit ein langsamer oder ausfallender Agent nicht den gesamten Job blockiert.",
+        "Menschliche Aufsicht staffeln: Leichtere Überprüfung bei risikoarmen Jobs, obligatorische Approval Gates bei irreversiblen oder sensiblen Aufgaben."
+      ],
+      "examples": [
+        "Ein Recherche- und Berichtsworkflow, bei dem ein Supervisor das Sammeln, Synthetisieren und die QS zur Faktenprüfung an separate Agenten delegiert.",
+        "Eine Pipeline für Kundenantworten, die Entwürfe erstellt, aber compliance-relevante Fälle an ein menschliches Approval Gate weiterleitet.",
+        "Ein Operations-Backoffice-Team aus Agenten, die Tickets triagieren, Aktionen vorbereiten und Ausnahmen an Mitarbeiter eskalieren."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies von einem einzelnen KI-Agenten?",
+          "a": "Ein einzelner Agent übernimmt das gesamte Reasoning und die Tool-Nutzung selbst. Eine AI Workforce besteht aus vielen koordinierten Agenten unter einem Supervisor, der Ziele zerlegt, an Spezialisten delegiert, den Zustand teilt und das gesamte Team steuert. Die eigentlichen Herausforderungen liegen in der Koordination, der Verantwortlichkeit und dem Schadensradius (Blast Radius) und weniger in den Fähigkeiten eines einzelnen Agenten."
+        },
+        {
+          "q": "Führen mehr Agenten immer zu einem besseren System?",
+          "a": "Nein. Jeder zusätzliche Agent bringt Übergaben, Latenz und neue Fehlerquellen mit sich. Fügen Sie Spezialisten nur dann hinzu, wenn ein einfacheres Team die Arbeit nachweislich nicht bewältigen kann, und messen Sie den Koordinationsaufwand, damit die Kosten der Orchestrierung nicht deren Nutzen übersteigen."
+        },
+        {
+          "q": "Wie messen wir echte Produktivitätssteigerungen?",
+          "a": "Messen Sie End-to-End im Vergleich zu einer ehrlichen menschlichen Baseline: Erfolg der Aufgabe, Eskalation, Nacharbeit und Kosten pro abgeschlossener Aufgabe. Beschleunigungen auf Task-Ebene können nachgelagerte Korrekturen und Review-Zeiten verschleiern. Berücksichtigen Sie daher nur Gewinne, die einer vollständigen End-to-End-Evaluierung standhalten."
+        }
+      ]
+    },
+    "ja": {
+      "name": "AIワークフォース",
+      "summary": "AIワークフォースとは、スーパーバイザー（監督者）のもとで、複数ステップのビジネスプロセスを協調して実行する、専門化されたエージェントのオーケストレーションされたチームです。スーパーバイザーは目標を分解し、優先順位を付けて、専門エージェント（調査、起草、QAなど）にサブタスクを委任します。各エージェントは共通のストアを介して状態（ステート）を共有します。エージェントは自身の能力を超える場合に人間へエスカレーションし、すべてのステップが観察可能（オブザーバブル）かつガバナンスの対象となります。これはデジタルワーカーの管理として捉えるべきです。成功するかどうかは、個々のエージェントの能力よりも、コーディネーション、エージェントレジストリによる明確な所有権、人間による監視、および個々のパーツではなくチーム全体を評価することにかかっています。",
+      "keyConcepts": [
+        "1つのエージェントがすべてを行うのではなく、スーパーバイザーが目標を分解し、専門エージェントに委任します。",
+        "共有状態とエージェントレジストリにより、チームにメモリ、明確な所有権、および検出可能な機能が提供されます。",
+        "人間による監視、エスカレーション、およびガバナンスにより、エージェントが誤った行動をとった際の影響範囲（ブラスト半径）を制限します。",
+        "ワークフォースを個々のエージェントとして切り離して評価するのではなく、1つのシステムとして評価および測定します。"
+      ],
+      "definition": "AIワークフォースアーキテクチャとは、統制されたマルチエージェントシステムであり、スーパーバイザーが目標を分解し、優先順位付けされたサブタスクを専門エージェントに委任します。これらのエージェントは状態を共有し、人間へのエスカレーションを行い、エンドツーエンドで観察されます。",
+      "architecture": [
+        "その中心に位置するのが、ビジネス目標を受け取り、それをサブタスクの計画に分解し、優先順位を付け、それぞれを最適な専門エージェントにルーティングするスーパーバイザー（またはオーケストレーター）です。専門エージェント（調査、起草、QA、ツール実行エージェントなど）はエージェントレジストリに登録されます。このレジストリには、各エージェントの機能、入力、出力、コスト、および所有者が記録されるため、スーパーバイザーはそれらを検出して選択でき、人間はその振る舞いに対する責任の所在を明らかにできます。",
+        "エージェントは、すべての情報をプロンプト経由で受け渡すわけではありません。進行中のジョブコンテキスト、中間成果物、および意思決定を保持する共有メモリまたは状態ストアの読み書きを行います。この共有状態こそが、単なるエージェントの集まりをチームへと変える要素です。ステップ間の連続性を維持し、エージェントが互いの成果を基に作業できるようにし、オブザーバビリティと監査に「信頼できる唯一の情報源（Single Source of Truth）」を提供します。エージェントとツールまたはデータの間にガードレールを配置することで、アクションを制限し、出力を検証し、安全でない操作を防止します。",
+        "システム全体を包み込むのが、人間による監視とガバナンスです。定義されたエスカレーションパスにより、信頼度が低い場合やリスクの高いタスクにおいて、エージェントから人間へと処理を引き継ぐことができます。また、承認ゲートにより、取り返しのつかないアクションを実行する前に人間の承認を義務付けます。オブザーバビリティ（トレース、評価、エージェントごとおよびジョブごとのコストとレイテンシ）により、チームの振る舞いが可視化されます。1つのエージェントの失敗が連鎖する可能性があるため、このアーキテクチャでは、スコープ制限、タイムアウト、サーキットブレーカーを通じて、影響範囲（ブラスト半径）を意図的に制限します。"
+      ],
+      "flow": [
+        "1. インテーク（受付）: ビジネス目標またはジョブがシステムに入力され、スーパーバイザーがコンテキスト、優先順位、および所有権とともにそれを記録します。",
+        "2. 分解と優先順位付け: スーパーバイザーは、依存関係と緊急度を考慮しながら、目標を順序付けされたサブタスクに分解し、ランク付けします。",
+        "3. 委任: 各サブタスクは、機能とコストに基づいてエージェントレジストリから選択された専門エージェントにルーティングされます。",
+        "4. 共有状態による実行: エージェントはガードレールで保護されたツールを使用して作業し、共有ストアの読み書きを行うことで、後続のエージェントが先行する結果を利用できるようにします。",
+        "5. エスカレーションまたは承認: 信頼度が低い場合やリスクが高い場合、エージェントは人間にエスカレーションするか、承認ゲートで待機します。",
+        "6. 統合、検証、およびクローズ: QAステップで統合された出力を検証し、スーパーバイザーがジョブを完了させ、評価用のトレースとメトリクスを出力します。"
+      ],
+      "components": [
+        "計画と委任を行うスーパーバイザー / オーケストレーター",
+        "所有者と機能を管理する専門エージェントのエージェントレジストリ",
+        "専門エージェント（調査、起草、QA、ツール実行）",
+        "ジョブコンテキスト用の共有メモリ / 状態ストア",
+        "ツール、データ、および出力に対するガードレール",
+        "人間による監視: エスカレーションパスと承認ゲート",
+        "ワークフォース全体のオブザーバビリティと評価"
+      ],
+      "referenceScenario": {
+        "context": "中規模企業において、現在は人間が承認する前に調査ステップ、起草ステップ、およびコンプライアンスレビューを必要としている、顧客向けのポリシー回答の起草を自動化したいと考えています。",
+        "scenario": "目標がシステムに入力されると、スーパーバイザーはそれを調査、起草、QAのサブタスクに分解し、それぞれを専門エージェントに委任します。また、コンプライアンスに影響するものはすべて、リリース前に人間による承認ゲートにルーティングします。",
+        "technology": "マルチエージェントオーケストレーション用のLangGraph、機能検出と所有権管理用のエージェントレジストリ、ジョブコンテキスト用の共有状態ストア、検索とツールに対するガードレール、およびトレースと評価用のLangSmithまたはLangfuse。",
+        "load": "週に数千件のジョブという想定ボリューム。営業時間中にスパイクが発生し、人間へのエスカレーションを必要とする複雑なジョブのロングテールが存在します。",
+        "results": "ここに記載されているすべての数値は、ご自身の環境で計測・測定するための参照ターゲットであり、保証値ではありません。生産性の向上を主張する前に、エンドツーエンドのジョブ成功率、エスカレーション率、手戻り率、および完了ジョブあたりのコストを追跡し、人間の基準値（ベースライン）と比較して検証することを目指してください。"
+      },
+      "benefits": [
+        "専門化により、1つのモノリシックなエージェントよりも、各エージェントをシンプルにし、適切に評価し、所有権を管理しやすくすることができます。",
+        "優先順位付けを行うスーパーバイザーが、単一のエージェントでは順序立てて処理することが困難な、依存関係の多い複数ステップの作業を処理します。",
+        "共有状態とレジストリにより、明確な所有権と検出可能な機能が提供され、チームの監査が可能になります。",
+        "人間による監視とガバナンスにより、リスクを制限しながら段階的に自動化を導入できます。"
+      ],
+      "risks": [
+        "コーディネーションコストは非線形に増加します。エージェントやハンドオフが増えると、レイテンシが増加し、エラーが複合化する可能性があります。",
+        "1つのエージェントのエラーがチーム全体に連鎖し、障害の影響範囲（ブラスト半径）が拡大する可能性があります。",
+        "エージェントレジストリと明確な所有権がないと、振る舞いが不透明になり、責任の所在が曖昧になります。",
+        "タスク単位で測定し、エンドツーエンドでの人間による実際の基準値（ベースライン）と比較しない場合、生産性の向上という主張は錯覚にすぎない可能性があります。"
+      ],
+      "failureModes": [
+        "連鎖的障害: 誤った中間結果が後続のプロセスで信頼され、最終的な出力を破損させます。",
+        "コーディネーションのデッドロックまたはループ: エージェントが互いに待機し合ったり、同じサブタスクを無期限に再委任し合ったりします。",
+        "共有状態の喪失または陳腐化: エージェントが古いコンテキストに基づいて動作し、一貫性のない結果を生成します。",
+        "エスカレーションの欠落: エージェントが人間に引き継ぐべきリスクの高いタスクを、そのまま実行してしまいます。"
+      ],
+      "lessons": [
+        "まずは機能する最小限 of チームから開始し、単一のエージェントでは明らかに対処できない場合にのみ専門エージェントを追加します。",
+        "エージェントレジストリ、所有権、および共有状態のコントラクトに早期に投資してください。これらがシステムを統制可能にする要素です。",
+        "個々のエージェントだけでなく、ワークフォース全体をエンドツーエンドで評価してください。破綻が生じるのはコーディネーションの部分だからです。",
+        "インシデントが発生した後にガバナンスを後付けするのではなく、初日からエスカレーションと影響範囲（ブラスト半径）の制限を設計してください。"
+      ],
+      "kpis": [
+        {
+          "metric": "エンドツーエンドのジョブ成功率",
+          "note": "人間の修正なしで正しく完了したジョブの割合。チームが実際に機能しているかどうかを示す主要な指標です。"
+        },
+        {
+          "metric": "エスカレーション率",
+          "note": "人間に引き継がれたジョブの割合。高すぎる場合は自動化が不十分であることを意味し、低すぎる場合は安全でない過剰な自動化が行われている可能性があります。"
+        },
+        {
+          "metric": "手戻り / 修正率",
+          "note": "出力が差し戻されたり修正されたりする頻度。手戻りの増加は、連鎖的なエラーや不十分なQAを示しています。"
+        },
+        {
+          "metric": "完了ジョブあたりのコスト",
+          "note": "完了したジョブあたりのモデル、ツール、および人間によるレビューの総コスト。生産性向上の主張の背後にある、実際のユニットエコノミクスです。"
+        },
+        {
+          "metric": "コーディネーションオーバーヘッド",
+          "note": "単一エージェントの基準値（ベースライン）と比較した、ハンドオフによる追加のレイテンシとトークンコスト。チームの規模に合わせて増加するため、監視が必要です。"
+        }
+      ],
+      "scaling": [
+        "レジストリの配下に専門エージェントを追加することでスケールさせますが、追加するたびに評価すべき新たなコーディネーション領域（サーフェス）として扱ってください。",
+        "共有状態の一貫性を維持しながら、独立したサブタスクが並行して実行されるように作業を分割します。",
+        "タイムアウト、バックオフ付きリトライ、およびサーキットブレーカーを適用し、処理の遅いエージェントや失敗したエージェントがジョブ全体を停滞させないようにします。",
+        "人間による監視を階層化します。リスクの低いジョブには軽めのレビューを、取り返しのつかないジョブや機密性の高いジョブには必須の承認ゲートを設けます。"
+      ],
+      "examples": [
+        "スーパーバイザーが収集、統合、およびファクトチェックQAをそれぞれ別個のエージェントに委任する、調査およびレポート作成のワークフロー。",
+        "回答を起草するものの、コンプライアンスに影響するケースは人間による承認ゲートにルーティングする、顧客対応パイプライン。",
+        "チケットのトリアージ、アクションの準備を行い、例外事項をスタッフにエスカレーションする、エージェントによるオペレーションバックオフィスチーム。"
+      ],
+      "faqs": [
+        {
+          "q": "単一のAIエージェントと何が違うのですか？",
+          "a": "単一のエージェントは、すべての推論とツールの使用を自身で行います。AIワークフォースは、スーパーバイザーのもとで協調して動作する複数のエージェントであり、スーパーバイザーが目標を分解し、専門エージェントに委任し、状態を共有し、チーム全体を統制します。ここでの困難な課題は、個々のエージェントの能力ではなく、コーディネーション、所有権、および影響範囲（ブラスト半径）の管理にあります。"
+        },
+        {
+          "q": "エージェントを増やせば、システムは常に向上しますか？",
+          "a": "いいえ。エージェントを追加するたびに、ハンドオフ、レイテンシー、そして新たな障害要因が発生します。よりシンプルなチームでは明らかに業務を遂行できない場合にのみスペシャリストを追加し、オーケストレーションのコストがそのメリットを上回らないよう、調整オーバーヘッドを測定してください。"
+        },
+        {
+          "q": "実際の生産性向上はどのように測定すればよいですか？",
+          "a": "業務の成功率、エスカレーション、手戻り、完了した業務あたりのコストなど、信頼できる人間の基準（ベースライン）と比較してエンドツーエンドで測定します。タスクごとの速度向上は、下流での修正やレビュー時間を隠蔽してしまう可能性があるため、完全なエンドツーエンドの評価をクリアした向上分のみをカウントしてください。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "AI 员工",
+      "summary": "AI 员工是由专业智能体协同组成的编排团队，在主管智能体的领导下协作处理多步骤业务流程。主管智能体负责分解目标，并将子任务按优先级分配给专业智能体（如研究、起草、QA），它们通过公共存储共享状态。当智能体能力不足时会升级上报给人类，且每个步骤都是可观测和受治理的。应将其视为管理数字化员工：成功较少取决于单个智能体，而更多取决于协同、通过智能体注册表确立的清晰权责归属、人类监督以及对整个团队而非局部进行评估。",
+      "keyConcepts": [
+        "由主管智能体分解目标并分派给专业智能体，而不是由单个智能体包揽所有工作。",
+        "共享状态和智能体注册表为团队提供了记忆、清晰的权责归属以及可发现的能力。",
+        "人类监督、升级上报和治理机制可以在智能体行为失当时限制爆炸半径。",
+        "您需要将 AI 员工作为一个系统进行评估和衡量，而不是孤立地评估每个智能体。"
+      ],
+      "definition": "AI 员工架构是一个受治理的多智能体系统，其中主管智能体负责分解目标，并将排好优先级的子任务分派给专业智能体。这些智能体共享状态、可升级上报给人类，并接受端到端的观测。",
+      "architecture": [
+        "核心是一个主管（或编排器）智能体，它接收业务目标，将其分解为子任务计划，排列优先级，并将每个子任务路由给最适合的专业智能体。专业智能体（例如研究、起草、QA 和工具智能体）注册在智能体注册表中，该注册表记录了每个智能体的能力、输入、输出、成本和所有者，以便主管智能体进行发现和选择，并让人类对智能体行为进行问责。",
+        "智能体并不完全通过提示词传递所有内容。它们读写共享内存或状态存储，其中保存着不断演进的任务上下文、中间产物和决策。这种共享状态将松散的智能体集合凝聚成一个团队：它保持了步骤之间的连续性，让智能体能够基于彼此的工作成果继续推进，并为可观测性和审计提供了单一可信源。护栏介于智能体与工具或数据之间，用以约束行为、验证输出并防止不安全的操作。",
+        "人类监督和治理贯穿整个系统。明确的升级上报路径允许智能体在置信度较低或任务风险较高时移交给人类，而审批关卡则要求在执行不可逆操作之前获得人类的签字批准。可观测性（每个智能体和每个任务的追踪、评估、成本和延迟）使团队的行为清晰可见。由于单个智能体的故障可能会级联放大，该架构通过限制范围、设置超时和熔断器来刻意限制爆炸半径。"
+      ],
+      "flow": [
+        "1. 准入：业务目标或任务进入系统，主管智能体记录其上下文、优先级和所有权。",
+        "2. 分解与排序：主管智能体将目标分解为有序的子任务，并结合依赖关系和紧急程度进行优先级排序。",
+        "3. 分派：根据能力和成本，从智能体注册表中选择合适的专业智能体，并将每个子任务路由给它。",
+        "4. 结合共享状态执行：智能体在受护栏保护的工具下工作，读写共享存储，以便后续智能体基于先前的结果继续构建。",
+        "5. 升级或审批：当置信度较低或风险较高时，智能体会在审批关卡处等待，或升级上报给人类。",
+        "6. 组装、验证与关闭：QA 步骤检查合并后的输出，主管智能体结束任务，并输出追踪和指标以供评估。"
+      ],
+      "components": [
+        "负责规划和分派的主管/编排器",
+        "包含所有者和能力的专业智能体注册表",
+        "专业智能体（研究、起草、QA、工具）",
+        "用于任务上下文的共享内存/状态存储",
+        "针对工具、数据和输出的护栏",
+        "人类监督：升级上报路径和审批关卡",
+        "贯穿整个 AI 员工队伍的可观测性与评估"
+      ],
+      "referenceScenario": {
+        "context": "一家中型企业希望自动起草面向客户的政策答复，目前这需要经过研究、起草和合规审查步骤，最后由人工签字批准。",
+        "scenario": "目标进入系统；主管智能体将其分解为研究、起草和 QA 子任务，分别分派给对应的专业智能体，并在发布前将任何涉及合规敏感的内容路由到人工审批关卡。",
+        "technology": "使用 LangGraph 进行多智能体编排，使用智能体注册表进行能力发现和权责归属，使用共享状态存储保存任务上下文，针对检索和工具设置护栏，并使用 LangSmith 或 Langfuse 进行追踪和评估。",
+        "load": "示例业务量为每周数千个任务，在工作时间会出现峰值，并存在大量需要人工升级处理的复杂长尾任务。",
+        "results": "此处的所有数据均为在您自己的环境中进行检测和衡量的参考目标，并非保证：旨在跟踪端到端任务成功率、升级率、返工率以及每个已完成任务的成本，并在声称提高生产力之前对照人工基线进行验证。"
+      },
+      "benefits": [
+        "专业化使得每个智能体比单体智能体更简单、更容易评估且更容易确定权责归属。",
+        "具备优先级排序功能的主管智能体可以处理多步骤、充满依赖关系的工作，而单个智能体很难理清这些工作的顺序。",
+        "共享状态和注册表使团队具备可审计性，拥有清晰的权责归属和可发现的能力。",
+        "人类监督和治理让您能够在限制风险的同时，逐步引入自动化。"
+      ],
+      "risks": [
+        "协同成本呈非线性增长；更多的智能体和交接可能会增加延迟并导致错误累积。",
+        "单个智能体中的错误可能会在整个团队中级联，从而扩大故障的爆炸半径。",
+        "如果没有智能体注册表和清晰的权责归属，行为就会变得不透明，且无人负责。",
+        "如果仅按单项任务衡量，而不是对照真实的端到端人工基线，那么关于生产力提升的说法可能是虚幻的。"
+      ],
+      "failureModes": [
+        "级联故障：错误的中间结果被下游信任，从而破坏了最终输出。",
+        "协同死锁或循环：智能体相互等待，或无限期地重新分派同一个子任务。",
+        "共享状态丢失或过期：智能体基于过时的上下文采取行动，导致输出结果不一致。",
+        "升级遗漏：智能体继续执行高风险任务，而不是移交给人类。"
+      ],
+      "lessons": [
+        "从能够运转的最简团队开始，只有在证明单个智能体确实无法应对时，才增加专业智能体。",
+        "尽早投入建设智能体注册表、权责归属和共享状态契约；这些是使系统可治理的关键所在。",
+        "端到端地评估整个 AI 员工队伍，而不仅仅是单个智能体，因为协同往往是出现问题的地方。",
+        "从第一天起就设计好升级机制和爆炸半径限制，而不是在发生事故后才强行加入治理机制。"
+      ],
+      "kpis": [
+        {
+          "metric": "端到端任务成功率",
+          "note": "无需人工纠正即可正确完成的任务比例；这是衡量团队是否真正发挥作用的首要指标。"
+        },
+        {
+          "metric": "升级率",
+          "note": "移交给人类的任务比例；比例过高意味着自动化程度不足，过低则可能意味着存在不安全过度自动化的风险。"
+        },
+        {
+          "metric": "返工/纠正率",
+          "note": "输出被退回或修正的频率；返工率上升标志着级联错误或 QA 环节薄弱。"
+        },
+        {
+          "metric": "每个已完成任务的成本",
+          "note": "每个已完成任务的总模型、工具和人工审核成本；这是声称提高生产力背后的真实单体经济效益。"
+        },
+        {
+          "metric": "协同开销",
+          "note": "与单智能体基线相比，因交接而增加的延迟和 Token 成本；需密切关注其随团队规模扩大而增长的情况。"
+        }
+      ],
+      "scaling": [
+        "通过在注册表后添加专业智能体来进行扩展，但要将每次添加视为需要评估的新协同界面。",
+        "对工作进行分区，使独立的子任务并行运行，同时保持共享状态的一致性。",
+        "应用超时、带退避的重试以及熔断器，使缓慢或失败的智能体不会拖延整个任务。",
+        "对人类监督进行分级：对低风险任务进行较轻的审核，对不可逆或敏感任务设置强制审批关卡。"
+      ],
+      "examples": [
+        "研究与报告工作流，其中主管智能体将收集、综合和事实核查 QA 分派给不同的智能体。",
+        "客户回复流水线，负责起草回复，但将合规敏感的案例路由到人工审批关卡。",
+        "由智能体组成的运营后台团队，负责对工单进行分类、准备行动，并将异常情况升级上报给员工。"
+      ],
+      "faqs": [
+        {
+          "q": "这与单个 AI 智能体有什么不同？",
+          "a": "单个智能体自身完成所有的推理和工具使用。而 AI 员工是在主管智能体领导下协同工作的多个智能体，主管智能体负责分解目标、分派给专业智能体、共享状态并治理整个团队；其难点在于协同、权责归属和爆炸半径，而不是单个智能体的能力。"
+        },
+        {
+          "q": "智能体数量越多，系统就一定会越好吗？",
+          "a": "不一定。每增加一个智能体都会引入交接、延迟和新的故障点。只有在更简单的团队架构明显无法完成工作时，才引入专职智能体，并衡量协调开销，以确保编排成本不会超过其带来的收益。"
+        },
+        {
+          "q": "我们该如何衡量真正的生产力提升？",
+          "a": "对照真实的人工基准进行端到端衡量：任务成功率、升级率、返工率以及单次完成任务的成本。单项任务的提速可能会掩盖下游的纠错和审核时间，因此只有在通过完整的端到端评估后，才能将这些提升计入收益。"
+        }
       ]
     }
   }

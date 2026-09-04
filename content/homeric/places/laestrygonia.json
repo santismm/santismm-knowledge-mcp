@@ -89,6 +89,22 @@
         "pt": {
           "label": "Bonifácio, Córsega",
           "note": "O poema descreve um porto onde se entra entre dois promontórios tão próximos que a ondulação não penetra, com falésias dos dois lados: uma descrição costeira incomumente específica, e a enseada de Bonifácio lhe corresponde tão bem quanto qualquer lugar do Mediterrâneo. Nada mais sustenta a identificação, e “corresponde à descrição” é exatamente o argumento que falhou em outras fichas deste atlas."
+        },
+        "fr": {
+          "label": "Bonifacio, Corse",
+          "note": "Le poème décrit un port dans lequel on pénètre entre deux caps si proches que la houle n'y entre jamais, bordé de falaises des deux côtés — une description côtière d'une précision inhabituelle, et le goulet de Bonifacio y correspond aussi bien que n'importe quel endroit de la Méditerranée. Rien d'autre ne soutient cette identification, et « cela correspond à la description » est précisément l'argument qui a échoué ailleurs dans cet atlas."
+        },
+        "zh": {
+          "label": "科西嘉岛博尼法乔",
+          "note": "诗中描述了一个从两个极其接近的岬角之间进入的港口，以至于波浪从未涌入，两侧皆是悬崖——这是一段异常具体的海岸描述，而博尼法乔的入口与这一描述的吻合度不亚于地中海的任何地方。此外没有其他证据支持这一认定，而“它符合描述”恰恰是本图册中其他地方已被证伪的论点。"
+        },
+        "de": {
+          "label": "Bonifacio, Korsika",
+          "note": "Das Epos beschreibt einen Hafen, in den man zwischen zwei so nahe beieinander liegenden Landzungen einläuft, dass die Dünung nie eindringt, mit Klippen auf beiden Seiten – eine ungewöhnlich spezifische Küstenbeschreibung, und die Bucht von Bonifacio entspricht ihr so gut wie jeder andere Ort im Mittelmeer. Nichts anderes stützt die Identifizierung, und „es entspricht der Beschreibung“ ist genau das Argument, das an anderer Stelle in diesem Atlas gescheitert ist."
+        },
+        "ja": {
+          "label": "コルシカ島、ボニファシオ",
+          "note": "詩は、うねりが決して入らないほど接近した2つの岬の間から入る、両側が崖に囲まれた港を描写している。これは異例なほど具体的な海岸の描写であり、ボニファシオの入り江は地中海のどの場所よりもこれに合致している。それ以外にこの同定を支持するものはなく、『描写に合致する』という主張は、まさにこの地図帳の他の箇所で破綻している議論そのものである。"
         }
       }
     },
@@ -126,6 +142,22 @@
         "pt": {
           "label": "A costa lacial ou siciliana",
           "note": "A tradição literária romana ligou os lestrigões à costa de Fórmias, e Tucídides registra a reivindicação siciliana. Ambas são tradições sobre onde se dizia que um povo vivia, não provas sobre onde um episódio aconteceu."
+        },
+        "fr": {
+          "label": "La côte du Latium ou de la Sicile",
+          "note": "La tradition littéraire romaine rattachait les Lestrygons à la côte autour de Formies, et Thucydide rapporte la revendication sicilienne. Il s'agit dans les deux cas de traditions sur le lieu où un peuple était censé avoir vécu, et non de preuves sur le lieu où s'est déroulé un épisode."
+        },
+        "zh": {
+          "label": "拉提姆或西西里海岸",
+          "note": "罗马文学传统将莱斯特律戈尼亚人与福尔米亚（Formiae）周围的海岸联系在一起，修昔底德也记录了西西里人的说法。这两者都是关于据说某个民族曾居住于何处的传统，而非某个事件发生在哪里的证据。"
+        },
+        "de": {
+          "label": "Die latinische oder sizilianische Küste",
+          "note": "Die römische literarische Tradition verortete die Lästrygonen an der Küste um Formiae, und Thukydides berichtet von dem sizilianischen Anspruch. Beides sind Überlieferungen darüber, wo ein Volk gelebt haben soll, keine Beweise dafür, wo sich eine Episode zugetragen hat."
+        },
+        "ja": {
+          "label": "ラティウムまたはシチリアの海岸",
+          "note": "ローマの文学的伝統はライストリュゴネス族をフォルミアイ周辺の海岸に結びつけており、トゥキディデスはシチリア側の主張を報告している。どちらも、ある人々が住んでいたと言い伝えられている場所に関する伝統であり、エピソードがどこで起こったかを示す証拠ではない。"
         }
       }
     }
@@ -163,6 +195,46 @@
       ],
       "identificationNote": "Especulativa: pontuação textual 3, arqueológica 0 e sem consenso. Essa combinação é exatamente o que a rubrica do atlas existe para tornar visível: uma descrição vívida não é prova de uma localização.",
       "debate": "Se o detalhe das noites curtas preserva um relato nórdico real, e se uma descrição portuária pode alguma vez identificar um lugar num mar cheio de portos parecidos."
+    },
+    "fr": {
+      "name": "Lestrygonie (Télépyle)",
+      "summary": "Là où Ulysse perd onze de ses douze navires en un seul après-midi. Le port est le mouillage décrit avec la plus grande précision dans le poème, et personne ne peut prouver de quel endroit il s'agit.",
+      "description": [
+        "La flotte pénètre dans un port fermé au milieu des falaises ; seul Ulysse laisse son navire à l'extérieur. Les Lestrygons s'avèrent être des géants et détruisent les navires à l'intérieur avec des rochers jetés d'en haut. C'est la pire perte unique du voyage et la seule qui soit purement un piège géographique.",
+        "La description — l'entrée étroite, les parois abruptes, le calme à l'intérieur — ressemble à des instructions nautiques, c'est pourquoi Bonifacio a attiré l'identification. Le poème indique également que l'endroit connaît des nuits si courtes qu'un homme sans sommeil pourrait gagner un double salaire, un détail interprété par certains comme un souvenir de hautes latitudes et par d'autres comme de la pure fantaisie."
+      ],
+      "identificationNote": "Spéculative : un score textuel de 3, un score archéologique de 0, et aucun consensus. C'est précisément pour rendre visible cette combinaison que la rubrique de l'atlas existe — une description vivante n'est pas la preuve d'une localisation.",
+      "debate": "La question de savoir si le détail des nuits courtes conserve un véritable récit nordique, et si la description d'un port peut un jour identifier un lieu dans une mer qui regorge de ports similaires."
+    },
+    "de": {
+      "name": "Lästrygonien (Telepylos)",
+      "summary": "Wo Odysseus an einem einzigen Nachmittag elf seiner zwölf Schiffe verliert. Der Hafen ist der am präzisesten beschriebene Ankerplatz im Epos, und niemand kann beweisen, um welchen es sich handelt.",
+      "description": [
+        "Die Flotte läuft in einen von Klippen umschlossenen Hafen ein; nur Odysseus lässt sein Schiff außerhalb. Die Lästrygonen entpuppen sich als Riesen und zerstören die Schiffe im Inneren mit von oben herabgeworfenen Felsbrocken. Es ist der schwerste Einzelverlust der Reise und der einzige, der eine reine Falle der Geografie ist.",
+        "Die Beschreibung – die schmale Einfahrt, die steilen Wände, die Windstille im Inneren – liest sich wie ein Seehandbuch, weshalb Bonifacio für diese Identifizierung herangezogen wurde. Das Epos besagt auch, dass der Ort so kurze Nächte hat, dass ein schlafloser Mann den doppelten Lohn verdienen könnte – ein Detail, das von einigen als Erinnerung an hohe Breitengrade und von anderen als reine Fantasie gedeutet wird."
+      ],
+      "identificationNote": "Spekulativ: eine Textbewertung von 3, eine archäologische Bewertung von 0 und kein Konsens. Diese Kombination soll durch die Rubrik des Atlas sichtbar gemacht werden – eine lebendige Beschreibung ist kein Beweis für einen Ort.",
+      "debate": "Ob das Detail der kurzen Nächte einen realen Bericht aus dem Norden bewahrt und ob eine Hafenbeschreibung jemals einen Ort in einem Meer voller ähnlicher Häfen identifizieren kann."
+    },
+    "ja": {
+      "name": "ライストリュゴニア（テレピュロス）",
+      "summary": "オデュッセウスがわずか一日の午後に12隻の船のうち11隻を失った場所。この港は詩の中で最も正確に描写されている停泊地であるが、それがどの港であるかを証明できる者は誰もいない。",
+      "description": [
+        "艦隊は崖に囲まれた陸封された港に入る。オデュッセウスだけが自分の船を外に留めておく。ライストリュゴネス族は巨人であることが判明し、上から岩を投げつけて内部の船を破壊する。これは航海中最大の単一の損失であり、純粋に地理的な罠による唯一の損失である。",
+        "狭い入り口、切り立った側面、内部の穏やかさといった描写は、まるで航路誌のようであり、そのためボニファシオが同定地として注目されてきた。また、詩にはこの場所の夜が非常に短いため、眠らない男は2倍の賃金を得ることができると書かれており、この詳細は高緯度地方の記憶と解釈する者もいれば、純粋な空想と解釈する者もいる。"
+      ],
+      "identificationNote": "推測の域を出ない：テキストスコアは3、考古学スコアは0であり、合意はない。この組み合わせこそが、この地図帳の評価基準が可視化するために存在しているものである。鮮やかな描写は、場所の証拠にはならない。",
+      "debate": "短い夜に関する詳細が北方の実際の報告を保存しているのかどうか、そして、似たような港が数多く存在する海において、港の描写だけで場所を特定できるのかどうか。"
+    },
+    "zh": {
+      "name": "莱斯特律戈尼亚（忒勒皮洛斯）",
+      "summary": "奥德修斯在一个下午便失去了十二艘船中的十一艘。该港口是诗中描述最精确的锚地，但无人能证实它究竟是哪一个。",
+      "description": [
+        "船队驶入了一个位于悬崖之间的陆锁港；只有奥德修斯将他的船停在外面。莱斯特律戈尼亚人原来是巨人，他们用从上方投掷的巨石摧毁了港内的船只。这是航行中损失最惨重的一次，也是唯一一次纯粹由地理陷阱造成的损失。",
+        "狭窄的入口、陡峭的绝壁、平静的内部——这些描述读起来就像航海指南，这也是为什么博尼法乔（Bonifacio）吸引了这一认定的原因。诗中还提到，这个地方的夜晚非常短暂，以至于一个不睡觉的人可以赚取双倍的工资，这一细节被一些人解读为对高纬度地区的记忆，而被另一些人视为纯粹的幻想。"
+      ],
+      "identificationNote": "推测性：文献评分3分，考古评分0分，且无共识。这种组合正是本图册的评估标准旨在揭示的——生动的描述并不能作为地理位置的证据。",
+      "debate": "关于“短暂夜晚”的细节是否保留了真实的北方传闻，以及在充满相似港口的海域中，对港口的描述是否能确定一个具体地点。"
     }
   }
 }

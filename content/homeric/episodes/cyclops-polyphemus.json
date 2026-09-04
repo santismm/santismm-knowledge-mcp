@@ -69,6 +69,22 @@
         "pt": {
           "label": "Sicília oriental",
           "note": "Tucídides registra a tradição de que os ciclopes viveram na Sicília, e a costa vulcânica sob o Etna a carrega desde então. A ilha das cabras foi associada a ilhotas de lá."
+        },
+        "fr": {
+          "label": "La Sicile orientale",
+          "note": "Thucydide rapporte la tradition selon laquelle les Cyclopes vivaient en Sicile, et la côte volcanique sous l'Etna la perpétue depuis lors. L'île aux chèvres au large a été associée à des îlots de cette région."
+        },
+        "zh": {
+          "label": "西西里岛东部",
+          "note": "修昔底德记载了独眼巨人曾居住在西西里岛的传说，自此埃特纳火山下的火山海岸便一直承载着这一说法。近海的野山羊岛已被对应为那里的几座小岛。"
+        },
+        "de": {
+          "label": "Östliches Sizilien",
+          "note": "Thukydides berichtet von der Überlieferung, dass die Kyklopen auf Sizilien lebten, und die vulkanische Küste unter dem Ätna trägt diese Tradition seither. Die vorgelagerte Ziegeninsel wurde mit dortigen Inselchen gleichgesetzt."
+        },
+        "ja": {
+          "label": "シチリア島東部",
+          "note": "トゥキディデスはキュクロプスたちがシチリアに住んでいたという伝承を報告しており、エトナ山麓の火山性の海岸はそれ以来その伝承を伝えています。沖合のヤギの島は、そこにある小島群と結びつけられてきました。"
         }
       }
     },
@@ -93,6 +109,22 @@
         "pt": {
           "label": "A costa campana",
           "note": "A leitura de Bérard segundo a rota fenícia situa o episódio perto de Nápoles. Sistemática, coerente e inverificável."
+        },
+        "fr": {
+          "label": "La côte campanienne",
+          "note": "L'interprétation de la route phénicienne par Bérard situe l'épisode près de Naples. Systématique, cohérente et invérifiable."
+        },
+        "zh": {
+          "label": "坎帕尼亚海岸",
+          "note": "贝拉尔对腓尼基航线的解读将这一情节定位在那不勒斯附近。该解读系统、连贯，但无法证实。"
+        },
+        "de": {
+          "label": "Die kampanische Küste",
+          "note": "Bérards Interpretation der phönizischen Route verortet die Episode in der Nähe von Neapel. Systematisch, konsistent und nicht überprüfbar."
+        },
+        "ja": {
+          "label": "カンパニア海岸",
+          "note": "ベラールによるフェニキア航路の解釈は、このエピソードをナポリ近郊に位置づけています。体系的で一貫性はあるものの、検証は不可能です。"
         }
       }
     }
@@ -155,6 +187,86 @@
         {
           "q": "Por que dizer o nome importa?",
           "a": "Porque converte uma fuga em maldição. Posêidon só pode agir contra um homem com nome — que é também a razão de a geografia do poema desabar em andança logo depois."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Le Cyclope Polyphème",
+      "summary": "L'épisode le plus célèbre d'Homère et l'un des moins localisables. Ulysse perd six hommes, aveugle un géant, s'échappe sous un bélier, puis crie son propre nom — ce qui lui coûtera dix ans d'errance.",
+      "narrative": [
+        "Ulysse emmène douze hommes dans une grotte pour voir « quels hommes » y vivent. Le propriétaire est un géant borgne qui en dévore deux d'un coup, bloque l'entrée avec une pierre qu'aucun mortel ne peut déplacer, et demande un nom. Ulysse répond « Personne », l'enivre avec le vin de Maron et lui enfonce un pieu d'olivier taillé dans l'œil.",
+        "L'évasion réussit. L'erreur survient après : s'éloignant à la rame, Ulysse crie son véritable nom, et Polyphème implore son père Poséidon de rendre son retour long, solitaire et semé d'embûches. Il obtient ce qu'il demande."
+      ],
+      "whyItMatters": "C'est l'épisode qui déclenche tout le reste du poème, et l'atlas ne peut le localiser que par la tradition — deux côtes volcaniques rivales, aucune preuve, et un texte qui décrit une condition morale plutôt qu'un littoral.",
+      "debate": "La question de savoir si la description précise de l'île aux chèvres reflète de réelles connaissances maritimes, et si l'une quelconque des errances peut être localisée.",
+      "faqs": [
+        {
+          "q": "Existe-t-il une véritable île des Cyclopes ?",
+          "a": "Aucun emplacement n'est établi. La tradition antique désigne l'est de la Sicile, tandis que la lecture moderne de Bérard indique la côte campanienne ; toutes deux obtiennent un score faible dans cet atlas car elles reposent sur la tradition et la déduction plutôt que sur des preuves."
+        },
+        {
+          "q": "Pourquoi le fait de donner son nom est-il important ?",
+          "a": "Parce que cela transforme une évasion en malédiction. Poséidon ne peut agir que contre un homme nommé — c'est aussi pourquoi la géographie du poème s'effondre immédiatement après dans l'errance."
+        }
+      ]
+    },
+    "de": {
+      "title": "Der Kyklop Polyphem",
+      "summary": "Die berühmteste Episode bei Homer und eine der am schwersten zu lokalisierenden. Odysseus verliert sechs Männer, blendet einen Riesen, entkommt unter einem Widder und ruft dann seinen eigenen Namen aus – was ihn letztlich zehn Jahre kostet.",
+      "narrative": [
+        "Odysseus führt zwölf Männer in eine Höhle, um zu sehen, „was für Menschen“ dort leben. Der Besitzer ist ein einäugiger Riese, der sofort zwei von ihnen frisst, den Eingang mit einem Stein versperrt, den kein Sterblicher bewegen kann, und nach einem Namen fragt. Odysseus antwortet „Niemand“, macht ihn mit Marons Wein betrunken und stößt ihm einen geschärften Olivenholzpfahl ins Auge.",
+        "Die Flucht gelingt. Der Fehler folgt danach: Beim Wegrudern ruft Odysseus seinen echten Namen, und Polyphem ruft seinen Vater Poseidon an, die Heimkehr lang, einsam und voller Kummer zu machen. Er bekommt, worum er bittet."
+      ],
+      "whyItMatters": "Es ist die Episode, die den Rest des Epos überhaupt erst in Gang setzt, und der Atlas kann sie nur anhand von Traditionen lokalisieren – zwei konkurrierende Vulkanküsten, keinerlei Beweise und ein Text, der eher einen moralischen Zustand als eine Küstenlinie beschreibt.",
+      "debate": "Ob die präzise Beschreibung der Ziegeninsel reales seemännisches Wissen widerspiegelt und ob sich irgendeine der Irrfahrten überhaupt lokalisieren lässt.",
+      "faqs": [
+        {
+          "q": "Gibt es eine reale Insel der Kyklopen?",
+          "a": "Es ist kein Ort gesichert. Die antike Tradition weist auf das östliche Sizilien hin, Bérards moderne Lesart auf die kampanische Küste; beide schneiden in diesem Atlas schlecht ab, da sie eher auf Tradition und Schlussfolgerungen als auf Beweisen beruhen."
+        },
+        {
+          "q": "Warum ist die Nennung des Namens so wichtig?",
+          "a": "Weil sie eine Flucht in einen Fluch verwandelt. Poseidon kann nur gegen einen namentlich bekannten Mann vorgehen – was auch der Grund ist, warum die Geografie des Epos unmittelbar danach in zielloses Umherirren zerfällt."
+        }
+      ]
+    },
+    "ja": {
+      "title": "キュクロプスのポリュペモス",
+      "summary": "ホメロスの中で最も有名であり、最も場所を特定しにくいエピソードの一つ。オデュッセウスは6人の部下を失い、巨人の目を潰し、雄羊の下に隠れて脱出するが、その後に自分の名前を叫んでしまう。これこそが、彼に10年の歳月を費えさせる原因となる。",
+      "narrative": [
+        "オデュッセウスは12人の部下を連れて洞窟に入り、そこに『どのような人々』が住んでいるのかを確かめようとする。その主は一つ目の巨人であり、部下のうち2人を一度に平らげ、いかなる凡人にも動かせない巨石で入り口を塞ぎ、名前を尋ねる。オデュッセウスは『誰でもない（Nobody）』と答え、マロンのワインで彼を酔わせ、尖らせたオリーブの杭をその目に突き刺す。",
+        "脱出は成功する。過ちはその後に起こる。船を漕ぎ出す際、オデュッセウスは本名を叫び、ポリュペモスは父ポセイドンに対し、彼の帰郷を長く、孤独で、悲しみに満ちたものにするよう祈る。その願いは聞き届けられる。"
+      ],
+      "whyItMatters": "これは詩の残りの部分を展開させる契機となるエピソードであり、本アトラスでは伝承によってのみ場所を特定できる。対立する2つの火山性の海岸、証拠の欠如、そして海岸線ではなく道徳的状況を描写するテキストが残されているのみである。",
+      "debate": "山羊の島の正確な描写が実際の航海知識を反映しているのかどうか、そして漂流の地をそもそも特定できるのかどうか。",
+      "faqs": [
+        {
+          "q": "キュクロプスの実在の島はありますか？",
+          "a": "特定された場所はない。古代の伝承はシチリア島東部を指し、ベラールの現代的な解釈はカンパニア沿岸を指している。どちらも伝承と推論に依存しており、証拠に基づかないため、本アトラスでの評価は低い。"
+        },
+        {
+          "q": "なぜ名前を名乗ることが重要だったのですか？",
+          "a": "それによって脱出が呪いへと変わるからである。ポセイドンは名前のわかっている人物に対してしか行動を起こせない。これこそが、その直後に詩の地理が漂流へと崩壊していく理由でもある。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "独眼巨人波吕斐摩斯",
+      "summary": "荷马史诗中最著名的事件，也是最无法定位的事件之一。奥德修斯失去了六名部下，刺瞎了一个巨人，藏在公羊腹下逃脱，然后高喊出自己的名字——这让他付出了十年的代价。",
+      "narrative": [
+        "奥德修斯带着十二个人走进一个洞穴，想看看那里住着“什么样的人”。洞穴的主人是一个独眼巨人，他一口气吃掉了其中两个人，用一块凡人无法移动的巨石堵住了入口，并询问名字。奥德修斯回答说“没有人”，用马隆的美酒灌醉了他，然后用一根削尖的橄榄木桩刺穿了他的眼睛。",
+        "逃脱成功了。但随后他犯了错：在划船离开时，奥德修斯大声喊出了自己的真名，波吕斐摩斯于是祈求他的父亲波塞冬，让奥德修斯的归途变得漫长、孤独且充满痛苦。他的祈求得到了回应。"
+      ],
+      "whyItMatters": "正是这一事件推动了史诗余下情节的发展，而地图集只能根据传统来定位它——两个相互竞争的火山海岸，没有任何证据，且文本描述的是一种道德状况而非海岸线。",
+      "debate": "对山羊岛的精确描述是否反映了真实的航海知识，以及这些漂泊旅程究竟能否被定位。",
+      "faqs": [
+        {
+          "q": "存在真实的独眼巨人岛吗？",
+          "a": "尚未确定任何位置。古代传统指向西西里岛东部，贝拉尔（Bérard）的现代解读指向坎帕尼亚海岸；两者在本地图集中的评分都很低，因为它们依赖于传统和推论，而非证据。"
+        },
+        {
+          "q": "为什么说出名字很重要？",
+          "a": "因为它将一次逃脱变成了诅咒。波塞冬只能针对一个有名字的人采取行动——这也是为什么在此之后，史诗中的地理环境立即崩溃为漫无目的的漂泊。"
         }
       ]
     }

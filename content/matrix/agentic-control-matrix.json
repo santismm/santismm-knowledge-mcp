@@ -139,6 +139,38 @@
           "assumes": "Que ninguém consegue reter a superfície de ferramentas na cabeça, e que essa superfície muda mais rápido que a memória.",
           "retireWhen": "O runtime consegue enumerar sob demanda toda ferramenta invocável com seu escopo e seu responsável, momento em que um documento mantido à mão é uma segunda cópia de um dado que a plataforma já tem.",
           "test": "Produza o catálogo. Cada entrada tem escopo escrito e responsável nomeado, e nada do que o agente pode invocar está fora dele."
+        },
+        "fr": {
+          "name": "Catalogue d'outils délimité",
+          "statement": "Chaque outil que l'agent peut appeler est répertorié, avec sa portée, s'il effectue des écritures, et ce qu'un attaquant gagne à l'appeler. Un outil que personne n'a documenté est une permission que personne n'a examinée.",
+          "axisNote": "Il limite ce qui peut exister avant toute exécution, mais rien ne garantit son exhaustivité : un catalogue ne vaut que par la rigueur de celui qui l'a rédigé.",
+          "assumes": "Que personne ne peut garder en tête toute la surface des outils, et que cette surface change plus vite que la mémoire humaine.",
+          "retireWhen": "L'environnement d'exécution peut énumérer à la demande chaque outil appelable avec sa portée et son propriétaire, moment auquel un document maintenu devient une copie redondante d'une information que la plateforme possède déjà.",
+          "test": "Produire le catalogue. Chaque entrée possède une portée écrite et un propriétaire désigné, et rien de ce que l'agent peut appeler n'y manque."
+        },
+        "zh": {
+          "name": "限定范围的工具目录",
+          "statement": "列出了智能体可以调用的每个工具，包括其范围、是否具有写入权限，以及攻击者通过调用它能获得什么。没有被记录的工具就是未经审查的权限。",
+          "axisNote": "它在任何内容运行之前限制了可能存在的内容，但没有任何机制强制其完整性：目录的价值取决于编写者的尽职程度。",
+          "assumes": "假设没有人能凭记忆记住所有的工具接口，且接口的变化速度快于记忆更新的速度。",
+          "retireWhen": "运行时可以根据需要列举每个可调用工具及其范围和所有者，此时维护的文档只是平台已掌握事实的副本。",
+          "test": "生成目录。每个条目都有书面的范围和指定的负责人，并且智能体可以调用的任何内容都没有遗漏。"
+        },
+        "de": {
+          "name": "Eingegrenzter Tool-Katalog",
+          "statement": "Jedes Tool, das der Agent aufrufen kann, ist aufgelistet, zusammen mit seinem Scope, der Information, ob es Schreibrechte besitzt, und was ein Angreifer durch seinen Aufruf gewinnt. Ein Tool, das niemand dokumentiert hat, ist eine Berechtigung, die niemand überprüft hat.",
+          "axisNote": "Es schränkt ein, was vor der Ausführung existieren darf, aber nichts erzwingt seine Vollständigkeit: Ein Katalog ist nur so gut wie die Sorgfalt der Person, die ihn erstellt hat.",
+          "assumes": "Dass niemand die gesamte Tool-Oberfläche im Kopf behalten kann und dass sich diese Oberfläche schneller verändert als das Gedächtnis.",
+          "retireWhen": "Die Runtime kann jedes aufrufbare Tool mit seinem Scope und seinem Besitzer bei Bedarf auflisten. Ab diesem Zeitpunkt ist ein manuell gepflegtes Dokument nur noch eine Kopie einer Tatsache, die der Plattform bereits bekannt ist.",
+          "test": "Erstellen Sie den Katalog. Jeder Eintrag hat einen schriftlich festgelegten Scope und einen benannten Besitzer, und kein vom Agenten aufrufbares Tool fehlt darin."
+        },
+        "ja": {
+          "name": "スコープ定義されたツールカタログ",
+          "statement": "エージェントが呼び出し可能なすべてのツールが、そのスコープ、書き込み権限の有無、および攻撃者がそれを呼び出すことで得られるメリットとともにリスト化されています。誰も文書化していないツールは、誰もレビューしていない権限と同じです。",
+          "axisNote": "実行前に存在し得るものを制限しますが、その完全性を強制するものは何もありません。カタログの価値は、それを記述した人の勤勉さに依存します。",
+          "assumes": "ツールの全容を誰も頭の中で把握しきれず、その全容が記憶よりも速く変化することを前提としています。",
+          "retireWhen": "ランタイムが、呼び出し可能なすべてのツールをそのスコープおよび所有者とともにオンデマンドで列挙できるようになれば、管理されているドキュメントはプラットフォームがすでに保持している事実の重複コピーにすぎなくなります。",
+          "test": "カタログを作成します。すべてのエントリに書面によるスコープと指定された所有者が存在し、エージェントが呼び出し可能なものが漏れなく含まれていることを確認します。"
         }
       }
     },
@@ -212,6 +244,38 @@
           "assumes": "Que os sistemas de origem emitem credenciais mais estreitas que a conta, e que uma ferramenta comprometida é um evento plausível.",
           "retireWhen": "As chamadas de ferramentas carregam autorização por chamada e por usuário que o sistema de origem avalia, de modo que a uma credencial de vida longa não sobra nada para conceder a mais.",
           "test": "Para cada ferramenta, mostre a credencial e seu escopo no servidor. Nenhum par de ferramentas compartilha credencial cujo alcance exceda o de qualquer uma delas."
+        },
+        "fr": {
+          "name": "Identifiants par outil à portée minimale",
+          "statement": "Chaque outil détient son propre identifiant, émis avec la portée la plus restreinte prise en charge par le système en amont. Un outil en lecture seule adossé à un jeton d'administration n'est qu'à un bug près de devenir un outil d'écriture.",
+          "axisNote": "La portée est appliquée en amont, côté entrée : un appel en dehors de celle-ci échoue de la même manière à chaque fois, peu importe l'intention du modèle.",
+          "assumes": "Que les systèmes en amont émettent des identifiants plus restreints que le compte global, et qu'un outil compromis est un événement plausible.",
+          "retireWhen": "Les appels d'outils portent une autorisation par appel et par utilisateur que le système en amont évalue, ne laissant aucun identifiant à longue durée de vie avec des privilèges excessifs.",
+          "test": "Pour chaque outil, afficher l'identifiant et sa portée côté serveur. Aucun outil ne partage un identifiant dont la portée dépasse celle requise par l'un ou l'autre."
+        },
+        "zh": {
+          "name": "最小范围的单工具凭据",
+          "statement": "每个工具都持有自己的凭据，该凭据在上游系统支持的最窄范围内签发。一个由管理员 Token 支持的只读工具，距离变成写入工具仅差一个 Bug。",
+          "axisNote": "该范围在上游（输入端）强制执行：无论模型的意图如何，超出该范围的调用每次都会以相同的方式失败。",
+          "assumes": "假设上游系统签发的凭据范围窄于账户范围，且工具被攻破是可能发生的事件。",
+          "retireWhen": "工具调用携带由上游系统评估的单次调用、单用户授权，从而使长期凭据不再存在过度授权的风险。",
+          "test": "对于每个工具，展示其凭据和服务器端范围。没有哪两个工具会共享一个超出其中任何一个工具范围的凭据。"
+        },
+        "de": {
+          "name": "Anmeldedaten pro Tool mit minimalem Scope",
+          "statement": "Jedes Tool besitzt eigene Anmeldedaten, die mit dem engstmöglichen Scope ausgestellt wurden, den das Upstream-System unterstützt. Ein Read-only-Tool, das durch ein Admin-Token abgesichert ist, ist nur einen Bug davon entfernt, ein Schreib-Tool zu sein.",
+          "axisNote": "Der Scope wird upstream auf der Eingangsseite erzwungen: Ein Aufruf außerhalb dieses Scopes schlägt jedes Mal auf dieselbe Weise fehl, unabhängig von der Absicht des Modells.",
+          "assumes": "Dass Upstream-Systeme Anmeldedaten ausstellen, die enger gefasst sind als das gesamte Konto, und dass ein kompromittiertes Tool ein plausibles Szenario darstellt.",
+          "retireWhen": "Tool-Aufrufe übertragen eine Autorisierung pro Aufruf und Benutzer, die vom Upstream-System ausgewertet wird, sodass keine langlebigen Anmeldedaten mit übermäßigen Rechten verbleiben.",
+          "test": "Zeigen Sie für jedes Tool die Anmeldedaten und deren serverseitigen Scope. Keine zwei Tools teilen sich Anmeldedaten, deren Reichweite die Anforderungen des jeweiligen Tools übersteigt."
+        },
+        "ja": {
+          "name": "最小スコープでのツールごとの認証情報",
+          "statement": "各ツールは、アップストリームシステムがサポートする最も狭いスコープで発行された独自の認証情報を保持します。管理者トークンに裏打ちされた読み取り専用ツールは、バグが1つあるだけで書き込みツールになってしまう危険性があります。",
+          "axisNote": "スコープはアップストリーム（入力側）で強制されます。モデルの意図に関係なく、スコープ外の呼び出しは毎回同様に失敗します。",
+          "assumes": "アップストリームシステムがアカウントよりも狭い範囲の認証情報を発行すること、およびツールの侵害が起こり得る事象であることを前提としています。",
+          "retireWhen": "ツール呼び出しに、アップストリームシステムが評価する呼び出しごと・ユーザーごとの認可情報が含まれるようになり、過剰な権限を付与された長期的な認証情報が不要になった時点で、この管理策は不要になります。",
+          "test": "各ツールについて、認証情報とそのサーバー側のスコープを示します。いずれかのツールの範囲を超えるような認証情報を、2つのツールが共有していないことを確認します。"
         }
       }
     },
@@ -283,6 +347,38 @@
           "assumes": "Que o modelo pode ser induzido a apontar uma ferramenta legítima para um destino ilegítimo, e que o sistema de origem não vai impedir.",
           "retireWhen": "O sistema de origem impõe a mesma restrição com seu próprio modelo de autoridade, momento em que a lista permitida é uma duplicata que pode se desalinhar dele.",
           "test": "Invoque cada ferramenta com escrita contra um alvo fora do escopo. A chamada é recusada na fronteira da própria ferramenta, não porque o modelo se recusou."
+        },
+        "fr": {
+          "name": "Listes d'autorisation de paramètres",
+          "statement": "Les cibles qu'un outil peut viser — chemins, dépôts, tables, comptes, destinataires — sont contraintes côté serveur, de sorte qu'un agent détourné ne puisse pas rediriger un outil légitime vers une cible illégitime.",
+          "axisNote": "Il inspecte l'argument avant que l'appel ne se produise, et refuse par règle plutôt que par opinion.",
+          "assumes": "Que le modèle peut être incité à diriger un outil légitime vers une cible illégitime, et que le système en amont ne l'en empêchera pas.",
+          "retireWhen": "Le système en amont applique la même contrainte via son propre modèle d'autorité, moment auquel la liste d'autorisation devient un doublon risquant de diverger de celui-ci.",
+          "test": "Appeler chaque outil capable d'écriture avec une cible hors de portée. L'appel est refusé par la propre limite de l'outil, et non par un refus du modèle."
+        },
+        "zh": {
+          "name": "参数白名单",
+          "statement": "工具可以访问的目标（路径、仓库、表、账户、接收者）在服务器端受到限制，因此被劫持的智能体无法将合法的工具重新指向非法的目标。",
+          "axisNote": "它在调用发生前检查参数，并根据规则而非主观判断予以拒绝。",
+          "assumes": "假设模型可能会被诱导将合法的工具指向非法的目标，且上游系统不会阻止它。",
+          "retireWhen": "上游系统通过其自身的权限模型强制执行相同的约束，此时白名单就成了可能与其产生偏差的重复配置。",
+          "test": "使用超出范围的目标调用每个具有写入能力的工具。该调用会被工具自身的边界拒绝，而不是由模型拒绝。"
+        },
+        "de": {
+          "name": "Parameter-Allowlists",
+          "statement": "Die Ziele, die ein Tool ansprechen darf – Pfade, Repositories, Tabellen, Konten, Empfänger –, sind serverseitig eingeschränkt, sodass ein gekaperter Agent ein legitimes Tool nicht auf ein illegitimes Ziel umleiten kann.",
+          "axisNote": "Es prüft das Argument vor der Ausführung des Aufrufs und lehnt diesen regelbasiert statt nach Ermessen ab.",
+          "assumes": "Dass das Modell dazu verleitet werden kann, ein legitimes Tool auf ein illegitimes Ziel zu richten, und dass das Upstream-System dies nicht verhindert.",
+          "retireWhen": "Das Upstream-System erzwingt dieselbe Einschränkung durch sein eigenes Autorisierungsmodell, wodurch die Allowlist zu einem Duplikat wird, das vom eigentlichen Modell abweichen kann.",
+          "test": "Rufen Sie jedes schreibfähige Tool mit einem Ziel außerhalb des Scopes auf. Der Aufruf wird durch die eigene Grenze des Tools abgelehnt, nicht durch eine Weigerung des Modells."
+        },
+        "ja": {
+          "name": "パラメータの許可リスト（アローリスト）",
+          "statement": "ツールがアクセスできるターゲット（パス、リポジトリ、テーブル、アカウント、受信者など）はサーバー側で制限されているため、乗っ取られたエージェントが正当なツールを不正なターゲットに向け直すことはできません。",
+          "axisNote": "呼び出しが発生する前に引数を検査し、主観的な判断ではなくルールに基づいて拒否します。",
+          "assumes": "モデルが誘導されて正当なツールを不正なターゲットに向けてしまう可能性があり、アップストリームシステムがそれを阻止しないことを前提としています。",
+          "retireWhen": "アップストリームシステムが独自の権限モデルを通じて同じ制約を強制するようになり、許可リストが重複し、不一致が生じる可能性が出てきた時点で、この管理策は不要になります。",
+          "test": "書き込み権限を持つ各ツールを、スコープ外のターゲットを指定して呼び出します。モデルが拒否するのではなく、ツール自体の境界によって呼び出しが拒否されることを確認します。"
         }
       }
     },
@@ -356,6 +452,38 @@
           "assumes": "Que toda via de exfiltração termina em uma requisição de saída, e que o conjunto de destinos legítimos pode ser conhecido de antemão.",
           "retireWhen": "Não por capacidade. Remova-o quando o agente não tiver nada que valha a pena exfiltrar, o que é uma afirmação sobre os dados e não sobre o modelo.",
           "test": "De dentro do ambiente do agente, requisite um host fora da lista. Falha na camada de rede ou de proxy e a recusa fica registrada."
+        },
+        "fr": {
+          "name": "Sortie interdite par défaut",
+          "statement": "Le trafic sortant n'atteint que les destinations désignées ; tout le reste est refusé. Chaque chemin d'exfiltration se termine par une requête sortante, c'est donc le contrôle qui fonctionne encore une fois que le modèle a été convaincu.",
+          "axisNote": "La destination est vérifiée avant le départ de la requête ; aucun résultat n'est mesuré et aucun jugement n'intervient.",
+          "assumes": "Que chaque chemin d'exfiltration se termine par une requête sortante, et que l'ensemble des destinations légitimes est connaissable à l'avance.",
+          "retireWhen": "Pas pour des raisons de capacité. Retirez-le lorsque l'agent n'a plus rien qui vaille la peine d'être exfiltré — ce qui est une affirmation sur les données, pas sur le modèle.",
+          "test": "Depuis l'environnement de l'agent, demandez un hôte qui ne figure pas sur la liste. La requête échoue au niveau de la couche réseau ou du proxy, et le refus est consigné dans les journaux."
+        },
+        "zh": {
+          "name": "默认拒绝的出口流量",
+          "statement": "出站流量只能到达指定的目的地；其他所有请求都会被拒绝。由于每个数据外泄路径都以出站请求结束，因此这是在模型被说服后依然有效的控制措施。",
+          "axisNote": "在请求发出之前检查目的地；不衡量结果，也不涉及判断。",
+          "assumes": "假设每个外发路径都以出站请求结束，并且合法目的地的集合是可以提前获知的。",
+          "retireWhen": "不因能力原因而停用。当智能体没有值得外发的内容时停用它——这是关于数据的陈述，而不是关于模型的。",
+          "test": "从智能体环境内部请求一个不在列表中的主机。该请求在网络或代理层失败，并且拒绝记录被记录下来。"
+        },
+        "de": {
+          "name": "Default-Deny-Egress",
+          "statement": "Ausgehender Datenverkehr erreicht nur explizit benannte Ziele; alles andere wird abgelehnt. Da jeder Exfiltrationspfad in einer ausgehenden Anfrage endet, ist dies die Sicherheitsmaßnahme, die auch dann noch greift, wenn das Modell bereits manipuliert wurde.",
+          "axisNote": "Das Ziel wird überprüft, bevor die Anfrage gesendet wird; es wird kein Ergebnis gemessen und es ist keine Beurteilung erforderlich.",
+          "assumes": "Dass jeder Exfiltrationspfad in einer ausgehenden Anfrage endet und dass die Menge der legitimen Ziele im Voraus bekannt ist.",
+          "retireWhen": "Nicht aus Kapazitätsgründen. Deaktivieren Sie es, wenn der Agent nichts Wertvolles zu exfiltrieren hat – was eine Aussage über die Daten und nicht über das Modell ist.",
+          "test": "Fordern Sie aus der Umgebung des Agenten heraus einen Host an, der nicht auf der Liste steht. Dies schlägt auf der Netzwerk- oder Proxy-Ebene fehl, und die Ablehnung wird protokolliert."
+        },
+        "ja": {
+          "name": "デフォルト拒否の送信（エグレス）制限",
+          "statement": "送信トラフィックは指定された宛先にのみ到達し、それ以外はすべて拒否されます。すべてのデータ流出経路は送信リクエストに帰着するため、これはモデルが説得（操作）された後でも機能し続ける管理策です。",
+          "axisNote": "リクエストが送信される前に宛先がチェックされます。結果の測定や判断は行われません。",
+          "assumes": "すべてのデータ流出経路が外部へのリクエストで終わり、正当な宛先のセットを事前に把握できることを前提としています。",
+          "retireWhen": "機能面を理由に廃止することはありません。エージェントに流出させる価値のあるものがなくなったときに廃止します。これはモデルではなくデータに関する判断です。",
+          "test": "エージェントの環境内から、リストにないホストをリクエストします。ネットワークまたはプロキシレイヤーで失敗し、拒否がログに記録されます。"
         }
       }
     },
@@ -427,6 +555,38 @@
           "assumes": "Que uma requisição de saída recusada é rara o bastante para ser sinal e não ruído.",
           "retireWhen": "A plataforma expõe as recusas como eventos de segurança por conta própria, ou as recusas viram rotina, o que significa que a lista está errada, não o alerta.",
           "test": "Provoque uma negação. Ela aparece como evento distinguível e alertável, com o destino e o agente que chamou, não como erro de rede genérico."
+        },
+        "fr": {
+          "name": "Le refus de sortie est une alerte, pas une erreur",
+          "statement": "Les requêtes sortantes refusées sont consignées comme signal de sécurité et transmises à un humain. Un refus est l'un des rares signaux d'attaque non ambigus qu'une pile d'agents produit, et il perd toute valeur s'il se retrouve dans la même catégorie qu'un dépassement de délai.",
+          "axisNote": "Il agit sur un événement déjà survenu — un refus — et se déclenche systématiquement selon une règle pour chacun d'eux.",
+          "assumes": "Qu'une requête sortante refusée est suffisamment rare pour constituer un signal plutôt que du bruit.",
+          "retireWhen": "La plateforme signale d'elle-même les refus comme des événements de sécurité, ou les refus deviennent routiniers — ce qui signifie que la liste d'autorisation est incorrecte, et non l'alerte.",
+          "test": "Déclenchez un refus. Il doit apparaître comme un événement distinct et alertable contenant la destination et l'agent appelant, et non comme une erreur réseau générique."
+        },
+        "zh": {
+          "name": "被拒绝的出站是警报，而不是错误",
+          "statement": "被拒绝的出站请求会被记录为安全信号并送达人工处理。拒绝是智能体技术栈产生的少数几个明确无误的攻击信号之一，如果它与超时归入同一类，那就毫无价值了。",
+          "axisNote": "它针对已经发生的事情（拒绝）采取行动，并根据规则对每一次拒绝都触发。",
+          "assumes": "假设被拒绝的出站请求足够罕见，可以作为信号而不是噪声。",
+          "retireWhen": "平台自身将拒绝作为安全事件呈现，或者拒绝变得司空见惯——这意味着允许列表有误，而不是警报有误。",
+          "test": "触发一次拒绝。它会作为一个包含目的地和调用智能体的、可发出警报的独立事件出现，而不是作为通用的网络错误。"
+        },
+        "de": {
+          "name": "Verweigerter ausgehender Datenverkehr ist eine Warnung, kein Fehler",
+          "statement": "Abgelehnte ausgehende Anfragen werden als Sicherheitssignal protokolliert und an eine Person weitergeleitet. Eine Verweigerung ist eines der wenigen eindeutigen Angriffssignale, die ein Agenten-Stack erzeugt, und sie ist wertlos, wenn sie im selben Topf wie ein Timeout landet.",
+          "axisNote": "Es reagiert auf etwas, das bereits geschehen ist – eine Ablehnung – und wird regelbasiert bei jeder einzelnen ausgelöst.",
+          "assumes": "Dass eine abgelehnte ausgehende Anfrage selten genug ist, um ein Signal und kein Rauschen zu sein.",
+          "retireWhen": "Die Plattform stellt Verweigerungen selbstständig als Sicherheitsereignisse dar, oder Verweigerungen werden zur Routine – was bedeutet, dass die Allowlist falsch ist, nicht die Warnung.",
+          "test": "Lösen Sie eine Verweigerung aus. Sie wird als separates, alarmierbares Ereignis mit dem Ziel und dem aufrufenden Agenten angezeigt, nicht als generischer Netzwerkfehler."
+        },
+        "ja": {
+          "name": "送信拒否はエラーではなくアラート",
+          "statement": "拒否された外部へのリクエストはセキュリティシグナルとしてログに記録され、担当者に届きます。拒否は、エージェントスタックが生成する数少ない明白な攻撃シグナルの1つであり、タイムアウトと同じバケットに分類されてしまっては価値がありません。",
+          "axisNote": "すでに発生した事象（拒否）に対して動作し、ルールに基づいてそのすべてに対して実行されます。",
+          "assumes": "拒否された外部へのリクエストは十分にまれであり、ノイズではなくシグナルとなることを前提としています。",
+          "retireWhen": "プラットフォーム自体が拒否をセキュリティイベントとして提示するようになるか、あるいは拒否が日常茶飯事になる（これはアラートではなく許可リストが間違っていることを意味します）場合に廃止します。",
+          "test": "拒否をトリガーします。一般的なネットワークエラーとしてではなく、宛先と呼び出し元エージェントを含む、アラート可能な個別のイベントとして表示されます。"
         }
       }
     },
@@ -498,6 +658,38 @@
           "assumes": "Que o comprometimento de uma tarefa não deve sobreviver à seguinte, e que o custo de montar o ambiente é menor que o custo da persistência.",
           "retireWhen": "Os ambientes de execução são por chamada e sem credenciais por construção, com o que “efêmero” deixa de ser algo que alguém possa desativar.",
           "test": "Dentro de uma tarefa ao vivo, enumere o ambiente. Não há credencial que a tarefa não precisasse, e o ambiente não sobrevive à tarefa."
+        },
+        "fr": {
+          "name": "Exécution éphémère et sans identifiants",
+          "statement": "Tout ce que l'agent génère ou invoque s'exécute dans un environnement créé par tâche et détruit ensuite, sans conserver d'identifiants ambiants. La persistance est le moyen par lequel une compromission ponctuelle devient un point d'ancrage.",
+          "axisNote": "L'environnement est construit sans les identifiants avant le début de la tâche ; il n'y a rien à mesurer ni à décider.",
+          "assumes": "Qu'une compromission d'une tâche ne doit pas se propager à la suivante, et que le coût de configuration est inférieur au coût de la persistance.",
+          "retireWhen": "Les environnements d'exécution sont par appel et sans identifiants par construction, de sorte que le caractère « éphémère » cesse d'être une option désactivable.",
+          "test": "Au cours d'une tâche active, énumérez l'environnement. Aucun identifiant non requis par la tâche n'est présent, et l'environnement ne survit pas à la tâche."
+        },
+        "zh": {
+          "name": "临时、无凭据的执行",
+          "statement": "智能体生成或调用的任何内容都在为每个任务创建并在任务结束后销毁的环境中运行，不保留任何环境凭据。持久化是一次性入侵演变为立足点的方式。",
+          "axisNote": "在任务开始之前，构建不带凭据的环境；没有什么需要衡量，也没有什么需要决定。",
+          "assumes": "假设一个任务的受损不应延续到下一个任务，且设置成本低于持久化的成本。",
+          "retireWhen": "执行环境在构建上就是每次调用独立且无凭据的，因此“临时性”不再是任何人可以关闭的选项。",
+          "test": "在活动任务内部，枚举环境。不存在任务不需要的凭据，且环境在任务结束后不复存在。"
+        },
+        "de": {
+          "name": "Ephemere, anmeldedatenfreie Ausführung",
+          "statement": "Alles, was der Agent generiert oder aufruft, läuft in einer Umgebung, die pro Aufgabe erstellt und danach zerstört wird und keine Ambient Credentials enthält. Persistenz ist der Weg, wie aus einer einmaligen Kompromittierung ein dauerhafter Zugang wird.",
+          "axisNote": "Die Umgebung wird vor dem Start der Aufgabe ohne die Anmeldedaten erstellt; es gibt nichts zu messen und nichts zu entscheiden.",
+          "assumes": "Dass die Kompromittierung einer Aufgabe nicht auf die nächste übergehen darf und dass die Einrichtungskosten niedriger sind als die Kosten der Persistenz.",
+          "retireWhen": "Ausführungsumgebungen sind konstruktionsbedingt pro Aufruf und anmeldedatenfrei, sodass „ephemer“ nichts mehr ist, was man einfach abschalten kann.",
+          "test": "Listen Sie innerhalb einer aktiven Aufgabe die Umgebung auf. Es sind keine Anmeldedaten vorhanden, die die Aufgabe nicht benötigt hat, und die Umgebung überdauert die Aufgabe nicht."
+        },
+        "ja": {
+          "name": "エフェメラル（一時的）で資格情報を持たない実行",
+          "statement": "エージェントが生成または呼び出すものはすべて、タスクごとに作成され、終了後に破棄される環境で実行され、環境に存在する資格情報は保持されません。永続化こそが、一回限りの侵害を足がかりへと変える要因です。",
+          "axisNote": "タスクが開始される前に、資格情報なしで環境が構築されます。測定するものも決定するものもありません。",
+          "assumes": "1つのタスクの侵害が次のタスクに引き継がれてはならないこと、そしてセットアップコストが永続化のコストよりも低いことを前提としています。",
+          "retireWhen": "実行環境が構造上、呼び出しごとにかつ資格情報なしで構築されるようになり、「エフェメラル」が誰でもオフにできるものではなくなったときに廃止します。",
+          "test": "実行中のタスクの内部で、環境を列挙します。タスクに不要な資格情報は存在せず、環境はタスクの終了とともに消滅することを確認します。"
         }
       }
     },
@@ -571,6 +763,38 @@
           "assumes": "Que um agente consumirá sem limite se nada o detiver, com adversário ou sem ele.",
           "retireWhen": "Não por capacidade. O consumo desenfreado é uma propriedade dos laços, e os modelos melhores tentam tarefas mais longas, não mais curtas.",
           "test": "Execute uma tarefa projetada para não terminar. Ela é interrompida por uma cota, a parada fica registrada e o custo da tentativa é limitado e conhecido."
+        },
+        "fr": {
+          "name": "Limites de ressources et dépassements de délai",
+          "statement": "Le processeur, la mémoire, le disque, le temps réel écoulé et le nombre d'appels sont limités par l'hôte. La consommation incontrôlée est le mode de défaillance qui survient en premier et le plus souvent, généralement sans qu'aucun adversaire ne soit impliqué.",
+          "axisNote": "Une limite est une boucle de rétroaction au sens strict : elle mesure la consommation en temps réel et agit lorsqu'un seuil est franchi.",
+          "assumes": "Qu'un agent consommera sans limite si rien ne l'arrête, avec ou sans adversaire.",
+          "retireWhen": "Pas pour des raisons de capacité. La consommation incontrôlée est une propriété des boucles, et les meilleurs modèles tentent des tâches plus longues plutôt que plus courtes.",
+          "test": "Exécutez une tâche conçue pour ne pas se terminer. Elle est arrêtée par un quota, l'arrêt est enregistré, et le coût de la tentative est limité et connu."
+        },
+        "zh": {
+          "name": "资源上限和超时",
+          "statement": "CPU、内存、磁盘、实际运行时间和调用次数都受到主机的限制。失控的消耗是最先且最常出现的失效模式，通常根本不涉及任何攻击者。",
+          "axisNote": "上限在严格意义上是一个反馈循环：它在消耗发生时进行衡量，并在跨越阈值时采取行动。",
+          "assumes": "假设如果没有限制，无论是否有攻击者，智能体都会无限制地消耗资源。",
+          "retireWhen": "不因能力原因而停用。失控消耗是循环的一个属性，更好的模型会尝试更长而非更短的任务。",
+          "test": "运行一个设计为不终止的任务。它被配额阻止，阻止行为被记录，且该尝试的成本是有界且已知的。"
+        },
+        "de": {
+          "name": "Ressourcenlimits und Timeouts",
+          "statement": "CPU, Arbeitsspeicher, Festplatte, tatsächliche Laufzeit und Anzahl der Aufrufe werden durch den Host begrenzt. Unkontrollierter Verbrauch ist das Fehlerszenario, das zuerst und am häufigsten auftritt, meist ganz ohne Beteiligung eines Angreifers.",
+          "axisNote": "Ein Limit ist eine Feedbackschleife im engeren Sinne: Es misst den Verbrauch während des laufenden Betriebs und reagiert, wenn ein Schwellenwert überschritten wird.",
+          "assumes": "Dass ein Agent unbegrenzt Ressourcen verbraucht, wenn ihn nichts daran hindert, unabhängig davon, ob ein Angreifer im Spiel ist oder nicht.",
+          "retireWhen": "Nicht aus Kapazitätsgründen. Unkontrollierter Verbrauch ist eine Eigenschaft von Schleifen, und bessere Modelle versuchen eher längere als kürzere Aufgaben.",
+          "test": "Führen Sie eine Aufgabe aus, die so konzipiert ist, dass sie nicht endet. Sie wird durch ein Kontingent gestoppt, der Stopp wird aufgezeichnet, und die Kosten des Versuchs sind begrenzt und bekannt."
+        },
+        "ja": {
+          "name": "リソース制限とタイムアウト",
+          "statement": "CPU、メモリ、ディスク、実時間、および呼び出し回数はホストによって制限されます。暴走的な消費は、最も早く、最も頻繁に発生する障害モードであり、通常は攻撃者がまったく関与していません。",
+          "axisNote": "制限とは厳密な意味でのフィードバックループです。発生した消費量を測定し、しきい値を超えたときに対処します。",
+          "assumes": "攻撃者の有無にかかわらず、阻止するものがなければエージェントは制限なく消費し続けることを前提としています。",
+          "retireWhen": "機能面を理由に廃止することはありません。暴走的な消費はループの特性であり、より優れたモデルほど、短いタスクではなく長いタスクを試行するようになります。",
+          "test": "終了しないように設計されたタスクを実行します。クォータによって停止され、その停止が記録され、試行のコストが制限され、把握できていることを確認します。"
         }
       }
     },
@@ -644,6 +868,38 @@
           "assumes": "Que o critério do modelo sobre ações de alto impacto é pior que o de uma pessoa, e que uma pessoa com o contexto decide melhor que uma regra.",
           "retireWhen": "A lacuna de verificação nos tipos de ação com comporta chega a zero sobre um conjunto de tarefas grande o bastante para confiar. Passado esse ponto, a comporta compra carimbos ao preço da latência.",
           "test": "Liste as ações com portão e o critério de risco que as colocou ali. Tente uma; ela suspende, roteia e registra a decisão com a identidade de quem a tomou."
+        },
+        "fr": {
+          "name": "Porte d'approbation pour les actions à fort impact",
+          "statement": "Les actions irréversibles, réglementées ou coûteuses s'interrompent dans l'attente d'une personne capable d'approuver, de modifier ou de rejeter, avec suffisamment de contexte pour décider. Filtrez par risque, pas par défaut — un excès de contrôle conduit à une approbation automatique systématique, ce qui est pire que l'absence de contrôle car cela en donne l'illusion.",
+          "axisNote": "Il arrête l'action avant qu'elle ne se produise, mais cette interruption attend la décision d'une personne, et un même cas peut être tranché de deux manières différentes.",
+          "assumes": "Que le jugement du modèle sur les actions à fort impact est inférieur à celui d'une personne, et qu'une personne disposant du contexte décide mieux qu'une règle.",
+          "retireWhen": "L'écart de vérification sur les types d'actions contrôlés atteint zéro sur un ensemble de tâches suffisamment large pour être fiable. Au-delà de ce point, le contrôle ne fait qu'acheter des approbations automatiques au prix de la latence.",
+          "test": "Listez les actions contrôlées et le critère de risque qui les y a placées. Tentez-en une ; elle doit se suspendre, être acheminée et enregistrer la décision ainsi que l'identité de son auteur."
+        },
+        "zh": {
+          "name": "高影响操作的审批关卡",
+          "statement": "不可逆、受监管或昂贵的操作会暂停，等待有足够上下文进行决策的人员来批准、编辑或拒绝。根据风险设置关卡，而不是默认设置——过多的关卡会导致流于形式的盖章审批，这比没有关卡更糟糕，因为它看起来像是一个关卡。",
+          "axisNote": "它在操作发生之前将其阻止，但它等待的是人的决定，而同一个案例可能会有两种不同的决定。",
+          "assumes": "假设模型对高影响操作的判断不如人，并且在给定上下文的情况下，人的决定比规则更好。",
+          "retireWhen": "在足够大且可信的任务集中，受控操作类型的验证差距达到零。超过这一点，该关卡就是以延迟为代价换取流于形式的盖章审批。",
+          "test": "列出受控操作以及将其列入其中的风险标准。尝试其中一个操作；它会挂起、路由并记录决策以及决策者的身份。"
+        },
+        "de": {
+          "name": "Freigabeschranke für folgenschwere Aktionen",
+          "statement": "Aktionen, die unumkehrbar, reguliert oder teuer sind, werden gestoppt, bis eine Person mit ausreichend Kontext diese genehmigen, bearbeiten oder ablehnen kann. Schranken sollten risikobasiert und nicht standardmäßig eingerichtet werden – zu viele Schranken führen zu blindem Abnicken, was schlimmer ist als gar keine Schranke, da es nur so aussieht wie eine.",
+          "axisNote": "Es stoppt die Aktion, bevor sie ausgeführt wird, aber der Grund für den Stopp ist die Entscheidung einer Person, und derselbe Fall kann auf zwei verschiedene Arten entschieden werden.",
+          "assumes": "Dass die Beurteilung des Modells bei folgenschweren Aktionen schlechter ist als die einer Person und dass eine Person mit dem entsprechenden Kontext bessere Entscheidungen trifft als eine Regel.",
+          "retireWhen": "Die Verifizierungslücke bei den beschränkten Aktionstypen erreicht bei einer ausreichend großen, vertrauenswürdigen Aufgabenmenge null. Ab diesem Punkt erkauft man sich mit der Schranke nur noch blindes Abnicken auf Kosten der Latenz.",
+          "test": "Listen Sie die beschränkten Aktionen und das Risikokriterium auf, das zu ihrer Einstufung geführt hat. Versuchen Sie eine davon; sie wird ausgesetzt, weitergeleitet und die Entscheidung wird zusammen mit der Identität der entscheidenden Person aufgezeichnet."
+        },
+        "ja": {
+          "name": "影響の大きいアクションに対する承認ゲート",
+          "statement": "不可逆的、規制対象、または高コストなアクションは、承認、編集、または拒否を判断できる十分なコンテキストを持つ担当者のために一時停止します。デフォルトですべてをゲートするのではなく、リスクに基づいてゲートを設定してください。過剰なゲート設定は形骸化（ラバースタンプ化）を招き、ゲートがあるように見える分、ゲートがない状態よりも悪影響を及ぼします。",
+          "axisNote": "アクションが発生する前に停止しますが、停止する目的は人の判断であり、同じケースであっても2通りの決定が下される可能性があります。",
+          "assumes": "影響の大きいアクションに対するモデルの判断は人の判断よりも劣ること、そしてコンテキストを与えられた人はルールよりも適切な判断ができることを前提としています。",
+          "retireWhen": "信頼するに足る十分な大きさのタスクセットにおいて、ゲートされたアクションタイプの検証ギャップがゼロに達したときに廃止します。その時点を過ぎると、ゲートはレイテンシを犠牲にして形骸化した承認（ラバースタンプ）を買い取るだけになります。",
+          "test": "ゲートされたアクションと、それを設定したリスク基準をリストアップします。そのうちの1つを試行し、一時停止、ルーティングされ、決定が下した人物の身元とともに記録されることを確認します。"
         }
       }
     },
@@ -712,6 +968,38 @@
           "assumes": "Que o agente consegue reconhecer que está bloqueado ou fora da política, e que uma pessoa pode desbloqueá-lo.",
           "retireWhen": "Que a taxa de recuperação seja igual com e sem a via de escalonamento, medida sobre as falhas que de fato ocorrem e não sobre as previstas.",
           "test": "Force um escalonamento. Ele chega a um humano nomeado dentro do tempo declarado, e a passagem carrega o contexto necessário para agir sem rededuzi-lo."
+        },
+        "fr": {
+          "name": "Voie d'escalade avec un responsable désigné",
+          "statement": "Lorsque l'agent est incertain, bloqué ou hors politique, il existe une voie définie vers une personne, et cette personne est désignée. Une voie d'escalade sans responsable n'est qu'une file d'attente.",
+          "axisNote": "Elle se déclenche sur un état que l'exécution a déjà atteint — incertain, bloqué, hors politique — et la suite relève d'un jugement.",
+          "assumes": "Que l'agent peut reconnaître qu'il est bloqué ou hors politique, et qu'une personne peut le débloquer.",
+          "retireWhen": "Le taux de récupération est identique avec ou sans la voie d'escalade, mesuré sur les défaillances qui se produisent réellement plutôt que sur celles anticipées.",
+          "test": "Forcez une escalade. Elle doit atteindre un humain désigné dans le délai imparti, et le transfert doit transmettre le contexte nécessaire pour agir sans avoir à le reconstituer."
+        },
+        "zh": {
+          "name": "具有指定负责人的升级路径",
+          "statement": "当智能体不确定、受阻或超出策略时，有一条明确的路径指向具体的人，并且该人是指定的。没有负责人的升级路径只是一个排队队列。",
+          "axisNote": "它在运行已达到的状态（不确定、受阻、超出策略）时触发，接下来发生的事情是一种判断。",
+          "assumes": "假设智能体能够识别自己受阻或超出策略，并且人可以为其解除阻止。",
+          "retireWhen": "有无升级路径的恢复率持平，这是根据实际发生的故障而非预期的故障来衡量的。",
+          "test": "强制进行一次升级。它在规定时间内送达指定的负责人，且交接内容包含采取行动所需的上下文，无需重新推导。"
+        },
+        "de": {
+          "name": "Eskalationspfad mit namentlich genanntem Verantwortlichen",
+          "statement": "Wenn der Agent unsicher, blockiert oder außerhalb der Richtlinien ist, gibt es einen definierten Pfad zu einer Person, und diese Person wird namentlich genannt. Ein Eskalationspfad ohne Verantwortlichen ist lediglich eine Warteschlange.",
+          "axisNote": "Es wird bei einem Zustand ausgelöst, den der Durchlauf bereits erreicht hat – unsicher, blockiert, außerhalb der Richtlinien – und was als Nächstes geschieht, ist eine Ermessensentscheidung.",
+          "assumes": "Dass der Agent erkennen kann, wenn er blockiert ist oder außerhalb der Richtlinien agiert, und dass eine Person diese Blockade aufheben kann.",
+          "retireWhen": "Die Wiederherstellungsrate mit und ohne Eskalationspfad ist gleichwertig, gemessen an den tatsächlich auftretenden Fehlern und nicht an den erwarteten.",
+          "test": "Erzwingen Sie eine Eskalation. Sie erreicht eine namentlich genannte Person innerhalb der angegebenen Zeit, und die Übergabe enthält den erforderlichen Kontext, um ohne erneute Herleitung handeln zu können."
+        },
+        "ja": {
+          "name": "指名されたオーナーを持つエスカレーションパス",
+          "statement": "エージェントが不確実な状態、ブロックされた状態、またはポリシー違反の状態にある場合、担当者に至る定義されたパスが存在し、その担当者が指名されています。オーナーのいないエスカレーションルートは、単なるキューにすぎません。",
+          "axisNote": "実行がすでに到達した状態（不確実、ブロック、ポリシー違反）でトリガーされ、次に何が起こるかは判断に委ねられます。",
+          "assumes": "エージェントがブロックされていることやポリシー違反であることを認識でき、人がそのブロックを解除できることを前提としています。",
+          "retireWhen": "予測された障害ではなく、実際に発生した障害で測定した結果、エスカレーションパスがある場合とない場合で回復率が同等になったときに廃止します。",
+          "test": "エスカレーションを強制的に発生させます。指定された時間内に指名された担当者に届き、引き継ぎの際、状況を再確認することなく対処するために必要なコンテキストが伝達されることを確認します。"
         }
       }
     },
@@ -785,6 +1073,38 @@
           "assumes": "Que algo terá de ser reconstruído mais tarde por alguém que não estava lá.",
           "retireWhen": "Não por capacidade. É o controle a partir do qual todo o resto que se mede é calculado; removê-lo remove a capacidade de saber se remover qualquer outra coisa foi boa ideia.",
           "test": "Pegue uma execução passada ao acaso e reconstrua-a de ponta a ponta só pelo log. Depois confirme que o log não guarda nenhum segredo ou dado pessoal cru de que não precisava."
+        },
+        "fr": {
+          "name": "Trace corrélée de chaque décision et appel d'outil",
+          "statement": "Chaque exécution produit un enregistrement immuable et corrélé : entrées, modèle et version, appels d'outils avec arguments et résultats, et action finale. Suffisamment pour reconstruire ce qui s'est passé, sans rien qui puisse transformer le journal lui-même en faille de sécurité.",
+          "axisNote": "Mesure pure a posteriori : elle ne change rien à l'exécution qu'elle enregistre, et elle enregistre systématiquement selon une règle.",
+          "assumes": "Que quelque chose devra être reconstruit plus tard par quelqu'un qui n'était pas présent.",
+          "retireWhen": "Pas pour des raisons de capacité. C'est le contrôle à partir duquel toutes les autres mesures sont calculées ; le supprimer revient à s'enlever la possibilité de savoir si la suppression de tout autre élément était une bonne idée.",
+          "test": "Choisissez une exécution passée au hasard et reconstruisez-la de bout en bout uniquement à partir du journal. Confirmez ensuite que le journal ne contient aucun secret ni donnée personnelle brute non nécessaire."
+        },
+        "zh": {
+          "name": "每个决策和工具调用的关联追踪",
+          "statement": "每次运行都会产生一个不可变的、关联的记录：输入、模型 and 版本、带有参数和结果的工具调用以及最终操作。这些记录足以重建发生的事情，且不包含任何会使日志本身成为泄露源的内容。",
+          "axisNote": "纯粹的事后衡量：它不会改变它所记录的运行的任何内容，并且它根据规则进行记录。",
+          "assumes": "假设以后需要由不在场的人来重建某些内容。",
+          "retireWhen": "不因能力原因而停用。这是计算所有其他衡量指标的基础控制措施；移除它就会失去了解移除其他任何内容是否是好主意的方法。",
+          "test": "随机选择一次过去的运行，并仅凭日志端到端地重建它。然后确认日志中没有包含不需要的机密或原始个人数据。"
+        },
+        "de": {
+          "name": "Korrelierter Trace jeder Entscheidung und jedes Tool-Aufrufs",
+          "statement": "Jeder Durchlauf erzeugt ein unveränderliches, korreliertes Protokoll: Eingaben, Modell und Version, Tool-Aufrufe mit Argumenten und Ergebnissen sowie die endgültige Aktion. Genug, um das Geschehene zu rekonstruieren, und nichts, was das Protokoll selbst zu einer Sicherheitslücke macht.",
+          "axisNote": "Reine Messung im Nachhinein: Sie ändert nichts an dem aufgezeichneten Durchlauf und erfolgt regelbasiert.",
+          "assumes": "Dass später etwas von jemandem rekonstruiert werden muss, der nicht anwesend war.",
+          "retireWhen": "Nicht aus Kapazitätsgründen. Dies ist die Kontrollmaßnahme, auf der jede andere Messung basiert; ihre Entfernung nimmt uns die Möglichkeit zu wissen, ob die Entfernung von irgendetwas anderem eine gute Idee war.",
+          "test": "Wählen Sie zufällig einen vergangenen Durchlauf aus und rekonstruieren Sie ihn vollständig allein anhand des Protokolls. Bestätigen Sie anschließend, dass das Protokoll keine Geheimnisse oder unnötigen personenbezogenen Rohdaten enthält."
+        },
+        "ja": {
+          "name": "すべての決定とツール呼び出しの相関トレース",
+          "statement": "各実行は、入力、モデルとバージョン、引数と結果を伴うツール呼び出し、および最終アクションという、不変で相関のある記録を生成します。何が起こったかを再構築するのに十分であり、ログ自体が情報漏洩の原因になるようなものは含まれません。",
+          "axisNote": "事後の純粋な測定です。記録対象の実行には何も変更を加えず、ルールに従って記録します。",
+          "assumes": "その場にいなかった誰かが、後で何かを再構築する必要が生じることを前提としています。",
+          "retireWhen": "機能面を理由に廃止することはありません。これは他のすべての測定値の算出元となるコントロールです。これを取り除くと、他の何かを取り除くことが適切であったかどうかを知る手段が失われます。",
+          "test": "過去の実行をランダムに選択し、ログのみから最初から最後まで再構築します。その後、ログに不要な機密情報や生の個人データが含まれていないことを確認します。"
         }
       }
     },
@@ -856,6 +1176,38 @@
           "assumes": "Que as mudanças provocam regressões que ninguém prevê, e que um conjunto curado pega mais delas que o critério.",
           "retireWhen": "Não como categoria. Os casos concretos são removidos continuamente: um caso que nenhuma mudança fez falhar em dois anos está medindo o passado, e mantê-lo é como as suites encarecem sem melhorar.",
           "test": "Introduza uma regressão conhecida. A suíte a pega e a mudança não sai. Uma suíte que nunca foi vista falhando é uma suíte que nunca foi verificada."
+        },
+        "fr": {
+          "name": "Suite d'évaluation contrôlant les modifications",
+          "statement": "Un ensemble sélectionné de cas est exécuté à chaque modification, et toute régression bloque la publication. Sans cela, « cela semble fonctionner » constitue l'unique argument de qualité, et rien ne distingue une correction d'une modification.",
+          "axisNote": "Elle mesure les résultats que le système a déjà produits, et ce qui constitue une régression dans les résultats agentiques relève du jugement — la suite couvre les cas qui ont été choisis.",
+          "assumes": "Que les modifications entraînent des régressions de comportement de manière imprévisible, et qu'un ensemble sélectionné en détecte davantage que le simple jugement.",
+          "retireWhen": "Pas en tant que catégorie. Les cas individuels sont constamment retirés : un cas qu'aucune modification n'a fait échouer en deux ans mesure le passé, et le conserver contribue à rendre les suites coûteuses sans pour autant les améliorer.",
+          "test": "Introduisez une régression connue. La suite la détecte et la modification n'est pas déployée. Une suite que l'on n'a jamais vue échouer est une suite qui n'a jamais été vérifiée."
+        },
+        "zh": {
+          "name": "评估套件管控变更",
+          "statement": "每次变更都会运行一组精选的案例，且任何回归都会阻止发布。没有它，“看起来可行”就是全部的质量论据，并且无法区分修复与变更。",
+          "axisNote": "它衡量系统已经产生的输出，而智能体输出中的回归判定是一种判断——该套件涵盖了人们选择的任何案例。",
+          "assumes": "假设变更会以无人预测的方式导致行为回归，并且精选的案例集比主观判断能捕获更多此类回归。",
+          "retireWhen": "不作为一整个类别停用。单个案例会不断停用：一个两年来没有因任何变更而失败的案例是在衡量过去，保留它只会让套件变得昂贵而不会变得更好。",
+          "test": "引入一个已知的回归。套件捕获了它，且变更未出货。从未见其失败过的套件是从未经过验证的套件。"
+        },
+        "de": {
+          "name": "Evaluierungssuite als Freigabeschranke für Änderungen",
+          "statement": "Bei jeder Änderung wird eine kuratierte Auswahl an Testfällen ausgeführt, und eine Regression blockiert die Veröffentlichung. Ohne sie ist „es scheint zu funktionieren“ das einzige Qualitätsargument, und nichts unterscheidet einen Fix von einer Änderung.",
+          "axisNote": "Es misst Ergebnisse, die das System bereits erzeugt hat, und was als Regression bei agentischen Ausgaben gilt, ist eine Ermessensentscheidung – die Suite deckt die Fälle ab, die ausgewählt wurden.",
+          "assumes": "Dass Änderungen das Verhalten auf unvorhersehbare Weise verschlechtern und dass eine kuratierte Auswahl mehr davon erfasst als eine bloße Einschätzung.",
+          "retireWhen": "Nicht als Kategorie. Einzelne Fälle werden ständig ausgemustert: Ein Fall, bei dem seit zwei Jahren keine Änderung mehr fehlgeschlagen ist, misst die Vergangenheit, und ihn zu behalten führt nur dazu, dass Suiten teurer werden, ohne besser zu werden.",
+          "test": "Führen Sie eine bekannte Regression ein. Die Suite fängt sie ab und die Änderung wird nicht ausgeliefert. Eine Suite, die man nie fehlschlagen sieht, ist eine Suite, die nie verifiziert wurde."
+        },
+        "ja": {
+          "name": "変更をゲートする評価スイート",
+          "statement": "変更のたびに厳選されたケースのセットが実行され、デグレード（退行）が発生した場合はリリースがブロックされます。これがないと、「動いているようだ」ということだけが品質の根拠になり、修正と単なる変更を区別するものがなくなります。",
+          "axisNote": "システムがすでに生成した出力を測定します。エージェントの出力におけるデグレード（退行）の定義は判断に委ねられます。スイートは、誰かが選択したケースをカバーします。",
+          "assumes": "変更によって誰も予測しない形で動作がデグレード（退行）すること、そして厳選されたセットの方が主観的な判断よりも多くのデグレードを検出できることを前提としています。",
+          "retireWhen": "カテゴリとして廃止することはありません。個々のケースは絶えず廃止されます。2年間どの変更でも失敗しなかったケースは過去を測定しているにすぎず、それを維持し続けることは、スイートの改善につながらないままコストだけを増大させる原因になります。",
+          "test": "既知のデグレード（退行）を混入させます。スイートがそれを検出し、変更が出荷されないことを確認します。失敗したところを見たことがないスイートは、検証されたことがないスイートと同じです。"
         }
       }
     },
@@ -930,6 +1282,38 @@
           "assumes": "Que o modelo não distingue de forma confiável instrução de dado dentro da própria janela de contexto.",
           "retireWhen": "Que os casos de injeção da suite deixem de ter sucesso com este controle removido, medido e não anunciado. Isso significaria que a separação é imposta abaixo do prompt e não dentro dele.",
           "test": "Plante uma instrução dentro de um documento que o agente recupere. O agente pode lê-la; não deve agir sobre ela, e a tentativa deve ficar visível depois."
+        },
+        "fr": {
+          "name": "Le contenu non approuvé est isolé et marqué",
+          "statement": "Les documents récupérés, les résultats d'outils et les sorties tierces sont délimités en tant que données, et ne sont jamais fusionnés dans le canal d'instructions. Le modèle ne peut pas les distinguer de manière fiable, c'est donc au harness de le faire.",
+          "axisNote": "La délimitation s'effectue sur l'entrée, avant que le modèle ne la lise, et elle s'applique à chaque document sans se soucier de son contenu.",
+          "assumes": "Que le modèle ne peut pas distinguer de manière fiable les instructions des données au sein de sa propre fenêtre de contexte.",
+          "retireWhen": "Les cas d'injection de la suite d'évaluation cessent de réussir lorsque ce contrôle est supprimé — mesuré, et non simplement annoncé. Cela signifierait que la séparation est appliquée en dessous du prompt plutôt qu'à l'intérieur de celui-ci.",
+          "test": "Introduisez une instruction dans un document que l'agent récupère. L'agent peut la lire ; il ne doit pas l'exécuter, et la tentative doit être visible par la suite."
+        },
+        "zh": {
+          "name": "不受信任的内容被隔离并标记",
+          "statement": "检索到的文档、工具结果和第三方输出被界定为数据，绝不合并到指令通道中。模型无法可靠地将它们区分开来，因此 Harness Engineering（智能体支撑系统工程）必须做到这一点。",
+          "axisNote": "界定发生在输入端，在模型读取它之前，并且它适用于每个文档，而不必询问其中的内容。",
+          "assumes": "假设模型无法在其自身的上下文窗口内可靠地将指令与数据区分开来。",
+          "retireWhen": "在移除此控制措施后，评估套件中的注入案例不再成功——这是经过衡量的，而不是宣布的。这意味着隔离是在提示词之下而不是在提示词内部强制执行的。",
+          "test": "在智能体检索的文档中植入一条指令。智能体可以读取它；但绝不能对其采取行动，并且该尝试在事后必须是可见的。"
+        },
+        "de": {
+          "name": "Nicht vertrauenswürdige Inhalte werden isoliert und gekennzeichnet",
+          "statement": "Abgerufene Dokumente, Tool-Ergebnisse und Ausgaben von Drittanbietern werden als Daten abgegrenzt und niemals mit dem Anweisungskanal zusammengeführt. Das Modell kann sie nicht zuverlässig voneinander unterscheiden, daher muss das Harness dies tun.",
+          "axisNote": "Die Abgrenzung erfolgt bei der Eingabe, bevor das Modell sie liest, und sie gilt für jedes Dokument, ohne zu fragen, was sich darin befindet.",
+          "assumes": "Dass das Modell innerhalb seines eigenen Kontextfensters Anweisungen nicht zuverlässig von Daten unterscheiden kann.",
+          "retireWhen": "Die Injection-Fälle in der Evaluierungssuite sind nach Entfernung dieser Kontrollmaßnahme nicht mehr erfolgreich – gemessen, nicht bloß angekündigt. Das würde bedeuten, dass die Trennung unterhalb des Prompts und nicht innerhalb des Prompts erzwungen wird.",
+          "test": "Platzieren Sie eine Anweisung in einem Dokument, das der Agent abruft. Der Agent darf sie lesen, er darf jedoch nicht danach handeln, und der Versuch muss im Nachhinein sichtbar sein."
+        },
+        "ja": {
+          "name": "信頼できないコンテンツの隔離とマーク",
+          "statement": "取得したドキュメント、ツールの実行結果、およびサードパーティの出力はデータとして区切られ、指示チャネルにマージされることはありません。モデルはこれらを確実に区別できないため、ハーネスが区別する必要があります。",
+          "axisNote": "区切り処理は、モデルが読み取る前の入力段階で行われ、中身を問わずすべてのドキュメントに適用されます。",
+          "assumes": "モデルが自身のコンテキストウィンドウ内で、指示とデータを確実に区別できないことを前提としています。",
+          "retireWhen": "このコントロールを削除しても、評価スイート内のインジェクションケースが成功しなくなったとき（憶測ではなく測定による確認）に廃止します。これは、分離がプロンプトの内部ではなく、プロンプトより下のレイヤーで強制されていることを意味します。",
+          "test": "エージェントが取得するドキュメント内に指示を仕込みます。エージェントがそれを読み取ることはあっても、実行してはならず、その試行が後から確認できる必要があります。"
         }
       }
     },
@@ -1001,6 +1385,38 @@
           "assumes": "Que os destinos a jusante confiam no que lhes chega, e que o modelo emitirá aquilo para o qual foi direcionado.",
           "retireWhen": "Não por causa do modelo. É uma propriedade do destino, não do produtor: a mesma codificação seria necessária se a string tivesse sido digitada por uma pessoa.",
           "test": "Faça o modelo emitir um payload para cada destino a jusante que você tenha. Cada um é neutralizado na fronteira antes de chegar."
+        },
+        "fr": {
+          "name": "La sortie du modèle est traitée comme une entrée non approuvée",
+          "statement": "Tout ce que le modèle émet et qui atteint un moteur de rendu, un interpréteur de commandes (shell), une requête ou un autre système est encodé et validé exactement comme le serait une entrée provenant d'un inconnu.",
+          "axisNote": "Le moment est relatif à l'action protégée : l'encodage agit sur l'entrée du récepteur (sink), avant que celui-ci n'en fasse quoi que ce soit.",
+          "assumes": "Que les récepteurs (sinks) en aval font confiance à ce qui leur parvient, et que le modèle émettra tout ce vers quoi il a été orienté.",
+          "retireWhen": "Pas pour des raisons liées au modèle. C'est une propriété du récepteur (sink), pas du producteur : le même encodage serait requis si une personne physique avait saisi la chaîne.",
+          "test": "Faites en sorte que le modèle émette une charge utile pour chaque récepteur (sink) en aval dont vous disposez. Chacune est neutralisée à la frontière avant son arrivée."
+        },
+        "zh": {
+          "name": "模型输出被视为不受信任的输入",
+          "statement": "模型发出的、到达渲染器、Shell、查询或其他系统的任何内容，都必须像来自陌生人的输入一样进行编码和验证。",
+          "axisNote": "该时刻相对于受保护的操作而言：编码作用于接收端的输入，在接收端对其进行任何操作之前。",
+          "assumes": "假设下游接收端信任到达它们的内容，并且模型会发出任何被引导发出的内容。",
+          "retireWhen": "不因模型原因而停用。这是接收端的属性，而不是生成端的属性：如果是由人输入该字符串，也需要进行相同的编码。",
+          "test": "让模型为您拥有的每个下游接收端发出一个有效载荷。每个载荷在到达之前都在边界处被中和。"
+        },
+        "de": {
+          "name": "Modellausgabe wird als nicht vertrauenswürdige Eingabe behandelt",
+          "statement": "Alles, was das Modell ausgibt und was einen Renderer, eine Shell, eine Abfrage oder ein anderes System erreicht, wird genau so codiert und validiert, wie es bei der Eingabe eines Fremden der Fall wäre.",
+          "axisNote": "Der Zeitpunkt bezieht sich auf die zu schützende Aktion: Die Codierung wirkt auf die Eingabe der Senke, bevor die Senke etwas damit tut.",
+          "assumes": "Dass nachgelagerte Senken dem vertrauen, was sie erreicht, und dass das Modell alles ausgibt, wozu es verleitet wurde.",
+          "retireWhen": "Nicht aus Modellgründen. Dies ist eine Eigenschaft der Senke, nicht des Erzeugers: Dieselbe Codierung wäre erforderlich, wenn eine Person die Zeichenfolge eingegeben hätte.",
+          "test": "Lassen Sie das Modell ein Payload für jede Ihrer nachgelagerten Senken ausgeben. Jedes Payload wird an der Grenze neutralisiert, bevor es dort ankommt."
+        },
+        "ja": {
+          "name": "モデル出力を信頼できない入力として処理",
+          "statement": "モデルが出力したもののうち、レンダラー、シェル、クエリ、または他のシステムに到達するものはすべて、見知らぬ人からの入力とまったく同じようにエンコードおよび検証されます。",
+          "axisNote": "処理のタイミングは保護対象のアクションに関連しています。エンコードは、シンク（出力先）がそれに対して何らかの処理を行う前に、シンクの入力に対して作用します。",
+          "assumes": "下流のシンク（出力先）に到達するものをシンクが信頼していること、そしてモデルは誘導された通りのものを出力してしまうことを前提としています。",
+          "retireWhen": "モデル側の理由で廃止することはありません。これは生成側ではなくシンク（出力先）の特性です。人間が文字列を入力した場合でも、同様のエンコードが必要になります。",
+          "test": "存在する各下流シンク（出力先）に対して、モデルにペイロードを出力させます。それぞれが到達する前に、境界で無害化されることを確認します。"
         }
       }
     },
@@ -1074,6 +1490,38 @@
           "assumes": "Que a memória escrita persiste entre tarefas, e que um dado falso escrito uma vez será lido muitas.",
           "retireWhen": "Que o próprio sistema de memória atribua e expire as escritas, com o que a integridade deixa de ser uma disciplina que o harness tenha de impor de fora.",
           "test": "Grave um fato falso por meio de uma interação normal. Mostre de onde veio, quem pode removê-lo e quando expiraria sozinho."
+        },
+        "fr": {
+          "name": "Intégrité et expiration de la mémoire",
+          "statement": "Ce que l'agent écrit dans la mémoire persistante est attribué, révisable et sujet à expiration. La mémoire est ce qui transforme une attaque ponctuelle en une attaque qui se déclenche à nouveau lors de tâches futures et sans rapport.",
+          "axisNote": "Son action s'exerce sur ce qui a déjà été écrit, et décider qu'un fait stocké est faux relève d'un jugement qu'aucune règle ne peut prendre à votre place.",
+          "assumes": "Que la mémoire écrite persiste d'une tâche à l'autre, et qu'un fait erroné écrit une fois sera lu de nombreuses fois.",
+          "retireWhen": "Le système de mémoire attribue et expire les écritures de lui-même, de sorte que l'intégrité cesse d'être une discipline que le harness doit imposer de l'extérieur.",
+          "test": "Écrivez un fait erroné via une interaction normale. Montrez d'où il provient, qui peut le supprimer et quand il expirerait de lui-même."
+        },
+        "zh": {
+          "name": "记忆完整性与过期",
+          "statement": "智能体写入持久记忆的内容是可归属、可审查且可过期的。记忆是将一次性攻击转变为在未来无关任务中重新触发的攻击的关键。",
+          "axisNote": "它对已经写入的内容起作用，而判定存储的事实为假是一种没有任何规则能替你做出的判断。",
+          "assumes": "假设写入的记忆会跨任务持久存在，并且写入一次的错误事实会被多次读取。",
+          "retireWhen": "记忆系统会自行归属并过期写入，因此完整性不再是支撑系统必须从外部强加的约束。",
+          "test": "通过正常交互写入一个虚假事实。展示其来源、谁可以将其删除，以及它何时会自行过期。"
+        },
+        "de": {
+          "name": "Speicherintegrität und -ablauf",
+          "statement": "Was der Agent in den persistenten Speicher schreibt, ist zugeordnet, überprüfbar und kann ablaufen. Der Speicher ist das, was einen einmaligen Angriff in einen Angriff verwandelt, der bei zukünftigen, nicht damit zusammenhängenden Aufgaben erneut ausgelöst wird.",
+          "axisNote": "Es greift bei dem, was bereits geschrieben wurde, und die Entscheidung, dass eine gespeicherte Tatsache falsch ist, ist eine Ermessensentscheidung, die keine Regel für Sie übernimmt.",
+          "assumes": "Dass geschriebener Speicher über Aufgaben hinweg bestehen bleibt und dass eine einmal geschriebene falsche Tatsache viele Male gelesen wird.",
+          "retireWhen": "Das Speichersystem ordnet Schreibvorgänge selbstständig zu und lässt sie ablaufen, sodass Integrität keine Disziplin mehr ist, die das Harness von außen erzwingen muss.",
+          "test": "Schreiben Sie eine falsche Tatsache über eine normale Interaktion. Zeigen Sie auf, woher sie stammt, wer sie entfernen kann und wann sie von selbst ablaufen würde."
+        },
+        "ja": {
+          "name": "メモリの整合性と有効期限",
+          "statement": "エージェントが永続メモリに書き込む内容は、属性が定義され、レビュー可能で、有効期限を設定できます。メモリこそが、一回限りの攻撃を、将来の無関係なタスクで再トリガーされる攻撃へと変える要因です。",
+          "axisNote": "すでに書き込まれた内容に対して機能しますが、保存された事実が誤りであると判断することは、いかなるルールも自動的には行ってくれない主観的な判断です。",
+          "assumes": "書き込まれたメモリがタスク間で永続すること、そして一度書き込まれた誤った事実が何度も読み取られることを前提としています。",
+          "retireWhen": "メモリシステムが独自に書き込みの属性を特定し、有効期限を設定するため、ハーネスが外部から整合性を強制する必要がなくなります。",
+          "test": "通常のインタラクションを通じて誤った事実を書き込みます。それがどこから来たのか、誰が削除できるのか、そしていつ自動的に期限切れになるのかを示します。"
         }
       }
     },
@@ -1148,6 +1596,38 @@
           "assumes": "Que uma dependência pode mudar sob seus pés, e que a mudança pode alterar o comportamento sem alterar seu código.",
           "retireWhen": "Não por capacidade. É o que faz a banda de determinismo significar alguma coisa: sem fixação, as execuções repetidas medem o calendário de versões do fornecedor.",
           "test": "Para cada dependência externa, nomeie a versão fixada e quem revisou a última mudança. Altere uma descrição de ferramenta a montante; a mudança é detectada antes de chegar à produção."
+        },
+        "fr": {
+          "name": "Provenance pour les modèles, les prompts et les serveurs",
+          "statement": "Les modèles, les prompts système, les serveurs MCP, les packages et les jeux de données sont figés, examinés lors de chaque modification et traçables jusqu'à leur source. Une dépendance capable de réécrire la description d'un outil peut réécrire le comportement de l'agent.",
+          "axisNote": "Le figeage (pin) est vérifié avant l'utilisation de la dépendance, et une description d'outil modifiée constitue un diff, pas une opinion.",
+          "assumes": "Qu'une dépendance peut changer à votre insu, et que ce changement peut altérer le comportement sans modifier votre code.",
+          "retireWhen": "Pas pour des raisons de capacité. C'est ce qui donne tout son sens à la bande de déterminisme : sans figeage, les exécutions répétées ne font que mesurer le calendrier de publication du fournisseur.",
+          "test": "Pour chaque dépendance externe, nommez la version figée et la personne qui a examiné la dernière modification. Modifiez une description d'outil en amont ; le changement doit être détecté avant d'atteindre la production."
+        },
+        "zh": {
+          "name": "模型、提示词和服务器的溯源",
+          "statement": "模型、系统提示词、MCP 服务器、包和数据集均已锁定版本、在变更时经过评审，且可追溯到源头。能够重写工具描述的依赖项同样能够重写智能体的行为。",
+          "axisNote": "在依赖项被使用前会检查版本锁定，而发生变更的工具描述是一个差异对比（diff），而非主观意见。",
+          "assumes": "假设依赖项可能会在您不知情的情况下发生变化，且该变化可以在不修改您的代码的情况下改变行为。",
+          "retireWhen": "不会因能力原因而废除。这就是确定性区间具有实际意义的原因：如果不锁定版本，重复运行测试的其实是供应商的发布计划。",
+          "test": "对于每个外部依赖项，指明锁定的版本以及谁评审了最近的变更。在上游修改工具描述；该变更在进入生产环境之前被检测到。"
+        },
+        "de": {
+          "name": "Provenienz für Modelle, Prompts und Server",
+          "statement": "Modelle, System-Prompts, MCP-Server, Pakete und Datensätze sind festgeschrieben (pinned), werden bei Änderungen überprüft und sind bis zu einer Quelle rückverfolgbar. Eine Abhängigkeit, die eine Tool-Beschreibung umschreiben kann, kann auch das Verhalten des Agenten umschreiben.",
+          "axisNote": "Ein Pin wird überprüft, bevor die Abhängigkeit verwendet wird, und eine geänderte Tool-Beschreibung ist ein Diff, keine Meinung.",
+          "assumes": "Dass sich eine Abhängigkeit unbemerkt ändern kann und dass diese Änderung das Verhalten beeinflussen kann, ohne Ihren Code zu ändern.",
+          "retireWhen": "Nicht aus Kapazitätsgründen. Erst dies verleiht dem Determinismus-Bereich eine Bedeutung: Ohne Pinning messen wiederholte Durchläufe lediglich den Release-Zyklus des Anbieters.",
+          "test": "Nennen Sie für jede externe Abhängigkeit die festgeschriebene Version und wer die letzte Änderung überprüft hat. Ändern Sie eine Tool-Beschreibung upstream; die Änderung wird erkannt, bevor sie die Produktion erreicht."
+        },
+        "ja": {
+          "name": "モデル、プロンプト、およびサーバーのプロバナンス（来歴）",
+          "statement": "モデル、システムプロンプト、MCPサーバー、パッケージ、およびデータセットがピン留めされ、変更時にレビューされ、ソースまで追跡可能であること。ツールの説明を書き換えられる依存関係は、エージェントの動作も書き換えることができます。",
+          "axisNote": "依存関係が使用される前にピン留めがチェックされ、変更されたツールの説明は主観ではなく差分（diff）として扱われます。",
+          "assumes": "依存関係が知らないうちに変化する可能性があり、その変化によってコードを変更することなく動作が変わる可能性があること。",
+          "retireWhen": "機能的な理由で廃止されることはありません。これこそが決定論的帯域（determinism band）を意味あるものにする理由です。ピン留めがなければ、繰り返し実行してもベンダーのリリーススケジュールを測定しているに過ぎなくなります。",
+          "test": "外部依存関係ごとに、ピン留めされたバージョンと最後の変更をレビューした担当者を特定します。上流でツールの説明を変更し、その変更が本番環境に到達する前に検出されることを確認します。"
         }
       }
     },
@@ -1217,6 +1697,38 @@
           "assumes": "Que o endpoint é alcançável de fora, e que os navegadores serão apontados para ele pela página de outra pessoa.",
           "retireWhen": "Que o endpoint deixe de ser alcançável de fora. Um modelo melhor não torna seguro um Origin sem validação.",
           "test": "Chame o endpoint com um Origin alheio e sem Origin. O primeiro é recusado antes de qualquer handler rodar; o segundo é servido e conta contra o limite do seu chamador."
+        },
+        "fr": {
+          "name": "Validation du transport et de l'origine sur les points de terminaison exposés",
+          "statement": "Un point de terminaison d'agent accessible de l'extérieur valide son transport avant d'effectuer tout travail : l'origine est vérifiée par rapport à une liste d'autorisation, les appels intersites initiés par un navigateur sont rejetés, et chaque appelant est limité en débit avec une véritable erreur 429.",
+          "axisNote": "La requête est évaluée par son en-tête Origin avant l'exécution de tout gestionnaire ; le même appel reçoit la même réponse à chaque fois.",
+          "assumes": "Que le point de terminaison est accessible de l'extérieur, et que des navigateurs y seront orientés par la page de quelqu'un d'autre.",
+          "retireWhen": "Le point de terminaison cesse d'être accessible de l'extérieur. Un meilleur modèle ne rend pas pour autant un Origin non validé sûr.",
+          "test": "Appelez le point de terminaison avec un Origin étranger et sans Origin. Le premier est rejeté avant l'exécution de tout gestionnaire ; le second est traité et comptabilisé dans la limite de l'appelant."
+        },
+        "zh": {
+          "name": "对暴露端点的传输和 Origin 验证",
+          "statement": "可从外部访问的智能体端点在执行工作前会验证其传输：根据白名单检查 Origin，拒绝浏览器发起的跨站调用，并使用真实的 429 状态码对每个调用者进行速率限制。",
+          "axisNote": "在任何处理程序运行之前，请求将根据其 Origin 标头进行判定；相同的调用每次都会得到相同的响应。",
+          "assumes": "假设端点可从外部访问，且浏览器会被其他人的页面引导至该端点。",
+          "retireWhen": "端点不再可从外部访问。更好的模型并不能让未经验证的 Origin 变得安全。",
+          "test": "使用外部 Origin 和无 Origin 调用端点。前者在任何处理程序运行前被拒绝；后者被正常服务并计入调用者的限制额度。"
+        },
+        "de": {
+          "name": "Transport- und Ursprungsvalidierung an exponierten Endpunkten",
+          "statement": "Ein von außen erreichbarer Agenten-Endpunkt validiert seinen Transport, bevor er Arbeit verrichtet: Der Ursprung (Origin) wird mit einer Allowlist abgeglichen, vom Browser initiierte Cross-Site-Aufrufe werden abgelehnt und für jeden Aufrufer wird ein Rate-Limiting mit einem echten 429-Statuscode erzwungen.",
+          "axisNote": "Die Anfrage wird anhand ihres Origin-Headers beurteilt, bevor ein Handler ausgeführt wird; derselbe Aufruf erhält jedes Mal dieselbe Antwort.",
+          "assumes": "Dass der Endpunkt von außen erreichbar ist und dass Browser durch die Seite eines Dritten darauf verwiesen werden.",
+          "retireWhen": "Der Endpunkt ist nicht mehr von außen erreichbar. Ein besseres Modell macht eine nicht validierte Origin nicht sicher.",
+          "test": "Rufen Sie den Endpunkt mit einer fremden Origin und ohne Origin auf. Ersteres wird abgelehnt, bevor ein Handler ausgeführt wird; Letzteres wird bedient und auf das Limit des Aufrufers angerechnet."
+        },
+        "ja": {
+          "name": "公開されたエンドポイントにおけるトランスポートおよびオリジンの検証",
+          "statement": "外部からアクセス可能なエージェントエンドポイントは、処理を実行する前にトランスポートを検証します。オリジンを許可リストと照合し、ブラウザ起点のクロスサイト呼び出しを拒否し、すべての呼び出し元に対して実際の429エラーでレート制限を適用します。",
+          "axisNote": "ハンドラーが実行される前に、リクエストはOriginヘッダーによって判断されます。同じ呼び出しに対しては、常に同じ応答が返されます。",
+          "assumes": "エンドポイントが外部からアクセス可能であり、他人のページによってブラウザがそのエンドポイントに向けられる可能性があること。",
+          "retireWhen": "エンドポイントが外部からアクセスできなくなったとき。モデルが向上したからといって、検証されていないOriginが安全になるわけではありません。",
+          "test": "外部のOrigin、およびOriginなしでエンドポイントを呼び出します。前者はハンドラーが実行される前に拒否され、後者は処理されて呼び出し元の制限にカウントされます。"
         }
       }
     },
@@ -1289,6 +1801,38 @@
           "assumes": "Que uma execução pode dar errado de uma forma que uma pessoa percebe antes do harness.",
           "retireWhen": "Que a lacuna de verificação chegue a zero e a taxa de recuperação seja igual sem ele, isto é, que o harness perceba as próprias falhas pelo menos tão rápido quanto quem observa. Hoje nada neste corpus mede isso.",
           "test": "Pare um agente em execução. Ele para dentro do tempo declarado, não deixa nenhuma mudança pela metade e a parada fica registrada com quem a ordenou."
+        },
+        "fr": {
+          "name": "Réversibilité et contrôle d'arrêt",
+          "statement": "Chaque action que l'agent peut entreprendre est soit réversible, soit soumise à validation, et une personne peut arrêter l'agent en cours d'exécution sans arrêter l'ensemble du système. L'autonomie sans interrupteur d'arrêt n'est pas de l'autonomie, c'est de l'exposition.",
+          "axisNote": "Quelqu'un doit surveiller et décider que cette exécution doit se terminer ; le mécanisme est déterministe, le déclencheur ne l'est pas.",
+          "assumes": "Qu'une exécution peut mal tourner d'une manière qu'une personne remarque avant le harness.",
+          "retireWhen": "L'écart de vérification atteint zéro et le taux de récupération est à parité sans cela — ce qui signifie que le harness remarque ses propres défaillances au moins aussi vite que la personne qui surveille. Rien dans ce corpus ne mesure cela aujourd'hui.",
+          "test": "Arrêtez un agent en cours d'exécution. Il s'interrompt dans le délai imparti, ne laisse aucune modification appliquée à moitié, et l'arrêt est enregistré avec l'identité de son auteur."
+        },
+        "zh": {
+          "name": "可逆性与停止控制",
+          "statement": "智能体可以采取的每项操作要么是可逆的，要么是受控的，且人员可以在运行中途停止智能体，而无需停止整个系统。没有关闭开关的自主性不是自主性，而是暴露在风险之中。",
+          "axisNote": "必须有人进行监控并决定该次运行应当结束；机制是确定性的，但触发机制不是。",
+          "assumes": "假设运行可能会以人员比支撑系统更早察觉的方式出错。",
+          "retireWhen": "验证差距降至零，且在没有它的情况下恢复率达到对等——这意味着支撑系统察觉自身故障的速度至少与监控人员一样快。目前该语料库中没有任何内容可以衡量这一点。",
+          "test": "停止正在运行的智能体。它在规定时间内停下来，不留下任何应用了一半的变更，并且记录停止操作及发起人。"
+        },
+        "de": {
+          "name": "Reversibilität und eine Stopp-Steuerung",
+          "statement": "Jede Aktion, die der Agent ausführen kann, ist entweder reversibel oder durch ein Gate geschützt, und eine Person kann den Agenten mitten im Durchlauf stoppen, ohne das gesamte System anzuhalten. Autonomie ohne Ausschalter ist keine Autonomie, sondern ein Risiko.",
+          "axisNote": "Jemand muss zusehen und entscheiden, dass dieser Durchlauf beendet werden soll; der Mechanismus ist deterministisch, der Auslöser ist es nicht.",
+          "assumes": "Dass ein Durchlauf auf eine Weise schiefgehen kann, die ein Mensch bemerkt, bevor das Harness es tut.",
+          "retireWhen": "Die Verifizierungslücke erreicht Null und die Wiederherstellungsrate ist ohne sie gleichwertig – was bedeutet, dass das Harness seine eigenen Fehler mindestens so schnell bemerkt wie die zusehende Person. Nichts in diesem Korpus misst das heute.",
+          "test": "Stoppen Sie einen laufenden Agenten. Er hält innerhalb der angegebenen Zeit an, hinterlässt keine halb angewendeten Änderungen und der Stopp wird mit der Angabe erfasst, wer ihn ausgelöst hat."
+        },
+        "ja": {
+          "name": "可逆性と停止制御",
+          "statement": "エージェントが実行できるすべてのアクションは、可逆的であるか、ゲート（制限）が設けられており、システム全体を停止させることなく、実行途中で人間がエージェントを停止できます。オフスイッチのない自律性は自律性ではなく、危険に身をさらしているだけです。",
+          "axisNote": "誰かが監視し、この実行を終了すべきだと判断する必要があります。メカニズムは決定論的ですが、トリガーはそうではありません。",
+          "assumes": "ハーネスが気づく前に、人間が気づくような形で実行が失敗する可能性があること。",
+          "retireWhen": "検証ギャップがゼロになり、それなしでも回復率が同等に達したとき。つまり、ハーネスが自身の失敗を、監視している人間と少なくとも同等の速さで検知できるようになったときです。現在のこのコーパスには、それを測定するものは存在しません。",
+          "test": "実行中のエージェントを停止します。規定の時間内に停止し、中途半端に適用された変更を残さず、停止の記録とそれを実行した担当者が記録されることを確認します。"
         }
       }
     },
@@ -1363,6 +1907,38 @@
           "assumes": "Que a superfície de ataque muda quando mudam as ferramentas, as fontes de dados ou os níveis de autonomia, e que ninguém percebe a menos que alguém seja responsabilizado por perceber.",
           "retireWhen": "Que o modelo de ameaças seja gerado a partir do catálogo de ferramentas e da configuração de autonomia, com o que não pode ficar para trás. Nesse ponto este controle foi substituído, não removido.",
           "test": "Mostre o modelo de ameaças vigente e a data da última mudança no catálogo de ferramentas. Se o catálogo for mais novo que o modelo, o modelo está desatualizado e este controle falha."
+        },
+        "fr": {
+          "name": "Un modèle de menace maintenu et testé",
+          "statement": "Les surfaces d'attaque sont consignées par écrit avec un contrôle et un propriétaire pour chacune, les risques acceptés sont explicitement désignés comme tels, et le document est révisé chaque fois qu'un outil, une source de données ou un niveau d'autonomie change.",
+          "axisNote": "Son test compare deux dates, mais le contenu du document relève du jugement, et il est révisé en réponse à des changements déjà effectifs.",
+          "assumes": "Que la surface d'attaque change lorsque les outils, les sources de données ou les niveaux d'autonomie changent, et que personne ne le remarque à moins que quelqu'un ne soit chargé de le faire.",
+          "retireWhen": "Le modèle de menace est généré à partir du catalogue d'outils et de la configuration d'autonomie, de sorte qu'il ne peut pas être en retard sur ces derniers. À ce stade, ce contrôle a été remplacé, et non retiré.",
+          "test": "Présentez le modèle de menace actuel et la date de la dernière modification du catalogue d'outils. Si le catalogue est plus récent que le modèle, le modèle est obsolète et ce contrôle échoue."
+        },
+        "zh": {
+          "name": "持续维护并测试的威胁模型",
+          "statement": "记录攻击面，并为每个攻击面指定控制措施和所有者，将接受的风险明确标记为已接受，并且每当工具、数据源或自主性级别发生变化时，都会重新评估该文档。",
+          "axisNote": "其测试比较两个日期，但文档的内容属于主观判断，并且是针对已经落地的变更进行修订的。",
+          "assumes": "假设当工具、数据源或自主性级别发生变化时，攻击面也会随之变化，且除非有人负责关注，否则没人会注意到。",
+          "retireWhen": "威胁模型是根据工具目录和自主性配置生成的，因此它不会滞后于它们。届时，该控制措施已被取代，而非废除。",
+          "test": "展示当前的威胁模型以及工具目录的最近变更日期。如果目录比模型新，则说明模型已过时，此项控制失败。"
+        },
+        "de": {
+          "name": "Ein Bedrohungsmodell, das gepflegt und getestet wird",
+          "statement": "Die Angriffsflächen sind jeweils mit einer Kontrollmaßnahme und einem Verantwortlichen dokumentiert, akzeptierte Risiken werden als solche benannt und das Dokument wird immer dann überarbeitet, wenn sich ein Tool, eine Datenquelle oder eine Autonomiestufe ändert.",
+          "axisNote": "Sein Test vergleicht zwei Daten, aber was im Dokument steht, ist eine Ermessensentscheidung, und es wird als Reaktion auf bereits vorgenommene Änderungen überarbeitet.",
+          "assumes": "Dass sich die Angriffsfläche ändert, wenn sich Tools, Datenquellen oder Autonomiestufen ändern, und dass dies niemand bemerkt, wenn nicht jemand dafür verantwortlich gemacht wird.",
+          "retireWhen": "Das Bedrohungsmodell wird aus dem Tool-Katalog und der Autonomiekonfiguration generiert, sodass es nicht hinterherhinken kann. Zu diesem Zeitpunkt wurde diese Kontrollmaßnahme ersetzt, nicht abgeschafft.",
+          "test": "Zeigen Sie das aktuelle Bedrohungsmodell und das Datum der letzten Änderung am Tool-Katalog. Wenn der Katalog neuer ist als das Modell, ist das Modell veraltet und diese Kontrollmaßnahme schlägt fehl."
+        },
+        "ja": {
+          "name": "維持およびテストされた脅威モデル",
+          "statement": "攻撃対象領域（アタックサーフェス）が書き出され、それぞれに制御策と所有者が割り当てられ、許容されたリスクは許容済みとして明記され、ツール、データソース、または自律性レベルが変更されるたびにドキュメントが再検討されること。",
+          "axisNote": "そのテストでは2つの日付を比較しますが、ドキュメントの内容は判断であり、すでに導入された変更に応じて改訂されます。",
+          "assumes": "ツール、データソース、または自律性レベルが変更されると攻撃対象領域も変化し、誰かに気づく責任を課さない限り、誰もそれに気づかないこと。",
+          "retireWhen": "脅威モデルがツールカタログと自律性設定から自動生成されるため、それらから遅れることがなくなったとき。その時点で、この制御策は廃止されたのではなく、置き換えられたことになります。",
+          "test": "現在の脅威モデルと、ツールカタログの最終変更日を表示します。カタログの方がモデルよりも新しい場合、モデルは古くなっており、この制御策は不合格となります。"
         }
       }
     }

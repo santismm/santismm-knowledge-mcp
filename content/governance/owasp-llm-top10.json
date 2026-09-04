@@ -296,6 +296,326 @@
           "a": "Respondem perguntas diferentes. O OWASP nomeia as classes de vulnerabilidade da sua aplicação; o ATLAS cataloga as táticas e técnicas que um adversário usa contra sistemas de IA. Uma é uma lista de verificação sobre o seu design, a outra é um mapa do manual do atacante."
         }
       ]
+    },
+    "fr": {
+      "name": "OWASP Top 10 pour les applications LLM",
+      "summary": "L'OWASP Top 10 pour les applications LLM constitue le vocabulaire partagé pour identifier les défaillances des systèmes basés sur des modèles de langage. Il ne s'agit pas d'un cadre de contrôle et il ne prescrit pas ce qu'il faut mettre en œuvre — il nomme les classes de vulnérabilités, de l'injection de requêtes (prompt injection) à la consommation illimitée (unbounded consumption) en passant par l'excès d'autonomie (excessive agency), afin que les équipes, les auditeurs et les fournisseurs parlent de la même chose. Sa valeur pratique réside dans son utilisation comme liste de contrôle pour votre propre architecture et comme langage commun pour signaler les anomalies.",
+      "definition": "L'OWASP Top 10 pour les applications LLM est une liste gérée par la communauté répertoriant les classes de vulnérabilités les plus critiques dans les applications basées sur de grands modèles de langage. Elle est publiée par l'OWASP GenAI Security Project et révisée périodiquement au fil de l'évolution de l'écosystème.",
+      "scope": "Toute application basée sur un grand modèle de langage — interfaces de chat, systèmes de recherche d'informations (retrieval), agents et outils qu'ils appellent. Elle est volontaire, non certifiable et délibérément descriptive : elle classifie les risques, mais ne prescrit pas de contrôles et ne confère pas de conformité.",
+      "keyPoints": [
+        "L'injection de requêtes (prompt injection) figure en tête de liste depuis la première édition et reste la classe pour laquelle il n'existe pas de solution miracle — seul un confinement de sécurité multicouche est possible.",
+        "L'édition 2025 couvre l'injection de requêtes, la divulgation d'informations sensibles, la chaîne d'approvisionnement, l'empoisonnement des données et des modèles, la mauvaise gestion des sorties, l'excès d'autonomie, la fuite de requêtes système, les faiblesses des vecteurs et des plongements (embeddings), la désinformation et la consommation illimitée. La liste étant révisée périodiquement, veuillez consulter l'édition en vigueur plutôt que de vous fier à une version en cache.",
+        "Plusieurs entrées ont un effet spécifique aux agents : l'excès d'autonomie et la mauvaise gestion des sorties ne deviennent critiques que lorsque le modèle est en mesure d'agir.",
+        "Il s'agit d'une taxonomie, pas d'un ensemble de contrôles. Associer une anomalie à LLM06 indique la nature du problème, mais pas ce qu'il faut construire.",
+        "C'est la lingua franca du domaine : les revues de sécurité, les questionnaires des fournisseurs et les rapports de bogues y font tous référence, ce qui explique en grande partie pourquoi il est utile de la connaître par numéro.",
+        "Couvrir la liste ne constitue pas une posture de sécurité. Chaque entrée nécessite un contrôle dans votre architecture, et une entrée sans contrôle représente un risque accepté, que cela ait été formalisé par écrit ou non."
+      ],
+      "controls": [
+        {
+          "control": "Projeter la liste sur votre propre architecture",
+          "note": "Confrontez chaque entrée à vos entrées, outils, bases de données et sorties réels. L'exercice a plus de valeur que la liste elle-même, car il met en évidence les entrées non applicables ainsi que les surfaces d'attaque non mentionnées par la liste."
+        },
+        {
+          "control": "Attribuer un responsable et un contrôle par entrée",
+          "note": "Chaque classe applicable nécessite un composant désigné pour la limiter et une personne pour maintenir ce composant. Une entrée non associée à un contrôle est une faille dotée d'un numéro de référence."
+        },
+        {
+          "control": "Traiter l'injection de requêtes comme du confinement, pas de la prévention",
+          "note": "LLM01 ne dispose d'aucun correctif fiable au niveau du modèle. Les contrôles essentiels sont l'outillage de moindre privilège, la restriction des flux de sortie, la gestion des sorties et les barrières d'approbation pour les actions à fort impact."
+        },
+        {
+          "control": "Contraindre explicitement l'autonomie",
+          "note": "Pour LLM06, définissez par écrit ce que l'agent est autorisé à faire, avec quels identifiants et sur quelles cibles — et appliquez ces règles en aval du modèle plutôt que dans la requête (prompt)."
+        },
+        {
+          "control": "Traiter les sorties du modèle comme des entrées non approuvées",
+          "note": "Pour LLM05, tout ce que le modèle génère et qui atteint un moteur de rendu, un interpréteur de commandes (shell), une requête ou un autre système nécessite le même encodage et la même validation que vous appliqueriez à une entrée provenant d'un tiers inconnu."
+        },
+        {
+          "control": "Limiter la consommation",
+          "note": "Pour LLM10, les limites de débit, les quotas et les délais d'expiration transforment une attaque sur la disponibilité et les coûts en un refus consigné dans les journaux. C'est l'entrée que les équipes ignorent le plus souvent, car elle ne ressemble pas à un problème de sécurité avant la réception de la facture."
+        },
+        {
+          "control": "Relancer la projection lorsque la liste ou le système change",
+          "note": "La liste est révisée et votre catalogue d'outils s'enrichit. Une projection réalisée une seule fois devient un document décrivant un système qui n'existe plus."
+        }
+      ],
+      "checklist": [
+        "Lisez l'édition en vigueur plutôt qu'un résumé — y compris celui-ci.",
+        "Produisez un tableau de correspondance : entrée → s'applique ? → contrôle → responsable.",
+        "Pour chaque entrée applicable sans contrôle, enregistrez-la comme un risque accepté avec un motif et une détection compensatoire.",
+        "Écrivez un test pour chaque contrôle et assurez-vous que le test échoue avant de lui faire confiance.",
+        "Vérifiez les entrées qui ne posent problème qu'avec des outils : excès d'autonomie, mauvaise gestion des sorties, chaîne d'approvisionnement.",
+        "Confirmez que les limites de débit et les quotas existent et renvoient les signaux appropriés aux clients bien intentionnés.",
+        "Relancez la projection chaque fois qu'un outil, une source de données ou un niveau d'autonomie change.",
+        "Utilisez la numérotation de la liste dans les rapports d'anomalies afin que les réviseurs et les fournisseurs discutent de la même classe."
+      ],
+      "pitfalls": [
+        "Traiter la liste comme un objectif de conformité : couvrir dix rubriques alors que l'architecture réelle reste non examinée.",
+        "Supposer que le travail de sécurité d'un fournisseur de modèles couvre LLM01. Cela réduit les tentatives, mais les conséquences restent entièrement de votre responsabilité.",
+        "Effectuer la projection sur une édition en cache. La liste étant révisée, une ancienne projection cesse discrètement de couvrir les classes actuelles.",
+        "Ignorer LLM10 parce que la consommation illimitée ressemble à un problème d'exploitation plutôt qu'à un problème de sécurité.",
+        "Confondre le fait de nommer une classe avec le fait de la contrôler. Un tableau de correspondance bien ordonné sans mise en application constitue une documentation du risque, non sa réduction."
+      ],
+      "examples": [
+        "Un agent qui résume les e-mails des clients correspond à LLM01 (le corps de l'e-mail est une entrée d'instruction non approuvée), LLM02 (le résumé peut répéter des données que le demandeur ne devrait pas voir) et LLM06 (l'outil CRM transforme un détournement en action) — trois entrées pour une seule fonctionnalité, chacune nécessitant un contrôle différent.",
+        "Un système RAG sur un wiki interne correspond à LLM01 via une injection indirecte provenant de n'importe quel éditeur de page, à LLM04 si l'index peut être empoisonné, et à LLM08 pour une recherche qui renvoie des documents en dehors des autorisations du demandeur.",
+        "Un point de terminaison MCP public correspond le plus nettement à LLM10 : données publiques en lecture seule, de sorte que la limite de consommation — des limites de débit avec des en-têtes corrects — est l'entrée qui effectue le véritable travail."
+      ],
+      "faqs": [
+        {
+          "q": "Peut-on être conforme à l'OWASP LLM Top 10 ?",
+          "a": "Non. Il s'agit d'un document de sensibilisation et de classification, pas d'une norme certifiable. Il s'associe naturellement à un système de gestion tel qu'ISO 42001 ou à un cadre tel que le NIST AI RMF, où résident réellement les obligations de gouvernance."
+        },
+        {
+          "q": "Quelles entrées changent le plus lorsque vous ajoutez des outils à un modèle ?",
+          "a": "L'excès d'autonomie et la mauvaise gestion des sorties. Sans outils, ils produisent une réponse erronée ; avec des outils, ils produisent une action, et la gravité passe d'une simple gêne à un incident."
+        },
+        {
+          "q": "Quel est son lien avec MITRE ATLAS ?",
+          "a": "Ils répondent à des questions différentes. L'OWASP nomme les classes de vulnérabilités de votre application ; ATLAS catalogue les tactiques et techniques qu'un adversaire utilise contre les systèmes d'IA. L'un est une liste de contrôle pour votre conception, l'autre est une carte des techniques de l'attaquant."
+        }
+      ]
+    },
+    "de": {
+      "name": "OWASP Top 10 für LLM-Anwendungen",
+      "summary": "Die OWASP Top 10 für LLM-Anwendungen sind das gemeinsame Vokabular für Probleme in Systemen, die auf Sprachmodellen basieren. Es handelt sich nicht um ein Kontroll-Framework und es schreibt nicht vor, was implementiert werden muss – es benennt die Schwachstellenklassen, von Prompt Injection über übermäßige Handlungsbefugnis (Excessive Agency) bis hin zu unbegrenztem Ressourcenverbrauch (Unbounded Consumption), damit Teams, Auditoren und Anbieter über dieselben Dinge sprechen können. Ihr praktischer Wert liegt in der Funktion als Checkliste für die eigene Architektur und als gemeinsame Sprache, in der Ergebnisse gemeldet werden.",
+      "definition": "Die OWASP Top 10 für LLM-Anwendungen ist eine von der Community gepflegte Liste der kritischsten Schwachstellenklassen in Anwendungen, die auf großen Sprachmodellen basieren. Sie wird vom OWASP GenAI Security Project veröffentlicht und regelmäßig an Veränderungen im Ökosystem angepasst.",
+      "scope": "Jede Anwendung, die auf einem großen Sprachmodell basiert – Chat-Schnittstellen, Retrieval-Systeme, Agenten und die von ihnen aufgerufenen Tools. Sie ist freiwillig, nicht zertifizierbar und bewusst deskriptiv: Sie klassifiziert Risiken, schreibt jedoch keine Kontrollen vor und gewährt keine Compliance.",
+      "keyPoints": [
+        "Prompt Injection führt die Liste seit der ersten Ausgabe an und bleibt die Klasse, für die es keine saubere Lösung gibt – sondern nur eine mehrschichtige Eindämmung.",
+        "Die Ausgabe 2025 umfasst Prompt Injection, Offenlegung sensibler Informationen, Lieferkette, Daten- und Modell-Poisoning, unsachgemäße Ausgabebehandlung, übermäßige Handlungsbefugnis, System-Prompt-Leakage, Vektor- und Embedding-Schwächen, Fehlinformationen und unbegrenzten Ressourcenverbrauch. Die Liste wird regelmäßig überarbeitet. Prüfen Sie daher die aktuelle Ausgabe, anstatt sich auf eine veraltete Version zu verlassen.",
+        "Einige Einträge wirken sich speziell auf Agenten aus: Übermäßige Handlungsbefugnis und unsachgemäße Ausgabebehandlung werden erst dann kritisch, wenn das Modell selbstständig agieren kann.",
+        "Es handelt sich um eine Taxonomie, nicht um ein Kontrollset. Die Zuordnung eines Befunds zu LLM06 zeigt Ihnen, um welche Art von Problem es sich handelt, nicht aber, was Sie entwickeln müssen.",
+        "Es ist die Lingua Franca des Fachbereichs: Sicherheitsüberprüfungen, Anbieterfragebögen und Bug-Reports beziehen sich alle darauf, weshalb es sich vor allem lohnt, sie namentlich und nach Nummern zu kennen.",
+        "Das Abdecken der Liste stellt noch kein Sicherheitskonzept dar. Jeder Eintrag erfordert eine Sicherheitsmaßnahme (Control) in Ihrer Architektur, und ein Eintrag ohne Maßnahme ist ein akzeptiertes Risiko, unabhängig davon, ob dies schriftlich festgehalten wurde."
+      ],
+      "controls": [
+        {
+          "control": "Die Liste auf die eigene Architektur übertragen",
+          "note": "Gleichen Sie jeden Eintrag mit Ihren tatsächlichen Eingaben, Tools, Datenspeichern und Ausgaben ab. Diese Übung ist wertvoller als die Liste selbst, da sie aufzeigt, welche Einträge nicht zutreffen und welche Angriffsflächen die Liste nicht nennt."
+        },
+        {
+          "control": "Einen Verantwortlichen und eine Sicherheitsmaßnahme pro Eintrag zuweisen",
+          "note": "Jede anwendbare Klasse benötigt eine definierte Komponente, die sie eingrenzt, und eine Person, die diese Komponente pflegt. Ein Eintrag ohne Zuordnung ist eine Sicherheitslücke mit einer Referenznummer."
+        },
+        {
+          "control": "Prompt Injection als Schadensbegrenzung statt als Prävention behandeln",
+          "note": "Für LLM01 gibt es keine zuverlässige Lösung auf der Modellebene. Die entscheidenden Maßnahmen sind Tools mit minimalen Rechten (Least Privilege), ausgehende Beschränkungen (Egress Restriction), Ausgabebehandlung und Freigabeprozesse für folgenschwere Aktionen."
+        },
+        {
+          "control": "Handlungsbefugnisse explizit einschränken",
+          "note": "Schreiben Sie für LLM06 auf, was der Agent mit welchen Anmeldedaten und für welche Ziele tun darf – und setzen Sie dies unterhalb der Modellebene durch, anstatt im Prompt."
+        },
+        {
+          "control": "Modellausgaben als nicht vertrauenswürdige Eingaben behandeln",
+          "note": "Für LLM05 gilt: Alles, was das Modell ausgibt und was einen Renderer, eine Shell, eine Abfrage oder ein anderes System erreicht, erfordert dieselbe Codierung und Validierung, die Sie bei Eingaben von Fremden anwenden würden."
+        },
+        {
+          "control": "Ressourcenverbrauch begrenzen",
+          "note": "Für LLM10 verwandeln Ratenbegrenzungen (Rate Limits), Quoten und Timeouts einen Angriff auf Verfügbarkeit und Kosten in eine protokollierte Verweigerung. Dies ist der Eintrag, den Teams am häufigsten überspringen, weil er erst dann wie ein Sicherheitsproblem aussieht, wenn die Rechnung eintrifft."
+        },
+        {
+          "control": "Die Zuordnung erneut durchführen, wenn sich die Liste oder das Systemändert",
+          "note": "Die Liste wird überarbeitet und Ihr Tool-Katalog wächst. Eine einmalig durchgeführte Zuordnung ist lediglich ein Dokument über ein System, das so nicht mehr existiert."
+        }
+      ],
+      "checklist": [
+        "Lesen Sie die aktuelle Ausgabe anstelle einer Zusammenfassung – einschließlich dieser hier.",
+        "Erstellen Sie eine Zuordnungstabelle: Eintrag → Anwendbar? → Maßnahme → Verantwortlicher.",
+        "Erfassen Sie jeden anwendbaren Eintrag ohne Maßnahme als akzeptiertes Risiko mit einer Begründung und einer kompensierenden Erkennungsmaßnahme.",
+        "Schreiben Sie einen Test für jede Maßnahme und stellen Sie sicher, dass der Test fehlschlägt, bevor Sie ihm vertrauen.",
+        "Prüfen Sie die Einträge, die erst im Zusammenspiel mit Tools gefährlich werden: übermäßige Handlungsbefugnis, unsachgemäße Ausgabebehandlung, Lieferkette.",
+        "Stellen Sie sicher, dass Ratenbegrenzungen und Quoten existieren und korrekte Signale an ordnungsgemäß agierende Clients zurückgeben.",
+        "Führen Sie die Zuordnung jedes Mal neu durch, wenn sich ein Tool, eine Datenquelle oder ein Autonomiegrad ändert.",
+        "Verwenden Sie die Nummerierung der Liste in Ihren Befunden, damit Prüfer und Anbieter über dieselbe Klasse diskutieren."
+      ],
+      "pitfalls": [
+        "Die Liste als Compliance-Ziel behandeln: Zehn Überschriften abhaken, während die tatsächliche Architektur ungeprüft bleibt.",
+        "Anzunehmen, dass die Sicherheitsvorkehrungen des Modellherstellers LLM01 abdecken. Sie reduzieren zwar die Versuche, aber die Konsequenzen tragen Sie weiterhin allein.",
+        "Die Zuordnung auf Basis einer veralteten Ausgabe vornehmen. Die Liste wird überarbeitet, und eine alte Zuordnung deckt aktuelle Klassen unbemerkt nicht mehr ab.",
+        "LLM10 überspringen, weil unbegrenzter Ressourcenverbrauch eher wie ein Betriebsproblem als ein Sicherheitsproblem aussieht.",
+        "Das Benennen einer Klasse mit deren Beherrschung verwechseln. Eine ordentliche Zuordnungstabelle ohne Durchsetzung dokumentiert das Risiko lediglich, anstatt es zu verringern."
+      ],
+      "examples": [
+        "Ein Agent, der Kunden-E-Mails zusammenfasst, lässt sich LLM01 (der E-Mail-Text ist eine nicht vertrauenswürdige Anweisungseingabe), LLM02 (die Zusammenfassung kann Daten enthalten, die der Anforderer nicht sehen darf) und LLM06 (das CRM-Tool macht aus einer Übernahme eine Aktion) zuordnen – drei Einträge aus einer einzigen Funktion, die jeweils eine andere Sicherheitsmaßnahme erfordern.",
+        "Ein RAG-System über ein internes Wiki lässt sich LLM01 über indirekte Injection durch jeden Seiteneditor, LLM04, falls der Index manipuliert (poisoned) werden kann, und LLM08 für Abfragen, die Dokumente außerhalb der Berechtigungen des Anforderers zurückgeben, zuordnen.",
+        "Ein öffentlicher MCP-Endpunkt lässt sich am ehesten LLM10 zuordnen: Nur-Lese-Zugriff, öffentliche Daten, sodass die Begrenzung des Ressourcenverbrauchs – Ratenbegrenzungen mit korrekten Headern – die eigentliche Arbeit leistet."
+      ],
+      "faqs": [
+        {
+          "q": "Kann man mit den OWASP LLM Top 10 konform (compliant) sein?",
+          "a": "Nein. Es ist ein Dokument zur Sensibilisierung und Klassifizierung, kein zertifizierbarer Standard. Es lässt sich ideal mit einem Managementsystem wie ISO 42001 oder einem Framework wie dem NIST AI RMF kombinieren, in denen die eigentlichen Governance-Verpflichtungen verankert sind."
+        },
+        {
+          "q": "Welche Einträge ändern sich am meisten, wenn man einem Modell Tools hinzufügt?",
+          "a": "Übermäßige Handlungsbefugnis (Excessive Agency) und unsachgemäße Ausgabebehandlung (Improper Output Handling). Ohne Tools führen sie zu einer falschen Antwort; mit Tools führen sie zu einer Aktion, und der Schweregrad verschiebt sich von einer Peinlichkeit zu einem Sicherheitsvorfall."
+        },
+        {
+          "q": "Wie verhält es sich im Vergleich zu MITRE ATLAS?",
+          "a": "Sie beantworten unterschiedliche Fragen. OWASP benennt die Schwachstellenklassen in Ihrer Anwendung; ATLAS katalogisiert die Taktiken und Techniken, die ein Angreifer gegen KI-Systeme einsetzt. Das eine ist eine Checkliste für Ihr Design, das andere eine Übersicht über das Playbook des Angreifers."
+        }
+      ]
+    },
+    "ja": {
+      "name": "OWASP LLMアプリケーションのトップ10",
+      "summary": "「OWASP LLMアプリケーションのトップ10」は、言語モデル上に構築されたシステムで発生する不具合に関する共通の語彙です。これは管理策フレームワークではなく、何を実装すべきかを指示するものでもありません。プロンプトインジェクションから過剰なエージェンシー、無制限の消費に至るまでの脆弱性クラスを定義することで、チーム、監査人、ベンダーが同じ前提で議論できるようにします。その実用的な価値は、自社のアーキテクチャに対するチェックリストとして、また検出事項を報告する際の共通言語として機能することにあります。",
+      "definition": "「OWASP LLMアプリケーションのトップ10」は、大規模言語モデル（LLM）上に構築されたアプリケーションにおける最も重大な脆弱性クラスをコミュニティが維持管理しているリストです。OWASP GenAI Security Projectによって公開され、エコシステムの変化に応じて定期的に改訂されます。",
+      "scope": "チャットインターフェース、検索システム、エージェント、およびそれらが呼び出すツールなど、大規模言語モデル上に構築されたあらゆるアプリケーションが対象です。これは自主的なものであり、認証可能な規格ではなく、意図的に記述的な性質を持っています。リスクを分類するものであり、管理策を規定したりコンプライアンスを付与したりするものではありません。",
+      "keyPoints": [
+        "プロンプトインジェクションは初版からリストのトップに位置しており、根本的な解決策がなく、多層的な封じ込めのみが有効なクラスであり続けています。",
+        "2025年版では、プロンプトインジェクション、機密情報の漏洩、サプライチェーン、データおよびモデルのポイズニング、不適切な出力処理、過剰なエージェンシー、システムプロンプトの漏洩、ベクトルと埋め込みの脆弱性、誤情報、および無制限の消費をカバーしています。リストは定期的に改訂されるため、キャッシュされた情報を信頼するのではなく、最新版を確認してください。",
+        "いくつかの項目は、実質的にエージェント特有のものです。過剰なエージェンシーや不適切な出力処理は、モデルがアクションを実行できるようになって初めて深刻化します。",
+        "これは分類法（タクソノミー）であり、管理策のセットではありません。検出事項をLLM06にマッピングすることは、それがどのような問題であるかを示すものであり、何を構築すべきかを教えるものではありません。",
+        "これはこの分野の共通言語です。セキュリティレビュー、ベンダーのアンケート、バグレポートのすべてがこれを参照しており、番号で把握しておく価値がある主な理由はここにあります。",
+        "リストを網羅していること自体は、セキュリティポスチャ（セキュリティ態勢）ではありません。すべての項目についてアーキテクチャ内での管理策が必要であり、管理策のない項目は、文書化されているかどうかにかかわらず、受容されたリスクとなります。"
+      ],
+      "controls": [
+        {
+          "control": "リストを自社のアーキテクチャにマッピングする",
+          "note": "実際の入力、ツール、データストア、出力に対して、各項目を検証します。この演習はリストそのものよりも価値があります。なぜなら、適用されない項目や、リストに記載されていない領域が明らかになるからです。"
+        },
+        {
+          "control": "項目ごとに所有者と管理策を割り当てる",
+          "note": "適用可能な各クラスには、それを制限する特定のコンポーネントと、そのコンポーネントを維持管理する担当者が必要です。何にもマッピングされていない項目は、参照番号が付いた単なるギャップにすぎません。"
+        },
+        {
+          "control": "プロンプトインジェクションは予防ではなく封じ込めとして扱う",
+          "note": "LLM01には、モデルレイヤーでの信頼できる解決策がありません。重要な管理策は、最小権限のツール設定、送信制限、出力処理、および影響の大きいアクションに対する承認ゲートです。"
+        },
+        {
+          "control": "エージェンシーを明示的に制限する",
+          "note": "LLM06については、エージェントがどの認証情報を使用して、どのターゲットに対して何を実行できるかを文書化し、プロンプト内ではなくモデルの下位レイヤーでそれを強制します。"
+        },
+        {
+          "control": "モデルの出力を信頼できない入力として処理する",
+          "note": "LLM05については、モデルが出力し、レンダラー、シェル、クエリ、または他のシステムに到達するすべてのものに対して、見知らぬ人からの入力に適用するのと同様のエンコーディングと検証を行う必要があります。"
+        },
+        {
+          "control": "消費を制限する",
+          "note": "LLM10については、レート制限、クォータ、およびタイムアウトを設定することで、可用性とコストに対する攻撃を、ログに記録された拒否応答へと変換します。これは、請求書が届くまでセキュリティ問題のように見えないため、チームが最も見落としがちな項目です。"
+        },
+        {
+          "control": "リストまたはシステムが変更されたときにマッピングを再実行する",
+          "note": "リストは改訂され、ツールのカタログは増加します。一度だけ行われたマッピングは、もはや存在しないシステムに関する文書になってしまいます。"
+        }
+      ],
+      "checklist": [
+        "要約（これを含む）ではなく、最新版を読んでください。",
+        "マッピングテーブル（項目 → 適用されるか？ → 管理策 → 所有者）を作成します。",
+        "管理策のないすべての適用可能な項目について、理由と代替となる検知手段を添えて、受容されたリスクとして記録します。",
+        "各管理策のテストを作成し、そのテストが失敗することを確認してから信頼します。",
+        "ツールを使用する場合にのみ問題となる項目（過剰なエージェンシー、不適切な出力処理、サプライチェーン）を確認します。",
+        "レート制限とクォータが存在し、正常なクライアントに対して正しいシグナルを返すことを確認します。",
+        "ツール、データソース、または自律性のレベルが変更されるたびに、マッピングを再実行します。",
+        "レビュー担当者やベンダーが同じクラスについて議論できるように、検出事項にはリストの番号を使用します。"
+      ],
+      "pitfalls": [
+        "リストをコンプライアンスの目標として扱うこと。実際のアーキテクチャが検証されないまま、10個の見出しを網羅するだけに終わってしまう。",
+        "モデルベンダーの安全性への取り組みがLLM01をカバーしていると仮定すること。それは試行を減らすだけであり、結果に対する責任は完全に自社にあります。",
+        "キャッシュされた版にマッピングすること。リストは改訂されるため、古いマッピングでは現在のクラスをいつの間にかカバーできなくなります。",
+        "無制限の消費がセキュリティ問題ではなく運用の問題に見えるため、LLM10をスキップすること。",
+        "クラスを命名することと、それを管理することを混同すること。強制力のない整然としたマッピングテーブルは、リスクの文書化にすぎず、リスクの軽減にはなりません。"
+      ],
+      "examples": [
+        "顧客のメールを要約するエージェントは、LLM01（メール本文は信頼できない指示入力）、LLM02（要約に要求者が閲覧すべきでないデータが含まれる可能性がある）、およびLLM06（CRMツールが乗っ取りをアクションに変換する）にマッピングされます。これは1つの機能から生じる3つの項目であり、それぞれに異なる管理策が必要です。",
+        "社内Wikiを対象とするRAGシステムは、任意のページ編集者からの間接的なインジェクションを介してLLM01に、インデックスがポイズニングされる可能性がある場合はLLM04に、要求者の権限外のドキュメントを返す検索についてはLLM08にマッピングされます。",
+        "公開されているMCPエンドポイントは、LLM10に最も明確にマッピングされます。読み取り専用の公開データであるため、消費制限（正しいヘッダーを伴うレート制限）が実際に機能する項目となります。"
+      ],
+      "faqs": [
+        {
+          "q": "OWASP LLM Top 10に準拠することは可能ですか？",
+          "a": "いいえ。これは啓発および分類のための文書であり、認証可能な規格ではありません。ISO 42001などの管理システムや、NIST AI RMFなどのフレームワークと組み合わせるのが自然であり、ガバナンスの義務は実際にそこに存在します。"
+        },
+        {
+          "q": "モデルにツールを追加したときに、最も変化する項目はどれですか？",
+          "a": "過剰なエージェンシーと不適切な出力処理です。ツールがない場合、これらは誤った回答を生成するだけですが、ツールがある場合はアクションを実行するため、深刻度は単なる当惑からインシデントへと移行します。"
+        },
+        {
+          "q": "MITRE ATLASとはどのような関係がありますか？",
+          "a": "これらは異なる疑問に答えるものです。OWASPはアプリケーションにおける脆弱性クラスを定義し、ATLASは攻撃者がAIシステムに対して使用する戦術と技術をカタログ化しています。一方は設計に対するチェックリストであり、他方は攻撃者のプレイブックのマップです。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "OWASP LLM 应用十大安全漏洞",
+      "summary": "OWASP LLM 应用十大安全漏洞是针对基于语言模型构建的系统中可能出现的问题的通用词汇表。它不是一个控制框架，也不会告诉你应该实现什么——它命名了漏洞类别，从提示词注入、过度授权到无限制消耗，以便团队、审计人员和供应商能够基于相同的概念进行讨论。它的实用价值在于作为您自身架构的核对清单，以及作为报告发现问题时的通用语言。",
+      "definition": "OWASP LLM 应用十大安全漏洞是由社区维护的、基于大语言模型构建的应用中最关键的漏洞类别清单，由 OWASP GenAI 安全项目发布，并随着生态系统的变化定期修订。",
+      "scope": "任何基于大语言模型构建的应用——聊天界面、检索系统、智能体及其调用的工具。它是自愿性的、不可认证的，且刻意采用描述性方式：它对风险进行分类，而不规定控制措施或授予合规性。",
+      "keyPoints": [
+        "自第一版以来，提示词注入一直位居榜首，并且仍然是唯一没有彻底解决方案的类别——只能进行分层遏制。",
+        "2025 版涵盖了提示词注入、敏感信息泄露、供应链、数据和模型投毒、不当输出处理、过度授权、系统提示词泄露、向量和嵌入缺陷、虚假信息以及无限制消耗。该清单会定期修订，因此请查看当前版本，而不要信任缓存的版本。",
+        "有几项在效果上是针对智能体特有的：只有当模型能够执行操作时，过度授权和不当输出处理才会变得严重。",
+        "它是一个分类法，而不是控制集。将发现的问题映射到 LLM06 只能告诉你这是哪类问题，而不能告诉你该构建什么。",
+        "它是该领域的通用语言：安全审查、供应商问卷和漏洞报告都会引用它，这也是为什么按编号了解它非常有价值的主要原因。",
+        "覆盖该清单并不等同于具备安全态势。您架构中的每一项都需要一个控制措施，而没有任何控制措施的项目就是已接受的风险，无论是否有人将其记录下来。"
+      ],
+      "controls": [
+        {
+          "control": "将清单映射到您自己的架构中",
+          "note": "对照您实际的输入、工具、数据存储和输出逐一检查每一项。这种练习的价值远超清单本身，因为它能显现出不适用的项目以及清单中未提及的暴露面。"
+        },
+        {
+          "control": "为每项分配一个所有者和控制措施",
+          "note": "每个适用的类别都需要一个命名的组件来对其进行限制，并需要一个人来维护该组件。未映射到任何内容的项就是一个带有参考编号的空白漏洞。"
+        },
+        {
+          "control": "将提示词注入视为遏制，而非预防",
+          "note": "LLM01 在模型层没有可靠的修复方法。真正起作用的控制措施是最小权限工具、出口限制、输出处理以及高影响操作的审批关卡。"
+        },
+        {
+          "control": "显式约束代理权限",
+          "note": "对于 LLM06，写下智能体可以做什么、使用哪些凭据、针对哪些目标——并在模型之下（而非提示词中）强制执行。"
+        },
+        {
+          "control": "将模型输出视为不可信的输入",
+          "note": "对于 LLM05，模型输出的任何到达渲染器、Shell、查询或其他系统的内容，都需要进行与对待陌生人输入相同的编码和验证。"
+        },
+        {
+          "control": "限制消耗",
+          "note": "对于 LLM10，速率限制、配额和超时可以将可用性和成本攻击转变为已记录的拒绝服务。这是团队最常跳过的项目，因为在账单寄到之前，它看起来不像是安全问题。"
+        },
+        {
+          "control": "当清单或系统发生变化时，重新运行映射",
+          "note": "清单会修订，您的工具目录也会增加。只做一次的映射只是一份关于已不存在的系统的文档。"
+        }
+      ],
+      "checklist": [
+        "阅读当前版本，而不是摘要——包括本摘要。",
+        "制作一个映射表：项目 → 是否适用？ → 控制措施 → 所有者。",
+        "对于每个适用但没有控制措施的项目，将其记录为已接受的风险，并注明原因和补偿性检测措施。",
+        "为每个控制措施编写测试，并在信任它之前先看到测试失败。",
+        "检查只有在使用工具时才会产生危害的项目：过度授权、不当输出处理、供应链。",
+        "确认存在速率限制 and 配额，并向行为良好的客户端返回正确的信号。",
+        "每当工具、数据源或自主性级别发生变化时，重新运行映射。",
+        "在发现的问题中使用清单的编号，以便评审人员和供应商讨论的是同一个类别。"
+      ],
+      "pitfalls": [
+        "将清单视为合规目标：涵盖了十个标题，而实际架构却未经过审查。",
+        "假设模型供应商的安全工作涵盖了 LLM01。它只是减少了尝试；后果仍然完全由您承担。",
+        "映射到缓存的版本。清单会修订，旧的映射会悄然停止覆盖当前的类别。",
+        "跳过 LLM10，因为无限制消耗看起来像是一个运维问题，而不是安全问题。",
+        "混淆了命名类别与控制类别。一个没有执行力的整洁映射表只是对风险的记录，而不是对风险的降低。"
+      ],
+      "examples": [
+        "一个总结客户电子邮件的智能体映射到 LLM01（邮件正文是不可信的指令输入）、LLM02（摘要可能会重复请求者不应看到的数据）和 LLM06（CRM 工具将劫持转化为操作）——一个功能中的三个项目，每个都需要不同的控制措施。",
+        "一个针对内部 Wiki 的 RAG 系统通过任何页面编辑器的间接注入映射到 LLM01，如果索引可能被投毒则映射到 LLM04，以及因检索返回超出请求者权限的文档而映射到 LLM08。",
+        "一个公开的 MCP 端点最明显地映射到 LLM10：只读、公开数据，因此消耗限制（带有正确标头的速率限制）是真正起作用的项目。"
+      ],
+      "faqs": [
+        {
+          "q": "OWASP LLM Top 10 是可以实现合规的东西吗？",
+          "a": "不是。它是一个认知和分类文档，而不是一个可认证的标准。它自然地与诸如 ISO 42001 之类的管理系统或诸如 NIST AI RMF 之类的框架相配合，而这才是治理义务真正存在的地方。"
+        },
+        {
+          "q": "当您向模型添加工具时，哪些项目变化最大？",
+          "a": "过度授权和不当输出处理。在没有工具的情况下，它们会产生错误答案；在使用工具的情况下，它们会产生操作，严重程度也从尴尬转变为安全事件。"
+        },
+        {
+          "q": "它与 MITRE ATLAS 有何关系？",
+          "a": "它们回答了不同的问题。OWASP 命名了您应用中的漏洞类别；ATLAS 则对对手针对 AI 系统使用的战术和技术进行了分类。一个是针对您设计的核对清单，另一个是攻击者战术手册的映射。"
+        }
+      ]
     }
   }
 }

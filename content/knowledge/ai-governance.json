@@ -4,16 +4,33 @@
   "updated": "2026-06-21",
   "version": "1.0",
   "featured": true,
-  "related": ["enterprise-rag", "agentic-evaluation", "agentic-ai", "harness-engineering"],
+  "related": [
+    "enterprise-rag",
+    "agentic-evaluation",
+    "agentic-ai",
+    "harness-engineering"
+  ],
   "references": [
-    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
-    { "title": "European Union — AI Act (Regulation 2024/1689)", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj" },
-    { "title": "ISO/IEC 42001:2023 — AI management systems", "url": "https://www.iso.org/standard/81230.html" }
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "European Union — AI Act (Regulation 2024/1689)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+    },
+    {
+      "title": "ISO/IEC 42001:2023 — AI management systems",
+      "url": "https://www.iso.org/standard/81230.html"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["paper", "industry_observation"]
+    "sourceType": [
+      "paper",
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {
@@ -35,7 +52,15 @@
         "A practical governance program has layers: policy and principles; an AI risk catalog and assessment process; controls (access, data handling, evaluation, human oversight, logging); monitoring and incident response; and an audit trail that maps controls to external frameworks.",
         "Frameworks complement each other. The NIST AI RMF organizes practice around Govern, Map, Measure and Manage. ISO/IEC 42001 defines an auditable AI management system. The EU AI Act sets legal obligations by risk tier. Mature programs map their controls to all three."
       ],
-      "components": ["Policy & principles", "AI risk catalog", "Risk assessment process", "Controls (access, data, oversight)", "Evaluation & monitoring", "Incident response", "Audit trail & framework mapping"],
+      "components": [
+        "Policy & principles",
+        "AI risk catalog",
+        "Risk assessment process",
+        "Controls (access, data, oversight)",
+        "Evaluation & monitoring",
+        "Incident response",
+        "Audit trail & framework mapping"
+      ],
       "pros": [
         "Manages legal, ethical and operational risk systematically.",
         "Builds trust with customers, regulators and employees.",
@@ -48,17 +73,35 @@
         "Fragmented ownership across legal, security and product.",
         "Falling behind fast-moving regulation and capabilities."
       ],
-      "tools": ["NIST AI RMF", "ISO/IEC 42001", "EU AI Act compliance mapping", "Model & system documentation (model cards)", "AI evaluation & monitoring platforms"],
+      "tools": [
+        "NIST AI RMF",
+        "ISO/IEC 42001",
+        "EU AI Act compliance mapping",
+        "Model & system documentation (model cards)",
+        "AI evaluation & monitoring platforms"
+      ],
       "examples": [
         "An AI risk catalog with assessments per use case before deployment.",
         "Human-in-the-loop approval controls for high-impact agent actions.",
         "Logging and audit trails mapped to NIST AI RMF functions."
       ],
       "faqs": [
-        { "q": "What frameworks should we follow?", "a": "Commonly the NIST AI Risk Management Framework, ISO/IEC 42001 and, where in scope, the EU AI Act. Mature programs map a single control set to all three." },
-        { "q": "Is AI governance only about compliance?", "a": "No. Compliance is one part. Governance also covers risk, security, transparency, accountability and operational oversight that enable safe adoption." },
-        { "q": "How does governance apply to agents?", "a": "Autonomy and tool access add risk, so agentic systems need authorization controls, human oversight for high-impact actions, logging and evaluation." },
-        { "q": "Does governance slow innovation?", "a": "Done well, it accelerates it: clear guardrails let teams ship with confidence. Done poorly, it becomes bureaucracy. The goal is enforceable, lightweight controls." }
+        {
+          "q": "What frameworks should we follow?",
+          "a": "Commonly the NIST AI Risk Management Framework, ISO/IEC 42001 and, where in scope, the EU AI Act. Mature programs map a single control set to all three."
+        },
+        {
+          "q": "Is AI governance only about compliance?",
+          "a": "No. Compliance is one part. Governance also covers risk, security, transparency, accountability and operational oversight that enable safe adoption."
+        },
+        {
+          "q": "How does governance apply to agents?",
+          "a": "Autonomy and tool access add risk, so agentic systems need authorization controls, human oversight for high-impact actions, logging and evaluation."
+        },
+        {
+          "q": "Does governance slow innovation?",
+          "a": "Done well, it accelerates it: clear guardrails let teams ship with confidence. Done poorly, it becomes bureaucracy. The goal is enforceable, lightweight controls."
+        }
       ]
     },
     "es": {
@@ -80,7 +123,15 @@
         "Un programa práctico de gobernanza tiene capas: política y principios; un catálogo de riesgos de IA y un proceso de evaluación; controles (acceso, tratamiento de datos, evaluación, supervisión humana, registro); monitorización y respuesta a incidentes; y una traza de auditoría que mapea los controles a marcos externos.",
         "Los marcos se complementan. El NIST AI RMF organiza la práctica en Gobernar, Mapear, Medir y Gestionar. ISO/IEC 42001 define un sistema de gestión de IA auditable. El Reglamento de IA de la UE fija obligaciones legales por nivel de riesgo. Los programas maduros mapean sus controles a los tres."
       ],
-      "components": ["Política y principios", "Catálogo de riesgos de IA", "Proceso de evaluación de riesgos", "Controles (acceso, datos, supervisión)", "Evaluación y monitorización", "Respuesta a incidentes", "Traza de auditoría y mapeo de marcos"],
+      "components": [
+        "Política y principios",
+        "Catálogo de riesgos de IA",
+        "Proceso de evaluación de riesgos",
+        "Controles (acceso, datos, supervisión)",
+        "Evaluación y monitorización",
+        "Respuesta a incidentes",
+        "Traza de auditoría y mapeo de marcos"
+      ],
       "pros": [
         "Gestiona el riesgo legal, ético y operativo de forma sistemática.",
         "Genera confianza con clientes, reguladores y empleados.",
@@ -93,17 +144,35 @@
         "Propiedad fragmentada entre legal, seguridad y producto.",
         "Quedarse atrás frente a una regulación y unas capacidades que cambian rápido."
       ],
-      "tools": ["NIST AI RMF", "ISO/IEC 42001", "Mapeo de cumplimiento del Reglamento de IA de la UE", "Documentación de modelos y sistemas (model cards)", "Plataformas de evaluación y monitorización de IA"],
+      "tools": [
+        "NIST AI RMF",
+        "ISO/IEC 42001",
+        "Mapeo de cumplimiento del Reglamento de IA de la UE",
+        "Documentación de modelos y sistemas (model cards)",
+        "Plataformas de evaluación y monitorización de IA"
+      ],
       "examples": [
         "Un catálogo de riesgos de IA con evaluaciones por caso de uso antes del despliegue.",
         "Controles de aprobación con humano en el bucle para acciones de agente de alto impacto.",
         "Registro y trazas de auditoría mapeados a las funciones del NIST AI RMF."
       ],
       "faqs": [
-        { "q": "¿Qué marcos deberíamos seguir?", "a": "Habitualmente el NIST AI Risk Management Framework, ISO/IEC 42001 y, cuando aplique, el Reglamento de IA de la UE. Los programas maduros mapean un único conjunto de controles a los tres." },
-        { "q": "¿La gobernanza de IA es solo cumplimiento?", "a": "No. El cumplimiento es una parte. La gobernanza también cubre riesgo, seguridad, transparencia, rendición de cuentas y supervisión operativa que habilitan una adopción segura." },
-        { "q": "¿Cómo aplica la gobernanza a los agentes?", "a": "La autonomía y el acceso a herramientas añaden riesgo, así que los sistemas agénticos necesitan controles de autorización, supervisión humana para acciones de alto impacto, registro y evaluación." },
-        { "q": "¿La gobernanza frena la innovación?", "a": "Bien hecha, la acelera: unos guardarraíles claros permiten desplegar con confianza. Mal hecha, se vuelve burocracia. El objetivo son controles exigibles y ligeros." }
+        {
+          "q": "¿Qué marcos deberíamos seguir?",
+          "a": "Habitualmente el NIST AI Risk Management Framework, ISO/IEC 42001 y, cuando aplique, el Reglamento de IA de la UE. Los programas maduros mapean un único conjunto de controles a los tres."
+        },
+        {
+          "q": "¿La gobernanza de IA es solo cumplimiento?",
+          "a": "No. El cumplimiento es una parte. La gobernanza también cubre riesgo, seguridad, transparencia, rendición de cuentas y supervisión operativa que habilitan una adopción segura."
+        },
+        {
+          "q": "¿Cómo aplica la gobernanza a los agentes?",
+          "a": "La autonomía y el acceso a herramientas añaden riesgo, así que los sistemas agénticos necesitan controles de autorización, supervisión humana para acciones de alto impacto, registro y evaluación."
+        },
+        {
+          "q": "¿La gobernanza frena la innovación?",
+          "a": "Bien hecha, la acelera: unos guardarraíles claros permiten desplegar con confianza. Mal hecha, se vuelve burocracia. El objetivo son controles exigibles y ligeros."
+        }
       ]
     },
     "pt": {
@@ -125,7 +194,15 @@
         "Um programa prático de governança tem camadas: política e princípios; um catálogo de riscos de IA e um processo de avaliação; controles (acesso, tratamento de dados, avaliação, supervisão humana, registro); monitoramento e resposta a incidentes; e uma trilha de auditoria que mapeia os controles a marcos externos.",
         "Os marcos se complementam. O NIST AI RMF organiza a prática em Governar, Mapear, Medir e Gerir. A ISO/IEC 42001 define um sistema de gestão de IA auditável. O Regulamento de IA da UE fixa obrigações legais por nível de risco. Programas maduros mapeiam seus controles aos três."
       ],
-      "components": ["Política e princípios", "Catálogo de riscos de IA", "Processo de avaliação de riscos", "Controles (acesso, dados, supervisão)", "Avaliação e monitoramento", "Resposta a incidentes", "Trilha de auditoria e mapeamento de marcos"],
+      "components": [
+        "Política e princípios",
+        "Catálogo de riscos de IA",
+        "Processo de avaliação de riscos",
+        "Controles (acesso, dados, supervisão)",
+        "Avaliação e monitoramento",
+        "Resposta a incidentes",
+        "Trilha de auditoria e mapeamento de marcos"
+      ],
       "pros": [
         "Gere o risco legal, ético e operacional de forma sistemática.",
         "Gera confiança com clientes, reguladores e funcionários.",
@@ -138,17 +215,319 @@
         "Propriedade fragmentada entre jurídico, segurança e produto.",
         "Ficar para trás frente a uma regulação e capacidades que mudam rápido."
       ],
-      "tools": ["NIST AI RMF", "ISO/IEC 42001", "Mapeamento de conformidade do Regulamento de IA da UE", "Documentação de modelos e sistemas (model cards)", "Plataformas de avaliação e monitoramento de IA"],
+      "tools": [
+        "NIST AI RMF",
+        "ISO/IEC 42001",
+        "Mapeamento de conformidade do Regulamento de IA da UE",
+        "Documentação de modelos e sistemas (model cards)",
+        "Plataformas de avaliação e monitoramento de IA"
+      ],
       "examples": [
         "Um catálogo de riscos de IA com avaliações por caso de uso antes da implantação.",
         "Controles de aprovação com humano no laço para ações de agente de alto impacto.",
         "Registro e trilhas de auditoria mapeados às funções do NIST AI RMF."
       ],
       "faqs": [
-        { "q": "Quais marcos devemos seguir?", "a": "Comumente o NIST AI Risk Management Framework, a ISO/IEC 42001 e, quando aplicável, o Regulamento de IA da UE. Programas maduros mapeiam um único conjunto de controles aos três." },
-        { "q": "A governança de IA é só conformidade?", "a": "Não. A conformidade é uma parte. A governança também cobre risco, segurança, transparência, prestação de contas e supervisão operacional que habilitam uma adoção segura." },
-        { "q": "Como a governança se aplica aos agentes?", "a": "A autonomia e o acesso a ferramentas adicionam risco, então os sistemas agênticos precisam de controles de autorização, supervisão humana para ações de alto impacto, registro e avaliação." },
-        { "q": "A governança freia a inovação?", "a": "Bem feita, a acelera: guard-rails claros permitem implantar com confiança. Mal feita, vira burocracia. O objetivo são controles exigíveis e leves." }
+        {
+          "q": "Quais marcos devemos seguir?",
+          "a": "Comumente o NIST AI Risk Management Framework, a ISO/IEC 42001 e, quando aplicável, o Regulamento de IA da UE. Programas maduros mapeiam um único conjunto de controles aos três."
+        },
+        {
+          "q": "A governança de IA é só conformidade?",
+          "a": "Não. A conformidade é uma parte. A governança também cobre risco, segurança, transparência, prestação de contas e supervisão operacional que habilitam uma adoção segura."
+        },
+        {
+          "q": "Como a governança se aplica aos agentes?",
+          "a": "A autonomia e o acesso a ferramentas adicionam risco, então os sistemas agênticos precisam de controles de autorização, supervisão humana para ações de alto impacto, registro e avaliação."
+        },
+        {
+          "q": "A governança freia a inovação?",
+          "a": "Bem feita, a acelera: guard-rails claros permitem implantar com confiança. Mal feita, vira burocracia. O objetivo são controles exigíveis e leves."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que la gouvernance de l'IA ?",
+      "summary": "La gouvernance de l'IA est l'ensemble des politiques, processus, rôles et contrôles qui garantissent que l'IA est conçue et utilisée de manière responsable, légale et sûre. Elle englobe la gestion des risques, la responsabilité, la transparence, la sécurité et la conformité tout au long du cycle de vie de l'IA. En pratique, elle opérationnalise des cadres reconnus — l'EU AI Act, le NIST AI Risk Management Framework et l'ISO/IEC 42001 — en contrôles concrets qu'une organisation peut mettre en œuvre, prouver et auditer.",
+      "definition": "La gouvernance de l'IA est le cadre de politiques, de processus, de rôles et de contrôles qu'une organisation utilise pour gérer les risques liés à l'IA et garantir que les systèmes d'IA sont responsables, conformes, sécurisés et redevables tout au long de leur cycle de vie.",
+      "takeaways": [
+        "La gouvernance transforme les principes de l'IA en contrôles applicables et auditables.",
+        "Elle couvre l'ensemble du cycle de vie : données, construction, déploiement, surveillance, retrait.",
+        "Principales références : EU AI Act, NIST AI RMF, ISO/IEC 42001.",
+        "L'IA agentique augmente les enjeux : l'autonomie et l'accès aux outils élargissent les risques.",
+        "Une bonne gouvernance favorise l'adoption ; elle ne constitue pas seulement un frein."
+      ],
+      "context": [
+        "À mesure que l'IA s'immisce dans des décisions qui affectent les personnes et les opérations, les organisations ont besoin d'un moyen de gérer ses risques de manière systématique — et non ponctuelle. La gouvernance apporte cela : une responsabilité claire, une évaluation documentée des risques, des contrôles, une surveillance et les preuves permettant de démontrer la conformité.",
+        "Les systèmes agentiques renforcent ce besoin. Lorsque les logiciels peuvent agir de manière autonome et appeler des outils, les questions d'autorisation, de responsabilité, d'auditabilité et de supervision humaine deviennent opérationnelles, et non théoriques."
+      ],
+      "architecture": [
+        "Un programme de gouvernance pratique comporte plusieurs niveaux : politiques et principes ; un catalogue de risques liés à l'IA et un processus d'évaluation ; des contrôles (accès, traitement des données, évaluation, supervision humaine, journalisation) ; une surveillance et une réponse aux incidents ; et une piste d'audit qui associe les contrôles aux cadres externes.",
+        "Les cadres se complètent mutuellement. Le NIST AI RMF organise les pratiques autour de Gouverner, Cartographier, Mesurer et Gérer. L'ISO/IEC 42001 définit un système de gestion de l'IA auditable. L'EU AI Act fixe des obligations légales par niveau de risque. Les programmes matures associent leurs contrôles à ces trois cadres."
+      ],
+      "components": [
+        "Politiques et principes",
+        "Catalogue de risques liés à l'IA",
+        "Processus d'évaluation des risques",
+        "Contrôles (accès, données, supervision)",
+        "Évaluation et surveillance",
+        "Réponse aux incidents",
+        "Piste d'audit et correspondance avec les cadres"
+      ],
+      "pros": [
+        "Gère les risques juridiques, éthiques et opérationnels de manière systématique.",
+        "Renforce la confiance auprès des clients, des régulateurs et des employés.",
+        "Fournit des preuves pour les audits et les certifications.",
+        "Permet une adoption plus rapide et plus sûre grâce à des garde-fous clairs."
+      ],
+      "risks": [
+        "Une bureaucratie qui ralentit l'adoption si elle est surconçue.",
+        "Une conformité purement formelle qui ne change pas les comportements réels.",
+        "Une responsabilité fragmentée entre le juridique, la sécurité et le produit.",
+        "Prendre du retard face à l'évolution rapide des réglementations et des capacités."
+      ],
+      "tools": [
+        "NIST AI RMF",
+        "ISO/IEC 42001",
+        "Cartographie de conformité à l'EU AI Act",
+        "Documentation des modèles et des systèmes (model cards)",
+        "Plateformes d'évaluation et de surveillance de l'IA"
+      ],
+      "examples": [
+        "Un catalogue de risques de l'IA avec des évaluations par cas d'usage avant le déploiement.",
+        "Des contrôles d'approbation avec intervention humaine (human-in-the-loop) pour les actions d'agents à fort impact.",
+        "La journalisation et les pistes d'audit associées aux fonctions du NIST AI RMF."
+      ],
+      "faqs": [
+        {
+          "q": "Quels cadres de référence devons-nous suivre ?",
+          "a": "Généralement le NIST AI Risk Management Framework, l'ISO/IEC 42001 et, lorsqu'il s'applique, l'EU AI Act. Les programmes matures associent un ensemble unique de contrôles à ces trois référentiels."
+        },
+        {
+          "q": "La gouvernance de l'IA se limite-t-elle à la conformité ?",
+          "a": "Non. La conformité n'est qu'une partie. La gouvernance couvre également les risques, la sécurité, la transparence, la responsabilité et la supervision opérationnelle qui permettent une adoption sûre."
+        },
+        {
+          "q": "Comment la gouvernance s'applique-t-elle aux agents ?",
+          "a": "L'autonomie et l'accès aux outils augmentent les risques ; les systèmes d'agents ont donc besoin de contrôles d'autorisation, d'une supervision humaine pour les actions à fort impact, de journalisation et d'évaluation."
+        },
+        {
+          "q": "La gouvernance ralentit-elle l'innovation ?",
+          "a": "Bien menée, elle l'accélère : des garde-fous clairs permettent aux équipes de déployer en toute confiance. Mal gérée, elle devient bureaucratique. L'objectif est d'avoir des contrôles légers et applicables."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist AI Governance?",
+      "summary": "AI Governance ist die Gesamtheit der Richtlinien, Prozesse, Rollen und Kontrollen, die sicherstellen, dass KI verantwortungsvoll, rechtmäßig und sicher entwickelt und eingesetzt wird. Sie umfasst Risikomanagement, Rechenschaftspflicht, Transparenz, Sicherheit und Compliance über den gesamten KI-Lebenszyklus hinweg. In der Praxis operationalisiert sie anerkannte Frameworks – den EU AI Act, das NIST AI Risk Management Framework und ISO/IEC 42001 – in konkrete Kontrollen, die eine Organisation implementieren, nachweisen und auditieren kann.",
+      "definition": "AI Governance ist das Framework aus Richtlinien, Prozessen, Rollen und Kontrollen, mit dem eine Organisation KI-Risiken verwaltet und sicherstellt, dass KI-Systeme über ihren gesamten Lebenszyklus hinweg verantwortungsvoll, konform, sicher und rechenschaftspflichtig sind.",
+      "takeaways": [
+        "Governance macht aus KI-Prinzipien durchsetzbare, auditierbare Kontrollen.",
+        "Sie erstreckt sich über den gesamten Lebenszyklus: Daten, Entwicklung, Bereitstellung, Überwachung, Deaktivierung.",
+        "Wichtige Referenzen: EU AI Act, NIST AI RMF, ISO/IEC 42001.",
+        "Agenten-KI (Agentic AI) erhöht den Einsatz: Autonomie und Tool-Zugriff vergrößern das Risiko.",
+        "Gute Governance ermöglicht die Einführung; sie ist nicht nur eine Bremse."
+      ],
+      "context": [
+        "Da KI zunehmend Entscheidungen trifft, die Menschen und Betriebsabläufe betreffen, benötigen Organisationen eine Möglichkeit, ihre Risiken systematisch und nicht ad hoc zu verwalten. Governance bietet genau das: klare Verantwortlichkeiten, dokumentierte Risikobewertungen, Kontrollen, Überwachung und die Nachweise zur Belegung der Compliance.",
+        "Agentenbasierte Systeme verschärfen diesen Bedarf. Wenn Software autonom agieren und Tools aufrufen kann, werden die Fragen nach Autorisierung, Rechenschaftspflicht, Auditierbarkeit und menschlicher Aufsicht operativ und nicht mehr nur theoretisch."
+      ],
+      "architecture": [
+        "Ein praktisches Governance-Programm ist in Schichten unterteilt: Richtlinien und Prinzipien; ein KI-Risikokatalog und ein Bewertungsprozess; Kontrollen (Zugriff, Datenverarbeitung, Evaluation, menschliche Aufsicht, Protokollierung); Überwachung und Incident Response sowie ein Audit-Trail, der Kontrollen externen Frameworks zuordnet.",
+        "Frameworks ergänzen einander. Das NIST AI RMF organisiert die Praxis um Govern, Map, Measure und Manage. ISO/IEC 42001 definiert ein auditierbares KI-Managementsystem. Der EU AI Act legt gesetzliche Verpflichtungen nach Risikostufen fest. Ausgereifte Programme ordnen ihre Kontrollen allen drei Frameworks zu."
+      ],
+      "components": [
+        "Richtlinien & Prinzipien",
+        "KI-Risikokatalog",
+        "Risikobewertungsprozess",
+        "Kontrollen (Zugriff, Daten, Aufsicht)",
+        "Evaluation & Überwachung",
+        "Incident Response",
+        "Audit-Trail & Framework-Zuordnung"
+      ],
+      "pros": [
+        "Verwaltet rechtliche, ethische und operative Risiken systematisch.",
+        "Baut Vertrauen bei Kunden, Regulierungsbehörden und Mitarbeitern auf.",
+        "Liefert Nachweise für Audits und Zertifizierungen.",
+        "Ermöglicht eine schnellere und sicherere Einführung durch klare Guardrails."
+      ],
+      "risks": [
+        "Bürokratie, die die Einführung verlangsamt, wenn sie über-engineered ist.",
+        "Paper-Compliance, die das tatsächliche Verhalten nicht verändert.",
+        "Fragmentierte Zuständigkeiten zwischen Rechtsabteilung, Sicherheit und Produkt.",
+        "Hinter sich schnell entwickelnden Regulierungen und technologischen Möglichkeiten zurückzubleiben."
+      ],
+      "tools": [
+        "NIST AI RMF",
+        "ISO/IEC 42001",
+        "Compliance-Mapping für den EU AI Act",
+        "Modell- und Systemdokumentation (Model Cards)",
+        "Plattformen für KI-Evaluierung und -Monitoring"
+      ],
+      "examples": [
+        "Ein KI-Risikokatalog mit Bewertungen pro Anwendungsfall vor der Bereitstellung.",
+        "Human-in-the-Loop-Freigabekontrollen für folgenschwere Agenten-Aktionen.",
+        "Protokollierung und Audit-Trails, die den Funktionen des NIST AI RMF zugeordnet sind."
+      ],
+      "faqs": [
+        {
+          "q": "Welchen Frameworks sollten wir folgen?",
+          "a": "Typischerweise dem NIST AI Risk Management Framework, ISO/IEC 42001 und, sofern anwendbar, dem EU AI Act. Ausgereifte Programme ordnen allen dreien ein einziges Set an Kontrollen (Control Set) zu."
+        },
+        {
+          "q": "Geht es bei AI Governance nur um Compliance?",
+          "a": "Nein. Compliance ist nur ein Teilbereich. Governance umfasst auch Risiko, Sicherheit, Transparenz, Rechenschaftspflicht und betriebliche Aufsicht, die eine sichere Einführung ermöglichen."
+        },
+        {
+          "q": "Wie lässt sich Governance auf Agenten anwenden?",
+          "a": "Autonomie und Tool-Zugriff bergen zusätzliche Risiken. Daher benötigen agentische Systeme Autorisierungskontrollen, menschliche Aufsicht bei folgenschweren Aktionen, Protokollierung und Evaluierung."
+        },
+        {
+          "q": "Verlangsamt Governance die Innovation?",
+          "a": "Richtig umgesetzt beschleunigt sie diese: Klare Guardrails ermöglichen es Teams, Code mit Zuversicht bereitzustellen. Schlecht umgesetzt führt sie zu Bürokratie. Das Ziel sind durchsetzbare, leichtgewichtige Kontrollen."
+        }
+      ]
+    },
+    "ja": {
+      "title": "AIガバナンスとは？",
+      "summary": "AIガバナンスとは、AIが責任を持って、合法的に、かつ安全に構築および使用されることを保証するための一連のポリシー、プロセス、役割、およびコントロールのことです。これは、AIのライフサイクル全体にわたるリスク管理、説明責任、透明性、セキュリティ、およびコンプライアンスを網羅します。実際には、EU AI法、NIST AIリスク管理フレームワーク（NIST AI RMF）、ISO/IEC 42001などの認知されたフレームワークを、組織が実装、実証、および監査できる具体的なコントロールへと運用化します。",
+      "definition": "AIガバナンスとは、組織がAIリスクを管理し、AIシステムがそのライフサイクル全体を通じて責任を持ち、準拠し、安全で、説明責任を果たせるようにするために使用する、ポリシー、プロセス、役割、およびコントロールの枠組みです。",
+      "takeaways": [
+        "ガバナンスは、AIの原則を実行可能かつ監査可能なコントロールへと変換します。",
+        "データ、構築、デプロイ、監視、廃棄に至るライフサイクル全体を網羅します。",
+        "主な参照基準：EU AI法、NIST AI RMF、ISO/IEC 42001。",
+        "エージェント型AI（Agentic AI）はリスクを高めます。自律性とツールへのアクセスがリスクを拡大するためです。",
+        "優れたガバナンスは導入を促進するものであり、単なるブレーキではありません。"
+      ],
+      "context": [
+        "AIが人々や業務に影響を与える意思決定に関与するようになるにつれ、組織はリスクをその場しのぎではなく、体系的に管理する方法を必要としています。ガバナンスは、明確な所有権、文書化されたリスク評価、コントロール、監視、およびコンプライアンスを実証するための証跡を提供することで、それを実現します。",
+        "エージェント型システムはこの必要性をさらに高めます。ソフトウェアが自律的に動作し、ツールを呼び出すことができるようになると、権限付与、説明責任、監査可能性、および人間の監視に関する問題は、理論的なものではなく運用上の課題となります。"
+      ],
+      "architecture": [
+        "実用的なガバナンスプログラムには、ポリシーと原則、AIリスクカタログと評価プロセス、コントロール（アクセス、データ処理、評価、人間の監視、ログ記録）、監視とインシデント対応、およびコントロールを外部フレームワークにマッピングする監査証跡といったレイヤーが存在します。",
+        "各フレームワークは相互に補完し合います。NIST AI RMFは、ガバナンス（Govern）、マッピング（Map）、測定（Measure）、管理（Manage）を中心に実践を整理しています。ISO/IEC 42001は、監査可能なAI管理システムを定義しています。EU AI法は、リスク層ごとに法的義務を定めています。成熟したプログラムは、自社のコントロールをこれら3つすべてにマッピングします。"
+      ],
+      "components": [
+        "ポリシーと原則",
+        "AIリスクカタログ",
+        "リスク評価プロセス",
+        "コントロール（アクセス、データ、監視）",
+        "評価と監視",
+        "インシデント対応",
+        "監査証跡とフレームワークのマッピング"
+      ],
+      "pros": [
+        "法的、倫理的、および運用上のリスクを体系的に管理します。",
+        "顧客、規制当局、および従業員との信頼関係を構築します。",
+        "監査や認証のための証拠を提供します。",
+        "明確なガードレールにより、より迅速かつ安全な導入を可能にします。"
+      ],
+      "risks": [
+        "過剰に設計された場合に導入を遅らせる官僚主義。",
+        "実際の行動を変えることのない、形骸化したコンプライアンス。",
+        "法務、セキュリティ、プロダクトの間で分断されたオーナーシップ。",
+        "急速に変化する規制や技術力に取り残されること。"
+      ],
+      "tools": [
+        "NIST AI RMF",
+        "ISO/IEC 42001",
+        "EU AI Actコンプライアンスマッピング",
+        "モデルおよびシステムのドキュメント（モデルカード）",
+        "AI評価・モニタリングプラットフォーム"
+      ],
+      "examples": [
+        "展開前にユースケースごとに評価を行うAIリスクカタログ。",
+        "影響の大きいエージェントのアクションに対するHuman-in-the-loop（人間関与型）の承認コントロール。",
+        "NIST AI RMFの機能にマッピングされたロギングと監査トレイル。"
+      ],
+      "faqs": [
+        {
+          "q": "どのようなフレームワークに従うべきですか？",
+          "a": "一般的には、NIST AIリスクマネジメントフレームワーク（NIST AI RMF）、ISO/IEC 42001、および適用対象となる場合はEU AI Act（EU AI法）です。成熟したプログラムでは、単一のコントロールセットをこれら3つすべてにマッピングします。"
+        },
+        {
+          "q": "AIガバナンスはコンプライアンスだけに関するものですか？",
+          "a": "いいえ。コンプライアンスはその一部に過ぎません。ガバナンスは、安全な導入を可能にするリスク、セキュリティ、透明性、説明責任、および運用の監視もカバーします。"
+        },
+        {
+          "q": "ガバナンスはエージェントにどのように適用されますか？",
+          "a": "自律性とツールへのアクセスはリスクを増大させるため、エージェントシステムには認可コントロール、影響の大きいアクションに対する人間の監視、ロギング、および評価が必要です。"
+        },
+        {
+          "q": "ガバナンスはイノベーションを遅らせますか？",
+          "a": "適切に行われれば、イノベーションは加速します。明確なガードレールにより、チームは自信を持ってリリースできるようになります。不適切に行われると、単なる官僚主義に陥ります。目標は、実効性のある軽量なコントロールです。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是 AI 治理？",
+      "summary": "AI 治理是一套确保负责任、合法且安全地构建和使用 AI 的政策、流程、角色和控制措施。它涵盖了整个 AI 生命周期中的风险管理、问责制、透明度、安全性和合规性。在实践中，它将公认的框架（欧盟《AI 法案》、NIST AI 风险管理框架和 ISO/IEC 42001）转化为组织可以实施、证明和审计的具体控制措施。",
+      "definition": "AI 治理是组织用于管理 AI 风险并确保 AI 系统在其整个生命周期中保持负责任、合规、安全和可问责的政策、流程、角色和控制措施框架。",
+      "takeaways": [
+        "治理将 AI 原则转化为可执行、可审计的控制措施。",
+        "它涵盖了完整的生命周期：数据、构建、部署、监控、退役。",
+        "主要参考标准：欧盟《AI 法案》、NIST AI RMF、ISO/IEC 42001。",
+        "智能体 AI（Agentic AI）提高了风险：自主性和工具访问权限扩大了风险面。",
+        "良好的治理能够促进落地，而不仅仅是刹车。"
+      ],
+      "context": [
+        "随着 AI 开始参与影响人员和运营的决策，组织需要一种系统化而非临时性的方式来管理其风险。治理提供了这种方式：明确的所有权、文档化的风险评估、控制措施、监控以及证明合规性的证据。",
+        "智能体系统使这一需求更加迫切。当软件能够自主行动并调用工具时，授权、问责、可审计性和人工监督等问题就变成了操作层面的实践，而不再是理论探讨。"
+      ],
+      "architecture": [
+        "一个实用的治理计划具有多个层级：政策和原则；AI 风险目录和评估流程；控制措施（访问、数据处理、评估、人工监督、日志记录）；监控和事件响应；以及将控制措施映射到外部框架的审计追踪。",
+        "各个框架相辅相成。NIST AI RMF 围绕治理（Govern）、映射（Map）、度量（Measure）和管理（Manage）来组织实践。ISO/IEC 42001 定义了一个可审计的 AI 管理体系。欧盟《AI 法案》按风险等级设定了法律义务。成熟的治理计划会将其控制措施映射到这三者之上。"
+      ],
+      "components": [
+        "政策与原则",
+        "AI 风险目录",
+        "风险评估流程",
+        "控制措施（访问、数据、监督）",
+        "评估与监控",
+        "事件响应",
+        "审计追踪与框架映射"
+      ],
+      "pros": [
+        "系统化地管理法律、伦理和运营风险。",
+        "建立与客户、监管机构和员工之间的信任。",
+        "为审计和认证提供证据。",
+        "通过明确的护栏实现更快速、更安全的采用。"
+      ],
+      "risks": [
+        "如果过度设计，官僚主义会减缓采用速度。",
+        "纸面合规，无法改变实际行为。",
+        "法务、安全和产品部门之间的权责碎片化。",
+        "落后于快速变化的监管和技术能力。"
+      ],
+      "tools": [
+        "NIST AI RMF",
+        "ISO/IEC 42001",
+        "欧盟 AI 法案合规映射",
+        "模型与系统文档（模型卡片）",
+        "AI 评估与监控平台"
+      ],
+      "examples": [
+        "部署前针对每个用例进行评估的 AI 风险目录。",
+        "针对高影响智能体行为的人机协同审批控制。",
+        "映射到 NIST AI RMF 功能的日志记录和审计追踪。"
+      ],
+      "faqs": [
+        {
+          "q": "我们应该遵循哪些框架？",
+          "a": "通常是 NIST AI 风险管理框架、ISO/IEC 42001，以及在适用范围内的欧盟 AI 法案。成熟的项目会将单一控制集映射到这三者。"
+        },
+        {
+          "q": "AI 治理仅仅关乎合规吗？",
+          "a": "不。合规只是其中一部分。治理还涵盖风险、安全、透明度、问责制和运营监督，以实现安全采用。"
+        },
+        {
+          "q": "治理如何应用于智能体？",
+          "a": "自主性和工具访问增加了风险，因此智能体系统需要授权控制、对高影响行为的人工监督、日志记录和评估。"
+        },
+        {
+          "q": "治理会减缓创新吗？",
+          "a": "做好治理反而能加速创新：明确的护栏让团队能够充满信心地发布。如果做得不好，它就会变成官僚主义。目标是实现可执行且轻量级的控制。"
+        }
       ]
     }
   }

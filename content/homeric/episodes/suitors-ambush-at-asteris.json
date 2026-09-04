@@ -62,6 +62,22 @@
         "pt": {
           "label": "O ilhéu de Daskalio",
           "note": "O único candidato no estreito certo, e não tem nenhum dos dois portos que o poema dá a Astéris. Estrabão já registrava a objeção."
+        },
+        "fr": {
+          "label": "L'îlot de Daskalio",
+          "note": "Le seul candidat situé dans le bon détroit, et il ne possède aucun des deux ports que le poème attribue à Astéris. Strabon avait déjà consigné cette objection."
+        },
+        "zh": {
+          "label": "达斯卡利奥小岛",
+          "note": "唯一处于正确海峡内的候选地点，但它完全没有史诗赋予阿斯泰里斯的两个港口。斯特拉博（Strabo）早已记录了这一异议。"
+        },
+        "de": {
+          "label": "Die kleine Insel Daskalio",
+          "note": "Der einzige Kandidat in der richtigen Meerenge, und er hat keinen der beiden Häfen, die das Epos Asteris zuschreibt. Strabon hat diesen Einwand bereits festgehalten."
+        },
+        "ja": {
+          "label": "ダスカリオ小島",
+          "note": "適切な海峡にある唯一の候補地ですが、詩がアステリスに与えている2つの港は存在しません。ストラボンがすでにこの異論を記録しています。"
         }
       }
     }
@@ -124,6 +140,86 @@
         {
           "q": "A costa pode ter mudado?",
           "a": "O Jônico é sismicamente ativo e ali as costas mudaram. Isso é possibilidade, não prova, e o atlas o registra como tal."
+        }
+      ]
+    },
+    "fr": {
+      "title": "L'embuscade à Astéris",
+      "summary": "Vingt prétendants prennent un navire et attendent dans un détroit le retour de Télémaque. Six lignes de texte, un îlot nommé, et une identification qui échoue depuis deux mille ans.",
+      "narrative": [
+        "Antinoos propose l'embuscade et les prétendants la tendent entre Ithaque et Samé, sur une petite île dotée de deux ports. Télémaque, averti par Athéna, emprunte un autre itinéraire et débarque ailleurs ; l'embuscade n'a jamais lieu.",
+        "C'est l'élément géographique le plus opérationnel de l'Odyssée — une position choisie pour intercepter le trafic — et le seul îlot situé au bon endroit ne possède aucun port."
+      ],
+      "whyItMatters": "C'est un test que la carte échoue. Lorsque le poème est au plus précis, la confiance de l'atlas est au plus bas, et cette inversion mérite d'être montrée.",
+      "debate": "Si le littoral a changé, si le détail est inventé, et si l'ensemble de la géographie ionienne est cohérent en soi.",
+      "faqs": [
+        {
+          "q": "Astéris existe-t-elle ?",
+          "a": "Aucun îlot correspondant à la description n'a été identifié. Daskalio, le candidat traditionnel, ne possède pas les deux ports que lui attribue Homère."
+        },
+        {
+          "q": "Le littoral aurait-il pu changer ?",
+          "a": "La mer Ionienne est sismiquement active et les littoraux y ont changé. C'est une possibilité, pas une preuve, et l'atlas l'enregistre comme telle."
+        }
+      ]
+    },
+    "de": {
+      "title": "Der Hinterhalt bei Asteris",
+      "summary": "Zwanzig Freier nehmen ein Schiff und warten in einer Meerenge darauf, dass Telemach segelnd nach Hause zurückkehrt. Sechs Textzeilen, eine namentlich genannte kleine Insel und eine Identifizierung, die seit zweitausend Jahren fehlschlägt.",
+      "narrative": [
+        "Antinoos schlägt den Hinterhalt vor, und die Freier legen ihn zwischen Ithaka und Same auf einer kleinen Insel mit zwei Häfen an. Telemach, von Athena gewarnt, nimmt eine andere Route und landet andernorts; der Hinterhalt findet nie statt.",
+        "Es ist das operativste Stück Geografie in der Odyssee – eine Position, die gewählt wurde, um den Verkehr abzufangen –, und die einzige kleine Insel an der richtigen Stelle hat überhaupt keine Häfen."
+      ],
+      "whyItMatters": "Es ist ein test, an dem die Karte scheitert. Wenn das Epos am präzisesten ist, ist das Vertrauen des Atlas am geringsten, und diese Umkehrung ist es wert, gezeigt zu werden.",
+      "debate": "Ob sich die Küstenlinie verändert hat, ob das Detail erfunden ist und ob die gesamte ionische Geografie in sich konsistent ist.",
+      "faqs": [
+        {
+          "q": "Existiert Asteris?",
+          "a": "Es wurde keine kleine Insel identifiziert, die der Beschreibung entspricht. Daskalio, dem traditionellen Kandidaten, fehlen die zwei Häfen, die Homer ihr zuschreibt."
+        },
+        {
+          "q": "Könnte sich die Küstenlinie verändert haben?",
+          "a": "Das Ionische Meer ist seismisch aktiv, und die Küstenlinien dort haben sich verändert. Das ist eine Möglichkeit, kein Beweis, und der Atlas verzeichnet es als solche."
+        }
+      ]
+    },
+    "ja": {
+      "title": "アステリスでの待ち伏せ",
+      "summary": "20人の求婚者たちが船を出し、テレマコスが船で帰郷するのを海峡で待ち伏せします。わずか6行のテキスト、名前が挙げられた1つの小島、および2000年もの間、特定に失敗し続けている比定地です。",
+      "narrative": [
+        "アンティノオスが待ち伏せを提案し、求婚者たちはイタカとサメの間の、2つの港を持つ小さな島に陣取ります。アテナから警告を受けたテレマコスは別のルートを取り、別の場所に上陸したため、待ち伏せは実行されずに終わります。",
+        "これは『オデュッセイア』において最も実用的な地理描写（往来を遮断するために選ばれた位置）ですが、適切な場所にある唯一の小島には港がまったく存在しません。"
+      ],
+      "whyItMatters": "これは地図が検証に失敗する事例です。詩の描写が最も精密であるとき、地図帳の信頼度は最も低くなり、その逆転現象は示す価値があります。",
+      "debate": "海岸線が変化したのか、詳細が創作されたのか、そしてイオニア地方の地理全体に内部的な一貫性があるのかという議論です。",
+      "faqs": [
+        {
+          "q": "アステリスは実在しますか？",
+          "a": "描写に合致する小島は特定されていません。伝統的な候補地であるダスカリオには、ホメロスが記述している2つの港がありません。"
+        },
+        {
+          "q": "海岸線が変化した可能性はありますか？",
+          "a": "イオニア地方は地震活動が活発であり、海岸線が変化した可能性はあります。しかし、それは可能性であって証拠ではなく、地図帳でもそのように記録されています。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "阿斯泰里斯的伏击",
+      "summary": "二十名求婚者乘船在海峡中等待特勒马科斯驾船回家。六行文字，一个有名字的小岛，以及一个两千年来都未能成功对应的认定。",
+      "narrative": [
+        "安提诺乌斯提议进行伏击，求婚者们将伏击地点设在伊萨卡 and 萨墨（Same）之间一个拥有两个港口的小岛上。特勒马科斯在雅典娜的警告下改走其他路线并在别处登陆；伏击从未发生。",
+        "这是《奥德赛》中最具战术操作性的地理描述——一个为了拦截交通而选择的位置——然而唯一处于正确位置的小岛却根本没有港口。"
+      ],
+      "whyItMatters": "这是一个地图未能通过的测试。当史诗的描述最为精确时，本图集的置信度却降到了最低，这种反差值得展现。",
+      "debate": "海岸线是否发生了变化，细节是否为虚构，以及整个伊奥尼亚地理在内部是否自相一致。",
+      "faqs": [
+        {
+          "q": "阿斯泰里斯存在吗？",
+          "a": "尚未发现符合该描述的小岛。传统的候选地点达斯卡利奥（Daskalio）缺少荷马所描述的两个港口。"
+        },
+        {
+          "q": "海岸线可能发生变化了吗？",
+          "a": "伊奥尼亚群岛地震活跃，那里的海岸线确实发生过变化。这只是一种可能性，而非证据，本图集也仅将其作为可能性予以记录。"
         }
       ]
     }

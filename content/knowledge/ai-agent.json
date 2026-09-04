@@ -3,15 +3,29 @@
   "category": "concept",
   "updated": "2026-06-21",
   "version": "1.0",
-  "related": ["agentic-ai", "harness-engineering", "model-context-protocol", "multi-agent-architecture"],
+  "related": [
+    "agentic-ai",
+    "harness-engineering",
+    "model-context-protocol",
+    "multi-agent-architecture"
+  ],
   "references": [
-    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" },
-    { "title": "Yao et al. — ReAct (2022)", "url": "https://arxiv.org/abs/2210.03629" }
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    },
+    {
+      "title": "Yao et al. — ReAct (2022)",
+      "url": "https://arxiv.org/abs/2210.03629"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["industry_observation", "paper"]
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
   },
   "locales": {
     "en": {
@@ -33,7 +47,14 @@
         "The core loop is sense → decide → act → observe. The model decides the next action, an orchestrator executes it via a tool, the result is fed back as an observation, and the loop continues until a goal or stop condition is reached.",
         "Around this loop sit memory (to carry state), guardrails (to constrain behavior), and observability (to trace what happened). These are the parts of the harness that make an agent dependable."
       ],
-      "components": ["Reasoning model", "Tools", "Memory", "Orchestration loop", "Guardrails", "Observability"],
+      "components": [
+        "Reasoning model",
+        "Tools",
+        "Memory",
+        "Orchestration loop",
+        "Guardrails",
+        "Observability"
+      ],
       "pros": [
         "Executes tasks end to end.",
         "Connects models to live systems.",
@@ -46,17 +67,35 @@
         "Prompt injection and tool-misuse risks.",
         "Harder to test and debug than single prompts."
       ],
-      "tools": ["LangGraph", "Claude Agent SDK", "OpenAI Agents SDK", "CrewAI", "Model Context Protocol (MCP)"],
+      "tools": [
+        "LangGraph",
+        "Claude Agent SDK",
+        "OpenAI Agents SDK",
+        "CrewAI",
+        "Model Context Protocol (MCP)"
+      ],
       "examples": [
         "A triage agent that classifies and routes incoming requests.",
         "A coding agent that fixes a bug and verifies it with tests.",
         "A data agent that queries a warehouse and assembles a report."
       ],
       "faqs": [
-        { "q": "Is a chatbot an AI agent?", "a": "Not by default. A chatbot answers; an agent takes actions through tools across multiple steps to reach a goal." },
-        { "q": "What is the simplest useful agent?", "a": "A model with one or two well-described tools and a clear stop condition. Start simple and add structure only when measurement shows you need it." },
-        { "q": "What makes an agent reliable?", "a": "The harness: clean tool design, good memory, guardrails, observability and evaluation — not just a stronger model." },
-        { "q": "Single agent or multi-agent?", "a": "Prefer a single agent until a task clearly benefits from specialized, separable roles. Multi-agent adds coordination overhead." }
+        {
+          "q": "Is a chatbot an AI agent?",
+          "a": "Not by default. A chatbot answers; an agent takes actions through tools across multiple steps to reach a goal."
+        },
+        {
+          "q": "What is the simplest useful agent?",
+          "a": "A model with one or two well-described tools and a clear stop condition. Start simple and add structure only when measurement shows you need it."
+        },
+        {
+          "q": "What makes an agent reliable?",
+          "a": "The harness: clean tool design, good memory, guardrails, observability and evaluation — not just a stronger model."
+        },
+        {
+          "q": "Single agent or multi-agent?",
+          "a": "Prefer a single agent until a task clearly benefits from specialized, separable roles. Multi-agent adds coordination overhead."
+        }
       ]
     },
     "es": {
@@ -78,7 +117,14 @@
         "El bucle central es percibir → decidir → actuar → observar. El modelo decide la siguiente acción, un orquestador la ejecuta vía una herramienta, el resultado vuelve como observación, y el bucle continúa hasta alcanzar un objetivo o una condición de parada.",
         "Alrededor de ese bucle están la memoria (para arrastrar estado), los guardarraíles (para acotar el comportamiento) y la observabilidad (para trazar lo ocurrido). Son las partes del harness que hacen fiable a un agente."
       ],
-      "components": ["Modelo de razonamiento", "Herramientas", "Memoria", "Bucle de orquestación", "Guardarraíles", "Observabilidad"],
+      "components": [
+        "Modelo de razonamiento",
+        "Herramientas",
+        "Memoria",
+        "Bucle de orquestación",
+        "Guardarraíles",
+        "Observabilidad"
+      ],
       "pros": [
         "Ejecuta tareas de principio a fin.",
         "Conecta modelos con sistemas en vivo.",
@@ -91,17 +137,35 @@
         "Riesgos de inyección de prompts y mal uso de herramientas.",
         "Más difícil de probar y depurar que un prompt simple."
       ],
-      "tools": ["LangGraph", "Claude Agent SDK", "OpenAI Agents SDK", "CrewAI", "Model Context Protocol (MCP)"],
+      "tools": [
+        "LangGraph",
+        "Claude Agent SDK",
+        "OpenAI Agents SDK",
+        "CrewAI",
+        "Model Context Protocol (MCP)"
+      ],
       "examples": [
         "Un agente de triaje que clasifica y enruta solicitudes entrantes.",
         "Un agente de programación que corrige un bug y lo verifica con tests.",
         "Un agente de datos que consulta un warehouse y arma un informe."
       ],
       "faqs": [
-        { "q": "¿Un chatbot es un agente de IA?", "a": "Por defecto no. Un chatbot responde; un agente toma acciones mediante herramientas en varios pasos para alcanzar un objetivo." },
-        { "q": "¿Cuál es el agente útil más simple?", "a": "Un modelo con una o dos herramientas bien descritas y una condición de parada clara. Empieza simple y añade estructura solo cuando la medición lo justifique." },
-        { "q": "¿Qué hace fiable a un agente?", "a": "El harness: diseño limpio de herramientas, buena memoria, guardarraíles, observabilidad y evaluación, no solo un modelo más potente." },
-        { "q": "¿Un agente o multiagente?", "a": "Prefiere un solo agente hasta que la tarea se beneficie claramente de roles especializados y separables. El multiagente añade coste de coordinación." }
+        {
+          "q": "¿Un chatbot es un agente de IA?",
+          "a": "Por defecto no. Un chatbot responde; un agente toma acciones mediante herramientas en varios pasos para alcanzar un objetivo."
+        },
+        {
+          "q": "¿Cuál es el agente útil más simple?",
+          "a": "Un modelo con una o dos herramientas bien descritas y una condición de parada clara. Empieza simple y añade estructura solo cuando la medición lo justifique."
+        },
+        {
+          "q": "¿Qué hace fiable a un agente?",
+          "a": "El harness: diseño limpio de herramientas, buena memoria, guardarraíles, observabilidad y evaluación, no solo un modelo más potente."
+        },
+        {
+          "q": "¿Un agente o multiagente?",
+          "a": "Prefiere un solo agente hasta que la tarea se beneficie claramente de roles especializados y separables. El multiagente añade coste de coordinación."
+        }
       ]
     },
     "pt": {
@@ -123,7 +187,14 @@
         "O laço central é perceber → decidir → agir → observar. O modelo decide a próxima ação, um orquestrador a executa via uma ferramenta, o resultado retorna como observação, e o laço continua até alcançar um objetivo ou uma condição de parada.",
         "Em torno desse laço estão a memória (para carregar estado), os guard-rails (para limitar o comportamento) e a observabilidade (para rastrear o ocorrido). São as partes do harness que tornam um agente confiável."
       ],
-      "components": ["Modelo de raciocínio", "Ferramentas", "Memória", "Laço de orquestração", "Guard-rails", "Observabilidade"],
+      "components": [
+        "Modelo de raciocínio",
+        "Ferramentas",
+        "Memória",
+        "Laço de orquestração",
+        "Guard-rails",
+        "Observabilidade"
+      ],
       "pros": [
         "Executa tarefas de ponta a ponta.",
         "Conecta modelos a sistemas ao vivo.",
@@ -136,17 +207,315 @@
         "Riscos de injeção de prompts e mau uso de ferramentas.",
         "Mais difícil de testar e depurar que um prompt simples."
       ],
-      "tools": ["LangGraph", "Claude Agent SDK", "OpenAI Agents SDK", "CrewAI", "Model Context Protocol (MCP)"],
+      "tools": [
+        "LangGraph",
+        "Claude Agent SDK",
+        "OpenAI Agents SDK",
+        "CrewAI",
+        "Model Context Protocol (MCP)"
+      ],
       "examples": [
         "Um agente de triagem que classifica e roteia solicitações recebidas.",
         "Um agente de programação que corrige um bug e o verifica com testes.",
         "Um agente de dados que consulta um warehouse e monta um relatório."
       ],
       "faqs": [
-        { "q": "Um chatbot é um agente de IA?", "a": "Por padrão não. Um chatbot responde; um agente toma ações por meio de ferramentas em vários passos para alcançar um objetivo." },
-        { "q": "Qual é o agente útil mais simples?", "a": "Um modelo com uma ou duas ferramentas bem descritas e uma condição de parada clara. Comece simples e adicione estrutura só quando a medição justificar." },
-        { "q": "O que torna um agente confiável?", "a": "O harness: design limpo de ferramentas, boa memória, guard-rails, observabilidade e avaliação, não só um modelo mais potente." },
-        { "q": "Um agente ou multiagente?", "a": "Prefira um único agente até a tarefa se beneficiar claramente de papéis especializados e separáveis. O multiagente adiciona custo de coordenação." }
+        {
+          "q": "Um chatbot é um agente de IA?",
+          "a": "Por padrão não. Um chatbot responde; um agente toma ações por meio de ferramentas em vários passos para alcançar um objetivo."
+        },
+        {
+          "q": "Qual é o agente útil mais simples?",
+          "a": "Um modelo com uma ou duas ferramentas bem descritas e uma condição de parada clara. Comece simples e adicione estrutura só quando a medição justificar."
+        },
+        {
+          "q": "O que torna um agente confiável?",
+          "a": "O harness: design limpo de ferramentas, boa memória, guard-rails, observabilidade e avaliação, não só um modelo mais potente."
+        },
+        {
+          "q": "Um agente ou multiagente?",
+          "a": "Prefira um único agente até a tarefa se beneficiar claramente de papéis especializados e separáveis. O multiagente adiciona custo de coordenação."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce qu'un agent d'IA ?",
+      "summary": "Un agent d'IA est un système qui combine un modèle avec des outils, de la mémoire et une boucle de contrôle pour entreprendre des actions vers un objectif, plutôt que de simplement répondre à un prompt unique. Il perçoit une situation, décide de l'action à mener, agit via des outils, observe le résultat et répète le processus jusqu'à sa finalisation. L'autonomie va d'un simple appel d'outil à l'exécution à long terme de tâches complexes.",
+      "definition": "Un agent d'IA est un système qui associe un modèle de raisonnement à des outils, de la mémoire et une boucle d'orchestration afin de pouvoir planifier et agir en plusieurs étapes pour atteindre un objectif.",
+      "takeaways": [
+        "Agent = modèle + outils + mémoire + boucle de contrôle.",
+        "Les agents agissent ; les chatbots répondent.",
+        "L'utilisation d'outils est la passerelle vers les systèmes et données réels.",
+        "Plus d'autonomie implique un besoin accru de garde-fous et d'évaluation.",
+        "La fiabilité est conçue à travers le harness, et non supposée à partir du modèle."
+      ],
+      "context": [
+        "Un LLM classique produit du texte. Un agent utilise ce texte pour décider et agir : il peut effectuer des recherches, appeler des API, écrire des fichiers ou déclencher des flux de travail, puis réagir aux événements. C'est cette boucle qui lui permet de mener à bien des tâches au lieu de simplement les décrire.",
+        "Les agents se situent sur un spectre d'autonomie. Les agents à faible autonomie effectuent un ou deux appels d'outils sous un contrôle étroit ; les agents à forte autonomie exécutent des tâches longues et ramifiées avec peu de supervision — et nécessitent des garde-fous proportionnellement plus solides."
+      ],
+      "architecture": [
+        "La boucle principale est percevoir → décider → agir → observer. Le modèle décide de l'action suivante, un orchestrateur l'exécute via un outil, le résultat est renvoyé sous forme d'observation, et la boucle continue jusqu'à ce qu'un objectif ou une condition d'arrêt soit atteint.",
+        "Autour de cette boucle se trouvent la mémoire (pour conserver l'état), les garde-fous (pour contraindre le comportement) et l'observabilité (pour tracer ce qui s'est passé). Ce sont les éléments du harness qui rendent un agent fiable."
+      ],
+      "components": [
+        "Modèle de raisonnement",
+        "Outils",
+        "Mémoire",
+        "Boucle d'orchestration",
+        "Garde-fous",
+        "Observabilité"
+      ],
+      "pros": [
+        "Exécute les tâches de bout en bout.",
+        "Connecte les modèles à des systèmes en direct.",
+        "Récupère des échecs intermédiaires.",
+        "Automatise le travail intellectuel en plusieurs étapes."
+      ],
+      "risks": [
+        "Cumul des erreurs sur les tâches longues.",
+        "Coût et latence en l'absence de budgets.",
+        "Risques d'injection de prompt et de mauvaise utilisation des outils.",
+        "Plus difficile à tester et à déboguer que des prompts uniques."
+      ],
+      "tools": [
+        "LangGraph",
+        "Claude Agent SDK",
+        "OpenAI Agents SDK",
+        "CrewAI",
+        "Model Context Protocol (MCP)"
+      ],
+      "examples": [
+        "Un agent de tri qui classifie et oriente les requêtes entrantes.",
+        "Un agent de codage qui corrige un bug et le vérifie à l'aide de tests.",
+        "Un agent de données qui interroge un entrepôt de données et assemble un rapport."
+      ],
+      "faqs": [
+        {
+          "q": "Un chatbot est-il un agent d'IA ?",
+          "a": "Pas par défaut. Un chatbot répond ; un agent entreprend des actions via des outils en plusieurs étapes pour atteindre un objectif."
+        },
+        {
+          "q": "Quel est l'agent utile le plus simple ?",
+          "a": "Un modèle doté d'un ou deux outils bien décrits et d'une condition d'arrêt claire. Commencez simplement et n'ajoutez de la structure que lorsque les mesures indiquent que vous en avez besoin."
+        },
+        {
+          "q": "Qu'est-ce qui rend un agent fiable ?",
+          "a": "Le harness : une conception d'outils propre, une bonne mémoire, des garde-fous, de l'observabilité et de l'évaluation — pas seulement un modèle plus puissant."
+        },
+        {
+          "q": "Agent unique ou multi-agent ?",
+          "a": "Privilégiez un agent unique jusqu'à ce qu'une tâche bénéficie clairement de rôles spécialisés et distincts. Le multi-agent ajoute une surcharge de coordination."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist ein KI-Agent?",
+      "summary": "Ein KI-Agent ist ein System, das ein Modell mit Tools, Speicher und einer Kontrollschleife kombiniert, um Aktionen zur Erreichung eines Ziels auszuführen, anstatt nur auf einen einzelnen Prompt zu antworten. Er nimmt eine Situation wahr, entscheidet, was zu tun ist, agiert über Tools, beobachtet das Ergebnis und wiederholt dies, bis die Aufgabe erledigt ist. Die Autonomie reicht von einem einzelnen Tool-Aufruf bis hin zur langfristigen Ausführung komplexer Aufgaben.",
+      "definition": "Ein KI-Agent ist ein System, das ein logisches Denkmodell (Reasoning Model) mit Tools, Speicher und einer Orchestrierungsschleife verbindet, um über mehrere Schritte hinweg zu planen und zu handeln, um ein Ziel zu erreichen.",
+      "takeaways": [
+        "Agent = Modell + Tools + Speicher + Kontrollschleife.",
+        "Agenten handeln; Chatbots antworten.",
+        "Die Nutzung von Tools ist die Brücke zu realen Systemen und Daten.",
+        "Mehr Autonomie bedeutet einen größeren Bedarf an Guardrails und Evaluierung.",
+        "Zuverlässigkeit wird durch das Harness entwickelt, nicht vom Modell vorausgesetzt."
+      ],
+      "context": [
+        "Ein reines LLM erzeugt Text. Ein Agent nutzt diesen Text, um Entscheidungen zu treffen und zu handeln: Er kann suchen, APIs aufrufen, Dateien schreiben oder Workflows auslösen und dann auf das reagieren, was passiert. Diese Schleife ermöglicht es ihm, Aufgaben zu erledigen, anstatt sie nur zu beschreiben.",
+        "Agenten bewegen sich auf einem Autonomie-Spektrum. Agenten mit geringer Autonomie führen unter strenger Kontrolle ein oder zwei Tool-Aufrufe aus; Agenten mit hoher Autonomie führen lange, verzweigte Aufgaben mit wenig Aufsicht aus — und benötigen entsprechend stärkere Guardrails."
+      ],
+      "architecture": [
+        "Die Kernschleife lautet: Wahrnehmen → Entscheiden → Handeln → Beobachten (Sense → Decide → Act → Observe). Das Modell entscheidet über die nächste Aktion, ein Orchestrator führt sie über ein Tool aus, das Ergebnis wird als Beobachtung zurückgegeben, und die Schleife wird fortgesetzt, bis ein Ziel oder eine Stoppbedingung erreicht ist.",
+        "Um diese Schleife herum befinden sich der Speicher (zur Zustandserhaltung), Guardrails (zur Einschränkung des Verhaltens) und Observability (zur Nachverfolgung der Abläufe). Dies sind die Teile des Harness, die einen Agenten zuverlässig machen."
+      ],
+      "components": [
+        "Reasoning-Modell",
+        "Tools",
+        "Speicher",
+        "Orchestrierungsschleife",
+        "Guardrails",
+        "Observability"
+      ],
+      "pros": [
+        "Führt Aufgaben End-to-End aus.",
+        "Verbindet Modelle mit Live-Systemen.",
+        "Erholt sich von zwischenzeitlichen Fehlern.",
+        "Automatisiert mehrstufige Wissensarbeit."
+      ],
+      "risks": [
+        "Fehlerpotenzierung bei langen Aufgaben.",
+        "Kosten und Latenz ohne Budgetvorgaben.",
+        "Risiken durch Prompt-Injection und Tool-Missbrauch.",
+        "Schwieriger zu testen und zu debuggen als einzelne Prompts."
+      ],
+      "tools": [
+        "LangGraph",
+        "Claude Agent SDK",
+        "OpenAI Agents SDK",
+        "CrewAI",
+        "Model Context Protocol (MCP)"
+      ],
+      "examples": [
+        "Ein Triage-Agent, der eingehende Anfragen klassifiziert und weiterleitet.",
+        "Ein Coding-Agent, der einen Fehler behebt und dies mit Tests verifiziert.",
+        "Ein Daten-Agent, der ein Data Warehouse abfragt und einen Bericht erstellt."
+      ],
+      "faqs": [
+        {
+          "q": "Ist ein Chatbot ein KI-Agent?",
+          "a": "Nicht standardmäßig. Ein Chatbot antwortet; ein Agent führt über mehrere Schritte hinweg Aktionen mithilfe von Tools aus, um ein Ziel zu erreichen."
+        },
+        {
+          "q": "Was ist der einfachste nützliche Agent?",
+          "a": "Ein Modell mit ein oder zwei gut beschriebenen Tools und einer klaren Stoppbedingung. Beginnen Sie einfach und fügen Sie Struktur erst hinzu, wenn Messungen zeigen, dass Sie sie benötigen."
+        },
+        {
+          "q": "Was macht einen Agenten zuverlässig?",
+          "a": "Das Harness: sauberes Tool-Design, gutes Gedächtnis, Guardrails, Observability und Evaluation – nicht nur ein stärkeres Modell."
+        },
+        {
+          "q": "Einzelner Agent oder Multi-Agent?",
+          "a": "Bevorzugen Sie einen einzelnen Agenten, bis eine Aufgabe eindeutig von spezialisierten, trennbaren Rollen profitiert. Multi-Agenten-Systeme verursachen zusätzlichen Koordinationsaufwand."
+        }
+      ]
+    },
+    "ja": {
+      "title": "AIエージェントとは？",
+      "summary": "AIエージェントとは、単一のプロンプトに回答するだけでなく、モデルにツール、メモリ、コントロールループを組み合わせて、目標に向けたアクションを実行するシステムです。状況を認識し、何をすべきかを決定し、ツールを介して行動し、結果を観察し、完了するまでこれを繰り返します。自律性の範囲は、単一のツール呼び出しから、複雑なタスクの長期的な実行まで多岐にわたります。",
+      "definition": "AIエージェントとは、推論モデルにツール、メモリ、オーケストレーションループを組み合わせることで、目標を達成するために複数のステップにわたって計画し、行動できるようにしたシステムです。",
+      "takeaways": [
+        "エージェント ＝ モデル ＋ ツール ＋ メモリ ＋ コントロールループ",
+        "エージェントは行動し、チャットボットは回答する。",
+        "ツールの使用は、実際のシステムやデータへの架け橋となる。",
+        "自律性が高まるほど、ガードレールと評価の必要性が増す。",
+        "信頼性はモデルから想定されるものではなく、ハーネスを通じて構築（エンジニアリング）される。"
+      ],
+      "context": [
+        "単なるLLMはテキストを生成します。一方、エージェントはそのテキストを使用して決定し、行動します。検索、APIの呼び出し、ファイルの書き込み、ワークフローのトリガーを実行し、発生した事象に対応できます。このループにより、単に説明するだけでなく、タスクを完了させることができます。",
+        "エージェントは自律性のスペクトラム上に位置します。自律性の低いエージェントは、厳格な制御下で1つか2つのツール呼び出しを行います。自律性の高いエージェントは、ほとんど監視なしで、分岐を伴う長期的なタスクを実行します。そのため、それ相応に強力なガードレールが必要になります。"
+      ],
+      "architecture": [
+        "コアとなるループは、認識（sense）→ 決定（decide）→ 行動（act）→ 観察（observe）です。モデルが次のアクションを決定し、オーケストレーターがツールを介してそれを実行し、その結果が観察としてフィードバックされ、目標または停止条件に達するまでループが継続します。",
+        "このループの周囲には、メモリ（状態の保持）、ガードレール（動作の制限）、オブザーバビリティ（何が起きたかの追跡）が配置されます。これらは、エージェントの信頼性を高めるためのハーネスの構成要素です。"
+      ],
+      "components": [
+        "推論モデル",
+        "ツール",
+        "メモリ",
+        "オーケストレーションループ",
+        "ガードレール",
+        "オブザーバビリティ"
+      ],
+      "pros": [
+        "タスクをエンドツーエンドで実行する。",
+        "モデルを実稼働システムに接続する。",
+        "途中の失敗から回復する。",
+        "複数ステップにわたるナレッジワークを自動化する。"
+      ],
+      "risks": [
+        "長期的なタスクにおけるエラーの累積。",
+        "予算制限がない場合のコストとレイテンシ。",
+        "プロンプトインジェクションおよびツールの誤用のリスク。",
+        "単一のプロンプトよりもテストやデバッグが困難。"
+      ],
+      "tools": [
+        "LangGraph",
+        "Claude Agent SDK",
+        "OpenAI Agents SDK",
+        "CrewAI",
+        "Model Context Protocol (MCP)"
+      ],
+      "examples": [
+        "受信したリクエストを分類してルーティングするトリアージエージェント。",
+        "バグを修正し、テストで検証するコーディングエージェント。",
+        "ウェアハウスにクエリを実行し、レポートを作成するデータエージェント。"
+      ],
+      "faqs": [
+        {
+          "q": "チャットボットはAIエージェントですか？",
+          "a": "基本的には異なります。チャットボットは回答しますが、エージェントは目標を達成するために、複数のステップにわたってツールを介してアクションを実行します。"
+        },
+        {
+          "q": "最もシンプルで実用的なエージェントとはどのようなものですか？",
+          "a": "適切に記述された1つまたは2つのツールと、明確な停止条件を持つモデルです。シンプルに開始し、測定によって必要性が示された場合にのみ構造を追加してください。"
+        },
+        {
+          "q": "エージェントの信頼性を高めるものは何ですか？",
+          "a": "ハーネス：クリーンなツール設計、優れたメモリ、ガードレール、オブザーバビリティ、および評価。単に強力なモデルを用意するだけではありません。"
+        },
+        {
+          "q": "単一エージェントか、マルチエージェントか？",
+          "a": "タスクが専門化・分離された役割から明確に恩恵を受けるまでは、単一エージェントを優先してください。マルチエージェントは調整のオーバーヘッドを増加させます。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是 AI 智能体？",
+      "summary": "AI 智能体是一种将模型与工具、内存和控制循环相结合的系统，旨在朝着目标采取行动，而不仅仅是回答单个提示词。它感知情境、决定做什么、通过工具采取行动、观察结果并重复这一过程直至完成。其自主程度从单一的工具调用到复杂任务的长周期执行不等。",
+      "definition": "AI 智能体是一种将推理模型与工具、内存和编排循环相结合的系统，使其能够通过多个步骤进行规划和行动以实现目标。",
+      "takeaways": [
+        "智能体 = 模型 + 工具 + 内存 + 控制循环。",
+        "智能体行动；聊天机器人回答。",
+        "工具使用是连接真实系统和数据的桥梁。",
+        "更高的自主性意味着更需要护栏和评估。",
+        "可靠性是通过支撑系统（harness）构建出来的，而不是假设模型本身就具备。"
+      ],
+      "context": [
+        "普通的 LLM 只生成文本。而智能体利用该文本进行决策和行动：它可以进行搜索、调用 API、写入文件或触发工作流，然后对发生的情况做出反应。正是这种循环使其能够完成任务，而不仅仅是描述任务。",
+        "智能体处于不同的自主程度光谱中。低自主性智能体在严格控制下进行一两次工具调用；高自主性智能体在几乎没有监督的情况下运行长周期的分支任务——因此需要相应更强大的护栏。"
+      ],
+      "architecture": [
+        "核心循环是：感知 → 决策 → 行动 → 观察。模型决定下一步行动，编排器通过工具执行该行动，结果作为观察反馈回来，循环继续，直到达到目标或终止条件。",
+        "围绕这一循环的是内存（用于承载状态）、护栏（用于约束行为）和可观测性（用于追踪发生的情况）。这些是支撑系统（harness）的组成部分，使智能体变得可靠。"
+      ],
+      "components": [
+        "推理模型",
+        "工具",
+        "内存",
+        "编排循环",
+        "护栏",
+        "可观测性"
+      ],
+      "pros": [
+        "端到端执行任务。",
+        "将模型连接到实时系统。",
+        "从中间失败中恢复。",
+        "自动化多步骤的知识性工作。"
+      ],
+      "risks": [
+        "长周期任务中的错误累积。",
+        "在没有预算限制下的成本和延迟。",
+        "提示词注入和工具滥用风险。",
+        "比单个提示词更难测试和调试。"
+      ],
+      "tools": [
+        "LangGraph",
+        "Claude Agent SDK",
+        "OpenAI Agents SDK",
+        "CrewAI",
+        "Model Context Protocol (MCP)"
+      ],
+      "examples": [
+        "对传入请求进行分类和分流的分诊智能体。",
+        "修复 Bug 并通过测试进行验证的编码智能体。",
+        "查询数据仓库并生成报告的数据智能体。"
+      ],
+      "faqs": [
+        {
+          "q": "聊天机器人是 AI 智能体吗？",
+          "a": "默认情况下不是。聊天机器人进行回答；而智能体通过工具跨多个步骤采取行动以实现目标。"
+        },
+        {
+          "q": "最简单且有用的智能体是什么？",
+          "a": "一个拥有一个或两个描述详尽的工具以及明确终止条件的模型。从简单开始，只有在测量表明需要时才添加结构。"
+        },
+        {
+          "q": "是什么让智能体变得可靠？",
+          "a": "支撑系统：清晰的工具设计、良好的记忆、安全护栏、可观测性和评估——而不仅仅是更强大的模型。"
+        },
+        {
+          "q": "单智能体还是多智能体？",
+          "a": "优先选择单智能体，除非任务显然能从专门且可分离的角色中受益。多智能体系统会增加协调开销。"
+        }
       ]
     }
   }

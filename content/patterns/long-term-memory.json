@@ -1,6 +1,9 @@
 {
   "slug": "long-term-memory",
-  "aliases": ["PAT-004", "PAT-006"],
+  "aliases": [
+    "PAT-004",
+    "PAT-006"
+  ],
   "category": "retrieval",
   "updated": "2026-08-25",
   "version": "1.2",
@@ -29,7 +32,11 @@
   "evidence": {
     "evidenceLevel": "production",
     "confidenceLevel": "low",
-    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+    "sourceType": [
+      "production_system",
+      "personal_experience",
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {
@@ -299,6 +306,366 @@
         {
           "q": "Como lidar com PII e privacidade?",
           "a": "Trate o armazenamento como dados governados: aplique o escopo para que as memórias nunca cruzem entre usuários ou inquilinos, minimize o que você persiste, dê suporte a consentimento e exclusão, e defina controles de retenção e de acesso. A inspecionabilidade e uma política de expiração fazem parte do cumprimento dessas obrigações."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Mémoire à long terme",
+      "summary": "Dotez un agent d'une mémoire persistante d'une session à l'autre afin qu'il se souvienne des faits, des préférences de l'utilisateur et des résultats antérieurs au-delà d'une simple fenêtre de contexte. Un chemin d'écriture décide de ce qu'il faut stocker, le synthétise et supprime les doublons ; un chemin de lecture récupère uniquement les souvenirs pertinents dans le contexte en cas de besoin. Contrairement à la mise en cache sémantique, qui met en cache des réponses entières pour éviter de recalculer, la mémoire à long terme stocke des faits et des états durables et les recompose à chaque fois dans un nouveau raisonnement.",
+      "problem": "La fenêtre de contexte est finie et se réinitialise entre les sessions. Un agent qui ne voit que la conversation en cours oublie les préférences exprimées par l'utilisateur, les décisions prises la semaine précédente et le résultat des tâches antérieures. Intégrer tout l'historique dans chaque invite devient impossible au-delà d'une certaine échelle et dégrade le raisonnement à mesure que la fenêtre se remplit de jetons à faible valeur. Les équipes ont besoin d'un moyen de conserver le petit ensemble de faits importants et de les faire remonter précisément lorsqu'ils sont pertinents.",
+      "context": "Utilisez ce modèle lorsqu'un agent est au service des mêmes utilisateurs ou travaille de manière répétée sur les mêmes tâches de longue durée : assistants qui apprennent les préférences, agents de support qui suivent l'historique d'un client, agents de codage qui mémorisent les conventions d'un projet, ou flux de travail multi-étapes s'étendant sur plusieurs jours. Cela suppose que vous puissiez stocker des données en dehors du modèle (un magasin de vecteurs, une base de données ou un framework de mémoire) et que vous contrôliez à la fois le moment où les souvenirs sont écrits et la manière dont ils sont récupérés dans l'invite.",
+      "solution": [
+        "Séparez le chemin d'écriture du chemin de lecture. Sur le chemin d'écriture, une fois qu'un tour ou une tâche se termine, une étape d'extraction décide de ce qui mérite d'être mémorisé : des faits stables, des préférences, des engagements et des résultats — et non des échanges éphémères. Les souvenirs potentiels sont synthétisés sous forme d'énoncés compacts et autonomes, comparés aux souvenirs existants pour éliminer les doublons et détecter les contradictions, puis écrits dans un magasin avec des métadonnées : un type de mémoire, un horodatage, une source, et l'utilisateur ou la portée auquel il appartient. L'objectif est d'écrire moins mais d'écrire mieux ; des souvenirs superflus polluent les récupérations ultérieures.\n\nSur le chemin de lecture, avant que l'agent ne raisonne, vous récupérez les souvenirs potentiels pertinents pour la tâche en cours — généralement par similarité sémantique combinée à des filtres sur la portée et la récence —, vous les classez et vous n'injectez que les tout premiers dans le contexte. Traitez la récupération comme un problème de précision : une poignée de souvenirs exacts vaut mieux qu'un grand ensemble vaguement lié. Distinguez les types de mémoire afin de cibler la récupération : épisodique (ce qui s'est passé), sémantique (faits et préférences durables) et procédurale (comment réaliser une tâche récurrente). Consolidez périodiquement et faites expirer les souvenirs pour que le magasin reste de taille réduite, à jour et exempt de contradictions."
+      ],
+      "components": [
+        "Extracteur de mémoire (chemin d'écriture)",
+        "Déduplication et vérification des contradictions",
+        "Magasin de mémoire",
+        "Récupérateur (chemin de lecture)",
+        "Assembleur de contexte",
+        "Tâche de consolidation et d'expiration"
+      ],
+      "benefits": [
+        "L'agent se souvient des préférences, des décisions et des résultats des sessions précédentes, évitant ainsi aux utilisateurs de répéter le contexte et garantissant un comportement cohérent de l'agent dans le temps.",
+        "La récupération de quelques souvenirs pertinents permet de concentrer la fenêtre sur des jetons à forte valeur plutôt que d'injecter tout l'historique, ce qui préserve la qualité du raisonnement et réduit les coûts.",
+        "À mesure que les faits stables et les préférences s'accumulent, l'agent adapte ses réponses de manière plus précise à chaque interaction, sans nécessiter de réentraînement du modèle.",
+        "Puisque les souvenirs résident dans un magasin externe doté de métadonnées, vous pouvez inspecter, corriger, exporter et supprimer ce que l'agent sait — un aspect essentiel pour la confiance et la conformité."
+      ],
+      "risks": [
+        "Sans consolidation ni expiration, le magasin accumule des faits obsolètes et des déclarations contradictoires, et l'agent risque d'agir avec assurance sur la base d'informations erronées.",
+        "La conservation des données utilisateur entraîne des obligations en matière de rétention, de consentement et de contrôle d'accès ; les souvenirs peuvent divulguer des informations sensibles d'une session ou d'un utilisateur à l'autre si la portée n'est pas strictement appliquée.",
+        "Une faible précision injecte des souvenirs non pertinents ou erronés qui faussent le raisonnement ; un faible rappel omet silencieusement le souvenir qui importait, rendant les défaillances difficiles à diagnostiquer.",
+        "Une écriture trop systématique gonfle le magasin, ralentit la récupération, augmente les coûts de stockage et d'intégration (embeddings), et dilue le signal dont dépend la qualité de la récupération."
+      ],
+      "whenNot": [
+        "Si les sessions sont indépendantes et que rien n'a besoin d'être transmis, la mémoire persistante ajoute de la complexité, des coûts et une surface d'exposition des données personnelles sans aucun avantage.",
+        "Lorsque l'objectif est de réutiliser une réponse précédente pour une requête répétée, la mise en cache sémantique est l'outil approprié ; la mémoire à long terme sert à mémoriser des faits et des états, et non à mettre en cache des sorties.",
+        "Lorsque la réglementation ou les politiques interdisent la conservation des données utilisateur, ne persistez pas les souvenirs ; appuyez-vous sur le contexte de la session ou sur un stockage explicite et délimité contrôlé par l'utilisateur."
+      ],
+      "examples": [
+        "D'une session à l'autre, il se souvient du ton, des formats, des contacts récurrents et des instructions permanentes, récupérant les quelques éléments qui s'appliquent à la demande en cours au lieu de poser à nouveau la question.",
+        "À chaque contact, il récupère les problèmes antérieurs du client, ses droits et les résolutions associées à ce compte, afin de poursuivre la conversation plutôt que de la recommencer.",
+        "Il stocke des souvenirs procéduraux — commandes de build, règles de nommage, préférences de révision — et les rappelle lorsqu'il travaille sur le même dépôt au fil de nombreuses sessions."
+      ],
+      "productionEvidence": {
+        "context": "Déploiement OpenClaw mono-opérateur et local-first observé sur 57 jours (161 sessions / 2 776 tours), agrégé à partir des traces de trajectoire de l'agent lui-même.",
+        "scenario": "L'agent persiste les fichiers de mémoire de l'espace de travail et les traces par session pour assurer la continuité entre les tours et les sessions, avec un plugin de rappel sémantique disponible à la demande.",
+        "technology": "Fichiers de mémoire de l'espace de travail (MEMORY.md, IDENTITY.md, SOUL.md, USER.md, HEARTBEAT.md), identifiants de session persistants et événements de cycle de vie, et un plugin de mémoire active (memory_search/get/recall).",
+        "load": "134 fichiers de session persistés sur la fenêtre de 57 jours ; rappel sémantique invoqué une fois.",
+        "results": "La continuité a été maintenue sur 134 sessions persistées pendant 57 jours grâce à la mémoire structurelle de l'espace de travail ; le rappel sémantique explicite a été rarement nécessaire (un seul appel) dans cette charge de travail autonome. Déploiement local-first à opérateur unique."
+      },
+      "kpis": [
+        {
+          "metric": "Précision de récupération des souvenirs injectés",
+          "note": "Parmi les souvenirs placés en contexte, la part de ceux qui étaient réellement pertinents. C'est la métrique qui régit le plus directement la qualité des réponses ; un bon résultat signifie que l'ensemble injecté est presque entièrement pertinent, les souvenirs non pertinents étant rares."
+        },
+        {
+          "metric": "Rappel de récupération sur les tâches dépendantes de la mémoire",
+          "note": "Pour les tâches nécessitant un fait stocké connu, la fréquence à laquelle ce fait est réellement récupéré. Un bon résultat signifie que le bon souvenir remonte de manière fiable ; des échecs persistants indiquent des lacunes d'extraction ou d'indexation."
+        },
+        {
+          "metric": "Taille et taux de croissance du stockage de mémoire",
+          "note": "Nombre total de souvenirs et vitesse à laquelle ils s'accumulent par utilisateur actif. Un bon résultat signifie que la croissance suit de nouveaux faits durables réels, et non une hausse illimitée — une courbe exponentielle signale une écriture trop zélée."
+        },
+        {
+          "metric": "Taux d'obsolescence et de contradiction",
+          "note": "Part des souvenirs récupérés qui sont obsolètes ou en conflit avec une vérité plus récente. Un bon résultat correspond à un taux faible et stable, preuve que la consolidation et l'expiration suivent le rythme des changements."
+        }
+      ],
+      "failureModes": [
+        "Tout écrire transforme le stockage en bruit ; la récupération fait alors remonter des souvenirs de faible valeur ou erronés. Corrigez cela en élevant le niveau d'exigence pour ce qui est écrit et en examinant la qualité de l'extraction.",
+        "Un fait ancien est récupéré et exploité après que la vérité a changé, sans aucun signal indiquant qu'il est obsolète. Atténuez ce problème avec des horodatages, un classement pondéré par la récence et un remplacement explicite lors de l'écriture.",
+        "Un souvenir d'un utilisateur, d'un locataire ou d'un projet est récupéré dans le contexte d'un autre parce que les filtres de portée étaient manquants ou incorrects — un échec à la fois de confidentialité et d'exactitude.",
+        "Pour compenser un mauvais classement, les équipes injectent de nombreux souvenirs, remplissant la fenêtre de jetons marginaux et dégradant le raisonnement même que la mémoire était censée soutenir."
+      ],
+      "lessons": [
+        "La qualité se décide au moment de choisir ce qu'il faut mémoriser. Un stockage restreint, propre et dédoublonné offre une bien meilleure récupération qu'un grand stockage bruyant.",
+        "Quelques souvenirs corrects sont plus performants que de nombreux souvenirs vaguement liés. Ajustez la pertinence et classez de manière stricte plutôt que de maximiser la quantité injectée.",
+        "Stockez les métadonnées et fournissez des moyens de visualiser, modifier, faire expirer et supprimer les souvenirs. C'est essentiel pour le débogage, la confiance et le respect des obligations de confidentialité.",
+        "Les faits deviennent obsolètes et se contredisent. Intégrez tôt la consolidation, le remplacement et l'expiration ; les adapter ultérieurement à un grand stockage pollué est fastidieux."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il de la mise en cache sémantique ?",
+          "a": "La mise en cache sémantique stocke et rejoue des réponses entières pour éviter de recalculer des requêtes similaires. La mémoire à long terme stocke des faits durables, des préférences et des résultats, puis les recompose dans un nouveau raisonnement pour chaque nouvelle tâche. L'une réutilise les sorties ; l'autre mémorise l'état."
+        },
+        {
+          "q": "Que doit réellement mémoriser l'agent ?",
+          "a": "Un signal stable et réutilisable : les préférences de l'utilisateur, les décisions et engagements, les résultats des tâches antérieures et les procédures récurrentes. Évitez les bavardages éphémères et tout ce dont vous ne pouvez justifier la conservation. Écrire moins mais écrire bien est ce qui rend la récupération ultérieure précise."
+        },
+        {
+          "q": "Comment gérez-vous les PII et la confidentialité ?",
+          "a": "Traitez le stockage comme des données gouvernées : appliquez des limites de portée pour que les souvenirs ne croisent jamais les utilisateurs ou les locataires, minimisez ce que vous persistez, prenez en charge le consentement et la suppression, et définissez des contrôles de rétention et d'accès. L'inspectabilité et une politique d'expiration font partie du respect de ces obligations."
+        }
+      ]
+    },
+    "de": {
+      "name": "Langzeitgedächtnis",
+      "summary": "Geben Sie einem Agenten ein persistentes Gedächtnis über Sitzungen hinweg, sodass er sich an Fakten, Benutzerpräferenzen und frühere Ergebnisse über ein einzelnes Kontextfenster hinaus erinnert. Ein Schreibpfad entscheidet, was gespeichert wird, fasst es zusammen und dedupliziert es; ein Lesepfad ruft bei Bedarf nur die relevanten Erinnerungen in den Kontext ab. Im Gegensatz zum semantischen Caching, das ganze Antworten zwischenspeichert, um Neuberechnungen zu vermeiden, speichert das Langzeitgedächtnis dauerhafte Fakten und Zustände und setzt diese jedes Mal neu für logische Schlussfolgerungen (Reasoning) zusammen.",
+      "problem": "Das Kontextfenster ist begrenzt und wird zwischen den Sitzungen zurückgesetzt. Ein Agent, der nur die aktuelle Konversation sieht, vergisst die geäußerten Präferenzen eines Benutzers, Entscheidungen aus der Vorwoche und die Ergebnisse früherer Aufgaben. Ab einer bestimmten Größenordnung ist es unmöglich, den gesamten Verlauf in jeden Prompt zu packen, und es verschlechtert das Reasoning, da sich das Fenster mit Token von geringem Wert füllt. Teams benötigen eine Möglichkeit, die wenigen entscheidenden Fakten dauerhaft zu speichern und genau dann bereitzustellen, wenn sie relevant sind.",
+      "context": "Verwenden Sie dies, wenn ein Agent wiederholt dieselben Benutzer bedient oder an denselben langlaufenden Aufgaben arbeitet: Assistenten, die Präferenzen lernen, Support-Agenten, die die Historie eines Kunden verfolgen, Coding-Agenten, die sich an Projektkonventionen erinnern, oder mehrstufige Workflows, die sich über Tage erstrecken. Es setzt voraus, dass Sie Daten außerhalb des Modells speichern können (ein Vektorspeicher, eine Datenbank oder ein Memory-Framework) und dass Sie sowohl den Zeitpunkt des Schreibens von Erinnerungen als auch deren Abruf in den Prompt steuern.",
+      "solution": [
+        "Trennen Sie den Schreibpfad vom Lesepfad. Auf dem Schreibpfad entscheidet nach Abschluss eines Interaktionsschritts (Turn) oder einer Aufgabe ein Extraktionsschritt, was erinnerungswürdig ist: stabile Fakten, Präferenzen, Zusagen und Ergebnisse – kein flüchtiges Geplauder. Potenzielle Erinnerungen werden in kompakte, in sich geschlossene Aussagen zusammengefasst, mit bestehenden Erinnerungen abgeglichen, um sie zu deduplizieren und Widersprüche zu erkennen, und dann mit Metadaten in einen Speicher geschrieben: einem Erinnerungstyp, einem Zeitstempel, einer Quelle und dem Benutzer oder Scope, zu dem sie gehören. Weniger, aber dafür gut zu schreiben, ist das Ziel; verrauschte Erinnerungen beeinträchtigen den späteren Abruf.\n\nAuf dem Lesepfad rufen Sie, bevor der Agent logische Schlussfolgerungen zieht, potenzielle Erinnerungen ab, die für die aktuelle Aufgabe relevant sind – typischerweise durch semantische Ähnlichkeit plus Filter für Scope und Aktualität –, bewerten diese und fügen nur die wichtigsten in den Kontext ein. Betrachten Sie den Abruf als Präzisionsproblem: Eine Handvoll korrekter Erinnerungen ist besser als eine große, lose zusammenhängende Menge. Unterscheiden Sie Erinnerungstypen, um den Abruf gezielt zu steuern: episodisch (was passiert ist), semantisch (dauerhafte Fakten und Präferenzen) und prozedural (wie eine wiederkehrende Aufgabe auszuführen ist). Konsolidieren Sie Erinnerungen regelmäßig und lassen Sie sie ablaufen, damit der Speicher klein, aktuell und frei von Widersprüchen bleibt."
+      ],
+      "components": [
+        "Memory-Extraktor (Schreibpfad)",
+        "Deduplizierung und Widerspruchsprüfung",
+        "Memory-Speicher",
+        "Retriever (Lesepfad)",
+        "Kontext-Assembler",
+        "Konsolidierungs- und Ablauf-Job"
+      ],
+      "benefits": [
+        "Der Agent erinnert sich an Präferenzen, Entscheidungen und Ergebnisse aus früheren Sitzungen, sodass Benutzer den Kontext nicht wiederholen müssen und sich der Agent über die Zeit hinweg konsistent verhält.",
+        "Das Abrufen einiger weniger relevanter Erinnerungen sorgt dafür, dass sich das Fenster auf hochwertige Token konzentriert, anstatt den gesamten Verlauf zu laden. Dies erhält die Qualität des Reasonings und senkt die Kosten.",
+        "Da sich stabile Fakten und Präferenzen ansammeln, passt der Agent seine Antworten mit jeder Interaktion präziser an, ohne dass das Modell neu trainiert werden muss.",
+        "Da Erinnerungen in einem externen Speicher mit Metadaten abgelegt werden, können Sie überprüfen, korrigieren, exportieren und löschen, was der Agent weiß – wichtig für Vertrauen und Compliance."
+      ],
+      "risks": [
+        "Ohne Konsolidierung und Ablaufdatum sammelt der Speicher veraltete Fakten und widersprüchliche Aussagen an, und der Agent agiert selbstbewusst auf Basis der falschen Informationen.",
+        "Das Speichern von Benutzerdaten bringt Verpflichtungen zur Aufbewahrung, Einwilligung und Zugriffskontrolle mit sich; Erinnerungen können sensible Informationen über Sitzungen oder Benutzer hinweg preisgeben, wenn der Scope nicht erzwungen wird.",
+        "Eine geringe Präzision führt dazu, dass irrelevante oder falsche Erinnerungen eingefügt werden, die das Reasoning in die Irre führen; ein geringer Recall lässt genau die Erinnerung, auf die es ankam, stillschweigend untergehen, was Fehler schwer diagnostizierbar macht.",
+        "Zu eifriges Schreiben bläht den Speicher auf, verlangsamt den Abruf, erhöht die Speicher- und Embedding-Kosten und verwässert das Signal, auf das ein guter Abruf angewiesen ist."
+      ],
+      "whenNot": [
+        "Wenn Sitzungen unabhängig sind und nichts übertragen werden muss, erhöht ein persistentes Gedächtnis die Komplexität, die Kosten und die Angriffsfläche für den Datenschutz, ohne einen Nutzen zu bringen.",
+        "Wenn das Ziel darin besteht, eine vorherige Antwort für eine wiederholte Anfrage wiederzuverwenden, ist semantisches Caching das richtige Werkzeug; das Langzeitgedächtnis dient dem Erinnern von Fakten und Zuständen, nicht dem Caching von Ausgaben.",
+        "Wo Vorschriften oder Richtlinien die Aufbewahrung von Benutzerdaten verbieten, sollten Sie keine Erinnerungen persistieren; verlassen Sie sich auf den In-Session-Kontext oder einen expliziten, eingegrenzten Speicher, den der Benutzer kontrolliert."
+      ],
+      "examples": [
+        "Über Sitzungen hinweg erinnert es sich an Tonalität, Formate, wiederkehrende Kontakte und ständige Anweisungen und ruft die wenigen ab, die für die aktuelle Anfrage gelten, anstatt erneut nachzufragen.",
+        "Bei jedem Kontakt ruft es die früheren Probleme, Berechtigungen und Lösungen des Kunden ab, die auf dieses Konto bezogen sind, sodass es die Konversation fortsetzt, anstatt sie neu zu starten.",
+        "Es speichert prozedurale Erinnerungen – Build-Befehle, Namensregeln, Review-Präferenzen – und ruft sie ab, wenn in vielen Sitzungen im selben Repository gearbeitet wird."
+      ],
+      "productionEvidence": {
+        "context": "Single-Operator, Local-First OpenClaw-Bereitstellung, beobachtet über 57 Tage (161 Sitzungen / 2.776 Turns), aggregiert aus den eigenen Trajektorien-Traces des Agenten.",
+        "scenario": "Der Agent persistiert Workspace-Memory-Dateien und Traces pro Sitzung für die Kontinuität über Turns und Sitzungen hinweg, wobei bei Bedarf ein Plugin für semantischen Abruf zur Verfügung steht.",
+        "technology": "Workspace-Speicherdateien (MEMORY.md, IDENTITY.md, SOUL.md, USER.md, HEARTBEAT.md), persistente Session-IDs und Lifecycle-Events sowie ein Active-Memory-Plugin (memory_search/get/recall).",
+        "load": "134 persistierte Session-Dateien über das 57-Tage-Fenster; semantischer Abruf (semantic recall) einmal aufgerufen.",
+        "results": "Die Kontinuität blieb über 134 persistierte Sessions hinweg über 57 Tage durch strukturellen Workspace-Speicher erhalten; expliziter semantischer Abruf war in diesem autonomen Workload selten erforderlich (ein Aufruf). Lokale Bereitstellung für einen einzelnen Operator (Local-First)."
+      },
+      "kpis": [
+        {
+          "metric": "Retrieval-Präzision (Precision) injizierter Erinnerungen",
+          "note": "Der Anteil der tatsächlich relevanten Erinnerungen unter den in den Kontext eingefügten. Dies ist die Metrik, die die Antwortqualität am direktesten beeinflusst; ein gutes Ergebnis bedeutet, dass die injizierte Menge fast vollständig themenbezogen ist und irrelevante Erinnerungen selten sind."
+        },
+        {
+          "metric": "Retrieval-Trefferquote (Recall) bei speicherabhängigen Aufgaben",
+          "note": "Bei Aufgaben, die einen bekannten gespeicherten Fakt erfordern, die Häufigkeit, mit der dieser Fakt tatsächlich abgerufen wird. Ein gutes Ergebnis bedeutet, dass die richtige Erinnerung zuverlässig auftaucht; anhaltende Fehlversuche deuten auf Lücken bei der Extraktion oder Indizierung hin."
+        },
+        {
+          "metric": "Größe und Wachstumsrate des Speichers",
+          "note": "Gesamtzahl der Erinnerungen und wie schnell sie sich pro aktivem Benutzer ansammeln. Ein gutes Ergebnis bedeutet, dass das Wachstum tatsächlich neue, dauerhafte Fakten widerspiegelt und keinen unbegrenzten Anstieg – eine exponentielle Kurve signalisiert ein zu eifriges Schreiben."
+        },
+        {
+          "metric": "Veraltungs- und Widerspruchsrate",
+          "note": "Anteil der abgerufenen Erinnerungen, die veraltet sind oder im Widerspruch zu einer neueren Wahrheit stehen. Ein gutes Ergebnis bedeutet eine niedrige und stabile Rate, was beweist, dass Konsolidierung und Ablaufdatum mit den Änderungen Schritt halten."
+        }
+      ],
+      "failureModes": [
+        "Das Schreiben von allem verwandelt den Speicher in Rauschen; der Abruf liefert dann minderwertige oder falsche Erinnerungen. Beheben Sie dies, indem Sie die Hürde für das Schreiben erhöhen und die Extraktionsqualität überprüfen.",
+        "Ein alter Fakt wird abgerufen und verarbeitet, nachdem sich die Wahrheit geändert hat, ohne dass ein Signal für die Veraltung vorliegt. Mildern Sie dies durch Zeitstempel, nach Aktualität gewichtetes Ranking und explizites Überschreiben beim Schreiben.",
+        "Eine Erinnerung eines Benutzers, Mandanten oder Projekts wird in den Kontext eines anderen abgerufen, weil Scope-Filter fehlten oder fehlerhaft waren – ein gleichzeitiger Verstoß gegen Datenschutz und Korrektheit.",
+        "Um ein schlechtes Ranking zu kompensieren, injizieren Teams viele Erinnerungen, wodurch das Kontextfenster mit marginalen Tokens gefüllt und genau die Argumentation beeinträchtigt wird, die der Speicher eigentlich unterstützen sollte."
+      ],
+      "lessons": [
+        "Die Qualität entscheidet sich bei der Auswahl dessen, was erinnert werden soll. Ein kleiner, sauberer, deduplizierter Speicher liefert weitaus bessere Abrufergebnisse als ein großer, verrauschter Speicher.",
+        "Einige wenige korrekte Erinnerungen übertreffen viele lose zusammenhängende. Optimieren Sie auf Relevanz und ranken Sie streng, anstatt die Menge der injizierten Daten zu maximieren.",
+        "Speichern Sie Metadaten und bieten Sie Möglichkeiten zum Anzeigen, Bearbeiten, Ablaufenlassen und Löschen von Erinnerungen. Dies ist unerlässlich für das Debugging, das Vertrauen und die Erfüllung von Datenschutzpflichten.",
+        "Fakten veralten und widersprechen sich. Implementieren Sie Konsolidierung, Überschreiben und Ablaufdaten frühzeitig; diese nachträglich in einen großen, verunreinigten Speicher einzubauen, ist mühsam."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies von semantischem Caching?",
+          "a": "Semantisches Caching speichert und gibt ganze Antworten wieder, um die Neuberechnung ähnlicher Anfragen zu vermeiden. Langzeitgedächtnis speichert dauerhafte Fakten, Präferenzen und Ergebnisse und setzt diese dann für jede neue Aufgabe zu neuen logischen Schlüssen zusammen. Das eine verwendet Ausgaben wieder, das andere merkt sich den Zustand."
+        },
+        {
+          "q": "Was sollte sich der Agent tatsächlich merken?",
+          "a": "Stabile, wiederverwendbare Signale: Benutzerpräferenzen, Entscheidungen und Zusagen, Ergebnisse früherer Aufgaben und wiederkehrende Abläufe. Vermeiden Sie flüchtigen Smalltalk und alles, dessen Aufbewahrung Sie nicht rechtfertigen können. Weniger, aber dafür gut zu schreiben, macht den späteren Abruf präzise."
+        },
+        {
+          "q": "Wie gehen Sie mit personenbezogenen Daten (PII) und Datenschutz um?",
+          "a": "Behandeln Sie den Speicher als regulierte Daten: Setzen Sie Scopes durch, damit Erinnerungen niemals Benutzer oder Mandanten überschreiten, minimieren Sie die Persistierung, unterstützen Sie Einwilligung und Löschung und legen Sie Aufbewahrungs- und Zugriffskontrollen fest. Überprüfbarkeit und eine Richtlinie zum Ablauf von Daten sind Teil der Erfüllung dieser Pflichten."
+        }
+      ]
+    },
+    "ja": {
+      "name": "長期記憶（Long-Term Memory）",
+      "summary": "エージェントにセッション間で永続する記憶を提供し、単一のコンテキストウィンドウを超えて事実、ユーザーの好み、過去の結果を記憶できるようにします。書き込みパスは保存すべき内容を決定し、要約して重複を排除します。読み取りパスは、必要なときにのみ関連する記憶をコンテキストに取得します。再計算をスキップするために回答全体をキャッシュするセマンティックキャッシュとは異なり、長期記憶は永続的な事実と状態を保存し、毎回それらを新しい推論に再構成します。",
+      "problem": "コンテキストウィンドウは有限であり、セッション間でリセットされます。現在の会話しか見えないエージェントは、ユーザーが指定した好み、先週下された決定、過去のタスクの結果を忘れてしまいます。すべての履歴をすべてのプロンプトに詰め込むことは、一定の規模を超えると不可能になり、ウィンドウが価値の低いトークンで満たされるため推論の質が低下します。開発チームは、重要な少数の事実を永続化し、それらが関連するタイミングで正確に提示する方法を必要としています。",
+      "context": "エージェントが同じユーザーに対応したり、同じ長期的なタスクを繰り返し実行したりする場合に使用します。好みを学習するアシスタント、顧客の履歴を追跡するサポートエージェント、プロジェクトの規約を記憶するコーディングエージェント、数日間にわたるマルチステップのワークフローなどが該当します。これは、モデルの外部（ベクトルストア、データベース、またはメモリフレームワーク）にデータを保存できること、および記憶が書き込まれるタイミングとプロンプトに取得される方法の両方を制御できることを前提としています。",
+      "solution": [
+        "書き込みパスと読み取りパスを分離します。書き込みパスでは、ターンまたはタスクの完了後に、抽出ステップによって記憶に値するもの（一時的な雑談ではなく、不変の事実、好み、約束、結果など）を決定します。記憶の候補は、コンパクトで自己完結した記述に要約され、既存の記憶と照合されて重複や矛盾が検出された後、メモリタイプ、タイムスタンプ、ソース、所属するユーザーまたはスコープなどのメタデータとともにストアに書き込まれます。少なく、かつ質高く書き込むことが目標です。ノイズの多い記憶は、その後の取得プロセスを阻害します。\\n\\n読み取りパスでは、エージェントが推論を行う前に、現在のタスクに関連する記憶の候補を（通常はセマンティック類似度に加え、スコープや新しさのフィルターを用いて）取得し、ランク付けして、上位の数件のみをコンテキストに注入します。取得は適合率（プレシジョン）の問題として捉えてください。関連性の薄い大量の記憶よりも、少数の正確な記憶の方が効果的です。取得をターゲット化できるように、記憶のタイプを区別します。エピソード記憶（何が起きたか）、意味記憶（永続的な事実や好み）、手続き記憶（繰り返し発生するタスクの実行方法）などです。定期的に記憶を整理（集約）および期限切れにすることで、ストアを小さく、最新の状態に保ち、矛盾を排除します。"
+      ],
+      "components": [
+        "メモリ抽出器（書き込みパス）",
+        "重複排除および矛盾チェック",
+        "メモリストア",
+        "リトリーバー（読み取りパス）",
+        "コンテキストアセンブラー",
+        "集約および期限切れジョブ"
+      ],
+      "benefits": [
+        "エージェントが過去のセッションからの好み、決定、結果を思い出すため、ユーザーがコンテキストを繰り返す必要がなくなり、エージェントは長期にわたって一貫した動作を維持できます。",
+        "いくつかの関連する記憶のみを取得することで、履歴全体をダンプする代わりに、ウィンドウを価値の高いトークンに集中させることができます。これにより、推論の質が維持され、コストが削減されます。",
+        "不変の事実や好みが蓄積されるにつれて、モデルを再学習させることなく、インタラクションを重ねるごとにエージェントはより正確にパーソナライズされた応答を返せるようになります。",
+        "記憶はメタデータとともに外部ストアに保存されるため、エージェントが知っている内容を検査、修正、エクスポート、削除できます。これは信頼性とコンプライアンスにおいて重要です。"
+      ],
+      "risks": [
+        "集約と期限切れの処理を行わないと、ストアに古い事実や矛盾する記述が蓄積され、エージェントが誤った情報に基づいて自信満々に行動してしまう可能性があります。",
+        "ユーザーデータを永続化すると、保持、同意、アクセス制御の義務が生じます。スコープが強制されていない場合、記憶によってセッション間やユーザー間で機密情報が漏洩する可能性があります。",
+        "適合率（プレシジョン）が低いと、無関係な記憶や誤った記憶が注入されて推論が誤った方向に導かれます。再現率（リコール）が低いと、重要な記憶が暗黙的にドロップされ、失敗の診断が困難になります。",
+        "過剰に書き込みを行うと、ストアが肥大化し、取得が遅くなり、ストレージと埋め込み（embedding）のコストが上昇し、優れた取得の前提となるシグナルが希薄化します。"
+      ],
+      "whenNot": [
+        "セッションが独立しており、引き継ぐべき情報がない場合、永続メモリはメリットをもたらさず、複雑さ、コスト、プライバシーのリスクを増大させるだけです。",
+        "繰り返されるクエリに対して以前の回答を再利用することが目的である場合は、セマンティックキャッシュが適切なツールです。長期記憶は事実や状態を記憶するためのものであり、出力をキャッシュするためのものではありません。",
+        "規制やポリシーによってユーザーデータの保持が禁止されている場合は、記憶を永続化しないでください。セッション内のコンテキストや、ユーザーが制御する明示的でスコープ限定されたストレージに依存してください。"
+      ],
+      "examples": [
+        "セッションをまたいでトーン、フォーマット、頻繁に連絡する相手、常時指示を記憶し、再質問する代わり現在のリクエストに適用される少数の指示を取得します。",
+        "コンタクトのたびに、そのアカウントにスコープされた顧客の過去の課題、資格、解決策を取得するため、会話を最初からやり直すのではなく、継続することができます。",
+        "手続き記憶（ビルドコマンド、命名規則、レビューの好みなど）を保存し、多くのセッションにわたって同じリポジトリで作業する際にそれらを呼び出します。"
+      ],
+      "productionEvidence": {
+        "context": "57日間（161セッション / 2,776ターン）にわたって観察された、シングルオペレーター、ローカルファーストのOpenClawデプロイメント。エージェント自身のトラジェクトリトレースから集計。",
+        "scenario": "エージェントは、ターン間およびセッション間の継続性のためにワークスペースメモリファイルとセッションごとのトレースを永続化し、オンデマンドでセマンティックリコールプラグインを利用できるようにします。",
+        "technology": "ワークスペースメモリファイル（MEMORY.md、IDENTITY.md、SOUL.md、USER.md、HEARTBEAT.md）、永続的なセッションIDとライフサイクルイベント、およびアクティブメモリプラグイン（memory_search/get/recall）。",
+        "load": "57日間のウィンドウ全体で134の永続化されたセッションファイル。セマンティックリコールは1回呼び出されました。",
+        "results": "構造化されたワークスペースメモリにより、57日間にわたる134の永続セッション全体で継続性が維持されました。この自律的なワークロードにおいて、明示的なセマンティックリコールはほとんど必要ありませんでした（呼び出しは1回）。単一オペレーターによるローカルファーストのデプロイメント。"
+      },
+      "kpis": [
+        {
+          "metric": "注入されたメモリの検索適合率（Precision）",
+          "note": "コンテキストに配置されたメモリのうち、実際に関連していたものの割合。これは回答の品質を最も直接的に左右する指標です。良好な状態とは、注入されたメモリセットがほぼ完全にトピックに沿っており、無関係なメモリがほとんどない状態を指します。"
+        },
+        {
+          "metric": "メモリ依存タスクにおける検索再現率（Recall）",
+          "note": "既知の保存された事実を必要とするタスクにおいて、その事実が実際に検索される頻度。良好な状態とは、適切なメモリが確実に表面化することです。継続的な検索漏れは、抽出またはインデックス作成のギャップを示しています。"
+        },
+        {
+          "metric": "メモリストアのサイズと成長率",
+          "note": "総メモリ数と、アクティブユーザーあたりの蓄積速度。良好な状態とは、制限のない増加ではなく、真に新しい永続的な事実に追従して成長することです。制御不能な急上昇曲線は、過剰な書き込みが行われていることを示します。"
+        },
+        {
+          "metric": "陳腐化および矛盾の発生率",
+          "note": "検索されたメモリのうち、古くなっているか、より新しい事実と矛盾しているものの割合。良好な状態とは、この割合が低く安定していることであり、整理（consolidation）と有効期限切れ（expiry）の処理が変化に追いついている証拠です。"
+        }
+      ],
+      "failureModes": [
+        "すべてを書き込むとストアがノイズ化し、検索時に価値の低いメモリや誤ったメモリが表面化します。書き込む情報の基準を引き上げ、抽出品質を見直すことで解決します。",
+        "事実が変更された後、それが古くなっているというシグナルがないまま、古い事実が検索されて実行されてしまいます。タイムスタンプ、新しさを重視した重み付けランキング、および書き込み時の明示的な上書き（supersession）によって軽減します。",
+        "スコープフィルターの欠落や誤りにより、あるユーザー、テナント、またはプロジェクトのメモリが別のコンテキストに検索されてしまいます。これはプライバシーと正確性の両方における重大な障害です。",
+        "ランキング精度の低さを補うために、チームが多数のメモリを注入してしまい、コンテキストウィンドウが重要度の低いトークンで埋め尽くされ、メモリが本来サポートすべき推論能力自体が低下します。"
+      ],
+      "lessons": [
+        "品質は、何を記憶するかを選択する時点で決まります。重複が排除された、小さくクリーンなストアは、ノイズの多い巨大なストアよりもはるかに優れた検索精度を発揮します。",
+        "少数の正確なメモリは、緩やかに関連する多数 of メモリよりも優れたパフォーマンスを発揮します。注入する量を最大化するのではなく、関連性を調整し、厳密にランク付けしてください。",
+        "メタデータを保存し、メモリの表示、編集、期限切れ、削除を行う方法を提供してください。これは、デバッグ、信頼性の確保、およびプライバシー義務の遵守に不可欠です。",
+        "事実は陳腐化し、互いに矛盾するようになります。整理、上書き、および有効期限切れの仕組みを早期に構築してください。汚染された大規模なストアにこれらを後から組み込むのは極めて困難です。"
+      ],
+      "faqs": [
+        {
+          "q": "セマンティックキャッシュとはどのように違うのですか？",
+          "a": "セマンティックキャッシュは、同様のリクエストの再計算を避けるために、回答全体を保存して再利用します。長期メモリは、永続的な事実、好み、および結果を保存し、新しいタスクごとにそれらを再構成して新たな推論を行います。一方は出力を再利用し、他方は状態を記憶します。"
+        },
+        {
+          "q": "エージェントは実際に何を記憶すべきですか？",
+          "a": "ユーザーの好み、決定とコミットメント、以前のタスクの結果、繰り返し発生する手順など、安定して再利用可能なシグナルです。一時的な雑談や、保持する正当な理由がないものは避けてください。書き込み量を抑え、質の高い書き込みを行うことが、後の検索精度を高める鍵となります。"
+        },
+        {
+          "q": "PII（個人特定情報）とプライバシーはどのように処理しますか？",
+          "a": "ストアをガバナンス対象データとして扱います。メモリがユーザーやテナントをまたぐことがないようスコープを強制し、永続化するデータを最小限に抑え、同意と削除をサポートし、保持期間とアクセス制御を設定します。監査可能性と有効期限ポリシーは、これらの義務を果たすための要素です。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "长期记忆",
+      "summary": "为智能体提供跨会话的持久化记忆，使其能够在单个上下文窗口之外记住事实、用户偏好和先前的结果。写入路径决定存储什么、对其进行摘要并去重；读取路径在需要时仅将相关的记忆检索到上下文中。与缓存完整答案以跳过重复计算的语义缓存不同，长期记忆存储持久的事实和状态，并在每次进行新的推理时重新组合它们。",
+      "problem": "上下文窗口是有限的，并且会在会话之间重置。仅关注当前对话的智能体会遗忘用户声明的偏好、上周做出的决定以及先前任务的结果。在超过一定规模后，将所有历史记录塞进每个提示词中是不可能的，而且随着窗口被低价值 Token 填满，推理质量也会下降。团队需要一种方法来持久化存储少数关键事实，并在它们相关时精准地呈现出来。",
+      "context": "当智能体需要重复服务相同的用户或处理相同的长期运行任务时，请使用此模式：例如学习偏好的助手、跟踪客户历史记录的支持智能体、记住项目规范的编码智能体，或跨越数天的多步骤工作流。它假设您可以在模型外部存储数据（向量存储、数据库或记忆框架），并且您可以控制何时写入记忆以及如何将记忆检索到提示词中。",
+      "solution": [
+        "将写入路径与读取路径分离。在写入路径上，在单轮对话或任务完成后，提取步骤会决定哪些内容值得记住：稳定的事实、偏好、承诺和结果——而不是瞬时的闲聊。候选记忆会被总结为紧凑、自包含的陈述，并与现有记忆进行比对以去重和检测冲突，然后写入带有元数据（记忆类型、时间戳、来源以及所属的用户或范围）的存储中。目标是少写但写好，嘈杂的记忆会污染后续的检索。\n\n在读取路径上，在智能体进行推理之前，您需要检索与当前任务相关的候选记忆（通常通过语义相似度加上范围和时效性过滤器），对其进行排序，并仅将前几个注入到上下文中。将检索视为一个精度问题：少数正确的记忆胜过大量松散相关的记忆。区分记忆类型以便进行有针对性的检索：情景记忆（发生了什么）、语义记忆（持久的事实和偏好）和程序记忆（如何执行循环任务）。定期合并和过期记忆，以保持存储的小型化、最新性且无冲突。"
+      ],
+      "components": [
+        "记忆提取器（写入路径）",
+        "去重与冲突检查",
+        "记忆存储",
+        "检索器（读取路径）",
+        "上下文装配器",
+        "合并与过期任务"
+      ],
+      "benefits": [
+        "智能体能够召回先前会话中的偏好、决定和结果，因此用户无需重复提供上下文，且智能体随时间推移表现出一致的行为。",
+        "仅检索少数相关的记忆可以使窗口专注于高价值 Token，而不是倾倒全部历史记录，从而保证了推理质量并降低了成本。",
+        "随着稳定事实和偏好的积累，智能体在每次交互中都能更准确地定制回复，而无需重新训练模型。",
+        "由于记忆保存在带有元数据的外部存储中，您可以检查、纠正、导出和删除智能体所知的内容——这对于信任和合规性至关重要。"
+      ],
+      "risks": [
+        "如果没有合并和过期机制，存储中会积累过时的事实和相互冲突的陈述，导致智能体自信地基于错误的信息采取行动。",
+        "持久化用户数据会增加数据保留、同意和访问控制方面的义务；如果未强制执行范围限制，记忆可能会跨会话或跨用户泄露敏感信息。",
+        "低精准度会注入无关或错误的记忆，从而误导推理；低召回率会默默丢弃关键记忆，使故障难以诊断。",
+        "过度频繁的写入会使存储膨胀、减慢检索速度、增加存储和嵌入成本，并稀释高质量检索所依赖的信号。"
+      ],
+      "whenNot": [
+        "如果会话是独立的且不需要传递任何内容，持久化记忆只会增加复杂性、成本和隐私风险，而不会带来任何好处。",
+        "当目标是为重复的查询重用以前的答案时，语义缓存是正确的工具；长期记忆用于记住事实和状态，而不是缓存输出。",
+        "在法规或政策禁止保留用户数据的情况下，请勿持久化记忆；应依赖会话内上下文或用户控制的、有明确范围限制的显式存储。"
+      ],
+      "examples": [
+        "跨会话记住语气、格式、常用联系人和现行指令，仅检索适用于当前请求的少数内容，而不是重新询问。",
+        "在每次联系时，它会检索该账户范围内的客户先前问题、权益和解决方案，从而继续对话而不是重新开始。",
+        "它存储程序记忆——构建命令、命名规则、评审偏好——并在跨多个会话在同一个代码库中工作时召回它们。"
+      ],
+      "productionEvidence": {
+        "context": "在 57 天（161 个会话 / 2,776 轮）内观察到的单操作员、本地优先的 OpenClaw 部署，数据从智能体自身的轨迹追踪中聚合而来。",
+        "scenario": "智能体持久化工作区记忆文件和每个会话的追踪，以实现跨轮次和跨会话的连续性，并可根据需要使用语义召回插件。",
+        "technology": "工作区记忆文件（MEMORY.md、IDENTITY.md、SOUL.md、USER.md、HEARTBEAT.md）、持久化会话 ID 和生命周期事件，以及活动记忆插件（memory_search/get/recall）。",
+        "load": "在 57 天的窗口期内共有 134 个持久化会话文件；语义召回被调用了一次。",
+        "results": "通过结构化工作区记忆，在 57 天内的 134 个持久化会话中保持了连续性；在此自主工作负载中，极少需要显式语义召回（仅调用一次）。单操作员本地优先部署。"
+      },
+      "kpis": [
+        {
+          "metric": "注入记忆的检索精准率",
+          "note": "在放入上下文的记忆中，实际相关的比例。这是最直接决定回答质量的指标；表现良好意味着注入的记忆集几乎完全切题，极少出现无关记忆。"
+        },
+        {
+          "metric": "依赖记忆的任务的检索召回率",
+          "note": "在需要已知存储事实的任务中，该事实实际被检索到的频率。表现良好意味着正确的记忆能够可靠地呈现；持续遗漏则表明存在提取或索引差距。"
+        },
+        {
+          "metric": "记忆库大小和增长率",
+          "note": "总记忆量以及每个活跃用户的累积速度。表现良好意味着增长与真正新增的持久事实保持同步，而不是无限制地攀升——失控的曲线表明写入过于频繁。"
+        },
+        {
+          "metric": "陈旧率和冲突率",
+          "note": "检索到的记忆中已过时或与更新的事实相冲突的比例。表现良好意味着该比例低且稳定，这证明整合和过期机制跟上了变化的速度。"
+        }
+      ],
+      "failureModes": [
+        "记录所有内容会导致记忆库充斥噪音；检索时就会呈现低价值或错误的记忆。解决方法是提高写入内容的门槛，并审查提取质量。",
+        "在事实发生变化后，检索并执行了旧的事实，且没有任何其已过时的信号。通过时间戳、基于新鲜度权重的排序以及在写入时显式更替来缓解此问题。",
+        "由于缺少或错误的范围过滤器，导致某个用户、租户或项目的记忆被检索到了另一个的上下文中——这同时属于隐私和正确性故障。",
+        "为了弥补排序不佳的问题，团队注入了大量记忆，导致窗口中充斥着边缘 Token，从而降低了记忆本应支持的推理能力。"
+      ],
+      "lessons": [
+        "质量取决于你选择记住什么。一个小型、干净、去重的记忆库，其检索效果远好于一个庞大且嘈杂的记忆库。",
+        "少数正确的记忆胜过大量弱相关的记忆。应针对相关性进行微调并严格排序，而不是最大化注入量。",
+        "存储元数据并提供查看、编辑、过期和删除记忆的方法。这对于调试、建立信任以及履行隐私义务至关重要。",
+        "事实会变陈旧并相互冲突。尽早构建整合、更替和过期机制；在已被污染的大型记忆库上进行后期改造会非常痛苦。"
+      ],
+      "faqs": [
+        {
+          "q": "这与语义缓存有什么不同？",
+          "a": "语义缓存存储并重放完整的回答，以避免重复计算相似的请求。长期记忆则存储持久的事实、偏好和结果，然后针对每个新任务将它们重新组合成全新的推理。前者重用输出，后者记住状态。"
+        },
+        {
+          "q": "智能体实际上应该记住什么？",
+          "a": "稳定、可重用的信号：用户偏好、决策与承诺、先前任务的结果以及循环往复的流程。避免记录瞬时的闲聊以及任何无法证明保留合理性的内容。写得少但写得好，才能保证后续检索的精准。"
+        },
+        {
+          "q": "如何处理 PII 和隐私？",
+          "a": "将记忆库视为受治理的数据：强制执行范围限制，确保记忆绝不跨用户或租户，尽量减少持久化的内容，支持知情同意 and 删除，并设置保留和访问控制。可检查性和过期策略是履行这些义务的一部分。"
         }
       ]
     }

@@ -70,6 +70,22 @@
         "pt": {
           "label": "Micenas",
           "note": "A Odisseia faz Agamêmnon ser desviado além do Maleia e assassinado no retorno. O lugar é aceito, o acontecimento não é comprovado, e a “máscara de Agamêmnon” de Schliemann é cerca de três séculos anterior."
+        },
+        "fr": {
+          "label": "Mycènes",
+          "note": "L'Odyssée montre Agamemnon emporté au-delà du cap Malée et assassiné à son retour. Le lieu est accepté, l'événement n'est pas prouvé, et le « masque d'Agamemnon » de Schliemann est antérieur d'environ trois siècles."
+        },
+        "zh": {
+          "label": "迈锡尼",
+          "note": "《奥德赛》中阿伽门农被风吹过马勒阿，并在返回时遇害。该地点已被公认，但该事件并无证据支持，且施里曼发现的“阿伽门农面具”比该事件早了大约三个世纪。"
+        },
+        "de": {
+          "label": "Mykene",
+          "note": "In der Odyssee wird Agamemnon an Malea vorbeigetrieben und bei seiner Rückkehr ermordet. Der Ort ist anerkannt, das Ereignis ist nicht belegt, und Schliemanns „Maske des Agamemnon“ ist dafür etwa drei Jahrhunderte zu alt."
+        },
+        "ja": {
+          "label": "ミケーネ",
+          "note": "『オデュッセイア』では、アガメムノンはマレア岬を通り過ぎて流され、帰還時に殺害されます。場所は広く認められていますが、出来事の証拠はなく、シュリーマンの「アガメムノンのマスク」はそれよりも約3世紀古いものです。"
         }
       }
     },
@@ -93,6 +109,22 @@
         "pt": {
           "label": "Argos, na tradição trágica",
           "note": "Ésquilo situa o assassinato em Argos, não em Micenas — um lembrete de que o “onde” de uma história célebre pode se deslocar entre gêneros sem que ninguém note."
+        },
+        "fr": {
+          "label": "Argos, dans la tradition tragique",
+          "note": "Eschyle situe le meurtre à Argos plutôt qu'à Mycènes — un rappel que le « où » d'une histoire célèbre peut passer d'un genre à l'autre sans que personne ne s'en aperçoive."
+        },
+        "zh": {
+          "label": "悲剧传统中的阿耳戈斯",
+          "note": "埃斯库罗斯将谋杀地点设在阿耳戈斯而非迈锡尼——这提醒我们，一个著名故事的“发生地”可以在不同文学体裁之间悄然转移。"
+        },
+        "de": {
+          "label": "Argos, in der Tradition der Tragödie",
+          "note": "Aischylos verlegt den Mord nach Argos statt nach Mykene – eine Erinnerung daran, dass das „Wo“ einer berühmten Geschichte unbemerkt zwischen den Genres wechseln kann."
+        },
+        "ja": {
+          "label": "悲劇の伝統におけるアルゴス",
+          "note": "アイスキュロスは殺害の舞台をミケーネではなくアルゴスに設定しています。これは、有名な物語の「舞台」が、誰にも気づかれることなくジャンル間で移動し得ることを思い出させてくれます。"
         }
       }
     }
@@ -155,6 +187,86 @@
         {
           "q": "A Odisseia diz onde Agamêmnon foi morto?",
           "a": "Em sua própria casa, após desembarcar na própria costa. A tragédia posterior mudou o cenário para Argos; o atlas registra ambos."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Le meurtre d'Agamemnon",
+      "summary": "Le contre-exemple de l'Odyssée : le retour au pays qui tourne mal. Agamemnon atteint sa propre patrie et est tué lors d'un dîner, une histoire qui plane sur le retour d'Ulysse dès le chant I.",
+      "narrative": [
+        "Protée raconte à Ménélas ce qui s'est passé : une tempête au cap Malée, un débarquement sur la mauvaise côte, un guetteur posté par Égisthe, et un banquet au cours duquel Agamemnon et ses hommes sont égorgés « comme des bœufs à l'étable ».",
+        "Le poème y revient sans cesse. Agamemnon raconte lui-même à nouveau l'histoire aux Enfers, et Athéna s'en sert pour avertir Télémaque. C'est la fin alternative que l'Odyssée passe vingt-quatre chants à éviter."
+      ],
+      "whyItMatters": "Il lie le site le plus sûr de l'atlas à l'un de ses événements les moins vérifiables — précisément la distinction que cette rubrique vise à maintenir visible.",
+      "debate": "Le lieu où se situe le meurtre — Mycènes chez Homère, Argos chez Eschyle — et la question de savoir si l'histoire reflète une quelconque violence dynastique historique à la fin de l'âge du bronze.",
+      "faqs": [
+        {
+          "q": "Le « masque d'Agamemnon » est-il vraiment le sien ?",
+          "a": "Non. Les masques d'or découverts par Schliemann dans les tombes à fosse de Mycènes datent environ du XVIe siècle avant notre ère, soit quelque trois cents ans avant toute date plausible pour la guerre de Troie."
+        },
+        {
+          "q": "L'Odyssée précise-t-elle où Agamemnon a été tué ?",
+          "a": "Dans sa propre demeure, après avoir débarqué sur sa propre côte. La tragédie ultérieure a déplacé le cadre à Argos ; l'atlas mentionne les deux."
+        }
+      ]
+    },
+    "de": {
+      "title": "Die Ermordung Agamemnons",
+      "summary": "Das Gegenbeispiel der Odyssee: die Heimkehr, die schiefgeht. Agamemnon erreicht sein eigenes Land und wird beim Abendessen getötet; diese Geschichte überschattet Odysseus' Rückkehr von Gesang 1 an.",
+      "narrative": [
+        "Proteus erzählt Menelaos, was geschah: ein Sturm bei Malea, eine Landung an der falschen Küste, ein von Ägisth aufgestellter Wächter und ein Festmahl, bei dem Agamemnon und seine Männer „wie Ochsen an der Krippe“ niedergemetzelt werden.",
+        "Das Epos kommt immer wieder darauf zurück. Agamemnon erzählt die Geschichte in der Unterwelt selbst noch einmal, und Athena nutzt sie, um Telemach zu warnen. Es ist das alternative Ende, das die Odyssee vierundzwanzig Gesänge lang zu vermeiden sucht."
+      ],
+      "whyItMatters": "Es verbindet die sicherste Fundstätte des Atlas mit einem seiner am wenigsten verifizierbaren Ereignisse – genau die Unterscheidung, die durch die Rubrik sichtbar gehalten werden soll.",
+      "debate": "Wo der Mord verortet wurde – Mykene bei Homer, Argos bei Aischylos – und ob die Geschichte eine historische dynastische Gewalt am Ende der Bronzezeit widerspiegelt.",
+      "faqs": [
+        {
+          "q": "Ist die „Maske des Agamemnon“ wirklich seine?",
+          "a": "Nein. Die Goldmasken, die Schliemann in den Schachtgräbern von Mykene fand, datieren in etwa auf das 16. Jahrhundert v. Chr., rund dreihundert Jahre vor jedem plausiblen Datum für den Trojanischen Krieg."
+        },
+        {
+          "q": "Sagt die Odyssee, wo Agamemnon getötet wurde?",
+          "a": "In seinem eigenen Haus, nach einer Landung an seiner eigenen Küste. Die spätere Tragödiendichtung verlegte den Schauplatz nach Argos; der Atlas verzeichnet beides."
+        }
+      ]
+    },
+    "ja": {
+      "title": "アガメムノンの暗殺",
+      "summary": "『オデュッセイア』における反面教師、すなわち「失敗した帰還」です。アガメムノンは自国にたどり着いたものの、晩餐の席で殺害されます。この物語は、第1巻以降、オデュッセウスの帰還に暗い影を落とし続けます。",
+      "narrative": [
+        "プロテウスがメネラオスに事の顛末を語ります。マレア岬での嵐、誤った海岸への上陸、アイギストスが配置した見張り、そしてアガメムノンとその部下たちが「飼い葉桶の牛のように」切り倒された宴会についてです。",
+        "この詩は何度もこの出来事に立ち戻ります。アガメムノン自身が冥界で再びこの物語を語り、アテナはテレマコスへの警告としてこれを用います。これは、『オデュッセイア』が全24巻を費やして回避しようとする「もう一つの結末」なのです。"
+      ],
+      "whyItMatters": "これは、このアトラスで最も確実な遺跡を、最も検証不可能な出来事の一つと結びつけています。これこそ、評価基準が可視化するために存在する区別そのものです。",
+      "debate": "殺害の舞台がどこであったか（ホメロスではミケーネ、アイスキュロスではアルゴス）、そしてこの物語が青銅器時代末期の歴史的な王朝内の暴力を反映しているのかという議論。",
+      "faqs": [
+        {
+          "q": "「アガメムノンのマスク」は本当に彼のものでしたか？",
+          "a": "いいえ。シュリーマンがミケーネの竪穴墓で発見した黄金のマスクは、およそ紀元前16世紀のものであり、トロイア戦争の妥当とされる年代よりも約300年遡ります。"
+        },
+        {
+          "q": "『オデュッセイア』にはアガメムノンがどこで殺されたか書かれていますか？",
+          "a": "自国の海岸に上陸した後、彼自身の館で殺されました。後世の悲劇では舞台がアルゴスに移されましたが、このアトラスではその両方を記録しています。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "阿伽门农遇害",
+      "summary": "《奥德赛》中的反面教材：走向悲剧的归家之路。阿伽门农回到了自己的国家，却在晚宴上被杀，这个故事从第一卷起就为奥德修斯的回归蒙上了一层阴影。",
+      "narrative": [
+        "普罗透斯告诉了墨涅拉俄斯所发生的一切：马勒阿的一场风暴，在错误的海岸登陆，埃癸斯托斯布置的哨兵，以及一场宴会，在宴会上阿伽门农和他的部下像“槽旁的牛”一样被宰杀。",
+        "史诗不断提及此事。阿伽门农自己在冥界再次讲述了这个故事，雅典娜也用它来警告特勒马科斯。这是《奥德赛》用了二十四卷书去极力避免的另一种结局。"
+      ],
+      "whyItMatters": "它将本图册中最确凿的遗址与最无法考证的事件之一联系在了一起——这恰恰是本图册分类标准旨在保持清晰呈现的差异。",
+      "debate": "谋杀发生的地点——在荷马史诗中是迈锡尼，在埃斯库罗斯的戏剧中是阿耳戈斯——以及该故事是否反映了青铜时代末期真实的王朝暴力历史。",
+      "faqs": [
+        {
+          "q": "“阿伽门农黄金面具”真的是他的吗？",
+          "a": "不是。施里曼在迈锡尼竖穴墓中发现的黄金面具大约可以追溯到公元前16世纪，比任何合理的特洛伊战争发生时间都要早大约三百年。"
+        },
+        {
+          "q": "《奥德赛》是否说明了阿伽门农是在哪里被杀的？",
+          "a": "在他自己的海岸登陆后，在他自己的房子里。后来的悲剧将背景移至阿耳戈斯；本图册对两者均予以记录。"
         }
       ]
     }

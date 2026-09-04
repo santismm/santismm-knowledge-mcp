@@ -282,6 +282,330 @@
           "a": "Sempre que uma ferramenta, uma fonte de dados ou um nível de autonomia mudar — esses são os eventos que criam superfícies. Atualizações de modelo importam menos do que se imagina; mudam a probabilidade, não o alcance."
         }
       ]
+    },
+    "fr": {
+      "title": "Qu'est-ce qu'un modèle de menace agentique ?",
+      "summary": "Un modèle de menace agentique cartographie la manière dont un agent autonome peut être attaqué : non pas à travers ses poids, mais à travers tout ce qu'il lit, mémorise, appelle et est autorisé à faire. Il identifie les surfaces d'attaque — injection de prompt directe et indirecte, empoisonnement d'outils, agentivité excessive, empoisonnement de la mémoire, chaîne d'approvisionnement, canaux d'exfiltration, le problème du député confus — afin que chacune bénéficie d'un contrôle dans le harness plutôt que d'un simple espoir dans le prompt système.",
+      "definition": "Un modèle de menace agentique est une énumération structurée des surfaces d'attaque, des objectifs de l'adversaire et des voies d'abus spécifiques à un agent IA — ses entrées, son contexte, sa mémoire, ses outils, ses identifiants et son autonomie — utilisée pour décider quels contrôles de harness sont requis avant de donner à l'agent un accès à la production.",
+      "takeaways": [
+        "Modélisez les menaces pesant sur les actions de l'agent, et non sur les sorties du modèle.",
+        "Chaque entrée lue par l'agent est un canal d'instructions : documents, pages, résultats d'outils, autres agents.",
+        "Chaque outil que l'agent peut appeler est une capacité dont l'attaquant hérite dès qu'une injection réussit.",
+        "La mémoire transforme une attaque ponctuelle en une attaque persistante.",
+        "Le rayon d'impact est défini par les identifiants et les flux sortants, non par le prompt.",
+        "Une surface d'attaque non identifiée n'est pas une surface absente — consignez explicitement par écrit les risques acceptés."
+      ],
+      "context": [
+        "La modélisation classique des menaces s'intéresse à ce qu'un attaquant peut envoyer à votre système. Avec les agents, la question la plus difficile est de savoir ce que votre système va lire de sa propre initiative et traiter comme des instructions. Un agent qui récupère une page, ouvre un ticket ou lit le résultat d'un outil a élargi sa frontière de confiance sans que personne ne l'ait explicitement décidé.",
+        "Le second changement réside dans l'agentivité. Un chatbot trompé produit une phrase erronée ; un agent trompé effectue un appel, transfère de l'argent, supprime une branche ou envoie un fichier par e-mail. La gravité d'une attaque réussie est déterminée par les outils et les identifiants associés à l'agent, c'est pourquoi la gestion des permissions est une décision de sécurité et non de commodité.",
+        "Des frameworks structurent cet exercice : l'OWASP Top 10 pour les applications LLM répertorie les classes de vulnérabilités et MITRE ATLAS catalogue les tactiques adverses observées contre les systèmes d'IA. Utilisez-les comme des listes de contrôle pour votre propre architecture, et non comme des substituts à celle-ci."
+      ],
+      "architecture": [
+        "Injection de prompt directe — la personne qui interagit avec l'agent tente de contourner ses instructions. C'est la tentative la moins coûteuse et la plus facile à limiter, car cet utilisateur se trouve déjà dans les limites des permissions accordées par la session.",
+        "Injection de prompt indirecte — instructions dissimulées dans le contenu récupéré par l'agent : une page web, un PDF, un commentaire de ticket, un e-mail, un fichier source, la sortie d'un autre agent. L'attaquant n'interagit jamais directement avec votre agent ; il place du texte là où l'agent va le lire.",
+        "Empoisonnement d'outil — un outil dont la description ou le résultat est lui-même malveillant. Un serveur peut décrire un outil inoffensif au moment de l'approbation et le modifier par la suite, de sorte que la confiance est vérifiée une seule fois mais exploitée indéfiniment.",
+        "Agentivité excessive — l'agent détient des permissions plus larges que ce que requiert une tâche unique. Rien n'a encore mal tourné ; la surface d'attaque réside dans le fait qu'un agent détourné hérite instantanément de tout ce que le harness était prêt à lui accorder.",
+        "Empoisonnement de la mémoire — de faux faits ou instructions sont écrits dans la mémoire persistante ou une base de données vectorielle, de sorte que l'attaque survit à la session et se déclenche à nouveau lors de tâches futures et non liées.",
+        "Chaîne d'approvisionnement — modèles, prompts système, serveurs MCP, packages et jeux de données importés de l'extérieur de l'organisation. Une dépendance capable de réécrire la description d'un outil est une dépendance capable de réécrire le comportement de l'agent.",
+        "Canaux d'exfiltration — toute voie par laquelle des octets peuvent sortir : une requête fetch sortante, une URL d'image affichée dans une réponse, un outil d'e-mail ou de webhook, un commit. Les données n'ont pas besoin d'être lues par un humain pour être volées ; une URL suffit.",
+        "Député confus — l'agent agit avec des identifiants que le demandeur ne possède pas, de sorte qu'un attaquant ne pouvant pas accéder directement à un système demande à l'agent d'y accéder pour son compte."
+      ],
+      "components": [
+        "Inventaire des actifs : les données, systèmes et identifiants auxquels l'agent peut accéder, répertoriés selon la portée de l'agent plutôt que selon l'organigramme de l'équipe.",
+        "Limites de confiance : quelles entrées sont des instructions, lesquelles sont des données, et où cette frontière est appliquée dans le code plutôt que dans du texte brut.",
+        "Catalogue d'outils avec permissions : chaque outil, sa portée, s'il effectue des écritures, et ce qu'un attaquant gagne en l'appelant.",
+        "Carte des sorties : toutes les manières dont des octets peuvent s'échapper, y compris accidentelles — aperçus de liens, images affichées, transfert de journaux, rapports d'erreurs.",
+        "Objectifs de l'adversaire : exfiltrer, élever les privilèges, persister, perturber, tromper — chacun étant mis en correspondance avec les surfaces ci-dessus.",
+        "Contrôles avec responsables : quel composant du harness limite chaque chemin, et qui en assure la maintenance.",
+        "Risques acceptés : chemins délibérément laissés ouverts, avec la justification et la détection compensatoire associée.",
+        "Cas de test : pour chaque surface, la tentative d'injection ou d'abus qui prouve l'efficacité du contrôle. Un contrôle que l'on n'a jamais vu échouer est un contrôle qui n'a jamais été vérifié."
+      ],
+      "pros": [
+        "Il transforme la question « notre agent est-il sûr ? » en une liste finie de surfaces disposant chacune d'un responsable et d'un contrôle.",
+        "Il rend les décisions relatives aux permissions explicites et vérifiables avant que l'accès à la production ne soit accordé.",
+        "Il fournit aux red teams une liste de cibles et offre aux suites d'évaluation des cas concrets à automatiser.",
+        "Il vieillit bien : les modèles changent souvent, les surfaces évoluent lentement, de sorte que la cartographie survit au prochain changement de modèle."
+      ],
+      "risks": [
+        "Modéliser le chatbot et non l'agent — énumérer les préjudices liés aux sorties tout en ignorant les outils qui les transforment en actions.",
+        "Traiter le modèle comme le point de contrôle. L'alignement réduit les tentatives ; il ne limite pas les conséquences.",
+        "Un document rédigé une fois et jamais révisé. Chaque nouvel outil constitue une nouvelle surface, le modèle doit donc être intégré au processus de gestion du changement.",
+        "Confondre couverture et défense : nommer une surface ne signifie pas la contrôler, et un contrôle non testé n'est qu'une simple affirmation."
+      ],
+      "tools": [
+        "OWASP Top 10 for LLM Applications — vocabulaire partagé pour les classes de vulnérabilités.",
+        "MITRE ATLAS — tactiques et techniques des adversaires observées contre les systèmes d'IA.",
+        "NIST AI RMF — le cadre de gouvernance dans lequel s'inscrit la cartographie (Gouverner, Cartographier, Mesurer, Gérer).",
+        "Traces d'agents et journaux d'audit — la couche de preuves ; sans elles, le modèle est invérifiable.",
+        "Suites de red-teaming automatisées — corpus d'injections exécutés en CI pour que les régressions apparaissent avant la mise en production.",
+        "Moteurs de politiques et de permissions — là où les conclusions du modèle sont réellement appliquées."
+      ],
+      "examples": [
+        "Un agent de support qui lit les e-mails des clients : le corps du message est une entrée d'instruction non approuvée, l'outil CRM est la capacité, et le canal de réponse est le chemin d'exfiltration. Trois surfaces pour une seule fonctionnalité.",
+        "Un agent de codage avec accès en écriture au dépôt et sortie réseau : injection via le README d'une dépendance, capacité via l'outil de commit, exfiltration via tout registre qu'il peut atteindre.",
+        "Un agent de recherche sur un wiki interne : toute personne pouvant modifier une page peut rédiger des instructions que l'agent lira, ce qui fait d'un éditeur interne à faibles privilèges un vecteur d'injection."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il d'un modèle de menace classique ?",
+          "a": "La méthode est la même ; ce sont les surfaces qui sont nouvelles. Les modèles classiques partent du principe que le code exécute des instructions et que les données n'en contiennent pas. Avec un agent, les données sont des instructions — ainsi, la recherche, la mémoire et les résultats des outils deviennent tous des canaux d'entrée accessibles par un attaquant."
+        },
+        {
+          "q": "En ai-je besoin si mon agent est en lecture seule ?",
+          "a": "Oui, mais plus restreint. Un agent en lecture seule possède toujours une surface d'exfiltration — on peut lui faire répéter tout ce qu'il peut lire — et la « lecture seule » est une propriété qui doit être appliquée au niveau de la couche de l'outil, et non supposée à partir du prompt."
+        },
+        {
+          "q": "Par quoi commencer si je n'ai encore rien rédigé ?",
+          "a": "Listez les outils que l'agent peut appeler et les données auxquelles chacun accède. Ce simple tableau génère la majeure partie de la cartographie : les capacités représentent le rayon d'impact, et les entrées qui peuvent les atteindre constituent les chemins d'attaque."
+        },
+        {
+          "q": "À quelle fréquence doit-il être révisé ?",
+          "a": "Chaque fois qu'un outil, une source de données ou un niveau d'autonomie change — ce sont ces événements qui créent des surfaces. Les mises à niveau des modèles importent moins qu'on ne le pense ; elles modifient la probabilité, pas la portée."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist ein Agentic Threat Model?",
+      "summary": "Ein Agentic Threat Model ist die Abbildung dessen, wie ein autonomer Agent angegriffen werden kann: nicht über seine Gewichte, sondern über alles, was er liest, sich merkt, aufruft und tun darf. Es benennt die Angriffsflächen – direkte und indirekte Prompt Injection, Tool Poisoning, übermäßige Handlungsfähigkeit (Excessive Agency), Memory Poisoning, Lieferkette, Exfiltrationskanäle, der Confused Deputy –, sodass jede einzelne eine Kontrolle im Harness erhält, statt nur auf eine Hoffnung im System-Prompt zu setzen.",
+      "definition": "Ein Agentic Threat Model ist eine strukturierte Aufzählung der Angriffsflächen, Angreiferziele und Missbrauchspfade, die spezifisch für einen KI-Agenten sind – seine Eingaben, sein Kontext, sein Speicher, seine Tools, seine Anmeldedaten und seine Autonomie. Es dient der Entscheidung, welche Harness-Kontrollen erforderlich sind, bevor dem Agenten Zugriff auf die Produktion gewährt wird.",
+      "takeaways": [
+        "Erstellen Sie das Bedrohungsmodell für die Aktionen des Agenten, nicht für die Ausgaben des Modells.",
+        "Jede Eingabe, die der Agent liest, ist ein Anweisungskanal: Dokumente, Seiten, Tool-Ergebnisse, andere Agenten.",
+        "Jedes Tool, das der Agent aufrufen kann, ist eine Fähigkeit, die ein Angreifer in dem Moment erbt, in dem eine Injection erfolgreich ist.",
+        "Speicher verwandelt einen One-Shot-Angriff in einen persistenten Angriff.",
+        "Der Blast Radius wird durch Anmeldedaten und Egress bestimmt, nicht durch den Prompt.",
+        "Eine unbenannte Angriffsfläche ist keine nicht vorhandene – schreiben Sie akzeptierte Risiken explizit auf."
+      ],
+      "context": [
+        "Klassisches Threat Modelling fragt danach, was ein Angreifer an Ihr System senden kann. Bei Agenten lautet die schwierigere Frage, was Ihr System von sich aus liest und als Anweisungen behandelt. Ein Agent, der eine Seite abruft, ein Ticket öffnet oder ein Tool-Ergebnis liest, hat seine Vertrauensgrenze erweitert, ohne dass dies jemand explizit beschlossen hat.",
+        "Die zweite Verschiebung betrifft die Handlungsfähigkeit (Agency). Ein Chatbot, der getäuscht wird, erzeugt einen falschen Satz; ein Agent, der getäuscht wird, tätigt einen Anruf, transferiert Geld, löscht einen Branch oder versendet eine Datei per E-Mail. Die Schwere eines erfolgreichen Angriffs wird durch die dem Agenten zugewiesenen Tools und Anmeldedaten bestimmt, weshalb die Rechtevergabe eine Sicherheitsentscheidung und keine reine Komfortentscheidung ist.",
+        "Frameworks verankern diese Praxis: Die OWASP Top 10 für LLM-Anwendungen benennen die Schwachstellenklassen und MITRE ATLAS katalogisiert die gegen KI-Systeme beobachteten Taktiken von Angreifern. Nutzen Sie diese als Checklisten für Ihre eigene Architektur, nicht als Ersatz für eine solche."
+      ],
+      "architecture": [
+        "Direkte Prompt Injection – die Person, die mit dem Agenten spricht, versucht, dessen Anweisungen außer Kraft zu setzen. Am einfachsten zu versuchen und am leichtesten einzugrenzen, da sich dieser Benutzer bereits innerhalb der Berechtigungen befindet, die die Sitzung gewährt.",
+        "Indirekte Prompt Injection – Anweisungen, die in Inhalten versteckt sind, die der Agent abruft: eine Webseite, ein PDF, ein Ticket-Kommentar, eine E-Mail, eine Quelldatei, die Ausgabe eines anderen Agenten. Der Angreifer spricht nie direkt mit Ihrem Agenten; er platziert Text dort, wo der Agent ihn lesen wird.",
+        "Tool Poisoning – ein Tool, dessen Beschreibung oder Ergebnis selbst schädlich ist. Ein Server kann zum Zeitpunkt der Genehmigung ein harmloses Tool beschreiben und es danach ändern, sodass Vertrauen einmal geprüft und für immer ausgeübt wird.",
+        "Übermäßige Handlungsbefugnis (Excessive Agency) — der Agent besitzt Berechtigungen, die über das für eine einzelne Aufgabe erforderliche Maß hinausgehen. Noch ist nichts schiefgegangen; die Angriffsfläche besteht darin, dass ein gekaperter Agent sofort alle Rechte erbt, die das Harness zu gewähren bereit war.",
+        "Memory Poisoning (Speichermanipulation) — falsche Fakten oder Anweisungen, die in den persistenten Speicher oder einen Vektorspeicher geschrieben werden, sodass der Angriff die Sitzung überdauert und bei zukünftigen, nicht damit zusammenhängenden Aufgaben erneut ausgelöst wird.",
+        "Lieferkette (Supply Chain) — Modelle, System-Prompts, MCP-Server, Pakete und Datensätze, die von außerhalb der Organisation bezogen werden. Eine Abhängigkeit, die eine Tool-Beschreibung umschreiben kann, ist eine Abhängigkeit, die das Verhalten des Agenten umschreiben kann.",
+        "Exfiltrationskanäle — jeder Pfad, über den Bytes abfließen können: ein ausgehender Fetch-Aufruf, eine in einer Antwort gerenderte Bild-URL, ein E-Mail- oder Webhook-Tool, ein Commit. Daten müssen nicht von einem Menschen gelesen werden, um gestohlen zu werden; eine URL genügt.",
+        "Confused Deputy — der Agent agiert mit Anmeldedaten, die der Anforderer selbst nicht besitzt, sodass ein Angreifer, der ein System nicht direkt erreichen kann, den Agenten bittet, in seinem Namen darauf zuzugreifen."
+      ],
+      "components": [
+        "Asset-Inventar: die Daten, Systeme und Anmeldedaten, auf die der Agent zugreifen kann, aufgelistet nach der Reichweite des Agenten und nicht nach dem Organigramm des Teams.",
+        "Vertrauensgrenzen (Trust Boundaries): Welche Eingaben sind Anweisungen, welche sind Daten, und an welcher Stelle diese Grenze im Code statt in Textform erzwungen wird.",
+        "Tool-Katalog mit Berechtigungen: jedes Tool, sein Umfang, ob es Schreibrechte besitzt und was ein Angreifer durch dessen Aufruf gewinnt.",
+        "Egress-Map (Abflusspfade): Jeder Weg, auf dem Bytes abfließen können, einschließlich unbeabsichtigter Wege — Link-Vorschauen, gerenderte Bilder, Log-Versand, Fehlerberichterstattung.",
+        "Ziele des Angreifers: Exfiltrieren, Rechte ausweiten (Escalate), Persistenz etablieren, Stören, Täuschen — jeweils auf die oben genannten Angriffsflächen abgebildet.",
+        "Sicherheitskontrollen (Controls) mit Verantwortlichen: Welche Harness-Komponente den jeweiligen Pfad begrenzt und wer diese pflegt.",
+        "Akzeptierte Risiken: bewusst offengehaltene Pfade, inklusive Begründung und kompensierender Erkennungsmaßnahmen.",
+        "Testfälle: für jede Angriffsfläche der Injektions- oder Missbrauchsversuch, der beweist, dass die Sicherheitskontrolle funktioniert. Eine Kontrolle, deren Fehlschlagen man nie beobachtet hat, ist eine nicht verifizierte Kontrolle."
+      ],
+      "pros": [
+        "Es verwandelt die Frage „Ist unser Agent sicher?“ in eine endliche Liste von Angriffsflächen, die jeweils einen Verantwortlichen und eine Sicherheitskontrolle haben.",
+        "Es macht Berechtigungsentscheidungen explizit und überprüfbar, bevor der Zugriff auf die Produktionsumgebung gewährt wird.",
+        "Es liefert Red Teams eine Zielliste und bietet Evaluierungs-Suites konkrete Fälle zur Automatisierung.",
+        "Es altert gut: Modelle ändern sich oft, Angriffsflächen ändern sich langsam, sodass die Übersicht den nächsten Modellwechsel überdauert."
+      ],
+      "risks": [
+        "Den Chatbot statt des Agenten zu modellieren — also Risiken bei der Ausgabe aufzuzählen, während die Tools ignoriert werden, die diese Ausgaben in Aktionen umsetzen.",
+        "Das Modell als Kontrollpunkt zu behandeln. Alignment reduziert Versuche; es begrenzt nicht die Konsequenzen.",
+        "Ein einmal geschriebenes Dokument, das nie wieder angerührt wird. Jedes neue Tool ist eine neue Angriffsfläche, daher gehört das Modell in den Change-Prozess.",
+        "Abdeckung mit Abwehr zu verwechseln: Eine Angriffsfläche zu benennen bedeutet nicht, sie zu kontrollieren, und eine ungeprüfte Kontrolle ist lediglich eine Behauptung."
+      ],
+      "tools": [
+        "OWASP Top 10 für LLM-Anwendungen — ein gemeinsames Vokabular für die Schwachstellenklassen.",
+        "MITRE ATLAS — Taktiken und Techniken von Angreifern, die bei KI-Systemen beobachtet wurden.",
+        "NIST AI RMF — der Governance-Rahmen, in den sich die Übersicht einfügt (Govern, Map, Measure, Manage).",
+        "Agenten-Traces und Audit-Logs — die Nachweisebene; ohne sie ist das Modell nicht falsifizierbar.",
+        "Automatisierte Red-Team-Suites — Injektions-Korpora, die in der CI ausgeführt werden, damit Regressionen vor dem Release auffallen.",
+        "Richtlinien- und Berechtigungs-Engines — dort, wo die Schlussfolgerungen des Modells tatsächlich durchgesetzt werden."
+      ],
+      "examples": [
+        "Ein Support-Agent, der Kunden-E-Mails liest: Der Nachrichtentext ist eine nicht vertrauenswürdige Anweisungseingabe, das CRM-Tool ist die Funktion (Capability) und der Antwortkanal ist der Exfiltrationspfad. Drei Angriffsflächen aus einem einzigen Feature.",
+        "Ein Coding-Agent mit Schreibzugriff auf das Repository und Netzwerk-Egress: Injektion über die README einer Abhängigkeit, Funktion über das Commit-Tool, Exfiltration über jede erreichbare Registry.",
+        "Ein Retrieval-Agent für ein internes Wiki: Jeder, der eine Seite bearbeiten kann, kann Anweisungen schreiben, die der Agent liest, was einen internen Editor mit geringen Rechten zu einem Injektionsvektor macht."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies von einer normalen Bedrohungsanalyse (Threat Model)?",
+          "a": "Die Methode ist dieselbe, die Angriffsflächen sind neu. Klassische Modelle gehen davon aus, dass Code Anweisungen ausführt und Daten dies nicht tun. Bei einem Agenten sind Daten Anweisungen — somit werden Retrieval, Speicher und Tool-Ergebnisse alle zu Eingangskanälen, die ein Angreifer erreichen kann."
+        },
+        {
+          "q": "Benötige ich eine Bedrohungsanalyse, wenn mein Agent schreibgeschützt (read-only) ist?",
+          "a": "Ja, eine kleinere. Ein schreibgeschützter Agent hat immer noch eine Exfiltrationsfläche — alles, was er lesen kann, kann er auch wiederholen —, und „schreibgeschützt“ ist eine Eigenschaft, die auf der Tool-Ebene erzwungen werden muss und nicht einfach im Prompt vorausgesetzt werden darf."
+        },
+        {
+          "q": "Wo fange ich an, wenn ich noch nichts schriftlich festgehalten habe?",
+          "a": "Listen Sie die Tools auf, die der Agent aufrufen kann, und die Daten, auf die jedes Tool zugreift. Diese eine Tabelle liefert den Großteil der Übersicht: Funktionen (Capabilities) stellen den Schadensradius (Blast Radius) dar, und die Eingaben, die sie erreichen können, sind die Angriffspfade."
+        },
+        {
+          "q": "Wie oft sollte sie überarbeitet werden?",
+          "a": "Immer wenn sich ein Tool, eine Datenquelle oder eine Autonomiestufe ändert — das sind die Ereignisse, die neue Angriffsflächen schaffen. Modell-Upgrades sind weniger wichtig als gedacht; sie ändern die Wahrscheinlichkeit, nicht die Reichweite."
+        }
+      ]
+    },
+    "ja": {
+      "title": "アジェンティック脅威モデルとは何ですか？",
+      "summary": "アジェンティック脅威モデルとは、自律型エージェントがどのように攻撃され得るかを示すマップです。これはモデルの重み（ウェイト）を介した攻撃ではなく、エージェントが読み取り、記憶し、呼び出し、実行を許可されているすべての要素を対象とします。直接的および間接的なプロンプトインジェクション、ツールの汚染（ツールポイズニング）、過剰なエージェンシー、メモリの汚染、サプライチェーン、情報の流出経路、混乱した代理人（Confused Deputy）問題などの攻撃対象領域（サーフェス）を特定し、システムプロンプトに期待するのではなく、ハーネス内でそれぞれに対する制御（コントロール）を実装できるようにします。",
+      "definition": "アジェンティック脅威モデルとは、AIエージェントに特有の攻撃対象領域、攻撃者の目標、および悪用経路（入力、コンテキスト、メモリ、ツール、資格情報、自律性など）を構造化して列挙したものです。これは、エージェントに本番環境へのアクセス権を付与する前に、どのハーネス制御が必要かを決定するために使用されます。",
+      "takeaways": [
+        "モデルの出力ではなく、エージェントのアクションを対象に脅威モデリングを行う。",
+        "エージェントが読み取るすべての入力（ドキュメント、ページ、ツールの実行結果、他のエージェントなど）は、指示チャネルとなる。",
+        "エージェントが呼び出せるすべてのツールは、インジェクションが成功した瞬間に攻撃者が継承する能力となる。",
+        "メモリは、単発の（ワンショット）攻撃を持続的な攻撃へと変化させる。",
+        "影響範囲（ブラストライジアス）は、プロンプトではなく、資格情報と送信（エグレス）制限によって決定される。",
+        "明文化されていない攻撃対象領域が存在しないわけではない。許容されたリスクは明示的に文書化する。"
+      ],
+      "context": [
+        "従来の脅威モデリングでは、攻撃者がシステムに何を送信できるかを問いかけます。しかしエージェントの場合、より困難な問いは「システムが自発的に何を読み取り、それを指示として扱うか」です。ページを取得したり、チケットを開いたり、ツールの実行結果を読み取ったりするエージェントは、誰も意図しないうちに自らの信頼境界（トラストバウンダリ）を拡大してしまっています。",
+        "2つ目の移行はエージェンシー（自律性）です。騙されたチャットボットは誤った文章を生成するだけですが、騙されたエージェントはAPIを呼び出し、資金を移動し、ブランチを削除し、あるいはファイルをメールで送信します。攻撃成功時の深刻度は、エージェントに紐付けられたツールと資格情報によって決定されます。そのため、権限付与は利便性のための判断ではなく、セキュリティ上の決定なのです。",
+        "フレームワークは、この取り組みの指針となります。「OWASP Top 10 for LLM Applications」は脆弱性の分類を定義し、「MITRE ATLAS」はAIシステムに対して観測された攻撃者の戦術をカタログ化しています。これらは、独自のアーキテクチャを構築する代わりにするのではなく、そのアーキテクチャを検証するためのチェックリストとして使用してください。"
+      ],
+      "architecture": [
+        "直接的プロンプトインジェクション — エージェントと対話している人物が、その指示を上書きしようと試みます。セッションに付与された権限の範囲内にユーザーがすでに存在するため、最も低コストで試行でき、制限するのも最も容易です。",
+        "間接的プロンプトインジェクション — エージェントが取得するコンテンツ（Webページ、PDF、チケットのコメント、メール、ソースファイル、他のエージェントの出力など）に指示が隠されているケースです。攻撃者はエージェントと直接対話することはなく、エージェントが読み取る場所にテキストを仕込みます。",
+        "ツールの汚染（ツールポイズニング） — ツールの説明や実行結果自体が敵対的なものであるケースです。サーバーは承認時には無害なツールとして説明し、承認後にそれを変更することができるため、信頼性のチェックが一度行われただけで、永続的に実行されてしまうリスクがあります。",
+        "過剰なエージェンシー（Excessive agency） — エージェントが、個々のタスクが必要とするよりも広範な権限を保持している状態。まだ問題は発生していませんが、乗っ取られたエージェントが、ハーネスが許可していたすべての権限を即座に引き継いでしまうという攻撃対象領域（サーフェス）が存在します。",
+        "メモリポイズニング（Memory poisoning） — 永続メモリやベクトルストアに誤った事実や指示が書き込まれることで、攻撃がセッションを超えて存続し、将来の無関係なタスクで再実行されること。",
+        "サプライチェーン — 組織の外部から取り込まれるモデル、システムプロンプト、MCPサーバー、パッケージ、データセット。ツールの説明を書き換えられる依存関係は、エージェントの動作を書き換えられる依存関係と同義です。",
+        "流出チャネル（Exfiltration channels） — バイトデータが外部に流出する可能性のあるあらゆる経路：アウトバウンドのfetch、返答内にレンダリングされた画像URL、メールやWebhookツール、コミットなど。データが盗まれるために人間がそれを読む必要はありません。URLだけで十分です。",
+        "代理の混乱（Confused deputy） — エージェントが要求元（リクエスター）の持っていない資格情報を使用して動作するため、システムに直接アクセスできない攻撃者が、エージェントに代理でアクセスするよう要求すること。"
+      ],
+      "components": [
+        "資産インベントリ：エージェントがアクセスできるデータ、システム、資格情報。チームの組織図ではなく、エージェントの到達範囲に基づいてリスト化されます。",
+        "信頼境界（Trust boundaries）：どの入力が指示で、どの入力がデータであるか、そしてその境界線が自然言語（プロース）ではなくコードでどのように強制されているか。",
+        "権限付きツールカタログ：すべてのツール、そのスコープ、書き込みを行うかどうか、および攻撃者がそれを呼び出すことで何を得られるか。",
+        "エグレス（送信）マップ：リンクプレビュー、レンダリングされた画像、ログ転送、エラーレポートなど、意図しないものも含めて、バイトデータが外部に流出するあらゆる経路。",
+        "敵対者の目標：流出、権限昇格、永続化、妨害、欺瞞 — それぞれが上記の攻撃対象領域（サーフェス）にマッピングされます。",
+        "オーナー付きのコントロール：どのハーネスコンポーネントが各経路を制限しているか、およびその維持管理の担当者。",
+        "許容されたリスク：意図的に開放されたままにしている経路、その理由、および補完的な検知策。",
+        "テストケース：各攻撃対象領域（サーフェス）において、コントロールが機能していることを証明するインジェクションや悪用の試み。失敗が確認されたことのないコントロールは、検証されたことのないコントロールと同義です。"
+      ],
+      "pros": [
+        "『私たちのエージェントは安全か？』という問いを、それぞれにオーナーとコントロールが存在する、有限の攻撃対象領域（サーフェス）のリストへと変換します。",
+        "本番環境へのアクセス権限が許可される前に、権限に関する決定を明確にし、レビュー可能にします。",
+        "レッドチームにターゲットリストを提供し、評価スイートに自動化のための具体的なケースを提供します。",
+        "経年劣化しにくい：モデルは頻繁に変更されますが、攻撃対象領域（サーフェス）の変化は緩やかであるため、このマップは次のモデルの入れ替え時にも有効であり続けます。"
+      ],
+      "risks": [
+        "エージェントではなくチャットボットをモデル化してしまうこと — 出力による害を列挙する一方で、それらを実行に移すツールを無視してしまうこと。",
+        "モデルをコントロールポイント（制御点）として扱ってしまうこと。アライメントは試みを減らすことはできますが、結果を制限することはできません。",
+        "一度作成されたきり、二度と見直されないドキュメント。新しいツールはすべて新しい攻撃対象領域（サーフェス）となるため、モデルは変更プロセスに組み込まれるべきです。",
+        "カバレッジと防御を混同すること：攻撃対象領域（サーフェス）を特定することはそれを制御することではなく、テストされていないコントロールは単なる主張にすぎません。"
+      ],
+      "tools": [
+        "OWASP Top 10 for LLM Applications — 脆弱性クラスの共通語彙。",
+        "MITRE ATLAS — AIシステムに対して観測された敵対者の戦術と技術。",
+        "NIST AI RMF — マップが組み込まれるガバナンスフレームワーク（Govern、Map、Measure、Manage）。",
+        "エージェントのトレースと監査ログ — エビデンス（証拠）レイヤー。これらがなければ、モデルの反証は不可能です。",
+        "自動レッドチームスイート — リリース前にデグレード（先祖返り）を表面化させるために、CIで実行されるインジェクションコーパス。",
+        "ポリシーおよび権限エンジン — モデルの結論が実際に強制適用される場所。"
+      ],
+      "examples": [
+        "顧客のメールを読み取るサポートエージェント：メッセージ本文は信頼できない指示入力であり、CRMツールは機能（ケイパビリティ）、返信チャネルは流出経路となります。1つの機能から3つの攻撃対象領域（サーフェス）が生じます。",
+        "リポジトリへの書き込み権限とネットワーク送信（エグレス）権限を持つコーディングエージェント：依存関係のREADMEを介したインジェクション、コミットツールを介した機能（ケイパビリティ）、アクセス可能な任意のレジストリを介した流出。",
+        "社内Wikiを対象とする検索（RAG）エージェント：ページを編集できる人なら誰でもエージェントが読み取る指示を書き込めるため、低権限の社内編集者がインジェクションベクターになります。"
+      ],
+      "faqs": [
+        {
+          "q": "通常の脅威モデルと何が違うのですか？",
+          "a": "手法は同じですが、攻撃対象領域（サーフェス）が新しくなっています。従来のモデルでは、コードが指示を実行し、データは実行しないと仮定していました。エージェントの場合、データが指示となります。そのため、検索結果、メモリ、ツールの実行結果のすべてが、攻撃者がアクセス可能な入力チャネルになります。"
+        },
+        {
+          "q": "エージェントが読み取り専用の場合でも、脅威モデルは必要ですか？",
+          "a": "はい、小規模なものが必要です。読み取り専用のエージェントであっても、流出の攻撃対象領域（サーフェス）は存在します（読み取れるものは何でも復唱させられる可能性があります）。また、『読み取り専用』という属性は、プロンプトから想定するのではなく、ツールレイヤーで強制適用される必要があります。"
+        },
+        {
+          "q": "何も文書化されていない場合、どこから始めればよいですか？",
+          "a": "エージェントが呼び出せるツールと、それぞれがアクセスするデータをリストアップします。その1つの表からマップの大部分が作成されます。機能（ケイパビリティ）が影響範囲（ブラストラジアス）となり、それらに到達可能な入力が攻撃経路となります。"
+        },
+        {
+          "q": "どのくらいの頻度で見直すべきですか？",
+          "a": "ツール、データソース、または自律性のレベルが変更されるたびに見直す必要があります。これらは攻撃対象領域（サーフェス）を生み出すイベントだからです。モデルのアップグレードは、一般に思われているほど重要ではありません。アップグレードによって変わるのは発生可能性であり、到達範囲ではないからです。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是智能体威胁模型？",
+      "summary": "智能体威胁模型是自主智能体可能遭受攻击的路径图：攻击并非通过其权重进行，而是通过它所读取、记忆、调用以及被允许执行的一切操作。它指明了各种攻击面——直接和间接提示词注入、工具投毒、过度授权、记忆投毒、供应链、数据外泄通道、混淆代理——从而让每一个攻击面都能在支撑系统中得到具体控制，而不是寄希望于系统提示词。",
+      "definition": "智能体威胁模型是对AI智能体特有的攻击面、对手目标和滥用路径（包括其输入、上下文、记忆、工具、凭证和自主权）进行的结构化列举，用于在授予智能体生产环境访问权限之前，决定需要哪些支撑系统控制措施。",
+      "takeaways": [
+        "对智能体的行为进行威胁建模，而不是对模型的输出进行威胁建模。",
+        "智能体读取的每个输入都是一个指令通道：文档、页面、工具结果、其他智能体。",
+        "智能体可以调用的每个工具，都是攻击者在注入成功那一刻所继承的能力。",
+        "记忆会将单次攻击转变为持久性攻击。",
+        "爆炸半径（受损范围）由凭证和出口决定，而不是由提示词决定。",
+        "未被指明的攻击面并不意味着它存在——请明确记录已接受的风险。"
+      ],
+      "context": [
+        "传统的威胁建模关注攻击者可以向你的系统发送什么。而对于智能体，更难的问题是你的系统会主动读取什么并将其视为指令。一个获取页面、打开工单或读取工具结果的智能体，在未经任何人决策的情况下，就已经扩大了其信任边界。",
+        "第二个转变是能动性。一个被愚弄的聊天机器人只会产生错误的句子；而一个被愚弄的智能体则会进行调用、转账、删除分支或发送包含文件的电子邮件。成功攻击的严重程度取决于绑定到该智能体的工具和凭证，这就是为什么权限授予是一个安全决策，而不仅仅是为了方便。",
+        "框架为这一实践提供了支撑：OWASP Top 10 for LLM Applications 命名了漏洞类别，而 MITRE ATLAS 则编目了针对 AI 系统观察到的对手战术。将它们用作针对你自己架构的检查清单，而不是替代架构本身。"
+      ],
+      "architecture": [
+        "直接提示词注入——与智能体对话的人试图覆盖其指令。这种尝试成本最低，也最容易限制，因为该用户已经处于会话所授予的任何权限范围内。",
+        "间接提示词注入——隐藏在智能体检索内容中的指令：网页、PDF、工单评论、电子邮件、源文件或其他智能体的输出。攻击者从未直接与你的智能体对话，他们只是在智能体将要读取的地方植入文本。",
+        "工具投毒——工具的描述或结果本身具有对抗性。服务器可以在审批时将工具描述为无害的，并在之后对其进行修改，从而实现“一次审核，永久使用”的信任滥用。",
+        "过度授权（Excessive agency）——智能体拥有的权限超出了任何单一任务所需的范围。目前还没有发生任何问题；其隐患在于，一旦智能体被劫持，它将立即继承支撑系统（harness）愿意授予的所有权限。",
+        "内存毒化（Memory poisoning）——将虚假事实或指令写入持久化内存或向量数据库中，从而使攻击在会话结束后依然存在，并在未来无关的任务中重新触发。",
+        "供应链（Supply chain）——从组织外部拉取的模型、系统提示词、MCP 服务器、依赖包和数据集。一个能够重写工具描述的依赖项，同样能够重写智能体的行为。",
+        "外发通道（Exfiltration channels）——任何字节可以流出的路径：出站 fetch 请求、回复中渲染的图片 URL、电子邮件或 webhook 工具、提交（commit）。数据不需要被人类读取才算被盗；一个 URL 就足够了。",
+        "混淆代理（Confused deputy）——智能体使用请求者不具备的凭据执行操作，因此无法直接访问系统的攻击者会要求智能体代表其进行访问。"
+      ],
+      "components": [
+        "资产清单：智能体可以接触的数据、系统和凭据，按智能体的触达范围而非团队的组织架构图列出。",
+        "信任边界：哪些输入是指令，哪些是数据，以及该界限是在代码中强制执行还是仅在文本中说明。",
+        "带权限的工具目录：每个工具及其范围、是否执行写操作，以及攻击者通过调用它能获得什么。",
+        "出口地图：字节可以流出的每种方式，包括意外流出的方式——链接预览、渲染的图像、日志传输、错误报告。",
+        "对手目标：外发、提权、持久化、破坏、欺骗——每个目标都映射到上述攻击面上。",
+        "带负责人的控制措施：哪个支撑系统（harness）组件限制了每条路径，以及由谁来维护它。",
+        "接受的风险：故意保留的开放路径，以及原因和补偿性检测措施。",
+        "测试用例：针对每个攻击面，证明控制措施有效的注入或滥用尝试。从未见证过失败的控制措施是未经证实的控制措施。"
+      ],
+      "pros": [
+        "它将“我们的智能体安全吗？”转化为一个有限的攻击面列表，每个攻击面都有负责人和控制措施。",
+        "它使权限决策在授予生产环境访问权限之前变得明确且可审查。",
+        "它为红队提供了目标列表，并为评估套件提供了可自动化的具体案例。",
+        "它经得起时间考验：模型经常变化，而攻击面变化缓慢，因此该地图在下一次模型更换后依然适用。"
+      ],
+      "risks": [
+        "对聊天机器人而非智能体进行建模——列举了输出危害，却忽略了将这些输出转化为行动的工具。",
+        "将模型视为控制点。对齐只能减少尝试，并不能限制后果。",
+        "文档一次写成后便再未修改。每个新工具都是一个新的攻击面，因此该模型应纳入变更流程中。",
+        "将覆盖范围与防御混淆：命名一个攻击面并不等于控制它，未经测试的控制措施只是一种说辞。"
+      ],
+      "tools": [
+        "OWASP Top 10 for LLM Applications——漏洞类别的共享词汇表。",
+        "MITRE ATLAS——针对 AI 系统观察到的对手战术和技术。",
+        "NIST AI RMF——该地图接入的治理框架（治理、映射、测量、管理）。",
+        "智能体追踪和审计日志——证据层；没有它们，模型是无法证伪的。",
+        "自动化红队套件——在 CI 中运行的注入语料库，以便在发布前发现回归问题。",
+        "策略和权限引擎——模型结论实际执行的地方。"
+      ],
+      "examples": [
+        "读取客户电子邮件的支持智能体：邮件正文是不可信的指令输入，CRM 工具是能力，而回复通道是外发路径。一个功能产生三个攻击面。",
+        "具有代码库写入权限和网络出口的编码智能体：通过依赖项的 README 进行注入，通过 commit 工具获得能力，通过其可触达的任何注册表进行外发。",
+        "针对内部 Wiki 的检索智能体：任何可以编辑页面的人都可以编写智能体将读取的指令，这使得低权限的内部编辑器成为注入向量。"
+      ],
+      "faqs": [
+        {
+          "q": "这与普通的威胁模型有什么不同？",
+          "a": "方法相同，但攻击面是全新的。经典模型假设代码执行指令，而数据不执行。对于智能体，数据就是指令——因此检索、内存和工具结果都变成了攻击者可以触达的输入通道。"
+        },
+        {
+          "q": "如果我的智能体是只读的，我还需要威胁模型吗？",
+          "a": "是的，需要一个规模较小的模型。只读智能体仍然具有外发攻击面——任何它能读取的内容都可以被诱导重复输出——而且“只读”这一属性必须在工具层强制执行，而不能仅凭提示词来假设。"
+        },
+        {
+          "q": "如果我什么都还没写，该从哪里开始？",
+          "a": "列出智能体可以调用的工具以及每个工具所触达的数据。仅凭这张表就能生成地图的大部分内容：能力是爆炸半径，而能够触达它们的输入则是攻击路径。"
+        },
+        {
+          "q": "应该多长时间重新评估一次？",
+          "a": "每当工具、数据源或自主程度发生变化时——这些都是产生攻击面的事件。模型升级的影响比人们预期的要小；它们改变的是可能性，而不是触达范围。"
+        }
+      ]
     }
   }
 }

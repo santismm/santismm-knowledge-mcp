@@ -306,6 +306,362 @@
           "a": "Não; cobrem metades diferentes. O privilégio mínimo limita o que o agente pode fazer; o controle de saída limita para onde pode ir o que ele já leu. Um agente somente leitura com saída aberta ainda vaza tudo o que consegue ler."
         }
       ]
+    },
+    "fr": {
+      "name": "Liste d'autorisation de sortie",
+      "summary": "Restreignez les destinations autorisées pour le trafic d'un agent. Le vol de données et la livraison de charges utiles d'injection se terminent tous deux par une requête sortante, de sorte qu'une liste de destinations autorisées avec refus par défaut est le contrôle qui fonctionne encore lorsque tous les autres ont échoué.",
+      "definition": "Une liste d'autorisation de sortie est une politique au niveau du réseau ou du bac à sable (sandbox) qui n'autorise les requêtes sortantes d'un agent que vers un ensemble de destinations explicitement nommées et refuse tout le reste par défaut, de sorte que les données ne peuvent pas être envoyées vers un point de terminaison choisi par un attaquant, même si l'agent a été entièrement compromis.",
+      "problem": "Chaque chemin d'exfiltration se termine par une requête sortante. Un agent capable d'atteindre des hôtes arbitraires peut recevoir l'instruction d'envoyer tout ce qu'il a lu à n'importe quelle adresse, et aucune instruction au niveau du prompt ne peut l'empêcher.",
+      "context": "Utilisez-le partout où un agent traite du contenu non approuvé et peut effectuer des requêtes réseau — récupération de pages, appels d'outils, rendu d'images, exécution de code généré. Ce pattern est le plus précieux là où l'injection est la plus probable.",
+      "solution": [
+        "Refus par défaut. La liste d'autorisation est la seule issue ; tout ce qui n'y figure pas est refusé, et le refus est journalisé comme un signal plutôt que d'être étouffé sous forme d'erreur.",
+        "Énumérez les destinations à partir de la tâche : les API que l'agent doit appeler, les domaines qu'il doit récupérer, les registres à partir desquels il doit installer — chacun avec un propriétaire et un motif écrit.",
+        "Appliquez les règles en aval de l'agent. Placez la politique dans le sandbox, le proxy ou le réseau, jamais dans le code de l'outil dont le modèle pourrait s'affranchir par la discussion. Une règle qu'un agent peut contourner par la persuasion est une simple documentation, pas un contrôle.",
+        "Fermez les canaux discrets. Les URL d'images générées, les aperçus de liens, les requêtes DNS, les webhooks, les rapports d'erreurs et les installations de paquets constituent tous des flux sortants (egress), et ils sont tous exploités.",
+        "Autorisez les hôtes dont vous pouvez analyser le comportement. Un caractère générique (wildcard) sur un hôte qui héberge du contenu fourni par l'utilisateur — un CDN de fichiers bruts, un site de partage de texte (paste site), un stockage d'objets public — est un canal ouvert déguisé en liste d'autorisation.",
+        "Déduisez la liste à partir de mesures réelles et recalculez-la lorsque la tâche change. Partez de ce que l'agent appelle réellement, et non de ce que l'on suppose qu'il appelle."
+      ],
+      "components": [
+        "Une passerelle de sortie (egress gateway) ou une politique réseau de sandbox que tout le trafic doit obligatoirement traverser.",
+        "Une règle de refus par défaut avec un inventaire explicite et géré des destinations autorisées.",
+        "Des politiques par rôle, afin qu'un agent de recherche et un agent de déploiement ne partagent pas la même liste.",
+        "La journalisation des refus connectée à un système d'alerte, car un refus est un événement à fort signal.",
+        "Des contraintes sur les méthodes et les charges utiles (payloads) lorsque la destination seule ne suffit pas (GET uniquement, limites de taille du corps de la requête).",
+        "Un cycle de révision régulier pour supprimer les destinations qui n'ont pas été utilisées."
+      ],
+      "benefits": [
+        "Limite l'exfiltration de données même après un compromis total du raisonnement de l'agent.",
+        "Rend les tentatives visibles : une destination refusée est l'un des rares signaux d'attaque non ambigus générés par une pile d'agents.",
+        "Indépendant du modèle — il continue de fonctionner lors des changements de modèle, des modifications de prompt et des migrations de framework.",
+        "Peu coûteux à étendre une fois la passerelle en place ; chaque nouvel agent hérite du point de contrôle."
+      ],
+      "risks": [
+        "Le relais sur liste d'autorisation : un hôte autorisé qui réachemine lui-même les données réduit la liste d'autorisation à une simple formalité.",
+        "Risque de rupture lorsqu'une dépendance légitime change d'hôte, ce qui pousse à élargir la liste dans l'urgence.",
+        "L'érosion par caractères génériques (wildcards) : chaque entrée large ajoutée « temporairement » devient permanente tant qu'aucun audit n'est réalisé.",
+        "Application au mauvais niveau — un contrôle au sein du processus (in-process) que le code généré peut simplement contourner."
+      ],
+      "whenNot": [
+        "Agents entièrement hors ligne, pour lesquels il n'y a aucun flux sortant à restreindre et où le contrôle ne serait que de la figuration.",
+        "Lorsque la conception n'autorise déjà qu'une seule et unique destination, faisant de la liste d'autorisation une propriété intrinsèque de l'architecture plutôt qu'une politique à ajouter.",
+        "Lorsqu'un proxy d'entreprise applique déjà la même politique et qu'une seconde liste diviserait la responsabilité sans ajouter de contrainte réelle."
+      ],
+      "examples": [
+        "Un agent de codage dans un conteneur dont la politique de sortie (egress) ne mentionne que le registre de paquets et l'hôte Git interne. Une instruction injectée visant à envoyer un POST du dépôt vers un collecteur externe échoue au niveau de la couche réseau et apparaît comme un refus.",
+        "Un agent de recherche autorisé à effectuer des requêtes étendues mais contraint de passer par un proxy qui n'autorise que le GET et limite la taille des corps sortants — lui permettant ainsi de lire le web sans disposer de canal pour y écrire.",
+        "Le paquet stdio publié pour cette base de connaissances : sa seule destination sortante est le point de terminaison public pour lequel il sert de proxy, de sorte que la liste d'autorisation est une propriété de la conception plutôt qu'une politique superposée a posteriori."
+      ],
+      "kpis": [
+        {
+          "metric": "Tentatives de sortie (egress) refusées",
+          "note": "Le signal que ce pattern a pour but de produire. Une hausse prolongée indique soit une attaque, soit une tâche devenue trop large pour sa liste — deux informations cruciales à connaître."
+        },
+        {
+          "metric": "Taille de la liste d'autorisation",
+          "note": "Destinations autorisées par rôle d'agent. Une croissance sans suppression correspond à une dérive de la liste vers un mode « tout autoriser »."
+        },
+        {
+          "metric": "Entrées avec caractères génériques (wildcards)",
+          "note": "Nombre d'entrées larges. Chacune d'elles représente un canal dont vous ne pouvez pas analyser le comportement ; l'objectif est d'en avoir zéro."
+        },
+        {
+          "metric": "Délai entre le refus et le tri",
+          "note": "Le temps d'attente d'un refus avant qu'un humain ne l'examine. Un refus non consulté est une alerte qui n'existe pas réellement."
+        }
+      ],
+      "failureModes": [
+        "Le relais sur liste d'autorisation : un hôte approuvé qui réacheminera tout ce qu'il reçoit, de sorte que la vérification de la destination réussit et que les données s'échappent tout de même.",
+        "L'érosion par caractères génériques (wildcards) : des entrées larges temporaires qui survivent à la raison pour laquelle elles ont été ajoutées.",
+        "Application au sein du processus (in-process) : le contrôle réside là où le code généré s'exécute, permettant à ce dernier de l'ignorer.",
+        "Refus silencieux : des refus enregistrés comme de simples erreurs réseau ordinaires, de sorte que l'unique signal généré par le pattern ne parvient jamais à personne."
+      ],
+      "lessons": [
+        "Le contrôle des flux sortants (egress) est le dernier rempart qui fonctionne encore une fois que le modèle a été manipulé. Mettez-le en place avant d'en avoir besoin.",
+        "Déduisez la liste à partir du trafic mesuré plutôt que de suppositions. C'est précisément ce que nous avons fait pour la règle d'origine entrante sur notre propre point de terminaison MCP, ce qui a produit une règle bien différente de celle que nous aurions écrite par défaut.",
+        "Traitez un refus comme une alerte, pas comme une erreur. C'est le signal d'attaque le plus économique de la pile.",
+        "Chaque caractère générique (wildcard) est une promesse que vous ne pouvez pas tenir. Nommez explicitement les hôtes, ou acceptez le fait que vous n'avez pas de liste d'autorisation."
+      ],
+      "faqs": [
+        {
+          "q": "Une liste d'autorisation de sortie (egress) est-elle réaliste pour un agent qui navigue sur le web ?",
+          "a": "Oui, si vous limitez la forme plutôt que l'ensemble. Autorisez un large trafic GET via un proxy qui interdit les corps de requête et limite les tailles : l'agent peut ainsi lire à grande échelle sans disposer de canal suffisant pour exporter ce qu'il a lu."
+        },
+        {
+          "q": "Le DNS doit-il figurer sur la liste ?",
+          "a": "Tout à fait. Un résolveur que l'agent peut interroger librement constitue un canal d'exfiltration — les données encodées dans des requêtes de sous-domaines s'échappent sans la moindre requête HTTP. Soumettez le DNS à la même politique."
+        },
+        {
+          "q": "Nous disposons déjà d'outils de moindre privilège. Est-ce redondant ?",
+          "a": "Non, ils couvrent deux aspects complémentaires. Le moindre privilège limite ce que l'agent peut faire, tandis que le contrôle des flux sortants (egress) limite la destination de ce qu'il a déjà lu. Un agent en lecture seule avec un accès sortant ouvert peut tout de même divulguer l'intégralité de ce qu'il est capable de lire."
+        }
+      ]
+    },
+    "de": {
+      "name": "Egress-Allowlist",
+      "summary": "Schränken Sie ein, wohin der Traffic eines Agenten fließen darf. Datendiebstahl und die Übertragung von Injection-Payloads enden beide in einem ausgehenden Request. Eine Default-Deny-Liste zugelassener Ziele ist daher die Kontrollmaßnahme, die selbst dann noch greift, wenn alle anderen versagt haben.",
+      "definition": "Eine Egress-Allowlist ist eine Richtlinie auf Netzwerk- oder Sandbox-Ebene, die ausgehende Requests eines Agenten nur an eine explizit definierte Gruppe von Zielen zulässt und alles andere standardmäßig blockiert. So können selbst bei einer vollständigen Übernahme des Agenten keine Daten an einen vom Angreifer gewählten Endpunkt abfließen.",
+      "problem": "Jeder Exfiltrationspfad endet in einem ausgehenden Request. Ein Agent, der beliebige Hosts erreichen kann, kann angewiesen werden, alle gelesenen Daten an eine beliebige Adresse zu senden – und keine Anweisung auf Prompt-Ebene kann das verhindern.",
+      "context": "Nutzen Sie dieses Pattern überall dort, wo ein Agent sowohl nicht vertrauenswürdige Inhalte verarbeitet als auch Netzwerkanfragen stellen kann – sei es beim Abrufen von Seiten, Aufrufen von Tools, Rendern von Bildern oder Ausführen von generiertem Code. Das Pattern ist genau dort am wertvollsten, wo Injections am wahrscheinlichsten sind.",
+      "solution": [
+        "Default-Deny. Die Allowlist ist der einzige Ausweg; alles, was nicht explizit aufgeführt ist, wird blockiert. Diese Blockierung wird als Signal protokolliert und nicht einfach als Fehler verschluckt.",
+        "Listen Sie die Ziele basierend auf der Aufgabe auf: die APIs, die der Agent aufrufen muss, die Domains, die er abrufen muss, die Registries, aus denen er installieren muss – jeweils mit einem Verantwortlichen und einer schriftlichen Begründung.",
+        "Erzwingen Sie dies unterhalb des Agenten. Platzieren Sie die Richtlinie in der Sandbox, im Proxy oder im Netzwerk, niemals im Tool-Code, von dem das Modell abgebracht werden kann. Eine Regel, die der Agent wegdiskutieren kann, ist eine Dokumentation, keine Kontrollmaßnahme.",
+        "Schließen Sie die stillen Kanäle. Gerenderte Bild-URLs, Link-Vorschauen, DNS-Abfragen, Webhooks, Fehlerberichterstatter und Paketinstallationen sind alle Egress, und sie alle werden genutzt.",
+        "Erlauben Sie Hosts, über die Sie logisch urteilen können. Eine Wildcard für einen Host, der vom Benutzer bereitgestellte Inhalte bereitstellt – ein Raw-File-CDN, eine Paste-Website, ein öffentlicher Objektspeicher –, ist ein offener Kanal im Gewand einer Allowlist.",
+        "Leiten Sie die Liste aus Messungen ab und leiten Sie sie erneut ab, wenn sich die Aufgabe ändert. Gehen Sie von dem aus, was der Agent tatsächlich aufruft, nicht von dem, was jemand vermutet."
+      ],
+      "components": [
+        "Ein Egress-Gateway oder eine Sandbox-Netzwerkrichtlinie, die der gesamte Datenverkehr durchlaufen muss.",
+        "Eine Deny-by-Default-Regel mit einem expliziten, verwalteten Zielinventar.",
+        "Rollenbasierte Richtlinien, damit ein Forschungs-Agent und ein Deployment-Agent nicht dieselbe Liste teilen.",
+        "Protokollierung von Blockierungen (Denial Logging) gekoppelt mit Alarmierung, da eine Blockierung ein Signal mit hohem Informationsgehalt ist.",
+        "Methoden- und Payload-Einschränkungen, wenn das Ziel allein nicht ausreicht (nur GET, Begrenzung der Body-Größe).",
+        "Ein regelmäßiger Überprüfungszyklus, der Ziele entfernt, die von nichts genutzt wurden."
+      ],
+      "benefits": [
+        "Begrenzt die Datenexfiltration selbst nach einer vollständigen Kompromittierung der Logik des Agenten.",
+        "Macht Versuche sichtbar: Ein blockiertes Ziel ist eines der wenigen eindeutigen Angriffssignale, die ein Agenten-Stack erzeugt.",
+        "Modellunabhängig – es funktioniert auch bei Modellwechseln, Prompt-Änderungen und Framework-Migrationen weiterhin.",
+        "Kostengünstig zu erweitern, sobald das Gateway existiert; jeder neue Agent erbt den Durchsetzungspunkt."
+      ],
+      "risks": [
+        "Das freigegebene Relay: Ein erlaubter Host, der selbst Daten weiterleitet, macht die Allowlist zu einer reinen Formalität.",
+        "Ausfälle, wenn eine legitime Abhängigkeit den Host wechselt, was unter Zeitdruck Druck erzeugt, die Liste zu erweitern.",
+        "Wildcard-Erosion: Jeder grobe Eintrag, der \"vorübergehend\" hinzugefügt wird, bleibt dauerhaft bestehen, bis ihn jemand überprüft.",
+        "Durchsetzung auf der falschen Ebene – eine In-Process-Prüfung, die der generierte Code einfach umgehen kann."
+      ],
+      "whenNot": [
+        "Vollständig Offline-Agenten, bei denen es keinen Egress einzuschränken gibt und die Kontrollmaßnahme reine Show wäre.",
+        "Wenn das Design bereits genau ein Ziel zulässt, sodass die Allowlist eine Eigenschaft der Architektur ist und keine zusätzlich hinzuzufügende Richtlinie.",
+        "Wenn ein Unternehmens-Proxy bereits dieselbe Richtlinie erzwingt und eine zweite Liste die Zuständigkeit aufteilen würde, ohne eine Einschränkung hinzuzufügen."
+      ],
+      "examples": [
+        "Ein Coding-Agent in einem Container, dessen Egress-Richtlinie nur die Paketregistrierung und den internen Git-Host nennt. Eine injizierte Anweisung, das Repository per POST an einen externen Collector zu senden, schlägt auf der Netzwerkesbene fehl und wird als Blockierung erfasst.",
+        "Ein Forschungs-Agent, der weitreichende Abrufe durchführen darf, aber über einen Proxy geleitet wird, der nur GET erlaubt und ausgehende Bodys begrenzt – er kann das Web lesen, hat aber keinen Kanal, um darauf zu schreiben.",
+        "Das für diese Wissensdatenbank veröffentlichte stdio-Paket: Sein einziges ausgehendes Ziel ist der öffentliche Endpunkt, den es per Proxy anspricht, sodass die Allowlist eine Eigenschaft des Designs ist und keine nachträglich überlagerte Richtlinie."
+      ],
+      "kpis": [
+        {
+          "metric": "Blockierte Egress-Versuche",
+          "note": "Das Signal, für dessen Erzeugung das Pattern existiert. Ein anhaltender Anstieg ist entweder ein Angriff oder eine Aufgabe, die über ihre Liste hinausgewachsen ist – beides ist wissenswert."
+        },
+        {
+          "metric": "Größe der Allowlist",
+          "note": "Zugelassene Ziele pro Agentenrolle. Ein Wachstum ohne Löschungen führt dazu, dass die Liste in Richtung \"Alles erlauben\" verfällt."
+        },
+        {
+          "metric": "Wildcard-Einträge",
+          "note": "Anzahl grober Einträge. Jeder einzelne ist ein Kanal, über den Sie nicht logisch urteilen können; das Ziel ist null."
+        },
+        {
+          "metric": "Zeit von der Blockierung bis zur Triage",
+          "note": "Wie lange eine Blockierung wartet, bevor ein Mensch sie ansieht. Eine ungelesene Blockierung ist ein Alarm, den Sie eigentlich nicht haben."
+        }
+      ],
+      "failureModes": [
+        "Das freigegebene Relay: Ein zugelassener Host, der alles weiterleitet, was er erhält, sodass die Zielprüfung erfolgreich ist und die Daten dennoch abfließen.",
+        "Wildcard-Erosion: Temporäre grobe Einträge, die den Grund für ihre Hinzufügung überdauern.",
+        "In-Process-Durchsetzung: Die Prüfung findet dort statt, wo der generierte Code ausgeführt wird, sodass der Code sie umgehen kann.",
+        "Stille Blockierungen: Ablehnungen, die als gewöhnliche Netzwerkfehler protokolliert werden, sodass das einzige Signal, das das Pattern erzeugt, niemanden erreicht."
+      ],
+      "lessons": [
+        "Egress is die letzte Kontrollmaßnahme, die noch funktioniert, nachdem das Modell überzeugt wurde. Bauen Sie sie auf, bevor Sie sie benötigen.",
+        "Leiten Sie die Liste aus dem gemessenen Datenverkehr ab und nicht aus Annahmen. Genau das für die Inbound-Origin-Regel an unserem eigenen MCP-Endpunkt zu tun, führte zu einer Regel, die sich von der unterschied, die wir standardmäßig geschrieben hätten.",
+        "Behandeln Sie eine Blockierung als Alarm, nicht als Fehler. Sie ist das kostengünstigste Angriffssignal im Stack.",
+        "Jede Wildcard ist ein Versprechen, das Sie nicht halten können. Nennen Sie konkrete Hosts, oder akzeptieren Sie, dass Sie keine Allowlist haben."
+      ],
+      "faqs": [
+        {
+          "q": "Ist eine Egress-Allowlist für einen Agenten, der im Web surft, realistisch?",
+          "a": "Ja, wenn Sie eher die Form als die Menge einschränken. Erlauben Sie weitreichenden GET-Datenverkehr über einen Proxy, der Request-Bodys verbietet und die Größe begrenzt: Der Agent kann umfassend lesen, hat aber keinen Kanal, der breit genug ist, um das Gelesene herauszuschreiben."
+        },
+        {
+          "q": "Muss DNS auf der Liste stehen?",
+          "a": "Ja. Ein Resolver, den der Agent frei abfragen kann, ist ein Exfiltrationskanal – Daten, die in Subdomain-Abfragen codiert sind, fließen ohne eine einzige HTTP-Anfrage ab. Leiten Sie DNS über dieselbe Richtlinie."
+        },
+        {
+          "q": "Wir haben bereits Tools mit dem Prinzip der minimalen Rechtevergabe (Least Privilege). Ist das redundant?",
+          "a": "Nein; sie decken unterschiedliche Hälften ab. Least Privilege begrenzt, was der Agent tun kann, Egress-Kontrolle begrenzt, wohin das bereits Gelesene gelangen kann. Ein Read-Only-Agent mit offenem Egress kann dennoch alles leaken, was er lesen kann."
+        }
+      ]
+    },
+    "ja": {
+      "name": "エグレス許可リスト",
+      "summary": "エージェントのトラフィックの送信先を制限します。データの窃盗もインジェクションペイロードの配信も、最終的には外部へのリクエストに行き着くため、許可された送信先のみを定義するデフォルト拒否（default-deny）リストは、他のすべてのコントロールが失敗した後に機能する最後の砦となります。",
+      "definition": "エグレス許可リストとは、エージェントの外部へのリクエストを明示的に指定された送信先セットのみに許可し、それ以外をデフォルトで拒否する、ネットワークまたはサンドボックスレベルのポリシーです。これにより、エージェントが完全にハイジャックされた場合でも、攻撃者が指定したエンドポイントにデータが流出するのを防ぐことができます。",
+      "problem": "すべてのデータ流出経路は、外部へのリクエストで行き着きます。任意のホストにアクセスできるエージェントは、読み取ったすべてのデータを任意のアドレスに送信するように指示される可能性があり、プロンプトレベルの指示ではこれを防ぐことはできません。",
+      "context": "エージェントが信頼できないコンテンツを処理し、かつネットワークリクエスト（ページの取得、ツールの呼び出し、画像のレンダリング、生成されたコードの実行など）を実行できるすべての場所で使用します。このパターンは、インジェクションが発生する可能性が最も高い場所で最大の価値を発揮します。",
+      "solution": [
+        "デフォルト拒否。許可リストのみが唯一の送信経路となります。指定されていないものはすべて拒否され、その拒否はエラーとして握り潰されるのではなく、シグナルとしてログに記録されます。",
+        "タスクに基づいて送信先を列挙します。エージェントが呼び出す必要のあるAPI、取得する必要のあるドメイン、インストール元のレジストリなど、それぞれに所有者と書面による理由を明記します。",
+        "エージェントの下層で強制します。ポリシーはサンドボックス、プロキシ、またはネットワークに配置し、モデルが言いくるめて回避できるようなツールのコード内には決して配置しないでください。エージェントが言いくるめて回避できるルールは、コントロールではなく単なるドキュメントです。",
+        "目立たないチャネルを閉鎖します。レンダリングされた画像URL、リンクプレビュー、DNSルックアップ、Webhook、エラーリポーター、パッケージのインストールはすべてエグレスであり、そのすべてが利用されます。",
+        "動作を論理的に推測できるホストのみを許可します。ユーザー提供のコンテンツを配信するホスト（生のファイルのCDN、ペーストサイト、パブリックオブジェクトストレージなど）に対するワイルドカードは、許可リストの皮を被ったオープンなチャネルにすぎません。",
+        "測定に基づいてリストを導出し、タスクが変更されたときに再導出します。誰かが呼び出すと想定しているものではなく、エージェントが実際に呼び出すものから開始します。"
+      ],
+      "components": [
+        "すべてのトラフィックが通過しなければならないエグレスゲートウェイまたはサンドボックスネットワークポリシー。",
+        "明示的かつ管理された宛先インベントリを持つ、デフォルト拒否（deny-by-default）ルール。",
+        "調査用エージェントとデプロイ用エージェントが1つのリストを共有しないようにするための、ロールごとのポリシー。",
+        "拒否はシグナル強度の高いイベントであるため、アラート送信に連携された拒否ログ。",
+        "宛先だけでは不十分な場合における、メソッドとペイロードの制約（GETのみ、ボディサイズ制限など）。",
+        "誰も使用していない宛先を削除するための定期的なレビュー。"
+      ],
+      "benefits": [
+        "エージェントの推論プロセスが完全に侵害された後でも、データの持ち出しを制限します。",
+        "試行を可視化します。拒否された宛先は、エージェントスタックが生成する数少ない明白な攻撃シグナルの1つです。",
+        "モデルに依存しません。モデルの入れ替え、プロンプトの変更、フレームワークの移行を行っても機能し続けます。",
+        "ゲートウェイが存在すれば拡張コストが低く、新しいエージェントはそれぞれその強制ポイントを継承します。"
+      ],
+      "risks": [
+        "許可リストに登録されたリレー：許可されたホスト自体がデータをさらに転送する場合、許可リストは形骸化します。",
+        "正当な依存関係のホストが移動したときに破損が発生し、時間のプレッシャーの中でリストを拡張せざるを得なくなる状況。",
+        "ワイルドカードの浸食：「一時的」に追加された広範なエントリは、誰かが監査するまで永続的に残ります。",
+        "誤ったレイヤーでの強制：生成されたコードが簡単にバイパスできるインプロセスチェック。"
+      ],
+      "whenNot": [
+        "完全にオフラインのエージェント。制限すべきエグレスが存在せず、コントロールが形骸化（形だけ）になります。",
+        "設計上、すでに宛先が厳密に1つしか許可されていない場合。この場合、許可リストは追加すべきポリシーではなく、アーキテクチャの特性となります。",
+        "企業のプロキシがすでに同じポリシーを強制しており、2つ目のリストを作成すると制約を追加することなく所有権が分散してしまう場合。"
+      ],
+      "examples": [
+        "コンテナ内のコーディングエージェントで、そのエグレスポリシーにパッケージレジストリと内部Gitホストのみが指定されている場合。リポジトリを外部のコレクターにPOSTするように注入された指示は、ネットワークレイヤーで失敗し、拒否として表示されます。",
+        "広範囲のフェッチは許可されているものの、GETのみを許可し送信ボディを制限するプロキシの通過を強制される調査用エージェント。Webを読み取ることはできますが、Webに書き込むためのチャネルは持ちません。",
+        "このナレッジベース向けに公開されているstdioパッケージ：その唯一の送信先はプロキシ先であるパブリックエンドポイントであるため、許可リストは後から重ねるポリシーではなく、設計の特性となります。"
+      ],
+      "kpis": [
+        {
+          "metric": "拒否されたエグレス試行",
+          "note": "このパターンが存在する目的であるシグナル。持続的な増加は、攻撃が発生しているか、タスクがリストの規模を超えたかのいずれかであり、どちらも把握する価値があります。"
+        },
+        {
+          "metric": "許可リストのサイズ",
+          "note": "エージェントのロールごとに許可されている宛先。削除を伴わない増加は、リストが「すべて許可」に向かって形骸化していることを意味します。"
+        },
+        {
+          "metric": "ワイルドカードエントリ",
+          "note": "広範なエントリの数。これらはすべて、動作を論理的に推測できないチャネルであり、目標値はゼロです。"
+        },
+        {
+          "metric": "拒否からトリアージまでの時間",
+          "note": "拒否が発生してから人間が確認するまでの待ち時間。確認されない拒否は、実際には存在しないアラートと同じです。"
+        }
+      ],
+      "failureModes": [
+        "許可リストに登録されたリレー：渡されたものを何でも転送する承認済みホスト。これにより、宛先チェックはパスし、データは流出し続けます。",
+        "ワイルドカードの浸食：追加された理由よりも長生きする、一時的な広範なエントリ。",
+        "インプロセスでの強制：生成されたコードが実行される場所でチェックが行われるため、コードがチェックをスキップできてしまいます。",
+        "サイレントな拒否：拒否が通常のネットワークエラーとしてログに記録されるため、このパターンが生成する唯一のシグナルが誰にも届きません。"
+      ],
+      "lessons": [
+        "エグレスは、モデルが言いくるめられた後でも機能する最後のコントロールです。必要になる前に構築してください。",
+        "想定ではなく、測定されたトラフィックからリストを導出します。独自のMCPエンドポイントのインバウンドオリジンルールでまさにこれを行ったところ、デフォルトから作成したであろうルールとは異なるルールが生成されました。",
+        "拒否をエラーではなくアラートとして扱います。これはスタックの中で最も低コストな攻撃シグナルです。",
+        "すべてのワイルドカードは、守ることのできない約束です。ホスト名を指定するか、許可リストが存在しないことを受け入れてください。"
+      ],
+      "faqs": [
+        {
+          "q": "Webを閲覧するエージェントにとって、エグレス許可リストは現実的ですか？",
+          "a": "はい、セットではなく形状を制約すれば可能です。リクエストボディを禁止しサイズを制限するプロキシを介して広範なGETトラフィックを許可します。これにより、エージェントは広く読み取ることができますが、読み取った内容を書き出すのに十分な広さのチャネルは持ちません。"
+        },
+        {
+          "q": "DNSをリストに含める必要がありますか？",
+          "a": "必要です。エージェントが自由にクエリできるリゾルバーは、データの持ち出しチャネルになります。サブドメインのルックアップにエンコードされたデータは、HTTPリクエストを1回も送信することなく流出します。DNSも同じポリシーを介してルーティングしてください。"
+        },
+        {
+          "q": "すでに最小権限のツールを導入しています。これは冗長ですか？",
+          "a": "いいえ、これらは異なる半分をカバーしています。最小権限はエージェントができることを制限し、エグレスコントロールはすでに読み取ったデータの送信先を制限します。エグレスが開放されている読み取り専用エージェントは、読み取ることができるすべての情報を漏洩させる可能性があります。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "出口允许列表",
+      "summary": "限制智能体的流量允许流向何处。数据窃取和注入有效载荷的传递都以出站请求结束，因此默认拒绝的允许目标地址列表是在其他所有控制措施都失效后仍然有效的控制手段。",
+      "definition": "出口允许列表是一种网络或沙箱级别的策略，它仅允许智能体向明确指定的目的地集合发送出站请求，并默认拒绝其他所有请求，因此即使智能体已被完全劫持，数据也无法流向攻击者选择的端点。",
+      "problem": "每条外发路径都以出站请求结束。可以访问任意主机的智能体可能会被指示将其读取的任何内容发送到任何地址，而没有任何提示词级别的指令可以阻止这一点。",
+      "context": "在智能体既处理不可信内容又可以发起网络请求的任何地方使用它——例如获取页面、调用工具、渲染图像、运行生成的代码。该模式在最容易发生注入的地方价值最大。",
+      "solution": [
+        "默认拒绝。允许列表是唯一的出口；任何未列出的请求都会被拒绝，并且该拒绝会被记录为信号，而不是作为错误被吞掉。",
+        "根据任务列举目的地：智能体必须调用的 API、必须获取的域名、必须从中安装的注册表——每个目的地都应有所有者和书面理由。",
+        "在智能体底层进行强制执行。将策略置于沙箱、代理或网络中，绝不要放在模型可以通过辩解绕过的工具代码中。一条智能体可以说服绕过的规则只是文档，而不是控制措施。",
+        "关闭隐蔽通道。渲染的图像 URL、链接预览、DNS 查询、webhook、错误报告程序和包安装都属于出站流量，而且它们都会被利用。",
+        "仅允许您可以推断其行为的主机。在提供用户生成内容的主机（如原始文件 CDN、剪贴板网站、公共对象存储）上使用通配符，无异于披着白名单外衣的开放通道。",
+        "通过实际测量来推导白名单，并在任务改变时重新推导。从智能体实际调用的内容开始，而不是基于某人假设它会调用的内容。"
+      ],
+      "components": [
+        "所有流量都必须通过的出站网关或沙箱网络策略。",
+        "默认拒绝规则，并配有明确且有专人维护的目标地址清单。",
+        "基于角色的策略，使研究智能体和部署智能体不共享同一个白名单。",
+        "将拒绝日志与告警关联，因为拒绝事件是高信号强度的事件。",
+        "在仅靠目标地址还不够时的请求方法和载荷限制（例如：仅限 GET、限制主体大小）。",
+        "定期审查机制，用于移除从未被使用过的目标地址。"
+      ],
+      "benefits": [
+        "即使在智能体的推理能力被完全攻破后，也能限制数据外泄。",
+        "使尝试行为可视化：被拒绝的目标地址是智能体技术栈产生的少数几个明确无误的攻击信号之一。",
+        "独立于模型 —— 在更换模型、修改提示词和迁移框架时依然有效。",
+        "一旦网关建立，扩展成本极低；每个新智能体都会继承该执行点。"
+      ],
+      "risks": [
+        "白名单中的中继：允许的主机自身如果转发数据，会使白名单流于形式。",
+        "当合法的依赖项迁移主机时会导致服务中断，从而在时间紧迫的情况下产生扩大白名单的压力。",
+        "通配符侵蚀：每个“临时”添加的宽泛条目在有人审计之前都会变成永久条目。",
+        "在错误的层级进行强制执行 —— 例如生成的代码可以轻易绕过的进程内检查。"
+      ],
+      "whenNot": [
+        "完全离线的智能体，此时没有需要限制的出站流量，这种控制措施只是流于形式。",
+        "当设计上已经仅允许一个目标地址时，白名单已是架构本身的属性，无需额外添加策略。",
+        "当企业代理已经强制执行相同的策略时，设置第二个白名单会在不增加任何限制的情况下分散所有权。"
+      ],
+      "examples": [
+        "容器中的编码智能体，其出站策略仅指定了包注册表和内部 Git 主机。注入的将代码库 POST 到外部收集器的指令会在网络层失败，并显示为拒绝事件。",
+        "允许广泛获取数据但必须通过代理的研究智能体，该代理仅允许 GET 请求并限制出站主体大小 —— 使其能够读取网页，但没有向外写入数据的通道。",
+        "为此知识库发布的 stdio 包：其唯一的出站目标是它所代理的公共端点，因此白名单是设计本身的属性，而不是事后叠加的策略。"
+      ],
+      "kpis": [
+        {
+          "metric": "被拒绝的出站尝试",
+          "note": "该模式旨在产生的信号。持续上升要么意味着遭受攻击，要么意味着任务超出了其白名单范围 —— 这两者都值得关注。"
+        },
+        {
+          "metric": "白名单大小",
+          "note": "每个智能体角色允许的目标地址数量。只增不减会导致白名单逐渐退化为“允许所有”。"
+        },
+        {
+          "metric": "通配符条目",
+          "note": "宽泛条目的数量。每一个宽泛条目都是一个您无法推断其行为的通道；目标值应为零。"
+        },
+        {
+          "metric": "从拒绝到分类处置的时间",
+          "note": "拒绝事件在人工查看前等待了多长时间。未读的拒绝事件等于不存在的告警。"
+        }
+      ],
+      "failureModes": [
+        "白名单中的中继：一个被批准的主机会转发接收到的任何内容，从而使目标检查通过，而数据仍然会外泄。",
+        "通配符侵蚀：临时的宽泛条目生命周期超出了其添加的初衷。",
+        "进程内强制执行：检查存在于生成代码运行的地方，因此代码可以跳过它。",
+        "静默拒绝：拒绝被记录为普通的网络错误，导致该模式生成的唯一信号永远无法送达任何人。"
+      ],
+      "lessons": [
+        "出站控制是模型被说服后仍然有效的最后一道防线。在需要它之前就构建好它。",
+        "通过测量流量而非假设来推导白名单。在针对我们自己的 MCP 端点的入站来源规则进行此操作时，产生了一条与我们默认编写的规则完全不同的规则。",
+        "将拒绝事件视为告警，而非错误。它是技术栈中成本最低的攻击信号。",
+        "每一个通配符都是一个您无法兑现的承诺。明确指定主机，否则就承认您并没有白名单。"
+      ],
+      "faqs": [
+        {
+          "q": "对于需要浏览网页的智能体，出站白名单现实吗？",
+          "a": "是的，前提是您限制其形式而不是集合。通过禁止请求主体并限制大小的代理来允许广泛的 GET 流量：智能体可以广泛读取，但没有足够宽的通道来写出它所读取的内容。"
+        },
+        {
+          "q": "DNS 需要在白名单中吗？",
+          "a": "需要。智能体可以自由查询的解析器是一个数据外泄通道 —— 编码到子域名查询中的数据无需单个 HTTP 请求即可流出。请通过相同的策略路由 DNS。"
+        },
+        {
+          "q": "我们已经有了最小权限工具。这是否多余？",
+          "a": "不，它们涵盖了不同的方面。最小权限限制了智能体可以执行的操作，而出站控制限制了它已经读取的内容可以流向何处。一个具有开放出站通道的只读智能体仍然可以泄露它能读取的所有内容。"
+        }
+      ]
     }
   }
 }

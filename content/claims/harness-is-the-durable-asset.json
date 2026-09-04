@@ -38,6 +38,30 @@
       "basis": "Os modelos são comprados por todos em condições comparáveis, ao passo que o harness codifica o acesso a dados próprios, as políticas, os contratos de ferramentas, as suites de avaliação e os limites de autoridade de uma organização concreta — e nada disso viaja ao mudar de modelo.",
       "limitations": "É uma aposta sobre o futuro, sustentada com confiança baixa e sem medição que a apoie. O contrário é igualmente defensável: os ganhos de capacidade podem absorver o trabalho de harness, e boa parte do harness de hoje existe para compensar limitações que a geração seguinte elimina.",
       "falsifiedBy": "Que gerações sucessivas de modelos reduzam o harness necessário para o mesmo resultado verificado — mensuravelmente menos componentes para resultados iguais ou melhores — ou que às empresas o que lhes move os resultados seja mudar de modelo e não a qualidade do harness."
+    },
+    "fr": {
+      "statement": "À mesure que les capacités des modèles de pointe se banalisent, le harness devient la source durable d'avantage concurrentiel pour une entreprise.",
+      "basis": "Les modèles sont achetés par tous à des conditions comparables, tandis que le harness encode les accès aux données propres à l'organisation, ses politiques, ses contrats d'outils, ses suites d'évaluation et ses limites d'autorité — dont aucun n'est transféré lors d'un changement de modèle.",
+      "limitations": "Un pari sur l'avenir, formulé avec un faible niveau de confiance et sans mesure à l'appui. L'inverse est tout aussi défendable : les gains de capacité pourraient absorber le travail du harness, et une grande partie du harness actuel existe pour compenser des limitations que la prochaine génération de modèles éliminera.",
+      "falsifiedBy": "Des générations successives de modèles réduisant le harness nécessaire pour atteindre le même résultat vérifié — mesurable par moins de composants pour des résultats équivalents ou meilleurs — ou des entreprises constatant que c'est le changement de modèle, et non la qualité du harness, qui fait évoluer leurs résultats."
+    },
+    "de": {
+      "statement": "Da die Fähigkeiten von Frontier-Modellen zur Commodity werden, entwickelt sich der Harness zur dauerhaften Quelle für Wettbewerbsvorteile eines Unternehmens.",
+      "basis": "Modelle werden von allen zu vergleichbaren Konditionen eingekauft, während der Harness den eigenen Datenzugriff, Richtlinien, Tool-Contracts, Evaluations-Suites und Befugnisgrenzen eines Unternehmens kodiert – nichts davon lässt sich bei einem Modellwechsel übertragen.",
+      "limitations": "Eine Wette auf die Zukunft, mit geringem Vertrauen und ohne stützende Messungen. Das Gegenteil ist ebenso argumentierbar: Fähigkeitsgewinne könnten die Harness-Arbeit absorbieren, und ein Großteil des heutigen Harness existiert nur, um Einschränkungen zu kompensieren, die die nächste Modellgeneration behebt.",
+      "falsifiedBy": "Dass aufeinanderfolgende Modellgenerationen den benötigten Harness reduzieren, um dasselbe verifizierte Ergebnis zu erzielen – messbar weniger Komponenten für gleiche oder bessere Ergebnisse – oder dass Unternehmen feststellen, dass der Wechsel von Modellen und nicht die Qualität des Harness ihre Ergebnisse beeinflusst."
+    },
+    "ja": {
+      "statement": "フロンティアモデルの能力がコモディティ化するにつれて、ハーネスは企業にとって持続可能な競争優位性の源泉となります。",
+      "basis": "モデルは誰もが同等の条件で購入できますが、ハーネスには組織独自のデータアクセス、ポリシー、ツール契約、評価スイート、および権限制限がコード化されており、これらはモデルを入れ替えても引き継がれません。",
+      "limitations": "これは未来に対する賭けであり、確信度は低く、裏付けとなる測定データもありません。逆の主張も同様に成り立ちます。能力の向上によってハーネスの役割が吸収される可能性があり、今日のハーネスの多くは、次のモデル世代で解消される制限を補うために存在しています。",
+      "falsifiedBy": "後続のモデル世代によって、同じ検証済み成果を達成するために必要なハーネスが削減されること（同等以上の結果に対してコンポーネント数が測定可能なレベルで減少すること）、または企業が成果を左右するのはハーネスの品質ではなく、モデルの入れ替えであると気づくこと。"
+    },
+    "zh": {
+      "statement": "随着前沿模型能力走向商品化，支撑系统成为企业持久竞争优势的源泉。",
+      "basis": "所有人购买模型的条件都大体相当，而支撑系统则编码了组织自身的数据访问、策略、工具契约、评估套件和权限限制——这些都不会随着模型的更换而转移。",
+      "limitations": "这是一场对未来的赌注，置信度较低且缺乏数据支持。相反的论点同样站得住脚：模型能力的提升可能会吞噬支撑系统的工作，且当今的大部分支撑系统都是为了弥补下一代模型将会消除的局限性而存在的。",
+      "falsifiedBy": "连续的模型世代减少了达到相同验证结果所需的支撑系统——在获得相同或更好结果的前提下，组件数量明显减少——或者企业发现，改变结果的是更换模型，而非支撑系统的质量。"
     }
   }
 }

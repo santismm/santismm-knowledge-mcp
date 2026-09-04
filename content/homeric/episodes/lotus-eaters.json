@@ -69,6 +69,22 @@
         "pt": {
           "label": "Djerba e a costa líbia",
           "note": "Heródoto conhecia nessa costa um povo chamado lotófagos e Políbio identificou sua ilha com Meninx. É a mais bem argumentada das identificações das andanças e ainda se apoia em geógrafos lendo um poema."
+        },
+        "fr": {
+          "label": "Djerba et la côte libyenne",
+          "note": "Hérodote connaissait un peuple appelé Lotophages sur cette côte et Polybe a identifié leur île comme étant Meninx. C'est la mieux argumentée des identifications d'errance, et elle repose toujours sur la lecture d'un poème par des géographes."
+        },
+        "zh": {
+          "label": "杰尔巴岛与利比亚海岸",
+          "note": "希罗多德知道在这片海岸上有一个被称为洛托法吉人的民族，波利比乌斯将他们的岛屿认定为梅宁克斯岛。这是关于漂泊地点认定中论证最充分的一个，但它仍然建立在地理学家对史诗的解读之上。"
+        },
+        "de": {
+          "label": "Djerba und die libysche Küste",
+          "note": "Herodot von Halikarnassos kannte ein Volk namens Lotophagen an dieser Küste, und Polybios identifizierte ihre Insel als Meninx. Es ist die am besten begründete der Identifizierungen der Irrfahrten und beruht dennoch darauf, dass Geografen ein Gedicht interpretieren."
+        },
+        "ja": {
+          "label": "ジェルバ島とリビア海岸",
+          "note": "ヘロドトスはこの海岸にロトパゴス族と呼ばれる人々がいたことを知っており、ポリュビオスはその島をメニンクス島と特定しました。これは漂流の特定の中で最もよく議論されているものですが、依然として地理学者たちが詩を読み解いた結果に基づいています。"
         }
       }
     }
@@ -131,6 +147,86 @@
         {
           "q": "Djerba é a ilha dos lotófagos?",
           "a": "É a identificação antiga, argumentada por Políbio. O atlas a registra como especulativa: nenhuma escavação conecta a ilha ao episódio."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Les Lotophages",
+      "summary": "Vingt-trois vers, aucune violence, et le danger le plus sournoisement effrayant du poème : un fruit qui fait perdre aux hommes l'envie de rentrer chez eux.",
+      "narrative": [
+        "Emporté au-delà de Cythère pendant neuf jours, Ulysse débarque chez un peuple qui offre du lotus à ses éclaireurs au lieu de leur faire du mal. Les hommes qui en mangent oublient le retour ; Ulysse les ramène de force, en larmes, et les attache sous les bancs.",
+        "La menace n'est pas la mort, mais la fin de l'histoire. Tout ce qui fait l'Odyssée — le retour, la mémoire, l'identité — peut être dissous par une plante."
+      ],
+      "whyItMatters": "C'est la première des errances et celle qui s'appuie sur la géographie antique la plus respectable, c'est pourquoi elle obtient le score le plus élevé de la catégorie spéculative.",
+      "debate": "Reste à savoir si les Lotophages d'Homère sont les Lotophages historiques sous un nom poétique, ou si les géographes de l'Antiquité ont projeté le poème sur un peuple réel.",
+      "faqs": [
+        {
+          "q": "Qu'était le lotus ?",
+          "a": "Les commentateurs anciens et modernes proposent le plus souvent le Ziziphus lotus, un arbuste semblable au jujubier de la côte nord-africaine dont le fruit est doux et légèrement enivrant en quantité. L'identification est plausible et non prouvée."
+        },
+        {
+          "q": "Djerba est-elle l'île des Lotophages ?",
+          "a": "C'est l'identification antique, soutenue par Polybe. L'atlas la classe comme spéculative : aucune fouille ne relie l'île à l'épisode."
+        }
+      ]
+    },
+    "de": {
+      "title": "Die Lotophagen",
+      "summary": "Dreiundzwanzig Zeilen, keine Gewalt und die am leisesten beängstigende Gefahr im Gedicht: eine Frucht, die Männer vergessen lässt, dass sie nach Hause wollen.",
+      "narrative": [
+        "Neun Tage lang an Kythera vorbeigetrieben, landet Odysseus bei einem Volk, das seinen Kundschaftern Lotus statt Schaden anbietet. Die Männer, die davon essen, vergessen die Heimkehr; Odysseus zieht sie weinend zurück und fesselt sie unter den Ruderbänken.",
+        "Die Bedrohung ist nicht der Tod, sondern das Ende der Geschichte. Alles, worum es in der Odyssee geht – Heimkehr, Erinnerung, Identität –, kann durch eine Pflanze aufgelöst werden."
+      ],
+      "whyItMatters": "Es ist die erste der Irrfahrten und diejenige mit der fundiertesten antiken Geografie im Hintergrund, weshalb sie an der Spitze des spekulativen Bereichs abschneidet.",
+      "debate": "Ob Homers Lotophagen die historischen Lotophagen unter einem poetischen Namen sind oder ob antike Geografen das Gedicht auf ein reales Volk projiziert haben.",
+      "faqs": [
+        {
+          "q": "Was war der Lotus?",
+          "a": "Antike und moderne Kommentatoren schlagen meist Ziziphus lotus vor, einen jujubenartigen Strauch der nordafrikanischen Küste, dessen Frucht süß und in größeren Mengen leicht berauschend ist. Die Identifizierung ist plausibel, aber unbewiesen."
+        },
+        {
+          "q": "Ist Djerba die Insel der Lotophagen?",
+          "a": "Dies ist die antike Identifizierung, die von Polybios vertreten wurde. Der Atlas verzeichnet sie als spekulativ: Keine Ausgrabung verbindet die Insel mit der Episode."
+        }
+      ]
+    },
+    "ja": {
+      "title": "ハスを食う人々",
+      "summary": "わずか23行、暴力は一切なし。そして、この詩の中で最も静かに恐ろしい危険。それは、人々に帰郷を望むことを忘れさせる果実です。",
+      "narrative": [
+        "キテラ島を越えて9日間にわたり風に流されたオデュッセウスは、偵察隊に危害を加える代わりにハスの実を差し出す人々の土地に上陸します。それを食べた男たちは帰還することを忘れてしまい、オデュッセウスは泣き叫ぶ彼らを無理やり連れ戻し、ベンチの下に縛り付けます。",
+        "脅威は死ではなく、物語の終わりです。『オデュッセイア』がテーマとするすべて（帰還、記憶、アイデンティティ）が、たった一つの植物によって消し去られてしまうのです。"
+      ],
+      "whyItMatters": "これは漂流の最初の出来事であり、その背景には最も信頼に足る古代の地理が存在します。そのため、推測の範疇において最高得点を獲得しています。",
+      "debate": "ホメロスの描く「ハスを食う人々」が詩的な名前を与えられた歴史上のロトパゴス族なのか、それとも古代の地理学者たちがこの詩を実在の民族に投影しただけなのか。",
+      "faqs": [
+        {
+          "q": "ハス（ロータス）とは何だったのですか？",
+          "a": "古代および現代の注釈家が最も頻繁に提示するのは、北アフリカ沿岸に自生するナツメに似た低木であるZiziphus lotusです。その果実は甘く、大量に食べると軽い酩酊感をもたらします。この特定はもっともらしいものの、証明はされていません。"
+        },
+        {
+          "q": "ジェルバ島は「ハスを食う人々」の島ですか？",
+          "a": "それはポリュビオスが主張した古代の特定です。地図帳ではこれを推測の域を出ないものとして記録しています。この島とエピソードを結びつける発掘調査は行われていません。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "食莲人",
+      "summary": "仅有二十三行，没有暴力，却是史诗中最悄无声息、令人恐惧的危险：一种让人不再想回家的果实。",
+      "narrative": [
+        "被风吹过基西拉岛九天后，奥德修斯在一群人那里登陆，他们没有伤害他的侦察兵，而是给他们提供食莲果。吃下果实的人忘记了归途；奥德修斯哭着把他们拖了回来，绑在船凳下。",
+        "威胁不是死亡，而是故事的终结。《奥德赛》所关乎的一切——归途、记忆、身份——都可以被一株植物消解。"
+      ],
+      "whyItMatters": "这是漂泊之旅的第一站，也是背后有着最值得信赖的古代地理依据的一站，因此它在推测性区间中得分最高。",
+      "debate": "究竟荷马笔下的食莲人是冠以诗意名称的历史上的洛托法吉人，还是古代地理学家将史诗投射到了现实中的民族身上。",
+      "faqs": [
+        {
+          "q": "食莲果究竟是什么？",
+          "a": "古代和现代的评论家最常提出的是野酸枣（Ziziphus lotus），这是一种生长在北非海岸、类似于枣树的灌木，其果实甘甜，大量食用会产生轻微的醉意。这一认定看似合理，但尚未得到证实。"
+        },
+        {
+          "q": "杰尔巴岛是食莲人的岛屿吗？",
+          "a": "这是古代的认定，由波利比乌斯提出。地图集将其记录为推测性的：没有任何考古发掘能将该岛与这一情节联系起来。"
         }
       ]
     }

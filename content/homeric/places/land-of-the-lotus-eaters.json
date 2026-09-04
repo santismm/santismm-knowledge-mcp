@@ -80,6 +80,22 @@
         "pt": {
           "label": "Djerba (a antiga Meninx)",
           "note": "A única identificação das andanças com o raciocínio de um geógrafo antigo por trás, e não uma coincidência de nomes: Heródoto situa um povo chamado lotófagos na costa líbia, e Políbio identificou sua ilha com Meninx, a atual Djerba. Ali cresce um fruto local que encaixa na descrição."
+        },
+        "fr": {
+          "label": "Djerba (l'antique Méninx)",
+          "note": "La seule identification d'errance qui s'appuie sur l'argument d'un géographe antique plutôt que sur une coïncidence de noms : Hérodote situe un peuple appelé les Lotophages sur la côte libyenne, et Polybe a identifié leur île comme Méninx, l'actuelle Djerba. Un fruit local correspondant à la description y pousse."
+        },
+        "zh": {
+          "label": "杰尔巴岛（古代梅宁克斯）",
+          "note": "这是唯一一个背后有古代地理学家论证支持、而非仅仅是名字巧合的漂泊地认定：希罗多德将一个名为洛托法基的民族置于利比亚海岸，波利比乌斯将他们的岛屿认定为梅宁克斯，即现代的杰尔巴岛。那里生长着一种与描述相符的当地果实。"
+        },
+        "de": {
+          "label": "Djerba (antikes Meninx)",
+          "note": "Die einzige Identifizierung der Irrfahrten, hinter der das Argument eines antiken Geografen steht und nicht nur eine Namensübereinstimmung: Herodot berichtet von einem Volk namens Lotophagen an der libyschen Küste, und Polybios identifizierte deren Insel mit Meninx, dem heutigen Djerba. Eine lokale Frucht, die der Beschreibung entspricht, wächst dort."
+        },
+        "ja": {
+          "label": "ジェルバ島（古代のメニンクス）",
+          "note": "名前の偶然の一致ではなく、古代の地理学者の議論に裏付けられた唯一の漂流同定：ヘロドトスはリビア海岸にロトパゴイと呼ばれる人々を位置づけており、ポリュビオスは彼らの島をメニンクス（現代のジェルバ島）と同定した。そこには描写に合致する地元の果実が育っている。"
         }
       }
     }
@@ -117,6 +133,46 @@
       ],
       "identificationNote": "Especulativa, com 6/12: duas fontes antigas a argumentam em vez de afirmá-la, e a botânica é ao menos coerente. Continua sem nada escavado e sem consenso moderno de que o episódio registre uma viagem.",
       "debate": "Se os lotófagos de Homero são os lotófagos históricos sob um nome poético, ou se os geógrafos gregos projetaram o poema sobre um povo que encontraram."
+    },
+    "fr": {
+      "name": "La terre des Lotophages",
+      "summary": "La première étape après la tempête, et la première tentation : un peuple dont le fruit fait oublier aux visiteurs le chemin du retour. La géographie antique les situait sur la côte libyenne, à Djerba.",
+      "description": [
+        "L'épisode est court et structurellement important. Trois hommes mangent le lotus, perdent tout désir de retour, et doivent être traînés de force vers les navires et attachés sous les bancs. Personne n'est tué ; le danger est l'amnésie.",
+        "Hérodote connaissait un véritable peuple appelé Lotophages sur la côte à l'ouest de la Syrte, et Polybe a identifié l'île de Méninx comme étant la leur. Cela en fait la mieux documentée des identifications d'errance, ce qui en dit long sur la fragilité des autres."
+      ],
+      "identificationNote": "Spéculative, à 6/12 : deux sources antiques la soutiennent par des arguments plutôt que de simplement l'affirmer, et la botanique est pour le moins cohérente. Il n'y a toujours aucun vestige fouillé et aucun consensus moderne sur le fait que l'épisode relate un voyage réel.",
+      "debate": "La question de savoir si les Lotophages d'Homère sont les Lotophages historiques sous un nom poétique, ou si les géographes grecs ont projeté le poème sur un peuple qu'ils ont rencontré."
+    },
+    "de": {
+      "name": "Das Land der Lotophagen",
+      "summary": "Die erste Station nach dem Sturm und die erste Versuchung: ein Volk, dessen Frucht Besucher den Heimweg vergessen lässt. Die antike Geografie verortete sie an der libyschen Küste, auf Djerba.",
+      "description": [
+        "Die Episode ist kurz und strukturell wichtig. Drei Männer essen vom Lotus, verlieren jeden Wunsch zurückzukehren, müssen zu den Schiffen zurückgeschleift und unter den Bänken festgebunden werden. Niemand wird getötet; die Gefahr ist Amnesie.",
+        "Herodot kannte ein reales Volk namens Lotophagen an der Küste westlich der Syrte, und Polybios identifizierte die Insel Meninx als die ihre. Das macht dies zur am besten dokumentierten der Identifizierungen der Irrfahrten, was ein Kommentar dazu ist, wie dünn die anderen gesät sind."
+      ],
+      "identificationNote": "Spekulativ, bei 6/12: Zwei antike Quellen argumentieren dafür, anstatt es nur zu behaupten, und die Botanik ist zumindest konsistent. Es gibt immer noch keine Ausgrabungen und keinen modernen Konsens darüber, dass die Episode eine reale Reise aufzeichnet.",
+      "debate": "Ob Homers Lotophagen die historischen Lotophagen unter einem poetischen Namen sind oder ob griechische Geografen das Epos auf ein Volk zurückprojizierten, dem sie begegten."
+    },
+    "ja": {
+      "name": "ロトパゴイ（ハスを食う人々）の国",
+      "summary": "嵐の後の最初の目的地であり、最初の誘惑。その果実を食べると、訪れた者は家への帰り道を忘れてしまうという人々。古代の地理学は、彼らをリビア海岸のジェルバ島に位置づけていた。",
+      "description": [
+        "このエピソードは短いが、構造的に重要である。3人の男がハスを食べ、帰還する意欲を完全に失い、船へと引きずり戻されてベンチの下に縛り付けられなければならなかった。誰も殺されない。危険なのは記憶喪失である。",
+        "ヘロドトスは、シルト湾の西の海岸にロトパゴイと呼ばれる実在の民族がいたことを知っており、ポリュビオスはメニンクス島を彼らの島と同定した。これにより、これは漂流の同定の中で最も文献的証拠が豊富なものとなっているが、それは他の同定がいかに希薄であるかを示すものでもある。"
+      ],
+      "identificationNote": "推測の域を出ず、スコアは6/12：2つの古代の資料は、それを単に主張するのではなく論証しており、植物学的特徴は少なくとも一致している。依然として発掘されたものはなく、このエピソードが実際の航海を記録したものであるという現代の合意もない。",
+      "debate": "ホメロスの描くロトパゴイが詩的な名前で呼ばれた歴史上のロトパゴイなのか、それともギリシャの地理学者たちが、自分たちが出会った人々に詩の描写を当てはめただけなのか。"
+    },
+    "zh": {
+      "name": "食莲人之地",
+      "summary": "风暴过后的第一站，也是第一个诱惑：一个其果实能让游客忘记回家之路的民族。古代地理学将其置于利比亚海岸的杰尔巴岛（Djerba）。",
+      "description": [
+        "这一情节很短，但在结构上非常重要。三个人吃了莲子，失去了所有回去的欲望，不得不被拖回船上并绑在长椅下。没有人丧生；危险在于遗忘。",
+        "希罗多德知道在锡尔特（Syrtis）以西的海岸上有一个真实的民族叫洛托法基人（Lotophagi），波利比乌斯认定梅宁克斯岛（Meninx）是他们的领地。这使得它成为漂泊之旅认定中文献记载最充分的一个，这也反衬出其他认定的证据是多么单薄。"
+      ],
+      "identificationNote": "推测性，评分为 6/12：两个古代文献对其进行了论证而非仅仅断言，且植物学特征至少是吻合的。但目前仍无任何发掘物，现代学术界也未就该情节记录了一次真实航行达成共识。",
+      "debate": "荷马笔下的食莲人究竟是冠以诗意名称的历史上的洛托法基人，还是希腊地理学家将诗作套用在他们遇到的民族身上。"
     }
   }
 }

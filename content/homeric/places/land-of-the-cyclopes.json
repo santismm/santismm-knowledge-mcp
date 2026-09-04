@@ -89,6 +89,22 @@
         "pt": {
           "label": "Sicília oriental, sob o Etna",
           "note": "A identificação mais antiga: Tucídides registra que se dizia que ciclopes e lestrigões teriam sido os primeiros habitantes da Sicília, e a costa vulcânica ao pé do Etna carrega a associação desde então. Nada escavado a sustenta, e a descrição do próprio poema — um povo pastoril sem leis, sem naus nem assembleias — é um retrato da não civilização mais que uma localização."
+        },
+        "fr": {
+          "label": "Sicile orientale, au pied de l'Etna",
+          "note": "La plus ancienne identification : Thucydide rapporte que les Cyclopes et les Lestrygons étaient considérés comme les premiers habitants de la Sicile, et la côte volcanique au pied de l'Etna porte cette association depuis lors. Aucune fouille ne vient l'étayer, et la description même du poème — un peuple pastoral sans lois, sans navires ni assemblées — est le portrait d'une non-civilisation plutôt qu'une localisation."
+        },
+        "zh": {
+          "label": "埃特纳火山下的西西里东部",
+          "note": "最古老的认定：修昔底德记载，据说独眼巨人和莱斯特律戈尼亚人是西西里最早的居民，自此埃特纳火山下方的火山海岸便一直与此相联系。没有任何发掘物与此相关，而诗作本身的描述——一个没有船只或集会的无法无天的游牧民族——是对“非文明”状态的描绘，而非一个地理位置。"
+        },
+        "de": {
+          "label": "Ost-Sizilien, unter dem Ätna",
+          "note": "Die älteste Identifizierung: Thukydides berichtet, dass die Kyklopen und Lästrygonen als die frühesten Bewohner Siziliens galten, und die vulkanische Küste unter dem Ätna trägt seither diese Verbindung. Keine Ausgrabung hat Bezug dazu, und die Beschreibung des Epos selbst – ein gesetzloses Hirtenvolk ohne Schiffe oder Versammlungen – ist eher das Porträt einer Unzivilisation als eine Ortsangabe."
+        },
+        "ja": {
+          "label": "エトナ山麓、シチリア東部",
+          "note": "最も古い同定：トゥキディデスは、キュクロプス族とライストリュゴネス族がシチリアの最初の住民であったと言い伝えられていると報告しており、エトナ山麓の火山性の海岸はそれ以来この関連性を持ち続けている。発掘されたものは何一つこれに関係しておらず、詩自体の描写（船も集会もない、無法な牧畜民）は、場所というよりも非文明の肖像である。"
         }
       }
     },
@@ -127,6 +143,22 @@
         "pt": {
           "label": "A costa campana",
           "note": "A leitura sistemática de Bérard, que entende as andanças como uma rota fenícia de navegação, situou os ciclopes na costa vulcânica perto de Nápoles. O método é coerente e a conclusão é inverificável: explica o poema supondo que o poema registra um itinerário real."
+        },
+        "fr": {
+          "label": "La côte de Campanie",
+          "note": "La lecture systématique des errances par Bérard comme une route maritime phénicienne situe les Cyclopes sur la côte volcanique près de Naples. La méthode est cohérente et la conclusion invérifiable : elle explique le poème en supposant que celui-ci consigne un itinéraire réel."
+        },
+        "zh": {
+          "label": "坎帕尼亚海岸",
+          "note": "贝拉尔（Bérard）将漂泊之旅系统地解读为腓尼基人的航线，从而将独眼巨人置于那不勒斯附近的火山海岸。该方法逻辑自洽，但结论无法证实：它通过假设诗作记录了真实的行程来解释诗作。"
+        },
+        "de": {
+          "label": "Die kampanische Küste",
+          "note": "Bérards systematische Deutung der Irrfahrten als phönizische Segelroute verortete die Kyklopen an der vulkanischen Küste bei Neapel. Die Methode ist konsistent und die Schlussfolgerung unüberprüfbar: Sie erklärt das Epos unter der Annahme, dass das Epos eine reale Reiseroute aufzeichnet."
+        },
+        "ja": {
+          "label": "カンパニアの海岸",
+          "note": "漂流をフェニキア人の航路として系統的に読み解いたベラールの解釈は、キュクロプス族をナポリ近郊の火山性の海岸に位置づけた。その方法は一貫しているが、結論は検証不可能である。それは、詩が実際の旅程を記録していると仮定することによって詩を説明している。"
         }
       }
     }
@@ -164,6 +196,46 @@
       ],
       "identificationNote": "Especulativa: duas identificações com pedigree antigo e moderno reais, nenhuma arqueologia e um texto que descreve uma condição moral mais que uma costa. A hipótese mais forte chega a 5/12.",
       "debate": "Se as andanças codificam sequer uma rota náutica real. A resposta de Eratóstenes — descobrirás por onde Odisseu andou quando descobrires o sapateiro que costurou o odre dos ventos — segue sendo a formulação mais afiada do caso cético."
+    },
+    "fr": {
+      "name": "La terre des Cyclopes",
+      "summary": "Là où Ulysse perd six hommes et aveugle Polyphème. Deux traditions la situent sur des côtes volcaniques — la Sicile et la Campanie — et le poème ne la situe nulle part en particulier, de manière délibérée.",
+      "description": [
+        "Le chant IX est l'épisode le plus cité des deux poèmes et le moins localisable. La terre est décrite par ce qui lui manque : pas de navires, pas d'assemblées, pas de labour, pas de lois. Ulysse l'atteint après les Lotophages et en repart après avoir aveuglé un ennemi et s'être attiré la malédiction de Poséidon.",
+        "Il y a une petite île aux chèvres au large, décrite avec un œil de marin — bon port, aucun habitant, chèvres sauvages — qui est le seul détail s'apparentant à une observation réelle. Elle a été associée à des îlots au large de la Sicile et de la Campanie avec la même assurance et la même absence de preuves."
+      ],
+      "identificationNote": "Spéculative : deux identifications ayant de réelles lettres de noblesse anciennes et modernes, aucune archéologie, et un texte qui décrit une condition morale plutôt qu'un littoral. L'hypothèse la plus solide atteint 5/12.",
+      "debate": "La question de savoir si les errances recèlent une quelconque route maritime réelle. La réponse d'Ératosthène — selon laquelle on trouvera où Ulysse a erré quand on aura trouvé le cordonnier qui a cousu l'outre des vents — reste la formulation la plus incisive de la position sceptique."
+    },
+    "de": {
+      "name": "Das Land der Kyklopen",
+      "summary": "Wo Odysseus sechs Männer verliert und Polyphem den Blick raubt. Zwei Traditionen verorten es an vulkanischen Küsten – Sizilien und Kampanien – und das Epos verortet es ganz bewusst an keinem bestimmten Ort.",
+      "description": [
+        "Das 9. Buch ist die am häufigsten zitierte Episode in beiden Epen und die am schwersten zu lokalisierende. Das Land wird durch das beschrieben, was ihm fehlt: keine Schiffe, keine Versammlungen, kein Pflügen, keine Gesetze. Odysseus erreicht es nach den Lotophagen und verlässt es, nachdem er einen Feind geblendet hat und von Poseidon verflucht wurde.",
+        "Vor der Küste liegt eine kleine Ziegeninsel, die mit dem Auge eines Seemanns beschrieben wird – guter Hafen, keine Einwohner, wilde Ziegen –, was das einzige Detail ist, das sich wie eine Beobachtung liest. Sie wurde mit gleicher Zuversicht und gleicher Abwesenheit von Beweisen mit Inselchen vor Sizilien und vor Kampanien gleichgesetzt."
+      ],
+      "identificationNote": "Spekulativ: zwei Identifizierungen mit echter antiker und moderner Tradition, keine Archäologie und ein Text, der eher einen moralischen Zustand als eine Küstenlinie beschreibt. Die stärkste Hypothese erreicht 5/12.",
+      "debate": "Ob die Irrfahrten überhaupt eine reale Segelroute kodieren. Eratosthenes' Antwort – dass man den Ort von Odysseus' Irrfahrten finden wird, wenn man den Schuster findet, der den Sack der Winde genäht hat – bleibt die schärfste Formulierung der skeptischen Haltung."
+    },
+    "ja": {
+      "name": "キュクロプス達の国",
+      "summary": "オデュッセウスが6人の部下を失い、ポリュペモスを盲目にした場所。2つの伝統はここを火山性の海岸（シチリアとカンパニア）に位置づけているが、詩は意図的に特定の場所を定めていない。",
+      "description": [
+        "第9歌は、どちらの詩の中でも最も引用されるエピソードであり、最も場所を特定しにくい。この土地は、船がない、集会がない、耕作がない、法がないといった、欠如しているものによって描写されている。オデュッセウスはロトパゴイ（ハスを食う人々）の後にここに到達し、一人の敵を盲目にし、ポセイドンに呪われてここを去る。",
+        "沖合には小さなヤギの島があり、船乗りの目で描写されている（良い港、住民はいない、野生のヤギ）。これは実際の観察のように読める唯一の詳細である。この島は、シチリア沖やカンパニア沖の小島と、同等の自信と同等の証拠の欠如をもって結びつけられてきた。"
+      ],
+      "identificationNote": "推測の域を出ない：古代および現代において確かな系譜を持つ2つの同定があるが、考古学的な証拠はなく、テキストは海岸線というよりも道徳的な状態を描写している。最も有力な仮説でもスコアは5/12にとどまる。",
+      "debate": "漂流が実際の航路を少しでも反映しているのかどうか。エラトステネスの回答（風の袋を縫った靴屋を見つけたときに、オデュッセウスがどこを漂流したかがわかるだろう）は、懐疑派の主張として今なお最も鋭いものである。"
+    },
+    "zh": {
+      "name": "独眼巨人之地",
+      "summary": "奥德修斯在此失去了六名部下并刺瞎了波吕斐摩斯。两种传统将其置于火山海岸——西西里和坎帕尼亚——而诗作则故意没有将其置于任何具体的地点。",
+      "description": [
+        "第9卷是两部史诗中被引用最多、但最无法确定位置的篇章。这片土地是通过它所缺失的东西来描述的：没有船只、没有集会、没有耕作、没有法律。奥德修斯在离开食莲人之地后到达这里，在刺瞎了一个敌人并受到波塞冬的诅咒后离开。",
+        "近海有一个小山羊岛，其描述极具水手的眼光——优良的港口、无人居住、有野山羊——这是唯一读起来像是实地观察的细节。它被同样自信地、也同样缺乏证据地与西西里和坎帕尼亚附近的小岛联系在一起。"
+      ],
+      "identificationNote": "推测性：两个具有真实古代和现代渊源的认定，没有考古学支持，且文本描述的是一种道德状况而非海岸线。最强的假说得分仅为 5/12。",
+      "debate": "漂泊之旅是否真的编码了任何真实的航线。埃拉托斯特尼（Eratosthenes）的回答——当你找到缝制风袋的鞋匠时，你就会找到奥德修斯漂泊的地方——仍然是对怀疑论立场最犀利的陈述。"
     }
   }
 }

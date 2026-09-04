@@ -82,6 +82,22 @@
         "pt": {
           "label": "Lipari e as ilhas Eólias",
           "note": "As ilhas carregam o nome, e a Antiguidade fez a conexão cedo: Tucídides as trata como as ilhas de Éolo. A ilha flutuante com muralha de bronze do poema não é uma descrição de Lipari, mas o vulcanismo do arquipélago e os ventos ao redor mantiveram a identificação viva por 2.500 anos."
+        },
+        "fr": {
+          "label": "Lipari et les îles Éoliennes",
+          "note": "Les îles en portent le nom, et l'Antiquité a fait le rapprochement très tôt : Thucydide les évoque comme les îles d'Éole. L'île flottante au mur de bronze du poème n'est pas une description de Lipari, mais le volcanisme de l'archipel et les vents qui l'entourent maintiennent cette identification vivante depuis 2 500 ans."
+        },
+        "zh": {
+          "label": "利帕里与埃俄利亚群岛",
+          "note": "这些岛屿沿用了这一名字，且古人很早就建立了这种联系：修昔底德将它们作为埃俄洛斯的岛屿进行讨论。诗歌中拥有青铜墙的漂浮岛屿并非对利帕里的描述，但该群岛的火山活动及其周围的风，使这一认定在2500年间保持着生命力。"
+        },
+        "de": {
+          "label": "Lipari und die Äolischen Inseln",
+          "note": "Die Inseln tragen den Namen, und die Antike stellte die Verbindung früh her: Thukydides erörtert sie als die Inseln des Aiolos. Die schwimmende Insel mit einer Bronzemauer im Epos ist keine Beschreibung von Lipari, aber der Vulkanismus des Archipels und die Winde um ihn herum haben die Identifizierung seit 2.500 Jahren lebendig gehalten."
+        },
+        "ja": {
+          "label": "リパリ島とアイオリア諸島",
+          "note": "これらの島々はその名を冠しており、古代において早くから関連付けがなされていた。トゥキディデスはこれらをアイオロスの島々として論じている。詩に登場する青銅の壁を持つ浮島はリパリ島の説明とは一致しないが、この諸島の火山活動と周囲の風により、この同定は2500年もの間維持されてきた。"
         }
       }
     },
@@ -119,6 +135,22 @@
         "pt": {
           "label": "Strômboli",
           "note": "Uma versão mais estreita da mesma ideia, atraída pelo vulcão permanentemente ativo. Explica a ilha “flutuante” como uma ilha fumegante; não explica mais nada."
+        },
+        "fr": {
+          "label": "Stromboli",
+          "note": "Une version plus restreinte de la même idée, séduite par le volcan en activité permanente. Elle explique l'île « flottante » par une île fumante ; elle n'explique rien d'autre."
+        },
+        "zh": {
+          "label": "斯特龙博利",
+          "note": "同一观点的更狭义版本，因其永久活跃的火山而受到关注。它将“漂浮”的岛屿解释为冒烟的岛屿；除此之外，它无法解释任何其他事情。"
+        },
+        "de": {
+          "label": "Stromboli",
+          "note": "Eine engere Fassung derselben Idee, angezogen durch den permanent aktiven Vulkan. Sie erklärt die „schwimmende“ Insel als eine rauchende; sonst erklärt sie nichts."
+        },
+        "ja": {
+          "label": "ストロンボリ島",
+          "note": "同じアイデアをより限定した説であり、常時活動している火山に着目したもの。「浮いている」島を煙を上げる島として説明しているが、それ以外のことは何も説明できていない。"
         }
       }
     }
@@ -156,6 +188,46 @@
       ],
       "identificationNote": "Especulativa: uma identificação antiga baseada no nome e um refinamento vulcânico moderno, nenhum com apoio material. A melhor hipótese pontua 5/12.",
       "debate": "Se as ilhas Eólias receberam o nome do Éolo homérico ou o Éolo homérico delas: a direção desse empréstimo é toda a questão, e o atlas a registra como não resolvida."
+    },
+    "fr": {
+      "name": "Éolie",
+      "summary": "L'île flottante d'Éole, le gardien des vents, dont les compagnons d'Ulysse ouvrent le présent alors qu'Ithaque est en vue. Les îles Éoliennes en portent le nom — ce qui témoigne de la dation des noms chez les Grecs, non du poème.",
+      "description": [
+        "L'Éolie est décrite comme une île flottante, ceinte d'un mur de bronze continu, où Éole vit avec ses six fils mariés à ses six filles. Le détail relève du conte de fées et l'hospitalité est bien réelle : Éole donne à Ulysse une outre contenant tous les vents, sauf celui qui doit le ramener chez lui.",
+        "La géographie de cet épisode est notoirement contradictoire. Neuf jours de navigation favorable permettent d'apercevoir Ithaque ; l'équipage ouvre l'outre ; les vents les ramènent directement en Éolie. Quelle que soit cette île, le poème la situe exactement à neuf jours d'Ithaque, puis refuse d'indiquer dans quelle direction."
+      ],
+      "identificationNote": "Spéculatif : une identification ancienne basée sur le nom et un affinement volcanique moderne, aucun des deux ne reposant sur des preuves matérielles. La meilleure hypothèse obtient un score de 5/12.",
+      "debate": "Savoir si les îles Éoliennes ont été nommées d'après l'Éole homérique ou si l'Éole homérique a été nommé d'après elles — le sens de cet emprunt est toute la question, et l'atlas la classe comme non résolue."
+    },
+    "de": {
+      "name": "Aiolia",
+      "summary": "Die schwimmende Insel des Aiolos, des Hüters der Winde, dessen Geschenk die Gefährten des Odysseus in Sichtweite von Ithaka öffnen. Die Äolischen Inseln tragen diesen Namen – was ein Beleg für die griechische Namensgebung ist, nicht für das Epos.",
+      "description": [
+        "Aiolia wird als eine schwimmende Insel beschrieben, die von einer ununterbrochenen Bronzemauer umgeben ist und auf der Aiolos mit sechs Söhnen lebt, die mit seinen sechs Töchtern verheiratet sind. Das Detail ist märchenhaft, die Gastfreundschaft real: Aiolos schenkt Odysseus einen Schlauch, der alle Winde enthält, bis auf denjenigen, der ihn nach Hause bringen soll.",
+        "Die Geografie dieser Episode ist bekanntermaßen in sich widersprüchlich. Nach neun Tagen günstiger Fahrt kommt Ithaka in Sicht; die Gefährten öffnen den Schlauch; die Winde treiben sie direkt nach Aiolia zurück. Was auch immer die Insel sein mag, das Epos verortet sie genau neun Tage von Ithaka entfernt und weigert sich dann zu sagen, in welcher Richtung."
+      ],
+      "identificationNote": "Spekulativ: eine antike, auf dem Namen basierende Identifizierung und eine moderne vulkanische Verfeinerung, beide ohne materiellen Beleg. Die beste Hypothese erreicht 5/12 Punkten.",
+      "debate": "Ob die Äolischen Inseln nach dem homerischen Aiolos benannt wurden oder der homerische Aiolos nach ihnen – die Richtung dieser Entlehnung ist die entscheidende Frage, und der Atlas verzeichnet sie als ungeklärt."
+    },
+    "ja": {
+      "name": "アイオリア",
+      "summary": "風の守護者アイオロスが住む浮島。オデュッセウスの部下たちはイタカが見えるところで彼の贈り物を開けてしまう。アイオリア諸島がその名を冠しているが、これはギリシャ人の命名に関する証拠であり、詩そのものに関する証拠ではない。",
+      "description": [
+        "アイオリアは、途切れることのない青銅の壁に囲まれた浮島として描かれており、そこではアイオロスが6人の息子と6人の娘（互いに結婚している）とともに暮らしている。その詳細はまるでおとぎ話のようだが、もてなしは本物である。アイオロスはオデュッセウスに、彼を故郷へと運ぶ風以外のすべての風を閉じ込めた袋を与える。",
+        "このエピソードの地理は、矛盾していることで有名である。順風に恵まれた9日間の航海でイタカが視野に入るが、部下たちが袋を開けてしまい、風によってアイオリアへと真っ直ぐ引き戻される。この島が何であれ、詩の中ではイタカからちょうど9日間の場所に位置づけられているが、それがどの方向であるかは明かされない。"
+      ],
+      "identificationNote": "推測の域を出ない：古代の名前ベースの同定と、現代の火山学的な精緻化があるが、いずれも具体的な裏付けはない。最も有力な仮説のスコアは12点満点中5点である。",
+      "debate": "アイオリア諸島がホメロスのアイオロスにちなんで名付けられたのか、それともホメロスのアイオロスが諸島にちなんで名付けられたのか。その借用の方向性こそが最大の疑問であり、アトラスでは未解決として記録されている。"
+    },
+    "zh": {
+      "name": "埃俄利亚",
+      "summary": "风神埃俄洛斯的漂浮之岛，奥德修斯的船员在望见伊萨卡时打开了他的赠礼。埃俄利亚群岛沿用了这一名字——这证明了希腊人的命名习惯，而非诗歌本身。",
+      "description": [
+        "埃俄利亚被描述为一座漂浮的岛屿，四周环绕着坚固的青铜墙，埃俄洛斯与他娶了六个女儿的六个儿子居住于此。这些细节带有童话色彩，而款待则是真实的：埃俄洛斯送给奥德修斯一个袋子，里面装有除能送他回家的风以外的所有风。",
+        "这一情节的地理设定是出了名的自相矛盾。顺风航行九天后，伊萨卡已清晰可见；船员们打开了袋子；狂风将他们直接吹回了埃俄利亚。无论这座岛屿究竟是什么，诗歌将其定位在距离伊萨卡恰好九天航程的地方，却拒绝透露具体方向。"
+      ],
+      "identificationNote": "推测性：一种基于古代名称的认定和现代火山学说的修正，两者均缺乏任何实物证据支持。最佳假说评分为 5/12。",
+      "debate": "究竟是埃俄利亚群岛得名于荷马史诗中的埃俄洛斯，还是荷马史诗中的埃俄洛斯得名于群岛——这种借用关系的方向正是核心问题所在，而本图集将其记录为未决问题。"
     }
   }
 }

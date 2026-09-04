@@ -69,7 +69,7 @@ const MANIFIESTO: Record<PromptName, Omit<PromptManifestEntry, "name">> = {
     surface: "meta",
     arguments: [
       { name: "concept", description: "The term, question or slug you are looking for.", required: true },
-      { name: "locale", description: "en, es or pt. Defaults to en.", required: false },
+      { name: "locale", description: "en, es, pt, fr, de, ja or zh. Defaults to en.", required: false },
     ],
   },
   locate_handbook_chapter: {
@@ -79,7 +79,7 @@ const MANIFIESTO: Record<PromptName, Omit<PromptManifestEntry, "name">> = {
     surface: "core",
     arguments: [
       { name: "topic", description: "What you want the Handbook to cover. Optional: omit it to see every chapter.", required: false },
-      { name: "locale", description: "en, es or pt. Defaults to en.", required: false },
+      { name: "locale", description: "en, es, pt, fr, de, ja or zh. Defaults to en.", required: false },
     ],
   },
   cite_with_provenance: {
@@ -89,7 +89,7 @@ const MANIFIESTO: Record<PromptName, Omit<PromptManifestEntry, "name">> = {
     surface: "core",
     arguments: [
       { name: "identifier", description: "Slug or id of the unit you are about to cite.", required: true },
-      { name: "locale", description: "en, es or pt. Defaults to en.", required: false },
+      { name: "locale", description: "en, es, pt, fr, de, ja or zh. Defaults to en.", required: false },
     ],
   },
 };
@@ -133,7 +133,7 @@ export interface McpPromptTelemetry {
   promptResult?(event: McpPromptResultEvent): void;
 }
 
-const LOCALES = ["en", "es", "pt"] as const;
+const LOCALES = ["en", "es", "pt", "fr", "de", "ja", "zh"] as const;
 const localeSchema = z
   .enum(LOCALES)
   .optional()

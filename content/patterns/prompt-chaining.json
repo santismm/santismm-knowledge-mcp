@@ -4,15 +4,30 @@
   "updated": "2026-06-21",
   "version": "1.0",
   "featured": true,
-  "technologies": ["LangGraph", "OpenAI Agents SDK", "Claude Agent SDK", "Workflow engines"],
-  "related": ["routing", "orchestrator-workers", "evaluator-optimizer"],
+  "technologies": [
+    "LangGraph",
+    "OpenAI Agents SDK",
+    "Claude Agent SDK",
+    "Workflow engines"
+  ],
+  "related": [
+    "routing",
+    "orchestrator-workers",
+    "evaluator-optimizer"
+  ],
   "references": [
-    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" }
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["industry_observation", "paper"]
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
   },
   "locales": {
     "en": {
@@ -24,7 +39,12 @@
         "Break the task into discrete steps and run one LLM call per step, passing each output to the next. Optionally add programmatic checks (gates) between steps to validate intermediate results before continuing.",
         "Because each call has one focused job, prompts are simpler, outputs are more reliable, and failures are localized to a specific step that you can inspect and fix."
       ],
-      "components": ["Ordered steps", "Per-step prompt", "Inter-step gates / validation", "State passed between steps"],
+      "components": [
+        "Ordered steps",
+        "Per-step prompt",
+        "Inter-step gates / validation",
+        "State passed between steps"
+      ],
       "benefits": [
         "Higher accuracy by giving each call one focused job.",
         "Easier to debug — failures localize to a step.",
@@ -46,10 +66,22 @@
         "Translate a document, then check the translation against the source."
       ],
       "kpis": [
-        { "metric": "End-to-end success rate", "note": "Share of chains that produce a correct final result; errors compound across steps." },
-        { "metric": "Per-step error rate", "note": "Failure rate at each link — a 95%-reliable step chained five times yields ~77% end to end." },
-        { "metric": "Total latency & cost", "note": "Sum across every call in the chain; more steps mean more of both." },
-        { "metric": "Recovery rate", "note": "How often a failed intermediate step is caught and corrected rather than silently propagated." }
+        {
+          "metric": "End-to-end success rate",
+          "note": "Share of chains that produce a correct final result; errors compound across steps."
+        },
+        {
+          "metric": "Per-step error rate",
+          "note": "Failure rate at each link — a 95%-reliable step chained five times yields ~77% end to end."
+        },
+        {
+          "metric": "Total latency & cost",
+          "note": "Sum across every call in the chain; more steps mean more of both."
+        },
+        {
+          "metric": "Recovery rate",
+          "note": "How often a failed intermediate step is caught and corrected rather than silently propagated."
+        }
       ],
       "failureModes": [
         "Error propagation: a mistake early in the chain corrupts every downstream step.",
@@ -64,9 +96,18 @@
         "Use chaining for genuinely sequential work; parallelize independent steps instead."
       ],
       "faqs": [
-        { "q": "How is prompt chaining different from an agent?", "a": "Prompt chaining follows a fixed, predefined sequence. An agent decides its own steps dynamically. Prefer chaining when the path is known in advance." },
-        { "q": "When should I add gates between steps?", "a": "Whenever an intermediate result must meet a condition before proceeding — it stops errors from propagating down the chain." },
-        { "q": "Does chaining increase cost?", "a": "Yes, modestly — more calls mean more tokens and latency — but the gain in reliability usually outweighs it for multi-part tasks." }
+        {
+          "q": "How is prompt chaining different from an agent?",
+          "a": "Prompt chaining follows a fixed, predefined sequence. An agent decides its own steps dynamically. Prefer chaining when the path is known in advance."
+        },
+        {
+          "q": "When should I add gates between steps?",
+          "a": "Whenever an intermediate result must meet a condition before proceeding — it stops errors from propagating down the chain."
+        },
+        {
+          "q": "Does chaining increase cost?",
+          "a": "Yes, modestly — more calls mean more tokens and latency — but the gain in reliability usually outweighs it for multi-part tasks."
+        }
       ]
     },
     "es": {
@@ -78,7 +119,12 @@
         "Divide la tarea en pasos discretos y ejecuta una llamada al LLM por paso, pasando cada salida a la siguiente. Opcionalmente añade comprobaciones programáticas (gates) entre pasos para validar resultados intermedios antes de continuar.",
         "Como cada llamada tiene un único trabajo enfocado, los prompts son más simples, las salidas más fiables y los fallos quedan localizados en un paso concreto que puedes inspeccionar y corregir."
       ],
-      "components": ["Pasos ordenados", "Prompt por paso", "Gates / validación entre pasos", "Estado pasado entre pasos"],
+      "components": [
+        "Pasos ordenados",
+        "Prompt por paso",
+        "Gates / validación entre pasos",
+        "Estado pasado entre pasos"
+      ],
       "benefits": [
         "Mayor precisión al dar a cada llamada un único trabajo enfocado.",
         "Más fácil de depurar: los fallos se localizan en un paso.",
@@ -100,10 +146,22 @@
         "Traducir un documento, luego comprobar la traducción contra el original."
       ],
       "kpis": [
-        { "metric": "Tasa de éxito de extremo a extremo", "note": "Proporción de cadenas que producen un resultado final correcto; los errores se acumulan entre pasos." },
-        { "metric": "Tasa de error por paso", "note": "Fallo en cada eslabón: un paso fiable al 95% encadenado cinco veces da ~77% de extremo a extremo." },
-        { "metric": "Latencia y coste totales", "note": "Suma de todas las llamadas de la cadena; más pasos significan más de ambos." },
-        { "metric": "Tasa de recuperación", "note": "Con qué frecuencia un paso intermedio fallido se detecta y corrige en vez de propagarse en silencio." }
+        {
+          "metric": "Tasa de éxito de extremo a extremo",
+          "note": "Proporción de cadenas que producen un resultado final correcto; los errores se acumulan entre pasos."
+        },
+        {
+          "metric": "Tasa de error por paso",
+          "note": "Fallo en cada eslabón: un paso fiable al 95% encadenado cinco veces da ~77% de extremo a extremo."
+        },
+        {
+          "metric": "Latencia y coste totales",
+          "note": "Suma de todas las llamadas de la cadena; más pasos significan más de ambos."
+        },
+        {
+          "metric": "Tasa de recuperación",
+          "note": "Con qué frecuencia un paso intermedio fallido se detecta y corrige en vez de propagarse en silencio."
+        }
       ],
       "failureModes": [
         "Propagación de errores: un fallo temprano en la cadena corrompe todos los pasos posteriores.",
@@ -118,9 +176,18 @@
         "Usa el encadenamiento para trabajo genuinamente secuencial; paraleliza los pasos independientes."
       ],
       "faqs": [
-        { "q": "¿En qué se diferencia del agente?", "a": "El encadenamiento sigue una secuencia fija predefinida. Un agente decide sus propios pasos de forma dinámica. Prefiere el encadenamiento cuando el camino se conoce de antemano." },
-        { "q": "¿Cuándo debo añadir gates entre pasos?", "a": "Siempre que un resultado intermedio deba cumplir una condición antes de seguir: evita que los errores se propaguen por la cadena." },
-        { "q": "¿El encadenamiento aumenta el coste?", "a": "Sí, moderadamente —más llamadas significan más tokens y latencia— pero la ganancia en fiabilidad suele compensarlo en tareas de varias partes." }
+        {
+          "q": "¿En qué se diferencia del agente?",
+          "a": "El encadenamiento sigue una secuencia fija predefinida. Un agente decide sus propios pasos de forma dinámica. Prefiere el encadenamiento cuando el camino se conoce de antemano."
+        },
+        {
+          "q": "¿Cuándo debo añadir gates entre pasos?",
+          "a": "Siempre que un resultado intermedio deba cumplir una condición antes de seguir: evita que los errores se propaguen por la cadena."
+        },
+        {
+          "q": "¿El encadenamiento aumenta el coste?",
+          "a": "Sí, moderadamente —más llamadas significan más tokens y latencia— pero la ganancia en fiabilidad suele compensarlo en tareas de varias partes."
+        }
       ]
     },
     "pt": {
@@ -132,7 +199,12 @@
         "Divida a tarefa em passos discretos e execute uma chamada ao LLM por passo, passando cada saída à seguinte. Opcionalmente adicione verificações programáticas (gates) entre passos para validar resultados intermediários antes de continuar.",
         "Como cada chamada tem um único trabalho focado, os prompts são mais simples, as saídas mais confiáveis e as falhas ficam localizadas num passo concreto que você pode inspecionar e corrigir."
       ],
-      "components": ["Passos ordenados", "Prompt por passo", "Gates / validação entre passos", "Estado passado entre passos"],
+      "components": [
+        "Passos ordenados",
+        "Prompt por passo",
+        "Gates / validação entre passos",
+        "Estado passado entre passos"
+      ],
       "benefits": [
         "Maior precisão ao dar a cada chamada um único trabalho focado.",
         "Mais fácil de depurar: as falhas se localizam num passo.",
@@ -154,10 +226,22 @@
         "Traduzir um documento, depois verificar a tradução contra o original."
       ],
       "kpis": [
-        { "metric": "Taxa de sucesso ponta a ponta", "note": "Proporção de cadeias que produzem um resultado final correto; os erros se acumulam entre passos." },
-        { "metric": "Taxa de erro por passo", "note": "Falha em cada elo: um passo confiável a 95% encadeado cinco vezes dá ~77% ponta a ponta." },
-        { "metric": "Latência e custo totais", "note": "Soma de todas as chamadas da cadeia; mais passos significam mais de ambos." },
-        { "metric": "Taxa de recuperação", "note": "Com que frequência um passo intermediário falho é detectado e corrigido em vez de propagado em silêncio." }
+        {
+          "metric": "Taxa de sucesso ponta a ponta",
+          "note": "Proporção de cadeias que produzem um resultado final correto; os erros se acumulam entre passos."
+        },
+        {
+          "metric": "Taxa de erro por passo",
+          "note": "Falha em cada elo: um passo confiável a 95% encadeado cinco vezes dá ~77% ponta a ponta."
+        },
+        {
+          "metric": "Latência e custo totais",
+          "note": "Soma de todas as chamadas da cadeia; mais passos significam mais de ambos."
+        },
+        {
+          "metric": "Taxa de recuperação",
+          "note": "Com que frequência um passo intermediário falho é detectado e corrigido em vez de propagado em silêncio."
+        }
       ],
       "failureModes": [
         "Propagação de erros: uma falha cedo na cadeia corrompe todos os passos seguintes.",
@@ -172,9 +256,338 @@
         "Use o encadeamento para trabalho genuinamente sequencial; paralelize os passos independentes."
       ],
       "faqs": [
-        { "q": "Como difere de um agente?", "a": "O encadeamento segue uma sequência fixa predefinida. Um agente decide seus próprios passos de forma dinâmica. Prefira o encadeamento quando o caminho é conhecido de antemão." },
-        { "q": "Quando devo adicionar gates entre passos?", "a": "Sempre que um resultado intermediário precise cumprir uma condição antes de prosseguir: evita que os erros se propaguem pela cadeia." },
-        { "q": "O encadeamento aumenta o custo?", "a": "Sim, moderadamente — mais chamadas significam mais tokens e latência — mas o ganho em confiabilidade costuma compensar em tarefas de várias partes." }
+        {
+          "q": "Como difere de um agente?",
+          "a": "O encadeamento segue uma sequência fixa predefinida. Um agente decide seus próprios passos de forma dinâmica. Prefira o encadeamento quando o caminho é conhecido de antemão."
+        },
+        {
+          "q": "Quando devo adicionar gates entre passos?",
+          "a": "Sempre que um resultado intermediário precise cumprir uma condição antes de prosseguir: evita que os erros se propaguem pela cadeia."
+        },
+        {
+          "q": "O encadeamento aumenta o custo?",
+          "a": "Sim, moderadamente — mais chamadas significam mais tokens e latência — mas o ganho em confiabilidade costuma compensar em tarefas de várias partes."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Enchaînement de prompts",
+      "summary": "L'enchaînement de prompts décompose une tâche en une séquence fixe d'appels de LLM, où chaque étape travaille sur le résultat de la précédente. Il échange un peu de latence contre une précision et un contrôle bien plus élevés, et constitue le pattern de workflow le plus simple : utilisez-le dès qu'une tâche se divise clairement en sous-tâches ordonnées.",
+      "problem": "Un prompt unique auquel on demande de faire plusieurs choses à la fois produit un résultat de moindre qualité, plus difficile à contrôler, et s'avère complexe à déboguer en cas de problème.",
+      "context": "Utilisez l'enchaînement de prompts lorsqu'une tâche se décompose en une séquence claire et ordonnée de sous-tâches — par exemple, faire un plan, puis rédiger, puis éditer — et que chaque étape bénéficie du résultat de la précédente.",
+      "solution": [
+        "Divisez la tâche en étapes distinctes et effectuez un appel de LLM par étape, en transmettant chaque résultat au suivant. Ajoutez éventuellement des contrôles programmatiques (portes de validation) entre les étapes pour valider les résultats intermédiaires avant de continuer.",
+        "Chaque appel ayant une tâche ciblée, les prompts sont plus simples, les résultats plus fiables, et les échecs sont localisés à une étape spécifique que vous pouvez inspecter et corriger."
+      ],
+      "components": [
+        "Étapes ordonnées",
+        "Prompt par étape",
+        "Portes de validation / contrôles entre les étapes",
+        "État transmis entre les étapes"
+      ],
+      "benefits": [
+        "Précision accrue en attribuant à chaque appel une tâche ciblée.",
+        "Plus facile à déboguer — les échecs sont localisés à une étape précise.",
+        "Les portes de validation peuvent intercepter les erreurs entre les étapes."
+      ],
+      "risks": [
+        "Latence totale plus élevée en raison des appels séquentiels.",
+        "Les erreurs peuvent s'accumuler tout au long de la chaîne si elles ne sont pas contrôlées.",
+        "Un trop grand nombre d'étapes augmente le coût et la fragilité."
+      ],
+      "whenNot": [
+        "Lorsque la tâche est suffisamment simple pour un seul appel.",
+        "Lorsque les sous-tâches sont indépendantes — parallélisez plutôt.",
+        "Lorsque le chemin n'est pas connu à l'avance — utilisez une boucle d'agent."
+      ],
+      "examples": [
+        "Générer un plan, puis rédiger chaque section, puis réviser le ton.",
+        "Extraire des champs structurés, puis les valider, puis résumer.",
+        "Traduire un document, puis vérifier la traduction par rapport à la source."
+      ],
+      "kpis": [
+        {
+          "metric": "Taux de réussite de bout en bout",
+          "note": "Part des chaînes qui produisent un résultat final correct ; les erreurs s'accumulent au fil des étapes."
+        },
+        {
+          "metric": "Taux d'erreur par étape",
+          "note": "Taux d'échec à chaque maillon — une étape fiable à 95 % enchaînée cinq fois donne environ 77 % de réussite de bout en bout."
+        },
+        {
+          "metric": "Latence et coût totaux",
+          "note": "Somme de tous les appels de la chaîne ; plus d'étapes signifie une augmentation de ces deux facteurs."
+        },
+        {
+          "metric": "Taux de récupération",
+          "note": "Fréquence à laquelle une étape intermédiaire défaillante est interceptée et corrigée plutôt que propagée silencieusement."
+        }
+      ],
+      "failureModes": [
+        "Propagation des erreurs : une erreur au début de la chaîne corrompt toutes les étapes en aval.",
+        "Accumulation de la latence et des coûts à mesure que la chaîne s'allonge.",
+        "Passages de relais fragiles lorsque le format de sortie d'une étape ne correspond pas à l'entrée attendue de l'étape suivante.",
+        "Perte de contexte entre les étapes, de sorte que les maillons ultérieurs oublient les contraintes définies précédemment."
+      ],
+      "lessons": [
+        "Validez ou effectuez des contrôles d'accès (gate-checks) entre les étapes afin que les erreurs soient interceptées avant de se propager.",
+        "Gardez les chaînes aussi courtes que la tâche le permet ; chaque étape supplémentaire multiplie la probabilité d'échec.",
+        "Figez le contrat de sortie de chaque étape afin que les passages de relais ne se cassent pas silencieusement.",
+        "Utilisez l'enchaînement pour les travaux véritablement séquentiels ; parallélisez plutôt les étapes indépendantes."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi l'enchaînement de prompts diffère-t-il d'un agent ?",
+          "a": "L'enchaînement de prompts suit une séquence fixe et prédéfinie. Un agent décide de ses propres étapes de manière dynamique. Privilégiez l'enchaînement lorsque le chemin est connu à l'avance."
+        },
+        {
+          "q": "Quand dois-je ajouter des portes de validation entre les étapes ?",
+          "a": "Chaque fois qu'un résultat intermédiaire doit remplir une condition avant de continuer — cela empêche les erreurs de se propager tout au long de la chaîne."
+        },
+        {
+          "q": "Le chaînage augmente-t-il le coût ?",
+          "a": "Oui, modestement — plus d'appels signifie plus de jetons et de latence — mais le gain de fiabilité l'emporte généralement pour les tâches en plusieurs parties."
+        }
+      ]
+    },
+    "de": {
+      "name": "Prompt Chaining",
+      "summary": "Prompt Chaining zerlegt eine Aufgabe in eine feste Sequenz von LLM-Aufrufen, bei der jeder Schritt auf der Ausgabe des vorherigen aufbaut. Es tauscht ein wenig Latenz gegen eine deutlich höhere Genauigkeit und Kontrolle ein und ist das einfachste Workflow-Muster: Nutzen Sie es immer dann, wenn sich eine Aufgabe sauber in geordnete Teilaufgaben aufteilen lässt.",
+      "problem": "Ein einzelner Prompt, der mehrere Dinge gleichzeitig erledigen soll, liefert eine qualitativ minderwertigere, schwerer zu kontrollierende Ausgabe und ist bei Fehlern nur schwer zu debuggen.",
+      "context": "Nutzen Sie Prompt Chaining, wenn sich eine Aufgabe in eine klare, geordnete Sequenz von Teilaufgaben zerlegen lässt – zum Beispiel Gliederung, dann Entwurf, dann Bearbeitung – und jeder Schritt vom Ergebnis des vorherigen Schritts profitiert.",
+      "solution": [
+        "Teilen Sie die Aufgabe in diskrete Schritte auf und führen Sie einen LLM-Aufruf pro Schritt aus, wobei jede Ausgabe an den nächsten übergeben wird. Fügen Sie optional programmatische Prüfungen (Gates) zwischen den Schritten hinzu, um Zwischenergebnisse zu validieren, bevor Sie fortfahren.",
+        "Da jeder Aufruf eine fokussierte Aufgabe hat, sind die Prompts einfacher, die Ausgaben zuverlässiger und Fehler auf einen bestimmten Schritt eingegrenzt, den Sie überprüfen und beheben können."
+      ],
+      "components": [
+        "Geordnete Schritte",
+        "Prompt pro Schritt",
+        "Gates / Validierung zwischen den Schritten",
+        "Zwischen den Schritten übergebener Zustand"
+      ],
+      "benefits": [
+        "Höhere Genauigkeit, da jeder Aufruf eine fokussierte Aufgabe hat.",
+        "Einfacheres Debugging – Fehler lassen sich auf einen Schritt eingrenzen.",
+        "Validierungs-Gates können Fehler zwischen den Schritten abfangen."
+      ],
+      "risks": [
+        "Höhere Gesamtlatenz durch sequenzielle Aufrufe.",
+        "Fehler können sich entlang der Kette aufschaukeln, wenn sie nicht überprüft werden.",
+        "Zu viele Schritte erhöhen die Kosten und die Fehleranfälligkeit."
+      ],
+      "whenNot": [
+        "Wenn die Aufgabe einfach genug für einen einzelnen Aufruf ist.",
+        "Wenn Teilaufgaben unabhängig sind – parallelisieren Sie stattdessen.",
+        "Wenn der Pfad im Vorfeld unbekannt ist – nutzen Sie einen Agent-Loop."
+      ],
+      "examples": [
+        "Erstellen einer Gliederung, anschließendes Schreiben jedes Abschnitts und abschließendes Überarbeiten des Tonfalls.",
+        "Extrahieren strukturierter Felder, anschließendes Validieren dieser Felder und abschließendes Zusammenfassen.",
+        "Übersetzen eines Dokuments und anschließendes Abgleichen der Übersetzung mit der Quelle."
+      ],
+      "kpis": [
+        {
+          "metric": "End-to-End-Erfolgsquote",
+          "note": "Anteil der Ketten, die ein korrektes Endergebnis liefern; Fehler summieren sich über die Schritte hinweg."
+        },
+        {
+          "metric": "Fehlerrate pro Schritt",
+          "note": "Ausfallrate bei jedem Glied – ein zu 95 % zuverlässiger Schritt, der fünfmal verkettet wird, führt zu einer End-to-End-Zuverlässigkeit von ca. 77 %."
+        },
+        {
+          "metric": "Gesamtlatenz und -kosten",
+          "note": "Summe über jeden Aufruf in der Kette; mehr Schritte bedeuten eine Erhöhung von beidem."
+        },
+        {
+          "metric": "Recovery-Rate",
+          "note": "Wie oft ein fehlgeschlagener Zwischenschritt abgefangen und korrigiert wird, anstatt stillschweigend weitergegeben zu werden."
+        }
+      ],
+      "failureModes": [
+        "Fehlerfortpflanzung: Ein Fehler zu Beginn der Kette beeinträchtigt jeden nachfolgenden Schritt.",
+        "Akkumulation von Latenz und Kosten, je länger die Kette wird.",
+        "Fehleranfällige Übergaben, wenn das Ausgabeformat eines Schritts nicht mit der erwarteten Eingabe des nächsten Schritts übereinstimmt.",
+        "Kontextverlust über Schritte hinweg, sodass spätere Glieder früher festgelegte Einschränkungen vergessen."
+      ],
+      "lessons": [
+        "Validieren oder prüfen Sie Zwischenschritte mit Gates, damit Fehler abgefangen werden, bevor sie sich fortpflanzen.",
+        "Halten Sie Ketten so kurz wie möglich; jeder zusätzliche Schritt multipliziert die Ausfallwahrscheinlichkeit.",
+        "Legen Sie den Ausgabe-Vertrag (Output Contract) jedes Schritts fest, damit Übergaben nicht unbemerkt fehlschlagen.",
+        "Nutzen Sie Chaining für wirklich sequenzielle Aufgaben; parallelisieren Sie stattdessen unabhängige Schritte."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich Prompt Chaining von einem Agenten?",
+          "a": "Prompt Chaining folgt einer festen, vordefinierten Sequenz. Ein Agent entscheidet seine Schritte dynamisch selbst. Bevorzugen Sie Chaining, wenn der Pfad im Voraus bekannt ist."
+        },
+        {
+          "q": "Wann sollte ich Gates zwischen den Schritten hinzufügen?",
+          "a": "Immer dann, wenn ein Zwischenergebnis eine Bedingung erfüllen muss, bevor es weitergeht – dies verhindert, dass sich Fehler in der Kette fortpflanzen."
+        },
+        {
+          "q": "Erhöht Chaining die Kosten?",
+          "a": "Ja, in geringem Maße – mehr Aufrufe bedeuten mehr Token und Latenz –, aber der Gewinn an Zuverlässigkeit überwiegt dies bei mehrteiligen Aufgaben meist."
+        }
+      ]
+    },
+    "ja": {
+      "name": "プロンプトチェーニング",
+      "summary": "プロンプトチェーニングは、タスクを固定された一連のLLM呼び出しに分解し、各ステップで前のステップの出力を処理します。わずかなレイテンシと引き換えに、精度と制御性を大幅に向上させることができます。これは最もシンプルなワークフローパターンであり、タスクを順序付けられたサブタスクに明確に分割できる場合は常に使用すべきです。",
+      "problem": "1つのプロンプトで同時に複数のことを実行しようとすると、出力の品質が低下し、制御が難しくなります。また、問題が発生した際のデバッグも困難になります。",
+      "context": "タスクが明確で順序付けられた一連のサブタスク（例：アウトライン作成、ドラフト作成、編集など）に分解でき、各ステップが前のステップの結果を利用できる場合に、プロンプトチェーニングを使用します。",
+      "solution": [
+        "タスクを個別のステップに分割し、ステップごとに1回のLLM呼び出しを実行して、各出力を次のステップに渡します。オプションとして、ステップ間にプログラムによるチェック（ゲート）を追加し、処理を継続する前に中間結果を検証することもできます。",
+        "各呼び出しの役割が1つに絞られるため、プロンプトがシンプルになり、出力の信頼性が向上します。また、失敗が特定のステップに限定されるため、そのステップを調査して修正することが容易になります。"
+      ],
+      "components": [
+        "順序付けられたステップ",
+        "ステップごとのプロンプト",
+        "ステップ間のゲート / 検証",
+        "ステップ間で渡される状態（ステート）"
+      ],
+      "benefits": [
+        "各呼び出しの役割を1つに絞ることで、精度が向上します。",
+        "デバッグが容易になります。失敗が特定のステップに限定されるためです。",
+        "検証ゲートにより、ステップ間のエラーをキャッチできます。"
+      ],
+      "risks": [
+        "順次呼び出しを行うため、全体のレイテンシが増加します。",
+        "チェックを行わないと、チェーンの下流に進むにつれてエラーが蓄積・増幅する可能性があります。",
+        "ステップ数が多すぎると、コストが増加し、システムが脆弱になります。"
+      ],
+      "whenNot": [
+        "タスクが十分にシンプルで、1回の呼び出しで済む場合。",
+        "サブタスクが独立している場合（この場合は並列化を行います）。",
+        "事前に実行経路が不明な場合（この場合はエージェントループを使用します）。"
+      ],
+      "examples": [
+        "アウトラインを生成し、次に各セクションを執筆し、最後にトーンを修正する。",
+        "構造化されたフィールドを抽出し、それらを検証し、最後に要約する。",
+        "ドキュメントを翻訳し、次に翻訳結果を原文と照らし合わせてチェックする。"
+      ],
+      "kpis": [
+        {
+          "metric": "エンドツーエンドの成功率",
+          "note": "最終的に正しい結果を出力できたチェーンの割合。エラーはステップをまたいで蓄積されます。"
+        },
+        {
+          "metric": "ステップごとのエラー率",
+          "note": "各リンクにおける失敗率。信頼性95%のステップを5回連結すると、エンドツーエンドの信頼性は約77%になります。"
+        },
+        {
+          "metric": "総レイテンシと総コスト",
+          "note": "チェーン内のすべての呼び出しの合計。ステップ数が増えるほど、レイテンシとコストの両方が増加します。"
+        },
+        {
+          "metric": "リカバリ率",
+          "note": "失敗した中間ステップが、暗黙的に伝播されることなく、キャッチされて修正される頻度。"
+        }
+      ],
+      "failureModes": [
+        "エラーの伝播：チェーンの初期段階での誤りが、下流のすべてのステップを損なう。",
+        "チェーンが長くなるにつれて、レイテンシとコストが累積する。",
+        "あるステップの出力フォーマットが、次のステップで想定されている入力フォーマットと一致しない場合に、連携が破綻しやすい。",
+        "ステップ間でコンテキストが失われ、後続のリンクが以前に設定された制約を忘れてしまう。"
+      ],
+      "lessons": [
+        "エラーが伝播する前にキャッチできるよう、ステップ間で検証またはゲートチェックを行ってください。",
+        "タスクが許す限りチェーンを短く保ってください。ステップが1つ増えるごとに出力失敗の確率が倍増します。",
+        "連携が暗黙的に破綻しないよう、各ステップの出力仕様（コントラクト）を固定してください。",
+        "真に順次実行が必要な作業にのみチェーニングを使用してください。独立したステップは代わりに並列化します。"
+      ],
+      "faqs": [
+        {
+          "q": "プロンプトチェーニングはエージェントとどう違うのですか？",
+          "a": "プロンプトチェーニングは、事前に定義された固定の順序に従います。一方、エージェントは自身のステップを動的に決定します。実行経路が事前に分かっている場合は、チェーニングを優先してください。"
+        },
+        {
+          "q": "ステップ間にゲートを追加すべきなのはどのような場合ですか？",
+          "a": "処理を進める前に中間結果が特定の条件を満たす必要がある場合は常に、ゲートを追加すべきです。これにより、エラーがチェーンの下流に伝播するのを防ぐことができます。"
+        },
+        {
+          "q": "チェーニングによってコストは増加しますか？",
+          "a": "はい、わずかに増加します。呼び出し回数が増えることは、トークン数とレイテンシの増加を意味します。しかし、複数のパートからなるタスクにおいては、通常、信頼性の向上がそのコストを上回ります。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "提示词链式调用",
+      "summary": "提示词链式调用（Prompt Chaining）将任务分解为固定的 LLM 调用序列，其中每一步都基于上一步的输出进行处理。它以少许延迟为代价换取极高的准确性和控制力，是最简单的流式工作流模式：只要任务可以清晰地拆分为有序的子任务，即可使用该模式。",
+      "problem": "要求单个提示词同时完成多项任务会导致输出质量下降、难以控制，且在出错时难以调试。",
+      "context": "当任务可以分解为清晰、有序的子任务序列（例如：先列大纲，再起草，最后编辑），且每一步都受益于上一步的结果时，请使用提示词链式调用。",
+      "solution": [
+        "将任务拆分为离散的步骤，每步运行一次 LLM 调用，并将每次的输出传递给下一步。可以选择在步骤之间添加程序化检查（网关），以便在继续之前验证中间结果。",
+        "由于每次调用都专注于一项工作，提示词会更简单，输出更可靠，且失败会被定位到特定步骤，便于检查和修复。"
+      ],
+      "components": [
+        "有序步骤",
+        "每步提示词",
+        "步骤间网关/验证",
+        "步骤间传递的状态"
+      ],
+      "benefits": [
+        "通过让每次调用专注于一项工作来提高准确性。",
+        "更易于调试——失败会被定位到具体步骤。",
+        "验证网关可以捕获步骤之间的错误。"
+      ],
+      "risks": [
+        "顺序调用会导致更高的总延迟。",
+        "如果不进行检查，错误可能会在链条中向下累积。",
+        "步骤过多会增加成本和脆弱性。"
+      ],
+      "whenNot": [
+        "当任务足够简单，单次调用即可完成时。",
+        "当子任务相互独立时——请改用并行化。",
+        "当执行路径无法预先确定时——请使用智能体循环（agent loop）。"
+      ],
+      "examples": [
+        "生成大纲，然后撰写每个章节，最后修改语气。",
+        "提取结构化字段，然后对其进行验证，最后进行总结。",
+        "翻译文档，然后对照原文检查译文。"
+      ],
+      "kpis": [
+        {
+          "metric": "端到端成功率",
+          "note": "产生正确最终结果的链条比例；错误会在各个步骤之间累积。"
+        },
+        {
+          "metric": "单步错误率",
+          "note": "每个环节的失败率——一个可靠性为 95% 的步骤在链式调用五次后，端到端可靠性约为 77%。"
+        },
+        {
+          "metric": "总延迟与成本",
+          "note": "链条中每次调用的总和；步骤越多，两者的消耗就越大。"
+        },
+        {
+          "metric": "恢复率",
+          "note": "失败的中间步骤被捕获并纠正（而不是默默向下传播）的频率。"
+        }
+      ],
+      "failureModes": [
+        "错误传播：链条前期的错误会破坏所有下游步骤。",
+        "随着链条变长，延迟和成本不断累积。",
+        "当某一步的输出格式与下一步预期的输入不匹配时，会导致脆弱的交接。",
+        "跨步骤丢失上下文，导致后面的环节忘记了前面设置的约束。"
+      ],
+      "lessons": [
+        "在步骤之间进行验证或网关检查，以便在错误传播之前将其捕获。",
+        "在任务允许的范围内尽可能缩短链条；每增加一个步骤都会使失败概率成倍增加。",
+        "固定每一步的输出契约，以免交接过程默默中断。",
+        "将链式调用用于真正的顺序工作；对于独立的步骤，请改用并行化。"
+      ],
+      "faqs": [
+        {
+          "q": "提示词链式调用与智能体（agent）有什么区别？",
+          "a": "提示词链式调用遵循固定的、预定义的顺序。而智能体则动态决定自己的步骤。当执行路径预先已知时，优先选择链式调用。"
+        },
+        {
+          "q": "我应该在什么时候在步骤之间添加网关？",
+          "a": "每当中间结果在继续之前必须满足某个条件时——这可以防止错误在链条中向下传播。"
+        },
+        {
+          "q": "链式调用会增加成本吗？",
+          "a": "是的，会略微增加——更多的调用意味着更多的 Token 和延迟——但对于多步骤任务，可靠性的提升通常利大于弊。"
+        }
       ]
     }
   }

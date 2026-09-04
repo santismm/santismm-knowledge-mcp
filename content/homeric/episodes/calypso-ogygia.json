@@ -64,6 +64,22 @@
         "pt": {
           "label": "Gozo",
           "note": "A identificação com que um visitante mais provavelmente se depara e a que menos se sustenta: nenhuma fonte antiga, nenhuma escavação e uma paisagem que não encaixa no poema melhor que uma dúzia de outras."
+        },
+        "fr": {
+          "label": "Gozo",
+          "note": "L'identification qu'un visiteur a le plus de chances de rencontrer, et celle qui repose sur le moins d'éléments : aucune source antique, aucune fouille, et un paysage qui ne correspond pas mieux au poème qu'une douzaine d'autres."
+        },
+        "zh": {
+          "label": "戈佐岛",
+          "note": "这是游客最容易接触到的认定，也是最缺乏依据的一个：既无古代文献支持，也无考古发掘，且其景观与诗中描述的契合度并不比其他十几个地方更好。"
+        },
+        "de": {
+          "label": "Gozo",
+          "note": "Die Identifizierung, auf die ein Besucher am ehesten stößt, und diejenige mit der geringsten Substanz: keine antike Quelle, keine Ausgrabung und eine Landschaft, die nicht besser zum Epos passt als ein Dutzend andere."
+        },
+        "ja": {
+          "label": "ゴゾ島",
+          "note": "旅行者が最も耳にしやすい同定でありながら、最も根拠の薄いものです。古代の文献も発掘調査の裏付けもなく、その景観も他の多くの場所と比べて特に詩の描写と一致しているわけではありません。"
         }
       }
     },
@@ -88,6 +104,22 @@
         "pt": {
           "label": "Uma Ogígia atlântica, fora do mapa",
           "note": "Plutarco situa uma Ogígia bem a oeste da Britânia, e as leituras atlânticas modernas seguem os dezessete dias de jangada para fora do Estreito. Esta teoria aponta para fora do quadro do atlas de propósito: é listada, não fincada."
+        },
+        "fr": {
+          "label": "Une Ogygie atlantique, au-delà de la carte",
+          "note": "Plutarque situe une Ogygie loin à l'ouest de la Bretagne, et les lectures atlantiques modernes suivent le voyage de dix-sept jours en radeau vers le large à travers Gibraltar. Cette théorie pointe volontairement hors du cadre de l'atlas : elle est répertoriée, non épinglée."
+        },
+        "zh": {
+          "label": "大西洋中的奥吉吉亚，超出地图范围",
+          "note": "普鲁塔克将奥吉吉亚置于不列颠以西遥远的地方，而现代的大西洋解读则顺着十七天的木筏航程，穿过直布罗陀海峡向外延伸。这一理论故意指向了本图册框架之外：它只是被列出，并未被钉在地图上。"
+        },
+        "de": {
+          "label": "Ein atlantisches Ogygia, jenseits der Karte",
+          "note": "Plutarch verortet ein Ogygia weit westlich von Britannien, und moderne atlantische Interpretationen folgen der siebzehntägigen Floßfahrt nach außen durch Gibraltar. Diese Theorie weist bewusst über den Rahmen des Atlas hinaus: Sie wird aufgeführt, nicht festgenagelt."
+        },
+        "ja": {
+          "label": "地図の枠外にある、大西洋のオギュギア島",
+          "note": "プルタルコスはオギュギア島をブリテン島の遥か西に位置づけており、現代の大西洋説はジブラルタルを経由して外海へと向かう17日間の筏の旅をたどります。この説は意図的にアトラスの枠外を指し示しているため、ピン留めはせず、リストへの掲載に留めています。"
         }
       }
     }
@@ -150,6 +182,86 @@
         {
           "q": "Quanto tempo Odisseu passa em Ogígia?",
           "a": "Sete dos dez anos de ausência: a estadia mais longa de todo o poema e a menos narrada."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Calypso et l'île d'Ogygie",
+      "summary": "Sept des dix années s'écoulent ici, et le poème les passe presque entièrement hors scène. Quand l'Odyssée s'ouvre enfin sur Ogygie au chant V, elle en donne une description luxuriante mais aucune coordonnée.",
+      "narrative": [
+        "Hermès traverse la mer pour ordonner à Calypso de libérer Ulysse ; l'île est décrite à travers son arrivée — une grotte, quatre sources, des prairies de violettes et d'ache, des aulnes et des cyprès peuplés d'oiseaux. Ulysse est sur le rivage, pleurant face à la mer.",
+        "Il construit un radeau, et Calypso lui indique comment gouverner : garder la Grande Ourse à sa gauche, ce qui signifie naviguer vers l'est. Dix-sept jours plus tard, il aperçoit la Schérie. Ces deux faits constituent les seules indications de navigation de l'épisode, et elles sont relatives, non absolues."
+      ],
+      "whyItMatters": "C'est le cas d'école le plus bas de l'atlas : l'épisode qui montre à quoi ressemble un score de 2/12. Le lecteur voit immédiatement que ses identifications reposent sur la tradition plutôt que sur le texte, l'archéologie ou le consensus.",
+      "debate": "La question est de savoir si la navigation de dix-sept jours est une mesure réelle de distance, et si Ogygie appartient à la même géographie que le reste du poème. Les lectures qui la situent dans l'Atlantique, à Malte ou dans l'Adriatique partent toutes du principe qu'elle est localisable.",
+      "faqs": [
+        {
+          "q": "Où se trouve l'Ogygie ?",
+          "a": "Nulle part où le poème la situe. L'Odyssée l'appelle le nombril de la mer et n'indique aucune route pour s'y rendre ; les identifications avec Gozo, l'Atlantique ou d'autres lieux sont des affirmations ultérieures, consignées ici avec leurs sources et leurs faiblesses."
+        },
+        {
+          "q": "Combien de temps Ulysse reste-t-il sur l'île d'Ogygie ?",
+          "a": "Sept ans sur ses dix années d'absence, le séjour le plus long de tout le poème — et le moins raconté."
+        }
+      ]
+    },
+    "de": {
+      "title": "Kalypso und die Insel Ogygia",
+      "summary": "Sieben der zehn Jahre werden hier verbracht, und das Epos schildert sie fast vollständig abseits des Geschehens. Als die Odyssee in Gesang 5 schließlich auf Ogygia einsetzt, liefert sie eine üppige Beschreibung und keinerlei Koordinaten.",
+      "narrative": [
+        "Hermes überquert das Meer, um Kalypso zu befehlen, Odysseus freizulassen; die Insel wird durch seine Ankunft beschrieben – eine Höhle, vier Quellen, Wiesen mit Veilchen und Sellerie, Erlen und Zypressen voller Vögel. Odysseus sitzt am Ufer und weint mit Blick auf das Meer.",
+        "Er baut ein Floß, und Kalypso erklärt ihm, wie er steuern soll: Er muss den Bären zu seiner Linken halten, was bedeutet, nach Osten zu segeln. Siebzehn Tage später sichtet er Scheria. Diese beiden Fakten sind der einzige navigatorische Inhalt, den die Episode enthält, und sie sind relativ, nicht absolut."
+      ],
+      "whyItMatters": "Es ist der Mindestwert des Atlas: die Episode, die zeigt, wie eine Bewertung von 2/12 aussieht. Ein Leser kann sofort erkennen, dass ihre Identifizierungen eher auf Tradition als auf Text, Archäologie oder Konsens beruhen.",
+      "debate": "Ob die siebzehntägige Segelfahrt überhaupt ein reales Entfernungsmaß ist und ob Ogygia zur selben Geographie gehört wie der Rest des Epos. Interpretationen, die die Insel im Atlantik, auf Malta oder in der Adria verorten, gehen alle von der Annahme aus, dass sie lokalisierbar ist.",
+      "faqs": [
+        {
+          "q": "Wo liegt Ogygia?",
+          "a": "Nirgendwo, wo das Epos sie verortet. Die Odyssee nennt sie den Nabel des Meeres und gibt keinen Weg dorthin an; die Identifizierungen mit Gozo, dem Atlantik und anderen Orten sind spätere Behauptungen, die hier mit ihren Quellen und Schwachstellen verzeichnet sind."
+        },
+        {
+          "q": "Wie lange ist Odysseus auf Ogygia?",
+          "a": "Sieben Jahre seiner zehnjährigen Abwesenheit, der längste Aufenthalt im gesamten Epos – und der am wenigsten erzählte."
+        }
+      ]
+    },
+    "ja": {
+      "title": "カリュプソとオギュギア島",
+      "summary": "10年のうち7年がここで費やされますが、詩の中ではそのほとんどが舞台裏で処理されています。第5巻で『オデュッセイア』がようやくオギュギア島から始まる時、そこには瑞々しい描写がなされるものの、座標は一切示されません。",
+      "narrative": [
+        "ヘルメスは海を渡り、カリュプソにオデュッセウスを解放するよう命じます。島は彼の到着を通して描写されます。洞窟、4つの泉、スミレとパセリの咲く草地、鳥の群がるハンノキやイトスギ。オデュッセウスは海岸に佇み、海に向かって涙を流しています。",
+        "彼は筏を造り、カリュプソは舵の取り方を教えます。大熊座を左手に見ながら進むこと、すなわち東へ帆走することです。17日後、彼はスケリア島を目にします。この2つの事実だけが、このエピソードに含まれる唯一の航海情報であり、それらは絶対的なものではなく相対的なものです。"
+      ],
+      "whyItMatters": "これはこのアトラスにおける最低評価の事例であり、12点満点中2点というスコアがどのようなものかを示しています。読者は、その同定がテキストや考古学、あるいは合意形成ではなく、単なる伝承に基づいていることを即座に理解できます。",
+      "debate": "17日間の帆走がそもそも実際の距離の尺度になり得るのか、そしてオギュギア島がこの詩の他の部分と同じ地理に属しているのかという議論。大西洋、マルタ、あるいはアドリア海に比定する解釈は、いずれもそこが「位置特定可能である」という前提から出発しています。",
+      "faqs": [
+        {
+          "q": "オギュギア島はどこにありますか？",
+          "a": "詩の中では位置が特定されていません。『オデュッセイア』はそこを「海のへそ」と呼び、そこへ至るルートを示していません。ゴゾ島や大西洋などとの同定は後世の主張であり、ここではその情報源や根拠の薄弱さと共に記録されています。"
+        },
+        {
+          "q": "オデュッセウスはオギュギア島にどのくらい滞在しましたか？",
+          "a": "10年間にわたる不在のうちの7年間です。これは詩の中で最も長い滞在であり、最も語られることの少なかった期間です。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "卡吕普索与奥吉吉亚岛",
+      "summary": "在十年的漂泊中，有七年是在这里度过的，而史诗几乎完全没有正面描写这段时间。当《奥德赛》终于在第五卷将场景转向奥吉吉亚时，它给出了郁郁葱葱的景物描写，却没有任何地理坐标。",
+      "narrative": [
+        "赫尔墨斯跨越海洋去命令卡吕普索释放奥德修斯；岛屿的样貌通过他的抵达展现出来——一个洞穴、四股泉水、长满紫罗兰和欧芹的草地，以及栖满飞鸟的桤木与柏树。奥德修斯则独自在岸边，望着大海哭泣。",
+        "他建造了一只木筏，卡吕普索告诉他如何掌舵：将大熊座保持在左侧，这意味着向东航行。十七天后，他望见了斯克里亚。这两个事实是该篇章包含的仅有的航海内容，而且它们是相对的，而非绝对的。"
+      ],
+      "whyItMatters": "这是本图册的底线案例：展示了2/12的评分是什么样子的。读者可以立刻看出，对其身份的认定依赖于传统，而非文本、考古或共识。",
+      "debate": "十七天的航行是否真的是对距离的实际测量，以及奥吉吉亚是否与诗中其他地方属于同一地理体系。将其置于大西洋、马耳他或亚得里亚海的解读，都始于一个假设，即它是可以定位的。",
+      "faqs": [
+        {
+          "q": "奥吉吉亚在哪里？",
+          "a": "诗中并未定位其具体位置。《奥德赛》称其为大海的肚脐，却没有给出前往那里的路线；将其认定为戈佐岛、大西洋或其他地方都是后人的说法，本图册记录了这些说法及其来源和不足之处。"
+        },
+        {
+          "q": "奥德修斯在奥吉吉亚停留了多久？",
+          "a": "在他十年漫长漂泊中的七年，这是整部史诗中停留时间最长的地方——也是叙述最少的地方。"
         }
       ]
     }

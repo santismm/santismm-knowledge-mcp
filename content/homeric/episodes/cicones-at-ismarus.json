@@ -62,6 +62,22 @@
         "pt": {
           "label": "A costa trácia de Maroneia",
           "note": "Um povo real num território real, com o nome preservado numa serra. O episódio se lê como razia comum, e é isso que torna a identificação comparativamente forte."
+        },
+        "fr": {
+          "label": "La côte thrace à Maronée",
+          "note": "Un vrai peuple sur un vrai territoire, dont le nom subsiste sur une crête. L'épisode s'apparente à un raid ordinaire, ce qui rend l'identification comparativement solide."
+        },
+        "zh": {
+          "label": "马罗尼亚的色雷斯海岸",
+          "note": "真实领土上的真实民族，其名称在山脊上流传至今。该事件读起来就像是普通的袭击，这也使得这一身份认定相对有力。"
+        },
+        "de": {
+          "label": "Die thrakische Küste bei Maroneia",
+          "note": "Ein reales Volk in einem realen Gebiet, dessen Name auf einem Höhenrücken überlebt hat. Die Episode liest sich wie ein gewöhnlicher Raubzug, was die Identifizierung vergleichsweise stark macht."
+        },
+        "ja": {
+          "label": "マロニアのトラキア沿岸",
+          "note": "実在の領土に実在した人々であり、その名は尾根に残っている。このエピソードはありふれた略奪として読めるため、特定が比較的強力なものとなっている。"
         }
       }
     }
@@ -124,6 +140,86 @@
         {
           "q": "Por que este episódio importa?",
           "a": "Porque é o último com localização defensável antes de as andanças começarem. Marca o ponto em que a confiança do atlas cai."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Les Cicones à Ismaros",
+      "summary": "Le dernier fragment d'histoire ordinaire dans l'Odyssée. Ulysse quitte Troie, saccage une ville thrace, perd soixante-douze hommes lors d'une contre-attaque, puis le vent prend le relais.",
+      "narrative": [
+        "Le raid se déroule exactement comme tous les raids : la ville tombe, le butin est partagé « afin que nul ne soit privé d'une part égale », et Ulysse ordonne à l'équipage de partir. Ils restent pour boire sur la plage. Les Cicones de l'intérieur des terres arrivent à l'aube avec des chars, et six hommes de chaque navire périssent.",
+        "Une seule chose emportée aura de l'importance par la suite : le vin offert par Maron, prêtre d'Apollon, épargné lors du sac. C'est le narcotique qui endormira le Cyclope."
+      ],
+      "whyItMatters": "C'est la frontière de l'Odyssée cartographiable. Tout ce qui précède Ismaros peut être tracé avec assurance ; après le cap Malée, presque rien ne le peut.",
+      "debate": "La question de savoir si le raid conserve le souvenir d'une véritable guerre côtière en Égée, et dans quelle mesure la description du vin reflète une connaissance de la production thrace.",
+      "faqs": [
+        {
+          "q": "Où se trouve Ismaros ?",
+          "a": "Sur la côte thrace, près de la Maronée moderne, où une crête porte encore ce nom. L'atlas classe ce lieu comme plausible : la région fait consensus, mais la ville précise n'a pas été fouillée."
+        },
+        {
+          "q": "Pourquoi cet épisode est-il important ?",
+          "a": "Parce qu'il s'agit du dernier épisode dont la localisation est défendable avant le début des errances. Il marque le point où la certitude de l'atlas s'effondre."
+        }
+      ]
+    },
+    "de": {
+      "title": "Die Kikonen in Ismaros",
+      "summary": "Das letzte Stück gewöhnlicher Geschichte in der Odyssee. Odysseus verlässt Troja, plündert eine thrakische Stadt, verliert zweiundsiebzig Männer bei einem Gegenangriff, und dann übernimmt der Wind das Kommando.",
+      "narrative": [
+        "Der Raubzug verläuft genau so, wie Raubzüge eben verlaufen: Die Stadt fällt, die Beute wird geteilt, „damit niemand ohne gleichen Anteil ausgehe“, und Odysseus fordert die Gefährten zum Aufbruch auf. Sie bleiben, um am Strand zu trinken. Die Kikonen aus dem Landesinneren treffen im Morgengrauen mit Streitwagen ein, und von jedem Schiff sterben sechs Männer.",
+        "Nur eine Sache wird mitgenommen, die später von Bedeutung ist: der Wein von Maron, dem Priester des Apollon, der bei der Plünderung verschont wurde. Es ist das Betäubungsmittel, das den Zyklopen einschläfern wird."
+      ],
+      "whyItMatters": "Es ist die Grenze der kartierbaren Odyssee. Alles vor Ismaros lässt sich mit Zuversicht verorten; nach Kap Malea fast nichts mehr.",
+      "debate": "Ob der Raubzug die Erinnerung an reale Kriegführung an den ägäischen Küsten bewahrt und inwieweit die Beschreibung des Weins Kenntnisse über die thrakische Produktion widerspiegelt.",
+      "faqs": [
+        {
+          "q": "Wo liegt Ismaros?",
+          "a": "An der thrakischen Küste nahe dem heutigen Maroneia, wo ein Höhenrücken noch immer diesen Namen trägt. Der Atlas stuft den Ort als plausibel ein: Die Region ist unumstritten, die konkrete Stadt ist jedoch nicht ausgegraben."
+        },
+        {
+          "q": "Warum ist diese Episode wichtig?",
+          "a": "Weil sie die letzte mit einer vertretbaren Lokalisierung ist, bevor die Irrfahrten beginnen. Sie markiert den Punkt, an dem die Zuverlässigkeit des Atlasses abfällt."
+        }
+      ]
+    },
+    "ja": {
+      "title": "イスマロスにおけるキコネス人",
+      "summary": "『オデュッセイア』における、ありふれた歴史の最後の断片。オデュッセウスはトロイアを離れ、トラキアの町を略奪し、反撃によって72人の部下を失う。そして、その後は風に翻弄されることになる。",
+      "narrative": [
+        "襲撃はまさに常套手段通りに進む。町は陥落し、略奪品は『誰もが平等な分け前を得られるように』分配され、オデュッセウスは乗組員に立ち去るよう命じる。しかし彼らは浜辺に留まって酒を飲む。夜明けに内陸のキコネス人が戦車を率いて到着し、各船から6人ずつが命を落とす。",
+        "後に重要となる、持ち出された唯一のものは、略奪の際に命を救われたアポロンの神官マロンから贈られたワインである。これこそが、キュクロプスを眠らせる薬となる。"
+      ],
+      "whyItMatters": "これは、地図に描くことができる『オデュッセイア』の境界である。イスマロスより前の出来事はすべて確信を持ってプロットできるが、マレア岬を過ぎると、ほぼ何もプロットできなくなる。",
+      "debate": "この襲撃が実際のエーゲ海沿岸の戦争の記憶を留めているのかどうか、そしてワインの描写がトラキアでの生産に関する知識をどの程度反映しているのか。",
+      "faqs": [
+        {
+          "q": "イスマロスはどこにありますか？",
+          "a": "現代のマロニアに近いトラキア沿岸にあり、そこには今もその名を冠した尾根が存在する。本アトラスでは、この場所を『妥当（plausible）』に分類している。地域については合意されているが、特定の町は発掘されていない。"
+        },
+        {
+          "q": "なぜこのエピソードが重要なのですか？",
+          "a": "漂流が始まる前に、位置を擁護できる最後の場所だからである。これは、本アトラスの確信度が低下する境界点を示している。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "伊斯马鲁斯的基科涅斯人",
+      "summary": "《奥德赛》中最后一段普通历史。奥德修斯离开特洛伊，洗劫了一座色雷斯城镇，在反击中失去了七十二名部下，随后风暴主宰了一切。",
+      "narrative": [
+        "袭击过程与普通的袭击完全一样：城镇陷落，掠夺的财物被瓜分，“以便没有人得不到公平的一份”，奥德修斯叫船员们离开。他们却留在海滩上喝酒。内陆的基科涅斯人在黎明时分驾着战车赶来，每艘船都有六人丧生。",
+        "只有一件带走的东西在后来起到了关键作用：阿波罗祭司马隆赠送的美酒，他在洗劫中得以幸免。这就是后来让独眼巨人入睡的迷药。"
+      ],
+      "whyItMatters": "这是《奥德赛》中可绘制地图的边界。伊斯马鲁斯之前的一切都可以确信地绘制出来；而在马利亚海角（Cape Malea）之后，几乎什么都无法定位了。",
+      "debate": "这次袭击是否保留了爱琴海沿岸真实战争的记忆，以及对美酒的描述在多大程度上反映了对色雷斯酿酒业的了解。",
+      "faqs": [
+        {
+          "q": "伊斯马鲁斯（Ismarus）在哪里？",
+          "a": "在现代马罗尼亚（Maroneia）附近的色雷斯海岸，那里的一处山脊仍保留着这个名字。地图集将该地点归为“看似合理”：地区已达成共识，但具体城镇尚未发掘。"
+        },
+        {
+          "q": "为什么这一事件很重要？",
+          "a": "因为它是漂泊开始前最后一个有据可查的地点。它标志着地图集可信度下降的起点。"
         }
       ]
     }

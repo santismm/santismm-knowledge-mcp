@@ -269,6 +269,314 @@
           "a": "Sim, com superfície menor. Um agente somente leitura ainda pode exfiltrar o que lê, então fronteiras de contexto e controle de saída continuam importando mesmo sem nenhuma ferramenta de escrita."
         }
       ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que la cyberdéfense de l'IA ?",
+      "summary": "La cyberdéfense de l'IA est la pratique consistant à protéger les systèmes d'IA — modèles, agents, outils qu'ils appellent et données auxquelles ils accèdent — contre les attaques qui exploitent la façon dont ces systèmes raisonnent et agissent. Pour les agents, il ne s'agit pas d'une couche ajoutée après coup : les contrôles qui bloquent une attaque sont les mêmes composants du harness qui permettent à l'agent de fonctionner — permissions des outils, limites de contexte, barrières d'approbation, observabilité. Défendre un agent revient à concevoir son harness.",
+      "definition": "La cyberdéfense de l'IA est la pratique consistant à protéger les systèmes d'IA, ainsi que les organisations qui les exploitent, contre les attaques ciblant l'IA elle-même — ses entrées, son contexte, ses outils et son autonomie — grâce à des contrôles implémentés dans le harness autour du modèle plutôt que dans les poids du modèle.",
+      "takeaways": [
+        "Le modèle est rarement la surface d'attaque ; c'est le harness qui l'entoure qui l'est.",
+        "Les attaques ciblent les entrées, la mémoire, les outils et l'autonomie d'un agent — pas ses paramètres.",
+        "Vous ne pouvez pas corriger un modèle de langage contre l'injection de requêtes. Vous devez limiter ce qu'un agent détourné est capable de faire.",
+        "Chaque contrôle défensif est également un contrôle de fiabilité : moindre privilège, validation, barrières d'approbation, journaux d'audit.",
+        "Deux directions partagent ce nom : défendre les systèmes d'IA et utiliser l'IA pour défendre. Elles partagent des outils, pas des modèles de menace."
+      ],
+      "context": [
+        "La sécurité applicative classique suppose que le code décide et que les données sont inertes. Un agent brise cette hypothèse : il lit du contenu non fiable puis prend des décisions à partir de celui-ci, de sorte que tout document, page web ou réponse d'outil est une instruction potentielle.",
+        "C'est là que l'adoption en entreprise stagne. L'examen de sécurité est le bloqueur le plus courant entre la démo d'un agent et sa mise en production, car le risque est inhabituel : le système se comporte exactement comme prévu et fait pourtant l'objet d'abus."
+      ],
+      "architecture": [
+        "Limite d'entrée — le contenu non fiable est délimité et étiqueté comme donnée, jamais concaténé dans le canal d'instructions.",
+        "Couche d'outils — chaque outil dispose de l'identifiant le plus restreint possible lui permettant de fonctionner, et déclare s'il est en lecture seule.",
+        "Barrière d'action — les actions irréversibles ou à forte valeur s'arrêtent pour obtenir une approbation humaine au lieu de s'en remettre au jugement du modèle.",
+        "Contrôle de sortie — les destinations sortantes sont sur liste autorisée, de sorte que l'exfiltration nécessite une faille ouverte délibérément.",
+        "Observabilité — chaque appel d'outil, ses arguments et son résultat sont enregistrés, car un incident que vous ne pouvez pas reconstruire est un incident que vous ne pouvez pas résoudre.",
+        "Évaluation contradictoire — les cas d'injection et d'abus s'exécutent dans la CI aux côtés des tests fonctionnels, de sorte qu'une régression fait échouer un build plutôt qu'un client."
+      ],
+      "components": [
+        "Modèle de menace pour l'agent spécifique",
+        "Identifiants d'outils au moindre privilège",
+        "Limite de confiance entre instructions et contenu",
+        "Barrière d'approbation humaine pour les actions irréversibles",
+        "Liste autorisée de sortie",
+        "Journal d'audit infalsifiable des appels d'outils",
+        "Suite d'évaluations contradictoires",
+        "Procédure de réponse aux incidents couvrant le comportement de l'agent"
+      ],
+      "pros": [
+        "Les contrôles sont auditables et testables, contrairement aux assurances au niveau du modèle qui ne peuvent pas être vérifiées de l'extérieur.",
+        "Le même travail garantit la fiabilité : un agent qui ne peut pas supprimer le mauvais enregistrement par malveillance ne peut pas non plus le supprimer par erreur.",
+        "Il s'aligne directement sur les obligations auxquelles les organisations sont déjà confrontées — obligations de robustesse et de cybersécurité de l'EU AI Act, ISO/IEC 42001, NIST AI RMF.",
+        "Il donne à l'examen de sécurité un élément concret à approuver, ce qui débloque la mise en production."
+      ],
+      "risks": [
+        "Théâtre de la sécurité : un modèle de garde-fous filtrant le texte alors que l'agent détient toujours une clé API avec droits d'écriture.",
+        "Une restriction excessive qui rend l'agent inutile et pousse les utilisateurs vers des copies non officielles sans aucun contrôle.",
+        "Supposer que les paramètres par défaut des fournisseurs sont sûrs, en particulier pour les serveurs d'outils tiers que personne dans l'équipe n'a analysés.",
+        "Traiter cela comme un examen ponctuel plutôt que comme un cycle de vie : nouvel outil, nouvelle surface d'attaque."
+      ],
+      "tools": [
+        "OWASP Top 10 pour les applications LLM — vocabulaire de risque partagé",
+        "MITRE ATLAS — tactiques et techniques d'adversaires observées contre les systèmes d'IA",
+        "NIST AI RMF et son profil d'IA générative",
+        "Bibliothèques de validation et de garde-fous d'entrée/sortie",
+        "Environnements d'exécution isolés (sandbox) et proxys de sortie",
+        "Harnesses d'évaluation contradictoire intégrés à la CI"
+      ],
+      "examples": [
+        "Un agent qui lit une boîte de réception partagée et peut envoyer des e-mails : un e-mail injecté lui ordonne de transférer les vingt derniers messages à une adresse externe.",
+        "Un agent de codage détenant un jeton de dépôt, orienté vers une dépendance dont le fichier README contient des instructions cachées.",
+        "Un client MCP qui se connecte à un serveur d'outils tiers dont les descriptions d'outils contiennent des instructions destinées au modèle plutôt qu'au développeur."
+      ],
+      "faqs": [
+        {
+          "q": "Un meilleur modèle résoudra-t-il l'injection de requêtes ?",
+          "a": "Non. La vulnérabilité est structurelle : les instructions et le contenu arrivent par le même canal, sous forme de texte. Les meilleurs modèles augmentent le coût d'une attaque ; seul le harness limite son rayon d'action."
+        },
+        {
+          "q": "En quoi cela diffère-t-il de la gouvernance de l'IA ?",
+          "a": "La gouvernance décide de ce qui est autorisé et de qui en est responsable. La cyberdéfense rend difficile l'abus de ce qui est autorisé. Elles partagent des preuves — journaux, évaluations, approbations — c'est pourquoi elles sont généralement construites ensemble."
+        },
+        {
+          "q": "Par quoi une équipe devrait-elle commencer ?",
+          "a": "Rédigez le modèle de menace pour un agent, listez la pire chose qu'on pourrait lui faire faire, et supprimez sa capacité à le faire sans intervention humaine. Tout le reste n'est que raffinement."
+        },
+        {
+          "q": "Cela s'applique-t-il aux agents qui ne font que lire ?",
+          "a": "Oui, avec une surface plus réduite. Un agent en lecture seule peut toujours exfiltrer ce qu'il lit, de sorte que les limites de contexte et le contrôle de sortie restent importants même si aucun outil ne peut écrire."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist KI-Cyberdefense?",
+      "summary": "KI-Cyberdefense ist die Praxis des Schutzes von KI-Systemen – Modellen, Agenten, den von ihnen aufgerufenen Tools und den Daten, auf die sie zugreifen – vor Angriffen, die die Funktionsweise und das Handeln dieser Systeme ausnutzen. Bei Agenten handelt es sich nicht um eine nachträglich hinzugefügte Schicht: Die Kontrollen, die einen Angriff stoppen, sind dieselben Harness-Komponenten, die den Agenten überhaupt erst funktionsfähig machen – Tool-Berechtigungen, Kontextgrenzen, Freigabe-Gates, Observability. Einen Agenten zu verteidigen bedeutet, sein Harness zu entwickeln.",
+      "definition": "KI-Cyberdefense ist die Praxis des Schutzes von KI-Systemen und den sie betreibenden Organisationen vor Angriffen, die auf die KI selbst abzielen – ihre Eingaben, ihren Kontext, ihre Tools und ihre Autonomie – durch Kontrollen, die im Harness um das Modell herum implementiert sind, statt in den Gewichten des Modells.",
+      "takeaways": [
+        "Das Modell ist selten die Angriffsfläche; es ist das Harness um das Modell herum.",
+        "Angriffe zielen auf die Eingaben, den Speicher, die Tools und die Autonomie eines Agenten ab – nicht auf seine Parameter.",
+        "Man kann ein Sprachmodell nicht gegen Prompt Injection patchen. Man schränkt stattdessen ein, was ein gekaperter Agent tun kann.",
+        "Jede defensive Kontrolle ist auch eine Zuverlässigkeitskontrolle: Least Privilege, Validierung, Freigabe-Gates, Audit-Logs.",
+        "Zwei Richtungen teilen sich den Namen: die Verteidigung von KI-Systemen und der Einsatz von KI zur Verteidigung. Sie teilen sich die Tools, nicht die Bedrohungsmodelle."
+      ],
+      "context": [
+        "Die klassische Anwendungssicherheit geht davon aus, dass Code entscheidet und Daten träge sind. Ein Agent bricht mit dieser Annahme: Er liest nicht vertrauenswürdige Inhalte und entscheidet dann auf dieser Grundlage. Jedes Dokument, jede Webseite oder jede Tool-Antwort ist somit eine potenzielle Anweisung.",
+        "Hier stockt die Einführung in Unternehmen. Die Sicherheitsüberprüfung ist der häufigste Blocker zwischen einer Agenten-Demo und der Produktionsumgebung, da das Risiko ungewohnt ist: Das System verhält sich genau wie entworfen und wird dennoch missbraucht."
+      ],
+      "architecture": [
+        "Eingabegrenze – nicht vertrauenswürdige Inhalte werden abgegrenzt und als Daten gekennzeichnet, niemals in den Anweisungskanal verkettet.",
+        "Tool-Ebene – jedes Tool verfügt über die minimal erforderlichen Berechtigungen, die für seine Funktion nötig sind, und deklariert, ob es schreibgeschützt ist.",
+        "Aktions-Gate – irreversible oder folgenschwere Aktionen erfordern eine menschliche Freigabe, anstatt dem Urteil des Modells zu vertrauen.",
+        "Egress-Kontrolle – ausgehende Ziele stehen auf einer Allowlist, sodass eine Exfiltration eine bewusst geöffnete Lücke erfordert.",
+        "Observability – jeder Tool-Aufruf, seine Argumente und sein Ergebnis werden protokolliert, denn ein Vorfall, den man nicht rekonstruieren kann, ist ein Vorfall, den man nicht abschließen kann.",
+        "Adversarial Evaluation – Injektions- und Missbrauchsfälle laufen in der CI neben den funktionalen Tests, sodass eine Regression den Build fehlschlagen lässt und nicht beim Kunden auftritt."
+      ],
+      "components": [
+        "Bedrohungsmodell für den spezifischen Agenten",
+        "Tool-Zugangsdaten nach dem Minimalprinzip (Least Privilege)",
+        "Vertrauensgrenze zwischen Anweisungen und Inhalten",
+        "Menschliches Freigabe-Gate für irreversible Aktionen",
+        "Egress-Allowlist",
+        "Manipulationssicheres Audit-Log von Tool-Aufrufen",
+        "Adversarial-Evaluation-Suite",
+        "Incident-Response-Verfahren, das das Verhalten des Agenten abdeckt"
+      ],
+      "pros": [
+        "Kontrollen sind auditierbar und testbar, im Gegensatz zu Zusicherungen auf Modellebene, die von außen nicht überprüft werden können.",
+        "Derselbe Aufwand sorgt für Zuverlässigkeit: Ein Agent, der einen falschen Datensatz nicht böswillig löschen kann, kann ihn auch nicht versehentlich löschen.",
+        "Es lässt sich direkt auf Verpflichtungen übertragen, vor denen Organisationen bereits stehen – Robustheits- und Cybersicherheitsanforderungen des EU AI Act, ISO/IEC 42001, NIST AI RMF.",
+        "Es gibt der Sicherheitsüberprüfung etwas Konkretes zur Freigabe, was den Weg in die Produktion ebnet."
+      ],
+      "risks": [
+        "Sicherheitstheater: Ein Guardrail-Modell filtert Text, während der Agent immer noch einen API-Schlüssel mit Schreibrechten besitzt.",
+        "Übermäßige Einschränkung, die den Agenten unbrauchbar macht und Nutzer zu inoffiziellen Kopien ohne jegliche Kontrollen drängt.",
+        "Die Annahme, dass Standardeinstellungen von Anbietern sicher sind, insbesondere bei Tool-Servern von Drittanbietern, die niemand im Team geprüft hat.",
+        "Die Behandlung als einmalige Überprüfung statt als Lebenszyklus: neues Tool, neue Angriffsfläche."
+      ],
+      "tools": [
+        "OWASP Top 10 für LLM-Anwendungen – gemeinsames Risikovokabular",
+        "MITRE ATLAS – gegen KI-Systeme beobachtete Taktiken und Techniken von Angreifern",
+        "NIST AI RMF und dessen Generative AI Profile",
+        "Bibliotheken für Input/Output-Guardrails und Validierung",
+        "Sandboxed-Ausführungsumgebungen und Egress-Proxies",
+        "In die CI integrierte Adversarial-Evaluation-Harnesses"
+      ],
+      "examples": [
+        "Ein Agent, der ein gemeinsames Postfach liest und E-Mails senden kann: Eine eingeschleuste E-Mail weist ihn an, die letzten zwanzig Nachrichten an eine externe Adresse weiterzuleiten.",
+        "Ein Coding-Agent mit einem Repository-Token, der auf eine Abhängigkeit ausgerichtet ist, deren README versteckte Anweisungen enthält.",
+        "Ein MCP-Client, der sich mit dem Tool-Server eines Drittanbieters verbindet, dessen Tool-Beschreibungen Anweisungen enthalten, die sich an das Modell und nicht an den Entwickler richten."
+      ],
+      "faqs": [
+        {
+          "q": "Wird ein besseres Modell Prompt Injection beheben?",
+          "a": "Nein. Die Schwachstelle ist strukturell: Anweisungen und Inhalte kommen über denselben Kanal als Text an. Bessere Modelle erhöhen die Kosten eines Angriffs; nur das Harness begrenzt dessen Schadensradius."
+        },
+        {
+          "q": "Wie unterscheidet sich dies von AI Governance?",
+          "a": "Governance entscheidet, was erlaubt ist und wer dafür verantwortlich ist. Cyberdefense sorgt dafür, dass das Erlaubte schwer zu missbrauchen ist. Sie teilen sich Nachweise – Logs, Evaluationen, Freigaben –, weshalb sie meist zusammen aufgebaut werden."
+        },
+        {
+          "q": "Wo sollte ein Team anfangen?",
+          "a": "Erstellen Sie das Bedrohungsmodell für einen einzelnen Agenten, listen Sie das Schlimmste auf, was er tun könnte, und entziehen Sie ihm die Fähigkeit, dies ohne menschliche Freigabe zu tun. Alles andere ist Feinschliff."
+        },
+        {
+          "q": "Gilt dies auch für Agenten, die nur lesen?",
+          "a": "Ja, wenn auch mit einer kleineren Angriffsfläche. Ein schreibgeschützter Agent kann dennoch die gelesenen Daten exfiltrieren, weshalb Kontextgrenzen und Egress-Kontrolle auch dann wichtig sind, wenn kein Tool schreiben kann."
+        }
+      ]
+    },
+    "ja": {
+      "title": "AIサイバーディフェンスとは？",
+      "summary": "AIサイバーディフェンスとは、AIシステム（モデル、エージェント、それらが呼び出すツール、アクセスするデータ）を、それらのシステムの推論や行動の仕組みを悪用する攻撃から保護する取り組みです。エージェントにとって、これは後から追加するレイヤーではありません。攻撃を阻止するコントロールは、エージェントを機能させるためのハーネスコンポーネント（ツールの権限、コンテキスト境界、承認ゲート、オブザーバビリティ）そのものです。エージェントを防御することは、そのハーネスをエンジニアリングすることに他なりません。",
+      "definition": "AIサイバーディフェンスとは、AIシステムおよびそれを運用する組織を、AI自体（その入力、コンテキスト、ツール、自律性）を標的とする攻撃から保護する取り組みです。これはモデルの重みではなく、モデルを取り囲むハーネスに実装されたコントロールを通じて行われます。",
+      "takeaways": [
+        "攻撃対象領域（アタックサーフェス）になるのはモデル自体ではなく、ほとんどの場合、それを取り囲むハーネスです。",
+        "攻撃が標的とするのは、エージェントの入力、メモリ、ツール、自律性であり、そのパラメータではありません。",
+        "プロンプトインジェクションに対して言語モデルにパッチを適用することはできません。乗っ取られたエージェントが実行できる行動を制限するのです。",
+        "すべての防御コントロール（最小権限、バリデーション、承認ゲート、監査ログ）は、信頼性コントロールでもあります。",
+        "この名称には、AIシステムの防御と、防御のためのAIの活用という2つの方向性があります。これらはツールを共有しますが、脅威モデルは共有しません。"
+      ],
+      "context": [
+        "従来のアプリケーションセキュリティは、コードが決定を下し、データは不活性であることを前提としています。エージェントはこの前提を覆します。信頼できないコンテンツを読み込み、それに基づいて決定を下すため、あらゆるドキュメント、ウェブページ、ツールの応答が指示（インストラクション）の候補になり得るのです。",
+        "ここで企業の導入が停滞します。エージェントのデモから本番環境への移行において、セキュリティレビューは最も一般的な障害となっています。なぜなら、そのリスクが未知のものであるためです。システムは設計通りに動作しているにもかかわらず、悪用されてしまうのです。"
+      ],
+      "architecture": [
+        "入力境界 — 信頼できないコンテンツはデータとして区切られ、ラベル付けされます。指示チャネルに直接結合されることは決してありません。",
+        "ツールレイヤー — 各ツールは、動作に必要な最小限の資格情報（クレデンシャル）のみを保持し、読み取り専用であるかどうかを宣言します。",
+        "アクションゲート — 不可逆的なアクションや価値の高いアクションは、モデルの判断に委ねるのではなく、人間の承認を得るために一時停止します。",
+        "送信制御（エグレスコントロール） — 外部への送信先は許可リスト（アローリスト）に登録されるため、データの持ち出しには誰かが意図的に開けた穴が必要になります。",
+        "オブザーバビリティ — すべてのツール呼び出し、その引数、および結果がログに記録されます。再現できないインシデントは、解決できないインシデントだからです。",
+        "敵対的評価 — インジェクションや悪用のユースケースは、機能テストと並行してCIで実行されます。これにより、デグレードが発生した場合は、顧客に影響が及ぶ前にビルドが失敗します。"
+      ],
+      "components": [
+        "特定のエージェントに対する脅威モデル",
+        "最小権限のツール資格情報",
+        "指示とコンテンツの間の信頼境界",
+        "不可逆的なアクションに対する人間の承認ゲート",
+        "送信許可リスト",
+        "改ざん検知可能なツール呼び出しの監査ログ",
+        "敵対的評価スイート",
+        "エージェントの行動をカバーするインシデント対応手順"
+      ],
+      "pros": [
+        "外部から検証できないモデルレベルの保証とは異なり、コントロールは監査可能かつテスト可能です。",
+        "同じ取り組みが信頼性の向上にもつながります。悪意によって誤ったレコードを削除できないエージェントは、誤って削除することもありません。",
+        "これは、組織がすでに直面している義務（EU AI法における堅牢性とサイバーセキュリティの義務、ISO/IEC 42001、NIST AI RMFなど）に直接マッピングされます。",
+        "セキュリティレビューにおいて承認すべき具体的な対象が明確になり、本番環境への移行を阻む要因が解消されます。"
+      ],
+      "risks": [
+        "セキュリティシアター（形だけのセキュリティ）：エージェントが書き込み権限を持つAPIキーを保持したままで、ガードレールモデルがテキストをフィルタリングしている状態。",
+        "過度な制限によりエージェントが使い物にならなくなり、ユーザーがコントロールのない非公式のコピーに流れてしまうこと。",
+        "ベンダーのデフォルト設定が安全であると仮定すること。特に、チームの誰もコードを確認していないサードパーティのツールサーバーにおいて顕著です。",
+        "これをライフサイクルとしてではなく、単発のレビューとして扱うこと。新しいツールは、新しい攻撃対象領域（アタックサーフェス）を意味します。"
+      ],
+      "tools": [
+        "OWASP Top 10 for LLM Applications — 共通の脅威語彙",
+        "MITRE ATLAS — AIシステムに対して観測された敵対者の戦術と技術",
+        "NIST AI RMFおよびそのジェネレーティブAIプロファイル",
+        "入出力ガードレールおよびバリデーションライブラリ",
+        "サンドボックス化された実行環境および送信（エグレス）プロキシ",
+        "CIに組み込まれた敵対的評価ハーネス"
+      ],
+      "examples": [
+        "共有受信トレイを読み取り、メールを送信できるエージェント：インジェクションされたメールが、直近の20件のメッセージを外部のアドレスに転送するようエージェントに指示するケース。",
+        "リポジトリトークンを保持するコーディングエージェントが、READMEに隠された指示が含まれる依存関係を指しているケース。",
+        "MCPクライアントがサードパーティのツールサーバーに接続し、そのツールの説明に開発者ではなくモデルを標的とした指示が含まれているケース。"
+      ],
+      "faqs": [
+        {
+          "q": "より優れたモデルを使用すれば、プロンプトインジェクションは解決しますか？",
+          "a": "いいえ。この脆弱性は構造的なものです。指示とコンテンツがテキストとして同じチャネルを通じて届くためです。優れたモデルは攻撃のコストを上げますが、その影響範囲（ブラストライジアス）を制限できるのはハーネスだけです。"
+        },
+        {
+          "q": "これはAIガバナンスとどう違うのですか？",
+          "a": "ガバナンスは何が許可され、誰がその責任を負うかを決定します。サイバーディフェンスは、許可されたものが悪用されにくくします。これらはログ、評価、承認などの証跡を共有するため、通常は一緒に構築されます。"
+        },
+        {
+          "q": "チームはどこから始めるべきですか？",
+          "a": "1つのエージェントに対する脅威モデルを作成し、実行させられ得る最悪の事態をリストアップし、人間の介在なしにそれを実行できないようにします。それ以外はすべて微調整です。"
+        },
+        {
+          "q": "これは読み取り専用のエージェントにも適用されますか？",
+          "a": "はい、ただし攻撃対象領域は小さくなります。読み取り専用のエージェントであっても、読み取った内容を持ち出すことは可能なため、書き込み可能なツールがない場合でも、コンテキスト境界と送信制御（エグレスコントロール）は依然として重要です。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是 AI 网络防御？",
+      "summary": "AI 网络防御是保护 AI 系统（模型、智能体、它们调用的工具以及它们访问的数据）免受利用这些系统推理和行为方式的攻击的实践。对于智能体而言，它不是事后添加的层：阻止攻击的控制措施与使智能体正常工作的支撑系统组件完全相同——工具权限、上下文边界、审批关口、可观测性。防御智能体就是构建其支撑系统。",
+      "definition": "AI 网络防御是保护 AI 系统及其运营组织免受针对 AI 自身（其输入、上下文、工具和自主性）攻击的实践，这些防御是通过在模型周围的支撑系统中实施控制，而不是在模型权重中实施控制来实现的。",
+      "takeaways": [
+        "模型本身很少是攻击面；其周围的支撑系统才是。",
+        "攻击的目标是智能体的输入、记忆、工具和自主性——而不是其参数。",
+        "你无法通过给语言模型打补丁来防御提示词注入。你只能限制被劫持的智能体所能做的事情。",
+        "每项防御性控制同时也是可靠性控制：最小特权、验证、审批关口、审计日志。",
+        "有两个方向共享这一名称：防御 AI 系统，以及使用 AI 进行防御。它们共享工具，但不共享威胁模型。"
+      ],
+      "context": [
+        "传统应用安全假设代码做决策而数据是惰性的。智能体打破了这一假设：它读取不可信的内容，然后据此做出决策，因此任何文档、网页或工具响应都可能成为潜在的指令。",
+        "这就是企业落地停滞不前的原因。安全审查是智能体从 Demo 走向生产环境最常见的阻碍，因为这种风险是陌生的：系统完全按照设计运行，但仍然会被滥用。"
+      ],
+      "architecture": [
+        "输入边界——不可信内容被界定并标记为数据，绝不直接拼接进指令通道。",
+        "工具层——每个工具仅携带能使其正常工作的最小凭证，并声明其是否为只读。",
+        "操作关口——不可逆或高价值的操作会暂停以等待人工审批，而不是完全信任模型的判断。",
+        "出口控制——出口目的地被列入白名单，因此数据外泄需要有人故意留出的漏洞。",
+        "可观测性——每次工具调用、其参数和结果都会被记录，因为无法重现的安全事件就是无法结案的事件。",
+        "对抗性评估——注入和滥用用例在 CI 中与功能测试并排运行，因此回归问题会导致构建失败，而不是让客户受损。"
+      ],
+      "components": [
+        "针对特定智能体的威胁模型",
+        "最小特权工具凭证",
+        "指令与内容之间的信任边界",
+        "针对不可逆操作的人工审批关口",
+        "出口白名单",
+        "防篡改的工具调用审计日志",
+        "对抗性评估套件",
+        "覆盖智能体行为的事件响应流程"
+      ],
+      "pros": [
+        "控制措施是可审计和可测试的，不像模型层面的保证那样无法从外部验证。",
+        "同样的工作也能带来可靠性：一个无法因恶意删除错误记录的智能体，也同样不会因失误而删除它。",
+        "它直接对应了组织已经面临的义务——欧盟《AI 法案》的鲁棒性和网络安全职责、ISO/IEC 42001、NIST AI RMF。",
+        "它为安全审查提供了具体的审批依据，而这正是打通生产环境的关键。"
+      ],
+      "risks": [
+        "安全演戏：一个护栏模型在过滤文本，而智能体却仍然持有具备写入权限的 API 密钥。",
+        "过度限制导致智能体无法使用，并迫使用户转向没有任何控制措施的非官方副本。",
+        "假设供应商默认设置是安全的，特别是对于团队中无人阅读过其代码的第三方工具服务器。",
+        "将其视为一次性审查，而不是一个生命周期：新工具意味着新的攻击面。"
+      ],
+      "tools": [
+        "OWASP LLM 应用十大安全漏洞——共享的风险词汇表",
+        "MITRE ATLAS——针对 AI 系统观察到的对手战术和技术",
+        "NIST AI RMF 及其生成式 AI 配置文件",
+        "输入/输出护栏和验证库",
+        "沙箱执行环境和出口代理",
+        "接入 CI 的对抗性评估支撑系统"
+      ],
+      "examples": [
+        "一个读取共享收件箱并能发送邮件的智能体：一封被注入的电子邮件指示它将最后二十条消息转发到外部地址。",
+        "一个持有代码仓库 Token 的编码智能体，指向一个其 README 包含隐藏指令的依赖项。",
+        "一个连接到第三方工具服务器的 MCP 客户端，该服务器的工具描述中包含针对模型而非开发者的指令。"
+      ],
+      "faqs": [
+        {
+          "q": "更强大的模型能解决提示词注入问题吗？",
+          "a": "不能。该漏洞是结构性的：指令和内容通过同一个通道（即文本）传入。更好的模型只是提高了攻击成本；只有支撑系统才能限制其爆炸半径。"
+        },
+        {
+          "q": "这与 AI 治理有什么不同？",
+          "a": "治理决定了什么是被允许的以及谁为此负责。网络防御则使被允许的事情难以被滥用。它们共享证据（日志、评估、审批），这就是为什么它们通常是一起构建的。"
+        },
+        {
+          "q": "团队应该从哪里开始？",
+          "a": "为单个智能体编写威胁模型，列出它可能被诱导做出的最糟糕的事情，并在没有人工干预的情况下剥夺其执行该操作的能力。其余的一切都是细化完善。"
+        },
+        {
+          "q": "这适用于仅有读取权限的智能体吗？",
+          "a": "适用，但攻击面较小。只读智能体仍然可以外泄它读取的内容，因此即使没有工具可以执行写入操作，上下文边界和出口控制仍然至关重要。"
+        }
+      ]
     }
   }
 }

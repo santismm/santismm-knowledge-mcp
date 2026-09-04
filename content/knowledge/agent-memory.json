@@ -3,15 +3,29 @@
   "category": "harness",
   "updated": "2026-06-21",
   "version": "1.0",
-  "related": ["harness-engineering", "context-engineering", "ai-agent", "enterprise-rag"],
+  "related": [
+    "harness-engineering",
+    "context-engineering",
+    "ai-agent",
+    "enterprise-rag"
+  ],
   "references": [
-    { "title": "Packer et al. — MemGPT: Towards LLMs as Operating Systems (2023)", "url": "https://arxiv.org/abs/2310.08560" },
-    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" }
+    {
+      "title": "Packer et al. — MemGPT: Towards LLMs as Operating Systems (2023)",
+      "url": "https://arxiv.org/abs/2310.08560"
+    },
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["industry_observation", "paper"]
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
   },
   "locales": {
     "en": {
@@ -33,7 +47,14 @@
         "Two layers: working memory (the current context window, holding the active task) and long-term memory (external stores — vector, key-value, document or graph — written during a task and retrieved later). Some designs add episodic (events), semantic (facts) and procedural (skills) memory.",
         "The agent reads relevant memories into context at each step and writes new ones as it learns. Retrieval, summarization and forgetting policies keep memory useful rather than overwhelming."
       ],
-      "components": ["Working memory", "Long-term store (vector/KV/graph)", "Write policy", "Retrieval policy", "Summarization / consolidation", "Forgetting / expiry"],
+      "components": [
+        "Working memory",
+        "Long-term store (vector/KV/graph)",
+        "Write policy",
+        "Retrieval policy",
+        "Summarization / consolidation",
+        "Forgetting / expiry"
+      ],
       "pros": [
         "Continuity across steps, sessions and tasks.",
         "Personalization that persists over time.",
@@ -46,17 +67,34 @@
         "Retrieval of irrelevant memories adds noise.",
         "Unbounded growth without consolidation or expiry."
       ],
-      "tools": ["Vector databases", "Key-value / document stores", "MemGPT-style memory managers", "Agent frameworks (LangGraph, Agents SDKs)"],
+      "tools": [
+        "Vector databases",
+        "Key-value / document stores",
+        "MemGPT-style memory managers",
+        "Agent frameworks (LangGraph, Agents SDKs)"
+      ],
       "examples": [
         "An assistant remembering a user's preferences across sessions.",
         "A long-running agent summarizing progress so it never repeats a step.",
         "A support agent recalling a customer's prior tickets when relevant."
       ],
       "faqs": [
-        { "q": "How is agent memory different from RAG?", "a": "RAG retrieves from an external knowledge base; agent memory retrieves from the agent's own accumulated state. The retrieval machinery is similar, but the source and write path differ." },
-        { "q": "What is the difference between short- and long-term memory?", "a": "Short-term (working) memory is the live context window for the current task; long-term memory is a persistent store the agent reads from and writes to across tasks and sessions." },
-        { "q": "Why not keep everything in the context window?", "a": "Windows are finite and quality drops as they fill. Externalizing state to memory and retrieving only what is relevant keeps the agent focused and affordable." },
-        { "q": "What are the governance concerns?", "a": "Stored memory may contain personal or sensitive data, so it needs access control, retention limits and the ability to correct or delete entries." }
+        {
+          "q": "How is agent memory different from RAG?",
+          "a": "RAG retrieves from an external knowledge base; agent memory retrieves from the agent's own accumulated state. The retrieval machinery is similar, but the source and write path differ."
+        },
+        {
+          "q": "What is the difference between short- and long-term memory?",
+          "a": "Short-term (working) memory is the live context window for the current task; long-term memory is a persistent store the agent reads from and writes to across tasks and sessions."
+        },
+        {
+          "q": "Why not keep everything in the context window?",
+          "a": "Windows are finite and quality drops as they fill. Externalizing state to memory and retrieving only what is relevant keeps the agent focused and affordable."
+        },
+        {
+          "q": "What are the governance concerns?",
+          "a": "Stored memory may contain personal or sensitive data, so it needs access control, retention limits and the ability to correct or delete entries."
+        }
       ]
     },
     "es": {
@@ -78,7 +116,14 @@
         "Dos capas: memoria de trabajo (la ventana de contexto actual, con la tarea activa) y memoria a largo plazo (almacenes externos —vectorial, clave-valor, documental o de grafo— escritos durante una tarea y recuperados después). Algunos diseños añaden memoria episódica (eventos), semántica (hechos) y procedimental (habilidades).",
         "El agente lee memorias relevantes al contexto en cada paso y escribe nuevas a medida que aprende. Las políticas de recuperación, resumen y olvido mantienen la memoria útil en vez de abrumadora."
       ],
-      "components": ["Memoria de trabajo", "Almacén a largo plazo (vectorial/KV/grafo)", "Política de escritura", "Política de recuperación", "Resumen / consolidación", "Olvido / expiración"],
+      "components": [
+        "Memoria de trabajo",
+        "Almacén a largo plazo (vectorial/KV/grafo)",
+        "Política de escritura",
+        "Política de recuperación",
+        "Resumen / consolidación",
+        "Olvido / expiración"
+      ],
       "pros": [
         "Continuidad entre pasos, sesiones y tareas.",
         "Personalización que persiste en el tiempo.",
@@ -91,17 +136,34 @@
         "Recuperar memorias irrelevantes añade ruido.",
         "Crecimiento sin límite sin consolidación ni expiración."
       ],
-      "tools": ["Bases de datos vectoriales", "Almacenes clave-valor / documentales", "Gestores de memoria estilo MemGPT", "Frameworks de agentes (LangGraph, SDKs de agentes)"],
+      "tools": [
+        "Bases de datos vectoriales",
+        "Almacenes clave-valor / documentales",
+        "Gestores de memoria estilo MemGPT",
+        "Frameworks de agentes (LangGraph, SDKs de agentes)"
+      ],
       "examples": [
         "Un asistente que recuerda las preferencias de un usuario entre sesiones.",
         "Un agente de larga duración que resume su progreso para no repetir un paso.",
         "Un agente de soporte que recuerda los tickets previos de un cliente cuando es relevante."
       ],
       "faqs": [
-        { "q": "¿En qué se diferencia la memoria de agente de RAG?", "a": "RAG recupera de una base de conocimiento externa; la memoria de agente recupera del propio estado acumulado del agente. La maquinaria de recuperación es similar, pero la fuente y la ruta de escritura difieren." },
-        { "q": "¿Cuál es la diferencia entre memoria a corto y largo plazo?", "a": "La memoria a corto plazo (de trabajo) es la ventana de contexto viva para la tarea actual; la de largo plazo es un almacén persistente que el agente lee y escribe entre tareas y sesiones." },
-        { "q": "¿Por qué no guardar todo en la ventana de contexto?", "a": "Las ventanas son finitas y la calidad cae al llenarse. Externalizar el estado a memoria y recuperar solo lo relevante mantiene al agente enfocado y asequible." },
-        { "q": "¿Cuáles son las preocupaciones de gobernanza?", "a": "La memoria guardada puede contener datos personales o sensibles, así que necesita control de acceso, límites de retención y capacidad de corregir o borrar entradas." }
+        {
+          "q": "¿En qué se diferencia la memoria de agente de RAG?",
+          "a": "RAG recupera de una base de conocimiento externa; la memoria de agente recupera del propio estado acumulado del agente. La maquinaria de recuperación es similar, pero la fuente y la ruta de escritura difieren."
+        },
+        {
+          "q": "¿Cuál es la diferencia entre memoria a corto y largo plazo?",
+          "a": "La memoria a corto plazo (de trabajo) es la ventana de contexto viva para la tarea actual; la de largo plazo es un almacén persistente que el agente lee y escribe entre tareas y sesiones."
+        },
+        {
+          "q": "¿Por qué no guardar todo en la ventana de contexto?",
+          "a": "Las ventanas son finitas y la calidad cae al llenarse. Externalizar el estado a memoria y recuperar solo lo relevante mantiene al agente enfocado y asequible."
+        },
+        {
+          "q": "¿Cuáles son las preocupaciones de gobernanza?",
+          "a": "La memoria guardada puede contener datos personales o sensibles, así que necesita control de acceso, límites de retención y capacidad de corregir o borrar entradas."
+        }
       ]
     },
     "pt": {
@@ -123,7 +185,14 @@
         "Duas camadas: memória de trabalho (a janela de contexto atual, com a tarefa ativa) e memória de longo prazo (armazenamentos externos — vetorial, chave-valor, documental ou de grafo — escritos durante uma tarefa e recuperados depois). Alguns designs adicionam memória episódica (eventos), semântica (fatos) e procedural (habilidades).",
         "O agente lê memórias relevantes ao contexto a cada passo e escreve novas conforme aprende. Políticas de recuperação, resumo e esquecimento mantêm a memória útil em vez de avassaladora."
       ],
-      "components": ["Memória de trabalho", "Armazenamento de longo prazo (vetorial/KV/grafo)", "Política de escrita", "Política de recuperação", "Resumo / consolidação", "Esquecimento / expiração"],
+      "components": [
+        "Memória de trabalho",
+        "Armazenamento de longo prazo (vetorial/KV/grafo)",
+        "Política de escrita",
+        "Política de recuperação",
+        "Resumo / consolidação",
+        "Esquecimento / expiração"
+      ],
       "pros": [
         "Continuidade entre passos, sessões e tarefas.",
         "Personalização que persiste ao longo do tempo.",
@@ -136,17 +205,310 @@
         "Recuperar memórias irrelevantes adiciona ruído.",
         "Crescimento sem limite sem consolidação nem expiração."
       ],
-      "tools": ["Bancos de dados vetoriais", "Armazenamentos chave-valor / documentais", "Gerenciadores de memória estilo MemGPT", "Frameworks de agentes (LangGraph, SDKs de agentes)"],
+      "tools": [
+        "Bancos de dados vetoriais",
+        "Armazenamentos chave-valor / documentais",
+        "Gerenciadores de memória estilo MemGPT",
+        "Frameworks de agentes (LangGraph, SDKs de agentes)"
+      ],
       "examples": [
         "Um assistente que lembra as preferências de um usuário entre sessões.",
         "Um agente de longa duração que resume seu progresso para não repetir um passo.",
         "Um agente de suporte que lembra os chamados anteriores de um cliente quando relevante."
       ],
       "faqs": [
-        { "q": "Como a memória de agente difere do RAG?", "a": "O RAG recupera de uma base de conhecimento externa; a memória de agente recupera do próprio estado acumulado do agente. A maquinaria de recuperação é similar, mas a fonte e o caminho de escrita diferem." },
-        { "q": "Qual a diferença entre memória de curto e longo prazo?", "a": "A memória de curto prazo (de trabalho) é a janela de contexto viva para a tarefa atual; a de longo prazo é um armazenamento persistente que o agente lê e escreve entre tarefas e sessões." },
-        { "q": "Por que não guardar tudo na janela de contexto?", "a": "Janelas são finitas e a qualidade cai ao se encherem. Externalizar o estado para a memória e recuperar só o relevante mantém o agente focado e acessível." },
-        { "q": "Quais são as preocupações de governança?", "a": "A memória guardada pode conter dados pessoais ou sensíveis, então precisa de controle de acesso, limites de retenção e capacidade de corrigir ou apagar entradas." }
+        {
+          "q": "Como a memória de agente difere do RAG?",
+          "a": "O RAG recupera de uma base de conhecimento externa; a memória de agente recupera do próprio estado acumulado do agente. A maquinaria de recuperação é similar, mas a fonte e o caminho de escrita diferem."
+        },
+        {
+          "q": "Qual a diferença entre memória de curto e longo prazo?",
+          "a": "A memória de curto prazo (de trabalho) é a janela de contexto viva para a tarefa atual; a de longo prazo é um armazenamento persistente que o agente lê e escreve entre tarefas e sessões."
+        },
+        {
+          "q": "Por que não guardar tudo na janela de contexto?",
+          "a": "Janelas são finitas e a qualidade cai ao se encherem. Externalizar o estado para a memória e recuperar só o relevante mantém o agente focado e acessível."
+        },
+        {
+          "q": "Quais são as preocupações de governança?",
+          "a": "A memória guardada pode conter dados pessoais ou sensíveis, então precisa de controle de acesso, limites de retenção e capacidade de corrigir ou apagar entradas."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que les systèmes de mémoire d'agent ?",
+      "summary": "La mémoire d'agent désigne la manière dont un agent d'IA conserve et rappelle des informations au-delà d'une seule fenêtre de contexte — à travers les étapes, les sessions et les tâches. Elle sépare généralement la mémoire de travail à court terme (le contexte actuel) de la mémoire à long terme (des espaces de stockage durables dans lesquels l'agent lit et écrit). La mémoire est ce qui permet à un agent de conserver un état tout au long d'une tâche complexe, de se souvenir d'un utilisateur au fil du temps et d'éviter de répéter le même travail. C'est une couche fondamentale de la discipline Harness Engineering.",
+      "definition": "La mémoire d'agent est l'ensemble des mécanismes qu'un agent d'IA utilise pour stocker, organiser et récupérer des informations au-delà de sa fenêtre de contexte immédiate, englobant la mémoire de travail à court terme et la mémoire persistante à long terme.",
+      "takeaways": [
+        "La mémoire permet à un agent de s'étendre au-delà d'une seule fenêtre de contexte finie.",
+        "La mémoire à court terme (de travail) et la mémoire à long terme (persistante) jouent des rôles différents.",
+        "La mémoire à long terme est souvent récupérée à la demande, à l'instar d'un RAG appliqué à l'historique propre de l'agent.",
+        "Une bonne mémoire évite la répétition des tâches et la perte d'état lors de travaux de longue durée.",
+        "Déterminer ce qu'il faut écrire, conserver et oublier relève d'une décision de conception, et non d'un processus automatique."
+      ],
+      "context": [
+        "La fenêtre de contexte d'un modèle étant finie, tout ce qu'un agent doit mémoriser au-delà de celle-ci nécessite un stockage externe. Sans mémoire, un agent oublie les étapes précédentes, répète des actions et ne peut pas personnaliser l'expérience d'une session à l'autre.",
+        "La mémoire transforme un modèle sans état (stateless) en un système doté d'une continuité. La difficulté réside dans la curation : décider de ce qui mérite d'être consigné, comment l'organiser et comment ne récupérer que ce qui est pertinent à l'instant T — un aspect étroitement lié au context engineering."
+      ],
+      "architecture": [
+        "Deux couches : la mémoire de travail (la fenêtre de contexte actuelle, contenant la tâche active) et la mémoire à long terme (stockages externes — vectoriels, clé-valeur, documents ou graphes — alimentés pendant une tâche et récupérés ultérieurement). Certaines architectures y ajoutent une mémoire épisodique (événements), sémantique (faits) et procédurale (compétences).",
+        "L'agent charge les souvenirs pertinents dans son contexte à chaque étape et en écrit de nouveaux au fil de son apprentissage. Des politiques de récupération, de résumé et d'oubli permettent de maintenir la mémoire utile plutôt qu'encombrante."
+      ],
+      "components": [
+        "Mémoire de travail",
+        "Stockage à long terme (vectoriel/clé-valeur/graphe)",
+        "Politique d'écriture",
+        "Politique de récupération",
+        "Résumé / consolidation",
+        "Oubli / expiration"
+      ],
+      "pros": [
+        "Continuité à travers les étapes, les sessions et les tâches.",
+        "Personnalisation persistante dans le temps.",
+        "Évite la répétition des tâches et la perte de contexte.",
+        "Permet de concevoir des agents avec état (stateful) sur de longs horizons."
+      ],
+      "risks": [
+        "Des souvenirs obsolètes ou erronés corrompent les réponses futures.",
+        "Obligations de confidentialité et de gouvernance sur les données stockées.",
+        "La récupération de souvenirs non pertinents ajoute du bruit.",
+        "Croissance illimitée en l'absence de consolidation ou d'expiration."
+      ],
+      "tools": [
+        "Bases de données vectorielles",
+        "Stockages clé-valeur / de documents",
+        "Gestionnaires de mémoire de type MemGPT",
+        "Frameworks d'agents (LangGraph, SDK d'agents)"
+      ],
+      "examples": [
+        "Un assistant se souvenant des préférences d'un utilisateur d'une session à l'autre.",
+        "Un agent à exécution longue résumant sa progression pour ne jamais répéter une étape.",
+        "Un agent de support rappelant les anciens tickets d'un client lorsque c'est pertinent."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi la mémoire d'agent diffère-t-elle du RAG ?",
+          "a": "Le RAG effectue des recherches dans une base de connaissances externe ; la mémoire d'agent récupère des informations à partir de l'état accumulé par l'agent lui-même. Le mécanisme de récupération est similaire, mais la source et le chemin d'écriture diffèrent."
+        },
+        {
+          "q": "Quelle est la différence entre la mémoire à court terme et la mémoire à long terme ?",
+          "a": "La mémoire à court terme (de travail) est la fenêtre de contexte active pour la tâche en cours ; la mémoire à long terme est un stockage persistant dans lequel l'agent lit et écrit à travers les tâches et les sessions."
+        },
+        {
+          "q": "Pourquoi ne pas tout conserver dans la fenêtre de contexte ?",
+          "a": "Les fenêtres sont finies et la qualité diminue à mesure qu'elles se remplissent. Externaliser l'état vers la mémoire et ne récupérer que ce qui est pertinent permet de garder l'agent concentré et d'optimiser les coûts."
+        },
+        {
+          "q": "Quelles sont les préoccupations en matière de gouvernance ?",
+          "a": "La mémoire stockée peut contenir des données personnelles ou sensibles, elle nécessite donc un contrôle d'accès, des limites de conservation et la possibilité de corriger ou de supprimer des entrées."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was sind Agenten-Gedächtnissysteme?",
+      "summary": "Das Agenten-Gedächtnis (Agent Memory) ermöglicht es einem KI-Agenten, Informationen über ein einzelnes Kontextfenster hinaus zu behalten und abzurufen – über Schritte, Sitzungen und Aufgaben hinweg. Es trennt typischerweise das Kurzzeit-Arbeitsgedächtnis (den aktuellen Kontext) vom Langzeitgedächtnis (dauerhafte Speicher, aus denen der Agent liest und in die er schreibt). Das Gedächtnis ermöglicht es einem Agenten, den Zustand über eine lange Aufgabe hinweg beizubehalten, sich im Laufe der Zeit an einen Benutzer zu erinnern und doppelte Arbeit zu vermeiden. Es ist eine Kernschicht des Harness Engineering.",
+      "definition": "Das Agenten-Gedächtnis ist die Gesamtheit der Mechanismen, die ein KI-Agent nutzt, um Informationen über sein unmittelbares Kontextfenster hinaus zu speichern, zu organisieren und abzurufen, und umfasst sowohl das Kurzzeit-Arbeitsgedächtnis als auch das persistente Langzeitgedächtnis.",
+      "takeaways": [
+        "Das Gedächtnis erweitert die Fähigkeiten eines Agenten über ein einzelnes, begrenztes Kontextfenster hinaus.",
+        "Kurzzeit- (Arbeits-) und Langzeitgedächtnis (persistentes Gedächtnis) erfüllen unterschiedliche Aufgaben.",
+        "Das Langzeitgedächtnis wird oft bei Bedarf abgerufen, ähnlich wie RAG über die eigene Historie des Agenten.",
+        "Ein gutes Gedächtnis verhindert doppelte Arbeit und den Verlust des Zustands bei langwierigen Aufgaben.",
+        "Was geschrieben, behalten und vergessen wird, ist eine Designentscheidung und geschieht nicht automatisch."
+      ],
+      "context": [
+        "Das Kontextfenster eines Modells ist begrenzt. Alles, was sich ein Agent darüber hinaus merken muss, erfordert daher einen externen Speicher. Ohne Gedächtnis vergisst ein Agent frühere Schritte, wiederholt Aktionen und kann sitzungsübergreifend keine Personalisierung vornehmen.",
+        "Das Gedächtnis macht aus einem zustandslosen Modell ein System mit Kontinuität. Die Herausforderung liegt in der Kuration: der Entscheidung, was aufzeichnungswürdig ist, wie es organisiert wird und wie nur das abgerufen wird, was im Moment relevant ist – eng verknüpft mit dem Context Engineering."
+      ],
+      "architecture": [
+        "Zwei Schichten: das Arbeitsgedächtnis (das aktuelle Kontextfenster, das die aktive Aufgabe enthält) und das Langzeitgedächtnis (externe Speicher – Vektor-, Key-Value-, Dokumenten- oder Graphspeicher –, die während einer Aufgabe beschrieben und später abgerufen werden). Einige Architekturen ergänzen dies um ein episodisches (Ereignisse), semantisches (Fakten) und prozedurales (Fähigkeiten) Gedächtnis.",
+        "Der Agent liest bei jedem Schritt relevante Erinnerungen in den Kontext ein und schreibt beim Lernen neue hinzu. Strategien für Abruf (Retrieval), Zusammenfassung und Vergessen sorgen dafür, dass das Gedächtnis nützlich bleibt, anstatt das System zu überlasten."
+      ],
+      "components": [
+        "Arbeitsgedächtnis",
+        "Langzeitspeicher (Vektor/KV/Graph)",
+        "Schreibstrategie",
+        "Abrufstrategie",
+        "Zusammenfassung / Konsolidierung",
+        "Vergessen / Ablauf"
+      ],
+      "pros": [
+        "Kontinuität über Schritte, Sitzungen und Aufgaben hinweg.",
+        "Personalisierung, die über die Zeit hinweg bestehen bleibt.",
+        "Vermeidet doppelte Arbeit und den Verlust von Kontext.",
+        "Ermöglicht zustandsbehaftete Agenten mit langem Zeithorizont."
+      ],
+      "risks": [
+        "Veraltete oder fehlerhafte Erinnerungen beeinträchtigen zukünftige Antworten.",
+        "Datenschutz- und Governance-Verpflichtungen für gespeicherte Daten.",
+        "Der Abruf irrelevanter Erinnerungen führt zu Rauschen.",
+        "Unbegrenztes Wachstum ohne Konsolidierung oder Ablauf."
+      ],
+      "tools": [
+        "Vektordatenbanken",
+        "Key-Value- / Dokumentenspeicher",
+        "Memory-Manager im MemGPT-Stil",
+        "Agenten-Frameworks (LangGraph, Agents SDKs)"
+      ],
+      "examples": [
+        "Ein Assistent, der sich sitzungsübergreifend an die Präferenzen eines Benutzers erinnert.",
+        "Ein langlaufender Agent, der den Fortschritt zusammenfasst, um keinen Schritt zu wiederholen.",
+        "Ein Support-Agent, der bei Bedarf frühere Tickets eines Kunden abruft."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich das Agenten-Gedächtnis von RAG?",
+          "a": "RAG ruft Informationen aus einer externen Wissensdatenbank ab; das Agenten-Gedächtnis greift auf den eigenen, akkumulierten Zustand des Agenten zu. Die Abrufmechanismen sind ähnlich, aber die Quelle und der Schreibpfad unterscheiden sich."
+        },
+        {
+          "q": "Was ist der Unterschied zwischen Kurz- und Langzeitgedächtnis?",
+          "a": "Das Kurzzeit- (Arbeits-) Gedächtnis ist das aktive Kontextfenster für die aktuelle Aufgabe; das Langzeitgedächtnis ist ein persistenter Speicher, aus dem der Agent über Aufgaben und Sitzungen hinweg liest und in den er schreibt."
+        },
+        {
+          "q": "Warum behält man nicht einfach alles im Kontextfenster?",
+          "a": "Kontextfenster sind begrenzt, und die Qualität sinkt, je voller sie werden. Die Auslagerung des Zustands in ein Gedächtnis und der gezielte Abruf relevanter Informationen sorgen dafür, dass der Agent fokussiert und kosteneffizient bleibt."
+        },
+        {
+          "q": "Welche Governance-Bedenken gibt es?",
+          "a": "Das gespeicherte Gedächtnis kann personenbezogene oder sensible Daten enthalten. Daher sind Zugriffskontrollen, Aufbewahrungsfristen sowie die Möglichkeit zur Korrektur oder Löschung von Einträgen erforderlich."
+        }
+      ]
+    },
+    "ja": {
+      "title": "エージェントメモリシステムとは何か？",
+      "summary": "エージェントメモリとは、AIエージェントが単一のコンテキストウィンドウを超えて、ステップ、セッション、タスク間で情報を保持および想起する方法である。通常、短期のワーキングメモリ（現在のコンテキスト）と、長期メモリ（エージェントが読み書きする永続的なストレージ）を分離する。メモリによって、エージェントは長いタスクを通じて状態を維持し、時間の経過とともにユーザーを記憶し、重複する作業を避けることができる。これはハーネスエンジニアリング (Harness Engineering) のコアレイヤーである。",
+      "definition": "エージェントメモリとは、AIエージェントが当面のコンテキストウィンドウを超えて情報を保存、整理、検索するために使用する一連のメカニズムであり、短期のワーキングメモリと長期の永続メモリにまたがる。",
+      "takeaways": [
+        "メモリは、単一の有限なコンテキストウィンドウを超えてエージェントを拡張する。",
+        "短期（ワーキング）メモリと長期（永続）メモリは、それぞれ異なる役割を果たす。",
+        "長期メモリは、エージェント自身の履歴に対するRAGのように、多くの場合オンデマンドで検索される。",
+        "優れたメモリは、長いタスクにおける重複作業や状態の喪失を防ぐ。",
+        "何を書き込み、保持し、忘れるかは設計上の決定事項であり、自動的に行われるものではない。"
+      ],
+      "context": [
+        "モデルのコンテキストウィンドウは有限であるため、エージェントがそれを超えて記憶する必要があるものはすべて外部ストレージを必要とする。メモリがなければ、エージェントは以前のステップを忘れ、アクションを繰り返し、セッションをまたいだパーソナライズを行うことができない。",
+        "メモリは、ステートレスなモデルを連続性のあるシステムへと変える。難しいのはキュレーションである。何を書き留める価値があるか、それをどのように整理するか、そして今関連するものだけをどのように検索するかを決定することであり、これはコンテキストエンジニアリングと密接に関連している。"
+      ],
+      "architecture": [
+        "2つのレイヤー：ワーキングメモリ（アクティブなタスクを保持する現在のコンテキストウィンドウ）と、長期メモリ（タスク中に書き込まれ、後で検索されるベクトル、キーバリュー、ドキュメント、グラフなどの外部ストレージ）。一部の設計では、エピソードメモリ（イベント）、意味メモリ（事実）、手続きメモリ（スキル）が追加される。",
+        "エージェントは各ステップで関連するメモリをコンテキストに読み込み、学習するにつれて新しいメモリを書き込む。検索、要約、忘却のポリシーにより、メモリは肥大化することなく有用な状態に保たれる。"
+      ],
+      "components": [
+        "ワーキングメモリ",
+        "長期ストレージ（ベクトル/KV/グラフ）",
+        "書き込みポリシー",
+        "検索ポリシー",
+        "要約 / 統合",
+        "忘却 / 有効期限"
+      ],
+      "pros": [
+        "ステップ、セッション、タスク間の連続性。",
+        "時間の経過とともに持続するパーソナライズ。",
+        "重複作業やコンテキストの喪失を回避。",
+        "長期的なステートフルエージェントを実現。"
+      ],
+      "risks": [
+        "古くなったり誤ったりしたメモリが、将来の回答を汚染する。",
+        "保存されたデータに対するプライバシーおよびガバナンスの義務。",
+        "無関係なメモリの検索によるノイズの増加。",
+        "統合や有効期限がないことによる、制限のない肥大化。"
+      ],
+      "tools": [
+        "ベクトルデータベース",
+        "キーバリュー / ドキュメントストア",
+        "MemGPTスタイルのメモリマネージャー",
+        "エージェントフレームワーク（LangGraph、Agents SDK）"
+      ],
+      "examples": [
+        "セッションをまたいでユーザーの好みを記憶するアシスタント。",
+        "ステップを繰り返さないように進捗を要約する、長期実行型のエージェント。",
+        "関連する場合に、顧客の過去のチケットを想起するサポートエージェント。"
+      ],
+      "faqs": [
+        {
+          "q": "エージェントメモリはRAGとどう違うのですか？",
+          "a": "RAGは外部のナレッジベースから検索しますが、エージェントメモリはエージェント自身が蓄積した状態から検索します。検索の仕組みは似ていますが、ソースと書き込みパスが異なります。"
+        },
+        {
+          "q": "短期メモリと長期メモリの違いは何ですか？",
+          "a": "短期（ワーキング）メモリは現在のタスクのためのライブなコンテキストウィンドウであり、長期メモリはエージェントがタスクやセッションをまたいで読み書きする永続的なストレージです。"
+        },
+        {
+          "q": "すべてをコンテキストウィンドウに保持しないのはなぜですか？",
+          "a": "ウィンドウは有限であり、満たされるにつれて品質が低下します。状態をメモリに外部化し、関連するものだけを検索することで、エージェントのフォーカスを維持し、コストを抑えることができます。"
+        },
+        {
+          "q": "ガバナンス上の懸念にはどのようなものがありますか？",
+          "a": "保存されたメモリには個人データや機密データが含まれる可能性があるため、アクセス制御、保持制限、およびエントリを修正または削除する機能が必要です。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是智能体记忆系统？",
+      "summary": "智能体记忆是 AI 智能体在单个上下文窗口之外保留和检索信息的方式——跨越步骤、会话和任务。它通常将短期工作记忆（当前上下文）与长期记忆（智能体读写的持久化存储）区分开来。记忆使智能体能够在长期任务中携带状态、长期记住用户并避免重复工作。它是 Harness Engineering（智能体支撑系统工程）的核心层。",
+      "definition": "智能体记忆是 AI 智能体用于在其直接上下文窗口之外存储、组织和检索信息的一系列机制，涵盖短期工作记忆和长期持久记忆。",
+      "takeaways": [
+        "记忆使智能体能够超越单个有限的上下文窗口。",
+        "短期（工作）记忆与长期（持久）记忆承担着不同的角色。",
+        "长期记忆通常是按需检索的，类似于对智能体自身历史记录进行 RAG。",
+        "良好的记忆力可以防止在长期任务中出现重复工作和状态丢失。",
+        "写入、保留和遗忘哪些内容是一项设计决策，而非自动进行的。"
+      ],
+      "context": [
+        "模型的上下文窗口是有限的，因此智能体必须记住的超出该窗口的任何内容都需要外部存储。如果没有记忆，智能体就会忘记先前的步骤、重复操作，并且无法跨会话进行个性化。",
+        "记忆将无状态模型转变为具有连续性的系统。难点在于整理：决定什么值得记录、如何组织它，以及如何仅检索当前相关的内容——这与上下文工程密切相关。"
+      ],
+      "architecture": [
+        "两个层级：工作记忆（当前上下文窗口，保存活动任务）和长期记忆（外部存储——向量、键值、文档或图——在任务期间写入并在以后检索）。某些设计还增加了情景记忆（事件）、语义记忆（事实）和程序记忆（技能）。",
+        "智能体在每一步将相关的记忆读取到上下文中，并在学习时写入新的记忆。检索、总结和遗忘策略使记忆保持实用，而不会使其过载。"
+      ],
+      "components": [
+        "工作记忆",
+        "长期存储（向量/KV/图）",
+        "写入策略",
+        "检索策略",
+        "总结 / 整合",
+        "遗忘 / 过期"
+      ],
+      "pros": [
+        "跨步骤、会话和任务的连续性。",
+        "随时间持久保留的个性化。",
+        "避免重复工作和上下文丢失。",
+        "支持长周期、有状态的智能体。"
+      ],
+      "risks": [
+        "陈旧或错误的记忆会污染未来的回答。",
+        "对存储数据的隐私和治理义务。",
+        "检索到无关的记忆会增加噪音。",
+        "若无整合或过期机制，记忆会无限制增长。"
+      ],
+      "tools": [
+        "向量数据库",
+        "键值 / 文档存储",
+        "MemGPT 风格的记忆管理器",
+        "智能体框架（LangGraph、Agents SDK）"
+      ],
+      "examples": [
+        "助手跨会话记住用户的偏好。",
+        "长期运行的智能体总结进度，从而绝不重复步骤。",
+        "支持智能体在相关时召回客户先前的工单。"
+      ],
+      "faqs": [
+        {
+          "q": "智能体记忆与 RAG 有何不同？",
+          "a": "RAG 从外部知识库中检索；智能体记忆则从智能体自身积累的状态中检索。检索机制类似，但数据源 and 写入路径不同。"
+        },
+        {
+          "q": "短期记忆和长期记忆有什么区别？",
+          "a": "短期（工作）记忆是当前任务的实时上下文窗口；长期记忆是智能体在跨任务和会话时进行读写的持久化存储。"
+        },
+        {
+          "q": "为什么不把所有内容都保留在上下文窗口中？",
+          "a": "窗口是有限的，且随着窗口填满，质量会下降。将状态外部化到记忆中并仅检索相关内容，可以使智能体保持专注且成本可控。"
+        },
+        {
+          "q": "有哪些治理方面的顾虑？",
+          "a": "存储的记忆可能包含个人或敏感数据，因此需要访问控制、保留期限限制以及纠正或删除条目的能力。"
+        }
       ]
     }
   }

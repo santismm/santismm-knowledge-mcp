@@ -12,7 +12,7 @@ two shapes, by their nature:
 
 | Shape | Domains | Why | Source |
 | --- | --- | --- | --- |
-| **Structured JSON** | `knowledge`, `patterns`, `architectures`, `governance` | discrete, field-addressable, trilingual artifacts that render identically across many output formats | `content/{domain}/{slug}.json` (all locales inside) |
+| **Structured JSON** | `knowledge`, `patterns`, `architectures`, `governance` | discrete, field-addressable, seven-locale artifacts that render identically across many output formats | `content/{domain}/{slug}.json` (all locales inside) |
 | **Markdown + frontmatter** | `harness` (the Handbook) | long-form prose where the document *is* the unit | `content/harness/HRN-###-*.md` |
 
 Both are validated and both feed the same generated outputs. See
@@ -55,11 +55,11 @@ it never fails the build.
 
 ## Internationalization
 
-The structured JSON artifacts carry all three locales (`en`/`es`/`pt`) inside
-each file. The Handbook is currently **English-only at the source**; localized
-rendering falls back to English until per-locale bodies are authored (per-locale
-Markdown, e.g. `HRN-001.es.md`, will be added alongside the English source — the
-English file remains canonical).
+The structured JSON artifacts carry all seven locales (`en`/`es`/`pt`/`fr`/
+`de`/`ja`/`zh`) inside each file. The Handbook keeps canonical English files
+plus complete per-locale Markdown siblings such as `HRN-001.ja.md`. The English
+file remains the editorial source of record. See
+[`../docs/localization.md`](../docs/localization.md).
 
 ## Evidence, honestly
 
@@ -73,5 +73,5 @@ measure, not invented numbers.
 1. Passes `npm run validate` (contract OK).
 2. Carries `id`/`status`/`evidence`/`source_type`/`related`/`references`.
 3. Is emitted into `index.json` + the graph, with JSON-LD.
-4. Renders in all three locales (or English with fallback, for the Handbook).
+4. Renders in all seven locales with no silent fallback in the core corpus.
 5. Appears in `llms.txt` / `llms-full.txt`.

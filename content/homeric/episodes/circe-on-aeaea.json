@@ -62,6 +62,22 @@
         "pt": {
           "label": "Monte Circeo",
           "note": "Uma identificação antiga com um acidente característico por trás — um promontório que do mar parece uma ilha — e nada escavado."
+        },
+        "fr": {
+          "label": "Le mont Circé",
+          "note": "Une identification antique étayée par un relief caractéristique — un promontoire qui ressemble à une île depuis la mer — et aucune fouille archéologique."
+        },
+        "zh": {
+          "label": "切尔切奥山（Monte Circeo）",
+          "note": "一个古老的身份认定，背后有着独特的地貌——一个从海上看像岛屿的海岬——且没有任何发掘成果。"
+        },
+        "de": {
+          "label": "Monte Circeo",
+          "note": "Eine antike Identifizierung, hinter der eine markante Landschaftsform steht – ein Vorgebirge, das vom Meer aus wie eine Insel aussieht – und keinerlei Ausgrabungsfunde."
+        },
+        "ja": {
+          "label": "モンテ・チルチェーオ",
+          "note": "特徴的な地形（海からは島のように見える岬）を背景とした古代の特定であるが、発掘調査による裏付けはない。"
         }
       }
     }
@@ -124,6 +140,86 @@
         {
           "q": "Por que Circe importa para a geografia?",
           "a": "Porque é ela quem dá as indicações náuticas. Cada escala posterior é descrita antes de ser alcançada, e por isso as andanças se leem como itinerário embora o poema nunca dê um rumo."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Circé sur Ééa",
+      "summary": "Un an sur une île avec une déesse qui transforme les hommes en porcs, et le seul hôte de toutes les errances qui laisse repartir Ulysse avec des instructions plutôt qu'avec des blessures.",
+      "narrative": [
+        "La moitié de l'équipage est transformée en pourceaux ; Ulysse, protégé par l'herbe moly, force Circé à annuler le sort. Ils y restent un an. Quand les hommes demandent enfin à partir, Circé dit à Ulysse qu'il doit d'abord se rendre dans la demeure d'Hadès pour consulter Tirésias.",
+        "À son retour du royaume des morts, elle lui donne de nouvelles instructions : les Sirènes, le choix entre les Roches Errantes et Scylla, les troupeaux du Soleil. Presque tout ce que l'on sait sur la suite du voyage provient de cette île."
+      ],
+      "whyItMatters": "C'est le pivot du récit des errances et la source de chaque « itinéraire » ultérieur. La localiser permettrait d'ancrer la seconde moitié du voyage ; son identification repose sur une tradition romaine rattachée à un promontoire.",
+      "debate": "Le poème qualifie Ééa de lieu « où l'Aurore a sa demeure », un repère oriental qui s'accorde mal avec l'identification occidentale. La question de savoir s'il s'agit d'une survivance d'une version plus ancienne de l'histoire fait l'objet de réels débats.",
+      "faqs": [
+        {
+          "q": "Où se trouve Ééa ?",
+          "a": "La tradition romaine la situait au mont Circé dans le Latium, qui porte encore le nom de Circé. L'atlas la classe comme spéculative avec une note de 5/12."
+        },
+        {
+          "q": "Pourquoi Circé importe-t-elle pour la géographie ?",
+          "a": "Parce qu'elle fournit les instructions de navigation. Chaque étape ultérieure est décrite avant d'être atteinte, c'est pourquoi les errances se lisent comme un itinéraire, même si le poème ne donne jamais de cap."
+        }
+      ]
+    },
+    "de": {
+      "title": "Kirke auf Aiaia",
+      "summary": "Ein Jahr auf einer Insel mit einer Göttin, die Männer in Schweine verwandelt, und der einzige Gastgeber auf den Irrfahrten, der Odysseus mit Anweisungen statt mit Verletzungen weiterschickt.",
+      "narrative": [
+        "Die Hälfte der Gefährten wird in Schweine verwandelt; Odysseus, geschützt durch das Kraut Moly, zwingt Kirke, dies rückgängig zu machen. Sie bleiben ein Jahr. Als die Männer schließlich aufbrechen wollen, erklärt Kirke Odysseus, er müsse zuerst in das Haus des Hades reisen und Teiresias befragen.",
+        "Nach der Rückkehr aus dem Totenreich instruiert sie ihn erneut: über die Sirenen, die Wahl zwischen den Plankten und Skylla, die Rinder des Helios. Fast alles, was für den Rest der Reise wichtig ist, stammt von dieser Insel."
+      ],
+      "whyItMatters": "Es ist der Dreh- und Angelpunkt der Erzählung über die Irrfahrten und die Quelle jeder nachfolgenden „Route“. Seine Lokalisierung würde die zweite Hälfte der Reise verankern; die Identifizierung ist eine römische Tradition, die sich an ein Vorgebirge knüpft.",
+      "debate": "Das Epos nennt Aiaia den Ort, „wo das Haus der Frühe ist“, eine nach Osten weisende Markierung, die schlecht zu der westlichen Identifizierung passt. Ob es sich dabei um das Überbleibsel einer älteren Version der Geschichte handelt, ist Gegenstand ernsthafter Debatten.",
+      "faqs": [
+        {
+          "q": "Wo liegt Aiaia?",
+          "a": "Die römische Tradition verortete es am Monte Circeo in Latium, der noch immer Kirkes Namen trägt. Der Atlas stuft es mit 5/12 als spekulativ ein."
+        },
+        {
+          "q": "Warum ist Kirke für die Geografie von Bedeutung?",
+          "a": "Weil sie die Wegbeschreibung für die Seefahrt liefert. Jede spätere Station wird beschrieben, bevor sie erreicht wird, weshalb sich die Irrfahrten wie eine Reiseroute lesen, obwohl das Epos nie eine Himmelsrichtung angibt."
+        }
+      ]
+    },
+    "ja": {
+      "title": "アイアイエ島のキルケ",
+      "summary": "男たちを豚に変える女神の島で過ごした1年間。そして漂流の中で、オデュッセウスに危害を加える代わりに指示を与えて送り出してくれた唯一の主（あるじ）。",
+      "narrative": [
+        "乗組員の半分が豚に変えられ、薬草モーリュによって守られたオデュッセウスは、キルケにそれを元に戻させる。彼らは1年間滞在する。部下たちがついに立ち去ることを望んだとき、キルケはオデュッセウスに対し、まずハデスの館へ行ってテイレシアスに相談しなければならないと告げる。",
+        "冥界から戻った彼に、彼女は再び指示を与える。セイレン、彷徨う岩（プランクトイ）とスキュラの選択、太陽神の牛。その後の航海に関する情報のほぼすべてが、この島からもたらされる。"
+      ],
+      "whyItMatters": "これは漂流の物語の要であり、その後のすべての『航路』の起点である。この場所を特定できれば航海の後半を位置づけることができるが、その特定は岬に結びつけられたローマの伝承にすぎない。",
+      "debate": "詩の中でアイアイエ島は『暁の女神の住処がある』場所と呼ばれており、これは東を示す目印であるため、西側とする特定とは相容れない。これがより古いバージョンの物語の名残であるかどうかは、真剣に議論されている。",
+      "faqs": [
+        {
+          "q": "アイアイエ島はどこにありますか？",
+          "a": "ローマの伝承では、ラティウムのモンテ・チルチェーオ（現在もキルケの名を冠している）に比定されている。本アトラスでは、これを12段階中5の『推測の域を出ない（speculative）』ものとして記録している。"
+        },
+        {
+          "q": "なぜキルケが地理にとって重要なのですか？",
+          "a": "彼女が航行の指示を与えるからである。その後のすべての寄港地は、到達する前に描写されている。そのため、詩の中で方位が示されることは一度もないにもかかわらず、漂流記がまるで旅程表のように読めるのである。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "埃埃亚岛上的喀耳刻",
+      "summary": "在一个岛上与一位将人变成猪的女神共度了一年，她也是漂泊旅程中唯一一位给予奥德修斯指引而非伤害的东道主。",
+      "narrative": [
+        "半数船员被变成了猪；奥德修斯在神草“摩吕”（moly）的保护下，迫使喀耳刻解除了法术。他们停留了一年。当船员们终于请求离开时，喀耳刻告诉奥德修斯，他必须先去哈得斯的冥府咨询提瑞西阿斯。",
+        "从冥界返回后，她再次向他交代了情况：塞壬女仙、在游荡之岩（Wandering Rocks）与斯库拉（Scylla）之间的抉择、太阳神的牛群。余下航程中所知的一切几乎都源自这个岛屿。"
+      ],
+      "whyItMatters": "它是漂泊叙事的枢纽，也是随后每条“路线”的源头。定位它将锚定航程的后半段；而这一身份认定只是与一处海岬相关的罗马传统。",
+      "debate": "史诗称埃埃亚（Aeaea）是“黎明女神居住的地方”，这是一个向东的标记，与向西的定位很不协调。这是否是更古老版本故事的遗存，确实存在争议。",
+      "faqs": [
+        {
+          "q": "埃埃亚（Aeaea）在哪里？",
+          "a": "罗马传统将其置于拉齐奥的切尔切奥山（Monte Circeo），该地至今仍保留着喀耳刻的名字。地图集将其归为推测性的，可信度为 5/12。"
+        },
+        {
+          "q": "为什么喀耳刻对地理研究很重要？",
+          "a": "因为她提供了航行指引。之后的每一个停靠点在抵达前都已被描述，这就是为什么尽管史诗从未给出方位，但漂泊旅程读起来却像是一份行程单。"
         }
       ]
     }

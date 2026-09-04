@@ -89,6 +89,22 @@
         "pt": {
           "label": "O santuário de Dodona, Epiro",
           "note": "Um santuário de Zeus escavado num vale de montanha ao sul de Ioânina, com material anterior ao oráculo arcaico e uma prática oracular documentada. Aquiles reza ao “Zeus de Dodona” e Odisseu afirma duas vezes ter ido ali consultar o carvalho — a mesma instituição, no mesmo lugar."
+        },
+        "fr": {
+          "label": "Le sanctuaire de Dodone, Épire",
+          "note": "Un sanctuaire de Zeus fouillé dans une vallée montagneuse au sud de Ioannina, avec du matériel remontant au-delà de l'oracle archaïque et une pratique oraculaire documentée. Achille prie le « Zeus de Dodone » et Ulysse prétend à deux reprises s'y être rendu pour consulter le chêne — la même institution, au même endroit."
+        },
+        "zh": {
+          "label": "伊庇鲁斯的多多纳圣所",
+          "note": "位于约阿尼纳以南山谷中已发掘的宙斯圣所，其文物可追溯到古风时期神谕之前，并有文献记载的神谕实践。阿喀琉斯向“多多纳的宙斯”祈祷，奥德修斯两次声称曾前往那里咨询橡树——相同的机构，在相同的地方。"
+        },
+        "de": {
+          "label": "Das Heiligtum von Dodona, Epirus",
+          "note": "Ein ausgegrabenes Heiligtum des Zeus in einem Bergtal südlich von Ioannina, mit Funden, die bis vor das archaische Orakel zurückreichen, und einer dokumentierten Orakelpraxis. Achilleus betet zum „Zeus von Dodona“ und Odysseus behauptet zweimal, dorthin gereist zu sein, um die Eiche zu befragen – dieselbe Institution am selben Ort."
+        },
+        "ja": {
+          "label": "エピロスのドドナの聖域",
+          "note": "ヨアニナの南の山谷にある、発掘されたゼウスの聖域。古風な神託以前に遡る遺物と、記録された神託の慣行が存在する。アキレウスは「ドドナのゼウス」に祈り、オデュッセウスはオークの木に相談するためにそこへ行ったと2度主張している。同じ場所にある、同じ制度である。"
         }
       }
     }
@@ -124,6 +140,46 @@
       ],
       "identificationNote": "Aceita: um santuário nomeado e escavado cuja descrição homérica coincide com sua prática documentada.",
       "debate": "Até quando o oráculo recua, e se os selos da Ilíada refletem um sacerdócio arcaico real ou uma lembrança já antiga quando o poema foi composto."
+    },
+    "fr": {
+      "name": "Dodone",
+      "summary": "L'oracle de Zeus dans les montagnes de l'Épire, et l'une des rares institutions homériques que nous puissions fouiller : le même dieu, le même chêne, la même vallée.",
+      "description": [
+        "Achille prie le Zeus de Dodone dans l'Iliade, invoquant les Selles qui dorment sur le sol et ne se lavent pas les pieds. Dans l'Odyssée, Ulysse raconte à deux reprises une histoire où il se rend à Dodone pour entendre la volonté de Zeus depuis le chêne. L'oracle fait normalement partie du monde des poèmes, ce n'est pas une merveille.",
+        "Le sanctuaire a été fouillé, et la pratique consistant à inscrire des questions sur des tablettes de plomb y est attestée dans les siècles suivants. C'est un cas rare où une institution religieuse homérique possède une adresse identifiable."
+      ],
+      "identificationNote": "Accepté : un sanctuaire nommé et fouillé, dont la description homérique correspond à la pratique documentée.",
+      "debate": "Jusqu'où remonte l'oracle, et si les Selles de l'Iliade reflètent un véritable sacerdoce archaïque ou un souvenir déjà antique lors de la composition du poème."
+    },
+    "de": {
+      "name": "Dodona",
+      "summary": "Das Orakel des Zeus in den Bergen von Epirus und eine der wenigen homerischen Institutionen, die wir ausgraben können: derselbe Gott, dieselbe Eiche, dasselbe Tal.",
+      "description": [
+        "Achilleus betet in der Ilias zu Zeus von Dodona und ruft die Selloi an, die auf dem Boden schlafen und sich die Füße nicht waschen. In der Odyssee erzählt Odysseus zweimal eine Geschichte, in der er nach Dodona reist, um den Willen des Zeus aus der Eiche zu vernehmen. Das Orakel ist ein normaler Teil der Welt der Epen, kein Wunder.",
+        "Das Heiligtum wurde ausgegraben, und die Praxis, Fragen auf Bleitäfelchen zu ritzen, ist dort für spätere Jahrhunderte belegt. Es ist ein seltener Fall, in dem eine homerische religiöse Institution eine auffindbare Adresse hat."
+      ],
+      "identificationNote": "Akzeptiert: ein namentlich bekanntes, ausgegrabenes Heiligtum, dessen homerische Beschreibung mit der dokumentierten Praxis übereinstimmt.",
+      "debate": "Wie weit das Orakel zurückreicht und ob die Selloi der Ilias eine reale archaische Priesterschaft oder eine bereits antike Erinnerung zur Zeit der Entstehung des Epos widerspiegeln."
+    },
+    "ja": {
+      "name": "ドドナ",
+      "summary": "エピロス地方の山中にあるゼウスの神託所。ホメロスの世界に登場する制度の中で、私たちが発掘できる数少ないものの1つである。同じ神、同じオークの木、同じ谷が存在する。",
+      "description": [
+        "『イリアス』でアキレウスはドドナのゼウスに祈り、地に伏して眠り足を洗わないセロイ（Selloi）に呼びかける。『オデュッセイア』では、オデュッセウスがオークの木からゼウスの意志を聞くためにドドナへ行くという話を2度語っている。この神託所は詩の世界の日常的な一部であり、驚異ではない。",
+        "聖域は発掘されており、後世において鉛の板に質問を刻む習慣があったことがそこで証明されている。これは、ホメロスの宗教的制度が特定可能な住所を持っている稀なケースである。"
+      ],
+      "identificationNote": "合意：名前が特定され、発掘された聖域であり、そのホメロスによる描写は記録されている慣行と一致している。",
+      "debate": "神託の歴史がどこまで遡るのか、そして『イリアス』のセロイが実際の古風な聖職者層を反映しているのか、それとも詩が作られた時点で既に古代の記憶となっていたものなのか。"
+    },
+    "zh": {
+      "name": "多多纳",
+      "summary": "伊庇鲁斯山区宙斯的神谕所，也是我们能够发掘的少数荷马时代制度之一：相同的神、相同的橡树、相同的山谷。",
+      "description": [
+        "在《伊利亚特》中，阿喀琉斯向多多纳的宙斯祈祷，呼唤睡在地上且不洗脚的塞洛伊人。在《奥德赛》中，奥德修斯两次讲述了他前往多多纳，从橡树中聆听宙斯旨意的故事。神谕是诗歌世界的常态，而非奇迹。",
+        "该圣所已被发掘，在后来的几个世纪里，那里有在铅板上刻写问题的做法。这是一个罕见的案例，即荷马史诗中的宗教机构拥有可寻找的地址。"
+      ],
+      "identificationNote": "公认：一个已命名且已发掘的圣所，其荷马史诗中的描述与其有文献记载的实践相吻合。",
+      "debate": "该神谕可以追溯到多久以前，以及《伊利亚特》中的塞洛伊人反映的是真实的古风时期祭司阶层，还是在诗歌创作时就已经是一段古老的记忆。"
     }
   }
 }

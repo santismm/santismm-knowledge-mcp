@@ -116,6 +116,22 @@
         "pt": {
           "label": "Ítaca moderna",
           "note": "A ilha carrega esse nome desde a Antiguidade, e o complexo de época micênica de Agios Athanasios, ao norte, é o melhor candidato arqueológico a um assentamento de escala odisseica. O que não encaixa com clareza é a descrição do próprio Odisseu: Ítaca não é baixa nem a mais ocidental do grupo."
+        },
+        "fr": {
+          "label": "L'Ithaque moderne",
+          "note": "L'île porte ce nom depuis l'Antiquité, et le complexe de l'époque mycénienne à Agios Athanasios, dans le nord, est le meilleur candidat archéologique pour un établissement de l'envergure de celui d'Ulysse. Ce à quoi elle ne correspond pas du tout, c'est la description d'Ulysse lui-même : l'Ithaque moderne n'est ni basse, ni la plus à l'ouest de son groupe."
+        },
+        "zh": {
+          "label": "现代伊萨基岛",
+          "note": "该岛自古以来就承载着这个名字，其北部阿基奥斯·阿萨纳西奥斯（Agios Athanasios）的迈锡尼时期建筑群是奥德修斯规模定居点的最佳考古候选。它无法完全契合的是奥德修斯本人的描述：伊萨基岛既非地势低平，也不是该群岛中最西端的一个。"
+        },
+        "de": {
+          "label": "Das moderne Ithaki",
+          "note": "Die Insel trägt den Namen seit der Antike, und der mykenische Komplex bei Agios Athanasios im Norden ist der beste archäologische Kandidat für eine Siedlung von der Größe derjenigen des Odysseus. Wozu sie nicht recht passt, ist Odysseus' eigene Beschreibung: Ithaki ist weder flach noch die am weitesten westlich gelegene Insel ihrer Gruppe."
+        },
+        "ja": {
+          "label": "現代のイサキ島",
+          "note": "この島は古代からその名を冠しており、北部のアギオス・アタナシオスにあるミケーネ時代の複合遺構は、オデュッセウスの規模にふさわしい集落を示す最も有力な考古学的候補である。しかし、オデュッセウス自身の描写（イサキ島は低地でもなく、その諸島群の最西端でもない）にはすっきりと適合しない。"
         }
       }
     },
@@ -155,6 +171,22 @@
         "pt": {
           "label": "Península de Paliki (Cefalônia)",
           "note": "A proposta de Bittlestone toma ao pé da letra a descrição de Odisseu — baixa, a mais voltada ao poente — e exige que o istmo de Thinia fosse um canal marinho na Idade do Bronze, o que faria de Paliki uma ilha. A geologia de Underhill encontrou no istmo um desabamento de rocha sobre um possível canal antigo, mas não pôde confirmar um estreito no Bronze. Nenhuma escavação produziu um assentamento correspondente."
+        },
+        "fr": {
+          "label": "La péninsule de Paliki (Céphalonie)",
+          "note": "La proposition de Bittlestone prend la description d'Ulysse au pied de la lettre — basse, la plus éloignée vers l'obscurité — et suppose que l'isthme de Thinia était un canal maritime à l'âge du bronze, faisant de Paliki une île. Les études géologiques d'Underhill ont révélé que l'isthme était un éboulement rocheux recouvrant un possible ancien canal, sans toutefois pouvoir confirmer l'existence d'un détroit à l'âge du bronze. Aucune fouille n'a mis au jour de colonie correspondante."
+        },
+        "zh": {
+          "label": "帕利基半岛（凯法利尼亚岛）",
+          "note": "比特尔斯通（Bittlestone）的提议字面理解了奥德修斯的描述——地势低洼，最靠近黑暗之处——并认为西尼亚（Thinia）地峡在青铜时代曾是一条海峡，从而使帕利基（Paliki）成为一个岛屿。安德希尔（Underhill）的地质研究发现，该地峡是可能曾存在的旧水道上的落石堆积，但无法证实其在青铜时代曾是海峡。目前尚无任何考古发掘发现与之相匹配的定居点。"
+        },
+        "de": {
+          "label": "Halbinsel Paliki (Kefalonia)",
+          "note": "Bittlestones Vorschlag nimmt Odysseus' Beschreibung wörtlich – flach liegend, am weitesten im Dunkeln – und setzt voraus, dass die Landenge von Thinia in der Bronzezeit ein Seekanal war, was Paliki zu einer Insel machte. Underhills geologische Untersuchungen ergaben, dass die Landenge aus Steinschlag über einem möglicherweise ehemaligen Kanal besteht, konnten jedoch eine bronzezeitliche Meerenge nicht bestätigen. Keine Ausgrabung hat eine dazu passende Siedlung hervorgebracht."
+        },
+        "ja": {
+          "label": "パリキ半島（ケファロニア島）",
+          "note": "ビトルストーンの提案は、オデュッセウスによる描写（低地にあり、最も暗闇の方を向いている）を文字通りに受け止めており、青銅器時代にティニア地峡が海峡であり、パリキが島であったことを前提としている。アンダーヒルの地質調査では、この地峡はかつて海峡であった可能性のある場所の上に崩落した岩石が堆積したものであることが判明したが、青銅器時代に海峡が存在したことを確認することはできなかった。これに合致する集落は、いかなる発掘調査でも発見されていない。"
         }
       }
     },
@@ -193,6 +225,22 @@
         "pt": {
           "label": "Lêucade (a Alt-Ithaka de Dörpfeld)",
           "note": "Dörpfeld, sucessor de Schliemann em Troia, passou décadas defendendo que Lêucade era a Ítaca da Odisseia, lendo no poema as distâncias de navegação e a baía de Nydri. Os túmulos da Idade do Bronze que escavou em Nydri são reais; a identificação não convenceu quase ninguém, e o nome antigo da ilha era Lêucade."
+        },
+        "fr": {
+          "label": "Leucade (l'Alt-Ithaka de Dörpfeld)",
+          "note": "Dörpfeld, successeur de Schliemann à Troie, a passé des décennies à soutenir que Leucade était l'Ithaque de l'Odyssée, projetant les distances de navigation et la baie de Nydri dans le poème. Les tumulus de l'âge du bronze qu'il a fouillés à Nydri sont bien réels ; cette identification n'a convaincu presque personne, et le nom antique de l'île était Leukas."
+        },
+        "zh": {
+          "label": "莱夫卡达（德普费尔德的“古伊萨卡”）",
+          "note": "德普费尔德（Dörpfeld）是施里曼（Schliemann）在特洛伊的继承者，他花了数十年时间论证莱夫卡达（Lefkada）就是《奥德赛》中的伊萨卡，并将航行距离和尼德里（Nydri）海湾套入诗作中。他在尼德里发掘的青铜时代土丘是真实存在的；但这一认定几乎没有说服任何人，而且该岛的古名是莱夫卡斯（Leukas）。"
+        },
+        "de": {
+          "label": "Lefkada (Dörpfelds Alt-Ithaka)",
+          "note": "Dörpfeld, Schliemanns Nachfolger in Troja, verbrachte Jahrzehnte damit, zu argumentieren, dass Lefkada das Ithaka der Odyssee sei, indem er die Segeldistanzen und die Bucht von Nydri in das Gedicht hineinlas. Die von ihm in Nydri ausgegrabenen bronzezeitlichen Grabhügel sind real; die Identifizierung überzeugte fast niemanden, und der antike Name der Insel war Leukas."
+        },
+        "ja": {
+          "label": "レフカダ（デルプフェルトの『古イタカ』）",
+          "note": "トロイアにおけるシュリーマンの後継者であるデルプフェルトは、航海距離やニドリ湾の描写を詩に読み解き、レフカダこそが『オデュッセイア』のイタカであると何十年にもわたって主張し続けた。彼がニドリで発掘した青銅器時代の古墳は実在するが、この同定に納得した者はほとんどおらず、この島の古代の名はレウカスであった。"
         }
       }
     }
@@ -235,6 +283,50 @@
       ],
       "identificationNote": "Plausível e não aceita: a identificação é majoritária e antiga, mas nenhuma escavação confirmou um centro do Bronze na escala necessária, e a geografia do próprio poema joga contra. A rubrica dá textual 2 (a descrição não encaixa), arqueológica 2, acadêmica 3 e geográfica 2: 9/12.",
       "debate": "Três questões estão realmente em aberto: se a geografia homérica das ilhas Jônicas é sequer coerente, se “Ítaca” nomeava outra ilha na Idade do Bronze, e se Paliki esteve separada da Cefalônia por um canal hoje assoreado. O atlas desenha as três candidaturas e as pontua separadamente em vez de escolher."
+    },
+    "fr": {
+      "name": "Ithaque",
+      "summary": "La patrie d'Ulysse et la destination de tout le poème — et, paradoxalement, l'un de ses emplacements les moins assurés. L'Ithaque moderne porte ce nom, mais la description de l'île par l'Odyssée elle-même lui correspond mal.",
+      "description": [
+        "Ithaque est le cas qui rend cet atlas nécessaire. Ce n'est pas un lieu mythique : le Catalogue des vaisseaux de l'Iliade répertorie le contingent d'Ulysse parmi de réelles communautés grecques, et une île appelée Ithaque a toujours existé sous ce nom. Pourtant, lorsqu'Ulysse décrit sa patrie (Odyssée 9.21–27), il la qualifie de basse et située la plus éloignée vers le couchant — la plus à l'ouest de son groupe — alors que l'Ithaque moderne est montagneuse et se trouve à l'est de Céphalonie.",
+        "Cette seule divergence a suscité deux siècles de propositions alternatives, dont les plus sérieuses sont Leucade de Dörpfeld et Paliki de Bittlestone. Toutes deux sont des lieux réels étayés par des preuves concrètes ; aucune n'a révélé l'établissement qui permettrait de trancher la question.",
+        "Entre-temps, l'archéologie d'Ithaque même a progressé : le complexe de l'époque mycénienne à Agios Athanasios, dans le nord de l'île, est le meilleur candidat structurel découvert à ce jour, bien que rien ne le relie à un personnage historique."
+      ],
+      "identificationNote": "Plausible plutôt qu'accepté : l'identification est courante et ancienne, mais aucune fouille n'a confirmé un centre de l'âge du bronze à la bonne échelle, et la géographie même du poème s'y oppose. La grille d'évaluation attribue 2 pour le texte (la description ne correspond pas), 2 pour l'archéologie, 3 pour les études académiques et 2 pour la géographie — soit 9/12.",
+      "debate": "Trois questions restent véritablement ouvertes : la géographie des îles Ioniennes chez Homère est-elle cohérente, le nom d'« Ithaque » désignait-il une autre île à l'âge du bronze, et Paliki était-elle séparée de Céphalonie par un canal comblé depuis lors. L'atlas cartographie les trois candidatures et leur attribue une note distincte plutôt que de choisir."
+    },
+    "de": {
+      "name": "Ithaka",
+      "summary": "Odysseus' Heimat und das Ziel des gesamten Epos – und unglücklicherweise einer seiner am wenigsten gesicherten Orte. Das moderne Ithaki trägt zwar den Namen, aber die Beschreibung der Insel in der Odyssee passt nur schlecht dazu.",
+      "description": [
+        "Ithaka ist der Fall, der diesen Atlas notwendig macht. Es ist kein mythischer Ort: Der Schiffskatalog der Ilias listet das Kontingent des Odysseus unter realen griechischen Gemeinschaften auf, und eine Insel namens Ithaka existiert durchgehend unter diesem Namen. Doch wenn Odysseus seine Heimat beschreibt (Odyssee 9,21–27), nennt er sie flach und am weitesten im Dunkeln liegend – die westlichste ihrer Gruppe –, während das moderne Ithaki gebirgig ist und östlich von Kefalonia liegt.",
+        "Diese einzige Diskrepanz hat zwei Jahrhunderte alternativer Vorschläge hervorgebracht, von denen die substanziellsten Dörpfelds Lefkada und Bittlestones Paliki sind. Beide sind reale Orte, für die mit realen Beweisen argumentiert wird; keiner von beiden hat jedoch die Siedlung hervorgebracht, die die Frage klären würde.",
+        "Inzwischen hat sich die Archäologie auf Ithaki selbst weiterentwickelt: Der mykenische Komplex bei Agios Athanasios im Norden der Insel ist der bisher beste bauliche Kandidat, obwohl nichts ihn mit einer namentlich bekannten Person verbindet."
+      ],
+      "identificationNote": "Eher plausibel als akzeptiert: Die Identifizierung ist etabliert und antik, aber keine Ausgrabung hat ein bronzezeitliches Zentrum der passenden Größe bestätigt, und die eigene Geografie des Epos spricht dagegen. Die Rubrik vergibt für den Text 2 (die Beschreibung passt nicht), Archäologie 2, Wissenschaft 3 und Geografie 2 – 9/12.",
+      "debate": "Drei Fragen sind völlig offen: ob Homers Geografie der Ionischen Inseln überhaupt kohärent ist, ob „Ithaka“ in der Bronzezeit eine andere Insel bezeichnete und ob Paliki von Kefalonia durch einen Kanal getrennt war, der inzwischen verlandet ist. Der Atlas stellt alle drei Kandidaturen dar und bewertet sie separat, anstatt eine Auswahl zu treffen."
+    },
+    "ja": {
+      "name": "イタカ",
+      "summary": "オデュッセウスの故郷であり、詩全体の目的地。しかし厄介なことに、最も位置の不確かな場所の1つでもある。現代のイサキ島がその名を冠しているが、『オデュッセイア』自体における島の描写は、この島にほとんど適合しない。",
+      "description": [
+        "イタカは、この地図帳を必要とさせる典型的な事例である。そこは神話上の場所ではない。『イリアス』の「船のカタログ」は、オデュッセウスの部隊を実在のギリシャ人コミュニティの中にリストアップしており、イタカと呼ばれる島はその名前で存続し続けてきた。しかし、オデュッセウスが自身の故郷を描写する際（『オデュッセイア』第9歌21–27行）、そこを低地にあり、暗闇に最も近い（その諸島群の中で最も西にある）と呼んでいるのに対し、現代 of イサキ島は山がちであり、ケファロニア島の東に位置している。",
+        "このわずかな不一致が、2世紀にわたる代替案の提示を生み出してきた。その中で最も有力なのが、デルプフェルトのレフカダ島とビトルストーンのパリキ半島である。どちらも実際の証拠に基づいて議論されている実在の場所であるが、いずれもこの疑問に決着をつけるような集落を発見するには至っていない。",
+        "一方で、イサキ島自体の考古学的調査は進展している。島北部のアギオス・アタナシオスにあるミケーネ時代の複合遺構は、これまでに発見された構造物の中で最も有力な候補であるが、特定の人物に結びつける証拠は何もない。"
+      ],
+      "identificationNote": "合意ありというよりは妥当：この同定は主流であり古代からのものであるが、適切な規模の青銅器時代の中心地を確認した発掘調査はなく、詩自体の地理もそれに反している。評価基準では、テキスト2（描写が適合しない）、考古学2、学術3、地理2となり、12点満点中9点となる。",
+      "debate": "3つの疑問が完全に未解決のままである。ホメロスによるイオニア諸島の地理がそもそも一貫しているのか、青銅器時代に「イタカ」が別の島を指していたのか、そしてパリキがその後埋まってしまった水路によってケファロニア島から隔てられていたのか、という点である。この地図帳では、1つを選択するのではなく、3つの候補すべてをプロットし、個別にスコアを付けている。"
+    },
+    "zh": {
+      "name": "伊萨卡",
+      "summary": "奥德修斯的家园，也是整部史诗的目的地——然而尴尬的是，它也是最不确定的地点之一。现代的伊萨基岛（Ithaki）承载着这个名字；但《奥德赛》自身对该岛的描述与其并不相符。",
+      "description": [
+        "伊萨卡是使本图册变得必不可少的案例。它不是一个神话中的地方：《伊利亚特》中的《船名录》将奥德修斯的队伍列在真实的希腊社群中，而且一个名为伊萨卡岛屿一直以该名称存在。但是，当奥德修斯描述他的家园时（《奥德赛》9.21–27），他称其地势低平，且最靠近黑暗——即该群岛中最西端的一个——而现代的伊萨基岛多山，且位于凯法利尼亚岛（Kefalonia）以东。",
+        "这一处不符引发了两个世纪的替代方案，其中最重要的是德普费尔德的莱夫卡斯岛（Lefkada）和比特尔斯通（Bittlestone）的帕利基（Paliki）。两者都是用真实证据论证的真实地点；但都没有发现能够解决这一问题的定居点。",
+        "与此同时，伊萨基岛本身的考古工作也有了进展：该岛北部阿基奥斯·阿萨纳西奥斯（Agios Athanasios）的迈锡尼时期建筑群是迄今为止发现的最佳结构候选，尽管没有任何证据将其与特定人物联系起来。"
+      ],
+      "identificationNote": "似是而非而非已公认：该认定是主流且古老的，但没有任何发掘证实存在相应规模的青铜时代中心，且史诗自身的地理描述也与之相悖。评分标准给出文本 2 分（描述不符）、考古 2 分、学术 3 分和地理 2 分——共 9/12 分。",
+      "debate": "有三个问题完全是悬而未决的：荷马对伊奥尼亚群岛的地理描述是否连贯，青铜时代的“伊萨卡”是否指代另一个不同的岛屿，以及帕利基（Paliki）过去是否通过一条后来被填平的海峡与凯法利尼亚岛相隔。本图册绘制了所有这三个候选地并分别评分，而不是做出选择。"
     }
   }
 }

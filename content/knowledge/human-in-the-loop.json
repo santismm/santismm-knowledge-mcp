@@ -3,15 +3,29 @@
   "category": "pattern",
   "updated": "2026-06-21",
   "version": "1.0",
-  "related": ["ai-governance", "agentic-ai", "ai-agent", "agentic-evaluation"],
+  "related": [
+    "ai-governance",
+    "agentic-ai",
+    "ai-agent",
+    "agentic-evaluation"
+  ],
   "references": [
-    { "title": "European Union — AI Act, Article 14 (Human oversight)", "url": "https://artificialintelligenceact.eu/article/14/" },
-    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+    {
+      "title": "European Union — AI Act, Article 14 (Human oversight)",
+      "url": "https://artificialintelligenceact.eu/article/14/"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["industry_observation", "paper"]
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
   },
   "locales": {
     "en": {
@@ -33,7 +47,14 @@
         "Patterns: human-in-the-loop (a person approves each high-impact action), human-on-the-loop (a person monitors and can intervene), and human-over-the-loop (periodic review and policy setting). The right level depends on the action's risk.",
         "Implementation needs an approval interface, clear context for the reviewer, the ability to edit or reject, fallback behavior on timeout, and logging of every decision for audit."
       ],
-      "components": ["Decision checkpoints", "Approval interface", "Reviewer context", "Edit / override", "Escalation & fallback", "Audit log"],
+      "components": [
+        "Decision checkpoints",
+        "Approval interface",
+        "Reviewer context",
+        "Edit / override",
+        "Escalation & fallback",
+        "Audit log"
+      ],
       "pros": [
         "Catches errors before they cause harm.",
         "Keeps accountability with a human.",
@@ -46,17 +67,34 @@
         "Alert fatigue degrades the quality of oversight.",
         "Over-applying it negates the value of automation."
       ],
-      "tools": ["Approval / workflow systems", "Agent frameworks with interrupt steps (e.g. LangGraph)", "Audit logging", "Case-management UIs"],
+      "tools": [
+        "Approval / workflow systems",
+        "Agent frameworks with interrupt steps (e.g. LangGraph)",
+        "Audit logging",
+        "Case-management UIs"
+      ],
       "examples": [
         "An agent drafting a refund that a human approves before it is issued.",
         "A content agent whose output a person reviews before publishing.",
         "An ops agent that pauses for sign-off before a production change."
       ],
       "faqs": [
-        { "q": "When should you use human-in-the-loop?", "a": "For actions that are high-impact, irreversible, sensitive or regulated, where the cost of an error outweighs the latency of review." },
-        { "q": "What is the difference between in-the-loop and on-the-loop?", "a": "In-the-loop means a human approves each action before it executes; on-the-loop means a human monitors and can intervene, but the system acts on its own by default." },
-        { "q": "Does HITL conflict with autonomy?", "a": "It bounds autonomy deliberately. Many systems start with heavy review and widen autonomy as evaluation demonstrates reliability for a task." },
-        { "q": "Is it required by regulation?", "a": "Human oversight is a recurring requirement — for example the EU AI Act mandates effective human oversight for high-risk AI systems." }
+        {
+          "q": "When should you use human-in-the-loop?",
+          "a": "For actions that are high-impact, irreversible, sensitive or regulated, where the cost of an error outweighs the latency of review."
+        },
+        {
+          "q": "What is the difference between in-the-loop and on-the-loop?",
+          "a": "In-the-loop means a human approves each action before it executes; on-the-loop means a human monitors and can intervene, but the system acts on its own by default."
+        },
+        {
+          "q": "Does HITL conflict with autonomy?",
+          "a": "It bounds autonomy deliberately. Many systems start with heavy review and widen autonomy as evaluation demonstrates reliability for a task."
+        },
+        {
+          "q": "Is it required by regulation?",
+          "a": "Human oversight is a recurring requirement — for example the EU AI Act mandates effective human oversight for high-risk AI systems."
+        }
       ]
     },
     "es": {
@@ -78,7 +116,14 @@
         "Patrones: human-in-the-loop (una persona aprueba cada acción de alto impacto), human-on-the-loop (una persona monitoriza y puede intervenir) y human-over-the-loop (revisión periódica y fijación de políticas). El nivel adecuado depende del riesgo de la acción.",
         "La implementación necesita una interfaz de aprobación, contexto claro para el revisor, capacidad de editar o rechazar, comportamiento de respaldo ante timeout, y registro de cada decisión para auditoría."
       ],
-      "components": ["Puntos de decisión", "Interfaz de aprobación", "Contexto para el revisor", "Edición / anulación", "Escalado y respaldo", "Registro de auditoría"],
+      "components": [
+        "Puntos de decisión",
+        "Interfaz de aprobación",
+        "Contexto para el revisor",
+        "Edición / anulación",
+        "Escalado y respaldo",
+        "Registro de auditoría"
+      ],
       "pros": [
         "Detecta errores antes de que causen daño.",
         "Mantiene la responsabilidad en un humano.",
@@ -91,17 +136,34 @@
         "La fatiga de alertas degrada la calidad de la supervisión.",
         "Aplicarlo en exceso anula el valor de la automatización."
       ],
-      "tools": ["Sistemas de aprobación / workflow", "Frameworks de agentes con pasos de interrupción (p. ej. LangGraph)", "Registro de auditoría", "Interfaces de gestión de casos"],
+      "tools": [
+        "Sistemas de aprobación / workflow",
+        "Frameworks de agentes con pasos de interrupción (p. ej. LangGraph)",
+        "Registro de auditoría",
+        "Interfaces de gestión de casos"
+      ],
       "examples": [
         "Un agente que redacta un reembolso que un humano aprueba antes de emitirse.",
         "Un agente de contenido cuya salida una persona revisa antes de publicar.",
         "Un agente de operaciones que se pausa para una firma antes de un cambio en producción."
       ],
       "faqs": [
-        { "q": "¿Cuándo usar human-in-the-loop?", "a": "Para acciones de alto impacto, irreversibles, sensibles o reguladas, donde el coste de un error supera a la latencia de la revisión." },
-        { "q": "¿Cuál es la diferencia entre in-the-loop y on-the-loop?", "a": "In-the-loop significa que un humano aprueba cada acción antes de ejecutarse; on-the-loop significa que un humano monitoriza y puede intervenir, pero el sistema actúa por su cuenta por defecto." },
-        { "q": "¿HITL choca con la autonomía?", "a": "La acota de forma deliberada. Muchos sistemas empiezan con revisión fuerte y amplían la autonomía a medida que la evaluación demuestra fiabilidad en una tarea." },
-        { "q": "¿Lo exige la regulación?", "a": "La supervisión humana es un requisito recurrente; por ejemplo, el Reglamento de IA de la UE exige una supervisión humana efectiva para los sistemas de IA de alto riesgo." }
+        {
+          "q": "¿Cuándo usar human-in-the-loop?",
+          "a": "Para acciones de alto impacto, irreversibles, sensibles o reguladas, donde el coste de un error supera a la latencia de la revisión."
+        },
+        {
+          "q": "¿Cuál es la diferencia entre in-the-loop y on-the-loop?",
+          "a": "In-the-loop significa que un humano aprueba cada acción antes de ejecutarse; on-the-loop significa que un humano monitoriza y puede intervenir, pero el sistema actúa por su cuenta por defecto."
+        },
+        {
+          "q": "¿HITL choca con la autonomía?",
+          "a": "La acota de forma deliberada. Muchos sistemas empiezan con revisión fuerte y amplían la autonomía a medida que la evaluación demuestra fiabilidad en una tarea."
+        },
+        {
+          "q": "¿Lo exige la regulación?",
+          "a": "La supervisión humana es un requisito recurrente; por ejemplo, el Reglamento de IA de la UE exige una supervisión humana efectiva para los sistemas de IA de alto riesgo."
+        }
       ]
     },
     "pt": {
@@ -123,7 +185,14 @@
         "Padrões: human-in-the-loop (uma pessoa aprova cada ação de alto impacto), human-on-the-loop (uma pessoa monitora e pode intervir) e human-over-the-loop (revisão periódica e definição de políticas). O nível adequado depende do risco da ação.",
         "A implementação precisa de uma interface de aprovação, contexto claro para o revisor, capacidade de editar ou rejeitar, comportamento de fallback em timeout, e registro de cada decisão para auditoria."
       ],
-      "components": ["Pontos de decisão", "Interface de aprovação", "Contexto para o revisor", "Edição / anulação", "Escalonamento e fallback", "Registro de auditoria"],
+      "components": [
+        "Pontos de decisão",
+        "Interface de aprovação",
+        "Contexto para o revisor",
+        "Edição / anulação",
+        "Escalonamento e fallback",
+        "Registro de auditoria"
+      ],
       "pros": [
         "Detecta erros antes que causem dano.",
         "Mantém a responsabilidade com um humano.",
@@ -136,17 +205,310 @@
         "A fadiga de alertas degrada a qualidade da supervisão.",
         "Aplicá-lo em excesso anula o valor da automação."
       ],
-      "tools": ["Sistemas de aprovação / workflow", "Frameworks de agentes com passos de interrupção (ex.: LangGraph)", "Registro de auditoria", "Interfaces de gestão de casos"],
+      "tools": [
+        "Sistemas de aprovação / workflow",
+        "Frameworks de agentes com passos de interrupção (ex.: LangGraph)",
+        "Registro de auditoria",
+        "Interfaces de gestão de casos"
+      ],
       "examples": [
         "Um agente que redige um reembolso que um humano aprova antes de ser emitido.",
         "Um agente de conteúdo cuja saída uma pessoa revisa antes de publicar.",
         "Um agente de operações que pausa para uma assinatura antes de uma mudança em produção."
       ],
       "faqs": [
-        { "q": "Quando usar human-in-the-loop?", "a": "Para ações de alto impacto, irreversíveis, sensíveis ou reguladas, em que o custo de um erro supera a latência da revisão." },
-        { "q": "Qual a diferença entre in-the-loop e on-the-loop?", "a": "In-the-loop significa que um humano aprova cada ação antes de executar; on-the-loop significa que um humano monitora e pode intervir, mas o sistema age por conta própria por padrão." },
-        { "q": "O HITL conflita com a autonomia?", "a": "Limita-a de forma deliberada. Muitos sistemas começam com revisão forte e ampliam a autonomia conforme a avaliação demonstra confiabilidade numa tarefa." },
-        { "q": "É exigido por regulação?", "a": "A supervisão humana é um requisito recorrente; por exemplo, o Regulamento de IA da UE exige supervisão humana efetiva para sistemas de IA de alto risco." }
+        {
+          "q": "Quando usar human-in-the-loop?",
+          "a": "Para ações de alto impacto, irreversíveis, sensíveis ou reguladas, em que o custo de um erro supera a latência da revisão."
+        },
+        {
+          "q": "Qual a diferença entre in-the-loop e on-the-loop?",
+          "a": "In-the-loop significa que um humano aprova cada ação antes de executar; on-the-loop significa que um humano monitora e pode intervir, mas o sistema age por conta própria por padrão."
+        },
+        {
+          "q": "O HITL conflita com a autonomia?",
+          "a": "Limita-a de forma deliberada. Muitos sistemas começam com revisão forte e ampliam a autonomia conforme a avaliação demonstra confiabilidade numa tarefa."
+        },
+        {
+          "q": "É exigido por regulação?",
+          "a": "A supervisão humana é um requisito recorrente; por exemplo, o Regulamento de IA da UE exige supervisão humana efetiva para sistemas de IA de alto risco."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que le pattern Human-in-the-Loop ?",
+      "summary": "Le Human-in-the-loop (HITL) est un design pattern dans lequel une personne examine, approuve ou corrige les résultats d'un système d'IA avant qu'ils ne prennent effet — en particulier pour les actions à fort impact. Au lieu d'une autonomie totale, l'agent propose et l'humain dispose. C'est un moyen de contrôle essentiel pour gérer les risques dans les systèmes d'agents et une exigence récurrente dans les cadres de gouvernance de l'IA tels que l'EU AI Act et le NIST AI RMF.",
+      "definition": "Le Human-in-the-loop est un pattern dans lequel un humain examine, approuve, modifie ou rejette la proposition de résultat ou d'action d'un système d'IA avant son exécution, intégrant ainsi le jugement humain à des points de décision définis.",
+      "takeaways": [
+        "L'agent propose ; un humain approuve, modifie ou rejette.",
+        "Appliquez-le aux actions à fort impact, irréversibles ou sensibles.",
+        "Il troque une partie de l'autonomie et de la rapidité contre du contrôle et de la confiance.",
+        "Les cadres de gouvernance exigent souvent une surveillance humaine dès la conception.",
+        "Les approbations et les contournements doivent être enregistrés pour des raisons d'auditabilité."
+      ],
+      "context": [
+        "L'autonomie totale est risquée lorsque les actions sont coûteuses, irréversibles ou réglementées. Le HITL insère un point de contrôle : l'IA fait le travail et un humain prend la décision finale, capturant ainsi l'essentiel de l'efficacité tout en maintenant la responsabilité chez une personne.",
+        "C'est également une stratégie de renforcement de la confiance et d'adoption. Les équipes commencent souvent par un examen humain rigoureux, puis élargissent l'autonomie à mesure que l'évaluation montre que le système est fiable pour une tâche donnée."
+      ],
+      "architecture": [
+        "Patterns : human-in-the-loop (une personne approuve chaque action à fort impact), human-on-the-loop (une personne surveille et peut intervenir) et human-over-the-loop (examen périodique et définition des politiques). Le niveau approprié dépend du risque de l'action.",
+        "L'implémentation nécessite une interface d'approbation, un contexte clair pour le réviseur, la possibilité de modifier ou de rejeter, un comportement de repli en cas de dépassement de délai et l'enregistrement de chaque décision pour audit."
+      ],
+      "components": [
+        "Points de contrôle des décisions",
+        "Interface d'approbation",
+        "Contexte pour le réviseur",
+        "Modification / contournement",
+        "Escalade et repli",
+        "Journal d'audit"
+      ],
+      "pros": [
+        "Détecte les erreurs avant qu'elles ne causent des dommages.",
+        "Maintient la responsabilité chez un humain.",
+        "Prend en charge les exigences de conformité et de gouvernance.",
+        "Renforce la confiance et permet une autonomie progressive."
+      ],
+      "risks": [
+        "Ajoute de la latence et limite le débit.",
+        "Validation aveugle : les réviseurs approuvent sans véritable examen.",
+        "La fatigue des alertes dégrade la qualité de la surveillance.",
+        "Une application excessive annule la valeur de l'automatisation."
+      ],
+      "tools": [
+        "Systèmes d'approbation / de workflow",
+        "Frameworks d'agents avec étapes d'interruption (par ex. LangGraph)",
+        "Journalisation d'audit",
+        "Interfaces de gestion des cas"
+      ],
+      "examples": [
+        "Un agent rédigeant un remboursement qu'un humain approuve avant qu'il ne soit émis.",
+        "Un agent de contenu dont le résultat est examiné par une personne avant publication.",
+        "Un agent d'exploitation qui s'interrompt pour obtenir une validation avant une modification en production."
+      ],
+      "faqs": [
+        {
+          "q": "Quand faut-il utiliser le human-in-the-loop ?",
+          "a": "Pour les actions à fort impact, irréversibles, sensibles ou réglementées, où le coût d'une erreur l'emporte sur la latence de l'examen."
+        },
+        {
+          "q": "Quelle est la différence entre in-the-loop et on-the-loop ?",
+          "a": "In-the-loop signifie qu'un humain approuve chaque action avant son exécution ; on-the-loop signifie qu'un humain surveille et peut intervenir, mais que le système agit de lui-même par défaut."
+        },
+        {
+          "q": "Le HITL entre-t-il en conflit avec l'autonomie ?",
+          "a": "Il limite délibérément l'autonomie. De nombreux systèmes commencent par un examen rigoureux et élargissent l'autonomie à mesure que l'évaluation démontre la fiabilité pour une tâche."
+        },
+        {
+          "q": "Est-ce exigé par la réglementation ?",
+          "a": "La surveillance humaine est une exigence récurrente — par exemple, l'EU AI Act impose une surveillance humaine efficace pour les systèmes d'IA à haut risque."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist das Human-in-the-Loop-Pattern?",
+      "summary": "Human-in-the-Loop (HITL) ist ein Entwurfsmuster, bei dem eine Person die Ausgabe eines KI-Systems überprüft, genehmigt oder korrigiert, bevor sie wirksam wird – insbesondere bei folgenschweren Aktionen. Anstelle von vollständiger Autonomie schlägt der Agent vor und der Mensch entscheidet. Es ist eine der wichtigsten Kontrollmaßnahmen zur Risikominimierung in agentischen Systemen und eine wiederkehrende Anforderung in KI-Governance-Frameworks wie dem EU AI Act und dem NIST AI RMF.",
+      "definition": "Human-in-the-Loop ist ein Muster, bei dem ein Mensch die vorgeschlagene Ausgabe oder Aktion eines KI-Systems überprüft, genehmigt, bearbeitet oder ablehnt, bevor sie ausgeführt wird, wodurch an definierten Entscheidungspunkten menschliches Urteilsvermögen eingebracht wird.",
+      "takeaways": [
+        "Der Agent schlägt vor; ein Mensch genehmigt, bearbeitet oder lehnt ab.",
+        "Wenden Sie es bei folgenschweren, unumkehrbaren oder sensiblen Aktionen an.",
+        "Es tauscht ein Stück Autonomie und Geschwindigkeit gegen Kontrolle und Vertrauen ein.",
+        "Governance-Frameworks erfordern oft von vornherein eine menschliche Aufsicht (Human Oversight by Design).",
+        "Genehmigungen und Überschreibungen sollten zur Überprüfbarkeit protokolliert werden."
+      ],
+      "context": [
+        "Vollständige Autonomie ist riskant, wenn Aktionen kostspielig, unumkehrbar oder reguliert sind. HITL führt einen Kontrollpunkt ein: Die KI erledigt die Arbeit und ein Mensch trifft die endgültige Entscheidung. So bleibt der Großteil der Effizienz erhalten, während die Verantwortung bei einer Person liegt.",
+        "Es ist zudem eine Strategie zur Vertrauensbildung und Einführung. Teams beginnen oft mit einer strengen menschlichen Überprüfung und erweitern die Autonomie, sobald die Evaluierung zeigt, dass das System für eine bestimmte Aufgabe zuverlässig ist."
+      ],
+      "architecture": [
+        "Muster: Human-in-the-Loop (eine Person genehmigt jede folgenschwere Aktion), Human-on-the-Loop (eine Person überwacht und kann eingreifen) und Human-over-the-Loop (regelmäßige Überprüfung und Richtlinienfestlegung). Die richtige Stufe hängt vom Risiko der Aktion ab.",
+        "Die Implementierung erfordert eine Genehmigungsschnittstelle, klaren Kontext für den Prüfer, die Möglichkeit zur Bearbeitung oder Ablehnung, ein Fallback-Verhalten bei Zeitüberschreitung und die Protokollierung jeder Entscheidung für Audits."
+      ],
+      "components": [
+        "Entscheidungskontrollpunkte",
+        "Genehmigungsschnittstelle",
+        "Prüferkontext",
+        "Bearbeiten / Überschreiben",
+        "Eskalation & Fallback",
+        "Audit-Log"
+      ],
+      "pros": [
+        "Fängt Fehler ab, bevor sie Schaden anrichten.",
+        "Belässt die Verantwortung bei einem Menschen.",
+        "Unterstützt Compliance- und Governance-Anforderungen.",
+        "Baut Vertrauen auf und ermöglicht schrittweise Autonomie."
+      ],
+      "risks": [
+        "Erhöht die Latenz und schränkt den Durchsatz ein.",
+        "Abstempeln (Rubber-Stamping): Prüfer genehmigen ohne echte Kontrolle.",
+        "Alarmmüdigkeit beeinträchtigt die Qualität der Aufsicht.",
+        "Eine übermäßige Anwendung hebt den Wert der Automatisierung auf."
+      ],
+      "tools": [
+        "Genehmigungs- / Workflow-Systeme",
+        "Agenten-Frameworks mit Unterbrechungsschritten (z. B. LangGraph)",
+        "Audit-Protokollierung",
+        "Case-Management-Benutzeroberflächen"
+      ],
+      "examples": [
+        "Ein Agent entwirft eine Rückerstattung, die ein Mensch genehmigt, bevor sie ausgestellt wird.",
+        "Ein Content-Agent, dessen Ausgabe eine Person vor der Veröffentlichung überprüft.",
+        "Ein Ops-Agent, der vor einer Produktionsänderung für eine Freigabe pausiert."
+      ],
+      "faqs": [
+        {
+          "q": "Wann sollte man Human-in-the-Loop einsetzen?",
+          "a": "Für Aktionen, die folgenschwer, unumkehrbar, sensibel oder reguliert sind, bei denen die Kosten eines Fehlers die Latenz der Überprüfung überwiegen."
+        },
+        {
+          "q": "Was ist der Unterschied zwischen In-the-Loop und On-the-Loop?",
+          "a": "In-the-Loop bedeutet, dass ein Mensch jede Aktion genehmigt, bevor sie ausgeführt wird; On-the-Loop bedeutet, dass ein Mensch überwacht und eingreifen kann, das System jedoch standardmäßig selbstständig agiert."
+        },
+        {
+          "q": "Steht HITL im Widerspruch zur Autonomie?",
+          "a": "Es grenzt die Autonomie bewusst ein. Viele Systeme beginnen mit einer strengen Überprüfung und erweitern die Autonomie, sobald die Evaluierung die Zuverlässigkeit für eine Aufgabe nachweist."
+        },
+        {
+          "q": "Ist es gesetzlich vorgeschrieben?",
+          "a": "Menschliche Aufsicht ist eine wiederkehrende Anforderung – beispielsweise schreibt der EU AI Act eine wirksame menschliche Aufsicht für hochriskante KI-Systeme vor."
+        }
+      ]
+    },
+    "ja": {
+      "title": "Human-in-the-Loop パターンとは何ですか？",
+      "summary": "Human-in-the-Loop（HITL）は、特に影響の大きいアクションにおいて、AIシステムの出力が有効になる前に人間がレビュー、承認、または修正を行う設計パターンです。完全な自律性の代わりに、エージェントが提案し、人間が決定します。これはエージェント型システムにおけるリスク管理の主要なコントロールであり、EU AI法やNIST AI RMFなどのAIガバナンスフレームワークで繰り返し求められる要件です。",
+      "definition": "Human-in-the-loopとは、AIシステムが提案した出力やアクションが実行される前に、人間がレビュー、承認、編集、または却下を行うパターンであり、定義された意思決定ポイントに人間の判断を介在させるものです。",
+      "takeaways": [
+        "エージェントが提案し、人間が承認、編集、または却下します。",
+        "影響が大きく、不可逆的、または機密性の高いアクションに適用します。",
+        "自律性とスピードをある程度犠牲にする代わりに、コントロールと信頼性を得ることができます。",
+        "ガバナンスフレームワークでは、設計段階からの人間による監視（human oversight by design）が求められることがよくあります。",
+        "監査性を確保するため、承認やオーバーライドはログに記録する必要があります。"
+      ],
+      "context": [
+        "アクションに多大なコストがかかる場合、不可逆的な場合、または規制対象である場合、完全な自律性はリスクを伴います。HITLはチェックポイントを挿入します。AIが作業を行い、人間が最終決定を下すことで、説明責任を人間に留めながら、効率性の大部分を享受できます。",
+        "これは信頼構築と導入促進のための戦略でもあります。チームは多くの場合、厳格な人間によるレビューから開始し、評価によって特定のタスクに対するシステムの信頼性が示されるにつれて、自律性の範囲を広げていきます。"
+      ],
+      "architecture": [
+        "パターンには、human-in-the-loop（人間が影響の大きい各アクションを承認する）、human-on-the-loop（人間が監視し、介入できる）、human-over-the-loop（定期的なレビューとポリシー設定を行う）があります。適切なレベルは、アクションのリスクによって異なります。",
+        "実装には、承認インターフェース、レビュー担当者向けの明確なコンテキスト、編集または却下を行う機能、タイムアウト時のフォールバック動作、および監査のためのすべての決定のログ記録が必要です。"
+      ],
+      "components": [
+        "意思決定チェックポイント",
+        "承認インターフェース",
+        "レビュー担当者向けコンテキスト",
+        "編集 / オーバーライド",
+        "エスカレーションとフォールバック",
+        "監査ログ"
+      ],
+      "pros": [
+        "被害が発生する前にエラーを検知します。",
+        "説明責任を人間に留めます。",
+        "コンプライアンスおよびガバナンスの要件をサポートします。",
+        "信頼を構築し、段階的な自律性を可能にします。"
+      ],
+      "risks": [
+        "レイテンシを追加し、スループットを制限します。",
+        "形骸化（ラバースタンプ）：レビュー担当者が十分に精査せずに承認してしまうこと。",
+        "アラート疲れにより、監視の質が低下します。",
+        "過剰に適用すると、自動化の価値が損なわれます。"
+      ],
+      "tools": [
+        "承認 / ワークフローシステム",
+        "割り込みステップを備えたエージェントフレームワーク（例：LangGraph）",
+        "監査ログ記録",
+        "ケース管理UI"
+      ],
+      "examples": [
+        "エージェントが返金のドラフトを作成し、発行前に人間が承認する。",
+        "コンテンツ作成エージェントの出力を、公開前に人間がレビューする。",
+        "運用エージェントが、本番環境への変更前に承認を得るために一時停止する。"
+      ],
+      "faqs": [
+        {
+          "q": "どのような場合にhuman-in-the-loopを使用すべきですか？",
+          "a": "エラーのコストがレビューのレイテンシを上回るような、影響が大きく、不可逆的、機密性が高い、または規制対象となるアクションに対して使用します。"
+        },
+        {
+          "q": "in-the-loopとon-the-loopの違いは何ですか？",
+          "a": "in-the-loopは、アクションが実行される前に人間が毎回承認することを意味します。on-the-loopは、人間が監視し介入することはできますが、デフォルトではシステムが自律的に動作することを意味します。"
+        },
+        {
+          "q": "HITLは自律性と矛盾しますか？",
+          "a": "意図的に自律性を制限します。多くのシステムは厳格なレビューから開始し、評価によってタスクに対する信頼性が実証されるにつれて、自律性を広げていきます。"
+        },
+        {
+          "q": "規制によって義務付けられていますか？",
+          "a": "人間による監視は繰り返し求められる要件です。例えば、EU AI法は高リスクAIシステムに対して効果的な人間による監視を義務付けています。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是人机回环（Human-in-the-Loop）模式？",
+      "summary": "人机回环（Human-in-the-loop, HITL）是一种设计模式，其中由人员在 AI 系统的输出生效之前对其进行审查、批准或纠正——特别是针对高影响力的操作。智能体负责提议，人类负责决策，而不是完全自主。它是管理智能体系统风险的主要控制手段，也是欧盟《AI 法案》和 NIST AI RMF 等 AI 治理框架中的常见要求。",
+      "definition": "人机回环是一种设计模式，其中人类在 AI 系统提议的输出或操作执行之前对其进行审查、批准、编辑或拒绝，从而在定义的决策点引入人类判断。",
+      "takeaways": [
+        "智能体提议；人类批准、编辑或拒绝。",
+        "将其应用于高影响力、不可逆或敏感的操作。",
+        "它牺牲了一定的自主性和速度，以换取控制力和信任。",
+        "治理框架通常在设计上就要求人类监督。",
+        "批准和覆盖（overrides）操作应予以记录以备审计。"
+      ],
+      "context": [
+        "当操作成本高昂、不可逆或受到监管时，完全自主是存在风险的。HITL 引入了一个检查点：AI 完成工作，人类做出最终决定，在保留大部分效率的同时，将责任保留在人身上。",
+        "它也是一种建立信任和促进采纳的策略。团队通常从严格的人工审查开始，然后随着评估表明系统在特定任务上可靠，逐步扩大自主权。"
+      ],
+      "architecture": [
+        "模式：人机回环（human-in-the-loop，由人员批准每个高影响力操作）、人机旁路（human-on-the-loop，由人员进行监控并可进行干预）以及人机监管（human-over-the-loop，定期审查和策略制定）。合适的级别取决于操作的风险。",
+        "实现需要一个审批界面、供审查者参考的清晰上下文、编辑或拒绝的能力、超时后的回退行为，以及记录每个决策以供审计。"
+      ],
+      "components": [
+        "决策检查点",
+        "审批界面",
+        "审查者上下文",
+        "编辑 / 覆盖",
+        "升级与回退",
+        "审计日志"
+      ],
+      "pros": [
+        "在错误造成危害之前将其捕获。",
+        "将责任保留在人身上。",
+        "支持合规与治理要求。",
+        "建立信任并实现逐步自主。"
+      ],
+      "risks": [
+        "增加延迟并限制吞吐量。",
+        "走过场：审查者未经实质性审查就予以批准。",
+        "警报疲劳会降低监督质量。",
+        "过度应用会否定自动化的价值。"
+      ],
+      "tools": [
+        "审批 / 工作流系统",
+        "具有中断步骤的智能体框架（例如 LangGraph）",
+        "审计日志记录",
+        "案例管理 UI"
+      ],
+      "examples": [
+        "智能体起草退款，由人工在发放前进行批准。",
+        "内容智能体，其输出在发布前由人工进行审查。",
+        "运维智能体，在进行生产环境变更前暂停以等待签核。"
+      ],
+      "faqs": [
+        {
+          "q": "什么时候应该使用人机回环？",
+          "a": "适用于高影响力、不可逆、敏感或受监管的操作，在这些操作中，错误的成本超过了审查带来的延迟。"
+        },
+        {
+          "q": "in-the-loop（人机回环）和 on-the-loop（人机旁路）有什么区别？",
+          "a": "In-the-loop 意味着人类在每个操作执行前进行批准；on-the-loop 意味着人类进行监控并可以干预，但系统默认自主运行。"
+        },
+        {
+          "q": "HITL 与自主性冲突吗？",
+          "a": "它刻意限制了自主性的边界。许多系统在开始时会进行严格审查，并随着评估证明其在某项任务上的可靠性而逐步扩大自主权。"
+        },
+        {
+          "q": "监管对此有要求吗？",
+          "a": "人类监督是一项常见要求——例如，欧盟《AI 法案》强制要求对高风险 AI 系统实施有效的人类监督。"
+        }
       ]
     }
   }

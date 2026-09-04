@@ -83,6 +83,22 @@
         "pt": {
           "label": "Egito e o Nilo",
           "note": "Homero chama de Aigyptos tanto o país quanto o rio, e descreve ali razias, cativeiro e trabalho forçado em termos que encaixam no funcionamento real do Mediterrâneo oriental. O Egito é o lugar real mais distante que os poemas nomeiam com segurança."
+        },
+        "fr": {
+          "label": "L'Égypte et le Nil",
+          "note": "Homère appelle à la fois le pays et le fleuve Aigyptos, et y décrit des raids, la captivité et le travail forcé dans des termes qui correspondent au fonctionnement réel de la Méditerranée orientale. L'Égypte est le lieu réel le plus éloigné que les poèmes nomment avec certitude."
+        },
+        "zh": {
+          "label": "埃及与尼罗河",
+          "note": "荷马将这个国家和这条河流都称为 Aigyptos，并用符合东地中海实际运作方式的措辞描述了那里的袭击、囚禁和强迫劳动。埃及是史诗中确凿提及的最遥远的真实地点。"
+        },
+        "de": {
+          "label": "Ägypten und der Nil",
+          "note": "Homer nennt sowohl das Land als auch den Fluss Aigyptos und beschreibt Raubzüge, Gefangenschaft und Zwangsarbeit dort in Begriffen, die der tatsächlichen Funktionsweise des östlichen Mittelmeerraums entsprechen. Ägypten ist der am weitesten entfernte reale Ort, den die Epen mit Gewissheit nennen."
+        },
+        "ja": {
+          "label": "エジプトとナイル川",
+          "note": "ホメロスは国と川の両方をアイギュプトスと呼び、そこでの襲撃、捕虜、強制労働を、東地中海の実際の仕組みと一致する言葉で描写している。エジプトは、詩篇が確信を持って名を挙げている最も遠い現実の場所である。"
         }
       }
     }
@@ -120,6 +136,46 @@
       ],
       "identificationNote": "Aceita: o país é o país. O critério arqueológico pontua 2 e não 3 porque o material que conecta visitantes egeus a fatos homéricos concretos é contextual, não direto.",
       "debate": "Quanto do detalhe egípcio nos poemas reflete contatos do Bronze Final e quanto reflete a presença grega no delta nos séculos VIII e VII."
+    },
+    "fr": {
+      "name": "Égypte",
+      "summary": "La limite lointaine du monde réel des poèmes. Ménélas y est poussé par les vents et en revient riche ; les récits de vie inventés par Ulysse s'y déroulent également, car c'est là que mènerait un mensonge plausible sur un voyage difficile.",
+      "description": [
+        "L'Égypte apparaît dans l'Odyssée comme une destination de pillage et de captivité, et Ulysse l'évoque à plusieurs reprises dans ses récits mensongers — signe que le public considérait cette destination comme crédible plutôt que merveilleuse.",
+        "Les détails sont pragmatiques et cohérents : un raid qui tourne mal, des prisonniers capturés, des années de service, des richesses acquises. C'est le genre de connaissances qu'un monde marchand possède sur un grand voisin."
+      ],
+      "identificationNote": "Accepté : le pays est bien le pays. Le score archéologique est de 2 plutôt que 3 car les éléments matériels reliant les visiteurs égéens à des événements homériques spécifiques sont contextuels et non directs.",
+      "debate": "Dans quelle mesure les détails égyptiens des poèmes reflètent les contacts de l'âge du bronze récent et dans quelle mesure ils reflètent la présence grecque dans le delta aux VIIIe et VIIe siècles."
+    },
+    "de": {
+      "name": "Ägypten",
+      "summary": "Der äußerste Rand der realen Welt der Epen. Menelaos wird dorthin verschlagen und kehrt reich nach Hause zurück; auch Odysseus' erfundene Lebensgeschichten führen dorthin, da es der Ort ist, an den eine glaubwürdige Lüge über beschwerliche Reisen führen würde.",
+      "description": [
+        "Ägypten erscheint in der Odyssee als Ziel für Raubzüge und Gefangenschaft, und Odysseus nutzt es wiederholt in seinen Lügengeschichten – ein Zeichen dafür, dass das Publikum das Ziel eher für glaubwürdig als für wunderbar hielt.",
+        "Die Details sind unromantisch und konsistent: ein missglückter Raubzug, Gefangennahme, jahrelanger Dienst, erworbenes Vermögen. Es ist die Art von Wissen, die eine Handelswelt über einen großen Nachbarn besitzt."
+      ],
+      "identificationNote": "Akzeptiert: Das Land ist das Land. Archäologisch mit 2 statt 3 bewertet, da das Material, das ägäische Besucher mit bestimmten homerischen Ereignissen verbindet, kontextuell und nicht direkt ist.",
+      "debate": "Wie viel der ägyptischen Details in den Epen auf Kontakte der Spätbronzezeit zurückgeht und wie viel auf die griechische Präsenz im Delta im achten und siebten Jahrhundert v. Chr. zurückzuführen ist."
+    },
+    "ja": {
+      "name": "エジプト",
+      "summary": "詩篇における現実世界の最果て。メネラオスは風に流されてそこへ至り、富を得て帰郷する。オデュッセウスの作り話の経歴もそこを舞台にしている。過酷な旅に関するもっともらしい嘘の行き先として、そこが最適だからである。",
+      "description": [
+        "『オデュッセイア』において、エジプトは襲撃や捕虜の目的地として登場し、オデュッセウスは自身の作り話の中で繰り返しそこを利用している。これは、聴衆がその目的地を驚異的な場所としてではなく、現実味のある場所として捉えていたことの表れである。",
+        "その描写は非ロマンチックで一貫している。失敗に終わる襲撃、捕らえられる捕虜、長年の奉仕、そして獲得される富。これは、交易を行う世界が巨大な隣国に対して抱くような知識の類である。"
+      ],
+      "identificationNote": "合意あり：その国はまさにその国である。エーゲ海からの来訪者と特定のホメロスの出来事を結びつける資料が、直接的ではなく文脈的なものであるため、考古学的なスコアは3ではなく2となる。",
+      "debate": "詩篇におけるエジプトに関する詳細な描写のうち、どの程度が青銅器時代後期の接触を反映しており、どの程度が紀元前8世紀および7世紀のデルタ地帯におけるギリシャ人の存在を反映しているか。"
+    },
+    "zh": {
+      "name": "埃及",
+      "summary": "史诗中真实世界的遥远边缘。墨涅拉俄斯（Menelaus）被风吹到那里，满载而归；奥德修斯（Odysseus）虚构的身世故事也设定在那里，因为对于艰难旅程而言，那是一个听起来合情合理的谎言去向。",
+      "description": [
+        "在《奥德赛》中，埃及是袭击和囚禁的目的地，奥德修斯在他的谎言中多次提到它——这表明听众认为这个目的地是可信的，而不是不可思议的。",
+        "细节毫不浪漫且前后一致：一次失败的袭击、被俘、多年的服役、获得的财富。这是一个贸易世界对一个庞大邻国所拥有的那种了解。"
+      ],
+      "identificationNote": "已公认：这个国家就是这个国家。考古学评分是 2 而不是 3，因为将爱琴海访客与特定荷马史诗事件联系起来的材料是背景性的，而非直接的。",
+      "debate": "史诗中关于埃及的细节，有多少反映了青铜时代晚期的接触，又有多少反映了公元前八世纪和七世纪希腊人在三角洲的存在。"
     }
   }
 }

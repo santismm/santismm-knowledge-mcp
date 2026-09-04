@@ -86,6 +86,50 @@
       ],
       "identificationNote": "Mítica e não localizada: nenhuma hipótese é registrada, porque não pode haver. É a única classe do atlas que por regra não carrega coordenadas: o esquema proíbe que um lugar não localizado tenha alguma, de modo que nada pode ganhar um alfinete em silêncio mais tarde.",
       "debate": "O que se discute não é a localização do Hades, mas a geografia da passagem: se as indicações de Circe preservam uma tradição náutica real rumo ao noroeste, se os rios vêm do Aqueronte tesprócio e se a Nekyia pertence sequer à camada mais antiga do poema."
+    },
+    "fr": {
+      "name": "La demeure d'Hadès",
+      "summary": "Là où Ulysse se rend pour interroger les morts. Le poème donne des instructions de navigation pour y parvenir — et elles mènent au-delà des limites du monde, c'est pourquoi cette entrée ne comporte aucune coordonnée.",
+      "description": [
+        "Les instructions de Circé sont d'une précision inhabituelle pour une destination qui ne peut exister : traverser l'Océan, échouer le navire près du bois sacré de Perséphone où se rejoignent trois fleuves nommés, creuser une fosse, verser les offrandes, et les morts viendront. Cette précision est précisément le but recherché — il s'agit d'instructions rituelles, non de navigation.",
+        "Des lieux réels ont hérité de cette association depuis l'Antiquité. Hérodote signale un oracle des morts sur l'Achéron en Thesprotie, et le site fouillé à Éphyre a longtemps été présenté comme cet oracle, bien que l'identification soit aujourd'hui contestée par les archéologues qui voient dans ce bâtiment une ferme fortifiée.",
+        "Ce sont des lieux réels avec une véritable histoire cultuelle. Ils ne sont pas la demeure d'Hadès, et l'atlas ne les assimile pas l'un à l'autre."
+      ],
+      "identificationNote": "Mythique et non localisé : aucune hypothèse n'est enregistrée, car aucune ne peut l'être. C'est la seule catégorie de l'atlas qui ne comporte par règle aucune coordonnée — le schéma interdit à un lieu non localisé d'en avoir, de sorte que rien ne peut se voir attribuer discrètement un repère par la suite.",
+      "debate": "Ce qui fait débat n'est pas l'emplacement de l'Hadès mais la géographie du passage : si les indications de Circé conservent une réelle tradition de navigation vers le nord-ouest, si les fleuves sont empruntés à l'Achéron de Thesprotie, et si la Nekyia appartient bien à la couche la plus ancienne du poème."
+    },
+    "de": {
+      "name": "Das Haus des Hades",
+      "summary": "Wohin Odysseus reist, um die Toten zu befragen. Das Epos gibt Wegbeschreibungen dorthin – und diese führen über den Rand der Welt hinaus, weshalb dieser Eintrag keinerlei Koordinaten enthält.",
+      "description": [
+        "Kirkes Anweisungen sind ungewöhnlich präzise für ein Ziel, das nicht existieren kann: Überquere den Okeanos, ziehe das Schiff am Hain der Persephone an Land, wo drei namentlich genannte Flüsse zusammenfließen, grabe eine Grube, gieße die Trankopfer aus, und die Toten werden kommen. Die Präzision ist der entscheidende Punkt – es handelt sich um eine rituelle Anweisung, nicht um Navigation.",
+        "Reale Orte haben diese Assoziation seit der Antike auf sich gezogen. Herodot berichtet von einem Totenorakel am Acheron in Thesprotien, und die in Ephyra ausgegrabene Stätte wurde lange Zeit als dieses Orakel präsentiert, obwohl die Identifizierung heute von Archäologen bestritten wird, die das Gebäude als befestigtes Gehöft deuten.",
+        "Dies sind reale Orte mit einer realen Kultgeschichte. Sie sind nicht das Haus des Hades, und der Atlas setzt sie nicht miteinander gleich."
+      ],
+      "identificationNote": "Mythisch und unlokalisiert: Es ist keine Hypothese verzeichnet, da dies unmöglich ist. Dies ist die einzige Kategorie im Atlas, die regelbedingt keine Koordinaten enthält – das Schema verbietet es einem unlokalisierten Ort, solche zu haben, sodass später nichts heimlich eine Markierung erhalten kann.",
+      "debate": "Debattiert wird nicht die Lage des Hades, sondern die Geografie der Passage: ob Kirkes Wegbeschreibung eine reale Seefahrtstradition nach Nordwesten bewahrt, ob die Flüsse vom thesprotischen Acheron entlehnt sind und ob die Nekyia überhaupt zur ältesten Schicht des Epos gehört."
+    },
+    "ja": {
+      "name": "ハデスの館",
+      "summary": "オデュッセウスが死者に問いかけるために赴く場所。詩にはそこへの航海案内が記されているが、それは世界の果てを越えた先へと導いている。そのため、このエントリーには座標が一切記載されていない。",
+      "description": [
+        "キルケの指示は、存在し得ない目的地にしては異常なほど精密である。オーケアノスを渡り、名のある3つの川が交わるペルセポネの木立ちの傍らに船を引き揚げ、穴を掘り、供物を注げば、死者が現れるという。この精密さこそが重要であり、これは航海案内ではなく儀式の指示なのである。",
+        "古代以来、実在の場所がこの連想と結びつけられてきた。ヘロドトスはテスプロティアのアケロン川にある死者の神託所について報告しており、エピュラで発掘された遺跡は長年その神託所として紹介されてきた。ただし、現在では考古学者によってその同定に異議が唱えられており、建物は要塞化された農家と解釈されている。",
+        "これらは実際の信仰の歴史を持つ実在の場所である。しかし、それらはハデスの館ではなく、この地図帳では一方を他方としてピン留めすることはない。"
+      ],
+      "identificationNote": "神話上かつ位置未特定：いかなる仮説も記録されていない。記録し得ないからである。これは、ルール上座標を持たないこの地図帳で唯一のクラスである。スキーマによって位置未特定の場所に座標を持たせることが禁止されているため、後から密かにピンが追加されることはない。",
+      "debate": "議論されているのはハデスの位置ではなく、その一節の地理である。キルケの指示が北西への実際の航海伝承を留めているのか、川の名がテスプロティアのアケロン川から借用されたものなのか、そしてそもそも『ネキア』が詩の最古の層に属しているのかどうか、という点である。"
+    },
+    "zh": {
+      "name": "哈迪斯的居所",
+      "summary": "奥德修斯前往询问死者的地方。史诗给出了前往那里的航行指引——而这些指引通往世界的边缘之外，这就是为什么该条目完全没有坐标的原因。",
+      "description": [
+        "对于一个不可能存在的目的地，喀耳刻的指示异常精确：跨越大洋河（Ocean），在三条有名河流交汇处的珀耳塞福涅（Persephone）树林旁停泊船只，挖一个坑，倾倒祭品，死者就会到来。这种精确性正是关键所在——这是仪式指导，而非航海导航。",
+        "自古以来，真实的地方就与此产生了联系。希罗多德记载了塞斯普罗蒂亚阿刻戎河畔的一个亡灵神谕所，而在埃菲拉发掘的遗址长期以来被介绍为该神谕所，尽管现在考古学家对此认定存在争议，他们将该建筑解读为防御性农舍。",
+        "那些是具有真实崇拜历史的真实地点。它们不是哈迪斯的居所，本图册也不会将两者混为一谈。"
+      ],
+      "identificationNote": "神话且未定位：没有记录任何假设，因为根本无法记录。这是本图册中唯一按规则不携带坐标的类别——模式（schema）禁止未定位的地点拥有任何坐标，因此以后任何内容都无法悄悄获取定位标记。",
+      "debate": "争论的不是哈迪斯的位置，而是该段落的地理描述：喀耳刻的指引是否保留了向西北方向航行的真实传统，这些河流是否借用自塞斯普罗蒂亚的阿刻戎河，以及《招魂术》（Nekyia）是否根本不属于史诗最古老的一层。"
     }
   }
 }

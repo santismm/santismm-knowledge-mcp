@@ -3,15 +3,31 @@
   "category": "concept",
   "updated": "2026-06-24",
   "version": "1.1",
-  "related": ["ai-agent", "model-context-protocol", "agentic-ai", "harness-engineering"],
+  "related": [
+    "ai-agent",
+    "model-context-protocol",
+    "agentic-ai",
+    "harness-engineering"
+  ],
   "references": [
-    { "title": "Schick et al. — Toolformer: Language Models Can Teach Themselves to Use Tools (2023)", "url": "https://arxiv.org/abs/2302.04761" },
-    { "title": "Anthropic — Tool use (function calling)", "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use" }
+    {
+      "title": "Schick et al. — Toolformer: Language Models Can Teach Themselves to Use Tools (2023)",
+      "url": "https://arxiv.org/abs/2302.04761"
+    },
+    {
+      "title": "Anthropic — Tool use (function calling)",
+      "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use"
+    }
   ],
   "evidence": {
     "evidenceLevel": "production",
     "confidenceLevel": "medium",
-    "sourceType": ["production_system", "personal_experience", "industry_observation", "paper"]
+    "sourceType": [
+      "production_system",
+      "personal_experience",
+      "industry_observation",
+      "paper"
+    ]
   },
   "locales": {
     "en": {
@@ -33,7 +49,14 @@
         "The loop: the application declares tools (name, description, parameter schema); the model emits a structured tool call; the application validates and executes it; the result returns to the model as an observation; the model continues or answers.",
         "MCP standardizes how tools are exposed and discovered across applications, so a tool written once can be reused by any compliant client. Guardrails and permissions wrap execution to keep it safe."
       ],
-      "components": ["Tool declaration (schema)", "Tool selection (model)", "Argument generation", "Execution layer", "Result / observation", "Guardrails & permissions"],
+      "components": [
+        "Tool declaration (schema)",
+        "Tool selection (model)",
+        "Argument generation",
+        "Execution layer",
+        "Result / observation",
+        "Guardrails & permissions"
+      ],
       "pros": [
         "Grounds answers in live, real data.",
         "Lets models take real actions, not just describe them.",
@@ -46,7 +69,12 @@
         "Over-broad tool access widens the attack surface.",
         "Latency and cost grow with each tool round-trip."
       ],
-      "tools": ["Function calling APIs", "Model Context Protocol (MCP)", "LangGraph / Agents SDKs", "Schema validation (e.g. JSON Schema, Zod)"],
+      "tools": [
+        "Function calling APIs",
+        "Model Context Protocol (MCP)",
+        "LangGraph / Agents SDKs",
+        "Schema validation (e.g. JSON Schema, Zod)"
+      ],
       "examples": [
         "A model calling a weather API to answer a forecast question.",
         "An agent querying a database to look up an order before acting.",
@@ -54,10 +82,22 @@
         "In practice: an autonomous OpenClaw agent issued 800 tool calls across 10 distinct tools over 57 days — exec (481), web_search (190), write (48), web_fetch (22), read (21) and others — averaging 5.97 tool calls per session. A single-operator local-first deployment, measured from the agent's own traces."
       ],
       "faqs": [
-        { "q": "Is tool use the same as MCP?", "a": "No. Tool use is the model capability to call functions. MCP is a standard for how those tools and data are exposed and discovered across applications." },
-        { "q": "How do you make tool use reliable?", "a": "Write tools for the model: clear names, precise parameter schemas, useful descriptions and informative errors. Validate arguments and constrain permissions." },
-        { "q": "What are the security risks?", "a": "Tools are real access. Prompt injection can attempt to trigger harmful calls, so apply least-privilege permissions, validate inputs, and treat tool outputs as untrusted." },
-        { "q": "Does tool use make a model an agent?", "a": "It is the key enabler. An agent combines tool use with a control loop, memory and a goal so it can act over multiple steps." }
+        {
+          "q": "Is tool use the same as MCP?",
+          "a": "No. Tool use is the model capability to call functions. MCP is a standard for how those tools and data are exposed and discovered across applications."
+        },
+        {
+          "q": "How do you make tool use reliable?",
+          "a": "Write tools for the model: clear names, precise parameter schemas, useful descriptions and informative errors. Validate arguments and constrain permissions."
+        },
+        {
+          "q": "What are the security risks?",
+          "a": "Tools are real access. Prompt injection can attempt to trigger harmful calls, so apply least-privilege permissions, validate inputs, and treat tool outputs as untrusted."
+        },
+        {
+          "q": "Does tool use make a model an agent?",
+          "a": "It is the key enabler. An agent combines tool use with a control loop, memory and a goal so it can act over multiple steps."
+        }
       ]
     },
     "es": {
@@ -79,7 +119,14 @@
         "El bucle: la aplicación declara herramientas (nombre, descripción, esquema de parámetros); el modelo emite una llamada estructurada; la aplicación la valida y ejecuta; el resultado vuelve al modelo como observación; el modelo continúa o responde.",
         "MCP estandariza cómo se exponen y descubren las herramientas entre aplicaciones, de modo que una herramienta escrita una vez se reutiliza en cualquier cliente compatible. Los guardarraíles y permisos envuelven la ejecución para mantenerla segura."
       ],
-      "components": ["Declaración de herramienta (esquema)", "Selección de herramienta (modelo)", "Generación de argumentos", "Capa de ejecución", "Resultado / observación", "Guardarraíles y permisos"],
+      "components": [
+        "Declaración de herramienta (esquema)",
+        "Selección de herramienta (modelo)",
+        "Generación de argumentos",
+        "Capa de ejecución",
+        "Resultado / observación",
+        "Guardarraíles y permisos"
+      ],
       "pros": [
         "Fundamenta las respuestas en datos reales y en vivo.",
         "Permite a los modelos tomar acciones reales, no solo describirlas.",
@@ -92,7 +139,12 @@
         "Un acceso demasiado amplio a herramientas amplía la superficie de ataque.",
         "La latencia y el coste crecen con cada ida y vuelta a una herramienta."
       ],
-      "tools": ["APIs de function calling", "Model Context Protocol (MCP)", "LangGraph / SDKs de agentes", "Validación de esquemas (p. ej. JSON Schema, Zod)"],
+      "tools": [
+        "APIs de function calling",
+        "Model Context Protocol (MCP)",
+        "LangGraph / SDKs de agentes",
+        "Validación de esquemas (p. ej. JSON Schema, Zod)"
+      ],
       "examples": [
         "Un modelo que llama a una API del tiempo para responder sobre el pronóstico.",
         "Un agente que consulta una base de datos para buscar un pedido antes de actuar.",
@@ -100,10 +152,22 @@
         "En la práctica: un agente autónomo OpenClaw realizó 800 llamadas a herramientas entre 10 herramientas distintas en 57 días — exec (481), web_search (190), write (48), web_fetch (22), read (21) y otras — con una media de 5,97 llamadas por sesión. Despliegue local-first mono-operador, medido desde las propias trazas del agente."
       ],
       "faqs": [
-        { "q": "¿El uso de herramientas es lo mismo que MCP?", "a": "No. El uso de herramientas es la capacidad del modelo de llamar a funciones. MCP es un estándar de cómo se exponen y descubren esas herramientas y datos entre aplicaciones." },
-        { "q": "¿Cómo se hace fiable el uso de herramientas?", "a": "Escribiendo las herramientas para el modelo: nombres claros, esquemas de parámetros precisos, descripciones útiles y errores informativos. Validar argumentos y limitar permisos." },
-        { "q": "¿Cuáles son los riesgos de seguridad?", "a": "Las herramientas son acceso real. La inyección de prompts puede intentar disparar llamadas dañinas, así que aplica permisos de mínimo privilegio, valida entradas y trata las salidas como no confiables." },
-        { "q": "¿El uso de herramientas convierte a un modelo en agente?", "a": "Es el habilitador clave. Un agente combina el uso de herramientas con un bucle de control, memoria y un objetivo para actuar en varios pasos." }
+        {
+          "q": "¿El uso de herramientas es lo mismo que MCP?",
+          "a": "No. El uso de herramientas es la capacidad del modelo de llamar a funciones. MCP es un estándar de cómo se exponen y descubren esas herramientas y datos entre aplicaciones."
+        },
+        {
+          "q": "¿Cómo se hace fiable el uso de herramientas?",
+          "a": "Escribiendo las herramientas para el modelo: nombres claros, esquemas de parámetros precisos, descripciones útiles y errores informativos. Validar argumentos y limitar permisos."
+        },
+        {
+          "q": "¿Cuáles son los riesgos de seguridad?",
+          "a": "Las herramientas son acceso real. La inyección de prompts puede intentar disparar llamadas dañinas, así que aplica permisos de mínimo privilegio, valida entradas y trata las salidas como no confiables."
+        },
+        {
+          "q": "¿El uso de herramientas convierte a un modelo en agente?",
+          "a": "Es el habilitador clave. Un agente combina el uso de herramientas con un bucle de control, memoria y un objetivo para actuar en varios pasos."
+        }
       ]
     },
     "pt": {
@@ -125,7 +189,14 @@
         "O laço: a aplicação declara ferramentas (nome, descrição, esquema de parâmetros); o modelo emite uma chamada estruturada; a aplicação a valida e executa; o resultado retorna ao modelo como observação; o modelo continua ou responde.",
         "O MCP padroniza como as ferramentas são expostas e descobertas entre aplicações, de modo que uma ferramenta escrita uma vez é reutilizada por qualquer cliente compatível. Guard-rails e permissões envolvem a execução para mantê-la segura."
       ],
-      "components": ["Declaração de ferramenta (esquema)", "Seleção de ferramenta (modelo)", "Geração de argumentos", "Camada de execução", "Resultado / observação", "Guard-rails e permissões"],
+      "components": [
+        "Declaração de ferramenta (esquema)",
+        "Seleção de ferramenta (modelo)",
+        "Geração de argumentos",
+        "Camada de execução",
+        "Resultado / observação",
+        "Guard-rails e permissões"
+      ],
       "pros": [
         "Fundamenta as respostas em dados reais e ao vivo.",
         "Permite aos modelos tomar ações reais, não só descrevê-las.",
@@ -138,7 +209,12 @@
         "Um acesso amplo demais a ferramentas amplia a superfície de ataque.",
         "A latência e o custo crescem a cada ida e volta a uma ferramenta."
       ],
-      "tools": ["APIs de function calling", "Model Context Protocol (MCP)", "LangGraph / SDKs de agentes", "Validação de esquemas (ex.: JSON Schema, Zod)"],
+      "tools": [
+        "APIs de function calling",
+        "Model Context Protocol (MCP)",
+        "LangGraph / SDKs de agentes",
+        "Validação de esquemas (ex.: JSON Schema, Zod)"
+      ],
       "examples": [
         "Um modelo que chama uma API de clima para responder sobre a previsão.",
         "Um agente que consulta um banco de dados para buscar um pedido antes de agir.",
@@ -146,10 +222,302 @@
         "Na prática: um agente autônomo OpenClaw fez 800 chamadas de ferramentas entre 10 ferramentas distintas em 57 dias — exec (481), web_search (190), write (48), web_fetch (22), read (21) e outras — com média de 5,97 chamadas por sessão. Implantação local-first de operador único, medida a partir dos próprios rastros do agente."
       ],
       "faqs": [
-        { "q": "O uso de ferramentas é o mesmo que MCP?", "a": "Não. O uso de ferramentas é a capacidade do modelo de chamar funções. O MCP é um padrão de como essas ferramentas e dados são expostos e descobertos entre aplicações." },
-        { "q": "Como tornar o uso de ferramentas confiável?", "a": "Escrevendo as ferramentas para o modelo: nomes claros, esquemas de parâmetros precisos, descrições úteis e erros informativos. Validar argumentos e limitar permissões." },
-        { "q": "Quais são os riscos de segurança?", "a": "Ferramentas são acesso real. A injeção de prompts pode tentar disparar chamadas nocivas, então aplique permissões de privilégio mínimo, valide entradas e trate as saídas como não confiáveis." },
-        { "q": "O uso de ferramentas torna um modelo um agente?", "a": "É o habilitador-chave. Um agente combina o uso de ferramentas com um laço de controle, memória e um objetivo para agir em vários passos." }
+        {
+          "q": "O uso de ferramentas é o mesmo que MCP?",
+          "a": "Não. O uso de ferramentas é a capacidade do modelo de chamar funções. O MCP é um padrão de como essas ferramentas e dados são expostos e descobertos entre aplicações."
+        },
+        {
+          "q": "Como tornar o uso de ferramentas confiável?",
+          "a": "Escrevendo as ferramentas para o modelo: nomes claros, esquemas de parâmetros precisos, descrições úteis e erros informativos. Validar argumentos e limitar permissões."
+        },
+        {
+          "q": "Quais são os riscos de segurança?",
+          "a": "Ferramentas são acesso real. A injeção de prompts pode tentar disparar chamadas nocivas, então aplique permissões de privilégio mínimo, valide entradas e trate as saídas como não confiáveis."
+        },
+        {
+          "q": "O uso de ferramentas torna um modelo um agente?",
+          "a": "É o habilitador-chave. Um agente combina o uso de ferramentas com um laço de controle, memória e um objetivo para agir em vários passos."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que l'utilisation d'outils (Function Calling) ?",
+      "summary": "L'utilisation d'outils, également appelée appel de fonction (function calling), permet à un modèle de langage d'invoquer des fonctions externes, des API ou du code pour récupérer des informations ou entreprendre des actions dans le monde réel. Le modèle décide quel outil appeler et avec quels arguments ; l'application exécute l'outil et renvoie le résultat, que le modèle utilise pour continuer. L'utilisation d'outils est la passerelle qui transforme un générateur de texte en un agent capable d'agir concrètement.",
+      "definition": "L'utilisation d'outils (function calling) est la capacité qui permet à un modèle de langage d'appeler des fonctions ou des API externes prédéfinies, avec des arguments qu'il génère, et d'intégrer les résultats dans sa réponse ou son étape suivante.",
+      "takeaways": [
+        "L'utilisation d'outils connecte un modèle à des données en direct et à des actions réelles.",
+        "Le modèle choisit l'outil et les arguments ; l'application l'exécute.",
+        "Des outils clairs et bien décrits améliorent considérablement la fiabilité.",
+        "C'est le mécanisme central derrière les agents et le protocole MCP.",
+        "L'accès aux outils élargit à la fois les capacités et la surface de sécurité."
+      ],
+      "context": [
+        "Seul, un modèle ne produit que du texte. L'utilisation d'outils brise cette frontière : face à un ensemble d'outils déclarés, le modèle peut choisir d'en appeler un — par exemple une recherche, une requête de base de données ou une API de paiement — puis de raisonner sur le résultat.",
+        "La manière dont les outils sont décrits importe tout autant que le modèle. Les outils écrits pour être utilisés par un modèle — noms clairs, paramètres précis, descriptions utiles et messages d'erreur — sont au cœur des préoccupations de Harness Engineering."
+      ],
+      "architecture": [
+        "La boucle : l'application déclare les outils (nom, description, schéma des paramètres) ; le modèle émet un appel d'outil structuré ; l'application le valide et l'exécute ; le résultat est renvoyé au modèle sous forme d'observation ; le modèle continue ou répond.",
+        "Le protocole MCP standardise la manière dont les outils sont exposés et découverts à travers les applications, de sorte qu'un outil écrit une fois puisse être réutilisé par n'importe quel client conforme. Des garde-fous (guardrails) et des permissions encadrent l'exécution pour garantir sa sécurité."
+      ],
+      "components": [
+        "Déclaration de l'outil (schéma)",
+        "Sélection de l'outil (modèle)",
+        "Génération d'arguments",
+        "Couche d'exécution",
+        "Résultat / observation",
+        "Garde-fous et permissions"
+      ],
+      "pros": [
+        "Ancre les réponses dans des données réelles et en direct.",
+        "Permet aux modèles d'entreprendre des actions réelles, et pas seulement de les décrire.",
+        "Étend un modèle sans réentraînement.",
+        "S'intègre dans des flux de travail (workflows) agentiques complets."
+      ],
+      "risks": [
+        "L'injection de requêtes (prompt injection) peut déclencher des appels d'outils involontaires.",
+        "Des arguments erronés ou une mauvaise utilisation des outils provoquent des erreurs dans le monde réel.",
+        "Un accès trop large aux outils élargit la surface d'attaque.",
+        "La latence et le coût augmentent à chaque aller-retour d'outil."
+      ],
+      "tools": [
+        "API d'appel de fonction (function calling)",
+        "Model Context Protocol (MCP)",
+        "SDK LangGraph / Agents",
+        "Validation de schéma (ex. JSON Schema, Zod)"
+      ],
+      "examples": [
+        "Un modèle appelant une API météo pour répondre à une question sur les prévisions.",
+        "Un agent interrogeant une base de données pour rechercher une commande avant d'agir.",
+        "Un agent de codage invoquant un exécuteur de tests et lisant les résultats.",
+        "En pratique : un agent autonome OpenClaw a émis 800 appels d'outils sur 10 outils distincts en 57 jours — exec (481), web_search (190), write (48), web_fetch (22), read (21) et autres — avec une moyenne de 5,97 appels d'outils par session. Un déploiement local-first à opérateur unique, mesuré à partir des propres traces de l'agent."
+      ],
+      "faqs": [
+        {
+          "q": "L'utilisation d'outils est-elle identique au protocole MCP ?",
+          "a": "Non. L'utilisation d'outils est la capacité du modèle à appeler des fonctions. Le protocole MCP est un standard définissant la manière dont ces outils et données sont exposés et découverts à travers les applications."
+        },
+        {
+          "q": "Comment fiabiliser l'utilisation d'outils ?",
+          "a": "Écrivez des outils adaptés au modèle : des noms clairs, des schémas de paramètres précis, des descriptions utiles et des erreurs informatives. Validez les arguments et limitez les permissions."
+        },
+        {
+          "q": "Quels sont les risques de sécurité ?",
+          "a": "Les outils constituent des accès réels. L'injection de requêtes (prompt injection) peut tenter de déclencher des appels malveillants ; appliquez donc le principe du moindre privilège, validez les entrées et traitez les sorties des outils comme non fiables."
+        },
+        {
+          "q": "L'utilisation d'outils fait-elle d'un modèle un agent ?",
+          "a": "C'est le catalyseur clé. Un agent combine l'utilisation d'outils avec une boucle de contrôle, une mémoire et un objectif afin de pouvoir agir sur plusieurs étapes."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist Tool Use (Function Calling)?",
+      "summary": "Tool Use, auch Function Calling genannt, ermöglicht es einem Sprachmodell, externe Funktionen, APIs oder Code aufzurufen, um Informationen abzurufen oder Aktionen in der realen Welt auszuführen. Das Modell entscheidet, welches Tool mit welchen Argumenten aufgerufen wird; die Anwendung führt das Tool aus und gibt das Ergebnis zurück, das das Modell zur Fortsetzung verwendet. Tool Use ist die Brücke, die einen Textgenerator in einen Agenten verwandelt, der tatsächlich handeln kann.",
+      "definition": "Tool Use (Function Calling) ist die Fähigkeit, die es einem Sprachmodell ermöglicht, vordefinierte externe Funktionen oder APIs mit selbst generierten Argumenten aufzurufen und die Ergebnisse in seine Antwort oder den nächsten Schritt einzubinden.",
+      "takeaways": [
+        "Tool Use verbindet ein Modell mit Live-Daten und realen Aktionen.",
+        "Das Modell wählt das Tool und die Argumente aus; die App führt es aus.",
+        "Klare, gut beschriebene Tools verbessern die Zuverlässigkeit drastisch.",
+        "Es ist der Kernmechanismus hinter Agenten und MCP.",
+        "Der Zugriff auf Tools erweitert sowohl die Fähigkeiten als auch die Sicherheitsangriffsfläche."
+      ],
+      "context": [
+        "Für sich genommen erzeugt ein Modell nur Text. Tool Use durchbricht diese Grenze: Ausgestattet mit einer Reihe deklarierter Tools kann das Modell entscheiden, eines davon aufzurufen – beispielsweise eine Suche, eine Datenbankabfrage oder eine Zahlungs-API – und anschließend über das Ergebnis nachdenken.",
+        "Wie Tools beschrieben werden, ist ebenso wichtig wie das Modell selbst. Tools, die für die Nutzung durch ein Modell entwickelt wurden – mit klaren Namen, präzisen Parametern, hilfreichen Beschreibungen und Fehlermeldungen –, sind ein zentrales Anliegen von Harness Engineering."
+      ],
+      "architecture": [
+        "Der Kreislauf: Die Anwendung deklariert Tools (Name, Beschreibung, Parameterschema); das Modell gibt einen strukturierten Tool-Aufruf aus; die Anwendung validiert und führt ihn aus; das Ergebnis wird als Beobachtung an das Modell zurückgegeben; das Modell fährt fort oder antwortet.",
+        "MCP standardisiert, wie Tools anwendungsübergreifend bereitgestellt und erkannt werden, sodass ein einmal geschriebenes Tool von jedem kompatiblen Client wiederverwendet werden kann. Guardrails und Berechtigungen sichern die Ausführung ab."
+      ],
+      "components": [
+        "Tool-Deklaration (Schema)",
+        "Tool-Auswahl (Modell)",
+        "Argumentgenerierung",
+        "Ausführungsschicht",
+        "Ergebnis / Beobachtung",
+        "Guardrails & Berechtigungen"
+      ],
+      "pros": [
+        "Fundiert Antworten in echten Live-Daten.",
+        "Ermöglicht es Modellen, reale Aktionen auszuführen, statt sie nur zu beschreiben.",
+        "Erweitert ein Modell ohne erneutes Training.",
+        "Lässt sich zu vollständigen agentischen Workflows zusammensetzen."
+      ],
+      "risks": [
+        "Prompt-Injection kann unbeabsichtigte Tool-Aufrufe auslösen.",
+        "Falsche Argumente oder Tool-Missbrauch verursachen Fehler in der realen Welt.",
+        "Zu weitreichender Tool-Zugriff vergrößert die Angriffsfläche.",
+        "Latenz und Kosten steigen mit jedem Tool-Roundtrip."
+      ],
+      "tools": [
+        "Function-Calling-APIs",
+        "Model Context Protocol (MCP)",
+        "LangGraph / Agents SDKs",
+        "Schema-Validierung (z. B. JSON Schema, Zod)"
+      ],
+      "examples": [
+        "Ein Modell, das eine Wetter-API aufruft, um eine Frage zur Vorhersage zu beantworten.",
+        "Ein Agent, der eine Datenbank abfragt, um eine Bestellung nachzuschlagen, bevor er handelt.",
+        "Ein Coding-Agent, der einen Test-Runner aufruft und die Ergebnisse liest.",
+        "In der Praxis: Ein autonomer OpenClaw-Agent führte über 57 Tage hinweg 800 Tool-Aufrufe über 10 verschiedene Tools aus – exec (481), web_search (190), write (48), web_fetch (22), read (21) und andere – mit durchschnittlich 5,97 Tool-Aufrufen pro Sitzung. Ein Local-First-Deployment mit nur einem Operator, gemessen anhand der eigenen Traces des Agenten."
+      ],
+      "faqs": [
+        {
+          "q": "Ist Tool Use dasselbe wie MCP?",
+          "a": "Nein. Tool Use ist die Fähigkeit des Modells, Funktionen aufzurufen. MCP ist ein Standard dafür, wie diese Tools und Daten anwendungsübergreifend bereitgestellt und erkannt werden."
+        },
+        {
+          "q": "Wie macht man Tool Use zuverlässig?",
+          "a": "Entwickeln Sie Tools speziell für das Modell: klare Namen, präzise Parameterschemata, nützliche Beschreibungen und informative Fehlermeldungen. Validieren Sie Argumente und schränken Sie Berechtigungen ein."
+        },
+        {
+          "q": "Welche Sicherheitsrisiken gibt es?",
+          "a": "Tools bedeuten echten Zugriff. Prompt-Injection kann versuchen, schädliche Aufrufe auszulösen. Wenden Sie daher das Prinzip der minimalen Rechtevergabe an, validieren Sie Eingaben und behandeln Sie Tool-Ausgaben als nicht vertrauenswürdig."
+        },
+        {
+          "q": "Macht Tool Use ein Modell zu einem Agenten?",
+          "a": "Es ist der entscheidende Wegbereiter. Ein Agent kombiniert Tool Use mit einer Kontrollschleife, einem Gedächtnis und einem Ziel, um über mehrere Schritte hinweg agieren zu können."
+        }
+      ]
+    },
+    "ja": {
+      "title": "ツール利用（Function Calling）とは何ですか？",
+      "summary": "ファンクションコーリング（function calling）とも呼ばれるツール利用（tool use）は、言語モデルが外部の関数、API、またはコードを呼び出して、情報を取得したり現実世界でアクションを実行したりできるようにする機能です。モデルはどのツールをどのような引数で呼び出すかを決定し、アプリケーションがそのツールを実行して結果を返します。モデルはその結果を使用して処理を継続します。ツール利用は、テキスト生成AIを、実際にアクションを実行できるエージェントへと変える架け橋となります。",
+      "definition": "ツール利用（ファンクションコーリング）とは、言語モデルが事前に定義された外部の関数やAPIを、自身が生成した引数を用いて呼び出し、その結果を自身の回答や次のステップに組み込むことができる機能です。",
+      "takeaways": [
+        "ツール利用は、モデルをライブデータや実際のアクションに接続します。",
+        "モデルがツールと引数を選択し、アプリケーションがそれを実行します。",
+        "明確で十分に説明されたツールは、信頼性を劇的に向上させます。",
+        "これは、エージェントやMCP（Model Context Protocol）の背後にある中核的なメカニズムです。",
+        "ツールへのアクセスは、機能を拡張すると同時に、セキュリティの攻撃対象領域（アタックサーフェス）も広げます。"
+      ],
+      "context": [
+        "モデル単体ではテキストを生成することしかできません。ツール利用はその境界を打ち破ります。宣言されたツール群が与えられると、モデルは検索、データベースクエリ、決済APIなどのいずれかを呼び出すことを選択し、その結果に基づいて推論を行うことができます。",
+        "ツールがどのように記述されているかは、モデルそのものと同じくらい重要です。モデルが使用するために作成されたツール（明確な名前、正確なパラメータ、役立つ説明、エラーメッセージなど）は、ハーネスエンジニアリング (Harness Engineering) の中心的な関心事です。"
+      ],
+      "architecture": [
+        "ループ：アプリケーションがツール（名前、説明、パラメータスキーマ）を宣言し、モデルが構造化されたツール呼び出しを出力します。アプリケーションはそれを検証して実行し、結果がオブザベーション（観測結果）としてモデルに返され、モデルは処理を継続するか回答を出力します。",
+        "MCPは、アプリケーション間でツールを公開および検出する方法を標準化するため、一度作成したツールを準拠する任意のクライアントで再利用できます。ガードレールと権限が実行を包み込み、安全性を維持します。"
+      ],
+      "components": [
+        "ツールの宣言（スキーマ）",
+        "ツールの選択（モデル）",
+        "引数の生成",
+        "実行レイヤー",
+        "結果 / オブザベーション（観測結果）",
+        "ガードレールと権限"
+      ],
+      "pros": [
+        "回答をライブのリアルなデータにグラウンディング（根拠付け）します。",
+        "モデルにアクションを説明させるだけでなく、実際のアクションを実行させることができます。",
+        "再トレーニングなしでモデルを拡張します。",
+        "完全なエージェント型ワークフローへと構成できます。"
+      ],
+      "risks": [
+        "プロンプトインジェクションにより、意図しないツール呼び出しがトリガーされる可能性があります。",
+        "誤った引数やツールの誤用は、現実世界でのエラーを引き起こします。",
+        "広すぎるツールアクセス権限は、攻撃対象領域（アタックサーフェス）を広げます。",
+        "ツールのラウンドトリップごとに、レイテンシーとコストが増加します。"
+      ],
+      "tools": [
+        "ファンクションコーリングAPI",
+        "Model Context Protocol (MCP)",
+        "LangGraph / Agents SDK",
+        "スキーマ検証（例：JSON Schema、Zod）"
+      ],
+      "examples": [
+        "モデルが天気APIを呼び出して、予報に関する質問に回答する。",
+        "エージェントがアクションを実行する前に、データベースにクエリを実行して注文を検索する。",
+        "コーディングエージェントがテストランナーを起動し、その結果を読み取る。",
+        "実践例：自律型のOpenClawエージェントは、57日間にわたり10個の異なるツールに対して800回のツール呼び出しを実行しました。内訳は、exec（481回）、web_search（190回）、write（48回）、web_fetch（22回）、read（21回）などであり、1セッションあたり平均5.97回のツール呼び出しでした。これは、エージェント自身のトレースから測定された、シングルオペレーターによるローカルファーストのデプロイメントにおける数値です。"
+      ],
+      "faqs": [
+        {
+          "q": "ツール利用はMCPと同じですか？",
+          "a": "いいえ。ツール利用は、関数を呼び出すためのモデルの機能です。MCPは、それらのツールやデータがアプリケーション間でどのように公開され、検出されるかを定義する標準規格です。"
+        },
+        {
+          "q": "ツール利用の信頼性を高めるにはどうすればよいですか？",
+          "a": "モデル向けにツールを作成します。明確な名前、正確なパラメータスキーマ、役立つ説明、有益なエラーメッセージを用意します。また、引数を検証し、権限を制限します。"
+        },
+        {
+          "q": "セキュリティ上のリスクは何ですか？",
+          "a": "ツールは実際のアクセス権限を持ちます。プロンプトインジェクションによって有害な呼び出しが試みられる可能性があるため、最小特権の原則を適用し、入力を検証し、ツールの出力を信頼できないものとして扱ってください。"
+        },
+        {
+          "q": "ツールを利用すれば、モデルはエージェントになりますか？",
+          "a": "ツール利用は重要なイネーブラー（実現要素）です。エージェントは、ツール利用に制御ループ、メモリ、および目標を組み合わせることで、複数のステップにわたって行動できるようになります。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是工具使用（函数调用）？",
+      "summary": "工具使用（也称为函数调用）允许语言模型调用外部函数、API 或代码，以获取信息或在现实世界中执行操作。模型决定调用哪个工具以及使用什么参数；应用程序运行该工具并返回结果，模型利用该结果继续执行。工具使用是将文本生成器转变为能够实际执行任务的智能体的桥梁。",
+      "definition": "工具使用（函数调用）是指允许语言模型调用预定义的外部函数或 API（使用其生成的参数），并将结果整合到其响应或下一步骤中的能力。",
+      "takeaways": [
+        "工具使用将模型与实时数据 and 实际操作连接起来。",
+        "模型选择工具和参数；应用程序执行该工具。",
+        "清晰、描述详尽的工具可以显著提高可靠性。",
+        "它是智能体和 MCP 背后的核心机制。",
+        "工具访问在扩展能力的同时，也扩大了安全攻击面。"
+      ],
+      "context": [
+        "模型本身只能生成文本。工具使用打破了这一界限：在给定一组声明的工具后，模型可以选择调用其中一个（例如搜索、数据库查询或支付 API），然后对结果进行推理。",
+        "工具的描述方式与模型本身同样重要。为模型使用而编写的工具——清晰的名称、精确的参数、有用的描述和错误信息——是 Harness Engineering（智能体支撑系统工程）的核心关注点。"
+      ],
+      "architecture": [
+        "循环过程：应用程序声明工具（名称、描述、参数 Schema）；模型发出结构化的工具调用；应用程序对其进行验证和执行；结果作为观测值（observation）返回给模型；模型继续执行或做出回答。",
+        "MCP 标准化了跨应用程序公开和发现工具的方式，因此编写一次的工具可以被任何兼容的客户端复用。护栏（Guardrails）和权限封装了执行过程以确保其安全。"
+      ],
+      "components": [
+        "工具声明（Schema）",
+        "工具选择（模型）",
+        "参数生成",
+        "执行层",
+        "结果 / 观测值",
+        "护栏与权限"
+      ],
+      "pros": [
+        "使回答基于实时的真实数据。",
+        "允许模型采取实际行动，而不仅仅是描述它们。",
+        "无需重新训练即可扩展模型能力。",
+        "组合成完整的智能体工作流。"
+      ],
+      "risks": [
+        "提示词注入可能会触发非预期的工具调用。",
+        "错误的参数或工具误用会导致现实世界中的错误。",
+        "过宽的工具访问权限会扩大攻击面。",
+        "延迟和成本随着每次工具往返而增加。"
+      ],
+      "tools": [
+        "函数调用 API",
+        "Model Context Protocol (MCP)",
+        "LangGraph / 智能体 SDK",
+        "Schema 验证（例如 JSON Schema、Zod）"
+      ],
+      "examples": [
+        "模型调用天气 API 来回答天气预报问题。",
+        "智能体在采取行动前查询数据库以查找订单。",
+        "编码智能体调用测试运行器并读取结果。",
+        "实践案例：一个自主的 OpenClaw 智能体在 57 天内通过 10 个不同的工具发起了 800 次工具调用——包括 exec (481)、web_search (190)、write (48)、web_fetch (22)、read (21) 等——平均每个会话进行 5.97 次工具调用。这是一个单操作员、本地优先的部署，数据源自该智能体自身的追踪记录。"
+      ],
+      "faqs": [
+        {
+          "q": "工具使用和 MCP 是一回事吗？",
+          "a": "不是。工具使用是模型调用函数的能力。而 MCP 是一种标准，用于规范如何在跨应用程序中公开和发现这些工具和数据。"
+        },
+        {
+          "q": "如何让工具使用更可靠？",
+          "a": "为模型编写工具：清晰的名称、精确的参数 Schema、有用的描述和信息丰富的错误提示。验证参数并限制权限。"
+        },
+        {
+          "q": "安全风险有哪些？",
+          "a": "工具代表着真实的访问权限。提示词注入可能会尝试触发有害的调用，因此请应用最小特权原则、验证输入，并将工具输出视为不可信内容。"
+        },
+        {
+          "q": "工具使用能让模型成为智能体吗？",
+          "a": "它是关键的赋能因素。智能体将工具使用与控制循环、记忆和目标相结合，从而能够跨多个步骤采取行动。"
+        }
       ]
     }
   }

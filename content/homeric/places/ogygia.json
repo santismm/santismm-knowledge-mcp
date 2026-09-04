@@ -80,6 +80,22 @@
         "pt": {
           "label": "Gozo (tradição local)",
           "note": "A identificação mais conhecida e o tipo de prova mais fraco deste atlas: uma tradição transmitida localmente e repetida pelos guias, sem texto antigo por trás nem nada escavado que a sustente. É desenhada porque o atlas registra o que se afirma, com a confiança que a afirmação merece: 2 de 12."
+        },
+        "fr": {
+          "label": "Gozo (tradition locale)",
+          "note": "L'identification la plus connue et le type de preuve le plus faible de cet atlas : une tradition, transmise localement et répétée par les guides touristiques, sans aucun texte antique pour l'appuyer et sans aucune fouille pour la soutenir. Elle est tracée car l'atlas enregistre ce qui est affirmé, au niveau de confiance que l'affirmation mérite — 2 sur 12."
+        },
+        "zh": {
+          "label": "戈佐岛（当地传说）",
+          "note": "这是最著名的认定，也是本图册中证据力最弱的一种：一种在当地流传并被旅游指南反复提及的传说，背后既无古代文献支持，也无考古发掘证实。之所以将其标绘出来，是因为本图册记录了所有被提出的主张，并给予其相应的主张置信度——12分中的2分。"
+        },
+        "de": {
+          "label": "Gozo (lokale Tradition)",
+          "note": "Die bekannteste Identifizierung und die schwächste Art von Evidenz in diesem Atlas: eine lokal überlieferte und von Reiseführern wiederholte Tradition, hinter der kein antiker Text steht und die durch keinerlei Ausgrabungen gestützt wird. Sie wird kartiert, weil der Atlas erfasst, was behauptet wird, und zwar mit dem Konfidenzwert, den die Behauptung verdient – 2 von 12."
+        },
+        "ja": {
+          "label": "ゴゾ島（地元の伝承）",
+          "note": "最もよく知られた同定であり、この地図帳において最も弱い証拠である。地元で伝承され、ガイドブックで繰り返されている伝統であり、裏付けとなる古代の文献や発掘調査の成果はない。これがプロットされているのは、この地図帳が主張されている内容を、その主張が得た信頼度（12段階中2）で記録しているためである。"
         }
       }
     }
@@ -120,6 +136,50 @@
       ],
       "identificationNote": "Mítica: o poema a situa fora do mundo mapeável, e nenhuma tradição externa anula isso. A classe descreve a geografia do próprio poema; a hipótese de Gozo é registrada e desenhada à parte, com sua própria confiança de 2/12.",
       "debate": "A pergunta real sobre Ogígia não é onde ela está, mas que tipo de lugar é. As leituras que a mapeiam — atlântica, maltesa, adriática — exigem tratar uma ilha deliberadamente não localizada como se fosse mal especificada. Este atlas mantém as duas coisas separadas: o lugar permanece mítico, e as afirmações sobre ele são listadas com suas fontes."
+    },
+    "fr": {
+      "name": "Ogygie",
+      "summary": "L'île de Calypso, où Ulysse passe sept de ses dix années d'absence. L'Odyssée la situe délibérément nulle part — « le nombril de la mer » — ce qui est précisément la raison pour laquelle ses identifications sont si révélatrices.",
+      "description": [
+        "Ogygie est le cas le plus net dans les poèmes d'un lieu qui résiste par conception à toute cartographie. Athéna l'appelle le nombril de la mer ; elle est décrite comme boisée, parsemée de sources et lointaine, et aucun itinéraire pour s'y rendre n'est fourni — Ulysse y arrive agrippé à des débris et en repart sur un radeau qu'il construit lui-même, naviguant dix-sept jours vers Schérie avec la Grande Ourse sur sa gauche.",
+        "Seul ce dernier détail relève de la navigation, et il pointe globalement vers l'ouest ou le nord-ouest depuis l'emplacement de Schérie, quel qu'il soit. Tout le reste n'est qu'atmosphère.",
+        "L'Antiquité spéculait déjà : Plutarque, écrivant un essai sur le visage de la lune, situe une « Ogygie » à cinq jours de navigation à l'ouest de la Bretagne — un emprunt littéraire plutôt qu'une localisation. L'identification moderne avec Gozo provient de la tradition maltaise et ne repose sur aucune autorité antique."
+      ],
+      "identificationNote": "Mythique : le poème la situe en dehors du monde cartographiable, et aucune tradition externe ne prévaut sur cela. La catégorie décrit la géographie propre du poème ; l'hypothèse de Gozo est enregistrée et tracée séparément, avec son propre niveau de confiance de 2/12.",
+      "debate": "La véritable question concernant Ogygie n'est pas de savoir où elle se trouve, mais quel type de lieu elle est. Les lectures qui la cartographient — atlantique, maltaise, adriatique — exigent toutes de traiter une île délibérément non localisée comme une île sous-spécifiée. Cet atlas sépare les deux : le lieu reste mythique, les affirmations à son sujet sont répertoriées avec leurs sources."
+    },
+    "de": {
+      "name": "Ogygia",
+      "summary": "Kalypsos Insel, auf der Odysseus sieben seiner zehn Jahre in der Fremde verbringt. Die Odyssee verortet sie bewusst im Nirgendwo – als „Nabel des Meeres“ –, was genau der Grund ist, warum ihre Identifizierungen so aufschlussreich sind.",
+      "description": [
+        "Ogygia ist in den Epen der deutlichste Fall eines Ortes, der sich bewusst einer Kartierung entzieht. Athena nennt sie den Nabel des Meeres; sie wird als waldreich, quellenreich und abgelegen beschrieben, und es wird kein Weg dorthin angegeben – Odysseus kommt an, indem er sich an Wrackteile klammert, und reist auf einem selbstgebauten Floß ab, wobei er siebzehn Tage lang mit dem Großen Bären zu seiner Linken nach Scheria segelt.",
+        "Nur dieses letzte Detail ist navigatorischer Natur, und es weist grob nach Westen oder Nordwesten, von wo auch immer Scheria liegt. Alles andere ist Atmosphäre.",
+        "Bereits die Antike spekulierte: Plutarch verortet in einem Essay über das Gesicht im Mond ein „Ogygia“ fünf Segeltage westlich von Britannien – eher eine literarische Entlehnung als eine Lokalisierung. Die moderne Identifizierung mit Gozo stammt aus der maltesischen Tradition und entbehrt jeglicher antiken Autorität."
+      ],
+      "identificationNote": "Mythisch: Das Epos verortet die Insel außerhalb der kartierbaren Welt, und keine externe Tradition setzt dies außer Kraft. Die Klasse beschreibt die eigene Geographie des Epos; die Gozo-Hypothese wird separat erfasst und mit einem eigenen Konfidenzwert von 2/12 eingetragen.",
+      "debate": "Die eigentliche Frage zu Ogygia ist nicht, wo sie liegt, sondern was für ein Ort sie ist. Interpretationen, die sie kartieren – im Atlantik, bei Malta oder in der Adria –, erfordern alle, eine bewusst unlokalisierte Insel als eine unzureichend spezifizierte zu behandeln. Dieser Atlas hält beides auseinander: Der Ort bleibt mythisch, die Behauptungen darüber werden mit ihren Quellen aufgeführt."
+    },
+    "ja": {
+      "name": "オギュギア",
+      "summary": "オデュッセウスが10年の放浪のうち7年を過ごしたカリュプソの島。『オデュッセイア』は意図的にこの島をどこでもない場所（「海のへそ」）に配置しており、それこそがこの島の同定が極めて示唆に富む理由である。",
+      "description": [
+        "オギュギアは、詩の中で意図的にマッピングを拒む場所の最も明白な例である。アテナはそこを海のへそと呼び、木々が茂り、泉が湧き、人里離れた場所として描かれているが、そこへのルートは示されていない。オデュッセウスは難破船の残骸にしがみついて漂着し、自作のいかだで出発し、おおぐま座を左手に見ながらスケリアまで17日間航海する。",
+        "航海に関する情報は最後の一点のみであり、スケリアがどこにあろうとも、そこから大まかに西または北西を指している。それ以外はすべて雰囲気の描写にすぎない。",
+        "古代においてすでに推測がなされていた。プルタルコスは月面に関するエッセイの中で、ブリテン島から西へ5日間航海した場所に「オギュギア」を配置しているが、これは位置の特定というよりも文学的な借用である。ゴゾ島とする現代の同定はマルタの伝承に由来するものであり、古代の典拠はない。"
+      ],
+      "identificationNote": "神話：詩はこれをマッピング可能な世界の外部に配置しており、それを覆す外部の伝承は存在しない。この分類は詩自体の地理を表している。ゴゾ島説は、独自の信頼度2/12として別途記録され、プロットされている。",
+      "debate": "オギュギアに関する真の問いは、それがどこにあるかではなく、それがどのような場所であるかである。大西洋、マルタ、アドリア海など、この島をマッピングしようとする解釈はすべて、意図的に位置を特定されていない島を、単に詳細が不足している島として扱う必要がある。この地図帳ではこの2つを区別しており、場所は神話のままとし、それに関する主張は出典とともにリストアップしている。"
+    },
+    "zh": {
+      "name": "奥吉吉亚",
+      "summary": "卡吕普索的岛屿，奥德修斯在外流亡的十年中有七年在此度过。《奥德赛》刻意不将其置于任何具体位置——称其为“大海的肚脐”——这恰恰是为什么对该岛的认定如此耐人寻味。",
+      "description": [
+        "奥吉吉亚是诗歌中设计上最明显抗拒地图定位的地点。雅典娜称其为大海的肚脐；它被描述为树木茂密、泉水潺潺且地处偏远，书中没有给出任何通往该岛的路线——奥德修斯是抓着船只残骸漂流至此，离开时则是乘坐自己建造的木筏，在左侧大熊座的指引下航行了十七天到达斯克里亚。",
+        "只有这最后一个细节与航向有关，它大致指向斯克里亚以西或西北方向。其余的一切都只是氛围烘托。",
+        "古人对此早有推测：普鲁塔克在撰写关于月面的一篇随笔时，将一个“奥吉吉亚”置于不列颠以西五天航程的地方——这更像是一种文学借用，而非实际定位。现代将其认定为戈佐岛（Gozo）源于马耳他的民间传说，并无古代文献依据。"
+      ],
+      "identificationNote": "神话传说：诗歌将其置于可绘制地图的世界之外，且没有任何外部传说能推翻这一点。该类别描述了诗歌自身的地理设定；戈佐岛假说被单独记录和标绘，其置信度仅为 2/12。",
+      "debate": "关于奥吉吉亚的真正问题不在于它在哪里，而在于它是一个怎样的地方。将其绘制在地图上的解读——无论是大西洋、马耳他还是亚得里亚海——都必须将一个刻意不设具体位置的岛屿视为一个描述不详的岛屿。本图册将这两者区分开来：该地点保持其神话属性，而关于它的各种主张则与其来源一同列出。"
     }
   }
 }

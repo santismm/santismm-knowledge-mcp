@@ -4,15 +4,29 @@
   "updated": "2026-06-21",
   "version": "1.0",
   "featured": true,
-  "related": ["ai-agent", "agentic-ai", "enterprise-rag", "harness-engineering", "mcp-security"],
+  "related": [
+    "ai-agent",
+    "agentic-ai",
+    "enterprise-rag",
+    "harness-engineering",
+    "mcp-security"
+  ],
   "references": [
-    { "title": "Model Context Protocol — Official site & specification", "url": "https://modelcontextprotocol.io" },
-    { "title": "Anthropic — Introducing the Model Context Protocol (2024)", "url": "https://www.anthropic.com/news/model-context-protocol" }
+    {
+      "title": "Model Context Protocol — Official site & specification",
+      "url": "https://modelcontextprotocol.io"
+    },
+    {
+      "title": "Anthropic — Introducing the Model Context Protocol (2024)",
+      "url": "https://www.anthropic.com/news/model-context-protocol"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "high",
-    "sourceType": ["industry_observation"]
+    "sourceType": [
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {
@@ -34,7 +48,15 @@
         "MCP defines three roles: a host application, an MCP client inside it, and one or more MCP servers. The client connects to servers over a transport, and servers expose capabilities the model can use.",
         "Servers offer three primitives: tools (actions the model can invoke), resources (data the model can read), and prompts (reusable templates). The model, via the host, discovers and uses these in a standard way."
       ],
-      "components": ["Host application", "MCP client", "MCP server", "Tools", "Resources", "Prompts", "Transport"],
+      "components": [
+        "Host application",
+        "MCP client",
+        "MCP server",
+        "Tools",
+        "Resources",
+        "Prompts",
+        "Transport"
+      ],
       "pros": [
         "Eliminates bespoke N×M integrations.",
         "Connectors are reusable and shareable across clients.",
@@ -47,17 +69,34 @@
         "A young standard, still evolving.",
         "Operational overhead of running and securing servers."
       ],
-      "tools": ["MCP reference SDKs", "Claude Desktop / Code", "IDE MCP clients", "Community MCP server registries"],
+      "tools": [
+        "MCP reference SDKs",
+        "Claude Desktop / Code",
+        "IDE MCP clients",
+        "Community MCP server registries"
+      ],
       "examples": [
         "An MCP server exposing a company knowledge base as readable resources to an agent.",
         "A filesystem or database MCP server giving an agent scoped, permissioned access.",
         "A shared connector for a SaaS API reused across several internal agents."
       ],
       "faqs": [
-        { "q": "Who created MCP?", "a": "Anthropic introduced MCP as an open standard in late 2024, and it has since seen adoption across multiple vendors and tools." },
-        { "q": "Is MCP the same as function calling?", "a": "No. Function calling lets a model invoke tools; MCP standardizes how those tools, data and prompts are exposed and discovered across applications." },
-        { "q": "Why does MCP matter for the enterprise?", "a": "Integration is usually the bottleneck for agents. MCP turns one-off connectors into a reusable, governable ecosystem." },
-        { "q": "What are the security considerations?", "a": "Each server is an access point. Apply least-privilege permissions, vet servers, and treat their outputs as untrusted input subject to prompt-injection risk." }
+        {
+          "q": "Who created MCP?",
+          "a": "Anthropic introduced MCP as an open standard in late 2024, and it has since seen adoption across multiple vendors and tools."
+        },
+        {
+          "q": "Is MCP the same as function calling?",
+          "a": "No. Function calling lets a model invoke tools; MCP standardizes how those tools, data and prompts are exposed and discovered across applications."
+        },
+        {
+          "q": "Why does MCP matter for the enterprise?",
+          "a": "Integration is usually the bottleneck for agents. MCP turns one-off connectors into a reusable, governable ecosystem."
+        },
+        {
+          "q": "What are the security considerations?",
+          "a": "Each server is an access point. Apply least-privilege permissions, vet servers, and treat their outputs as untrusted input subject to prompt-injection risk."
+        }
       ]
     },
     "es": {
@@ -79,7 +118,15 @@
         "MCP define tres roles: una aplicación host, un cliente MCP dentro de ella y uno o varios servidores MCP. El cliente se conecta a los servidores por un transporte, y los servidores exponen capacidades que el modelo puede usar.",
         "Los servidores ofrecen tres primitivas: herramientas (acciones que el modelo puede invocar), recursos (datos que el modelo puede leer) y prompts (plantillas reutilizables). El modelo, vía el host, las descubre y usa de forma estándar."
       ],
-      "components": ["Aplicación host", "Cliente MCP", "Servidor MCP", "Herramientas", "Recursos", "Prompts", "Transporte"],
+      "components": [
+        "Aplicación host",
+        "Cliente MCP",
+        "Servidor MCP",
+        "Herramientas",
+        "Recursos",
+        "Prompts",
+        "Transporte"
+      ],
       "pros": [
         "Elimina las integraciones a medida N×M.",
         "Los conectores son reutilizables y compartibles entre clientes.",
@@ -92,17 +139,34 @@
         "Es un estándar joven, todavía en evolución.",
         "Coste operativo de ejecutar y asegurar servidores."
       ],
-      "tools": ["SDKs de referencia de MCP", "Claude Desktop / Code", "Clientes MCP en IDEs", "Registros comunitarios de servidores MCP"],
+      "tools": [
+        "SDKs de referencia de MCP",
+        "Claude Desktop / Code",
+        "Clientes MCP en IDEs",
+        "Registros comunitarios de servidores MCP"
+      ],
       "examples": [
         "Un servidor MCP que expone la base de conocimiento de la empresa como recursos legibles para un agente.",
         "Un servidor MCP de sistema de ficheros o base de datos que da a un agente acceso acotado y con permisos.",
         "Un conector compartido para una API SaaS reutilizado en varios agentes internos."
       ],
       "faqs": [
-        { "q": "¿Quién creó MCP?", "a": "Anthropic presentó MCP como estándar abierto a finales de 2024, y desde entonces ha tenido adopción en varios fabricantes y herramientas." },
-        { "q": "¿MCP es lo mismo que function calling?", "a": "No. El function calling permite a un modelo invocar herramientas; MCP estandariza cómo se exponen y descubren esas herramientas, datos y prompts entre aplicaciones." },
-        { "q": "¿Por qué importa MCP en la empresa?", "a": "La integración suele ser el cuello de botella de los agentes. MCP convierte los conectores de un solo uso en un ecosistema reutilizable y gobernable." },
-        { "q": "¿Qué consideraciones de seguridad tiene?", "a": "Cada servidor es un punto de acceso. Aplica permisos de mínimo privilegio, valida los servidores y trata sus salidas como entrada no confiable sujeta a inyección de prompts." }
+        {
+          "q": "¿Quién creó MCP?",
+          "a": "Anthropic presentó MCP como estándar abierto a finales de 2024, y desde entonces ha tenido adopción en varios fabricantes y herramientas."
+        },
+        {
+          "q": "¿MCP es lo mismo que function calling?",
+          "a": "No. El function calling permite a un modelo invocar herramientas; MCP estandariza cómo se exponen y descubren esas herramientas, datos y prompts entre aplicaciones."
+        },
+        {
+          "q": "¿Por qué importa MCP en la empresa?",
+          "a": "La integración suele ser el cuello de botella de los agentes. MCP convierte los conectores de un solo uso en un ecosistema reutilizable y gobernable."
+        },
+        {
+          "q": "¿Qué consideraciones de seguridad tiene?",
+          "a": "Cada servidor es un punto de acceso. Aplica permisos de mínimo privilegio, valida los servidores y trata sus salidas como entrada no confiable sujeta a inyección de prompts."
+        }
       ]
     },
     "pt": {
@@ -124,7 +188,15 @@
         "O MCP define três papéis: uma aplicação host, um cliente MCP dentro dela e um ou mais servidores MCP. O cliente se conecta aos servidores por um transporte, e os servidores expõem capacidades que o modelo pode usar.",
         "Os servidores oferecem três primitivas: ferramentas (ações que o modelo pode invocar), recursos (dados que o modelo pode ler) e prompts (modelos reutilizáveis). O modelo, via host, os descobre e usa de forma padronizada."
       ],
-      "components": ["Aplicação host", "Cliente MCP", "Servidor MCP", "Ferramentas", "Recursos", "Prompts", "Transporte"],
+      "components": [
+        "Aplicação host",
+        "Cliente MCP",
+        "Servidor MCP",
+        "Ferramentas",
+        "Recursos",
+        "Prompts",
+        "Transporte"
+      ],
       "pros": [
         "Elimina as integrações sob medida N×M.",
         "Os conectores são reutilizáveis e compartilháveis entre clientes.",
@@ -137,17 +209,314 @@
         "É um padrão jovem, ainda em evolução.",
         "Custo operacional de executar e proteger servidores."
       ],
-      "tools": ["SDKs de referência do MCP", "Claude Desktop / Code", "Clientes MCP em IDEs", "Registros comunitários de servidores MCP"],
+      "tools": [
+        "SDKs de referência do MCP",
+        "Claude Desktop / Code",
+        "Clientes MCP em IDEs",
+        "Registros comunitários de servidores MCP"
+      ],
       "examples": [
         "Um servidor MCP que expõe a base de conhecimento da empresa como recursos legíveis para um agente.",
         "Um servidor MCP de sistema de arquivos ou banco de dados que dá a um agente acesso restrito e com permissões.",
         "Um conector compartilhado para uma API SaaS reutilizado em vários agentes internos."
       ],
       "faqs": [
-        { "q": "Quem criou o MCP?", "a": "A Anthropic apresentou o MCP como padrão aberto no fim de 2024, e desde então teve adoção em vários fabricantes e ferramentas." },
-        { "q": "MCP é o mesmo que function calling?", "a": "Não. O function calling permite a um modelo invocar ferramentas; o MCP padroniza como essas ferramentas, dados e prompts são expostos e descobertos entre aplicações." },
-        { "q": "Por que o MCP importa na empresa?", "a": "A integração costuma ser o gargalo dos agentes. O MCP transforma os conectores de uso único num ecossistema reutilizável e governável." },
-        { "q": "Quais as considerações de segurança?", "a": "Cada servidor é um ponto de acesso. Aplique permissões de privilégio mínimo, valide os servidores e trate suas saídas como entrada não confiável sujeita a injeção de prompts." }
+        {
+          "q": "Quem criou o MCP?",
+          "a": "A Anthropic apresentou o MCP como padrão aberto no fim de 2024, e desde então teve adoção em vários fabricantes e ferramentas."
+        },
+        {
+          "q": "MCP é o mesmo que function calling?",
+          "a": "Não. O function calling permite a um modelo invocar ferramentas; o MCP padroniza como essas ferramentas, dados e prompts são expostos e descobertos entre aplicações."
+        },
+        {
+          "q": "Por que o MCP importa na empresa?",
+          "a": "A integração costuma ser o gargalo dos agentes. O MCP transforma os conectores de uso único num ecossistema reutilizável e governável."
+        },
+        {
+          "q": "Quais as considerações de segurança?",
+          "a": "Cada servidor é um ponto de acesso. Aplique permissões de privilégio mínimo, valide os servidores e trate suas saídas como entrada não confiável sujeita a injeção de prompts."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que le Model Context Protocol (MCP) ?",
+      "summary": "Le Model Context Protocol (MCP) est un standard ouvert permettant de connecter des modèles et agents d'IA à des outils, sources de données et systèmes externes via une interface unique et uniforme. Introduit par Anthropic fin 2024, il normalise la manière dont une application expose son contexte et ses capacités à un modèle — agissant comme un adaptateur universel pour que tout client conforme puisse communiquer avec tout serveur conforme.",
+      "definition": "Le MCP est un protocole ouvert qui normalise la manière dont les applications d'IA fournissent des outils, des ressources et du contexte aux modèles via une interface client-serveur commune.",
+      "takeaways": [
+        "Le MCP normalise les connexions entre modèles et outils/données, à l'image d'un adaptateur universel.",
+        "Il utilise un modèle client-serveur : les hôtes exécutent les clients ; les intégrations sont des serveurs.",
+        "Les serveurs exposent des outils, des ressources et des prompts sous une forme uniforme.",
+        "Il réduit les intégrations personnalisées N×M à des connecteurs réutilisables et partageables.",
+        "Il est ouvert et neutre vis-à-vis des fournisseurs, avec une adoption multi-fournisseur croissante."
+      ],
+      "context": [
+        "Avant le MCP, chaque intégration d'un agent à un système était sur mesure : chaque outil était relié manuellement à chaque application. Le MCP remplace cela par un protocole partagé, de sorte qu'un connecteur écrit une seule fois peut être réutilisé sur n'importe quel client compatible MCP.",
+        "Cela est crucial pour les entreprises car l'intégration — et non la qualité du modèle — est souvent le véritable goulot d'étranglement lors du déploiement d'agents. Un protocole commun transforme les connecteurs en un écosystème réutilisable plutôt qu'en un code de liaison unique."
+      ],
+      "architecture": [
+        "Le MCP définit trois rôles : une application hôte, un client MCP intégré et un ou plusieurs serveurs MCP. Le client se connecte aux serveurs via un transport, et les serveurs exposent des capacités que le modèle peut utiliser.",
+        "Les serveurs proposent trois primitives : les outils (actions que le modèle peut invoquer), les ressources (données que le modèle peut lire) et les prompts (modèles réutilisables). Le modèle, via l'hôte, les découvre et les utilise de manière standardisée."
+      ],
+      "components": [
+        "Application hôte",
+        "Client MCP",
+        "Serveur MCP",
+        "Outils",
+        "Ressources",
+        "Prompts",
+        "Transport"
+      ],
+      "pros": [
+        "Élimine les intégrations sur mesure N×M.",
+        "Les connecteurs sont réutilisables et partageables entre les clients.",
+        "Ouvert et neutre vis-à-vis des fournisseurs.",
+        "Séparation plus nette entre la logique de l'agent et les intégrations."
+      ],
+      "risks": [
+        "L'accès au serveur élargit la surface d'attaque ; les autorisations sont cruciales.",
+        "Les serveurs non approuvés peuvent tenter des injections de prompt ou des exfiltrations de données.",
+        "Un standard récent, encore en évolution.",
+        "Surcharge opérationnelle liée à l'exécution et à la sécurisation des serveurs."
+      ],
+      "tools": [
+        "SDK de référence MCP",
+        "Claude Desktop / Code",
+        "Clients MCP pour IDE",
+        "Registres de serveurs MCP de la communauté"
+      ],
+      "examples": [
+        "Un serveur MCP exposant une base de connaissances d'entreprise sous forme de ressources lisibles pour un agent.",
+        "Un serveur MCP de système de fichiers ou de base de données offrant à un agent un accès restreint et autorisé.",
+        "Un connecteur partagé pour une API SaaS, réutilisé par plusieurs agents internes."
+      ],
+      "faqs": [
+        {
+          "q": "Qui a créé MCP ?",
+          "a": "Anthropic a introduit MCP en tant que standard ouvert fin 2024, et il a depuis été adopté par de multiples fournisseurs et outils."
+        },
+        {
+          "q": "MCP est-il identique à l'appel de fonctions (function calling) ?",
+          "a": "Non. L'appel de fonctions permet à un modèle d'invoquer des outils ; MCP standardise la manière dont ces outils, données et prompts sont exposés et découverts à travers les applications."
+        },
+        {
+          "q": "Pourquoi MCP est-il important pour l'entreprise ?",
+          "a": "L'intégration est généralement le goulot d'étranglement pour les agents. MCP transforme les connecteurs uniques en un écosystème réutilisable et gouvernable."
+        },
+        {
+          "q": "Quelles sont les considérations de sécurité ?",
+          "a": "Chaque serveur est un point d'accès. Appliquez des autorisations de moindre privilège, évaluez les serveurs et traitez leurs sorties comme des entrées non fiables sujettes aux risques d'injection de prompt."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist das Model Context Protocol (MCP)?",
+      "summary": "Das Model Context Protocol (MCP) ist ein offener Standard zur Verbindung von KI-Modellen und -Agenten mit externen Tools, Datenquellen und Systemen über eine einzige, einheitliche Schnittstelle. Es wurde Ende 2024 von Anthropic eingeführt und standardisiert, wie eine Anwendung Kontext und Funktionen für ein Modell bereitstellt – ähnlich wie ein Universaladapter, sodass jeder konforme Client mit jedem konformen Server kommunizieren kann.",
+      "definition": "MCP ist ein offenes Protokoll, das standardisiert, wie KI-Anwendungen Tools, Ressourcen und Kontext für Modelle über eine gemeinsame Client-Server-Schnittstelle bereitstellen.",
+      "takeaways": [
+        "MCP standardisiert Verbindungen von Modellen zu Tools/Daten, ähnlich wie ein Universaladapter.",
+        "Es nutzt ein Client-Server-Modell: Hosts führen Clients aus; Integrationen sind Server.",
+        "Server stellen Tools, Ressourcen und Prompts in einer einheitlichen Struktur bereit.",
+        "Es reduziert N×M benutzerdefinierte Integrationen auf wiederverwendbare, teilbare Connectors.",
+        "Es ist offen und herstellerneutral, mit einer wachsenden Akzeptanz durch verschiedene Anbieter."
+      ],
+      "context": [
+        "Vor MCP war jede Integration von Agenten in Systeme maßgeschneidert: Jedes Tool wurde manuell mit jeder Anwendung verknüpft. MCP ersetzt dies durch ein gemeinsames Protokoll, sodass ein einmal geschriebener Connector in jedem MCP-fähigen Client wiederverwendet werden kann.",
+        "Dies ist für Unternehmen von Bedeutung, da die Integration – und nicht die Modellqualität – oft der eigentliche Flaschenhals bei der Bereitstellung von Agenten ist. Ein gemeinsames Protokoll macht Connectors zu einem wiederverwendbaren Ökosystem statt zu einmaligem Glue-Code."
+      ],
+      "architecture": [
+        "MCP definiert drei Rollen: eine Host-Anwendung, einen darin befindlichen MCP-Client und einen oder mehrere MCP-Server. Der Client verbindet sich über einen Transportweg mit den Servern, und die Server stellen Funktionen bereit, die das Modell nutzen kann.",
+        "Server bieten drei Primitive: Tools (Aktionen, die das Modell aufrufen kann), Ressourcen (Daten, die das Modell lesen kann) und Prompts (wiederverwendbare Vorlagen). Das Modell erkennt und nutzt diese über den Host auf standardisierte Weise."
+      ],
+      "components": [
+        "Host-Anwendung",
+        "MCP-Client",
+        "MCP-Server",
+        "Tools",
+        "Ressourcen",
+        "Prompts",
+        "Transport"
+      ],
+      "pros": [
+        "Eliminiert maßgeschneiderte N×M-Integrationen.",
+        "Connectors sind wiederverwendbar und über verschiedene Clients hinweg teilbar.",
+        "Offen und herstellerneutral.",
+        "Sauberere Trennung zwischen Agenten-Logik und Integrationen."
+      ],
+      "risks": [
+        "Serverzugriff vergrößert die Angriffsfläche; Berechtigungen sind entscheidend.",
+        "Nicht vertrauenswürdige Server können versuchen, Prompt-Injections oder Datenabfluss durchzuführen.",
+        "Ein junger Standard, der sich noch in der Entwicklung befindet.",
+        "Betrieblicher Aufwand für den Betrieb und die Absicherung von Servern."
+      ],
+      "tools": [
+        "MCP-Referenz-SDKs",
+        "Claude Desktop / Code",
+        "IDE-MCP-Clients",
+        "Community-MCP-Server-Registries"
+      ],
+      "examples": [
+        "Ein MCP-Server, der einem Agenten eine Unternehmens-Wissensdatenbank als lesbare Ressourcen bereitstellt.",
+        "Ein Dateisystem- oder Datenbank-MCP-Server, der einem Agenten einen eingegrenzten, autorisierten Zugriff gewährt.",
+        "Ein gemeinsam genutzter Connector für eine SaaS-API, der für mehrere interne Agenten wiederverwendet wird."
+      ],
+      "faqs": [
+        {
+          "q": "Wer hat MCP entwickelt?",
+          "a": "Anthropic hat MCP Ende 2024 als offenen Standard eingeführt, und er wurde seitdem von zahlreichen Anbietern und Tools übernommen."
+        },
+        {
+          "q": "Ist MCP dasselbe wie Function Calling?",
+          "a": "Nein. Function Calling ermöglicht es einem Modell, Tools aufzurufen; MCP standardisiert, wie diese Tools, Daten und Prompts anwendungsübergreifend bereitgestellt und erkannt werden."
+        },
+        {
+          "q": "Warum ist MCP für Unternehmen wichtig?",
+          "a": "Die Integration ist meist der Flaschenhals für Agenten. MCP verwandelt einmalige Connectoren in ein wiederverwendbares, steuerbares Ökosystem."
+        },
+        {
+          "q": "Welche Sicherheitsaspekte müssen berücksichtigt werden?",
+          "a": "Jeder Server ist ein Zugriffspunkt. Wenden Sie das Prinzip der minimalen Rechtevergabe (Least Privilege) an, überprüfen Sie Server und behandeln Sie deren Ausgaben als nicht vertrauenswürdige Eingaben, bei denen das Risiko von Prompt-Injections besteht."
+        }
+      ]
+    },
+    "ja": {
+      "title": "Model Context Protocol (MCP) とは何ですか？",
+      "summary": "Model Context Protocol (MCP) は、AIモデルやエージェントを、単一の統一されたインターフェースを介して外部のツール、データソース、システムに接続するためのオープン標準です。2024年後半にAnthropicによって導入され、アプリケーションがコンテキストや機能をモデルに公開する方法を標準化します。ユニバーサルアダプターのように機能し、準拠している任意のクライアントが、準拠している任意のサーバーと通信できるようにします。",
+      "definition": "MCPは、AIアプリケーションが共通のクライアント・サーバーインターフェースを介して、ツール、リソース、コンテキストをモデルに提供する方法を標準化するオープンプロトコルです。",
+      "takeaways": [
+        "MCPは、ユニバーサルアダプターのように、モデルからツールやデータへの接続を標準化します。",
+        "クライアント・サーバーモデルを使用します。ホストがクライアントを実行し、統合機能がサーバーとなります。",
+        "サーバーは、ツール、リソース、プロンプトを統一された形式で公開します。",
+        "N×M個のカスタム統合を、再利用可能で共有可能なコネクタに削減します。",
+        "オープンかつベンダーニュートラルであり、マルチベンダーによる採用が広がっています。"
+      ],
+      "context": [
+        "MCPが登場する前は、エージェントとシステムの統合はすべて個別対応（ビスポーク）であり、各ツールが各アプリケーションに手動で接続されていました。MCPはこれを共通プロトコルに置き換えるため、一度作成したコネクタを、MCPに対応した任意のクライアントで再利用できます。",
+        "これは企業にとって重要です。なぜなら、エージェントを本番環境に導入する際の真のボトルネックは、モデルの品質ではなく、統合であることが多いためです。共通プロトコルにより、コネクタは使い捨ての接着コードではなく、再利用可能なエコシステムへと変化します。"
+      ],
+      "architecture": [
+        "MCPは、ホストアプリケーション、その内部のMCPクライアント、および1つ以上のMCPサーバーという3つの役割を定義します。クライアントはトランスポートを介してサーバーに接続し、サーバーはモデルが使用できる機能を公開します。",
+        "サーバーは、ツール（モデルが呼び出せるアクション）、リソース（モデルが読み取れるデータ）、プロンプト（再利用可能なテンプレート）という3つのプリミティブを提供します。モデルはホストを介して、これらを標準的な方法で検出して使用します。"
+      ],
+      "components": [
+        "ホストアプリケーション",
+        "MCPクライアント",
+        "MCPサーバー",
+        "ツール",
+        "リソース",
+        "プロンプト",
+        "トランスポート"
+      ],
+      "pros": [
+        "個別対応のN×M個の統合を排除します。",
+        "コネクタはクライアント間で再利用および共有可能です。",
+        "オープンかつベンダーニュートラルです。",
+        "エージェントロジックと統合機能のより明確な分離を実現します。"
+      ],
+      "risks": [
+        "サーバーへのアクセスにより攻撃対象領域が拡大するため、権限管理が重要になります。",
+        "信頼できないサーバーが、プロンプトインジェクションやデータの持ち出しを試みる可能性があります。",
+        "まだ発展途上の新しい標準規格です。",
+        "サーバーの実行とセキュリティ確保に伴う運用オーバーヘッド。"
+      ],
+      "tools": [
+        "MCPリファレンスSDK",
+        "Claude Desktop / Code",
+        "IDE MCPクライアント",
+        "コミュニティMCPサーバーレジストリ"
+      ],
+      "examples": [
+        "企業のナレッジベースを読み取り可能なリソースとしてエージェントに公開するMCPサーバー。",
+        "エージェントに対してスコープ制限および権限管理されたアクセスを提供する、ファイルシステムまたはデータベースのMCPサーバー。",
+        "複数の社内エージェント間で再利用される、SaaS API用の共有コネクター。"
+      ],
+      "faqs": [
+        {
+          "q": "MCPは誰が作成したのですか？",
+          "a": "Anthropicが2024年後半にオープン標準としてMCPを導入し、それ以来、複数のベンダーやツールで採用が進んでいます。"
+        },
+        {
+          "q": "MCPはファンクションコーリング（Function Calling）と同じですか？",
+          "a": "いいえ。ファンクションコーリングはモデルがツールを呼び出せるようにするものです。一方、MCPは、それらのツール、データ、プロンプトをアプリケーション間で公開および検出する方法を標準化します。"
+        },
+        {
+          "q": "なぜエンタープライズにとってMCPが重要なのですか？",
+          "a": "通常、統合（インテグレーション）がエージェントのボトルネックになります。MCPは、使い捨てのコネクターを、再利用可能でガバナンスの効いたエコシステムへと変換します。"
+        },
+        {
+          "q": "セキュリティ上の考慮事項は何ですか？",
+          "a": "各サーバーはアクセスポイントとなります。最小権限の原則を適用し、サーバーを審査し、その出力をプロンプトインジェクションのリスクがある信頼できない入力として扱ってください。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是模型上下文协议（MCP）？",
+      "summary": "模型上下文协议（MCP）是一个开放标准，用于通过单一、统一的接口将 AI 模型和智能体连接到外部工具、数据源和系统。它由 Anthropic 于 2024 年底推出，规范了应用程序向模型暴露上下文和能力的方式——其作用类似于通用适配器，使任何合规的客户端都能与任何合规的服务器进行通信。",
+      "definition": "MCP 是一种开放协议，它规范了 AI 应用程序如何通过通用的客户端-服务器接口向模型提供工具、资源和上下文。",
+      "takeaways": [
+        "MCP 规范了模型与工具/数据的连接，类似于通用适配器。",
+        "它采用客户端-服务器模型：宿主应用运行客户端；集成充当服务器。",
+        "服务器以统一的形式暴露工具、资源和提示词。",
+        "它将 N×M 个自定义集成减少为可重用、可共享的连接器。",
+        "它是开放且厂商中立的，并获得了越来越多厂商的采用。"
+      ],
+      "context": [
+        "在 MCP 出现之前，每个智能体到系统的集成都是定制的：每个工具都需要手动连接到每个应用程序。MCP 用共享协议取代了这种方式，因此编写一次连接器就可以在任何支持 MCP 的客户端中重用。",
+        "这对企业至关重要，因为集成（而非模型质量）往往是交付智能体的真正瓶颈。通用协议将连接器转变为可重用的生态系统，而不是一次性的胶水代码。"
+      ],
+      "architecture": [
+        "MCP 定义了三种角色：宿主应用程序、其内部的 MCP 客户端以及一个或多个 MCP 服务器。客户端通过传输层连接到服务器，服务器则暴露模型可以使用的能力。",
+        "服务器提供三种基元：工具（模型可以调用的操作）、资源（模型可以读取的数据）和提示词（可重用的模板）。模型通过宿主以标准方式发现并使用这些基元。"
+      ],
+      "components": [
+        "宿主应用程序",
+        "MCP 客户端",
+        "MCP 服务器",
+        "工具",
+        "资源",
+        "提示词",
+        "传输层"
+      ],
+      "pros": [
+        "消除了定制的 N×M 个集成。",
+        "连接器可在不同客户端之间重用和共享。",
+        "开放且厂商中立。",
+        "智能体逻辑与集成之间更清晰的分离。"
+      ],
+      "risks": [
+        "服务器访问扩大了攻击面；权限至关重要。",
+        "不可信的服务器可能会尝试提示词注入或数据外泄。",
+        "一个年轻的标准，仍在不断演进。",
+        "运行和保障服务器安全带来的运维开销。"
+      ],
+      "tools": [
+        "MCP 参考 SDK",
+        "Claude Desktop / Code",
+        "IDE MCP 客户端",
+        "社区 MCP 服务器注册表"
+      ],
+      "examples": [
+        "将公司知识库作为可读资源暴露给智能体的 MCP 服务器。",
+        "为智能体提供限定范围和权限访问的文件系统或数据库 MCP 服务器。",
+        "在多个内部智能体之间复用的 SaaS API 共享连接器。"
+      ],
+      "faqs": [
+        {
+          "q": "谁创建了 MCP？",
+          "a": "Anthropic 于 2024 年底将 MCP 作为开放标准推出，此后已被多个厂商和工具采用。"
+        },
+        {
+          "q": "MCP 与函数调用（function calling）是一回事吗？",
+          "a": "不是。函数调用允许模型调用工具；而 MCP 则规范了这些工具、数据和提示词在不同应用程序之间的暴露和发现方式。"
+        },
+        {
+          "q": "为什么 MCP 对企业至关重要？",
+          "a": "集成通常是智能体的瓶颈。MCP 将一次性连接器转变为可复用、可治理的生态系统。"
+        },
+        {
+          "q": "有哪些安全方面的考量？",
+          "a": "每个服务器都是一个访问点。应应用最小权限原则、审查服务器，并将其输出视为存在提示词注入风险的不可信输入。"
+        }
       ]
     }
   }

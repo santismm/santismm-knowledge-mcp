@@ -72,6 +72,46 @@
       ],
       "identificationNote": "Mítica e sem localização: nenhuma hipótese é registrada, porque o próprio poema as apresenta como o caminho não tomado e toda identificação posterior vem do ciclo argonáutico, não deste texto.",
       "debate": "Se as Plânctas são um dublê de Cila e Caribdes, um empréstimo de um poema argonáutico mais antigo ou a lembrança de um perigo real hoje irreconhecível. O atlas não toma posição e não desenha nada."
+    },
+    "fr": {
+      "name": "Les Roches Errantes",
+      "summary": "La route que Circé conseille à Ulysse de ne pas prendre. Elles sont décrites, nommées, puis évitées — le seul lieu du poème qui existe purement comme une alternative.",
+      "description": [
+        "Circé propose un choix : les Roches Errantes, que seul l'Argo a jamais franchies, ou le détroit de Scylla et Charybde. Elle recommande le détroit. Les Roches sont donc décrites en détail et ne sont jamais visitées.",
+        "Parce que l'Argo les a franchies, elles appartiennent à une autre histoire — la tradition des Argonautes, que des auteurs plus tardifs comme Apollonios ont située dans l'Adriatique ou dans l'extrême Occident. L'Odyssée les emprunte comme un marqueur des limites de son propre monde."
+      ],
+      "identificationNote": "Mythique et non localisé : aucune hypothèse n'est enregistrée, car le poème lui-même les présente comme la route non empruntée, et toutes les identifications ultérieures proviennent du cycle des Argonautes plutôt que de ce texte.",
+      "debate": "Savoir si les Planctes sont un doublon de Charybde et Scylla, un emprunt à un poème argonautique plus ancien, ou le souvenir d'un danger réel aujourd'hui méconnaissable. L'atlas ne prend pas position et ne trace rien."
+    },
+    "de": {
+      "name": "Die Irrfelsen",
+      "summary": "Die Route, von der Kirke Odysseus rät, sie nicht zu nehmen. Sie werden beschrieben, benannt und dann gemieden – der einzige Ort im Epos, der rein als Alternative existiert.",
+      "description": [
+        "Kirke stellt ihn vor die Wahl: die Irrfelsen, an denen außer der Argo noch nie ein Schiff vorbeigekommen ist, oder die Meerenge von Skylla und Charybdis. Sie empfiehlt die Meerenge. Die Felsen werden daher ausführlich beschrieben und nie besucht.",
+        "Da die Argo sie passierte, gehören sie zu einer anderen Geschichte – der Argonautentradition, die spätere Autoren wie Apollonios in der Adria oder im fernen Westen verorteten. Die Odyssee leiht sie sich als Grenzmarkierung ihrer eigenen Welt aus."
+      ],
+      "identificationNote": "Mythisch und unlokalisiert: Es ist keine Hypothese erfasst, da das Epos selbst sie als den nicht eingeschlagenen Weg darstellt und jede spätere Identifizierung eher aus dem Argonautenzyklus als aus diesem Text stammt.",
+      "debate": "Ob die Plankten ein Doublette von Skylla und Charybdis sind, eine Entlehnung aus einem älteren Argonauten-Epos oder die Erinnerung an eine reale, heute nicht mehr erkennbare Gefahr. Der Atlas bezieht keine Stellung und kartiert nichts."
+    },
+    "ja": {
+      "name": "さまよう岩々",
+      "summary": "キルケがオデュッセウスに進まないよう告げたルート。それらは描写され、命名され、そして回避される。詩の中で純粋に代替案としてのみ存在する唯一の場所である。",
+      "description": [
+        "キルケは選択肢を提示する。アルゴー船以外に通り抜けた船がない「さまよう岩々」か、スキュラとカリュブディスの海峡か。彼女は海峡を勧める。そのため、岩々は詳細に描写されるものの、決して訪れられることはない。",
+        "アルゴー船がそこを通過したため、それらは別の物語、すなわちアポロニオスなどの後世の作家がアドリア海や極西に位置づけたアルゴナウタイの伝承に属している。『オデュッセイア』は、自らの世界の境界標としてこれらを借用している。"
+      ],
+      "identificationNote": "神話かつ位置特定不能：詩自体がこれらを選ばれなかった道として提示しており、後世の同定はすべてこのテキストではなくアルゴナウタイのサイクルに由来するため、仮説は記録されていない。",
+      "debate": "プランクタイ（さまよう岩々）がスキュラとカリュブディスの二重写しなのか、より古いアルゴナウタイの詩からの借用なのか、あるいは現在は認識できない実在の危険の記憶なのかという点。この地図帳は立場をとらず、何もプロットしない。"
+    },
+    "zh": {
+      "name": "游岩",
+      "summary": "喀耳刻告诫奥德修斯不要选择的路线。它们在诗中被描述、被命名，然后被避开——这是诗中唯一一个纯粹作为替代方案而存在的地点。",
+      "description": [
+        "喀耳刻提供了一个选择：除了“阿尔戈号”之外没有任何船只通过的游岩，或者是斯库拉和卡律布狄斯的海峡。她推荐走海峡。因此，游岩虽被详细描述，却从未被造访。",
+        "因为“阿尔戈号”曾通过它们，所以它们属于另一个故事——阿尔戈英雄的传说，后来的作家（如阿波罗尼奥斯）将其置于亚得里亚海或极西之地。《奥德赛》借用它们作为自身世界的边界标记。"
+      ],
+      "identificationNote": "神话且未定位：未记录任何假说，因为诗歌本身将其呈现为未选择的道路，且后来的所有认定都源自阿尔戈英雄故事群，而非本篇文献。",
+      "debate": "游岩究竟是斯库拉和卡律布狄斯的变体、对更古老的阿尔戈英雄诗歌的借用，还是对如今已无法辨认的真实险境的记忆。本图册不持立场，亦不作标绘。"
     }
   }
 }

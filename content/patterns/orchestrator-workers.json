@@ -1,19 +1,37 @@
 {
   "slug": "orchestrator-workers",
-  "aliases": ["PAT-005"],
+  "aliases": [
+    "PAT-005"
+  ],
   "category": "orchestration",
   "updated": "2026-06-24",
   "version": "1.1",
   "featured": true,
-  "technologies": ["LangGraph", "CrewAI", "OpenAI Agents SDK", "Model Context Protocol (MCP)"],
-  "related": ["routing", "parallelization", "evaluator-optimizer"],
+  "technologies": [
+    "LangGraph",
+    "CrewAI",
+    "OpenAI Agents SDK",
+    "Model Context Protocol (MCP)"
+  ],
+  "related": [
+    "routing",
+    "parallelization",
+    "evaluator-optimizer"
+  ],
   "references": [
-    { "title": "Anthropic — Building Effective Agents (2024)", "url": "https://www.anthropic.com/research/building-effective-agents" }
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    }
   ],
   "evidence": {
     "evidenceLevel": "production",
     "confidenceLevel": "low",
-    "sourceType": ["production_system", "personal_experience", "industry_observation"]
+    "sourceType": [
+      "production_system",
+      "personal_experience",
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {
@@ -25,7 +43,13 @@
         "A lead (orchestrator) model analyzes the task, decides which subtasks are needed, and delegates each to a worker model (often specialized). It then collects and synthesizes the workers' outputs into a final result.",
         "It is the agentic generalization of parallelization: the decomposition is decided at runtime rather than hard-coded, which adds flexibility at the cost of more coordination and unpredictability."
       ],
-      "components": ["Orchestrator (lead) model", "Worker models", "Delegation logic", "Synthesizer", "Shared state / tools"],
+      "components": [
+        "Orchestrator (lead) model",
+        "Worker models",
+        "Delegation logic",
+        "Synthesizer",
+        "Shared state / tools"
+      ],
       "benefits": [
         "Handles complex tasks with dynamic decomposition.",
         "Workers can be specialized per subtask.",
@@ -54,10 +78,22 @@
         "results": "57 isolated worker sessions ran without cross-session interference; forked-session isolation was the dominant worker pattern, while the explicit spawn tool stayed unused in this window. Single-operator local-first deployment."
       },
       "kpis": [
-        { "metric": "End-to-end task completion rate", "note": "Share of orchestrated jobs that finish correctly across all sub-tasks; the orchestrator owns the whole outcome." },
-        { "metric": "Worker fan-out & cost", "note": "Number of worker calls per job and their combined token cost; orchestration can explode spend if decomposition is sloppy." },
-        { "metric": "Critical-path latency", "note": "Wall-clock of the longest dependent chain, not the sum of workers — this bounds responsiveness." },
-        { "metric": "Sub-task error rate", "note": "How often individual workers fail or return unusable results, driving retries and recovery." }
+        {
+          "metric": "End-to-end task completion rate",
+          "note": "Share of orchestrated jobs that finish correctly across all sub-tasks; the orchestrator owns the whole outcome."
+        },
+        {
+          "metric": "Worker fan-out & cost",
+          "note": "Number of worker calls per job and their combined token cost; orchestration can explode spend if decomposition is sloppy."
+        },
+        {
+          "metric": "Critical-path latency",
+          "note": "Wall-clock of the longest dependent chain, not the sum of workers — this bounds responsiveness."
+        },
+        {
+          "metric": "Sub-task error rate",
+          "note": "How often individual workers fail or return unusable results, driving retries and recovery."
+        }
       ],
       "failureModes": [
         "Bad decomposition: the orchestrator splits the task wrongly, so correct workers still produce a wrong whole.",
@@ -72,9 +108,18 @@
         "Make the orchestrator's plan inspectable so failures can be traced to a specific sub-task."
       ],
       "faqs": [
-        { "q": "How is this different from parallelization?", "a": "Parallelization uses a fixed, predefined split. Orchestrator-workers decides the subtasks dynamically at runtime, so it handles tasks whose shape varies by input." },
-        { "q": "Is this a multi-agent system?", "a": "Yes — it is a common multi-agent pattern. Use it only when a task genuinely benefits from dynamic, separable subtasks." },
-        { "q": "How do I keep it from running away?", "a": "Set budgets, step limits and stop conditions, and add observability so you can see and bound the orchestrator's planning." }
+        {
+          "q": "How is this different from parallelization?",
+          "a": "Parallelization uses a fixed, predefined split. Orchestrator-workers decides the subtasks dynamically at runtime, so it handles tasks whose shape varies by input."
+        },
+        {
+          "q": "Is this a multi-agent system?",
+          "a": "Yes — it is a common multi-agent pattern. Use it only when a task genuinely benefits from dynamic, separable subtasks."
+        },
+        {
+          "q": "How do I keep it from running away?",
+          "a": "Set budgets, step limits and stop conditions, and add observability so you can see and bound the orchestrator's planning."
+        }
       ]
     },
     "es": {
@@ -86,7 +131,13 @@
         "Un modelo líder (orquestador) analiza la tarea, decide qué subtareas hacen falta y delega cada una a un modelo trabajador (a menudo especializado). Luego recoge y sintetiza las salidas de los trabajadores en un resultado final.",
         "Es la generalización agéntica de la paralelización: la descomposición se decide en tiempo de ejecución en vez de estar fijada, lo que añade flexibilidad a costa de más coordinación e imprevisibilidad."
       ],
-      "components": ["Modelo orquestador (líder)", "Modelos trabajadores", "Lógica de delegación", "Sintetizador", "Estado / herramientas compartidos"],
+      "components": [
+        "Modelo orquestador (líder)",
+        "Modelos trabajadores",
+        "Lógica de delegación",
+        "Sintetizador",
+        "Estado / herramientas compartidos"
+      ],
       "benefits": [
         "Maneja tareas complejas con descomposición dinámica.",
         "Los trabajadores pueden especializarse por subtarea.",
@@ -115,10 +166,22 @@
         "results": "57 sesiones worker aisladas corrieron sin interferencia entre sesiones; el aislamiento por sesión bifurcada fue el patrón worker dominante, mientras la herramienta de spawn explícito quedó sin uso en esta ventana. Despliegue local-first mono-operador."
       },
       "kpis": [
-        { "metric": "Tasa de finalización de extremo a extremo", "note": "Proporción de trabajos orquestados que terminan correctamente en todas las subtareas; el orquestador es dueño del resultado completo." },
-        { "metric": "Fan-out de workers y coste", "note": "Número de llamadas a workers por trabajo y su coste combinado en tokens; la orquestación puede disparar el gasto si la descomposición es descuidada." },
-        { "metric": "Latencia de ruta crítica", "note": "Tiempo de la cadena dependiente más larga, no la suma de workers; esto acota la capacidad de respuesta." },
-        { "metric": "Tasa de error de subtareas", "note": "Con qué frecuencia los workers individuales fallan o devuelven resultados inservibles, provocando reintentos y recuperación." }
+        {
+          "metric": "Tasa de finalización de extremo a extremo",
+          "note": "Proporción de trabajos orquestados que terminan correctamente en todas las subtareas; el orquestador es dueño del resultado completo."
+        },
+        {
+          "metric": "Fan-out de workers y coste",
+          "note": "Número de llamadas a workers por trabajo y su coste combinado en tokens; la orquestación puede disparar el gasto si la descomposición es descuidada."
+        },
+        {
+          "metric": "Latencia de ruta crítica",
+          "note": "Tiempo de la cadena dependiente más larga, no la suma de workers; esto acota la capacidad de respuesta."
+        },
+        {
+          "metric": "Tasa de error de subtareas",
+          "note": "Con qué frecuencia los workers individuales fallan o devuelven resultados inservibles, provocando reintentos y recuperación."
+        }
       ],
       "failureModes": [
         "Mala descomposición: el orquestador divide mal la tarea, así que workers correctos producen un todo incorrecto.",
@@ -133,9 +196,18 @@
         "Haz inspeccionable el plan del orquestador para rastrear fallos hasta una subtarea concreta."
       ],
       "faqs": [
-        { "q": "¿En qué se diferencia de la paralelización?", "a": "La paralelización usa una división fija predefinida. Orquestador-trabajadores decide las subtareas dinámicamente en ejecución, así maneja tareas cuya forma varía según la entrada." },
-        { "q": "¿Es un sistema multiagente?", "a": "Sí, es un patrón multiagente común. Úsalo solo cuando una tarea se beneficie realmente de subtareas dinámicas y separables." },
-        { "q": "¿Cómo evito que se descontrole?", "a": "Fija presupuestos, límites de pasos y condiciones de parada, y añade observabilidad para ver y acotar la planificación del orquestador." }
+        {
+          "q": "¿En qué se diferencia de la paralelización?",
+          "a": "La paralelización usa una división fija predefinida. Orquestador-trabajadores decide las subtareas dinámicamente en ejecución, así maneja tareas cuya forma varía según la entrada."
+        },
+        {
+          "q": "¿Es un sistema multiagente?",
+          "a": "Sí, es un patrón multiagente común. Úsalo solo cuando una tarea se beneficie realmente de subtareas dinámicas y separables."
+        },
+        {
+          "q": "¿Cómo evito que se descontrole?",
+          "a": "Fija presupuestos, límites de pasos y condiciones de parada, y añade observabilidad para ver y acotar la planificación del orquestador."
+        }
       ]
     },
     "pt": {
@@ -147,7 +219,13 @@
         "Um modelo líder (orquestrador) analisa a tarefa, decide quais subtarefas são necessárias e delega cada uma a um modelo trabalhador (muitas vezes especializado). Depois coleta e sintetiza as saídas dos trabalhadores num resultado final.",
         "É a generalização agêntica da paralelização: a decomposição é decidida em tempo de execução em vez de fixada, o que adiciona flexibilidade ao custo de mais coordenação e imprevisibilidade."
       ],
-      "components": ["Modelo orquestrador (líder)", "Modelos trabalhadores", "Lógica de delegação", "Sintetizador", "Estado / ferramentas compartilhados"],
+      "components": [
+        "Modelo orquestrador (líder)",
+        "Modelos trabalhadores",
+        "Lógica de delegação",
+        "Sintetizador",
+        "Estado / ferramentas compartilhados"
+      ],
       "benefits": [
         "Lida com tarefas complexas com decomposição dinâmica.",
         "Os trabalhadores podem se especializar por subtarefa.",
@@ -176,10 +254,22 @@
         "results": "57 sessões worker isoladas rodaram sem interferência entre sessões; o isolamento por sessão bifurcada foi o padrão worker dominante, enquanto a ferramenta de spawn explícito ficou sem uso nesta janela. Implantação local-first de operador único."
       },
       "kpis": [
-        { "metric": "Taxa de conclusão ponta a ponta", "note": "Proporção de trabalhos orquestrados que terminam corretamente em todas as subtarefas; o orquestrador é dono do resultado completo." },
-        { "metric": "Fan-out de workers e custo", "note": "Número de chamadas a workers por trabalho e seu custo combinado em tokens; a orquestração pode disparar o gasto se a decomposição for descuidada." },
-        { "metric": "Latência do caminho crítico", "note": "Tempo da cadeia dependente mais longa, não a soma dos workers; isso limita a capacidade de resposta." },
-        { "metric": "Taxa de erro de subtarefas", "note": "Com que frequência os workers individuais falham ou devolvem resultados inúteis, provocando retentativas e recuperação." }
+        {
+          "metric": "Taxa de conclusão ponta a ponta",
+          "note": "Proporção de trabalhos orquestrados que terminam corretamente em todas as subtarefas; o orquestrador é dono do resultado completo."
+        },
+        {
+          "metric": "Fan-out de workers e custo",
+          "note": "Número de chamadas a workers por trabalho e seu custo combinado em tokens; a orquestração pode disparar o gasto se a decomposição for descuidada."
+        },
+        {
+          "metric": "Latência do caminho crítico",
+          "note": "Tempo da cadeia dependente mais longa, não a soma dos workers; isso limita a capacidade de resposta."
+        },
+        {
+          "metric": "Taxa de erro de subtarefas",
+          "note": "Com que frequência os workers individuais falham ou devolvem resultados inúteis, provocando retentativas e recuperação."
+        }
       ],
       "failureModes": [
         "Má decomposição: o orquestrador divide a tarefa errado, então workers corretos produzem um todo incorreto.",
@@ -194,9 +284,370 @@
         "Torne o plano do orquestrador inspecionável para rastrear falhas até uma subtarefa concreta."
       ],
       "faqs": [
-        { "q": "Como difere da paralelização?", "a": "A paralelização usa uma divisão fixa predefinida. Orquestrador-trabalhadores decide as subtarefas dinamicamente em execução, então lida com tarefas cuja forma varia conforme a entrada." },
-        { "q": "É um sistema multiagente?", "a": "Sim, é um padrão multiagente comum. Use-o só quando uma tarefa realmente se beneficiar de subtarefas dinâmicas e separáveis." },
-        { "q": "Como evito que descontrole?", "a": "Defina orçamentos, limites de passos e condições de parada, e adicione observabilidade para ver e limitar o planejamento do orquestrador." }
+        {
+          "q": "Como difere da paralelização?",
+          "a": "A paralelização usa uma divisão fixa predefinida. Orquestrador-trabalhadores decide as subtarefas dinamicamente em execução, então lida com tarefas cuja forma varia conforme a entrada."
+        },
+        {
+          "q": "É um sistema multiagente?",
+          "a": "Sim, é um padrão multiagente comum. Use-o só quando uma tarefa realmente se beneficiar de subtarefas dinâmicas e separáveis."
+        },
+        {
+          "q": "Como evito que descontrole?",
+          "a": "Defina orçamentos, limites de passos e condições de parada, e adicione observabilidade para ver e limitar o planejamento do orquestrador."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Orchestrateur-Workers",
+      "summary": "Un LLM orchestrateur décompose dynamiquement une tâche en sous-tâches, délègue chacune à un LLM worker, et synthétise les résultats. Contrairement à la parallélisation fixe, l'orchestrateur décide des sous-tâches au moment de l'exécution — ce qui le rend adapté aux tâches complexes dont la décomposition n'est pas connue à l'avance.",
+      "problem": "Certaines tâches sont trop complexes pour un seul appel et ne peuvent pas être décomposées à l'avance, car les sous-tâches nécessaires dépendent de l'entrée.",
+      "context": "Utilisez le modèle orchestrateur-workers lorsqu'une tâche nécessite une décomposition dynamique — le nombre et la nature des sous-tâches variant selon l'entrée — et qu'un modèle de coordination peut planifier et intégrer le travail.",
+      "solution": [
+        "Un modèle principal (orchestrateur) analyse la tâche, décide des sous-tâches nécessaires et délègue chacune à un modèle worker (souvent spécialisé). Il collecte et synthétise ensuite les sorties des workers en un résultat final.",
+        "Il s'agit de la généralisation agentique de la parallélisation : la décomposition est décidée au moment de l'exécution plutôt que codée en dur, ce qui ajoute de la flexibilité au prix d'une coordination accrue et d'une plus grande imprévisibilité."
+      ],
+      "components": [
+        "Modèle orchestrateur (principal)",
+        "Modèles workers",
+        "Logique de délégation",
+        "Synthétiseur",
+        "État partagé / outils"
+      ],
+      "benefits": [
+        "Gère les tâches complexes avec une décomposition dynamique.",
+        "Les workers peuvent être spécialisés par sous-tâche.",
+        "S'adapte à des entrées variées sans étapes codées en dur."
+      ],
+      "risks": [
+        "Surcharge de coordination, latence et coût en jetons.",
+        "Plus difficile à prédire et à déboguer que les flux de travail fixes.",
+        "L'orchestrateur peut mal planifier ou boucler sans limites."
+      ],
+      "whenNot": [
+        "Lorsque la décomposition est connue à l'avance — utilisez le chaînage ou la parallélisation fixe.",
+        "Pour les tâches simples qu'un seul appel peut traiter.",
+        "Lorsque la prévisibilité et un contrôle strict des coûts sont primodiaux."
+      ],
+      "examples": [
+        "Une tâche de codage où le lead décide quels fichiers modifier et délègue les éditions.",
+        "Une tâche de recherche divisée en sous-questions, chacune faisant l'objet de recherches puis d'une synthèse.",
+        "Un rapport complexe assemblé à partir de sections choisies dynamiquement."
+      ],
+      "productionEvidence": {
+        "context": "Déploiement OpenClaw local-first à opérateur unique observé sur 57 jours (161 sessions / 2 776 tours), agrégé à partir des propres traces de trajectoire de l'agent.",
+        "scenario": "Le travail planifié s'exécute dans des sessions de workers isolées et uniques, dupliquées (forked) depuis le parent, avec une délimitation des capacités et des limites d'enfants/profondeur.",
+        "technology": "Runtime d'agent isolé Cron, duplication de session (forkSessionFromParent), un couloir et registre de sous-agents, et limites d'enfants/profondeur par agent.",
+        "load": "57 sessions de workers isolées par cron sur la fenêtre (l'outil explicite sessions.spawn n'a pas été utilisé).",
+        "results": "57 sessions de workers isolées ont fonctionné sans interférence entre sessions ; l'isolation par duplication de session (forked-session) a été le modèle de worker dominant, tandis que l'outil explicite spawn est resté inutilisé dans cette fenêtre. Déploiement local-first à opérateur unique."
+      },
+      "kpis": [
+        {
+          "metric": "Taux de réussite des tâches de bout en bout",
+          "note": "Part des tâches orchestrées qui se terminent correctement sur l'ensemble des sous-tâches ; l'orchestrateur est responsable du résultat global."
+        },
+        {
+          "metric": "Facteur de division (fan-out) et coût des workers",
+          "note": "Nombre d'appels de workers par tâche et leur coût combiné en jetons ; l'orchestration peut faire exploser les dépenses si la décomposition est bâclée."
+        },
+        {
+          "metric": "Latence du chemin critique",
+          "note": "Temps réel de la chaîne dépendante la plus longue, et non la somme des workers — cela limite la réactivité."
+        },
+        {
+          "metric": "Taux d'erreur des sous-tâches",
+          "note": "Fréquence à laquelle les workers individuels échouent ou renvoient des résultats inutilisables, entraînant des tentatives de réessai et de récupération."
+        }
+      ],
+      "failureModes": [
+        "Mauvaise décomposition : l'orchestrateur divise mal la tâche, de sorte que des workers corrects produisent tout de même un résultat global erroné.",
+        "Perte de contexte entre l'orchestrateur et les workers, provoquant des résultats partiels incohérents ou contradictoires.",
+        "Explosion des coûts due à la création de trop nombreux workers ou à une imbrication profonde sans limites de budget.",
+        "Point de défaillance unique : si l'orchestrateur évalue mal la situation, l'ensemble de la tâche échoue malgré des workers sains."
+      ],
+      "lessons": [
+        "Investissez dans la logique de décomposition — la plupart des échecs proviennent de la manière dont le travail a été divisé, et non des workers.",
+        "Transmettez explicitement aux workers le contexte minimal dont ils ont besoin pour éviter les dérives et les contradictions.",
+        "Définissez un budget et une limite de profondeur ; l'orchestration sans limites est la cause de l'envolée des coûts des agents.",
+        "Rendez le plan de l'orchestrateur inspectable afin que les échecs puissent être attribués à une sous-tâche spécifique."
+      ],
+      "faqs": [
+        {
+          "q": "En quoi cela diffère-t-il de la parallélisation ?",
+          "a": "La parallélisation utilise une division fixe et prédéfinie. Orchestrator-workers décide des sous-tâches de manière dynamique au moment de l'exécution, ce qui lui permet de gérer des tâches dont la forme varie selon l'entrée."
+        },
+        {
+          "q": "S'agit-il d'un système multi-agent ?",
+          "a": "Oui — c'est un modèle multi-agent courant. Utilisez-le uniquement lorsqu'une tâche bénéficie réellement de sous-tâches dynamiques et séparables."
+        },
+        {
+          "q": "Comment éviter qu'il ne devienne incontrôlable ?",
+          "a": "Définissez des budgets, des limites d'étapes et des conditions d'arrêt, et ajoutez de l'observabilité afin de pouvoir visualiser et limiter la planification de l'orchestrateur."
+        }
+      ]
+    },
+    "de": {
+      "name": "Orchestrator-Workers",
+      "summary": "Ein Orchestrator-LLM zerlegt eine Aufgabe dynamisch in Teilaufgaben, delegiert diese jeweils an ein Worker-LLM und führt die Ergebnisse zusammen. Im Gegensatz zur festen Parallelisierung entscheidet der Orchestrator zur Laufzeit über die Teilaufgaben – was ihn für komplexe Aufgaben eignet, deren Zerlegung im Vorfeld nicht bekannt ist.",
+      "problem": "Einige Aufgaben sind zu komplex für einen einzelnen Aufruf und können nicht im Vorfeld zerlegt werden, da die benötigten Teilaufgaben von der Eingabe abhängen.",
+      "context": "Verwenden Sie das Orchestrator-Workers-Muster, wenn eine Aufgabe eine dynamische Zerlegung erfordert – die Anzahl und Art der Teilaufgaben variieren je nach Eingabe – und ein koordinierendes Modell die Arbeit planen und integrieren kann.",
+      "solution": [
+        "Ein führendes Modell (Orchestrator) analysiert die Aufgabe, entscheidet, welche Teilaufgaben erforderlich sind, und delegiert diese jeweils an ein (oft spezialisiertes) Worker-Modell. Anschließend sammelt und synthetisiert es die Ausgaben der Worker zu einem Endergebnis.",
+        "Es ist die agentenbasierte Generalisierung der Parallelisierung: Die Zerlegung wird zur Laufzeit entschieden und nicht fest codiert, was Flexibilität auf Kosten von mehr Koordination und Unvorhersehbarkeit bringt."
+      ],
+      "components": [
+        "Orchestrator-Modell (Lead)",
+        "Worker-Modelle",
+        "Delegationslogik",
+        "Synthesizer",
+        "Gemeinsamer Zustand / Tools"
+      ],
+      "benefits": [
+        "Bewältigt komplexe Aufgaben mit dynamischer Zerlegung.",
+        "Worker können pro Teilaufgabe spezialisiert werden.",
+        "Skaliert für unterschiedliche Eingaben ohne fest codierte Schritte."
+      ],
+      "risks": [
+        "Koordinationsaufwand, Latenz und Token-Kosten.",
+        "Schwerer vorherzusagen und zu debuggen als feste Workflows.",
+        "Der Orchestrator kann Fehlplanungen vornehmen oder in Endlosschleifen geraten."
+      ],
+      "whenNot": [
+        "Wenn die Zerlegung im Vorfeld bekannt ist – verwenden Sie Chaining oder feste Parallelisierung.",
+        "Für einfache Aufgaben, die mit einem einzigen Aufruf erledigt werden können.",
+        "Wenn Vorhersehbarkeit und strenge Kostenkontrolle im Vordergrund stehen."
+      ],
+      "examples": [
+        "Eine Programmieraufgabe, bei der das Lead-Modell entscheidet, welche Dateien geändert werden sollen, und die Bearbeitungen delegiert.",
+        "Eine Forschungsaufgabe, die in Teilfragen aufgeteilt wird, die jeweils untersucht und anschließend synthetisiert werden.",
+        "Ein komplexer Bericht, der aus dynamisch ausgewählten Abschnitten zusammengestellt wird."
+      ],
+      "productionEvidence": {
+        "context": "Lokale Bereitstellung für einen einzelnen Operator (Local-First) von OpenClaw, beobachtet über 57 Tage (161 Sessions / 2.776 Turns), aggregiert aus den eigenen Trajektorien-Traces des Agenten.",
+        "scenario": "Geplante Arbeiten laufen in isolierten, einmaligen Worker-Sessions, die vom übergeordneten Prozess geforkt wurden, mit Berechtigungseinschränkungen (Capability Scoping) sowie Limits für Child-Prozesse und Tiefe.",
+        "technology": "Cron-isolierte Agenten-Laufzeitumgebung, Session-Forking (forkSessionFromParent), eine Subagenten-Lane und -Registry sowie Child-/Tiefenlimits pro Agent.",
+        "load": "57 Cron-isolierte Worker-Sessions über das Zeitfenster (das explizite Tool sessions.spawn wurde nicht verwendet).",
+        "results": "57 isolierte Worker-Sessions liefen ohne gegenseitige Beeinflussung; die Isolation durch geforkte Sessions war das dominierende Worker-Muster, während das explizite Spawn-Tool in diesem Zeitfenster ungenutzt blieb. Lokale Bereitstellung für einen einzelnen Operator (Local-First)."
+      },
+      "kpis": [
+        {
+          "metric": "End-to-End-Aufgabenerfüllungsrate",
+          "note": "Anteil der orchestrierten Jobs, die über alle Teilaufgaben hinweg korrekt abgeschlossen werden; der Orchestrator trägt die Verantwortung für das Gesamtergebnis."
+        },
+        {
+          "metric": "Worker-Fan-out & Kosten",
+          "note": "Anzahl der Worker-Aufrufe pro Job und deren kombinierte Token-Kosten; die Orchestrierung kann die Ausgaben explodieren lassen, wenn die Zerlegung ungenau ist."
+        },
+        {
+          "metric": "Latenz des kritischen Pfads",
+          "note": "Tatsächliche Laufzeit (Wall-clock) der längsten abhängigen Kette, nicht die Summe der Worker – dies begrenzt die Reaktionsfähigkeit."
+        },
+        {
+          "metric": "Fehlerrate der Teilaufgaben",
+          "note": "Wie oft einzelne Worker fehlschlagen oder unbrauchbare Ergebnisse liefern, was zu Wiederholungsversuchen und Fehlerbehebungen führt."
+        }
+      ],
+      "failureModes": [
+        "Fehlerhafte Zerlegung: Der Orchestrator teilt die Aufgabe falsch auf, sodass korrekt arbeitende Worker dennoch ein falsches Gesamtergebnis liefern.",
+        "Kontextverlust zwischen Orchestrator und Workern, was zu inkonsistenten oder widersprüchlichen Teilergebnissen führt.",
+        "Kostenexplosion durch das Erzeugen zu vieler Worker oder tiefe Verschachtelung ohne Budgetgrenzen.",
+        "Single Point of Failure: Wenn sich der Orchestrator verschätzt, schlägt der gesamte Job trotz funktionierender Worker fehl."
+      ],
+      "lessons": [
+        "Investieren Sie in die Zerlegungslogik – die meisten Fehler lassen sich darauf zurückführen, wie die Arbeit aufgeteilt wurde, nicht auf die Worker.",
+        "Übergeben Sie Workern explizit nur den minimal benötigten Kontext, um Abweichungen und Widersprüche zu vermeiden.",
+        "Legen Sie ein Budget und ein Tiefenlimit fest; eine grenzenlose Orchestrierung lässt die Agenten-Kosten explodieren.",
+        "Machen Sie den Plan des Orchestrators einsehbar, damit Fehler auf eine bestimmte Teilaufgabe zurückgeführt werden können."
+      ],
+      "faqs": [
+        {
+          "q": "Wie unterscheidet sich dies von der Parallelisierung?",
+          "a": "Die Parallelisierung nutzt eine feste, vordefinierte Aufteilung. Orchestrator-Workers entscheidet über die Teilaufgaben dynamisch zur Laufzeit und bewältigt so Aufgaben, deren Struktur je nach Eingabe variiert."
+        },
+        {
+          "q": "Handelt es sich hierbei um ein Multi-Agenten-System?",
+          "a": "Ja – es ist ein gängiges Multi-Agenten-Muster. Verwenden Sie es nur, wenn eine Aufgabe tatsächlich von dynamischen, trennbaren Teilaufgaben profitiert."
+        },
+        {
+          "q": "Wie verhindere ich, dass es außer Kontrolle gerät?",
+          "a": "Legen Sie Budgets, Schrittbegrenzungen und Abbruchbedingungen fest und fügen Sie Observability hinzu, damit Sie die Planung des Orchestrators einsehen und eingrenzen können."
+        }
+      ]
+    },
+    "ja": {
+      "name": "オーケストレーター・ワーカー（Orchestrator-Workers）",
+      "summary": "オーケストレーターLLMがタスクを動的にサブタスクに分割し、それぞれをワーカーLLMに委譲して、結果を統合します。固定された並列化とは異なり、オーケストレーターは実行時にサブタスクを決定するため、事前に分解方法がわからない複雑なタスクに適しています。",
+      "problem": "一部のタスクは1回の呼び出しで処理するには複雑すぎて、必要なサブタスクが入力に依存するため、事前に分解することができません。",
+      "context": "タスクに動的な分解が必要な場合（サブタスクの数や性質が入力によって異なる場合）、および調整モデルが作業を計画して統合できる場合に、オーケストレーター・ワーカーを使用します。",
+      "solution": [
+        "リード（オーケストレーター）モデルがタスクを分析し、必要なサブタスクを決定して、それぞれを（多くの場合、特化した）ワーカーモデルに委譲します。その後、ワーカーの出力を収集して最終結果に統合します。",
+        "これは並列化のエージェント的汎用化です。分解はハードコードされるのではなく実行時に決定されるため、柔軟性が向上する一方で、調整コストと予測不可能性が増加します。"
+      ],
+      "components": [
+        "オーケストレーター（リード）モデル",
+        "ワーカーモデル",
+        "委譲ロジック",
+        "シンセサイザー（統合器）",
+        "共有状態 / ツール"
+      ],
+      "benefits": [
+        "動的な分解を伴う複雑なタスクを処理できます。",
+        "サブタスクごとにワーカーを特化させることができます。",
+        "ハードコードされたステップなしで、多様な入力に対応してスケールします。"
+      ],
+      "risks": [
+        "調整のオーバーヘッド、レイテンシー、およびトークンコスト。",
+        "固定されたワークフローよりも予測やデバッグが困難です。",
+        "オーケストレーターが計画を誤ったり、制限なくループしたりする可能性があります。"
+      ],
+      "whenNot": [
+        "分解方法が事前にわかっている場合。チェーニングまたは固定の並列化を使用してください。",
+        "1回の呼び出しで処理できるシンプルなタスクの場合。",
+        "予測可能性と厳格なコスト管理が最優先される場合。"
+      ],
+      "examples": [
+        "リードが変更すべきファイルを決定し、編集を委譲するコーディングタスク。",
+        "調査タスクをサブ質問に分割し、それぞれを調査した後に統合するケース。",
+        "動的に選択されたセクションから組み立てられる複雑なレポート。"
+      ],
+      "productionEvidence": {
+        "context": "57日間にわたり観察された単一オペレーター、ローカルファーストのOpenClawデプロイメント（161セッション / 2,776ターン）。エージェント自身のトラジェクトリトレースから集計。",
+        "scenario": "スケジュールされたワークは、親からフォークされた隔離されたワンショットのワーカーセッションで実行され、機能スコープおよび子/深度の制限が適用されます。",
+        "technology": "Cron隔離エージェントランタイム、セッションフォーク（forkSessionFromParent）、サブエージェントレーンおよびレジストリ、エージェントごとの子/深度制限。",
+        "load": "対象期間中に57のCron隔離ワーカーセッション（明示的なsessions.spawnツールは実行されませんでした）。",
+        "results": "57の隔離されたワーカーセッションがセッション間の干渉なしに実行されました。フォークされたセッションの隔離が主要なワーカーパターンであり、この期間中、明示的なspawnツールは未使用のままでした。単一オペレーターによるローカルファーストのデプロイメント。"
+      },
+      "kpis": [
+        {
+          "metric": "エンドツーエンドのタスク完了率",
+          "note": "オーケストレーションされたジョブのうち、すべてのサブタスクにわたって正しく完了した割合。オーケストレーターが結果全体に責任を持ちます。"
+        },
+        {
+          "metric": "ワーカーのファンアウトとコスト",
+          "note": "ジョブあたりのワーカー呼び出し回数と、それらの合計トークンコスト。分解が不十分な場合、オーケストレーションによって支出が爆発的に増加する可能性があります。"
+        },
+        {
+          "metric": "クリティカルパスのレイテンシー",
+          "note": "ワーカーの合計時間ではなく、最も長い依存チェーンの実時間（ウォールクロック時間）。これが応答性の限界を決定します。"
+        },
+        {
+          "metric": "サブタスクのエラー率",
+          "note": "個々のワーカーが失敗するか、使用不可能な結果を返す頻度。これにより再試行やリカバリが発生します。"
+        }
+      ],
+      "failureModes": [
+        "不適切な分解：オーケストレーターがタスクを誤って分割するため、個々のワーカーが正しく動作しても、全体として誤った結果が生成されます。",
+        "オーケストレーターとワーカー間のコンテキスト喪失。これにより、一貫性のない、または矛盾する部分的な結果が生じます。",
+        "予算制限なしに多数のワーカーを生成したり、深いネストを行ったりすることによるコストの爆発的増加。",
+        "単一障害点：オーケストレーターが判断を誤ると、ワーカーが正常であってもジョブ全体が失敗します。"
+      ],
+      "lessons": [
+        "分解ロジックに投資してください。ほとんどの失敗は、ワーカーではなく、作業の分割方法に起因しています。",
+        "乖離や矛盾を避けるために、ワーカーには必要な最小限のコンテキストを明示的に渡してください。",
+        "予算と深度の上限を設定してください。制限のないオーケストレーションは、エージェントコストが急上昇する原因になります。",
+        "失敗を特定のサブタスクまで追跡できるように、オーケストレーターの計画を検査可能にしてください。"
+      ],
+      "faqs": [
+        {
+          "q": "並列化とはどのように違うのですか？",
+          "a": "並列化は、固定された事前定義済みの分割を使用します。オーケストレーター・ワーカーは実行時に動的にサブタスクを決定するため、入力によって形状が変化するタスクを処理できます。"
+        },
+        {
+          "q": "これはマルチエージェントシステムですか？",
+          "a": "はい。これは一般的なマルチエージェントパターンです。タスクが動的で分離可能なサブタスクから真に恩恵を受ける場合にのみ使用してください。"
+        },
+        {
+          "q": "暴走を防ぐにはどうすればよいですか？",
+          "a": "予算、ステップ制限、停止条件を設定し、オブザーバビリティ（可観測性）を追加することで、オーケストレーターの計画を可視化し、制限できるようにします。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "编排器-工作器",
+      "summary": "编排器 LLM 动态地将任务分解为子任务，将每个子任务委派给工作器 LLM，并综合结果。与固定的并行化不同，编排器在运行时决定子任务，这使其适用于无法提前预知如何分解的复杂任务。",
+      "problem": "某些任务过于复杂，无法通过单次调用完成，且无法提前分解，因为所需的子任务取决于输入。",
+      "context": "当任务需要动态分解（子任务的数量和性质因输入而异），且协调模型能够规划和整合工作时，请使用编排器-工作器模式。",
+      "solution": [
+        "主导（编排器）模型分析任务，决定需要哪些子任务，并将每个子任务委派给工作器模型（通常是专门的）。然后，它收集并综合工作器的输出以生成最终结果。",
+        "它是并行化在智能体（Agentic）层面的泛化：分解是在运行时决定的，而不是硬编码的，这增加了灵活性，但代价是更多的协调工作和不可预测性。"
+      ],
+      "components": [
+        "编排器（主导）模型",
+        "工作器模型",
+        "委派逻辑",
+        "综合器",
+        "共享状态 / 工具"
+      ],
+      "benefits": [
+        "处理具有动态分解特征的复杂任务。",
+        "工作器可以针对每个子任务进行专门化。",
+        "无需硬编码步骤即可扩展以适应各种输入。"
+      ],
+      "risks": [
+        "协调开销、延迟和 Token 成本。",
+        "比固定工作流更难预测和调试。",
+        "编排器可能会规划失误或进行无限循环。"
+      ],
+      "whenNot": [
+        "当分解方式提前已知时——使用链式调用或固定并行化。",
+        "适用于单次调用即可处理的简单任务。",
+        "当可预测性和严格的成本控制至关重要时。"
+      ],
+      "examples": [
+        "一个编码任务，其中主导模型决定要修改哪些文件并委派编辑工作。",
+        "一个研究任务，被拆分为若干子问题，每个子问题分别进行研究然后进行综合。",
+        "一份由动态选择的章节组装而成的复杂报告。"
+      ],
+      "productionEvidence": {
+        "context": "在 57 天内（161 个会话 / 2,776 个轮次）观察到的单操作员、本地优先 OpenClaw 部署，数据自智能体自身的轨迹追踪聚合而来。",
+        "scenario": "计划的工作在从父会话派生的隔离、一次性工作器会话中运行，并具有能力范围限制以及子会话/深度限制。",
+        "technology": "Cron 隔离智能体运行时、会话派生（forkSessionFromParent）、子智能体通道与注册表，以及每个智能体的子会话/深度限制。",
+        "load": "在窗口期内共有 57 个 Cron 隔离的工作器会话（未调用显式的 sessions.spawn 工具）。",
+        "results": "57 个隔离的工作器会话在没有跨会话干扰的情况下运行；派生会话隔离是主要的工作器模式，而显式的 spawn 工具在此窗口期内保持未使用状态。单操作员本地优先部署。"
+      },
+      "kpis": [
+        {
+          "metric": "端到端任务完成率",
+          "note": "在所有子任务中正确完成的编排作业比例；编排器对整个结果负责。"
+        },
+        {
+          "metric": "工作器扇出与成本",
+          "note": "每个作业的工作器调用次数及其合并的 Token 成本；如果分解过于草率，编排可能会导致开销激增。"
+        },
+        {
+          "metric": "关键路径延迟",
+          "note": "最长依赖链的实际耗时，而不是工作器耗时的总和——这限制了响应速度。"
+        },
+        {
+          "metric": "子任务错误率",
+          "note": "单个工作器失败或返回不可用结果的频率，这会触发重试和恢复。"
+        }
+      ],
+      "failureModes": [
+        "糟糕的分解：编排器错误地拆分了任务，导致即使工作器正确执行，最终仍产生错误的结果。",
+        "编排器与工作器之间丢失上下文，导致部分结果不一致或相互矛盾。",
+        "由于在没有预算限制的情况下生成过多工作器或进行深层嵌套，导致成本激增。",
+        "单点故障：如果编排器判断失误，尽管工作器运行正常，整个作业仍会失败。"
+      ],
+      "lessons": [
+        "投入精力优化分解逻辑——大多数失败都可以追溯到工作是如何拆分的，而不是工作器本身的问题。",
+        "显式地向工作器传递其所需的最小上下文，以避免偏差和矛盾。",
+        "设置预算和深度上限；无限制的编排是智能体成本失控的根源。",
+        "使编排器的计划具有可检查性，以便将失败追溯到特定的子任务。"
+      ],
+      "faqs": [
+        {
+          "q": "这与并行化有什么不同？",
+          "a": "并行化使用固定的、预定义的拆分方式。而编排器-工作者（Orchestrator-workers）模式在运行时动态决定子任务，因此它能够处理其形态随输入而变化的任务。"
+        },
+        {
+          "q": "这是一个多智能体系统吗？",
+          "a": "是的——这是一个常见的多智能体模式。只有当任务确实能从动态、可拆分的子任务中获益时，才应使用它。"
+        },
+        {
+          "q": "我该如何防止它失控运行？",
+          "a": "设置预算、步骤限制和终止条件，并增加可观测性，以便您能够查看并限制编排器的规划。"
+        }
       ]
     }
   }

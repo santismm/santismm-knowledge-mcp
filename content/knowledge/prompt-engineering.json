@@ -3,15 +3,30 @@
   "category": "concept",
   "updated": "2026-06-21",
   "version": "1.0",
-  "related": ["context-engineering", "tool-use", "agentic-ai", "harness-engineering"],
+  "related": [
+    "context-engineering",
+    "tool-use",
+    "agentic-ai",
+    "harness-engineering"
+  ],
   "references": [
-    { "title": "Wei et al. — Chain-of-Thought Prompting Elicits Reasoning in LLMs (2022)", "url": "https://arxiv.org/abs/2201.11903" },
-    { "title": "Anthropic — Prompt engineering overview", "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" }
+    {
+      "title": "Wei et al. — Chain-of-Thought Prompting Elicits Reasoning in LLMs (2022)",
+      "url": "https://arxiv.org/abs/2201.11903"
+    },
+    {
+      "title": "Anthropic — Prompt engineering overview",
+      "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview"
+    }
   ],
   "evidence": {
     "evidenceLevel": "benchmark",
     "confidenceLevel": "high",
-    "sourceType": ["benchmark", "paper", "industry_observation"]
+    "sourceType": [
+      "benchmark",
+      "paper",
+      "industry_observation"
+    ]
   },
   "locales": {
     "en": {
@@ -33,7 +48,14 @@
         "Common techniques: zero-shot (instruction only), few-shot (instruction plus examples), chain-of-thought (ask for step-by-step reasoning), role and format specification, and decomposition (breaking a task into smaller prompts).",
         "Mature practice treats prompts as code: stored, versioned, tested against evals, and changed deliberately. Reusable prompt templates and structured output schemas reduce variance."
       ],
-      "components": ["Role / persona", "Task instruction", "Constraints", "Output format", "Examples (few-shot)", "Reasoning cues"],
+      "components": [
+        "Role / persona",
+        "Task instruction",
+        "Constraints",
+        "Output format",
+        "Examples (few-shot)",
+        "Reasoning cues"
+      ],
       "pros": [
         "Fastest, cheapest way to change model behavior.",
         "No training or infrastructure required.",
@@ -46,17 +68,34 @@
         "Hard to scale reliability by prompting alone.",
         "Hidden coupling to a specific model's quirks."
       ],
-      "tools": ["Prompt templates", "Structured output / JSON schema", "LangSmith / Langfuse (prompt testing)", "Evaluation suites"],
+      "tools": [
+        "Prompt templates",
+        "Structured output / JSON schema",
+        "LangSmith / Langfuse (prompt testing)",
+        "Evaluation suites"
+      ],
       "examples": [
         "Adding a few worked examples to make a model output consistent JSON.",
         "Asking for step-by-step reasoning to improve a math or logic answer.",
         "Specifying a strict format so downstream code can parse the response."
       ],
       "faqs": [
-        { "q": "Is prompt engineering still relevant as models improve?", "a": "Yes, but its role narrows. Better models need less coaxing, yet clear instructions, examples and format specs still measurably improve reliability — especially inside agents." },
-        { "q": "What is the difference from context engineering?", "a": "Prompt engineering focuses on the instruction. Context engineering is the broader task of deciding what information enters the model's limited context window at each step." },
-        { "q": "Does chain-of-thought always help?", "a": "It helps most on multi-step reasoning tasks, at the cost of more tokens. For simple lookups it adds latency without benefit." },
-        { "q": "How do you keep prompts reliable?", "a": "Treat them as code: version them, test them against evals, and change them deliberately rather than by trial and error." }
+        {
+          "q": "Is prompt engineering still relevant as models improve?",
+          "a": "Yes, but its role narrows. Better models need less coaxing, yet clear instructions, examples and format specs still measurably improve reliability — especially inside agents."
+        },
+        {
+          "q": "What is the difference from context engineering?",
+          "a": "Prompt engineering focuses on the instruction. Context engineering is the broader task of deciding what information enters the model's limited context window at each step."
+        },
+        {
+          "q": "Does chain-of-thought always help?",
+          "a": "It helps most on multi-step reasoning tasks, at the cost of more tokens. For simple lookups it adds latency without benefit."
+        },
+        {
+          "q": "How do you keep prompts reliable?",
+          "a": "Treat them as code: version them, test them against evals, and change them deliberately rather than by trial and error."
+        }
       ]
     },
     "es": {
@@ -78,7 +117,14 @@
         "Técnicas habituales: zero-shot (solo instrucción), few-shot (instrucción más ejemplos), chain-of-thought (pedir razonamiento paso a paso), especificación de rol y formato, y descomposición (dividir una tarea en prompts más pequeños).",
         "La práctica madura trata los prompts como código: se guardan, se versionan, se prueban contra evaluaciones y se cambian de forma deliberada. Las plantillas reutilizables y los esquemas de salida estructurada reducen la varianza."
       ],
-      "components": ["Rol / persona", "Instrucción de tarea", "Restricciones", "Formato de salida", "Ejemplos (few-shot)", "Pistas de razonamiento"],
+      "components": [
+        "Rol / persona",
+        "Instrucción de tarea",
+        "Restricciones",
+        "Formato de salida",
+        "Ejemplos (few-shot)",
+        "Pistas de razonamiento"
+      ],
       "pros": [
         "La forma más rápida y barata de cambiar el comportamiento del modelo.",
         "No requiere entrenamiento ni infraestructura.",
@@ -91,17 +137,34 @@
         "Difícil escalar la fiabilidad solo con prompting.",
         "Acoplamiento oculto a las peculiaridades de un modelo."
       ],
-      "tools": ["Plantillas de prompts", "Salida estructurada / JSON schema", "LangSmith / Langfuse (pruebas de prompts)", "Suites de evaluación"],
+      "tools": [
+        "Plantillas de prompts",
+        "Salida estructurada / JSON schema",
+        "LangSmith / Langfuse (pruebas de prompts)",
+        "Suites de evaluación"
+      ],
       "examples": [
         "Añadir ejemplos para que un modelo devuelva JSON consistente.",
         "Pedir razonamiento paso a paso para mejorar una respuesta de lógica o matemáticas.",
         "Especificar un formato estricto para que el código posterior pueda parsear la respuesta."
       ],
       "faqs": [
-        { "q": "¿Sigue siendo relevante el prompt engineering según mejoran los modelos?", "a": "Sí, pero su papel se estrecha. Los mejores modelos necesitan menos persuasión, pero instrucciones claras, ejemplos y formato siguen mejorando la fiabilidad de forma medible, sobre todo dentro de agentes." },
-        { "q": "¿En qué se diferencia de la ingeniería de contexto?", "a": "El prompt engineering se centra en la instrucción. La ingeniería de contexto es la tarea más amplia de decidir qué información entra en la ventana de contexto limitada del modelo en cada paso." },
-        { "q": "¿El chain-of-thought ayuda siempre?", "a": "Ayuda sobre todo en tareas de razonamiento de varios pasos, a costa de más tokens. Para búsquedas simples añade latencia sin beneficio." },
-        { "q": "¿Cómo se mantienen fiables los prompts?", "a": "Tratándolos como código: versionarlos, probarlos contra evaluaciones y cambiarlos de forma deliberada en vez de por ensayo y error." }
+        {
+          "q": "¿Sigue siendo relevante el prompt engineering según mejoran los modelos?",
+          "a": "Sí, pero su papel se estrecha. Los mejores modelos necesitan menos persuasión, pero instrucciones claras, ejemplos y formato siguen mejorando la fiabilidad de forma medible, sobre todo dentro de agentes."
+        },
+        {
+          "q": "¿En qué se diferencia de la ingeniería de contexto?",
+          "a": "El prompt engineering se centra en la instrucción. La ingeniería de contexto es la tarea más amplia de decidir qué información entra en la ventana de contexto limitada del modelo en cada paso."
+        },
+        {
+          "q": "¿El chain-of-thought ayuda siempre?",
+          "a": "Ayuda sobre todo en tareas de razonamiento de varios pasos, a costa de más tokens. Para búsquedas simples añade latencia sin beneficio."
+        },
+        {
+          "q": "¿Cómo se mantienen fiables los prompts?",
+          "a": "Tratándolos como código: versionarlos, probarlos contra evaluaciones y cambiarlos de forma deliberada en vez de por ensayo y error."
+        }
       ]
     },
     "pt": {
@@ -123,7 +186,14 @@
         "Técnicas comuns: zero-shot (só instrução), few-shot (instrução mais exemplos), chain-of-thought (pedir raciocínio passo a passo), especificação de papel e formato, e decomposição (dividir uma tarefa em prompts menores).",
         "A prática madura trata os prompts como código: são guardados, versionados, testados contra avaliações e alterados de forma deliberada. Modelos reutilizáveis e esquemas de saída estruturada reduzem a variância."
       ],
-      "components": ["Papel / persona", "Instrução de tarefa", "Restrições", "Formato de saída", "Exemplos (few-shot)", "Pistas de raciocínio"],
+      "components": [
+        "Papel / persona",
+        "Instrução de tarefa",
+        "Restrições",
+        "Formato de saída",
+        "Exemplos (few-shot)",
+        "Pistas de raciocínio"
+      ],
       "pros": [
         "A forma mais rápida e barata de mudar o comportamento do modelo.",
         "Não requer treinamento nem infraestrutura.",
@@ -136,17 +206,310 @@
         "Difícil escalar a confiabilidade só com prompting.",
         "Acoplamento oculto às peculiaridades de um modelo."
       ],
-      "tools": ["Modelos de prompts", "Saída estruturada / JSON schema", "LangSmith / Langfuse (testes de prompts)", "Suítes de avaliação"],
+      "tools": [
+        "Modelos de prompts",
+        "Saída estruturada / JSON schema",
+        "LangSmith / Langfuse (testes de prompts)",
+        "Suítes de avaliação"
+      ],
       "examples": [
         "Adicionar exemplos para um modelo devolver JSON consistente.",
         "Pedir raciocínio passo a passo para melhorar uma resposta de lógica ou matemática.",
         "Especificar um formato estrito para o código posterior poder parsear a resposta."
       ],
       "faqs": [
-        { "q": "A engenharia de prompts ainda é relevante conforme os modelos melhoram?", "a": "Sim, mas seu papel se estreita. Modelos melhores precisam de menos persuasão, mas instruções claras, exemplos e formato continuam melhorando a confiabilidade de forma mensurável, sobretudo dentro de agentes." },
-        { "q": "Qual a diferença para a engenharia de contexto?", "a": "A engenharia de prompts foca na instrução. A engenharia de contexto é a tarefa mais ampla de decidir qual informação entra na janela de contexto limitada do modelo a cada passo." },
-        { "q": "O chain-of-thought sempre ajuda?", "a": "Ajuda sobretudo em tarefas de raciocínio de vários passos, ao custo de mais tokens. Para buscas simples adiciona latência sem benefício." },
-        { "q": "Como manter os prompts confiáveis?", "a": "Tratando-os como código: versioná-los, testá-los contra avaliações e alterá-los de forma deliberada em vez de por tentativa e erro." }
+        {
+          "q": "A engenharia de prompts ainda é relevante conforme os modelos melhoram?",
+          "a": "Sim, mas seu papel se estreita. Modelos melhores precisam de menos persuasão, mas instruções claras, exemplos e formato continuam melhorando a confiabilidade de forma mensurável, sobretudo dentro de agentes."
+        },
+        {
+          "q": "Qual a diferença para a engenharia de contexto?",
+          "a": "A engenharia de prompts foca na instrução. A engenharia de contexto é a tarefa mais ampla de decidir qual informação entra na janela de contexto limitada do modelo a cada passo."
+        },
+        {
+          "q": "O chain-of-thought sempre ajuda?",
+          "a": "Ajuda sobretudo em tarefas de raciocínio de vários passos, ao custo de mais tokens. Para buscas simples adiciona latência sem benefício."
+        },
+        {
+          "q": "Como manter os prompts confiáveis?",
+          "a": "Tratando-os como código: versioná-los, testá-los contra avaliações e alterá-los de forma deliberada em vez de por tentativa e erro."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que le Prompt Engineering ?",
+      "summary": "Le Prompt Engineering est la pratique consistant à concevoir les entrées fournies à un modèle de langage afin qu'il produise le résultat souhaité de manière fiable. Un bon prompt spécifie le rôle, la tâche, les contraintes, le format de sortie et, si nécessaire, des exemples. C'est le levier le plus accessible pour orienter le comportement du modèle — et une couche du harness plus large entourant un modèle — mais à lui seul, il ne rend pas un système fiable à grande échelle.",
+      "definition": "Le Prompt Engineering est la pratique consistant à concevoir et à affiner les instructions, le contexte et les exemples fournis à un modèle de langage pour obtenir de manière fiable le résultat souhaité.",
+      "takeaways": [
+        "Un prompt efficace précise le rôle, la tâche, les contraintes, le format et des exemples.",
+        "Les exemples (few-shot) surpassent généralement les instructions seules pour les tâches structurées.",
+        "Le prompt par chaîne de pensée (chain-of-thought) améliore le raisonnement en plusieurs étapes.",
+        "Les prompts doivent être testés et versionnés, et non ajustés manuellement au ressenti.",
+        "Il s'agit d'une couche du harness, et non d'un substitut aux outils, à la mémoire et à l'évaluation."
+      ],
+      "context": [
+        "Puisque les modèles suivent des instructions en langage naturel, la formulation d'une tâche modifie sensiblement le résultat. Le Prompt Engineering est la discipline qui consiste à bien la formuler : en étant explicite sur l'objectif, le public cible, les contraintes et le format attendu.",
+        "C'est le moyen le plus rapide et le moins coûteux d'améliorer la qualité des résultats, c'est pourquoi la plupart des équipes commencent par là. Mais à mesure que les systèmes évoluent vers des agents, le prompt devient un composant parmi d'autres — outils, mémoire, récupération (retrieval) et évaluation — constituant le harness complet."
+      ],
+      "architecture": [
+        "Techniques courantes : zero-shot (instruction seule), few-shot (instruction et exemples), chain-of-thought (demande de raisonnement étape par étape), spécification de rôle et de format, et décomposition (division d'une tâche en prompts plus simples).",
+        "Une pratique mature traite les prompts comme du code : stockés, versionnés, testés par rapport à des évaluations (evals) et modifiés de manière délibérée. Les modèles de prompts réutilisables et les schémas de sortie structurés réduisent la variance."
+      ],
+      "components": [
+        "Rôle / persona",
+        "Instruction de tâche",
+        "Contraintes",
+        "Format de sortie",
+        "Exemples (few-shot)",
+        "Indices de raisonnement"
+      ],
+      "pros": [
+        "Le moyen le plus rapide et le moins coûteux de modifier le comportement d'un modèle.",
+        "Aucun entraînement ni infrastructure requis.",
+        "Fonctionne sur différents modèles et tâches.",
+        "Facile à itérer et à combiner avec d'autres techniques."
+      ],
+      "risks": [
+        "Fragile : de légères modifications de formulation peuvent modifier le comportement.",
+        "Injection de prompt lorsque les prompts incluent des entrées non fiables.",
+        "Difficile de mettre à l'échelle la fiabilité uniquement par le prompting.",
+        "Couplage masqué avec les particularités d'un modèle spécifique."
+      ],
+      "tools": [
+        "Modèles de prompts",
+        "Sortie structurée / schéma JSON",
+        "LangSmith / Langfuse (test de prompts)",
+        "Suites d'évaluation"
+      ],
+      "examples": [
+        "Ajouter quelques exemples concrets pour que le modèle produise un JSON cohérent.",
+        "Demander un raisonnement étape par étape pour améliorer une réponse mathématique ou logique.",
+        "Spécifier un format strict pour que le code en aval puisse analyser la réponse."
+      ],
+      "faqs": [
+        {
+          "q": "Le prompt engineering est-il toujours pertinent à mesure que les modèles s'améliorent ?",
+          "a": "Oui, mais son rôle se restreint. Les meilleurs modèles ont besoin de moins d'incitations, mais des instructions claires, des exemples et des spécifications de format améliorent encore de manière mesurable la fiabilité — en particulier au sein des agents."
+        },
+        {
+          "q": "Quelle est la différence avec le context engineering ?",
+          "a": "Le prompt engineering se concentre sur l'instruction. Le context engineering est la tâche plus large consistant à décider quelles informations entrent dans la fenêtre de contexte limitée du modèle à chaque étape."
+        },
+        {
+          "q": "La chaîne de pensée (chain-of-thought) aide-t-elle toujours ?",
+          "a": "Elle est surtout utile pour les tâches de raisonnement en plusieurs étapes, au prix d'un plus grand nombre de tokens. Pour les recherches simples, elle ajoute de la latence sans aucun avantage."
+        },
+        {
+          "q": "Comment maintenir la fiabilité des prompts ?",
+          "a": "Traitez-les comme du code : versionnez-les, testez-les par rapport à des évaluations et modifiez-les de manière délibérée plutôt que par tâtonnements."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist Prompt Engineering?",
+      "summary": "Prompt Engineering ist die Praxis des Entwerfens von Eingaben für ein Sprachmodell, damit dieses zuverlässig die gewünschte Ausgabe erzeugt. Ein guter Prompt spezifiziert die Rolle, die Aufgabe, die Einschränkungen, das Ausgabeformat und, falls nützlich, Beispiele. Es ist der am leichtesten zugängliche Hebel zur Steuerung des Modellverhaltens – und eine Ebene des umfassenderen Harness um ein Modell –, aber für sich genommen macht es ein System im großen Maßstab noch nicht zuverlässig.",
+      "definition": "Prompt Engineering ist die Praxis des Entwerfens und Verfeinerns von Anweisungen, Kontexten und Beispielen für ein Sprachmodell, um zuverlässig eine gewünschte Ausgabe hervorzurufen.",
+      "takeaways": [
+        "Ein starker Prompt definiert Rolle, Aufgabe, Einschränkungen, Format und Beispiele.",
+        "Beispiele (Few-Shot) sind bei strukturierten Aufgaben reinen Anweisungen meist überlegen.",
+        "Chain-of-Thought-Prompting verbessert mehrstufiges logisches Denken (Reasoning).",
+        "Prompts sollten getestet und versioniert werden, anstatt sie nach Gefühl manuell anzupassen.",
+        "Es ist eine Ebene des Harness, kein Ersatz für Tools, Speicher und Evaluierung."
+      ],
+      "context": [
+        "Da Modelle Anweisungen in natürlicher Sprache befolgen, verändert die Art und Weise, wie eine Aufgabe formuliert ist, das Ergebnis erheblich. Prompt Engineering ist die Disziplin, diese gut zu formulieren: explizit in Bezug auf das Ziel, die Zielgruppe, die Einschränkungen und das gewünschte Rückgabeformat zu sein.",
+        "Es ist der schnellste und kostengünstigste Weg, die Ausgabequalität zu verbessern, weshalb die meisten Teams hier anfangen. Doch wenn Systeme zu Agenten heranwachsen, wird Prompting zu einer Komponente unter vielen neben Tools, Speicher, Retrieval und Evaluierung – dem vollständigen Harness."
+      ],
+      "architecture": [
+        "Gängige Techniken: Zero-Shot (nur Anweisung), Few-Shot (Anweisung plus Beispiele), Chain-of-Thought (Aufforderung zu schrittweisem Denken), Rollen- und Formatspezifikation sowie Dekomposition (Aufteilung einer Aufgabe in kleinere Prompts).",
+        "Eine ausgereifte Praxis behandelt Prompts wie Code: gespeichert, versioniert, gegen Evals getestet und gezielt geändert. Wiederverwendbare Prompt-Templates und strukturierte Ausgabeschemata reduzieren die Varianz."
+      ],
+      "components": [
+        "Rolle / Persona",
+        "Aufgabenanweisung",
+        "Einschränkungen",
+        "Ausgabeformat",
+        "Beispiele (Few-Shot)",
+        "Reasoning-Hinweise"
+      ],
+      "pros": [
+        "Der schnellste und kostengünstigste Weg, das Modellverhalten zu ändern.",
+        "Kein Training oder Infrastruktur erforderlich.",
+        "Funktioniert modell- und aufgabenübergreifend.",
+        "Einfach zu iterieren und mit anderen Techniken zu kombinieren."
+      ],
+      "risks": [
+        "Fragil: Geringfügige Änderungen im Wortlaut können das Verhalten verändern.",
+        "Prompt Injection, wenn Prompts nicht vertrauenswürdige Eingaben enthalten.",
+        "Schwer, die Zuverlässigkeit allein durch Prompting zu skalieren.",
+        "Verdeckte Kopplung an die Eigenheiten eines bestimmten Modells."
+      ],
+      "tools": [
+        "Prompt-Templates",
+        "Strukturierte Ausgabe / JSON-Schema",
+        "LangSmith / Langfuse (Prompt-Testing)",
+        "Evaluations-Suites"
+      ],
+      "examples": [
+        "Hinzufügen einiger ausgearbeiteter Beispiele, damit das Modell konsistentes JSON ausgibt.",
+        "Aufforderung zu einer schrittweisen Argumentation, um mathematische oder logische Antworten zu verbessern.",
+        "Spezifizieren eines strikten Formats, damit nachgelagerter Code die Antwort parsen kann."
+      ],
+      "faqs": [
+        {
+          "q": "Ist Prompt Engineering angesichts besserer Modelle immer noch relevant?",
+          "a": "Ja, aber seine Rolle schrumpft. Bessere Modelle benötigen weniger Überredung, doch klare Anweisungen, Beispiele und Formatspezifikationen verbessern die Zuverlässigkeit immer noch messbar – insbesondere innerhalb von Agenten."
+        },
+        {
+          "q": "Was ist der Unterschied zu Context Engineering?",
+          "a": "Prompt Engineering konzentriert sich auf die Anweisung. Context Engineering ist die umfassendere Aufgabe zu entscheiden, welche Informationen in jedem Schritt in das begrenzte Kontextfenster des Modells einfließen."
+        },
+        {
+          "q": "Hilft Chain-of-Thought immer?",
+          "a": "Es hilft am meisten bei mehrstufigen logischen Aufgaben, auf Kosten von mehr Token. Bei einfachen Abfragen erhöht es die Latenz ohne Nutzen."
+        },
+        {
+          "q": "Wie hält man Prompts zuverlässig?",
+          "a": "Behandeln Sie sie wie Code: Versionieren Sie sie, testen Sie sie gegen Evaluationen und ändern Sie sie gezielt statt durch Ausprobieren."
+        }
+      ]
+    },
+    "ja": {
+      "title": "プロンプトエンジニアリングとは何ですか？",
+      "summary": "プロンプトエンジニアリングとは、言語モデルが望ましい出力を確実に生成するように、モデルに与える入力を設計する手法です。優れたプロンプトは、役割、タスク、制約、出力形式、および必要に応じて例を指定します。これはモデルの挙動を制御するための最も手軽な手段であり、モデルを取り囲む広範なハーネスの1つのレイヤーですが、これ単体でシステムの大規模な信頼性を担保できるわけではありません。",
+      "definition": "プロンプトエンジニアリングとは、望ましい出力を確実に引き出すために、言語モデルに与える指示、コンテキスト、および例を設計・洗練させる手法です。",
+      "takeaways": [
+        "強力なプロンプトは、役割、タスク、制約、形式、および例を明示します。",
+        "構造化されたタスクでは、通常、指示のみよりも例（フューショット）を提示する方が優れた結果をもたらします。",
+        "Chain-of-Thought（思考の連鎖）プロンプトは、複数ステップの推論を向上させます。",
+        "プロンプトは感覚で手動調整するのではなく、テストおよびバージョン管理を行うべきです。",
+        "それはハーネスの1つのレイヤーであり、ツール、メモリ、評価の代わりになるものではありません。"
+      ],
+      "context": [
+        "モデルは自然言語の指示に従うため、タスクの表現方法によって結果が大きく変わります。プロンプトエンジニアリングとは、表現を洗練させる技術であり、目標、対象読者、制約、および期待する出力形式を明示することです。",
+        "これは出力品質を向上させる最も迅速かつ安価な方法であり、多くのチームがここから開始する理由でもあります。しかし、システムがエージェントへと進化するにつれて、プロンプト作成は、ツール、メモリ、検索、評価といったコンポーネント（完全なハーネス）の一部にすぎなくなります。"
+      ],
+      "architecture": [
+        "一般的な手法：ゼロショット（指示のみ）、フューショット（指示と例）、Chain-of-Thought（段階的な推論を求める）、役割と形式の指定、および分解（タスクをより小さなプロンプトに分割する）。",
+        "成熟したプラクティスでは、プロンプトをコードとして扱います。保存、バージョン管理、評価（evals）に対するテストを行い、計画的に変更します。再利用可能なプロンプトテンプレートや構造化された出力スキーマにより、ばらつきを抑えることができます。"
+      ],
+      "components": [
+        "役割／ペルソナ",
+        "タスクの指示",
+        "制約",
+        "出力形式",
+        "例（フューショット）",
+        "推論の手がかり"
+      ],
+      "pros": [
+        "モデルの挙動を変更するための、最も迅速かつ安価な方法。",
+        "トレーニングやインフラストラクチャは不要。",
+        "さまざまなモデルやタスクに対応可能。",
+        "反復（イテレーション）が容易で、他の手法と組み合わせやすい。"
+      ],
+      "risks": [
+        "脆弱性：わずかな表現の違いで挙動が変化する可能性がある。",
+        "プロンプトに信頼できない入力が含まれる場合のプロンプトインジェクション。",
+        "プロンプティング単体では信頼性のスケールが困難。",
+        "特定のモデルの癖に対する隠れた結合。"
+      ],
+      "tools": [
+        "プロンプトテンプレート",
+        "構造化出力 / JSONスキーマ",
+        "LangSmith / Langfuse（プロンプトテスト）",
+        "評価スイート"
+      ],
+      "examples": [
+        "モデルが一貫したJSONを出力するように、いくつかの具体的な実行例（Few-shot）を追加する。",
+        "数学や論理の回答を改善するために、段階的な思考（推論）を求める。",
+        "後続のコードがレスポンスをパースできるように、厳格なフォーマットを指定する。"
+      ],
+      "faqs": [
+        {
+          "q": "モデルが向上しても、プロンプトエンジニアリングは依然として重要ですか？",
+          "a": "はい、ただしその役割は狭まります。優れたモデルほど誘導を必要としなくなりますが、明確な指示、例、フォーマット指定は、特にエージェントの内部において、信頼性を測定可能な形で向上させます。"
+        },
+        {
+          "q": "コンテキストエンジニアリングとの違いは何ですか？",
+          "a": "プロンプトエンジニアリングは指示に焦点を当てます。コンテキストエンジニアリングは、各ステップでモデルの限られたコンテキストウィンドウにどの情報を入力するかを決定する、より広範なタスクです。"
+        },
+        {
+          "q": "Chain-of-Thought（思考の連鎖）は常に効果的ですか？",
+          "a": "トークン消費量が増える代わりに、複数ステップの推論タスクで最も効果を発揮します。単純な検索タスクでは、メリットなしにレイテンシーが増加するだけです。"
+        },
+        {
+          "q": "プロンプトの信頼性を維持するにはどうすればよいですか？",
+          "a": "コードとして扱うことです。バージョン管理を行い、評価（evals）に対してテストし、試行錯誤ではなく意図的に変更を加えます。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是提示词工程？",
+      "summary": "提示词工程是设计提供给语言模型的输入以使其可靠地产生所需输出的实践。一个好的提示词会指定角色、任务、约束、输出格式以及（在有用时）示例。它是引导模型行为最易用的手段——也是围绕模型的更广泛支撑系统（harness）中的一层——但仅凭其自身并不能使系统在大规模下保持可靠。",
+      "definition": "提示词工程是设计和改进提供给语言模型的指令、上下文和示例，以可靠地引导出所需输出的实践。",
+      "takeaways": [
+        "一个强大的提示词应说明角色、任务、约束、格式和示例。",
+        "对于结构化任务，示例（少样本/few-shot）的效果通常优于仅有指令。",
+        "思维链（chain-of-thought）提示词可以提高多步推理能力。",
+        "提示词应该经过测试和版本控制，而不是凭感觉手动调整。",
+        "它是支撑系统（harness）的一层，不能替代工具、内存和评估。"
+      ],
+      "context": [
+        "因为模型遵循自然语言指令，所以任务的表述方式会实质性地改变结果。提示词工程就是将其表述得当的学科：明确目标、受众、约束以及你希望返回的格式。",
+        "这是提高输出质量最快、最便宜的方法，也是大多数团队的起点。但随着系统演变为智能体，提示词编写变成了工具、内存、检索和评估（即完整的支撑系统/harness）中的一个组件。"
+      ],
+      "architecture": [
+        "常用技术：零样本/zero-shot（仅指令）、少样本/few-shot（指令加示例）、思维链/chain-of-thought（要求逐步推理）、角色和格式规范，以及分解（将任务拆分为更小的提示词）。",
+        "成熟的实践将提示词视为代码：进行存储、版本控制、针对评估（evals）进行测试，并谨慎地进行更改。可复用的提示词模板和结构化输出模式（schemas）可以减少偏差。"
+      ],
+      "components": [
+        "角色 / 人设（persona）",
+        "任务指令",
+        "约束条件",
+        "输出格式",
+        "示例（少样本/few-shot）",
+        "推理线索"
+      ],
+      "pros": [
+        "改变模型行为最快、最便宜的方法。",
+        "无需训练或基础设施。",
+        "适用于各种模型和任务。",
+        "易于迭代并与其他技术结合。"
+      ],
+      "risks": [
+        "脆弱性：微小的措辞变化就可能改变模型行为。",
+        "当提示词包含不可信输入时，存在提示词注入风险。",
+        "仅靠提示词很难规模化地提升可靠性。",
+        "隐性耦合于特定模型的独特怪癖。"
+      ],
+      "tools": [
+        "提示词模板",
+        "结构化输出 / JSON Schema",
+        "LangSmith / Langfuse（提示词测试）",
+        "评估套件"
+      ],
+      "examples": [
+        "添加几个完整示例，使模型输出一致的 JSON。",
+        "要求进行分步推理，以提高数学或逻辑回答的准确性。",
+        "指定严格的格式，以便下游代码能够解析响应。"
+      ],
+      "faqs": [
+        {
+          "q": "随着模型能力的提升，提示词工程依然重要吗？",
+          "a": "是的，但其作用范围在缩小。更好的模型需要更少的引导，但清晰的指令、示例和格式规范仍然能显著提高可靠性——特别是在智能体内部。"
+        },
+        {
+          "q": "它与上下文工程有什么区别？",
+          "a": "提示词工程侧重于指令本身。而上下文工程是一项更广泛的任务，旨在决定在每一步中哪些信息进入模型有限的上下文窗口。"
+        },
+        {
+          "q": "思维链（Chain-of-Thought）总是有效吗？",
+          "a": "它在多步推理任务中帮助最大，代价是消耗更多 Token。对于简单的查询，它只会增加延迟而无任何益处。"
+        },
+        {
+          "q": "如何保持提示词的可靠性？",
+          "a": "将它们视为代码：进行版本控制，对照评估集进行测试，并有目的地进行修改，而不是盲目试错。"
+        }
       ]
     }
   }

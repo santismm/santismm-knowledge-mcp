@@ -62,6 +62,22 @@
         "pt": {
           "label": "As ilhas Eólias",
           "note": "As ilhas levam o nome e a Antiguidade fez a ligação cedo. Em que direção correu a denominação — do poema às ilhas ou das ilhas ao poema — é a questão sem resposta."
+        },
+        "fr": {
+          "label": "Les îles Éoliennes",
+          "note": "Les îles portent ce nom et l'Antiquité a établi le lien très tôt. Le sens de cette attribution de nom — du poème aux îles ou des îles au poème — reste une question non résolue."
+        },
+        "zh": {
+          "label": "埃奥利群岛",
+          "note": "这些岛屿同名，且古人很早就建立了这种联系。命名究竟是源自史诗还是源自岛屿，这是一个尚未解决的问题。"
+        },
+        "de": {
+          "label": "Die Äolischen Inseln",
+          "note": "Die Inseln tragen den Namen, und die Antike stellte die Verbindung früh her. In welche Richtung die Namensgebung verlief – vom Epos zu den Inseln oder von den Inseln zum Epos –, ist die ungeklärte Frage."
+        },
+        "ja": {
+          "label": "エオリア諸島",
+          "note": "これらの島々はその名を冠しており、古代から早い段階で関連付けられていました。命名の流れが「詩から島々へ」だったのか、それとも「島々から詩へ」だったのかは、未解決の疑問です。"
         }
       }
     }
@@ -124,6 +140,86 @@
         {
           "q": "Os nove dias servem para medir distância?",
           "a": "Só se as andanças forem um itinerário real, que é exatamente a questão. Nove dias a velocidades típicas da Idade do Bronze cobririam quase todo o Mediterrâneo central."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Éole et le sac des vents",
+      "summary": "L'épisode le plus cruel du poème : Ithaque est en vue, l'équipage ouvre le sac que leur capitaine a gardé pendant neuf jours, et les vents les ramènent tout au bout du chemin.",
+      "narrative": [
+        "Éole, le gardien des vents, accueille Ulysse pendant un mois et le renvoie avec un sac de cuir contenant tous les vents sauf le zéphyr. Ulysse navigue pendant neuf jours et neuf nuits sans dormir. Le dixième jour, alors que les feux d'Ithaque sont visibles, il s'endort et l'équipage — certain que le sac contient de l'or — l'ouvre.",
+        "Ils sont rejetés vers Éolie. Cette fois, Éole refuse de les aider : un homme si haï des dieux ne doit pas recevoir d'aide. C'est l'affirmation la plus claire du poème que le retour n'est pas un problème de navigation."
+      ],
+      "whyItMatters": "C'est le centre géométrique des errances et le point où la confiance de l'atlas est la plus faible : une navigation de neuf jours depuis une île non localisée permet d'apercevoir Ithaque, et le poème ne précise jamais dans quelle direction.",
+      "debate": "La question est de savoir si les îles Éoliennes ont été nommées d'après l'Éole homérique ou inversement, et si l'intervalle de neuf jours peut réellement servir de preuve de distance.",
+      "faqs": [
+        {
+          "q": "Où se trouve l'Éolie ?",
+          "a": "Nulle part de manière établie. La tradition antique l'associe aux îles Éoliennes au nord de la Sicile, et le poème décrit une île flottante entourée d'un mur de bronze, ce qui ne correspond à aucun lieu réel."
+        },
+        {
+          "q": "Les neuf jours peuvent-ils servir à mesurer la distance ?",
+          "a": "Seulement si les errances constituent un itinéraire réel, ce qui est précisément la question. Neuf jours de navigation aux vitesses typiques de l'âge du bronze couvriraient la majeure partie de la Méditerranée centrale."
+        }
+      ]
+    },
+    "de": {
+      "title": "Aiolos und der Schlauch der Winde",
+      "summary": "Die grausamste Episode im Epos: Ithaka ist bereits in Sicht, als die Gefährten den Schlauch öffnen, den ihr Kapitän neun Tage lang bewacht hat, und die Winde sie den ganzen Weg zurücktreiben.",
+      "narrative": [
+        "Aiolos, der Hüter der Winde, bewirtet Odysseus einen Monat lang und entlässt ihn mit einem Lederschlauch, der alle Winde außer dem Westwind enthält. Odysseus steuert neun Tage und Nächte lang, ohne zu schlafen. Am zehnten Tag, als die Feuer von Ithaka bereits sichtbar sind, schläft er ein, und die Gefährten – überzeugt, dass der Schlauch Gold enthält – öffnen ihn.",
+        "Sie werden nach Aiolia zurückgeweht. Dieses Mal weist Aiolos sie ab: Einem Mann, der von den Göttern so gehasst wird, darf nicht geholfen werden. Dies ist die deutlichste Aussage des Epos, dass die Heimkehr kein navigatorisches Problem ist."
+      ],
+      "whyItMatters": "Es ist das geometrische Zentrum der Irrfahrten und der Punkt, an dem das Vertrauen des Atlas am geringsten ist: Eine neuntägige Segelfahrt von einer nicht lokalisierten Insel bringt Ithaka in Sicht, und das Epos verrät nie, in welche Richtung.",
+      "debate": "Ob die Äolischen Inseln nach dem homerischen Aiolos benannt wurden oder umgekehrt, und ob das neuntägige Intervall überhaupt als Beweis für eine Entfernung dienen kann.",
+      "faqs": [
+        {
+          "q": "Wo liegt Aiolia?",
+          "a": "Nirgendwo nachgewiesen. Die antike Tradition bringt sie mit den Äolischen Inseln nördlich von Sizilien in Verbindung, und das Epos beschreibt eine schwimmende Insel, die von einer Bronzemauer umgeben ist – was auf keinen realen Ort zutrifft."
+        },
+        {
+          "q": "Können die neun Tage zur Entfernungsmessung herangezogen werden?",
+          "a": "Nur wenn die Irrfahrten eine reale Reiseroute darstellen, was genau die Frage ist. Neun Tage bei typischen bronzezeitlichen Segelgeschwindigkeiten würden den größten Teil des zentralen Mittelmeers abdecken."
+        }
+      ]
+    },
+    "ja": {
+      "title": "アイオロスと風の袋",
+      "summary": "この詩の中で最も残酷なエピソードです。イタカが目と鼻の先に見えたその時、部下たちが船長が9日間にわたって守り抜いた袋を開けてしまい、風によって元の場所まで吹き戻されてしまいます。",
+      "narrative": [
+        "風の守り手であるアイオロスは、オデュッセウスを1ヶ月間もてなし、西風以外のすべての風を閉じ込めた革袋を持たせて送り出します。オデュッセウスは不眠不休で9日9晩舵を取り続けます。10日目、イタカの篝火が見えたところで彼が眠りに落ちると、袋に金が入っていると確信した部下たちがそれを開けてしまいます。",
+        "彼らはアイオリア島まで吹き戻されます。今度はアイオロスも彼らを拒絶します。神々にこれほど嫌われている者は助けるべきではないというのです。これは、帰還が航海技術上の問題ではないことを、この詩の中で最も明確に示している場面です。"
+      ],
+      "whyItMatters": "これは漂流の幾何学的な中心であり、このアトラスの信頼度が最も低い地点でもあります。位置の特定できない島から9日間帆走するとイタカが見えてきますが、詩の中ではそれがどの方向であるかが一切語られていません。",
+      "debate": "エオリア諸島の名がホメロスのアイオロスに由来するのか、あるいはその逆なのか、そして9日間という期間がそもそも距離の証拠として使えるのかという議論。",
+      "faqs": [
+        {
+          "q": "アイオリアはどこにありますか？",
+          "a": "確定した場所はありません。古代の伝承ではシチリア島北方のエオリア諸島と結びつけられていますが、詩の中では青銅の壁に囲まれた浮かぶ島と描写されており、実在するいかなる場所の説明にも当てはまりません。"
+        },
+        {
+          "q": "9日間という期間を距離の測定に使えますか？",
+          "a": "漂流が実在の航路である場合に限られますが、それ自体が疑問視されています。青銅器時代の一般的な帆走速度で9日間進めば、地中海中部の大部分をカバーすることになります。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "埃俄罗斯与风袋",
+      "summary": "诗中最残酷的篇章：伊萨卡已近在眼前，船员们却打开了船长守护了九天的风袋，狂风将他们一路吹回了原点。",
+      "narrative": [
+        "风神埃俄罗斯款待了奥德修斯一个月，并送给他一个皮袋，里面装有除西风以外的所有风。奥德修斯不眠不休地掌舵了九天九夜。第十天，当伊萨卡的烽火清晰可见时，他睡着了，而坚信袋子里装有黄金的船员们打开了它。",
+        "他们被吹回了埃奥利亚。这一次埃俄罗斯拒绝了他们：一个如此被神明憎恨的人是不应得到帮助的。这是诗中最明确的表态，即回归并非一个航海导航问题。"
+      ],
+      "whyItMatters": "这是漂泊旅程的几何中心，也是本图册可信度最低的一点：从一个未确定位置的岛屿航行九天便可望见伊萨卡，而诗中从未说明是朝哪个方向。",
+      "debate": "究竟是埃奥利群岛因荷马史诗中的埃俄罗斯而得名，还是相反，以及这九天的间隔是否可以作为距离的证据。",
+      "faqs": [
+        {
+          "q": "埃奥利亚在哪里？",
+          "a": "尚无定论。古代传统将其与西西里岛以北的埃奥利群岛联系在一起，而诗中将其描述为一个被青铜环绕的漂浮岛屿，这不符合任何现实中的地方。"
+        },
+        {
+          "q": "这九天的时间能用来测量距离吗？",
+          "a": "只有在这些漂泊旅程是真实路线的前提下才可以，而这正是问题所在。以青铜时代典型的航行速度，九天时间可以覆盖地中海中部的大部分区域。"
         }
       ]
     }

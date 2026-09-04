@@ -84,6 +84,22 @@
         "pt": {
           "label": "Uma lembrança do Bronze Final",
           "note": "A versão mais forte do argumento: uma proporção significativa dos lugares do Catálogo estava ocupada no Bronze Final e alguns foram abandonados antes da época arcaica, o que é difícil de explicar se a lista foi composta a partir de um mapa do século VIII."
+        },
+        "fr": {
+          "label": "Un souvenir de l'âge du bronze récent",
+          "note": "La version la plus solide de cet argument : une proportion importante des localités du Catalogue était occupée à l'âge du bronze récent et certaines ont été abandonnées avant l'époque archaïque, ce qui s'explique difficilement si la liste avait été établie à partir d'une carte du VIIIe siècle."
+        },
+        "zh": {
+          "label": "青铜时代晚期的记忆",
+          "note": "该论点最强有力的版本是：在青铜时代晚期，《船名录》中相当比例的地点有人居住，而其中一些在古风时期之前就被废弃了，如果该名单是根据公元前八世纪的地图编制的，这一点将很难解释。"
+        },
+        "de": {
+          "label": "Eine Erinnerung an die Spätbronzezeit",
+          "note": "Die stärkste Version dieses Arguments: Ein erheblicher Teil der im Schiffskatalog genannten Orte war in der Spätbronzezeit besiedelt und einige wurden noch vor der archaischen Zeit aufgegeben. Dies lässt sich nur schwer erklären, wenn die Liste auf der Grundlage einer Karte aus dem achten Jahrhundert erstellt worden wäre."
+        },
+        "ja": {
+          "label": "青銅器時代後期の記憶",
+          "note": "この説の最も強力な根拠：『船のカタログ』に記載された場所の大部分は後期青銅器時代に居住地であり、その一部はアルカイック期より前に放棄されていた。もしこのリストが8世紀の地図をもとに作成されたのであれば、この事実を説明するのは困難である。"
         }
       }
     },
@@ -108,6 +124,22 @@
         "pt": {
           "label": "Uma lista arcaica projetada para trás",
           "note": "A leitura cética: o Catálogo reflete a geografia política da época do poeta, com toques arcaizantes, e seus acertos do Bronze são os lugares que sempre foram importantes. Os comentadores antigos já discutiam entradas que não encaixavam na Grécia que conheciam."
+        },
+        "fr": {
+          "label": "Une liste archaïque, projetée dans le passé",
+          "note": "La lecture sceptique : le Catalogue reflète la géographie politique de l'époque du poète, avec des touches archaïsantes, et ses correspondances avec l'âge du bronze sont simplement des lieux qui ont toujours été importants. Les commentateurs de l'Antiquité débattaient déjà des entrées qui ne correspondaient pas à la Grèce qu'ils connaissaient."
+        },
+        "zh": {
+          "label": "追溯投射的古风时期名单",
+          "note": "怀疑派的解读：该《船名录》反映了诗人所处时代的政治地理，并带有复古色彩，而其中与青铜时代相吻合的地点，仅仅是因为这些地方一直都很重要。古代评论家们就已经在为那些与他们所知的希腊不相符的条目争论不休了。"
+        },
+        "de": {
+          "label": "Eine archaische Liste, rückprojiziert",
+          "note": "Die skeptische Lesart: Der Katalog spiegelt die politische Geografie der eigenen Zeit des Dichters mit archaisierenden Zügen wider, und seine Treffer aus der Bronzezeit sind jene Orte, die schlichtweg schon immer bedeutend waren. Bereits antike Kommentatoren stritten über Einträge, die nicht mit dem Griechenland übereinstimmten, das sie kannten."
+        },
+        "ja": {
+          "label": "過去に投影されたアルカイック期のリスト",
+          "note": "懐疑的な解釈：このカタログは、古風な味付けを施しつつ、詩人自身の時代の政治地理を反映したものであり、青銅器時代と一致する場所は、単に常に重要であった場所にすぎない。古代の注釈家たちも、彼らが知っていたギリシャと一致しない記載について、すでに議論を戦わせていた。"
         }
       }
     }
@@ -170,6 +202,86 @@
         {
           "q": "Por que importa para localizar lugares homéricos?",
           "a": "Porque nomeia lugares em relação uns aos outros e a seus chefes, de modo que uma identificação proposta pode ser confrontada com um padrão regional inteiro, não com um único verso."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Le Catalogue des vaisseaux",
+      "summary": "Deux cent soixante-dix vers énumérant vingt-neuf contingents, leurs commandants, le nombre de leurs navires et leurs villes. C'est l'élément géographique le plus dense de toute la littérature grecque et la colonne vertébrale de cet atlas.",
+      "narrative": [
+        "Le Catalogue interrompt le deuxième chant de l'Iliade pour énumérer les forces achéennes rassemblées à Aulis : les Béotiens d'abord, puis contingent après contingent, chacun avec ses villes nommées. Un catalogue troyen plus court suit. Rien d'autre dans l'un ou l'autre poème ne s'apparente à un recensement.",
+        "Son intérêt ici est qu'il peut être mis à l'épreuve. On peut chercher sur le terrain les lieux de la liste, et beaucoup ont été retrouvés — certains d'entre eux étant occupés à l'âge du bronze récent et abandonnés bien avant que le poème ne soit mis par écrit."
+      ],
+      "whyItMatters": "Chaque identification acceptée dans cet atlas est une entrée du Catalogue, et c'est grâce au Catalogue que l'atlas peut distinguer les lieux localisés de ceux qui font débat. Il obtient un score de 8/12 : superbe sur le texte, solide sur le consensus, mais limité par le fait qu'une liste de noms ne remplace pas des fouilles.",
+      "debate": "La question est de savoir si le Catalogue conserve un document de l'âge du bronze, une reconstruction archaïque ou une tradition qui s'est enrichie au fil des siècles. L'archéologie confirme une antiquité partielle, mais ne tranche ni sur l'auteur ni sur la date.",
+      "faqs": [
+        {
+          "q": "Le Catalogue des vaisseaux est-il historiquement fiable ?",
+          "a": "En partie. Certaines de ses villes étaient occupées à l'âge du bronze récent et abandonnées avant l'époque archaïque, ce qui suggère des éléments véritablement anciens ; d'autres entrées correspondent mieux à l'époque du poète lui-même. Il convient de le lire comme une liste stratifiée plutôt que comme un document unique datant d'une seule époque."
+        },
+        {
+          "q": "Pourquoi est-il important pour localiser les lieux homériques ?",
+          "a": "Parce qu'il nomme les lieux les uns par rapport aux autres et par rapport à leurs commandants, ce qui permet de tester une proposition d'identification par rapport à tout un schéma régional plutôt qu'à un seul vers."
+        }
+      ]
+    },
+    "de": {
+      "title": "Der Schiffskatalog",
+      "summary": "Zweihundertsiebzig Verse, die neunundzwanzig Kontingente, ihre Befehlshaber, ihre Schiffsanzahl und ihre Städte auflisten. Es ist das dichteste Stück Geographie in der griechischen Literatur und das Rückgrat dieses Atlas.",
+      "narrative": [
+        "Der Katalog unterbricht den zweiten Gesang der Ilias, um die in Aulis versammelten achaischen Streitkräfte aufzuzählen: zuerst die Böotier, dann Kontingent auf Kontingent, jeweils mit namentlich genannten Städten. Es folgt ein kürzerer trojanischer Katalog. Nichts anderes in beiden Epen versucht, eine solche Bestandsaufnahme zu sein.",
+        "Sein Wert hier liegt darin, dass er überprüft werden kann. Orte auf der Liste können vor Ort gesucht werden, und viele wurden gefunden – einige davon waren in der Spätbronzezeit besiedelt und lagen lange vor der Niederschrift des Epos verlassen da."
+      ],
+      "whyItMatters": "Jede anerkannte Identifizierung in diesem Atlas ist ein Eintrag im Schiffskatalog, und der Katalog ist der Grund, warum der Atlas überhaupt zwischen lokalisierten und umstrittenen Orten unterscheiden kann. Er erreicht eine Bewertung von 8/12: hervorragend beim Text, stark beim Konsens, gebremst durch die Tatsache, dass eine Namensliste an sich noch keine Ausgrabung ist.",
+      "debate": "Ob der Katalog ein bronzezeitliches Dokument, eine archaische Rekonstruktion oder eine über Jahrhunderte angewachsene Tradition bewahrt. Die Archäologie stützt ein teilweises hohes Alter; sie klärt weder Autorschaft noch Datum.",
+      "faqs": [
+        {
+          "q": "Ist der Schiffskatalog historisch zuverlässig?",
+          "a": "In Teilen. Einige seiner Städte waren in der Spätbronzezeit besiedelt und wurden vor der archaischen Zeit aufgegeben, was auf echtes altes Material hindeutet; andere Einträge passen besser in die eigene Epoche des Dichters. Er wird am besten als eine geschichtete Liste und nicht als ein einzelnes Dokument aus einer einzigen Epoche verstanden."
+        },
+        {
+          "q": "Warum ist er für die Lokalisierung homerischer Orte von Bedeutung?",
+          "a": "Weil er Orte in Beziehung zueinander und zu ihren Befehlshabern nennt, sodass eine vorgeschlagene Identifizierung an einem gesamten regionalen Muster und nicht nur an einem einzelnen Vers überprüft werden kann."
+        }
+      ]
+    },
+    "ja": {
+      "title": "船のカタログ",
+      "summary": "270行にわたり、29の部隊、その指揮官、船の数、そして彼らの町が列挙されています。これはギリシャ文学において最も高密度な地理的記述であり、このアトラスの骨格をなすものです。",
+      "narrative": [
+        "このカタログは『イリアス』第2巻を中断する形で挿入され、アウリスに集結したアカイア人の軍勢を列挙します。まずボイオティア人、次いで部隊が次々と紹介され、それぞれに具体的な町の名が挙げられます。その後、より短いトロイア側のカタログが続きます。両詩において、これほど網羅的な調査を試みている箇所は他にありません。",
+        "ここでの価値は、それを検証できる点にあります。リストに掲載された場所は現地で探索することができ、その多くが実際に発見されています。中には、青銅器時代後期に人が居住し、この詩が書き留められる遥か前に放棄された場所もあります。"
+      ],
+      "whyItMatters": "このアトラスで認められているすべての同定は「船のカタログ」の記載項目であり、このカタログがあるからこそ、アトラスは位置が特定された場所と議論のある場所を明確に区別できるのです。スコアは12点満点中8点です。テキストの面では極めて優れており、合意形成も強力ですが、名前のリスト自体は発掘調査そのものではないという事実が評価の足を引っ張っています。",
+      "debate": "このカタログが青銅器時代の文書を保存しているのか、古拙期（アルカイック期）の再構成なのか、あるいは何世紀にもわたって蓄積された伝承なのかという議論。考古学は部分的な古さを支持していますが、著者や年代を確定させるものではありません。",
+      "faqs": [
+        {
+          "q": "「船のカタログ」は歴史的に信頼できますか？",
+          "a": "部分的には信頼できます。一部の町は青銅器時代後期に人が住んでおり、古拙期（アルカイック期）より前に放棄されていたため、真に古い資料であることが示唆されます。一方で、詩人自身の時代により適合する記載もあります。これは、単一の年代の文書としてではなく、層状に積み重なったリストとして読むのが最も適切です。"
+        },
+        {
+          "q": "ホメロスの地名を特定する上で、なぜこれが重要なのでしょうか？",
+          "a": "場所同士の相互関係や指揮官との関連性において地名が挙げられているため、提案された同定案を、単一の詩行だけでなく、地域全体のパターンと照らし合わせて検証できるからです。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "战船名录",
+      "summary": "用两百七十行诗句列出了二十九支分队、他们的指挥官、船只数量以及他们的城镇。这是希腊文学中地理信息最密集的一段，也是本图册的支柱。",
+      "narrative": [
+        "该名录穿插在《伊利亚特》第二卷中，列举了聚集在奥利斯的阿开亚军队：玻俄提亚人排在首位，随后是一支支分队，每支分队都列出了具体的城镇名称。随后是一个较短的特洛伊盟军名录。两部史诗中再无其他篇章试图进行如此详尽的普查。",
+        "它在这里的价值在于它是可以被验证的。列表中的地点可以在实地进行寻找，并且许多已经找到——其中一些在青铜时代晚期曾有人居住，但在该史诗被记录下来之前很久就已被废弃。"
+      ],
+      "whyItMatters": "本图册中每一个被接受的身份认定都是《战船名录》中的一个条目，而该名录正是本图册能够区分“已定位地点”与“存议地点”的原因。它的评分为8/12：文本依据极佳，共识度高，但受限于一个事实，即一份名字列表本身并不能等同于考古发掘。",
+      "debate": "究竟是该名录保存了一份青铜时代的文献、一份古风时期的重建版本，还是一个累积了数个世纪的传统。考古学支持其部分古老性，但并未解决作者身份或创作日期的问题。",
+      "faqs": [
+        {
+          "q": "《战船名录》在历史上可靠吗？",
+          "a": "部分可靠。其中的一些城镇在青铜时代晚期曾有人居住，并在古风时期之前被废弃，这表明其包含真正古老的内容；其他条目则更符合诗人自己所处的时代。最好将其视为一份层级累积的列表，而非单一时期的文献。"
+        },
+        {
+          "q": "为什么它对于定位荷马史诗中的地点至关重要？",
+          "a": "因为它命名了地点之间的相互关系以及它们与指挥官的关系，因此可以根据整个区域格局来验证拟议的身份认定，而不仅仅是根据单行诗句。"
         }
       ]
     }

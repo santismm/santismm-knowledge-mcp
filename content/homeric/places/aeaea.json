@@ -87,6 +87,22 @@
         "pt": {
           "label": "Monte Circeo, Lácio",
           "note": "Um promontório calcário que se ergue sobre costa plana, com aparência de ilha vista do mar e com o nome de Circe nas fontes latinas desde Estrabão e Virgílio. A identificação é antiga, geograficamente sugestiva e sem apoio arqueológico."
+        },
+        "fr": {
+          "label": "Mont Circé, Latium",
+          "note": "Un promontoire calcaire s'élevant d'une côte plate, qui ressemble à une île vue de la mer et porte le nom de Circé dans les sources latines à partir de Strabon et Virgile. L'identification est ancienne, géographiquement suggestive et archéologiquement non étayée."
+        },
+        "zh": {
+          "label": "拉齐奥的切尔切奥山（Monte Circeo, Latium）",
+          "note": "一座从平坦海岸升起的石灰岩海岬，从海上看去像一座岛屿，在斯特拉博和维吉尔之后的拉丁文献中一直冠有喀耳刻之名。这一认定历史悠久，在地理上具有暗示性，但在考古学上缺乏支持。"
+        },
+        "de": {
+          "label": "Monte Circeo, Latium",
+          "note": "Ein Kalksteinvorgebirge, das sich aus einer flachen Küste erhebt, vom Meer aus wie eine Insel aussieht und in lateinischen Quellen ab Strabo und Vergil den Namen der Kirke trägt. Die Identifizierung ist antik, geografisch naheliegend und archäologisch nicht belegt."
+        },
+        "ja": {
+          "label": "ラティウムのチルチェーオ山",
+          "note": "平坦な海岸からそびえ立つ石灰岩の岬。海からは島のように見え、ストラボンやウェルギリウス以降のラテン語の史料ではキルケの名を冠している。この同定は古代からのものであり、地理的にはそれらしさを示唆しているものの、考古学的な裏付けはない。"
         }
       }
     }
@@ -124,6 +140,46 @@
       ],
       "identificationNote": "Especulativa: uma identificação antiga com um acidente geográfico real e característico por trás, e nada mais. O critério textual fica em 2 porque a própria orientação que o poema dá a Eeia aponta para o lado contrário.",
       "debate": "Se a ilha de Circe pertence à mesma geografia das escalas sicilianas e tirrenas, ou se a “morada da Aurora” a leste preserva uma camada mais antiga e distinta do relato."
+    },
+    "fr": {
+      "name": "Ééa",
+      "summary": "L'île de Circé, où l'équipage est transformé en porcs et où l'on indique à Ulysse comment rejoindre le royaume des morts. La tradition romaine la situait sur un promontoire qui ressemble seulement à une île.",
+      "description": [
+        "Les hommes d'Ulysse passent un an sur Ééa. C'est le pivot du voyage : Circé est la seule hôtesse qui donne des instructions plutôt que de dresser des obstacles, et la route vers les Enfers, les Sirènes, Scylla et la Thrinacie sortent toutes de sa bouche.",
+        "Le poème la qualifie d'île où « l'Aurore a sa demeure et ses chœurs de danse », un détail oriental qui s'accorde mal avec une identification occidentale — l'un des nombreux endroits où les indications internes de l'Odyssée et la carte traditionnelle divergent."
+      ],
+      "identificationNote": "Spéculatif : une identification antique reposant sur un relief réel et distinctif, et rien d'autre. Le critère textuel est maintenu à 2 car la propre orientation du poème pour Ééa pointe dans la direction opposée.",
+      "debate": "La question est de savoir si l'île de Circé appartient à la même géographie que les étapes siciliennes et tyrrhéniennes, ou si la « demeure de l'Aurore » située à l'est conserve une couche plus ancienne et différente du récit."
+    },
+    "de": {
+      "name": "Aiaia",
+      "summary": "Kirkes Insel, auf der die Gefährten in Schweine verwandelt werden und auf der Odysseus erfährt, wie er das Reich der Toten erreicht. Die römische Tradition verortete sie auf einer Landzunge, die nur wie eine Insel aussieht.",
+      "description": [
+        "Odysseus' Männer verbringen ein Jahr auf Aiaia. Es ist der Dreh- und Angelpunkt der Reise: Kirke ist die einzige Gastgeberin, die Anweisungen statt Hindernisse gibt, und der Weg in die Unterwelt, zu den Sirenen, Skylla und Thrinakia stammen alle aus ihrem Mund.",
+        "Das Epos nennt sie eine Insel, auf der „die Eos ihre Wohnung und ihre Reigenplätze hat“ – ein nach Osten weisendes Detail, das schlecht zu einer westlichen Identifizierung passt; einer von mehreren Orten, an denen die internen Wegbeschreibungen der Odyssee und die traditionelle Landkarte nicht übereinstimmen."
+      ],
+      "identificationNote": "Spekulativ: eine antike Identifizierung, hinter der eine reale, markante Landform steht und sonst nichts. Das Textkriterium wird bei 2 gehalten, da die eigene Orientierung des Epos für Aiaia in die entgegengesetzte Richtung weist.",
+      "debate": "Ob Kirkes Insel zur selben Geografie gehört wie die sizilianischen und tyrrhenischen Stationen oder ob das östliche „Haus der Eos“ eine ältere, andere Schicht der Erzählung bewahrt."
+    },
+    "ja": {
+      "name": "アイアイエ",
+      "summary": "キルケの島。ここで乗組員たちは豚に変えられ、オデュッセウスは死者の国への行き方を告げられる。ローマの伝承では、島のように見えるだけの岬にこの島を比定している。",
+      "description": [
+        "オデュッセウスの部下たちはアイアイエで1年間を過ごす。これは航海の転換点である。キルケは、障害ではなく指示を与えてくれる唯一の主（ホスト）であり、冥界へのルート、セイレンたち、スカイラ、そしてスリナキアはすべて彼女の口から語られる。",
+        "詩の中では、この島は「暁の館と舞い処がある」島と呼ばれており、この東方を示す描写は、西方とする同定とはうまく噛み合わない。これは、『オデュッセイア』の内部の方向指示と伝統的な地図が一致しないいくつかの場所の一つである。"
+      ],
+      "identificationNote": "推測の域を出ない：実在する特徴的な地形を背景にした古代の同定であるが、それ以外の根拠はない。詩自体が示すアイアイエの方角が逆を指しているため、テキスト基準は2に留められている。",
+      "debate": "キルケの島がシチリアやティレニアの寄港地と同じ地理に属しているのか、それとも東方の「暁の館」が物語のより古く異なる層を保存しているのかという議論。"
+    },
+    "zh": {
+      "name": "埃埃亚（Aeaea）",
+      "summary": "喀耳刻的岛屿，船员们在此被变成了猪，奥德修斯在此被告知如何前往亡灵之地。罗马传统将其定位在一个仅仅看起来像岛屿的岬角上。",
+      "description": [
+        "奥德修斯的船员在埃埃亚度过了一年。这是航行的关键转折点：喀耳刻是唯一一位给予指引而非制造障碍的主人，前往冥界、塞壬、斯库拉（Scylla）和斯里纳基亚（Thrinacia）的路线都出自她之口。",
+        "史诗称其为“黎明女神居住和跳舞”的岛屿，这一向东的细节与西方的地理识别显得格格不入——这是《奥德赛》内部方向指引与传统地图不一致的几处地方之一。"
+      ],
+      "identificationNote": "推测性：一个古老的地理识别，背后仅有一个真实且独特的地形，别无其他。文本标准被定为 2，因为史诗本身对埃埃亚的方位描述指向了相反的方向。",
+      "debate": "喀耳刻的岛屿是否与西西里和第勒尼安（Tyrrhenian）的停靠点属于同一地理范畴，抑或是向东的“黎明之屋”保留了故事中更古老、不同的层面。"
     }
   }
 }

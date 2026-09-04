@@ -83,6 +83,22 @@
         "pt": {
           "label": "Kaz Dağı (o monte Ida da Trôade)",
           "note": "O maciço a sudeste da Trôade, a maior altura à vista da planície, do qual a Ilíada faz Zeus observar o combate. Os rios que o poema nomeia — o Escamandro entre eles — nascem em suas encostas. Nada da identificação é contestado."
+        },
+        "fr": {
+          "label": "Kaz Dağı (le mont Ida de la Troade)",
+          "note": "Le massif au sud-est de la Troade, le point culminant en vue de la plaine, d'où l'Iliade fait observer les combats par Zeus. Des fleuves nommés dans le poème — dont le Scamandre — prennent leur source sur ses flancs. Rien dans cette identification n'est contesté."
+        },
+        "zh": {
+          "label": "卡兹山（特罗阿德的伊达山）",
+          "note": "特罗阿德东南部的山脉，是平原视野内的最高点，在《伊利亚特》中，宙斯在此观看战斗。诗中提到的河流——包括斯卡曼德罗斯河（Scamander）——均发源于其山坡。这一认定没有任何争议。"
+        },
+        "de": {
+          "label": "Kaz Dağı (Berg Ida der Troas)",
+          "note": "Das Massiv südöstlich der Troas, die höchste Erhebung in Sichtweite der Ebene, von der aus Zeus in der Ilias die Kämpfe beobachtet. Im Epos genannte Flüsse – darunter der Skamandros – entspringen an seinen Hängen. Nichts an dieser Identifizierung ist umstritten."
+        },
+        "ja": {
+          "label": "カズ山（トロアスのイダ山）",
+          "note": "トロアス地方の南東に位置する山塊で、平野から見える最も高い場所。ここから『イリアス』ではゼウスが戦闘を見守る。詩に登場する川（スカマンドロス川など）は、その斜面に源を発している。この同定について異論はない。"
         }
       }
     }
@@ -121,6 +137,46 @@
       ],
       "identificationNote": "Aceita: um acidente geográfico nomeado e inconfundível, consensual desde a Antiguidade. O critério arqueológico pontua 1 porque uma montanha não é uma escavação, não porque haja dúvida.",
       "debate": "Nada sobre a montanha. O que a ficha aporta é a corroboração da paisagem da Trôade como um todo: o ponto em que vários topônimos homéricos deixam de ser nomes e passam a ser um mapa."
+    },
+    "fr": {
+      "name": "Mont Ida",
+      "summary": "La montagne depuis laquelle les dieux observent la guerre, et un élément de topographie réelle qui ancre le paysage de l'Iliade : elle est visible depuis Hisarlık, et les fleuves de la plaine y prennent leur source.",
+      "description": [
+        "L'Ida est le point d'observation de l'Iliade. Zeus siège sur le Gargaros, l'un de ses sommets, et le climat du poème, ses fleuves et ses comparaisons descendent du massif vers la plaine. C'est aussi là que Pâris a jugé les déesses, dans une histoire que l'Iliade évoque plutôt qu'elle ne la raconte.",
+        "L'identification est banale, et c'est bien là l'essentiel : la géographie physique de la Troade — montagne, fleuves, plaine, détroit, îles au large — est cohérente et vérifiable, et constitue le plus solide argument en faveur du fait que le cadre du poème était connu de son auteur."
+      ],
+      "identificationNote": "Acceptée : un relief nommé et indubitable, faisant consensus depuis l'Antiquité. Le score archéologique est de 1 parce qu'une montagne n'est pas un site de fouilles, et non parce qu'il y aurait un doute.",
+      "debate": "Rien concernant la montagne. Ce que cette entrée apporte, c'est une corroboration du paysage de la Troade dans son ensemble — le point de bascule où plusieurs noms de lieux homériques cessent d'être de simples noms pour devenir une carte."
+    },
+    "de": {
+      "name": "Berg Ida",
+      "summary": "Der Berg, von dem aus die Götter den Krieg beobachten, und ein Stück realer Topografie, das die Landschaft der Ilias verankert: Er ist von Hisarlık aus sichtbar, und die Flüsse der Ebene entspringen dort.",
+      "description": [
+        "Der Ida ist der Aussichtspunkt der Ilias. Zeus sitzt auf dem Gargaros, einem seiner Gipfel, und das Wetter des Epos, seine Flüsse und seine Gleichnisse kommen vom Massiv hinab in die Ebene. Es ist auch der Ort, an dem Paris das Urteil über die Göttinnen fällte, in einer Geschichte, auf die die Ilias eher anspielt, als dass sie sie erzählt.",
+        "Die Identifizierung ist unauffällig, was genau der Punkt ist: Die physische Geografie der Troas – Berg, Flüsse, Ebene, Meerenge, vorgelagerte Inseln – ist kohärent und überprüfbar, und sie ist das stärkste Einzelargument dafür, dass der Schauplatz des Epos demjenigen bekannt war, der es verfasst hat."
+      ],
+      "identificationNote": "Akzeptiert: eine benannte, unmissverständliche Landschaftsform, seit der Antike unumstritten. Die archäologische Bewertung liegt bei 1, weil ein Berg keine Ausgrabung ist, nicht weil irgendetwas in Zweifel stünde.",
+      "debate": "Nichts über den Berg selbst. Was der Eintrag beiträgt, ist die Bestätigung für die Landschaft der Troas als Ganzes – der Punkt, an dem mehrere homerische Ortsnamen aufhören, bloße Namen zu sein, und anfangen, eine Karte zu bilden."
+    },
+    "ja": {
+      "name": "イダ山",
+      "summary": "神々が戦争を見守る山であり、『イリアス』の風景を固定する実在の地形。ヒサルルクから見ることができ、平野の川はこの山から流れ出ている。",
+      "description": [
+        "イダ山は『イリアス』の展望台である。ゼウスはその峰の一つであるガルガロスに座し、詩に描かれる天候、川、そして直喩はこの山塊から平野へと下ってくる。また、ここはパリスが女神たちを審判した場所でもあり、その物語は『イリアス』で語られるというよりも、ほのめかされている。",
+        "この同定は平凡なものであるが、それこそが重要な点である。トロアス地方の自然地理（山、川、平野、海峡、沖合의島々）は一貫しており、検証可能である。これは、詩の舞台がその作者に知られていたことを示す最も強力な単一の論拠である。"
+      ],
+      "identificationNote": "合意あり：古代から認められている、名前のある紛れもない地形。考古学スコアが1なのは、山が発掘現場ではないためであり、何かが疑わしいためではない。",
+      "debate": "山自体についての議論はない。この項目が貢献しているのは、トロアスの風景全体に対する裏付けである。つまり、いくつかのホメロスの地名が単なる名前であることをやめ、地図になり始める地点である。"
+    },
+    "zh": {
+      "name": "伊达山",
+      "summary": "众神观看战争的山峰，也是奠定《伊利亚特》景观基础的真实地形：从希萨尔利克（Hisarlık）可以看到它，平原上的河流也发源于此。",
+      "description": [
+        "伊达山是《伊利亚特》中的绝佳观测点。宙斯坐在它的山峰之一加尔加鲁斯（Gargarus）上，诗中的天气、河流和比喻都从这座山脉延伸到平原。这里也是帕里斯评判女神的地方，在《伊利亚特》中，这个故事只是被提及而非详细讲述。",
+        "这一认定平淡无奇，但这正是关键所在：特罗阿德（Troad）的自然地理——山脉、河流、平原、海峡、近海岛屿——是连贯且可考证的，这是证明诗作创作者了解其设定背景的最强有力单一论据。"
+      ],
+      "identificationNote": "已确认：自古以来公认的、有名字且清晰可辨的地貌。考古评分仅为1分，是因为山脉不是发掘遗址，而非因为存在任何疑问。",
+      "debate": "关于这座山本身并无争议。该条目的贡献在于为整个特罗阿德景观提供了佐证——在这一点上，几个荷马史诗中的地名不再仅仅是名字，而是开始构成一幅地图。"
     }
   }
 }

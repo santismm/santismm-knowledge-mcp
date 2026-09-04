@@ -38,6 +38,30 @@
       "basis": "Os modos de falha são novos — a mesma entrada pode seguir caminhos diferentes e chegar a conclusões diferentes —, pelo que a confiança vem de medir distribuições e limitar a autoridade, não de asserções. As competências que exige (fiabilidade probabilística, desenho de avaliação, engenharia de contexto, desenho de contratos de ferramentas, segurança adversária) não encaixam de forma limpa em nenhuma das disciplinas-mãe.",
       "limitations": "É a posição da SANTISMM, não um consenso do setor. Não há acreditação, currículo padrão, corpo de conhecimento acordado nem organismo profissional. «Emergente» faz trabalho real nesta frase: afirma-se que a disciplina se está a formar, não que esteja estabelecida.",
       "falsifiedBy": "Que essas preocupações sejam absorvidas como especialidade normal da engenharia de plataforma ou de ML — currículos e carreiras a tratá-la assim —, ou que a capacidade dos modelos avance o suficiente para o sistema à volta deixar de precisar de engenharia própria."
+    },
+    "fr": {
+      "statement": "Construire le système autour du modèle est une discipline d'ingénierie émergente à part entière, et non une spécialité du machine learning ou de l'ingénierie backend.",
+      "basis": "Les modes de défaillance sont nouveaux — une même entrée peut emprunter des chemins différents et mener à des conclusions différentes — la confiance provient donc de la mesure des distributions et de la limitation de l'autorité plutôt que d'affirmations. Les compétences requises (fiabilité probabiliste, conception d'évaluations, ingénierie du contexte, conception de contrats d'outils, sécurité adverse) ne s'inscrivent clairement dans aucun des deux domaines d'origine.",
+      "limitations": "Il s'agit de la position de SANTISMM, et non d'un consensus du secteur. Il n'existe aucune accréditation, aucun programme standard, aucun corpus de connaissances partagé ni aucun organisme professionnel. Le terme « émergente » joue un rôle clé ici : l'affirmation est que la discipline est en cours de formation, et non qu'elle est établie.",
+      "falsifiedBy": "L'intégration de ces problématiques comme une spécialité normale de l'ingénierie de plateforme ou du ML — les programmes d'études standard et les parcours professionnels les traitant comme tels — ou une progression des capacités des modèles telle que le système environnant n'ait plus besoin d'une ingénierie distincte."
+    },
+    "de": {
+      "statement": "Der Aufbau des Systems um das Modell herum ist eine eigenständige, im Entstehen begriffene Ingenieursdisziplin und kein Spezialgebiet des maschinellen Lernens oder des Backend-Engineerings.",
+      "basis": "Die Fehlermodi sind neu – dieselbe Eingabe kann unterschiedliche Wege nehmen und zu unterschiedlichen Ergebnissen führen –, sodass Vertrauen eher durch das Messen von Verteilungen und das Begrenzen von Befugnissen als durch bloße Behauptungen entsteht. Die geforderten Fähigkeiten (probabilistische Zuverlässigkeit, Evaluationsdesign, Context Engineering, Tool-Contract-Design, Adversarial Security) lassen sich keinem der beiden Ursprungsfelder eindeutig zuordnen.",
+      "limitations": "Dies ist die Position von SANTISMM, kein Branchenkonsens. Es gibt keine Akkreditierung, kein Standard-Curriculum, kein vereinbartes Fachwissen und keinen Berufsverband. „Im Entstehen begriffen“ leistet in diesem Satz echte Arbeit: Die Behauptung ist, dass sich die Disziplin erst herausbildet, nicht, dass sie bereits etabliert ist.",
+      "falsifiedBy": "Dass diese Aufgaben als normales Spezialgebiet des Plattform- oder ML-Engineerings absorbiert werden – indem Standard-Curricula und Karrierepfade sie als solche behandeln – oder dass sich die Modellfähigkeiten so weit verbessern, dass das umgebende System kein eigenes Engineering mehr benötigt."
+    },
+    "ja": {
+      "statement": "モデルの周囲にシステムを構築することは、機械学習やバックエンドエンジニアリングの専門分野ではなく、それ自体が新たな独立したエンジニアリング分野として台頭しつつあります。これがハーネスエンジニアリング (Harness Engineering) です。",
+      "basis": "その失敗モードは新しいものです。同じ入力が異なる経路をたどり、異なる結論に達する可能性があるため、確実性はアサーション（断定）からではなく、分布の測定と権限の制限から得られます。求められるスキル（確率的信頼性、評価設計、コンテキストエンジニアリング、ツール契約設計、敵対的セキュリティ）は、どちらの親分野にもすっきりと収まりません。",
+      "limitations": "これはSANTISMMの立場であり、業界のコンセンサスではありません。認定制度も、標準的なカリキュラムも、合意された知識体系も、専門機関も存在しません。この一文において「新しい（Emerging）」という言葉は重要な意味を持っています。この主張は、その分野が形成されつつあることを意味しており、確立されていることを意味するものではありません。",
+      "falsifiedBy": "これらの関心事がプラットフォームエンジニアリングやMLエンジニアリングの通常の専門分野として吸収されること（標準的なカリキュラムやキャリアパスがそのように扱うこと）、あるいはモデルの能力が十分に向上し、周囲のシステムが独立したエンジニアリングを必要としなくなること。"
+    },
+    "zh": {
+      "statement": "围绕模型构建系统本身就是一门新兴的工程学科——Harness Engineering（智能体支撑系统工程），而不是机器学习或后端工程的专业分支。",
+      "basis": "其失效模式是全新的——相同的输入可能会走不同的路径并得出不同的结论——因此，信心源于对分布的测量和对权限的限制，而非主观断言。它所要求的技能（概率可靠性、评估设计、上下文工程、工具契约设计、对抗性安全）并不完全属于这两个父领域的任何一个。",
+      "limitations": "这是 SANTISMM 的立场，而非行业共识。目前尚无认证、标准课程、公认的知识体系或专业机构。这句话中“新兴”一词至关重要：该主张是指该学科正在形成，而非已经确立。",
+      "falsifiedBy": "这些关注点被吸纳为平台或机器学习（ML）工程的常规专业分支——标准课程和职业晋升通道也将其视作分支——或者模型能力大幅提升，以至于周围系统不再需要专门的工程设计。"
     }
   }
 }

@@ -69,6 +69,22 @@
         "pt": {
           "label": "A baía assoreada ao norte de Hisarlık",
           "note": "Os trabalhos geológicos na Trôade mostram que a linha de costa do Bronze ficava bem mais para o interior que a atual, o que situaria as naus encalhadas mais perto da cidadela do que a paisagem presente sugere. É o argumento físico mais forte de que o campo de batalha da Ilíada é um espaço real."
+        },
+        "fr": {
+          "label": "La baie envasée au nord d'Hisarlık",
+          "note": "Les travaux géologiques sur la Troade montrent que le littoral de l'âge du bronze se situait bien plus à l'intérieur des terres que le littoral moderne, ce qui placerait les navires échoués plus près de la citadelle que ne le suggère le paysage actuel. C'est l'argument physique le plus solide en faveur de la réalité spatiale du champ de bataille de l'Iliade."
+        },
+        "zh": {
+          "label": "希萨尔利克（Hisarlık）以北淤积的海湾",
+          "note": "对特罗阿德（Troad）的地质研究表明，青铜时代的海岸线远比现代海岸线更靠内陆，这将使搁浅的战船比现在的景观所显示的更接近卫城。这是证明《伊利亚特》战场是一个真实空间的最强有力物理论据。"
+        },
+        "de": {
+          "label": "Die verlandete Bucht nördlich von Hisarlık",
+          "note": "Geologische Untersuchungen in der Troas zeigen, dass die bronzezeitliche Küstenlinie weit landeinwärts der heutigen lag, was die am Strand liegenden Schiffe näher an die Zitadelle herangerückt hätte, als es die heutige Landschaft vermuten lässt. Dies ist das stärkste physische Argument dafür, dass das Schlachtfeld der Ilias ein realer Raum ist."
+        },
+        "ja": {
+          "label": "ヒサルルク北方の堆積した湾",
+          "note": "トロアス地方の地質学的調査により、青銅器時代の海岸線は現代の海岸線よりもかなり内陸にあったことが示されており、引き揚げられた船は現在の地形から推測されるよりも城塞の近くに位置していたことになります。これは、『イリアス』の戦場が実在の空間であったとする最も強力な物理的根拠です。"
         }
       }
     }
@@ -131,6 +147,86 @@
         {
           "q": "Por que o poema destrói a muralha?",
           "a": "Posêidon e Apolo a varrem depois da guerra, o que explica convenientemente que nada dela reste. Os críticos antigos notaram a conveniência."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Le camp achéen et le rempart",
+      "summary": "Le second cadre de l'Iliade : une plage de navires tirés au sec, un fossé, un rempart avec des portes, et l'espace entre celui-ci et la ville où se déroulent presque tous les combats.",
+      "narrative": [
+        "Le camp est construit comme un véritable lieu : des navires alignés, des huttes, une place d'assemblée, un rempart érigé au chant VII et forcé au chant XII. Thucydide lisait déjà la description du camp dans l'Iliade comme un indice du déroulement probable du siège.",
+        "La distance entre le camp et la ville régit l'action du poème, et elle dépend de l'emplacement de la ligne de côte. La géologie côtière indique que la baie s'enfonçait beaucoup plus loin dans les terres à l'âge du bronze, ce qui réduit le champ de bataille à une distance franchissable en une journée de combat."
+      ],
+      "whyItMatters": "C'est la partie du paysage troyen qui peut être testée par la géologie plutôt que par les fouilles, et le résultat est probant.",
+      "debate": "La question de savoir jusqu'où la côte de l'âge du bronze s'enfonçait réellement dans les terres, et si le rempart du chant VII appartient à la couche la plus ancienne du poème — une question critique déjà posée dans l'Antiquité, puisque le poème affirme également que les dieux l'ont détruit sans laisser de traces.",
+      "faqs": [
+        {
+          "q": "Le camp achéen peut-il être fouillé ?",
+          "a": "Rien d'identifiable comme le camp n'a été retrouvé. Ce qui soutient ce cadre est la reconstitution du littoral de l'âge du bronze, qui place une plage propice bien plus près de la citadelle que ne le suggère la plaine actuelle."
+        },
+        {
+          "q": "Pourquoi le poème détruit-il le rempart ?",
+          "a": "Poséidon et Apollon le balayent après la guerre, ce qui explique commodément pourquoi il n'en reste rien. Les critiques de l'Antiquité avaient déjà remarqué cette commodité."
+        }
+      ]
+    },
+    "de": {
+      "title": "Das Lager der Achäer und die Mauer",
+      "summary": "Der zweite Schauplatz der Ilias: ein Strand mit heraufgezogenen Schiffen, ein Graben, eine Mauer mit Toren und das Gelände zwischen ihr und der Stadt, auf dem fast alle Kämpfe stattfinden.",
+      "narrative": [
+        "Das Lager ist wie ein realer Ort aufgebaut – Schiffe in Reihen, Hütten, ein Versammlungsplatz, eine im 7. Buch errichtete und im 12. Buch durchbrochene Mauer. Bereits Thukydides deutete das Lager der Ilias als Beleg dafür, wie die Belagerung abgelaufen sein muss.",
+        "Die Entfernung zwischen Lager und Stadt bestimmt die Handlung des Epos, und sie hängt davon ab, wo die Küstenlinie verlief. Die Küstengeologie zeigt, dass die Bucht in der Bronzezeit viel weiter ins Landesinnere reichte, was das Schlachtfeld so weit verkürzt, dass es an einem einzigen Kampftag überquert werden kann."
+      ],
+      "whyItMatters": "Es ist der Teil der trojanischen Landschaft, der eher durch Geologie als durch Ausgrabungen überprüft werden kann, und er schneidet dabei gut ab.",
+      "debate": "Wie weit landeinwärts die bronzezeitliche Küste tatsächlich lag und ob die Mauer aus Buch 7 zur ältesten Schicht des Epos gehört – eine bereits in der Antike diskutierte Frage, da das Epos auch besagt, dass die Götter sie spurlos zerstörten.",
+      "faqs": [
+        {
+          "q": "Kann das Lager der Achäer ausgegraben werden?",
+          "a": "Es wurde nichts gefunden, was eindeutig als das Lager identifiziert werden könnte. Was den Schauplatz stützt, ist die Rekonstruktion der bronzezeitlichen Küstenlinie, die einen geeigneten Strand viel näher an der Zitadelle verortet, als es die heutige Ebene vermuten lässt."
+        },
+        {
+          "q": "Warum zerstört das Epos die Mauer?",
+          "a": "Poseidon und Apollon fegen sie nach dem Krieg weg, was praktischerweise erklärt, warum nichts von ihr übrig geblieben ist. Antike Kritiker bemerkten diese Zweckmäßigkeit."
+        }
+      ]
+    },
+    "ja": {
+      "title": "アカイア人の陣営と防壁",
+      "summary": "『イリアス』の第二の舞台。引き揚げられた船が並ぶ海岸、堀、門のある防壁、そしてそれと都市との間に広がり、ほぼすべての戦闘が行われる平原。",
+      "narrative": [
+        "陣営は一つの場所として構築されている。列をなす船、小屋、集会場、第7巻で急造され第12巻で突破される防壁などである。トゥキディデスはすでに、『イリアス』の陣営の描写を、包囲戦がどのように行われたかを示す証拠として読み解いていた。",
+        "陣営と都市の間の距離が詩の戦闘行動を規定しており、それは当時の海岸線がどこにあったかに依存する。沿岸地質学によれば、青銅器時代には湾が現在よりもはるか内陸まで入り込んでおり、戦場は1日の戦闘で往復できる程度に狭まっていたとされる。"
+      ],
+      "whyItMatters": "トロイアの景観の中で、発掘調査ではなく地質学によって検証可能な部分であり、その検証結果は良好である。",
+      "debate": "青銅器時代の海岸線が実際にどこまで内陸に入り込んでいたか、そして第7巻の防壁が詩の最古の層に属しているかどうかという議論。詩の中では神々がその防壁を跡形もなく破壊したと語られているため、これは古代からの批評上の疑問である。",
+      "faqs": [
+        {
+          "q": "アカイア人の陣営を発掘することはできますか？",
+          "a": "陣営と同定できるものは何も発見されていません。この舞台設定を支持しているのは青銅器時代の海岸線の復元であり、それによると、現在の平野から想像されるよりもはるかに城塞に近い場所に、条件に合う海岸が存在していたことになります。"
+        },
+        {
+          "q": "なぜ詩の中で防壁は破壊されるのですか？",
+          "a": "戦争の後、ポセイドンとアポロンがそれを押し流してしまいます。これにより、防壁の痕跡が何も残っていない理由が都合よく説明されます。古代の批評家たちも、この都合の良さに気づいていました。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "阿开亚人营地与城墙",
+      "summary": "《伊利亚特》的第二场景：停放着拖上岸的战船的海滩、一条壕沟、一堵带城门的城墙，以及城墙与城市之间几乎发生所有战斗的空地。",
+      "narrative": [
+        "营地的构建宛如一个真实的地方——成排的战船、棚屋、集会广场，以及在第7卷中筑起并在第12卷中被攻破的城墙。修昔底德已经将《伊利亚特》中的营地解读为关于围城战如何进行的证据。",
+        "营地与城市之间的距离主导了史诗中的行动，而这取决于海岸线的位置。海岸地质学表明，在青铜时代，海湾向内陆延伸得更深，这使得战场缩短到一天的战斗即可横穿的距离。"
+      ],
+      "whyItMatters": "这是特洛伊景观中可以通过地质学而非考古发掘来检验的部分，且检验结果非常吻合。",
+      "debate": "青铜时代的海岸线实际上向内陆延伸了多远，以及第7卷中的城墙是否属于史诗最古老的一层——这是一个古老的关键问题，因为史诗还提到众神将其彻底摧毁，未留痕迹。",
+      "faqs": [
+        {
+          "q": "阿开亚人营地可以被发掘吗？",
+          "a": "尚未发现任何可确认为营地的遗迹。支持这一场景设定的是对青铜时代海岸线的重建，该重建表明，当时一处合适的海滩距离卫城比今天的平原要近得多。"
+        },
+        {
+          "q": "为什么史诗要摧毁城墙？",
+          "a": "波塞冬和阿波罗在战争结束后将其扫除，这恰好解释了为什么没有留下任何遗迹。古代评论家注意到了这种便利性。"
         }
       ]
     }

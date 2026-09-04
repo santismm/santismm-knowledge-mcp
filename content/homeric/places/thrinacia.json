@@ -45,7 +45,7 @@
       "modernName": "Sicily",
       "country": "IT",
       "lat": 37.5,
-      "lon": 14.0,
+      "lon": 14,
       "precision": "island",
       "proponent": "Ancient identification via the name Trinacria; Strabo 6.2",
       "era": "antiquity",
@@ -74,6 +74,22 @@
         "pt": {
           "label": "Sicília",
           "note": "A identificação se apoia num nome: autores antigos conectaram Trinácia a Trinácria, a ilha de três pontas. É filologia plausível e prova nenhuma sobre o episódio, que exige uma ilha onde o deus sol apascenta gado imortal."
+        },
+        "fr": {
+          "label": "Sicile",
+          "note": "L'identification repose sur un nom : les auteurs anciens ont relié la Thrinacie à la Trinacrie, l'île aux trois pointes. C'est une philologie plausible mais cela ne constitue en rien une preuve concernant l'épisode, qui requiert une île où le dieu du soleil fait paître des troupeaux immortels."
+        },
+        "zh": {
+          "label": "西西里岛",
+          "note": "这一认定基于一个名称：古代作家将斯里纳基亚与特里纳克里亚（意为三角形的岛屿）联系在一起。这在语言学上是说得通的，但对于该情节本身完全没有提供证据，因为该情节需要一个太阳神放牧长生神牛的岛屿。"
+        },
+        "de": {
+          "label": "Sizilien",
+          "note": "Die Identifizierung beruht auf einem Namen: Antike Schriftsteller brachten Thrinakia mit Trinakria, der dreieckigen Insel, in Verbindung. Das ist plausible Philologie, aber keinerlei Beweis für die Episode, die eine Insel erfordert, auf der der Sonnengott unsterbliche Rinder weidet."
+        },
+        "ja": {
+          "label": "シチリア",
+          "note": "この同定は名前に基づいている。古代の著述家たちはスリナキアを、三角の島を意味するトリナクリアと結びつけた。これは言語学的にはもっともらしいが、太陽神が不死の牛を放牧する島を必要とするこのエピソードについては、何の証拠にもならない。"
         }
       }
     }
@@ -111,6 +127,46 @@
       ],
       "identificationNote": "Especulativa: uma etimologia plausível, uma espécie de consenso antigo e nenhuma conexão material com o episódio. Pontua 6/12, o teto da faixa especulativa.",
       "debate": "Se Trinácia e Trinácria são a mesma palavra, e se uma ilha de gado imortal pode ser localizada sem antes decidir que as andanças são um itinerário real."
+    },
+    "fr": {
+      "name": "Thrinacie",
+      "summary": "L'île des troupeaux du Soleil, où l'équipage commet le sacrilège qui causera leur perte à tous. L'Antiquité a assimilé ce nom à la Sicile ; le poème décrit un lieu qu'on ne peut visiter sans péril.",
+      "description": [
+        "Ulysse est averti à deux reprises — par Tirésias et par Circé — de ne pas toucher aux troupeaux. Bloqué par un mois de vents contraires et à court de nourriture, l'équipage les tue néanmoins pendant son sommeil. Zeus détruit le navire ; seul Ulysse survit.",
+        "L'assimilation à la Sicile sur la base du nom est ancienne et philologiquement raisonnable. C'est également la dernière étape avant Ogygie, ce qui signifie que toute l'interprétation occidentale du voyage dépend de lieux comme celui-ci."
+      ],
+      "identificationNote": "Spéculatif : une étymologie plausible, une sorte de consensus antique, et aucun lien matériel avec l'épisode. Score : 6/12, le sommet de la catégorie spéculative.",
+      "debate": "La question est de savoir si Thrinacie et Trinacrie sont le même mot, et si une île aux troupeaux immortels peut être localisée sans décréter au préalable que les errances constituent un itinéraire réel."
+    },
+    "de": {
+      "name": "Thrinakia",
+      "summary": "Die Insel der Rinder des Sonnengottes, auf der die Gefährten das Sakrileg begehen, das sie alle das Leben kostet. Die Antike deutete den Namen als Sizilien; das Epos beschreibt einen Ort, der nicht sicher besucht werden kann.",
+      "description": [
+        "Odysseus wird zweimal gewarnt – von Teiresias und von Kirke –, die Rinder in Ruhe zu lassen. Gefangen von einem Monat Gegenwind und ohne Nahrung tötet die Mannschaft sie dennoch, während er schläft. Zeus zerstört das Schiff; nur Odysseus überlebt.",
+        "Die auf dem Namen basierende Gleichsetzung mit Sizilien ist alt und philologisch plausibel. Es ist zudem die letzte Station vor Ogygia, was bedeutet, dass die gesamte westliche Deutung der Reise mit Orten wie diesem steht oder fällt."
+      ],
+      "identificationNote": "Spekulativ: eine plausible Etymologie, eine Art antiker Konsens und keine materielle Verbindung zur Episode. Bewertung: 6/12, die Spitze des spekulativen Bereichs.",
+      "debate": "Ob Thrinakia und Trinakria dasselbe Wort sind und ob eine Insel mit unsterblichen Rindern überhaupt lokalisiert werden kann, ohne zuvor zu entscheiden, dass die Irrfahrten eine reale Reiseroute darstellen."
+    },
+    "ja": {
+      "name": "スリナキア",
+      "summary": "太陽神の牛の島。ここで乗組員たちは全員の死を招く冒涜を犯す。古代の人々はこの名前をシチリアと解釈したが、詩が描写しているのは安全に訪れることのできない場所である。",
+      "description": [
+        "オデュッセウスは、テイレイシアスとキルケの二人から、牛に手を出すなと二度警告される。1ヶ月に及ぶ逆風に阻まれ、食料も尽きた乗組員たちは、彼が眠っている間に牛を殺してしまう。ゼウスは船を破壊し、オデュッセウスだけが生き残る。",
+        "名前に基づくシチリアとの同一視は古く、言語学的に合理的である。また、ここはオギュギアに到着する前の最後の寄港地でもあり、航海に関する西方の解釈全体が、このような場所と一蓮托生であることを意味している。"
+      ],
+      "identificationNote": "推測の域を出ない：もっともらしい語源、ある種の古代の合意はあるものの、エピソードとの物質的な結びつきはない。スコアは12点満点中6点で、推測の範囲の最上位である。",
+      "debate": "スリナキア（Thrinacia）とトリナクリア（Trinacria）が同じ言葉なのかどうか、そして漂流の旅が実在のルートであるとあらかじめ決めつけることなしに、不死の牛の島を特定することがそもそも可能なのかどうかという点である。"
+    },
+    "zh": {
+      "name": "斯里纳基亚岛",
+      "summary": "太阳神神牛的岛屿，船员们在此犯下了导致他们全部丧命的亵渎罪行。古代学者将该名称解读为西西里岛；而史诗描述的则是一个无法安全造访的地方。",
+      "description": [
+        "奥德修斯曾两次受到警告——分别来自提瑞西阿斯 and 喀耳刻——不要碰那些神牛。由于被逆风困了一个月且食物耗尽，船员们趁他睡觉时还是杀死了神牛。宙斯摧毁了船只；只有奥德修斯一人幸存。",
+        "基于名称将该岛等同于西西里岛的观点历史悠久，且在语言学上是合理的。它也是抵达奥吉吉亚岛之前的最后一站，这意味着对整个航程的西方化解读与此类地点的认定休戚与共。"
+      ],
+      "identificationNote": "推测性：合理的词源学解释、某种古代共识，但与该情节没有物质联系。得分为 6/12，处于推测性区间的上限。",
+      "debate": "斯里纳基亚（Thrinacia）和特里纳克里亚（Trinacria）是否为同一个词，以及在未首先断定漂泊旅程是真实路线的情况下，是否根本无法对一个拥有长生神牛的岛屿进行定位。"
     }
   }
 }

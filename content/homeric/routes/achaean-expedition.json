@@ -96,6 +96,22 @@
         "pt": {
           "label": "Concentração em Áulis e travessia à Trôade",
           "note": "A viagem de ida que a Ilíada pressupõe em vez de narrar: os contingentes se reúnem em Áulis, cruzam o Egeu e acampam na costa da Trôade. Todas as escalas são lugares aceitos ou plausíveis, o que faz desta a rota mais bem ancorada do atlas depois da Telemaquia."
+        },
+        "fr": {
+          "label": "Rassemblement à Aulis, traversée vers la Troade",
+          "note": "Le voyage aller que l'Iliade présuppose plutôt qu'elle ne le raconte : les contingents se rassemblent à Aulis, traversent la mer Égée et campent sur le rivage de la Troade. Chaque étape est un lieu accepté ou plausible, ce qui en fait la route la mieux ancrée de l'atlas après la Télémachie."
+        },
+        "zh": {
+          "label": "在奥利斯集结，渡海前往特罗阿德",
+          "note": "《伊利亚特》假定而非叙述的去程：各支部队在奥利斯集结，横渡爱琴海，并在特罗阿德海岸扎营。每一个停靠点都是公认或合理的地点，这使得它成为本图册中除《忒勒马科斯游记》（Telemachy）之外定位最可靠的路线。"
+        },
+        "de": {
+          "label": "Sammlung in Aulis, Überfahrt zur Troas",
+          "note": "Die Hinreise, die die Ilias eher voraussetzt als erzählt: Die Kontingente versammeln sich in Aulis, überqueren die Ägäis und lagern am Ufer der Troas. Jede Station ist ein akzeptierter oder plausibler Ort, was diese Route nach der Telemachie zur am besten verankerten im Atlas macht."
+        },
+        "ja": {
+          "label": "アウリスでの集結、トロアスへの渡海",
+          "note": "『イリアス』が語るのではなく前提としている往路。各部隊がアウリスに集結し、エーゲ海を渡り、トロアス地方の海岸に陣を張る。すべての経由地が承認された場所、あるいは妥当な場所であり、そのため本ルートは「テレマコスの旅」に次いで、本地図帳の中で最も確実なルートとなっている。"
         }
       }
     }
@@ -127,6 +143,42 @@
         "Tucídides leu esse mesmo material como prova de escala e logística: como uma força desse tamanho podia se alimentar e por que o cerco durou o que durou. Fazia, no século V a.C., o que este atlas faz: tratar o poema como testemunho a ser ponderado, não crido."
       ],
       "debate": "Se chegou a existir uma expedição de coalizão dessa escala. As escalas da rota são seguras; a campanha que descrevem é exatamente o que a arqueologia não pode confirmar."
+    },
+    "fr": {
+      "name": "L'expédition achéenne",
+      "summary": "Comment l'armée est arrivée là. L'Iliade commence à la dixième année et tient le voyage pour acquis, cette route est donc reconstituée à partir du Catalogue, d'Aulis et du camp sur le rivage.",
+      "description": [
+        "Le Catalogue des vaisseaux nomme la provenance des contingents ; le discours d'Ulysse au chant II rappelle le présage d'Aulis ; le camp sur le rivage de la Troade est le second décor du poème. Ensemble, ils décrivent une expédition sans jamais en raconter le voyage.",
+        "Thucydide a lu ces mêmes éléments comme des preuves d'échelle et de logistique — comment une force de cette taille pouvait se nourrir, et pourquoi le siège a duré si longtemps. Il faisait, au Ve siècle avant notre ère, ce que fait cet atlas : traiter le poème comme un témoignage à évaluer plutôt qu'à croire sur parole."
+      ],
+      "debate": "La question de savoir si une expédition de coalition d'une telle envergure a réellement eu lieu. Les étapes de la route sont sûres ; la campagne qu'elles décrivent est précisément ce que l'archéologie ne peut confirmer."
+    },
+    "de": {
+      "name": "Der achäische Feldzug",
+      "summary": "Wie das Heer dorthin gelangte. Da die Ilias im zehnten Jahr beginnt und die Reise als selbstverständlich voraussetzt, wird diese Route aus dem Schiffskatalog, aus Aulis und dem Lager am Ufer rekonstruiert.",
+      "description": [
+        "Der Schiffskatalog nennt die Herkunftsorte der Kontingente; die Rede des Odysseus im 2. Buch erinnert an das Omen in Aulis; das Lager am Ufer der Troas ist der zweite Schauplatz des Epos. Zusammen beschreiben sie einen Feldzug, ohne jemals dessen Seereise zu erzählen.",
+        "Thukydides las dasselbe Material als Beleg für Ausmaß und Logistik – wie sich eine Streitmacht dieser Größe ernähren konnte und warum die Belagerung so lange dauerte. Er tat im fünften Jahrhundert v. Chr. das, was dieser Atlas tut: Er behandelte das Epos als ein Zeugnis, das abzuwägen und nicht einfach zu glauben ist."
+      ],
+      "debate": "Ob ein Koalitionsfeldzug dieses Ausmaßes überhaupt stattgefunden hat. Die Stationen der Route sind gesichert; der Feldzug, den sie beschreiben, ist genau das, was die Archäologie nicht bestätigen kann."
+    },
+    "ja": {
+      "name": "アカイア人の遠征",
+      "summary": "軍勢がどのようにして現地に到達したか。『イリアス』は戦争の10年目から始まり、そこに至る旅路は当然の前提とされているため、このルートは「船のカタログ」、アウリス、そして海岸の陣営の記述から組み立てられている。",
+      "description": [
+        "「船のカタログ」は各部隊の出身地を挙げ、第2巻のオデュッセウスの演説はアウリスでの予兆を回想し、トロアス地方の海岸にある陣営は叙事詩の第二の舞台となる。これらは、航海そのものを語ることなく、遠征の全容を描き出している。",
+        "トゥキディデスは、これと同じ資料を規模と兵站の証拠として読み解いた。すなわち、あれほどの規模の軍勢がどのように食料を調達したのか、そしてなぜ包囲戦があれほど長くかかったのかという点である。彼は紀元前5世紀において、本地図帳が行っていることと同じことをしていた。つまり、叙事詩を盲信するのではなく、検証すべき証言として扱っていたのである。"
+      ],
+      "debate": "このような規模の連合軍による遠征が実際にあったのかどうか。ルートの経由地は確実であるが、それらが描き出す軍事行動こそが、考古学では証明できない部分である。"
+    },
+    "zh": {
+      "name": "阿开亚远征",
+      "summary": "军队是如何到达那里的。《伊利亚特》始于第十年，并将这段旅程视为理所当然，因此这条路线是根据《船名表》、奥利斯（Aulis）以及海岸上的营地拼凑而成的。",
+      "description": [
+        "《船名表》指明了各支部队的来源；奥德修斯在第二卷中的演讲回忆了奥利斯的征兆；特罗阿德（Troad）海岸上的营地是史诗的第二个场景。它们共同描述了一次远征，却从未直接叙述其航程。",
+        "修昔底德将同样的材料解读为规模和后勤的证据——如此庞大的军队如何自给自足，以及围城战为何持续了这么久。他在公元前五世纪所做的事情，正是本图册正在做的事情：将史诗视为需要权衡而非盲信的证词。"
+      ],
+      "debate": "这种规模的联军远征是否真的发生过。该路线的停靠点是确定的；但它们所描述的战役恰恰是考古学无法证实的。"
     }
   }
 }

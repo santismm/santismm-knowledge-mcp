@@ -1,4 +1,5 @@
 import { norm, queryTerms } from './shape.ts';
+import type { Locale } from './content.ts';
 
 /**
  * Federated SANTISMM Labs catalogue and deterministic calculators.
@@ -92,9 +93,10 @@ const LAB_SEARCH_COPY: Record<string, Record<'en' | 'pt', LabCopy>> = {
   },
 };
 
-function localizedLab(lab: LabDefinition, locale: LabLocale): LabDefinition {
-  if (locale === 'es') return lab;
-  const copy = LAB_SEARCH_COPY[lab.slug]?.[locale];
+function localizedLab(lab: LabDefinition, locale: Locale): LabDefinition {
+  const resolved: LabLocale = locale === 'es' || locale === 'pt' ? locale : 'en';
+  if (resolved === 'es') return lab;
+  const copy = LAB_SEARCH_COPY[lab.slug]?.[resolved];
   return copy ? { ...lab, ...copy } : lab;
 }
 
@@ -137,7 +139,7 @@ function validLab(value: unknown): value is LabDefinition {
 
 async function fetchCorpus(): Promise<LabCorpus> {
   const response = await fetch(LABS_API_URL, {
-    headers: { Accept: 'application/json', 'User-Agent': 'santismm-knowledge-mcp/0.4.1' },
+    headers: { Accept: 'application/json', 'User-Agent': 'santismm-knowledge-mcp/0.5.0' },
     signal: AbortSignal.timeout(8_000),
     cache: 'no-store',
   });
@@ -180,7 +182,7 @@ export function searchLabCorpus(
   labs: LabDefinition[],
   query: string,
   limit: number,
-  locale: LabLocale = 'en',
+  locale: Locale = 'en',
 ): LabSearchResult[] {
   const terms = queryTerms(query);
   const phrase = norm(query).trim();
@@ -222,14 +224,20 @@ export function searchLabCorpus(
 export async function executeLabCalculator(
   slug: ExecutableLabSlug,
   inputs: Record<string, number>,
-  locale: 'en' | 'es' | 'pt' = 'en',
+  locale: Locale = 'en',
 ): Promise<Record<string, unknown>> {
-  const response = await fetch(`${LABS_SERVICE_ORIGIN}/api/calculate/${slug}?locale=${locale}`, {
+  // The separately deployed Labs execution service currently publishes these
+  // three locales. Core corpus reads support all seven; calculator prose falls
+  // back explicitly until that owner service expands its own contract.
+  const resolvedLocale = (['en', 'es', 'pt'] as const).includes(locale as 'en' | 'es' | 'pt')
+    ? (locale as 'en' | 'es' | 'pt')
+    : 'en';
+  const response = await fetch(`${LABS_SERVICE_ORIGIN}/api/calculate/${slug}?locale=${resolvedLocale}`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'User-Agent': 'santismm-knowledge-mcp/0.4.1',
+      'User-Agent': 'santismm-knowledge-mcp/0.5.0',
     },
     body: JSON.stringify(inputs),
     signal: AbortSignal.timeout(8_000),
@@ -252,5 +260,10 @@ export async function executeLabCalculator(
   ) {
     throw new Error(`Labs calculator ${slug} returned an invalid result contract`);
   }
-  return raw;
+  return {
+    ...raw,
+    requested_locale: locale,
+    resolved_locale: resolvedLocale,
+    fallback: locale !== resolvedLocale,
+  };
 }

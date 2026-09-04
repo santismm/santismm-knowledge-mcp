@@ -35,7 +35,7 @@ import { resourceUri } from "./resource-uris.ts";
  * data, while Article tools deliberately read the first-party Articles API.
  */
 
-export const SERVER_INFO = { name: "santismm-knowledge", version: "0.4.1" } as const;
+export const SERVER_INFO = { name: "santismm-knowledge", version: "0.5.0" } as const;
 
 /**
  * The subset of the MCP SDK's `McpServer` that the registry uses (just
@@ -119,7 +119,7 @@ const READ_ONLY = {
 const READ_ONLY_REMOTE = { ...READ_ONLY, openWorldHint: true } as const;
 
 const localeSchema = z
-  .enum(["en", "es", "pt"])
+  .enum(["en", "es", "pt", "fr", "de", "ja", "zh"])
   .optional()
   .describe("Language of the returned body. Default: en.");
 
@@ -744,6 +744,9 @@ const calculationBaseSchema = z.object({
   schema_version: z.string(),
   source: z.string(),
   language: z.string(),
+  requested_locale: z.string(),
+  resolved_locale: z.string(),
+  fallback: z.boolean(),
   slug: z.string(),
   version: z.string(),
   updated: z.string(),
@@ -1129,7 +1132,9 @@ export function registerTools(
       description:
         "Search the core corpus, first-party essays, executable Labs, epistemic claims and the Homeric Atlas in one call. Use this first when a natural-language question might require a calculation, a long-form essay or a claim audit rather than only a core knowledge unit. Results name the next tool to call; calculator-shaped questions are routed toward Labs.",
       inputSchema: z.object({
-        query: querySchema.describe("Question or topic, in English, Spanish or Portuguese."),
+        query: querySchema.describe(
+          "Question or topic, in English, Spanish, Portuguese, French, German, Japanese or Simplified Chinese.",
+        ),
         surfaces: z.array(z.enum(SEARCH_SURFACES)).min(1).optional()
           .describe("Restrict the search. Omit to search all five surfaces."),
         limit_per_surface: z.number().int().positive().max(10).optional().describe("Maximum hits from each surface. Default: 5."),
@@ -1419,7 +1424,7 @@ export function registerTools(
       description:
         "Ranked keyword search across the whole corpus (knowledge, patterns, architectures, governance and the handbook). Matches every language and ignores accents, so query in the user's own words. Each hit carries a relevance score and the fields it matched; follow up with the matching get_* tool for full detail. Use this before any `get_*` tool whenever you have a question rather than an identifier.",
       inputSchema: z.object({
-        query: querySchema.describe("Keyword or phrase to search for, in any of en/es/pt."),
+        query: querySchema.describe("Keyword or phrase to search for in any supported language."),
         domains: z
           .array(z.enum(["knowledge", "patterns", "architectures", "governance", "handbook"]))
           .optional()
@@ -1449,7 +1454,7 @@ export function registerTools(
       description:
         "List every long-form essay published on articles.santismm.com, with language, dates, topics and citable canonical URLs. Use this to browse the essay catalogue; use `search_articles` when you have a topic rather than a slug.",
       inputSchema: z.object({
-        locale: localeSchema.describe("Restrict to en, es or pt. Omit to return every language."),
+        locale: localeSchema.describe("Restrict by language. Articles are currently published in en, es and pt."),
       }),
       outputSchema: articleListOutput,
     },
@@ -1500,7 +1505,7 @@ export function registerTools(
         "Ranked, accent-insensitive full-text search over every first-party essay, including titles, summaries, topics and bodies. Use this when you need long-form analysis about a topic; follow with `get_article` for the complete essay.",
       inputSchema: z.object({
         query: querySchema.describe("Keyword or phrase to search for in any supported language."),
-        locale: localeSchema.describe("Restrict to en, es or pt. Omit to search every language."),
+        locale: localeSchema.describe("Restrict by language. Articles are currently published in en, es and pt."),
         limit: z.number().int().positive().max(20).optional().describe("Maximum results (default 10)."),
       }),
       outputSchema: articleSearchOutput,
@@ -1590,7 +1595,7 @@ export function registerTools(
         reviewRate: z.number().min(0).max(100).describe("Share of cases reviewed by a person."),
         reviewMinutes: z.number().min(0).max(10_080).describe("Human review minutes per reviewed case."),
         reworkMinutes: z.number().min(0).max(10_080).describe("Human rework minutes per failed case."),
-        locale: localeSchema.describe("Language for interpretations, assumptions, formulas and warnings (default en)."),
+        locale: localeSchema.describe("Language for interpretations, assumptions, formulas and warnings. The Labs execution service currently resolves fr/de/ja/zh to English and reports that fallback."),
       }),
       outputSchema: agentEconomicsOutput,
     },
@@ -1615,7 +1620,7 @@ export function registerTools(
         confidence: z.union([z.literal(90), z.literal(95), z.literal(99)]).describe("Confidence level, in percent."),
         margin: z.number().min(0.1).max(50).describe("Margin for estimating the failure rate, in percentage points."),
         population: z.number().min(1).max(1_000_000_000).describe("Number of distinct evaluable cases."),
-        locale: localeSchema.describe("Language for interpretations, assumptions, formulas and warnings (default en)."),
+        locale: localeSchema.describe("Language for interpretations, assumptions, formulas and warnings. The Labs execution service currently resolves fr/de/ja/zh to English and reports that fallback."),
       }),
       outputSchema: evaluationSampleOutput,
     },
@@ -1646,7 +1651,7 @@ export function registerTools(
         utilization: z.number().min(1).max(100).describe("Share of paid time available for review and escalation, in percent."),
         reviewers: z.number().min(0.1).max(1_000_000).describe("Available reviewer FTE."),
         hourlyCost: z.number().min(0).max(1_000_000).describe("Fully loaded reviewer hourly cost, in the chosen currency."),
-        locale: localeSchema.describe("Language for interpretations, assumptions, formulas and warnings (default en)."),
+        locale: localeSchema.describe("Language for interpretations, assumptions, formulas and warnings. The Labs execution service currently resolves fr/de/ja/zh to English and reports that fallback."),
       }),
       outputSchema: humanSupervisionOutput,
     },

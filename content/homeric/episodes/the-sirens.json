@@ -60,6 +60,22 @@
         "pt": {
           "label": "Os ilhéus Sirenusas",
           "note": "Uma tradição sustentada por um nome. Os ilhéus diante da península sorrentina chamam-se Sirenusas desde a Antiguidade, o que nos diz o que gregos e romanos acreditavam, não onde o episódio se encaixa."
+        },
+        "fr": {
+          "label": "Les îlots des Sirénuses",
+          "note": "Une tradition portée par un nom. Les îlots au large de la péninsule de Sorrente sont appelés les Sirénuses depuis l'Antiquité, ce qui nous renseigne sur les croyances des Grecs et des Romains, mais pas sur le lieu réel de l'épisode."
+        },
+        "zh": {
+          "label": "塞壬努塞小岛",
+          "note": "由一个名称承载的传统。自古以来，索伦托（Sorrentine）半岛附近的小岛就被称为塞壬努塞，这告诉我们希腊人和罗马人相信什么，而不是该事件真正属于哪里。"
+        },
+        "de": {
+          "label": "Die Sirenusen-Inseln",
+          "note": "Eine Tradition, die von einem Namen getragen wird. Die kleinen Inseln vor der Halbinsel von Sorrent werden seit der Antike Sirenusen genannt, was uns zeigt, was Griechen und Römer glaubten, nicht aber, wohin die Episode gehört."
+        },
+        "ja": {
+          "label": "シレヌーセ諸島",
+          "note": "名前によって受け継がれてきた伝承。ソレント半島沖の諸島は古代からシレヌーセと呼ばれており、これはギリシャ人やローマ人が何を信じていたかを示すものであって、エピソードが実際にどの場所に属するかを示すものではありません。"
         }
       }
     }
@@ -122,6 +138,86 @@
         {
           "q": "O que as sereias realmente oferecem?",
           "a": "Conhecimento. Cantam que sabem o que ocorreu em Troia e tudo o que se passa na terra, e por isso a tentação funciona com este ouvinte em particular."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Les Sirènes",
+      "summary": "Le seul danger auquel Ulysse survit grâce à la planification : de la cire dans les oreilles de l'équipage, son propre corps ligoté au mât, et le chant entendu par un homme incapable d'agir.",
+      "narrative": [
+        "Circé le met en garde et lui donne la méthode. Les Sirènes chantent qu'elles savent tout ce qui s'est passé à Troie et tout ce qui se produit sur la terre — le savoir, et non la beauté, est l'appât — et Ulysse fait signe qu'on le détache tandis que son équipage sourd poursuit sa rame.",
+        "L'épisode entier ne dure que trente-cinq vers. Il a généré une part disproportionnée de la postérité du poème, et n'apporte presque rien à la carte."
+      ],
+      "whyItMatters": "C'est l'exemple le plus clair dans l'atlas d'une identification basée uniquement sur le nom : les îlots des Sirénuses portent ce nom, mais rien d'autre ne vient étayer cette localisation.",
+      "debate": "La question est de savoir si les îlots ont été nommés d'après l'épisode ou si l'épisode a été localisé sur ces îlots — une circularité que l'on retrouve dans la plupart des identifications occidentales.",
+      "faqs": [
+        {
+          "q": "Où se trouve l'île des Sirènes ?",
+          "a": "Non établie. La tradition italienne la situe à Li Galli, au large d'Amalfi ; l'atlas lui attribue un score de 4/12."
+        },
+        {
+          "q": "Qu'offrent réellement les Sirènes ?",
+          "a": "Le savoir. Elles chantent qu'elles savent ce qui s'est passé à Troie et tout ce qui advient sur la terre, c'est pourquoi la tentation fonctionne sur cet auditeur particulier."
+        }
+      ]
+    },
+    "de": {
+      "title": "Die Sirenen",
+      "summary": "Die einzige Gefahr, die Odysseus durch vorausschauende Planung überlebt: Wachs in den Ohren der Mannschaft, sein eigener Körper an den Mast gefesselt und der Gesang, den ein Mann hört, der nicht danach handeln kann.",
+      "narrative": [
+        "Kirke warnt ihn und zeigt ihm die Methode. Die Sirenen singen, dass sie alles wissen, was in Troja geschah und was auf Erden geschieht – Wissen, nicht Schönheit, ist der Köder –, und Odysseus gibt Zeichen, ihn loszubinden, während seine gehörlose Mannschaft vorbeirudert.",
+        "Die gesamte Episode ist fünfunddreißig Verse lang. Sie hat einen unverhältnismäßig großen Anteil an der Nachwirkung des Epos hervorgerufen und trägt fast nichts zur Landkarte bei."
+      ],
+      "whyItMatters": "Es ist das deutlichste Beispiel im Atlas für eine namensbasierte Identifizierung: Die Sirenusen-Inseln tragen den Namen, und nichts anderes stützt die Lokalisierung.",
+      "debate": "Ob die Inseln nach der Episode benannt wurden oder die Episode bei den Inseln lokalisiert wurde – ein Zirkelschluss, der sich durch die meisten westlichen Identifizierungen zieht.",
+      "faqs": [
+        {
+          "q": "Wo liegt die Insel der Sirenen?",
+          "a": "Nicht gesichert. Die italienische Tradition verortet sie bei Li Galli vor Amalfi; der Atlas bewertet dies mit 4/12."
+        },
+        {
+          "q": "Was bieten die Sirenen eigentlich an?",
+          "a": "Wissen. Sie singen, dass sie wissen, was in Troja geschah und was auf Erden geschehen wird, weshalb die Versuchung bei diesem speziellen Zuhörer wirkt."
+        }
+      ]
+    },
+    "ja": {
+      "title": "セイレンたち",
+      "summary": "オデュッセウスが計画によって生き延びた唯一の危機。乗組員の耳に蝋を詰め、自身の体をマストに縛り付け、行動を起こすことのできない状態で歌を聴く。",
+      "narrative": [
+        "キルケが彼に警告し、方法を授ける。セイレンたちは、トロイアで起こったすべてのこと、および地上で起こるすべてのことを知っていると歌う。美しさではなく知識こそが罠なのである。耳の聞こえない乗組員たちが漕ぎ進む中、オデュッセウスは縄を解くよう合図を送る。",
+        "エピソード全体はわずか35行の長さである。しかし、この詩の後世への影響において不釣り合いなほど大きな割合を占めており、地図の作成にはほとんど寄与していない。"
+      ],
+      "whyItMatters": "これは、名前のみに基づく同定を示すアトラスの中で最も明確な例である。シレヌーセ諸島がその名を冠しているだけで、その場所を裏付ける証拠は他に何もない。",
+      "debate": "諸島がこのエピソードにちなんで名付けられたのか、それともエピソードがこの諸島に位置づけられたのかという議論。これは、西洋における同定の大部分に見られる循環論法である。",
+      "faqs": [
+        {
+          "q": "セイレンたちの島はどこにありますか？",
+          "a": "特定されていません。イタリアの伝承ではアマルフィ沖のリ・ガッリ島と結びつけられていますが、アトラスでのスコアは4/12です。"
+        },
+        {
+          "q": "セイレンたちは実際に何を提示しているのですか？",
+          "a": "知識です。彼女たちは、トロイアで何が起こったか、そして地上で起こるすべてのことを知っていると歌います。だからこそ、この特定の聞き手に対して誘惑が効果を持つのです。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "塞壬",
+      "summary": "奥德修斯通过谋划得以幸存的唯一危险：在船员的耳朵里塞入蜡，将自己的身体绑在桅杆上，由一个无法采取行动的人来聆听歌声。",
+      "narrative": [
+        "喀耳刻（Circe）警告了他并提供了方法。塞壬歌唱道，她们知道特洛伊发生的一切以及地球上发生的一切——知识而非美貌才是诱饵——奥德修斯示意松绑，而他听不见声音的船员们则继续划船通过。",
+        "整个事件只有三十五行长。它在史诗的后世流传中产生了不成比例的巨大影响，但对地图的贡献几乎为零。"
+      ],
+      "whyItMatters": "这是地图集中基于名称进行识别的最清晰例子：塞壬努塞（Sirenuse）小岛承载了这一名称，而没有其他任何证据支持该位置。",
+      "debate": "是这些小岛因该事件而得名，还是该事件被定位在这些小岛上——这种循环论证贯穿了大多数西方地理识别。",
+      "faqs": [
+        {
+          "q": "塞壬的岛屿在哪里？",
+          "a": "尚未确定。意大利的传统将其归于阿马尔菲（Amalfi）附近的利加利（Li Galli）群岛；地图集对此的评分为 4/12。"
+        },
+        {
+          "q": "塞壬实际上提供了什么？",
+          "a": "知识。她们歌唱道，她们知道特洛伊发生的一切以及地球上将要发生的一切，这就是为什么这种诱惑对这位特殊的听众起作用。"
         }
       ]
     }

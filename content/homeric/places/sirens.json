@@ -85,6 +85,22 @@
         "pt": {
           "label": "Li Galli / as Sirenusas",
           "note": "Três ilhotas diante da península sorrentina, chamadas Sirenusas desde a Antiguidade. O nome é o argumento, e bem pode ter seguido o poema em vez de precedê-lo."
+        },
+        "fr": {
+          "label": "Li Galli / les Sirénuses",
+          "note": "Trois îlots au large de la péninsule de Sorrente, appelés les Sirénuses depuis l'Antiquité. Le nom constitue l'argument, et il se pourrait bien que le nom ait découlé du poème plutôt qu'il ne l'ait précédé."
+        },
+        "zh": {
+          "label": "利加利群岛 / 塞雷努塞群岛",
+          "note": "索伦托半岛附近的三个小岛，自古以来就被称为塞雷努塞群岛。其名称即是论据，而该名称很可能是因史诗而产生，而非先于史诗存在。"
+        },
+        "de": {
+          "label": "Li Galli / die Sirenusen",
+          "note": "Drei kleine Inseln vor der Halbinsel von Sorrent, die seit der Antike Sirenusen genannt werden. Der Name ist das Argument, und der Name folgte wohl eher dem Epos, als dass er ihm vorausging."
+        },
+        "ja": {
+          "label": "リー・ガッリ / シレヌーセ",
+          "note": "ソレント半島沖にある3つの小島で、古代からシレヌーセと呼ばれている。その名前こそが論拠であるが、その名前は詩に先行したのではなく、詩の後に付けられた可能性が十分に高い。"
         }
       }
     }
@@ -122,6 +138,46 @@
       ],
       "identificationNote": "Especulativa: uma tradição baseada no nome, sem provas de apoio nem consenso acadêmico; pontua 4/12.",
       "debate": "Se as Sirenusas se chamam assim por causa do episódio ou o episódio é situado nas Sirenusas — a mesma circularidade que percorre quase todas as identificações ocidentais."
+    },
+    "fr": {
+      "name": "L'île des Sirènes",
+      "summary": "Deux chanteuses sur une prairie fleurie, entourées des ossements des hommes qui se sont arrêtés pour les écouter. Le poème ne donne aucune coordonnée et une seule consigne de navigation : de la cire dans les oreilles, et attacher le capitaine au mât.",
+      "description": [
+        "Les Sirènes sont le seul danger auquel Ulysse survit uniquement grâce à sa préparation. Circé lui explique qui elles sont et ce qu'il doit faire ; il s'exécute ; le navire passe. L'épisode dure vingt vers et a inspiré plus d'œuvres d'art que tout autre passage du poème.",
+        "La tradition italienne les a rattachées aux îlots des Sirénuses, au large d'Amalfi, ce qui relève de l'attribution d'un nom et non d'une découverte. L'atlas enregistre cette identification et lui attribue le score correspondant."
+      ],
+      "identificationNote": "Spéculatif : une tradition basée sur les noms, sans preuve à l'appui ni consensus scientifique, avec un score de 4/12.",
+      "debate": "La question est de savoir si les Sirénuses tirent leur nom de l'épisode ou si l'épisode a été localisé aux Sirénuses — la même circularité qui caractérise la plupart des identifications occidentales."
+    },
+    "de": {
+      "name": "Die Insel der Sirenen",
+      "summary": "Zwei Sängerinnen auf einer blühenden Wiese, umgeben von den Knochen der Männer, die anhielten, um zuzuhören. Das Epos gibt keine Koordinaten und nur eine Navigationsanweisung: Wachs in die Ohren und den Kapitän an den Mast fesseln.",
+      "description": [
+        "Die Sirenen sind die einzige Gefahr, die Odysseus allein durch Vorbereitung überlebt. Kirke sagt ihm, wer sie sind und was zu tun ist; er tut es; das Schiff fährt vorbei. Die Episode ist zwanzig Zeilen lang und hat mehr Kunstwerke hervorgebracht als jede andere im Epos.",
+        "Die italienische Tradition verortete sie auf den Sirenusen-Inseln vor Amalfi, was eine Namensgebung und keine Entdeckung darstellt. Der Atlas verzeichnet die Identifizierung und bewertet sie entsprechend."
+      ],
+      "identificationNote": "Spekulativ: eine auf Namen basierende Tradition ohne stützende Beweise und ohne wissenschaftlichen Konsens, Bewertung: 4/12.",
+      "debate": "Ob die Sirenusen nach der Episode benannt wurden oder die Episode bei den Sirenusen verortet wurde – derselbe Zirkelschluss, der sich durch die meisten westlichen Identifizierungen zieht."
+    },
+    "ja": {
+      "name": "セイレーンの島",
+      "summary": "立ち止まって耳を傾けた男たちの骨に囲まれた、花咲く草原の上の2人の歌い手。詩には座標は示されておらず、航海上の指示が1つだけある。耳に蝋を詰め、船長をマストに縛り付けること。",
+      "description": [
+        "セイレーンは、オデュッセウスが事前の準備だけで生き延びた唯一の危険である。キルケは彼らにそれが何であるか、そしてどうすべきかを告げ、彼はそれを実行し、船は通過する。このエピソードはわずか20行の長さであるが、詩の中の他のどのエピソードよりも多くの芸術作品を生み出してきた。",
+        "イタリアの伝承は、彼らをアマルフィ沖のシレヌーセ諸島に結びつけたが、これは命名であって発見ではない。アトラスはこの同定を記録し、それに応じたスコアを付けている。"
+      ],
+      "identificationNote": "推測の域を出ない：裏付けとなる証拠がなく、学術的な合意もない、名前に基づく伝承。スコアは12点満点中4点。",
+      "debate": "シレヌーセがこのエピソードにちなんで名付けられたのか、それともエピソードがシレヌーセに位置づけられたのか。これは、西方の同定の大部分に見られるのと同じ循環論法である。"
+    },
+    "zh": {
+      "name": "塞壬的岛屿",
+      "summary": "两位歌手在鲜花盛开的草地上歌唱，周围堆满了驻足倾听者的白骨。史诗没有给出坐标，只给了一条航行指示：用蜡封住耳朵，并将船长绑在桅杆上。",
+      "description": [
+        "塞壬是奥德修斯仅凭提前准备便得以幸存的唯一险境。喀耳刻告诉他她们是什么以及该怎么做；他照做了；船只顺利通过。这一情节只有二十行长，却比史诗中的任何其他章节激发了更多的艺术创作。",
+        "意大利的传统将她们与阿马尔菲附近的塞雷努塞（Sirenuse）群岛联系在一起，这只是一种命名，而非发现。本地图集记录了这一认定并据此评分。"
+      ],
+      "identificationNote": "推测性：一个基于名称的传统，没有支持性证据，也未达成学术共识，得分为 4/12。",
+      "debate": "究竟是塞雷努塞群岛因这一情节而得名，还是这一情节被定位于塞雷努塞群岛——这正是贯穿大多数西方地理认定中的同义反复问题。"
     }
   }
 }

@@ -62,6 +62,22 @@
         "pt": {
           "label": "O estreito de Messina",
           "note": "A identificação mais forte das andanças: uma corrente de maré real, um redemoinho real, uma margem de falésias e testemunho antigo unânime. Uma cidade chamada Scilla ainda está de pé sobre a rocha."
+        },
+        "fr": {
+          "label": "Le détroit de Messine",
+          "note": "L'identification la plus forte des errances : un véritable raz-de-marée, un véritable tourbillon, une côte bordée de falaises et le témoignage unanime de l'Antiquité. Une ville appelée Scilla se dresse toujours sur le rocher."
+        },
+        "zh": {
+          "label": "墨西拿海峡",
+          "note": "漂泊旅程中最确凿的认定：真实的急流、真实的漩涡、悬崖峭壁的海岸，以及古代文献的一致佐证。一座名为斯奇拉（Scilla）的小镇至今仍矗立在岩石上。"
+        },
+        "de": {
+          "label": "Die Straße von Messina",
+          "note": "Die stärkste Identifizierung auf den Irrwegen: eine reale Gezeitenströmung, ein realer Strudel, eine von Klippen gesäumte Küste und einhellige antike Zeugnisse. Auf dem Felsen steht noch heute eine Stadt namens Scilla."
+        },
+        "ja": {
+          "label": "メッシーナ海峡",
+          "note": "漂流の旅において最も確実な比定地です。実際の激しい潮流、実際の渦巻き、崖に囲まれた海岸、 tender古代の満場一致の証言が存在します。その岩の上には、今でもシッラ（Scilla）と呼ばれる町があります。"
         }
       }
     }
@@ -124,6 +140,86 @@
         {
           "q": "Por que as rochas errantes não têm localização aqui?",
           "a": "Porque o poema as apresenta como o caminho não tomado, e toda identificação posterior vem da tradição argonáutica, não da Odisseia."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Scylla et Charybde",
+      "summary": "Un choix entre perdre six hommes et perdre tout le monde. C'est le seul danger des errances dont le comportement physique correspond à un lieu réel.",
+      "narrative": [
+        "Circé décrit les deux : le tourbillon qui engloutit la mer trois fois par jour, et le monstre à six têtes dans la grotte au-dessus de la falaise. Elle conseille à Ulysse de se tenir du côté de Scylla et d'accepter la perte. C'est ce qu'il fait, regardant six hommes se faire enlever « comme des poissons au bout d'une longue ligne ».",
+        "Les Planctes — les Roches Errantes — sont proposées comme itinéraire alternatif et ne sont jamais empruntées, c'est pourquoi elles apparaissent dans cet atlas comme un lieu non localisé sans coordonnées."
+      ],
+      "whyItMatters": "C'est l'épisode d'errance le mieux noté de l'atlas avec un score de 8/12, et le cas le plus clair de géographie réelle au sein d'un voyage fictif.",
+      "debate": "Si cette identification préserve un souvenir ancien ou reflète les connaissances des marins grecs du VIIIe siècle qui empruntaient le détroit, auquel cas le poème décrit un lieu réel qu'il ne prétend jamais visiter.",
+      "faqs": [
+        {
+          "q": "Charybde est-il un vrai tourbillon ?",
+          "a": "Le détroit de Messine produit réellement de puissants courants de marée et un tourbillon à certains moments de la marée. Il est dangereux pour les petites embarcations et l'était encore plus à la rame et à la voile."
+        },
+        {
+          "q": "Pourquoi les Roches Errantes n'ont-elles pas d'emplacement ici ?",
+          "a": "Parce que le poème les présente comme la route non empruntée, et que toute identification ultérieure provient de la tradition des Argonautes plutôt que de l'Odyssée."
+        }
+      ]
+    },
+    "de": {
+      "title": "Skylla und Charybdis",
+      "summary": "Die Wahl zwischen dem Verlust von sechs Männern und dem Verlust aller. Es ist die einzige Gefahr auf den Irrwegen, deren physisches Verhalten mit einem realen Ort übereinstimmt.",
+      "narrative": [
+        "Kirke beschreibt beide: den Strudel, der dreimal am Tag das Meer verschlingt, und das sechsköpfige Ungeheuer in der Höhle über der Klippe. Sie rät Odysseus, sich an Skyllas Seite zu halten und den Verlust zu akzeptieren. Er tut es und sieht zu, wie sechs Männer „wie Fische an einer langen Rute“ geholt werden.",
+        "Die Plankten – die Irrsteine – werden als Alternativroute angeboten und nie gewählt, weshalb sie in diesem Atlas als nicht lokalisierter Ort ohne Koordinaten erscheinen."
+      ],
+      "whyItMatters": "Es ist die am höchsten bewertete Irrweg-Episode des Atlas mit 8/12 Punkten und der deutlichste Fall realer Geografie innerhalb einer fiktiven Reise.",
+      "debate": "Ob die Identifizierung eine alte Erinnerung bewahrt oder das Wissen griechischer Seeleute des achten Jahrhunderts widerspiegelt, die die Meerenge nutzten – in diesem Fall beschreibt das Epos einen realen Ort, den es selbst nie zu besuchen beansprucht.",
+      "faqs": [
+        {
+          "q": "Ist Charybdis ein realer Strudel?",
+          "a": "Die Straße von Messina erzeugt tatsächlich starke Gezeitenströmungen und bei bestimmten Gezeitenständen einen Strudel. Er ist für kleine Boote gefährlich und war es unter Ruder und Segel noch mehr."
+        },
+        {
+          "q": "Warum haben die Irrsteine hier keinen Ort?",
+          "a": "Weil das Epos sie als den nicht gewählten Weg darstellt und jede spätere Identifizierung eher aus der Argonautentradition als aus der Odyssee stammt."
+        }
+      ]
+    },
+    "ja": {
+      "title": "スキュラとカリュブディス",
+      "summary": "6人の部下を失うか、全員を失うかの選択です。これは、漂流の旅における危険の中で、その物理的な挙動が実際の場所と一致する唯一のものです。",
+      "narrative": [
+        "キルケはその両方を説明します。1日に3回海水を飲み込む大渦巻きと、崖の上の洞窟に潜む6つの頭を持つ怪物です。彼女はオデュッセウスに、スキュラ側に進路を取り、犠牲を受け入れるよう告げます。彼はその通りにし、6人の部下が「長い竿にかかった魚のように」連れ去られるのを目撃します。",
+        "プランクタイ（彷徨う岩）は代替ルートとして提示されるものの、決して通ることはありません。そのため、この地図帳では座標のない「位置不明の場所」として掲載されています。"
+      ],
+      "whyItMatters": "これは、この地図帳の漂流エピソードの中で最高スコア（12点満点中8点）を獲得したものであり、架空の航海の中に実際の地理が組み込まれている最も明確な事例です。",
+      "debate": "この比定が古い記憶を留めているものなのか、それともこの海峡を利用していた紀元前8世紀のギリシャ人船乗りの知識を反映しているものなのかという議論です。後者の場合、この詩は訪れたと明言していない実際の場所を描写していることになります。",
+      "faqs": [
+        {
+          "q": "カリュブディスは実在する渦巻きですか？",
+          "a": "メッシーナ海峡では、実際に強い潮流が発生し、特定の潮汐状態で渦巻きが生じます。小型船にとっては危険であり、櫂や帆で航行していた時代にはなおさら危険でした。"
+        },
+        {
+          "q": "なぜ「彷徨う岩」にはここに位置が設定されていないのですか？",
+          "a": "詩の中でそれらが「選ばれなかった道」として提示されており、後世の比定はすべて『オデュッセイア』ではなくアルゴナウタイの伝承に由来しているためです。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "斯库拉与卡律布狄斯",
+      "summary": "在失去六个人和全军覆没之间做出选择。这是漂泊旅程中唯一一个物理特征与现实地点相吻合的险境。",
+      "narrative": [
+        "喀耳刻对两者都进行了描述：每天吞吐海水三次的漩涡，以及悬崖上方洞穴中的六头海怪。她告诉奥德修斯要靠斯库拉一侧行驶，并接受损失。他照做了，眼睁睁看着六个同伴“像长竿钓起的鱼”一样被抓走。",
+        "普兰克泰（Planctae）——即“漂流石”——被作为备选路线，但从未被选择，这就是为什么它们在本地图中显示为没有坐标的未定位地点。"
+      ],
+      "whyItMatters": "这是本图集中评分最高的漂泊章节（8/12分），也是虚构航程中存在真实地理的最清晰案例。",
+      "debate": "这一认定是保留了古老的记忆，还是反映了公元前八世纪使用该海峡的希腊水手的知识——如果是后者，那么史诗描述的就是一个它从未声称造访过的真实地点。",
+      "faqs": [
+        {
+          "q": "卡律布狄斯是真实的漩涡吗？",
+          "a": "墨西拿海峡在特定潮汐状态下确实会产生强劲的潮流和漩涡。它对小型船只非常危险，在依靠桨和帆航行的时代更是如此。"
+        },
+        {
+          "q": "为什么漂流石在这里没有定位？",
+          "a": "因为史诗将它们呈现为未选择的道路，而且所有后来的认定都源自阿尔戈英雄（Argonaut）的传统，而非源自《奥德赛》。"
         }
       ]
     }

@@ -279,6 +279,326 @@
           "a": "Um servidor que apresenta descrições inofensivas quando o usuário o aprova e as altera depois. As defesas são fixar a versão do servidor, revalidar as descrições quando elas mudam e não conceder a um servidor remoto capacidades que você não concederia a uma dependência de código."
         }
       ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que la sécurité MCP ?",
+      "summary": "La sécurité MCP est ce qui empêche un serveur Model Context Protocol de devenir la porte d'entrée la plus facile dans un système. Le protocole standardise la manière dont les agents découvrent et appellent les outils ; il ne décide pas de qui peut les appeler, de ce qu'ils peuvent atteindre, ni de ce qui se passe lorsqu'une description d'outil devient hostile. Ces décisions incombent au serveur : authentification, validation de l'origine et du transport, outils à portée restreinte, limites de débit et piste d'audit.",
+      "definition": "La sécurité MCP est l'ensemble des contrôles appliqués à un serveur Model Context Protocol et à ses clients — authentification et autorisation, validation de l'origine et du transport, définition de la portée des outils, gestion des entrées et des sorties, limitation du débit et audit — afin que l'exposition de capacités à un agent d'IA n'expose pas les systèmes sous-jacents.",
+      "takeaways": [
+        "Le MCP standardise la plomberie, pas la confiance : chaque serveur décide de sa propre posture.",
+        "La description d'un outil est une entrée non fiable pour le modèle — elle peut donner des instructions et peut changer après approbation.",
+        "Les serveurs stdio locaux et les serveurs HTTP distants ont des modèles de menace différents ; les erreurs dangereuses diffèrent.",
+        "Les vérifications d'origine et les limites de débit relèvent du serveur, car les clients ne sont pas sous votre contrôle.",
+        "Le 'lecture seule' est une propriété de l'implémentation, jamais du nom de l'outil."
+      ],
+      "context": [
+        "Le MCP offre à un agent un moyen uniforme de découvrir et d'invoquer des capacités. Cette uniformité constitue à la fois la valeur et le risque : un client peut être orienté vers de nombreux serveurs, et chaque serveur représente une nouvelle décision de confiance prise — en pratique — par quiconque a collé une URL dans un fichier de configuration.",
+        "Deux types de déploiement prédominent. Un serveur stdio local s'exécute avec les propres privilèges de l'utilisateur sur sa machine : il n'y a pas de frontière réseau, les questions portent donc sur ce qu'il peut lire et s'il communique avec l'extérieur. Un serveur HTTP distant est un point de terminaison public : les questions deviennent alors qui appelle, d'où, à quelle fréquence, et si un navigateur peut être trompé pour l'appeler au nom d'un utilisateur.",
+        "Nous exploitons un modèle de chaque type pour cette base de connaissances — un point de terminaison HTTP public et un package stdio publié — de sorte que les contrôles ci-dessous sont décrits tels qu'ils sont implémentés plutôt que sous forme de liste de contrôle générique."
+      ],
+      "architecture": [
+        "Déterminez d'abord le niveau d'exposition : accès public en lecture seule, accès authentifié ou local uniquement. Tout le reste découle de cette réponse, et la plupart des incidents proviennent d'un serveur qui n'a jamais franchi cette étape.",
+        "Validez le transport avant d'effectuer toute opération. Pour les serveurs HTTP, comparez l'en-tête Origin à une liste d'autorisation et rejetez les appels intersites initiés par le navigateur avant l'exécution d'un gestionnaire — le rebind DNS et les abus de type CSRF surviennent tous deux de cette manière.",
+        "Maintenez le serveur sans état (stateless) partout où le protocole le permet. L'absence de stockage de session élimine la fixation de session, la contamination entre requêtes et la fuite d'état entre les appelants.",
+        "Restreignez strictement la portée des outils. Un outil, une fonctionnalité, pas de verbes qui changent selon un argument — un outil de « requête » qui peut également écrire est une élévation de privilèges qui n'attend que le bon paramètre.",
+        "Limitez le débit par appelant et répondez avec un véritable code 429 et un en-tête Retry-After. Un agent qui réessaie constitue un trafic normal ; un agent qui réessaie sans limite est un outil de déni de service dirigé contre votre propre backend.",
+        "Enregistrez chaque appel avec suffisamment de structure pour reconstituer les abus — outil, résultat, latence, identité de l'appelant — et rien qui ne transforme le journal lui-même en faille de sécurité.",
+        "Traisez chaque résultat d'outil comme du contenu non approuvé lors du retour. Un serveur qui sert de proxy pour des données externes constitue, par construction, un canal d'injection de prompt indirect."
+      ],
+      "components": [
+        "Authentification : aucune pour les données de lecture véritablement publiques, un jeton ou OAuth pour tout le reste — avec une décision documentée, car l'absence d'authentification doit être un choix et non un oubli.",
+        "Validation de l'origine et de l'hôte pour les serveurs distants, dérivée du trafic mesuré plutôt que supposée à partir des valeurs par défaut d'une application web.",
+        "Autorisation par outil : ce que cet appelant est autorisé à invoquer, et non pas seulement s'il est autorisé à se connecter.",
+        "Validation des entrées à la limite de l'outil, avec la même rigeur que pour une API publique — car c'est exactement ce dont il s'agit.",
+        "Mise en forme des sorties : renvoyez le strict minimum requis par l'appelant ; ne transmettez jamais directement les charges utiles brutes en amont.",
+        "Limitation du débit et quotas, avec des en-têtes suffisamment précis pour que les clients bien configurés ralentissent d'eux-mêmes.",
+        "Journaux d'audit et métriques, conservés suffisamment longtemps pour permettre les investigations et suffisamment agrégés pour être stockés en toute sécurité.",
+        "Hygiène de la chaîne d'approvisionnement pour le serveur lui-même : dépendances figées, mises à jour examinées, provenance publiée afin que les clients puissent vérifier qu'ils communiquent bien avec le serveur que vous avez construit."
+      ],
+      "pros": [
+        "Un serveur MCP bien délimité présente une surface d'attaque plus restreinte que l'intégration ad hoc qu'il remplace : un seul protocole, un seul point d'audit, un seul endroit pour révoquer les accès.",
+        "L'absence d'état et la spécialisation étroite des outils facilitent l'analyse du serveur — l'évaluation de sécurité tient sur une seule page.",
+        "Les erreurs standardisées et les en-têtes de limitation de débit rendent le comportement des clients prévisible, ce qui constitue en soi une propriété défensive.",
+        "Puisque tout franchit une seule et même frontière, la mesure est immédiate : l'utilisation normale et les abus apparaissent dans les mêmes journaux et se distinguent facilement."
+      ],
+      "risks": [
+        "Changements de comportement d'outils (« tool rug pulls ») : un serveur qui se comporte correctement au moment de l'approbation et modifie la description de ses outils plus tard, une fois que le client a cessé de vérifier.",
+        "Serveurs locaux trop permissifs : un serveur stdio détenant le système de fichiers et les identifiants de l'utilisateur offre une capacité d'agent complète sans aucune frontière réseau pour l'intercepter.",
+        "Député confus (« confused deputy ») : le serveur détient des identifiants que l'appelant n'a pas, de sorte que quiconque y accède hérite de sa portée.",
+        "Exposition publique silencieuse : un serveur distant déployé sans authentification, sans vérification d'origine et sans limitation de débit est facilement détectable et exposé aux abus.",
+        "Relais d'injection : la sortie d'un outil provenant de sources tierces est transmise au modèle comme s'il s'agissait d'une instruction de confiance."
+      ],
+      "tools": [
+        "La spécification MCP et ses directives de sécurité de transport — la référence à laquelle chaque serveur devrait pouvoir se conformer.",
+        "Listes d'autorisation d'origine et configuration CORS appliquées avant l'exécution du code de l'application.",
+        "Stockages de limitation de débit (Redis ou équivalent) indexés par un hachage de l'identité de l'appelant plutôt que par une adresse IP brute.",
+        "Journaux de requêtes structurés et métriques de latence, afin que les abus et les coûts soient visibles dans la même vue.",
+        "Le Top 10 OWASP pour les applications LLM, pour les catégories d'injection et d'agentivité excessive que les serveurs MCP amplifient.",
+        "Inscriptions au registre et publications signées, afin que les clients puissent vérifier que le serveur qu'ils installent est bien celui que vous avez livré."
+      ],
+      "examples": [
+        "Cette base de connaissances expose un point de terminaison HTTP MCP public en lecture seule. Elle est sans état par conception, de sorte qu'aucune session ne peut être fixée ou rejouée ; les outils ne renvoient que du contenu publié ; et chaque appel est limité en débit par appelant haché avec un véritable code 429 et un en-tête Retry-After.",
+        "Avant d'écrire une règle d'origine (Origin) pour ce point de terminaison, nous avons d'abord mesuré son propre trafic : presque toutes les requêtes ne comportaient aucun en-tête Origin, aucune ne comportait la valeur null, et chaque requête qui en comportait un provenait de ce site. La règle déployée suit cette mesure — rejeter les appels provenant de navigateurs tiers, autoriser le trafic d'agents sans en-tête qui constitue l'audience réelle — plutôt que d'appliquer une politique copiée par défaut depuis une application web.",
+        "Le package stdio publié pour cette même base de connaissances s'exécute localement sans identifiants ni accès au système de fichiers, car il n'a besoin que d'un appel sortant vers le point de terminaison public. Un serveur local qui n'a besoin de rien ne doit rien recevoir."
+      ],
+      "faqs": [
+        {
+          "q": "Le protocole MCP rend-il les agents plus ou moins sûrs ?",
+          "a": "Plus sûr par intégration, plus risqué globalement. Un seul protocole signifie un seul endroit pour examiner et révoquer les accès — mais cela réduit également le coût de connexion d'un agent à un autre système, et chaque connexion représente une nouvelle décision de confiance à prendre."
+        },
+        {
+          "q": "Ai-je besoin d'une authentification sur un serveur en lecture seule ?",
+          "a": "Pas nécessairement, si les données sont véritablement publiques. Vous avez tout de même besoin d'une limitation de débit et d'une piste d'audit : public ne signifie pas gratuit, et un point de terminaison public non limité est un amplificateur dirigé contre votre propre infrastructure."
+        },
+        {
+          "q": "Pourquoi vérifier l'en-tête Origin si les agents n'en envoient pas ?",
+          "a": "Précisément parce qu'ils n'en envoient pas. Le trafic sans en-tête constitue l'audience légitime ; une requête qui comporte une origine (Origin) étrangère provient d'un navigateur agissant pour le compte de quelqu'un d'autre, ce qui est exactement le cas qu'il convient de rejeter."
+        },
+        {
+          "q": "Qu'est-ce qu'un changement de comportement d'outil (« tool rug pull ») et comment s'en prémunir ?",
+          "a": "Il s'agit d'un serveur qui présente des descriptions d'outils inoffensives lorsque l'utilisateur l'approuve, puis les modifie par la suite. Les défenses consistent à figer la version du serveur, à revalider les descriptions lorsqu'elles changent et à ne pas accorder à un serveur distant des capacités que vous n'accorderiez pas à une dépendance de code."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist MCP-Sicherheit?",
+      "summary": "MCP-Sicherheit verhindert, dass ein Model Context Protocol-Server zum einfachsten Einfallstor in ein System wird. Das Protokoll standardisiert, wie Agenten Tools erkennen und aufrufen; es entscheidet nicht, wer sie aufrufen darf, was sie erreichen können oder was passiert, wenn eine Tool-Beschreibung bösartig wird. Diese Entscheidungen liegen beim Server: Authentifizierung, Herkunfts- und Transportvalidierung, eng eingegrenzte Tools, Ratenbegrenzungen (Rate Limits) und ein Audit-Trail.",
+      "definition": "MCP-Sicherheit ist die Gesamtheit der Kontrollmaßnahmen, die auf einen Model Context Protocol-Server und seine Clients angewendet werden – Authentifizierung und Autorisierung, Herkunfts- und Transportvalidierung, Tool-Scoping, Eingabe- und Ausgabeverarbeitung, Ratenbegrenzung und Auditierung –, damit die Bereitstellung von Funktionen für einen KI-Agenten nicht die dahinter liegenden Systeme gefährdet.",
+      "takeaways": [
+        "MCP standardisiert die Infrastruktur, nicht das Vertrauen: Jeder Server bestimmt seine eigene Sicherheitsstruktur.",
+        "Eine Tool-Beschreibung ist eine nicht vertrauenswürdige Eingabe für das Modell – sie kann Anweisungen enthalten und sich nach der Genehmigung ändern.",
+        "Lokale stdio-Server und Remote-HTTP-Server haben unterschiedliche Bedrohungsmodelle; die gefährlichen Fehler unterscheiden sich.",
+        "Herkunftsprüfungen (Origin Checks) und Ratenbegrenzungen gehören in den Server, da Clients nicht unter Ihrer Kontrolle stehen.",
+        "„Read-only“ ist eine Eigenschaft der Implementierung, niemals des Tool-Namens."
+      ],
+      "context": [
+        "MCP bietet einem Agenten eine einheitliche Möglichkeit, Funktionen zu erkennen und aufzurufen. Diese Einheitlichkeit ist sowohl der Nutzen als auch das Risiko: Ein Client kann auf viele Server verweisen, und jeder Server erfordert eine neue Vertrauensentscheidung, die in der Praxis von der Person getroffen wird, die eine URL in eine Konfigurationsdatei kopiert hat.",
+        "Zwei Bereitstellungsformen dominieren. Ein lokaler stdio-Server läuft mit den eigenen Rechten des Benutzers auf dessen Rechner: Es gibt keine Netzwerkgrenze, daher stellt sich die Frage, was er lesen kann und ob er Daten nach Hause sendet. Ein Remote-HTTP-Server ist ein öffentlicher Endpunkt: Hier stellt sich die Frage, wer von wo aus wie oft aufruft und ob ein Browser dazu verleitet werden kann, ihn im Namen eines Benutzers aufzurufen.",
+        "Wir betreiben für diese Wissensdatenbank jeweils eine dieser Formen – einen öffentlichen HTTP-Endpunkt und ein veröffentlichtes stdio-Paket –, sodass die folgenden Kontrollmaßnahmen so beschrieben werden, wie sie implementiert sind, und nicht als generische Checkliste."
+      ],
+      "architecture": [
+        "Entscheiden Sie zuerst über die Freigabe: öffentlich lesbar, authentifiziert oder rein lokal. Alles andere ergibt sich aus dieser Antwort, und die meisten Vorfälle resultieren aus einem Server, der diesen Schritt nie geschafft hat.",
+        "Validieren Sie den Transportweg, bevor Sie irgendwelche Aktionen ausführen. Überprüfen Sie bei HTTP-Servern den Origin-Header gegen eine Allowlist und weisen Sie vom Browser initiierte Cross-Site-Aufrufe ab, bevor ein Handler ausgeführt wird – DNS-Rebinding und CSRF-artiger Missbrauch erfolgen beide auf diesem Weg.",
+        "Halten Sie den Server zustandslos, wo immer das Protokoll es zulässt. Kein Session-Store bedeutet keine Session-Fixation, keine Kontamination zwischen Anfragen und kein Zustand, der zwischen Aufrufern offengelegt werden kann.",
+        "Grenzen Sie Tools eng ein. Ein Tool, eine Funktion, keine Verben, die sich mit einem Argument ändern – ein „query“-Tool, das auch schreiben kann, ist eine Privilege Escalation, die nur auf den richtigen Parameter wartet.",
+        "Implementieren Sie ein Rate Limiting pro Aufrufer und antworten Sie mit einem echten 429 und Retry-After. Ein Agent, der es erneut versucht, ist normaler Traffic; ein Agent, der unbegrenzt fehlschlägt und es erneut versucht, ist ein Denial-of-Service-Tool, das auf Ihr eigenes Backend gerichtet ist.",
+        "Protokollieren Sie jeden Aufruf mit ausreichend Struktur, um Missbrauch zu rekonstruieren – Tool, Ergebnis, Latenz, Identität des Aufrufers – und ohne Daten, die das Log selbst zu einer Sicherheitslücke machen.",
+        "Behandeln Sie jedes Tool-Ergebnis auf dem Rückweg als nicht vertrauenswürdigen Inhalt. Ein Server, der externe Daten weiterleitet, ist konstruktionsbedingt ein Kanal für indirekte Prompt-Injections."
+      ],
+      "components": [
+        "Authentifizierung: Keine für wirklich öffentlich lesbare Daten, ein Token oder OAuth für alles andere – wobei diese Entscheidung dokumentiert sein muss, da „keine Authentifizierung“ eine bewusste Entscheidung und kein Versehen sein darf.",
+        "Origin- und Host-Validierung für Remote-Server, abgeleitet aus gemessenem Traffic statt angenommen aus einem Web-App-Standardwert.",
+        "Autorisierung pro Tool: Was dieser Aufrufer ausführen darf, nicht nur, ob er sich verbinden darf.",
+        "Eingabevalidierung an der Tool-Grenze mit derselben Strenge wie bei einer öffentlichen API – denn genau das ist es.",
+        "Ausgabe-Shaping: Geben Sie nur das Minimum zurück, das der Aufrufer benötigt; leiten Sie niemals rohe Upstream-Payloads direkt durch.",
+        "Rate Limiting und Quotas, mit ausreichend korrekten Headern, sodass sich gut verhaltende Clients von selbst zurückziehen.",
+        "Audit-Protokollierung und Metriken, die lange genug für Untersuchungen aufbewahrt und ausreichend aggregiert werden, um eine sichere Speicherung zu gewährleisten.",
+        "Supply-Chain-Hygiene für den Server selbst: gepinnte Abhängigkeiten, überprüfte Updates, veröffentlichte Provenienz, damit Clients erkennen können, dass sie mit dem von Ihnen entwickelten Server kommunizieren."
+      ],
+      "pros": [
+        "Ein gut eingegrenzter MCP-Server bietet eine kleinere Angriffsfläche als die Ad-hoc-Integration, die er ersetzt: ein Protokoll, ein Audit-Punkt, eine Stelle zum Widerrufen.",
+        "Zustandslosigkeit und eng eingegrenzte Tools machen den Server leicht verständlich – die Sicherheitsüberprüfung passt auf eine einzige Seite.",
+        "Standardfehler und Rate-Limit-Header machen das Client-Verhalten vorhersagbar, was an sich schon eine defensive Eigenschaft ist.",
+        "Da alles über eine einzige Grenze läuft, ist die Messung quasi kostenlos: Missbrauch und normale Nutzung erscheinen in denselben Logs und sehen unterschiedlich aus."
+      ],
+      "risks": [
+        "Tool Rug Pulls: Ein Server, der sich zum Zeitpunkt der Freigabe ordnungsgemäß verhält und seine Tool-Beschreibungen später ändert, sobald der Client nicht mehr nachfragt.",
+        "Zu weit gefasste lokale Server: Ein stdio-Server, der Zugriff auf das Dateisystem und die Anmeldedaten des Benutzers hat, stellt eine vollständige Agenten-Funktion dar, ohne dass eine Netzwerkgrenze dies abfangen könnte.",
+        "Confused Deputy: Der Server besitzt Anmeldedaten, die der Aufrufer nicht hat, sodass jeder, der ihn erreicht, dessen Berechtigungen erbt.",
+        "Stille öffentliche Freigabe: Ein Remote-Server, der ohne Authentifizierung, Origin-Prüfung und Rate Limiting bereitgestellt wird, ist leicht auffindbar und kann ungehindert missbraucht werden.",
+        "Injection-Relay: Tool-Ausgaben, die aus Drittquellen stammen und an das Modell übergeben werden, als handele es sich um vertrauenswürdige Anweisungen."
+      ],
+      "tools": [
+        "Die MCP-Spezifikation und ihre Richtlinien zur Transportsicherheit – die Baseline, an der sich jeder Server messen lassen sollte.",
+        "Origin-Allowlists und CORS-Konfigurationen, die angewendet werden, bevor der Anwendungscode ausgeführt wird.",
+        "Rate-Limiting-Speicher (Redis oder Äquivalent), die über eine gehashte Identität des Aufrufers statt über eine rohe IP-Adresse indiziert werden.",
+        "Strukturierte Anfrage-Logs und Latenzmetriken, sodass Missbrauch und Kosten in derselben Ansicht sichtbar sind.",
+        "OWASP Top 10 für LLM-Anwendungen, für die Kategorien Injection und Excessive Agency, die durch MCP-Server verstärkt werden.",
+        "Registry-Einträge und signierte Veröffentlichungen, damit Clients überprüfen können, ob der installierte Server dem von Ihnen bereitgestellten entspricht."
+      ],
+      "examples": [
+        "Diese Knowledge Base stellt einen öffentlichen, schreibgeschützten HTTP-MCP-Endpunkt bereit. Er ist standardmäßig zustandslos, sodass keine Session fixiert oder wiederholt werden kann; die Tools geben nur veröffentlichte Inhalte zurück; und jeder Aufruf ist pro gehashtem Aufrufer mit einem echten 429 und Retry-After ratenbegrenzt.",
+        "Bevor wir eine Origin-Regel für diesen Endpunkt definiert haben, haben wir zuerst dessen Traffic gemessen: Fast jede Anfrage enthielt überhaupt keinen Origin-Header, keine enthielt null, und jede Anfrage, die einen enthielt, stammte von dieser Website. Die implementierte Regel folgt dieser Messung – sie weist Browser-Origin-Aufrufe von überall sonst ab und lässt den headerlosen Agenten-Traffic zu, der die eigentliche Zielgruppe darstellt – anstatt eine Richtlinie aus einem Web-App-Standardwert zu kopieren.",
+        "Das für dieselbe Knowledge Base veröffentlichte stdio-Paket läuft lokal ohne Anmeldedaten und ohne Zugriff auf das Dateisystem, da es lediglich einen ausgehenden Aufruf an den öffentlichen Endpunkt benötigt. Einem lokalen Server, der nichts benötigt, sollte auch nichts gegeben werden."
+      ],
+      "faqs": [
+        {
+          "q": "Macht MCP Agenten sicherer oder unsicherer?",
+          "a": "Sicherer pro Integration, riskanter in der Gesamtheit. Ein einziges Protokoll bedeutet eine einzige Stelle für Überprüfungen und Widerrufe – aber es senkt auch die Hürde, einen Agenten mit einem anderen System zu verbinden, und jede Verbindung ist eine neue Vertrauensentscheidung, die jemand treffen muss."
+        },
+        {
+          "q": "Benötige ich eine Authentifizierung für einen schreibgeschützten Server?",
+          "a": "Nicht zwingend, wenn die Daten wirklich öffentlich sind. Sie benötigen dennoch ein Rate Limiting und einen Audit-Trail: Öffentlich bedeutet nicht kostenlos, und ein unbegrenzter öffentlicher Endpunkt ist ein Verstärker, der auf Ihre eigene Infrastruktur gerichtet ist."
+        },
+        {
+          "q": "Warum sollte man den Origin-Header prüfen, wenn Agenten keinen senden?",
+          "a": "Genau deshalb. Der headerlose Traffic ist die legitime Zielgruppe; eine Anfrage, die einen fremden Origin enthält, ist ein Browser, der im Namen eines Dritten handelt – und genau das ist der Fall, den es abzuweisen gilt."
+        },
+        {
+          "q": "Was ist ein Tool Rug Pull und wie schütze ich mich davor?",
+          "a": "Ein Server, der harmlose Tool-Beschreibungen anzeigt, wenn der Benutzer ihn freigibt, und diese im Nachhinein ändert. Die Schutzmaßnahmen bestehen darin, die Serverversion zu pinnen, Beschreibungen bei Änderungen neu zu validieren und einem Remote-Server keine Berechtigungen zu erteilen, die Sie nicht auch einer Code-Abhängigkeit gewähren würden."
+        }
+      ]
+    },
+    "ja": {
+      "title": "MCPセキュリティとは何ですか？",
+      "summary": "MCPセキュリティとは、Model Context Protocolサーバーがシステムへの最も容易な侵入経路になるのを防ぐためのものです。このプロトコルは、エージェントがツールを検出して呼び出す方法を標準化しますが、誰がツールを呼び出せるか、ツールがどこにアクセスできるか、あるいはツールの説明が有害なものに変化した場合に何が起こるかまでは決定しません。これらの決定は、認証、オリジンおよびトランスポートの検証、厳密にスコープ定義されたツール、レート制限、監査トレールなど、サーバー側で行われます。",
+      "definition": "MCPセキュリティとは、AIエージェントに機能を公開してもその背後にあるシステムが公開されないように、Model Context Protocolサーバーとそのクライアントに適用される一連のコントロール（認証と認可、オリジンとトランスポートの検証、ツールのスコープ定義、入力と出力の処理、レート制限、監査など）のことです。",
+      "takeaways": [
+        "MCPは配管（仕組み）を標準化するのであって、信頼を標準化するわけではありません。各サーバーが独自のセキュリティ姿勢を決定します。",
+        "ツールの説明はモデルに対する信頼できない入力です。指示を含むことがあり、承認後に変更される可能性もあります。",
+        "ローカルのstdioサーバーとリモートのHTTPサーバーでは脅威モデルが異なり、発生しうる危険なミスも異なります。",
+        "クライアントは管理下にはないため、オリジンチェックとレート制限はサーバー側で行う必要があります。",
+        "「読み取り専用」は実装の属性であり、ツールの名前によって保証されるものではありません。"
+      ],
+      "context": [
+        "MCPは、エージェントに機能を検出して呼び出すための統一された方法を提供します。その統一性は価値であると同時にリスクでもあります。1つのクライアントを多くのサーバーに向けることができ、各サーバーは、実際には設定ファイルにURLを貼り付けた人物によって、その都度新たな信頼の決定が下されることになります。",
+        "主に2つのデプロイ形態があります。ローカルのstdioサーバーは、ユーザー自身のマシン上でそのユーザーの権限で実行されます。ネットワーク境界がないため、問題となるのはそれが何を読み取れるか、そして外部に通信（phone home）するかどうかです。リモートのHTTPサーバーはパブリックなエンドポイントです。問題となるのは、誰が、どこから、どのくらいの頻度で呼び出しているか、そしてブラウザが騙されてユーザーの代わりにそれを呼び出すように仕向けられていないか、ということです。",
+        "このナレッジベースでは、パブリックHTTPエンドポイントと公開されたstdioパッケージという、これら両方の形態を1つずつ運用しています。そのため、以下のコントロールは一般的なチェックリストとしてではなく、実際に実装されている通りに説明されています。"
+      ],
+      "architecture": [
+        "まず公開範囲を決定します。パブリックな読み取り専用機能、認証が必要な機能、またはローカル専用機能のいずれかです。その他すべての設計はその決定に従うものであり、ほとんどのインシデントは、その決定がなされなかったサーバーから発生しています。",
+        "処理を実行する前にトランスポートを検証します。HTTPサーバーの場合、ハンドラーが実行される前にOriginヘッダーを許可リストと照合し、ブラウザ起点のクロスサイト呼び出しを拒否します。DNSリバインディングやCSRF型の不正利用は、いずれもこの経路から発生するためです。",
+        "プロトコルが許す限り、サーバーをステートレスに保ちます。セッションストアを持たないことは、セッション固定化攻撃、リクエスト間の汚染、および呼び出し元間での状態の漏洩が発生しないことを意味します。",
+        "ツールのスコープを狭く限定します。1つのツールに1つの機能を持たせ、引数によって動作が変わる動詞は避けます。書き込みも実行できる「query」ツールは、適切なパラメータが渡されるのを待っている権限昇格の脆弱性に他なりません。",
+        "呼び出し元ごとにレート制限を適用し、実際の429ステータスコードとRetry-Afterヘッダーで応答します。制限に従って再試行するエージェントは通常のトラフィックですが、制限なしに再試行を繰り返すエージェントは、自社のバックエンドに向けられたサービス拒否（DoS）ツールと化します。",
+        "不正利用を再構成できる十分な情報（ツール、結果、レイテンシ、呼び出し元の識別情報）を含めてすべての呼び出しをログに記録し、ログ自体が情報漏洩の要因にならないようにします。",
+        "返されるすべてのツールの実行結果を、信頼できないコンテンツとして扱います。外部データをプロキシするサーバーは、その構造上、間接的なプロンプトインジェクションの経路となります。"
+      ],
+      "components": [
+        "認証：完全に公開された読み取りデータには不要、それ以外にはトークンまたはOAuthを使用します。また、その決定を文書化してください。「認証なし」は見落としではなく、意図的な選択である必要があります。",
+        "リモートサーバーに対するOriginおよびホストの検証。Webアプリケーションのデフォルト設定を想定するのではなく、測定された実際のトラフィックに基づいて設定します。",
+        "ツールごとの認可：単に接続可能かだけでなく、この呼び出し元が何を呼び出すことを許可されているかを制御します。",
+        "ツールの境界における入力検証。公開APIと同等の厳格さで実施します。なぜなら、それが実質的に公開APIそのものだからです。",
+        "出力のシェーピング：呼び出し元が必要とする最小限の情報のみを返します。アップストリームからの生のペイロードをそのまま通過させてはなりません。",
+        "レート制限とクォータ。適切なクライアントが自律的にバックオフできるように、正確なヘッダーを返します。",
+        "監査ログとメトリクス。調査に十分な期間保持し、安全に保管できるように適切に集約します。",
+        "サーバー自体のサプライチェーンの健全性：依存関係の固定、更新内容のレビュー、プロベナンス（来歴）の公開により、クライアントが自身で構築したサーバーと通信していることを確認できるようにします。"
+      ],
+      "pros": [
+        "適切にスコープが定義されたMCPサーバーは、それが置き換えるアドホックな統合よりも攻撃対象領域が小さくなります。1つのプロトコル、1つの監査ポイント、1つの取り消し場所で済みます。",
+        "ステートレス性と限定されたツールにより、サーバーの動作把握が容易になります。セキュリティレビューは1ページに収まる規模になります。",
+        "標準的なエラーとレート制限ヘッダーにより、クライアントの動作が予測可能になります。これはそれ自体が防御的な特性です。",
+        "すべてが単一の境界を通過するため、測定が容易になります。不正利用と通常の利用が同じログに記録され、明確に区別できます。"
+      ],
+      "risks": [
+        "ツールのラグプル（梯子外し）：承認時には正常に動作し、クライアントが確認を求めてこなくなった後で、ツールの説明を後から変更するサーバー。",
+        "スコープが広すぎるローカルサーバー：ユーザーのファイルシステムや認証情報を保持するstdioサーバーは、それを捕捉するネットワーク境界がないため、エージェントの全権限を持つことになります。",
+        "混乱した代理（Confused Deputy）：サーバーが呼び出し元の持たない認証情報を保持しているため、サーバーにアクセスできるすべてのユーザーがその権限を引き継いでしまいます。",
+        "暗黙的なパブリック公開：認証、Originチェック、レート制限なしでデプロイされたリモートサーバーは、容易に発見され、自由に不正利用されてしまいます。",
+        "インジェクションの中継：サードパーティのソースから取得したツールの出力を、信頼できる指示であるかのようにモデルに渡してしまうこと。"
+      ],
+      "tools": [
+        "MCP仕様およびそのトランスポートセキュリティガイダンス。すべてのサーバーが準拠すべき基準です。",
+        "アプリケーションコードが実行される前に適用されるOrigin許可リストとCORS設定。",
+        "生のIPアドレスではなく、ハッシュ化された呼び出し元の識別情報をキーとするレート制限ストア（Redisまたは同等品）。",
+        "構造化されたリクエストログとレイテンシメトリクス。不正利用とコストを同じビューで可視化できます。",
+        "OWASP Top 10 for LLM Applications。MCPサーバーが助長するインジェクションや過剰なエージェンシー（Excessive Agency）のカテゴリに対応します。",
+        "レジストリへの登録と署名付き公開。クライアントがインストールするサーバーが、提供されたものであることを検証できるようにします。"
+      ],
+      "examples": [
+        "このナレッジベースは、パブリックな読み取り専用のHTTP MCPエンドポイントを公開しています。設計上ステートレスであるため、セッションの固定化やリプレイは発生しません。ツールは公開されたコンテンツのみを返し、すべての呼び出しはハッシュ化された呼び出し元ごとに、実際の429ステータスコードとRetry-Afterヘッダーを用いてレート制限されます。",
+        "そのエンドポイントのOriginルールを作成する前に、まず実際のトラフィックを測定しました。ほぼすべてのリクエストにOriginヘッダーが全く含まれておらず、nullを含むものはなく、ヘッダーが含まれていたリクエストはすべてこのサイトからのものでした。適用されたルールはこの測定結果に従っており、Webアプリケーションのデフォルト設定をコピーするのではなく、他の場所からのブラウザ起点の呼び出しを拒否し、実際のターゲットであるヘッダーなしのエージェントトラフィックを許可しています。",
+        "同じナレッジベース向けに公開されているstdioパッケージは、パブリックエンドポイントへのアウトバウンド呼び出しのみを必要とするため、認証情報やファイルシステムへのアクセス権なしでローカルに実行されます。何も必要としないローカルサーバーには、何も与えるべきではありません。"
+      ],
+      "faqs": [
+        {
+          "q": "MCPはエージェントの安全性を高めますか、それとも低下させますか？",
+          "a": "個々の統合においては安全性が高まりますが、全体としてはリスクが高まります。1つのプロトコルに統合されることで、レビューや取り消しを行う場所が1つにまとまります。しかし、エージェントを別のシステムに接続するコストも下がるため、接続するたびに新たな信頼の決定を迫られることになります。"
+        },
+        {
+          "q": "読み取り専用サーバーに認証は必要ですか？",
+          "a": "データが完全に公開されているのであれば、必ずしも必要ではありません。ただし、レート制限と監査証跡は依然として必要です。公開されているからといって無料（無制限）で利用できるわけではなく、制限のないパブリックエンドポイントは、自社のインフラに向けられた増幅器となってしまいます。"
+        },
+        {
+          "q": "エージェントがOriginヘッダーを送信しないのであれば、なぜそれをチェックするのですか？",
+          "a": "まさに送信しないからです。ヘッダーのないトラフィックこそが正当な対象であり、外部のOriginを持つリクエストは、第三者に代わって動作しているブラウザによるものであるため、まさに拒否すべきケースに該当します。"
+        },
+        {
+          "q": "ツールのラグプル（梯子外し）とは何ですか？また、どのように防御すればよいですか？",
+          "a": "ユーザーが承認した時点では無害なツールの説明を提示し、その後で説明を変更するサーバーのことです。防御策としては、サーバーのバージョンを固定すること、説明が変更されたときに再検証すること、そしてコードの依存関係に付与しないような権限をリモートサーバーに付与しないことが挙げられます。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是 MCP 安全？",
+      "summary": "MCP 安全是防止 Model Context Protocol（模型上下文协议）服务器成为进入系统最便捷通道的关键。该协议规范了智能体如何发现和调用工具；但它并不决定谁可以调用它们、它们可以访问什么，或者当工具描述变得具有敌意时会发生什么。这些决策存在于服务器中：身份验证、来源和传输验证、严格限制范围的工具、速率限制以及审计追踪。",
+      "definition": "MCP 安全是应用于 Model Context Protocol 服务器及其客户端的一组控制措施——包括身份验证和授权、来源和传输验证、工具范围限定、输入和输出处理、速率限制以及审计——从而确保向 AI 智能体开放能力不会暴露其背后的系统。",
+      "takeaways": [
+        "MCP 规范的是管道，而不是信任：每个服务器都决定自己的安全态势。",
+        "工具描述对模型而言是不可信的输入——它可以包含指令，并且在批准后可能会发生变化。",
+        "本地 stdio 服务器和远程 HTTP 服务器具有不同的威胁模型；其危险的错误也各不相同。",
+        "来源检查和速率限制属于服务器端职责，因为客户端并不在您的控制之下。",
+        "“只读”是实现的一种属性，绝非工具名称所能决定。"
+      ],
+      "context": [
+        "MCP 为智能体提供了一种统一的方式来发现和调用能力。这种统一性既是价值所在，也是风险所在：一个客户端可以指向多个服务器，而每个服务器都是一个全新的信任决策——在实践中，这往往是由将 URL 粘贴到配置文件中的人做出的。",
+        "主要存在两种部署形式。本地 stdio 服务器在用户的机器上以用户自身的权限运行：没有网络边界，因此问题在于它可以读取什么以及它是否会向外发送数据。远程 HTTP 服务器是一个公共端点：问题变成了谁在调用、从哪里调用、调用频率如何，以及是否可以诱骗浏览器代表用户调用它。",
+        "我们为此知识库运营着这两种形式的实例——一个公共 HTTP 端点和一个已发布的 stdio 包——因此下面描述的控制措施是基于其实际实现方式，而非通用的检查清单。"
+      ],
+      "architecture": [
+        "首先确定暴露级别：公开只读能力、经过身份验证的能力，还是仅限本地。其他所有设计都取决于这个决定，而大多数安全事件都源于那些本不该暴露的服务器。",
+        "在执行任何操作之前先验证传输。对于 HTTP 服务器，在处理程序运行之前，根据白名单检查 Origin 标头并拒绝浏览器发起的跨站调用——DNS 重绑定和 CSRF 类型的滥用都是通过这种方式进行的。",
+        "只要协议允许，就保持服务器无状态。没有会话存储意味着没有会话固定、没有跨请求污染，也没有调用者之间泄露状态的风险。",
+        "严格限制工具的作用域。一个工具，一种能力，不要使用会随参数改变而改变的动词——一个同时支持写入的 'query' 工具，随时可能因为一个特定的参数而导致权限提升。",
+        "针对每个调用者进行速率限制，并返回真实的 429 状态码和 Retry-After 标头。会进行重试的智能体（agent）是正常流量；而无限制重试的智能体则是针对您自己后端的拒绝服务（DoS）工具。",
+        "记录每一次调用，并保留足够的信息以重建滥用场景——工具、结果、延迟、调用者身份——且不要记录任何可能使日志本身成为泄露源的信息。",
+        "在返回过程中，将每个工具的结果都视为不可信内容。从设计上讲，代理外部数据的服务器就是一个间接提示词注入（prompt-injection）通道。"
+      ],
+      "components": [
+        "身份验证：对于真正的公开只读数据，无需验证；对于其他任何数据，使用令牌（token）或 OAuth——并且必须记录这一决定，因为“无验证”必须是一种主动选择，而不是疏忽。",
+        "针对远程服务器的 Origin 和主机验证，应基于实际测量的流量，而不是假定使用 Web 应用的默认设置。",
+        "针对每个工具的授权：明确该调用者可以调用什么，而不仅仅是他们是否可以连接。",
+        "在工具边界进行输入验证，其严格程度应与公开 API 相同——因为它的本质就是公开 API。",
+        "输出整形：仅返回调用者所需的最小内容；绝不直接透传原始的上游负载。",
+        "速率限制和配额，并提供足够准确的标头，以便行为良好的客户端能够自动退避。",
+        "审计日志和指标，保留时间应足够长以便于调查，且聚合度应足够高以确保安全保存。",
+        "服务器自身的供应链卫生：固定依赖项、审查更新、发布来源证明，以便客户端能够确认它们正在与您构建的服务器进行通信。"
+      ],
+      "pros": [
+        "与它所替代的临时集成相比，一个作用域划分合理的 MCP 服务器具有更小的攻击面：统一的协议、统一的审计点、统一的撤销位置。",
+        "无状态和单一职责的工具使得服务器易于推理——安全审查报告一页纸就能写完。",
+        "标准的错误和速率限制标头使客户端行为变得可预测，这本身就是一种防御性特征。",
+        "因为所有内容都跨越同一个边界，所以测量是顺理成章的：滥用行为和正常使用会出现在相同的日志中，且特征明显不同。"
+      ],
+      "risks": [
+        "工具“抽毯子”（rug pulls）：服务器在审批时表现正常，但在客户端停止询问后更改其工具描述。",
+        "作用域过宽的本地服务器：持有用户文件系统和凭据的 stdio 服务器具有完整的智能体能力，且没有网络边界来拦截它。",
+        "混淆代理（confused deputy）：服务器持有调用者不具备的凭据，因此任何访问该服务器的人都会继承其访问权限。",
+        "隐蔽的公开暴露：部署时没有身份验证、没有 Origin 检查且没有速率限制的远程服务器很容易被发现并被随意滥用。",
+        "注入中继：从第三方源获取工具输出，并将其作为可信指令传递给模型。"
+      ],
+      "tools": [
+        "MCP 规范及其传输安全指南——每个服务器都应该能够对照并满足的基线要求。",
+        "在应用代码运行之前应用的 Origin 白名单和 CORS 配置。",
+        "速率限制存储（Redis 或同等工具），以哈希处理后的调用者身份而非原始 IP 作为键。",
+        "结构化请求日志和延迟指标，以便在同一视图中直观查看滥用情况和成本。",
+        "针对 LLM 应用的 OWASP Top 10，用于应对 MCP 服务器会放大的一系列注入和过度授权（excessive agency）问题。",
+        "注册表列表和签名发布，以便客户端可以验证它们安装的服务器就是您发布的那个。"
+      ],
+      "examples": [
+        "该知识库暴露了一个公开的、只读的 HTTP MCP 端点。它在设计上是无状态的，因此无法固定或重放会话；工具仅返回已发布的内容；并且每次调用都会针对哈希处理后的调用者进行速率限制，并返回真实的 429 和 Retry-After。",
+        "在为该端点编写 Origin 规则之前，我们首先测量了它自身的流量：几乎所有的请求都没有携带 Origin 标头，没有一个携带 null，而每个确实携带该标头的请求都来自本网站。最终发布的规则遵循了这一测量结果——拒绝来自其他任何地方的浏览器源调用，允许作为实际受众的无标头智能体流量——而不是复制 Web 应用的默认策略。",
+        "为该知识库发布的 stdio 包在本地运行，无需凭据，也无需文件系统访问权限，因为它只需要向公开端点发起出站调用。一个什么都不需要的本地服务器，就不应该被赋予任何权限。"
+      ],
+      "faqs": [
+        {
+          "q": "MCP 是让智能体更安全还是更不安全？",
+          "a": "单次集成更安全，但总体而言风险更高。统一的协议意味着只需在一个地方进行审查和撤销——但它也降低了将智能体连接到另一个系统的成本，而每一次连接都是一个必须由人做出的全新信任决策。"
+        },
+        {
+          "q": "只读服务器需要身份验证吗？",
+          "a": "如果数据是真正公开的，则不一定需要。但您仍然需要速率限制和审计追踪：公开并不意味着免费，一个无限制的公开端点就是一个指向您自己基础设施的放大器。"
+        },
+        {
+          "q": "如果智能体不发送 Origin 标头，为什么还要检查它？",
+          "a": "正因为它们不发送。无标头的流量才是合法的受众；而确实携带外部 Origin 的请求则是代表他人操作的浏览器，这恰恰是值得拒绝的情况。"
+        },
+        {
+          "q": "什么是工具“抽毯子”（rug pull），我该如何防范？",
+          "a": "指服务器在用户批准时提供良性的工具描述，随后又将其更改。防御措施包括固定服务器版本、在描述更改时重新验证，以及不向远程服务器授予您不会授予代码依赖项的权限。"
+        }
+      ]
     }
   }
 }

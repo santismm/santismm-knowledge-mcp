@@ -18,15 +18,30 @@
     "sandboxed-execution"
   ],
   "references": [
-    { "title": "OWASP — Top 10 for LLM Applications", "url": "https://genai.owasp.org/llm-top-10/" },
-    { "title": "OWASP — LLM01: Prompt Injection", "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/" },
-    { "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems", "url": "https://atlas.mitre.org/" },
-    { "title": "NIST — AI Risk Management Framework (AI RMF 1.0)", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+    {
+      "title": "OWASP — Top 10 for LLM Applications",
+      "url": "https://genai.owasp.org/llm-top-10/"
+    },
+    {
+      "title": "OWASP — LLM01: Prompt Injection",
+      "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    },
+    {
+      "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
+      "url": "https://atlas.mitre.org/"
+    },
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    }
   ],
   "evidence": {
     "evidenceLevel": "industry_observation",
     "confidenceLevel": "medium",
-    "sourceType": ["industry_observation", "paper"]
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
   },
   "locales": {
     "en": {
@@ -74,10 +89,22 @@
         "A support agent whose memory records expire in 90 days by default, with a longer lifetime only for entries a human explicitly confirmed — so the unreviewed majority ages out and the reviewed minority persists."
       ],
       "kpis": [
-        { "metric": "Attributed write share", "note": "Share of memory records carrying a machine-readable origin. Below 100% the store cannot answer where a claim came from, which is the whole control." },
-        { "metric": "Median record age", "note": "How old the memory in play actually is. A rising median with no removals means the store is accumulating rather than being curated." },
-        { "metric": "Deletion propagation lag", "note": "Time between removing a record and the claim stopping being retrievable from every derived artefact. The window in which a deleted claim still acts." },
-        { "metric": "Expired-on-schedule share", "note": "Share of records that reached their expiry and were actually removed. Evidence the lifetime is real rather than declared." }
+        {
+          "metric": "Attributed write share",
+          "note": "Share of memory records carrying a machine-readable origin. Below 100% the store cannot answer where a claim came from, which is the whole control."
+        },
+        {
+          "metric": "Median record age",
+          "note": "How old the memory in play actually is. A rising median with no removals means the store is accumulating rather than being curated."
+        },
+        {
+          "metric": "Deletion propagation lag",
+          "note": "Time between removing a record and the claim stopping being retrievable from every derived artefact. The window in which a deleted claim still acts."
+        },
+        {
+          "metric": "Expired-on-schedule share",
+          "note": "Share of records that reached their expiry and were actually removed. Evidence the lifetime is real rather than declared."
+        }
       ],
       "failureModes": [
         "Delayed-action poisoning: a false fact planted in one conversation surfaces in an unrelated task weeks later, where nothing in the context explains why the agent believes it.",
@@ -92,9 +119,18 @@
         "Deletion is only as complete as the derived artefact you forgot about."
       ],
       "faqs": [
-        { "q": "Isn't this just retention policy with extra steps?", "a": "Retention answers when data goes. Attribution answers where a claim came from and who may remove it, which is what you need the moment a memory turns out to be wrong rather than merely old. The two are complementary: without expiry, attribution accumulates; without attribution, expiry deletes evidence you never understood." },
-        { "q": "The agent writes its own memories. Whose authority do those carry?", "a": "Its own, and that is the class worth naming. An agent-inferred claim is weaker than an operator-configured one and should be retrievable as such — otherwise the model's own guesses come back later indistinguishable from configuration." },
-        { "q": "How do we keep provenance through summarisation?", "a": "Either the summary carries the union of its sources' origins, or it is written as a new agent-inferred record pointing at the ones it replaced. What cannot happen is the summary quietly becoming an unsourced fact, because that is the step where poisoning becomes permanent." }
+        {
+          "q": "Isn't this just retention policy with extra steps?",
+          "a": "Retention answers when data goes. Attribution answers where a claim came from and who may remove it, which is what you need the moment a memory turns out to be wrong rather than merely old. The two are complementary: without expiry, attribution accumulates; without attribution, expiry deletes evidence you never understood."
+        },
+        {
+          "q": "The agent writes its own memories. Whose authority do those carry?",
+          "a": "Its own, and that is the class worth naming. An agent-inferred claim is weaker than an operator-configured one and should be retrievable as such — otherwise the model's own guesses come back later indistinguishable from configuration."
+        },
+        {
+          "q": "How do we keep provenance through summarisation?",
+          "a": "Either the summary carries the union of its sources' origins, or it is written as a new agent-inferred record pointing at the ones it replaced. What cannot happen is the summary quietly becoming an unsourced fact, because that is the step where poisoning becomes permanent."
+        }
       ]
     },
     "es": {
@@ -142,10 +178,22 @@
         "Un agente de soporte cuyos registros de memoria caducan a los 90 días por defecto, con una vida más larga solo para las entradas que una persona confirmó explícitamente — así envejece y desaparece la mayoría sin revisar y persiste la minoría revisada."
       ],
       "kpis": [
-        { "metric": "Proporción de escrituras atribuidas", "note": "Cuántos registros llevan un origen legible por máquina. Por debajo del 100% el almacén no puede responder de dónde salió una afirmación, que es el control entero." },
-        { "metric": "Edad mediana del registro", "note": "Qué antigüedad tiene de verdad la memoria en juego. Una mediana que sube sin borrados significa que el almacén acumula en vez de curarse." },
-        { "metric": "Retraso de propagación del borrado", "note": "Tiempo entre quitar un registro y que la afirmación deje de ser recuperable desde cualquier artefacto derivado. La ventana en la que una afirmación borrada sigue actuando." },
-        { "metric": "Proporción caducada a tiempo", "note": "Cuántos registros llegaron a su caducidad y se quitaron de verdad. La prueba de que la vida útil es real y no declarada." }
+        {
+          "metric": "Proporción de escrituras atribuidas",
+          "note": "Cuántos registros llevan un origen legible por máquina. Por debajo del 100% el almacén no puede responder de dónde salió una afirmación, que es el control entero."
+        },
+        {
+          "metric": "Edad mediana del registro",
+          "note": "Qué antigüedad tiene de verdad la memoria en juego. Una mediana que sube sin borrados significa que el almacén acumula en vez de curarse."
+        },
+        {
+          "metric": "Retraso de propagación del borrado",
+          "note": "Tiempo entre quitar un registro y que la afirmación deje de ser recuperable desde cualquier artefacto derivado. La ventana en la que una afirmación borrada sigue actuando."
+        },
+        {
+          "metric": "Proporción caducada a tiempo",
+          "note": "Cuántos registros llegaron a su caducidad y se quitaron de verdad. La prueba de que la vida útil es real y no declarada."
+        }
       ],
       "failureModes": [
         "Envenenamiento de acción retardada: un dato falso plantado en una conversación aparece semanas después en una tarea sin relación, donde nada del contexto explica por qué el agente lo cree.",
@@ -160,9 +208,18 @@
         "Un borrado es tan completo como el artefacto derivado del que te olvidaste."
       ],
       "faqs": [
-        { "q": "¿No es esto una política de retención con pasos de más?", "a": "La retención responde cuándo se va el dato. La atribución responde de dónde salió una afirmación y quién puede quitarla, que es lo que necesitas en cuanto un recuerdo resulta estar equivocado y no simplemente viejo. Son complementarias: sin caducidad la atribución se acumula; sin atribución la caducidad borra pruebas que nunca entendiste." },
-        { "q": "El agente escribe sus propios recuerdos. ¿Qué autoridad llevan?", "a": "La suya, y esa es la clase que merece nombre. Una afirmación deducida por el agente es más débil que una configurada por el operador y debería poder recuperarse como tal — si no, las conjeturas del propio modelo vuelven después indistinguibles de la configuración." },
-        { "q": "¿Cómo mantenemos la procedencia a través del resumen?", "a": "O el resumen lleva la unión de los orígenes de sus fuentes, o se escribe como un registro nuevo deducido por el agente que apunta a los que sustituye. Lo que no puede pasar es que el resumen se convierta en silencio en un hecho sin fuente, porque ese es el paso en el que el envenenamiento se vuelve permanente." }
+        {
+          "q": "¿No es esto una política de retención con pasos de más?",
+          "a": "La retención responde cuándo se va el dato. La atribución responde de dónde salió una afirmación y quién puede quitarla, que es lo que necesitas en cuanto un recuerdo resulta estar equivocado y no simplemente viejo. Son complementarias: sin caducidad la atribución se acumula; sin atribución la caducidad borra pruebas que nunca entendiste."
+        },
+        {
+          "q": "El agente escribe sus propios recuerdos. ¿Qué autoridad llevan?",
+          "a": "La suya, y esa es la clase que merece nombre. Una afirmación deducida por el agente es más débil que una configurada por el operador y debería poder recuperarse como tal — si no, las conjeturas del propio modelo vuelven después indistinguibles de la configuración."
+        },
+        {
+          "q": "¿Cómo mantenemos la procedencia a través del resumen?",
+          "a": "O el resumen lleva la unión de los orígenes de sus fuentes, o se escribe como un registro nuevo deducido por el agente que apunta a los que sustituye. Lo que no puede pasar es que el resumen se convierta en silencio en un hecho sin fuente, porque ese es el paso en el que el envenenamiento se vuelve permanente."
+        }
       ]
     },
     "pt": {
@@ -210,10 +267,22 @@
         "Um agente de suporte cujos registros de memória expiram em 90 dias por padrão, com vida mais longa apenas para entradas que uma pessoa confirmou explicitamente — assim a maioria não revisada envelhece e sai, e a minoria revisada permanece."
       ],
       "kpis": [
-        { "metric": "Proporção de escritas atribuídas", "note": "Quantos registros carregam uma origem legível por máquina. Abaixo de 100% o armazenamento não consegue responder de onde veio uma afirmação, que é o controle inteiro." },
-        { "metric": "Idade mediana do registro", "note": "Que antiguidade a memória em jogo realmente tem. Uma mediana que sobe sem remoções significa que o armazenamento acumula em vez de ser curado." },
-        { "metric": "Atraso de propagação da remoção", "note": "Tempo entre remover um registro e a afirmação deixar de ser recuperável de qualquer artefato derivado. A janela em que uma afirmação removida ainda age." },
-        { "metric": "Proporção expirada no prazo", "note": "Quantos registros chegaram à validade e foram de fato removidos. A prova de que o prazo é real e não apenas declarado." }
+        {
+          "metric": "Proporção de escritas atribuídas",
+          "note": "Quantos registros carregam uma origem legível por máquina. Abaixo de 100% o armazenamento não consegue responder de onde veio uma afirmação, que é o controle inteiro."
+        },
+        {
+          "metric": "Idade mediana do registro",
+          "note": "Que antiguidade a memória em jogo realmente tem. Uma mediana que sobe sem remoções significa que o armazenamento acumula em vez de ser curado."
+        },
+        {
+          "metric": "Atraso de propagação da remoção",
+          "note": "Tempo entre remover um registro e a afirmação deixar de ser recuperável de qualquer artefato derivado. A janela em que uma afirmação removida ainda age."
+        },
+        {
+          "metric": "Proporção expirada no prazo",
+          "note": "Quantos registros chegaram à validade e foram de fato removidos. A prova de que o prazo é real e não apenas declarado."
+        }
       ],
       "failureModes": [
         "Envenenamento de ação retardada: um fato falso plantado em uma conversa aparece semanas depois em uma tarefa sem relação, onde nada no contexto explica por que o agente acredita nele.",
@@ -228,9 +297,374 @@
         "Uma remoção é tão completa quanto o artefato derivado de que você esqueceu."
       ],
       "faqs": [
-        { "q": "Isso não é política de retenção com passos a mais?", "a": "A retenção responde quando o dado sai. A atribuição responde de onde veio uma afirmação e quem pode removê-la, que é o que você precisa no momento em que uma lembrança se revela errada e não apenas velha. As duas são complementares: sem expiração a atribuição acumula; sem atribuição a expiração apaga evidências que você nunca entendeu." },
-        { "q": "O agente escreve as próprias lembranças. Que autoridade elas carregam?", "a": "A dele, e essa é a classe que merece nome. Uma afirmação deduzida pelo agente é mais fraca que uma configurada pelo operador e deveria ser recuperável como tal — caso contrário, os palpites do próprio modelo voltam depois indistinguíveis da configuração." },
-        { "q": "Como manter a procedência através do resumo?", "a": "Ou o resumo carrega a união das origens de suas fontes, ou é escrito como um registro novo deduzido pelo agente apontando para os que substitui. O que não pode acontecer é o resumo virar em silêncio um fato sem fonte, porque esse é o passo em que o envenenamento se torna permanente." }
+        {
+          "q": "Isso não é política de retenção com passos a mais?",
+          "a": "A retenção responde quando o dado sai. A atribuição responde de onde veio uma afirmação e quem pode removê-la, que é o que você precisa no momento em que uma lembrança se revela errada e não apenas velha. As duas são complementares: sem expiração a atribuição acumula; sem atribuição a expiração apaga evidências que você nunca entendeu."
+        },
+        {
+          "q": "O agente escreve as próprias lembranças. Que autoridade elas carregam?",
+          "a": "A dele, e essa é a classe que merece nome. Uma afirmação deduzida pelo agente é mais fraca que uma configurada pelo operador e deveria ser recuperável como tal — caso contrário, os palpites do próprio modelo voltam depois indistinguíveis da configuração."
+        },
+        {
+          "q": "Como manter a procedência através do resumo?",
+          "a": "Ou o resumo carrega a união das origens de suas fontes, ou é escrito como um registro novo deduzido pelo agente apontando para os que substitui. O que não pode acontecer é o resumo virar em silêncio um fato sem fonte, porque esse é o passo em que o envenenamento se torna permanente."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Mémoire attribuée",
+      "summary": "Stockez ce dont un agent se souvient sous forme d'enregistrements indiquant leur origine, un propriétaire capable de les supprimer et une durée de vie — jamais sous la forme d'un bloc de texte anonyme. La mémoire est ce qui transforme une attaque ponctuelle en une attaque qui se déclenche à nouveau sur des tâches futures et non liées ; l'attribution est ce qui rend cela réversible.",
+      "definition": "La mémoire attribuée est la pratique consistant à écrire chaque mémoire persistante d'un agent sous forme d'enregistrement avec sa provenance (d'où provient l'affirmation et de quelle autorité elle émane), un propriétaire désigné qui peut la supprimer et une expiration — de sorte qu'un fait erroné puisse être tracé, supprimé et, à défaut, disparaisse de lui-même.",
+      "problem": "Un agent qui écrit du texte libre dans une mémoire persistante ne peut pas savoir plus tard quelles mémoires lui ont été dictées, lesquelles ont été lues sur la page web d'un inconnu, et lesquelles ont été déduites. Une seule écriture empoisonnée réapparaît alors comme un contexte de confiance dans des tâches qui n'ont rien à voir avec la conversation qui l'a implantée.",
+      "context": "Utilisez-la partout où la mémoire survit à la session qui l'a créée : assistants qui mémorisent des préférences, agents qui accumulent l'état d'un projet, tout espace de stockage de récupération dans lequel l'agent lui-même écrit. Plus la rétention est longue et plus le corpus rédigé par l'agent est important, plus la mémoire doit être un stockage d'enregistrements structurés plutôt qu'un bloc-notes.",
+      "solution": [
+        "Refusez les écritures anonymes. Chaque enregistrement indique d'où provient l'affirmation — la session et le tour de parole, l'outil ou le document, et l'URL si elle provient de l'extérieur — sous forme de champs structurés, et non de phrase au sein du texte.",
+        "Enregistrez l'autorité dont émane l'affirmation. Un fait configuré par l'opérateur, un fait affirmé par l'utilisateur final et un fait lu par l'agent sur une page tierce sont trois affirmations différentes ; gardez la classe explicite afin que le chemin de récupération puisse les pondérer et qu'un réviseur puisse les trier.",
+        "Attribuez une durée de vie à chaque enregistrement, et définissez-la par défaut comme courte. Une mémoire qui n'expire jamais est une mémoire que personne ne révisera, et c'est la demi-vie d'une écriture empoisonnée qui détermine combien de temps une attaque reste efficace.",
+        "Faites de la suppression une opération de premier ordre avec un propriétaire désigné, et assurez sa propagation. Supprimer l'enregistrement ne suffit pas si l'affirmation survit dans un plongement (embedding), un résumé en cache ou un profil dérivé.",
+        "Traitez le chemin d'écriture comme une action. Les écritures en mémoire modifient le comportement futur, elles doivent donc passer par les mêmes processus d'autorisation et de journalisation que toute autre écriture — et non par une porte dérobée sous prétexte que la destination s'avère être un fichier.",
+        "Ne laissez jamais une mémoire récupérée réintégrer le prompt sous forme d'instruction. Elle arrive en tant que donnée accompagnée d'une origine, et un enregistrement dont l'origine est un tiers est traité exactement comme une entrée non fiable provenant de ce tiers."
+      ],
+      "components": [
+        "Un schéma d'enregistrement contenant l'origine, la classe d'autorité, l'horodatage et l'expiration comme champs obligatoires.",
+        "Un chemin d'écriture qui rejette tout enregistrement auquel l'un de ces éléments fait défaut.",
+        "Un chemin de récupération qui renvoie l'origine aux côtés du contenu, afin que le modèle et le réviseur voient la même chose.",
+        "Une opération de suppression qui se propage aux plongements (embeddings), aux résumés et à tout artefact dérivé.",
+        "Un processus d'expiration, accompagné de la preuve de son exécution.",
+        "Un journal d'audit des écritures et des suppressions en mémoire, distinct du journal de conversation."
+      ],
+      "benefits": [
+        "Rend l'empoisonnement de la mémoire réversible : vous pouvez retrouver l'écriture, voir d'où elle provient et supprimer tout ce qui en découle.",
+        "Transforme la question « que croit cet agent à mon sujet ? » en une question dotée d'une réponse lisible par un humain.",
+        "Permet à la récupération de pondérer une affirmation en fonction de son origine plutôt que du niveau d'assurance avec lequel le texte a été rédigé.",
+        "Satisfait aux obligations de conservation et d'effacement applicables à toute donnée persistante concernant une personne, sans nécessiter de mécanisme distinct greffé ultérieurement."
+      ],
+      "risks": [
+        "Le simulacre de provenance : un champ d'origine qui indique systématiquement « agent », ce qui ne documente rien et donne seulement l'illusion d'un contrôle.",
+        "Le blanchiment par compaction — la manière la plus courante dont l'attribution disparaît. Résumer dix enregistrements attribués en un seul paragraphe produit une affirmation non attribuée qui ressemble désormais à un consensus.",
+        "La suppression partielle : l'enregistrement principal disparaît, le vecteur reste, et l'affirmation continue d'être récupérée.",
+        "Une expiration excessive détruisant la continuité pour laquelle la mémoire existait, ce qui pousse les utilisateurs à désactiver complètement l'expiration."
+      ],
+      "whenNot": [
+        "Agents à session unique sans persistance : il n'y a pas de mémoire à attribuer, et ce formalisme n'apporte rien.",
+        "Lorsque le stockage est un cache de votre propre système d'enregistrement déjà gouverné — attribuez le système source une seule fois, et non chaque ligne dérivée.",
+        "Lorsque la surcharge inciterait les opérateurs à conserver les véritables notes en dehors du système, ce qui est bien pire qu'un enregistrement imparfait à l'intérieur de celui-ci."
+      ],
+      "examples": [
+        "Un assistant qui écrit « préfère les unités métriques ». L'enregistrement contient l'ID de session et le tour de parole où l'utilisateur l'a mentionné, de sorte qu'une mauvaise préférence peut être tracée jusqu'à la phrase qui l'a causée et supprimée.",
+        "Un agent de recherche qui lit une page tierce et stocke une affirmation étiquetée « observée à cette URL, à cette date », jamais comme un fait établi. Lorsque la même affirmation est récupérée des mois plus tard, son origine l'accompagne.",
+        "Un agent de support dont les enregistrements en mémoire expirent par défaut au bout de 90 jours, avec une durée de vie plus longue uniquement pour les entrées explicitement confirmées par un humain — de sorte que la majorité non révisée expire et que la minorité révisée persiste."
+      ],
+      "kpis": [
+        {
+          "metric": "Part des écritures attribuées",
+          "note": "Part des enregistrements en mémoire portant une origine lisible par machine. En dessous de 100 %, le stockage ne peut pas indiquer d'où provient une affirmation, ce qui annule l'intérêt même du contrôle."
+        },
+        {
+          "metric": "Âge médian des enregistrements",
+          "note": "L'âge réel de la mémoire exploitée. Une médiane en hausse sans suppressions signifie que le stockage accumule les données plutôt que d'être géré."
+        },
+        {
+          "metric": "Délai de propagation de la suppression",
+          "note": "Temps écoulé entre la suppression d'un enregistrement et le moment où l'affirmation cesse d'être récupérable à partir de tout artefact dérivé. La fenêtre durant laquelle une affirmation supprimée continue d'agir."
+        },
+        {
+          "metric": "Part des expirations respectant le calendrier",
+          "note": "Part des enregistrements ayant atteint leur expiration et ayant été effectivement supprimés. Preuve que la durée de vie est réelle et non simplement déclarée."
+        }
+      ],
+      "failureModes": [
+        "Empoisonnement à retardement : un fait erroné implanté dans une conversation refait surface dans une tâche non liée des semaines plus tard, sans que rien dans le contexte n'explique pourquoi l'agent y croit.",
+        "Survie dans le résumé : l'enregistrement est supprimé, mais pas le résumé compacté qui l'a absorbé, et l'affirmation survit à sa propre source.",
+        "Index fantôme : le plongement (embedding) d'un enregistrement supprimé reste interrogeable, de sorte que la suppression a réussi partout où l'auditeur a regardé, mais nulle part où cela importait.",
+        "Fuite d'identité : une mémoire indexée de manière trop lâche, de sorte que l'enregistrement d'un utilisateur est récupéré pour un autre, transformant un défaut de conception de la mémoire en une divulgation de données."
+      ],
+      "lessons": [
+        "L'attribution is peu coûteuse au moment de l'écriture et impossible à reconstruire plus tard. Le champ doit exister avant l'affirmation.",
+        "Chaque étape de compaction est une frontière d'attribution. Si le module de résumé ne peut pas transmettre les origines, il produit de nouvelles affirmations sans source.",
+        "Une expiration que personne n'a jamais vue se déclencher est une politique, pas un contrôle.",
+        "La suppression n'est complète qu'à la mesure de l'artefact dérivé que vous avez oublié."
+      ],
+      "faqs": [
+        {
+          "q": "N'est-ce pas simplement une politique de conservation avec des étapes supplémentaires ?",
+          "a": "La conservation détermine quand les données disparaissent. L'attribution détermine d'où provient une affirmation et qui peut la supprimer, ce qui est indispensable dès lors qu'une mémoire s'avère erronée et non pas seulement ancienne. Les deux sont complémentaires : sans expiration, l'attribution s'accumule ; sans attribution, l'expiration supprime des preuves que vous n'avez jamais comprises."
+        },
+        {
+          "q": "L'agent écrit ses propres mémoires. De quelle autorité émanent-elles ?",
+          "a": "La sienne, et c'est précisément la classe qu'il convient de nommer. Une affirmation déduite par l'agent est plus faible qu'une affirmation configurée par l'opérateur et doit pouvoir être récupérée comme telle — sinon, les propres suppositions du modèle reviennent plus tard sans distinction possible de la configuration."
+        },
+        {
+          "q": "Comment conserver la provenance à travers la production de résumés ?",
+          "a": "Soit le résumé porte l'union des origines de ses sources, soit il est écrit comme un nouvel enregistrement déduit par l'agent pointant vers ceux qu'il a remplacés. Ce qui ne doit pas se produire, c'est que le résumé devienne discrètement un fait sans source, car c'est à cette étape que l'empoisonnement devient permanent."
+        }
+      ]
+    },
+    "de": {
+      "name": "Attributierter Speicher",
+      "summary": "Speichern Sie das, woran sich ein Agent erinnert, als Datensätze, die ihre Herkunft, einen Eigentümer, der sie entfernen kann, und eine Lebensdauer enthalten – niemals als anonymen Text-Blob. Das Gedächtnis macht aus einem One-Shot-Angriff einen Angriff, der bei zukünftigen, nicht zusammenhängenden Aufgaben erneut ausgelöst wird; die Attribuierung macht dies umkehrbar.",
+      "definition": "Attributierter Speicher bezeichnet die Praxis, jedes persistente Gedächtnis eines Agenten als Datensatz mit seiner Provenienz (woher die Behauptung stammt und wessen Autorität sie besaß), einem namentlich genannten Eigentümer, der sie löschen kann, und einem Ablaufdatum zu schreiben – so dass eine Falschinformation zurückverfolgt, entfernt werden kann und, falls das fehlschlägt, von selbst erlischt.",
+      "problem": "Ein Agent, der Freitext in das persistente Gedächtnis schreibt, kann später nicht mehr unterscheiden, welche seiner Erinnerungen ihm mitgeteilt wurden, welche er auf der Webseite eines Fremden gelesen hat und welche er selbst geschlussfolgert hat. Ein einziger manipulierter Schreibvorgang (Poisoned Write) taucht dann als vertrauenswürdiger Kontext in Aufgaben auf, die nichts mit der Konversation zu tun haben, in der er platziert wurde.",
+      "context": "Nutzen Sie dies überall dort, wo das Gedächtnis die Sitzung überdauert, die es erstellt hat: Assistenten, die sich Präferenzen merken, Agenten, die den Projektstatus akkumulieren, oder jeder Retrieval-Speicher, in den der Agent selbst schreibt. Je länger die Aufbewahrungsfrist ist und je größer der vom Agenten selbst verfasste Korpus ist, desto mehr muss das Gedächtnis ein strukturierter Datenspeicher statt eines Notizbuchs sein.",
+      "solution": [
+        "Verweigern Sie anonyme Schreibvorgänge. Jeder Datensatz enthält Angaben darüber, woher die Behauptung stammt – die Sitzung und den Turn, das Tool oder Dokument sowie die URL, falls sie von außen stammt – als strukturierte Felder, nicht als Satz innerhalb des Textes.",
+        "Erfassen Sie, wessen Autorität die Behauptung trug. Ein vom Operator konfiguriertes Faktum, ein vom Endbenutzer behauptetes Faktum und ein von einer Drittanbieterseite gelesenes Faktum sind drei verschiedene Behauptungen; halten Sie die Klasse explizit, damit der Retrieval-Pfad sie gewichten und ein Reviewer sie sortieren kann.",
+        "Geben Sie jedem Datensatz eine Lebensdauer und wählen Sie standardmäßig eine kurze Dauer. Ein Gedächtnis, das niemals abläuft, wird niemand jemals überprüfen, und es ist die Halbwertszeit eines manipulierten Schreibvorgangs, die bestimmt, wie lange ein Angriff wirksam bleibt.",
+        "Machen Sie das Entfernen zu einer First-Class-Operation mit einem namentlich genannten Eigentümer und sorgen Sie für eine Weitergabe (Propagation). Das Löschen des Datensatzes reicht nicht aus, wenn die Behauptung in einem Embedding, einer gecachten Zusammenfassung oder einem abgeleiteten Profil überlebt.",
+        "Behandeln Sie den Schreibpfad als Aktion. Schreibvorgänge im Gedächtnis verändern das zukünftige Verhalten, daher durchlaufen sie dieselbe Autorisierung und Protokollierung wie jeder andere Schreibvorgang – nicht durch eine Hintertür, nur weil das Ziel zufällig eine Datei ist.",
+        "Lassen Sie abgerufenes Gedächtnis niemals als Anweisung (Instruction) wieder in den Prompt einfließen. Es geht als Daten mit verknüpfter Herkunft ein, und ein Datensatz, dessen Herkunft ein Drittanbieter ist, wird genau wie eine nicht vertrauenswürdige Eingabe dieser Partei behandelt."
+      ],
+      "components": [
+        "Ein Datensatz-Schema mit Herkunft, Autoritätsklasse, Zeitstempel und Ablaufdatum als Pflichtfelder.",
+        "Ein Schreibpfad, der Datensätze ablehnt, bei denen eines dieser Felder fehlt.",
+        "Ein Retrieval-Pfad, der die Herkunft zusammen mit dem Inhalt zurückgibt, sodass das Modell und der Reviewer dasselbe sehen.",
+        "Eine Entfernungsoperation, die sich auf Embeddings, Zusammenfassungen und alle abgeleiteten Artefakte überträgt.",
+        "Ein Ablaufprozess sowie der Nachweis, dass er ausgeführt wurde.",
+        "Ein Audit-Log von Schreib- und Löschvorgängen im Gedächtnis, getrennt vom Konversationsprotokoll."
+      ],
+      "benefits": [
+        "Macht die Manipulation des Gedächtnisses (Memory Poisoning) umkehrbar: Sie können den Schreibvorgang finden, sehen, woher er stammt, und alles davon Abgeleitete entfernen.",
+        "Macht aus „Was glaubt dieser Agent über mich?“ eine Frage mit einer für Menschen lesbaren Antwort.",
+        "Ermöglicht es dem Retrieval, eine Behauptung anhand ihrer Herkunft zu gewichten und nicht danach, wie selbstbewusst der Text verfasst wurde.",
+        "Erfüllt die Aufbewahrungs- und Löschpflichten, die für alle über eine Person gespeicherten Daten gelten, ohne dass später ein separater Mechanismus angeflanscht werden muss."
+      ],
+      "risks": [
+        "Provenienz-Theater: ein Herkunftsfeld, das immer „Agent“ anzeigt, was nichts dokumentiert und nur wie ein Control aussieht.",
+        "Verdichtungswäsche (Compaction Laundering) – der häufigste Weg, wie Attribuierung verloren geht. Das Zusammenfassen von zehn attributierten Datensätzen in einem einzigen Absatz erzeugt eine nicht attributierte Behauptung, die nun wie ein Konsens wirkt.",
+        "Teillöschung: Der primäre Datensatz verschwindet, der Vektor bleibt, und die Behauptung wird weiterhin abgerufen.",
+        "Übermäßiges Ablaufen zerstört die Kontinuität, für die das Gedächtnis eigentlich gedacht war, was dazu führt, dass das Ablaufen komplett deaktiviert wird."
+      ],
+      "whenNot": [
+        "Single-Session-Agenten ohne Persistenz: Es gibt kein Gedächtnis, das attributiert werden müsste, und der Aufwand bringt keinen Nutzen.",
+        "Wenn der Speicher ein Cache Ihres eigenen, bereits verwalteten System of Record ist – attributieren Sie das Quellsystem einmal und nicht jede abgeleitete Zeile.",
+        "Wenn der Overhead die Operatoren dazu verleiten würde, die eigentlichen Notizen außerhalb des Systems zu führen, was weitaus schlechter ist als ein unvollständiger Datensatz innerhalb des Systems."
+      ],
+      "examples": [
+        "Ein Assistent, der „bevorzugt metrische Einheiten“ schreibt. Der Datensatz enthält die Session-ID und den Turn, in dem der Benutzer dies gesagt hat, sodass eine falsche Präferenz auf den verursachenden Satz zurückgeführt und entfernt werden kann.",
+        "Ein Recherche-Agent, der eine Drittanbieterseite liest und eine Behauptung mit dem Tag „an dieser URL zu diesem Datum beobachtet“ speichert, niemals als Faktum. Wenn dieselbe Behauptung Monate später abgerufen wird, reist ihre Herkunft mit.",
+        "Ein Support-Agent, dessen Gedächtniseinträge standardmäßig nach 90 Tagen ablaufen, mit einer längeren Lebensdauer nur für Einträge, die ein Mensch explizit bestätigt hat – sodass die ungeprüfte Mehrheit veraltet und die geprüfte Minderheit bestehen bleibt."
+      ],
+      "kpis": [
+        {
+          "metric": "Anteil attributierter Schreibvorgänge",
+          "note": "Anteil der Gedächtniseinträge, die eine maschinenlesbare Herkunft aufweisen. Unter 100 % kann der Speicher nicht beantworten, woher eine Behauptung stammt, was das eigentliche Control hinfällig macht."
+        },
+        {
+          "metric": "Medianes Alter der Datensätze",
+          "note": "Wie alt das aktive Gedächtnis tatsächlich ist. Ein steigender Median ohne Löschungen bedeutet, dass sich der Speicher anhäuft, anstatt kuratiert zu werden."
+        },
+        {
+          "metric": "Verzögerung bei der Löschungsweitergabe",
+          "note": "Zeitspanne zwischen dem Entfernen eines Datensatzes und dem Zeitpunkt, an dem die Behauptung aus allen abgeleiteten Artefakten nicht mehr abrufbar ist. Das Zeitfenster, in dem eine gelöschte Behauptung noch wirkt."
+        },
+        {
+          "metric": "Anteil planmäßig abgelaufener Datensätze",
+          "note": "Anteil der Datensätze, die ihr Ablaufdatum erreicht haben und tatsächlich entfernt wurden. Ein Beleg dafür, dass die Lebensdauer real und nicht nur deklariert ist."
+        }
+      ],
+      "failureModes": [
+        "Verzögerte Manipulation (Delayed-Action Poisoning): Ein in einer Konversation platziertes falsches Faktum taucht Wochen später in einer nicht zusammenhängenden Aufgabe auf, wobei nichts im Kontext erklärt, warum der Agent es glaubt.",
+        "Überleben in der Zusammenfassung: Der Datensatz wird gelöscht, die verdichtete Zusammenfassung, die ihn aufgenommen hat, jedoch nicht, und die Behauptung überlebt ihre eigene Quelle.",
+        "Schattenindex: Das Embedding eines entfernten Datensatzes bleibt durchsuchbar, sodass die Löschung überall dort erfolgreich war, wo der Auditor hingesehen hat, aber nirgends, wo es darauf ankam.",
+        "Identitäts-Bleed: Das Gedächtnis ist so ungenau zugeordnet, dass der Datensatz eines Benutzers für einen anderen abgerufen wird, was einen Designfehler des Gedächtnisses in eine Datenoffenlegung verwandelt."
+      ],
+      "lessons": [
+        "Die Attribuierung ist beim Schreiben kostengünstig und später unmöglich zu rekonstruieren. Das Feld muss existieren, bevor die Behauptung existiert.",
+        "Jeder Verdichtungsschritt ist eine Attribuierungsgrenze. Wenn der Summarizer die Herkunft nicht weitergeben kann, erzeugt er neue, quellenlose Behauptungen.",
+        "Ein Ablaufdatum, dessen Auslösung noch nie jemand beobachtet hat, ist eine Richtlinie, kein Control.",
+        "Eine Löschung ist nur so vollständig wie das abgeleitete Artefakt, das Sie vergessen haben."
+      ],
+      "faqs": [
+        {
+          "q": "Ist das nicht nur eine Aufbewahrungsrichtlinie mit zusätzlichem Aufwand?",
+          "a": "Die Aufbewahrung (Retention) bestimmt, wann Daten gelöscht werden. Die Attribuierung beantwortet, woher eine Behauptung stammt und wer sie entfernen darf – genau das, was Sie in dem Moment benötigen, in dem sich eine Erinnerung als falsch und nicht nur als alt herausstellt. Beide ergänzen sich: Ohne Ablaufdatum häuft sich die Attribuierung an; ohne Attribuierung löscht das Ablaufdatum Beweise, die Sie nie verstanden haben."
+        },
+        {
+          "q": "Der Agent schreibt seine eigenen Erinnerungen. Wessen Autorität tragen diese?",
+          "a": "Seine eigene, und das ist die Klasse, die es zu benennen gilt. Eine vom Agenten geschlussfolgerte Behauptung ist schwächer als eine vom Operator konfigurierte und sollte als solche abrufbar sein – andernfalls kehren die eigenen Vermutungen des Modells später ununterscheidbar von der Konfiguration zurück."
+        },
+        {
+          "q": "Wie bewahren wir die Provenienz bei der Zusammenfassung?",
+          "a": "Entweder trägt die Zusammenfassung die Vereinigung der Herkunftsnachweise ihrer Quellen in sich, oder sie wird als neuer, vom Agenten geschlussfolgerter Datensatz geschrieben, der auf die ersetzten Datensätze verweist. Was nicht passieren darf, ist, dass die Zusammenfassung stillschweigend zu einem quellenlosen Faktum wird, denn das ist der Schritt, bei dem die Manipulation dauerhaft wird."
+        }
+      ]
+    },
+    "ja": {
+      "name": "Attributed Memory",
+      "summary": "エージェントが記憶する内容を、匿名のテキストの塊としてではなく、そのオリジン（発生元）、削除権限を持つオーナー、および有効期間を保持するレコードとして保存します。メモリは、単発の攻撃を、将来の無関係なタスクで再トリガーされる攻撃へと変えてしまう要因です。アトリビューション（属性定義）こそが、それを可逆的なものにします。",
+      "definition": "Attributed Memoryとは、永続的なエージェントメモリのすべてを、プロバナンス（その主張がどこから来て、誰の権限を伴っていたか）、削除可能な指名されたオーナー、および有効期限を持つレコードとして書き込むプラクティスです。これにより、誤った事実を追跡して削除することができ、それが叶わなくても自然に消滅させることができます。",
+      "problem": "永続メモリに自由形式のテキストを書き込むエージェントは、後からどの記憶が指示されたものか、どの記憶が見知らぬ人のウェブページから読み取ったものか、そしてどの記憶を自身で推論したのかを区別できません。その結果、1つの汚染された書き込みが、それを植え付けた会話とはまったく関係のないタスクにおいて、信頼できるコンテキストとして再浮上することになります。",
+      "context": "作成されたセッションよりもメモリが長生きするあらゆる場所で使用します。設定を記憶するアシスタント、プロジェクトの状態を蓄積するエージェント、エージェント自身が書き込む検索ストアなどです。保持期間が長くなり、エージェントが作成したコーパスの割合が増えるほど、メモリはノートブックではなくレコードストアである必要があります。",
+      "solution": [
+        "匿名の書き込みを拒否します。すべてのレコードは、その主張がどこから来たのか（セッションとターン、ツールまたはドキュメント、外部からの場合はURL）を、テキスト内の文章としてではなく、構造化されたフィールドとして保持します。",
+        "その主張が誰の権限を伴っていたかを記録します。オペレーターが設定した事実、エンドユーザーが主張した事実、エージェントがサードパーティのページで読み取った事実は、それぞれ異なる3つの主張です。検索パスがそれらに重み付けをし、レビュー担当者が分類できるように、クラスを明示的に維持します。",
+        "すべてのレコードに有効期間を設定し、デフォルトは短くします。期限切れにならないメモリは誰もレビューすることはありません。汚染された書き込みの半減期こそが、攻撃の影響がどれだけ長く続くかを決定します。",
+        "指名されたオーナーを伴う第一級の操作として削除を定義し、それを伝播させます。埋め込み（embedding）、キャッシュされた要約、または派生したプロファイルに主張が残っている場合、レコードを削除するだけでは不十分です。",
+        "書き込みパスをアクションとして扱います。メモリの書き込みは将来の動作を変更するため、保存先がたまたまファイルであるからといって裏口から行うのではなく、他の書き込みと同様の認可とログ記録を経由させます。",
+        "検索されたメモリを指示（instruction）としてプロンプトに再入力させてはなりません。それはオリジンが添付されたデータとして到達し、オリジンがサードパーティであるレコードは、そのサードパーティからの信頼できない入力とまったく同じように扱われます。"
+      ],
+      "components": [
+        "オリジン、権限クラス、タイムスタンプ、および有効期限を必須フィールドとするレコードスキーマ。",
+        "これらのいずれかが欠けているレコードを拒否する書き込みパス。",
+        "コンテンツと同時にオリジンを返す検索パス。これにより、モデルとレビュー担当者が同じ情報を確認できるようになります。",
+        "埋め込み、要約、およびすべての派生アーティファクトに伝播する削除操作。",
+        "有効期限処理、およびそれが実行された証拠。",
+        "会話ログとは別に管理される、メモリの書き込みと削除の監査ログ。"
+      ],
+      "benefits": [
+        "メモリ汚染を可逆的なものにします。書き込みを特定し、その発生元を確認し、そこから派生したすべてのものを削除できます。",
+        "「このエージェントは私について何を信じているのか？」という問いを、人間が読める回答が存在する質問に変えます。",
+        "テキストがどれほど自信ありげに書かれているかではなく、そのオリジンに基づいて主張に重み付けをして検索できるようにします。",
+        "個人に関して永続化されたあらゆるデータに適用される保持および消去の義務を、後から別の仕組みを継ぎ接ぎすることなく満たします。"
+      ],
+      "risks": [
+        "プロバナンス・シアター（形だけのプロバナンス）：オリジンフィールドが常に「agent」となっており、何も記録していないにもかかわらず、コントロールが機能しているように見せかけること。",
+        "コンパクション・ロンダリング（要約による属性ロンダリング） — アトリビューションが失われる最も一般的な原因。属性付きの10個のレコードを1つの段落に要約すると、属性のない主張が生成され、それが合意事項のように見えてしまいます。",
+        "部分的な削除：プライマリレコードは削除されるものの、ベクトルが残り、その主張が検索され続けること。",
+        "過剰な期限切れによってメモリが存在していた目的である連続性が破壊され、結果として期限切れ設定を完全に無効化するようになってしまうこと。"
+      ],
+      "whenNot": [
+        "永続性のないシングルセッションのエージェント：属性を付与すべきメモリが存在せず、形式的な手続きによるメリットがありません。",
+        "ストアが、すでにガバナンスが効いている自社のシステム・オブ・レコード（SoR）のキャッシュである場合。派生した行ごとではなく、ソースシステムに対して一度だけ属性を付与します。",
+        "オーバーヘッドのせいでオペレーターが実際のメモをシステムの外部に保管するようになる場合。これは、システム内に不完全なレコードを保持するよりも明らかに悪質です。"
+      ],
+      "examples": [
+        "「メートル法を好む」と書き込むアシスタント。レコードにはセッションIDとユーザーがそれを発言したターンが保持されるため、誤った設定を原因となった文まで追跡して削除できます。",
+        "サードパーティのページを読み込み、事実としてではなく「そのURLで、その日付に観測された」というタグ付きで主張を保存する調査エージェント。数ヶ月後に同じ主張が検索されたとき、そのオリジンも一緒に取得されます。",
+        "デフォルトでメモリレコードが90日後に期限切れになるサポートエージェント。人間が明示的に確認したエントリのみ有効期間が延長されるため、レビューされていない大部分は期限切れとなり、レビュー済みの少数が残ります。"
+      ],
+      "kpis": [
+        {
+          "metric": "属性付き書き込みの割合",
+          "note": "機械可読なオリジンを保持しているメモリレコードの割合。これが100%未満の場合、ストアは主張がどこから来たのかを回答できず、コントロールとしての意味をなしません。"
+        },
+        {
+          "metric": "レコード年齢の中央値",
+          "note": "実際に使用されているメモリの古さ。削除が行われずに中央値が上昇している場合、ストアがキュレーションされることなく蓄積されていることを意味します。"
+        },
+        {
+          "metric": "削除伝播の遅延",
+          "note": "レコードが削除されてから、すべての派生アーティファクトからその主張が検索できなくなるまでの時間。削除された主張が依然として機能してしまう期間を指します。"
+        },
+        {
+          "metric": "予定通りに期限切れとなった割合",
+          "note": "有効期限に達し、実際に削除されたレコードの割合。有効期間が単なる宣言ではなく、実際に機能している証拠となります。"
+        }
+      ],
+      "failureModes": [
+        "遅延型汚染：ある会話で植え付けられた誤った事実が、数週間後に無関係なタスクで浮上し、コンテキストのどこにもエージェントがそれを信じる理由が説明されていない状態。",
+        "要約の残存：レコードは削除されたものの、それを吸収した圧縮要約が削除されず、主張がその情報源よりも長生きしてしまう状態。",
+        "シャドウインデックス：削除されたレコードの埋め込み（embedding）が検索可能なまま残っているため、監査人が確認したすべての場所では削除が成功しているように見えても、重要な場所では機能していない状態。",
+        "アイデンティティの漏洩：メモリのキー設定が緩いため、あるユーザーのレコードが別のユーザーのために検索されてしまい、メモリ設計の欠陥が情報漏洩につながる状態。"
+      ],
+      "lessons": [
+        "アトリビューションは書き込み時には低コストですが、後から再構築することは不可能です。主張が存在する前に、フィールドが存在していなければなりません。",
+        "すべての圧縮ステップはアトリビューションの境界です。要約処理がオリジンを引き継ぐことができない場合、それは情報源のない新しい主張を生み出していることになります。",
+        "誰も実行されたのを見たことがない有効期限は、ポリシーであってコントロールではありません。",
+        "削除の完全性は、忘れてしまった派生アーティファクトの存在によって左右されます。"
+      ],
+      "faqs": [
+        {
+          "q": "これは単に、手順を増やしたデータ保持ポリシー（retention policy）ではないのですか？",
+          "a": "保持ポリシーはデータがいつ消えるかを決定します。アトリビューションは、主張がどこから来て、誰がそれを削除できるかを決定します。これは、メモリが単に古いだけでなく、誤りであることが判明した瞬間に必要となるものです。この2つは相互補完的です。有効期限がなければアトリビューションは蓄積し続け、アトリビューションがなければ有効期限は理解していなかった証拠を削除してしまいます。"
+        },
+        {
+          "q": "エージェントが自身のメモリを書き込む場合、それらは誰の権限を伴うのですか？",
+          "a": "エージェント自身の権限であり、それこそが定義する価値のあるクラスです。エージェントが推論した主張は、オペレーターが設定したものよりも弱く、そのように検索されるべきです。そうでなければ、モデル自身の推測が、後から設定と区別がつかない状態で戻ってくることになります。"
+        },
+        {
+          "q": "要約処理を通じてプロバナンスを維持するにはどうすればよいですか？",
+          "a": "要約がそのソースのオリジンの和集合を保持するか、あるいは置き換えたレコードを指し示す新しいエージェント推論レコードとして書き込まれるかのいずれかです。避けるべきなのは、要約がいつの間にか情報源のない事実になってしまうことであり、それこそが汚染が永続化するステップだからです。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "归属化记忆",
+      "summary": "将智能体记住的内容存储为包含其来源、可将其删除的所有者以及生命周期的记录，绝不能存为匿名的文本块。记忆会将单次攻击转变为在未来无关任务中重复触发的攻击；而归属化正是让这种影响可逆的关键。",
+      "definition": "归属化记忆是指将智能体的每条持久化记忆写入为一条记录，其中包含其出处（该断言来自何处以及承载了谁的授权）、一个有名字的且可以删除它的所有者，以及一个有效期——这样，虚假的事实就可以被追踪、移除，即使未能手动移除，也会自动失效。",
+      "problem": "将自由文本写入持久化记忆的智能体，在以后无法区分哪些记忆是别人告诉它的、哪些是它从陌生网页上读取的、哪些是它自己推断的。这样一来，一次被污染的写入就会在与植入该写入的对话毫无关系的任务中，作为可信上下文重新出现。",
+      "context": "适用于记忆生命周期长于创建它的会话的任何场景：记住偏好的助手、积累项目状态的智能体，以及智能体自身写入的任何检索库。保留时间越长，且智能体创作的语料库越多，记忆就越需要是一个记录存储库，而不是一个笔记本。",
+      "solution": [
+        "拒绝匿名写入。每条记录都应以结构化字段（而非文本中的句子）的形式携带断言的来源——会话和轮次、工具或文档，如果来自外部，还应包括 URL。",
+        "记录断言承载了谁的授权。操作员配置的事实、最终用户断言的事实以及智能体在第三方页面上读取的事实是三种不同的断言；保持类别明确，以便检索路径可以对其进行加权，审核人员可以对其进行分类。",
+        "为每条记录设定生命周期，并将默认值设得很短。永不失效的记忆是永远不会有人审核的记忆，而被污染写入的半衰期决定了攻击能持续发挥作用多久。",
+        "使删除操作成为具有具名所有者的一等公民操作，并使其能够传播。如果断言仍然存在于嵌入（embedding）、缓存的摘要或派生的画像中，仅删除记录是不够的。",
+        "将写入路径视为一项操作。记忆写入会改变未来的行为，因此它们必须像其他任何写入一样经过相同的授权和日志记录——不能因为目的地恰好是一个文件就走旁路。",
+        "绝不允许检索到的记忆作为指令重新进入提示词。它作为附带来源的数据到达，而来源为第三方的记录应完全被视为来自该第三方的不可信输入。"
+      ],
+      "components": [
+        "一个将来源、授权类别、时间戳和有效期作为必填字段的记录模式（schema）。",
+        "一个拒绝缺少上述任何一项的记录的写入路径。",
+        "一个在返回内容的同时返回来源的检索路径，以便模型和审核人员看到相同的信息。",
+        "一个能传播到嵌入（embeddings）、摘要和任何派生产物中的删除操作。",
+        "一个失效处理流程，以及其已运行的凭证。",
+        "一个与对话日志分离的记忆写入和删除审计日志。"
+      ],
+      "benefits": [
+        "使记忆污染可逆：你可以找到该写入，查看其来源，并删除从中派生的所有内容。",
+        "将“这个智能体对我的认知是什么？”变成一个人类可读的有解问题。",
+        "允许检索根据断言的来源对其进行加权，而不是根据文本撰写时的自信程度。",
+        "满足适用于任何关于个人的持久化数据的保留和擦除义务，而无需在以后额外拼凑独立的机制。"
+      ],
+      "risks": [
+        "出处作秀（Provenance theatre）：来源字段总是显示为“agent”，这没有记录任何实质内容，却看起来像是一个控制项。",
+        "压缩洗白（Compaction laundering）——归属信息消亡最常见的方式。将十条带有归属信息的记录总结为一个段落，会产生一个无归属信息的断言，而这个断言现在看起来就像是共识。",
+        "部分删除：主记录消失了，但向量保留了下来，导致该断言仍不断被检索到。",
+        "过度失效破坏了记忆存在所需的连续性，从而迫使人们完全禁用失效机制。"
+      ],
+      "whenNot": [
+        "无持久化的单会话智能体：没有需要归属的记忆，这种仪式感毫无收益。",
+        "当存储库是你自己已经过治理的记录系统的缓存时——只需对源系统进行一次归属标记，而不是对每个派生行都进行标记。",
+        "当开销会迫使操作员将真实的笔记保存在系统之外时，这显然比系统内存在不完美的记录要糟糕得多。"
+      ],
+      "examples": [
+        "一个写入“偏好公制单位”的助手。该记录携带了会话 ID 和用户说出这句话的轮次，因此错误的偏好可以追溯到导致该偏好的句子并予以删除。",
+        "一个读取第三方页面并存储带有“在某日期、某 URL 处观察到”标签的断言的研究智能体，绝不将其存为事实。当数月后检索到相同的断言时，其来源会随之呈现。",
+        "一个支持智能体，其记忆记录默认在 90 天后失效，只有经人工明确确认的条目才具有更长的生命周期——这样，未审核的大多数记录会因过期而淘汰，而经审核的少数记录则得以保留。"
+      ],
+      "kpis": [
+        {
+          "metric": "归属化写入占比",
+          "note": "携带机器可读来源的记忆记录占比。如果低于 100%，存储库就无法回答断言来自何处，而这正是整个控制项的核心所在。"
+        },
+        {
+          "metric": "记录年龄中位数",
+          "note": "实际起作用的记忆的真实年龄。在没有删除操作的情况下，中位数上升意味着存储库只是在不断累积，而不是在被精心维护。"
+        },
+        {
+          "metric": "删除传播延迟",
+          "note": "从删除记录到该断言无法从每个派生产物中检索到之间的时间。这是已删除断言仍然起作用的时间窗口。"
+        },
+        {
+          "metric": "按期失效占比",
+          "note": "达到有效期并被实际移除的记录占比。这是生命周期真实存在而非仅作声明的证据。"
+        }
+      ],
+      "failureModes": [
+        "延时生效污染：在一次对话中植入的虚假事实在数周后的无关任务中浮出水面，而上下文中的任何内容都无法解释为什么智能体相信它。",
+        "摘要残留：记录被删除了，但吸收了该记录的压缩摘要未被删除，导致断言比其自身的来源存活得更久。",
+        "影子索引：已删除记录的嵌入（embedding）仍然可以被搜索到，导致删除操作在审计员查看的每个地方都成功了，但在真正起作用的地方却失败了。",
+        "身份混淆（Identity bleed）：记忆的键值关联过于松散，导致一个用户的记录被另一个用户检索到，从而将记忆设计缺陷演变成信息泄露。"
+      ],
+      "lessons": [
+        "归属信息在写入时成本很低，但事后重建却是不可能的。该字段必须在断言产生之前就存在。",
+        "每个压缩步骤都是一个归属边界。如果摘要生成器无法将来源传递下去，它就会产生新的无源断言。",
+        "从未有人见其触发过的失效机制只是一项政策，而不是一个控制项。",
+        "删除的彻底程度，取决于你所遗忘的派生产物。"
+      ],
+      "faqs": [
+        {
+          "q": "这不就是步骤更繁琐的数据保留政策吗？",
+          "a": "保留政策解决的是数据何时消失的问题。而归属信息解决的是断言来自何处以及谁可以删除它的问题，这正是当记忆被发现是错误的（而不仅仅是陈旧的）那一刻你所需要的。两者是互补的：没有失效机制，归属信息就会不断堆积；没有归属信息，失效机制就会删除你从未理解的证据。"
+        },
+        {
+          "q": "智能体自己写入记忆。这些记忆承载了谁的授权？",
+          "a": "它自己的授权，而这正是值得命名的类别。智能体推断的断言比操作员配置的断言要弱，并且在检索时应当能够体现这一点——否则模型自身的猜测在以后返回时将与配置无法区分。"
+        },
+        {
+          "q": "我们如何在摘要生成过程中保留出处？",
+          "a": "要么摘要携带其所有源头来源的并集，要么将其写入为一条指向其所替代记录的、由智能体推断的新记录。绝不能让摘要悄无声息地变成无源事实，因为这一步会让污染变成永久性的。"
+        }
       ]
     }
   }

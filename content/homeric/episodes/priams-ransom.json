@@ -62,6 +62,22 @@
         "pt": {
           "label": "A travessia noturna da planície",
           "note": "Príamo vai de carro da cidade ao acampamento aqueu e volta numa noite, o que as distâncias reais da Trôade permitem — sobretudo com uma linha de costa do Bronze mais para o interior."
+        },
+        "fr": {
+          "label": "La traversée nocturne de la plaine",
+          "note": "Priam effectue l'aller-retour entre la ville et le camp achéen en une nuit, ce que permettent les distances réelles de la Troade — en particulier avec un littoral de l'âge du bronze situé plus à l'intérieur des terres."
+        },
+        "zh": {
+          "label": "夜渡平原",
+          "note": "普里阿摩斯在夜间驾车从城市往返阿开亚人营地，这在特罗阿德的实际距离内是可行的——尤其是考虑到青铜时代的海岸线更靠内陆。"
+        },
+        "de": {
+          "label": "Die nächtliche Überquerung der Ebene",
+          "note": "Priamos fährt in einer Nacht von der Stadt zum Lager der Achäer und zurück, was die realen Entfernungen der Troas zulassen – besonders bei einer bronzezeitlichen Küstenlinie, die weiter landeinwärts lag."
+        },
+        "ja": {
+          "label": "夜間の平原横断",
+          "note": "プリアモスは一晩で都市からアカイア人の陣営を往復しますが、これはトロアス地方の実際の距離（特に青銅器時代の海岸線がより内陸にあったことを考慮すると）であれば十分に可能です。"
         }
       }
     }
@@ -124,6 +140,86 @@
         {
           "q": "Por que a Ilíada termina aqui?",
           "a": "Com o funeral de Heitor, não com a queda da cidade. O saque pertence ao Ciclo Épico e em Homero apenas se entrevê."
+        }
+      ]
+    },
+    "fr": {
+      "title": "La rançon de Priam",
+      "summary": "Un vieux roi traverse la plaine de nuit avec un chariot de trésors pour réclamer le corps de son fils à son meurtrier. L'Iliade s'achève ici, tout comme sa géographie.",
+      "narrative": [
+        "Hermès guide Priam au-delà des sentinelles jusqu'à la tente d'Achille. La scène est domestique et insoutenable : la rançon pesée, la supplique formulée, les deux hommes pleurant des morts différents, puis un repas. Achille restitue le corps et accorde une trêve de onze jours pour les funérailles.",
+        "Sur le plan géographique, c'est un court voyage — la ville, le gué, la plaine, le camp — et c'est la dernière fois que le poème utilise le paysage qu'il a mis vingt-quatre chants à traverser."
+      ],
+      "whyItMatters": "Cela confirme l'échelle du champ de bataille de Troie : un aller-retour nocturne en chariot, ce que permet la véritable Troade et qu'un paysage plus vaste ne permettrait pas.",
+      "debate": "Rien concernant l'emplacement. Ce qui est débattu, c'est le cadre historique — si les références hittites à Wilusa donnent au poème un contexte politique, ou seulement un nom.",
+      "faqs": [
+        {
+          "q": "Priam est-il un personnage historique ?",
+          "a": "Il n'existe aucune preuve de l'existence de Priam. Les documents hittites nomment des dirigeants d'une Wilusa que la plupart des spécialistes assimilent à Ilion, mais aucun nom n'y correspond à celui de Priam."
+        },
+        {
+          "q": "Pourquoi l'Iliade se termine-t-elle ici ?",
+          "a": "Avec les funérailles d'Hector, et non avec la chute de la ville. Le sac appartient au Cycle Épique et n'est qu'entrevu chez Homère."
+        }
+      ]
+    },
+    "de": {
+      "title": "Das Lösegeld des Priamos",
+      "summary": "Ein alter König überquert nachts die Ebene mit einem Wagen voller Schätze, um den Mörder seines Sohnes um dessen Leichnam zu bitten. Hier endet die Ilias, und mit ihr ihre Geografie.",
+      "narrative": [
+        "Hermes führt Priamos an den Wachen vorbei zu Achills Hütte. Die Szene ist häuslich und unerträglich: Das Lösegeld wird abgewogen, die Bitte vorgetragen, die beiden Männer weinen um unterschiedliche Tote, und schließlich folgt ein Mahl. Achill gibt den Leichnam zurück und gewährt einen elftägigen Waffenstillstand für das Begräbnis.",
+        "Geografisch gesehen ist es eine kurze Reise – Stadt, Furt, Ebene, Lager – und es ist das letzte Mal, dass das Epos die Landschaft nutzt, die es vierundzwanzig Bücher lang durchquert hat."
+      ],
+      "whyItMatters": "Es bestätigt die Dimensionen des trojanischen Schlachtfelds: eine nächtliche Hin- und Rückfahrt mit dem Wagen, was die reale Troas zulässt, eine größere Landschaft hingegen nicht.",
+      "debate": "Nichts über den Ort. Diskutiert wird der historische Rahmen – ob die hethitischen Verweise auf Wilusa dem Epos einen politischen Kontext oder nur einen Namen geben.",
+      "faqs": [
+        {
+          "q": "Ist Priamos eine historische Figur?",
+          "a": "Es gibt keine Belege für Priamos. Hethitische Dokumente nennen Herrscher eines Wilusa, das die meisten Gelehrten mit Ilios gleichsetzen, aber kein Name darin stimmt mit dem von Priamos überein."
+        },
+        {
+          "q": "Warum endet die Ilias hier?",
+          "a": "Mit Hektors Begräbnis, nicht mit dem Fall der Stadt. Die Plünderung gehört zum Epischen Zyklus und wird bei Homer immer nur angedeutet."
+        }
+      ]
+    },
+    "ja": {
+      "title": "プリアモスの身代金",
+      "summary": "老王は夜、財宝を積んだ荷車を引いて平原を渡り、息子の遺体を返してもらうよう、息子を殺した男に懇願します。『イリアス』はここで幕を閉じ、その地理もまたここで終わりを迎えます。",
+      "narrative": [
+        "ヘルメスはプリアモスを導き、歩哨を通り抜けてアキレウスの小屋へと向かわせます。その場面は日常的でありながら耐え難いものです。身代金が量られ、懇願がなされ、二人の男がそれぞれ異なる死者のために涙を流し、そして食事が供されます。アキレウスは遺体を返還し、葬儀のために11日間の休戦を認めます。",
+        "地理的には、都市、渡し場、平原、陣営という短い旅路であり、この詩が24巻にわたって描き続けてきた風景を利用する最後の場面となります。"
+      ],
+      "whyItMatters": "これはトロイアの戦場の規模を裏付けるものです。すなわち、荷車による一晩の往復であり、これは実際のトロアス地方の広さであれば可能ですが、より広大な地形では不可能です。",
+      "debate": "場所に関する議論はありません。議論されているのは歴史的な枠組みであり、ヒッタイトの史料における「ウィルサ」への言及が、この詩に政治的な背景を与えるものなのか、それとも単に名前を提供しているだけなのかという点です。",
+      "faqs": [
+        {
+          "q": "プリアモスは実在の人物ですか？",
+          "a": "プリアモスの実在を示す証拠はありません。ヒッタイトの文書には、多くの学者がイリオスと同一視するウィルサの支配者たちの名前が記されていますが、その中にプリアモスの名に一致するものは存在しません。"
+        },
+        {
+          "q": "なぜ『イリアス』はここで終わるのですか？",
+          "a": "都市の陥落ではなく、ヘクトルの葬儀で終わるためです。都市の略奪は「叙事詩の環（エピック・サイクル）」に属するエピソードであり、ホメロスの作品中では垣間見られるにすぎません。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "普里阿摩斯的赎金",
+      "summary": "一位年迈的国王在夜色中赶着一马车财宝穿过平原，向杀死他儿子的仇人讨要遗体。《伊利亚特》在此结束，其地理版图也在此画上句号。",
+      "narrative": [
+        "赫尔墨斯引导普里阿摩斯避开哨兵，来到阿喀琉斯的营房。场景充满了生活气息，却又令人难以承受：称量赎金、提出请求、两个男人为各自逝去的亲人痛哭，随后共进晚餐。阿喀琉斯归还了遗体，并为葬礼允诺了十一天的停战期。",
+        "从地理上看，这是一段很短的旅程——城市、渡口、平原、营地——这也是这部史诗最后一次使用它花了二十四卷篇幅所描绘的景观。"
+      ],
+      "whyItMatters": "它证实了特洛伊战场的规模：乘马车在夜间往返一趟，这在现实中的特罗阿德地区是可行的，而更广阔的地理环境则无法实现。",
+      "debate": "争论与地点无关。争论的焦点在于历史框架——赫梯文献中对威路萨（Wilusa）的提及是为史诗提供了政治背景，还是仅仅提供了一个名字。",
+      "faqs": [
+        {
+          "q": "普里阿摩斯是历史人物吗？",
+          "a": "没有证据表明普里阿摩斯真实存在。赫梯文献命名了威路萨的统治者，大多数学者认为威路萨即伊利奥斯（Ilios），但文献中没有一个名字与普里阿摩斯相符。"
+        },
+        {
+          "q": "为什么《伊利亚特》在这里结束？",
+          "a": "史诗以赫克托耳的葬礼结束，而不是以城市的陷落结束。特洛伊的劫掠属于“史诗体裁集”（Epic Cycle），在荷马史诗中仅能窥见一斑。"
         }
       ]
     }

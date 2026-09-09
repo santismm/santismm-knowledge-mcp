@@ -240,8 +240,8 @@
       "problem": "Um agente com ferramentas amplas e credenciais amplas transforma qualquer injeção, jailbreak ou alucinação bem-sucedida em uma ação real com todo o alcance da conta por trás dela.",
       "context": "Use onde um agente puder agir: chamar APIs, escrever arquivos, enviar mensagens, movimentar dinheiro. Quanto mais autonomia e menos revisão humana, mais o raio de impacto precisa ser definido na camada de permissões e não no prompt.",
       "solution": [
-        "Parta da tarefa, não da plataforma. Liste as operações que o agente precisa executar e exponha exatamente essas. Um catálogo montado a partir de «o que a API oferece» é uma concessão de permissões que ninguém revisou.",
-        "Separe leitura de escrita: ferramentas distintas, credenciais distintas e nenhum caminho de escrita alcançável por um argumento de uma ferramenta de leitura. Endpoints de «consulta» que também mutam são a escalada silenciosa mais comum.",
+        "Parta da tarefa, não da plataforma. Liste as operações que o agente precisa executar e exponha exatamente essas. Um catálogo montado a partir de “o que a API oferece” é uma concessão de permissões que ninguém revisou.",
+        "Separe leitura de escrita: ferramentas distintas, credenciais distintas e nenhum caminho de escrita alcançável por um argumento de uma ferramenta de leitura. Endpoints de “consulta” que também mutam são a escalada silenciosa mais comum.",
         "Restrinja a credencial, não apenas a ferramenta. Uma ferramenta somente leitura apoiada por um token de administrador está a um bug de virar ferramenta de escrita; emita credenciais por ferramenta com o escopo mais estreito que o sistema a montante suporte.",
         "Limite os parâmetros. Coloque em lista de permitidos os caminhos, repositórios, tabelas, contas ou destinatários que uma ferramenta pode endereçar, para que um agente sequestrado não consiga reapontar uma ferramenta legítima para um alvo ilegítimo.",
         "Faça as concessões expirarem e serem revisadas. Ferramentas se acumulam; remova o que ninguém invoca e trate adicionar uma ferramenta como a mudança de permissão que ela é.",
@@ -257,7 +257,7 @@
       ],
       "benefits": [
         "Limita o dano de uma injeção bem-sucedida sem depender de o modelo se comportar.",
-        "Transforma «este agente é seguro?» em um artefato revisável: uma lista de ferramentas, escopos e responsáveis.",
+        "Transforma “este agente é seguro?” em um artefato revisável: uma lista de ferramentas, escopos e responsáveis.",
         "Melhora de tabela a precisão na escolha de ferramenta: menos ferramentas e mais nítidas são mais fáceis de distinguir para um modelo.",
         "Torna incidentes investigáveis, porque o conjunto alcançável já era conhecido antes do incidente."
       ],
@@ -318,7 +318,7 @@
         },
         {
           "q": "Usamos uma única conta de serviço para tudo. É tão ruim assim?",
-          "a": "Significa que cada agente, e cada atacante que alcançar um deles, tem o alcance da tarefa mais ampla que qualquer um deles executa. Uma única conta é a versão deste padrão em que o raio de impacto é «tudo»."
+          "a": "Significa que cada agente, e cada atacante que alcançar um deles, tem o alcance da tarefa mais ampla que qualquer um deles executa. Uma única conta é a versão deste padrão em que o raio de impacto é “tudo”."
         }
       ],
       "productionEvidence": {

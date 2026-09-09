@@ -225,7 +225,7 @@
         },
         {
           "control": "Use-a como backlog do red team",
-          "note": "As técnicas são testáveis por construção. Execute-as contra o seu próprio sistema e trate «não conseguimos reproduzir» como um resultado que vale registrar, não como ausência de trabalho."
+          "note": "As técnicas são testáveis por construção. Execute-as contra o seu próprio sistema e trate “não conseguimos reproduzir” como um resultado que vale registrar, não como ausência de trabalho."
         },
         {
           "control": "Fale ATT&CK onde a organização já fala",
@@ -250,7 +250,7 @@
         "Cruze com o OWASP Top 10 para LLM para que fragilidades e comportamento adversário fiquem mapeados entre si, e não em registros separados."
       ],
       "pitfalls": [
-        "Tratá-lo como lista de conformidade. Nada certifica contra o ATLAS, e «revisamos a matriz» não é um controle.",
+        "Tratá-lo como lista de conformidade. Nada certifica contra o ATLAS, e “revisamos a matriz” não é um controle.",
         "Mapear todas as técnicas independentemente da alcançabilidade, o que produz um documento grande e nenhuma prioridade.",
         "Manter a inteligência de ameaças de IA num processo separado do que a organização já tem — exatamente o resultado que o alinhamento com ATT&CK existe para evitar.",
         "Ler a matriz e pular os estudos de caso, que é onde mora o detalhe operacional transferível.",

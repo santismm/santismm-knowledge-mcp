@@ -246,12 +246,12 @@
       ],
       "benefits": [
         "Torna reversível o envenenamento de memória: dá para achar a escrita, ver de onde veio e remover tudo o que dela derivou.",
-        "Transforma «o que este agente acredita sobre mim?» em uma pergunta com uma resposta que uma pessoa consegue ler.",
+        "Transforma “o que este agente acredita sobre mim?” em uma pergunta com uma resposta que uma pessoa consegue ler.",
         "Permite que a recuperação pondere uma afirmação pela origem e não pela segurança com que o texto foi escrito.",
         "Cumpre as obrigações de retenção e eliminação que se aplicam a qualquer dado persistido sobre uma pessoa, sem um mecanismo separado colado depois."
       ],
       "risks": [
-        "Procedência de teatro: um campo de origem que diz sempre «agente», que não documenta nada e parece um controle.",
+        "Procedência de teatro: um campo de origem que diz sempre “agente”, que não documenta nada e parece um controle.",
         "Lavagem por compactação — a forma mais comum de a atribuição morrer. Resumir dez registros atribuídos em um parágrafo produz uma afirmação sem origem que agora parece consenso.",
         "Remoção parcial: some o registro principal, fica o vetor, e a afirmação continua sendo recuperada.",
         "Expirar demais e destruir a continuidade para a qual a memória existia, o que empurra a desativar a expiração por completo."
@@ -262,8 +262,8 @@
         "Quando o custo empurraria os operadores a manter as anotações reais fora do sistema, o que é estritamente pior do que um registro imperfeito dentro dele."
       ],
       "examples": [
-        "Um assistente que escreve «prefere unidades métricas». O registro carrega o id da sessão e o turno em que o usuário disse isso, então uma preferência errada pode ser rastreada até a frase que a causou e removida.",
-        "Um agente de pesquisa que lê uma página de terceiros e guarda uma afirmação marcada «observado naquela URL, naquela data», nunca como um fato. Quando a mesma afirmação é recuperada meses depois, sua origem viaja com ela.",
+        "Um assistente que escreve “prefere unidades métricas”. O registro carrega o id da sessão e o turno em que o usuário disse isso, então uma preferência errada pode ser rastreada até a frase que a causou e removida.",
+        "Um agente de pesquisa que lê uma página de terceiros e guarda uma afirmação marcada “observado naquela URL, naquela data”, nunca como um fato. Quando a mesma afirmação é recuperada meses depois, sua origem viaja com ela.",
         "Um agente de suporte cujos registros de memória expiram em 90 dias por padrão, com vida mais longa apenas para entradas que uma pessoa confirmou explicitamente — assim a maioria não revisada envelhece e sai, e a minoria revisada permanece."
       ],
       "kpis": [

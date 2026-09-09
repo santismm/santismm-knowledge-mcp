@@ -249,7 +249,7 @@
       "risks": [
         "O relé permitido: um host autorizado que por sua vez repassa os dados transforma a lista em formalidade.",
         "Quebras quando uma dependência legítima muda de host, o que gera pressão para ampliar a lista com pressa.",
-        "Erosão por curingas: cada entrada ampla adicionada «temporariamente» é permanente até alguém auditá-la.",
+        "Erosão por curingas: cada entrada ampla adicionada “temporariamente” é permanente até alguém auditá-la.",
         "Aplicação na camada errada: uma verificação no próprio processo que o código gerado simplesmente contorna."
       ],
       "whenNot": [
@@ -269,7 +269,7 @@
         },
         {
           "metric": "Tamanho da lista",
-          "note": "Destinos permitidos por papel de agente. Crescer sem remover é a lista degradando para «permitir tudo»."
+          "note": "Destinos permitidos por papel de agente. Crescer sem remover é a lista degradando para “permitir tudo”."
         },
         {
           "metric": "Entradas com curinga",

@@ -209,7 +209,7 @@
         "A descrição de uma ferramenta é entrada não confiável para o modelo: ela pode instruir e pode mudar depois de aprovada.",
         "Servidores locais por stdio e remotos por HTTP têm modelos de ameaça diferentes; os erros perigosos são outros.",
         "Verificações de origem e limites de taxa ficam no servidor, porque os clientes não estão sob o seu controle.",
-        "«Somente leitura» é uma propriedade da implementação, nunca do nome da ferramenta."
+        "“Somente leitura” é uma propriedade da implementação, nunca do nome da ferramenta."
       ],
       "context": [
         "O MCP dá ao agente uma forma uniforme de descobrir e invocar capacidades. Essa uniformidade é ao mesmo tempo o valor e o risco: um mesmo cliente pode apontar para muitos servidores, e cada servidor é uma decisão de confiança nova, tomada na prática por quem colou uma URL num arquivo de configuração.",
@@ -220,13 +220,13 @@
         "Decida primeiro a exposição: capacidade pública somente leitura, capacidade autenticada ou apenas local. Todo o resto decorre dessa resposta, e a maioria dos incidentes vem de um servidor que nunca a tomou.",
         "Valide o transporte antes de fazer trabalho. Em servidores HTTP, verifique o cabeçalho Origin contra uma lista de permitidos e rejeite chamadas cross-site iniciadas por navegador antes de qualquer handler rodar: DNS rebinding e abuso no estilo CSRF chegam por aí.",
         "Mantenha o servidor sem estado sempre que o protocolo permitir. Sem armazenamento de sessão não há fixação de sessão, nem contaminação entre requisições, nem estado a vazar entre chamadores.",
-        "Restrinja o escopo das ferramentas. Uma ferramenta, uma capacidade, sem verbos que mudam conforme um argumento: uma ferramenta de «consulta» que também escreve é uma escalada de privilégio esperando o parâmetro certo.",
+        "Restrinja o escopo das ferramentas. Uma ferramenta, uma capacidade, sem verbos que mudam conforme um argumento: uma ferramenta de “consulta” que também escreve é uma escalada de privilégio esperando o parâmetro certo.",
         "Limite a taxa por chamador e responda com um 429 real e Retry-After. Um agente que tenta de novo é tráfego normal; um agente que tenta sem limite é uma ferramenta de negação de serviço apontada para o seu próprio backend.",
         "Registre cada chamada com forma suficiente para reconstruir um abuso — ferramenta, resultado, latência, identidade do chamador — e nada que transforme o próprio log na brecha.",
         "Trate todo resultado de ferramenta como conteúdo não confiável no caminho de volta. Um servidor que faz proxy de dados externos é, por construção, um canal de injeção indireta."
       ],
       "components": [
-        "Autenticação: nenhuma para dados de leitura genuinamente públicos, token ou OAuth para qualquer outra coisa, com a decisão documentada, porque «sem auth» precisa ser uma escolha e não um descuido.",
+        "Autenticação: nenhuma para dados de leitura genuinamente públicos, token ou OAuth para qualquer outra coisa, com a decisão documentada, porque “sem auth” precisa ser uma escolha e não um descuido.",
         "Validação de origem e host em servidores remotos, derivada de tráfego medido e não presumida a partir do padrão de uma aplicação web.",
         "Autorização por ferramenta: o que este chamador pode invocar, não apenas se ele pode se conectar.",
         "Validação de entrada na fronteira da ferramenta, com o mesmo rigor de uma API pública — porque é isso que ela é.",

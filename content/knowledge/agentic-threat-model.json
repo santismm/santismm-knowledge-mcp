@@ -240,7 +240,7 @@
         "Casos de teste: para cada superfície, a tentativa de injeção ou abuso que prova que o controle funciona. Um controle que nunca foi visto falhando é um controle que nunca foi verificado."
       ],
       "pros": [
-        "Converte «o nosso agente é seguro?» em uma lista finita de superfícies, cada uma com responsável e controle.",
+        "Converte “o nosso agente é seguro?” em uma lista finita de superfícies, cada uma com responsável e controle.",
         "Torna as decisões de permissão explícitas e revisáveis antes de conceder acesso à produção.",
         "Dá ao red team uma lista de alvos e às suítes de avaliação casos concretos para automatizar.",
         "Envelhece bem: modelos mudam com frequência, superfícies mudam devagar, então o mapa sobrevive à próxima troca de modelo."
@@ -271,7 +271,7 @@
         },
         {
           "q": "Preciso de um se o meu agente é somente leitura?",
-          "a": "Sim, um menor. Um agente somente leitura ainda tem superfície de exfiltração — tudo o que ele pode ler pode ser levado a repetir — e «somente leitura» é uma propriedade que precisa ser aplicada na camada de ferramentas, não presumida a partir do prompt."
+          "a": "Sim, um menor. Um agente somente leitura ainda tem superfície de exfiltração — tudo o que ele pode ler pode ser levado a repetir — e “somente leitura” é uma propriedade que precisa ser aplicada na camada de ferramentas, não presumida a partir do prompt."
         },
         {
           "q": "Por onde começo se não tenho nada escrito?",

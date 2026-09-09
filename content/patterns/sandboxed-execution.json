@@ -244,7 +244,7 @@
         "Registro de fronteira: entradas, saídas e destinos."
       ],
       "benefits": [
-        "Converte «o agente executou algo ruim» de incidente em contêiner descartado.",
+        "Converte “o agente executou algo ruim” de incidente em contêiner descartado.",
         "Torna seguro dar a um agente capacidade real de execução, que costuma ser justamente o que o torna útil.",
         "Limita erros honestos tanto quanto ataques: o mesmo controle pega um laço infinito e um payload injetado.",
         "Dá um bom lugar para observar: tudo o que a tarefa tocou cruzou uma única fronteira."

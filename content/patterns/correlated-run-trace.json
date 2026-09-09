@@ -237,7 +237,7 @@
       "name": "Trace de execução correlacionado",
       "summary": "Um identificador costura a execução inteira de um agente — entradas, modelo e versão, cada chamada de ferramenta com seus argumentos e resultado, a ação final — em um registro que se pode reproduzir meses depois. O difícil não é capturar. É ser completo o bastante para reconstruir a execução e contido o bastante para que o repositório de traces não seja uma segunda cópia dos dados que descreve.",
       "definition": "Um trace de execução correlacionado é um registro imutável, com um único identificador, de tudo o que uma execução de agente decidiu e fez, capturado com fidelidade suficiente para que alguém possa reconstruí-la de ponta a ponta depois, sem acesso aos sistemas que a produziram, e redigido de modo que o trace não seja um alvo mais fácil do que a origem. É o registro de decisões do agente, não um log de requisições.",
-      "problem": "Agentes são não determinísticos e de vários passos, então «o que aconteceu» não se deduz da saída. Quase todas as equipes registram algo e ainda assim não conseguem explicar por que uma execução específica fez o que fez: os passos estão em sistemas diferentes sem identificador comum, o prompt foi salvo como referência a um template que já mudou, ou a versão do modelo nunca foi capturada, então ninguém consegue dizer se o comportamento derivou ou se o modelo mudou.",
+      "problem": "Agentes são não determinísticos e de vários passos, então “o que aconteceu” não se deduz da saída. Quase todas as equipes registram algo e ainda assim não conseguem explicar por que uma execução específica fez o que fez: os passos estão em sistemas diferentes sem identificador comum, o prompt foi salvo como referência a um template que já mudou, ou a versão do modelo nunca foi capturada, então ninguém consegue dizer se o comportamento derivou ou se o modelo mudou.",
       "context": "Qualquer agente cujas ações tenham consequências sobre as quais alguém vai perguntar depois: um processo regulado onde o trace é a trilha de auditoria e a rastreabilidade é uma obrigação e não uma preferência, um incidente que precisa de causa raiz, um cliente que contesta um resultado, ou um ciclo de avaliação que precisa de falhas reais para aprender.",
       "solution": [
         "Emita um identificador de execução no ponto de entrada e propague-o por cada passo, serviço e nova tentativa. A correlação é todo o valor: registros desconectados da mesma execução são três logs, não um trace.",
@@ -260,7 +260,7 @@
         "Torna diagnosticáveis as falhas não determinísticas: dá para responder por que esta execução fez isto, em vez de reproduzir até acontecer de novo.",
         "Transforma obrigações de registro em artefato e não em promessa. A reconstrução funciona sobre uma execução passada ao acaso, ou não funciona.",
         "Alimenta a avaliação com falhas reais em vez de inventadas, que é a diferença entre um benchmark e uma suíte de regressão.",
-        "Separa a deriva do deploy. Com a versão do modelo no registro, «piorou» vira uma pergunta com resposta."
+        "Separa a deriva do deploy. Com a versão do modelo no registro, “piorou” vira uma pergunta com resposta."
       ],
       "risks": [
         "O repositório de traces como o alvo mais fraco: guarda os mesmos dados dos sistemas que descreve, em geral com menos controle de acesso e mais retenção.",

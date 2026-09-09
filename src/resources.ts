@@ -212,6 +212,48 @@ function observeRead(
   };
 }
 
+/**
+ * The enumerations, computed once per content provider.
+ *
+ * `resources/list` was the slowest method on the endpoint by an order of
+ * magnitude — 455 ms average and a 1 s p95 on 9 Sep 2026, against 12–22 ms
+ * for everything else — and the whole cost was rebuilding the same answer:
+ * 987 cards, every unit in every locale, summarised on each call (217 ms of
+ * construction, 2 ms of serialisation, and a second pass exactly as slow as
+ * the first because nothing upstream remembers).
+ *
+ * The corpus is read from files fixed at build time, so within a process the
+ * listing cannot change; the route already promises as much with a one-hour
+ * `cacheHint` on this very method. Keyed by provider rather than held in a
+ * closure because the stateless HTTP transport re-runs `registerResources`
+ * for every request: a closure would be born and die with the request, and
+ * the memo would never be hit. `WeakMap` so a provider built for one test
+ * does not pin its listing for the next.
+ */
+const LISTINGS = new WeakMap<McpContent, Map<string, ResourceListEntry[]>>();
+
+function remembered(
+  content: McpContent,
+  key: string,
+  build: () => ResourceListEntry[],
+): () => ResourceListEntry[] {
+  return () => {
+    let perProvider = LISTINGS.get(content);
+    if (!perProvider) {
+      perProvider = new Map();
+      LISTINGS.set(content, perProvider);
+    }
+    let listing = perProvider.get(key);
+    if (!listing) {
+      listing = build();
+      perProvider.set(key, listing);
+    }
+    // A fresh array each time: the SDK may hand it on, and a caller that sorts
+    // or pages in place must not be editing the memo.
+    return [...listing];
+  };
+}
+
 function localTemplate(
   pattern: string,
   list: () => ResourceListEntry[],
@@ -257,12 +299,12 @@ export function registerResources(
         .filter(Boolean);
     const template = localTemplate(
       entry.uri_template,
-      () => LOCALES.flatMap((locale) =>
+      remembered(content, entry.name, () => LOCALES.flatMap((locale) =>
         (content.listDomain(domain, locale) as Array<Record<string, unknown>>).map((item) => {
           const slug = String(item.slug ?? "");
           return listEntry(resourceUri.core(domain, slug, locale), `${domain}/${slug}@${locale}`, item);
         }),
-      ),
+      )),
       { locale: completeFrom(() => [...LOCALES]), slug: completeFrom(slugs) },
     );
     server.registerResource(
@@ -288,12 +330,12 @@ export function registerResources(
     handbook.name,
     localTemplate(
       handbook.uri_template,
-      () => LOCALES.flatMap((locale) =>
+      remembered(content, handbook.name, () => LOCALES.flatMap((locale) =>
         (content.listHandbook(locale) as Array<Record<string, unknown>>).map((item) => {
           const id = String(item.id ?? item.slug ?? "");
           return listEntry(resourceUri.handbook(id, locale), `handbook/${id}@${locale}`, item);
         }),
-      ),
+      )),
       { locale: completeFrom(() => [...LOCALES]), id: completeFrom(handbookIds) },
     ),
     templateConfig(handbook),
@@ -344,12 +386,12 @@ export function registerResources(
     homeric.name,
     localTemplate(
       homeric.uri_template,
-      () => kinds.flatMap((kind) => LOCALES.flatMap((locale) =>
+      remembered(content, homeric.name, () => kinds.flatMap((kind) => LOCALES.flatMap((locale) =>
         (content.listHomeric(kind, locale) as Array<Record<string, unknown>>).map((item) => {
           const slug = String(item.slug ?? "");
           return listEntry(resourceUri.homeric(kind, slug, locale), `homeric/${kind}/${slug}@${locale}`, item);
         }),
-      )),
+      ))),
       {
         kind: completeFrom(() => [...kinds]),
         locale: completeFrom(() => [...LOCALES]),
@@ -377,12 +419,12 @@ export function registerResources(
     claims.name,
     localTemplate(
       claims.uri_template,
-      () => LOCALES.flatMap((locale) =>
+      remembered(content, claims.name, () => LOCALES.flatMap((locale) =>
         (content.listClaims(undefined, locale) as Array<Record<string, unknown>>).map((item) => {
           const id = String(item.id ?? item.slug ?? "");
           return listEntry(resourceUri.claim(id, locale), `claims/${id}@${locale}`, item);
         }),
-      ),
+      )),
       { locale: completeFrom(() => [...LOCALES]), id: completeFrom(claimIds) },
     ),
     templateConfig(claims),

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "santismm-knowledge-mcp"
-version = "0.2.1"
+version = "0.5.0"
 description = "MCP access to the Santismm Knowledge Platform (harness engineering, agentic AI patterns, reference architectures, AI governance) — a zero-dependency stdio proxy to the hosted, always-fresh endpoint."
 readme = "README.md"
 license = "MIT"

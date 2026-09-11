@@ -1,0 +1,996 @@
+{
+  "id": "ARCH-006",
+  "slug": "agentic-immune-system",
+  "aliases": [
+    "the-agentic-enterprise-needs-an-immune-system",
+    "la-empresa-agentica-necesita-un-sistema-inmunitario",
+    "a-empresa-agentica-precisa-de-um-sistema-imunologico"
+  ],
+  "category": "operations",
+  "updated": "2026-09-10",
+  "version": "1.0",
+  "featured": false,
+  "evidence": {
+    "evidenceLevel": "industry_observation",
+    "confidenceLevel": "medium",
+    "sourceType": [
+      "industry_observation",
+      "paper"
+    ]
+  },
+  "technologies": [
+    "Short-lived workload identity (OIDC / SPIFFE-style)",
+    "Capability-scoped tool broker (MCP or equivalent)",
+    "Sandboxed execution (container or microVM)",
+    "Egress allowlist / forward proxy",
+    "Output encoding at the trust boundary",
+    "Distributed tracing with a run correlation id",
+    "Policy engine for risk-based approval"
+  ],
+  "patterns": [
+    "least-privilege-tooling",
+    "sandboxed-execution",
+    "egress-allowlist",
+    "output-boundary-encoding",
+    "human-approval-gate",
+    "human-escalation",
+    "recovery-strategy",
+    "correlated-run-trace"
+  ],
+  "knowledge": [
+    "agentic-threat-model",
+    "mcp-security",
+    "prompt-injection",
+    "guardrails",
+    "ai-cyberdefense",
+    "human-in-the-loop",
+    "ai-observability",
+    "ai-agent"
+  ],
+  "references": [
+    {
+      "title": "NIST — AI Risk Management Framework (AI RMF 1.0)",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+    },
+    {
+      "title": "OWASP — Top 10 for Large Language Model Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
+    },
+    {
+      "title": "MITRE ATLAS — Adversarial Threat Landscape for AI Systems",
+      "url": "https://atlas.mitre.org/"
+    },
+    {
+      "title": "Anthropic — Building Effective Agents (2024)",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
+    },
+    {
+      "title": "Santa María, S. — The agentic enterprise needs an immune system (2026)",
+      "url": "https://articles.santismm.com/the-agentic-enterprise-needs-an-immune-system/"
+    }
+  ],
+  "related": [
+    "customer-service-agent",
+    "ai-workforce",
+    "operations-center"
+  ],
+  "locales": {
+    "en": {
+      "name": "Agentic Immune System",
+      "summary": "A reference architecture for running enterprise AI agents without concentrating trust in any one of them. Five layers — identity, least privilege, containment, oversight and recovery — assume that some agent will eventually be wrong or subverted, and make that event survivable instead of catastrophic. The unit of defence is the individual run, not the fleet.",
+      "keyConcepts": [
+        "Assume compromise: the question is not whether an agent will act wrongly but what it can reach when it does.",
+        "Identity per run: every agent execution carries its own short-lived identity, never a shared operator credential.",
+        "Containment over prevention: blast radius is designed, not hoped for — a subverted run affects one task, not the estate.",
+        "Recovery is a design surface: the ability to trace, undo and stop is built in, not improvised during the incident."
+      ],
+      "definition": "The agentic immune system is a layered runtime architecture that lets AI agents take real actions on enterprise systems while bounding what any single run can reach, observe or damage, through per-run identity, task-scoped privilege, execution and egress containment, risk-based human oversight, and traceable recovery.",
+      "architecture": [
+        "The architecture inverts the usual question. Instead of asking how to stop an agent from making a mistake — which no guardrail achieves reliably against a system that reasons — it asks what the agent can reach at the moment it makes one. Every layer is a bound on reach, and the layers are independent so that one failing does not open the rest.",
+        "Identity is the foundation. Each run is issued a short-lived credential bound to the task, the requesting principal and the tools it declared it needs. Agents do not share a service account: when something goes wrong, the trace names a run, not a fleet, and revocation costs one token rather than a rotation across the estate.",
+        "Privilege is scoped to the task and expires with it. The tool broker grants the narrow set of capabilities a run declared up front — read this ticket, write this record — and refuses anything outside it, so a prompt injection that persuades the model to attempt more finds nothing to call.",
+        "Containment assumes the first two layers can be defeated. Execution happens in a sandbox with no ambient credentials; outbound network access goes through an allowlist so exfiltration has nowhere to send; and anything the agent produces is encoded at the boundary so its output cannot become the next system's instruction.",
+        "Oversight is where a human carries accountability, placed by risk rather than by default: irreversible or regulated actions pause for approval, and low-confidence outcomes escalate with the full run context attached. Gating everything defeats the automation and trains reviewers to click through.",
+        "Recovery closes the loop. Every run is traced under a single correlation id across models, tools and retries; actions are designed with a compensating counterpart where the underlying system allows it; and a kill switch stops a class of runs without taking down the platform."
+      ],
+      "flow": [
+        "1. Request: a task arrives with its requesting principal and a declared set of tools and data scopes.",
+        "2. Issue: the broker mints a short-lived, run-scoped identity bound to that declaration.",
+        "3. Admit: the run starts in a sandbox with no ambient credentials and an egress allowlist.",
+        "4. Act: every tool call is authorised against the run's scope; anything outside it is refused and recorded.",
+        "5. Gate: irreversible or regulated actions pause for human approval with the run context attached.",
+        "6. Emit: outputs are encoded at the boundary so they cannot be executed as instructions downstream.",
+        "7. Close: the identity expires, the trace is sealed under its correlation id, and compensating actions stay available."
+      ],
+      "components": [
+        "Run identity broker (short-lived, task-bound credentials)",
+        "Tool broker with declared capability scopes",
+        "Sandboxed execution environment",
+        "Egress allowlist and data-loss controls",
+        "Output boundary encoder",
+        "Risk-based human approval gate",
+        "Correlated run trace and audit log",
+        "Compensating actions and kill switch"
+      ],
+      "referenceScenario": {
+        "context": "An illustrative enterprise running dozens of agents across ticketing, finance and internal knowledge, where each agent can both read and write to systems of record.",
+        "scenario": "A retrieval step ingests a document containing an injected instruction telling the agent to export customer records. The model complies, but the export tool is outside the run's declared scope and is refused; the attempt is recorded, the run is stopped by the anomaly rule, and the correlation id gives the responder the full chain in one query.",
+        "technology": "Per-run credential broker, capability-scoped tool broker, sandboxed execution, egress allowlist, boundary encoding, risk-based approval gate, correlated tracing.",
+        "load": "Continuous background automation with bursts around business processes; the rare, high-impact action is a small fraction of calls and the one that carries the risk.",
+        "results": "Reference target, not a measured outcome: a subverted run is bounded to its declared scope, every refusal is attributable to a run, and any action taken can be traced and — where the underlying system permits — compensated."
+      },
+      "benefits": [
+        "A wrong or subverted agent costs one task, not the estate.",
+        "Incidents are attributable to a run rather than to a shared account, so response is targeted and revocation is cheap.",
+        "Prompt injection loses most of its value: persuading the model does not grant it capability it never held.",
+        "Oversight effort concentrates on the actions that are actually irreversible, keeping approval meaningful."
+      ],
+      "risks": [
+        "Scope declarations drift from what agents actually need, so teams widen them until least privilege is nominal.",
+        "Gating too much trains reviewers to approve without reading, which is worse than not gating at all.",
+        "Sandboxing and brokering add latency and operational surface that small deployments may not justify.",
+        "Compensating actions are impossible for some external effects — a sent email or a paid invoice does not roll back."
+      ],
+      "failureModes": [
+        "A shared service credential survives somewhere in the stack and silently defeats per-run identity.",
+        "The egress allowlist is bypassed through an approved destination that itself forwards data.",
+        "Traces break across a retry or a model switch, so the incident chain cannot be reconstructed.",
+        "The approval queue backs up and the gate is disabled 'temporarily' to clear a backlog.",
+        "Tool output is treated as trusted input by the next step, turning containment into a single boundary that leaks."
+      ],
+      "lessons": [
+        "Design the blast radius before the capability: what an agent may reach is a harder question than what it may do, and answering it first makes the rest tractable.",
+        "Per-run identity is the load-bearing layer; without it every other control is enforced against a subject you cannot name.",
+        "A gate that fires on everything is a gate that fires on nothing — reserve human approval for the irreversible.",
+        "Assume the model will be persuaded and design so that persuasion is not authorisation.",
+        "Recovery has to be built while the system is calm; nobody designs a compensating action during an incident."
+      ],
+      "kpis": [
+        {
+          "metric": "Share of runs with a unique, short-lived identity",
+          "note": "The load-bearing control. Anything short of 100% means some path still uses a shared credential."
+        },
+        {
+          "metric": "Out-of-scope tool attempts, refused",
+          "note": "Counted per run. A rising number is a signal about the environment, not necessarily a failure of the design."
+        },
+        {
+          "metric": "Blast radius per run",
+          "note": "Number of systems and records a single run could reach if fully subverted. The number the architecture exists to shrink."
+        },
+        {
+          "metric": "Gated action rate and approval latency",
+          "note": "Both matter: too high a rate defeats automation, too high a latency makes teams disable the gate."
+        },
+        {
+          "metric": "Trace completeness",
+          "note": "Share of runs reconstructable end to end under one correlation id, including retries and model switches."
+        },
+        {
+          "metric": "Time to revoke",
+          "note": "From detection to a run's capability being gone. Short-lived credentials should make this close to expiry, not to a rotation."
+        }
+      ],
+      "scaling": [
+        "The identity and tool brokers are on the hot path of every call, so they set the ceiling; they are stateless and scale horizontally, but their latency is paid on every tool use.",
+        "Sandbox start-up dominates cost for short runs; pooling warm sandboxes trades isolation depth for latency and should be an explicit decision.",
+        "Human approval does not scale linearly and is the real constraint — the gated set must stay small as the fleet grows or the queue becomes the outage.",
+        "Trace storage grows with runs times tool calls; sampling is safe for observability but not for audit, so the two retention policies should be separate."
+      ],
+      "examples": [
+        "An injected instruction in a retrieved document asks for a data export; the tool is outside the run's scope and the call is refused and recorded.",
+        "A finance agent drafts a payment and a human approves it before execution, with the run trace attached to the approval.",
+        "A misbehaving agent class is stopped by kill switch while the rest of the fleet keeps running.",
+        "An incident is reconstructed from a single correlation id spanning three models, nine tool calls and two retries."
+      ],
+      "faqs": [
+        {
+          "q": "Why an immune system rather than a firewall?",
+          "a": "A firewall assumes a boundary between inside and outside. An enterprise running agents has no such boundary: the agent is already inside, acting with real credentials. An immune system assumes intrusion is normal and invests in recognition, containment and repair rather than in a perimeter."
+        },
+        {
+          "q": "Isn't this just least privilege with extra steps?",
+          "a": "Least privilege is one of the five layers and the most familiar. The architecture's claim is that it is not sufficient alone: without per-run identity you cannot scope privilege to a subject, and without containment and recovery a correctly-scoped run that still goes wrong has no bound and no undo."
+        },
+        {
+          "q": "Does this stop prompt injection?",
+          "a": "No, and treating any control as stopping it is the mistake. It makes injection cheap to survive: persuading the model to attempt an action is not the same as the action being authorised, and the refused attempt is itself a signal."
+        },
+        {
+          "q": "What is the minimum viable version?",
+          "a": "Per-run identity and task-scoped tool access. Those two give you attribution and a bound. Containment, gating and compensating actions matter more as the actions get more irreversible."
+        },
+        {
+          "q": "How does this relate to the governance frameworks?",
+          "a": "It is the runtime expression of what they require. NIST AI RMF and ISO 42001 ask for accountability and traceability; OWASP LLM Top 10 and MITRE ATLAS describe the attacks. This architecture is where those obligations become identities, scopes, sandboxes and traces."
+        }
+      ]
+    },
+    "es": {
+      "name": "Sistema inmunitario agéntico",
+      "summary": "Arquitectura de referencia para operar agentes de IA en la empresa sin concentrar la confianza en ninguno de ellos. Cinco capas —identidad, mínimo privilegio, contención, supervisión y recuperación— dan por supuesto que algún agente acabará equivocándose o siendo subvertido, y hacen que ese día sea sobrevivible en vez de catastrófico. La unidad de defensa es la ejecución concreta, no la flota.",
+      "keyConcepts": [
+        "Dar por hecho el compromiso: la pregunta no es si un agente actuará mal, sino hasta dónde llega cuando lo haga.",
+        "Identidad por ejecución: cada ejecución lleva su propia credencial efímera, nunca una cuenta de operador compartida.",
+        "Contención antes que prevención: el radio de daño se diseña, no se espera — una ejecución subvertida afecta a una tarea, no al parque.",
+        "La recuperación es una superficie de diseño: trazar, deshacer y parar se construyen antes, no se improvisan durante el incidente."
+      ],
+      "definition": "El sistema inmunitario agéntico es una arquitectura de ejecución por capas que permite a los agentes de IA actuar de verdad sobre los sistemas de la empresa acotando lo que una sola ejecución puede alcanzar, observar o dañar, mediante identidad por ejecución, privilegio limitado a la tarea, contención de ejecución y de salida, supervisión humana por riesgo y recuperación trazable.",
+      "architecture": [
+        "La arquitectura invierte la pregunta habitual. En vez de preguntar cómo impedir que un agente se equivoque —cosa que ninguna barrera consigue de forma fiable frente a un sistema que razona— pregunta hasta dónde llega el agente en el momento en que se equivoca. Cada capa es un límite de alcance, y las capas son independientes para que el fallo de una no abra las demás.",
+        "La identidad es el cimiento. Cada ejecución recibe una credencial efímera ligada a la tarea, a quien la pide y a las herramientas que declaró necesitar. Los agentes no comparten cuenta de servicio: cuando algo sale mal, la traza nombra una ejecución y no una flota, y revocar cuesta un token en vez de una rotación en todo el parque.",
+        "El privilegio se limita a la tarea y caduca con ella. El intermediario de herramientas concede el conjunto estrecho de capacidades que la ejecución declaró de antemano —leer este ticket, escribir este registro— y rechaza cualquier otra, de modo que una inyección de prompt que convenza al modelo de intentar más no encuentra nada que llamar.",
+        "La contención da por supuesto que las dos capas anteriores pueden caer. La ejecución ocurre en un entorno aislado sin credenciales ambientales; la salida a red pasa por una lista de destinos permitidos, así que la exfiltración no tiene adónde enviar; y lo que el agente produce se codifica en la frontera para que su salida no se convierta en la instrucción del siguiente sistema.",
+        "La supervisión es donde una persona asume la responsabilidad, colocada por riesgo y no por defecto: las acciones irreversibles o reguladas se detienen a esperar aprobación, y los resultados de baja confianza escalan con todo el contexto de la ejecución. Poner puerta a todo derrota la automatización y enseña a los revisores a aprobar sin leer.",
+        "La recuperación cierra el círculo. Cada ejecución se traza bajo un único identificador de correlación a través de modelos, herramientas y reintentos; las acciones se diseñan con su contrapartida compensatoria cuando el sistema de destino lo permite; y un interruptor de parada detiene una clase de ejecuciones sin tumbar la plataforma."
+      ],
+      "flow": [
+        "1. Petición: llega una tarea con quien la solicita y un conjunto declarado de herramientas y ámbitos de datos.",
+        "2. Emisión: el intermediario acuña una identidad efímera, limitada a la ejecución y ligada a esa declaración.",
+        "3. Admisión: la ejecución arranca en un entorno aislado, sin credenciales ambientales y con lista de salida permitida.",
+        "4. Acción: cada llamada a herramienta se autoriza contra el ámbito de la ejecución; lo que queda fuera se rechaza y se registra.",
+        "5. Puerta: las acciones irreversibles o reguladas se detienen a esperar aprobación humana con el contexto adjunto.",
+        "6. Emisión de salida: lo producido se codifica en la frontera para que aguas abajo no se ejecute como instrucción.",
+        "7. Cierre: la identidad caduca, la traza se sella bajo su identificador de correlación y las acciones compensatorias siguen disponibles."
+      ],
+      "components": [
+        "Emisor de identidad por ejecución (credenciales efímeras ligadas a la tarea)",
+        "Intermediario de herramientas con ámbitos de capacidad declarados",
+        "Entorno de ejecución aislado",
+        "Lista de salida permitida y controles de fuga de datos",
+        "Codificador de frontera de salida",
+        "Puerta de aprobación humana por riesgo",
+        "Traza de ejecución correlacionada y registro de auditoría",
+        "Acciones compensatorias e interruptor de parada"
+      ],
+      "referenceScenario": {
+        "context": "Una empresa ilustrativa que opera decenas de agentes en ticketing, finanzas y conocimiento interno, donde cada agente puede leer y escribir en sistemas de registro.",
+        "scenario": "Un paso de recuperación ingiere un documento con una instrucción inyectada que pide al agente exportar registros de clientes. El modelo obedece, pero la herramienta de exportación queda fuera del ámbito declarado de la ejecución y se rechaza; el intento queda registrado, la regla de anomalía detiene la ejecución y el identificador de correlación da a quien responde la cadena completa en una sola consulta.",
+        "technology": "Emisor de credenciales por ejecución, intermediario de herramientas con ámbitos, ejecución aislada, lista de salida permitida, codificación de frontera, puerta de aprobación por riesgo y trazado correlacionado.",
+        "load": "Automatización continua de fondo con picos alrededor de los procesos de negocio; la acción rara y de alto impacto es una fracción pequeña de las llamadas y es la que carga el riesgo.",
+        "results": "Objetivo de referencia, no una medición: una ejecución subvertida queda acotada a su ámbito declarado, cada rechazo es atribuible a una ejecución, y toda acción ejecutada se puede trazar y —cuando el sistema de destino lo permite— compensar."
+      },
+      "benefits": [
+        "Un agente equivocado o subvertido cuesta una tarea, no el parque entero.",
+        "Los incidentes son atribuibles a una ejecución y no a una cuenta compartida, así que la respuesta es dirigida y revocar sale barato.",
+        "La inyección de prompt pierde casi todo su valor: convencer al modelo no le concede una capacidad que nunca tuvo.",
+        "El esfuerzo de supervisión se concentra en las acciones realmente irreversibles, y así la aprobación sigue significando algo."
+      ],
+      "risks": [
+        "Los ámbitos declarados se separan de lo que los agentes necesitan de verdad y los equipos los ensanchan hasta que el mínimo privilegio es nominal.",
+        "Poner puerta a demasiadas cosas enseña a los revisores a aprobar sin leer, que es peor que no poner puerta.",
+        "El aislamiento y los intermediarios añaden latencia y superficie operativa que un despliegue pequeño quizá no justifique.",
+        "Hay efectos externos que no admiten compensación: un correo enviado o una factura pagada no se deshacen."
+      ],
+      "failureModes": [
+        "Una credencial de servicio compartida sobrevive en algún punto de la pila y derrota en silencio la identidad por ejecución.",
+        "La lista de salida se sortea a través de un destino permitido que a su vez reenvía los datos.",
+        "Las trazas se rompen en un reintento o en un cambio de modelo, y la cadena del incidente ya no se puede reconstruir.",
+        "La cola de aprobación se atasca y la puerta se desactiva «temporalmente» para vaciarla.",
+        "La salida de una herramienta se trata como entrada de confianza en el paso siguiente, y la contención pasa a ser una sola frontera con fugas."
+      ],
+      "lessons": [
+        "Diseña el radio de daño antes que la capacidad: hasta dónde puede llegar un agente es una pregunta más difícil que qué puede hacer, y contestarla primero hace tratable el resto.",
+        "La identidad por ejecución es la capa que sostiene el peso; sin ella, cualquier otro control se aplica contra un sujeto que no sabes nombrar.",
+        "Una puerta que salta con todo es una puerta que no salta con nada: reserva la aprobación humana para lo irreversible.",
+        "Da por hecho que al modelo lo convencerán, y diseña para que convencer no sea autorizar.",
+        "La recuperación hay que construirla con el sistema en calma; nadie diseña una acción compensatoria durante un incidente."
+      ],
+      "kpis": [
+        {
+          "metric": "Ejecuciones con identidad propia y efímera",
+          "note": "El control que sostiene el peso. Cualquier cifra por debajo del 100 % significa que algún camino sigue usando una credencial compartida."
+        },
+        {
+          "metric": "Intentos de herramienta fuera de ámbito, rechazados",
+          "note": "Contados por ejecución. Que suban dice algo del entorno, no necesariamente que el diseño falle."
+        },
+        {
+          "metric": "Radio de daño por ejecución",
+          "note": "Cuántos sistemas y registros podría alcanzar una sola ejecución completamente subvertida. Es el número que la arquitectura existe para encoger."
+        },
+        {
+          "metric": "Tasa de acciones con puerta y latencia de aprobación",
+          "note": "Importan las dos: una tasa alta derrota la automatización y una latencia alta hace que los equipos desactiven la puerta."
+        },
+        {
+          "metric": "Completitud de la traza",
+          "note": "Proporción de ejecuciones reconstruibles de principio a fin bajo un identificador de correlación, reintentos y cambios de modelo incluidos."
+        },
+        {
+          "metric": "Tiempo hasta revocar",
+          "note": "Desde la detección hasta que la capacidad de una ejecución ya no existe. Con credenciales efímeras debería parecerse a su caducidad, no a una rotación."
+        }
+      ],
+      "scaling": [
+        "Los intermediarios de identidad y de herramientas están en el camino caliente de cada llamada, así que marcan el techo; son sin estado y escalan en horizontal, pero su latencia se paga en cada uso de herramienta.",
+        "El arranque del entorno aislado domina el coste de las ejecuciones cortas; mantener entornos calientes en pool cambia profundidad de aislamiento por latencia y debe ser una decisión explícita.",
+        "La aprobación humana no escala de forma lineal y es la restricción real: el conjunto con puerta tiene que seguir siendo pequeño según crece la flota, o la cola se convierte en la caída.",
+        "El almacenamiento de trazas crece con ejecuciones por llamadas a herramienta; muestrear vale para observabilidad pero no para auditoría, así que las dos políticas de retención deben ir separadas."
+      ],
+      "examples": [
+        "Una instrucción inyectada en un documento recuperado pide una exportación de datos; la herramienta queda fuera del ámbito de la ejecución y la llamada se rechaza y se registra.",
+        "Un agente de finanzas prepara un pago y una persona lo aprueba antes de ejecutarlo, con la traza de la ejecución adjunta a la aprobación.",
+        "Una clase de agente que se comporta mal se detiene con el interruptor de parada mientras el resto de la flota sigue funcionando.",
+        "Un incidente se reconstruye desde un único identificador de correlación que abarca tres modelos, nueve llamadas a herramienta y dos reintentos."
+      ],
+      "faqs": [
+        {
+          "q": "¿Por qué un sistema inmunitario y no un cortafuegos?",
+          "a": "Un cortafuegos supone una frontera entre dentro y fuera. Una empresa que opera agentes no tiene esa frontera: el agente ya está dentro, actuando con credenciales reales. Un sistema inmunitario da por normal la intrusión e invierte en reconocimiento, contención y reparación en vez de en un perímetro."
+        },
+        {
+          "q": "¿No es mínimo privilegio con pasos de más?",
+          "a": "El mínimo privilegio es una de las cinco capas y la más conocida. Lo que sostiene la arquitectura es que por sí sola no basta: sin identidad por ejecución no puedes limitar el privilegio a un sujeto, y sin contención ni recuperación una ejecución bien acotada que aun así sale mal no tiene ni límite ni marcha atrás."
+        },
+        {
+          "q": "¿Esto detiene la inyección de prompt?",
+          "a": "No, y tratar cualquier control como si la detuviera es justo el error. Lo que hace es abaratar sobrevivirla: convencer al modelo de intentar una acción no es lo mismo que esa acción esté autorizada, y el intento rechazado es en sí mismo una señal."
+        },
+        {
+          "q": "¿Cuál es la versión mínima viable?",
+          "a": "Identidad por ejecución y acceso a herramientas limitado a la tarea. Esas dos dan atribución y un límite. La contención, la puerta y las acciones compensatorias pesan más cuanto más irreversibles se vuelven las acciones."
+        },
+        {
+          "q": "¿Qué relación tiene con los marcos de gobernanza?",
+          "a": "Es su expresión en tiempo de ejecución. NIST AI RMF e ISO 42001 piden responsabilidad y trazabilidad; OWASP LLM Top 10 y MITRE ATLAS describen los ataques. Esta arquitectura es donde esas obligaciones se convierten en identidades, ámbitos, entornos aislados y trazas."
+        }
+      ]
+    },
+    "pt": {
+      "name": "Sistema imunológico agêntico",
+      "summary": "Arquitetura de referência para operar agentes de IA na empresa sem concentrar a confiança em nenhum deles. Cinco camadas — identidade, privilégio mínimo, contenção, supervisão e recuperação — partem do princípio de que algum agente acabará por errar ou ser subvertido, e tornam esse dia sobrevivível em vez de catastrófico. A unidade de defesa é a execução concreta, não a frota.",
+      "keyConcepts": [
+        "Assumir o comprometimento: a pergunta não é se um agente vai agir mal, mas até onde ele chega quando o fizer.",
+        "Identidade por execução: cada execução leva a sua própria credencial efêmera, nunca uma conta de operador compartilhada.",
+        "Contenção antes de prevenção: o raio de dano é projetado, não esperado — uma execução subvertida afeta uma tarefa, não o parque.",
+        "A recuperação é uma superfície de projeto: rastrear, desfazer e parar constroem-se antes, não se improvisam durante o incidente."
+      ],
+      "definition": "O sistema imunológico agêntico é uma arquitetura de execução em camadas que permite aos agentes de IA agir de fato sobre os sistemas da empresa, limitando o que uma única execução consegue alcançar, observar ou danificar, através de identidade por execução, privilégio limitado à tarefa, contenção de execução e de saída, supervisão humana por risco e recuperação rastreável.",
+      "architecture": [
+        "A arquitetura inverte a pergunta habitual. Em vez de perguntar como impedir que um agente erre — algo que nenhuma barreira consegue de forma confiável perante um sistema que raciocina — pergunta até onde o agente chega no momento em que erra. Cada camada é um limite de alcance, e as camadas são independentes para que a falha de uma não abra as restantes.",
+        "A identidade é o alicerce. Cada execução recebe uma credencial efêmera ligada à tarefa, a quem a pediu e às ferramentas que declarou precisar. Os agentes não compartilham conta de serviço: quando algo corre mal, o rastro nomeia uma execução e não uma frota, e revogar custa um token em vez de uma rotação em todo o parque.",
+        "O privilégio limita-se à tarefa e caduca com ela. O intermediário de ferramentas concede o conjunto estreito de capacidades que a execução declarou à partida — ler este ticket, escrever este registro — e recusa tudo o resto, de modo que uma injeção de prompt que convença o modelo a tentar mais não encontra nada para chamar.",
+        "A contenção parte do princípio de que as duas camadas anteriores podem cair. A execução acontece num ambiente isolado sem credenciais ambientais; a saída de rede passa por uma lista de destinos permitidos, pelo que a exfiltração não tem para onde enviar; e o que o agente produz é codificado na fronteira para que a sua saída não se torne a instrução do sistema seguinte.",
+        "A supervisão é onde uma pessoa assume a responsabilidade, colocada por risco e não por padrão: as ações irreversíveis ou reguladas param à espera de aprovação, e os resultados de baixa confiança escalam com todo o contexto da execução. Pôr porta em tudo derrota a automação e ensina os revisores a aprovar sem ler.",
+        "A recuperação fecha o ciclo. Cada execução é rastreada sob um único identificador de correlação através de modelos, ferramentas e novas tentativas; as ações são projetadas com a sua contrapartida compensatória quando o sistema de destino o permite; e um interruptor de paragem detém uma classe de execuções sem derrubar a plataforma."
+      ],
+      "flow": [
+        "1. Pedido: chega uma tarefa com quem a solicita e um conjunto declarado de ferramentas e âmbitos de dados.",
+        "2. Emissão: o intermediário cunha uma identidade efêmera, limitada à execução e ligada a essa declaração.",
+        "3. Admissão: a execução arranca num ambiente isolado, sem credenciais ambientais e com lista de saída permitida.",
+        "4. Ação: cada chamada a ferramenta é autorizada contra o âmbito da execução; o que fica de fora é recusado e registado.",
+        "5. Porta: as ações irreversíveis ou reguladas param à espera de aprovação humana com o contexto anexado.",
+        "6. Saída: o que é produzido é codificado na fronteira para que a jusante não seja executado como instrução.",
+        "7. Fecho: a identidade caduca, o rastro é selado sob o seu identificador de correlação e as ações compensatórias continuam disponíveis."
+      ],
+      "components": [
+        "Emissor de identidade por execução (credenciais efêmeras ligadas à tarefa)",
+        "Intermediário de ferramentas com âmbitos de capacidade declarados",
+        "Ambiente de execução isolado",
+        "Lista de saída permitida e controles de fuga de dados",
+        "Codificador de fronteira de saída",
+        "Porta de aprovação humana por risco",
+        "Rastro de execução correlacionado e registro de auditoria",
+        "Ações compensatórias e interruptor de paragem"
+      ],
+      "referenceScenario": {
+        "context": "Uma empresa ilustrativa operando dezenas de agentes em ticketing, finanças e conhecimento interno, onde cada agente pode ler e escrever em sistemas de registro.",
+        "scenario": "Um passo de recuperação ingere um documento com uma instrução injetada que pede ao agente para exportar registros de clientes. O modelo obedece, mas a ferramenta de exportação fica fora do âmbito declarado da execução e é recusada; a tentativa fica registada, a regra de anomalia detém a execução e o identificador de correlação dá a quem responde a cadeia completa numa só consulta.",
+        "technology": "Emissor de credenciais por execução, intermediário de ferramentas com âmbitos, execução isolada, lista de saída permitida, codificação de fronteira, porta de aprovação por risco e rastreio correlacionado.",
+        "load": "Automação contínua de fundo com picos à volta dos processos de negócio; a ação rara e de alto impacto é uma fração pequena das chamadas e é a que carrega o risco.",
+        "results": "Objetivo de referência, não uma medição: uma execução subvertida fica limitada ao seu âmbito declarado, cada recusa é atribuível a uma execução, e toda a ação executada pode ser rastreada e — quando o sistema de destino o permite — compensada."
+      },
+      "benefits": [
+        "Um agente errado ou subvertido custa uma tarefa, não o parque inteiro.",
+        "Os incidentes são atribuíveis a uma execução e não a uma conta compartilhada, pelo que a resposta é dirigida e revogar sai barato.",
+        "A injeção de prompt perde quase todo o seu valor: convencer o modelo não lhe concede uma capacidade que nunca teve.",
+        "O esforço de supervisão concentra-se nas ações realmente irreversíveis, e assim a aprovação continua a significar alguma coisa."
+      ],
+      "risks": [
+        "Os âmbitos declarados afastam-se do que os agentes precisam de fato e as equipas alargam-nos até o privilégio mínimo ser nominal.",
+        "Pôr porta em demasiadas coisas ensina os revisores a aprovar sem ler, o que é pior do que não pôr porta.",
+        "O isolamento e os intermediários acrescentam latência e superfície operacional que uma implantação pequena talvez não justifique.",
+        "Há efeitos externos que não admitem compensação: um email enviado ou uma fatura paga não se desfazem."
+      ],
+      "failureModes": [
+        "Uma credencial de serviço compartilhada sobrevive nalgum ponto da pilha e derrota em silêncio a identidade por execução.",
+        "A lista de saída é contornada através de um destino permitido que por sua vez reencaminha os dados.",
+        "Os rastros partem-se numa nova tentativa ou numa troca de modelo, e a cadeia do incidente já não pode ser reconstruída.",
+        "A fila de aprovação entope e a porta é desativada “temporariamente” para a esvaziar.",
+        "A saída de uma ferramenta é tratada como entrada de confiança no passo seguinte, e a contenção passa a ser uma só fronteira com fugas."
+      ],
+      "lessons": [
+        "Projeta o raio de dano antes da capacidade: até onde um agente pode chegar é uma pergunta mais difícil do que o que ele pode fazer, e respondê-la primeiro torna o resto tratável.",
+        "A identidade por execução é a camada que sustenta o peso; sem ela, qualquer outro controle é aplicado contra um sujeito que não sabes nomear.",
+        "Uma porta que dispara com tudo é uma porta que não dispara com nada: reserva a aprovação humana para o irreversível.",
+        "Assume que o modelo vai ser convencido e projeta para que convencer não seja autorizar.",
+        "A recuperação tem de ser construída com o sistema em calma; ninguém projeta uma ação compensatória durante um incidente."
+      ],
+      "kpis": [
+        {
+          "metric": "Execuções com identidade própria e efêmera",
+          "note": "O controle que sustenta o peso. Qualquer número abaixo dos 100 % significa que algum caminho continua a usar uma credencial compartilhada."
+        },
+        {
+          "metric": "Tentativas de ferramenta fora de âmbito, recusadas",
+          "note": "Contadas por execução. Subirem diz algo sobre o ambiente, não necessariamente que o desenho falha."
+        },
+        {
+          "metric": "Raio de dano por execução",
+          "note": "Quantos sistemas e registros uma única execução totalmente subvertida conseguiria alcançar. É o número que a arquitetura existe para encolher."
+        },
+        {
+          "metric": "Taxa de ações com porta e latência de aprovação",
+          "note": "Importam as duas: uma taxa alta derrota a automação e uma latência alta faz com que as equipas desativem a porta."
+        },
+        {
+          "metric": "Completude do rastro",
+          "note": "Proporção de execuções reconstruíveis de ponta a ponta sob um identificador de correlação, incluindo novas tentativas e trocas de modelo."
+        },
+        {
+          "metric": "Tempo até revogar",
+          "note": "Da detecção até a capacidade de uma execução deixar de existir. Com credenciais efêmeras deveria parecer-se com a sua caducidade, não com uma rotação."
+        }
+      ],
+      "scaling": [
+        "Os intermediários de identidade e de ferramentas estão no caminho quente de cada chamada, pelo que marcam o teto; não têm estado e escalam na horizontal, mas a sua latência paga-se em cada uso de ferramenta.",
+        "O arranque do ambiente isolado domina o custo das execuções curtas; manter ambientes quentes em pool troca profundidade de isolamento por latência e deve ser uma decisão explícita.",
+        "A aprovação humana não escala de forma linear e é a restrição real: o conjunto com porta tem de continuar pequeno à medida que a frota cresce, ou a fila torna-se a paragem.",
+        "O armazenamento de rastros cresce com execuções vezes chamadas a ferramenta; amostrar serve para observabilidade mas não para auditoria, pelo que as duas políticas de retenção devem ir separadas."
+      ],
+      "examples": [
+        "Uma instrução injetada num documento recuperado pede uma exportação de dados; a ferramenta fica fora do âmbito da execução e a chamada é recusada e registada.",
+        "Um agente de finanças prepara um pagamento e uma pessoa aprova-o antes de o executar, com o rastro da execução anexado à aprovação.",
+        "Uma classe de agente que se comporta mal é detida com o interruptor de paragem enquanto o resto da frota continua funcionando.",
+        "Um incidente é reconstruído a partir de um único identificador de correlação que abrange três modelos, nove chamadas a ferramenta e duas novas tentativas."
+      ],
+      "faqs": [
+        {
+          "q": "Porquê um sistema imunológico e não uma firewall?",
+          "a": "Uma firewall pressupõe uma fronteira entre dentro e fora. Uma empresa que opera agentes não tem essa fronteira: o agente já está dentro, agindo com credenciais reais. Um sistema imunológico assume a intrusão como normal e investe em reconhecimento, contenção e reparação em vez de num perímetro."
+        },
+        {
+          "q": "Não é privilégio mínimo com passos a mais?",
+          "a": "O privilégio mínimo é uma das cinco camadas e a mais conhecida. O que a arquitetura sustenta é que por si só não chega: sem identidade por execução não consegues limitar o privilégio a um sujeito, e sem contenção nem recuperação uma execução bem delimitada que ainda assim corre mal não tem limite nem marcha atrás."
+        },
+        {
+          "q": "Isto detém a injeção de prompt?",
+          "a": "Não, e tratar qualquer controle como se a detivesse é precisamente o erro. O que faz é baratear sobreviver-lhe: convencer o modelo a tentar uma ação não é o mesmo que essa ação estar autorizada, e a tentativa recusada é em si mesma um sinal."
+        },
+        {
+          "q": "Qual é a versão mínima viável?",
+          "a": "Identidade por execução e acesso a ferramentas limitado à tarefa. Essas duas dão atribuição e um limite. A contenção, a porta e as ações compensatórias pesam mais quanto mais irreversíveis se tornam as ações."
+        },
+        {
+          "q": "Que relação tem com os quadros de governança?",
+          "a": "É a sua expressão em tempo de execução. O NIST AI RMF e a ISO 42001 pedem responsabilidade e rastreabilidade; o OWASP LLM Top 10 e o MITRE ATLAS descrevem os ataques. Esta arquitetura é onde essas obrigações se transformam em identidades, âmbitos, ambientes isolados e rastros."
+        }
+      ]
+    },
+    "fr": {
+      "name": "Système immunitaire agentique",
+      "summary": "Architecture de référence pour exploiter des agents d'IA en entreprise sans concentrer la confiance sur aucun d'eux. Cinq couches — identité, moindre privilège, confinement, supervision et récupération — partent du principe qu'un agent finira par se tromper ou être détourné, et rendent ce jour survivable plutôt que catastrophique. L'unité de défense est l'exécution, pas la flotte.",
+      "keyConcepts": [
+        "Présumer la compromission : la question n'est pas de savoir si un agent agira mal, mais jusqu'où il ira quand ce sera le cas.",
+        "Identité par exécution : chaque exécution porte son propre justificatif éphémère, jamais un compte d'exploitation partagé.",
+        "Confinement plutôt que prévention : le rayon d'impact se conçoit, il ne s'espère pas — une exécution détournée touche une tâche, pas le parc.",
+        "La récupération est une surface de conception : tracer, annuler et arrêter se construisent avant, pas pendant l'incident."
+      ],
+      "definition": "Le système immunitaire agentique est une architecture d'exécution en couches qui permet aux agents d'IA d'agir réellement sur les systèmes de l'entreprise tout en bornant ce qu'une seule exécution peut atteindre, observer ou endommager, grâce à une identité par exécution, un privilège limité à la tâche, un confinement de l'exécution et des sorties, une supervision humaine par le risque et une récupération traçable.",
+      "architecture": [
+        "L'architecture renverse la question habituelle. Au lieu de demander comment empêcher un agent de se tromper — ce qu'aucune barrière n'obtient de façon fiable face à un système qui raisonne — elle demande jusqu'où l'agent va au moment où il se trompe. Chaque couche est une borne de portée, et les couches sont indépendantes pour que la défaillance de l'une n'ouvre pas les autres.",
+        "L'identité est le socle. Chaque exécution reçoit un justificatif éphémère lié à la tâche, au demandeur et aux outils qu'elle a déclarés. Les agents ne partagent pas de compte de service : quand quelque chose tourne mal, la trace nomme une exécution et non une flotte, et révoquer coûte un jeton au lieu d'une rotation sur tout le parc.",
+        "Le privilège se limite à la tâche et expire avec elle. Le courtier d'outils accorde l'ensemble étroit de capacités que l'exécution a déclaré d'emblée — lire ce ticket, écrire cet enregistrement — et refuse tout le reste, si bien qu'une injection de prompt qui convainc le modèle d'en tenter davantage ne trouve rien à appeler.",
+        "Le confinement suppose que les deux couches précédentes peuvent tomber. L'exécution a lieu dans un bac à sable sans justificatifs ambiants ; la sortie réseau passe par une liste d'autorisation, de sorte que l'exfiltration n'a nulle part où envoyer ; et ce que l'agent produit est encodé à la frontière pour que sa sortie ne devienne pas l'instruction du système suivant.",
+        "La supervision est l'endroit où une personne porte la responsabilité, placée selon le risque et non par défaut : les actions irréversibles ou réglementées s'arrêtent pour approbation, et les résultats peu confiants remontent avec tout le contexte de l'exécution. Mettre une porte partout défait l'automatisation et apprend aux relecteurs à approuver sans lire.",
+        "La récupération referme la boucle. Chaque exécution est tracée sous un identifiant de corrélation unique à travers modèles, outils et reprises ; les actions sont conçues avec leur contrepartie compensatoire lorsque le système sous-jacent le permet ; et un coupe-circuit arrête une classe d'exécutions sans faire tomber la plateforme."
+      ],
+      "flow": [
+        "1. Demande : une tâche arrive avec son demandeur et un ensemble déclaré d'outils et de portées de données.",
+        "2. Émission : le courtier frappe une identité éphémère, limitée à l'exécution et liée à cette déclaration.",
+        "3. Admission : l'exécution démarre dans un bac à sable, sans justificatifs ambiants et avec une liste de sortie autorisée.",
+        "4. Action : chaque appel d'outil est autorisé contre la portée de l'exécution ; ce qui en sort est refusé et journalisé.",
+        "5. Porte : les actions irréversibles ou réglementées s'arrêtent pour approbation humaine, contexte joint.",
+        "6. Sortie : ce qui est produit est encodé à la frontière pour ne pas être exécuté comme instruction en aval.",
+        "7. Clôture : l'identité expire, la trace est scellée sous son identifiant de corrélation et les actions compensatoires restent disponibles."
+      ],
+      "components": [
+        "Courtier d'identité par exécution (justificatifs éphémères liés à la tâche)",
+        "Courtier d'outils avec portées de capacité déclarées",
+        "Environnement d'exécution en bac à sable",
+        "Liste de sortie autorisée et contrôles de fuite de données",
+        "Encodeur de frontière de sortie",
+        "Porte d'approbation humaine par le risque",
+        "Trace d'exécution corrélée et journal d'audit",
+        "Actions compensatoires et coupe-circuit"
+      ],
+      "referenceScenario": {
+        "context": "Une entreprise illustrative exploitant des dizaines d'agents sur la billetterie, la finance et la connaissance interne, où chaque agent peut lire et écrire dans des systèmes de référence.",
+        "scenario": "Une étape de récupération ingère un document contenant une instruction injectée demandant à l'agent d'exporter des dossiers clients. Le modèle obtempère, mais l'outil d'export est hors de la portée déclarée de l'exécution et il est refusé ; la tentative est journalisée, la règle d'anomalie arrête l'exécution et l'identifiant de corrélation donne au répondant la chaîne complète en une seule requête.",
+        "technology": "Courtier de justificatifs par exécution, courtier d'outils à portées, exécution en bac à sable, liste de sortie autorisée, encodage de frontière, porte d'approbation par le risque et traçage corrélé.",
+        "load": "Automatisation continue en arrière-plan avec des pics autour des processus métier ; l'action rare et à fort impact est une faible fraction des appels et c'est elle qui porte le risque.",
+        "results": "Cible de référence, non une mesure : une exécution détournée reste bornée à sa portée déclarée, chaque refus est imputable à une exécution, et toute action exécutée peut être tracée et — quand le système sous-jacent le permet — compensée."
+      },
+      "benefits": [
+        "Un agent qui se trompe ou qui est détourné coûte une tâche, pas le parc entier.",
+        "Les incidents sont imputables à une exécution et non à un compte partagé : la réponse est ciblée et la révocation peu coûteuse.",
+        "L'injection de prompt perd l'essentiel de sa valeur : convaincre le modèle ne lui accorde pas une capacité qu'il n'a jamais eue.",
+        "L'effort de supervision se concentre sur les actions réellement irréversibles, ce qui préserve le sens de l'approbation."
+      ],
+      "risks": [
+        "Les portées déclarées s'éloignent de ce dont les agents ont réellement besoin, et les équipes les élargissent jusqu'à rendre le moindre privilège nominal.",
+        "Trop de portes apprend aux relecteurs à approuver sans lire, ce qui est pire que pas de porte du tout.",
+        "Le bac à sable et les courtiers ajoutent de la latence et une surface d'exploitation qu'un petit déploiement ne justifie peut-être pas.",
+        "Certains effets externes n'admettent aucune compensation : un courriel envoyé ou une facture payée ne s'annulent pas."
+      ],
+      "failureModes": [
+        "Un justificatif de service partagé survit quelque part dans la pile et défait silencieusement l'identité par exécution.",
+        "La liste de sortie est contournée via une destination autorisée qui retransmet elle-même les données.",
+        "Les traces se rompent lors d'une reprise ou d'un changement de modèle, et la chaîne de l'incident ne peut plus être reconstituée.",
+        "La file d'approbation s'engorge et la porte est désactivée « temporairement » pour la vider.",
+        "La sortie d'un outil est traitée comme une entrée de confiance à l'étape suivante, et le confinement se réduit à une frontière unique qui fuit."
+      ],
+      "lessons": [
+        "Concevez le rayon d'impact avant la capacité : jusqu'où un agent peut aller est une question plus difficile que ce qu'il peut faire, et y répondre d'abord rend le reste traitable.",
+        "L'identité par exécution est la couche porteuse ; sans elle, tout autre contrôle s'applique à un sujet que vous ne savez pas nommer.",
+        "Une porte qui se déclenche sur tout est une porte qui ne se déclenche sur rien : réservez l'approbation humaine à l'irréversible.",
+        "Supposez que le modèle sera convaincu et concevez pour que convaincre ne soit pas autoriser.",
+        "La récupération se construit quand le système est calme ; personne ne conçoit une action compensatoire pendant un incident."
+      ],
+      "kpis": [
+        {
+          "metric": "Part d'exécutions dotées d'une identité propre et éphémère",
+          "note": "Le contrôle porteur. Tout chiffre en deçà de 100 % signifie qu'un chemin utilise encore un justificatif partagé."
+        },
+        {
+          "metric": "Tentatives d'outil hors portée, refusées",
+          "note": "Comptées par exécution. Une hausse renseigne sur l'environnement, pas nécessairement sur un défaut de conception."
+        },
+        {
+          "metric": "Rayon d'impact par exécution",
+          "note": "Nombre de systèmes et d'enregistrements qu'une seule exécution entièrement détournée pourrait atteindre. C'est le nombre que l'architecture existe pour réduire."
+        },
+        {
+          "metric": "Taux d'actions sous porte et latence d'approbation",
+          "note": "Les deux comptent : un taux trop élevé défait l'automatisation, une latence trop élevée pousse les équipes à désactiver la porte."
+        },
+        {
+          "metric": "Complétude de la trace",
+          "note": "Part d'exécutions reconstituables de bout en bout sous un identifiant de corrélation, reprises et changements de modèle inclus."
+        },
+        {
+          "metric": "Délai de révocation",
+          "note": "De la détection à la disparition de la capacité d'une exécution. Avec des justificatifs éphémères, il devrait ressembler à leur expiration, pas à une rotation."
+        }
+      ],
+      "scaling": [
+        "Les courtiers d'identité et d'outils sont sur le chemin chaud de chaque appel : ils fixent le plafond ; ils sont sans état et passent à l'échelle horizontalement, mais leur latence se paie à chaque usage d'outil.",
+        "Le démarrage du bac à sable domine le coût des exécutions courtes ; garder un pool de bacs chauds échange de la profondeur d'isolement contre de la latence et doit être une décision explicite.",
+        "L'approbation humaine ne passe pas à l'échelle linéairement et constitue la vraie contrainte : l'ensemble sous porte doit rester petit à mesure que la flotte grandit, sinon la file devient la panne.",
+        "Le stockage des traces croît comme exécutions fois appels d'outils ; l'échantillonnage convient à l'observabilité mais pas à l'audit, donc les deux politiques de rétention doivent être distinctes."
+      ],
+      "examples": [
+        "Une instruction injectée dans un document récupéré demande un export de données ; l'outil est hors de la portée de l'exécution, l'appel est refusé et journalisé.",
+        "Un agent financier prépare un paiement et une personne l'approuve avant exécution, la trace de l'exécution jointe à l'approbation.",
+        "Une classe d'agents défaillante est arrêtée par le coupe-circuit pendant que le reste de la flotte continue.",
+        "Un incident est reconstitué à partir d'un seul identifiant de corrélation couvrant trois modèles, neuf appels d'outils et deux reprises."
+      ],
+      "faqs": [
+        {
+          "q": "Pourquoi un système immunitaire plutôt qu'un pare-feu ?",
+          "a": "Un pare-feu suppose une frontière entre l'intérieur et l'extérieur. Une entreprise qui exploite des agents n'a pas cette frontière : l'agent est déjà à l'intérieur, agissant avec de vrais justificatifs. Un système immunitaire tient l'intrusion pour normale et investit dans la reconnaissance, le confinement et la réparation plutôt que dans un périmètre."
+        },
+        {
+          "q": "N'est-ce pas du moindre privilège avec des étapes en plus ?",
+          "a": "Le moindre privilège est l'une des cinq couches et la plus familière. Ce que soutient l'architecture, c'est qu'elle ne suffit pas seule : sans identité par exécution vous ne pouvez pas limiter le privilège à un sujet, et sans confinement ni récupération une exécution correctement bornée qui dérape malgré tout n'a ni borne ni marche arrière."
+        },
+        {
+          "q": "Cela arrête-t-il l'injection de prompt ?",
+          "a": "Non, et considérer un contrôle comme l'arrêtant est justement l'erreur. Cela rend l'injection bon marché à survivre : convaincre le modèle de tenter une action n'équivaut pas à ce que cette action soit autorisée, et la tentative refusée est elle-même un signal."
+        },
+        {
+          "q": "Quelle est la version minimale viable ?",
+          "a": "Identité par exécution et accès aux outils limité à la tâche. Ces deux-là donnent l'imputabilité et une borne. Le confinement, la porte et les actions compensatoires pèsent d'autant plus que les actions deviennent irréversibles."
+        },
+        {
+          "q": "Quel rapport avec les cadres de gouvernance ?",
+          "a": "C'est leur expression à l'exécution. Le NIST AI RMF et l'ISO 42001 exigent responsabilité et traçabilité ; l'OWASP LLM Top 10 et MITRE ATLAS décrivent les attaques. Cette architecture est l'endroit où ces obligations deviennent des identités, des portées, des bacs à sable et des traces."
+        }
+      ]
+    },
+    "de": {
+      "name": "Agentisches Immunsystem",
+      "summary": "Referenzarchitektur, um KI-Agenten im Unternehmen zu betreiben, ohne das Vertrauen auf einen einzelnen zu bündeln. Fünf Schichten – Identität, minimale Rechte, Eindämmung, Aufsicht und Wiederherstellung – gehen davon aus, dass irgendein Agent irgendwann falsch handelt oder unterwandert wird, und machen diesen Tag überlebbar statt katastrophal. Verteidigungseinheit ist der einzelne Lauf, nicht die Flotte.",
+      "keyConcepts": [
+        "Kompromittierung voraussetzen: Die Frage ist nicht, ob ein Agent falsch handelt, sondern wie weit er dann reicht.",
+        "Identität je Lauf: Jeder Lauf trägt sein eigenes kurzlebiges Credential, nie ein geteiltes Betriebskonto.",
+        "Eindämmung vor Verhinderung: Der Schadensradius wird entworfen, nicht erhofft – ein unterwanderter Lauf trifft eine Aufgabe, nicht den Bestand.",
+        "Wiederherstellung ist eine Entwurfsfläche: Nachverfolgen, Rückgängigmachen und Anhalten werden vorher gebaut, nicht im Vorfall improvisiert."
+      ],
+      "definition": "Das agentische Immunsystem ist eine geschichtete Laufzeitarchitektur, die KI-Agenten echtes Handeln auf Unternehmenssystemen erlaubt und zugleich begrenzt, was ein einzelner Lauf erreichen, einsehen oder beschädigen kann – über Identität je Lauf, auf die Aufgabe beschränkte Rechte, Eindämmung von Ausführung und Ausgang, risikobasierte menschliche Aufsicht und nachvollziehbare Wiederherstellung.",
+      "architecture": [
+        "Die Architektur dreht die übliche Frage um. Statt zu fragen, wie man einen Agenten vom Fehler abhält – was keine Leitplanke gegenüber einem schlussfolgernden System verlässlich schafft –, fragt sie, wie weit der Agent in dem Moment reicht, in dem er sich irrt. Jede Schicht ist eine Reichweitengrenze, und die Schichten sind unabhängig, damit der Ausfall einer nicht die übrigen öffnet.",
+        "Identität ist das Fundament. Jeder Lauf erhält ein kurzlebiges Credential, gebunden an die Aufgabe, den anfragenden Principal und die Werkzeuge, die er angemeldet hat. Agenten teilen sich kein Dienstkonto: Geht etwas schief, benennt die Spur einen Lauf und keine Flotte, und Entzug kostet ein Token statt einer Rotation über den ganzen Bestand.",
+        "Rechte gelten für die Aufgabe und verfallen mit ihr. Der Werkzeug-Broker gewährt genau die schmale Menge an Fähigkeiten, die der Lauf vorab angemeldet hat – dieses Ticket lesen, diesen Datensatz schreiben – und verweigert alles andere. Eine Prompt-Injektion, die das Modell zu mehr überredet, findet nichts zum Aufrufen.",
+        "Eindämmung setzt voraus, dass die beiden vorherigen Schichten fallen können. Ausgeführt wird in einer Sandbox ohne Umgebungs-Credentials; ausgehender Netzverkehr läuft über eine Allowlist, sodass Exfiltration kein Ziel hat; und was der Agent erzeugt, wird an der Grenze kodiert, damit seine Ausgabe nicht zur Anweisung des nächsten Systems wird.",
+        "Aufsicht ist der Ort, an dem ein Mensch die Verantwortung trägt – nach Risiko platziert, nicht als Voreinstellung: Unumkehrbare oder regulierte Aktionen halten zur Freigabe an, und Ergebnisse geringer Zuversicht eskalieren mit dem vollen Laufkontext. Alles zu gaten zerstört die Automatisierung und erzieht Prüfende zum Durchklicken.",
+        "Wiederherstellung schließt den Kreis. Jeder Lauf wird unter einer einzigen Korrelations-ID über Modelle, Werkzeuge und Wiederholungen hinweg verfolgt; Aktionen werden mit einem kompensierenden Gegenstück entworfen, wo das Zielsystem es zulässt; und ein Notaus stoppt eine Klasse von Läufen, ohne die Plattform mitzunehmen."
+      ],
+      "flow": [
+        "1. Anfrage: Eine Aufgabe trifft ein, mit anfragendem Principal und angemeldeten Werkzeugen und Datenbereichen.",
+        "2. Ausstellung: Der Broker prägt eine kurzlebige, laufgebundene Identität zu dieser Anmeldung.",
+        "3. Zulassung: Der Lauf startet in einer Sandbox, ohne Umgebungs-Credentials und mit Ausgangs-Allowlist.",
+        "4. Handlung: Jeder Werkzeugaufruf wird gegen den Bereich des Laufs autorisiert; alles darüber hinaus wird verweigert und protokolliert.",
+        "5. Gate: Unumkehrbare oder regulierte Aktionen halten zur menschlichen Freigabe an, mit angehängtem Kontext.",
+        "6. Ausgabe: Erzeugtes wird an der Grenze kodiert, damit es nachgelagert nicht als Anweisung ausgeführt wird.",
+        "7. Abschluss: Die Identität verfällt, die Spur wird unter ihrer Korrelations-ID versiegelt, kompensierende Aktionen bleiben verfügbar."
+      ],
+      "components": [
+        "Identitäts-Broker je Lauf (kurzlebige, aufgabengebundene Credentials)",
+        "Werkzeug-Broker mit angemeldeten Fähigkeitsbereichen",
+        "Sandbox-Ausführungsumgebung",
+        "Ausgangs-Allowlist und Datenabfluss-Kontrollen",
+        "Grenz-Kodierer für Ausgaben",
+        "Risikobasiertes menschliches Freigabe-Gate",
+        "Korrelierte Laufspur und Auditprotokoll",
+        "Kompensierende Aktionen und Notaus"
+      ],
+      "referenceScenario": {
+        "context": "Ein illustratives Unternehmen mit Dutzenden Agenten in Ticketing, Finanzen und internem Wissen, in dem jeder Agent Systeme der Aufzeichnung lesen und schreiben kann.",
+        "scenario": "Ein Retrieval-Schritt nimmt ein Dokument auf, das eine eingeschleuste Anweisung enthält, Kundendaten zu exportieren. Das Modell folgt, doch das Export-Werkzeug liegt außerhalb des angemeldeten Bereichs des Laufs und wird verweigert; der Versuch wird protokolliert, die Anomalieregel stoppt den Lauf, und die Korrelations-ID liefert der Reaktion die vollständige Kette in einer Abfrage.",
+        "technology": "Credential-Broker je Lauf, Werkzeug-Broker mit Bereichen, Sandbox-Ausführung, Ausgangs-Allowlist, Grenzkodierung, risikobasiertes Freigabe-Gate und korrelierte Ablaufverfolgung.",
+        "load": "Dauerhafte Hintergrundautomatisierung mit Spitzen um Geschäftsprozesse; die seltene, folgenschwere Aktion ist ein kleiner Anteil der Aufrufe und trägt das Risiko.",
+        "results": "Referenzziel, keine Messung: Ein unterwanderter Lauf bleibt auf seinen angemeldeten Bereich begrenzt, jede Verweigerung ist einem Lauf zurechenbar, und jede ausgeführte Aktion lässt sich verfolgen und – wo das Zielsystem es erlaubt – kompensieren."
+      },
+      "benefits": [
+        "Ein falscher oder unterwanderter Agent kostet eine Aufgabe, nicht den Bestand.",
+        "Vorfälle sind einem Lauf zurechenbar statt einem geteilten Konto: Die Reaktion ist gezielt und der Entzug billig.",
+        "Prompt-Injektion verliert den größten Teil ihres Werts: Das Modell zu überreden verschafft ihm keine Fähigkeit, die es nie hatte.",
+        "Der Aufsichtsaufwand konzentriert sich auf die wirklich unumkehrbaren Aktionen, und die Freigabe behält dadurch ihre Bedeutung."
+      ],
+      "risks": [
+        "Angemeldete Bereiche driften von dem ab, was Agenten wirklich brauchen, und Teams weiten sie aus, bis minimale Rechte nur noch nominell sind.",
+        "Zu viel zu gaten erzieht Prüfende zum Freigeben ohne Lesen – schlimmer als gar kein Gate.",
+        "Sandbox und Broker fügen Latenz und Betriebsfläche hinzu, die kleine Installationen womöglich nicht rechtfertigen.",
+        "Manche externen Wirkungen lassen sich nicht kompensieren: Eine gesendete E-Mail oder eine bezahlte Rechnung nimmt man nicht zurück."
+      ],
+      "failureModes": [
+        "Ein geteiltes Dienst-Credential überlebt irgendwo im Stack und hebelt die Identität je Lauf still aus.",
+        "Die Ausgangs-Allowlist wird über ein erlaubtes Ziel umgangen, das die Daten selbst weiterleitet.",
+        "Spuren brechen bei einer Wiederholung oder einem Modellwechsel, und die Vorfallskette lässt sich nicht mehr rekonstruieren.",
+        "Die Freigabe-Warteschlange staut sich, und das Gate wird „vorübergehend“ abgeschaltet, um sie zu leeren.",
+        "Werkzeugausgabe wird im nächsten Schritt als vertrauenswürdige Eingabe behandelt – Eindämmung schrumpft auf eine einzige, undichte Grenze."
+      ],
+      "lessons": [
+        "Entwerfe den Schadensradius vor der Fähigkeit: Wie weit ein Agent reichen darf ist die schwerere Frage als was er tun darf, und sie zuerst zu beantworten macht den Rest handhabbar.",
+        "Identität je Lauf ist die tragende Schicht; ohne sie richtet sich jede andere Kontrolle gegen ein Subjekt, das man nicht benennen kann.",
+        "Ein Gate, das bei allem auslöst, löst bei nichts aus – menschliche Freigabe bleibt dem Unumkehrbaren vorbehalten.",
+        "Nimm an, das Modell wird überredet, und entwirf so, dass Überreden nicht Autorisieren ist.",
+        "Wiederherstellung wird gebaut, solange das System ruhig ist; niemand entwirft eine kompensierende Aktion mitten im Vorfall."
+      ],
+      "kpis": [
+        {
+          "metric": "Anteil Läufe mit eigener, kurzlebiger Identität",
+          "note": "Die tragende Kontrolle. Alles unter 100 % heißt, dass ein Pfad noch ein geteiltes Credential verwendet."
+        },
+        {
+          "metric": "Verweigerte Werkzeugversuche außerhalb des Bereichs",
+          "note": "Je Lauf gezählt. Ein Anstieg sagt etwas über die Umgebung, nicht zwingend über einen Entwurfsfehler."
+        },
+        {
+          "metric": "Schadensradius je Lauf",
+          "note": "Wie viele Systeme und Datensätze ein einzelner, vollständig unterwanderter Lauf erreichen könnte. Genau die Zahl, die diese Architektur schrumpfen soll."
+        },
+        {
+          "metric": "Gate-Quote und Freigabelatenz",
+          "note": "Beides zählt: Eine zu hohe Quote zerstört die Automatisierung, eine zu hohe Latenz bringt Teams dazu, das Gate abzuschalten."
+        },
+        {
+          "metric": "Vollständigkeit der Spur",
+          "note": "Anteil der Läufe, die sich unter einer Korrelations-ID durchgängig rekonstruieren lassen, samt Wiederholungen und Modellwechseln."
+        },
+        {
+          "metric": "Zeit bis zum Entzug",
+          "note": "Von der Erkennung bis zum Verschwinden der Fähigkeit eines Laufs. Mit kurzlebigen Credentials sollte das eher der Ablaufzeit gleichen als einer Rotation."
+        }
+      ],
+      "scaling": [
+        "Identitäts- und Werkzeug-Broker liegen im heißen Pfad jedes Aufrufs und setzen damit die Obergrenze; sie sind zustandslos und skalieren horizontal, aber ihre Latenz wird bei jedem Werkzeugeinsatz bezahlt.",
+        "Der Sandbox-Start dominiert die Kosten kurzer Läufe; ein Pool warmer Sandboxes tauscht Isolationstiefe gegen Latenz und sollte eine ausdrückliche Entscheidung sein.",
+        "Menschliche Freigabe skaliert nicht linear und ist die eigentliche Grenze: Die gegatete Menge muss klein bleiben, während die Flotte wächst, sonst wird die Warteschlange zum Ausfall.",
+        "Spurspeicher wächst mit Läufen mal Werkzeugaufrufen; Sampling taugt für Observability, nicht für Audit – die beiden Aufbewahrungsrichtlinien gehören getrennt."
+      ],
+      "examples": [
+        "Eine eingeschleuste Anweisung in einem abgerufenen Dokument verlangt einen Datenexport; das Werkzeug liegt außerhalb des Laufbereichs, der Aufruf wird verweigert und protokolliert.",
+        "Ein Finanzagent entwirft eine Zahlung, und ein Mensch gibt sie vor der Ausführung frei – die Laufspur hängt an der Freigabe.",
+        "Eine fehlverhaltende Agentenklasse wird per Notaus gestoppt, während der Rest der Flotte weiterläuft.",
+        "Ein Vorfall wird aus einer einzigen Korrelations-ID rekonstruiert, die drei Modelle, neun Werkzeugaufrufe und zwei Wiederholungen umfasst."
+      ],
+      "faqs": [
+        {
+          "q": "Warum ein Immunsystem und keine Firewall?",
+          "a": "Eine Firewall setzt eine Grenze zwischen innen und außen voraus. Ein Unternehmen, das Agenten betreibt, hat diese Grenze nicht: Der Agent ist bereits innen und handelt mit echten Credentials. Ein Immunsystem hält Eindringen für normal und investiert in Erkennung, Eindämmung und Reparatur statt in einen Perimeter."
+        },
+        {
+          "q": "Ist das nicht minimale Rechte mit Zusatzschritten?",
+          "a": "Minimale Rechte sind eine der fünf Schichten und die bekannteste. Die These der Architektur ist, dass sie allein nicht genügen: Ohne Identität je Lauf lassen sich Rechte keinem Subjekt zuschneiden, und ohne Eindämmung und Wiederherstellung hat ein korrekt beschnittener Lauf, der dennoch schiefgeht, weder Grenze noch Rückweg."
+        },
+        {
+          "q": "Stoppt das Prompt-Injektion?",
+          "a": "Nein, und irgendeine Kontrolle so zu behandeln, als stoppe sie das, ist genau der Fehler. Es macht Injektion billig überlebbar: Das Modell zu einer Aktion zu überreden ist nicht dasselbe, wie dass diese Aktion autorisiert wäre – und der verweigerte Versuch ist selbst ein Signal."
+        },
+        {
+          "q": "Was ist die minimal tragfähige Fassung?",
+          "a": "Identität je Lauf und aufgabenbeschränkter Werkzeugzugriff. Diese beiden liefern Zurechenbarkeit und eine Grenze. Eindämmung, Gate und kompensierende Aktionen wiegen umso schwerer, je unumkehrbarer die Aktionen werden."
+        },
+        {
+          "q": "Wie verhält sich das zu den Governance-Rahmenwerken?",
+          "a": "Es ist deren Ausdruck zur Laufzeit. NIST AI RMF und ISO 42001 verlangen Verantwortlichkeit und Nachvollziehbarkeit; OWASP LLM Top 10 und MITRE ATLAS beschreiben die Angriffe. In dieser Architektur werden diese Pflichten zu Identitäten, Bereichen, Sandboxes und Spuren."
+        }
+      ]
+    },
+    "ja": {
+      "name": "エージェント免疫系",
+      "summary": "特定のエージェントに信頼を集中させずに企業で AI エージェントを運用するためのリファレンスアーキテクチャ。アイデンティティ、最小権限、封じ込め、監督、復旧という五つの層は、いずれかのエージェントがいつか誤るか乗っ取られることを前提とし、その日を壊滅ではなく生存可能な出来事にする。防御の単位は個々の実行であり、群ではない。",
+      "keyConcepts": [
+        "侵害を前提とする。問うべきはエージェントが誤るかどうかではなく、誤った瞬間にどこまで届くかである。",
+        "実行ごとのアイデンティティ。各実行は自分専用の短命な資格情報を持ち、共有の運用アカウントは使わない。",
+        "予防より封じ込め。影響範囲は祈るものではなく設計するもので、乗っ取られた実行が及ぶのは一つのタスクであって全体ではない。",
+        "復旧は設計面である。追跡・取り消し・停止は事前に作るものであり、事故の最中に即席で用意するものではない。"
+      ],
+      "definition": "エージェント免疫系とは、実行ごとのアイデンティティ、タスクに限定した権限、実行と外向き通信の封じ込め、リスクに応じた人間の監督、追跡可能な復旧によって、単一の実行が到達・観測・破壊できる範囲を限定しながら、AI エージェントに企業システム上での実際の行動を許す階層型のランタイムアーキテクチャである。",
+      "architecture": [
+        "このアーキテクチャは通常の問いを反転させる。推論する系に対してどんなガードレールも確実には達成できない「どうすればエージェントに誤らせないか」ではなく、「誤ったその瞬間にどこまで届くか」を問う。各層は到達範囲の限界であり、層は互いに独立しているため、一つが破れても残りが開くことはない。",
+        "土台はアイデンティティである。各実行には、タスク・要求主体・宣言したツールに結び付いた短命な資格情報が発行される。エージェントはサービスアカウントを共有しない。問題が起きたとき、痕跡が名指すのは群ではなく一つの実行であり、失効の代償は全体のローテーションではなくトークン一つで済む。",
+        "権限はタスクに限定され、タスクとともに失効する。ツールブローカーは実行が事前に宣言した狭い能力の集合だけを与え——このチケットを読む、このレコードを書く——それ以外を拒む。したがって、もっと多くを試みるようモデルを説得したプロンプトインジェクションは、呼ぶ先を見つけられない。",
+        "封じ込めは、前の二層が破られうることを前提とする。実行は環境資格情報を持たないサンドボックスで行われ、外向き通信は許可リストを通るため持ち出しの送り先がなく、エージェントの生成物は境界で符号化され、その出力が次の系の命令になることを防ぐ。",
+        "監督は人が責任を負う場所であり、既定ではなくリスクに応じて置かれる。不可逆な行為や規制対象の行為は承認のために止まり、確信の低い結果は実行の全文脈を添えてエスカレーションされる。何にでもゲートを置けば自動化は死に、レビュー担当者は読まずに承認する習慣を身につける。",
+        "復旧が輪を閉じる。各実行はモデル・ツール・再試行をまたいで単一の相関 ID の下に追跡され、対象システムが許す限り行為には補償操作が対になって設計され、非常停止はプラットフォームを落とさずに特定クラスの実行だけを止める。"
+      ],
+      "flow": [
+        "1. 要求：タスクが、要求主体と宣言済みのツール・データ範囲とともに到着する。",
+        "2. 発行：ブローカーがその宣言に紐づく、実行限定で短命なアイデンティティを鋳造する。",
+        "3. 受入：実行は環境資格情報を持たないサンドボックスで、外向き許可リストとともに開始される。",
+        "4. 行動：ツール呼び出しはすべて実行の範囲に照らして認可され、範囲外は拒否のうえ記録される。",
+        "5. ゲート：不可逆・規制対象の行為は、文脈を添えて人間の承認を待って停止する。",
+        "6. 出力：生成物は境界で符号化され、下流で命令として実行されないようにする。",
+        "7. 終了：アイデンティティが失効し、痕跡は相関 ID の下に封印され、補償操作は引き続き利用できる。"
+      ],
+      "components": [
+        "実行ごとのアイデンティティ発行基盤（タスクに紐づく短命な資格情報）",
+        "能力範囲を宣言するツールブローカー",
+        "サンドボックス実行環境",
+        "外向き許可リストとデータ持ち出し制御",
+        "出力境界の符号化器",
+        "リスクに応じた人間の承認ゲート",
+        "相関付けされた実行トレースと監査ログ",
+        "補償操作と非常停止"
+      ],
+      "referenceScenario": {
+        "context": "チケット処理・財務・社内ナレッジにまたがって数十のエージェントを運用し、各エージェントが記録システムを読み書きできる、例示的な企業。",
+        "scenario": "検索工程が、顧客レコードを書き出すよう指示する注入文を含む文書を取り込む。モデルはそれに従うが、書き出しツールは実行が宣言した範囲の外にあり拒否される。試行は記録され、異常検知の規則が実行を停止し、相関 ID によって対応者は一度の照会で連鎖の全体を得る。",
+        "technology": "実行ごとの資格情報発行、範囲付きツールブローカー、サンドボックス実行、外向き許可リスト、境界符号化、リスク承認ゲート、相関トレース。",
+        "load": "業務プロセスの前後で山を作る、継続的な裏方の自動化。稀で影響の大きい行為は呼び出し全体のごく一部であり、そこにリスクが集中する。",
+        "results": "測定値ではなく参照目標：乗っ取られた実行は宣言範囲に閉じ込められ、あらゆる拒否は特定の実行に帰属し、実行された行為は追跡でき、対象システムが許す場合は補償できる。"
+      },
+      "benefits": [
+        "誤った、あるいは乗っ取られたエージェントの代償は一つのタスクであって、全体ではない。",
+        "事故は共有アカウントではなく一つの実行に帰属するため、対応は的を絞れ、失効は安く済む。",
+        "プロンプトインジェクションはほとんど価値を失う。モデルを説得しても、元々持たない能力は与えられない。",
+        "監督の労力が本当に不可逆な行為に集中し、承認が意味を保ち続ける。"
+      ],
+      "risks": [
+        "宣言された範囲が実際の必要から乖離し、チームが広げ続けた結果、最小権限が名ばかりになる。",
+        "ゲートを置きすぎると、レビュー担当者は読まずに承認するようになり、ゲートがないより悪くなる。",
+        "サンドボックスとブローカーは待ち時間と運用面を増やし、小規模な導入では割に合わないことがある。",
+        "外部への影響には補償できないものがある。送信済みのメールや支払済みの請求は元に戻らない。"
+      ],
+      "failureModes": [
+        "共有のサービス資格情報がスタックのどこかに生き残り、実行ごとのアイデンティティを静かに無効化する。",
+        "許可リストが、自らデータを転送する許可済みの宛先を経由して回避される。",
+        "再試行やモデル切り替えでトレースが途切れ、事故の連鎖を再構成できなくなる。",
+        "承認の待ち行列が詰まり、それを捌くためにゲートが「一時的に」無効化される。",
+        "ツールの出力が次工程で信頼できる入力として扱われ、封じ込めが漏れのある単一境界に縮む。"
+      ],
+      "lessons": [
+        "能力より先に影響範囲を設計する。エージェントが何をしてよいかより、どこまで届いてよいかの方が難しい問いであり、先に答えると残りが扱いやすくなる。",
+        "実行ごとのアイデンティティは荷重を支える層である。それがなければ、他のあらゆる統制は名指せない主体に対して適用される。",
+        "何にでも作動するゲートは、何にも作動しないゲートである。人間の承認は不可逆なものに限る。",
+        "モデルは説得されるものと想定し、説得が認可にならないように設計する。",
+        "復旧は系が平静なうちに作る。事故の最中に補償操作を設計する者はいない。"
+      ],
+      "kpis": [
+        {
+          "metric": "固有かつ短命なアイデンティティを持つ実行の割合",
+          "note": "荷重を支える統制。100 % に満たなければ、どこかの経路がまだ共有資格情報を使っている。"
+        },
+        {
+          "metric": "範囲外ツール試行の拒否件数",
+          "note": "実行ごとに数える。増加は環境について語るものであり、必ずしも設計の失敗ではない。"
+        },
+        {
+          "metric": "実行あたりの影響範囲",
+          "note": "完全に乗っ取られた単一の実行が到達しうるシステムとレコードの数。このアーキテクチャが縮めるために存在する数値。"
+        },
+        {
+          "metric": "ゲート対象率と承認待ち時間",
+          "note": "どちらも重要。率が高すぎれば自動化が死に、待ち時間が長すぎればチームがゲートを切る。"
+        },
+        {
+          "metric": "トレースの完全性",
+          "note": "再試行やモデル切り替えを含め、単一の相関 ID で端から端まで再構成できる実行の割合。"
+        },
+        {
+          "metric": "失効までの時間",
+          "note": "検知から実行の能力が消えるまで。短命な資格情報なら、ローテーションではなく有効期限に近いはずである。"
+        }
+      ],
+      "scaling": [
+        "アイデンティティとツールのブローカーは全呼び出しのホットパスにあり、上限を決める。状態を持たず水平に伸びるが、その待ち時間はツール利用のたびに支払われる。",
+        "短い実行ではサンドボックスの起動が費用を支配する。温めたサンドボックスをプールすると分離の深さと待ち時間を交換することになり、明示的な判断であるべきだ。",
+        "人間の承認は線形には伸びず、真の制約になる。群が育つにつれてゲート対象は小さく保たねばならず、さもなければ待ち行列そのものが障害になる。",
+        "トレースの保管量は実行数×ツール呼び出し数で増える。サンプリングは可観測性には妥当だが監査には使えないため、保持方針は二つに分けるべきである。"
+      ],
+      "examples": [
+        "取得した文書に注入された指示がデータ書き出しを要求するが、そのツールは実行範囲の外にあり、呼び出しは拒否され記録される。",
+        "財務エージェントが支払いを起案し、人が実行前に承認する。承認には実行トレースが添付される。",
+        "挙動の悪いエージェント種別が非常停止で止められ、残りの群は動き続ける。",
+        "三つのモデル、九回のツール呼び出し、二回の再試行にまたがる単一の相関 ID から事故が再構成される。"
+      ],
+      "faqs": [
+        {
+          "q": "なぜファイアウォールではなく免疫系なのか。",
+          "a": "ファイアウォールは内と外の境界を前提とする。エージェントを運用する企業にその境界はない。エージェントはすでに内側にいて、本物の資格情報で動いている。免疫系は侵入を常態とみなし、境界線ではなく認識・封じ込め・修復に投資する。"
+        },
+        {
+          "q": "手順が増えただけの最小権限では。",
+          "a": "最小権限は五つの層の一つで、最もよく知られたものだ。このアーキテクチャの主張は、それだけでは足りないという点にある。実行ごとのアイデンティティがなければ権限を主体に絞れず、封じ込めと復旧がなければ、正しく絞られていてもなお誤った実行には限界も引き返しもない。"
+        },
+        {
+          "q": "これでプロンプトインジェクションは止まるのか。",
+          "a": "止まらない。そして、どれかの統制がそれを止めると考えることこそが誤りである。これが行うのは、インジェクションを安く生き延びられるようにすることだ。行為を試みるようモデルを説得することと、その行為が認可されていることは同じではなく、拒否された試行自体が信号になる。"
+        },
+        {
+          "q": "最小限に成立する版は。",
+          "a": "実行ごとのアイデンティティと、タスクに限定したツールアクセス。この二つが帰属と限界を与える。封じ込め、ゲート、補償操作は、行為が不可逆になるほど重みを増す。"
+        },
+        {
+          "q": "ガバナンスの枠組みとの関係は。",
+          "a": "その実行時における表現である。NIST AI RMF と ISO 42001 は責任と追跡可能性を求め、OWASP LLM Top 10 と MITRE ATLAS は攻撃を記述する。このアーキテクチャは、それらの義務がアイデンティティ・範囲・サンドボックス・トレースになる場所だ。"
+        }
+      ]
+    },
+    "zh": {
+      "name": "智能体免疫系统",
+      "summary": "一套参考架构，用于在企业中运行 AI 智能体而不把信任集中于其中任何一个。身份、最小权限、围堵、监督与恢复这五层，假定总有某个智能体终将出错或被劫持，并让那一天变得可以承受而非灾难性的。防御的单位是单次运行，而不是整支队伍。",
+      "keyConcepts": [
+        "预设已被攻破：问题不是智能体会不会做错，而是它做错时能够触及多远。",
+        "按次运行的身份：每次运行携带自己的短时凭据，绝不使用共享的运维账号。",
+        "围堵先于预防：影响半径是设计出来的，不是指望出来的——被劫持的一次运行波及一项任务，而非整片资产。",
+        "恢复是一个设计面：追踪、撤销与停止要事先建好，而不是事故中临时凑出来。"
+      ],
+      "definition": "智能体免疫系统是一种分层的运行时架构，它通过按次运行的身份、限定于任务的权限、执行与出网的围堵、按风险设置的人工监督以及可追溯的恢复，在允许 AI 智能体对企业系统采取真实行动的同时，限定单次运行所能触及、观察或破坏的范围。",
+      "architecture": [
+        "这套架构把惯常的问题反了过来。它不问如何阻止智能体犯错——面对一个会推理的系统，没有任何护栏能可靠做到——而是问它犯错的那一刻能够触及多远。每一层都是触及范围的边界，各层彼此独立，因此其中一层失守不会把其余各层一并打开。",
+        "身份是地基。每次运行都会获得一份短时凭据，绑定到任务、发起主体以及它声明需要的工具。智能体之间不共享服务账号：出问题时，痕迹指向的是一次运行而非一支队伍，撤销的代价是一枚令牌，而不是整片资产的轮换。",
+        "权限限定于任务，并随任务失效。工具代理只授予运行事先声明的那一小组能力——读这张工单、写这条记录——并拒绝其余一切；于是，一次说服模型去尝试更多的提示注入，找不到可以调用的对象。",
+        "围堵假定前两层可能被攻破。执行发生在没有环境凭据的沙箱中；出网流量经过允许列表，因此外泄无处可送；而智能体产出的一切都会在边界处编码，使其输出不会成为下一个系统的指令。",
+        "监督是由人承担问责的位置，按风险而非默认设置：不可逆或受监管的动作会暂停等待批准，低置信度的结果会带着完整的运行上下文上报。对一切都设闸会毁掉自动化，并训练评审者不读就点通过。",
+        "恢复闭合了这个环。每次运行都在单一关联 ID 之下跨模型、工具与重试被追踪；在目标系统允许的情况下，动作都设计有配对的补偿操作；紧急停止可以停下一类运行，而不必让整个平台停摆。"
+      ],
+      "flow": [
+        "1. 请求：任务到达，附带发起主体以及声明的工具与数据范围。",
+        "2. 签发：代理铸造一份绑定该声明、限定于本次运行的短时身份。",
+        "3. 准入：运行在沙箱中启动，没有环境凭据，并带有出网允许列表。",
+        "4. 行动：每次工具调用都按本次运行的范围授权；范围之外的一律拒绝并记录。",
+        "5. 闸门：不可逆或受监管的动作暂停等待人工批准，并附上上下文。",
+        "6. 输出：产出在边界处编码，使其在下游不会被当作指令执行。",
+        "7. 收尾：身份失效，痕迹在其关联 ID 之下封存，补偿操作仍然可用。"
+      ],
+      "components": [
+        "按次运行的身份签发方（绑定任务的短时凭据）",
+        "带有声明能力范围的工具代理",
+        "沙箱执行环境",
+        "出网允许列表与数据外泄控制",
+        "输出边界编码器",
+        "按风险设置的人工批准闸门",
+        "关联的运行追踪与审计日志",
+        "补偿操作与紧急停止"
+      ],
+      "referenceScenario": {
+        "context": "一家示例企业，在工单、财务与内部知识领域运行着数十个智能体，每个智能体都可以读写记录系统。",
+        "scenario": "检索环节摄入了一份文档，其中注入的指令要求智能体导出客户记录。模型照做了，但导出工具不在本次运行声明的范围内，调用被拒绝；尝试被记录，异常规则停止了该次运行，关联 ID 让响应者一次查询就拿到完整链路。",
+        "technology": "按次运行的凭据签发、带范围的工具代理、沙箱执行、出网允许列表、边界编码、按风险的批准闸门与关联追踪。",
+        "load": "持续的后台自动化，并在业务流程前后形成尖峰；稀少而影响重大的动作只占调用的一小部分，风险恰恰集中在那里。",
+        "results": "参考目标而非实测结果：被劫持的运行被限定在其声明范围内，每一次拒绝都可归因到具体运行，任何已执行的动作都可追踪，并在目标系统允许时可被补偿。"
+      },
+      "benefits": [
+        "一个出错或被劫持的智能体，代价是一项任务，而不是整片资产。",
+        "事故可归因到一次运行而非共享账号，因此响应有的放矢，撤销成本低廉。",
+        "提示注入大部分价值落空：说服模型并不能赋予它从未拥有的能力。",
+        "监督精力集中在真正不可逆的动作上，批准因此仍然有分量。"
+      ],
+      "risks": [
+        "声明的范围与智能体真实所需逐渐脱节，团队不断放宽，直到最小权限只剩名义。",
+        "设闸过多会训练评审者不读就批准，那比不设闸更糟。",
+        "沙箱与代理带来额外的时延与运维面，小规模部署未必值得。",
+        "有些对外的影响无法补偿：已发出的邮件、已支付的账单都收不回来。"
+      ],
+      "failureModes": [
+        "某处栈中残留一份共享服务凭据，悄无声息地瓦解了按次运行的身份。",
+        "出网允许列表被绕过——经由一个本身会转发数据的已批准目的地。",
+        "追踪在一次重试或一次模型切换处断裂，事故链条再也无法重建。",
+        "批准队列积压，闸门被「临时」关闭以便清空队列。",
+        "工具输出在下一步被当作可信输入，围堵退化为一道会漏的单一边界。"
+      ],
+      "lessons": [
+        "先设计影响半径，再谈能力：智能体能触及多远，是比它能做什么更难的问题，先回答它会让其余部分变得可处理。",
+        "按次运行的身份是承重的一层；没有它，其他任何管控都是针对一个你叫不出名字的主体施加的。",
+        "对一切都触发的闸门等于什么都不触发：把人工批准留给不可逆的动作。",
+        "假定模型会被说服，并据此设计，使说服不等于授权。",
+        "恢复要在系统平静时建好；没有人会在事故当中设计补偿操作。"
+      ],
+      "kpis": [
+        {
+          "metric": "拥有独立短时身份的运行占比",
+          "note": "承重的那项管控。任何低于 100% 的数字都意味着仍有路径在使用共享凭据。"
+        },
+        {
+          "metric": "被拒绝的越界工具调用",
+          "note": "按运行计数。数字上升说明的是环境，未必是设计的失败。"
+        },
+        {
+          "metric": "每次运行的影响半径",
+          "note": "单次运行若被完全劫持所能触及的系统与记录数量。这正是该架构存在的目的所要缩小的数字。"
+        },
+        {
+          "metric": "设闸动作比例与批准时延",
+          "note": "两者都重要：比例过高会毁掉自动化，时延过长会让团队关掉闸门。"
+        },
+        {
+          "metric": "追踪完整度",
+          "note": "能在单一关联 ID 之下端到端重建的运行占比，包含重试与模型切换。"
+        },
+        {
+          "metric": "撤销所需时间",
+          "note": "从检测到一次运行的能力消失为止。使用短时凭据时，这个时间应接近其到期时长，而不是一次轮换。"
+        }
+      ],
+      "scaling": [
+        "身份代理与工具代理位于每次调用的热路径上，因而决定了上限；它们无状态、可水平扩展，但其时延在每次使用工具时都要支付。",
+        "对短运行而言，沙箱启动主导成本；用温沙箱池来换取时延，是以隔离深度作交换，应当是一个明确的决定。",
+        "人工批准不是线性扩展的，才是真正的约束：随着队伍变大，设闸的集合必须保持很小，否则队列本身就成了故障。",
+        "追踪存储随运行数乘以工具调用数增长；采样对可观测性可行，对审计不可行，因此两套留存策略应当分开。"
+      ],
+      "examples": [
+        "检索到的文档中注入的指令要求导出数据；该工具不在本次运行范围内，调用被拒绝并记录。",
+        "财务智能体起草一笔付款，由人在执行前批准，批准上附有该次运行的追踪。",
+        "行为异常的一类智能体被紧急停止，队伍中其余部分继续运行。",
+        "一次事故从单一关联 ID 重建出来，跨越三个模型、九次工具调用与两次重试。"
+      ],
+      "faqs": [
+        {
+          "q": "为什么是免疫系统而不是防火墙？",
+          "a": "防火墙假定内外之间存在边界。运行智能体的企业没有这条边界：智能体已经在里面，带着真实凭据在行动。免疫系统把入侵视为常态，把投入放在识别、围堵与修复上，而不是放在一道周界上。"
+        },
+        {
+          "q": "这不就是多绕几步的最小权限吗？",
+          "a": "最小权限是五层中的一层，也是最为人熟知的一层。这套架构的主张是：单靠它并不够。没有按次运行的身份，权限就无法收敛到一个主体；没有围堵与恢复，一次范围正确却仍然出错的运行既没有边界也没有退路。"
+        },
+        {
+          "q": "这能挡住提示注入吗？",
+          "a": "挡不住，而把任何一项管控当成能挡住它，恰恰是那个错误。它做的是让注入变得便宜到可以幸存：说服模型去尝试某个动作，和这个动作被授权并不是一回事，而被拒绝的尝试本身就是一个信号。"
+        },
+        {
+          "q": "最小可行版本是什么？",
+          "a": "按次运行的身份，加上限定于任务的工具访问。这两样给出归因与边界。围堵、闸门与补偿操作的分量，随动作越发不可逆而越发重要。"
+        },
+        {
+          "q": "它和治理框架是什么关系？",
+          "a": "它是这些框架在运行时的表达。NIST AI RMF 与 ISO 42001 要求问责与可追溯，OWASP LLM Top 10 与 MITRE ATLAS 描述攻击。这套架构正是那些义务变成身份、范围、沙箱与追踪的地方。"
+        }
+      ]
+    }
+  }
+}

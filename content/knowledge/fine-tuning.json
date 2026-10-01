@@ -7,7 +7,8 @@
     "foundation-models",
     "enterprise-rag",
     "prompt-engineering",
-    "embeddings"
+    "embeddings",
+    "recursive-self-improvement"
   ],
   "references": [
     {

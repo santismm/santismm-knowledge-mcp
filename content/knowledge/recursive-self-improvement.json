@@ -1,0 +1,617 @@
+{
+  "slug": "recursive-self-improvement",
+  "aliases": [
+    "rsi",
+    "self-improving-autonomous-ai"
+  ],
+  "category": "concept",
+  "updated": "2026-09-30",
+  "version": "1.0",
+  "related": [
+    "reasoning-models",
+    "fine-tuning",
+    "agentic-evaluation",
+    "agentic-ai",
+    "foundation-models",
+    "harness-engineering",
+    "ai-governance",
+    "agentic-threat-model"
+  ],
+  "references": [
+    {
+      "title": "Shinn et al. — Reflexion: Language Agents with Verbal Reinforcement Learning (2023)",
+      "url": "https://arxiv.org/abs/2303.11366"
+    },
+    {
+      "title": "Schick et al. — Toolformer: Language Models Can Teach Themselves to Use Tools (2023)",
+      "url": "https://arxiv.org/abs/2302.04761"
+    },
+    {
+      "title": "Jimenez et al. — SWE-bench: Can Language Models Resolve Real-World GitHub Issues? (2023)",
+      "url": "https://arxiv.org/abs/2310.06770"
+    },
+    {
+      "title": "DeepSeek-AI — DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (2025)",
+      "url": "https://arxiv.org/abs/2501.12948"
+    },
+    {
+      "title": "Huang et al. — Large Language Models Cannot Self-Correct Reasoning Yet (2023)",
+      "url": "https://arxiv.org/abs/2310.01798"
+    },
+    {
+      "title": "Shumailov et al. — The Curse of Recursion: Training on Generated Data Makes Models Forget (2023)",
+      "url": "https://arxiv.org/abs/2305.17493"
+    },
+    {
+      "title": "Anthropic — Responsible Scaling Policy",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy"
+    },
+    {
+      "title": "Santa María, S. — The next generation of AI: Self-Improvement and Autonomous Learning (2025)",
+      "url": "https://santismm.substack.com/p/the-next-generation-of-ai-self-improvement"
+    }
+  ],
+  "evidence": {
+    "evidenceLevel": "theoretical",
+    "confidenceLevel": "medium",
+    "sourceType": [
+      "paper",
+      "benchmark"
+    ]
+  },
+  "locales": {
+    "en": {
+      "title": "What is Recursive Self-Improvement (RSI)?",
+      "summary": "Recursive self-improvement is the idea of a system that improves its own ability to improve — each round of self-modification making the next one more effective, so that gains compound. Narrow pieces of that loop are real and measured today: a model that refines its own answer, generates its own training data, or searches for a better prompt and toolset. The compounding recursion the term actually names has not been demonstrated. The measured loops plateau, they need an external signal of correctness to work at all, and a system trained on its own output degrades rather than improves.",
+      "definition": "Recursive self-improvement is a process in which an AI system modifies itself — its output, its prompts and scaffold, its training data, or its weights — so as to increase its own capacity for further such modification, with each iteration improving the next.",
+      "takeaways": [
+        "The recursion is the claim, not the self-improvement: one round of self-refinement is routine engineering; rounds that compound are not demonstrated.",
+        "Every measured self-improvement loop rests on an external signal of correctness — tests, a verifier, a reward — and stalls without one.",
+        "A model trained on its own output degrades (model collapse); the loop needs fresh ground truth, which is a supply problem, not an algorithmic one.",
+        "What actually ships is scaffold-level: systems that rewrite prompts, tools and evaluation harnesses, with people holding the merge button.",
+        "Treat \"it improved itself\" as a measurement claim and ask what the verifier was, how deep the recursion ran, and where it stopped."
+      ],
+      "context": [
+        "The idea is old and the evidence is thin. I. J. Good argued in 1965 that a machine able to design better machines would set off an 'intelligence explosion', and that framing has shaped the discussion ever since — largely as an argument rather than as a measurement. Sixty years later the useful question is not whether the explosion is coming but which parts of the loop have been built and what bounded them.",
+        "Three developments reopened it as an engineering topic rather than a philosophical one. Models can now spend more compute reasoning at inference; reinforcement learning against automatically checkable rewards works well where correctness is machine-verifiable; and agents act on code, which is the one substrate where a system can edit the thing that produced it.",
+        "That matters for harness work specifically. If you run agents that write code, choose tools and tune their own prompts, you already operate part of a self-improvement loop — with a human in the merge path. The engineering question is where that human sits and what evidence lets them approve, not whether the loop exists."
+      ],
+      "architecture": [
+        "A system can modify itself at four depths, and they are not equally hard. The shallowest is the output: within a single run, a model critiques and rewrites its own answer. This is routine, it helps on some tasks, and it is bounded — published results show that without external feedback a model often cannot reliably tell its wrong answers from its right ones, so iterating on its own judgement can leave quality flat or worse.",
+        "Next is the prompt and scaffold: searching over instructions, tool definitions, retrieval settings and orchestration, keeping what scores better on a held-out set. This is where most real gains live today, because the thing being improved is code and configuration rather than the model, and because the score comes from outside the system.",
+        "Deeper is the data: a system generates its own training examples, keeps the ones a verifier accepts, and trains on those. This works where correctness is checkable — a unit test passes, a proof checks, a game is won — and it is the mechanism behind the strongest recent results. Where correctness is a matter of judgement, it degenerates: the system optimises the verifier instead of the task.",
+        "Deepest is the weights, retrained or reinforced on self-generated signal. This is where the compounding claim would have to be settled, and where the evidence is weakest, because the failure mode is not a crash but a slow narrowing: train on your own distribution and it contracts, generation after generation.",
+        "Across all four, the load-bearing component is not the model, it is the verifier. Recursion depth is bounded by how well you can tell better from worse without asking the system that produced it. That is why the loop runs far in code and games, and barely at all in open-ended work."
+      ],
+      "components": [
+        "Proposer — the model or agent that generates a candidate improvement",
+        "Verifier — the external signal that says whether it is better (tests, a held-out set, a reward, a human)",
+        "Memory of attempts — what was already tried, so search does not loop",
+        "Budget — the compute and wall-clock the loop is allowed to spend",
+        "Gate — the human or policy that decides what gets adopted"
+      ],
+      "pros": [
+        "Narrow loops with a hard verifier are genuinely productive: where correctness is machine-checkable, self-generated data and search deliver measured gains.",
+        "Scaffold-level improvement is cheap and reversible — prompts, tools and retrieval settings are configuration, so a bad round is a revert.",
+        "It puts pressure on evaluation, which is where the real work is: a loop is only as good as the score it optimises against.",
+        "The framing clarifies governance: the question 'what can this system change about itself, and who approves it?' is answerable and auditable."
+      ],
+      "risks": [
+        "Model collapse: training on self-generated output narrows the distribution and degrades quality across generations, so a loop without fresh ground truth decays rather than compounds.",
+        "Reward hacking: with a weak verifier the system improves the score and not the task, and the metric reports success while the capability does not move.",
+        "Unfalsifiable claims: 'the system improved itself' is unverifiable without the verifier, the baseline and the recursion depth, and those are usually the parts left out.",
+        "Loss of the oversight path: the deeper the self-modification, the harder it is to say what changed and why, which is precisely what an audit needs.",
+        "Capability opacity: a system that rewrites its own scaffold can acquire reach nobody granted it, which is a containment question before it is a capability question."
+      ],
+      "tools": [
+        "Automatic verifiers: test suites, type checkers, proof assistants, simulators",
+        "Held-out evaluation sets and regression batteries",
+        "Prompt and scaffold search over a scored objective",
+        "Rejection sampling and verifier-filtered data generation",
+        "Trace and provenance tooling, so an adopted change can be attributed"
+      ],
+      "examples": [
+        "A coding agent that writes a patch, runs the test suite, and retries on failure — one round of self-improvement with a hard verifier, and the mechanism behind measured progress on real-repository benchmarks.",
+        "A model taught to use a tool from examples it generated and filtered itself, keeping only the calls that improved its prediction.",
+        "Reinforcement learning on problems whose answers can be checked automatically, where the training signal comes from the checker rather than from a human label.",
+        "A prompt-and-scaffold search that proposes variants, scores each on a held-out set, and promotes the winner — improvement without touching the model."
+      ],
+      "faqs": [
+        {
+          "q": "Has any system actually done recursive self-improvement?",
+          "a": "No system has demonstrated the compounding loop the term names. What exists is single rounds against an external verifier, and search over scaffolds — both real and both bounded. The published results on a model correcting itself without outside feedback are notably weak, and training on self-generated data degrades quality over generations. Those two findings are what any claim of recursion has to get past."
+        },
+        {
+          "q": "Is this the same as the singularity?",
+          "a": "The singularity argument uses recursive self-improvement as its engine, but they are different claims. RSI is a mechanism you can look for and measure; the singularity is a prediction about consequences. You can take the mechanism seriously as an engineering topic while holding no position on the prediction, and that is the useful stance for building systems."
+        },
+        {
+          "q": "Why does the verifier matter so much?",
+          "a": "Because improvement means 'better', and better has to be decided by something outside the thing being improved. Where a machine can check correctness — tests pass, a proof closes, a game is won — the loop runs and the gains are real. Where correctness is a judgement call, the system ends up optimising whatever proxy you gave it. Recursion depth is a property of your verifier, not of your model."
+        },
+        {
+          "q": "Should I let agents improve their own prompts and tools in production?",
+          "a": "It is a reasonable thing to do and many teams do it, provided three things hold: the score comes from a held-out set the loop cannot see, every adopted change is attributable to a run, and a person or policy gates adoption. Without those you have not automated improvement, you have automated drift."
+        },
+        {
+          "q": "What would count as evidence of real recursion?",
+          "a": "A loop that runs several generations deep with the improvement rate not falling, a verifier the system cannot game, and a baseline that separates the loop's contribution from the compute spent. Reporting all three is rare enough that its absence is the first thing to check."
+        }
+      ]
+    },
+    "es": {
+      "title": "¿Qué es la auto-mejora recursiva (RSI)?",
+      "summary": "La auto-mejora recursiva es la idea de un sistema que mejora su propia capacidad de mejorar: cada ronda de automodificación hace más eficaz la siguiente, de modo que las ganancias se acumulan. Partes estrechas de ese bucle son reales y están medidas hoy — un modelo que refina su propia respuesta, que genera sus propios datos de entrenamiento, o que busca un prompt y un juego de herramientas mejores. La recursión acumulativa que el término nombra de verdad no está demostrada. Los bucles medidos se estancan, necesitan una señal externa de corrección para funcionar, y un sistema entrenado con su propia salida se degrada en vez de mejorar.",
+      "definition": "La auto-mejora recursiva es un proceso en el que un sistema de IA se modifica a sí mismo —su salida, sus prompts y su andamiaje, sus datos de entrenamiento o sus pesos— para aumentar su propia capacidad de seguir modificándose, de manera que cada iteración mejore la siguiente.",
+      "takeaways": [
+        "Lo que se afirma es la recursión, no la auto-mejora: una ronda de refinamiento propio es ingeniería rutinaria; rondas que se acumulen no están demostradas.",
+        "Todo bucle de auto-mejora medido se apoya en una señal externa de corrección —pruebas, un verificador, una recompensa— y se detiene sin ella.",
+        "Un modelo entrenado con su propia salida se degrada (colapso del modelo); el bucle necesita verdad de campo nueva, que es un problema de suministro y no algorítmico.",
+        "Lo que de verdad se despliega es de andamiaje: sistemas que reescriben prompts, herramientas y baterías de evaluación, con personas sujetando el botón de fusionar.",
+        "Trata «se mejoró solo» como una afirmación de medida y pregunta cuál era el verificador, cuánto profundizó la recursión y dónde se detuvo."
+      ],
+      "context": [
+        "La idea es vieja y la evidencia escasa. I. J. Good sostuvo en 1965 que una máquina capaz de diseñar máquinas mejores desataría una «explosión de inteligencia», y ese encuadre ha marcado la discusión desde entonces, más como argumento que como medida. Sesenta años después la pregunta útil no es si llega la explosión, sino qué partes del bucle se han construido y qué las limitó.",
+        "Tres desarrollos lo reabrieron como tema de ingeniería y no de filosofía. Los modelos pueden gastar más cómputo razonando en inferencia; el aprendizaje por refuerzo contra recompensas comprobables automáticamente funciona bien donde la corrección es verificable por máquina; y los agentes actúan sobre código, que es el único sustrato donde un sistema puede editar aquello que lo produjo.",
+        "Eso importa específicamente para el trabajo de harness. Si operas agentes que escriben código, eligen herramientas y ajustan sus propios prompts, ya estás operando parte de un bucle de auto-mejora, con una persona en el camino de la fusión. La pregunta de ingeniería es dónde se sienta esa persona y qué evidencia le permite aprobar, no si el bucle existe."
+      ],
+      "architecture": [
+        "Un sistema puede modificarse a cuatro profundidades, y no son igual de difíciles. La más superficial es la salida: dentro de una misma ejecución, el modelo critica y reescribe su propia respuesta. Es rutinario, ayuda en algunas tareas y está acotado — los resultados publicados muestran que sin realimentación externa un modelo a menudo no distingue de forma fiable sus respuestas malas de las buenas, así que iterar sobre su propio juicio puede dejar la calidad igual o peor.",
+        "Después vienen el prompt y el andamiaje: buscar entre instrucciones, definiciones de herramientas, ajustes de recuperación y orquestación, y quedarse con lo que puntúa mejor en un conjunto reservado. Ahí viven hoy casi todas las ganancias reales, porque lo que se mejora es código y configuración en vez del modelo, y porque la nota viene de fuera del sistema.",
+        "Más hondo están los datos: el sistema genera sus propios ejemplos de entrenamiento, conserva los que un verificador acepta y entrena con ésos. Funciona donde la corrección es comprobable —una prueba pasa, una demostración cierra, una partida se gana— y es el mecanismo detrás de los mejores resultados recientes. Donde la corrección es cuestión de juicio, degenera: el sistema optimiza el verificador en vez de la tarea.",
+        "Lo más hondo son los pesos, reentrenados o reforzados con señal autogenerada. Ahí tendría que zanjarse la afirmación acumulativa, y ahí la evidencia es más débil, porque el modo de fallo no es una caída sino un estrechamiento lento: entrena con tu propia distribución y se contrae, generación tras generación.",
+        "En las cuatro, el componente que sostiene el peso no es el modelo, es el verificador. La profundidad de la recursión está acotada por lo bien que puedas distinguir mejor de peor sin preguntárselo al sistema que lo produjo. Por eso el bucle corre lejos en código y en juegos, y apenas corre en trabajo abierto."
+      ],
+      "components": [
+        "Proponente: el modelo o agente que genera una mejora candidata",
+        "Verificador: la señal externa que dice si es mejor (pruebas, conjunto reservado, recompensa, una persona)",
+        "Memoria de intentos: lo ya probado, para que la búsqueda no dé vueltas",
+        "Presupuesto: el cómputo y el tiempo que el bucle puede gastar",
+        "Puerta: la persona o política que decide qué se adopta"
+      ],
+      "pros": [
+        "Los bucles estrechos con un verificador duro son productivos de verdad: donde la corrección es comprobable por máquina, los datos autogenerados y la búsqueda dan ganancias medidas.",
+        "La mejora de andamiaje es barata y reversible: prompts, herramientas y ajustes de recuperación son configuración, así que una ronda mala es una reversión.",
+        "Presiona sobre la evaluación, que es donde está el trabajo de verdad: un bucle vale lo que vale la nota que optimiza.",
+        "El encuadre aclara la gobernanza: la pregunta «qué puede cambiar este sistema de sí mismo, y quién lo aprueba» tiene respuesta y es auditable."
+      ],
+      "risks": [
+        "Colapso del modelo: entrenar con salida autogenerada estrecha la distribución y degrada la calidad de una generación a la siguiente, así que un bucle sin verdad de campo nueva decae en vez de acumularse.",
+        "Manipulación de la recompensa: con un verificador débil el sistema mejora la nota y no la tarea, y la métrica informa de un éxito que la capacidad no acompaña.",
+        "Afirmaciones infalsables: «el sistema se mejoró solo» no es verificable sin el verificador, la línea base y la profundidad de la recursión, y ésas son justo las partes que se suelen omitir.",
+        "Pérdida del camino de supervisión: cuanto más honda es la automodificación, más difícil resulta decir qué cambió y por qué, que es exactamente lo que una auditoría necesita.",
+        "Opacidad de capacidad: un sistema que reescribe su propio andamiaje puede adquirir un alcance que nadie le concedió, lo cual es una cuestión de contención antes que de capacidad."
+      ],
+      "tools": [
+        "Verificadores automáticos: baterías de pruebas, comprobadores de tipos, asistentes de demostración, simuladores",
+        "Conjuntos de evaluación reservados y baterías de regresión",
+        "Búsqueda de prompt y andamiaje contra un objetivo puntuado",
+        "Muestreo por rechazo y generación de datos filtrada por verificador",
+        "Herramientas de traza y procedencia, para poder atribuir un cambio adoptado"
+      ],
+      "examples": [
+        "Un agente de código que escribe un parche, ejecuta la batería de pruebas y reintenta al fallar: una ronda de auto-mejora con verificador duro, y el mecanismo detrás del progreso medido en pruebas sobre repositorios reales.",
+        "Un modelo que aprende a usar una herramienta a partir de ejemplos que él mismo generó y filtró, conservando sólo las llamadas que mejoraban su predicción.",
+        "Aprendizaje por refuerzo sobre problemas cuya respuesta puede comprobarse automáticamente, donde la señal de entrenamiento viene del comprobador y no de una etiqueta humana.",
+        "Una búsqueda de prompt y andamiaje que propone variantes, puntúa cada una en un conjunto reservado y promueve la ganadora: mejora sin tocar el modelo."
+      ],
+      "faqs": [
+        {
+          "q": "¿Algún sistema ha hecho auto-mejora recursiva de verdad?",
+          "a": "Ninguno ha demostrado el bucle acumulativo que el término nombra. Lo que existe son rondas sueltas contra un verificador externo, y búsqueda sobre andamiajes: reales las dos, y acotadas las dos. Los resultados publicados sobre un modelo corrigiéndose sin realimentación externa son notablemente débiles, y entrenar con datos autogenerados degrada la calidad entre generaciones. Esos dos hallazgos son lo que cualquier afirmación de recursión tiene que superar."
+        },
+        {
+          "q": "¿Es lo mismo que la singularidad?",
+          "a": "El argumento de la singularidad usa la auto-mejora recursiva como motor, pero son afirmaciones distintas. La RSI es un mecanismo que se puede buscar y medir; la singularidad es una predicción sobre consecuencias. Puedes tomarte el mecanismo en serio como tema de ingeniería sin sostener ninguna postura sobre la predicción, y ésa es la posición útil para construir sistemas."
+        },
+        {
+          "q": "¿Por qué importa tanto el verificador?",
+          "a": "Porque mejorar significa «mejor», y eso lo tiene que decidir algo externo a lo que se está mejorando. Donde una máquina puede comprobar la corrección —pasan las pruebas, cierra la demostración, se gana la partida— el bucle corre y las ganancias son reales. Donde la corrección es cuestión de juicio, el sistema acaba optimizando el proxy que le diste. La profundidad de la recursión es una propiedad de tu verificador, no de tu modelo."
+        },
+        {
+          "q": "¿Debo dejar que los agentes mejoren sus propios prompts y herramientas en producción?",
+          "a": "Es razonable y muchos equipos lo hacen, siempre que se cumplan tres cosas: que la nota venga de un conjunto reservado que el bucle no pueda ver, que todo cambio adoptado sea atribuible a una ejecución, y que una persona o una política controle la adopción. Sin eso no has automatizado la mejora, has automatizado la deriva."
+        },
+        {
+          "q": "¿Qué contaría como evidencia de recursión real?",
+          "a": "Un bucle que corra varias generaciones sin que caiga la tasa de mejora, un verificador que el sistema no pueda manipular, y una línea base que separe la aportación del bucle del cómputo gastado. Informar de las tres cosas es lo bastante raro como para que su ausencia sea lo primero que hay que comprobar."
+        }
+      ]
+    },
+    "pt": {
+      "title": "O que é auto-aperfeiçoamento recursivo (RSI)?",
+      "summary": "Auto-aperfeiçoamento recursivo é a ideia de um sistema que melhora a sua própria capacidade de melhorar: cada rodada de automodificação torna a seguinte mais eficaz, de modo que os ganhos se acumulam. Partes estreitas desse laço são reais e estão medidas hoje — um modelo que refina a própria resposta, que gera os próprios dados de treinamento, ou que busca um prompt e um conjunto de ferramentas melhores. A recursão acumulativa que o termo realmente nomeia não foi demonstrada. Os laços medidos estagnam, precisam de um sinal externo de correção para funcionar, e um sistema treinado com a própria saída degrada em vez de melhorar.",
+      "definition": "Auto-aperfeiçoamento recursivo é um processo em que um sistema de IA se modifica — a sua saída, os seus prompts e andaime, os seus dados de treinamento ou os seus pesos — para aumentar a própria capacidade de continuar a se modificar, de maneira que cada iteração melhore a seguinte.",
+      "takeaways": [
+        "O que se afirma é a recursão, não o auto-aperfeiçoamento: uma rodada de refinamento próprio é engenharia rotineira; rodadas que se acumulem não estão demonstradas.",
+        "Todo laço de auto-aperfeiçoamento medido se apoia num sinal externo de correção — testes, um verificador, uma recompensa — e para sem ele.",
+        "Um modelo treinado com a própria saída degrada (colapso do modelo); o laço precisa de verdade de campo nova, que é um problema de fornecimento e não algorítmico.",
+        "O que de fato entra em produção é de andaime: sistemas que reescrevem prompts, ferramentas e baterias de avaliação, com pessoas segurando o botão de mesclar.",
+        "Trate “melhorou sozinho” como uma afirmação de medida e pergunte qual era o verificador, quanto a recursão avançou e onde parou."
+      ],
+      "context": [
+        "A ideia é antiga e a evidência é escassa. I. J. Good sustentou em 1965 que uma máquina capaz de projetar máquinas melhores desencadearia uma “explosão de inteligência”, e esse enquadramento marcou a discussão desde então, mais como argumento do que como medida. Sessenta anos depois a pergunta útil não é se a explosão vem, mas quais partes do laço foram construídas e o que as limitou.",
+        "Três desenvolvimentos o reabriram como tema de engenharia e não de filosofia. Os modelos podem gastar mais computação raciocinando na inferência; o aprendizado por reforço contra recompensas verificáveis automaticamente funciona bem onde a correção é verificável por máquina; e os agentes agem sobre código, que é o único substrato em que um sistema pode editar aquilo que o produziu.",
+        "Isso importa especificamente para o trabalho de harness. Se você opera agentes que escrevem código, escolhem ferramentas e ajustam os próprios prompts, já opera parte de um laço de auto-aperfeiçoamento, com uma pessoa no caminho da mesclagem. A pergunta de engenharia é onde essa pessoa se senta e que evidência permite que ela aprove, não se o laço existe."
+      ],
+      "architecture": [
+        "Um sistema pode se modificar em quatro profundidades, e elas não são igualmente difíceis. A mais superficial é a saída: dentro de uma mesma execução, o modelo critica e reescreve a própria resposta. É rotineiro, ajuda em algumas tarefas e é limitado — os resultados publicados mostram que, sem retorno externo, um modelo muitas vezes não distingue de forma confiável as respostas erradas das certas, então iterar sobre o próprio julgamento pode deixar a qualidade igual ou pior.",
+        "Depois vêm o prompt e o andaime: buscar entre instruções, definições de ferramentas, ajustes de recuperação e orquestração, ficando com o que pontua melhor num conjunto reservado. É aí que vivem hoje quase todos os ganhos reais, porque o que se melhora é código e configuração em vez do modelo, e porque a nota vem de fora do sistema.",
+        "Mais fundo estão os dados: o sistema gera os próprios exemplos de treinamento, guarda os que um verificador aceita e treina com esses. Funciona onde a correção é verificável — um teste passa, uma prova fecha, uma partida é ganha — e é o mecanismo por trás dos melhores resultados recentes. Onde a correção é questão de julgamento, degenera: o sistema otimiza o verificador em vez da tarefa.",
+        "O mais fundo são os pesos, retreinados ou reforçados com sinal autogerado. É aí que a afirmação acumulativa teria de ser resolvida, e é aí que a evidência é mais fraca, porque o modo de falha não é uma queda e sim um estreitamento lento: treine com a própria distribuição e ela se contrai, geração após geração.",
+        "Nas quatro, o componente que sustenta o peso não é o modelo, é o verificador. A profundidade da recursão é limitada pelo quanto você consegue distinguir melhor de pior sem perguntar ao sistema que o produziu. Por isso o laço corre longe em código e em jogos, e quase não corre em trabalho aberto."
+      ],
+      "components": [
+        "Proponente: o modelo ou agente que gera uma melhoria candidata",
+        "Verificador: o sinal externo que diz se é melhor (testes, conjunto reservado, recompensa, uma pessoa)",
+        "Memória de tentativas: o que já foi tentado, para que a busca não ande em círculos",
+        "Orçamento: a computação e o tempo que o laço pode gastar",
+        "Porta: a pessoa ou política que decide o que é adotado"
+      ],
+      "pros": [
+        "Laços estreitos com um verificador duro são de fato produtivos: onde a correção é verificável por máquina, os dados autogerados e a busca dão ganhos medidos.",
+        "A melhoria de andaime é barata e reversível: prompts, ferramentas e ajustes de recuperação são configuração, então uma rodada ruim é uma reversão.",
+        "Pressiona a avaliação, que é onde está o trabalho de verdade: um laço vale o que vale a nota que ele otimiza.",
+        "O enquadramento esclarece a governança: a pergunta “o que este sistema pode mudar em si mesmo, e quem aprova” tem resposta e é auditável."
+      ],
+      "risks": [
+        "Colapso do modelo: treinar com saída autogerada estreita a distribuição e degrada a qualidade de uma geração para a seguinte, então um laço sem verdade de campo nova decai em vez de acumular.",
+        "Manipulação da recompensa: com um verificador fraco o sistema melhora a nota e não a tarefa, e a métrica informa um sucesso que a capacidade não acompanha.",
+        "Afirmações infalsificáveis: “o sistema melhorou sozinho” não é verificável sem o verificador, a linha de base e a profundidade da recursão, e essas são justamente as partes que costumam ser omitidas.",
+        "Perda do caminho de supervisão: quanto mais funda a automodificação, mais difícil dizer o que mudou e por quê, que é exatamente o que uma auditoria precisa.",
+        "Opacidade de capacidade: um sistema que reescreve o próprio andaime pode adquirir um alcance que ninguém lhe concedeu, o que é uma questão de contenção antes de ser de capacidade."
+      ],
+      "tools": [
+        "Verificadores automáticos: baterias de testes, verificadores de tipos, assistentes de prova, simuladores",
+        "Conjuntos de avaliação reservados e baterias de regressão",
+        "Busca de prompt e andaime contra um objetivo pontuado",
+        "Amostragem por rejeição e geração de dados filtrada por verificador",
+        "Ferramentas de rastro e procedência, para poder atribuir uma mudança adotada"
+      ],
+      "examples": [
+        "Um agente de código que escreve um patch, executa a bateria de testes e tenta de novo ao falhar: uma rodada de auto-aperfeiçoamento com verificador duro, e o mecanismo por trás do progresso medido em benchmarks sobre repositórios reais.",
+        "Um modelo que aprende a usar uma ferramenta a partir de exemplos que ele mesmo gerou e filtrou, guardando só as chamadas que melhoravam a sua previsão.",
+        "Aprendizado por reforço sobre problemas cuja resposta pode ser verificada automaticamente, em que o sinal de treinamento vem do verificador e não de uma etiqueta humana.",
+        "Uma busca de prompt e andaime que propõe variantes, pontua cada uma num conjunto reservado e promove a vencedora: melhoria sem tocar no modelo."
+      ],
+      "faqs": [
+        {
+          "q": "Algum sistema já fez auto-aperfeiçoamento recursivo de verdade?",
+          "a": "Nenhum demonstrou o laço acumulativo que o termo nomeia. O que existe são rodadas isoladas contra um verificador externo, e busca sobre andaimes: reais as duas, e limitadas as duas. Os resultados publicados sobre um modelo se corrigindo sem retorno externo são notavelmente fracos, e treinar com dados autogerados degrada a qualidade entre gerações. Esses dois achados são o que qualquer afirmação de recursão tem de superar."
+        },
+        {
+          "q": "É a mesma coisa que a singularidade?",
+          "a": "O argumento da singularidade usa o auto-aperfeiçoamento recursivo como motor, mas são afirmações distintas. RSI é um mecanismo que se pode procurar e medir; a singularidade é uma previsão sobre consequências. Você pode levar o mecanismo a sério como tema de engenharia sem sustentar posição alguma sobre a previsão, e essa é a postura útil para construir sistemas."
+        },
+        {
+          "q": "Por que o verificador importa tanto?",
+          "a": "Porque melhorar significa “melhor”, e isso tem de ser decidido por algo externo ao que está sendo melhorado. Onde uma máquina pode verificar a correção — os testes passam, a prova fecha, a partida é ganha — o laço corre e os ganhos são reais. Onde a correção é questão de julgamento, o sistema acaba otimizando o proxy que você deu. A profundidade da recursão é uma propriedade do seu verificador, não do seu modelo."
+        },
+        {
+          "q": "Devo deixar os agentes melhorarem os próprios prompts e ferramentas em produção?",
+          "a": "É razoável e muitas equipes fazem, desde que três coisas se cumpram: que a nota venha de um conjunto reservado que o laço não possa ver, que toda mudança adotada seja atribuível a uma execução, e que uma pessoa ou uma política controle a adoção. Sem isso você não automatizou a melhoria, automatizou o desvio."
+        },
+        {
+          "q": "O que contaria como evidência de recursão real?",
+          "a": "Um laço que corra várias gerações sem que a taxa de melhoria caia, um verificador que o sistema não consiga manipular, e uma linha de base que separe a contribuição do laço da computação gasta. Informar as três coisas é raro o bastante para que a sua ausência seja a primeira coisa a verificar."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Qu'est-ce que l'auto-amélioration récursive (RSI) ?",
+      "summary": "L'auto-amélioration récursive est l'idée d'un système qui améliore sa propre capacité à s'améliorer : chaque tour d'automodification rend le suivant plus efficace, si bien que les gains se cumulent. Des parties étroites de cette boucle sont réelles et mesurées aujourd'hui — un modèle qui affine sa propre réponse, qui génère ses propres données d'entraînement, ou qui cherche un meilleur prompt et un meilleur jeu d'outils. La récursion cumulative que le terme désigne vraiment n'a pas été démontrée. Les boucles mesurées plafonnent, elles ont besoin d'un signal externe de correction pour fonctionner, et un système entraîné sur sa propre sortie se dégrade au lieu de s'améliorer.",
+      "definition": "L'auto-amélioration récursive est un processus par lequel un système d'IA se modifie lui-même — sa sortie, ses prompts et son échafaudage, ses données d'entraînement ou ses poids — afin d'augmenter sa propre capacité à poursuivre de telles modifications, chaque itération améliorant la suivante.",
+      "takeaways": [
+        "Ce qui est affirmé, c'est la récursion, pas l'auto-amélioration : un tour d'affinage par soi-même est de l'ingénierie courante ; des tours qui se cumulent ne sont pas démontrés.",
+        "Toute boucle d'auto-amélioration mesurée repose sur un signal externe de correction — tests, vérificateur, récompense — et s'arrête sans lui.",
+        "Un modèle entraîné sur sa propre sortie se dégrade (effondrement du modèle) ; la boucle a besoin de vérité de terrain nouvelle, ce qui est un problème d'approvisionnement et non d'algorithme.",
+        "Ce qui part réellement en production relève de l'échafaudage : des systèmes qui réécrivent prompts, outils et batteries d'évaluation, avec des personnes qui tiennent le bouton de fusion.",
+        "Traitez « il s'est amélioré tout seul » comme une affirmation de mesure et demandez quel était le vérificateur, jusqu'où la récursion est allée et où elle s'est arrêtée."
+      ],
+      "context": [
+        "L'idée est ancienne et les preuves sont minces. I. J. Good soutenait en 1965 qu'une machine capable de concevoir de meilleures machines déclencherait une « explosion d'intelligence », et ce cadrage a structuré la discussion depuis, davantage comme argument que comme mesure. Soixante ans plus tard, la question utile n'est pas de savoir si l'explosion vient, mais quelles parties de la boucle ont été construites et ce qui les a bornées.",
+        "Trois évolutions l'ont rouverte comme sujet d'ingénierie et non de philosophie. Les modèles peuvent dépenser plus de calcul à raisonner à l'inférence ; l'apprentissage par renforcement contre des récompenses vérifiables automatiquement fonctionne bien là où la justesse est vérifiable par machine ; et les agents agissent sur du code, le seul substrat où un système peut éditer ce qui l'a produit.",
+        "Cela compte précisément pour le travail d'échafaudage. Si vous exploitez des agents qui écrivent du code, choisissent des outils et ajustent leurs propres prompts, vous opérez déjà une partie d'une boucle d'auto-amélioration, avec une personne sur le chemin de la fusion. La question d'ingénierie est où cette personne se situe et quelles preuves lui permettent d'approuver, non si la boucle existe."
+      ],
+      "architecture": [
+        "Un système peut se modifier à quatre profondeurs, qui ne sont pas d'égale difficulté. La plus superficielle est la sortie : au sein d'une même exécution, le modèle critique et réécrit sa propre réponse. C'est courant, cela aide sur certaines tâches, et c'est borné — les résultats publiés montrent que sans retour externe un modèle ne distingue souvent pas de façon fiable ses mauvaises réponses de ses bonnes, de sorte qu'itérer sur son propre jugement peut laisser la qualité inchangée ou pire.",
+        "Viennent ensuite le prompt et l'échafaudage : chercher parmi les instructions, définitions d'outils, réglages de recherche documentaire et orchestration, en gardant ce qui obtient le meilleur score sur un jeu réservé. C'est là que vivent aujourd'hui presque tous les gains réels, parce que ce qu'on améliore est du code et de la configuration plutôt que le modèle, et parce que la note vient de l'extérieur du système.",
+        "Plus profond, les données : le système génère ses propres exemples d'entraînement, garde ceux qu'un vérificateur accepte et s'entraîne dessus. Cela marche là où la justesse est vérifiable — un test passe, une preuve se ferme, une partie est gagnée — et c'est le mécanisme derrière les meilleurs résultats récents. Là où la justesse relève du jugement, cela dégénère : le système optimise le vérificateur plutôt que la tâche.",
+        "Le plus profond, les poids, réentraînés ou renforcés sur un signal auto-généré. C'est là que l'affirmation cumulative devrait se trancher, et là que les preuves sont les plus faibles, car le mode de défaillance n'est pas une panne mais un rétrécissement lent : entraînez sur votre propre distribution et elle se contracte, génération après génération.",
+        "Dans les quatre cas, le composant porteur n'est pas le modèle, c'est le vérificateur. La profondeur de la récursion est bornée par votre capacité à distinguer le meilleur du pire sans le demander au système qui l'a produit. C'est pourquoi la boucle va loin en code et en jeux, et à peine dans le travail ouvert."
+      ],
+      "components": [
+        "Proposeur : le modèle ou l'agent qui engendre une amélioration candidate",
+        "Vérificateur : le signal externe qui dit si c'est meilleur (tests, jeu réservé, récompense, une personne)",
+        "Mémoire des tentatives : ce qui a déjà été essayé, pour que la recherche ne tourne pas en rond",
+        "Budget : le calcul et le temps que la boucle peut dépenser",
+        "Porte : la personne ou la politique qui décide de ce qui est adopté"
+      ],
+      "pros": [
+        "Les boucles étroites avec un vérificateur dur sont réellement productives : là où la justesse est vérifiable par machine, les données auto-générées et la recherche donnent des gains mesurés.",
+        "L'amélioration au niveau de l'échafaudage est peu coûteuse et réversible : prompts, outils et réglages de recherche sont de la configuration, donc un mauvais tour se réverte.",
+        "Elle met la pression sur l'évaluation, où se trouve le vrai travail : une boucle ne vaut que la note qu'elle optimise.",
+        "Le cadrage clarifie la gouvernance : la question « que ce système peut-il changer de lui-même, et qui l'approuve » a une réponse et elle est auditable."
+      ],
+      "risks": [
+        "Effondrement du modèle : s'entraîner sur une sortie auto-générée rétrécit la distribution et dégrade la qualité d'une génération à l'autre, donc une boucle sans vérité de terrain nouvelle décline au lieu de se cumuler.",
+        "Détournement de la récompense : avec un vérificateur faible, le système améliore la note et non la tâche, et la métrique annonce un succès que la capacité ne suit pas.",
+        "Affirmations infalsifiables : « le système s'est amélioré tout seul » n'est pas vérifiable sans le vérificateur, la référence de départ et la profondeur de la récursion, et ce sont justement les parties qu'on omet.",
+        "Perte du chemin de supervision : plus l'automodification est profonde, plus il est difficile de dire ce qui a changé et pourquoi, ce qui est exactement ce dont un audit a besoin.",
+        "Opacité de capacité : un système qui réécrit son propre échafaudage peut acquérir une portée que personne ne lui a accordée, ce qui est une question de confinement avant d'être une question de capacité."
+      ],
+      "tools": [
+        "Vérificateurs automatiques : batteries de tests, vérificateurs de types, assistants de preuve, simulateurs",
+        "Jeux d'évaluation réservés et batteries de régression",
+        "Recherche de prompt et d'échafaudage contre un objectif noté",
+        "Échantillonnage par rejet et génération de données filtrée par vérificateur",
+        "Outillage de trace et de provenance, pour pouvoir imputer un changement adopté"
+      ],
+      "examples": [
+        "Un agent de code qui écrit un correctif, lance la batterie de tests et réessaie en cas d'échec : un tour d'auto-amélioration avec vérificateur dur, et le mécanisme derrière les progrès mesurés sur des jeux d'épreuves issus de dépôts réels.",
+        "Un modèle qui apprend à se servir d'un outil à partir d'exemples qu'il a lui-même générés puis filtrés, en ne gardant que les appels qui amélioraient sa prédiction.",
+        "De l'apprentissage par renforcement sur des problèmes dont la réponse peut être vérifiée automatiquement, où le signal d'entraînement vient du vérificateur et non d'une étiquette humaine.",
+        "Une recherche de prompt et d'échafaudage qui propose des variantes, note chacune sur un jeu réservé et promeut la gagnante : de l'amélioration sans toucher au modèle."
+      ],
+      "faqs": [
+        {
+          "q": "Un système a-t-il vraiment réalisé une auto-amélioration récursive ?",
+          "a": "Aucun système n'a démontré la boucle cumulative que le terme désigne. Ce qui existe, ce sont des tours isolés contre un vérificateur externe, et de la recherche sur des échafaudages : réels tous les deux, et bornés tous les deux. Les résultats publiés sur un modèle se corrigeant sans retour externe sont notablement faibles, et s'entraîner sur des données auto-générées dégrade la qualité au fil des générations. Ces deux constats sont ce que toute affirmation de récursion doit dépasser."
+        },
+        {
+          "q": "Est-ce la même chose que la singularité ?",
+          "a": "L'argument de la singularité prend l'auto-amélioration récursive pour moteur, mais ce sont deux affirmations distinctes. La RSI est un mécanisme qu'on peut chercher et mesurer ; la singularité est une prédiction sur des conséquences. On peut prendre le mécanisme au sérieux comme sujet d'ingénierie sans tenir aucune position sur la prédiction, et c'est la posture utile pour construire des systèmes."
+        },
+        {
+          "q": "Pourquoi le vérificateur compte-t-il autant ?",
+          "a": "Parce que s'améliorer signifie « meilleur », et cela doit être décidé par quelque chose d'extérieur à ce qu'on améliore. Là où une machine peut vérifier la justesse — les tests passent, la preuve se ferme, la partie est gagnée — la boucle tourne et les gains sont réels. Là où la justesse relève du jugement, le système finit par optimiser le substitut que vous lui avez donné. La profondeur de la récursion est une propriété de votre vérificateur, pas de votre modèle."
+        },
+        {
+          "q": "Faut-il laisser des agents améliorer leurs propres prompts et outils en production ?",
+          "a": "C'est raisonnable et beaucoup d'équipes le font, à trois conditions : que la note vienne d'un jeu réservé que la boucle ne peut pas voir, que tout changement adopté soit imputable à une exécution, et qu'une personne ou une politique commande l'adoption. Sans cela, vous n'avez pas automatisé l'amélioration, vous avez automatisé la dérive."
+        },
+        {
+          "q": "Qu'est-ce qui compterait comme preuve d'une vraie récursion ?",
+          "a": "Une boucle qui tourne sur plusieurs générations sans que le taux d'amélioration baisse, un vérificateur que le système ne peut pas détourner, et une référence de départ qui sépare l'apport de la boucle du calcul dépensé. Rapporter ces trois choses est assez rare pour que leur absence soit la première chose à vérifier."
+        }
+      ]
+    },
+    "de": {
+      "title": "Was ist rekursive Selbstverbesserung (RSI)?",
+      "summary": "Rekursive Selbstverbesserung ist die Idee eines Systems, das seine eigene Fähigkeit zur Verbesserung verbessert: Jede Runde der Selbstmodifikation macht die nächste wirksamer, sodass sich Gewinne aufaddieren. Schmale Teile dieser Schleife sind real und heute gemessen — ein Modell, das seine eigene Antwort nachschärft, das eigene Trainingsdaten erzeugt oder das nach einem besseren Prompt und Werkzeugsatz sucht. Die aufaddierende Rekursion, die der Begriff eigentlich benennt, ist nicht demonstriert. Die gemessenen Schleifen laufen in eine Sättigung, sie brauchen ein äußeres Korrektheitssignal, um überhaupt zu arbeiten, und ein Modell, das auf der eigenen Ausgabe trainiert, verschlechtert sich statt sich zu verbessern.",
+      "definition": "Rekursive Selbstverbesserung ist ein Prozess, in dem ein KI-System sich selbst verändert — seine Ausgabe, seine Prompts und sein Gerüst, seine Trainingsdaten oder seine Gewichte —, um die eigene Fähigkeit zu weiteren solchen Veränderungen zu erhöhen, sodass jede Iteration die nächste verbessert.",
+      "takeaways": [
+        "Behauptet wird die Rekursion, nicht die Selbstverbesserung: Eine Runde Selbstnachschärfung ist Alltagstechnik; Runden, die sich aufaddieren, sind nicht demonstriert.",
+        "Jede gemessene Selbstverbesserungsschleife ruht auf einem äußeren Korrektheitssignal — Tests, einem Prüfer, einer Belohnung — und bleibt ohne es stehen.",
+        "Ein Modell, das auf der eigenen Ausgabe trainiert, verschlechtert sich (Modellkollaps); die Schleife braucht frische Grundwahrheit, und das ist ein Beschaffungsproblem, kein algorithmisches.",
+        "Was tatsächlich in Produktion geht, liegt auf der Gerüstebene: Systeme, die Prompts, Werkzeuge und Prüfbatterien umschreiben, während Menschen den Merge-Knopf halten.",
+        "Behandle „es hat sich selbst verbessert“ als Messbehauptung und frage nach dem Prüfer, nach der Rekursionstiefe und danach, wo sie endete."
+      ],
+      "context": [
+        "Die Idee ist alt und die Belege sind dünn. I. J. Good argumentierte 1965, eine Maschine, die bessere Maschinen entwerfen kann, löse eine „Intelligenzexplosion“ aus, und diese Rahmung prägt die Debatte seither — weit mehr als Argument denn als Messung. Sechzig Jahre später lautet die nützliche Frage nicht, ob die Explosion kommt, sondern welche Teile der Schleife gebaut wurden und was sie begrenzt hat.",
+        "Drei Entwicklungen haben sie als Ingenieurthema statt als philosophisches wieder geöffnet. Modelle können bei der Inferenz mehr Rechenzeit ins Denken stecken; Verstärkungslernen gegen automatisch prüfbare Belohnungen funktioniert gut, wo Korrektheit maschinell nachweisbar ist; und Agenten handeln auf Code — dem einen Substrat, auf dem ein System das bearbeiten kann, was es erzeugt hat.",
+        "Für Gerüstarbeit ist das unmittelbar relevant. Wer Agenten betreibt, die Code schreiben, Werkzeuge wählen und ihre eigenen Prompts justieren, betreibt bereits einen Teil einer Selbstverbesserungsschleife — mit einem Menschen im Merge-Pfad. Die technische Frage ist, wo dieser Mensch sitzt und welche Belege ihn freigeben lassen, nicht ob die Schleife existiert."
+      ],
+      "architecture": [
+        "Ein System kann sich auf vier Tiefen verändern, und sie sind nicht gleich schwer. Die flachste ist die Ausgabe: innerhalb eines Laufs kritisiert und überschreibt das Modell seine eigene Antwort. Das ist Routine, es hilft bei manchen Aufgaben, und es ist begrenzt — veröffentlichte Ergebnisse zeigen, dass ein Modell ohne äußere Rückmeldung seine falschen Antworten oft nicht verlässlich von seinen richtigen unterscheidet, sodass Iterieren auf dem eigenen Urteil die Qualität gleich lassen oder verschlechtern kann.",
+        "Dann kommen Prompt und Gerüst: Suche über Anweisungen, Werkzeugdefinitionen, Retrieval-Einstellungen und Orchestrierung, und behalten, was auf einem zurückgehaltenen Satz besser abschneidet. Dort liegen heute fast alle echten Gewinne, weil das Verbesserte Code und Konfiguration ist statt das Modell, und weil die Bewertung von außerhalb des Systems kommt.",
+        "Tiefer liegen die Daten: Das System erzeugt eigene Trainingsbeispiele, behält die, die ein Prüfer akzeptiert, und trainiert darauf. Das funktioniert, wo Korrektheit prüfbar ist — ein Test läuft durch, ein Beweis schließt, eine Partie ist gewonnen — und ist der Mechanismus hinter den stärksten neueren Ergebnissen. Wo Korrektheit Ermessenssache ist, entgleist es: Das System optimiert den Prüfer statt die Aufgabe.",
+        "Am tiefsten liegen die Gewichte, nachtrainiert oder verstärkt auf selbst erzeugtem Signal. Dort müsste sich die Aufaddierungsbehauptung entscheiden, und dort sind die Belege am schwächsten, denn der Fehlermodus ist kein Absturz, sondern ein langsames Verengen: Trainiere auf der eigenen Verteilung, und sie zieht sich zusammen, Generation um Generation.",
+        "In allen vier Fällen ist die tragende Komponente nicht das Modell, sondern der Prüfer. Die Rekursionstiefe ist dadurch begrenzt, wie gut man besser von schlechter unterscheiden kann, ohne das System zu fragen, das es erzeugt hat. Deshalb läuft die Schleife bei Code und Spielen weit und bei offener Arbeit kaum."
+      ],
+      "components": [
+        "Vorschlagender: das Modell oder der Agent, der eine Verbesserung vorschlägt",
+        "Prüfer: das äußere Signal, das sagt, ob es besser ist (Tests, zurückgehaltener Satz, Belohnung, ein Mensch)",
+        "Versuchsgedächtnis: was schon probiert wurde, damit die Suche nicht im Kreis läuft",
+        "Budget: Rechenzeit und Uhrzeit, die die Schleife verbrauchen darf",
+        "Gate: der Mensch oder die Richtlinie, die über die Übernahme entscheidet"
+      ],
+      "pros": [
+        "Schmale Schleifen mit hartem Prüfer sind wirklich produktiv: Wo Korrektheit maschinell prüfbar ist, liefern selbst erzeugte Daten und Suche gemessene Gewinne.",
+        "Verbesserung auf Gerüstebene ist billig und umkehrbar: Prompts, Werkzeuge und Retrieval-Einstellungen sind Konfiguration, eine schlechte Runde ist ein Revert.",
+        "Sie erzeugt Druck auf die Evaluation, wo die eigentliche Arbeit liegt: Eine Schleife ist nur so gut wie die Bewertung, gegen die sie optimiert.",
+        "Die Rahmung klärt die Governance: Die Frage „was darf dieses System an sich selbst ändern, und wer gibt es frei“ ist beantwortbar und prüfbar."
+      ],
+      "risks": [
+        "Modellkollaps: Training auf selbst erzeugter Ausgabe verengt die Verteilung und verschlechtert die Qualität über Generationen, sodass eine Schleife ohne frische Grundwahrheit verfällt statt sich aufzuaddieren.",
+        "Belohnungsausnutzung: Mit schwachem Prüfer verbessert das System die Bewertung und nicht die Aufgabe, und die Metrik meldet einen Erfolg, dem die Fähigkeit nicht folgt.",
+        "Unfalsifizierbare Behauptungen: „Das System hat sich selbst verbessert“ ist ohne Prüfer, Ausgangsbasis und Rekursionstiefe nicht nachprüfbar — und genau diese Teile fehlen meist.",
+        "Verlust des Aufsichtspfads: Je tiefer die Selbstmodifikation, desto schwerer zu sagen, was sich geändert hat und warum, und genau das braucht eine Prüfung.",
+        "Fähigkeitsopazität: Ein System, das sein eigenes Gerüst umschreibt, kann Reichweite erlangen, die ihm niemand gewährt hat — eine Frage der Eindämmung, bevor sie eine der Fähigkeit ist."
+      ],
+      "tools": [
+        "Automatische Prüfer: Testsuiten, Typprüfer, Beweisassistenten, Simulatoren",
+        "Zurückgehaltene Evaluationssätze und Regressionsbatterien",
+        "Prompt- und Gerüstsuche gegen ein bewertetes Ziel",
+        "Rückweisungsstichproben und prüfergefilterte Datenerzeugung",
+        "Spur- und Herkunftswerkzeuge, damit eine übernommene Änderung zuzuordnen ist"
+      ],
+      "examples": [
+        "Ein Coding-Agent, der einen Patch schreibt, die Testsuite laufen lässt und bei Fehlschlag erneut ansetzt: eine Runde Selbstverbesserung mit hartem Prüfer, und der Mechanismus hinter gemessenen Fortschritten auf Benchmarks aus echten Repositories.",
+        "Ein Modell, das den Gebrauch eines Werkzeugs aus Beispielen lernt, die es selbst erzeugt und gefiltert hat, und nur die Aufrufe behält, die seine Vorhersage verbesserten.",
+        "Verstärkungslernen an Aufgaben, deren Antwort automatisch prüfbar ist, wobei das Trainingssignal vom Prüfer kommt und nicht von einem menschlichen Label.",
+        "Eine Prompt- und Gerüstsuche, die Varianten vorschlägt, jede auf einem zurückgehaltenen Satz bewertet und die Siegerin übernimmt: Verbesserung, ohne das Modell anzufassen."
+      ],
+      "faqs": [
+        {
+          "q": "Hat je ein System wirklich rekursive Selbstverbesserung geleistet?",
+          "a": "Kein System hat die aufaddierende Schleife gezeigt, die der Begriff benennt. Es gibt einzelne Runden gegen einen äußeren Prüfer und Suche über Gerüste — beides real und beides begrenzt. Die veröffentlichten Ergebnisse zu einem Modell, das sich ohne äußere Rückmeldung selbst korrigiert, sind auffällig schwach, und Training auf selbst erzeugten Daten verschlechtert die Qualität über Generationen. An diesen zwei Befunden muss jede Rekursionsbehauptung vorbei."
+        },
+        {
+          "q": "Ist das dasselbe wie die Singularität?",
+          "a": "Das Singularitätsargument nimmt rekursive Selbstverbesserung als Motor, aber es sind verschiedene Behauptungen. RSI ist ein Mechanismus, den man suchen und messen kann; die Singularität ist eine Vorhersage über Folgen. Man kann den Mechanismus als Ingenieurthema ernst nehmen, ohne zur Vorhersage Position zu beziehen — und das ist die nützliche Haltung beim Bauen von Systemen."
+        },
+        {
+          "q": "Warum zählt der Prüfer so viel?",
+          "a": "Weil Verbesserung „besser“ heißt, und das muss etwas außerhalb des Verbesserten entscheiden. Wo eine Maschine Korrektheit prüfen kann — Tests laufen durch, der Beweis schließt, die Partie ist gewonnen — läuft die Schleife und die Gewinne sind echt. Wo Korrektheit Ermessen ist, optimiert das System am Ende den Stellvertreter, den man ihm gegeben hat. Rekursionstiefe ist eine Eigenschaft des Prüfers, nicht des Modells."
+        },
+        {
+          "q": "Soll man Agenten ihre eigenen Prompts und Werkzeuge in Produktion verbessern lassen?",
+          "a": "Das ist vernünftig und viele Teams tun es, sofern drei Dinge gelten: Die Bewertung kommt von einem zurückgehaltenen Satz, den die Schleife nicht sehen kann; jede übernommene Änderung ist einem Lauf zuzuordnen; und ein Mensch oder eine Richtlinie steuert die Übernahme. Ohne das hat man nicht Verbesserung automatisiert, sondern Abdriften."
+        },
+        {
+          "q": "Was würde als Beleg für echte Rekursion zählen?",
+          "a": "Eine Schleife, die mehrere Generationen tief läuft, ohne dass die Verbesserungsrate fällt, ein Prüfer, den das System nicht ausnutzen kann, und eine Ausgangsbasis, die den Beitrag der Schleife von der verbrauchten Rechenzeit trennt. Dass alle drei berichtet werden, ist selten genug, dass ihr Fehlen das Erste ist, was man prüft."
+        }
+      ]
+    },
+    "ja": {
+      "title": "再帰的自己改善（RSI）とは何か",
+      "summary": "再帰的自己改善とは、自らを改善する能力そのものを改善する系という考えである。自己改変の各周回が次の周回をより有効にし、利得が積み上がる。この輪の狭い部分は現実に存在し、今日すでに測られている——自分の答えを推敲するモデル、自分の訓練データを生成するモデル、より良いプロンプトと道具立てを探索するモデル。だが、この語が本来名指す「積み上がる再帰」は実証されていない。測られた輪は頭打ちになり、動くためには外部からの正しさの信号を必要とし、自分の出力で訓練した系は改善ではなく劣化する。",
+      "definition": "再帰的自己改善とは、AI の系が自分自身——出力、プロンプトと足場、訓練データ、あるいは重み——を改変し、さらなる改変を行う自らの能力を高め、各反復が次の反復を改善していく過程である。",
+      "takeaways": [
+        "主張されているのは再帰であって自己改善ではない。自己推敲を一周するのは日常的な工学であり、積み上がる周回は実証されていない。",
+        "測られた自己改善の輪はどれも外部の正しさの信号——テスト、検証器、報酬——に支えられており、それがなければ止まる。",
+        "自分の出力で訓練したモデルは劣化する（モデル崩壊）。輪には新しい正解が必要で、それはアルゴリズムの問題ではなく供給の問題である。",
+        "実際に運用に入っているのは足場の層である。プロンプト、道具、評価バッテリーを書き換える系があり、統合のボタンは人が握っている。",
+        "「自分で良くなった」は測定の主張として扱い、検証器は何か、再帰はどこまで進んだか、どこで止まったかを問うこと。"
+      ],
+      "context": [
+        "考えは古く、証拠は薄い。I. J. グッドは 1965 年に、より良い機械を設計できる機械は「知能爆発」を引き起こすと論じ、その枠組みが以後の議論を形づくってきた——測定としてよりも論証として。六十年後に有用な問いは、爆発が来るかどうかではなく、輪のどの部分が実際に作られ、何がそれを縛ったかである。",
+        "三つの進展が、これを哲学ではなく工学の話題として再び開いた。モデルは推論時に計算を多く費やして考えられるようになった。自動で検査できる報酬に対する強化学習は、正しさが機械的に検証できる領域でよく働く。そしてエージェントはコードに対して行為する——系が自分を生み出したものを編集できる唯一の基盤である。",
+        "これはとりわけハーネスの仕事に関わる。コードを書き、道具を選び、自分のプロンプトを調整するエージェントを運用しているなら、あなたはすでに自己改善の輪の一部を——統合の経路に人を置いたまま——運用している。工学上の問いは、その人がどこに座り、何を証拠に承認できるかであって、輪が存在するかどうかではない。"
+      ],
+      "architecture": [
+        "系は四つの深さで自分を改変できるが、難しさは同じではない。最も浅いのは出力である。一回の実行の内側で、モデルが自分の答えを批判し書き直す。これは日常的で、一部の課題では効き、そして限界がある——公表された結果は、外部からの手がかりがなければモデルは自分の誤答と正答を確実には見分けられないことが多いと示しており、自分の判断の上で反復しても品質は変わらないか悪くなりうる。",
+        "次はプロンプトと足場である。指示、道具の定義、検索設定、編成を探索し、取り置いた集合で高く出たものを残す。今日の現実的な利得のほとんどはここにある。改善される対象がモデルではなくコードと設定であり、点数が系の外から来るからである。",
+        "さらに深いのはデータである。系が自分で訓練例を生成し、検証器が受理したものだけを残して、それで訓練する。正しさが検査できるところ——テストが通る、証明が閉じる、勝負に勝つ——では働き、近年の最も強い結果の背後にある機構がこれである。正しさが判断の問題であるところでは退行する。系は課題ではなく検証器を最適化してしまう。",
+        "最も深いのは重みで、自己生成の信号で再訓練あるいは強化する。積み上がるという主張はここで決着させねばならず、そしてここが証拠のいちばん薄いところだ。失敗の様式は停止ではなく、ゆっくりした狭まりである。自分の分布で訓練すれば、世代を追って分布は縮む。",
+        "四つのいずれでも、荷重を支える部品はモデルではなく検証器である。再帰の深さは、それを生み出した系に尋ねずに良し悪しをどれだけ見分けられるかで縛られる。だからこの輪はコードと勝負では遠くまで回り、開かれた仕事ではほとんど回らない。"
+      ],
+      "components": [
+        "提案側：改善の候補を生成するモデルまたはエージェント",
+        "検証器：より良いかを告げる外部の信号（テスト、取り置いた集合、報酬、人）",
+        "試行の記憶：すでに試したこと。探索が同じ場所を回らないために",
+        "予算：この輪が費やしてよい計算と時間",
+        "ゲート：何を採用するかを決める人または方針"
+      ],
+      "pros": [
+        "堅い検証器を備えた狭い輪は本当に生産的である。正しさが機械で検査できるところでは、自己生成データと探索は測られた利得を出す。",
+        "足場の層での改善は安価で可逆である。プロンプト、道具、検索設定は設定であり、悪い周回は巻き戻せばよい。",
+        "評価に圧力をかける。そこが本当の仕事の場所だ。輪の値打ちは、それが最適化する点数の値打ちに等しい。",
+        "この枠組みは統治を明確にする。「この系は自分の何を変えてよいか、誰が承認するか」という問いには答えがあり、監査できる。"
+      ],
+      "risks": [
+        "モデル崩壊：自己生成の出力で訓練すると分布が狭まり、世代をまたいで品質が落ちる。新しい正解のない輪は積み上がらずに衰える。",
+        "報酬のすり抜け：検証器が弱いと、系は課題ではなく点数を良くする。指標は成功を告げるが、能力はついてこない。",
+        "反証できない主張：「系が自分で良くなった」は、検証器と基準線と再帰の深さがなければ検証できない。そしてその三つが省かれるのが普通である。",
+        "監督経路の喪失：自己改変が深くなるほど、何がどう変わったかを言うのが難しくなる。監査が必要とするのはまさにそれである。",
+        "能力の不透明化：自分の足場を書き換える系は、誰も与えていない到達範囲を獲得しうる。これは能力の問題である前に封じ込めの問題である。"
+      ],
+      "tools": [
+        "自動検証器：テストバッテリー、型検査器、証明支援系、シミュレータ",
+        "取り置いた評価集合と回帰バッテリー",
+        "点数化された目的に対するプロンプトと足場の探索",
+        "棄却サンプリングと、検証器で濾したデータ生成",
+        "痕跡と由来の道具立て。採用された変更を帰属できるように"
+      ],
+      "examples": [
+        "パッチを書き、テストバッテリーを走らせ、失敗すれば再試行するコーディングエージェント。堅い検証器を伴う自己改善の一周であり、実リポジトリの評価課題で測られた進歩の背後にある機構である。",
+        "自分で生成して自分で濾した例から道具の使い方を学ぶモデル。予測を良くした呼び出しだけを残す。",
+        "答えを自動で検査できる問題に対する強化学習。訓練信号は人の付けた札ではなく検査器から来る。",
+        "変種を提案し、取り置いた集合でそれぞれに点を付け、勝ったものを昇格させるプロンプトと足場の探索。モデルに触らない改善である。"
+      ],
+      "faqs": [
+        {
+          "q": "再帰的自己改善を本当に行った系はあるか。",
+          "a": "この語が名指す積み上がる輪を実証した系はない。あるのは外部検証器に対する単発の周回と、足場に対する探索である。どちらも現実で、どちらも限界がある。外部の手がかりなしにモデルが自己修正する件について公表された結果は際立って弱く、自己生成データでの訓練は世代をまたいで品質を落とす。再帰を主張するなら、まずこの二つの知見を越えなければならない。"
+        },
+        {
+          "q": "シンギュラリティと同じことか。",
+          "a": "シンギュラリティの論証は再帰的自己改善を原動機として使うが、主張としては別物である。RSI は探して測れる機構であり、シンギュラリティは帰結についての予測である。予測にいっさい立場を取らずに、機構を工学の話題として真剣に受け取ることはできる。系を作る立場にはそれが有用な構えだ。"
+        },
+        {
+          "q": "なぜ検証器がそれほど重要なのか。",
+          "a": "改善とは「より良い」ということであり、それは改善される当のものの外側にある何かが決めなければならない。機械が正しさを検査できるところ——テストが通る、証明が閉じる、勝負に勝つ——では輪は回り、利得は本物である。正しさが判断の問題であるところでは、系は与えられた代理指標を最適化して終わる。再帰の深さはモデルの性質ではなく検証器の性質である。"
+        },
+        {
+          "q": "本番でエージェントに自分のプロンプトと道具を改善させてよいか。",
+          "a": "理に適っているし多くのチームがやっている。ただし三つが成り立つ限りにおいてである。点数が、その輪から見えない取り置いた集合から来ること。採用されたすべての変更が特定の実行に帰属できること。そして人または方針が採用を制御すること。これがなければ、改善を自動化したのではなく逸脱を自動化したことになる。"
+        },
+        {
+          "q": "本物の再帰の証拠として何が数えられるか。",
+          "a": "改善率が落ちないまま数世代の深さを回る輪、系がすり抜けられない検証器、そして費やした計算と輪の寄与を切り分ける基準線。この三つがそろって報告されることは稀であり、稀であるからこそ、その欠落が最初に確かめるべきことになる。"
+        }
+      ]
+    },
+    "zh": {
+      "title": "什么是递归自我改进（RSI）？",
+      "summary": "递归自我改进指的是这样一个系统：它改进的是自己改进的能力——每一轮自我修改都让下一轮更有效，于是收益会累积。这个回路的狭窄片段是真实的，今天也已经被测量：一个模型润色自己的答案、生成自己的训练数据，或者搜索更好的提示词与工具组合。但这个词真正指称的那种累积式递归并没有被证实。已测量的回路会趋于平台，它们要运转就得依赖外部的正确性信号，而用自己的输出训练出来的系统是退化而非进步。",
+      "definition": "递归自我改进是这样一个过程：一个 AI 系统修改自身——它的输出、它的提示词与脚手架、它的训练数据或它的权重——以提升自己继续进行此类修改的能力，使每一次迭代改进下一次。",
+      "takeaways": [
+        "被主张的是递归，而不是自我改进：自我润色一轮是常规工程；能够累积的多轮并未被证实。",
+        "每一个被测量的自我改进回路都依赖一个外部的正确性信号——测试、验证器、奖励——没有它就停摆。",
+        "用自己的输出训练会让模型退化（模型崩塌）；回路需要新鲜的真值，这是供给问题，不是算法问题。",
+        "真正上生产的是脚手架层面的：重写提示词、工具与评测套件的系统，而合并按钮握在人手里。",
+        "把「它自己变好了」当作一项测量主张来对待，并追问验证器是什么、递归走了多深、在哪里停下。"
+      ],
+      "context": [
+        "这个想法很老，证据很薄。I. J. Good 在 1965 年论证说，一台能设计出更好机器的机器会引发「智能爆炸」，此后这个框架一直塑造着讨论——更多是作为论证，而不是作为测量。六十年后有用的问题不是爆炸会不会来，而是这个回路的哪些部分真被造出来了，以及是什么把它们限住了。",
+        "三项进展把它重新打开为工程话题而非哲学话题。模型可以在推理时投入更多算力去思考；针对可自动检查的奖励做强化学习，在正确性可由机器验证的地方效果很好；而智能体作用于代码——这是系统唯一能够编辑「产生了它的那个东西」的基底。",
+        "这一点对脚手架工作尤其切身。如果你在运行会写代码、选工具并调自己提示词的智能体，你已经在运行这个自我改进回路的一部分了——只是合并路径上还站着一个人。工程上的问题是这个人站在哪里、凭什么证据批准，而不是回路是否存在。"
+      ],
+      "architecture": [
+        "一个系统可以在四种深度上修改自己，而它们的难度并不相同。最浅的是输出：在同一次运行之内，模型批评并重写自己的答案。这很常规，在一部分任务上有效，而且有边界——已发表的结果表明，在没有外部反馈时，模型往往无法可靠地把自己答错的与答对的分开，因此在自己的判断上反复迭代，质量可能原地不动甚至更差。",
+        "其次是提示词与脚手架：在指令、工具定义、检索设置与编排之间搜索，保留在留出集上得分更高的那一个。今天绝大多数真实收益都在这里，因为被改进的是代码和配置而不是模型，也因为分数来自系统之外。",
+        "更深一层是数据：系统生成自己的训练样本，只留下验证器接受的那些，再拿它们去训练。这在正确性可检查的地方奏效——测试通过、证明闭合、棋局取胜——也是近期最强结果背后的机制。而在正确性属于判断的地方，它会变质：系统优化的是验证器而不是任务。",
+        "最深的是权重，用自生成的信号重训或强化。累积式的那个主张本该在这里见分晓，而这里的证据最薄弱，因为失效方式不是崩溃，而是缓慢的收窄：用自己的分布去训练，它就会一代一代地收缩。",
+        "在这四层里，承重的部件都不是模型，而是验证器。递归能走多深，取决于你在不询问「产生它的那个系统」的情况下，能把好与坏分辨到什么程度。这就是为什么这个回路在代码和棋局里能跑很远，而在开放性工作里几乎跑不动。"
+      ],
+      "components": [
+        "提议方：生成候选改进的模型或智能体",
+        "验证器：判定是否更好的外部信号（测试、留出集、奖励、人）",
+        "尝试记忆：已经试过什么，以免搜索原地打转",
+        "预算：这个回路可以花掉的算力与时间",
+        "闸门：决定采纳什么的人或策略"
+      ],
+      "pros": [
+        "带硬验证器的狭窄回路确实有生产力：在正确性可由机器检查的地方，自生成数据与搜索能带来被测量的收益。",
+        "脚手架层面的改进便宜且可逆：提示词、工具与检索设置都是配置，糟糕的一轮回退即可。",
+        "它把压力施加在评测上，而那里才是真正的工作：一个回路的价值不会超过它所优化的那个分数。",
+        "这个框架让治理变清楚：「这个系统可以改自己的什么，由谁批准」这个问题有答案，而且可审计。"
+      ],
+      "risks": [
+        "模型崩塌：用自生成输出训练会收窄分布，并让质量一代不如一代，所以没有新鲜真值的回路是衰减而非累积。",
+        "奖励套利：验证器一弱，系统改进的就是分数而不是任务，指标报出成功而能力并未跟上。",
+        "无法反驳的主张：「系统自己变好了」在缺少验证器、基线和递归深度时无法核验，而这三样恰恰是通常被省略的部分。",
+        "监督路径的丧失：自我修改越深，越难说清改了什么、为什么改，而这正是审计所需要的。",
+        "能力的不透明：一个会重写自己脚手架的系统，可能获得没人授予它的触及范围；这在成为能力问题之前，先是围堵问题。"
+      ],
+      "tools": [
+        "自动验证器：测试套件、类型检查器、证明助手、模拟器",
+        "留出评测集与回归套件",
+        "针对带分目标的提示词与脚手架搜索",
+        "拒绝采样与经验证器过滤的数据生成",
+        "追踪与来源工具，使被采纳的改动可以归因"
+      ],
+      "examples": [
+        "一个写补丁、跑测试套件、失败就重试的编码智能体：带硬验证器的一轮自我改进，也是真实仓库评测上那些被测量的进展背后的机制。",
+        "一个模型从自己生成又自己过滤的样例中学会使用某个工具，只保留那些让预测变好的调用。",
+        "在答案可自动检查的问题上做强化学习，训练信号来自检查器而不是人工标注。",
+        "一次提示词与脚手架搜索：提出变体、在留出集上各自打分、把胜者提升上去——不碰模型的改进。"
+      ],
+      "faqs": [
+        {
+          "q": "有哪个系统真的做到了递归自我改进吗？",
+          "a": "没有系统展示过这个词所指称的累积式回路。已有的是针对外部验证器的单轮，以及对脚手架的搜索：两者都真实，两者都有边界。关于模型在没有外部反馈时自我纠错，已发表的结果明显薄弱；而用自生成数据训练会让质量一代一代下降。任何关于递归的主张，首先都得过这两道结论。"
+        },
+        {
+          "q": "这和奇点是一回事吗？",
+          "a": "奇点的论证把递归自我改进当作发动机，但这是两个不同的主张。RSI 是一个可以去寻找、去测量的机制；奇点是一个关于后果的预测。你完全可以把这个机制当作严肃的工程话题，同时对那个预测不持任何立场——对要造系统的人来说，这才是有用的姿态。"
+        },
+        {
+          "q": "为什么验证器这么关键？",
+          "a": "因为改进意味着「更好」，而这必须由被改进者之外的某个东西来判定。在机器能检查正确性的地方——测试通过、证明闭合、棋局取胜——回路转得起来，收益是真的。在正确性属于判断的地方，系统最终优化的是你给它的那个替代指标。递归深度是你验证器的属性，不是你模型的属性。"
+        },
+        {
+          "q": "该让智能体在生产环境里改进自己的提示词和工具吗？",
+          "a": "这是合理的，很多团队也在做，前提是三件事成立：分数来自这个回路看不到的留出集；每一项被采纳的改动都能归因到某一次运行；以及由一个人或一条策略来把关采纳。缺了这些，你自动化的不是改进，而是漂移。"
+        },
+        {
+          "q": "什么才算真正递归的证据？",
+          "a": "一个能往下跑好几代而改进率不下降的回路，一个系统无法套利的验证器，以及一条能把回路的贡献与所花算力分开的基线。这三样同时被报告出来的情况足够罕见，罕见到它们的缺席本身就是第一个该检查的地方。"
+        }
+      ]
+    }
+  }
+}

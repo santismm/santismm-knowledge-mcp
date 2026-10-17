@@ -10,6 +10,7 @@ export type HomericResourceKind = "places" | "episodes" | "routes";
  */
 export const resourceUri = {
   overview: () => "santismm://overview",
+  authorProfile: () => "santismm://author",
   core: (domain: Domain, slug: string, locale: Locale = "en") =>
     `santismm://${domain}/${locale}/${encodeURIComponent(slug)}`,
   handbook: (id: string, locale: Locale = "en") =>
@@ -24,6 +25,7 @@ export const resourceUri = {
 
 const HOST_SURFACES: Readonly<Record<string, Surface>> = {
   overview: "meta",
+  author: "meta",
   knowledge: "core",
   patterns: "core",
   architectures: "core",

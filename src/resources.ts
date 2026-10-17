@@ -123,6 +123,18 @@ const RESOURCE_MANIFEST: readonly ResourceManifestEntry[] = [
     surface: "claims",
     federated: false,
   },
+  // Appended, not inserted: the registrations below address this array by
+  // index (`[0]`, `slice(1, 5)`), so an entry in the middle would shift the
+  // core domains onto the wrong readers.
+  {
+    name: "author-profile",
+    title: "Who wrote this corpus",
+    description:
+      "Read the author's professional facts: name and its other forms, current role with its start date, previous organisations, the frameworks he authored, how to cite, licence, and when these facts were last verified.",
+    uri_template: resourceUri.authorProfile(),
+    surface: "meta",
+    federated: false,
+  },
 ] as const;
 
 export function resourceManifest(): ResourceManifestEntry[] {
@@ -290,6 +302,19 @@ export function registerResources(
     ) as unknown as (uri: URL, context: unknown) => Promise<ResourceResult>,
   );
 
+  // Same document the `get_author_profile` tool returns: an agent that found
+  // the citation facts through a tool call and an agent that read them as a
+  // resource must not get different answers.
+  const author = RESOURCE_MANIFEST.find((e) => e.name === "author-profile")!;
+  server.registerResource(
+    author.name,
+    author.uri_template,
+    templateConfig(author),
+    observeRead(author.name, author.surface, telemetry, (uri) =>
+      jsonResource(uri, { resource_uri: resourceUri.authorProfile(), ...PROFILE }),
+    ) as unknown as (uri: URL, context: unknown) => Promise<ResourceResult>,
+  );
+
   const core = RESOURCE_MANIFEST.slice(1, 5);
   for (const entry of core) {
     const domain = entry.name.replace(/-unit$/, "") as Domain;
@@ -439,3 +464,4 @@ export function registerResources(
 }
 
 export { resourceSurfaceOf };
+import { PROFILE } from "./profile.ts";

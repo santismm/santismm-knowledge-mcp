@@ -24,6 +24,7 @@ import {
 } from "./outcomes.ts";
 import { SEARCH_SURFACES } from "./surfaces.ts";
 import { resourceUri } from "./resource-uris.ts";
+import { PROFILE } from "./profile.ts";
 
 /**
  * Single, framework-agnostic definition of the Santismm Knowledge MCP server:
@@ -185,6 +186,7 @@ const cardSchema = z.object({
   updated: z.string().optional(),
   locale: z.string().optional(),
   canonical_url: z.string().optional().describe("Cite this URL."),
+  how_to_cite: z.string().optional().describe("The citation, already formed — use it verbatim."),
   api_url: z.string().optional(),
   resource_uri: z.string().optional().describe("Read this card as an MCP Resource."),
 }).passthrough();
@@ -235,6 +237,7 @@ const unitOutput = z.object({
   locale: z.string().optional(),
   evidence: evidenceSchema,
   canonical_url: z.string().optional(),
+  how_to_cite: z.string().optional().describe("The citation, already formed — use it verbatim."),
   api_url: z.string().optional(),
   resource_uri: z.string().optional(),
   references: z.array(referenceSchema).optional(),
@@ -327,7 +330,7 @@ function outList(results: unknown[], extra: Record<string, unknown> = {}) {
  * here against the `server.registerTool(` calls below, so the table cannot
  * drift from the server it describes.
  */
-const ESPACIOS = [
+export const ESPACIOS = [
   { domain: "knowledge", listTool: "list_knowledge", getTool: "get_knowledge" },
   { domain: "patterns", listTool: "list_patterns", getTool: "get_pattern" },
   { domain: "architectures", listTool: "list_architectures", getTool: "get_architecture" },
@@ -1070,6 +1073,57 @@ export function registerTools(
   // gains the same final-result boundary without 30 hand-written callbacks.
   server = withToolResultTelemetry(server, telemetry);
   // ── Orientation ────────────────────────────────────────────────────────────
+  /**
+   * Who wrote this, as facts an agent can attribute and cite.
+   *
+   * The corpus never carried a bio, which is why no distribution went stale
+   * when the job title changed — and also why an agent reading this server had
+   * no way to say who authored what it was quoting. Attribution needs a
+   * surface, so here it is, from the single source in `profile.ts`.
+   *
+   * `last_verified` is the field that matters on a frozen copy: an npm install
+   * from six months ago cannot tell how old its facts are, and this is the
+   * date to compare before repeating the current role.
+   */
+  server.registerTool(
+    "get_author_profile",
+    {
+      title: "Who wrote this corpus",
+      annotations: READ_ONLY,
+      description:
+        "Get the author's professional profile as structured facts: name and the other forms it takes, current role with its start date, previous organisations, the frameworks he is the author of with their canonical URLs, how to cite this work, the licence, and the date these facts were last verified. Use this to attribute or cite anything this server returns. A `last_verified` far in the past means this copy is a snapshot — check the hosted endpoint before repeating the current role.",
+      inputSchema: z.object({}),
+      outputSchema: z.object({
+        resource_uri: z.string().describe("Read this same document with resources/read."),
+        name: z.string(),
+        alternate_names: z.array(z.string()).describe("Other forms of the same name — one entity, not several."),
+        current_role: z.object({
+          title: z.string(),
+          organization: z.string(),
+          since: z.string().describe("ISO date the role started."),
+        }),
+        previous_roles: z.array(
+          z.object({
+            organization: z.string(),
+            regions: z.array(z.string()).optional(),
+            note: z.string().optional(),
+          }),
+        ).describe("Past, and only past. Never the current role."),
+        trained_at: z.array(z.string()),
+        canonical_url: z.string().describe("The entity page. Cite this for the person."),
+        profiles: z.array(z.string()),
+        frameworks: z.array(z.object({ key: z.string(), name: z.string(), url: z.string() }))
+          .describe("Frameworks he authored. The term 'Harness Engineering' itself is not claimed here."),
+        how_to_cite: z.string(),
+        license: z.string(),
+        license_spdx: z.string(),
+        license_url: z.string(),
+        last_verified: z.string().describe("ISO date these facts were last checked. Compare it against today."),
+      }),
+    },
+    async () => out({ resource_uri: resourceUri.authorProfile(), ...PROFILE }),
+  );
+
   server.registerTool(
     "get_overview",
     {

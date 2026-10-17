@@ -213,6 +213,12 @@ export function summarize(domain: Domain, entry: Entry, locale: Locale = "en") {
     locale,
     // Canonical, citable URL for this unit in the requested language.
     canonical_url: `${SITE_URL}/${locale}/${domain}/${entry.slug}`,
+    // And the citation itself, already formed. An agent that has the URL still
+    // has to invent a format; this is the format, with this unit's own title
+    // and revision year, so two agents citing the same unit write the same
+    // thing. The year is `updated`, labelled as the revision — the corpus
+    // records a publication date only where one is known.
+    how_to_cite: `Santa María Morales, S. (${String(entry.updated).slice(0, 4)}). ${name}${/[.?!。！？]$/.test(name) ? "" : "."} santismm.com. ${SITE_URL}/${locale}/${domain}/${entry.slug}`,
     api_url: `${SITE_URL}/api/${domain}/${entry.slug}`,
     resource_uri: resourceUri.core(domain, entry.slug, locale),
   };
@@ -856,12 +862,22 @@ export function makeContent(
       const entry = getOne(domain, slug);
       if (!entry) return undefined;
       // Full units are citable too: carry the same canonical/API URLs the
-      // cards do, so an agent never has to reconstruct them.
+      // cards do, so an agent never has to reconstruct them — and the citation
+      // already formed, so it does not have to invent a format either. The
+      // title comes from the requested locale, falling back to English, which
+      // is the same rule the body follows.
+      const loc = locale ?? "en";
+      const titled = entry.locales?.[loc] ?? entry.locales?.en;
+      const citeName = (titled as { title?: string } | undefined)?.title ?? entry.slug;
       const links = {
         domain,
-        canonical_url: `${SITE_URL}/${locale ?? "en"}/${domain}/${entry.slug}`,
+        canonical_url: `${SITE_URL}/${loc}/${domain}/${entry.slug}`,
         api_url: `${SITE_URL}/api/${domain}/${entry.slug}`,
-        resource_uri: resourceUri.core(domain, entry.slug, locale ?? "en"),
+        // No second full stop after a title that already ends in one: many
+        // units are questions, and "…de Agentes?." is what an agent would
+        // then copy verbatim into a bibliography.
+        how_to_cite: `Santa María Morales, S. (${String(entry.updated).slice(0, 4)}). ${citeName}${/[.?!。！？]$/.test(citeName) ? "" : "."} santismm.com. ${SITE_URL}/${loc}/${domain}/${entry.slug}`,
+        resource_uri: resourceUri.core(domain, entry.slug, loc),
       };
       if (!locale) return { ...entry, ...links };
       const { locales, ...meta } = entry;

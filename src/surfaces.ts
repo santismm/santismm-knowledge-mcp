@@ -8,7 +8,7 @@
  * silencio, y una superficie sin datos se lee como «nadie la usa».
  *
  * Aquí no sobra nada por descarte: el núcleo se declara igual que las
- * extensiones. `meta` son las dos transversales —`get_overview` y
+ * extensiones. `meta` son las transversales —`get_overview`, `get_author_profile` y
  * `search_all`— y separarlas no es cosmético: la lectura de 90 días encontró
  * que ~16.400 de 39.499 peticiones eran saludo y catálogo, así que mezclarlas
  * con el consumo de contenido es justo lo que hace que el volumen parezca
@@ -27,7 +27,7 @@ export const SURFACE_TOOLS = {
     "list_handbook", "get_handbook",
     "get_related", "search",
   ],
-  meta: ["get_overview", "search_all"],
+  meta: ["get_overview", "get_author_profile", "search_all"],
   articles: ["list_articles", "get_article", "search_articles"],
   homeric_atlas: [
     "list_homeric_places", "get_homeric_place",

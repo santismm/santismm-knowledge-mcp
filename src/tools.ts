@@ -12,6 +12,7 @@ import {
 import {
   LABS_API_URL,
   executeLabCalculator,
+  labContentLocale,
   loadLabs,
   searchLabCorpus,
   type LabDefinition,
@@ -22,6 +23,7 @@ import {
   benchmarkRecord,
   benchmarkRows,
   benchmarkSlug,
+  benchLocale,
   compareModels,
   findBenchmark,
   findProfession,
@@ -807,6 +809,8 @@ const humanSupervisionOutput = calculationBaseSchema.extend({
 
 const globalSearchCard = z.object({
   surface: z.enum(SEARCH_SURFACES),
+  content_locale: z.string().optional().describe("The language this result is actually in."),
+  fallback: z.boolean().optional().describe("True when content_locale differs from the requested locale."),
   score: z.number(),
   source_score: z.number(),
   rank_within_surface: z.number(),
@@ -826,8 +830,19 @@ const globalSearchCard = z.object({
 
 const globalSearchOutput = {
   query: z.string(),
+  /**
+   * The six surfaces resolve language by six different rules — the corpus
+   * falls back to English, labs keep a Spanish base, benchmarks carry only
+   * English and Spanish, and federated articles negotiate nothing at all. A
+   * request in Japanese could come back three-quarters in other languages
+   * with nothing saying so. These three fields are that contract, made
+   * explicit: what was asked, what each result is in, and whether the second
+   * differs from the first.
+   */
+  requested_locale: z.string().describe("The locale this search asked for."),
   count: z.number(),
   results: z.array(globalSearchCard),
+  substituted_count: z.number().describe("How many results are not in the requested language."),
   unavailable_surfaces: z.array(z.object({
     surface: z.enum(["articles", "labs", "benchmarks"]),
     error: z.string(),
@@ -1356,10 +1371,15 @@ export function registerTools(
           .describe("Restrict the search. Omit to search all six surfaces."),
         limit_per_surface: z.number().int().positive().max(10).optional().describe("Maximum hits from each surface. Default: 5."),
         locale: localeSchema,
+        content_locales: z.array(z.string()).min(1).optional()
+          .describe("Keep only results actually written in these languages. `locale` is a presentation preference and still returns substitutions, labelled; this is the hard filter. A result that cannot declare its language is dropped."),
       }),
-      outputSchema: z.object(globalSearchOutput),
+      outputSchema: z.object({
+        ...globalSearchOutput,
+        empty_reason: z.string().optional().describe("Why a strict content_locales filter returned nothing."),
+      }),
     },
-    async ({ query, surfaces, limit_per_surface, locale }) => {
+    async ({ query, surfaces, limit_per_surface, locale, content_locales }) => {
       try {
         const selected = new Set<string>(surfaces ?? SEARCH_SURFACES);
         const limit = limit_per_surface ?? 5;
@@ -1402,6 +1422,7 @@ export function registerTools(
             hits.push({
               ...raw,
               surface: "core",
+              // `content_locale` arrives inside `raw` from the corpus shaping.
               score: sourceScore + boost,
               source_score: sourceScore,
               rank_within_surface: index + 1,
@@ -1418,6 +1439,10 @@ export function registerTools(
           for (const [index, raw] of searchArticleCorpus(articles, query, limit).entries()) {
             hits.push({
               surface: "articles", score: raw.score + boost, source_score: raw.score,
+              // Each article declares its own language and nothing negotiates
+              // it: this is the surface that returned Portuguese for a Spanish
+              // request without saying so.
+              content_locale: String(raw.language ?? "").toLowerCase().split("-")[0] || undefined,
               rank_within_surface: index + 1, slug: raw.slug, title: raw.title, summary: raw.summary,
               canonical_url: raw.canonical_url, api_url: raw.api_url, suggested_tool: "get_article",
               resource_uri: resourceUri.article(raw.slug),
@@ -1436,6 +1461,7 @@ export function registerTools(
           for (const [index, raw] of searchLabCorpus(labs, query, limit, lang).entries()) {
             hits.push({
               surface: "labs", score: raw.score + boost, source_score: raw.score,
+              content_locale: labContentLocale(raw.slug, lang),
               rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind, title: raw.title,
               summary: raw.description, canonical_url: raw.canonical_url, api_url: raw.api_url,
               calculation_url: raw.calculation_url,
@@ -1452,6 +1478,9 @@ export function registerTools(
             const claim = raw.claim;
             hits.push({
               surface: "claims", score: raw.score + boost, source_score: raw.score,
+              // `listClaims` does not fall back, and an untranslated claim
+              // scores zero, so one that reaches here is in `lang`.
+              content_locale: lang,
               rank_within_surface: index + 1, id: claim.id, slug: claim.slug,
               kind: claim.claim_type, title: String(claim.statement ?? claim.slug),
               summary: `Epistemic type: ${String(claim.claim_type)}; confidence: ${String(claim.confidence_level)}.`,
@@ -1466,6 +1495,7 @@ export function registerTools(
           for (const [index, raw] of homericSearch(content, query, lang, limit).entries()) {
             hits.push({
               surface: "homeric_atlas", score: raw.score + boost, source_score: raw.score,
+              content_locale: raw.content_locale,
               rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind,
               title: String(raw.name ?? raw.slug), summary: raw.summary,
               canonical_url: raw.canonical_url, api_url: raw.api_url,
@@ -1481,6 +1511,9 @@ export function registerTools(
           for (const [index, raw] of searchBenchmarkCorpus(benchLoad.value, query, limit, lang).entries()) {
             hits.push({
               surface: "benchmarks", score: raw.score + boost, source_score: raw.score,
+              // Benchmarks carry English and Spanish only: every other
+              // requested language resolves to English, by construction.
+              content_locale: benchLocale(lang),
               rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind, title: raw.title,
               summary: raw.summary, canonical_url: raw.canonical_url,
               resource_uri: raw.kind === "profession" ? resourceUri.profession(raw.slug) : resourceUri.benchmark(raw.slug),
@@ -1490,8 +1523,31 @@ export function registerTools(
           }
         }
 
-        hits.sort((a, b) => Number(b.score) - Number(a.score) || Number(a.rank_within_surface) - Number(b.rank_within_surface));
-        return out({ query, count: hits.length, results: hits, unavailable_surfaces: unavailableSurfaces }, hits);
+        // One place, after every surface has declared what it has: mark the
+        // substitutions, then apply the strict filter if one was asked for.
+        for (const hit of hits) {
+          if (typeof hit.content_locale === "string") hit.fallback = hit.content_locale !== lang;
+        }
+        const allowed = content_locales;
+        const kept = allowed
+          // A result that cannot say what language it is in is not "allowed by
+          // default": a filter that silently keeps unknowns is not a filter.
+          ? hits.filter((h) => typeof h.content_locale === "string" && allowed.includes(h.content_locale))
+          : hits;
+        kept.sort((a, b) => Number(b.score) - Number(a.score) || Number(a.rank_within_surface) - Number(b.rank_within_surface));
+        return out({
+          query,
+          requested_locale: lang,
+          count: kept.length,
+          results: kept,
+          substituted_count: kept.filter((h) => h.fallback === true).length,
+          unavailable_surfaces: unavailableSurfaces,
+          ...(allowed && kept.length === 0
+            // An empty list is explained rather than left to look like "no
+            // such content": the report asks for exactly this.
+            ? { empty_reason: `No result matched content_locales=${allowed.join(",")}. Surfaces carry: core and claims in all seven locales, labs in es/pt/en, benchmarks in en/es, articles in whatever language each essay was written in.` }
+            : {}),
+        }, kept);
       } catch (error) {
         return globalSearchFailure(error);
       }

@@ -100,6 +100,21 @@ function localizedLab(lab: LabDefinition, locale: Locale): LabDefinition {
   return copy ? { ...lab, ...copy } : lab;
 }
 
+/**
+ * Which language a lab's card actually comes back in.
+ *
+ * Reads the same rule `localizedLab` applies, rather than restating it: only
+ * `es` and `pt` are asked for directly, anything else resolves to `en`, and a
+ * lab with no translated copy keeps the base definition — which is **Spanish**.
+ * So an English request for a lab without English copy returns Spanish text,
+ * and nothing said so.
+ */
+export function labContentLocale(slug: string, locale: Locale): 'en' | 'es' | 'pt' {
+  const resolved: LabLocale = locale === 'es' || locale === 'pt' ? locale : 'en';
+  if (resolved === 'es') return 'es';
+  return LAB_SEARCH_COPY[slug]?.[resolved] ? resolved : 'es';
+}
+
 interface LabCorpus {
   source: string;
   canonical_url: string;

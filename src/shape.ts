@@ -190,17 +190,27 @@ function domainOverview(domain: Domain, items: Array<{ category?: string }>): Do
   };
 }
 
-/** The display name + short text from a locale (knowledge uses title; others name). */
+/**
+ * The display name + short text from a locale (knowledge uses title; others name).
+ *
+ * Returns the locale the text is actually in, which is not always the one
+ * asked for: a unit without the requested translation falls back to English,
+ * and the card used to be labelled with the *requested* locale regardless. No
+ * unit is missing a translation today, so nothing was mislabelled in
+ * practice — but the field said something the code could not promise.
+ */
 function localeText(entry: Entry, locale: Locale = "en") {
+  const has = entry.locales?.[locale] !== undefined;
+  const contentLocale: Locale = has ? locale : "en";
   const L = (entry.locales?.[locale] ?? entry.locales?.en ?? {}) as Record<string, unknown>;
   const name = (L.name ?? L.title ?? entry.slug) as string;
   const summary = (L.summary ?? L.definition ?? "") as string;
-  return { name, summary };
+  return { name, summary, contentLocale };
 }
 
 /** Compact card used in list/search/graph results. */
 export function summarize(domain: Domain, entry: Entry, locale: Locale = "en") {
-  const { name, summary } = localeText(entry, locale);
+  const { name, summary, contentLocale } = localeText(entry, locale);
   return {
     domain,
     id: entry.id,
@@ -211,6 +221,10 @@ export function summarize(domain: Domain, entry: Entry, locale: Locale = "en") {
     evidence: entry.evidence,
     updated: entry.updated,
     locale,
+    // The language the text above is in. Equal to `locale` whenever the
+    // translation exists, which is every unit today; stated so a client never
+    // has to assume it.
+    content_locale: contentLocale,
     // Canonical, citable URL for this unit in the requested language.
     canonical_url: `${SITE_URL}/${locale}/${domain}/${entry.slug}`,
     // And the citation itself, already formed. An agent that has the URL still
@@ -621,6 +635,11 @@ function homericBody(e: HomericArtifact, locale: Locale): Record<string, unknown
   return e.locales?.[locale] ?? e.locales?.en;
 }
 
+/** Which language `homericBody` will actually return for this artifact. */
+function homericContentLocale(e: HomericArtifact, locale: Locale): Locale {
+  return e.locales?.[locale] !== undefined ? locale : "en";
+}
+
 /**
  * The confidence a place leads with: the strongest identification class it
  * carries, then the highest score inside that class — the same rule the site
@@ -650,6 +669,7 @@ function summarizeHomeric(kind: HomericKind, e: HomericArtifact, locale: Locale)
     id: e.id,
     slug: e.slug,
     name,
+    content_locale: homericContentLocale(e, locale),
     summary: typeof body.summary === "string" ? body.summary : undefined,
     identification: e.identification,
     region: e.region,

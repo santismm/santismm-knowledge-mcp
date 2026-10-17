@@ -3,6 +3,15 @@ import {
   ResourceTemplate,
 } from "@modelcontextprotocol/server";
 import { loadArticles } from "./articles.ts";
+import {
+  benchmarkRecord,
+  benchmarkSlug,
+  findBenchmark,
+  findProfession,
+  loadBenchmarkCorpus,
+  loadRanking,
+  professionRecord,
+} from "./benchmarks.ts";
 import type { Domain, Locale } from "./content.ts";
 import { resourceSurfaceOf, resourceUri } from "./resource-uris.ts";
 import type { Surface } from "./surfaces.ts";
@@ -134,6 +143,22 @@ const RESOURCE_MANIFEST: readonly ResourceManifestEntry[] = [
     uri_template: resourceUri.authorProfile(),
     surface: "meta",
     federated: false,
+  },
+  {
+    name: "profession-ranking",
+    title: "AI model ranking for one profession",
+    description: "Read one profession's AI model ranking from benchmarks.santismm.com, with its direct or indirect evaluation and the tasks no benchmark measures.",
+    uri_template: "santismm://professions/{id}",
+    surface: "benchmarks",
+    federated: true,
+  },
+  {
+    name: "benchmark-record",
+    title: "AI benchmark record",
+    description: "Read one benchmark from the AI Agent Benchmarks catalogue: SOTA, saturation, source, radar axis and recorded model scores.",
+    uri_template: "santismm://benchmarks/{slug}",
+    surface: "benchmarks",
+    federated: true,
   },
 ] as const;
 
@@ -459,6 +484,32 @@ export function registerResources(
       const value = content.getClaim(id, locale);
       if (!value) throw new ResourceNotFoundError(uri.href);
       return jsonResource(uri, value);
+    }),
+  );
+
+  const professions = RESOURCE_MANIFEST[11];
+  server.registerResource(
+    professions.name,
+    new ResourceTemplate(professions.uri_template, { list: undefined }),
+    templateConfig(professions, FEDERATED_CACHE),
+    observeRead(professions.name, professions.surface, telemetry, async (uri, variables) => {
+      const file = await loadRanking();
+      const value = findProfession(file, stringVariable(variables.id));
+      if (!value) throw new ResourceNotFoundError(uri.href);
+      return jsonResource(uri, { ...professionRecord(value, file), resource_uri: resourceUri.profession(value.id) });
+    }),
+  );
+
+  const benchmarks = RESOURCE_MANIFEST[12];
+  server.registerResource(
+    benchmarks.name,
+    new ResourceTemplate(benchmarks.uri_template, { list: undefined }),
+    templateConfig(benchmarks, FEDERATED_CACHE),
+    observeRead(benchmarks.name, benchmarks.surface, telemetry, async (uri, variables) => {
+      const corpus = await loadBenchmarkCorpus();
+      const value = findBenchmark(corpus, stringVariable(variables.slug));
+      if (!value) throw new ResourceNotFoundError(uri.href);
+      return jsonResource(uri, { ...benchmarkRecord(corpus, value), resource_uri: resourceUri.benchmark(benchmarkSlug(value.name)) });
     }),
   );
 }

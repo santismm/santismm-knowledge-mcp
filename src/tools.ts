@@ -17,6 +17,22 @@ import {
   type LabDefinition,
 } from "./labs.ts";
 import {
+  BENCHMARKS_ORIGIN,
+  benchmarkCard,
+  benchmarkRecord,
+  benchmarkRows,
+  benchmarkSlug,
+  compareModels,
+  findBenchmark,
+  findProfession,
+  loadBenchmarkCorpus,
+  loadRanking,
+  professionCandidates,
+  professionCard,
+  professionRecord,
+  searchBenchmarkCorpus,
+} from "./benchmarks.ts";
+import {
   lookupRequestForTool,
   summarizeToolResult,
   type McpToolObservation,
@@ -342,6 +358,8 @@ export const ESPACIOS = [
   { domain: "claims", listTool: "list_claims", getTool: "get_claim" },
   { domain: "articles", listTool: "list_articles", getTool: "get_article" },
   { domain: "labs", listTool: "list_labs", getTool: "get_lab" },
+  { domain: "professions", listTool: "list_professions", getTool: "recommend_model_for_profession" },
+  { domain: "benchmarks", listTool: "list_benchmarks", getTool: "get_benchmark" },
 ] as const;
 
 type EspacioNombre = (typeof ESPACIOS)[number]["domain"];
@@ -363,7 +381,7 @@ function identificadores(cards: unknown[]): string[] {
 function cardsDe(content: McpContent, domain: EspacioNombre, locale: Locale): unknown[] {
   // Federated Articles and Labs are asynchronous and have their own recovery
   // payloads; keep them out of the synchronous cross-space lookup for locals.
-  if (domain === "articles" || domain === "labs") return [];
+  if (domain === "articles" || domain === "labs" || domain === "professions" || domain === "benchmarks") return [];
   if (domain === "handbook") return content.listHandbook(locale);
   if (domain === "claims") return content.listClaims(undefined, locale);
   if (domain.startsWith("homeric/")) {
@@ -429,7 +447,7 @@ export async function observeToolResult(
   const wanted = normalizar(lookup.identifier);
 
   for (const space of ESPACIOS) {
-    if (space.domain === lookup.domain || space.domain === "articles" || space.domain === "labs") continue;
+    if (space.domain === lookup.domain || ["articles", "labs", "professions", "benchmarks"].includes(space.domain)) continue;
     try {
       const exact = cardsDe(content, space.domain, "en").find((candidate) => {
         const item = candidate as Record<string, unknown> | null;
@@ -811,7 +829,7 @@ const globalSearchOutput = {
   count: z.number(),
   results: z.array(globalSearchCard),
   unavailable_surfaces: z.array(z.object({
-    surface: z.enum(["articles", "labs"]),
+    surface: z.enum(["articles", "labs", "benchmarks"]),
     error: z.string(),
     retry_tool: z.string(),
   })),
@@ -876,6 +894,150 @@ function labNotFound(labs: Array<{ slug: string }>, slug: string) {
     available,
     list_tool: "list_labs",
     hint: "Call list_labs for every valid slug. Only Labs with calculation_url can be executed.",
+  };
+  return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
+}
+
+/**
+ * Benchmarks (federated from benchmarks.santismm.com).
+ *
+ * The envelope is closed; the records are open, because the benchmarks site
+ * adds catalogue fields between releases and a closed record would turn each
+ * one into a contract violation. What an agent must not miss — whether the
+ * ranking is a direct or an indirect evaluation, and which tasks nothing
+ * measures — is declared and required.
+ */
+const rankedModelSchema = z.object({
+  id: z.string(), name: z.string(), org: z.string(), score: z.number(),
+}).passthrough();
+
+const professionCardSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  group: z.string(),
+  evaluation: z.enum(["direct", "indirect"]),
+  first: z.string().nullable(),
+  unmeasured_tasks: z.number().describe("How many of its listed tasks no benchmark measures yet."),
+  canonical_url: z.string().describe("Cite this URL."),
+  dataset_version: z.string(),
+  resource_uri: z.string(),
+});
+
+const professionRecordSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  group: z.string(),
+  requested_locale: z.string(),
+  resolved_locale: z.enum(["en", "es"]),
+  evaluation: z.object({
+    type: z.enum(["direct", "indirect"]),
+    direct_share: z.number(),
+    how_to_present: z.string().describe("Follow this when quoting the ranking."),
+  }),
+  tasks: z.array(z.object({ task: z.string(), measured_by: z.array(z.string()) })),
+  unmeasured_tasks: z.array(z.string()),
+  picks: z.object({
+    first: rankedModelSchema.nullable(),
+    second: rankedModelSchema.nullable(),
+    close_call: z.boolean(),
+    best_value: rankedModelSchema.nullable(),
+    best_open_weights: rankedModelSchema.nullable(),
+  }),
+  ranking: z.array(rankedModelSchema),
+  caveat: z.string(),
+  not_measured: z.string(),
+  canonical_url: z.string().describe("Cite this URL."),
+  dataset_version: z.string(),
+  radar_version: z.string(),
+  professions_version: z.string(),
+  resource_uri: z.string(),
+}).passthrough();
+
+const benchmarkCardSchema = z.object({
+  slug: z.string(),
+  name: z.string(),
+  list: z.enum(["catalog", "complementary"]),
+  measures: z.string().optional(),
+  group: z.string().optional(),
+  saturation: z.string().optional(),
+  sota_normalized: z.number().nullable(),
+  resource_uri: z.string(),
+});
+
+const benchmarkRecordSchema = z.object({
+  slug: z.string(),
+  name: z.string(),
+  list: z.enum(["catalog", "complementary"]),
+  radar: z.array(z.object({}).passthrough()),
+  model_scores: z.array(z.object({}).passthrough()),
+  comparable_across_labs: z.boolean(),
+  used_by_professions: z.array(z.string()),
+  canonical_url: z.string().describe("Cite this URL with dataset_version."),
+  dataset_version: z.string(),
+  citation: z.string(),
+  resource_uri: z.string(),
+}).passthrough();
+
+const compareOutput = z.object({
+  models: z.array(z.object({ id: z.string(), name: z.string(), org: z.string() })),
+  unknown_models: z.array(z.string()),
+  available_models: z.array(z.string()),
+  profession: z.object({
+    id: z.string(),
+    evaluation: z.enum(["direct", "indirect"]),
+    rows: z.array(rankedModelSchema),
+    not_ranked: z.array(z.object({}).passthrough()),
+  }).nullable(),
+  benchmarks: z.array(z.object({
+    benchmark: z.string(),
+    comparable_across_labs: z.boolean(),
+    scores: z.array(z.object({}).passthrough()),
+  })),
+  note: z.string(),
+  dataset_version: z.string(),
+  radar_version: z.string(),
+  canonical_url: z.string(),
+});
+
+function benchmarksFailure(error: unknown) {
+  const body = {
+    error: "benchmarks_unavailable",
+    source: BENCHMARKS_ORIGIN,
+    hint: "The AI Agent Benchmarks files could not be read. Retry later or read professions-ranking.json, data.json and radar.json from that origin directly.",
+    detail: error instanceof Error ? error.message : String(error),
+  };
+  return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
+}
+
+/** A federated miss, with the same recovery fields `noEncontrado` gives local spaces. */
+function federatedNotFound(
+  domain: "professions" | "benchmarks",
+  wanted: string,
+  available: string[],
+  listTool: string,
+  extra = "",
+  matches: string[] = [],
+) {
+  const buscado = normalizar(wanted);
+  const tope = Math.max(2, Math.floor(buscado.length / 3));
+  // Several professions answering to the same words is ambiguity, not a typo: name them all.
+  const cerca = matches.length > 1 ? matches : available
+    .map((id) => ({ id, d: distancia(buscado, normalizar(id), tope) }))
+    .filter((c) => c.d <= tope)
+    .sort((a, b) => a.d - b.d)
+    .slice(0, 3)
+    .map((c) => c.id);
+  const orden = [...available].sort();
+  const body: Record<string, unknown> = {
+    error: "not_found",
+    domain,
+    slug: wanted,
+    ...(cerca.length ? { did_you_mean: cerca } : {}),
+    available_count: orden.length,
+    available: orden.slice(0, MUESTRA_MAXIMA),
+    ...(orden.length > MUESTRA_MAXIMA ? { available_truncated: true } : {}),
+    list_tool: listTool,
+    hint: `${cerca.length ? `Did you mean ${cerca.map((c) => `"${c}"`).join(", ")}? ` : ""}${listTool} returns every identifier this tool accepts.${extra}`,
   };
   return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
 }
@@ -980,6 +1142,7 @@ function intentBoost(query: string, surface: (typeof SEARCH_SURFACES)[number]): 
   if (surface === "labs" && /\b(calcul\w*|how many|cuant\w*|sample|muestra|roi|cost\w*|coste\w*|supervis\w*|fte|capacity|capacidad|break even|token\w*|pages|paginas)\b/.test(normal)) return 30;
   if (surface === "claims" && /\b(claim|claims|evidence|fact|thesis|tesis|hypothesis|hipotesis|falsif|refut)\b/.test(normal)) return 25;
   if (surface === "homeric_atlas" && /\b(homer\w*|homér\w*|iliad\w*|ilíad\w*|odyssey|odisea|odisseia|ithaca|itaca|ítaca|troy|troya|ulysses|ulises|odysseus|odiseo)\b/.test(normal)) return 25;
+  if (surface === "benchmarks" && /\b(benchmark\w*|which (ai|model|llm)|que (ia|modelo)|mejor modelo|best model|model\w* (for|para)|profession\w*|profesion\w*|sota|leaderboard|ranking)\b/.test(normal)) return 25;
   if (surface === "articles" && /\b(article|articles|essay|essays|articulo|artículo|ensayo|recent|latest|nuevo|reciente)\b/.test(normal)) return 20;
   return 0;
 }
@@ -1130,7 +1293,7 @@ export function registerTools(
       title: "Corpus Overview — Start Here",
       annotations: READ_ONLY,
       description:
-        "Get the complete MCP map — start here. Returns the five-domain core plus the separate Article, Labs, Homeric Atlas and claim-registry surfaces, with their tools, identifiers, citation rules, languages, licence and bulk-ingest URLs.",
+        "Get the complete MCP map — start here. Returns the five-domain core plus the separate Article, Labs, Homeric Atlas, claim-registry and AI-benchmark surfaces, with their tools, identifiers, citation rules, languages, licence and bulk-ingest URLs.",
       inputSchema: z.object({}),
       outputSchema: z.object({
         resource_uri: z.string().describe("Read this same document with resources/read."),
@@ -1184,13 +1347,13 @@ export function registerTools(
       title: "Search every SANTISMM knowledge surface",
       annotations: READ_ONLY_REMOTE,
       description:
-        "Search the core corpus, first-party essays, executable Labs, epistemic claims and the Homeric Atlas in one call. Use this first when a natural-language question might require a calculation, a long-form essay or a claim audit rather than only a core knowledge unit. Results name the next tool to call; calculator-shaped questions are routed toward Labs.",
+        "Search the core corpus, first-party essays, executable Labs, epistemic claims, the Homeric Atlas and the AI benchmarks (professions and benchmark catalogue) in one call. Use this first when a natural-language question might require a calculation, a long-form essay, a claim audit or a model choice rather than only a core knowledge unit. Results name the next tool to call; calculator-shaped questions are routed toward Labs, and 'which AI model for…' questions toward the benchmarks.",
       inputSchema: z.object({
         query: querySchema.describe(
           "Question or topic, in English, Spanish, Portuguese, French, German, Japanese or Simplified Chinese.",
         ),
         surfaces: z.array(z.enum(SEARCH_SURFACES)).min(1).optional()
-          .describe("Restrict the search. Omit to search all five surfaces."),
+          .describe("Restrict the search. Omit to search all six surfaces."),
         limit_per_surface: z.number().int().positive().max(10).optional().describe("Maximum hits from each surface. Default: 5."),
         locale: localeSchema,
       }),
@@ -1201,11 +1364,12 @@ export function registerTools(
         const selected = new Set<string>(surfaces ?? SEARCH_SURFACES);
         const limit = limit_per_surface ?? 5;
         const lang = (locale ?? "en") as Locale;
-        const [articleLoad, labLoad] = await Promise.allSettled([
+        const [articleLoad, labLoad, benchLoad] = await Promise.allSettled([
           selected.has("articles") ? loadArticles() : Promise.resolve([]),
           selected.has("labs") ? loadLabs() : Promise.resolve([]),
+          selected.has("benchmarks") ? loadBenchmarkCorpus() : Promise.resolve(undefined),
         ]);
-        const unavailableSurfaces: Array<{ surface: "articles" | "labs"; error: string; retry_tool: string }> = [];
+        const unavailableSurfaces: Array<{ surface: "articles" | "labs" | "benchmarks"; error: string; retry_tool: string }> = [];
         const articles = articleLoad.status === "fulfilled" ? articleLoad.value : [];
         const labs = labLoad.status === "fulfilled" ? labLoad.value : [];
         if (selected.has("articles") && articleLoad.status === "rejected") {
@@ -1220,6 +1384,13 @@ export function registerTools(
             surface: "labs",
             error: labLoad.reason instanceof Error ? labLoad.reason.message : String(labLoad.reason),
             retry_tool: "list_labs",
+          });
+        }
+        if (selected.has("benchmarks") && benchLoad.status === "rejected") {
+          unavailableSurfaces.push({
+            surface: "benchmarks",
+            error: benchLoad.reason instanceof Error ? benchLoad.reason.message : String(benchLoad.reason),
+            retry_tool: "list_professions",
           });
         }
         const hits: Array<Record<string, unknown>> = [];
@@ -1300,6 +1471,20 @@ export function registerTools(
               canonical_url: raw.canonical_url, api_url: raw.api_url,
               resource_uri: raw.resource_uri,
               suggested_tool: HOMERIC_TOOL[raw.kind],
+              matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
+            });
+          }
+        }
+
+        if (selected.has("benchmarks") && benchLoad.status === "fulfilled" && benchLoad.value) {
+          const boost = intentBoost(query, "benchmarks");
+          for (const [index, raw] of searchBenchmarkCorpus(benchLoad.value, query, limit, lang).entries()) {
+            hits.push({
+              surface: "benchmarks", score: raw.score + boost, source_score: raw.score,
+              rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind, title: raw.title,
+              summary: raw.summary, canonical_url: raw.canonical_url,
+              resource_uri: raw.kind === "profession" ? resourceUri.profession(raw.slug) : resourceUri.benchmark(raw.slug),
+              suggested_tool: raw.suggested_tool,
               matchedFields: raw.matchedFields, matchedTerms: raw.matchedTerms,
             });
           }
@@ -1576,6 +1761,145 @@ export function registerTools(
         );
       } catch (error) {
         return articleFailure(error);
+      }
+    },
+  );
+
+  // ── AI Agent Benchmarks (federated: benchmarks.santismm.com) ─────────────
+  // The ranking is read, never recomputed: benchmarks.santismm.com publishes
+  // the same professions-ranking.json its page renders.
+  server.registerTool(
+    "list_professions",
+    {
+      title: "List the professions with an AI model ranking",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "List the professions that have a ranking of frontier AI models built from independent benchmark results (lawyer, accountant, developer, salesperson, translator, engineer…), each marked as a direct or an indirect evaluation, with the model that ranks first today. Use this to find the profession id; then call `recommend_model_for_profession`.",
+      inputSchema: z.object({
+        group: z.string().max(64).optional().describe("Restrict to one family: knowledge, business, creative, tech, technical or care."),
+        evaluation: z.enum(["direct", "indirect"]).optional().describe("Restrict to direct evaluations (a benchmark reproduces the job) or indirect ones (general tests only)."),
+        locale: localeSchema.describe("Language of the names. The benchmarks site publishes en and es; other locales fall back to English."),
+      }),
+      outputSchema: z.object({ count: z.number(), results: z.array(professionCardSchema) }),
+    },
+    async ({ group, evaluation, locale }) => {
+      try {
+        const file = await loadRanking();
+        return outList(
+          file.professions
+            .filter((p) => (!group || p.group === group) && (!evaluation || p.evaluation.type === evaluation))
+            .map((p) => ({ ...professionCard(p, file, locale as Locale | undefined), resource_uri: resourceUri.profession(p.id) })),
+        );
+      } catch (error) {
+        return benchmarksFailure(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "recommend_model_for_profession",
+    {
+      title: "Which AI model is best for a profession",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Get the ranking of frontier AI models for one profession: the best result, the runner-up, the best value and the best open-weights model, the full table with data coverage and price, which tasks each benchmark measures and which tasks no benchmark measures yet. Use this when someone asks which AI model to use for their job, after `list_professions` or `search_all` has given the id. When `evaluation.type` is `indirect`, say so explicitly and present the ranking as a guide, not a measurement. Cite `canonical_url` with `dataset_version`.",
+      inputSchema: z.object({
+        id: z.string().min(1).max(128).describe("Profession id from list_professions (e.g. 'lawyer', 'translator'), or its name in English or Spanish."),
+        locale: localeSchema.describe("Language of names, tasks and caveats. The benchmarks site publishes en and es; other locales fall back to English."),
+        limit: z.number().int().positive().max(50).optional().describe("Rows of the full table to return (default: all)."),
+      }),
+      outputSchema: professionRecordSchema,
+    },
+    async ({ id, locale, limit }) => {
+      try {
+        const file = await loadRanking();
+        const p = findProfession(file, id);
+        if (!p) {
+          return federatedNotFound("professions", id, file.professions.map((x) => x.id), "list_professions",
+            " Professions are matched by id, by their English or Spanish name, or by words that name only one of them.",
+            professionCandidates(file, id).map((x) => x.id));
+        }
+        return out({ ...professionRecord(p, file, locale as Locale | undefined, limit), resource_uri: resourceUri.profession(p.id) });
+      } catch (error) {
+        return benchmarksFailure(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "compare_models",
+    {
+      title: "Compare AI models on published benchmark results",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Put two or more frontier models side by side on the benchmark results recorded for them (score, unit, source table and evidence grade per benchmark), optionally with their rows in one profession's ranking. Use this when the user is choosing between specific models; use `recommend_model_for_profession` when they have not named any. No new aggregate is computed. Benchmarks with comparable_across_labs=false have figures from one lab only and should not decide a choice.",
+      inputSchema: z.object({
+        models: z.array(z.string().min(1).max(128)).min(2).max(8).describe("Model ids or names, e.g. ['claude-opus-5.5', 'GPT-6 Astra']."),
+        profession: z.string().min(1).max(128).optional().describe("Optional profession id or name, to include the models' rows in its ranking."),
+      }),
+      outputSchema: compareOutput,
+    },
+    async ({ models, profession }) => {
+      try {
+        const corpus = await loadBenchmarkCorpus();
+        const p = profession ? findProfession(corpus.ranking, profession) : undefined;
+        if (profession && !p) {
+          return federatedNotFound("professions", profession, corpus.ranking.professions.map((x) => x.id), "list_professions");
+        }
+        return out(compareModels(corpus, models, p));
+      } catch (error) {
+        return benchmarksFailure(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "list_benchmarks",
+    {
+      title: "List the AI benchmarks tracked by benchmarks.santismm.com",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "List every benchmark in the AI Agent Benchmarks catalogue (agentic benchmarks with SOTA, saturation and headroom) and in the radar's complementary list (vision, long context, factuality, instruction following, language). Use this to find a benchmark slug; then call `get_benchmark`.",
+      inputSchema: z.object({
+        list: z.enum(["catalog", "complementary"]).optional().describe("Restrict to the agentic catalogue or the complementary list. Omit for both."),
+      }),
+      outputSchema: z.object({ count: z.number(), results: z.array(benchmarkCardSchema), dataset_version: z.string() }),
+    },
+    async ({ list }) => {
+      try {
+        const corpus = await loadBenchmarkCorpus();
+        const cards = benchmarkRows(corpus)
+          .filter((b) => !list || b.list === list)
+          .map((b) => ({ ...benchmarkCard(b), resource_uri: resourceUri.benchmark(benchmarkSlug(b.name)) }));
+        return outList(cards, { dataset_version: corpus.data.version });
+      } catch (error) {
+        return benchmarksFailure(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "get_benchmark",
+    {
+      title: "Get one AI benchmark with its SOTA and model scores",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Get one benchmark by slug or name: what it measures, state of the art, saturation, headroom, human baseline, source and notes, the radar axis it informs, the model scores recorded on it, and which profession rankings use it. Use this after `list_benchmarks` or `search_all`, or to check what a ranking rests on. Cite `canonical_url` with `dataset_version`.",
+      inputSchema: z.object({
+        slug: slugSchema.describe("Benchmark slug from list_benchmarks (e.g. 'swe-bench-pro') or its exact name."),
+      }),
+      outputSchema: benchmarkRecordSchema,
+    },
+    async ({ slug }) => {
+      try {
+        const corpus = await loadBenchmarkCorpus();
+        const b = findBenchmark(corpus, slug);
+        if (!b) {
+          return federatedNotFound("benchmarks", slug, benchmarkRows(corpus).map((x) => benchmarkSlug(x.name)), "list_benchmarks");
+        }
+        return out({ ...benchmarkRecord(corpus, b), resource_uri: resourceUri.benchmark(benchmarkSlug(b.name)) });
+      } catch (error) {
+        return benchmarksFailure(error);
       }
     },
   );

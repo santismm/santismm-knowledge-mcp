@@ -21,6 +21,8 @@ export const resourceUri = {
     `santismm://homeric/${kind}/${locale}/${encodeURIComponent(slug)}`,
   claim: (id: string, locale: Locale = "en") =>
     `santismm://claims/${locale}/${encodeURIComponent(id)}`,
+  profession: (id: string) => `santismm://professions/${encodeURIComponent(id)}`,
+  benchmark: (slug: string) => `santismm://benchmarks/${encodeURIComponent(slug)}`,
 } as const;
 
 const HOST_SURFACES: Readonly<Record<string, Surface>> = {
@@ -35,6 +37,8 @@ const HOST_SURFACES: Readonly<Record<string, Surface>> = {
   labs: "labs",
   homeric: "homeric_atlas",
   claims: "claims",
+  professions: "benchmarks",
+  benchmarks: "benchmarks",
 };
 
 /** Derive analytics attribution from the URI the resource registry serves. */

@@ -66,6 +66,8 @@ const GET_DETAIL: Record<string, { domain: string; argument: "slug" | "id" }> = 
   get_homeric_episode: { domain: "homeric/episodes", argument: "slug" },
   get_homeric_route: { domain: "homeric/routes", argument: "slug" },
   get_claim: { domain: "claims", argument: "id" },
+  recommend_model_for_profession: { domain: "professions", argument: "id" },
+  get_benchmark: { domain: "benchmarks", argument: "slug" },
 };
 
 export function lookupRequestForTool(

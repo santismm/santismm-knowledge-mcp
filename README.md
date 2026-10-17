@@ -41,8 +41,9 @@ npm ci && npm run build && npm start
 ```
 
 The core corpus ships in `content/` and is read from disk, so its tools work
-offline. The three federated Article tools read the canonical Articles API over
-HTTPS. Point the core corpus elsewhere with `SANTISMM_CONTENT_DIR`.
+offline. The federated Article, Labs and benchmark tools read their canonical
+first-party APIs over HTTPS (benchmarks: `SANTISMM_BENCHMARKS_URL`). Point the
+core corpus elsewhere with `SANTISMM_CONTENT_DIR`.
 
 ## Install from npm
 
@@ -82,12 +83,13 @@ is not a software licence and MIT is not a content licence.
 
 ## What it exposes
 
-31 read-only tools over knowledge, patterns, architectures, governance, the
-Harness Engineering Handbook and first-party Articles, each declaring an
+36 read-only tools over knowledge, patterns, architectures, governance, the
+Harness Engineering Handbook, first-party Articles, Labs and the AI benchmarks,
+each declaring an
 `outputSchema` and returning validated `structuredContent`. Every tool is
 annotated `readOnlyHint: true`, `destructiveHint: false` and
-`idempotentHint: true`. The three federated Article tools declare
-`openWorldHint: true`; local-corpus tools remain `false`.
+`idempotentHint: true`. The federated Article, Labs and benchmark tools
+declare `openWorldHint: true`; local-corpus tools remain `false`.
 
 Content in seven languages (en/es/pt/fr/de/ja/zh).
 

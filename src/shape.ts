@@ -821,6 +821,14 @@ export function makeContent(
             lookup: "Lab slug; executable tools take typed numeric assumptions",
             citation: "Definitions and calculation results carry canonical_url, api_url, version, assumptions and warnings.",
           },
+          {
+            surface: "benchmarks",
+            description: "Which AI model fits which profession, the AI agent benchmark catalogue and per-model results, read at call time from benchmarks.santismm.com. Profession rankings are marked direct or indirect evaluations and list the tasks no benchmark measures.",
+            tools: [...SURFACE_TOOLS.benchmarks],
+            source: "https://benchmarks.santismm.com/professions-ranking.json",
+            lookup: "profession id or name (en/es); benchmark slug or name",
+            citation: "Results carry canonical_url and dataset_version; cite both.",
+          },
         ],
         corpus: {
           newest_unit: newestUpdated([
@@ -837,7 +845,7 @@ export function makeContent(
           "search(query, locale) to search only the five-domain core; " +
           "list_<domain> to browse one; get_<domain>(slug) for a full unit with its " +
           "Evidence-First provenance; get_related(domain, slug) to traverse the graph. " +
-          "Use the tools named in extensions for Articles, the Homeric Atlas and claims. " +
+          "Use the tools named in extensions for Articles, the Homeric Atlas, claims and the AI benchmarks. " +
           "Citable content results carry canonical_url; claim records use their stable id.",
         // For agents that would rather ingest the corpus than walk it.
         bulk: {
@@ -850,6 +858,9 @@ export function makeContent(
           labs: "https://labs.santismm.com/llms-full.txt",
           labs_api: "https://labs.santismm.com/api/labs",
           labs_openapi: "https://labs.santismm.com/openapi.json",
+          benchmarks: "https://benchmarks.santismm.com/data.json",
+          benchmarks_professions: "https://benchmarks.santismm.com/professions-ranking.json",
+          benchmarks_radar: "https://benchmarks.santismm.com/radar.json",
         },
       };
     },

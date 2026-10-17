@@ -389,16 +389,28 @@ export interface BenchmarkSearchHit {
   matchedTerms: string[];
 }
 
+/**
+ * The words every model-choice question carries. They say which surface to
+ * route to (search_all's intent boost reads the raw query for that), but they
+ * name no profession, so scoring on them let "qué IA es mejor para abogados"
+ * rank whichever profession's tasks happened to say "mejor".
+ */
+const CHOICE_WORDS = new Set(queryTerms(
+  'ia ai modelo modelos model models llm llms mejor mejores best better which cual usar use using recomienda recommend',
+));
+
 export function searchBenchmarkCorpus(c: BenchmarkCorpus, query: string, limit: number, locale?: Locale): BenchmarkSearchHit[] {
-  const terms = queryTerms(query);
+  const all = queryTerms(query);
+  const terms = all.filter((t) => !CHOICE_WORDS.has(t));
   if (terms.length === 0) return [];
   const l = benchLocale(locale);
+  // Word starts, not substrings: "ia" is inside "industrial" and "técnica".
   const score = (fields: Array<[string, string, number]>) => {
     let s = 0;
     const mf = new Set<string>(), mt = new Set<string>();
     for (const [field, value, weight] of fields) {
-      const v = norm(value);
-      for (const t of terms) if (v.includes(t)) { s += weight; mf.add(field); mt.add(t); }
+      const words = norm(value).split(/[^\p{L}\p{N}]+/u);
+      for (const t of terms) if (words.some((w) => w.startsWith(t))) { s += weight; mf.add(field); mt.add(t); }
     }
     const cov = mt.size / terms.length;
     return { score: Math.round(s * cov * cov * 100) / 100, matchedFields: [...mf], matchedTerms: [...mt] };

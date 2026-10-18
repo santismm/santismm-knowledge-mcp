@@ -190,6 +190,42 @@ export function benchmarkSlug(name: string): string {
 
 // ── Professions ─────────────────────────────────────────────────────────────
 
+/**
+ * How much of this profession the ranking actually measures — the arithmetic
+ * stated, and the two limits told apart.
+ *
+ * `unmeasured_tasks: []` was read as "the ranking measures everything that
+ * matters", which it never meant, and the record said nothing to stop that
+ * reading: right beside the empty list, `not_measured` excluded teaching
+ * quality from the student ranking. Both were true. They are different axes.
+ *
+ *   - TASKS — what this profession does. The file lists them and names the
+ *     benchmarks behind each; the ones with none are `unmeasured_tasks`.
+ *     Complete task coverage means every listed task has at least one
+ *     benchmark, nothing more.
+ *   - DIMENSIONS — what no benchmark in the catalogue evaluates at all
+ *     (`not_measured`). Outside the ranking regardless of task coverage, so
+ *     it still applies when `unmeasured_tasks` is empty.
+ *
+ * Derived from the file, never written out: `tasks_measured` is counted off
+ * `measured_by`, so the numbers cannot disagree with the list above them.
+ */
+function taskCoverage(p: ProfessionRanking, l: 'en' | 'es') {
+  const measured = p.tasks.filter((t) => t.measured_by.length > 0).length;
+  const unmeasured = p.tasks.length - measured;
+  const complete = unmeasured === 0;
+  return {
+    tasks_listed: p.tasks.length,
+    tasks_measured: measured,
+    tasks_unmeasured: unmeasured,
+    dimensions_not_measured: pick(p.not_measured, l),
+    how_to_present: complete
+      ? `Task coverage is complete: all ${p.tasks.length} tasks listed here have at least one benchmark behind them. That is NOT the same as a complete measurement — \`dimensions_not_measured\` names what no benchmark evaluates at all, and it applies anyway. Do not present an empty \`unmeasured_tasks\` as "the ranking measures everything that matters".`
+      : `Task coverage is partial: ${unmeasured} of the ${p.tasks.length} tasks listed here have no benchmark behind them (\`unmeasured_tasks\`). On top of that, \`dimensions_not_measured\` names what no benchmark evaluates at all. Both limits apply; name them separately.`,
+  };
+}
+
+
 export function professionCard(p: ProfessionRanking, file: RankingFile, locale?: Locale) {
   const l = benchLocale(locale);
   return {
@@ -199,6 +235,14 @@ export function professionCard(p: ProfessionRanking, file: RankingFile, locale?:
     evaluation: p.evaluation.type,
     first: p.picks.first?.name ?? null,
     unmeasured_tasks: p.unmeasured_tasks.length,
+    // Zero unmeasured tasks is not a clean bill of health, and the card was
+    // read as one. The two limits are on different axes: `unmeasured_tasks`
+    // counts this profession's own listed tasks that no benchmark covers,
+    // while `not_measured` names qualities no benchmark in the catalogue
+    // evaluates at all — which is why the student ranking can have nothing
+    // unmeasured and still exclude teaching quality. The card carries the
+    // second one too, in a word, so a list cannot show half the caveat.
+    not_measured: pick(p.not_measured, l),
     canonical_url: p.url,
     dataset_version: file.dataset_version,
   };
@@ -222,6 +266,7 @@ export function professionRecord(p: ProfessionRanking, file: RankingFile, locale
     },
     tasks: p.tasks.map((t) => ({ task: pick(t.text, l), measured_by: t.measured_by })),
     unmeasured_tasks: p.unmeasured_tasks.map((t) => pick(t, l)),
+    coverage: taskCoverage(p, l),
     picks: p.picks,
     ranking: limit ? p.ranking.slice(0, limit) : p.ranking,
     not_ranked: p.not_ranked,
@@ -382,6 +427,18 @@ export interface BenchmarkSearchHit {
   slug: string;
   title: string;
   summary: string;
+  /**
+   * The languages the text above is actually in — a set, not one value,
+   * because a hit can mix them.
+   *
+   * `benchLocale` says which locale was *selected*, which is not the same
+   * thing: a benchmark row carries its own name and `measures` string, neither
+   * localised at all, and a profession hit localises its title while its
+   * summary is written in English right here in the code. Labelling either as
+   * `es` because Spanish was asked for is how an English benchmark summary
+   * came back tagged Spanish, and how a strict language filter kept it.
+   */
+  content_locales: string[];
   canonical_url: string;
   suggested_tool: string;
   score: number;
@@ -424,7 +481,10 @@ export function searchBenchmarkCorpus(c: BenchmarkCorpus, query: string, limit: 
     ]);
     if (r.score > 0) hits.push({
       kind: 'profession', slug: p.id, title: pick(p.name, l),
+      // This sentence is English wherever it is read from: it is built here,
+      // not translated. So the hit is mixed whenever the title is not English.
       summary: `${p.evaluation.type === 'direct' ? 'Direct' : 'Indirect'} evaluation; first today: ${p.picks.first?.name ?? 'not enough data'}.`,
+      content_locales: [...new Set([p.name[l] !== undefined ? l : 'en', 'en'])].sort(),
       canonical_url: p.url, suggested_tool: 'recommend_model_for_profession', ...r,
     });
   }
@@ -436,6 +496,9 @@ export function searchBenchmarkCorpus(c: BenchmarkCorpus, query: string, limit: 
     ]);
     if (r.score > 0) hits.push({
       kind: 'benchmark', slug: benchmarkSlug(b.name), title: b.name, summary: String(b.measures ?? ''),
+      // Neither field has a translation to choose from: the benchmark's name
+      // and what it measures are published once, in English.
+      content_locales: ['en'],
       canonical_url: c.data.canonical_url, suggested_tool: 'get_benchmark', ...r,
     });
   }

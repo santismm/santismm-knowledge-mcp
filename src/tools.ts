@@ -809,8 +809,12 @@ const humanSupervisionOutput = calculationBaseSchema.extend({
 
 const globalSearchCard = z.object({
   surface: z.enum(SEARCH_SURFACES),
-  content_locale: z.string().optional().describe("The language this result is actually in."),
-  fallback: z.boolean().optional().describe("True when content_locale differs from the requested locale."),
+  content_locales: z.array(z.string()).optional()
+    .describe("Every language this result's text is actually in. More than one means the result mixes them — a localised title with an English summary, for instance."),
+  content_locale: z.string().nullable().optional()
+    .describe("The single language the whole result is in, or null when it mixes languages. Filter on content_locales, not on this."),
+  fallback: z.boolean().optional()
+    .describe("True unless the whole result is in the requested language."),
   score: z.number(),
   source_score: z.number(),
   rank_within_surface: z.number(),
@@ -932,7 +936,10 @@ const professionCardSchema = z.object({
   group: z.string(),
   evaluation: z.enum(["direct", "indirect"]),
   first: z.string().nullable(),
-  unmeasured_tasks: z.number().describe("How many of its listed tasks no benchmark measures yet."),
+  unmeasured_tasks: z.number()
+    .describe("How many of its listed TASKS no benchmark measures yet. Zero is complete task coverage, not a complete measurement — `not_measured` is a different axis and applies anyway."),
+  not_measured: z.string()
+    .describe("What no benchmark in the catalogue evaluates at all. Applies even when `unmeasured_tasks` is 0."),
   canonical_url: z.string().describe("Cite this URL."),
   dataset_version: z.string(),
   resource_uri: z.string(),
@@ -950,7 +957,17 @@ const professionRecordSchema = z.object({
     how_to_present: z.string().describe("Follow this when quoting the ranking."),
   }),
   tasks: z.array(z.object({ task: z.string(), measured_by: z.array(z.string()) })),
-  unmeasured_tasks: z.array(z.string()),
+  unmeasured_tasks: z.array(z.string())
+    .describe("The listed tasks with no benchmark behind them. An empty list means every task is covered, not that the ranking measures everything that matters — see `coverage`."),
+  // Two limits on two axes, and the record used to leave the reader to work
+  // out that they were different ones.
+  coverage: z.object({
+    tasks_listed: z.number(),
+    tasks_measured: z.number(),
+    tasks_unmeasured: z.number(),
+    dimensions_not_measured: z.string().describe("What no benchmark evaluates at all — independent of task coverage."),
+    how_to_present: z.string().describe("Follow this when quoting the limits: it says which of the two axes is complete and which is not."),
+  }),
   picks: z.object({
     first: rankedModelSchema.nullable(),
     second: rankedModelSchema.nullable(),
@@ -960,7 +977,8 @@ const professionRecordSchema = z.object({
   }),
   ranking: z.array(rankedModelSchema),
   caveat: z.string(),
-  not_measured: z.string(),
+  not_measured: z.string()
+    .describe("Dimensions no benchmark in the catalogue evaluates at all. A different axis from `unmeasured_tasks`, which is about this profession's listed tasks; this one applies even when that list is empty."),
   canonical_url: z.string().describe("Cite this URL."),
   dataset_version: z.string(),
   radar_version: z.string(),
@@ -1372,7 +1390,7 @@ export function registerTools(
         limit_per_surface: z.number().int().positive().max(10).optional().describe("Maximum hits from each surface. Default: 5."),
         locale: localeSchema,
         content_locales: z.array(z.string()).min(1).optional()
-          .describe("Keep only results actually written in these languages. `locale` is a presentation preference and still returns substitutions, labelled; this is the hard filter. A result that cannot declare its language is dropped."),
+          .describe("Keep only results whose text is entirely in these languages. `locale` is a presentation preference and still returns substitutions, labelled; this is the hard filter. A result that mixes a language you did not allow is dropped, and so is one that cannot declare its languages."),
       }),
       outputSchema: z.object({
         ...globalSearchOutput,
@@ -1422,7 +1440,7 @@ export function registerTools(
             hits.push({
               ...raw,
               surface: "core",
-              // `content_locale` arrives inside `raw` from the corpus shaping.
+              content_locales: [raw.content_locale],
               score: sourceScore + boost,
               source_score: sourceScore,
               rank_within_surface: index + 1,
@@ -1442,7 +1460,7 @@ export function registerTools(
               // Each article declares its own language and nothing negotiates
               // it: this is the surface that returned Portuguese for a Spanish
               // request without saying so.
-              content_locale: String(raw.language ?? "").toLowerCase().split("-")[0] || undefined,
+              content_locales: [String(raw.language ?? "").toLowerCase().split("-")[0]].filter(Boolean),
               rank_within_surface: index + 1, slug: raw.slug, title: raw.title, summary: raw.summary,
               canonical_url: raw.canonical_url, api_url: raw.api_url, suggested_tool: "get_article",
               resource_uri: resourceUri.article(raw.slug),
@@ -1461,7 +1479,7 @@ export function registerTools(
           for (const [index, raw] of searchLabCorpus(labs, query, limit, lang).entries()) {
             hits.push({
               surface: "labs", score: raw.score + boost, source_score: raw.score,
-              content_locale: labContentLocale(raw.slug, lang),
+              content_locales: [labContentLocale(raw.slug, lang)],
               rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind, title: raw.title,
               summary: raw.description, canonical_url: raw.canonical_url, api_url: raw.api_url,
               calculation_url: raw.calculation_url,
@@ -1480,7 +1498,7 @@ export function registerTools(
               surface: "claims", score: raw.score + boost, source_score: raw.score,
               // `listClaims` does not fall back, and an untranslated claim
               // scores zero, so one that reaches here is in `lang`.
-              content_locale: lang,
+              content_locales: [lang],
               rank_within_surface: index + 1, id: claim.id, slug: claim.slug,
               kind: claim.claim_type, title: String(claim.statement ?? claim.slug),
               summary: `Epistemic type: ${String(claim.claim_type)}; confidence: ${String(claim.confidence_level)}.`,
@@ -1495,7 +1513,7 @@ export function registerTools(
           for (const [index, raw] of homericSearch(content, query, lang, limit).entries()) {
             hits.push({
               surface: "homeric_atlas", score: raw.score + boost, source_score: raw.score,
-              content_locale: raw.content_locale,
+              content_locales: [raw.content_locale],
               rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind,
               title: String(raw.name ?? raw.slug), summary: raw.summary,
               canonical_url: raw.canonical_url, api_url: raw.api_url,
@@ -1511,9 +1529,12 @@ export function registerTools(
           for (const [index, raw] of searchBenchmarkCorpus(benchLoad.value, query, limit, lang).entries()) {
             hits.push({
               surface: "benchmarks", score: raw.score + boost, source_score: raw.score,
-              // Benchmarks carry English and Spanish only: every other
-              // requested language resolves to English, by construction.
-              content_locale: benchLocale(lang),
+              // Read from the hit, not from `benchLocale`: that says which
+              // locale was selected, and a benchmark row's name and measures
+              // are not localised at all while a profession's summary is
+              // written in English in the code. The hit knows; the selector
+              // does not.
+              content_locales: raw.content_locales,
               rank_within_surface: index + 1, slug: raw.slug, kind: raw.kind, title: raw.title,
               summary: raw.summary, canonical_url: raw.canonical_url,
               resource_uri: raw.kind === "profession" ? resourceUri.profession(raw.slug) : resourceUri.benchmark(raw.slug),
@@ -1523,16 +1544,30 @@ export function registerTools(
           }
         }
 
-        // One place, after every surface has declared what it has: mark the
-        // substitutions, then apply the strict filter if one was asked for.
+        // One place, after every surface has declared what it has.
+        //
+        // The label is a SET because a result can mix languages: a profession
+        // hit localises its title and keeps an English summary. Labelling that
+        // `es` is what let a strict Spanish filter keep English text, which is
+        // the defect this replaces. `content_locale` is therefore stated only
+        // when the whole result is one language, and `fallback` is true unless
+        // that one language is the one asked for.
         for (const hit of hits) {
-          if (typeof hit.content_locale === "string") hit.fallback = hit.content_locale !== lang;
+          const set = [...new Set((hit.content_locales as unknown[] ?? []).filter((x): x is string => typeof x === "string" && x.length > 0))].sort();
+          hit.content_locales = set;
+          hit.content_locale = set.length === 1 ? set[0] : null;
+          hit.fallback = !(set.length === 1 && set[0] === lang);
         }
         const allowed = content_locales;
         const kept = allowed
-          // A result that cannot say what language it is in is not "allowed by
-          // default": a filter that silently keeps unknowns is not a filter.
-          ? hits.filter((h) => typeof h.content_locale === "string" && allowed.includes(h.content_locale))
+          // Every language the result carries has to be allowed — not just one
+          // of them, or a mixed result sneaks English past a Spanish filter.
+          // And a result that cannot say what it is in is dropped: a filter
+          // that keeps unknowns is not a filter.
+          ? hits.filter((h) => {
+              const set = h.content_locales as string[];
+              return set.length > 0 && set.every((l) => allowed.includes(l));
+            })
           : hits;
         kept.sort((a, b) => Number(b.score) - Number(a.score) || Number(a.rank_within_surface) - Number(b.rank_within_surface));
         return out({
@@ -1545,7 +1580,7 @@ export function registerTools(
           ...(allowed && kept.length === 0
             // An empty list is explained rather than left to look like "no
             // such content": the report asks for exactly this.
-            ? { empty_reason: `No result matched content_locales=${allowed.join(",")}. Surfaces carry: core and claims in all seven locales, labs in es/pt/en, benchmarks in en/es, articles in whatever language each essay was written in.` }
+            ? { empty_reason: `No result is written entirely in ${allowed.join(" or ")}. Surfaces carry: core and claims in all seven locales; labs in es/pt/en; articles in whatever language each essay was written in; benchmark rows in English only, and profession hits mix a localised title with an English summary, so they match a filter only when English is allowed too.` }
             : {}),
         }, kept);
       } catch (error) {

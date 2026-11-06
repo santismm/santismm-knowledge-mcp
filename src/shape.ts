@@ -128,6 +128,10 @@ export interface CorpusOverview {
     source: string;
     lookup: string;
     citation: string;
+    /** Federated surfaces only: read live by `get_overview`, absent from the static map. */
+    dataset_version?: string | null;
+    counts?: Record<string, number> | null;
+    live?: "ok" | "unavailable";
   }>;
   /**
    * How fresh the copy answering this call is.
@@ -849,6 +853,14 @@ export function makeContent(
             lookup: "profession id or name (en/es); benchmark slug or name",
             citation: "Results carry canonical_url and dataset_version; cite both.",
           },
+          {
+            surface: "physical_ai",
+            description: "Physical AI and robotics for the enterprise, federated from physicalai.santismm.com: real platforms with sourced spec sheets, documented deployments, the deployment guide, the autonomy taxonomy and the evidence methodology — plus the host's own ROI/TCO model, readiness assessment and published-fact comparison.",
+            tools: [...SURFACE_TOOLS.physical_ai],
+            source: "https://physicalai.santismm.com/api",
+            lookup: "type + slug (platform, case_study, guide, source); taxonomy and methodology need no slug",
+            citation: "Every record carries canonical_url, api_url and dataset_version; specs and facts carry source ids that resolve to dated, evidence-levelled sources.",
+          },
         ],
         corpus: {
           newest_unit: newestUpdated([
@@ -865,7 +877,7 @@ export function makeContent(
           "search(query, locale) to search only the five-domain core; " +
           "list_<domain> to browse one; get_<domain>(slug) for a full unit with its " +
           "Evidence-First provenance; get_related(domain, slug) to traverse the graph. " +
-          "Use the tools named in extensions for Articles, the Homeric Atlas, claims and the AI benchmarks. " +
+          "Use the tools named in extensions for Articles, the Homeric Atlas, claims, the AI benchmarks and Physical AI. " +
           "Citable content results carry canonical_url; claim records use their stable id.",
         // For agents that would rather ingest the corpus than walk it.
         bulk: {
@@ -881,6 +893,9 @@ export function makeContent(
           benchmarks: "https://benchmarks.santismm.com/data.json",
           benchmarks_professions: "https://benchmarks.santismm.com/professions-ranking.json",
           benchmarks_radar: "https://benchmarks.santismm.com/radar.json",
+          physical_ai: "https://physicalai.santismm.com/llms-full.txt",
+          physical_ai_index: "https://physicalai.santismm.com/ai-index.json",
+          physical_ai_openapi: "https://physicalai.santismm.com/openapi.json",
         },
       };
     },

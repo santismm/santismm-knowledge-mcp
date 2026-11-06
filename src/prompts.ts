@@ -43,6 +43,9 @@ export const PROMPT_NAMES = [
   "locate_in_corpus",
   "locate_handbook_chapter",
   "cite_with_provenance",
+  "evaluate_physical_ai_opportunity",
+  "compare_physical_ai_options",
+  "design_physical_ai_pilot",
 ] as const;
 export type PromptName = (typeof PROMPT_NAMES)[number];
 
@@ -89,6 +92,39 @@ const MANIFIESTO: Record<PromptName, Omit<PromptManifestEntry, "name">> = {
     surface: "core",
     arguments: [
       { name: "identifier", description: "Slug or id of the unit you are about to cite.", required: true },
+      { name: "locale", description: "en, es, pt, fr, de, ja or zh. Defaults to en.", required: false },
+    ],
+  },
+  evaluate_physical_ai_opportunity: {
+    title: "Evaluate a robotics automation opportunity",
+    description:
+      "Walk from an operational problem to an evidence-backed assessment: matching platforms and documented deployments, the readiness assessment, and the host's own ROI/TCO model — with every assumption and unknown stated. It assembles public, deterministic results; it is not a priced business case.",
+    surface: "physical_ai",
+    arguments: [
+      { name: "task", description: "The operational task, e.g. 'night-time inspection of a chemical plant'.", required: true },
+      { name: "environment", description: "Environment id, e.g. industrial, warehouse, offshore. Optional.", required: false },
+      { name: "sector", description: "Sector id, e.g. inspection, logistics, security. Optional.", required: false },
+      { name: "locale", description: "en, es, pt, fr, de, ja or zh. Defaults to en.", required: false },
+    ],
+  },
+  compare_physical_ai_options: {
+    title: "Compare robot platforms on published facts",
+    description:
+      "Shortlist platforms for a need and compare them as a table of published facts — with provenance, test conditions and the values nobody has published — instead of a generated opinion.",
+    surface: "physical_ai",
+    arguments: [
+      { name: "need", description: "What the robot has to do, or the platforms to compare by name.", required: true },
+      { name: "locale", description: "en, es, pt, fr, de, ja or zh. Defaults to en.", required: false },
+    ],
+  },
+  design_physical_ai_pilot: {
+    title: "Design a robotics pilot from the deployment guide",
+    description:
+      "Draft a pilot plan — scope, operational design domain, KPIs, success criteria and exit conditions — grounded in the deployment guide and in the lessons of documented deployments, with each borrowed point cited.",
+    surface: "physical_ai",
+    arguments: [
+      { name: "task", description: "The task the pilot should test.", required: true },
+      { name: "platform", description: "Platform slug, if one is already chosen. Optional.", required: false },
       { name: "locale", description: "en, es, pt, fr, de, ja or zh. Defaults to en.", required: false },
     ],
   },
@@ -329,6 +365,116 @@ export function registerPrompts(
             `\`${resourceUri.overview()}\` — read it rather than assuming a licence.\n\n` +
             `If the unit does not exist, say so and name the identifier you tried. A citation to a ` +
             `unit nobody can open is worse than no citation.`,
+        ),
+      };
+    }),
+  );
+
+  // ── 4–6. Physical AI ──────────────────────────────────────────────────────
+  // Prompts, not more tools: these are workflows a person chooses, and each one
+  // only orders tools that already exist. None of them produces a priced
+  // business case — that is a paid artefact under docs/commerce, not a public
+  // tool or prompt. They assemble public, deterministic results and say what
+  // is still unknown.
+  const physicalAiRules =
+    `Rules for every answer built from Physical AI:\n` +
+    `- Cite \`canonical_url\` for every platform, case and guide you use, and the source ids behind each figure.\n` +
+    `- A value with \`status: "unpublished"\` is unknown. Say it is unknown; never estimate it or fill it from memory.\n` +
+    `- Keep manufacturer claims, press reports, independent evidence and editorial estimates apart — the \`provenance\` and \`evidence_level\` fields say which is which.\n` +
+    `- Manufacturer maxima are not simultaneous: quote the \`conditions\` with the number.\n` +
+    `- Calculations come from the tools, never from your own arithmetic, and carry their \`model_version\` and \`fields_to_validate\`.\n` +
+    `- Do not recommend buying a specific product. Show the evidence and what remains to be validated.`;
+
+  server.registerPrompt(
+    "evaluate_physical_ai_opportunity",
+    {
+      title: MANIFIESTO.evaluate_physical_ai_opportunity.title,
+      description: MANIFIESTO.evaluate_physical_ai_opportunity.description,
+      argsSchema: z.object({
+        task: z.string().min(1).max(512).describe("The operational task."),
+        environment: z.string().max(40).optional().describe("Environment id, e.g. industrial."),
+        sector: z.string().max(40).optional().describe("Sector id, e.g. inspection."),
+        locale: localeSchema,
+      }),
+    },
+    observar("evaluate_physical_ai_opportunity", (args) => {
+      const tarea = texto(args.task);
+      const entorno = texto(args.environment);
+      const sector = texto(args.sector);
+      const locale = localeDe(args.locale);
+      const contexto = [entorno && `environment "${entorno}"`, sector && `sector "${sector}"`].filter(Boolean).join(", ");
+      return {
+        description: `Evaluate a robotics opportunity: ${tarea}.`,
+        messages: mensaje(
+          `Evaluate whether robotics fits this task: "${tarea}"${contexto ? ` (${contexto})` : ""}.\n\n` +
+            `1. \`search_physical_ai\` with the task, locale "${locale}"${entorno ? `, environments ["${entorno}"]` : ""}` +
+            `${sector ? `, sectors ["${sector}"]` : ""}, types ["platform", "case_study"]. Note the evidence level and limitations of each hit.\n` +
+            `2. Read the two or three strongest documented deployments with \`get_physical_ai_item\` (type "case_study"). Their published KPIs and lessons are your precedent; an unpublished KPI is a gap, not a zero.\n` +
+            `3. \`assess_physical_ai_fit\` with no answers${contexto ? ` and the same ${contexto}` : ""} to get the readiness questions. Ask the user the ones you cannot answer from what they told you, then call it again with the answers.\n` +
+            `4. \`calculate_physical_ai_roi\` with the user's own figures; pick \`use_case\` only if one of the published presets matches. List every entry of \`fields_to_validate\` as an open assumption.\n` +
+            `5. Present: readiness by area and blockers; matching platforms and precedents; ROI, TCO and payback with their sensitivity; and a final list of what is still unknown.\n\n` +
+            `${physicalAiRules}`,
+        ),
+      };
+    }),
+  );
+
+  server.registerPrompt(
+    "compare_physical_ai_options",
+    {
+      title: MANIFIESTO.compare_physical_ai_options.title,
+      description: MANIFIESTO.compare_physical_ai_options.description,
+      argsSchema: z.object({
+        need: z.string().min(1).max(512).describe("What the robot has to do, or the platforms to compare."),
+        locale: localeSchema,
+      }),
+    },
+    observar("compare_physical_ai_options", (args) => {
+      const necesidad = texto(args.need);
+      const locale = localeDe(args.locale);
+      return {
+        description: `Compare platforms for: ${necesidad}.`,
+        messages: mensaje(
+          `Compare robot platforms for: "${necesidad}".\n\n` +
+            `1. \`search_physical_ai\` with that need, types ["platform"], locale "${locale}". Shortlist 2–5 platforms whose environments and sectors match; say why each made the list.\n` +
+            `2. \`compare_physical_ai_platforms\` with the shortlisted slugs. Use the criteria that matter for the need, or omit criteria for all.\n` +
+            `3. Render the result as a table. Mark each cell as published, unpublished or estimate, and add the test conditions where they exist.\n` +
+            `4. After the table, list the decisive unknowns: the criteria where a value is unpublished for one or more candidates.\n` +
+            `There is no winner in the data. If the user asks for one, explain which criteria would decide it and which of them are still unknown.\n\n` +
+            `${physicalAiRules}`,
+        ),
+      };
+    }),
+  );
+
+  server.registerPrompt(
+    "design_physical_ai_pilot",
+    {
+      title: MANIFIESTO.design_physical_ai_pilot.title,
+      description: MANIFIESTO.design_physical_ai_pilot.description,
+      argsSchema: z.object({
+        task: z.string().min(1).max(512).describe("The task the pilot should test."),
+        platform: z.string().max(128).optional().describe("Platform slug, if chosen."),
+        locale: localeSchema,
+      }),
+    },
+    observar("design_physical_ai_pilot", (args) => {
+      const tarea = texto(args.task);
+      const plataforma = texto(args.platform);
+      const locale = localeDe(args.locale);
+      return {
+        description: `Design a pilot for: ${tarea}.`,
+        messages: mensaje(
+          `Draft a pilot plan for: "${tarea}"${plataforma ? ` with platform "${plataforma}"` : ""}.\n\n` +
+            `1. Read the deployment guide — \`get_physical_ai_item\` type "guide", slug "deployment-guide", locale "${locale}" ` +
+            `(or the resource \`santismm://physical-ai/guides/deployment-guide?locale=${locale}\`). Its pilot-design, KPI and scaling sections are the template.\n` +
+            (plataforma
+              ? `2. Read the platform sheet (\`get_physical_ai_item\` type "platform", slug "${plataforma}"): its autonomy-by-task and access fields bound what the pilot can claim.\n`
+              : `2. If no platform is chosen yet, run the compare_physical_ai_options workflow first, or keep the plan platform-neutral.\n`) +
+            `3. \`search_physical_ai\` for documented deployments of similar tasks; reuse their integration, maintenance and scaling lessons, citing each.\n` +
+            `4. Write the plan: scope and operational design domain, KPIs with baseline and target, success and exit criteria, duration, roles, and the risks the lessons point to.\n` +
+            `5. Mark which targets come from a published precedent and which are the user's own assumptions.\n\n` +
+            `${physicalAiRules}`,
         ),
       };
     }),

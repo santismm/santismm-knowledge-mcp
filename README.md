@@ -83,7 +83,7 @@ is not a software licence and MIT is not a content licence.
 
 ## What it exposes
 
-36 read-only tools over knowledge, patterns, architectures, governance, the
+41 read-only tools over knowledge, patterns, architectures, governance, the
 Harness Engineering Handbook, first-party Articles, Labs and the AI benchmarks,
 each declaring an
 `outputSchema` and returning validated `structuredContent`. Every tool is

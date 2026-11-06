@@ -41,6 +41,22 @@ import {
   type McpToolResultEvent,
 } from "./outcomes.ts";
 import { SEARCH_SURFACES } from "./surfaces.ts";
+import {
+  PHYSICAL_AI_API_URL,
+  PHYSICAL_AI_ITEM_TYPES,
+  PHYSICAL_AI_OPENAPI_URL,
+  PHYSICAL_AI_SINGLETONS,
+  PHYSICAL_AI_TYPES,
+  PhysicalAiRejection,
+  assessPhysicalAiFit,
+  calculatePhysicalAiRoi,
+  comparePhysicalAiPlatforms,
+  getPhysicalAiItem,
+  listPhysicalAi,
+  physicalAiOverview,
+  searchPhysicalAi,
+  type PhysicalAiItemType,
+} from "./physical-ai.ts";
 import { resourceUri } from "./resource-uris.ts";
 import { PROFILE } from "./profile.ts";
 
@@ -54,7 +70,7 @@ import { PROFILE } from "./profile.ts";
  * data, while Article tools deliberately read the first-party Articles API.
  */
 
-export const SERVER_INFO = { name: "santismm-knowledge", version: "0.5.0" } as const;
+export const SERVER_INFO = { name: "santismm-knowledge", version: "0.6.0" } as const;
 
 /**
  * The subset of the MCP SDK's `McpServer` that the registry uses (just
@@ -362,6 +378,7 @@ export const ESPACIOS = [
   { domain: "labs", listTool: "list_labs", getTool: "get_lab" },
   { domain: "professions", listTool: "list_professions", getTool: "recommend_model_for_profession" },
   { domain: "benchmarks", listTool: "list_benchmarks", getTool: "get_benchmark" },
+  { domain: "physical_ai", listTool: "search_physical_ai", getTool: "get_physical_ai_item" },
 ] as const;
 
 type EspacioNombre = (typeof ESPACIOS)[number]["domain"];
@@ -383,7 +400,7 @@ function identificadores(cards: unknown[]): string[] {
 function cardsDe(content: McpContent, domain: EspacioNombre, locale: Locale): unknown[] {
   // Federated Articles and Labs are asynchronous and have their own recovery
   // payloads; keep them out of the synchronous cross-space lookup for locals.
-  if (domain === "articles" || domain === "labs" || domain === "professions" || domain === "benchmarks") return [];
+  if (domain === "articles" || domain === "labs" || domain === "professions" || domain === "benchmarks" || domain === "physical_ai") return [];
   if (domain === "handbook") return content.listHandbook(locale);
   if (domain === "claims") return content.listClaims(undefined, locale);
   if (domain.startsWith("homeric/")) {
@@ -835,7 +852,7 @@ const globalSearchCard = z.object({
 const globalSearchOutput = {
   query: z.string(),
   /**
-   * The six surfaces resolve language by six different rules — the corpus
+   * The surfaces resolve language by different rules — the corpus
    * falls back to English, labs keep a Spanish base, benchmarks carry only
    * English and Spanish, and federated articles negotiate nothing at all. A
    * request in Japanese could come back three-quarters in other languages
@@ -848,7 +865,7 @@ const globalSearchOutput = {
   results: z.array(globalSearchCard),
   substituted_count: z.number().describe("How many results are not in the requested language."),
   unavailable_surfaces: z.array(z.object({
-    surface: z.enum(["articles", "labs", "benchmarks"]),
+    surface: z.enum(["articles", "labs", "benchmarks", "physical_ai"]),
     error: z.string(),
     retry_tool: z.string(),
   })),
@@ -916,6 +933,131 @@ function labNotFound(labs: Array<{ slug: string }>, slug: string) {
   };
   return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
 }
+
+/**
+ * Physical AI (federated from physicalai.santismm.com).
+ *
+ * Two failures that must not look alike: the API refusing the request (400
+ * with field errors, 404 for an unknown slug) is the caller's to fix and keeps
+ * the API's own details; the API being unreachable is ours and says where to
+ * go instead.
+ */
+function physicalAiFailure(error: unknown, tool: string) {
+  if (error instanceof PhysicalAiRejection) {
+    const body = {
+      ...error.body,
+      error: String(error.body.error ?? (error.status === 404 ? "not_found" : "invalid_input")),
+      domain: "physical_ai",
+      status: error.status,
+      hint: error.status === 404
+        ? "Call search_physical_ai to find a valid slug, or read the lists at /api/platforms, /api/case-studies and /api/guides."
+        : `Fix the fields listed in details and call ${tool} again. Every input is documented in ${PHYSICAL_AI_OPENAPI_URL}.`,
+    };
+    return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
+  }
+  const body = {
+    error: "physical_ai_unavailable",
+    source: PHYSICAL_AI_API_URL,
+    hint: "The first-party Physical AI API could not be read. Retry later or bind directly to its OpenAPI document.",
+    openapi: PHYSICAL_AI_OPENAPI_URL,
+    detail: error instanceof Error ? error.message : String(error),
+  };
+  return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
+}
+
+/** A 404 from get_physical_ai_item lists the valid slugs, like every other get_* miss. */
+async function physicalAiNotFound(type: PhysicalAiItemType, slug: string, error: PhysicalAiRejection) {
+  const kind = type === "platform" ? "platforms" : type === "case_study" ? "case-studies" : type === "guide" ? "guides" : undefined;
+  let available: string[] = [];
+  if (kind) {
+    try {
+      available = (await listPhysicalAi(kind)).map((item) => String(item.slug ?? "")).filter(Boolean).sort();
+    } catch {
+      // The miss is still reported; only the recovery list is lost.
+    }
+  }
+  const body = {
+    error: "not_found",
+    domain: "physical_ai",
+    type,
+    slug,
+    available_count: available.length,
+    available,
+    list_tool: "search_physical_ai",
+    hint: kind
+      ? "Use one of the available slugs, or call search_physical_ai with the name you have."
+      : "Source ids are listed in the `sources` of the platform or case that cites them.",
+    api: error.body,
+  };
+  return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
+}
+
+/**
+ * Open records, closed envelope essentials: the host adds catalogue fields
+ * between releases, and what an agent must not miss — the canonical URL, the
+ * dataset version, the evidence — is declared and required.
+ */
+const physicalAiEnvelope = {
+  api_version: z.string(),
+  dataset_version: z.string(),
+  locale: z.string().optional(),
+};
+
+const physicalAiHit = z.object({
+  id: z.string(),
+  type: z.enum(PHYSICAL_AI_TYPES),
+  slug: z.string(),
+  title: z.string(),
+  summary: z.string().optional(),
+  canonical_url: z.string(),
+  api_url: z.string(),
+  resource_uri: z.string(),
+  suggested_tool: z.string(),
+  evidence_level: z.string().nullable().optional(),
+  limitations: z.array(z.string()).optional(),
+  score: z.number(),
+}).passthrough();
+
+const physicalAiSearchOutput = z.object({
+  ...physicalAiEnvelope,
+  query: z.string(),
+  count: z.number(),
+  results: z.array(physicalAiHit),
+}).passthrough();
+
+const physicalAiItemOutput = z.object({
+  ...physicalAiEnvelope,
+  type: z.enum(PHYSICAL_AI_ITEM_TYPES),
+  resource_uri: z.string(),
+}).passthrough();
+
+const physicalAiEngineOutput = z.object({
+  ...physicalAiEnvelope,
+  model_version: z.string().optional(),
+}).passthrough();
+
+/** Criteria the comparison accepts — published fields only, never a score. */
+const PHYSICAL_AI_CRITERIA = [
+  "weight_kg", "payload_kg", "runtime_min", "speed_ms", "height_m", "ip", "temp_c", "price_usd",
+  "autonomy", "coordination", "control", "perception", "environments", "sectors",
+  "evidence_stage", "evidence_date", "access", "lifecycle",
+] as const;
+
+const PHYSICAL_AI_TOOL_FOR_TYPE: Record<string, string> = {
+  platform: "get_physical_ai_item",
+  case_study: "get_physical_ai_item",
+  guide: "get_physical_ai_item",
+  taxonomy: "get_physical_ai_item",
+  methodology: "get_physical_ai_item",
+};
+
+const robotFleetClass = z.object({
+  count: z.number().int().min(0).max(10_000).optional().describe("Units of this class in the fleet."),
+  capex: z.number().min(0).max(100_000_000).optional().describe("Purchase price per unit, incl. dock or base station."),
+  maintenance_pct: z.number().min(0).max(100).optional().describe("Annual maintenance as % of capex."),
+  software_per_year: z.number().min(0).max(10_000_000).optional().describe("Software / fleet-management subscription per unit and year."),
+  hours_per_day: z.number().min(0).max(24).optional().describe("Labour hours per day one unit can take over, before uptime."),
+}).strict();
 
 /**
  * Benchmarks (federated from benchmarks.santismm.com).
@@ -1176,6 +1318,7 @@ function intentBoost(query: string, surface: (typeof SEARCH_SURFACES)[number]): 
   if (surface === "claims" && /\b(claim|claims|evidence|fact|thesis|tesis|hypothesis|hipotesis|falsif|refut)\b/.test(normal)) return 25;
   if (surface === "homeric_atlas" && /\b(homer\w*|homér\w*|iliad\w*|ilíad\w*|odyssey|odisea|odisseia|ithaca|itaca|ítaca|troy|troya|ulysses|ulises|odysseus|odiseo)\b/.test(normal)) return 25;
   if (surface === "benchmarks" && /\b(benchmark\w*|which (ai|model|llm)|que (ia|modelo)|mejor modelo|best model|model\w* (for|para)|profession\w*|profesion\w*|sota|leaderboard|ranking)\b/.test(normal)) return 25;
+  if (surface === "physical_ai" && /\b(robot\w*|robotic\w*|humanoid\w*|humanoide\w*|quadruped\w*|cuadrupedo\w*|dron\w*|drone\w*|uav|ugv|amr|agv|spot|anymal|digit|optimus|physical ai|ia fisica|fleet|flota|tco|payback)\b/.test(normal)) return 30;
   if (surface === "articles" && /\b(article|articles|essay|essays|articulo|artículo|ensayo|recent|latest|nuevo|reciente)\b/.test(normal)) return 20;
   return 0;
 }
@@ -1326,7 +1469,7 @@ export function registerTools(
       title: "Corpus Overview — Start Here",
       annotations: READ_ONLY,
       description:
-        "Get the complete MCP map — start here. Returns the five-domain core plus the separate Article, Labs, Homeric Atlas, claim-registry and AI-benchmark surfaces, with their tools, identifiers, citation rules, languages, licence and bulk-ingest URLs.",
+        "Get the complete MCP map — start here. Returns the five-domain core plus the separate Article, Labs, Homeric Atlas, claim-registry, AI-benchmark and Physical AI surfaces, with their tools, identifiers, citation rules, languages, licence and bulk-ingest URLs. Federated surfaces that publish a dataset version report it and their live counts.",
       inputSchema: z.object({}),
       outputSchema: z.object({
         resource_uri: z.string().describe("Read this same document with resources/read."),
@@ -1357,6 +1500,12 @@ export function registerTools(
             source: z.string(),
             lookup: z.string(),
             citation: z.string(),
+            dataset_version: z.string().nullable().optional()
+              .describe("Version of the federated dataset, read live from its host."),
+            counts: z.record(z.string(), z.number()).nullable().optional()
+              .describe("Live record counts from the federated host's own index."),
+            live: z.enum(["ok", "unavailable"]).optional()
+              .describe("Whether the live fields could be read on this call."),
           }),
         ),
         corpus: z
@@ -1371,7 +1520,31 @@ export function registerTools(
         bulk: z.record(z.string(), z.string()),
       }),
     },
-    async () => out({ ...content.overview() }),
+    async () => {
+      const overview = content.overview();
+      // The local map stays the answer; the federated host only adds what it
+      // alone knows — its dataset version and counts — and is given a short
+      // budget so a slow host cannot make "start here" slow.
+      const live = await Promise.race([
+        physicalAiOverview().then((value) => ({ ok: true as const, value })).catch(() => ({ ok: false as const })),
+        new Promise<{ ok: false }>((resolve) => setTimeout(() => resolve({ ok: false }), 1_500)),
+      ]);
+      const extensions = overview.extensions.map((extension) => {
+        if (extension.surface !== "physical_ai") return extension;
+        if (!live.ok) return { ...extension, live: "unavailable" as const };
+        const counts = live.value.counts && typeof live.value.counts === "object"
+          ? Object.fromEntries(Object.entries(live.value.counts as Record<string, unknown>)
+            .filter((entry): entry is [string, number] => typeof entry[1] === "number"))
+          : null;
+        return {
+          ...extension,
+          dataset_version: typeof live.value.dataset_version === "string" ? live.value.dataset_version : null,
+          counts,
+          live: "ok" as const,
+        };
+      });
+      return out({ ...overview, extensions });
+    },
   );
 
   server.registerTool(
@@ -1380,13 +1553,13 @@ export function registerTools(
       title: "Search every SANTISMM knowledge surface",
       annotations: READ_ONLY_REMOTE,
       description:
-        "Search the core corpus, first-party essays, executable Labs, epistemic claims, the Homeric Atlas and the AI benchmarks (professions and benchmark catalogue) in one call. Use this first when a natural-language question might require a calculation, a long-form essay, a claim audit or a model choice rather than only a core knowledge unit. Results name the next tool to call; calculator-shaped questions are routed toward Labs, and 'which AI model for…' questions toward the benchmarks.",
+        "Search the core corpus, first-party essays, executable Labs, epistemic claims, the Homeric Atlas, the AI benchmarks (professions and benchmark catalogue) and Physical AI (robot platforms, documented deployments, deployment guide) in one call. Use this first when a natural-language question might require a calculation, a long-form essay, a claim audit or a model choice rather than only a core knowledge unit. Results name the next tool to call; calculator-shaped questions are routed toward Labs, 'which AI model for…' questions toward the benchmarks, and robotics questions toward Physical AI.",
       inputSchema: z.object({
         query: querySchema.describe(
           "Question or topic, in English, Spanish, Portuguese, French, German, Japanese or Simplified Chinese.",
         ),
         surfaces: z.array(z.enum(SEARCH_SURFACES)).min(1).optional()
-          .describe("Restrict the search. Omit to search all six surfaces."),
+          .describe("Restrict the search. Omit to search all seven surfaces."),
         limit_per_surface: z.number().int().positive().max(10).optional().describe("Maximum hits from each surface. Default: 5."),
         locale: localeSchema,
         content_locales: z.array(z.string()).min(1).optional()
@@ -1402,12 +1575,24 @@ export function registerTools(
         const selected = new Set<string>(surfaces ?? SEARCH_SURFACES);
         const limit = limit_per_surface ?? 5;
         const lang = (locale ?? "en") as Locale;
-        const [articleLoad, labLoad, benchLoad] = await Promise.allSettled([
+        const [articleLoad, labLoad, benchLoad, physicalLoad] = await Promise.allSettled([
           selected.has("articles") ? loadArticles() : Promise.resolve([]),
           selected.has("labs") ? loadLabs() : Promise.resolve([]),
           selected.has("benchmarks") ? loadBenchmarkCorpus() : Promise.resolve(undefined),
+          // The host ranks its own corpus (one search engine for the page, the
+          // API and this call); only the merge across surfaces happens here.
+          selected.has("physical_ai")
+            ? searchPhysicalAi({ q: query, locale: lang, limit })
+            : Promise.resolve(undefined),
         ]);
-        const unavailableSurfaces: Array<{ surface: "articles" | "labs" | "benchmarks"; error: string; retry_tool: string }> = [];
+        const unavailableSurfaces: Array<{ surface: "articles" | "labs" | "benchmarks" | "physical_ai"; error: string; retry_tool: string }> = [];
+        if (selected.has("physical_ai") && physicalLoad.status === "rejected") {
+          unavailableSurfaces.push({
+            surface: "physical_ai",
+            error: physicalLoad.reason instanceof Error ? physicalLoad.reason.message : String(physicalLoad.reason),
+            retry_tool: "search_physical_ai",
+          });
+        }
         const articles = articleLoad.status === "fulfilled" ? articleLoad.value : [];
         const labs = labLoad.status === "fulfilled" ? labLoad.value : [];
         if (selected.has("articles") && articleLoad.status === "rejected") {
@@ -1544,6 +1729,24 @@ export function registerTools(
           }
         }
 
+        if (physicalLoad.status === "fulfilled" && physicalLoad.value) {
+          const boost = intentBoost(query, "physical_ai");
+          for (const [index, raw] of physicalLoad.value.results.entries()) {
+            hits.push({
+              surface: "physical_ai", score: raw.score + boost, source_score: raw.score,
+              // Every record is authored in es and en and published in all
+              // seven locales, so the text comes back in the language asked.
+              content_locales: [String(physicalLoad.value.locale ?? lang)],
+              rank_within_surface: index + 1, id: raw.id, slug: raw.slug, kind: raw.type,
+              title: raw.title, summary: raw.summary, canonical_url: raw.canonical_url, api_url: raw.api_url,
+              resource_uri: resourceUri.physicalAi(raw.type, raw.slug, lang),
+              suggested_tool: PHYSICAL_AI_TOOL_FOR_TYPE[raw.type] ?? "get_physical_ai_item",
+              matchedFields: Array.isArray(raw.matchedFields) ? raw.matchedFields : [],
+              matchedTerms: Array.isArray(raw.matchedTerms) ? raw.matchedTerms : [],
+            });
+          }
+        }
+
         // One place, after every surface has declared what it has.
         //
         // The label is a SET because a result can mix languages: a profession
@@ -1580,7 +1783,7 @@ export function registerTools(
           ...(allowed && kept.length === 0
             // An empty list is explained rather than left to look like "no
             // such content": the report asks for exactly this.
-            ? { empty_reason: `No result is written entirely in ${allowed.join(" or ")}. Surfaces carry: core and claims in all seven locales; labs in es/pt/en; articles in whatever language each essay was written in; benchmark rows in English only, and profession hits mix a localised title with an English summary, so they match a filter only when English is allowed too.` }
+            ? { empty_reason: `No result is written entirely in ${allowed.join(" or ")}. Surfaces carry: core and claims in all seven locales; labs in es/pt/en; articles in whatever language each essay was written in; benchmark rows in English only, and profession hits mix a localised title with an English summary, so they match a filter only when English is allowed too; Physical AI in all seven locales.` }
             : {}),
         }, kept);
       } catch (error) {
@@ -2129,6 +2332,167 @@ export function registerTools(
         return out(await executeLabCalculator("human-supervision-capacity", inputs, (locale ?? "en") as Locale));
       } catch (error) {
         return labsFailure(error);
+      }
+    },
+  );
+
+  // ── Physical AI (federated: physicalai.santismm.com) ──────────────────────
+  // Five tools, not ten: reading an item is one typed tool and most of the
+  // catalogue is also served as resources. The engines are the host's own —
+  // the same code the calculator page and the REST API run.
+  server.registerTool(
+    "search_physical_ai",
+    {
+      title: "Search Physical AI platforms, deployments, guides and methodology",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Search the Physical AI dataset — real robot platforms (humanoids, quadrupeds, mobile manipulators, UGVs, drones), documented deployments with sources, the enterprise deployment guide, the autonomy taxonomy and the evidence methodology. Filter by type and taxonomy ids. Each result carries its evidence level, the sources behind it and what is NOT published (limitations); cite canonical_url. Use this for any question about robots, robotic platforms or real robotics deployments; use search_all when the question may also concern the rest of the corpus.",
+      inputSchema: z.object({
+        query: querySchema.describe("What you are looking for, e.g. 'quadruped inspection in industrial plants'."),
+        types: z.array(z.enum(PHYSICAL_AI_TYPES)).min(1).optional()
+          .describe("Restrict to these content types. Omit for all."),
+        families: z.array(z.string().min(1).max(40)).max(5).optional()
+          .describe("Taxonomy family ids: humanoid, mobile-manipulator, quadruped, ugv, uav."),
+        environments: z.array(z.string().min(1).max(40)).max(11).optional()
+          .describe("Environment ids, e.g. industrial, warehouse, urban, offshore, underground-mining."),
+        sectors: z.array(z.string().min(1).max(40)).max(11).optional()
+          .describe("Sector ids, e.g. inspection, logistics, security, manipulation, energy."),
+        limit: z.number().int().min(1).max(50).optional().describe("Maximum results. Default: 10."),
+        locale: localeSchema,
+      }),
+      outputSchema: physicalAiSearchOutput,
+    },
+    async ({ query, types, families, environments, sectors, limit, locale }) => {
+      try {
+        const lang = (locale ?? "en") as Locale;
+        const body = await searchPhysicalAi({ q: query, types, families, environments, sectors, limit, locale: lang });
+        const results = body.results.map((hit) => ({
+          ...hit,
+          resource_uri: resourceUri.physicalAi(hit.type, hit.slug, lang),
+          suggested_tool: PHYSICAL_AI_TOOL_FOR_TYPE[hit.type] ?? "get_physical_ai_item",
+        }));
+        return out({ ...body, query, count: results.length, results }, results);
+      } catch (error) {
+        return physicalAiFailure(error, "search_physical_ai");
+      }
+    },
+  );
+
+  server.registerTool(
+    "get_physical_ai_item",
+    {
+      title: "Get one Physical AI platform, deployment, guide or reference",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Read one record by type and slug: a platform sheet (specs with test conditions, provenance and sources, autonomy by task, evidence stage, access, lifecycle), a documented case study (sourced facts, published KPIs, lessons), a guide, a cited source, or the taxonomy and methodology (no slug). A spec or KPI the maker has not published is null with status 'unpublished' — report it as unknown, never estimate it. Use this after search_physical_ai, with the type and slug it returned.",
+      inputSchema: z.object({
+        type: z.enum(PHYSICAL_AI_ITEM_TYPES).describe("platform, case_study, guide, source, taxonomy or methodology."),
+        slug: slugSchema.optional().describe("Required except for taxonomy and methodology, e.g. 'spot' or a source id."),
+        locale: localeSchema,
+      }),
+      outputSchema: physicalAiItemOutput,
+    },
+    async ({ type, slug, locale }) => {
+      const lang = (locale ?? "en") as Locale;
+      const singleton = (PHYSICAL_AI_SINGLETONS as readonly string[]).includes(type);
+      try {
+        const item = await getPhysicalAiItem(type, singleton ? undefined : slug, lang);
+        return out({ ...item, resource_uri: resourceUri.physicalAi(type, singleton ? type : String(slug), lang) });
+      } catch (error) {
+        if (error instanceof PhysicalAiRejection && error.status === 404 && slug) {
+          return physicalAiNotFound(type, slug, error);
+        }
+        return physicalAiFailure(error, "get_physical_ai_item");
+      }
+    },
+  );
+
+  server.registerTool(
+    "compare_physical_ai_platforms",
+    {
+      title: "Compare robot platforms on published facts",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Compare 2–5 platforms side by side on published fields only — payload, runtime, weight, speed, IP rating, temperature range, price, autonomy, coordination, control, perception, environments, sectors, evidence stage, access and lifecycle. Every cell says whether the value is published, unpublished or an editorial estimate, who stated it (manufacturer, press) and under what test conditions. There is no ranking or winner: present it as a table of facts and say which values are unknown. Use this when the user is choosing between named platforms.",
+      inputSchema: z.object({
+        platforms: z.array(slugSchema).min(2).max(5).describe("Platform slugs, e.g. ['spot', 'anymal-d']."),
+        criteria: z.array(z.enum(PHYSICAL_AI_CRITERIA)).min(1).optional().describe("Fields to compare. Omit for all."),
+        locale: localeSchema,
+      }),
+      outputSchema: physicalAiEngineOutput,
+    },
+    async ({ platforms, criteria, locale }) => {
+      try {
+        return out(await comparePhysicalAiPlatforms(platforms, criteria, (locale ?? "en") as Locale));
+      } catch (error) {
+        return physicalAiFailure(error, "compare_physical_ai_platforms");
+      }
+    },
+  );
+
+  server.registerTool(
+    "calculate_physical_ai_roi",
+    {
+      title: "Calculate the ROI and TCO of a robot fleet",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Run the Physical AI calculator's own 36-month model: manual vs robotic TCO, annual savings, upfront investment, payback month, ROI, coverage, supervision and incidents, plus payback sensitivity to hourly cost, capex, coverage, integration, maintenance and uptime. Every input is optional; use_case applies a published preset first. The response lists the assumptions with their evidence level and the fields_to_validate that are still editorial defaults — tell the user to replace them. Orientative, undiscounted, single currency; not a quote. Use this for the cost, savings or payback of a robot fleet; for an AI-agent business case use calculate_agent_economics.",
+      inputSchema: z.object({
+        use_case: z.enum(["last-mile", "inspection", "manipulation", "security"]).optional()
+          .describe("Apply this automation-matrix preset before the other inputs."),
+        operators_per_shift: z.number().int().min(0).max(10_000).optional().describe("People per shift doing the work today."),
+        hourly_cost: z.number().min(0).max(10_000).optional().describe("Fully loaded hourly labour cost, in the chosen currency."),
+        shifts_per_day: z.number().int().min(1).max(24).optional().describe("Shifts per day."),
+        hours_per_shift: z.number().min(1).max(24).optional().describe("shifts_per_day × hours_per_shift may not exceed 24."),
+        days_per_year: z.number().int().min(1).max(366).optional().describe("Operating days per year."),
+        error_rate_pct: z.number().min(0).max(100).optional().describe("% of tasks (≈ one per labour hour) that end in an incident."),
+        cost_per_incident: z.number().min(0).max(10_000_000).optional().describe("Average cost of one incident, in the chosen currency."),
+        risk: z.enum(["low", "medium", "high"]).optional().describe("Hazard level: scales incident cost and adds a labour risk premium."),
+        fleet: z.object({
+          quadruped: robotFleetClass.optional(),
+          humanoid: robotFleetClass.optional(),
+          ugv: robotFleetClass.optional(),
+          uav: robotFleetClass.optional(),
+        }).strict().optional().describe("Per robot class; any field omitted keeps its default."),
+        robots_per_supervisor: z.number().min(1).max(1_000).optional().describe("Robots one supervisor can oversee at once."),
+        integration_cost: z.number().min(0).max(1_000_000_000).optional().describe("One-off integration cost, in the chosen currency."),
+        uptime_pct: z.number().min(0).max(100).optional().describe("Robot availability, 0–100 %."),
+        horizon_months: z.number().int().min(1).max(120).optional().describe("Default 36."),
+        locale: localeSchema,
+      }),
+      outputSchema: physicalAiEngineOutput,
+    },
+    async ({ locale, ...inputs }) => {
+      try {
+        return out(await calculatePhysicalAiRoi(inputs, (locale ?? "en") as Locale));
+      } catch (error) {
+        return physicalAiFailure(error, "calculate_physical_ai_roi");
+      }
+    },
+  );
+
+  server.registerTool(
+    "assess_physical_ai_fit",
+    {
+      title: "Assess readiness for a robotics deployment",
+      annotations: READ_ONLY_REMOTE,
+      description:
+        "Run the deployment guide's readiness assessment: score per area and overall, the band and its guidance, the weakest area, blockers (items answered 'no') and the questions still unanswered, plus the platforms and documented deployments that match the environment, sector and family, ordered by strength of evidence. Call with no answers first to receive every question. It never recommends a purchase; it shows what is ready, what is missing and what evidence exists. Use this when an organisation asks whether it is ready to deploy robots.",
+      inputSchema: z.object({
+        answers: z.record(z.string().min(1).max(64), z.enum(["yes", "partial", "no"])).optional()
+          .describe("Readiness item id → yes | partial | no (24 items; ids in the deployment guide's readiness.item_ids). Omit to get every question back as `unanswered`."),
+        environment: z.string().min(1).max(40).optional().describe("Environment id, e.g. industrial, warehouse, offshore."),
+        sector: z.string().min(1).max(40).optional().describe("Sector id, e.g. inspection, logistics, security."),
+        family: z.string().min(1).max(40).optional().describe("Family id: humanoid, mobile-manipulator, quadruped, ugv, uav."),
+        locale: localeSchema,
+      }),
+      outputSchema: physicalAiEngineOutput,
+    },
+    async ({ locale, ...inputs }) => {
+      try {
+        return out(await assessPhysicalAiFit({ answers: {}, ...inputs }, (locale ?? "en") as Locale));
+      } catch (error) {
+        return physicalAiFailure(error, "assess_physical_ai_fit");
       }
     },
   );

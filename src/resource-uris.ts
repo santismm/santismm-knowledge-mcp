@@ -23,6 +23,26 @@ export const resourceUri = {
     `santismm://claims/${locale}/${encodeURIComponent(id)}`,
   profession: (id: string) => `santismm://professions/${encodeURIComponent(id)}`,
   benchmark: (slug: string) => `santismm://benchmarks/${encodeURIComponent(slug)}`,
+  /**
+   * Physical AI keeps the user's design: `santismm://physical-ai/{collection}/{slug}`
+   * plus two singletons. The locale is a query parameter because the item is one
+   * record served in seven languages, not seven records — and it is always
+   * written, `en` included: an RFC 6570 `{?locale}` template does not match a
+   * URI without the query, so an omitted default would make the English URI
+   * the one that cannot be read.
+   */
+  physicalAi: (type: string, slug: string, locale: Locale = "en") => {
+    const collection: Record<string, string> = {
+      platform: "platforms",
+      case_study: "case-studies",
+      guide: "guides",
+      source: "sources",
+    };
+    const suffix = `?locale=${locale}`;
+    return collection[type]
+      ? `santismm://physical-ai/${collection[type]}/${encodeURIComponent(slug)}${suffix}`
+      : `santismm://physical-ai/${type}${suffix}`;
+  },
 } as const;
 
 const HOST_SURFACES: Readonly<Record<string, Surface>> = {
@@ -39,6 +59,7 @@ const HOST_SURFACES: Readonly<Record<string, Surface>> = {
   claims: "claims",
   professions: "benchmarks",
   benchmarks: "benchmarks",
+  "physical-ai": "physical_ai",
 };
 
 /** Derive analytics attribution from the URI the resource registry serves. */

@@ -68,6 +68,7 @@ const GET_DETAIL: Record<string, { domain: string; argument: "slug" | "id" }> = 
   get_claim: { domain: "claims", argument: "id" },
   recommend_model_for_profession: { domain: "professions", argument: "id" },
   get_benchmark: { domain: "benchmarks", argument: "slug" },
+  get_physical_ai_item: { domain: "physical_ai", argument: "slug" },
 };
 
 export function lookupRequestForTool(

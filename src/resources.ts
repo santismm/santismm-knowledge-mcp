@@ -16,6 +16,7 @@ import type { Domain, Locale } from "./content.ts";
 import { resourceSurfaceOf, resourceUri } from "./resource-uris.ts";
 import type { Surface } from "./surfaces.ts";
 import { mergedLabs, type HomericKind, type McpContent } from "./tools.ts";
+import { PhysicalAiRejection, getPhysicalAiItem, listPhysicalAi, type PhysicalAiItemType } from "./physical-ai.ts";
 
 const LOCALES = ["en", "es", "pt", "fr", "de", "ja", "zh"] as const satisfies readonly Locale[];
 const LOCAL_CACHE = { ttlMs: 60 * 60 * 1000, cacheScope: "public" } as const;
@@ -158,6 +159,56 @@ const RESOURCE_MANIFEST: readonly ResourceManifestEntry[] = [
     description: "Read one benchmark from the AI Agent Benchmarks catalogue: SOTA, saturation, source, radar axis and recorded model scores.",
     uri_template: "santismm://benchmarks/{slug}",
     surface: "benchmarks",
+    federated: true,
+  },
+  // Physical AI: most of the catalogue is reading, not action, so it is served
+  // here instead of as more tools. Appended, for the same index reason as above.
+  {
+    name: "physical-ai-platform",
+    title: "Physical AI platform sheet",
+    description: "Read one robot platform: specs with test conditions and provenance, autonomy by task, evidence stage, access, lifecycle and the sources behind each claim.",
+    uri_template: "santismm://physical-ai/platforms/{slug}{?locale}",
+    surface: "physical_ai",
+    federated: true,
+  },
+  {
+    name: "physical-ai-case-study",
+    title: "Physical AI documented deployment",
+    description: "Read one documented deployment: sourced facts, published KPIs (null where unpublished), payback if published, and integration, maintenance and scaling lessons.",
+    uri_template: "santismm://physical-ai/case-studies/{slug}{?locale}",
+    surface: "physical_ai",
+    federated: true,
+  },
+  {
+    name: "physical-ai-guide",
+    title: "Physical AI guide",
+    description: "Read the enterprise deployment guide or the operational-continuity guide for robot fleets, as structured sections.",
+    uri_template: "santismm://physical-ai/guides/{slug}{?locale}",
+    surface: "physical_ai",
+    federated: true,
+  },
+  {
+    name: "physical-ai-taxonomy",
+    title: "Physical AI taxonomy",
+    description: "Read the reference taxonomy: families, autonomy levels 0–5, coordination, control modes, sensors, environments and sectors.",
+    uri_template: "santismm://physical-ai/taxonomy{?locale}",
+    surface: "physical_ai",
+    federated: true,
+  },
+  {
+    name: "physical-ai-methodology",
+    title: "Physical AI evidence methodology",
+    description: "Read how evidence levels A–D are derived, the spec-condition policy and what is documented versus modelled.",
+    uri_template: "santismm://physical-ai/methodology{?locale}",
+    surface: "physical_ai",
+    federated: true,
+  },
+  {
+    name: "physical-ai-source",
+    title: "Physical AI cited source",
+    description: "Read one cited source: publisher, date, accessed date, provenance, review, support and its derived evidence level.",
+    uri_template: "santismm://physical-ai/sources/{id}{?locale}",
+    surface: "physical_ai",
     federated: true,
   },
 ] as const;
@@ -512,6 +563,57 @@ export function registerResources(
       return jsonResource(uri, { ...benchmarkRecord(corpus, value), resource_uri: resourceUri.benchmark(benchmarkSlug(value.name)) });
     }),
   );
+
+  // Physical AI — six templates over one reader. Like Articles and Labs they do
+  // not enumerate: `resources/list` stays local and fast (it was once the
+  // slowest method on the endpoint), and a federated host must not add network
+  // latency to it. Slugs still complete from the host's own lists.
+  const physical: Array<{ name: string; type: PhysicalAiItemType; variable?: "slug" | "id"; list?: "platforms" | "case-studies" | "guides" }> = [
+    { name: "physical-ai-platform", type: "platform", variable: "slug", list: "platforms" },
+    { name: "physical-ai-case-study", type: "case_study", variable: "slug", list: "case-studies" },
+    { name: "physical-ai-guide", type: "guide", variable: "slug", list: "guides" },
+    { name: "physical-ai-taxonomy", type: "taxonomy" },
+    { name: "physical-ai-methodology", type: "methodology" },
+    { name: "physical-ai-source", type: "source", variable: "id" },
+  ];
+  for (const spec of physical) {
+    const entry = RESOURCE_MANIFEST.find((e) => e.name === spec.name)!;
+    const listKind = spec.list;
+    const template = new ResourceTemplate(entry.uri_template, {
+      list: undefined,
+      complete: {
+        locale: completeFrom(() => [...LOCALES]),
+        ...(listKind && spec.variable
+          ? {
+              [spec.variable]: async (prefix: string) =>
+                (await listPhysicalAi(listKind).catch(() => []))
+                  .map((item) => String(item.slug ?? ""))
+                  .filter((slug) => slug.toLowerCase().startsWith(prefix.toLowerCase()))
+                  .slice(0, 50),
+            }
+          : {}),
+      },
+    });
+    server.registerResource(
+      entry.name,
+      template,
+      templateConfig(entry, FEDERATED_CACHE),
+      observeRead(entry.name, entry.surface, telemetry, async (uri, variables) => {
+        const locale = localeVariable(variables.locale, uri);
+        const slug = spec.variable ? stringVariable(variables[spec.variable]) : undefined;
+        try {
+          const value = await getPhysicalAiItem(spec.type, slug, locale);
+          return jsonResource(uri, {
+            ...value,
+            resource_uri: resourceUri.physicalAi(spec.type, slug ?? spec.type, locale),
+          });
+        } catch (error) {
+          if (error instanceof PhysicalAiRejection && error.status === 404) throw new ResourceNotFoundError(uri.href);
+          throw error;
+        }
+      }),
+    );
+  }
 }
 
 export { resourceSurfaceOf };

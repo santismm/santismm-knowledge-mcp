@@ -45,6 +45,12 @@ export const SURFACE_TOOLS = {
     "list_professions", "recommend_model_for_profession",
     "compare_models", "list_benchmarks", "get_benchmark",
   ],
+  physical_ai: [
+    "search_physical_ai", "get_physical_ai_item",
+    "compare_physical_ai_platforms",
+    "calculate_physical_ai_roi",
+    "assess_physical_ai_fit",
+  ],
 } as const;
 
 export type Surface = keyof typeof SURFACE_TOOLS;
@@ -58,7 +64,7 @@ export const SURFACES = Object.keys(SURFACE_TOOLS) as Surface[];
  * avoids a tools.ts <-> outcomes.ts cycle and makes a search-surface change
  * atomic for both execution and measurement.
  */
-export const SEARCH_SURFACES = ["core", "articles", "labs", "claims", "homeric_atlas", "benchmarks"] as const;
+export const SEARCH_SURFACES = ["core", "articles", "labs", "claims", "homeric_atlas", "benchmarks", "physical_ai"] as const;
 
 /**
  * Las tres primitivas del protocolo. Tools y Resources (REG-19) ya se sirven;

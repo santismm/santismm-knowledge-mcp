@@ -30,9 +30,9 @@ before ranking a server finds one without anybody remembering to add it.
 - [npmjs.com](https://www.npmjs.com/package/santismm-knowledge-mcp)
 - [pypi.org](https://pypi.org/project/santismm-knowledge-mcp/)
 - [github.com](https://github.com/santismm/santismm-knowledge-mcp)
-- [smithery.ai](https://smithery.ai/servers/santismm/knowledge)
 - [glama.ai](https://glama.ai/mcp/servers/santismm/santismm-knowledge-mcp)
 - [mcpservers.org](https://mcpservers.org/servers/santismm/santismm-knowledge-mcp)
+- [mcp.so](https://mcp.so/servers/santismm-knowledge)
 
 ## Run it locally (stdio)
 

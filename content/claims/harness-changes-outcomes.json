@@ -17,21 +17,24 @@
       "author": "Anthropic",
       "venue": "Anthropic Engineering",
       "year": "2024",
-      "type": "industry_observation"
+      "type": "industry_observation",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
     },
     {
       "title": "How we built our multi-agent research system",
       "author": "Anthropic",
       "venue": "Anthropic Engineering",
       "year": "2025",
-      "type": "industry_observation"
+      "type": "industry_observation",
+      "url": "https://www.anthropic.com/research/multi-agent-research-system"
     },
     {
       "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
       "author": "Jimenez, C. et al.",
       "venue": "ICLR",
       "year": "2024",
-      "type": "benchmark"
+      "type": "benchmark",
+      "url": "https://arxiv.org/abs/2310.06770"
     }
   ],
   "locales": {

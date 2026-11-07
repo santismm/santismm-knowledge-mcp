@@ -18,21 +18,24 @@
       "author": "Anthropic",
       "venue": "Anthropic Engineering",
       "year": "2024",
-      "type": "industry_observation"
+      "type": "industry_observation",
+      "url": "https://www.anthropic.com/research/building-effective-agents"
     },
     {
       "title": "A Survey on Large Language Model based Autonomous Agents",
       "author": "Wang, L. et al.",
       "venue": "survey",
       "year": "2023",
-      "type": "paper"
+      "type": "paper",
+      "url": "https://arxiv.org/abs/2308.11432"
     },
     {
       "title": "AI Risk Management Framework (AI RMF 1.0)",
       "author": "NIST",
       "venue": "NIST",
       "year": "2023",
-      "type": "industry_observation"
+      "type": "industry_observation",
+      "url": "https://doi.org/10.6028/NIST.AI.100-1"
     }
   ],
   "locales": {

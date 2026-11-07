@@ -25,7 +25,7 @@ import sys
 import urllib.error
 import urllib.request
 
-__version__ = "0.6.0"
+__version__ = "0.6.1"
 
 ENDPOINT = os.environ.get("SANTISMM_MCP_URL", "https://santismm.com/mcp?via=pypi")
 USER_AGENT = f"santismm-knowledge-mcp-python/{__version__}"

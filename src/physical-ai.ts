@@ -25,7 +25,7 @@ const SERVICE_ORIGIN = new URL(PHYSICAL_AI_API_URL).origin;
 export const PHYSICAL_AI_CANONICAL_ORIGIN = 'https://physicalai.santismm.com';
 export const PHYSICAL_AI_OPENAPI_URL = `${PHYSICAL_AI_CANONICAL_ORIGIN}/openapi.json`;
 
-const USER_AGENT = 'santismm-knowledge-mcp/0.6.0';
+const USER_AGENT = 'santismm-knowledge-mcp/0.6.1';
 const READ_TTL_MS = 5 * 60 * 1000;
 const TIMEOUT_MS = 8_000;
 const MAX_CACHED = 200;
@@ -208,6 +208,7 @@ export const PHYSICAL_AI_SINGLETONS = ['taxonomy', 'methodology'] as const satis
 
 export async function getPhysicalAiItem(type: PhysicalAiItemType, slug: string | undefined, locale: Locale): Promise<Json> {
   const singleton = (PHYSICAL_AI_SINGLETONS as readonly string[]).includes(type);
+  if (type === 'source' && !slug) return physicalAiSources(locale);
   if (!singleton && !slug) {
     throw new PhysicalAiRejection(400, {
       error: 'invalid_input',
@@ -222,8 +223,19 @@ export async function getPhysicalAiItem(type: PhysicalAiItemType, slug: string |
   return canonicalise({ ...body, type, ...(slug && !singleton ? { slug } : {}) });
 }
 
+/**
+ * The whole bibliography, resolved (GET /api/sources). Before the host listed it,
+ * a source id could only be found inside the record that cited it, so sources no
+ * platform, case or guide cites were unreachable from here.
+ */
+export async function physicalAiSources(locale: Locale = 'en'): Promise<Json> {
+  const body = await read(`/sources${query({ locale })}`);
+  if (!Array.isArray(body.items)) throw new Error('Physical AI /sources returned no items array');
+  return canonicalise({ ...body, type: 'source' });
+}
+
 /** Every listable item, for not-found hints and resource completion. */
-export async function listPhysicalAi(kind: 'platforms' | 'case-studies' | 'guides', locale: Locale = 'en'): Promise<Json[]> {
+export async function listPhysicalAi(kind: 'platforms' | 'case-studies' | 'guides' | 'sources', locale: Locale = 'en'): Promise<Json[]> {
   const body = await read(`/${kind}${query({ locale })}`);
   if (!Array.isArray(body.items)) throw new Error(`Physical AI /${kind} returned no items array`);
   return canonicalise(body.items as Json[]);

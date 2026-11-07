@@ -156,7 +156,7 @@ async function cachedJson<T>(file: string, valid: (raw: Partial<T>) => raw is T)
   if (!pending) {
     pending = (async () => {
       const response = await fetch(`${BENCHMARKS_ORIGIN}/${file}`, {
-        headers: { Accept: 'application/json', 'User-Agent': 'santismm-knowledge-mcp/0.6.0' },
+        headers: { Accept: 'application/json', 'User-Agent': 'santismm-knowledge-mcp/0.6.1' },
         signal: AbortSignal.timeout(8_000),
         cache: 'no-store',
       });

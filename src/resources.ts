@@ -211,6 +211,14 @@ const RESOURCE_MANIFEST: readonly ResourceManifestEntry[] = [
     surface: "physical_ai",
     federated: true,
   },
+  {
+    name: "physical-ai-sources",
+    title: "Physical AI bibliography",
+    description: "Read every cited source of the Physical AI dataset at once, resolved, each with its derived A–D evidence level — including sources no platform, case or guide cites.",
+    uri_template: "santismm://physical-ai/sources{?locale}",
+    surface: "physical_ai",
+    federated: true,
+  },
 ] as const;
 
 export function resourceManifest(): ResourceManifestEntry[] {
@@ -564,17 +572,19 @@ export function registerResources(
     }),
   );
 
-  // Physical AI — six templates over one reader. Like Articles and Labs they do
+  // Physical AI — seven templates over one reader. Like Articles and Labs they do
   // not enumerate: `resources/list` stays local and fast (it was once the
   // slowest method on the endpoint), and a federated host must not add network
   // latency to it. Slugs still complete from the host's own lists.
-  const physical: Array<{ name: string; type: PhysicalAiItemType; variable?: "slug" | "id"; list?: "platforms" | "case-studies" | "guides" }> = [
+  const physical: Array<{ name: string; type: PhysicalAiItemType; variable?: "slug" | "id"; list?: "platforms" | "case-studies" | "guides" | "sources" }> = [
     { name: "physical-ai-platform", type: "platform", variable: "slug", list: "platforms" },
     { name: "physical-ai-case-study", type: "case_study", variable: "slug", list: "case-studies" },
     { name: "physical-ai-guide", type: "guide", variable: "slug", list: "guides" },
     { name: "physical-ai-taxonomy", type: "taxonomy" },
     { name: "physical-ai-methodology", type: "methodology" },
-    { name: "physical-ai-source", type: "source", variable: "id" },
+    { name: "physical-ai-source", type: "source", variable: "id", list: "sources" },
+    // The bibliography: type source with no id reads /api/sources.
+    { name: "physical-ai-sources", type: "source" },
   ];
   for (const spec of physical) {
     const entry = RESOURCE_MANIFEST.find((e) => e.name === spec.name)!;
@@ -587,7 +597,7 @@ export function registerResources(
           ? {
               [spec.variable]: async (prefix: string) =>
                 (await listPhysicalAi(listKind).catch(() => []))
-                  .map((item) => String(item.slug ?? ""))
+                  .map((item) => String((listKind === "sources" ? item.id : item.slug) ?? ""))
                   .filter((slug) => slug.toLowerCase().startsWith(prefix.toLowerCase()))
                   .slice(0, 50),
             }
@@ -605,7 +615,9 @@ export function registerResources(
           const value = await getPhysicalAiItem(spec.type, slug, locale);
           return jsonResource(uri, {
             ...value,
-            resource_uri: resourceUri.physicalAi(spec.type, slug ?? spec.type, locale),
+            resource_uri: spec.type === "source" && !slug
+              ? resourceUri.physicalAi("sources", "sources", locale)
+              : resourceUri.physicalAi(spec.type, slug ?? spec.type, locale),
           });
         } catch (error) {
           if (error instanceof PhysicalAiRejection && error.status === 404) throw new ResourceNotFoundError(uri.href);

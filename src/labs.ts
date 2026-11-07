@@ -154,7 +154,7 @@ function validLab(value: unknown): value is LabDefinition {
 
 async function fetchCorpus(): Promise<LabCorpus> {
   const response = await fetch(LABS_API_URL, {
-    headers: { Accept: 'application/json', 'User-Agent': 'santismm-knowledge-mcp/0.6.0' },
+    headers: { Accept: 'application/json', 'User-Agent': 'santismm-knowledge-mcp/0.6.1' },
     signal: AbortSignal.timeout(8_000),
     cache: 'no-store',
   });
@@ -252,7 +252,7 @@ export async function executeLabCalculator(
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'User-Agent': 'santismm-knowledge-mcp/0.6.0',
+      'User-Agent': 'santismm-knowledge-mcp/0.6.1',
     },
     body: JSON.stringify(inputs),
     signal: AbortSignal.timeout(8_000),

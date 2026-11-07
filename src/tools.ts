@@ -70,7 +70,7 @@ import { PROFILE } from "./profile.ts";
  * data, while Article tools deliberately read the first-party Articles API.
  */
 
-export const SERVER_INFO = { name: "santismm-knowledge", version: "0.6.0" } as const;
+export const SERVER_INFO = { name: "santismm-knowledge", version: "0.6.1" } as const;
 
 /**
  * The subset of the MCP SDK's `McpServer` that the registry uses (just
@@ -950,7 +950,7 @@ function physicalAiFailure(error: unknown, tool: string) {
       domain: "physical_ai",
       status: error.status,
       hint: error.status === 404
-        ? "Call search_physical_ai to find a valid slug, or read the lists at /api/platforms, /api/case-studies and /api/guides."
+        ? "Call search_physical_ai to find a valid slug, or read the lists at /api/platforms, /api/case-studies, /api/guides and /api/sources."
         : `Fix the fields listed in details and call ${tool} again. Every input is documented in ${PHYSICAL_AI_OPENAPI_URL}.`,
     };
     return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
@@ -967,11 +967,12 @@ function physicalAiFailure(error: unknown, tool: string) {
 
 /** A 404 from get_physical_ai_item lists the valid slugs, like every other get_* miss. */
 async function physicalAiNotFound(type: PhysicalAiItemType, slug: string, error: PhysicalAiRejection) {
-  const kind = type === "platform" ? "platforms" : type === "case_study" ? "case-studies" : type === "guide" ? "guides" : undefined;
+  const kind = type === "platform" ? "platforms" : type === "case_study" ? "case-studies" : type === "guide" ? "guides" : type === "source" ? "sources" : undefined;
   let available: string[] = [];
   if (kind) {
     try {
-      available = (await listPhysicalAi(kind)).map((item) => String(item.slug ?? "")).filter(Boolean).sort();
+      // Sources are keyed by id, everything else by slug.
+      available = (await listPhysicalAi(kind)).map((item) => String((kind === "sources" ? item.id : item.slug) ?? "")).filter(Boolean).sort();
     } catch {
       // The miss is still reported; only the recovery list is lost.
     }
@@ -984,9 +985,11 @@ async function physicalAiNotFound(type: PhysicalAiItemType, slug: string, error:
     available_count: available.length,
     available,
     list_tool: "search_physical_ai",
-    hint: kind
-      ? "Use one of the available slugs, or call search_physical_ai with the name you have."
-      : "Source ids are listed in the `sources` of the platform or case that cites them.",
+    hint: type === "source"
+      ? "Use one of the available source ids, or call get_physical_ai_item with type 'source' and no slug for the whole resolved bibliography."
+      : kind
+        ? "Use one of the available slugs, or call search_physical_ai with the name you have."
+        : "Taxonomy and methodology take no slug.",
     api: error.body,
   };
   return { content: [{ type: "text" as const, text: JSON.stringify(body, null, 2) }], isError: true as const };
@@ -2384,10 +2387,10 @@ export function registerTools(
       title: "Get one Physical AI platform, deployment, guide or reference",
       annotations: READ_ONLY_REMOTE,
       description:
-        "Read one record by type and slug: a platform sheet (specs with test conditions, provenance and sources, autonomy by task, evidence stage, access, lifecycle), a documented case study (sourced facts, published KPIs, lessons), a guide, a cited source, or the taxonomy and methodology (no slug). A spec or KPI the maker has not published is null with status 'unpublished' — report it as unknown, never estimate it. Use this after search_physical_ai, with the type and slug it returned.",
+        "Read one record by type and slug: a platform sheet (specs with test conditions, provenance and sources, autonomy by task, evidence stage, access, lifecycle), a documented case study (sourced facts, published KPIs, lessons), a guide, a cited source by id — or, with type 'source' and no slug, the whole resolved bibliography with each source's evidence level — or the taxonomy and methodology (no slug). A spec or KPI the maker has not published is null with status 'unpublished' — report it as unknown, never estimate it. Use this after search_physical_ai, with the type and slug it returned.",
       inputSchema: z.object({
         type: z.enum(PHYSICAL_AI_ITEM_TYPES).describe("platform, case_study, guide, source, taxonomy or methodology."),
-        slug: slugSchema.optional().describe("Required except for taxonomy and methodology, e.g. 'spot' or a source id."),
+        slug: slugSchema.optional().describe("Required for platform, case_study and guide, e.g. 'spot'. For source, a source id; omit it to list every source. Ignored for taxonomy and methodology."),
         locale: localeSchema,
       }),
       outputSchema: physicalAiItemOutput,
@@ -2397,7 +2400,10 @@ export function registerTools(
       const singleton = (PHYSICAL_AI_SINGLETONS as readonly string[]).includes(type);
       try {
         const item = await getPhysicalAiItem(type, singleton ? undefined : slug, lang);
-        return out({ ...item, resource_uri: resourceUri.physicalAi(type, singleton ? type : String(slug), lang) });
+        const uri = type === "source" && !slug
+          ? resourceUri.physicalAi("sources", "sources", lang)
+          : resourceUri.physicalAi(type, singleton ? type : String(slug), lang);
+        return out({ ...item, resource_uri: uri });
       } catch (error) {
         if (error instanceof PhysicalAiRejection && error.status === 404 && slug) {
           return physicalAiNotFound(type, slug, error);
